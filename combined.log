@@ -1,0 +1,707 @@
+{"level":"\u001b[32minfo\u001b[39m","message":"Listening @ 9000","service":"user-service"}
+{"level":"\u001b[32minfo\u001b[39m","message":"Listening @ 9000","service":"user-service"}
+{"level":"\u001b[32minfo\u001b[39m","message":[{"email":"sankaapn@gmail.com","id":1,"name":"Wongsathorn","password":"Pa13201575","posts":[{"authorId":1,"content":"hello world","createdAt":"2022-04-20T00:00:00.000Z","id":1,"published":false,"title":"Smart","updatedAt":"2022-08-22T17:36:44.318Z"}],"profile":{"bio":" i just smartman","id":1,"userId":1}}],"service":"user-service"}
+{"level":"\u001b[32minfo\u001b[39m","message":"Listening @ 9000","service":"user-service"}
+{"level":"\u001b[32minfo\u001b[39m","message":"Listening @ 9000","service":"user-service"}
+{"level":"\u001b[32minfo\u001b[39m","message":"Listening @ 9000","service":"user-service"}
+{"level":"\u001b[32minfo\u001b[39m","message":"Listening @ 9000","service":"user-service"}
+{"level":"\u001b[32minfo\u001b[39m","message":"Listening @ 9000","service":"user-service"}
+{"level":"\u001b[32minfo\u001b[39m","message":"Listening @ 9000","service":"user-service"}
+{"level":"\u001b[32minfo\u001b[39m","message":"Listening @ 9000","service":"user-service"}
+{"level":"\u001b[32minfo\u001b[39m","message":"Listening @ 9000","service":"user-service"}
+{"level":"\u001b[32minfo\u001b[39m","message":"Listening @ 9000","service":"user-service"}
+{"level":"\u001b[32minfo\u001b[39m","message":"Listening @ 9000","service":"user-service"}
+{"level":"\u001b[32minfo\u001b[39m","message":"Listening @ 9000","service":"user-service"}
+{"level":"\u001b[32minfo\u001b[39m","message":"Listening @ 9000","service":"user-service"}
+{"level":"\u001b[32minfo\u001b[39m","message":"Listening @ 9000","service":"user-service"}
+{"level":"\u001b[32minfo\u001b[39m","message":"Listening @ 9000","service":"user-service"}
+{"level":"\u001b[32minfo\u001b[39m","message":"Listening @ 9000","service":"user-service"}
+{"level":"\u001b[32minfo\u001b[39m","message":"Listening @ 9000","service":"user-service"}
+{"level":"\u001b[32minfo\u001b[39m","message":"Listening @ 9000","service":"user-service"}
+{"level":"\u001b[32minfo\u001b[39m","message":"Listening @ 9000","service":"user-service"}
+{"level":"\u001b[32minfo\u001b[39m","message":"User","service":"user-service"}
+{"level":"\u001b[32minfo\u001b[39m","message":"Listening @ 9000","service":"user-service"}
+{"level":"\u001b[32minfo\u001b[39m","message":"Register route User complete.","service":"user-service"}
+{"level":"\u001b[32minfo\u001b[39m","message":"Listening @ 9000","service":"user-service"}
+{"level":"\u001b[34mdebug\u001b[39m","message":"Register route User complete.","service":"user-service"}
+{"level":"\u001b[32minfo\u001b[39m","message":"Listening @ 9000","service":"user-service"}
+{"level":"\u001b[34mdebug\u001b[39m","message":"Register route User complete.","service":"user-service"}
+{"level":"\u001b[32minfo\u001b[39m","message":"Listening @ 9000","service":"user-service"}
+{"level":"\u001b[34mdebug\u001b[39m","message":"Register route user complete.","service":"user-service"}
+{"level":"\u001b[32minfo\u001b[39m","message":"Listening @ 9000","service":"user-service"}
+{"level":"\u001b[34mdebug\u001b[39m","message":"Register route [user] complete.","service":"user-service"}
+{"level":"\u001b[32minfo\u001b[39m","message":"Listening @ 9000","service":"user-service"}
+{"level":"\u001b[34mdebug\u001b[39m","message":"Register route [api/user] complete.","service":"user-service"}
+{"level":"\u001b[32minfo\u001b[39m","message":"Listening @ 9000","service":"user-service"}
+{"level":"\u001b[34mdebug\u001b[39m","message":"Register route [api/user] complete.","service":"user-service"}
+{"level":"\u001b[32minfo\u001b[39m","message":"Listening @ 9000","service":"user-service"}
+{"level":"\u001b[34mdebug\u001b[39m","message":"Register route [api/user] complete.","service":"user-service"}
+{"level":"\u001b[32minfo\u001b[39m","message":"Listening @ 9000","service":"user-service"}
+{"level":"\u001b[34mdebug\u001b[39m","message":"Register route [api/user] complete.","service":"user-service"}
+{"level":"\u001b[32minfo\u001b[39m","message":"Listening @ 9000","service":"user-service"}
+{"level":"\u001b[34mdebug\u001b[39m","message":"Register route [api/user] complete.","service":"user-service"}
+{"level":"\u001b[32minfo\u001b[39m","message":"Listening @ 9000","service":"user-service"}
+{"level":"\u001b[34mdebug\u001b[39m","message":"Register route [api/user] complete.","service":"user-service"}
+{"level":"\u001b[32minfo\u001b[39m","message":"Listening @ 9000","service":"user-service"}
+{"level":"\u001b[34mdebug\u001b[39m","message":"Register route [api/user] complete.","service":"user-service"}
+{"level":"\u001b[32minfo\u001b[39m","message":"Listening @ 9000","service":"user-service"}
+{"level":"\u001b[34mdebug\u001b[39m","message":"Register route [api/user] complete.","service":"user-service"}
+{"level":"\u001b[32minfo\u001b[39m","message":"Listening @ 9000","service":"user-service"}
+{"level":"\u001b[34mdebug\u001b[39m","message":"Register route [api/user] complete.","service":"user-service"}
+{"level":"\u001b[32minfo\u001b[39m","message":"Listening @ 9000","service":"user-service"}
+{"level":"\u001b[34mdebug\u001b[39m","message":"Register route [api/user] complete.","service":"user-service"}
+{"level":"\u001b[32minfo\u001b[39m","message":"Listening @ 9000","service":"user-service"}
+{"level":"\u001b[34mdebug\u001b[39m","message":"Register route [api/user] complete.","service":"user-service"}
+{"level":"\u001b[32minfo\u001b[39m","message":"Listening @ 9000","service":"user-service"}
+{"level":"\u001b[34mdebug\u001b[39m","message":"Register route [api/user] complete.","service":"user-service"}
+{"level":"\u001b[32minfo\u001b[39m","message":"Listening @ 9000","service":"user-service"}
+{"level":"\u001b[34mdebug\u001b[39m","message":"Register route [api/user] complete.","service":"user-service"}
+{"level":"\u001b[32minfo\u001b[39m","message":"Listening @ 9000","service":"user-service"}
+{"level":"\u001b[34mdebug\u001b[39m","message":"Register route [api/user] complete.","service":"user-service"}
+{"level":"\u001b[32minfo\u001b[39m","message":"Listening @ 9000","service":"user-service"}
+{"level":"\u001b[34mdebug\u001b[39m","message":"Register route [api/user] complete.","service":"user-service"}
+{"level":"\u001b[32minfo\u001b[39m","message":"Listening @ 9000","service":"user-service"}
+{"level":"\u001b[34mdebug\u001b[39m","message":"Register route [api/user] complete.","service":"user-service"}
+{"level":"\u001b[32minfo\u001b[39m","message":"Listening @ 9000","service":"user-service"}
+{"level":"\u001b[34mdebug\u001b[39m","message":"Register route [api/user] complete.","service":"user-service"}
+{"level":"\u001b[32minfo\u001b[39m","message":"Listening @ 9000","service":"user-service"}
+{"level":"\u001b[34mdebug\u001b[39m","message":"Register route [api/user] complete.","service":"user-service"}
+{"level":"\u001b[32minfo\u001b[39m","message":"Listening @ 9000","service":"user-service"}
+{"level":"\u001b[34mdebug\u001b[39m","message":"Register route [api/user] complete.","service":"user-service"}
+{"level":"\u001b[32minfo\u001b[39m","message":"Listening @ 9000","service":"user-service"}
+{"level":"\u001b[34mdebug\u001b[39m","message":"Register route [api/user] complete.","service":"user-service"}
+{"level":"\u001b[32minfo\u001b[39m","message":"Listening @ 9000","service":"user-service"}
+{"level":"\u001b[34mdebug\u001b[39m","message":"Register route [api/user] complete.","service":"user-service"}
+{"level":"\u001b[32minfo\u001b[39m","message":"Listening @ 9000","service":"user-service"}
+{"level":"\u001b[34mdebug\u001b[39m","message":"Register route [api/user] complete.","service":"user-service"}
+{"level":"\u001b[32minfo\u001b[39m","message":"Listening @ 9000","service":"user-service"}
+{"level":"\u001b[34mdebug\u001b[39m","message":"Register route [api/user] complete.","service":"user-service"}
+{"level":"\u001b[32minfo\u001b[39m","message":"Listening @ 9000","service":"user-service"}
+{"level":"\u001b[34mdebug\u001b[39m","message":"Register route [api/user] complete.","service":"user-service"}
+{"level":"\u001b[32minfo\u001b[39m","message":"Listening @ 9000","service":"user-service"}
+{"level":"\u001b[34mdebug\u001b[39m","message":"Register route [api/user] complete.","service":"user-service"}
+{"level":"\u001b[32minfo\u001b[39m","message":"Listening @ 9000","service":"user-service"}
+{"level":"\u001b[34mdebug\u001b[39m","message":"Register route [api/user] complete.","service":"user-service"}
+{"level":"\u001b[32minfo\u001b[39m","message":"Listening @ 9000","service":"user-service"}
+{"level":"\u001b[34mdebug\u001b[39m","message":"Register route [api/user] complete.","service":"user-service"}
+{"level":"\u001b[32minfo\u001b[39m","message":"Listening @ 9000","service":"user-service"}
+{"level":"\u001b[34mdebug\u001b[39m","message":"Register route [api/user] complete.","service":"user-service"}
+{"level":"\u001b[32minfo\u001b[39m","message":"Listening @ 9000","service":"user-service"}
+{"level":"\u001b[34mdebug\u001b[39m","message":"Register route [api/user] complete.","service":"user-service"}
+{"level":"\u001b[32minfo\u001b[39m","message":"Listening @ 9000","service":"user-service"}
+{"level":"\u001b[34mdebug\u001b[39m","message":"Register route [api/user] complete.","service":"user-service"}
+{"level":"\u001b[32minfo\u001b[39m","message":"Listening @ 9000","service":"user-service"}
+{"level":"\u001b[34mdebug\u001b[39m","message":"Register route [api/user] complete.","service":"user-service"}
+{"level":"\u001b[32minfo\u001b[39m","message":"Listening @ 9000","service":"user-service"}
+{"level":"\u001b[34mdebug\u001b[39m","message":"Register route [api/user] complete.","service":"user-service"}
+{"level":"\u001b[32minfo\u001b[39m","message":"Listening @ 9000","service":"user-service"}
+{"level":"\u001b[34mdebug\u001b[39m","message":"Register route [api/user] complete.","service":"user-service"}
+{"level":"\u001b[32minfo\u001b[39m","message":"Listening @ 9000","service":"user-service"}
+{"level":"\u001b[34mdebug\u001b[39m","message":"Register route [api/user] complete.","service":"user-service"}
+{"level":"\u001b[32minfo\u001b[39m","message":"Listening @ 9000","service":"user-service"}
+{"level":"\u001b[34mdebug\u001b[39m","message":"Register route [api/user] complete.","service":"user-service"}
+{"level":"\u001b[34mdebug\u001b[39m","message":"Register route [api/utils] complete.","service":"user-service"}
+{"level":"\u001b[32minfo\u001b[39m","message":"Listening @ 9000","service":"user-service"}
+{"level":"\u001b[34mdebug\u001b[39m","message":"Register route [api/user] complete.","service":"user-service"}
+{"level":"\u001b[34mdebug\u001b[39m","message":"Register route [api/util] complete.","service":"user-service"}
+{"level":"\u001b[32minfo\u001b[39m","message":"Listening @ 9000","service":"user-service"}
+{"level":"\u001b[34mdebug\u001b[39m","message":"Register route [api/user] complete.","service":"user-service"}
+{"level":"\u001b[34mdebug\u001b[39m","message":"Register route [api/util] complete.","service":"user-service"}
+{"level":"\u001b[32minfo\u001b[39m","message":"Listening @ 9000","service":"user-service"}
+{"level":"\u001b[34mdebug\u001b[39m","message":"Register route [api/user] complete.","service":"user-service"}
+{"level":"\u001b[34mdebug\u001b[39m","message":"Register route [api/util] complete.","service":"user-service"}
+{"level":"\u001b[32minfo\u001b[39m","message":"Listening @ 9000","service":"user-service"}
+{"level":"\u001b[34mdebug\u001b[39m","message":"Register route [api/user] complete.","service":"user-service"}
+{"level":"\u001b[34mdebug\u001b[39m","message":"Register route [api/util] complete.","service":"user-service"}
+{"level":"\u001b[32minfo\u001b[39m","message":"Listening @ 9000","service":"user-service"}
+{"level":"\u001b[34mdebug\u001b[39m","message":"Register route [api/user] complete.","service":"user-service"}
+{"level":"\u001b[34mdebug\u001b[39m","message":"Register route [api/util] complete.","service":"user-service"}
+{"level":"\u001b[32minfo\u001b[39m","message":"Listening @ 9000","service":"user-service"}
+{"level":"\u001b[34mdebug\u001b[39m","message":"Register route [api/user] complete.","service":"user-service"}
+{"level":"\u001b[34mdebug\u001b[39m","message":"Register route [api/util] complete.","service":"user-service"}
+{"level":"\u001b[32minfo\u001b[39m","message":"Listening @ 9000","service":"user-service"}
+{"level":"\u001b[34mdebug\u001b[39m","message":"Register route [api/user] complete.","service":"user-service"}
+{"level":"\u001b[34mdebug\u001b[39m","message":"Register route [api/util] complete.","service":"user-service"}
+{"level":"\u001b[32minfo\u001b[39m","message":"Listening @ 9000","service":"user-service"}
+{"level":"\u001b[34mdebug\u001b[39m","message":"Register route [api/user] complete.","service":"user-service"}
+{"level":"\u001b[34mdebug\u001b[39m","message":"Register route [api/util] complete.","service":"user-service"}
+{"level":"\u001b[32minfo\u001b[39m","message":"Listening @ 9000","service":"user-service"}
+{"level":"\u001b[34mdebug\u001b[39m","message":"Register route [api/user] complete.","service":"user-service"}
+{"level":"\u001b[34mdebug\u001b[39m","message":"Register route [api/util] complete.","service":"user-service"}
+{"level":"\u001b[32minfo\u001b[39m","message":"Listening @ 9000","service":"user-service"}
+{"level":"\u001b[34mdebug\u001b[39m","message":"Register route [api/user] complete.","service":"user-service"}
+{"level":"\u001b[34mdebug\u001b[39m","message":"Register route [api/util] complete.","service":"user-service"}
+{"level":"\u001b[32minfo\u001b[39m","message":"Listening @ 9000","service":"user-service"}
+{"level":"\u001b[34mdebug\u001b[39m","message":"Register route [api/user] complete.","service":"user-service"}
+{"level":"\u001b[34mdebug\u001b[39m","message":"Register route [api/util] complete.","service":"user-service"}
+{"level":"\u001b[32minfo\u001b[39m","message":"Listening @ 9000","service":"user-service"}
+{"level":"\u001b[34mdebug\u001b[39m","message":"Register route [api/user] complete.","service":"user-service"}
+{"level":"\u001b[34mdebug\u001b[39m","message":"Register route [api/util] complete.","service":"user-service"}
+{"level":"\u001b[32minfo\u001b[39m","message":"Listening @ 9000","service":"user-service"}
+{"level":"\u001b[34mdebug\u001b[39m","message":"Register route [api/user] complete.","service":"user-service"}
+{"level":"\u001b[34mdebug\u001b[39m","message":"Register route [api/util] complete.","service":"user-service"}
+{"level":"\u001b[32minfo\u001b[39m","message":"Listening @ 9000","service":"user-service"}
+{"level":"\u001b[34mdebug\u001b[39m","message":"Register route [api/user] complete.","service":"user-service"}
+{"level":"\u001b[34mdebug\u001b[39m","message":"Register route [api/util] complete.","service":"user-service"}
+{"level":"\u001b[32minfo\u001b[39m","message":"Listening @ 9000","service":"user-service"}
+{"level":"\u001b[34mdebug\u001b[39m","message":"Register route [api/user] complete.","service":"user-service"}
+{"level":"\u001b[34mdebug\u001b[39m","message":"Register route [api/util] complete.","service":"user-service"}
+{"level":"\u001b[32minfo\u001b[39m","message":"Listening @ 9000","service":"user-service"}
+{"level":"\u001b[34mdebug\u001b[39m","message":"Register route [api/user] complete.","service":"user-service"}
+{"level":"\u001b[34mdebug\u001b[39m","message":"Register route [api/util] complete.","service":"user-service"}
+{"level":"\u001b[32minfo\u001b[39m","message":"Listening @ 9000","service":"user-service"}
+{"level":"\u001b[34mdebug\u001b[39m","message":"Register route [api/user] complete.","service":"user-service"}
+{"level":"\u001b[34mdebug\u001b[39m","message":"Register route [api/util] complete.","service":"user-service"}
+{"level":"\u001b[32minfo\u001b[39m","message":"Listening @ 9000","service":"user-service"}
+{"level":"\u001b[34mdebug\u001b[39m","message":"Register route [api/user] complete.","service":"user-service"}
+{"level":"\u001b[34mdebug\u001b[39m","message":"Register route [api/util] complete.","service":"user-service"}
+{"level":"\u001b[32minfo\u001b[39m","message":"Listening @ 9000","service":"user-service"}
+{"level":"\u001b[34mdebug\u001b[39m","message":"Register route [api/user] complete.","service":"user-service"}
+{"level":"\u001b[34mdebug\u001b[39m","message":"Register route [api/util] complete.","service":"user-service"}
+{"level":"\u001b[32minfo\u001b[39m","message":"Listening @ 9000","service":"user-service"}
+{"level":"\u001b[34mdebug\u001b[39m","message":"Register route [api/user] complete.","service":"user-service"}
+{"level":"\u001b[34mdebug\u001b[39m","message":"Register route [api/util] complete.","service":"user-service"}
+{"level":"\u001b[32minfo\u001b[39m","message":"Listening @ 9000","service":"user-service"}
+{"level":"\u001b[34mdebug\u001b[39m","message":"Register route [api/user] complete.","service":"user-service"}
+{"level":"\u001b[34mdebug\u001b[39m","message":"Register route [api/util] complete.","service":"user-service"}
+{"level":"\u001b[32minfo\u001b[39m","message":"Listening @ 9000","service":"user-service"}
+{"level":"\u001b[34mdebug\u001b[39m","message":"Register route [api/user] complete.","service":"user-service"}
+{"level":"\u001b[34mdebug\u001b[39m","message":"Register route [api/util] complete.","service":"user-service"}
+{"level":"\u001b[32minfo\u001b[39m","message":"Listening @ 9000","service":"user-service"}
+{"level":"\u001b[34mdebug\u001b[39m","message":"Register route [api/user] complete.","service":"user-service"}
+{"level":"\u001b[34mdebug\u001b[39m","message":"Register route [api/util] complete.","service":"user-service"}
+{"level":"\u001b[32minfo\u001b[39m","message":"Listening @ 9000","service":"user-service"}
+{"level":"\u001b[34mdebug\u001b[39m","message":"Register route [api/user] complete.","service":"user-service"}
+{"level":"\u001b[34mdebug\u001b[39m","message":"Register route [api/util] complete.","service":"user-service"}
+{"level":"\u001b[32minfo\u001b[39m","message":"Listening @ 9000","service":"user-service"}
+{"level":"\u001b[34mdebug\u001b[39m","message":"Register route [api/user] complete.","service":"user-service"}
+{"level":"\u001b[34mdebug\u001b[39m","message":"Register route [api/util] complete.","service":"user-service"}
+{"level":"\u001b[32minfo\u001b[39m","message":"Listening @ 9000","service":"user-service"}
+{"level":"\u001b[34mdebug\u001b[39m","message":"Register route [api/user] complete.","service":"user-service"}
+{"level":"\u001b[34mdebug\u001b[39m","message":"Register route [api/util] complete.","service":"user-service"}
+{"level":"\u001b[32minfo\u001b[39m","message":"Listening @ 9000","service":"user-service"}
+{"level":"\u001b[34mdebug\u001b[39m","message":"Register route [api/user] complete.","service":"user-service"}
+{"level":"\u001b[34mdebug\u001b[39m","message":"Register route [api/util] complete.","service":"user-service"}
+{"level":"\u001b[32minfo\u001b[39m","message":"Listening @ 9000","service":"user-service"}
+{"level":"\u001b[34mdebug\u001b[39m","message":"Register route [api/user] complete.","service":"user-service"}
+{"level":"\u001b[34mdebug\u001b[39m","message":"Register route [api/util] complete.","service":"user-service"}
+{"level":"\u001b[32minfo\u001b[39m","message":"Listening @ 9000","service":"user-service"}
+{"level":"\u001b[34mdebug\u001b[39m","message":"Register route [api/user] complete.","service":"user-service"}
+{"level":"\u001b[34mdebug\u001b[39m","message":"Register route [api/util] complete.","service":"user-service"}
+{"level":"\u001b[32minfo\u001b[39m","message":"Listening @ 9000","service":"user-service"}
+{"level":"\u001b[34mdebug\u001b[39m","message":"Register route [api/user] complete.","service":"user-service"}
+{"level":"\u001b[34mdebug\u001b[39m","message":"Register route [api/util] complete.","service":"user-service"}
+{"level":"\u001b[32minfo\u001b[39m","message":"Listening @ 9000","service":"user-service"}
+{"level":"\u001b[34mdebug\u001b[39m","message":"Register route [api/user] complete.","service":"user-service"}
+{"level":"\u001b[34mdebug\u001b[39m","message":"Register route [api/util] complete.","service":"user-service"}
+{"level":"\u001b[32minfo\u001b[39m","message":"Listening @ 9000","service":"user-service"}
+{"level":"\u001b[34mdebug\u001b[39m","message":"Register route [api/user] complete.","service":"user-service"}
+{"level":"\u001b[34mdebug\u001b[39m","message":"Register route [api/util] complete.","service":"user-service"}
+{"level":"\u001b[32minfo\u001b[39m","message":"Listening @ 9000","service":"user-service"}
+{"level":"\u001b[34mdebug\u001b[39m","message":"Register route [api/user] complete.","service":"user-service"}
+{"level":"\u001b[34mdebug\u001b[39m","message":"Register route [api/util] complete.","service":"user-service"}
+{"level":"\u001b[32minfo\u001b[39m","message":"Listening @ 9000","service":"user-service"}
+{"level":"\u001b[34mdebug\u001b[39m","message":"Register route [api/user] complete.","service":"user-service"}
+{"level":"\u001b[34mdebug\u001b[39m","message":"Register route [api/util] complete.","service":"user-service"}
+{"level":"\u001b[32minfo\u001b[39m","message":"Listening @ 9000","service":"user-service"}
+{"level":"\u001b[34mdebug\u001b[39m","message":"Register route [api/user] complete.","service":"user-service"}
+{"level":"\u001b[34mdebug\u001b[39m","message":"Register route [api/util] complete.","service":"user-service"}
+{"level":"\u001b[32minfo\u001b[39m","message":"Listening @ 9000","service":"user-service"}
+{"level":"\u001b[34mdebug\u001b[39m","message":"Register route [api/user] complete.","service":"user-service"}
+{"level":"\u001b[34mdebug\u001b[39m","message":"Register route [api/util] complete.","service":"user-service"}
+{"level":"\u001b[32minfo\u001b[39m","message":"Listening @ 9000","service":"user-service"}
+{"level":"\u001b[34mdebug\u001b[39m","message":"Register route [api/user] complete.","service":"user-service"}
+{"level":"\u001b[34mdebug\u001b[39m","message":"Register route [api/util] complete.","service":"user-service"}
+{"level":"\u001b[32minfo\u001b[39m","message":"Listening @ 9000","service":"user-service"}
+{"level":"\u001b[34mdebug\u001b[39m","message":"Register route [api/user] complete.","service":"user-service"}
+{"level":"\u001b[34mdebug\u001b[39m","message":"Register route [api/util] complete.","service":"user-service"}
+{"level":"\u001b[32minfo\u001b[39m","message":"Listening @ 9000","service":"user-service"}
+{"level":"\u001b[34mdebug\u001b[39m","message":"Register route [api/user] complete.","service":"user-service"}
+{"level":"\u001b[34mdebug\u001b[39m","message":"Register route [api/util] complete.","service":"user-service"}
+{"level":"\u001b[32minfo\u001b[39m","message":"Listening @ 9000","service":"user-service"}
+{"level":"\u001b[34mdebug\u001b[39m","message":"Register route [api/user] complete.","service":"user-service"}
+{"level":"\u001b[34mdebug\u001b[39m","message":"Register route [api/util] complete.","service":"user-service"}
+{"level":"\u001b[32minfo\u001b[39m","message":"Listening @ 9000","service":"user-service"}
+{"level":"\u001b[34mdebug\u001b[39m","message":"Register route [api/user] complete.","service":"user-service"}
+{"level":"\u001b[34mdebug\u001b[39m","message":"Register route [api/util] complete.","service":"user-service"}
+{"level":"\u001b[32minfo\u001b[39m","message":"Listening @ 9000","service":"user-service"}
+{"level":"\u001b[34mdebug\u001b[39m","message":"Register route [api/user] complete.","service":"user-service"}
+{"level":"\u001b[34mdebug\u001b[39m","message":"Register route [api/util] complete.","service":"user-service"}
+{"level":"\u001b[32minfo\u001b[39m","message":"Listening @ 9000","service":"user-service"}
+{"level":"\u001b[34mdebug\u001b[39m","message":"Register route [api/user] complete.","service":"user-service"}
+{"level":"\u001b[34mdebug\u001b[39m","message":"Register route [api/util] complete.","service":"user-service"}
+{"level":"\u001b[32minfo\u001b[39m","message":"Listening @ 9000","service":"user-service"}
+{"level":"\u001b[34mdebug\u001b[39m","message":"Register route [api/user] complete.","service":"user-service"}
+{"level":"\u001b[34mdebug\u001b[39m","message":"Register route [api/util] complete.","service":"user-service"}
+{"level":"\u001b[32minfo\u001b[39m","message":"Listening @ 9000","service":"user-service"}
+{"level":"\u001b[34mdebug\u001b[39m","message":"Register route [api/user] complete.","service":"user-service"}
+{"level":"\u001b[34mdebug\u001b[39m","message":"Register route [api/util] complete.","service":"user-service"}
+{"level":"\u001b[32minfo\u001b[39m","message":"Listening @ 9000","service":"user-service"}
+{"level":"\u001b[34mdebug\u001b[39m","message":"Register route [api/user] complete.","service":"user-service"}
+{"level":"\u001b[34mdebug\u001b[39m","message":"Register route [api/util] complete.","service":"user-service"}
+{"level":"\u001b[32minfo\u001b[39m","message":"Listening @ 9000","service":"user-service"}
+{"level":"\u001b[34mdebug\u001b[39m","message":"Register route [api/user] complete.","service":"user-service"}
+{"level":"\u001b[34mdebug\u001b[39m","message":"Register route [api/util] complete.","service":"user-service"}
+{"level":"\u001b[32minfo\u001b[39m","message":"Listening @ 9000","service":"user-service"}
+{"level":"\u001b[34mdebug\u001b[39m","message":"Register route [api/user] complete.","service":"user-service"}
+{"level":"\u001b[34mdebug\u001b[39m","message":"Register route [api/util] complete.","service":"user-service"}
+{"level":"\u001b[32minfo\u001b[39m","message":"Listening @ 9000","service":"user-service"}
+{"level":"\u001b[34mdebug\u001b[39m","message":"Register route [api/user] complete.","service":"user-service"}
+{"level":"\u001b[34mdebug\u001b[39m","message":"Register route [api/util] complete.","service":"user-service"}
+{"level":"\u001b[32minfo\u001b[39m","message":"Listening @ 9000","service":"user-service"}
+{"level":"\u001b[34mdebug\u001b[39m","message":"Register route [api/user] complete.","service":"user-service"}
+{"level":"\u001b[34mdebug\u001b[39m","message":"Register route [api/util] complete.","service":"user-service"}
+{"level":"\u001b[32minfo\u001b[39m","message":"Listening @ 9000","service":"user-service"}
+{"level":"\u001b[34mdebug\u001b[39m","message":"Register route [api/user] complete.","service":"user-service"}
+{"level":"\u001b[34mdebug\u001b[39m","message":"Register route [api/util] complete.","service":"user-service"}
+{"level":"\u001b[32minfo\u001b[39m","message":"Listening @ 9000","service":"user-service"}
+{"level":"\u001b[34mdebug\u001b[39m","message":"Register route [api/user] complete.","service":"user-service"}
+{"level":"\u001b[34mdebug\u001b[39m","message":"Register route [api/util] complete.","service":"user-service"}
+{"level":"\u001b[32minfo\u001b[39m","message":"Listening @ 9000","service":"user-service"}
+{"level":"\u001b[34mdebug\u001b[39m","message":"Register route [api/user] complete.","service":"user-service"}
+{"level":"\u001b[34mdebug\u001b[39m","message":"Register route [api/util] complete.","service":"user-service"}
+{"level":"\u001b[32minfo\u001b[39m","message":"Listening @ 9000","service":"user-service"}
+{"level":"\u001b[34mdebug\u001b[39m","message":"Register route [api/user] complete.","service":"user-service"}
+{"level":"\u001b[34mdebug\u001b[39m","message":"Register route [api/util] complete.","service":"user-service"}
+{"level":"\u001b[32minfo\u001b[39m","message":"Listening @ 9000","service":"user-service"}
+{"level":"\u001b[34mdebug\u001b[39m","message":"Register route [api/user] complete.","service":"user-service"}
+{"level":"\u001b[34mdebug\u001b[39m","message":"Register route [api/util] complete.","service":"user-service"}
+{"level":"\u001b[32minfo\u001b[39m","message":"Listening @ 9000","service":"user-service"}
+{"level":"\u001b[34mdebug\u001b[39m","message":"Register route [api/user] complete.","service":"user-service"}
+{"level":"\u001b[34mdebug\u001b[39m","message":"Register route [api/util] complete.","service":"user-service"}
+{"level":"\u001b[32minfo\u001b[39m","message":"Listening @ 9000","service":"user-service"}
+{"level":"\u001b[34mdebug\u001b[39m","message":"Register route [api/login] complete.","service":"user-service"}
+{"level":"\u001b[34mdebug\u001b[39m","message":"Register route [api/user] complete.","service":"user-service"}
+{"level":"\u001b[34mdebug\u001b[39m","message":"Register route [api/util] complete.","service":"user-service"}
+{"level":"\u001b[32minfo\u001b[39m","message":"Listening @ 9000","service":"user-service"}
+{"level":"\u001b[34mdebug\u001b[39m","message":"Register route [api/provider] complete.","service":"user-service"}
+{"level":"\u001b[34mdebug\u001b[39m","message":"Register route [api/user] complete.","service":"user-service"}
+{"level":"\u001b[34mdebug\u001b[39m","message":"Register route [api/util] complete.","service":"user-service"}
+{"level":"\u001b[32minfo\u001b[39m","message":"Listening @ 9000","service":"user-service"}
+{"level":"\u001b[34mdebug\u001b[39m","message":"Register route [api/provider] complete.","service":"user-service"}
+{"level":"\u001b[34mdebug\u001b[39m","message":"Register route [api/user] complete.","service":"user-service"}
+{"level":"\u001b[34mdebug\u001b[39m","message":"Register route [api/util] complete.","service":"user-service"}
+{"level":"\u001b[32minfo\u001b[39m","message":"Listening @ 9000","service":"user-service"}
+{"level":"\u001b[34mdebug\u001b[39m","message":"Register route [api/provider] complete.","service":"user-service"}
+{"level":"\u001b[34mdebug\u001b[39m","message":"Register route [api/user] complete.","service":"user-service"}
+{"level":"\u001b[34mdebug\u001b[39m","message":"Register route [api/util] complete.","service":"user-service"}
+{"level":"\u001b[32minfo\u001b[39m","message":"Listening @ 9000","service":"user-service"}
+{"level":"\u001b[34mdebug\u001b[39m","message":"Register route [api/provider] complete.","service":"user-service"}
+{"level":"\u001b[34mdebug\u001b[39m","message":"Register route [api/user] complete.","service":"user-service"}
+{"level":"\u001b[34mdebug\u001b[39m","message":"Register route [api/util] complete.","service":"user-service"}
+{"level":"\u001b[32minfo\u001b[39m","message":"Listening @ 9000","service":"user-service"}
+{"level":"\u001b[34mdebug\u001b[39m","message":"Register route [api/provider] complete.","service":"user-service"}
+{"level":"\u001b[34mdebug\u001b[39m","message":"Register route [api/user] complete.","service":"user-service"}
+{"level":"\u001b[34mdebug\u001b[39m","message":"Register route [api/util] complete.","service":"user-service"}
+{"level":"\u001b[32minfo\u001b[39m","message":"Listening @ 9000","service":"user-service"}
+{"level":"\u001b[34mdebug\u001b[39m","message":"Register route [api/provider] complete.","service":"user-service"}
+{"level":"\u001b[34mdebug\u001b[39m","message":"Register route [api/user] complete.","service":"user-service"}
+{"level":"\u001b[34mdebug\u001b[39m","message":"Register route [api/util] complete.","service":"user-service"}
+{"level":"\u001b[32minfo\u001b[39m","message":"Listening @ 9000","service":"user-service"}
+{"level":"\u001b[34mdebug\u001b[39m","message":"Register route [api/provider] complete.","service":"user-service"}
+{"level":"\u001b[34mdebug\u001b[39m","message":"Register route [api/user] complete.","service":"user-service"}
+{"level":"\u001b[34mdebug\u001b[39m","message":"Register route [api/util] complete.","service":"user-service"}
+{"level":"\u001b[32minfo\u001b[39m","message":"Listening @ 9000","service":"user-service"}
+{"level":"\u001b[34mdebug\u001b[39m","message":"Register route [api/provider] complete.","service":"user-service"}
+{"level":"\u001b[34mdebug\u001b[39m","message":"Register route [api/user] complete.","service":"user-service"}
+{"level":"\u001b[34mdebug\u001b[39m","message":"Register route [api/util] complete.","service":"user-service"}
+{"level":"\u001b[32minfo\u001b[39m","message":"Listening @ 9000","service":"user-service"}
+{"level":"\u001b[34mdebug\u001b[39m","message":"Register route [api/provider] complete.","service":"user-service"}
+{"level":"\u001b[34mdebug\u001b[39m","message":"Register route [api/user] complete.","service":"user-service"}
+{"level":"\u001b[34mdebug\u001b[39m","message":"Register route [api/util] complete.","service":"user-service"}
+{"level":"\u001b[32minfo\u001b[39m","message":"Listening @ 9000","service":"user-service"}
+{"level":"\u001b[34mdebug\u001b[39m","message":"Register route [api/provider] complete.","service":"user-service"}
+{"level":"\u001b[34mdebug\u001b[39m","message":"Register route [api/user] complete.","service":"user-service"}
+{"level":"\u001b[34mdebug\u001b[39m","message":"Register route [api/util] complete.","service":"user-service"}
+{"level":"\u001b[32minfo\u001b[39m","message":"Listening @ 9000","service":"user-service"}
+{"level":"\u001b[34mdebug\u001b[39m","message":"Register route [api/provider] complete.","service":"user-service"}
+{"level":"\u001b[34mdebug\u001b[39m","message":"Register route [api/user] complete.","service":"user-service"}
+{"level":"\u001b[34mdebug\u001b[39m","message":"Register route [api/util] complete.","service":"user-service"}
+{"level":"\u001b[32minfo\u001b[39m","message":"Listening @ 9000","service":"user-service"}
+{"level":"\u001b[34mdebug\u001b[39m","message":"Register route [api/provider] complete.","service":"user-service"}
+{"level":"\u001b[34mdebug\u001b[39m","message":"Register route [api/user] complete.","service":"user-service"}
+{"level":"\u001b[34mdebug\u001b[39m","message":"Register route [api/util] complete.","service":"user-service"}
+{"level":"\u001b[32minfo\u001b[39m","message":"Listening @ 9000","service":"user-service"}
+{"level":"\u001b[34mdebug\u001b[39m","message":"Register route [api/provider] complete.","service":"user-service"}
+{"level":"\u001b[34mdebug\u001b[39m","message":"Register route [api/user] complete.","service":"user-service"}
+{"level":"\u001b[34mdebug\u001b[39m","message":"Register route [api/util] complete.","service":"user-service"}
+{"level":"\u001b[32minfo\u001b[39m","message":"Listening @ 9000","service":"user-service"}
+{"level":"\u001b[34mdebug\u001b[39m","message":"Register route [api/provider] complete.","service":"user-service"}
+{"level":"\u001b[34mdebug\u001b[39m","message":"Register route [api/user] complete.","service":"user-service"}
+{"level":"\u001b[34mdebug\u001b[39m","message":"Register route [api/util] complete.","service":"user-service"}
+{"level":"\u001b[32minfo\u001b[39m","message":"Listening @ 9000","service":"user-service"}
+{"level":"\u001b[34mdebug\u001b[39m","message":"Register route [api/provider] complete.","service":"user-service"}
+{"level":"\u001b[34mdebug\u001b[39m","message":"Register route [api/user] complete.","service":"user-service"}
+{"level":"\u001b[34mdebug\u001b[39m","message":"Register route [api/util] complete.","service":"user-service"}
+{"level":"\u001b[32minfo\u001b[39m","message":"Listening @ 9000","service":"user-service"}
+{"level":"\u001b[34mdebug\u001b[39m","message":"Register route [api/provider] complete.","service":"user-service"}
+{"level":"\u001b[34mdebug\u001b[39m","message":"Register route [api/user] complete.","service":"user-service"}
+{"level":"\u001b[34mdebug\u001b[39m","message":"Register route [api/util] complete.","service":"user-service"}
+{"level":"\u001b[32minfo\u001b[39m","message":"Listening @ 9000","service":"user-service"}
+{"level":"\u001b[34mdebug\u001b[39m","message":"Register route [api/provider] complete.","service":"user-service"}
+{"level":"\u001b[34mdebug\u001b[39m","message":"Register route [api/user] complete.","service":"user-service"}
+{"level":"\u001b[34mdebug\u001b[39m","message":"Register route [api/util] complete.","service":"user-service"}
+{"level":"\u001b[32minfo\u001b[39m","message":"Listening @ 9000","service":"user-service"}
+{"level":"\u001b[34mdebug\u001b[39m","message":"Register route [api/provider] complete.","service":"user-service"}
+{"level":"\u001b[34mdebug\u001b[39m","message":"Register route [api/user] complete.","service":"user-service"}
+{"level":"\u001b[34mdebug\u001b[39m","message":"Register route [api/util] complete.","service":"user-service"}
+{"level":"\u001b[32minfo\u001b[39m","message":"Listening @ 9000","service":"user-service"}
+{"level":"\u001b[34mdebug\u001b[39m","message":"Register route [api/provider] complete.","service":"user-service"}
+{"level":"\u001b[34mdebug\u001b[39m","message":"Register route [api/user] complete.","service":"user-service"}
+{"level":"\u001b[34mdebug\u001b[39m","message":"Register route [api/util] complete.","service":"user-service"}
+{"level":"\u001b[32minfo\u001b[39m","message":"Listening @ 9000","service":"user-service"}
+{"level":"\u001b[34mdebug\u001b[39m","message":"Register route [api/provider] complete.","service":"user-service"}
+{"level":"\u001b[34mdebug\u001b[39m","message":"Register route [api/user] complete.","service":"user-service"}
+{"level":"\u001b[34mdebug\u001b[39m","message":"Register route [api/util] complete.","service":"user-service"}
+{"level":"\u001b[32minfo\u001b[39m","message":"Listening @ 9000","service":"user-service"}
+{"level":"\u001b[34mdebug\u001b[39m","message":"Register route [api/provider] complete.","service":"user-service"}
+{"level":"\u001b[34mdebug\u001b[39m","message":"Register route [api/user] complete.","service":"user-service"}
+{"level":"\u001b[34mdebug\u001b[39m","message":"Register route [api/util] complete.","service":"user-service"}
+{"level":"\u001b[32minfo\u001b[39m","message":"Listening @ 9000","service":"user-service"}
+{"level":"\u001b[34mdebug\u001b[39m","message":"Register route [api/provider] complete.","service":"user-service"}
+{"level":"\u001b[34mdebug\u001b[39m","message":"Register route [api/user] complete.","service":"user-service"}
+{"level":"\u001b[34mdebug\u001b[39m","message":"Register route [api/util] complete.","service":"user-service"}
+{"level":"\u001b[32minfo\u001b[39m","message":"Listening @ 9000","service":"user-service"}
+{"level":"\u001b[34mdebug\u001b[39m","message":"Register route [api/provider] complete.","service":"user-service"}
+{"level":"\u001b[34mdebug\u001b[39m","message":"Register route [api/user] complete.","service":"user-service"}
+{"level":"\u001b[34mdebug\u001b[39m","message":"Register route [api/util] complete.","service":"user-service"}
+{"level":"\u001b[32minfo\u001b[39m","message":"Listening @ 9000","service":"user-service"}
+{"level":"\u001b[34mdebug\u001b[39m","message":"Register route [api/provider] complete.","service":"user-service"}
+{"level":"\u001b[34mdebug\u001b[39m","message":"Register route [api/user] complete.","service":"user-service"}
+{"level":"\u001b[34mdebug\u001b[39m","message":"Register route [api/util] complete.","service":"user-service"}
+{"level":"\u001b[32minfo\u001b[39m","message":"Listening @ 9000","service":"user-service"}
+{"level":"\u001b[34mdebug\u001b[39m","message":"Register route [api/provider] complete.","service":"user-service"}
+{"level":"\u001b[34mdebug\u001b[39m","message":"Register route [api/user] complete.","service":"user-service"}
+{"level":"\u001b[34mdebug\u001b[39m","message":"Register route [api/util] complete.","service":"user-service"}
+{"level":"\u001b[32minfo\u001b[39m","message":"Listening @ 9000","service":"user-service"}
+{"level":"\u001b[34mdebug\u001b[39m","message":"Register route [api/provider] complete.","service":"user-service"}
+{"level":"\u001b[34mdebug\u001b[39m","message":"Register route [api/user] complete.","service":"user-service"}
+{"level":"\u001b[34mdebug\u001b[39m","message":"Register route [api/util] complete.","service":"user-service"}
+{"level":"\u001b[32minfo\u001b[39m","message":"Listening @ 9000","service":"user-service"}
+{"level":"\u001b[34mdebug\u001b[39m","message":"Register route [api/provider] complete.","service":"user-service"}
+{"level":"\u001b[34mdebug\u001b[39m","message":"Register route [api/user] complete.","service":"user-service"}
+{"level":"\u001b[34mdebug\u001b[39m","message":"Register route [api/util] complete.","service":"user-service"}
+{"level":"\u001b[32minfo\u001b[39m","message":"Listening @ 9000","service":"user-service"}
+{"level":"\u001b[34mdebug\u001b[39m","message":"Register route [api/provider] complete.","service":"user-service"}
+{"level":"\u001b[34mdebug\u001b[39m","message":"Register route [api/user] complete.","service":"user-service"}
+{"level":"\u001b[34mdebug\u001b[39m","message":"Register route [api/util] complete.","service":"user-service"}
+{"level":"\u001b[32minfo\u001b[39m","message":"Listening @ 9000","service":"user-service"}
+{"level":"\u001b[34mdebug\u001b[39m","message":"Register route [api/provider] complete.","service":"user-service"}
+{"level":"\u001b[34mdebug\u001b[39m","message":"Register route [api/user] complete.","service":"user-service"}
+{"level":"\u001b[34mdebug\u001b[39m","message":"Register route [api/util] complete.","service":"user-service"}
+{"level":"\u001b[32minfo\u001b[39m","message":"Listening @ 9000","service":"user-service"}
+{"level":"\u001b[34mdebug\u001b[39m","message":"Register route [api/provider] complete.","service":"user-service"}
+{"level":"\u001b[34mdebug\u001b[39m","message":"Register route [api/user] complete.","service":"user-service"}
+{"level":"\u001b[34mdebug\u001b[39m","message":"Register route [api/util] complete.","service":"user-service"}
+{"level":"\u001b[32minfo\u001b[39m","message":"Listening @ 9000","service":"user-service"}
+{"level":"\u001b[34mdebug\u001b[39m","message":"Register route [api/provider] complete.","service":"user-service"}
+{"level":"\u001b[34mdebug\u001b[39m","message":"Register route [api/user] complete.","service":"user-service"}
+{"level":"\u001b[34mdebug\u001b[39m","message":"Register route [api/util] complete.","service":"user-service"}
+{"level":"\u001b[32minfo\u001b[39m","message":"Listening @ 9000","service":"user-service"}
+{"level":"\u001b[34mdebug\u001b[39m","message":"Register route [api/provider] complete.","service":"user-service"}
+{"level":"\u001b[34mdebug\u001b[39m","message":"Register route [api/user] complete.","service":"user-service"}
+{"level":"\u001b[34mdebug\u001b[39m","message":"Register route [api/util] complete.","service":"user-service"}
+{"level":"\u001b[32minfo\u001b[39m","message":"Listening @ 9000","service":"user-service"}
+{"level":"\u001b[34mdebug\u001b[39m","message":"Register route [api/provider] complete.","service":"user-service"}
+{"level":"\u001b[34mdebug\u001b[39m","message":"Register route [api/user] complete.","service":"user-service"}
+{"level":"\u001b[34mdebug\u001b[39m","message":"Register route [api/util] complete.","service":"user-service"}
+{"level":"\u001b[32minfo\u001b[39m","message":"Listening @ 9000","service":"user-service"}
+{"level":"\u001b[34mdebug\u001b[39m","message":"Register route [api/provider] complete.","service":"user-service"}
+{"level":"\u001b[34mdebug\u001b[39m","message":"Register route [api/user] complete.","service":"user-service"}
+{"level":"\u001b[34mdebug\u001b[39m","message":"Register route [api/util] complete.","service":"user-service"}
+{"level":"\u001b[32minfo\u001b[39m","message":"Listening @ 9000","service":"user-service"}
+{"level":"\u001b[34mdebug\u001b[39m","message":"Register route [api/provider] complete.","service":"user-service"}
+{"level":"\u001b[34mdebug\u001b[39m","message":"Register route [api/user] complete.","service":"user-service"}
+{"level":"\u001b[34mdebug\u001b[39m","message":"Register route [api/util] complete.","service":"user-service"}
+{"level":"\u001b[32minfo\u001b[39m","message":"Listening @ 9000","service":"user-service"}
+{"level":"\u001b[34mdebug\u001b[39m","message":"Register route [api/provider] complete.","service":"user-service"}
+{"level":"\u001b[34mdebug\u001b[39m","message":"Register route [api/user] complete.","service":"user-service"}
+{"level":"\u001b[34mdebug\u001b[39m","message":"Register route [api/util] complete.","service":"user-service"}
+{"level":"\u001b[32minfo\u001b[39m","message":"Listening @ 9000","service":"user-service"}
+{"level":"\u001b[34mdebug\u001b[39m","message":"Register route [api/provider] complete.","service":"user-service"}
+{"level":"\u001b[34mdebug\u001b[39m","message":"Register route [api/user] complete.","service":"user-service"}
+{"level":"\u001b[34mdebug\u001b[39m","message":"Register route [api/util] complete.","service":"user-service"}
+{"level":"\u001b[32minfo\u001b[39m","message":"Listening @ 9000","service":"user-service"}
+{"level":"\u001b[34mdebug\u001b[39m","message":"Register route [api/provider] complete.","service":"user-service"}
+{"level":"\u001b[34mdebug\u001b[39m","message":"Register route [api/user] complete.","service":"user-service"}
+{"level":"\u001b[34mdebug\u001b[39m","message":"Register route [api/util] complete.","service":"user-service"}
+{"level":"\u001b[32minfo\u001b[39m","message":"Listening @ 9000","service":"user-service"}
+{"level":"\u001b[34mdebug\u001b[39m","message":"Register route [api/provider] complete.","service":"user-service"}
+{"level":"\u001b[34mdebug\u001b[39m","message":"Register route [api/user] complete.","service":"user-service"}
+{"level":"\u001b[34mdebug\u001b[39m","message":"Register route [api/util] complete.","service":"user-service"}
+{"level":"\u001b[32minfo\u001b[39m","message":"Listening @ 9000","service":"user-service"}
+{"level":"\u001b[34mdebug\u001b[39m","message":"Register route [api/provider] complete.","service":"user-service"}
+{"level":"\u001b[34mdebug\u001b[39m","message":"Register route [api/user] complete.","service":"user-service"}
+{"level":"\u001b[34mdebug\u001b[39m","message":"Register route [api/util] complete.","service":"user-service"}
+{"level":"\u001b[32minfo\u001b[39m","message":"Listening @ 9000","service":"user-service"}
+{"level":"\u001b[34mdebug\u001b[39m","message":"Register route [api/provider] complete.","service":"user-service"}
+{"level":"\u001b[34mdebug\u001b[39m","message":"Register route [api/user] complete.","service":"user-service"}
+{"level":"\u001b[34mdebug\u001b[39m","message":"Register route [api/util] complete.","service":"user-service"}
+{"level":"\u001b[32minfo\u001b[39m","message":"Listening @ 9000","service":"user-service"}
+{"level":"\u001b[34mdebug\u001b[39m","message":"Register route [api/provider] complete.","service":"user-service"}
+{"level":"\u001b[34mdebug\u001b[39m","message":"Register route [api/user] complete.","service":"user-service"}
+{"level":"\u001b[34mdebug\u001b[39m","message":"Register route [api/util] complete.","service":"user-service"}
+{"level":"\u001b[32minfo\u001b[39m","message":"Listening @ 9000","service":"user-service"}
+{"level":"\u001b[32minfo\u001b[39m","message":"User wongsathorn@next.co.th is online","service":"user-service"}
+{"level":"\u001b[34mdebug\u001b[39m","message":"Register route [api/provider] complete.","service":"user-service"}
+{"level":"\u001b[34mdebug\u001b[39m","message":"Register route [api/user] complete.","service":"user-service"}
+{"level":"\u001b[34mdebug\u001b[39m","message":"Register route [api/util] complete.","service":"user-service"}
+{"level":"\u001b[32minfo\u001b[39m","message":"Listening @ 9000","service":"user-service"}
+{"level":"\u001b[32minfo\u001b[39m","message":"User wongsathorn@next.co.th is online","service":"user-service"}
+{"level":"\u001b[34mdebug\u001b[39m","message":"Register route [api/provider] complete.","service":"user-service"}
+{"level":"\u001b[34mdebug\u001b[39m","message":"Register route [api/user] complete.","service":"user-service"}
+{"level":"\u001b[34mdebug\u001b[39m","message":"Register route [api/util] complete.","service":"user-service"}
+{"level":"\u001b[32minfo\u001b[39m","message":"Listening @ 9000","service":"user-service"}
+{"level":"\u001b[32minfo\u001b[39m","message":"User wongsathorn@next.co.th is online","service":"user-service"}
+{"level":"\u001b[34mdebug\u001b[39m","message":"Register route [api/provider] complete.","service":"user-service"}
+{"level":"\u001b[34mdebug\u001b[39m","message":"Register route [api/user] complete.","service":"user-service"}
+{"level":"\u001b[34mdebug\u001b[39m","message":"Register route [api/util] complete.","service":"user-service"}
+{"level":"\u001b[32minfo\u001b[39m","message":"Listening @ 9000","service":"user-service"}
+{"level":"\u001b[34mdebug\u001b[39m","message":"Register route [api/provider] complete.","service":"user-service"}
+{"level":"\u001b[34mdebug\u001b[39m","message":"Register route [api/user] complete.","service":"user-service"}
+{"level":"\u001b[34mdebug\u001b[39m","message":"Register route [api/util] complete.","service":"user-service"}
+{"level":"\u001b[32minfo\u001b[39m","message":"Listening @ 9000","service":"user-service"}
+{"level":"\u001b[34mdebug\u001b[39m","message":"Register route [api/provider] complete.","service":"user-service"}
+{"level":"\u001b[34mdebug\u001b[39m","message":"Register route [api/user] complete.","service":"user-service"}
+{"level":"\u001b[34mdebug\u001b[39m","message":"Register route [api/util] complete.","service":"user-service"}
+{"level":"\u001b[32minfo\u001b[39m","message":"Listening @ 9000","service":"user-service"}
+{"level":"\u001b[34mdebug\u001b[39m","message":"Register route [api/provider] complete.","service":"user-service"}
+{"level":"\u001b[34mdebug\u001b[39m","message":"Register route [api/user] complete.","service":"user-service"}
+{"level":"\u001b[34mdebug\u001b[39m","message":"Register route [api/util] complete.","service":"user-service"}
+{"level":"\u001b[32minfo\u001b[39m","message":"Listening @ 9000","service":"user-service"}
+{"level":"\u001b[34mdebug\u001b[39m","message":"Register route [api/provider] complete.","service":"user-service"}
+{"level":"\u001b[34mdebug\u001b[39m","message":"Register route [api/user] complete.","service":"user-service"}
+{"level":"\u001b[34mdebug\u001b[39m","message":"Register route [api/util] complete.","service":"user-service"}
+{"level":"\u001b[32minfo\u001b[39m","message":"Listening @ 9000","service":"user-service"}
+{"level":"\u001b[34mdebug\u001b[39m","message":"Register route [api/provider] complete.","service":"user-service"}
+{"level":"\u001b[34mdebug\u001b[39m","message":"Register route [api/user] complete.","service":"user-service"}
+{"level":"\u001b[34mdebug\u001b[39m","message":"Register route [api/util] complete.","service":"user-service"}
+{"level":"\u001b[32minfo\u001b[39m","message":"Listening @ 9000","service":"user-service"}
+{"level":"\u001b[34mdebug\u001b[39m","message":"Register route [api/provider] complete.","service":"user-service"}
+{"level":"\u001b[34mdebug\u001b[39m","message":"Register route [api/user] complete.","service":"user-service"}
+{"level":"\u001b[34mdebug\u001b[39m","message":"Register route [api/util] complete.","service":"user-service"}
+{"level":"\u001b[32minfo\u001b[39m","message":"Listening @ 9000","service":"user-service"}
+{"level":"\u001b[34mdebug\u001b[39m","message":"Register route [api/provider] complete.","service":"user-service"}
+{"level":"\u001b[34mdebug\u001b[39m","message":"Register route [api/user] complete.","service":"user-service"}
+{"level":"\u001b[34mdebug\u001b[39m","message":"Register route [api/util] complete.","service":"user-service"}
+{"level":"\u001b[32minfo\u001b[39m","message":"Listening @ 9000","service":"user-service"}
+{"level":"\u001b[34mdebug\u001b[39m","message":"Register route [api/provider] complete.","service":"user-service"}
+{"level":"\u001b[34mdebug\u001b[39m","message":"Register route [api/user] complete.","service":"user-service"}
+{"level":"\u001b[34mdebug\u001b[39m","message":"Register route [api/util] complete.","service":"user-service"}
+{"level":"\u001b[32minfo\u001b[39m","message":"Listening @ 9000","service":"user-service"}
+{"level":"\u001b[34mdebug\u001b[39m","message":"Register route [api/provider] complete.","service":"user-service"}
+{"level":"\u001b[34mdebug\u001b[39m","message":"Register route [api/user] complete.","service":"user-service"}
+{"level":"\u001b[34mdebug\u001b[39m","message":"Register route [api/util] complete.","service":"user-service"}
+{"level":"\u001b[32minfo\u001b[39m","message":"Listening @ 9000","service":"user-service"}
+{"level":"\u001b[34mdebug\u001b[39m","message":"Register route [api/provider] complete.","service":"user-service"}
+{"level":"\u001b[34mdebug\u001b[39m","message":"Register route [api/user] complete.","service":"user-service"}
+{"level":"\u001b[34mdebug\u001b[39m","message":"Register route [api/util] complete.","service":"user-service"}
+{"level":"\u001b[32minfo\u001b[39m","message":"Listening @ 9000","service":"user-service"}
+{"level":"\u001b[34mdebug\u001b[39m","message":"Register route [api/provider] complete.","service":"user-service"}
+{"level":"\u001b[34mdebug\u001b[39m","message":"Register route [api/user] complete.","service":"user-service"}
+{"level":"\u001b[34mdebug\u001b[39m","message":"Register route [api/util] complete.","service":"user-service"}
+{"level":"\u001b[32minfo\u001b[39m","message":"Listening @ 9000","service":"user-service"}
+{"level":"\u001b[34mdebug\u001b[39m","message":"Register route [api/provider] complete.","service":"user-service"}
+{"level":"\u001b[34mdebug\u001b[39m","message":"Register route [api/user] complete.","service":"user-service"}
+{"level":"\u001b[34mdebug\u001b[39m","message":"Register route [api/util] complete.","service":"user-service"}
+{"level":"\u001b[32minfo\u001b[39m","message":"Listening @ 9000","service":"user-service"}
+{"level":"\u001b[32minfo\u001b[39m","message":"User wongsathorn@next.co.th is online","service":"user-service"}
+{"level":"\u001b[32minfo\u001b[39m","message":"User wongsathorn@next.co.th is online","service":"user-service"}
+{"level":"\u001b[34mdebug\u001b[39m","message":"Register route [api/provider] complete.","service":"user-service"}
+{"level":"\u001b[34mdebug\u001b[39m","message":"Register route [api/user] complete.","service":"user-service"}
+{"level":"\u001b[34mdebug\u001b[39m","message":"Register route [api/util] complete.","service":"user-service"}
+{"level":"\u001b[32minfo\u001b[39m","message":"Listening @ 9000","service":"user-service"}
+{"level":"\u001b[32minfo\u001b[39m","message":"User wongsathorn@next.co.th is offline","service":"user-service"}
+{"level":"\u001b[34mdebug\u001b[39m","message":"Register route [api/provider] complete.","service":"user-service"}
+{"level":"\u001b[34mdebug\u001b[39m","message":"Register route [api/user] complete.","service":"user-service"}
+{"level":"\u001b[34mdebug\u001b[39m","message":"Register route [api/util] complete.","service":"user-service"}
+{"level":"\u001b[32minfo\u001b[39m","message":"Listening @ 9000","service":"user-service"}
+{"level":"\u001b[32minfo\u001b[39m","message":"User wongsathorn@next.co.th is offline","service":"user-service"}
+{"level":"\u001b[32minfo\u001b[39m","message":"User wongsathorn@next.co.th is offline","service":"user-service"}
+{"level":"\u001b[32minfo\u001b[39m","message":"User wongsathorn@next.co.th is online","service":"user-service"}
+{"level":"\u001b[34mdebug\u001b[39m","message":"Register route [api/provider] complete.","service":"user-service"}
+{"level":"\u001b[34mdebug\u001b[39m","message":"Register route [api/user] complete.","service":"user-service"}
+{"level":"\u001b[34mdebug\u001b[39m","message":"Register route [api/util] complete.","service":"user-service"}
+{"level":"\u001b[32minfo\u001b[39m","message":"Listening @ 9000","service":"user-service"}
+{"level":"\u001b[34mdebug\u001b[39m","message":"Register route [api/provider] complete.","service":"user-service"}
+{"level":"\u001b[34mdebug\u001b[39m","message":"Register route [api/user] complete.","service":"user-service"}
+{"level":"\u001b[34mdebug\u001b[39m","message":"Register route [api/util] complete.","service":"user-service"}
+{"level":"\u001b[32minfo\u001b[39m","message":"Listening @ 9000","service":"user-service"}
+{"level":"\u001b[34mdebug\u001b[39m","message":"Register route [api/provider] complete.","service":"user-service"}
+{"level":"\u001b[34mdebug\u001b[39m","message":"Register route [api/user] complete.","service":"user-service"}
+{"level":"\u001b[34mdebug\u001b[39m","message":"Register route [api/util] complete.","service":"user-service"}
+{"level":"\u001b[32minfo\u001b[39m","message":"Listening @ 9000","service":"user-service"}
+{"level":"\u001b[34mdebug\u001b[39m","message":"Register route [api/provider] complete.","service":"user-service"}
+{"level":"\u001b[34mdebug\u001b[39m","message":"Register route [api/user] complete.","service":"user-service"}
+{"level":"\u001b[34mdebug\u001b[39m","message":"Register route [api/util] complete.","service":"user-service"}
+{"level":"\u001b[32minfo\u001b[39m","message":"Listening @ 9000","service":"user-service"}
+{"level":"\u001b[34mdebug\u001b[39m","message":"Register route [api/provider] complete.","service":"user-service"}
+{"level":"\u001b[34mdebug\u001b[39m","message":"Register route [api/user] complete.","service":"user-service"}
+{"level":"\u001b[34mdebug\u001b[39m","message":"Register route [api/util] complete.","service":"user-service"}
+{"level":"\u001b[32minfo\u001b[39m","message":"Listening @ 9000","service":"user-service"}
+{"level":"\u001b[34mdebug\u001b[39m","message":"Register route [api/provider] complete.","service":"user-service"}
+{"level":"\u001b[34mdebug\u001b[39m","message":"Register route [api/user] complete.","service":"user-service"}
+{"level":"\u001b[34mdebug\u001b[39m","message":"Register route [api/util] complete.","service":"user-service"}
+{"level":"\u001b[32minfo\u001b[39m","message":"Listening @ 9000","service":"user-service"}
+{"level":"\u001b[34mdebug\u001b[39m","message":"Register route [api/provider] complete.","service":"user-service"}
+{"level":"\u001b[34mdebug\u001b[39m","message":"Register route [api/user] complete.","service":"user-service"}
+{"level":"\u001b[34mdebug\u001b[39m","message":"Register route [api/util] complete.","service":"user-service"}
+{"level":"\u001b[32minfo\u001b[39m","message":"Listening @ 9000","service":"user-service"}
+{"level":"\u001b[34mdebug\u001b[39m","message":"Register route [api/provider] complete.","service":"user-service"}
+{"level":"\u001b[34mdebug\u001b[39m","message":"Register route [api/user] complete.","service":"user-service"}
+{"level":"\u001b[34mdebug\u001b[39m","message":"Register route [api/util] complete.","service":"user-service"}
+{"level":"\u001b[32minfo\u001b[39m","message":"Listening @ 9000","service":"user-service"}
+{"level":"\u001b[34mdebug\u001b[39m","message":"Register route [api/provider] complete.","service":"user-service"}
+{"level":"\u001b[34mdebug\u001b[39m","message":"Register route [api/user] complete.","service":"user-service"}
+{"level":"\u001b[34mdebug\u001b[39m","message":"Register route [api/util] complete.","service":"user-service"}
+{"level":"\u001b[32minfo\u001b[39m","message":"Listening @ 9000","service":"user-service"}
+{"level":"\u001b[34mdebug\u001b[39m","message":"Register route [api/provider] complete.","service":"user-service"}
+{"level":"\u001b[34mdebug\u001b[39m","message":"Register route [api/user] complete.","service":"user-service"}
+{"level":"\u001b[34mdebug\u001b[39m","message":"Register route [api/util] complete.","service":"user-service"}
+{"level":"\u001b[32minfo\u001b[39m","message":"Listening @ 9000","service":"user-service"}
+{"level":"\u001b[34mdebug\u001b[39m","message":"Register route [api/provider] complete.","service":"user-service"}
+{"level":"\u001b[34mdebug\u001b[39m","message":"Register route [api/user] complete.","service":"user-service"}
+{"level":"\u001b[34mdebug\u001b[39m","message":"Register route [api/util] complete.","service":"user-service"}
+{"level":"\u001b[32minfo\u001b[39m","message":"Listening @ 9000","service":"user-service"}
+{"level":"\u001b[34mdebug\u001b[39m","message":"Register route [api/provider] complete.","service":"user-service"}
+{"level":"\u001b[34mdebug\u001b[39m","message":"Register route [api/user] complete.","service":"user-service"}
+{"level":"\u001b[34mdebug\u001b[39m","message":"Register route [api/util] complete.","service":"user-service"}
+{"level":"\u001b[32minfo\u001b[39m","message":"Listening @ 9000","service":"user-service"}
+{"level":"\u001b[34mdebug\u001b[39m","message":"Register route [api/provider] complete.","service":"user-service"}
+{"level":"\u001b[34mdebug\u001b[39m","message":"Register route [api/user] complete.","service":"user-service"}
+{"level":"\u001b[34mdebug\u001b[39m","message":"Register route [api/util] complete.","service":"user-service"}
+{"level":"\u001b[32minfo\u001b[39m","message":"Listening @ 9000","service":"user-service"}
+{"level":"\u001b[34mdebug\u001b[39m","message":"Register route [api/provider] complete.","service":"user-service"}
+{"level":"\u001b[34mdebug\u001b[39m","message":"Register route [api/user] complete.","service":"user-service"}
+{"level":"\u001b[34mdebug\u001b[39m","message":"Register route [api/util] complete.","service":"user-service"}
+{"level":"\u001b[32minfo\u001b[39m","message":"Listening @ 9000","service":"user-service"}
+{"level":"\u001b[32minfo\u001b[39m","message":"User wongsathorn@next.co.th is online","service":"user-service"}
+{"level":"\u001b[32minfo\u001b[39m","message":"User wongsathorn@next.co.th is online","service":"user-service"}
+{"level":"\u001b[34mdebug\u001b[39m","message":"Register route [api/provider] complete.","service":"user-service"}
+{"level":"\u001b[34mdebug\u001b[39m","message":"Register route [api/user] complete.","service":"user-service"}
+{"level":"\u001b[34mdebug\u001b[39m","message":"Register route [api/util] complete.","service":"user-service"}
+{"level":"\u001b[32minfo\u001b[39m","message":"Listening @ 9000","service":"user-service"}
+{"level":"\u001b[32minfo\u001b[39m","message":"User wongsathorn@next.co.th is online","service":"user-service"}
+{"level":"\u001b[34mdebug\u001b[39m","message":"Register route [api/provider] complete.","service":"user-service"}
+{"level":"\u001b[34mdebug\u001b[39m","message":"Register route [api/user] complete.","service":"user-service"}
+{"level":"\u001b[34mdebug\u001b[39m","message":"Register route [api/util] complete.","service":"user-service"}
+{"level":"\u001b[32minfo\u001b[39m","message":"Listening @ 9000","service":"user-service"}
+{"level":"\u001b[34mdebug\u001b[39m","message":"Register route [api/provider] complete.","service":"user-service"}
+{"level":"\u001b[34mdebug\u001b[39m","message":"Register route [api/user] complete.","service":"user-service"}
+{"level":"\u001b[34mdebug\u001b[39m","message":"Register route [api/util] complete.","service":"user-service"}
+{"level":"\u001b[32minfo\u001b[39m","message":"Listening @ 9000","service":"user-service"}
+{"level":"\u001b[34mdebug\u001b[39m","message":"Register route [api/provider] complete.","service":"user-service"}
+{"level":"\u001b[34mdebug\u001b[39m","message":"Register route [api/user] complete.","service":"user-service"}
+{"level":"\u001b[34mdebug\u001b[39m","message":"Register route [api/util] complete.","service":"user-service"}
+{"level":"\u001b[32minfo\u001b[39m","message":"Listening @ 9000","service":"user-service"}
+{"level":"\u001b[34mdebug\u001b[39m","message":"Register route [api/provider] complete.","service":"user-service"}
+{"level":"\u001b[34mdebug\u001b[39m","message":"Register route [api/user] complete.","service":"user-service"}
+{"level":"\u001b[34mdebug\u001b[39m","message":"Register route [api/util] complete.","service":"user-service"}
+{"level":"\u001b[32minfo\u001b[39m","message":"Listening @ 9000","service":"user-service"}
+{"level":"\u001b[34mdebug\u001b[39m","message":"Register route [api/provider] complete.","service":"user-service"}
+{"level":"\u001b[34mdebug\u001b[39m","message":"Register route [api/user] complete.","service":"user-service"}
+{"level":"\u001b[34mdebug\u001b[39m","message":"Register route [api/util] complete.","service":"user-service"}
+{"level":"\u001b[32minfo\u001b[39m","message":"Listening @ 9000","service":"user-service"}
+{"level":"\u001b[34mdebug\u001b[39m","message":"Register route [api/provider] complete.","service":"user-service"}
+{"level":"\u001b[34mdebug\u001b[39m","message":"Register route [api/user] complete.","service":"user-service"}
+{"level":"\u001b[34mdebug\u001b[39m","message":"Register route [api/util] complete.","service":"user-service"}
+{"level":"\u001b[32minfo\u001b[39m","message":"Listening @ 9000","service":"user-service"}
+{"level":"\u001b[34mdebug\u001b[39m","message":"Register route [api/provider] complete.","service":"user-service"}
+{"level":"\u001b[34mdebug\u001b[39m","message":"Register route [api/user] complete.","service":"user-service"}
+{"level":"\u001b[34mdebug\u001b[39m","message":"Register route [api/util] complete.","service":"user-service"}
+{"level":"\u001b[32minfo\u001b[39m","message":"Listening @ 9000","service":"user-service"}
+{"level":"\u001b[34mdebug\u001b[39m","message":"Register route [api/provider] complete.","service":"user-service"}
+{"level":"\u001b[34mdebug\u001b[39m","message":"Register route [api/user] complete.","service":"user-service"}
+{"level":"\u001b[34mdebug\u001b[39m","message":"Register route [api/util] complete.","service":"user-service"}
+{"level":"\u001b[32minfo\u001b[39m","message":"Listening @ 9000","service":"user-service"}
+{"level":"\u001b[32minfo\u001b[39m","message":"User wongsathorn@nextx.co.th is online","service":"user-service"}
+{"level":"\u001b[32minfo\u001b[39m","message":"User wongsathorn@nextx.co.th is online","service":"user-service"}
+{"level":"\u001b[34mdebug\u001b[39m","message":"Register route [api/provider] complete.","service":"user-service"}
+{"level":"\u001b[34mdebug\u001b[39m","message":"Register route [api/user] complete.","service":"user-service"}
+{"level":"\u001b[34mdebug\u001b[39m","message":"Register route [api/util] complete.","service":"user-service"}
+{"level":"\u001b[32minfo\u001b[39m","message":"Listening @ 9000","service":"user-service"}
+{"level":"\u001b[34mdebug\u001b[39m","message":"Register route [api/provider] complete.","service":"user-service"}
+{"level":"\u001b[34mdebug\u001b[39m","message":"Register route [api/user] complete.","service":"user-service"}
+{"level":"\u001b[34mdebug\u001b[39m","message":"Register route [api/util] complete.","service":"user-service"}
+{"level":"\u001b[32minfo\u001b[39m","message":"Listening @ 9000","service":"user-service"}
+{"level":"\u001b[34mdebug\u001b[39m","message":"Register route [api/provider] complete.","service":"user-service"}
+{"level":"\u001b[34mdebug\u001b[39m","message":"Register route [api/user] complete.","service":"user-service"}
+{"level":"\u001b[34mdebug\u001b[39m","message":"Register route [api/util] complete.","service":"user-service"}
+{"level":"\u001b[32minfo\u001b[39m","message":"Listening @ 9000","service":"user-service"}
+{"level":"\u001b[34mdebug\u001b[39m","message":"Register route [api/provider] complete.","service":"user-service"}
+{"level":"\u001b[34mdebug\u001b[39m","message":"Register route [api/user] complete.","service":"user-service"}
+{"level":"\u001b[34mdebug\u001b[39m","message":"Register route [api/util] complete.","service":"user-service"}
+{"level":"\u001b[32minfo\u001b[39m","message":"Listening @ 9000","service":"user-service"}
+{"level":"\u001b[34mdebug\u001b[39m","message":"Register route [api/provider] complete.","service":"user-service"}
+{"level":"\u001b[34mdebug\u001b[39m","message":"Register route [api/user] complete.","service":"user-service"}
+{"level":"\u001b[34mdebug\u001b[39m","message":"Register route [api/util] complete.","service":"user-service"}
+{"level":"\u001b[32minfo\u001b[39m","message":"Listening @ 9000","service":"user-service"}
+{"level":"\u001b[34mdebug\u001b[39m","message":"Register route [api/provider] complete.","service":"user-service"}
+{"level":"\u001b[34mdebug\u001b[39m","message":"Register route [api/user] complete.","service":"user-service"}
+{"level":"\u001b[34mdebug\u001b[39m","message":"Register route [api/util] complete.","service":"user-service"}
+{"level":"\u001b[32minfo\u001b[39m","message":"Listening @ 9000","service":"user-service"}
+{"level":"\u001b[34mdebug\u001b[39m","message":"Register route [api/provider] complete.","service":"user-service"}
+{"level":"\u001b[34mdebug\u001b[39m","message":"Register route [api/user] complete.","service":"user-service"}
+{"level":"\u001b[34mdebug\u001b[39m","message":"Register route [api/util] complete.","service":"user-service"}
+{"level":"\u001b[32minfo\u001b[39m","message":"Listening @ 9000","service":"user-service"}
+{"level":"\u001b[34mdebug\u001b[39m","message":"Register route [api/provider] complete.","service":"user-service"}
+{"level":"\u001b[34mdebug\u001b[39m","message":"Register route [api/user] complete.","service":"user-service"}
+{"level":"\u001b[34mdebug\u001b[39m","message":"Register route [api/util] complete.","service":"user-service"}
+{"level":"\u001b[32minfo\u001b[39m","message":"Listening @ 9000","service":"user-service"}
+{"level":"\u001b[32minfo\u001b[39m","message":"User wongsathorn@next.co.th is online","service":"user-service"}
+{"level":"\u001b[32minfo\u001b[39m","message":"User wongsathorn@next.co.th is online","service":"user-service"}
+{"level":"\u001b[32minfo\u001b[39m","message":"User wongsathorn@next.co.th is online","service":"user-service"}
+{"level":"\u001b[32minfo\u001b[39m","message":"User wongsathorn@next.co.th is online","service":"user-service"}
+{"level":"\u001b[32minfo\u001b[39m","message":"User wongsathorn@next.co.th is online","service":"user-service"}
+{"level":"\u001b[32minfo\u001b[39m","message":"User wongsathorn@next.co.th is online","service":"user-service"}
+{"level":"\u001b[32minfo\u001b[39m","message":"User wongsathorn@next.co.th is online","service":"user-service"}
+{"level":"\u001b[32minfo\u001b[39m","message":"User wongsathorn@next.co.th is online","service":"user-service"}
+{"level":"\u001b[32minfo\u001b[39m","message":"User wongsathorn@next.co.th is online","service":"user-service"}
+{"level":"\u001b[32minfo\u001b[39m","message":"User wongsathorn@next.co.th is online","service":"user-service"}
+{"level":"\u001b[32minfo\u001b[39m","message":"User wongsathorn@next.co.th is online","service":"user-service"}
+{"level":"\u001b[32minfo\u001b[39m","message":"User wongsathorn@next.co.th is online","service":"user-service"}
+{"level":"\u001b[32minfo\u001b[39m","message":"User wongsathorn@next.co.th is online","service":"user-service"}
+{"level":"\u001b[34mdebug\u001b[39m","message":"Register route [api/provider] complete.","service":"user-service"}
+{"level":"\u001b[34mdebug\u001b[39m","message":"Register route [api/user] complete.","service":"user-service"}
+{"level":"\u001b[34mdebug\u001b[39m","message":"Register route [api/util] complete.","service":"user-service"}
+{"level":"\u001b[32minfo\u001b[39m","message":"Listening @ 9000","service":"user-service"}
+{"level":"\u001b[32minfo\u001b[39m","message":"User wongsathorn@next.co.th is online","service":"user-service"}
+{"level":"\u001b[34mdebug\u001b[39m","message":"Register route [api/provider] complete.","service":"user-service"}
+{"level":"\u001b[34mdebug\u001b[39m","message":"Register route [api/user] complete.","service":"user-service"}
+{"level":"\u001b[34mdebug\u001b[39m","message":"Register route [api/util] complete.","service":"user-service"}
+{"level":"\u001b[32minfo\u001b[39m","message":"Listening @ 9000","service":"user-service"}
+{"level":"\u001b[34mdebug\u001b[39m","message":"Register route [api/provider] complete.","service":"user-service"}
+{"level":"\u001b[34mdebug\u001b[39m","message":"Register route [api/user] complete.","service":"user-service"}
+{"level":"\u001b[34mdebug\u001b[39m","message":"Register route [api/util] complete.","service":"user-service"}
+{"level":"\u001b[32minfo\u001b[39m","message":"Listening @ 9000","service":"user-service"}
+{"level":"\u001b[32minfo\u001b[39m","message":"User wongsathorn@next.co.th is online","service":"user-service"}
+{"level":"\u001b[32minfo\u001b[39m","message":"User wongsathorn@next.co.th is online","service":"user-service"}
+{"level":"\u001b[34mdebug\u001b[39m","message":"Register route [api/provider] complete.","service":"user-service"}
+{"level":"\u001b[34mdebug\u001b[39m","message":"Register route [api/user] complete.","service":"user-service"}
+{"level":"\u001b[34mdebug\u001b[39m","message":"Register route [api/util] complete.","service":"user-service"}
+{"level":"\u001b[32minfo\u001b[39m","message":"Listening @ 9000","service":"user-service"}
+{"level":"\u001b[34mdebug\u001b[39m","message":"Register route [api/provider] complete.","service":"user-service"}
+{"level":"\u001b[34mdebug\u001b[39m","message":"Register route [api/user] complete.","service":"user-service"}
+{"level":"\u001b[34mdebug\u001b[39m","message":"Register route [api/util] complete.","service":"user-service"}
+{"level":"\u001b[32minfo\u001b[39m","message":"Listening @ 9000","service":"user-service"}
+{"level":"\u001b[32minfo\u001b[39m","message":"User wongsathorn@next.co.th is online","service":"user-service"}
+{"level":"\u001b[34mdebug\u001b[39m","message":"Register route [api/provider] complete.","service":"user-service"}
+{"level":"\u001b[34mdebug\u001b[39m","message":"Register route [api/user] complete.","service":"user-service"}
+{"level":"\u001b[34mdebug\u001b[39m","message":"Register route [api/util] complete.","service":"user-service"}
+{"level":"\u001b[32minfo\u001b[39m","message":"Listening @ 9000","service":"user-service"}
+{"level":"\u001b[34mdebug\u001b[39m","message":"Register route [api/provider] complete.","service":"user-service"}
+{"level":"\u001b[34mdebug\u001b[39m","message":"Register route [api/user] complete.","service":"user-service"}
+{"level":"\u001b[34mdebug\u001b[39m","message":"Register route [api/util] complete.","service":"user-service"}
+{"level":"\u001b[32minfo\u001b[39m","message":"Listening @ 9000","service":"user-service"}
+{"level":"\u001b[34mdebug\u001b[39m","message":"Register route [api/provider] complete.","service":"user-service"}
+{"level":"\u001b[34mdebug\u001b[39m","message":"Register route [api/user] complete.","service":"user-service"}
+{"level":"\u001b[34mdebug\u001b[39m","message":"Register route [api/util] complete.","service":"user-service"}
+{"level":"\u001b[32minfo\u001b[39m","message":"Listening @ 9000","service":"user-service"}
+{"level":"\u001b[34mdebug\u001b[39m","message":"Register route [api/provider] complete.","service":"user-service"}
+{"level":"\u001b[34mdebug\u001b[39m","message":"Register route [api/user] complete.","service":"user-service"}
+{"level":"\u001b[34mdebug\u001b[39m","message":"Register route [api/util] complete.","service":"user-service"}
+{"level":"\u001b[32minfo\u001b[39m","message":"Listening @ 9000","service":"user-service"}
+{"level":"\u001b[34mdebug\u001b[39m","message":"Register route [api/provider] complete.","service":"user-service"}
+{"level":"\u001b[34mdebug\u001b[39m","message":"Register route [api/user] complete.","service":"user-service"}
+{"level":"\u001b[34mdebug\u001b[39m","message":"Register route [api/util] complete.","service":"user-service"}
+{"level":"\u001b[32minfo\u001b[39m","message":"Listening @ 9000","service":"user-service"}
