@@ -27,9 +27,9 @@ model Company {
   city      String     @db.VarChar(255)
   state     String     @db.VarChar(255)
   zip       String     @db.VarChar(255)
-  country   String     @db.VarChar(255)
-  icon      String
-  phone     String     @db.VarChar(255)
+  country   String?    @db.VarChar(255)
+  icon      String?
+  phone     String?    @db.VarChar(255)
   website   String?    @db.VarChar(255)
   parentId  String?    @db.Uuid
   parent    Company?   @relation("parents", fields: [parentId], references: [id])
@@ -83,7 +83,29 @@ model Position {
   id        String   @unique @db.Uuid
   name      String   @db.VarChar(255)
   access    String
-  companyId String   @unique @db.Uuid
+  companyId String?  @db.Uuid
   company   Company? @relation(fields: [companyId], references: [id])
   users     User[]
+}
+
+model Province {
+  id       String     @unique @db.Uuid
+  name     String
+  district District[]
+}
+
+model District {
+  id         String   @unique @db.Uuid
+  name       String
+  provinceId String   @db.Uuid
+  province   Province @relation(fields: [provinceId], references: [id])
+  amphoe     Amphoe[]
+}
+
+model Amphoe {
+  id         String   @unique @db.Uuid
+  name       String
+  districtId String   @db.Uuid
+  zipcode    String?
+  district   District @relation(fields: [districtId], references: [id])
 }

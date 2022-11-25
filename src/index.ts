@@ -7,11 +7,17 @@ import http from 'http';
 import cors from 'cors';
 import bodyParser from 'body-parser';
 import { typeDefs , resolvers} from './datasource/index';
+import multer from 'multer';
+import { PrismaClient } from '@prisma/client';
+
+const prisma = new PrismaClient();
+
 
 dotenv.config();
 
-interface ApolloContext {
+export interface ApolloContext {
   token?: String;
+  prisma: typeof prisma
 }
 
 
@@ -28,16 +34,39 @@ const server = new ApolloServer<ApolloContext>({
 (async () => {
   await server.start();
 
+  const storageAvatar = multer.diskStorage({
+    destination: function (req, file, callback) {
+      callback(null, 'uploads/avatar')
+    },
+    filename: function (req, file, callback) {
+      const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1E9)
+      callback(null, file.fieldname + '-' + uniqueSuffix+'.png')
+    },
+  })
+
+  const uploads = multer({storage : storageAvatar})
+  app.post('/api/upload/avatar',uploads.single('avatar'),(req , res) => {
+    res.send(req.file)
+  })
+
+
+  app.use('/api/static', express.static('uploads'))
+
   app.use(
     '/gql',
     cors<cors.CorsRequest>(),
     bodyParser.json(),
     expressMiddleware(server, {
-      context: async ({ req }) => ({ token: req.headers.authorization }),
+      context: async ({ req }) => {
+        return {
+          prisma,
+          token: req.headers.authorization
+        }
+      },
     }),
   );
   await new Promise<void>((resolve) => httpServer.listen({ port: 4000 }, resolve));
-  
+
   console.log(`🚀 Server ready at http://localhost:4000/gql`);
 
 })();
