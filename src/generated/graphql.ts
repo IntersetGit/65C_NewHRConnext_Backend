@@ -23,12 +23,6 @@ export type Amphoe = {
   zipcode?: Maybe<Scalars['String']>;
 };
 
-export type Book = {
-  __typename?: 'Book';
-  author?: Maybe<Scalars['String']>;
-  title?: Maybe<Scalars['String']>;
-};
-
 export type Company = {
   __typename?: 'Company';
   address?: Maybe<Scalars['String']>;
@@ -81,14 +75,32 @@ export type District = {
   name?: Maybe<Scalars['String']>;
 };
 
+export type LoginResponse = {
+  __typename?: 'LoginResponse';
+  access_token?: Maybe<Scalars['String']>;
+  refresh_token?: Maybe<Scalars['String']>;
+  status?: Maybe<Scalars['Boolean']>;
+};
+
+export type LoginaInput = {
+  email: Scalars['String'];
+  password: Scalars['String'];
+};
+
 export type Mutation = {
   __typename?: 'Mutation';
   createAccount?: Maybe<CreateCompanyResponseType>;
+  login?: Maybe<LoginResponse>;
 };
 
 
 export type MutationCreateAccountArgs = {
   data: CreateAccountInput;
+};
+
+
+export type MutationLoginArgs = {
+  data: LoginaInput;
 };
 
 export type Position = {
@@ -128,9 +140,7 @@ export type Province = {
 
 export type Query = {
   __typename?: 'Query';
-  books?: Maybe<Array<Maybe<Book>>>;
   getProvince?: Maybe<Array<Maybe<Province>>>;
-  me?: Maybe<Scalars['Int']>;
   users?: Maybe<Array<Maybe<User>>>;
 };
 
@@ -239,7 +249,6 @@ export type DirectiveResolverFn<TResult = {}, TParent = {}, TContext = {}, TArgs
 /** Mapping between all available schema types and the resolvers types */
 export type ResolversTypes = ResolversObject<{
   Amphoe: ResolverTypeWrapper<Amphoe>;
-  Book: ResolverTypeWrapper<Book>;
   Boolean: ResolverTypeWrapper<Scalars['Boolean']>;
   Company: ResolverTypeWrapper<Company>;
   CreateAccountInput: CreateAccountInput;
@@ -247,7 +256,8 @@ export type ResolversTypes = ResolversObject<{
   Date: ResolverTypeWrapper<Scalars['Date']>;
   District: ResolverTypeWrapper<District>;
   ID: ResolverTypeWrapper<Scalars['ID']>;
-  Int: ResolverTypeWrapper<Scalars['Int']>;
+  LoginResponse: ResolverTypeWrapper<LoginResponse>;
+  LoginaInput: LoginaInput;
   Mutation: ResolverTypeWrapper<{}>;
   Position: ResolverTypeWrapper<Position>;
   Profile: ResolverTypeWrapper<Profile>;
@@ -262,7 +272,6 @@ export type ResolversTypes = ResolversObject<{
 /** Mapping between all available schema types and the resolvers parents */
 export type ResolversParentTypes = ResolversObject<{
   Amphoe: Amphoe;
-  Book: Book;
   Boolean: Scalars['Boolean'];
   Company: Company;
   CreateAccountInput: CreateAccountInput;
@@ -270,7 +279,8 @@ export type ResolversParentTypes = ResolversObject<{
   Date: Scalars['Date'];
   District: District;
   ID: Scalars['ID'];
-  Int: Scalars['Int'];
+  LoginResponse: LoginResponse;
+  LoginaInput: LoginaInput;
   Mutation: {};
   Position: Position;
   Profile: Profile;
@@ -286,12 +296,6 @@ export type AmphoeResolvers<ContextType = ApolloContext, ParentType extends Reso
   id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
   name?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   zipcode?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
-  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
-}>;
-
-export type BookResolvers<ContextType = ApolloContext, ParentType extends ResolversParentTypes['Book'] = ResolversParentTypes['Book']> = ResolversObject<{
-  author?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
-  title?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 }>;
 
@@ -333,8 +337,16 @@ export type DistrictResolvers<ContextType = ApolloContext, ParentType extends Re
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 }>;
 
+export type LoginResponseResolvers<ContextType = ApolloContext, ParentType extends ResolversParentTypes['LoginResponse'] = ResolversParentTypes['LoginResponse']> = ResolversObject<{
+  access_token?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  refresh_token?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  status?: Resolver<Maybe<ResolversTypes['Boolean']>, ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+}>;
+
 export type MutationResolvers<ContextType = ApolloContext, ParentType extends ResolversParentTypes['Mutation'] = ResolversParentTypes['Mutation']> = ResolversObject<{
   createAccount?: Resolver<Maybe<ResolversTypes['CreateCompanyResponseType']>, ParentType, ContextType, RequireFields<MutationCreateAccountArgs, 'data'>>;
+  login?: Resolver<Maybe<ResolversTypes['LoginResponse']>, ParentType, ContextType, RequireFields<MutationLoginArgs, 'data'>>;
 }>;
 
 export type PositionResolvers<ContextType = ApolloContext, ParentType extends ResolversParentTypes['Position'] = ResolversParentTypes['Position']> = ResolversObject<{
@@ -373,9 +385,7 @@ export type ProvinceResolvers<ContextType = ApolloContext, ParentType extends Re
 }>;
 
 export type QueryResolvers<ContextType = ApolloContext, ParentType extends ResolversParentTypes['Query'] = ResolversParentTypes['Query']> = ResolversObject<{
-  books?: Resolver<Maybe<Array<Maybe<ResolversTypes['Book']>>>, ParentType, ContextType>;
   getProvince?: Resolver<Maybe<Array<Maybe<ResolversTypes['Province']>>>, ParentType, ContextType>;
-  me?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
   users?: Resolver<Maybe<Array<Maybe<ResolversTypes['User']>>>, ParentType, ContextType, Partial<QueryUsersArgs>>;
 }>;
 
@@ -404,11 +414,11 @@ export type UserResolvers<ContextType = ApolloContext, ParentType extends Resolv
 
 export type Resolvers<ContextType = ApolloContext> = ResolversObject<{
   Amphoe?: AmphoeResolvers<ContextType>;
-  Book?: BookResolvers<ContextType>;
   Company?: CompanyResolvers<ContextType>;
   CreateCompanyResponseType?: CreateCompanyResponseTypeResolvers<ContextType>;
   Date?: GraphQLScalarType;
   District?: DistrictResolvers<ContextType>;
+  LoginResponse?: LoginResponseResolvers<ContextType>;
   Mutation?: MutationResolvers<ContextType>;
   Position?: PositionResolvers<ContextType>;
   Profile?: ProfileResolvers<ContextType>;
