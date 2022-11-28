@@ -1,8 +1,10 @@
-import { Resolvers } from '~/generated/graphql';
+import { Resolvers } from '../generated/graphql';
 import { createPassword } from '../utils/passwords';
 import gql from 'graphql-tag';
 import _ from 'lodash';
 import { v4 } from 'uuid';
+import { composeResolvers } from '@graphql-tools/resolvers-composition';
+import { authenticate } from '../middleware/authenticatetoken';
 
 export const userTypedef = gql`
   type User {
@@ -52,6 +54,7 @@ export const userTypedef = gql`
 
   type Query {
     users(userid: String): [User]
+    me: [User]
   }
 
   type Mutation {
@@ -59,13 +62,20 @@ export const userTypedef = gql`
   }
 `;
 
-export const userResolvers: Resolvers = {
+const resolvers: Resolvers = {
   Query: {
     async users(parent, args, ctx) {
       const filter = args?.userid ? args?.userid : undefined;
       const result = await ctx.prisma.user.findMany({
         include: { profile: true, company: true, position: true },
         where: { id: filter },
+      });
+      return result;
+    },
+    async me(parant, args, ctx) {
+      const result = await ctx.prisma.user.findMany({
+        include: { profile: true, company: true, position: true, role: true },
+        where: { id: ctx.currentUser?.id },
       });
       return result;
     },
@@ -116,3 +126,9 @@ export const userResolvers: Resolvers = {
     },
   },
 };
+
+const resolversComposition = {
+  'Query.me': [authenticate()],
+};
+
+export const userResolvers = composeResolvers(resolvers, resolversComposition);
