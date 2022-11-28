@@ -14,8 +14,14 @@ const prisma = new PrismaClient();
 
 dotenv.config();
 
+export type UsertokenType = {
+  id: string;
+  roleId: string;
+  compayId: string;
+};
 export interface ApolloContext {
   token?: String;
+  currentUser?: UsertokenType;
   prisma: typeof prisma;
 }
 

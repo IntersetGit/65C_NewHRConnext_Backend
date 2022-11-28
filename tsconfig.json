@@ -1,6 +1,6 @@
 {
-  "ts-node": {  
-    "files": true 
+  "ts-node": {
+    "files": true
   },
   "compilerOptions": {
     /* Visit https://aka.ms/tsconfig to read more about this file */
@@ -101,10 +101,7 @@
     "moduleResolution": "node",
     /* Completeness */
     // "skipDefaultLibCheck": true,                      /* Skip type checking .d.ts files that are included with TypeScript. */
-    "skipLibCheck": true , 
-    "paths": {
-      "~/*" : ["src/*"],
-    }                               /* Skip type checking all .d.ts files. */
+    "skipLibCheck": true ,                             /* Skip type checking all .d.ts files. */
   },
   "include": [
     "customreq.d.ts",

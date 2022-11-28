@@ -1,5 +1,5 @@
 import gql from 'graphql-tag';
-import { Resolvers } from '~/generated/graphql';
+import { Resolvers } from '../generated/graphql';
 
 export const masterTypedef = gql`
   type Amphoe {

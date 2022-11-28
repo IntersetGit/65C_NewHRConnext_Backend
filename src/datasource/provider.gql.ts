@@ -1,5 +1,5 @@
 import gql from 'graphql-tag';
-import { Resolvers } from '~/generated/graphql';
+import { Resolvers } from '../generated/graphql';
 import { comparePassword } from '../utils/passwords';
 import { GraphQLError } from 'graphql';
 import jwt from 'jsonwebtoken';

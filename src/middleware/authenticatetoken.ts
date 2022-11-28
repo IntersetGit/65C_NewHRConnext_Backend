@@ -1,22 +1,33 @@
 import jwt from 'jsonwebtoken';
-import { Request, Response, NextFunction } from 'express';
+import { GraphQLError } from 'graphql';
 
-export const authenticateToken = async (
-  req: Request,
-  res: Response,
-  next: NextFunction,
-) => {
-  const authheader = req.headers['authorization'];
-  const secret = process.env.JWT_SECRET || 'secret';
-  const token = authheader && authheader.split(' ')[1];
-  if (!token) {
-    return res.status(401).send({ message: 'Access denied', code: 401 });
-  }
-  jwt.verify(token, secret, async (error, message : any) => {
-    if ( error ) {
-        return res.status(403).send({ message: 'Invalid token or token expired', code: 403 });
+export const authenticate =
+  () => (next: any) => (root: any, args: any, ctx: any, info: any) => {
+    const secret = process.env.JWT_SECRET || 'secret';
+    if (!ctx.token) {
+      throw new GraphQLError('You are not authenticated!', {
+        extensions: {
+          code: 'USER_NOT_AUTHENTICATED',
+          http: {
+            status: 401,
+          },
+        },
+      });
     }
-    req.user = message;
-    next();
-  });
-};
+    try {
+      const tsplit = ctx.token.split(' ');
+      var decoded = jwt.verify(tsplit[1], secret);
+      ctx.currentUser = decoded;
+    } catch (err) {
+      throw new GraphQLError('Invalid token or token expired!', {
+        extensions: {
+          code: 'INVALID_TOKEN',
+          http: {
+            status: 403,
+          },
+        },
+      });
+    }
+
+    return next(root, args, ctx, info);
+  };
