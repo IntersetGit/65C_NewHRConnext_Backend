@@ -54,7 +54,7 @@ export const userTypedef = gql`
 
   type Query {
     users(userid: String): [User]
-    me: [User]
+    me: User
   }
 
   type Mutation {
@@ -73,7 +73,7 @@ const resolvers: Resolvers = {
       return result;
     },
     async me(parant, args, ctx) {
-      const result = await ctx.prisma.user.findMany({
+      const result = await ctx.prisma.user.findUnique({
         include: { profile: true, company: true, position: true, role: true },
         where: { id: ctx.currentUser?.id },
       });

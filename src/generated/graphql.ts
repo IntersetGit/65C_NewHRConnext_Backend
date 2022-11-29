@@ -91,6 +91,7 @@ export type Mutation = {
   __typename?: 'Mutation';
   createAccount?: Maybe<CreateCompanyResponseType>;
   login?: Maybe<LoginResponse>;
+  refreshToken?: Maybe<RefreshtokenResponseType>;
 };
 
 
@@ -141,13 +142,18 @@ export type Province = {
 export type Query = {
   __typename?: 'Query';
   getProvince?: Maybe<Array<Maybe<Province>>>;
-  me?: Maybe<Array<Maybe<User>>>;
+  me?: Maybe<User>;
   users?: Maybe<Array<Maybe<User>>>;
 };
 
 
 export type QueryUsersArgs = {
   userid?: InputMaybe<Scalars['String']>;
+};
+
+export type RefreshtokenResponseType = {
+  __typename?: 'RefreshtokenResponseType';
+  access_token?: Maybe<Scalars['String']>;
 };
 
 export type RegisterProfileInput = {
@@ -264,6 +270,7 @@ export type ResolversTypes = ResolversObject<{
   Profile: ResolverTypeWrapper<Profile>;
   Province: ResolverTypeWrapper<Province>;
   Query: ResolverTypeWrapper<{}>;
+  RefreshtokenResponseType: ResolverTypeWrapper<RefreshtokenResponseType>;
   RegisterProfileInput: RegisterProfileInput;
   Role: ResolverTypeWrapper<Role>;
   String: ResolverTypeWrapper<Scalars['String']>;
@@ -287,6 +294,7 @@ export type ResolversParentTypes = ResolversObject<{
   Profile: Profile;
   Province: Province;
   Query: {};
+  RefreshtokenResponseType: RefreshtokenResponseType;
   RegisterProfileInput: RegisterProfileInput;
   Role: Role;
   String: Scalars['String'];
@@ -348,6 +356,7 @@ export type LoginResponseResolvers<ContextType = ApolloContext, ParentType exten
 export type MutationResolvers<ContextType = ApolloContext, ParentType extends ResolversParentTypes['Mutation'] = ResolversParentTypes['Mutation']> = ResolversObject<{
   createAccount?: Resolver<Maybe<ResolversTypes['CreateCompanyResponseType']>, ParentType, ContextType, RequireFields<MutationCreateAccountArgs, 'data'>>;
   login?: Resolver<Maybe<ResolversTypes['LoginResponse']>, ParentType, ContextType, RequireFields<MutationLoginArgs, 'data'>>;
+  refreshToken?: Resolver<Maybe<ResolversTypes['RefreshtokenResponseType']>, ParentType, ContextType>;
 }>;
 
 export type PositionResolvers<ContextType = ApolloContext, ParentType extends ResolversParentTypes['Position'] = ResolversParentTypes['Position']> = ResolversObject<{
@@ -387,8 +396,13 @@ export type ProvinceResolvers<ContextType = ApolloContext, ParentType extends Re
 
 export type QueryResolvers<ContextType = ApolloContext, ParentType extends ResolversParentTypes['Query'] = ResolversParentTypes['Query']> = ResolversObject<{
   getProvince?: Resolver<Maybe<Array<Maybe<ResolversTypes['Province']>>>, ParentType, ContextType>;
-  me?: Resolver<Maybe<Array<Maybe<ResolversTypes['User']>>>, ParentType, ContextType>;
+  me?: Resolver<Maybe<ResolversTypes['User']>, ParentType, ContextType>;
   users?: Resolver<Maybe<Array<Maybe<ResolversTypes['User']>>>, ParentType, ContextType, Partial<QueryUsersArgs>>;
+}>;
+
+export type RefreshtokenResponseTypeResolvers<ContextType = ApolloContext, ParentType extends ResolversParentTypes['RefreshtokenResponseType'] = ResolversParentTypes['RefreshtokenResponseType']> = ResolversObject<{
+  access_token?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 }>;
 
 export type RoleResolvers<ContextType = ApolloContext, ParentType extends ResolversParentTypes['Role'] = ResolversParentTypes['Role']> = ResolversObject<{
@@ -426,6 +440,7 @@ export type Resolvers<ContextType = ApolloContext> = ResolversObject<{
   Profile?: ProfileResolvers<ContextType>;
   Province?: ProvinceResolvers<ContextType>;
   Query?: QueryResolvers<ContextType>;
+  RefreshtokenResponseType?: RefreshtokenResponseTypeResolvers<ContextType>;
   Role?: RoleResolvers<ContextType>;
   User?: UserResolvers<ContextType>;
 }>;

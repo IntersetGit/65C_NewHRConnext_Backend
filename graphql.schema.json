@@ -805,6 +805,18 @@
             },
             "isDeprecated": false,
             "deprecationReason": null
+          },
+          {
+            "name": "refreshToken",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "OBJECT",
+              "name": "RefreshtokenResponseType",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
           }
         ],
         "inputFields": null,
@@ -1167,13 +1179,9 @@
             "description": null,
             "args": [],
             "type": {
-              "kind": "LIST",
-              "name": null,
-              "ofType": {
-                "kind": "OBJECT",
-                "name": "User",
-                "ofType": null
-              }
+              "kind": "OBJECT",
+              "name": "User",
+              "ofType": null
             },
             "isDeprecated": false,
             "deprecationReason": null
@@ -1203,6 +1211,29 @@
                 "name": "User",
                 "ofType": null
               }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          }
+        ],
+        "inputFields": null,
+        "interfaces": [],
+        "enumValues": null,
+        "possibleTypes": null
+      },
+      {
+        "kind": "OBJECT",
+        "name": "RefreshtokenResponseType",
+        "description": null,
+        "fields": [
+          {
+            "name": "access_token",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
             },
             "isDeprecated": false,
             "deprecationReason": null

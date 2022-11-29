@@ -3,6 +3,7 @@ import { Resolvers } from '../generated/graphql';
 import { comparePassword } from '../utils/passwords';
 import { GraphQLError } from 'graphql';
 import jwt from 'jsonwebtoken';
+import _ from 'lodash';
 
 export const providerTypedef = gql`
   input LoginaInput {
@@ -16,8 +17,13 @@ export const providerTypedef = gql`
     status: Boolean
   }
 
+  type RefreshtokenResponseType {
+    access_token: String
+  }
+
   type Mutation {
     login(data: LoginaInput!): LoginResponse
+    refreshToken: RefreshtokenResponseType
   }
 `;
 
@@ -70,6 +76,35 @@ export const providerResolvers: Resolvers = {
         access_token,
         refresh_token,
         status: true,
+      };
+    },
+    async refreshToken(p, args, ctx) {
+      const secret = process.env.JWT_SECRET || 'secret';
+      const expire = process.env.JWT_EXPIRES_IN || '15m';
+      try {
+        const tsplit = ctx.token?.split(' ');
+        const val = tsplit ? tsplit[1] : '';
+        var decoded = jwt.verify(val, secret);
+        console.log('[gql] : refreshToken', decoded);
+      } catch (error) {
+        throw new GraphQLError('Session expired', {
+          extensions: {
+            code: 'SESSION_EXPIRED',
+            http: {
+              status: 401,
+            },
+          },
+        });
+      }
+
+      const creadential = _.omit(decoded as object, ['iat', 'exp']);
+
+      const access_token = jwt.sign(creadential, secret, {
+        expiresIn: expire,
+      });
+
+      return {
+        access_token,
       };
     },
   },
