@@ -13,7 +13,7 @@ import amphoeEnum from '../enum/amphoe.enum';
 const prisma = new PrismaClient();
 
 const main = async () => {
-  rolesEnum.forEach(async (role) => {
+  const role = await rolesEnum.forEach(async (role) => {
     await prisma.role.upsert({
       where: {
         id: role.id,
@@ -26,7 +26,7 @@ const main = async () => {
     });
   });
 
-  provinceEnum.forEach(async (e) => {
+  const procince = await provinceEnum.forEach(async (e) => {
     await prisma.province.upsert({
       where: {
         id: e.identifier,
@@ -39,7 +39,7 @@ const main = async () => {
     });
   });
 
-  districtEnum.forEach(async (e) => {
+  const district = await districtEnum.forEach(async (e) => {
     await prisma.district.upsert({
       where: {
         id: e.identifier,
@@ -53,7 +53,7 @@ const main = async () => {
     });
   });
 
-  amphoeEnum.forEach(async (e) => {
+  const amphoe = await amphoeEnum.forEach(async (e) => {
     await prisma.amphoe.upsert({
       where: {
         id: e.identifier,
@@ -70,8 +70,9 @@ const main = async () => {
 };
 
 main()
-  .catch((e) => {
+  .catch(async (e) => {
     console.error(e);
+    await prisma.$disconnect();
     process.exit(1);
   })
   .finally(async () => {

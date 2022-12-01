@@ -1,7 +1,4 @@
-import gql from "graphql-tag";
-
-
-
+import gql from 'graphql-tag';
 
 export const companyTypedef = gql`
     type Company {
@@ -23,4 +20,13 @@ export const companyTypedef = gql`
         users: [User]
         positions: [Position]
     }
-`
+
+    type GetCompanyAccessType {
+        name: String
+
+    }
+
+    type Query {
+        getCompanyAccess:
+    }
+`;

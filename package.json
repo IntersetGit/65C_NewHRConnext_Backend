@@ -14,6 +14,7 @@
     "db-nuke": "docker-compose down --volumes --remove-orphans",
     "db-monitor": "npx prisma studio",
     "format-db": "prisma format",
+    "dx:dev": "run-s db-migrate-dev db-seed codegen dev",
     "dx": "run-s compose db-migrate-dev db-seed dev",
     "build:1-migrate": "prisma migrate deploy",
     "codegen": "graphql-codegen --config codegen.ts"
@@ -23,7 +24,7 @@
   "license": "ISC",
   "dependencies": {
     "@apollo/server": "^4.1.1",
-    "@prisma/client": "^4.2.1",
+    "@prisma/client": "^4.7.0",
     "body-parser": "^1.20.0",
     "cors": "^2.8.5",
     "dotenv": "^16.0.1",
@@ -34,7 +35,6 @@
     "moment": "^2.29.4",
     "morgan": "^1.10.0",
     "multer": "1.4.5-lts.1",
-    "prisma": "^4.2.1",
     "socketio": "^1.0.0",
     "uuid": "^8.3.2",
     "winston": "^3.8.1",
@@ -63,6 +63,7 @@
     "nodemon": "^2.0.19",
     "npm-run-all": "^4.1.5",
     "prettier": "^2.7.1",
+    "prisma": "^4.7.0",
     "ts-jest": "^28.0.8",
     "ts-node": "^10.9.1",
     "typescript": "^4.7.4"

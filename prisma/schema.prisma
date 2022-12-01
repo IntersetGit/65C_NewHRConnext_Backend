@@ -21,23 +21,24 @@ generator client {
 //   authorId  Int
 // }
 model Company {
-  id        String     @unique @db.Uuid
-  name      String     @db.VarChar(255)
-  address   String     @db.VarChar(255)
-  city      String     @db.VarChar(255)
-  state     String     @db.VarChar(255)
-  zip       String     @db.VarChar(255)
-  country   String?    @db.VarChar(255)
-  icon      String?
-  phone     String?    @db.VarChar(255)
-  website   String?    @db.VarChar(255)
-  parentId  String?    @db.Uuid
-  parent    Company?   @relation("parents", fields: [parentId], references: [id])
-  children  Company[]  @relation("parents")
-  createdAt DateTime   @default(now())
-  updatedAt DateTime   @updatedAt
-  users     User[]
-  positions Position[]
+  id          String     @unique @db.Uuid
+  name        String     @db.VarChar(255)
+  companyCode String     @unique
+  address     String     @db.VarChar(255)
+  city        String     @db.VarChar(255)
+  state       String     @db.VarChar(255)
+  zip         String     @db.VarChar(255)
+  country     String?    @db.VarChar(255)
+  icon        String?
+  phone       String?    @db.VarChar(255)
+  website     String?    @db.VarChar(255)
+  parentId    String?    @db.Uuid
+  parent      Company?   @relation("parents", fields: [parentId], references: [id])
+  children    Company[]  @relation("parents")
+  createdAt   DateTime   @default(now())
+  updatedAt   DateTime   @updatedAt
+  users       User[]
+  positions   Position[]
 }
 
 model Profile {

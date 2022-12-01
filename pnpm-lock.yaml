@@ -7,7 +7,7 @@ specifiers:
   '@graphql-codegen/typescript': 2.8.2
   '@graphql-codegen/typescript-resolvers': 2.7.7
   '@graphql-tools/resolvers-composition': ^6.5.12
-  '@prisma/client': ^4.2.1
+  '@prisma/client': ^4.7.0
   '@types/bcrypt': ^5.0.0
   '@types/body-parser': ^1.19.2
   '@types/cors': ^2.8.12
@@ -35,7 +35,7 @@ specifiers:
   nodemon: ^2.0.19
   npm-run-all: ^4.1.5
   prettier: ^2.7.1
-  prisma: ^4.2.1
+  prisma: ^4.7.0
   socketio: ^1.0.0
   ts-jest: ^28.0.8
   ts-node: ^10.9.1
@@ -46,7 +46,7 @@ specifiers:
 
 dependencies:
   '@apollo/server': 4.1.1_graphql@16.6.0
-  '@prisma/client': 4.6.1_prisma@4.6.1
+  '@prisma/client': 4.7.0_prisma@4.7.0
   body-parser: 1.20.1
   cors: 2.8.5
   dotenv: 16.0.3
@@ -57,7 +57,6 @@ dependencies:
   moment: 2.29.4
   morgan: 1.10.0
   multer: 1.4.5-lts.1
-  prisma: 4.6.1
   socketio: 1.0.0
   uuid: 8.3.2
   winston: 3.8.2
@@ -86,6 +85,7 @@ devDependencies:
   nodemon: 2.0.20
   npm-run-all: 4.1.5
   prettier: 2.7.1
+  prisma: 4.7.0
   ts-jest: 28.0.8_l4uz7kl2eeclic7mumfbeqbwgi
   ts-node: 10.9.1_wup25etrarvlqkprac7h35hj7u
   typescript: 4.9.3
@@ -1903,8 +1903,8 @@ packages:
       webcrypto-core: 1.7.5
     dev: true
 
-  /@prisma/client/4.6.1_prisma@4.6.1:
-    resolution: {integrity: sha512-M1+NNrMzqaOIxT7PBGcTs3IZo7d1EW/+gVQd4C4gUgWBDGgD9AcIeZnUSidgWClmpMSgVUdnVORjsWWGUameYA==}
+  /@prisma/client/4.7.0_prisma@4.7.0:
+    resolution: {integrity: sha512-keXMa0oJWJGOzMEFKp+CEgzJPwnOtGSrnTWw6qMYxnypYrRFdNxqyA06EzELZexBhgM4oLooZ1jDJ3iy46wExA==}
     engines: {node: '>=14.17'}
     requiresBuild: true
     peerDependencies:
@@ -1913,18 +1913,17 @@ packages:
       prisma:
         optional: true
     dependencies:
-      '@prisma/engines-version': 4.6.1-3.694eea289a8462c80264df36757e4fdc129b1b32
-      prisma: 4.6.1
+      '@prisma/engines-version': 4.7.0-74.39190b250ebc338586e25e6da45e5e783bc8a635
+      prisma: 4.7.0
     dev: false
 
-  /@prisma/engines-version/4.6.1-3.694eea289a8462c80264df36757e4fdc129b1b32:
-    resolution: {integrity: sha512-HUCmkXAU2jqp2O1RvNtbE+seLGLyJGEABZS/R38rZjSAafAy0WzBuHq+tbZMnD+b5OSCsTVtIPVcuvx1ySxcWQ==}
+  /@prisma/engines-version/4.7.0-74.39190b250ebc338586e25e6da45e5e783bc8a635:
+    resolution: {integrity: sha512-ImczGEQ8NS1OUApEeyAGxC4uLTtQp0wI1+2wM4MeQLVwIQbyMHk1vOhWWE8Pwbi3rnzLcPvsIrd9sm6oNXhERw==}
     dev: false
 
-  /@prisma/engines/4.6.1:
-    resolution: {integrity: sha512-3u2/XxvxB+Q7cMXHnKU0CpBiUK1QWqpgiBv28YDo1zOIJE3FCF8DI2vrp6vuwjGt5h0JGXDSvmSf4D4maVjJdw==}
+  /@prisma/engines/4.7.0:
+    resolution: {integrity: sha512-afKrVFktaZ1pOK12/uFl2hRsBWIJZuC5FdDtacuKk5x/mR+rC5AbA+PlN3ZCZbmYTaeiBMHjcU5wbT5z2N3nSQ==}
     requiresBuild: true
-    dev: false
 
   /@protobufjs/aspromise/1.1.2:
     resolution: {integrity: sha512-j+gKExEuLmKwvz3OgROXtrJ2UG2x8Ch2YZUxahh+s1F2HZ+wAceUNLkvy6zKCPVRkU++ZWQrdxsUeQXmcg4uoQ==}
@@ -5582,14 +5581,13 @@ packages:
       react-is: 18.2.0
     dev: true
 
-  /prisma/4.6.1:
-    resolution: {integrity: sha512-BR4itMCuzrDV4tn3e2TF+nh1zIX/RVU0isKtKoN28ADeoJ9nYaMhiuRRkFd2TZN8+l/XfYzoRKyHzUFXLQhmBQ==}
+  /prisma/4.7.0:
+    resolution: {integrity: sha512-VsecNo0Ca3+bDTzSpJqIpdupKVhhQ8aOYeWc09JlUM89knqvhSrlMrg0U8BiOD4tFrY1OPaCcraK8leDBxKMBg==}
     engines: {node: '>=14.17'}
     hasBin: true
     requiresBuild: true
     dependencies:
-      '@prisma/engines': 4.6.1
-    dev: false
+      '@prisma/engines': 4.7.0
 
   /process-nextick-args/2.0.1:
     resolution: {integrity: sha512-3ouUOpQhtgrbOa17J7+uxOTpITYWaGP7/AhoR3+A+/1e9skrzelGi/dXzEYyvbxubEF6Wn2ypscTKiKJFFn1ag==}
