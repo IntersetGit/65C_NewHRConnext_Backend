@@ -34,6 +34,7 @@ export const userTypedef = gql`
     password: String!
     firstname: String!
     lastname: String!
+    companyCode: String!
     tel: String!
     avatar: String
     dob: String!
@@ -54,6 +55,7 @@ export const userTypedef = gql`
 
   type Query {
     users(userid: String): [User]
+    verifyCompanycode(companyname: String!): Boolean
     me: User
   }
 
@@ -72,6 +74,13 @@ const resolvers: Resolvers = {
       });
       return result;
     },
+    /**
+     * ?ดึงข้อมูลส่วนตัวของผู้ใช้
+     * @param parant
+     * @param args
+     * @param ctx
+     * @returns
+     */
     async me(parant, args, ctx) {
       const result = await ctx.prisma.user.findUnique({
         include: { profile: true, company: true, position: true, role: true },
@@ -79,8 +88,27 @@ const resolvers: Resolvers = {
       });
       return result;
     },
+    /**
+     * ?เช็คข้อมูลซ้ำของรหัสหรือชื่อย่อบริษัท
+     * @param p
+     * @param args
+     * @param ctx
+     */
+    async verifyCompanycode(p, args, ctx) {
+      const checker = await ctx.prisma.company.findMany({
+        where: { companyCode: args.companyname },
+      });
+      return checker.length >= 1 ? false : true;
+    },
   },
   Mutation: {
+    /**
+     * ?สร้าง User
+     * @param p
+     * @param args
+     * @param ctx
+     * @returns
+     */
     async createAccount(p, args, ctx) {
       const genCompanyId = v4();
       const genUserid = v4();
@@ -89,6 +117,7 @@ const resolvers: Resolvers = {
         data: {
           id: genCompanyId,
           name: args.data.company_name,
+          companyCode: args.data.companyCode,
           city: args.data.company_city,
           address: args.data.company_address,
           zip: args.data.company_zip,

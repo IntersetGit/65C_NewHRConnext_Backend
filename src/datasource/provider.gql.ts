@@ -31,6 +31,13 @@ export const providerTypedef = gql`
 // schema. This resolver retrieves books from the "books" array above.
 export const providerResolvers: Resolvers = {
   Mutation: {
+    /**
+     * ?เข้าสู่ระบบ
+     * @param p
+     * @param args
+     * @param ctx
+     * @returns
+     */
     async login(p, args, ctx) {
       const finduser = await ctx.prisma.user.findUnique({
         where: { email: args.data.email },
@@ -78,6 +85,13 @@ export const providerResolvers: Resolvers = {
         status: true,
       };
     },
+    /**
+     * ?รีเฟรชโทเค็น
+     * @param p
+     * @param args
+     * @param ctx
+     * @returns
+     */
     async refreshToken(p, args, ctx) {
       const secret = process.env.JWT_SECRET || 'secret';
       const expire = process.env.JWT_EXPIRES_IN || '15m';

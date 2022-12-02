@@ -46,6 +46,7 @@ export type Company = {
 
 export type CreateAccountInput = {
   avatar?: InputMaybe<Scalars['String']>;
+  companyCode: Scalars['String'];
   company_address: Scalars['String'];
   company_city: Scalars['String'];
   company_country: Scalars['String'];
@@ -72,6 +73,20 @@ export type District = {
   __typename?: 'District';
   amphoe?: Maybe<Array<Maybe<Amphoe>>>;
   id: Scalars['ID'];
+  name?: Maybe<Scalars['String']>;
+};
+
+export type GetCompanyAccessType = {
+  __typename?: 'GetCompanyAccessType';
+  name?: Maybe<Scalars['String']>;
+};
+
+export type GetowmComoanyType = {
+  __typename?: 'GetowmComoanyType';
+  codeCompany?: Maybe<Scalars['String']>;
+  companyType?: Maybe<Scalars['String']>;
+  icon?: Maybe<Scalars['String']>;
+  id?: Maybe<Scalars['String']>;
   name?: Maybe<Scalars['String']>;
 };
 
@@ -142,13 +157,20 @@ export type Province = {
 export type Query = {
   __typename?: 'Query';
   getProvince?: Maybe<Array<Maybe<Province>>>;
+  getownCompany?: Maybe<Array<Maybe<GetowmComoanyType>>>;
   me?: Maybe<User>;
   users?: Maybe<Array<Maybe<User>>>;
+  verifyCompanycode?: Maybe<Scalars['Boolean']>;
 };
 
 
 export type QueryUsersArgs = {
   userid?: InputMaybe<Scalars['String']>;
+};
+
+
+export type QueryVerifyCompanycodeArgs = {
+  companyname: Scalars['String'];
 };
 
 export type RefreshtokenResponseType = {
@@ -262,6 +284,8 @@ export type ResolversTypes = ResolversObject<{
   CreateCompanyResponseType: ResolverTypeWrapper<CreateCompanyResponseType>;
   Date: ResolverTypeWrapper<Scalars['Date']>;
   District: ResolverTypeWrapper<District>;
+  GetCompanyAccessType: ResolverTypeWrapper<GetCompanyAccessType>;
+  GetowmComoanyType: ResolverTypeWrapper<GetowmComoanyType>;
   ID: ResolverTypeWrapper<Scalars['ID']>;
   LoginResponse: ResolverTypeWrapper<LoginResponse>;
   LoginaInput: LoginaInput;
@@ -286,6 +310,8 @@ export type ResolversParentTypes = ResolversObject<{
   CreateCompanyResponseType: CreateCompanyResponseType;
   Date: Scalars['Date'];
   District: District;
+  GetCompanyAccessType: GetCompanyAccessType;
+  GetowmComoanyType: GetowmComoanyType;
   ID: Scalars['ID'];
   LoginResponse: LoginResponse;
   LoginaInput: LoginaInput;
@@ -346,6 +372,20 @@ export type DistrictResolvers<ContextType = ApolloContext, ParentType extends Re
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 }>;
 
+export type GetCompanyAccessTypeResolvers<ContextType = ApolloContext, ParentType extends ResolversParentTypes['GetCompanyAccessType'] = ResolversParentTypes['GetCompanyAccessType']> = ResolversObject<{
+  name?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+}>;
+
+export type GetowmComoanyTypeResolvers<ContextType = ApolloContext, ParentType extends ResolversParentTypes['GetowmComoanyType'] = ResolversParentTypes['GetowmComoanyType']> = ResolversObject<{
+  codeCompany?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  companyType?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  icon?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  id?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  name?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+}>;
+
 export type LoginResponseResolvers<ContextType = ApolloContext, ParentType extends ResolversParentTypes['LoginResponse'] = ResolversParentTypes['LoginResponse']> = ResolversObject<{
   access_token?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   refresh_token?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
@@ -396,8 +436,10 @@ export type ProvinceResolvers<ContextType = ApolloContext, ParentType extends Re
 
 export type QueryResolvers<ContextType = ApolloContext, ParentType extends ResolversParentTypes['Query'] = ResolversParentTypes['Query']> = ResolversObject<{
   getProvince?: Resolver<Maybe<Array<Maybe<ResolversTypes['Province']>>>, ParentType, ContextType>;
+  getownCompany?: Resolver<Maybe<Array<Maybe<ResolversTypes['GetowmComoanyType']>>>, ParentType, ContextType>;
   me?: Resolver<Maybe<ResolversTypes['User']>, ParentType, ContextType>;
   users?: Resolver<Maybe<Array<Maybe<ResolversTypes['User']>>>, ParentType, ContextType, Partial<QueryUsersArgs>>;
+  verifyCompanycode?: Resolver<Maybe<ResolversTypes['Boolean']>, ParentType, ContextType, RequireFields<QueryVerifyCompanycodeArgs, 'companyname'>>;
 }>;
 
 export type RefreshtokenResponseTypeResolvers<ContextType = ApolloContext, ParentType extends ResolversParentTypes['RefreshtokenResponseType'] = ResolversParentTypes['RefreshtokenResponseType']> = ResolversObject<{
@@ -434,6 +476,8 @@ export type Resolvers<ContextType = ApolloContext> = ResolversObject<{
   CreateCompanyResponseType?: CreateCompanyResponseTypeResolvers<ContextType>;
   Date?: GraphQLScalarType;
   District?: DistrictResolvers<ContextType>;
+  GetCompanyAccessType?: GetCompanyAccessTypeResolvers<ContextType>;
+  GetowmComoanyType?: GetowmComoanyTypeResolvers<ContextType>;
   LoginResponse?: LoginResponseResolvers<ContextType>;
   Mutation?: MutationResolvers<ContextType>;
   Position?: PositionResolvers<ContextType>;
