@@ -86,6 +86,7 @@ const resolvers: Resolvers = {
         include: { profile: true, company: true, position: true, role: true },
         where: { id: ctx.currentUser?.id },
       });
+      console.log(result);
       return result;
     },
     /**
