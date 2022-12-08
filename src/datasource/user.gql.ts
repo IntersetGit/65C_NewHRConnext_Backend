@@ -10,7 +10,7 @@ export const userTypedef = gql`
   type User {
     email: String
     id: ID!
-    profile: Profile
+    profile: SimpleProfileQuery
     islogin: Boolean!
     lastlogin: Date
     createdAt: Date
@@ -18,8 +18,8 @@ export const userTypedef = gql`
     companyId: String
     role: Role
     positionId: String
-    position: Position
-    company: Company
+    position: PositionInterface
+    company: SimpleCompanyQuery
   }
 
   input RegisterProfileInput {
@@ -53,10 +53,19 @@ export const userTypedef = gql`
     status: Boolean
   }
 
+  type Me {
+    id: ID!
+    email: String
+    position: PositionInterface
+    profile: SimpleProfileQuery
+    role: Role
+    company: SimpleCompanyQuery
+  }
+
   type Query {
     users(userid: String): [User]
     verifyCompanycode(companyname: String!): Boolean
-    me: User
+    me: Me
   }
 
   type Mutation {
@@ -72,6 +81,7 @@ const resolvers: Resolvers = {
         include: { profile: true, company: true, position: true },
         where: { id: filter },
       });
+
       return result;
     },
     /**
@@ -83,9 +93,43 @@ const resolvers: Resolvers = {
      */
     async me(parant, args, ctx) {
       const result = await ctx.prisma.user.findUnique({
-        include: { profile: true, company: true, position: true, role: true },
+        select: {
+          id: true,
+          email: true,
+          position: {
+            select: {
+              id: true,
+              access: true,
+              name: true,
+            },
+          },
+          profile: {
+            select: {
+              firstname: true,
+              lastname: true,
+              avatar: true,
+              prefix: true,
+              dob: true,
+              gender: true,
+              bio: true,
+              staff_code: true,
+              tel: true,
+            },
+          },
+          role: true,
+          company: {
+            select: {
+              id: true,
+              name: true,
+              companyCode: true,
+              icon: true,
+            },
+          },
+        },
         where: { id: ctx.currentUser?.id },
       });
+      if (result?.role?.name === 'Owner') {
+      }
       console.log(result);
       return result;
     },
