@@ -24,6 +24,13 @@ export const companyTypedef = gql`
     positions: [Position]
   }
 
+  type MecompanyType {
+    id: ID!
+    name: String
+    companyCode: String
+    iocn: String
+  }
+
   type GetCompanyAccessType {
     name: String
   }

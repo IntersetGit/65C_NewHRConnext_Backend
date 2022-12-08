@@ -53,10 +53,19 @@ export const userTypedef = gql`
     status: Boolean
   }
 
+  type Me {
+    id: ID!
+    email: String
+    position: MePositionType
+    profile: MeprofileType
+    role: Role
+    company: MecompanyType
+  }
+
   type Query {
     users(userid: String): [User]
     verifyCompanycode(companyname: String!): Boolean
-    me: User
+    me: Me
   }
 
   type Mutation {
