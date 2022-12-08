@@ -83,7 +83,39 @@ const resolvers: Resolvers = {
      */
     async me(parant, args, ctx) {
       const result = await ctx.prisma.user.findUnique({
-        include: { profile: true, company: true, position: true, role: true },
+        select: {
+          id: true,
+          email: true,
+          position: {
+            select: {
+              id: true,
+              access: true,
+              name: true,
+            },
+          },
+          profile: {
+            select: {
+              firstname: true,
+              lastname: true,
+              avatar: true,
+              prefix: true,
+              dob: true,
+              gender: true,
+              bio: true,
+              staff_code: true,
+              tel: true,
+            },
+          },
+          role: true,
+          company: {
+            select: {
+              id: true,
+              name: true,
+              companyCode: true,
+              icon: true,
+            },
+          },
+        },
         where: { id: ctx.currentUser?.id },
       });
       return result;
