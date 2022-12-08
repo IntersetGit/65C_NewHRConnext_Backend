@@ -4,14 +4,7 @@ import { GetowmComoanyType, Resolvers } from 'src/generated/graphql';
 import { authenticate } from '../middleware/authenticatetoken';
 
 export const companyTypedef = gql`
-  interface SimpleCompanyQuery {
-    id: ID!
-    name: String
-    companyCode: String
-    icon: String
-  }
-
-  type FullCompanyQuery implements SimpleCompanyQuery {
+  type Company {
     id: ID!
     name: String
     address: String
@@ -23,13 +16,12 @@ export const companyTypedef = gql`
     phone: String
     website: String
     parentId: String
-    companyCode: String
-    parent: FullCompanyQuery
-    children: [FullCompanyQuery]
+    parent: Company
+    children: [Company]
     createdAt: Date
     updatedAt: Date
     users: [User]
-    positions: [FullprofileQuery]
+    positions: [Position]
   }
 
   type GetCompanyAccessType {
