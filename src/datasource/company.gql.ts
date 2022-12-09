@@ -28,7 +28,7 @@ export const companyTypedef = gql`
     id: ID!
     name: String
     companyCode: String
-    iocn: String
+    icon: String
   }
 
   type GetCompanyAccessType {

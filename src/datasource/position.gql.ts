@@ -4,7 +4,7 @@ export const positionTypedef = gql`
   type Position {
     id: ID!
     name: String
-    access: String
+    access: JSON
     companyId: String
     company: Company
     users: [User]
@@ -12,7 +12,7 @@ export const positionTypedef = gql`
 
   type MePositionType {
     id: ID!
-    access: String
+    access: JSON
     name: String
   }
 `;

@@ -127,6 +127,20 @@ const resolvers: Resolvers = {
         },
         where: { id: ctx.currentUser?.id },
       });
+
+      if (result?.role?.name === 'Owner') {
+        result.position = {
+          name: 'Owner',
+          id: 'OWNER_POSITION',
+          access: [
+            {
+              action: 'manage',
+              subject: 'all',
+            },
+          ],
+        };
+      }
+
       return result;
     },
     /**
