@@ -99,7 +99,7 @@ const resolvers: Resolvers = {
         const tsplit = ctx.token?.split(' ');
         const val = tsplit ? tsplit[1] : '';
         var decoded = jwt.verify(val, secret);
-        console.log('[gql] : refreshToken', decoded);
+        //console.log('[gql] : refreshToken', decoded);
       } catch (error) {
         throw new GraphQLError('Session expired', {
           extensions: {
