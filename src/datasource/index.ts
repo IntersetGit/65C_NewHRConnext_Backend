@@ -1,6 +1,7 @@
 import { merge } from 'lodash';
 import { companyResolvers, companyTypedef } from './company.gql';
 import { dateResolvers, dateTypedef } from './date.scalar';
+import { josnResolvers, jsonTypedef } from './json.scalar';
 import { masterResolvers, masterTypedef } from './master.gql';
 import { positionTypedef } from './position.gql';
 import { profileTypedef } from './profile.gql';
@@ -21,6 +22,7 @@ export const typeDefs = [
   companyTypedef,
   providerTypedef,
   userTypedef,
+  jsonTypedef,
 ];
 
 /**
@@ -33,6 +35,7 @@ export const resolvers = merge(
   providerResolvers,
   userResolvers,
   companyResolvers,
+  josnResolvers,
 );
 
 // console.log(resolvers);

@@ -14,6 +14,7 @@ export type Scalars = {
   Int: number;
   Float: number;
   Date: any;
+  JSON: any;
 };
 
 export type Amphoe = {
@@ -102,11 +103,50 @@ export type LoginaInput = {
   password: Scalars['String'];
 };
 
+export type Me = {
+  __typename?: 'Me';
+  company?: Maybe<MecompanyType>;
+  email?: Maybe<Scalars['String']>;
+  id: Scalars['ID'];
+  position?: Maybe<MePositionType>;
+  profile?: Maybe<MeprofileType>;
+  role?: Maybe<Role>;
+};
+
+export type MePositionType = {
+  __typename?: 'MePositionType';
+  access?: Maybe<Scalars['JSON']>;
+  id: Scalars['ID'];
+  name?: Maybe<Scalars['String']>;
+};
+
+export type MecompanyType = {
+  __typename?: 'MecompanyType';
+  companyCode?: Maybe<Scalars['String']>;
+  icon?: Maybe<Scalars['String']>;
+  id: Scalars['ID'];
+  name?: Maybe<Scalars['String']>;
+};
+
+export type MeprofileType = {
+  __typename?: 'MeprofileType';
+  avatar?: Maybe<Scalars['String']>;
+  bio?: Maybe<Scalars['String']>;
+  dob?: Maybe<Scalars['Date']>;
+  firstname?: Maybe<Scalars['String']>;
+  gender?: Maybe<Scalars['String']>;
+  lastname?: Maybe<Scalars['String']>;
+  prefix?: Maybe<Scalars['String']>;
+  staff_code?: Maybe<Scalars['String']>;
+  tel?: Maybe<Scalars['String']>;
+};
+
 export type Mutation = {
   __typename?: 'Mutation';
   createAccount?: Maybe<CreateCompanyResponseType>;
   login?: Maybe<LoginResponse>;
   refreshToken?: Maybe<RefreshtokenResponseType>;
+  validateRoute?: Maybe<ValidateRoute>;
 };
 
 
@@ -119,9 +159,14 @@ export type MutationLoginArgs = {
   data: LoginaInput;
 };
 
+
+export type MutationValidateRouteArgs = {
+  args?: InputMaybe<Scalars['String']>;
+};
+
 export type Position = {
   __typename?: 'Position';
-  access?: Maybe<Scalars['String']>;
+  access?: Maybe<Scalars['JSON']>;
   company?: Maybe<Company>;
   companyId?: Maybe<Scalars['String']>;
   id: Scalars['ID'];
@@ -158,7 +203,7 @@ export type Query = {
   __typename?: 'Query';
   getProvince?: Maybe<Array<Maybe<Province>>>;
   getownCompany?: Maybe<Array<Maybe<GetowmComoanyType>>>;
-  me?: Maybe<User>;
+  me?: Maybe<Me>;
   users?: Maybe<Array<Maybe<User>>>;
   verifyCompanycode?: Maybe<Scalars['Boolean']>;
 };
@@ -205,6 +250,12 @@ export type User = {
   profile?: Maybe<Profile>;
   role?: Maybe<Role>;
   roleId?: Maybe<Scalars['String']>;
+};
+
+export type ValidateRoute = {
+  __typename?: 'ValidateRoute';
+  acess?: Maybe<Scalars['Boolean']>;
+  path?: Maybe<Scalars['String']>;
 };
 
 export type WithIndex<TObject> = TObject & Record<string, any>;
@@ -287,8 +338,13 @@ export type ResolversTypes = ResolversObject<{
   GetCompanyAccessType: ResolverTypeWrapper<GetCompanyAccessType>;
   GetowmComoanyType: ResolverTypeWrapper<GetowmComoanyType>;
   ID: ResolverTypeWrapper<Scalars['ID']>;
+  JSON: ResolverTypeWrapper<Scalars['JSON']>;
   LoginResponse: ResolverTypeWrapper<LoginResponse>;
   LoginaInput: LoginaInput;
+  Me: ResolverTypeWrapper<Me>;
+  MePositionType: ResolverTypeWrapper<MePositionType>;
+  MecompanyType: ResolverTypeWrapper<MecompanyType>;
+  MeprofileType: ResolverTypeWrapper<MeprofileType>;
   Mutation: ResolverTypeWrapper<{}>;
   Position: ResolverTypeWrapper<Position>;
   Profile: ResolverTypeWrapper<Profile>;
@@ -299,6 +355,7 @@ export type ResolversTypes = ResolversObject<{
   Role: ResolverTypeWrapper<Role>;
   String: ResolverTypeWrapper<Scalars['String']>;
   User: ResolverTypeWrapper<User>;
+  ValidateRoute: ResolverTypeWrapper<ValidateRoute>;
 }>;
 
 /** Mapping between all available schema types and the resolvers parents */
@@ -313,8 +370,13 @@ export type ResolversParentTypes = ResolversObject<{
   GetCompanyAccessType: GetCompanyAccessType;
   GetowmComoanyType: GetowmComoanyType;
   ID: Scalars['ID'];
+  JSON: Scalars['JSON'];
   LoginResponse: LoginResponse;
   LoginaInput: LoginaInput;
+  Me: Me;
+  MePositionType: MePositionType;
+  MecompanyType: MecompanyType;
+  MeprofileType: MeprofileType;
   Mutation: {};
   Position: Position;
   Profile: Profile;
@@ -325,6 +387,7 @@ export type ResolversParentTypes = ResolversObject<{
   Role: Role;
   String: Scalars['String'];
   User: User;
+  ValidateRoute: ValidateRoute;
 }>;
 
 export type AmphoeResolvers<ContextType = ApolloContext, ParentType extends ResolversParentTypes['Amphoe'] = ResolversParentTypes['Amphoe']> = ResolversObject<{
@@ -386,6 +449,10 @@ export type GetowmComoanyTypeResolvers<ContextType = ApolloContext, ParentType e
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 }>;
 
+export interface JsonScalarConfig extends GraphQLScalarTypeConfig<ResolversTypes['JSON'], any> {
+  name: 'JSON';
+}
+
 export type LoginResponseResolvers<ContextType = ApolloContext, ParentType extends ResolversParentTypes['LoginResponse'] = ResolversParentTypes['LoginResponse']> = ResolversObject<{
   access_token?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   refresh_token?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
@@ -393,14 +460,53 @@ export type LoginResponseResolvers<ContextType = ApolloContext, ParentType exten
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 }>;
 
+export type MeResolvers<ContextType = ApolloContext, ParentType extends ResolversParentTypes['Me'] = ResolversParentTypes['Me']> = ResolversObject<{
+  company?: Resolver<Maybe<ResolversTypes['MecompanyType']>, ParentType, ContextType>;
+  email?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
+  position?: Resolver<Maybe<ResolversTypes['MePositionType']>, ParentType, ContextType>;
+  profile?: Resolver<Maybe<ResolversTypes['MeprofileType']>, ParentType, ContextType>;
+  role?: Resolver<Maybe<ResolversTypes['Role']>, ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+}>;
+
+export type MePositionTypeResolvers<ContextType = ApolloContext, ParentType extends ResolversParentTypes['MePositionType'] = ResolversParentTypes['MePositionType']> = ResolversObject<{
+  access?: Resolver<Maybe<ResolversTypes['JSON']>, ParentType, ContextType>;
+  id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
+  name?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+}>;
+
+export type MecompanyTypeResolvers<ContextType = ApolloContext, ParentType extends ResolversParentTypes['MecompanyType'] = ResolversParentTypes['MecompanyType']> = ResolversObject<{
+  companyCode?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  icon?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
+  name?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+}>;
+
+export type MeprofileTypeResolvers<ContextType = ApolloContext, ParentType extends ResolversParentTypes['MeprofileType'] = ResolversParentTypes['MeprofileType']> = ResolversObject<{
+  avatar?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  bio?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  dob?: Resolver<Maybe<ResolversTypes['Date']>, ParentType, ContextType>;
+  firstname?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  gender?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  lastname?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  prefix?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  staff_code?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  tel?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+}>;
+
 export type MutationResolvers<ContextType = ApolloContext, ParentType extends ResolversParentTypes['Mutation'] = ResolversParentTypes['Mutation']> = ResolversObject<{
   createAccount?: Resolver<Maybe<ResolversTypes['CreateCompanyResponseType']>, ParentType, ContextType, RequireFields<MutationCreateAccountArgs, 'data'>>;
   login?: Resolver<Maybe<ResolversTypes['LoginResponse']>, ParentType, ContextType, RequireFields<MutationLoginArgs, 'data'>>;
   refreshToken?: Resolver<Maybe<ResolversTypes['RefreshtokenResponseType']>, ParentType, ContextType>;
+  validateRoute?: Resolver<Maybe<ResolversTypes['ValidateRoute']>, ParentType, ContextType, Partial<MutationValidateRouteArgs>>;
 }>;
 
 export type PositionResolvers<ContextType = ApolloContext, ParentType extends ResolversParentTypes['Position'] = ResolversParentTypes['Position']> = ResolversObject<{
-  access?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  access?: Resolver<Maybe<ResolversTypes['JSON']>, ParentType, ContextType>;
   company?: Resolver<Maybe<ResolversTypes['Company']>, ParentType, ContextType>;
   companyId?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
@@ -437,7 +543,7 @@ export type ProvinceResolvers<ContextType = ApolloContext, ParentType extends Re
 export type QueryResolvers<ContextType = ApolloContext, ParentType extends ResolversParentTypes['Query'] = ResolversParentTypes['Query']> = ResolversObject<{
   getProvince?: Resolver<Maybe<Array<Maybe<ResolversTypes['Province']>>>, ParentType, ContextType>;
   getownCompany?: Resolver<Maybe<Array<Maybe<ResolversTypes['GetowmComoanyType']>>>, ParentType, ContextType>;
-  me?: Resolver<Maybe<ResolversTypes['User']>, ParentType, ContextType>;
+  me?: Resolver<Maybe<ResolversTypes['Me']>, ParentType, ContextType>;
   users?: Resolver<Maybe<Array<Maybe<ResolversTypes['User']>>>, ParentType, ContextType, Partial<QueryUsersArgs>>;
   verifyCompanycode?: Resolver<Maybe<ResolversTypes['Boolean']>, ParentType, ContextType, RequireFields<QueryVerifyCompanycodeArgs, 'companyname'>>;
 }>;
@@ -470,6 +576,12 @@ export type UserResolvers<ContextType = ApolloContext, ParentType extends Resolv
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 }>;
 
+export type ValidateRouteResolvers<ContextType = ApolloContext, ParentType extends ResolversParentTypes['ValidateRoute'] = ResolversParentTypes['ValidateRoute']> = ResolversObject<{
+  acess?: Resolver<Maybe<ResolversTypes['Boolean']>, ParentType, ContextType>;
+  path?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+}>;
+
 export type Resolvers<ContextType = ApolloContext> = ResolversObject<{
   Amphoe?: AmphoeResolvers<ContextType>;
   Company?: CompanyResolvers<ContextType>;
@@ -478,7 +590,12 @@ export type Resolvers<ContextType = ApolloContext> = ResolversObject<{
   District?: DistrictResolvers<ContextType>;
   GetCompanyAccessType?: GetCompanyAccessTypeResolvers<ContextType>;
   GetowmComoanyType?: GetowmComoanyTypeResolvers<ContextType>;
+  JSON?: GraphQLScalarType;
   LoginResponse?: LoginResponseResolvers<ContextType>;
+  Me?: MeResolvers<ContextType>;
+  MePositionType?: MePositionTypeResolvers<ContextType>;
+  MecompanyType?: MecompanyTypeResolvers<ContextType>;
+  MeprofileType?: MeprofileTypeResolvers<ContextType>;
   Mutation?: MutationResolvers<ContextType>;
   Position?: PositionResolvers<ContextType>;
   Profile?: ProfileResolvers<ContextType>;
@@ -487,5 +604,6 @@ export type Resolvers<ContextType = ApolloContext> = ResolversObject<{
   RefreshtokenResponseType?: RefreshtokenResponseTypeResolvers<ContextType>;
   Role?: RoleResolvers<ContextType>;
   User?: UserResolvers<ContextType>;
+  ValidateRoute?: ValidateRouteResolvers<ContextType>;
 }>;
 

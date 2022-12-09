@@ -83,7 +83,7 @@ model Role {
 model Position {
   id        String   @unique @db.Uuid
   name      String   @db.VarChar(255)
-  access    String
+  access    Json
   companyId String?  @db.Uuid
   company   Company? @relation(fields: [companyId], references: [id])
   users     User[]

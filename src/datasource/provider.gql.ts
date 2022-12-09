@@ -4,6 +4,8 @@ import { comparePassword } from '../utils/passwords';
 import { GraphQLError } from 'graphql';
 import jwt from 'jsonwebtoken';
 import _ from 'lodash';
+import { authenticate } from '../middleware/authenticatetoken';
+import { composeResolvers } from '@graphql-tools/resolvers-composition';
 
 export const providerTypedef = gql`
   input LoginaInput {
@@ -17,26 +19,28 @@ export const providerTypedef = gql`
     status: Boolean
   }
 
+  type ValidateRoute {
+    acess: Boolean
+    path: String
+  }
+
   type RefreshtokenResponseType {
     access_token: String
   }
 
   type Mutation {
     login(data: LoginaInput!): LoginResponse
+    validateRoute(args: String!): ValidateRoute
     refreshToken: RefreshtokenResponseType
   }
 `;
 
 // Resolvers define the technique for fetching the types defined in the
 // schema. This resolver retrieves books from the "books" array above.
-export const providerResolvers: Resolvers = {
+const resolvers: Resolvers = {
   Mutation: {
     /**
      * ?เข้าสู่ระบบ
-     * @param p
-     * @param args
-     * @param ctx
-     * @returns
      */
     async login(p, args, ctx) {
       const finduser = await ctx.prisma.user.findUnique({
@@ -87,10 +91,6 @@ export const providerResolvers: Resolvers = {
     },
     /**
      * ?รีเฟรชโทเค็น
-     * @param p
-     * @param args
-     * @param ctx
-     * @returns
      */
     async refreshToken(p, args, ctx) {
       const secret = process.env.JWT_SECRET || 'secret';
@@ -121,5 +121,45 @@ export const providerResolvers: Resolvers = {
         access_token,
       };
     },
+    /**
+     * ?Validate company sub path
+     */
+    async validateRoute(p, { args }, ctx) {
+      if (!args)
+        throw new GraphQLError('Argument must be valid', {
+          extensions: {
+            code: 'INVALID_VALUE',
+            http: {
+              status: 400,
+            },
+          },
+        });
+      const result = await ctx.prisma.user.findUnique({
+        where: {
+          id: ctx.currentUser?.id,
+        },
+        select: {
+          company: {
+            select: {
+              companyCode: true,
+            },
+          },
+        },
+      });
+
+      return {
+        acess: result?.company?.companyCode === args ? true : false,
+        path: args,
+      };
+    },
   },
 };
+
+const resolversComposition = {
+  'Mutation.validateRoute': [authenticate()],
+};
+
+export const providerResolvers = composeResolvers(
+  resolvers,
+  resolversComposition,
+);
