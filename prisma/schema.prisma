@@ -21,24 +21,39 @@ generator client {
 //   authorId  Int
 // }
 model Company {
-  id          String     @unique @db.Uuid
-  name        String     @db.VarChar(255)
-  companyCode String     @unique
-  address     String     @db.VarChar(255)
-  city        String     @db.VarChar(255)
-  state       String     @db.VarChar(255)
-  zip         String     @db.VarChar(255)
-  country     String?    @db.VarChar(255)
+  id          String          @unique @db.Uuid
+  name        String          @db.VarChar(255)
+  companyCode String          @unique
+  address     String          @db.VarChar(255)
+  city        String          @db.VarChar(255)
+  state       String          @db.VarChar(255)
+  zip         String          @db.VarChar(255)
+  country     String?         @db.VarChar(255)
   icon        String?
-  phone       String?    @db.VarChar(255)
-  website     String?    @db.VarChar(255)
-  parentId    String?    @db.Uuid
-  parent      Company?   @relation("parents", fields: [parentId], references: [id])
-  children    Company[]  @relation("parents")
-  createdAt   DateTime   @default(now())
-  updatedAt   DateTime   @updatedAt
-  users       User[]
-  positions   Position[]
+  phone       String?         @db.VarChar(255)
+  website     String?         @db.VarChar(255)
+  parentId    String?         @db.Uuid
+  createdAt   DateTime        @default(now())
+  updatedAt   DateTime        @updatedAt
+  ownerId     String          @db.Uuid
+  owner       User            @relation(fields: [ownerId], references: [id])
+  branch      CompanyBranch[]
+}
+
+model CompanyBranch {
+  id        String     @unique @db.Uuid
+  name      String     @db.VarChar(255)
+  address   String     @db.VarChar(255)
+  city      String     @db.VarChar(255)
+  state     String     @db.VarChar(255)
+  zip       String     @db.VarChar(255)
+  country   String?    @db.VarChar(255)
+  createdAt DateTime   @default(now())
+  updatedAt DateTime   @updatedAt
+  company   Company?   @relation(fields: [companyId], references: [id])
+  companyId String?    @db.Uuid
+  users     User[]
+  positions Position[]
 }
 
 model Profile {
@@ -59,19 +74,21 @@ model Profile {
 }
 
 model User {
-  id         String    @unique @db.Uuid
-  email      String    @unique
-  password   String
-  profile    Profile?
-  islogin    Boolean   @default(false)
-  lastlogin  DateTime? @updatedAt
-  createdAt  DateTime  @default(now())
-  roleId     String?   @db.Uuid
-  companyId  String?   @db.Uuid
-  role       Role?     @relation(fields: [roleId], references: [id])
-  positionId String?   @db.Uuid
-  position   Position? @relation(fields: [positionId], references: [id])
-  company    Company?  @relation(fields: [companyId], references: [id])
+  id              String         @unique @db.Uuid
+  email           String         @unique
+  password        String
+  profile         Profile?
+  islogin         Boolean        @default(false)
+  isActive        Boolean        @default(false)
+  lastlogin       DateTime?      @updatedAt
+  createdAt       DateTime       @default(now())
+  roleId          String?        @db.Uuid
+  role            Role?          @relation(fields: [roleId], references: [id])
+  positionId      String?        @db.Uuid
+  company         Company[]
+  companyBranch   CompanyBranch? @relation(fields: [companyBranchId], references: [id])
+  companyBranchId String?        @db.Uuid
+  Position        Position?      @relation(fields: [positionId], references: [id])
 }
 
 model Role {
@@ -81,12 +98,12 @@ model Role {
 }
 
 model Position {
-  id        String   @unique @db.Uuid
-  name      String   @db.VarChar(255)
-  access    Json
-  companyId String?  @db.Uuid
-  company   Company? @relation(fields: [companyId], references: [id])
-  users     User[]
+  id              String         @unique @db.Uuid
+  name            String         @db.VarChar(255)
+  access          Json
+  users           User[]
+  companyBranch   CompanyBranch? @relation(fields: [companyBranchId], references: [id])
+  companyBranchId String?        @db.Uuid
 }
 
 model Province {
