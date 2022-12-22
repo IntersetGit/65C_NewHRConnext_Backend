@@ -12,14 +12,18 @@ export const userTypedef = gql`
     id: ID!
     profile: Profile
     islogin: Boolean!
+    isActive: Boolean!
+    isOwner: Boolean!
     lastlogin: Date
     createdAt: Date
     roleId: String
     companyId: String
     role: Role
     positionId: String
-    position: Position
+    Position: Position
     company: Company
+    companyBranch: CompanyBranch
+    companyBranchId: String
   }
 
   input RegisterProfileInput {
@@ -56,10 +60,10 @@ export const userTypedef = gql`
   type Me {
     id: ID!
     email: String
-    position: MePositionType
+    Position: MePositionType
     profile: MeprofileType
     role: Role
-    company: MecompanyType
+    company: MeCompanyBranch
   }
 
   type Query {
@@ -78,7 +82,7 @@ const resolvers: Resolvers = {
     async users(parent, args, ctx) {
       const filter = args?.userid ? args?.userid : undefined;
       const result = await ctx.prisma.user.findMany({
-        include: { profile: true, company: true, position: true },
+        // include: { profile: true, company: true, Position: true },
         where: { id: filter },
       });
       return result;
@@ -95,7 +99,7 @@ const resolvers: Resolvers = {
         select: {
           id: true,
           email: true,
-          position: {
+          Position: {
             select: {
               id: true,
               access: true,
@@ -116,12 +120,24 @@ const resolvers: Resolvers = {
             },
           },
           role: true,
-          company: {
+          companyBranch: {
             select: {
               id: true,
               name: true,
-              companyCode: true,
-              icon: true,
+              address: true,
+              city: true,
+              state: true,
+              zip: true,
+              country: true,
+              createdAt: true,
+              company: {
+                select: {
+                  id: true,
+                  name: true,
+                  companyCode: true,
+                  icon: true,
+                },
+              },
             },
           },
         },
@@ -129,7 +145,7 @@ const resolvers: Resolvers = {
       });
 
       if (result?.role?.name === 'Owner') {
-        result.position = {
+        result.Position = {
           name: 'Owner',
           id: 'OWNER_POSITION',
           access: [
@@ -168,20 +184,7 @@ const resolvers: Resolvers = {
       const genCompanyId = v4();
       const genUserid = v4();
       const genProfileid = v4();
-      const createCompany = await ctx.prisma.company.create({
-        data: {
-          id: genCompanyId,
-          name: args.data.company_name,
-          companyCode: args.data.companyCode,
-          city: args.data.company_city,
-          address: args.data.company_address,
-          zip: args.data.company_zip,
-          state: args.data.company_state,
-          phone: args.data.company_phone,
-          country: args.data.company_country,
-          icon: args.data.company_icon ? args.data.company_icon : '',
-        },
-      });
+      const genbranchid = v4();
 
       const createUser = await ctx.prisma.user.create({
         data: {
@@ -189,8 +192,9 @@ const resolvers: Resolvers = {
           email: args.data.email,
           password: await createPassword(args.data.password),
           roleId: 'd0bff324-e70c-494e-b4c3-da220cd0d9af',
+          isActive: true,
+          isOwner: true,
           islogin: false,
-          companyId: createCompany.id,
           createdAt: new Date(),
           profile: {
             create: {
@@ -200,6 +204,35 @@ const resolvers: Resolvers = {
               dob: new Date(args.data.dob),
             },
           },
+        },
+      });
+
+      const createCompany = await ctx.prisma.company.create({
+        data: {
+          id: genCompanyId,
+          name: args.data.company_name,
+          companyCode: args.data.companyCode,
+          city: args.data.company_city,
+          ownerId: createUser.id,
+          address: args.data.company_address,
+          zip: args.data.company_zip,
+          state: args.data.company_state,
+          phone: args.data.company_phone,
+          country: args.data.company_country,
+          icon: args.data.company_icon ? args.data.company_icon : '',
+        },
+      });
+
+      const createBranch = await ctx.prisma.companyBranch.create({
+        data: {
+          id: genbranchid,
+          name: 'สาขาใหญ่',
+          city: args.data.company_city,
+          address: args.data.company_address,
+          zip: args.data.company_zip,
+          state: args.data.company_state,
+          country: args.data.company_country,
+          companyId: createCompany.id,
         },
       });
 

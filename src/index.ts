@@ -8,7 +8,7 @@ import cors from 'cors';
 import bodyParser from 'body-parser';
 import { typeDefs, resolvers } from './datasource/index';
 import multer from 'multer';
-import { PrismaClient } from '@prisma/client';
+import { PrismaClient } from './generated/client';
 
 const prisma = new PrismaClient();
 
@@ -17,7 +17,9 @@ dotenv.config();
 export type UsertokenType = {
   id: string;
   roleId: string;
+  isOwner: boolean;
   compayId: string;
+  branchId: string;
 };
 export interface ApolloContext {
   token?: String;

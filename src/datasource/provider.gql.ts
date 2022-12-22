@@ -45,6 +45,22 @@ const resolvers: Resolvers = {
     async login(p, args, ctx) {
       const finduser = await ctx.prisma.user.findUnique({
         where: { email: args.data.email },
+        select: {
+          id: true,
+          roleId: true,
+          isOwner: true,
+          password: true,
+          companyBranch: {
+            select: {
+              id: true,
+              company: {
+                select: {
+                  id: true,
+                },
+              },
+            },
+          },
+        },
       });
 
       if (!finduser) {
@@ -71,7 +87,9 @@ const resolvers: Resolvers = {
       const credential = {
         id: finduser.id,
         roleId: finduser.roleId,
-        compayId: finduser.companyId,
+        isOwner: finduser.isOwner,
+        compayId: finduser.companyBranch?.company?.id,
+        branchId: finduser.companyBranch?.id,
       };
 
       const secret = process.env.JWT_SECRET || 'secret';
@@ -139,16 +157,21 @@ const resolvers: Resolvers = {
           id: ctx.currentUser?.id,
         },
         select: {
-          company: {
+          companyBranch: {
             select: {
-              companyCode: true,
+              company: {
+                select: {
+                  companyCode: true,
+                },
+              },
             },
           },
         },
       });
 
       return {
-        acess: result?.company?.companyCode === args ? true : false,
+        acess:
+          result?.companyBranch?.company?.companyCode === args ? true : false,
         path: args,
       };
     },

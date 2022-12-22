@@ -5,8 +5,8 @@ export const positionTypedef = gql`
     id: ID!
     name: String
     access: JSON
-    companyId: String
-    company: Company
+    companyBranchId: String
+    companyBranch: CompanyBranch
     users: [User]
   }
 
