@@ -157,6 +157,13 @@ const resolvers: Resolvers = {
           id: ctx.currentUser?.id,
         },
         select: {
+          isOwner: true,
+          company: {
+            select: {
+              companyCode: true,
+            },
+            where: { companyCode: args },
+          },
           companyBranch: {
             select: {
               company: {
@@ -168,10 +175,12 @@ const resolvers: Resolvers = {
           },
         },
       });
-
       return {
-        acess:
-          result?.companyBranch?.company?.companyCode === args ? true : false,
+        acess: result?.isOwner
+          ? result?.company.length > 0
+          : result?.companyBranch?.company?.companyCode === args
+          ? true
+          : false,
         path: args,
       };
     },

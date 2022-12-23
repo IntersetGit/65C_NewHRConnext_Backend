@@ -1,6 +1,6 @@
 import { composeResolvers } from '@graphql-tools/resolvers-composition';
 import gql from 'graphql-tag';
-import { GetowmComoanyType, Resolvers } from 'src/generated/graphql';
+import { Resolvers } from 'src/generated/graphql';
 import { authenticate } from '../middleware/authenticatetoken';
 
 export const companyTypedef = gql`
@@ -69,7 +69,7 @@ export const companyTypedef = gql`
     id: String
     name: String
     icon: String
-    codeCompany: String
+    companyCode: String
   }
 
   type GetOwncompanytype {
@@ -80,7 +80,7 @@ export const companyTypedef = gql`
   }
 
   type Query {
-    getownCompany: [GetOwncompanytype]
+    getownCompany: GetOwncompanytype
   }
 `;
 
@@ -91,32 +91,42 @@ const resolvers: Resolvers = {
         where: { id: ctx.currentUser?.id },
         select: {
           isOwner: true,
-          company: true,
+          company: {
+            select: {
+              id: true,
+              name: true,
+              icon: true,
+              companyCode: true,
+            },
+          },
           companyBranch: {
-            select : {
-              company : {
-                
-              }
-            }
+            select: {
+              company: {
+                select: {
+                  id: true,
+                  name: true,
+                  icon: true,
+                  companyCode: true,
+                },
+              },
+            },
           },
         },
       });
-      
-      if ( fetchCompany?.isOwner ) {
+
+      if (fetchCompany?.isOwner) {
         return {
           isOwner: fetchCompany?.isOwner,
           redirect: false,
           companies: fetchCompany.company,
-        }
+        };
       } else {
         return {
           isOwner: fetchCompany?.isOwner,
           redirect: true,
-          company: fetchCompany?.companyBranch?.,
-        }
+          company: fetchCompany?.companyBranch?.company,
+        };
       }
-
-
     },
   },
 };

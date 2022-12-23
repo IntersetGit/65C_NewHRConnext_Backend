@@ -1048,7 +1048,7 @@
             "deprecationReason": null
           },
           {
-            "name": "company",
+            "name": "companyBranch",
             "description": null,
             "args": [],
             "type": {
@@ -1083,6 +1083,18 @@
                 "name": "ID",
                 "ofType": null
               }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "isOwner",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "Boolean",
+              "ofType": null
             },
             "isDeprecated": false,
             "deprecationReason": null
@@ -1613,7 +1625,7 @@
         "description": null,
         "fields": [
           {
-            "name": "codeCompany",
+            "name": "companyCode",
             "description": null,
             "args": [],
             "type": {
@@ -2021,13 +2033,9 @@
             "description": null,
             "args": [],
             "type": {
-              "kind": "LIST",
-              "name": null,
-              "ofType": {
-                "kind": "OBJECT",
-                "name": "GetOwncompanytype",
-                "ofType": null
-              }
+              "kind": "OBJECT",
+              "name": "GetOwncompanytype",
+              "ofType": null
             },
             "isDeprecated": false,
             "deprecationReason": null
@@ -2277,9 +2285,13 @@
             "description": null,
             "args": [],
             "type": {
-              "kind": "OBJECT",
-              "name": "Company",
-              "ofType": null
+              "kind": "LIST",
+              "name": null,
+              "ofType": {
+                "kind": "OBJECT",
+                "name": "Company",
+                "ofType": null
+              }
             },
             "isDeprecated": false,
             "deprecationReason": null

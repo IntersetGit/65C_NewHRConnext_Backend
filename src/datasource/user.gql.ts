@@ -5,6 +5,7 @@ import _ from 'lodash';
 import { v4 } from 'uuid';
 import { composeResolvers } from '@graphql-tools/resolvers-composition';
 import { authenticate } from '../middleware/authenticatetoken';
+import { GraphQLError } from 'graphql';
 
 export const userTypedef = gql`
   type User {
@@ -21,7 +22,7 @@ export const userTypedef = gql`
     role: Role
     positionId: String
     Position: Position
-    company: Company
+    company: [Company]
     companyBranch: CompanyBranch
     companyBranchId: String
   }
@@ -60,10 +61,11 @@ export const userTypedef = gql`
   type Me {
     id: ID!
     email: String
+    isOwner: Boolean
     Position: MePositionType
     profile: MeprofileType
     role: Role
-    company: MeCompanyBranch
+    companyBranch: MeCompanyBranch
   }
 
   type Query {
@@ -99,6 +101,7 @@ const resolvers: Resolvers = {
         select: {
           id: true,
           email: true,
+          isOwner: true,
           Position: {
             select: {
               id: true,
@@ -143,6 +146,17 @@ const resolvers: Resolvers = {
         },
         where: { id: ctx.currentUser?.id },
       });
+
+      if (!result) {
+        throw new GraphQLError('User not found', {
+          extensions: {
+            code: 'USER_NOTFOUND',
+            http: {
+              status: 404,
+            },
+          },
+        });
+      }
 
       if (result?.role?.name === 'Owner') {
         result.Position = {
