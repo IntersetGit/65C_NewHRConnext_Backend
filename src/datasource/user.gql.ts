@@ -150,7 +150,7 @@ const resolvers: Resolvers = {
       if (!result) {
         throw new GraphQLError('User not found', {
           extensions: {
-            code: 'USER_NOTFOUND',
+            code: 'USER_NOT_FOUND',
             http: {
               status: 404,
             },

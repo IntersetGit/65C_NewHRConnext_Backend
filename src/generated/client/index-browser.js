@@ -98,6 +98,7 @@ exports.Prisma.AmphoeScalarFieldEnum = makeEnum({
 
 exports.Prisma.CompanyBranchScalarFieldEnum = makeEnum({
   id: 'id',
+  isMainbranch: 'isMainbranch',
   name: 'name',
   address: 'address',
   city: 'city',

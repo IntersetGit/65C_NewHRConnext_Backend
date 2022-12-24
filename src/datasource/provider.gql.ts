@@ -19,9 +19,18 @@ export const providerTypedef = gql`
     status: Boolean
   }
 
+  type ResponseBranchValidateRouteType {
+    companyId: String
+    companyName: String
+    branchId: String
+    branchName: String
+  }
+
   type ValidateRoute {
     acess: Boolean
     path: String
+    currentBranch: ResponseBranchValidateRouteType
+    reAccess: String
   }
 
   type RefreshtokenResponseType {
@@ -157,17 +166,33 @@ const resolvers: Resolvers = {
           id: ctx.currentUser?.id,
         },
         select: {
+          id: true,
+          roleId: true,
           isOwner: true,
           company: {
             select: {
+              id: true,
+              name: true,
               companyCode: true,
+              branch: {
+                select: {
+                  id: true,
+                  name: true,
+                },
+                where: { isMainbranch: true },
+                take: 1,
+              },
             },
             where: { companyCode: args },
           },
           companyBranch: {
             select: {
+              id: true,
+              name: true,
               company: {
                 select: {
+                  id: true,
+                  name: true,
                   companyCode: true,
                 },
               },
@@ -175,6 +200,39 @@ const resolvers: Resolvers = {
           },
         },
       });
+
+      if (!result) {
+        throw new GraphQLError('User not found', {
+          extensions: {
+            code: 'USER_NOT_FOUND',
+            http: {
+              status: 404,
+            },
+          },
+        });
+      }
+
+      /**
+       * ?Set token ใหม่
+       */
+      const credential = {
+        id: result?.id,
+        roleId: result?.roleId,
+        isOwner: result?.isOwner,
+        compayId: result?.isOwner
+          ? result.company[0].id
+          : result?.companyBranch?.company?.id,
+        branchId: result?.isOwner
+          ? result.company[0].branch[0].id
+          : result?.companyBranch?.id,
+      };
+
+      const secret = process.env.JWT_SECRET || 'secret';
+      const expire = process.env.JWT_EXPIRES_IN || '15m';
+      const access_token = await jwt.sign(credential, secret, {
+        expiresIn: expire,
+      });
+      // console.log(result?.company[0].branch[0]);
       return {
         acess: result?.isOwner
           ? result?.company.length > 0
@@ -182,6 +240,20 @@ const resolvers: Resolvers = {
           ? true
           : false,
         path: args,
+        currentBranch: result?.isOwner
+          ? {
+              branchId: result.company[0].branch[0].id,
+              branchName: result.company[0].branch[0].name,
+              companyName: result.company[0].name,
+              companyId: result.company[0].id,
+            }
+          : {
+              branchId: result.companyBranch?.id,
+              branchName: result.companyBranch?.name,
+              companyId: result.companyBranch?.company?.id,
+              companyName: result.companyBranch?.company?.name,
+            },
+        reAccess: access_token,
       };
     },
   },

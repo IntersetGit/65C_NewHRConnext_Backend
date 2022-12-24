@@ -39,6 +39,7 @@ export type Company = {
  */
 export type CompanyBranch = {
   id: string
+  isMainbranch: boolean
   name: string
   address: string
   city: string
@@ -2398,6 +2399,7 @@ export namespace Prisma {
 
   export type CompanyBranchMinAggregateOutputType = {
     id: string | null
+    isMainbranch: boolean | null
     name: string | null
     address: string | null
     city: string | null
@@ -2411,6 +2413,7 @@ export namespace Prisma {
 
   export type CompanyBranchMaxAggregateOutputType = {
     id: string | null
+    isMainbranch: boolean | null
     name: string | null
     address: string | null
     city: string | null
@@ -2424,6 +2427,7 @@ export namespace Prisma {
 
   export type CompanyBranchCountAggregateOutputType = {
     id: number
+    isMainbranch: number
     name: number
     address: number
     city: number
@@ -2439,6 +2443,7 @@ export namespace Prisma {
 
   export type CompanyBranchMinAggregateInputType = {
     id?: true
+    isMainbranch?: true
     name?: true
     address?: true
     city?: true
@@ -2452,6 +2457,7 @@ export namespace Prisma {
 
   export type CompanyBranchMaxAggregateInputType = {
     id?: true
+    isMainbranch?: true
     name?: true
     address?: true
     city?: true
@@ -2465,6 +2471,7 @@ export namespace Prisma {
 
   export type CompanyBranchCountAggregateInputType = {
     id?: true
+    isMainbranch?: true
     name?: true
     address?: true
     city?: true
@@ -2557,6 +2564,7 @@ export namespace Prisma {
 
   export type CompanyBranchGroupByOutputType = {
     id: string
+    isMainbranch: boolean
     name: string
     address: string
     city: string
@@ -2587,6 +2595,7 @@ export namespace Prisma {
 
   export type CompanyBranchSelect = {
     id?: boolean
+    isMainbranch?: boolean
     name?: boolean
     address?: boolean
     city?: boolean
@@ -10448,6 +10457,7 @@ export namespace Prisma {
 
   export const CompanyBranchScalarFieldEnum: {
     id: 'id',
+    isMainbranch: 'isMainbranch',
     name: 'name',
     address: 'address',
     city: 'city',
@@ -10691,6 +10701,7 @@ export namespace Prisma {
     OR?: Enumerable<CompanyBranchWhereInput>
     NOT?: Enumerable<CompanyBranchWhereInput>
     id?: UuidFilter | string
+    isMainbranch?: BoolFilter | boolean
     name?: StringFilter | string
     address?: StringFilter | string
     city?: StringFilter | string
@@ -10707,6 +10718,7 @@ export namespace Prisma {
 
   export type CompanyBranchOrderByWithRelationInput = {
     id?: SortOrder
+    isMainbranch?: SortOrder
     name?: SortOrder
     address?: SortOrder
     city?: SortOrder
@@ -10727,6 +10739,7 @@ export namespace Prisma {
 
   export type CompanyBranchOrderByWithAggregationInput = {
     id?: SortOrder
+    isMainbranch?: SortOrder
     name?: SortOrder
     address?: SortOrder
     city?: SortOrder
@@ -10746,6 +10759,7 @@ export namespace Prisma {
     OR?: Enumerable<CompanyBranchScalarWhereWithAggregatesInput>
     NOT?: Enumerable<CompanyBranchScalarWhereWithAggregatesInput>
     id?: UuidWithAggregatesFilter | string
+    isMainbranch?: BoolWithAggregatesFilter | boolean
     name?: StringWithAggregatesFilter | string
     address?: StringWithAggregatesFilter | string
     city?: StringWithAggregatesFilter | string
@@ -11241,6 +11255,7 @@ export namespace Prisma {
 
   export type CompanyBranchCreateInput = {
     id: string
+    isMainbranch?: boolean
     name: string
     address: string
     city: string
@@ -11256,6 +11271,7 @@ export namespace Prisma {
 
   export type CompanyBranchUncheckedCreateInput = {
     id: string
+    isMainbranch?: boolean
     name: string
     address: string
     city: string
@@ -11271,6 +11287,7 @@ export namespace Prisma {
 
   export type CompanyBranchUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
+    isMainbranch?: BoolFieldUpdateOperationsInput | boolean
     name?: StringFieldUpdateOperationsInput | string
     address?: StringFieldUpdateOperationsInput | string
     city?: StringFieldUpdateOperationsInput | string
@@ -11286,6 +11303,7 @@ export namespace Prisma {
 
   export type CompanyBranchUncheckedUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
+    isMainbranch?: BoolFieldUpdateOperationsInput | boolean
     name?: StringFieldUpdateOperationsInput | string
     address?: StringFieldUpdateOperationsInput | string
     city?: StringFieldUpdateOperationsInput | string
@@ -11301,6 +11319,7 @@ export namespace Prisma {
 
   export type CompanyBranchCreateManyInput = {
     id: string
+    isMainbranch?: boolean
     name: string
     address: string
     city: string
@@ -11314,6 +11333,7 @@ export namespace Prisma {
 
   export type CompanyBranchUpdateManyMutationInput = {
     id?: StringFieldUpdateOperationsInput | string
+    isMainbranch?: BoolFieldUpdateOperationsInput | boolean
     name?: StringFieldUpdateOperationsInput | string
     address?: StringFieldUpdateOperationsInput | string
     city?: StringFieldUpdateOperationsInput | string
@@ -11326,6 +11346,7 @@ export namespace Prisma {
 
   export type CompanyBranchUncheckedUpdateManyInput = {
     id?: StringFieldUpdateOperationsInput | string
+    isMainbranch?: BoolFieldUpdateOperationsInput | boolean
     name?: StringFieldUpdateOperationsInput | string
     address?: StringFieldUpdateOperationsInput | string
     city?: StringFieldUpdateOperationsInput | string
@@ -11958,6 +11979,11 @@ export namespace Prisma {
     _max?: NestedDateTimeFilter
   }
 
+  export type BoolFilter = {
+    equals?: boolean
+    not?: NestedBoolFilter | boolean
+  }
+
   export type CompanyRelationFilter = {
     is?: CompanyWhereInput | null
     isNot?: CompanyWhereInput | null
@@ -11997,6 +12023,7 @@ export namespace Prisma {
 
   export type CompanyBranchCountOrderByAggregateInput = {
     id?: SortOrder
+    isMainbranch?: SortOrder
     name?: SortOrder
     address?: SortOrder
     city?: SortOrder
@@ -12010,6 +12037,7 @@ export namespace Prisma {
 
   export type CompanyBranchMaxOrderByAggregateInput = {
     id?: SortOrder
+    isMainbranch?: SortOrder
     name?: SortOrder
     address?: SortOrder
     city?: SortOrder
@@ -12023,6 +12051,7 @@ export namespace Prisma {
 
   export type CompanyBranchMinOrderByAggregateInput = {
     id?: SortOrder
+    isMainbranch?: SortOrder
     name?: SortOrder
     address?: SortOrder
     city?: SortOrder
@@ -12032,6 +12061,14 @@ export namespace Prisma {
     createdAt?: SortOrder
     updatedAt?: SortOrder
     companyId?: SortOrder
+  }
+
+  export type BoolWithAggregatesFilter = {
+    equals?: boolean
+    not?: NestedBoolWithAggregatesFilter | boolean
+    _count?: NestedIntFilter
+    _min?: NestedBoolFilter
+    _max?: NestedBoolFilter
   }
 
   export type UuidNullableWithAggregatesFilter = {
@@ -12127,11 +12164,6 @@ export namespace Prisma {
     isNot?: ProfileWhereInput | null
   }
 
-  export type BoolFilter = {
-    equals?: boolean
-    not?: NestedBoolFilter | boolean
-  }
-
   export type RoleRelationFilter = {
     is?: RoleWhereInput | null
     isNot?: RoleWhereInput | null
@@ -12197,14 +12229,6 @@ export namespace Prisma {
     roleId?: SortOrder
     positionId?: SortOrder
     companyBranchId?: SortOrder
-  }
-
-  export type BoolWithAggregatesFilter = {
-    equals?: boolean
-    not?: NestedBoolWithAggregatesFilter | boolean
-    _count?: NestedIntFilter
-    _min?: NestedBoolFilter
-    _max?: NestedBoolFilter
   }
 
   export type RoleCountOrderByAggregateInput = {
@@ -12474,6 +12498,10 @@ export namespace Prisma {
     connect?: Enumerable<PositionWhereUniqueInput>
   }
 
+  export type BoolFieldUpdateOperationsInput = {
+    set?: boolean
+  }
+
   export type CompanyUpdateOneWithoutBranchNestedInput = {
     create?: XOR<CompanyCreateWithoutBranchInput, CompanyUncheckedCreateWithoutBranchInput>
     connectOrCreate?: CompanyCreateOrConnectWithoutBranchInput
@@ -12610,10 +12638,6 @@ export namespace Prisma {
     delete?: boolean
     connect?: ProfileWhereUniqueInput
     update?: XOR<ProfileUpdateWithoutUserInput, ProfileUncheckedUpdateWithoutUserInput>
-  }
-
-  export type BoolFieldUpdateOperationsInput = {
-    set?: boolean
   }
 
   export type RoleUpdateOneWithoutUsersNestedInput = {
@@ -13030,6 +13054,11 @@ export namespace Prisma {
     _max?: NestedDateTimeFilter
   }
 
+  export type NestedBoolFilter = {
+    equals?: boolean
+    not?: NestedBoolFilter | boolean
+  }
+
   export type NestedUuidNullableFilter = {
     equals?: string | null
     in?: Enumerable<string> | null
@@ -13039,6 +13068,14 @@ export namespace Prisma {
     gt?: string
     gte?: string
     not?: NestedUuidNullableFilter | string | null
+  }
+
+  export type NestedBoolWithAggregatesFilter = {
+    equals?: boolean
+    not?: NestedBoolWithAggregatesFilter | boolean
+    _count?: NestedIntFilter
+    _min?: NestedBoolFilter
+    _max?: NestedBoolFilter
   }
 
   export type NestedUuidNullableWithAggregatesFilter = {
@@ -13078,19 +13115,6 @@ export namespace Prisma {
     _count?: NestedIntNullableFilter
     _min?: NestedDateTimeNullableFilter
     _max?: NestedDateTimeNullableFilter
-  }
-
-  export type NestedBoolFilter = {
-    equals?: boolean
-    not?: NestedBoolFilter | boolean
-  }
-
-  export type NestedBoolWithAggregatesFilter = {
-    equals?: boolean
-    not?: NestedBoolWithAggregatesFilter | boolean
-    _count?: NestedIntFilter
-    _min?: NestedBoolFilter
-    _max?: NestedBoolFilter
   }
   export type NestedJsonFilter = 
     | PatchUndefined<
@@ -13152,6 +13176,7 @@ export namespace Prisma {
 
   export type CompanyBranchCreateWithoutCompanyInput = {
     id: string
+    isMainbranch?: boolean
     name: string
     address: string
     city: string
@@ -13166,6 +13191,7 @@ export namespace Prisma {
 
   export type CompanyBranchUncheckedCreateWithoutCompanyInput = {
     id: string
+    isMainbranch?: boolean
     name: string
     address: string
     city: string
@@ -13244,6 +13270,7 @@ export namespace Prisma {
     OR?: Enumerable<CompanyBranchScalarWhereInput>
     NOT?: Enumerable<CompanyBranchScalarWhereInput>
     id?: UuidFilter | string
+    isMainbranch?: BoolFilter | boolean
     name?: StringFilter | string
     address?: StringFilter | string
     city?: StringFilter | string
@@ -13622,6 +13649,7 @@ export namespace Prisma {
 
   export type CompanyBranchCreateWithoutUsersInput = {
     id: string
+    isMainbranch?: boolean
     name: string
     address: string
     city: string
@@ -13636,6 +13664,7 @@ export namespace Prisma {
 
   export type CompanyBranchUncheckedCreateWithoutUsersInput = {
     id: string
+    isMainbranch?: boolean
     name: string
     address: string
     city: string
@@ -13765,6 +13794,7 @@ export namespace Prisma {
 
   export type CompanyBranchUpdateWithoutUsersInput = {
     id?: StringFieldUpdateOperationsInput | string
+    isMainbranch?: BoolFieldUpdateOperationsInput | boolean
     name?: StringFieldUpdateOperationsInput | string
     address?: StringFieldUpdateOperationsInput | string
     city?: StringFieldUpdateOperationsInput | string
@@ -13779,6 +13809,7 @@ export namespace Prisma {
 
   export type CompanyBranchUncheckedUpdateWithoutUsersInput = {
     id?: StringFieldUpdateOperationsInput | string
+    isMainbranch?: BoolFieldUpdateOperationsInput | boolean
     name?: StringFieldUpdateOperationsInput | string
     address?: StringFieldUpdateOperationsInput | string
     city?: StringFieldUpdateOperationsInput | string
@@ -13908,6 +13939,7 @@ export namespace Prisma {
 
   export type CompanyBranchCreateWithoutPositionsInput = {
     id: string
+    isMainbranch?: boolean
     name: string
     address: string
     city: string
@@ -13922,6 +13954,7 @@ export namespace Prisma {
 
   export type CompanyBranchUncheckedCreateWithoutPositionsInput = {
     id: string
+    isMainbranch?: boolean
     name: string
     address: string
     city: string
@@ -13962,6 +13995,7 @@ export namespace Prisma {
 
   export type CompanyBranchUpdateWithoutPositionsInput = {
     id?: StringFieldUpdateOperationsInput | string
+    isMainbranch?: BoolFieldUpdateOperationsInput | boolean
     name?: StringFieldUpdateOperationsInput | string
     address?: StringFieldUpdateOperationsInput | string
     city?: StringFieldUpdateOperationsInput | string
@@ -13976,6 +14010,7 @@ export namespace Prisma {
 
   export type CompanyBranchUncheckedUpdateWithoutPositionsInput = {
     id?: StringFieldUpdateOperationsInput | string
+    isMainbranch?: BoolFieldUpdateOperationsInput | boolean
     name?: StringFieldUpdateOperationsInput | string
     address?: StringFieldUpdateOperationsInput | string
     city?: StringFieldUpdateOperationsInput | string
@@ -14149,6 +14184,7 @@ export namespace Prisma {
 
   export type CompanyBranchCreateManyCompanyInput = {
     id: string
+    isMainbranch?: boolean
     name: string
     address: string
     city: string
@@ -14161,6 +14197,7 @@ export namespace Prisma {
 
   export type CompanyBranchUpdateWithoutCompanyInput = {
     id?: StringFieldUpdateOperationsInput | string
+    isMainbranch?: BoolFieldUpdateOperationsInput | boolean
     name?: StringFieldUpdateOperationsInput | string
     address?: StringFieldUpdateOperationsInput | string
     city?: StringFieldUpdateOperationsInput | string
@@ -14175,6 +14212,7 @@ export namespace Prisma {
 
   export type CompanyBranchUncheckedUpdateWithoutCompanyInput = {
     id?: StringFieldUpdateOperationsInput | string
+    isMainbranch?: BoolFieldUpdateOperationsInput | boolean
     name?: StringFieldUpdateOperationsInput | string
     address?: StringFieldUpdateOperationsInput | string
     city?: StringFieldUpdateOperationsInput | string
@@ -14189,6 +14227,7 @@ export namespace Prisma {
 
   export type CompanyBranchUncheckedUpdateManyWithoutBranchInput = {
     id?: StringFieldUpdateOperationsInput | string
+    isMainbranch?: BoolFieldUpdateOperationsInput | boolean
     name?: StringFieldUpdateOperationsInput | string
     address?: StringFieldUpdateOperationsInput | string
     city?: StringFieldUpdateOperationsInput | string

@@ -269,6 +269,14 @@ export type RegisterProfileInput = {
   lastname: Scalars['String'];
 };
 
+export type ResponseBranchValidateRouteType = {
+  __typename?: 'ResponseBranchValidateRouteType';
+  branchId?: Maybe<Scalars['String']>;
+  branchName?: Maybe<Scalars['String']>;
+  companyId?: Maybe<Scalars['String']>;
+  companyName?: Maybe<Scalars['String']>;
+};
+
 export type Role = {
   __typename?: 'Role';
   id: Scalars['ID'];
@@ -299,7 +307,9 @@ export type User = {
 export type ValidateRoute = {
   __typename?: 'ValidateRoute';
   acess?: Maybe<Scalars['Boolean']>;
+  currentBranch?: Maybe<ResponseBranchValidateRouteType>;
   path?: Maybe<Scalars['String']>;
+  reAccess?: Maybe<Scalars['String']>;
 };
 
 export type WithIndex<TObject> = TObject & Record<string, any>;
@@ -399,6 +409,7 @@ export type ResolversTypes = ResolversObject<{
   Query: ResolverTypeWrapper<{}>;
   RefreshtokenResponseType: ResolverTypeWrapper<RefreshtokenResponseType>;
   RegisterProfileInput: RegisterProfileInput;
+  ResponseBranchValidateRouteType: ResolverTypeWrapper<ResponseBranchValidateRouteType>;
   Role: ResolverTypeWrapper<Role>;
   String: ResolverTypeWrapper<Scalars['String']>;
   User: ResolverTypeWrapper<User>;
@@ -434,6 +445,7 @@ export type ResolversParentTypes = ResolversObject<{
   Query: {};
   RefreshtokenResponseType: RefreshtokenResponseType;
   RegisterProfileInput: RegisterProfileInput;
+  ResponseBranchValidateRouteType: ResponseBranchValidateRouteType;
   Role: Role;
   String: Scalars['String'];
   User: User;
@@ -643,6 +655,14 @@ export type RefreshtokenResponseTypeResolvers<ContextType = ApolloContext, Paren
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 }>;
 
+export type ResponseBranchValidateRouteTypeResolvers<ContextType = ApolloContext, ParentType extends ResolversParentTypes['ResponseBranchValidateRouteType'] = ResolversParentTypes['ResponseBranchValidateRouteType']> = ResolversObject<{
+  branchId?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  branchName?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  companyId?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  companyName?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+}>;
+
 export type RoleResolvers<ContextType = ApolloContext, ParentType extends ResolversParentTypes['Role'] = ResolversParentTypes['Role']> = ResolversObject<{
   id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
   name?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
@@ -672,7 +692,9 @@ export type UserResolvers<ContextType = ApolloContext, ParentType extends Resolv
 
 export type ValidateRouteResolvers<ContextType = ApolloContext, ParentType extends ResolversParentTypes['ValidateRoute'] = ResolversParentTypes['ValidateRoute']> = ResolversObject<{
   acess?: Resolver<Maybe<ResolversTypes['Boolean']>, ParentType, ContextType>;
+  currentBranch?: Resolver<Maybe<ResolversTypes['ResponseBranchValidateRouteType']>, ParentType, ContextType>;
   path?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  reAccess?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 }>;
 
@@ -699,6 +721,7 @@ export type Resolvers<ContextType = ApolloContext> = ResolversObject<{
   Province?: ProvinceResolvers<ContextType>;
   Query?: QueryResolvers<ContextType>;
   RefreshtokenResponseType?: RefreshtokenResponseTypeResolvers<ContextType>;
+  ResponseBranchValidateRouteType?: ResponseBranchValidateRouteTypeResolvers<ContextType>;
   Role?: RoleResolvers<ContextType>;
   User?: UserResolvers<ContextType>;
   ValidateRoute?: ValidateRouteResolvers<ContextType>;

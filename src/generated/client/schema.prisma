@@ -41,19 +41,20 @@ model Company {
 }
 
 model CompanyBranch {
-  id        String     @unique @db.Uuid
-  name      String     @db.VarChar(255)
-  address   String     @db.VarChar(255)
-  city      String     @db.VarChar(255)
-  state     String     @db.VarChar(255)
-  zip       String     @db.VarChar(255)
-  country   String?    @db.VarChar(255)
-  createdAt DateTime   @default(now())
-  updatedAt DateTime   @updatedAt
-  company   Company?   @relation(fields: [companyId], references: [id])
-  companyId String?    @db.Uuid
-  users     User[]
-  positions Position[]
+  id           String     @unique @db.Uuid
+  isMainbranch Boolean    @default(false)
+  name         String     @db.VarChar(255)
+  address      String     @db.VarChar(255)
+  city         String     @db.VarChar(255)
+  state        String     @db.VarChar(255)
+  zip          String     @db.VarChar(255)
+  country      String?    @db.VarChar(255)
+  createdAt    DateTime   @default(now())
+  updatedAt    DateTime   @updatedAt
+  company      Company?   @relation(fields: [companyId], references: [id])
+  companyId    String?    @db.Uuid
+  users        User[]
+  positions    Position[]
 }
 
 model Profile {
