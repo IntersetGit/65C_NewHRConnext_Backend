@@ -44,12 +44,69 @@ export const companyTypedef = gql`
     social_instragram: String
     social_line: String
     createdAt: Date
-    _count: String
     updatedAt: Date
     company: Company
     companyId: String
     users: [User]
     positions: [Position]
+  }
+
+  type CountInsideBranch {
+    positions: Int
+    users: Int
+  }
+
+  type CountBranch {
+    branch: Int
+  }
+
+  type ResponseCompany_Branch {
+    id: ID!
+    name: String
+    address: String
+    address_2: String
+    city: String
+    state: String
+    zip: String
+    country: String
+    tel: String
+    fax: String
+    website: String
+    lat: String
+    lng: String
+    email: String
+    email_2: String
+    company_type: String
+    sub_company_type: String
+    registeredamount: String
+    social_facebook: String
+    social_likedin: String
+    social_instragram: String
+    social_line: String
+    createdAt: Date
+    updatedAt: Date
+    company: Company
+    companyId: String
+    users: [User]
+    positions: [Position]
+    _count: CountInsideBranch
+  }
+
+  type ResponseCompany {
+    id: ID!
+    name: String
+    companyCode: String
+    userlimit: Int
+    company_registration_id: String
+    company_vat_id: String
+    icon: String
+    createdAt: Date
+    updatedAt: Date
+    users: [User]
+    ownerId: String
+    owner: User
+    branch: [ResponseCompany_Branch]
+    _count: CountBranch
   }
 
   type MeCompanyBranch {
@@ -92,7 +149,7 @@ export const companyTypedef = gql`
   }
 
   type Query {
-    company(name: String): Company
+    company(name: String): ResponseCompany
     getownCompany: GetOwncompanytype
   }
 `;
@@ -109,6 +166,7 @@ const resolvers: Resolvers = {
         },
         where: { id: ctx.currentUser?.compayId },
       });
+      console.log(result?.branch[0]._count.positions);
       return result;
     },
     async getownCompany(p, args, ctx) {
@@ -160,7 +218,6 @@ const resolversComposition = {
   'Query.getownCompany': [authenticate()],
   'Query.company': [authenticate()],
 };
-
 
 export const companyResolvers = composeResolvers(
   resolvers,
