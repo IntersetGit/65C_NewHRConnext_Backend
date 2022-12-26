@@ -161,6 +161,7 @@ const resolversComposition = {
   'Query.company': [authenticate()],
 };
 
+
 export const companyResolvers = composeResolvers(
   resolvers,
   resolversComposition,
