@@ -10,12 +10,28 @@ export const companyTypedef = gql`
     companyCode: String
     address: String
     city: String
+    userlimit: Int
+    company_registration_id: String
+    company_vat_id: String
+    address_2: String
     state: String
     zip: String
     country: String
     icon: String
-    phone: String
+    tel: String
+    fax: String
     website: String
+    lat: String
+    lng: String
+    email: String
+    email_2: String
+    company_type: String
+    sub_company_type: String
+    registeredamount: String
+    social_facebook: String
+    social_likedin: String
+    social_instragram: String
+    social_line: String
     createdAt: Date
     updatedAt: Date
     users: [User]

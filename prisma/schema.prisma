@@ -22,22 +22,38 @@ generator client {
 //   authorId  Int
 // }
 model Company {
-  id          String          @unique @db.Uuid
-  name        String          @db.VarChar(255)
-  companyCode String          @unique
-  address     String          @db.VarChar(255)
-  city        String          @db.VarChar(255)
-  state       String          @db.VarChar(255)
-  zip         String          @db.VarChar(255)
-  country     String?         @db.VarChar(255)
-  icon        String?
-  phone       String?         @db.VarChar(255)
-  website     String?         @db.VarChar(255)
-  createdAt   DateTime        @default(now())
-  updatedAt   DateTime        @updatedAt
-  ownerId     String          @db.Uuid
-  owner       User            @relation(fields: [ownerId], references: [id])
-  branch      CompanyBranch[]
+  id                      String          @unique @db.Uuid
+  name                    String          @db.VarChar(255)
+  companyCode             String          @unique
+  userlimit               Int             @default(0)
+  company_registration_id String?
+  company_vat_id          String?
+  address                 String          @db.VarChar(255)
+  address_2               String?         @db.VarChar(255)
+  city                    String          @db.VarChar(255)
+  state                   String          @db.VarChar(255)
+  zip                     String          @db.VarChar(255)
+  country                 String?         @db.VarChar(255)
+  icon                    String?
+  tel                     String?         @db.VarChar(255)
+  fax                     String?         @db.VarChar(255)
+  website                 String?         @db.VarChar(255)
+  lat                     String?
+  lng                     String?
+  email                   String?
+  email_2                 String?
+  company_type            String?
+  sub_company_type        String?
+  registeredamount        String?
+  social_facebook         String?
+  social_likedin          String?
+  social_instragram       String?
+  social_line             String?
+  createdAt               DateTime        @default(now())
+  updatedAt               DateTime        @updatedAt
+  ownerId                 String          @db.Uuid
+  owner                   User            @relation(fields: [ownerId], references: [id])
+  branch                  CompanyBranch[]
 }
 
 model CompanyBranch {
@@ -58,20 +74,51 @@ model CompanyBranch {
 }
 
 model Profile {
-  id         String    @unique @db.Uuid
-  bio        String?
-  firstname  String?   @db.VarChar(255)
-  lastname   String?   @db.VarChar(255)
-  avatar     String?
-  dob        DateTime?
-  prefix     String?
-  tel        String?
-  address    String?
-  gender     String?
-  staff_code String?   @unique
-  religion   String?
-  user       User      @relation(fields: [userId], references: [id])
-  userId     String    @unique @db.Uuid
+  id                     String    @unique @db.Uuid
+  bio                    String?
+  firstname_th           String?   @db.VarChar(255)
+  lastname_th            String?   @db.VarChar(255)
+  firstname_en           String?   @db.VarChar(255)
+  lastname_en            String?   @db.VarChar(255)
+  avatar                 String?
+  dob                    DateTime?
+  age                    String?
+  relationship           String?
+  shirt_size             String?
+  prefix_th              String?
+  prefix_en              String?
+  citizen_id             String?
+  social_id              String?
+  staff_status           String?
+  tel                    String?
+  address                String?
+  gender                 String?
+  staff_code             String?   @unique
+  religion               String?
+  user                   User      @relation(fields: [userId], references: [id])
+  userId                 String    @unique @db.Uuid
+  citizen_addressnumber  String?
+  citizen_address        String?
+  citizen_country        String?
+  citizen_province       String?
+  citizen_district       String?
+  citizen_state          String?
+  citizen_zipcode        String?
+  citizen_tel            String?
+  contract_sameCitizen   Boolean   @default(false)
+  contract_addressnumber String?
+  contract_address       String?
+  contract_country       String?
+  contract_province      String?
+  contract_district      String?
+  contract_state         String?
+  contract_zipcode       String?
+  contract_email         String?
+  contract_companyemail  String?
+  social_facebook        String?
+  social_likedin         String?
+  social_line            String?
+  social_telegram        String?
 }
 
 model User {

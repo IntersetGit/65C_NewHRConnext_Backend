@@ -13,12 +13,12 @@ const Prisma = {}
 exports.Prisma = Prisma
 
 /**
- * Prisma Client JS version: 4.7.1
- * Query Engine version: 272861e07ab64f234d3ffc4094e32bd61775599c
+ * Prisma Client JS version: 4.7.0
+ * Query Engine version: 39190b250ebc338586e25e6da45e5e783bc8a635
  */
 Prisma.prismaVersion = {
-  client: "4.7.1",
-  engine: "272861e07ab64f234d3ffc4094e32bd61775599c"
+  client: "4.7.0",
+  engine: "39190b250ebc338586e25e6da45e5e783bc8a635"
 }
 
 Prisma.PrismaClientKnownRequestError = () => {
@@ -114,14 +114,30 @@ exports.Prisma.CompanyScalarFieldEnum = makeEnum({
   id: 'id',
   name: 'name',
   companyCode: 'companyCode',
+  userlimit: 'userlimit',
+  company_registration_id: 'company_registration_id',
+  company_vat_id: 'company_vat_id',
   address: 'address',
+  address_2: 'address_2',
   city: 'city',
   state: 'state',
   zip: 'zip',
   country: 'country',
   icon: 'icon',
-  phone: 'phone',
+  tel: 'tel',
+  fax: 'fax',
   website: 'website',
+  lat: 'lat',
+  lng: 'lng',
+  email: 'email',
+  email_2: 'email_2',
+  company_type: 'company_type',
+  sub_company_type: 'sub_company_type',
+  registeredamount: 'registeredamount',
+  social_facebook: 'social_facebook',
+  social_likedin: 'social_likedin',
+  social_instragram: 'social_instragram',
+  social_line: 'social_line',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt',
   ownerId: 'ownerId'
@@ -153,17 +169,48 @@ exports.Prisma.PositionScalarFieldEnum = makeEnum({
 exports.Prisma.ProfileScalarFieldEnum = makeEnum({
   id: 'id',
   bio: 'bio',
-  firstname: 'firstname',
-  lastname: 'lastname',
+  firstname_th: 'firstname_th',
+  lastname_th: 'lastname_th',
+  firstname_en: 'firstname_en',
+  lastname_en: 'lastname_en',
   avatar: 'avatar',
   dob: 'dob',
-  prefix: 'prefix',
+  age: 'age',
+  relationship: 'relationship',
+  shirt_size: 'shirt_size',
+  prefix_th: 'prefix_th',
+  prefix_en: 'prefix_en',
+  citizen_id: 'citizen_id',
+  social_id: 'social_id',
+  staff_status: 'staff_status',
   tel: 'tel',
   address: 'address',
   gender: 'gender',
   staff_code: 'staff_code',
   religion: 'religion',
-  userId: 'userId'
+  userId: 'userId',
+  citizen_addressnumber: 'citizen_addressnumber',
+  citizen_address: 'citizen_address',
+  citizen_country: 'citizen_country',
+  citizen_province: 'citizen_province',
+  citizen_district: 'citizen_district',
+  citizen_state: 'citizen_state',
+  citizen_zipcode: 'citizen_zipcode',
+  citizen_tel: 'citizen_tel',
+  contract_sameCitizen: 'contract_sameCitizen',
+  contract_addressnumber: 'contract_addressnumber',
+  contract_address: 'contract_address',
+  contract_country: 'contract_country',
+  contract_province: 'contract_province',
+  contract_district: 'contract_district',
+  contract_state: 'contract_state',
+  contract_zipcode: 'contract_zipcode',
+  contract_email: 'contract_email',
+  contract_companyemail: 'contract_companyemail',
+  social_facebook: 'social_facebook',
+  social_likedin: 'social_likedin',
+  social_line: 'social_line',
+  social_telegram: 'social_telegram'
 });
 
 exports.Prisma.ProvinceScalarFieldEnum = makeEnum({

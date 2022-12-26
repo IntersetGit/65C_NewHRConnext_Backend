@@ -20,14 +20,30 @@ export type Company = {
   id: string
   name: string
   companyCode: string
+  userlimit: number
+  company_registration_id: string | null
+  company_vat_id: string | null
   address: string
+  address_2: string | null
   city: string
   state: string
   zip: string
   country: string | null
   icon: string | null
-  phone: string | null
+  tel: string | null
+  fax: string | null
   website: string | null
+  lat: string | null
+  lng: string | null
+  email: string | null
+  email_2: string | null
+  company_type: string | null
+  sub_company_type: string | null
+  registeredamount: string | null
+  social_facebook: string | null
+  social_likedin: string | null
+  social_instragram: string | null
+  social_line: string | null
   createdAt: Date
   updatedAt: Date
   ownerId: string
@@ -58,17 +74,48 @@ export type CompanyBranch = {
 export type Profile = {
   id: string
   bio: string | null
-  firstname: string | null
-  lastname: string | null
+  firstname_th: string | null
+  lastname_th: string | null
+  firstname_en: string | null
+  lastname_en: string | null
   avatar: string | null
   dob: Date | null
-  prefix: string | null
+  age: string | null
+  relationship: string | null
+  shirt_size: string | null
+  prefix_th: string | null
+  prefix_en: string | null
+  citizen_id: string | null
+  social_id: string | null
+  staff_status: string | null
   tel: string | null
   address: string | null
   gender: string | null
   staff_code: string | null
   religion: string | null
   userId: string
+  citizen_addressnumber: string | null
+  citizen_address: string | null
+  citizen_country: string | null
+  citizen_province: string | null
+  citizen_district: string | null
+  citizen_state: string | null
+  citizen_zipcode: string | null
+  citizen_tel: string | null
+  contract_sameCitizen: boolean
+  contract_addressnumber: string | null
+  contract_address: string | null
+  contract_country: string | null
+  contract_province: string | null
+  contract_district: string | null
+  contract_state: string | null
+  contract_zipcode: string | null
+  contract_email: string | null
+  contract_companyemail: string | null
+  social_facebook: string | null
+  social_likedin: string | null
+  social_line: string | null
+  social_telegram: string | null
 }
 
 /**
@@ -387,8 +434,8 @@ export namespace Prisma {
 
 
   /**
-   * Prisma Client JS version: 4.7.1
-   * Query Engine version: 272861e07ab64f234d3ffc4094e32bd61775599c
+   * Prisma Client JS version: 4.7.0
+   * Query Engine version: 39190b250ebc338586e25e6da45e5e783bc8a635
    */
   export type PrismaVersion = {
     client: string
@@ -1323,22 +1370,48 @@ export namespace Prisma {
 
   export type AggregateCompany = {
     _count: CompanyCountAggregateOutputType | null
+    _avg: CompanyAvgAggregateOutputType | null
+    _sum: CompanySumAggregateOutputType | null
     _min: CompanyMinAggregateOutputType | null
     _max: CompanyMaxAggregateOutputType | null
+  }
+
+  export type CompanyAvgAggregateOutputType = {
+    userlimit: number | null
+  }
+
+  export type CompanySumAggregateOutputType = {
+    userlimit: number | null
   }
 
   export type CompanyMinAggregateOutputType = {
     id: string | null
     name: string | null
     companyCode: string | null
+    userlimit: number | null
+    company_registration_id: string | null
+    company_vat_id: string | null
     address: string | null
+    address_2: string | null
     city: string | null
     state: string | null
     zip: string | null
     country: string | null
     icon: string | null
-    phone: string | null
+    tel: string | null
+    fax: string | null
     website: string | null
+    lat: string | null
+    lng: string | null
+    email: string | null
+    email_2: string | null
+    company_type: string | null
+    sub_company_type: string | null
+    registeredamount: string | null
+    social_facebook: string | null
+    social_likedin: string | null
+    social_instragram: string | null
+    social_line: string | null
     createdAt: Date | null
     updatedAt: Date | null
     ownerId: string | null
@@ -1348,14 +1421,30 @@ export namespace Prisma {
     id: string | null
     name: string | null
     companyCode: string | null
+    userlimit: number | null
+    company_registration_id: string | null
+    company_vat_id: string | null
     address: string | null
+    address_2: string | null
     city: string | null
     state: string | null
     zip: string | null
     country: string | null
     icon: string | null
-    phone: string | null
+    tel: string | null
+    fax: string | null
     website: string | null
+    lat: string | null
+    lng: string | null
+    email: string | null
+    email_2: string | null
+    company_type: string | null
+    sub_company_type: string | null
+    registeredamount: string | null
+    social_facebook: string | null
+    social_likedin: string | null
+    social_instragram: string | null
+    social_line: string | null
     createdAt: Date | null
     updatedAt: Date | null
     ownerId: string | null
@@ -1365,14 +1454,30 @@ export namespace Prisma {
     id: number
     name: number
     companyCode: number
+    userlimit: number
+    company_registration_id: number
+    company_vat_id: number
     address: number
+    address_2: number
     city: number
     state: number
     zip: number
     country: number
     icon: number
-    phone: number
+    tel: number
+    fax: number
     website: number
+    lat: number
+    lng: number
+    email: number
+    email_2: number
+    company_type: number
+    sub_company_type: number
+    registeredamount: number
+    social_facebook: number
+    social_likedin: number
+    social_instragram: number
+    social_line: number
     createdAt: number
     updatedAt: number
     ownerId: number
@@ -1380,18 +1485,42 @@ export namespace Prisma {
   }
 
 
+  export type CompanyAvgAggregateInputType = {
+    userlimit?: true
+  }
+
+  export type CompanySumAggregateInputType = {
+    userlimit?: true
+  }
+
   export type CompanyMinAggregateInputType = {
     id?: true
     name?: true
     companyCode?: true
+    userlimit?: true
+    company_registration_id?: true
+    company_vat_id?: true
     address?: true
+    address_2?: true
     city?: true
     state?: true
     zip?: true
     country?: true
     icon?: true
-    phone?: true
+    tel?: true
+    fax?: true
     website?: true
+    lat?: true
+    lng?: true
+    email?: true
+    email_2?: true
+    company_type?: true
+    sub_company_type?: true
+    registeredamount?: true
+    social_facebook?: true
+    social_likedin?: true
+    social_instragram?: true
+    social_line?: true
     createdAt?: true
     updatedAt?: true
     ownerId?: true
@@ -1401,14 +1530,30 @@ export namespace Prisma {
     id?: true
     name?: true
     companyCode?: true
+    userlimit?: true
+    company_registration_id?: true
+    company_vat_id?: true
     address?: true
+    address_2?: true
     city?: true
     state?: true
     zip?: true
     country?: true
     icon?: true
-    phone?: true
+    tel?: true
+    fax?: true
     website?: true
+    lat?: true
+    lng?: true
+    email?: true
+    email_2?: true
+    company_type?: true
+    sub_company_type?: true
+    registeredamount?: true
+    social_facebook?: true
+    social_likedin?: true
+    social_instragram?: true
+    social_line?: true
     createdAt?: true
     updatedAt?: true
     ownerId?: true
@@ -1418,14 +1563,30 @@ export namespace Prisma {
     id?: true
     name?: true
     companyCode?: true
+    userlimit?: true
+    company_registration_id?: true
+    company_vat_id?: true
     address?: true
+    address_2?: true
     city?: true
     state?: true
     zip?: true
     country?: true
     icon?: true
-    phone?: true
+    tel?: true
+    fax?: true
     website?: true
+    lat?: true
+    lng?: true
+    email?: true
+    email_2?: true
+    company_type?: true
+    sub_company_type?: true
+    registeredamount?: true
+    social_facebook?: true
+    social_likedin?: true
+    social_instragram?: true
+    social_line?: true
     createdAt?: true
     updatedAt?: true
     ownerId?: true
@@ -1475,6 +1636,18 @@ export namespace Prisma {
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
+     * Select which fields to average
+    **/
+    _avg?: CompanyAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: CompanySumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
      * Select which fields to find the minimum value
     **/
     _min?: CompanyMinAggregateInputType
@@ -1505,6 +1678,8 @@ export namespace Prisma {
     take?: number
     skip?: number
     _count?: CompanyCountAggregateInputType | true
+    _avg?: CompanyAvgAggregateInputType
+    _sum?: CompanySumAggregateInputType
     _min?: CompanyMinAggregateInputType
     _max?: CompanyMaxAggregateInputType
   }
@@ -1514,18 +1689,36 @@ export namespace Prisma {
     id: string
     name: string
     companyCode: string
+    userlimit: number
+    company_registration_id: string | null
+    company_vat_id: string | null
     address: string
+    address_2: string | null
     city: string
     state: string
     zip: string
     country: string | null
     icon: string | null
-    phone: string | null
+    tel: string | null
+    fax: string | null
     website: string | null
+    lat: string | null
+    lng: string | null
+    email: string | null
+    email_2: string | null
+    company_type: string | null
+    sub_company_type: string | null
+    registeredamount: string | null
+    social_facebook: string | null
+    social_likedin: string | null
+    social_instragram: string | null
+    social_line: string | null
     createdAt: Date
     updatedAt: Date
     ownerId: string
     _count: CompanyCountAggregateOutputType | null
+    _avg: CompanyAvgAggregateOutputType | null
+    _sum: CompanySumAggregateOutputType | null
     _min: CompanyMinAggregateOutputType | null
     _max: CompanyMaxAggregateOutputType | null
   }
@@ -1548,14 +1741,30 @@ export namespace Prisma {
     id?: boolean
     name?: boolean
     companyCode?: boolean
+    userlimit?: boolean
+    company_registration_id?: boolean
+    company_vat_id?: boolean
     address?: boolean
+    address_2?: boolean
     city?: boolean
     state?: boolean
     zip?: boolean
     country?: boolean
     icon?: boolean
-    phone?: boolean
+    tel?: boolean
+    fax?: boolean
     website?: boolean
+    lat?: boolean
+    lng?: boolean
+    email?: boolean
+    email_2?: boolean
+    company_type?: boolean
+    sub_company_type?: boolean
+    registeredamount?: boolean
+    social_facebook?: boolean
+    social_likedin?: boolean
+    social_instragram?: boolean
+    social_line?: boolean
     createdAt?: boolean
     updatedAt?: boolean
     ownerId?: boolean
@@ -3452,49 +3661,142 @@ export namespace Prisma {
   export type ProfileMinAggregateOutputType = {
     id: string | null
     bio: string | null
-    firstname: string | null
-    lastname: string | null
+    firstname_th: string | null
+    lastname_th: string | null
+    firstname_en: string | null
+    lastname_en: string | null
     avatar: string | null
     dob: Date | null
-    prefix: string | null
+    age: string | null
+    relationship: string | null
+    shirt_size: string | null
+    prefix_th: string | null
+    prefix_en: string | null
+    citizen_id: string | null
+    social_id: string | null
+    staff_status: string | null
     tel: string | null
     address: string | null
     gender: string | null
     staff_code: string | null
     religion: string | null
     userId: string | null
+    citizen_addressnumber: string | null
+    citizen_address: string | null
+    citizen_country: string | null
+    citizen_province: string | null
+    citizen_district: string | null
+    citizen_state: string | null
+    citizen_zipcode: string | null
+    citizen_tel: string | null
+    contract_sameCitizen: boolean | null
+    contract_addressnumber: string | null
+    contract_address: string | null
+    contract_country: string | null
+    contract_province: string | null
+    contract_district: string | null
+    contract_state: string | null
+    contract_zipcode: string | null
+    contract_email: string | null
+    contract_companyemail: string | null
+    social_facebook: string | null
+    social_likedin: string | null
+    social_line: string | null
+    social_telegram: string | null
   }
 
   export type ProfileMaxAggregateOutputType = {
     id: string | null
     bio: string | null
-    firstname: string | null
-    lastname: string | null
+    firstname_th: string | null
+    lastname_th: string | null
+    firstname_en: string | null
+    lastname_en: string | null
     avatar: string | null
     dob: Date | null
-    prefix: string | null
+    age: string | null
+    relationship: string | null
+    shirt_size: string | null
+    prefix_th: string | null
+    prefix_en: string | null
+    citizen_id: string | null
+    social_id: string | null
+    staff_status: string | null
     tel: string | null
     address: string | null
     gender: string | null
     staff_code: string | null
     religion: string | null
     userId: string | null
+    citizen_addressnumber: string | null
+    citizen_address: string | null
+    citizen_country: string | null
+    citizen_province: string | null
+    citizen_district: string | null
+    citizen_state: string | null
+    citizen_zipcode: string | null
+    citizen_tel: string | null
+    contract_sameCitizen: boolean | null
+    contract_addressnumber: string | null
+    contract_address: string | null
+    contract_country: string | null
+    contract_province: string | null
+    contract_district: string | null
+    contract_state: string | null
+    contract_zipcode: string | null
+    contract_email: string | null
+    contract_companyemail: string | null
+    social_facebook: string | null
+    social_likedin: string | null
+    social_line: string | null
+    social_telegram: string | null
   }
 
   export type ProfileCountAggregateOutputType = {
     id: number
     bio: number
-    firstname: number
-    lastname: number
+    firstname_th: number
+    lastname_th: number
+    firstname_en: number
+    lastname_en: number
     avatar: number
     dob: number
-    prefix: number
+    age: number
+    relationship: number
+    shirt_size: number
+    prefix_th: number
+    prefix_en: number
+    citizen_id: number
+    social_id: number
+    staff_status: number
     tel: number
     address: number
     gender: number
     staff_code: number
     religion: number
     userId: number
+    citizen_addressnumber: number
+    citizen_address: number
+    citizen_country: number
+    citizen_province: number
+    citizen_district: number
+    citizen_state: number
+    citizen_zipcode: number
+    citizen_tel: number
+    contract_sameCitizen: number
+    contract_addressnumber: number
+    contract_address: number
+    contract_country: number
+    contract_province: number
+    contract_district: number
+    contract_state: number
+    contract_zipcode: number
+    contract_email: number
+    contract_companyemail: number
+    social_facebook: number
+    social_likedin: number
+    social_line: number
+    social_telegram: number
     _all: number
   }
 
@@ -3502,49 +3804,142 @@ export namespace Prisma {
   export type ProfileMinAggregateInputType = {
     id?: true
     bio?: true
-    firstname?: true
-    lastname?: true
+    firstname_th?: true
+    lastname_th?: true
+    firstname_en?: true
+    lastname_en?: true
     avatar?: true
     dob?: true
-    prefix?: true
+    age?: true
+    relationship?: true
+    shirt_size?: true
+    prefix_th?: true
+    prefix_en?: true
+    citizen_id?: true
+    social_id?: true
+    staff_status?: true
     tel?: true
     address?: true
     gender?: true
     staff_code?: true
     religion?: true
     userId?: true
+    citizen_addressnumber?: true
+    citizen_address?: true
+    citizen_country?: true
+    citizen_province?: true
+    citizen_district?: true
+    citizen_state?: true
+    citizen_zipcode?: true
+    citizen_tel?: true
+    contract_sameCitizen?: true
+    contract_addressnumber?: true
+    contract_address?: true
+    contract_country?: true
+    contract_province?: true
+    contract_district?: true
+    contract_state?: true
+    contract_zipcode?: true
+    contract_email?: true
+    contract_companyemail?: true
+    social_facebook?: true
+    social_likedin?: true
+    social_line?: true
+    social_telegram?: true
   }
 
   export type ProfileMaxAggregateInputType = {
     id?: true
     bio?: true
-    firstname?: true
-    lastname?: true
+    firstname_th?: true
+    lastname_th?: true
+    firstname_en?: true
+    lastname_en?: true
     avatar?: true
     dob?: true
-    prefix?: true
+    age?: true
+    relationship?: true
+    shirt_size?: true
+    prefix_th?: true
+    prefix_en?: true
+    citizen_id?: true
+    social_id?: true
+    staff_status?: true
     tel?: true
     address?: true
     gender?: true
     staff_code?: true
     religion?: true
     userId?: true
+    citizen_addressnumber?: true
+    citizen_address?: true
+    citizen_country?: true
+    citizen_province?: true
+    citizen_district?: true
+    citizen_state?: true
+    citizen_zipcode?: true
+    citizen_tel?: true
+    contract_sameCitizen?: true
+    contract_addressnumber?: true
+    contract_address?: true
+    contract_country?: true
+    contract_province?: true
+    contract_district?: true
+    contract_state?: true
+    contract_zipcode?: true
+    contract_email?: true
+    contract_companyemail?: true
+    social_facebook?: true
+    social_likedin?: true
+    social_line?: true
+    social_telegram?: true
   }
 
   export type ProfileCountAggregateInputType = {
     id?: true
     bio?: true
-    firstname?: true
-    lastname?: true
+    firstname_th?: true
+    lastname_th?: true
+    firstname_en?: true
+    lastname_en?: true
     avatar?: true
     dob?: true
-    prefix?: true
+    age?: true
+    relationship?: true
+    shirt_size?: true
+    prefix_th?: true
+    prefix_en?: true
+    citizen_id?: true
+    social_id?: true
+    staff_status?: true
     tel?: true
     address?: true
     gender?: true
     staff_code?: true
     religion?: true
     userId?: true
+    citizen_addressnumber?: true
+    citizen_address?: true
+    citizen_country?: true
+    citizen_province?: true
+    citizen_district?: true
+    citizen_state?: true
+    citizen_zipcode?: true
+    citizen_tel?: true
+    contract_sameCitizen?: true
+    contract_addressnumber?: true
+    contract_address?: true
+    contract_country?: true
+    contract_province?: true
+    contract_district?: true
+    contract_state?: true
+    contract_zipcode?: true
+    contract_email?: true
+    contract_companyemail?: true
+    social_facebook?: true
+    social_likedin?: true
+    social_line?: true
+    social_telegram?: true
     _all?: true
   }
 
@@ -3629,17 +4024,48 @@ export namespace Prisma {
   export type ProfileGroupByOutputType = {
     id: string
     bio: string | null
-    firstname: string | null
-    lastname: string | null
+    firstname_th: string | null
+    lastname_th: string | null
+    firstname_en: string | null
+    lastname_en: string | null
     avatar: string | null
     dob: Date | null
-    prefix: string | null
+    age: string | null
+    relationship: string | null
+    shirt_size: string | null
+    prefix_th: string | null
+    prefix_en: string | null
+    citizen_id: string | null
+    social_id: string | null
+    staff_status: string | null
     tel: string | null
     address: string | null
     gender: string | null
     staff_code: string | null
     religion: string | null
     userId: string
+    citizen_addressnumber: string | null
+    citizen_address: string | null
+    citizen_country: string | null
+    citizen_province: string | null
+    citizen_district: string | null
+    citizen_state: string | null
+    citizen_zipcode: string | null
+    citizen_tel: string | null
+    contract_sameCitizen: boolean
+    contract_addressnumber: string | null
+    contract_address: string | null
+    contract_country: string | null
+    contract_province: string | null
+    contract_district: string | null
+    contract_state: string | null
+    contract_zipcode: string | null
+    contract_email: string | null
+    contract_companyemail: string | null
+    social_facebook: string | null
+    social_likedin: string | null
+    social_line: string | null
+    social_telegram: string | null
     _count: ProfileCountAggregateOutputType | null
     _min: ProfileMinAggregateOutputType | null
     _max: ProfileMaxAggregateOutputType | null
@@ -3662,11 +4088,20 @@ export namespace Prisma {
   export type ProfileSelect = {
     id?: boolean
     bio?: boolean
-    firstname?: boolean
-    lastname?: boolean
+    firstname_th?: boolean
+    lastname_th?: boolean
+    firstname_en?: boolean
+    lastname_en?: boolean
     avatar?: boolean
     dob?: boolean
-    prefix?: boolean
+    age?: boolean
+    relationship?: boolean
+    shirt_size?: boolean
+    prefix_th?: boolean
+    prefix_en?: boolean
+    citizen_id?: boolean
+    social_id?: boolean
+    staff_status?: boolean
     tel?: boolean
     address?: boolean
     gender?: boolean
@@ -3674,6 +4109,28 @@ export namespace Prisma {
     religion?: boolean
     user?: boolean | UserArgs
     userId?: boolean
+    citizen_addressnumber?: boolean
+    citizen_address?: boolean
+    citizen_country?: boolean
+    citizen_province?: boolean
+    citizen_district?: boolean
+    citizen_state?: boolean
+    citizen_zipcode?: boolean
+    citizen_tel?: boolean
+    contract_sameCitizen?: boolean
+    contract_addressnumber?: boolean
+    contract_address?: boolean
+    contract_country?: boolean
+    contract_province?: boolean
+    contract_district?: boolean
+    contract_state?: boolean
+    contract_zipcode?: boolean
+    contract_email?: boolean
+    contract_companyemail?: boolean
+    social_facebook?: boolean
+    social_likedin?: boolean
+    social_line?: boolean
+    social_telegram?: boolean
   }
 
 
@@ -10476,14 +10933,30 @@ export namespace Prisma {
     id: 'id',
     name: 'name',
     companyCode: 'companyCode',
+    userlimit: 'userlimit',
+    company_registration_id: 'company_registration_id',
+    company_vat_id: 'company_vat_id',
     address: 'address',
+    address_2: 'address_2',
     city: 'city',
     state: 'state',
     zip: 'zip',
     country: 'country',
     icon: 'icon',
-    phone: 'phone',
+    tel: 'tel',
+    fax: 'fax',
     website: 'website',
+    lat: 'lat',
+    lng: 'lng',
+    email: 'email',
+    email_2: 'email_2',
+    company_type: 'company_type',
+    sub_company_type: 'sub_company_type',
+    registeredamount: 'registeredamount',
+    social_facebook: 'social_facebook',
+    social_likedin: 'social_likedin',
+    social_instragram: 'social_instragram',
+    social_line: 'social_line',
     createdAt: 'createdAt',
     updatedAt: 'updatedAt',
     ownerId: 'ownerId'
@@ -10530,17 +11003,48 @@ export namespace Prisma {
   export const ProfileScalarFieldEnum: {
     id: 'id',
     bio: 'bio',
-    firstname: 'firstname',
-    lastname: 'lastname',
+    firstname_th: 'firstname_th',
+    lastname_th: 'lastname_th',
+    firstname_en: 'firstname_en',
+    lastname_en: 'lastname_en',
     avatar: 'avatar',
     dob: 'dob',
-    prefix: 'prefix',
+    age: 'age',
+    relationship: 'relationship',
+    shirt_size: 'shirt_size',
+    prefix_th: 'prefix_th',
+    prefix_en: 'prefix_en',
+    citizen_id: 'citizen_id',
+    social_id: 'social_id',
+    staff_status: 'staff_status',
     tel: 'tel',
     address: 'address',
     gender: 'gender',
     staff_code: 'staff_code',
     religion: 'religion',
-    userId: 'userId'
+    userId: 'userId',
+    citizen_addressnumber: 'citizen_addressnumber',
+    citizen_address: 'citizen_address',
+    citizen_country: 'citizen_country',
+    citizen_province: 'citizen_province',
+    citizen_district: 'citizen_district',
+    citizen_state: 'citizen_state',
+    citizen_zipcode: 'citizen_zipcode',
+    citizen_tel: 'citizen_tel',
+    contract_sameCitizen: 'contract_sameCitizen',
+    contract_addressnumber: 'contract_addressnumber',
+    contract_address: 'contract_address',
+    contract_country: 'contract_country',
+    contract_province: 'contract_province',
+    contract_district: 'contract_district',
+    contract_state: 'contract_state',
+    contract_zipcode: 'contract_zipcode',
+    contract_email: 'contract_email',
+    contract_companyemail: 'contract_companyemail',
+    social_facebook: 'social_facebook',
+    social_likedin: 'social_likedin',
+    social_line: 'social_line',
+    social_telegram: 'social_telegram'
   };
 
   export type ProfileScalarFieldEnum = (typeof ProfileScalarFieldEnum)[keyof typeof ProfileScalarFieldEnum]
@@ -10617,14 +11121,30 @@ export namespace Prisma {
     id?: UuidFilter | string
     name?: StringFilter | string
     companyCode?: StringFilter | string
+    userlimit?: IntFilter | number
+    company_registration_id?: StringNullableFilter | string | null
+    company_vat_id?: StringNullableFilter | string | null
     address?: StringFilter | string
+    address_2?: StringNullableFilter | string | null
     city?: StringFilter | string
     state?: StringFilter | string
     zip?: StringFilter | string
     country?: StringNullableFilter | string | null
     icon?: StringNullableFilter | string | null
-    phone?: StringNullableFilter | string | null
+    tel?: StringNullableFilter | string | null
+    fax?: StringNullableFilter | string | null
     website?: StringNullableFilter | string | null
+    lat?: StringNullableFilter | string | null
+    lng?: StringNullableFilter | string | null
+    email?: StringNullableFilter | string | null
+    email_2?: StringNullableFilter | string | null
+    company_type?: StringNullableFilter | string | null
+    sub_company_type?: StringNullableFilter | string | null
+    registeredamount?: StringNullableFilter | string | null
+    social_facebook?: StringNullableFilter | string | null
+    social_likedin?: StringNullableFilter | string | null
+    social_instragram?: StringNullableFilter | string | null
+    social_line?: StringNullableFilter | string | null
     createdAt?: DateTimeFilter | Date | string
     updatedAt?: DateTimeFilter | Date | string
     ownerId?: UuidFilter | string
@@ -10636,14 +11156,30 @@ export namespace Prisma {
     id?: SortOrder
     name?: SortOrder
     companyCode?: SortOrder
+    userlimit?: SortOrder
+    company_registration_id?: SortOrder
+    company_vat_id?: SortOrder
     address?: SortOrder
+    address_2?: SortOrder
     city?: SortOrder
     state?: SortOrder
     zip?: SortOrder
     country?: SortOrder
     icon?: SortOrder
-    phone?: SortOrder
+    tel?: SortOrder
+    fax?: SortOrder
     website?: SortOrder
+    lat?: SortOrder
+    lng?: SortOrder
+    email?: SortOrder
+    email_2?: SortOrder
+    company_type?: SortOrder
+    sub_company_type?: SortOrder
+    registeredamount?: SortOrder
+    social_facebook?: SortOrder
+    social_likedin?: SortOrder
+    social_instragram?: SortOrder
+    social_line?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     ownerId?: SortOrder
@@ -10660,20 +11196,38 @@ export namespace Prisma {
     id?: SortOrder
     name?: SortOrder
     companyCode?: SortOrder
+    userlimit?: SortOrder
+    company_registration_id?: SortOrder
+    company_vat_id?: SortOrder
     address?: SortOrder
+    address_2?: SortOrder
     city?: SortOrder
     state?: SortOrder
     zip?: SortOrder
     country?: SortOrder
     icon?: SortOrder
-    phone?: SortOrder
+    tel?: SortOrder
+    fax?: SortOrder
     website?: SortOrder
+    lat?: SortOrder
+    lng?: SortOrder
+    email?: SortOrder
+    email_2?: SortOrder
+    company_type?: SortOrder
+    sub_company_type?: SortOrder
+    registeredamount?: SortOrder
+    social_facebook?: SortOrder
+    social_likedin?: SortOrder
+    social_instragram?: SortOrder
+    social_line?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     ownerId?: SortOrder
     _count?: CompanyCountOrderByAggregateInput
+    _avg?: CompanyAvgOrderByAggregateInput
     _max?: CompanyMaxOrderByAggregateInput
     _min?: CompanyMinOrderByAggregateInput
+    _sum?: CompanySumOrderByAggregateInput
   }
 
   export type CompanyScalarWhereWithAggregatesInput = {
@@ -10683,14 +11237,30 @@ export namespace Prisma {
     id?: UuidWithAggregatesFilter | string
     name?: StringWithAggregatesFilter | string
     companyCode?: StringWithAggregatesFilter | string
+    userlimit?: IntWithAggregatesFilter | number
+    company_registration_id?: StringNullableWithAggregatesFilter | string | null
+    company_vat_id?: StringNullableWithAggregatesFilter | string | null
     address?: StringWithAggregatesFilter | string
+    address_2?: StringNullableWithAggregatesFilter | string | null
     city?: StringWithAggregatesFilter | string
     state?: StringWithAggregatesFilter | string
     zip?: StringWithAggregatesFilter | string
     country?: StringNullableWithAggregatesFilter | string | null
     icon?: StringNullableWithAggregatesFilter | string | null
-    phone?: StringNullableWithAggregatesFilter | string | null
+    tel?: StringNullableWithAggregatesFilter | string | null
+    fax?: StringNullableWithAggregatesFilter | string | null
     website?: StringNullableWithAggregatesFilter | string | null
+    lat?: StringNullableWithAggregatesFilter | string | null
+    lng?: StringNullableWithAggregatesFilter | string | null
+    email?: StringNullableWithAggregatesFilter | string | null
+    email_2?: StringNullableWithAggregatesFilter | string | null
+    company_type?: StringNullableWithAggregatesFilter | string | null
+    sub_company_type?: StringNullableWithAggregatesFilter | string | null
+    registeredamount?: StringNullableWithAggregatesFilter | string | null
+    social_facebook?: StringNullableWithAggregatesFilter | string | null
+    social_likedin?: StringNullableWithAggregatesFilter | string | null
+    social_instragram?: StringNullableWithAggregatesFilter | string | null
+    social_line?: StringNullableWithAggregatesFilter | string | null
     createdAt?: DateTimeWithAggregatesFilter | Date | string
     updatedAt?: DateTimeWithAggregatesFilter | Date | string
     ownerId?: UuidWithAggregatesFilter | string
@@ -10777,11 +11347,20 @@ export namespace Prisma {
     NOT?: Enumerable<ProfileWhereInput>
     id?: UuidFilter | string
     bio?: StringNullableFilter | string | null
-    firstname?: StringNullableFilter | string | null
-    lastname?: StringNullableFilter | string | null
+    firstname_th?: StringNullableFilter | string | null
+    lastname_th?: StringNullableFilter | string | null
+    firstname_en?: StringNullableFilter | string | null
+    lastname_en?: StringNullableFilter | string | null
     avatar?: StringNullableFilter | string | null
     dob?: DateTimeNullableFilter | Date | string | null
-    prefix?: StringNullableFilter | string | null
+    age?: StringNullableFilter | string | null
+    relationship?: StringNullableFilter | string | null
+    shirt_size?: StringNullableFilter | string | null
+    prefix_th?: StringNullableFilter | string | null
+    prefix_en?: StringNullableFilter | string | null
+    citizen_id?: StringNullableFilter | string | null
+    social_id?: StringNullableFilter | string | null
+    staff_status?: StringNullableFilter | string | null
     tel?: StringNullableFilter | string | null
     address?: StringNullableFilter | string | null
     gender?: StringNullableFilter | string | null
@@ -10789,16 +11368,47 @@ export namespace Prisma {
     religion?: StringNullableFilter | string | null
     user?: XOR<UserRelationFilter, UserWhereInput>
     userId?: UuidFilter | string
+    citizen_addressnumber?: StringNullableFilter | string | null
+    citizen_address?: StringNullableFilter | string | null
+    citizen_country?: StringNullableFilter | string | null
+    citizen_province?: StringNullableFilter | string | null
+    citizen_district?: StringNullableFilter | string | null
+    citizen_state?: StringNullableFilter | string | null
+    citizen_zipcode?: StringNullableFilter | string | null
+    citizen_tel?: StringNullableFilter | string | null
+    contract_sameCitizen?: BoolFilter | boolean
+    contract_addressnumber?: StringNullableFilter | string | null
+    contract_address?: StringNullableFilter | string | null
+    contract_country?: StringNullableFilter | string | null
+    contract_province?: StringNullableFilter | string | null
+    contract_district?: StringNullableFilter | string | null
+    contract_state?: StringNullableFilter | string | null
+    contract_zipcode?: StringNullableFilter | string | null
+    contract_email?: StringNullableFilter | string | null
+    contract_companyemail?: StringNullableFilter | string | null
+    social_facebook?: StringNullableFilter | string | null
+    social_likedin?: StringNullableFilter | string | null
+    social_line?: StringNullableFilter | string | null
+    social_telegram?: StringNullableFilter | string | null
   }
 
   export type ProfileOrderByWithRelationInput = {
     id?: SortOrder
     bio?: SortOrder
-    firstname?: SortOrder
-    lastname?: SortOrder
+    firstname_th?: SortOrder
+    lastname_th?: SortOrder
+    firstname_en?: SortOrder
+    lastname_en?: SortOrder
     avatar?: SortOrder
     dob?: SortOrder
-    prefix?: SortOrder
+    age?: SortOrder
+    relationship?: SortOrder
+    shirt_size?: SortOrder
+    prefix_th?: SortOrder
+    prefix_en?: SortOrder
+    citizen_id?: SortOrder
+    social_id?: SortOrder
+    staff_status?: SortOrder
     tel?: SortOrder
     address?: SortOrder
     gender?: SortOrder
@@ -10806,6 +11416,28 @@ export namespace Prisma {
     religion?: SortOrder
     user?: UserOrderByWithRelationInput
     userId?: SortOrder
+    citizen_addressnumber?: SortOrder
+    citizen_address?: SortOrder
+    citizen_country?: SortOrder
+    citizen_province?: SortOrder
+    citizen_district?: SortOrder
+    citizen_state?: SortOrder
+    citizen_zipcode?: SortOrder
+    citizen_tel?: SortOrder
+    contract_sameCitizen?: SortOrder
+    contract_addressnumber?: SortOrder
+    contract_address?: SortOrder
+    contract_country?: SortOrder
+    contract_province?: SortOrder
+    contract_district?: SortOrder
+    contract_state?: SortOrder
+    contract_zipcode?: SortOrder
+    contract_email?: SortOrder
+    contract_companyemail?: SortOrder
+    social_facebook?: SortOrder
+    social_likedin?: SortOrder
+    social_line?: SortOrder
+    social_telegram?: SortOrder
   }
 
   export type ProfileWhereUniqueInput = {
@@ -10817,17 +11449,48 @@ export namespace Prisma {
   export type ProfileOrderByWithAggregationInput = {
     id?: SortOrder
     bio?: SortOrder
-    firstname?: SortOrder
-    lastname?: SortOrder
+    firstname_th?: SortOrder
+    lastname_th?: SortOrder
+    firstname_en?: SortOrder
+    lastname_en?: SortOrder
     avatar?: SortOrder
     dob?: SortOrder
-    prefix?: SortOrder
+    age?: SortOrder
+    relationship?: SortOrder
+    shirt_size?: SortOrder
+    prefix_th?: SortOrder
+    prefix_en?: SortOrder
+    citizen_id?: SortOrder
+    social_id?: SortOrder
+    staff_status?: SortOrder
     tel?: SortOrder
     address?: SortOrder
     gender?: SortOrder
     staff_code?: SortOrder
     religion?: SortOrder
     userId?: SortOrder
+    citizen_addressnumber?: SortOrder
+    citizen_address?: SortOrder
+    citizen_country?: SortOrder
+    citizen_province?: SortOrder
+    citizen_district?: SortOrder
+    citizen_state?: SortOrder
+    citizen_zipcode?: SortOrder
+    citizen_tel?: SortOrder
+    contract_sameCitizen?: SortOrder
+    contract_addressnumber?: SortOrder
+    contract_address?: SortOrder
+    contract_country?: SortOrder
+    contract_province?: SortOrder
+    contract_district?: SortOrder
+    contract_state?: SortOrder
+    contract_zipcode?: SortOrder
+    contract_email?: SortOrder
+    contract_companyemail?: SortOrder
+    social_facebook?: SortOrder
+    social_likedin?: SortOrder
+    social_line?: SortOrder
+    social_telegram?: SortOrder
     _count?: ProfileCountOrderByAggregateInput
     _max?: ProfileMaxOrderByAggregateInput
     _min?: ProfileMinOrderByAggregateInput
@@ -10839,17 +11502,48 @@ export namespace Prisma {
     NOT?: Enumerable<ProfileScalarWhereWithAggregatesInput>
     id?: UuidWithAggregatesFilter | string
     bio?: StringNullableWithAggregatesFilter | string | null
-    firstname?: StringNullableWithAggregatesFilter | string | null
-    lastname?: StringNullableWithAggregatesFilter | string | null
+    firstname_th?: StringNullableWithAggregatesFilter | string | null
+    lastname_th?: StringNullableWithAggregatesFilter | string | null
+    firstname_en?: StringNullableWithAggregatesFilter | string | null
+    lastname_en?: StringNullableWithAggregatesFilter | string | null
     avatar?: StringNullableWithAggregatesFilter | string | null
     dob?: DateTimeNullableWithAggregatesFilter | Date | string | null
-    prefix?: StringNullableWithAggregatesFilter | string | null
+    age?: StringNullableWithAggregatesFilter | string | null
+    relationship?: StringNullableWithAggregatesFilter | string | null
+    shirt_size?: StringNullableWithAggregatesFilter | string | null
+    prefix_th?: StringNullableWithAggregatesFilter | string | null
+    prefix_en?: StringNullableWithAggregatesFilter | string | null
+    citizen_id?: StringNullableWithAggregatesFilter | string | null
+    social_id?: StringNullableWithAggregatesFilter | string | null
+    staff_status?: StringNullableWithAggregatesFilter | string | null
     tel?: StringNullableWithAggregatesFilter | string | null
     address?: StringNullableWithAggregatesFilter | string | null
     gender?: StringNullableWithAggregatesFilter | string | null
     staff_code?: StringNullableWithAggregatesFilter | string | null
     religion?: StringNullableWithAggregatesFilter | string | null
     userId?: UuidWithAggregatesFilter | string
+    citizen_addressnumber?: StringNullableWithAggregatesFilter | string | null
+    citizen_address?: StringNullableWithAggregatesFilter | string | null
+    citizen_country?: StringNullableWithAggregatesFilter | string | null
+    citizen_province?: StringNullableWithAggregatesFilter | string | null
+    citizen_district?: StringNullableWithAggregatesFilter | string | null
+    citizen_state?: StringNullableWithAggregatesFilter | string | null
+    citizen_zipcode?: StringNullableWithAggregatesFilter | string | null
+    citizen_tel?: StringNullableWithAggregatesFilter | string | null
+    contract_sameCitizen?: BoolWithAggregatesFilter | boolean
+    contract_addressnumber?: StringNullableWithAggregatesFilter | string | null
+    contract_address?: StringNullableWithAggregatesFilter | string | null
+    contract_country?: StringNullableWithAggregatesFilter | string | null
+    contract_province?: StringNullableWithAggregatesFilter | string | null
+    contract_district?: StringNullableWithAggregatesFilter | string | null
+    contract_state?: StringNullableWithAggregatesFilter | string | null
+    contract_zipcode?: StringNullableWithAggregatesFilter | string | null
+    contract_email?: StringNullableWithAggregatesFilter | string | null
+    contract_companyemail?: StringNullableWithAggregatesFilter | string | null
+    social_facebook?: StringNullableWithAggregatesFilter | string | null
+    social_likedin?: StringNullableWithAggregatesFilter | string | null
+    social_line?: StringNullableWithAggregatesFilter | string | null
+    social_telegram?: StringNullableWithAggregatesFilter | string | null
   }
 
   export type UserWhereInput = {
@@ -11135,14 +11829,30 @@ export namespace Prisma {
     id: string
     name: string
     companyCode: string
+    userlimit?: number
+    company_registration_id?: string | null
+    company_vat_id?: string | null
     address: string
+    address_2?: string | null
     city: string
     state: string
     zip: string
     country?: string | null
     icon?: string | null
-    phone?: string | null
+    tel?: string | null
+    fax?: string | null
     website?: string | null
+    lat?: string | null
+    lng?: string | null
+    email?: string | null
+    email_2?: string | null
+    company_type?: string | null
+    sub_company_type?: string | null
+    registeredamount?: string | null
+    social_facebook?: string | null
+    social_likedin?: string | null
+    social_instragram?: string | null
+    social_line?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     owner: UserCreateNestedOneWithoutCompanyInput
@@ -11153,14 +11863,30 @@ export namespace Prisma {
     id: string
     name: string
     companyCode: string
+    userlimit?: number
+    company_registration_id?: string | null
+    company_vat_id?: string | null
     address: string
+    address_2?: string | null
     city: string
     state: string
     zip: string
     country?: string | null
     icon?: string | null
-    phone?: string | null
+    tel?: string | null
+    fax?: string | null
     website?: string | null
+    lat?: string | null
+    lng?: string | null
+    email?: string | null
+    email_2?: string | null
+    company_type?: string | null
+    sub_company_type?: string | null
+    registeredamount?: string | null
+    social_facebook?: string | null
+    social_likedin?: string | null
+    social_instragram?: string | null
+    social_line?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     ownerId: string
@@ -11171,14 +11897,30 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     companyCode?: StringFieldUpdateOperationsInput | string
+    userlimit?: IntFieldUpdateOperationsInput | number
+    company_registration_id?: NullableStringFieldUpdateOperationsInput | string | null
+    company_vat_id?: NullableStringFieldUpdateOperationsInput | string | null
     address?: StringFieldUpdateOperationsInput | string
+    address_2?: NullableStringFieldUpdateOperationsInput | string | null
     city?: StringFieldUpdateOperationsInput | string
     state?: StringFieldUpdateOperationsInput | string
     zip?: StringFieldUpdateOperationsInput | string
     country?: NullableStringFieldUpdateOperationsInput | string | null
     icon?: NullableStringFieldUpdateOperationsInput | string | null
-    phone?: NullableStringFieldUpdateOperationsInput | string | null
+    tel?: NullableStringFieldUpdateOperationsInput | string | null
+    fax?: NullableStringFieldUpdateOperationsInput | string | null
     website?: NullableStringFieldUpdateOperationsInput | string | null
+    lat?: NullableStringFieldUpdateOperationsInput | string | null
+    lng?: NullableStringFieldUpdateOperationsInput | string | null
+    email?: NullableStringFieldUpdateOperationsInput | string | null
+    email_2?: NullableStringFieldUpdateOperationsInput | string | null
+    company_type?: NullableStringFieldUpdateOperationsInput | string | null
+    sub_company_type?: NullableStringFieldUpdateOperationsInput | string | null
+    registeredamount?: NullableStringFieldUpdateOperationsInput | string | null
+    social_facebook?: NullableStringFieldUpdateOperationsInput | string | null
+    social_likedin?: NullableStringFieldUpdateOperationsInput | string | null
+    social_instragram?: NullableStringFieldUpdateOperationsInput | string | null
+    social_line?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     owner?: UserUpdateOneRequiredWithoutCompanyNestedInput
@@ -11189,14 +11931,30 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     companyCode?: StringFieldUpdateOperationsInput | string
+    userlimit?: IntFieldUpdateOperationsInput | number
+    company_registration_id?: NullableStringFieldUpdateOperationsInput | string | null
+    company_vat_id?: NullableStringFieldUpdateOperationsInput | string | null
     address?: StringFieldUpdateOperationsInput | string
+    address_2?: NullableStringFieldUpdateOperationsInput | string | null
     city?: StringFieldUpdateOperationsInput | string
     state?: StringFieldUpdateOperationsInput | string
     zip?: StringFieldUpdateOperationsInput | string
     country?: NullableStringFieldUpdateOperationsInput | string | null
     icon?: NullableStringFieldUpdateOperationsInput | string | null
-    phone?: NullableStringFieldUpdateOperationsInput | string | null
+    tel?: NullableStringFieldUpdateOperationsInput | string | null
+    fax?: NullableStringFieldUpdateOperationsInput | string | null
     website?: NullableStringFieldUpdateOperationsInput | string | null
+    lat?: NullableStringFieldUpdateOperationsInput | string | null
+    lng?: NullableStringFieldUpdateOperationsInput | string | null
+    email?: NullableStringFieldUpdateOperationsInput | string | null
+    email_2?: NullableStringFieldUpdateOperationsInput | string | null
+    company_type?: NullableStringFieldUpdateOperationsInput | string | null
+    sub_company_type?: NullableStringFieldUpdateOperationsInput | string | null
+    registeredamount?: NullableStringFieldUpdateOperationsInput | string | null
+    social_facebook?: NullableStringFieldUpdateOperationsInput | string | null
+    social_likedin?: NullableStringFieldUpdateOperationsInput | string | null
+    social_instragram?: NullableStringFieldUpdateOperationsInput | string | null
+    social_line?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     ownerId?: StringFieldUpdateOperationsInput | string
@@ -11207,14 +11965,30 @@ export namespace Prisma {
     id: string
     name: string
     companyCode: string
+    userlimit?: number
+    company_registration_id?: string | null
+    company_vat_id?: string | null
     address: string
+    address_2?: string | null
     city: string
     state: string
     zip: string
     country?: string | null
     icon?: string | null
-    phone?: string | null
+    tel?: string | null
+    fax?: string | null
     website?: string | null
+    lat?: string | null
+    lng?: string | null
+    email?: string | null
+    email_2?: string | null
+    company_type?: string | null
+    sub_company_type?: string | null
+    registeredamount?: string | null
+    social_facebook?: string | null
+    social_likedin?: string | null
+    social_instragram?: string | null
+    social_line?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     ownerId: string
@@ -11224,14 +11998,30 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     companyCode?: StringFieldUpdateOperationsInput | string
+    userlimit?: IntFieldUpdateOperationsInput | number
+    company_registration_id?: NullableStringFieldUpdateOperationsInput | string | null
+    company_vat_id?: NullableStringFieldUpdateOperationsInput | string | null
     address?: StringFieldUpdateOperationsInput | string
+    address_2?: NullableStringFieldUpdateOperationsInput | string | null
     city?: StringFieldUpdateOperationsInput | string
     state?: StringFieldUpdateOperationsInput | string
     zip?: StringFieldUpdateOperationsInput | string
     country?: NullableStringFieldUpdateOperationsInput | string | null
     icon?: NullableStringFieldUpdateOperationsInput | string | null
-    phone?: NullableStringFieldUpdateOperationsInput | string | null
+    tel?: NullableStringFieldUpdateOperationsInput | string | null
+    fax?: NullableStringFieldUpdateOperationsInput | string | null
     website?: NullableStringFieldUpdateOperationsInput | string | null
+    lat?: NullableStringFieldUpdateOperationsInput | string | null
+    lng?: NullableStringFieldUpdateOperationsInput | string | null
+    email?: NullableStringFieldUpdateOperationsInput | string | null
+    email_2?: NullableStringFieldUpdateOperationsInput | string | null
+    company_type?: NullableStringFieldUpdateOperationsInput | string | null
+    sub_company_type?: NullableStringFieldUpdateOperationsInput | string | null
+    registeredamount?: NullableStringFieldUpdateOperationsInput | string | null
+    social_facebook?: NullableStringFieldUpdateOperationsInput | string | null
+    social_likedin?: NullableStringFieldUpdateOperationsInput | string | null
+    social_instragram?: NullableStringFieldUpdateOperationsInput | string | null
+    social_line?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -11240,14 +12030,30 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     companyCode?: StringFieldUpdateOperationsInput | string
+    userlimit?: IntFieldUpdateOperationsInput | number
+    company_registration_id?: NullableStringFieldUpdateOperationsInput | string | null
+    company_vat_id?: NullableStringFieldUpdateOperationsInput | string | null
     address?: StringFieldUpdateOperationsInput | string
+    address_2?: NullableStringFieldUpdateOperationsInput | string | null
     city?: StringFieldUpdateOperationsInput | string
     state?: StringFieldUpdateOperationsInput | string
     zip?: StringFieldUpdateOperationsInput | string
     country?: NullableStringFieldUpdateOperationsInput | string | null
     icon?: NullableStringFieldUpdateOperationsInput | string | null
-    phone?: NullableStringFieldUpdateOperationsInput | string | null
+    tel?: NullableStringFieldUpdateOperationsInput | string | null
+    fax?: NullableStringFieldUpdateOperationsInput | string | null
     website?: NullableStringFieldUpdateOperationsInput | string | null
+    lat?: NullableStringFieldUpdateOperationsInput | string | null
+    lng?: NullableStringFieldUpdateOperationsInput | string | null
+    email?: NullableStringFieldUpdateOperationsInput | string | null
+    email_2?: NullableStringFieldUpdateOperationsInput | string | null
+    company_type?: NullableStringFieldUpdateOperationsInput | string | null
+    sub_company_type?: NullableStringFieldUpdateOperationsInput | string | null
+    registeredamount?: NullableStringFieldUpdateOperationsInput | string | null
+    social_facebook?: NullableStringFieldUpdateOperationsInput | string | null
+    social_likedin?: NullableStringFieldUpdateOperationsInput | string | null
+    social_instragram?: NullableStringFieldUpdateOperationsInput | string | null
+    social_line?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     ownerId?: StringFieldUpdateOperationsInput | string
@@ -11361,112 +12167,329 @@ export namespace Prisma {
   export type ProfileCreateInput = {
     id: string
     bio?: string | null
-    firstname?: string | null
-    lastname?: string | null
+    firstname_th?: string | null
+    lastname_th?: string | null
+    firstname_en?: string | null
+    lastname_en?: string | null
     avatar?: string | null
     dob?: Date | string | null
-    prefix?: string | null
+    age?: string | null
+    relationship?: string | null
+    shirt_size?: string | null
+    prefix_th?: string | null
+    prefix_en?: string | null
+    citizen_id?: string | null
+    social_id?: string | null
+    staff_status?: string | null
     tel?: string | null
     address?: string | null
     gender?: string | null
     staff_code?: string | null
     religion?: string | null
     user: UserCreateNestedOneWithoutProfileInput
+    citizen_addressnumber?: string | null
+    citizen_address?: string | null
+    citizen_country?: string | null
+    citizen_province?: string | null
+    citizen_district?: string | null
+    citizen_state?: string | null
+    citizen_zipcode?: string | null
+    citizen_tel?: string | null
+    contract_sameCitizen?: boolean
+    contract_addressnumber?: string | null
+    contract_address?: string | null
+    contract_country?: string | null
+    contract_province?: string | null
+    contract_district?: string | null
+    contract_state?: string | null
+    contract_zipcode?: string | null
+    contract_email?: string | null
+    contract_companyemail?: string | null
+    social_facebook?: string | null
+    social_likedin?: string | null
+    social_line?: string | null
+    social_telegram?: string | null
   }
 
   export type ProfileUncheckedCreateInput = {
     id: string
     bio?: string | null
-    firstname?: string | null
-    lastname?: string | null
+    firstname_th?: string | null
+    lastname_th?: string | null
+    firstname_en?: string | null
+    lastname_en?: string | null
     avatar?: string | null
     dob?: Date | string | null
-    prefix?: string | null
+    age?: string | null
+    relationship?: string | null
+    shirt_size?: string | null
+    prefix_th?: string | null
+    prefix_en?: string | null
+    citizen_id?: string | null
+    social_id?: string | null
+    staff_status?: string | null
     tel?: string | null
     address?: string | null
     gender?: string | null
     staff_code?: string | null
     religion?: string | null
     userId: string
+    citizen_addressnumber?: string | null
+    citizen_address?: string | null
+    citizen_country?: string | null
+    citizen_province?: string | null
+    citizen_district?: string | null
+    citizen_state?: string | null
+    citizen_zipcode?: string | null
+    citizen_tel?: string | null
+    contract_sameCitizen?: boolean
+    contract_addressnumber?: string | null
+    contract_address?: string | null
+    contract_country?: string | null
+    contract_province?: string | null
+    contract_district?: string | null
+    contract_state?: string | null
+    contract_zipcode?: string | null
+    contract_email?: string | null
+    contract_companyemail?: string | null
+    social_facebook?: string | null
+    social_likedin?: string | null
+    social_line?: string | null
+    social_telegram?: string | null
   }
 
   export type ProfileUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
     bio?: NullableStringFieldUpdateOperationsInput | string | null
-    firstname?: NullableStringFieldUpdateOperationsInput | string | null
-    lastname?: NullableStringFieldUpdateOperationsInput | string | null
+    firstname_th?: NullableStringFieldUpdateOperationsInput | string | null
+    lastname_th?: NullableStringFieldUpdateOperationsInput | string | null
+    firstname_en?: NullableStringFieldUpdateOperationsInput | string | null
+    lastname_en?: NullableStringFieldUpdateOperationsInput | string | null
     avatar?: NullableStringFieldUpdateOperationsInput | string | null
     dob?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    prefix?: NullableStringFieldUpdateOperationsInput | string | null
+    age?: NullableStringFieldUpdateOperationsInput | string | null
+    relationship?: NullableStringFieldUpdateOperationsInput | string | null
+    shirt_size?: NullableStringFieldUpdateOperationsInput | string | null
+    prefix_th?: NullableStringFieldUpdateOperationsInput | string | null
+    prefix_en?: NullableStringFieldUpdateOperationsInput | string | null
+    citizen_id?: NullableStringFieldUpdateOperationsInput | string | null
+    social_id?: NullableStringFieldUpdateOperationsInput | string | null
+    staff_status?: NullableStringFieldUpdateOperationsInput | string | null
     tel?: NullableStringFieldUpdateOperationsInput | string | null
     address?: NullableStringFieldUpdateOperationsInput | string | null
     gender?: NullableStringFieldUpdateOperationsInput | string | null
     staff_code?: NullableStringFieldUpdateOperationsInput | string | null
     religion?: NullableStringFieldUpdateOperationsInput | string | null
     user?: UserUpdateOneRequiredWithoutProfileNestedInput
+    citizen_addressnumber?: NullableStringFieldUpdateOperationsInput | string | null
+    citizen_address?: NullableStringFieldUpdateOperationsInput | string | null
+    citizen_country?: NullableStringFieldUpdateOperationsInput | string | null
+    citizen_province?: NullableStringFieldUpdateOperationsInput | string | null
+    citizen_district?: NullableStringFieldUpdateOperationsInput | string | null
+    citizen_state?: NullableStringFieldUpdateOperationsInput | string | null
+    citizen_zipcode?: NullableStringFieldUpdateOperationsInput | string | null
+    citizen_tel?: NullableStringFieldUpdateOperationsInput | string | null
+    contract_sameCitizen?: BoolFieldUpdateOperationsInput | boolean
+    contract_addressnumber?: NullableStringFieldUpdateOperationsInput | string | null
+    contract_address?: NullableStringFieldUpdateOperationsInput | string | null
+    contract_country?: NullableStringFieldUpdateOperationsInput | string | null
+    contract_province?: NullableStringFieldUpdateOperationsInput | string | null
+    contract_district?: NullableStringFieldUpdateOperationsInput | string | null
+    contract_state?: NullableStringFieldUpdateOperationsInput | string | null
+    contract_zipcode?: NullableStringFieldUpdateOperationsInput | string | null
+    contract_email?: NullableStringFieldUpdateOperationsInput | string | null
+    contract_companyemail?: NullableStringFieldUpdateOperationsInput | string | null
+    social_facebook?: NullableStringFieldUpdateOperationsInput | string | null
+    social_likedin?: NullableStringFieldUpdateOperationsInput | string | null
+    social_line?: NullableStringFieldUpdateOperationsInput | string | null
+    social_telegram?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type ProfileUncheckedUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
     bio?: NullableStringFieldUpdateOperationsInput | string | null
-    firstname?: NullableStringFieldUpdateOperationsInput | string | null
-    lastname?: NullableStringFieldUpdateOperationsInput | string | null
+    firstname_th?: NullableStringFieldUpdateOperationsInput | string | null
+    lastname_th?: NullableStringFieldUpdateOperationsInput | string | null
+    firstname_en?: NullableStringFieldUpdateOperationsInput | string | null
+    lastname_en?: NullableStringFieldUpdateOperationsInput | string | null
     avatar?: NullableStringFieldUpdateOperationsInput | string | null
     dob?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    prefix?: NullableStringFieldUpdateOperationsInput | string | null
+    age?: NullableStringFieldUpdateOperationsInput | string | null
+    relationship?: NullableStringFieldUpdateOperationsInput | string | null
+    shirt_size?: NullableStringFieldUpdateOperationsInput | string | null
+    prefix_th?: NullableStringFieldUpdateOperationsInput | string | null
+    prefix_en?: NullableStringFieldUpdateOperationsInput | string | null
+    citizen_id?: NullableStringFieldUpdateOperationsInput | string | null
+    social_id?: NullableStringFieldUpdateOperationsInput | string | null
+    staff_status?: NullableStringFieldUpdateOperationsInput | string | null
     tel?: NullableStringFieldUpdateOperationsInput | string | null
     address?: NullableStringFieldUpdateOperationsInput | string | null
     gender?: NullableStringFieldUpdateOperationsInput | string | null
     staff_code?: NullableStringFieldUpdateOperationsInput | string | null
     religion?: NullableStringFieldUpdateOperationsInput | string | null
     userId?: StringFieldUpdateOperationsInput | string
+    citizen_addressnumber?: NullableStringFieldUpdateOperationsInput | string | null
+    citizen_address?: NullableStringFieldUpdateOperationsInput | string | null
+    citizen_country?: NullableStringFieldUpdateOperationsInput | string | null
+    citizen_province?: NullableStringFieldUpdateOperationsInput | string | null
+    citizen_district?: NullableStringFieldUpdateOperationsInput | string | null
+    citizen_state?: NullableStringFieldUpdateOperationsInput | string | null
+    citizen_zipcode?: NullableStringFieldUpdateOperationsInput | string | null
+    citizen_tel?: NullableStringFieldUpdateOperationsInput | string | null
+    contract_sameCitizen?: BoolFieldUpdateOperationsInput | boolean
+    contract_addressnumber?: NullableStringFieldUpdateOperationsInput | string | null
+    contract_address?: NullableStringFieldUpdateOperationsInput | string | null
+    contract_country?: NullableStringFieldUpdateOperationsInput | string | null
+    contract_province?: NullableStringFieldUpdateOperationsInput | string | null
+    contract_district?: NullableStringFieldUpdateOperationsInput | string | null
+    contract_state?: NullableStringFieldUpdateOperationsInput | string | null
+    contract_zipcode?: NullableStringFieldUpdateOperationsInput | string | null
+    contract_email?: NullableStringFieldUpdateOperationsInput | string | null
+    contract_companyemail?: NullableStringFieldUpdateOperationsInput | string | null
+    social_facebook?: NullableStringFieldUpdateOperationsInput | string | null
+    social_likedin?: NullableStringFieldUpdateOperationsInput | string | null
+    social_line?: NullableStringFieldUpdateOperationsInput | string | null
+    social_telegram?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type ProfileCreateManyInput = {
     id: string
     bio?: string | null
-    firstname?: string | null
-    lastname?: string | null
+    firstname_th?: string | null
+    lastname_th?: string | null
+    firstname_en?: string | null
+    lastname_en?: string | null
     avatar?: string | null
     dob?: Date | string | null
-    prefix?: string | null
+    age?: string | null
+    relationship?: string | null
+    shirt_size?: string | null
+    prefix_th?: string | null
+    prefix_en?: string | null
+    citizen_id?: string | null
+    social_id?: string | null
+    staff_status?: string | null
     tel?: string | null
     address?: string | null
     gender?: string | null
     staff_code?: string | null
     religion?: string | null
     userId: string
+    citizen_addressnumber?: string | null
+    citizen_address?: string | null
+    citizen_country?: string | null
+    citizen_province?: string | null
+    citizen_district?: string | null
+    citizen_state?: string | null
+    citizen_zipcode?: string | null
+    citizen_tel?: string | null
+    contract_sameCitizen?: boolean
+    contract_addressnumber?: string | null
+    contract_address?: string | null
+    contract_country?: string | null
+    contract_province?: string | null
+    contract_district?: string | null
+    contract_state?: string | null
+    contract_zipcode?: string | null
+    contract_email?: string | null
+    contract_companyemail?: string | null
+    social_facebook?: string | null
+    social_likedin?: string | null
+    social_line?: string | null
+    social_telegram?: string | null
   }
 
   export type ProfileUpdateManyMutationInput = {
     id?: StringFieldUpdateOperationsInput | string
     bio?: NullableStringFieldUpdateOperationsInput | string | null
-    firstname?: NullableStringFieldUpdateOperationsInput | string | null
-    lastname?: NullableStringFieldUpdateOperationsInput | string | null
+    firstname_th?: NullableStringFieldUpdateOperationsInput | string | null
+    lastname_th?: NullableStringFieldUpdateOperationsInput | string | null
+    firstname_en?: NullableStringFieldUpdateOperationsInput | string | null
+    lastname_en?: NullableStringFieldUpdateOperationsInput | string | null
     avatar?: NullableStringFieldUpdateOperationsInput | string | null
     dob?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    prefix?: NullableStringFieldUpdateOperationsInput | string | null
+    age?: NullableStringFieldUpdateOperationsInput | string | null
+    relationship?: NullableStringFieldUpdateOperationsInput | string | null
+    shirt_size?: NullableStringFieldUpdateOperationsInput | string | null
+    prefix_th?: NullableStringFieldUpdateOperationsInput | string | null
+    prefix_en?: NullableStringFieldUpdateOperationsInput | string | null
+    citizen_id?: NullableStringFieldUpdateOperationsInput | string | null
+    social_id?: NullableStringFieldUpdateOperationsInput | string | null
+    staff_status?: NullableStringFieldUpdateOperationsInput | string | null
     tel?: NullableStringFieldUpdateOperationsInput | string | null
     address?: NullableStringFieldUpdateOperationsInput | string | null
     gender?: NullableStringFieldUpdateOperationsInput | string | null
     staff_code?: NullableStringFieldUpdateOperationsInput | string | null
     religion?: NullableStringFieldUpdateOperationsInput | string | null
+    citizen_addressnumber?: NullableStringFieldUpdateOperationsInput | string | null
+    citizen_address?: NullableStringFieldUpdateOperationsInput | string | null
+    citizen_country?: NullableStringFieldUpdateOperationsInput | string | null
+    citizen_province?: NullableStringFieldUpdateOperationsInput | string | null
+    citizen_district?: NullableStringFieldUpdateOperationsInput | string | null
+    citizen_state?: NullableStringFieldUpdateOperationsInput | string | null
+    citizen_zipcode?: NullableStringFieldUpdateOperationsInput | string | null
+    citizen_tel?: NullableStringFieldUpdateOperationsInput | string | null
+    contract_sameCitizen?: BoolFieldUpdateOperationsInput | boolean
+    contract_addressnumber?: NullableStringFieldUpdateOperationsInput | string | null
+    contract_address?: NullableStringFieldUpdateOperationsInput | string | null
+    contract_country?: NullableStringFieldUpdateOperationsInput | string | null
+    contract_province?: NullableStringFieldUpdateOperationsInput | string | null
+    contract_district?: NullableStringFieldUpdateOperationsInput | string | null
+    contract_state?: NullableStringFieldUpdateOperationsInput | string | null
+    contract_zipcode?: NullableStringFieldUpdateOperationsInput | string | null
+    contract_email?: NullableStringFieldUpdateOperationsInput | string | null
+    contract_companyemail?: NullableStringFieldUpdateOperationsInput | string | null
+    social_facebook?: NullableStringFieldUpdateOperationsInput | string | null
+    social_likedin?: NullableStringFieldUpdateOperationsInput | string | null
+    social_line?: NullableStringFieldUpdateOperationsInput | string | null
+    social_telegram?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type ProfileUncheckedUpdateManyInput = {
     id?: StringFieldUpdateOperationsInput | string
     bio?: NullableStringFieldUpdateOperationsInput | string | null
-    firstname?: NullableStringFieldUpdateOperationsInput | string | null
-    lastname?: NullableStringFieldUpdateOperationsInput | string | null
+    firstname_th?: NullableStringFieldUpdateOperationsInput | string | null
+    lastname_th?: NullableStringFieldUpdateOperationsInput | string | null
+    firstname_en?: NullableStringFieldUpdateOperationsInput | string | null
+    lastname_en?: NullableStringFieldUpdateOperationsInput | string | null
     avatar?: NullableStringFieldUpdateOperationsInput | string | null
     dob?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    prefix?: NullableStringFieldUpdateOperationsInput | string | null
+    age?: NullableStringFieldUpdateOperationsInput | string | null
+    relationship?: NullableStringFieldUpdateOperationsInput | string | null
+    shirt_size?: NullableStringFieldUpdateOperationsInput | string | null
+    prefix_th?: NullableStringFieldUpdateOperationsInput | string | null
+    prefix_en?: NullableStringFieldUpdateOperationsInput | string | null
+    citizen_id?: NullableStringFieldUpdateOperationsInput | string | null
+    social_id?: NullableStringFieldUpdateOperationsInput | string | null
+    staff_status?: NullableStringFieldUpdateOperationsInput | string | null
     tel?: NullableStringFieldUpdateOperationsInput | string | null
     address?: NullableStringFieldUpdateOperationsInput | string | null
     gender?: NullableStringFieldUpdateOperationsInput | string | null
     staff_code?: NullableStringFieldUpdateOperationsInput | string | null
     religion?: NullableStringFieldUpdateOperationsInput | string | null
     userId?: StringFieldUpdateOperationsInput | string
+    citizen_addressnumber?: NullableStringFieldUpdateOperationsInput | string | null
+    citizen_address?: NullableStringFieldUpdateOperationsInput | string | null
+    citizen_country?: NullableStringFieldUpdateOperationsInput | string | null
+    citizen_province?: NullableStringFieldUpdateOperationsInput | string | null
+    citizen_district?: NullableStringFieldUpdateOperationsInput | string | null
+    citizen_state?: NullableStringFieldUpdateOperationsInput | string | null
+    citizen_zipcode?: NullableStringFieldUpdateOperationsInput | string | null
+    citizen_tel?: NullableStringFieldUpdateOperationsInput | string | null
+    contract_sameCitizen?: BoolFieldUpdateOperationsInput | boolean
+    contract_addressnumber?: NullableStringFieldUpdateOperationsInput | string | null
+    contract_address?: NullableStringFieldUpdateOperationsInput | string | null
+    contract_country?: NullableStringFieldUpdateOperationsInput | string | null
+    contract_province?: NullableStringFieldUpdateOperationsInput | string | null
+    contract_district?: NullableStringFieldUpdateOperationsInput | string | null
+    contract_state?: NullableStringFieldUpdateOperationsInput | string | null
+    contract_zipcode?: NullableStringFieldUpdateOperationsInput | string | null
+    contract_email?: NullableStringFieldUpdateOperationsInput | string | null
+    contract_companyemail?: NullableStringFieldUpdateOperationsInput | string | null
+    social_facebook?: NullableStringFieldUpdateOperationsInput | string | null
+    social_likedin?: NullableStringFieldUpdateOperationsInput | string | null
+    social_line?: NullableStringFieldUpdateOperationsInput | string | null
+    social_telegram?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type UserCreateInput = {
@@ -11822,6 +12845,17 @@ export namespace Prisma {
     not?: NestedStringFilter | string
   }
 
+  export type IntFilter = {
+    equals?: number
+    in?: Enumerable<number>
+    notIn?: Enumerable<number>
+    lt?: number
+    lte?: number
+    gt?: number
+    gte?: number
+    not?: NestedIntFilter | number
+  }
+
   export type StringNullableFilter = {
     equals?: string | null
     in?: Enumerable<string> | null
@@ -11867,31 +12901,67 @@ export namespace Prisma {
     id?: SortOrder
     name?: SortOrder
     companyCode?: SortOrder
+    userlimit?: SortOrder
+    company_registration_id?: SortOrder
+    company_vat_id?: SortOrder
     address?: SortOrder
+    address_2?: SortOrder
     city?: SortOrder
     state?: SortOrder
     zip?: SortOrder
     country?: SortOrder
     icon?: SortOrder
-    phone?: SortOrder
+    tel?: SortOrder
+    fax?: SortOrder
     website?: SortOrder
+    lat?: SortOrder
+    lng?: SortOrder
+    email?: SortOrder
+    email_2?: SortOrder
+    company_type?: SortOrder
+    sub_company_type?: SortOrder
+    registeredamount?: SortOrder
+    social_facebook?: SortOrder
+    social_likedin?: SortOrder
+    social_instragram?: SortOrder
+    social_line?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     ownerId?: SortOrder
+  }
+
+  export type CompanyAvgOrderByAggregateInput = {
+    userlimit?: SortOrder
   }
 
   export type CompanyMaxOrderByAggregateInput = {
     id?: SortOrder
     name?: SortOrder
     companyCode?: SortOrder
+    userlimit?: SortOrder
+    company_registration_id?: SortOrder
+    company_vat_id?: SortOrder
     address?: SortOrder
+    address_2?: SortOrder
     city?: SortOrder
     state?: SortOrder
     zip?: SortOrder
     country?: SortOrder
     icon?: SortOrder
-    phone?: SortOrder
+    tel?: SortOrder
+    fax?: SortOrder
     website?: SortOrder
+    lat?: SortOrder
+    lng?: SortOrder
+    email?: SortOrder
+    email_2?: SortOrder
+    company_type?: SortOrder
+    sub_company_type?: SortOrder
+    registeredamount?: SortOrder
+    social_facebook?: SortOrder
+    social_likedin?: SortOrder
+    social_instragram?: SortOrder
+    social_line?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     ownerId?: SortOrder
@@ -11901,17 +12971,37 @@ export namespace Prisma {
     id?: SortOrder
     name?: SortOrder
     companyCode?: SortOrder
+    userlimit?: SortOrder
+    company_registration_id?: SortOrder
+    company_vat_id?: SortOrder
     address?: SortOrder
+    address_2?: SortOrder
     city?: SortOrder
     state?: SortOrder
     zip?: SortOrder
     country?: SortOrder
     icon?: SortOrder
-    phone?: SortOrder
+    tel?: SortOrder
+    fax?: SortOrder
     website?: SortOrder
+    lat?: SortOrder
+    lng?: SortOrder
+    email?: SortOrder
+    email_2?: SortOrder
+    company_type?: SortOrder
+    sub_company_type?: SortOrder
+    registeredamount?: SortOrder
+    social_facebook?: SortOrder
+    social_likedin?: SortOrder
+    social_instragram?: SortOrder
+    social_line?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     ownerId?: SortOrder
+  }
+
+  export type CompanySumOrderByAggregateInput = {
+    userlimit?: SortOrder
   }
 
   export type UuidWithAggregatesFilter = {
@@ -11945,6 +13035,22 @@ export namespace Prisma {
     _count?: NestedIntFilter
     _min?: NestedStringFilter
     _max?: NestedStringFilter
+  }
+
+  export type IntWithAggregatesFilter = {
+    equals?: number
+    in?: Enumerable<number>
+    notIn?: Enumerable<number>
+    lt?: number
+    lte?: number
+    gt?: number
+    gte?: number
+    not?: NestedIntWithAggregatesFilter | number
+    _count?: NestedIntFilter
+    _avg?: NestedFloatFilter
+    _sum?: NestedIntFilter
+    _min?: NestedIntFilter
+    _max?: NestedIntFilter
   }
 
   export type StringNullableWithAggregatesFilter = {
@@ -12100,49 +13206,142 @@ export namespace Prisma {
   export type ProfileCountOrderByAggregateInput = {
     id?: SortOrder
     bio?: SortOrder
-    firstname?: SortOrder
-    lastname?: SortOrder
+    firstname_th?: SortOrder
+    lastname_th?: SortOrder
+    firstname_en?: SortOrder
+    lastname_en?: SortOrder
     avatar?: SortOrder
     dob?: SortOrder
-    prefix?: SortOrder
+    age?: SortOrder
+    relationship?: SortOrder
+    shirt_size?: SortOrder
+    prefix_th?: SortOrder
+    prefix_en?: SortOrder
+    citizen_id?: SortOrder
+    social_id?: SortOrder
+    staff_status?: SortOrder
     tel?: SortOrder
     address?: SortOrder
     gender?: SortOrder
     staff_code?: SortOrder
     religion?: SortOrder
     userId?: SortOrder
+    citizen_addressnumber?: SortOrder
+    citizen_address?: SortOrder
+    citizen_country?: SortOrder
+    citizen_province?: SortOrder
+    citizen_district?: SortOrder
+    citizen_state?: SortOrder
+    citizen_zipcode?: SortOrder
+    citizen_tel?: SortOrder
+    contract_sameCitizen?: SortOrder
+    contract_addressnumber?: SortOrder
+    contract_address?: SortOrder
+    contract_country?: SortOrder
+    contract_province?: SortOrder
+    contract_district?: SortOrder
+    contract_state?: SortOrder
+    contract_zipcode?: SortOrder
+    contract_email?: SortOrder
+    contract_companyemail?: SortOrder
+    social_facebook?: SortOrder
+    social_likedin?: SortOrder
+    social_line?: SortOrder
+    social_telegram?: SortOrder
   }
 
   export type ProfileMaxOrderByAggregateInput = {
     id?: SortOrder
     bio?: SortOrder
-    firstname?: SortOrder
-    lastname?: SortOrder
+    firstname_th?: SortOrder
+    lastname_th?: SortOrder
+    firstname_en?: SortOrder
+    lastname_en?: SortOrder
     avatar?: SortOrder
     dob?: SortOrder
-    prefix?: SortOrder
+    age?: SortOrder
+    relationship?: SortOrder
+    shirt_size?: SortOrder
+    prefix_th?: SortOrder
+    prefix_en?: SortOrder
+    citizen_id?: SortOrder
+    social_id?: SortOrder
+    staff_status?: SortOrder
     tel?: SortOrder
     address?: SortOrder
     gender?: SortOrder
     staff_code?: SortOrder
     religion?: SortOrder
     userId?: SortOrder
+    citizen_addressnumber?: SortOrder
+    citizen_address?: SortOrder
+    citizen_country?: SortOrder
+    citizen_province?: SortOrder
+    citizen_district?: SortOrder
+    citizen_state?: SortOrder
+    citizen_zipcode?: SortOrder
+    citizen_tel?: SortOrder
+    contract_sameCitizen?: SortOrder
+    contract_addressnumber?: SortOrder
+    contract_address?: SortOrder
+    contract_country?: SortOrder
+    contract_province?: SortOrder
+    contract_district?: SortOrder
+    contract_state?: SortOrder
+    contract_zipcode?: SortOrder
+    contract_email?: SortOrder
+    contract_companyemail?: SortOrder
+    social_facebook?: SortOrder
+    social_likedin?: SortOrder
+    social_line?: SortOrder
+    social_telegram?: SortOrder
   }
 
   export type ProfileMinOrderByAggregateInput = {
     id?: SortOrder
     bio?: SortOrder
-    firstname?: SortOrder
-    lastname?: SortOrder
+    firstname_th?: SortOrder
+    lastname_th?: SortOrder
+    firstname_en?: SortOrder
+    lastname_en?: SortOrder
     avatar?: SortOrder
     dob?: SortOrder
-    prefix?: SortOrder
+    age?: SortOrder
+    relationship?: SortOrder
+    shirt_size?: SortOrder
+    prefix_th?: SortOrder
+    prefix_en?: SortOrder
+    citizen_id?: SortOrder
+    social_id?: SortOrder
+    staff_status?: SortOrder
     tel?: SortOrder
     address?: SortOrder
     gender?: SortOrder
     staff_code?: SortOrder
     religion?: SortOrder
     userId?: SortOrder
+    citizen_addressnumber?: SortOrder
+    citizen_address?: SortOrder
+    citizen_country?: SortOrder
+    citizen_province?: SortOrder
+    citizen_district?: SortOrder
+    citizen_state?: SortOrder
+    citizen_zipcode?: SortOrder
+    citizen_tel?: SortOrder
+    contract_sameCitizen?: SortOrder
+    contract_addressnumber?: SortOrder
+    contract_address?: SortOrder
+    contract_country?: SortOrder
+    contract_province?: SortOrder
+    contract_district?: SortOrder
+    contract_state?: SortOrder
+    contract_zipcode?: SortOrder
+    contract_email?: SortOrder
+    contract_companyemail?: SortOrder
+    social_facebook?: SortOrder
+    social_likedin?: SortOrder
+    social_line?: SortOrder
+    social_telegram?: SortOrder
   }
 
   export type DateTimeNullableWithAggregatesFilter = {
@@ -12418,6 +13617,14 @@ export namespace Prisma {
 
   export type StringFieldUpdateOperationsInput = {
     set?: string
+  }
+
+  export type IntFieldUpdateOperationsInput = {
+    set?: number
+    increment?: number
+    decrement?: number
+    multiply?: number
+    divide?: number
   }
 
   export type NullableStringFieldUpdateOperationsInput = {
@@ -12945,6 +14152,17 @@ export namespace Prisma {
     not?: NestedStringFilter | string
   }
 
+  export type NestedIntFilter = {
+    equals?: number
+    in?: Enumerable<number>
+    notIn?: Enumerable<number>
+    lt?: number
+    lte?: number
+    gt?: number
+    gte?: number
+    not?: NestedIntFilter | number
+  }
+
   export type NestedStringNullableFilter = {
     equals?: string | null
     in?: Enumerable<string> | null
@@ -12984,17 +14202,6 @@ export namespace Prisma {
     _max?: NestedStringFilter
   }
 
-  export type NestedIntFilter = {
-    equals?: number
-    in?: Enumerable<number>
-    notIn?: Enumerable<number>
-    lt?: number
-    lte?: number
-    gt?: number
-    gte?: number
-    not?: NestedIntFilter | number
-  }
-
   export type NestedStringWithAggregatesFilter = {
     equals?: string
     in?: Enumerable<string>
@@ -13010,6 +14217,33 @@ export namespace Prisma {
     _count?: NestedIntFilter
     _min?: NestedStringFilter
     _max?: NestedStringFilter
+  }
+
+  export type NestedIntWithAggregatesFilter = {
+    equals?: number
+    in?: Enumerable<number>
+    notIn?: Enumerable<number>
+    lt?: number
+    lte?: number
+    gt?: number
+    gte?: number
+    not?: NestedIntWithAggregatesFilter | number
+    _count?: NestedIntFilter
+    _avg?: NestedFloatFilter
+    _sum?: NestedIntFilter
+    _min?: NestedIntFilter
+    _max?: NestedIntFilter
+  }
+
+  export type NestedFloatFilter = {
+    equals?: number
+    in?: Enumerable<number>
+    notIn?: Enumerable<number>
+    lt?: number
+    lte?: number
+    gt?: number
+    gte?: number
+    not?: NestedFloatFilter | number
   }
 
   export type NestedStringNullableWithAggregatesFilter = {
@@ -13286,14 +14520,30 @@ export namespace Prisma {
     id: string
     name: string
     companyCode: string
+    userlimit?: number
+    company_registration_id?: string | null
+    company_vat_id?: string | null
     address: string
+    address_2?: string | null
     city: string
     state: string
     zip: string
     country?: string | null
     icon?: string | null
-    phone?: string | null
+    tel?: string | null
+    fax?: string | null
     website?: string | null
+    lat?: string | null
+    lng?: string | null
+    email?: string | null
+    email_2?: string | null
+    company_type?: string | null
+    sub_company_type?: string | null
+    registeredamount?: string | null
+    social_facebook?: string | null
+    social_likedin?: string | null
+    social_instragram?: string | null
+    social_line?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     owner: UserCreateNestedOneWithoutCompanyInput
@@ -13303,14 +14553,30 @@ export namespace Prisma {
     id: string
     name: string
     companyCode: string
+    userlimit?: number
+    company_registration_id?: string | null
+    company_vat_id?: string | null
     address: string
+    address_2?: string | null
     city: string
     state: string
     zip: string
     country?: string | null
     icon?: string | null
-    phone?: string | null
+    tel?: string | null
+    fax?: string | null
     website?: string | null
+    lat?: string | null
+    lng?: string | null
+    email?: string | null
+    email_2?: string | null
+    company_type?: string | null
+    sub_company_type?: string | null
+    registeredamount?: string | null
+    social_facebook?: string | null
+    social_likedin?: string | null
+    social_instragram?: string | null
+    social_line?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     ownerId: string
@@ -13394,14 +14660,30 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     companyCode?: StringFieldUpdateOperationsInput | string
+    userlimit?: IntFieldUpdateOperationsInput | number
+    company_registration_id?: NullableStringFieldUpdateOperationsInput | string | null
+    company_vat_id?: NullableStringFieldUpdateOperationsInput | string | null
     address?: StringFieldUpdateOperationsInput | string
+    address_2?: NullableStringFieldUpdateOperationsInput | string | null
     city?: StringFieldUpdateOperationsInput | string
     state?: StringFieldUpdateOperationsInput | string
     zip?: StringFieldUpdateOperationsInput | string
     country?: NullableStringFieldUpdateOperationsInput | string | null
     icon?: NullableStringFieldUpdateOperationsInput | string | null
-    phone?: NullableStringFieldUpdateOperationsInput | string | null
+    tel?: NullableStringFieldUpdateOperationsInput | string | null
+    fax?: NullableStringFieldUpdateOperationsInput | string | null
     website?: NullableStringFieldUpdateOperationsInput | string | null
+    lat?: NullableStringFieldUpdateOperationsInput | string | null
+    lng?: NullableStringFieldUpdateOperationsInput | string | null
+    email?: NullableStringFieldUpdateOperationsInput | string | null
+    email_2?: NullableStringFieldUpdateOperationsInput | string | null
+    company_type?: NullableStringFieldUpdateOperationsInput | string | null
+    sub_company_type?: NullableStringFieldUpdateOperationsInput | string | null
+    registeredamount?: NullableStringFieldUpdateOperationsInput | string | null
+    social_facebook?: NullableStringFieldUpdateOperationsInput | string | null
+    social_likedin?: NullableStringFieldUpdateOperationsInput | string | null
+    social_instragram?: NullableStringFieldUpdateOperationsInput | string | null
+    social_line?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     owner?: UserUpdateOneRequiredWithoutCompanyNestedInput
@@ -13411,14 +14693,30 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     companyCode?: StringFieldUpdateOperationsInput | string
+    userlimit?: IntFieldUpdateOperationsInput | number
+    company_registration_id?: NullableStringFieldUpdateOperationsInput | string | null
+    company_vat_id?: NullableStringFieldUpdateOperationsInput | string | null
     address?: StringFieldUpdateOperationsInput | string
+    address_2?: NullableStringFieldUpdateOperationsInput | string | null
     city?: StringFieldUpdateOperationsInput | string
     state?: StringFieldUpdateOperationsInput | string
     zip?: StringFieldUpdateOperationsInput | string
     country?: NullableStringFieldUpdateOperationsInput | string | null
     icon?: NullableStringFieldUpdateOperationsInput | string | null
-    phone?: NullableStringFieldUpdateOperationsInput | string | null
+    tel?: NullableStringFieldUpdateOperationsInput | string | null
+    fax?: NullableStringFieldUpdateOperationsInput | string | null
     website?: NullableStringFieldUpdateOperationsInput | string | null
+    lat?: NullableStringFieldUpdateOperationsInput | string | null
+    lng?: NullableStringFieldUpdateOperationsInput | string | null
+    email?: NullableStringFieldUpdateOperationsInput | string | null
+    email_2?: NullableStringFieldUpdateOperationsInput | string | null
+    company_type?: NullableStringFieldUpdateOperationsInput | string | null
+    sub_company_type?: NullableStringFieldUpdateOperationsInput | string | null
+    registeredamount?: NullableStringFieldUpdateOperationsInput | string | null
+    social_facebook?: NullableStringFieldUpdateOperationsInput | string | null
+    social_likedin?: NullableStringFieldUpdateOperationsInput | string | null
+    social_instragram?: NullableStringFieldUpdateOperationsInput | string | null
+    social_line?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     ownerId?: StringFieldUpdateOperationsInput | string
@@ -13556,31 +14854,93 @@ export namespace Prisma {
   export type ProfileCreateWithoutUserInput = {
     id: string
     bio?: string | null
-    firstname?: string | null
-    lastname?: string | null
+    firstname_th?: string | null
+    lastname_th?: string | null
+    firstname_en?: string | null
+    lastname_en?: string | null
     avatar?: string | null
     dob?: Date | string | null
-    prefix?: string | null
+    age?: string | null
+    relationship?: string | null
+    shirt_size?: string | null
+    prefix_th?: string | null
+    prefix_en?: string | null
+    citizen_id?: string | null
+    social_id?: string | null
+    staff_status?: string | null
     tel?: string | null
     address?: string | null
     gender?: string | null
     staff_code?: string | null
     religion?: string | null
+    citizen_addressnumber?: string | null
+    citizen_address?: string | null
+    citizen_country?: string | null
+    citizen_province?: string | null
+    citizen_district?: string | null
+    citizen_state?: string | null
+    citizen_zipcode?: string | null
+    citizen_tel?: string | null
+    contract_sameCitizen?: boolean
+    contract_addressnumber?: string | null
+    contract_address?: string | null
+    contract_country?: string | null
+    contract_province?: string | null
+    contract_district?: string | null
+    contract_state?: string | null
+    contract_zipcode?: string | null
+    contract_email?: string | null
+    contract_companyemail?: string | null
+    social_facebook?: string | null
+    social_likedin?: string | null
+    social_line?: string | null
+    social_telegram?: string | null
   }
 
   export type ProfileUncheckedCreateWithoutUserInput = {
     id: string
     bio?: string | null
-    firstname?: string | null
-    lastname?: string | null
+    firstname_th?: string | null
+    lastname_th?: string | null
+    firstname_en?: string | null
+    lastname_en?: string | null
     avatar?: string | null
     dob?: Date | string | null
-    prefix?: string | null
+    age?: string | null
+    relationship?: string | null
+    shirt_size?: string | null
+    prefix_th?: string | null
+    prefix_en?: string | null
+    citizen_id?: string | null
+    social_id?: string | null
+    staff_status?: string | null
     tel?: string | null
     address?: string | null
     gender?: string | null
     staff_code?: string | null
     religion?: string | null
+    citizen_addressnumber?: string | null
+    citizen_address?: string | null
+    citizen_country?: string | null
+    citizen_province?: string | null
+    citizen_district?: string | null
+    citizen_state?: string | null
+    citizen_zipcode?: string | null
+    citizen_tel?: string | null
+    contract_sameCitizen?: boolean
+    contract_addressnumber?: string | null
+    contract_address?: string | null
+    contract_country?: string | null
+    contract_province?: string | null
+    contract_district?: string | null
+    contract_state?: string | null
+    contract_zipcode?: string | null
+    contract_email?: string | null
+    contract_companyemail?: string | null
+    social_facebook?: string | null
+    social_likedin?: string | null
+    social_line?: string | null
+    social_telegram?: string | null
   }
 
   export type ProfileCreateOrConnectWithoutUserInput = {
@@ -13607,14 +14967,30 @@ export namespace Prisma {
     id: string
     name: string
     companyCode: string
+    userlimit?: number
+    company_registration_id?: string | null
+    company_vat_id?: string | null
     address: string
+    address_2?: string | null
     city: string
     state: string
     zip: string
     country?: string | null
     icon?: string | null
-    phone?: string | null
+    tel?: string | null
+    fax?: string | null
     website?: string | null
+    lat?: string | null
+    lng?: string | null
+    email?: string | null
+    email_2?: string | null
+    company_type?: string | null
+    sub_company_type?: string | null
+    registeredamount?: string | null
+    social_facebook?: string | null
+    social_likedin?: string | null
+    social_instragram?: string | null
+    social_line?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     branch?: CompanyBranchCreateNestedManyWithoutCompanyInput
@@ -13624,14 +15000,30 @@ export namespace Prisma {
     id: string
     name: string
     companyCode: string
+    userlimit?: number
+    company_registration_id?: string | null
+    company_vat_id?: string | null
     address: string
+    address_2?: string | null
     city: string
     state: string
     zip: string
     country?: string | null
     icon?: string | null
-    phone?: string | null
+    tel?: string | null
+    fax?: string | null
     website?: string | null
+    lat?: string | null
+    lng?: string | null
+    email?: string | null
+    email_2?: string | null
+    company_type?: string | null
+    sub_company_type?: string | null
+    registeredamount?: string | null
+    social_facebook?: string | null
+    social_likedin?: string | null
+    social_instragram?: string | null
+    social_line?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     branch?: CompanyBranchUncheckedCreateNestedManyWithoutCompanyInput
@@ -13709,31 +15101,93 @@ export namespace Prisma {
   export type ProfileUpdateWithoutUserInput = {
     id?: StringFieldUpdateOperationsInput | string
     bio?: NullableStringFieldUpdateOperationsInput | string | null
-    firstname?: NullableStringFieldUpdateOperationsInput | string | null
-    lastname?: NullableStringFieldUpdateOperationsInput | string | null
+    firstname_th?: NullableStringFieldUpdateOperationsInput | string | null
+    lastname_th?: NullableStringFieldUpdateOperationsInput | string | null
+    firstname_en?: NullableStringFieldUpdateOperationsInput | string | null
+    lastname_en?: NullableStringFieldUpdateOperationsInput | string | null
     avatar?: NullableStringFieldUpdateOperationsInput | string | null
     dob?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    prefix?: NullableStringFieldUpdateOperationsInput | string | null
+    age?: NullableStringFieldUpdateOperationsInput | string | null
+    relationship?: NullableStringFieldUpdateOperationsInput | string | null
+    shirt_size?: NullableStringFieldUpdateOperationsInput | string | null
+    prefix_th?: NullableStringFieldUpdateOperationsInput | string | null
+    prefix_en?: NullableStringFieldUpdateOperationsInput | string | null
+    citizen_id?: NullableStringFieldUpdateOperationsInput | string | null
+    social_id?: NullableStringFieldUpdateOperationsInput | string | null
+    staff_status?: NullableStringFieldUpdateOperationsInput | string | null
     tel?: NullableStringFieldUpdateOperationsInput | string | null
     address?: NullableStringFieldUpdateOperationsInput | string | null
     gender?: NullableStringFieldUpdateOperationsInput | string | null
     staff_code?: NullableStringFieldUpdateOperationsInput | string | null
     religion?: NullableStringFieldUpdateOperationsInput | string | null
+    citizen_addressnumber?: NullableStringFieldUpdateOperationsInput | string | null
+    citizen_address?: NullableStringFieldUpdateOperationsInput | string | null
+    citizen_country?: NullableStringFieldUpdateOperationsInput | string | null
+    citizen_province?: NullableStringFieldUpdateOperationsInput | string | null
+    citizen_district?: NullableStringFieldUpdateOperationsInput | string | null
+    citizen_state?: NullableStringFieldUpdateOperationsInput | string | null
+    citizen_zipcode?: NullableStringFieldUpdateOperationsInput | string | null
+    citizen_tel?: NullableStringFieldUpdateOperationsInput | string | null
+    contract_sameCitizen?: BoolFieldUpdateOperationsInput | boolean
+    contract_addressnumber?: NullableStringFieldUpdateOperationsInput | string | null
+    contract_address?: NullableStringFieldUpdateOperationsInput | string | null
+    contract_country?: NullableStringFieldUpdateOperationsInput | string | null
+    contract_province?: NullableStringFieldUpdateOperationsInput | string | null
+    contract_district?: NullableStringFieldUpdateOperationsInput | string | null
+    contract_state?: NullableStringFieldUpdateOperationsInput | string | null
+    contract_zipcode?: NullableStringFieldUpdateOperationsInput | string | null
+    contract_email?: NullableStringFieldUpdateOperationsInput | string | null
+    contract_companyemail?: NullableStringFieldUpdateOperationsInput | string | null
+    social_facebook?: NullableStringFieldUpdateOperationsInput | string | null
+    social_likedin?: NullableStringFieldUpdateOperationsInput | string | null
+    social_line?: NullableStringFieldUpdateOperationsInput | string | null
+    social_telegram?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type ProfileUncheckedUpdateWithoutUserInput = {
     id?: StringFieldUpdateOperationsInput | string
     bio?: NullableStringFieldUpdateOperationsInput | string | null
-    firstname?: NullableStringFieldUpdateOperationsInput | string | null
-    lastname?: NullableStringFieldUpdateOperationsInput | string | null
+    firstname_th?: NullableStringFieldUpdateOperationsInput | string | null
+    lastname_th?: NullableStringFieldUpdateOperationsInput | string | null
+    firstname_en?: NullableStringFieldUpdateOperationsInput | string | null
+    lastname_en?: NullableStringFieldUpdateOperationsInput | string | null
     avatar?: NullableStringFieldUpdateOperationsInput | string | null
     dob?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    prefix?: NullableStringFieldUpdateOperationsInput | string | null
+    age?: NullableStringFieldUpdateOperationsInput | string | null
+    relationship?: NullableStringFieldUpdateOperationsInput | string | null
+    shirt_size?: NullableStringFieldUpdateOperationsInput | string | null
+    prefix_th?: NullableStringFieldUpdateOperationsInput | string | null
+    prefix_en?: NullableStringFieldUpdateOperationsInput | string | null
+    citizen_id?: NullableStringFieldUpdateOperationsInput | string | null
+    social_id?: NullableStringFieldUpdateOperationsInput | string | null
+    staff_status?: NullableStringFieldUpdateOperationsInput | string | null
     tel?: NullableStringFieldUpdateOperationsInput | string | null
     address?: NullableStringFieldUpdateOperationsInput | string | null
     gender?: NullableStringFieldUpdateOperationsInput | string | null
     staff_code?: NullableStringFieldUpdateOperationsInput | string | null
     religion?: NullableStringFieldUpdateOperationsInput | string | null
+    citizen_addressnumber?: NullableStringFieldUpdateOperationsInput | string | null
+    citizen_address?: NullableStringFieldUpdateOperationsInput | string | null
+    citizen_country?: NullableStringFieldUpdateOperationsInput | string | null
+    citizen_province?: NullableStringFieldUpdateOperationsInput | string | null
+    citizen_district?: NullableStringFieldUpdateOperationsInput | string | null
+    citizen_state?: NullableStringFieldUpdateOperationsInput | string | null
+    citizen_zipcode?: NullableStringFieldUpdateOperationsInput | string | null
+    citizen_tel?: NullableStringFieldUpdateOperationsInput | string | null
+    contract_sameCitizen?: BoolFieldUpdateOperationsInput | boolean
+    contract_addressnumber?: NullableStringFieldUpdateOperationsInput | string | null
+    contract_address?: NullableStringFieldUpdateOperationsInput | string | null
+    contract_country?: NullableStringFieldUpdateOperationsInput | string | null
+    contract_province?: NullableStringFieldUpdateOperationsInput | string | null
+    contract_district?: NullableStringFieldUpdateOperationsInput | string | null
+    contract_state?: NullableStringFieldUpdateOperationsInput | string | null
+    contract_zipcode?: NullableStringFieldUpdateOperationsInput | string | null
+    contract_email?: NullableStringFieldUpdateOperationsInput | string | null
+    contract_companyemail?: NullableStringFieldUpdateOperationsInput | string | null
+    social_facebook?: NullableStringFieldUpdateOperationsInput | string | null
+    social_likedin?: NullableStringFieldUpdateOperationsInput | string | null
+    social_line?: NullableStringFieldUpdateOperationsInput | string | null
+    social_telegram?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type RoleUpsertWithoutUsersInput = {
@@ -13774,14 +15228,30 @@ export namespace Prisma {
     id?: UuidFilter | string
     name?: StringFilter | string
     companyCode?: StringFilter | string
+    userlimit?: IntFilter | number
+    company_registration_id?: StringNullableFilter | string | null
+    company_vat_id?: StringNullableFilter | string | null
     address?: StringFilter | string
+    address_2?: StringNullableFilter | string | null
     city?: StringFilter | string
     state?: StringFilter | string
     zip?: StringFilter | string
     country?: StringNullableFilter | string | null
     icon?: StringNullableFilter | string | null
-    phone?: StringNullableFilter | string | null
+    tel?: StringNullableFilter | string | null
+    fax?: StringNullableFilter | string | null
     website?: StringNullableFilter | string | null
+    lat?: StringNullableFilter | string | null
+    lng?: StringNullableFilter | string | null
+    email?: StringNullableFilter | string | null
+    email_2?: StringNullableFilter | string | null
+    company_type?: StringNullableFilter | string | null
+    sub_company_type?: StringNullableFilter | string | null
+    registeredamount?: StringNullableFilter | string | null
+    social_facebook?: StringNullableFilter | string | null
+    social_likedin?: StringNullableFilter | string | null
+    social_instragram?: StringNullableFilter | string | null
+    social_line?: StringNullableFilter | string | null
     createdAt?: DateTimeFilter | Date | string
     updatedAt?: DateTimeFilter | Date | string
     ownerId?: UuidFilter | string
@@ -14324,14 +15794,30 @@ export namespace Prisma {
     id: string
     name: string
     companyCode: string
+    userlimit?: number
+    company_registration_id?: string | null
+    company_vat_id?: string | null
     address: string
+    address_2?: string | null
     city: string
     state: string
     zip: string
     country?: string | null
     icon?: string | null
-    phone?: string | null
+    tel?: string | null
+    fax?: string | null
     website?: string | null
+    lat?: string | null
+    lng?: string | null
+    email?: string | null
+    email_2?: string | null
+    company_type?: string | null
+    sub_company_type?: string | null
+    registeredamount?: string | null
+    social_facebook?: string | null
+    social_likedin?: string | null
+    social_instragram?: string | null
+    social_line?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -14340,14 +15826,30 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     companyCode?: StringFieldUpdateOperationsInput | string
+    userlimit?: IntFieldUpdateOperationsInput | number
+    company_registration_id?: NullableStringFieldUpdateOperationsInput | string | null
+    company_vat_id?: NullableStringFieldUpdateOperationsInput | string | null
     address?: StringFieldUpdateOperationsInput | string
+    address_2?: NullableStringFieldUpdateOperationsInput | string | null
     city?: StringFieldUpdateOperationsInput | string
     state?: StringFieldUpdateOperationsInput | string
     zip?: StringFieldUpdateOperationsInput | string
     country?: NullableStringFieldUpdateOperationsInput | string | null
     icon?: NullableStringFieldUpdateOperationsInput | string | null
-    phone?: NullableStringFieldUpdateOperationsInput | string | null
+    tel?: NullableStringFieldUpdateOperationsInput | string | null
+    fax?: NullableStringFieldUpdateOperationsInput | string | null
     website?: NullableStringFieldUpdateOperationsInput | string | null
+    lat?: NullableStringFieldUpdateOperationsInput | string | null
+    lng?: NullableStringFieldUpdateOperationsInput | string | null
+    email?: NullableStringFieldUpdateOperationsInput | string | null
+    email_2?: NullableStringFieldUpdateOperationsInput | string | null
+    company_type?: NullableStringFieldUpdateOperationsInput | string | null
+    sub_company_type?: NullableStringFieldUpdateOperationsInput | string | null
+    registeredamount?: NullableStringFieldUpdateOperationsInput | string | null
+    social_facebook?: NullableStringFieldUpdateOperationsInput | string | null
+    social_likedin?: NullableStringFieldUpdateOperationsInput | string | null
+    social_instragram?: NullableStringFieldUpdateOperationsInput | string | null
+    social_line?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     branch?: CompanyBranchUpdateManyWithoutCompanyNestedInput
@@ -14357,14 +15859,30 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     companyCode?: StringFieldUpdateOperationsInput | string
+    userlimit?: IntFieldUpdateOperationsInput | number
+    company_registration_id?: NullableStringFieldUpdateOperationsInput | string | null
+    company_vat_id?: NullableStringFieldUpdateOperationsInput | string | null
     address?: StringFieldUpdateOperationsInput | string
+    address_2?: NullableStringFieldUpdateOperationsInput | string | null
     city?: StringFieldUpdateOperationsInput | string
     state?: StringFieldUpdateOperationsInput | string
     zip?: StringFieldUpdateOperationsInput | string
     country?: NullableStringFieldUpdateOperationsInput | string | null
     icon?: NullableStringFieldUpdateOperationsInput | string | null
-    phone?: NullableStringFieldUpdateOperationsInput | string | null
+    tel?: NullableStringFieldUpdateOperationsInput | string | null
+    fax?: NullableStringFieldUpdateOperationsInput | string | null
     website?: NullableStringFieldUpdateOperationsInput | string | null
+    lat?: NullableStringFieldUpdateOperationsInput | string | null
+    lng?: NullableStringFieldUpdateOperationsInput | string | null
+    email?: NullableStringFieldUpdateOperationsInput | string | null
+    email_2?: NullableStringFieldUpdateOperationsInput | string | null
+    company_type?: NullableStringFieldUpdateOperationsInput | string | null
+    sub_company_type?: NullableStringFieldUpdateOperationsInput | string | null
+    registeredamount?: NullableStringFieldUpdateOperationsInput | string | null
+    social_facebook?: NullableStringFieldUpdateOperationsInput | string | null
+    social_likedin?: NullableStringFieldUpdateOperationsInput | string | null
+    social_instragram?: NullableStringFieldUpdateOperationsInput | string | null
+    social_line?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     branch?: CompanyBranchUncheckedUpdateManyWithoutCompanyNestedInput
@@ -14374,14 +15892,30 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     companyCode?: StringFieldUpdateOperationsInput | string
+    userlimit?: IntFieldUpdateOperationsInput | number
+    company_registration_id?: NullableStringFieldUpdateOperationsInput | string | null
+    company_vat_id?: NullableStringFieldUpdateOperationsInput | string | null
     address?: StringFieldUpdateOperationsInput | string
+    address_2?: NullableStringFieldUpdateOperationsInput | string | null
     city?: StringFieldUpdateOperationsInput | string
     state?: StringFieldUpdateOperationsInput | string
     zip?: StringFieldUpdateOperationsInput | string
     country?: NullableStringFieldUpdateOperationsInput | string | null
     icon?: NullableStringFieldUpdateOperationsInput | string | null
-    phone?: NullableStringFieldUpdateOperationsInput | string | null
+    tel?: NullableStringFieldUpdateOperationsInput | string | null
+    fax?: NullableStringFieldUpdateOperationsInput | string | null
     website?: NullableStringFieldUpdateOperationsInput | string | null
+    lat?: NullableStringFieldUpdateOperationsInput | string | null
+    lng?: NullableStringFieldUpdateOperationsInput | string | null
+    email?: NullableStringFieldUpdateOperationsInput | string | null
+    email_2?: NullableStringFieldUpdateOperationsInput | string | null
+    company_type?: NullableStringFieldUpdateOperationsInput | string | null
+    sub_company_type?: NullableStringFieldUpdateOperationsInput | string | null
+    registeredamount?: NullableStringFieldUpdateOperationsInput | string | null
+    social_facebook?: NullableStringFieldUpdateOperationsInput | string | null
+    social_likedin?: NullableStringFieldUpdateOperationsInput | string | null
+    social_instragram?: NullableStringFieldUpdateOperationsInput | string | null
+    social_line?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }

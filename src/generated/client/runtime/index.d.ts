@@ -83,8 +83,6 @@ declare class BaseDMMFHelper {
     constructor(dmmf: BaseDMMF);
 }
 
-declare type BatchQueryEngineResult<T> = QueryEngineResult<T> | Error;
-
 declare type BatchTransactionOptions = {
     isolationLevel?: Transaction.IsolationLevel;
 };
@@ -859,7 +857,7 @@ export declare abstract class Engine {
     abstract getDmmf(): Promise<DMMF.Document>;
     abstract version(forceRun?: boolean): Promise<string> | string;
     abstract request<T>(options: RequestOptions<unknown>): Promise<QueryEngineResult<T>>;
-    abstract requestBatch<T>(options: RequestBatchOptions): Promise<BatchQueryEngineResult<T>[]>;
+    abstract requestBatch<T>(options: RequestBatchOptions): Promise<QueryEngineResult<T>[]>;
     abstract transaction(action: 'start', headers: Transaction.TransactionHeaders, options?: Transaction.Options): Promise<Transaction.Info<unknown>>;
     abstract transaction(action: 'commit', headers: Transaction.TransactionHeaders, info: Transaction.Info<unknown>): Promise<void>;
     abstract transaction(action: 'rollback', headers: Transaction.TransactionHeaders, info: Transaction.Info<unknown>): Promise<void>;

@@ -43,6 +43,7 @@ export const userTypedef = gql`
     tel: String!
     avatar: String
     dob: String!
+    userlimit: Int
     company_name: String!
     company_address: String!
     company_city: String!
@@ -111,10 +112,10 @@ const resolvers: Resolvers = {
           },
           profile: {
             select: {
-              firstname: true,
-              lastname: true,
+              firstname_th: true,
+              firstname_en: true,
               avatar: true,
-              prefix: true,
+              prefix_th: true,
               dob: true,
               gender: true,
               bio: true,
@@ -213,8 +214,9 @@ const resolvers: Resolvers = {
           profile: {
             create: {
               id: genProfileid,
-              firstname: args.data.firstname,
-              lastname: args.data.lastname,
+              contract_email: args.data.email,
+              firstname_th: args.data.firstname,
+              lastname_th: args.data.lastname,
               dob: new Date(args.data.dob),
             },
           },
@@ -226,12 +228,13 @@ const resolvers: Resolvers = {
           id: genCompanyId,
           name: args.data.company_name,
           companyCode: args.data.companyCode,
+          userlimit: args.data.userlimit as number,
           city: args.data.company_city,
           ownerId: createUser.id,
           address: args.data.company_address,
           zip: args.data.company_zip,
           state: args.data.company_state,
-          phone: args.data.company_phone,
+          tel: args.data.company_phone,
           country: args.data.company_country,
           icon: args.data.company_icon ? args.data.company_icon : '',
         },
