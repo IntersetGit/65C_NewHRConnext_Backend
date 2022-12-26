@@ -85,8 +85,12 @@ const resolvers: Resolvers = {
     async users(parent, args, ctx) {
       const filter = args?.userid ? args?.userid : undefined;
       const result = await ctx.prisma.user.findMany({
-        // include: { profile: true, company: true, Position: true },
-        where: { id: filter },
+        include: { profile: true, company: true, Position: true },
+        where: {
+          profile: {
+            firstname_th: { contains: filter },
+          },
+        },
       });
       return result;
     },
@@ -221,6 +225,7 @@ const resolvers: Resolvers = {
               firstname_th: args.data.firstname,
               lastname_th: args.data.lastname,
               dob: new Date(args.data.dob),
+              tel: args.data.tel,
             },
           },
         },
@@ -232,13 +237,7 @@ const resolvers: Resolvers = {
           name: args.data.company_name,
           companyCode: args.data.companyCode,
           userlimit: args.data.userlimit as number,
-          city: args.data.company_city,
           ownerId: createUser.id,
-          address: args.data.company_address,
-          zip: args.data.company_zip,
-          state: args.data.company_state,
-          tel: args.data.company_phone,
-          country: args.data.company_country,
           icon: args.data.company_icon ? args.data.company_icon : '',
         },
       });
@@ -254,6 +253,7 @@ const resolvers: Resolvers = {
           state: args.data.company_state,
           country: args.data.company_country,
           companyId: createCompany.id,
+          tel: args.data.company_phone,
         },
       });
 

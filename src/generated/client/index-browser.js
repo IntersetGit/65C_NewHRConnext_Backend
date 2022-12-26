@@ -101,29 +101,11 @@ exports.Prisma.CompanyBranchScalarFieldEnum = makeEnum({
   isMainbranch: 'isMainbranch',
   name: 'name',
   address: 'address',
-  city: 'city',
-  state: 'state',
-  zip: 'zip',
-  country: 'country',
-  createdAt: 'createdAt',
-  updatedAt: 'updatedAt',
-  companyId: 'companyId'
-});
-
-exports.Prisma.CompanyScalarFieldEnum = makeEnum({
-  id: 'id',
-  name: 'name',
-  companyCode: 'companyCode',
-  userlimit: 'userlimit',
-  company_registration_id: 'company_registration_id',
-  company_vat_id: 'company_vat_id',
-  address: 'address',
   address_2: 'address_2',
   city: 'city',
   state: 'state',
   zip: 'zip',
   country: 'country',
-  icon: 'icon',
   tel: 'tel',
   fax: 'fax',
   website: 'website',
@@ -138,6 +120,19 @@ exports.Prisma.CompanyScalarFieldEnum = makeEnum({
   social_likedin: 'social_likedin',
   social_instragram: 'social_instragram',
   social_line: 'social_line',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt',
+  companyId: 'companyId'
+});
+
+exports.Prisma.CompanyScalarFieldEnum = makeEnum({
+  id: 'id',
+  name: 'name',
+  companyCode: 'companyCode',
+  userlimit: 'userlimit',
+  company_registration_id: 'company_registration_id',
+  company_vat_id: 'company_vat_id',
+  icon: 'icon',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt',
   ownerId: 'ownerId'

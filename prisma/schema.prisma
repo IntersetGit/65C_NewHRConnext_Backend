@@ -28,27 +28,7 @@ model Company {
   userlimit               Int             @default(0)
   company_registration_id String?
   company_vat_id          String?
-  address                 String          @db.VarChar(255)
-  address_2               String?         @db.VarChar(255)
-  city                    String          @db.VarChar(255)
-  state                   String          @db.VarChar(255)
-  zip                     String          @db.VarChar(255)
-  country                 String?         @db.VarChar(255)
   icon                    String?
-  tel                     String?         @db.VarChar(255)
-  fax                     String?         @db.VarChar(255)
-  website                 String?         @db.VarChar(255)
-  lat                     String?
-  lng                     String?
-  email                   String?
-  email_2                 String?
-  company_type            String?
-  sub_company_type        String?
-  registeredamount        String?
-  social_facebook         String?
-  social_likedin          String?
-  social_instragram       String?
-  social_line             String?
   createdAt               DateTime        @default(now())
   updatedAt               DateTime        @updatedAt
   ownerId                 String          @db.Uuid
@@ -57,20 +37,35 @@ model Company {
 }
 
 model CompanyBranch {
-  id           String     @unique @db.Uuid
-  isMainbranch Boolean    @default(false)
-  name         String     @db.VarChar(255)
-  address      String     @db.VarChar(255)
-  city         String     @db.VarChar(255)
-  state        String     @db.VarChar(255)
-  zip          String     @db.VarChar(255)
-  country      String?    @db.VarChar(255)
-  createdAt    DateTime   @default(now())
-  updatedAt    DateTime   @updatedAt
-  company      Company?   @relation(fields: [companyId], references: [id])
-  companyId    String?    @db.Uuid
-  users        User[]
-  positions    Position[]
+  id                String     @unique @db.Uuid
+  isMainbranch      Boolean    @default(false)
+  name              String     @db.VarChar(255)
+  address           String     @db.VarChar(255)
+  address_2         String?    @db.VarChar(255)
+  city              String     @db.VarChar(255)
+  state             String     @db.VarChar(255)
+  zip               String     @db.VarChar(255)
+  country           String?    @db.VarChar(255)
+  tel               String?    @db.VarChar(255)
+  fax               String?    @db.VarChar(255)
+  website           String?    @db.VarChar(255)
+  lat               String?
+  lng               String?
+  email             String?
+  email_2           String?
+  company_type      String?
+  sub_company_type  String?
+  registeredamount  String?
+  social_facebook   String?
+  social_likedin    String?
+  social_instragram String?
+  social_line       String?
+  createdAt         DateTime   @default(now())
+  updatedAt         DateTime   @updatedAt
+  company           Company?   @relation(fields: [companyId], references: [id])
+  companyId         String?    @db.Uuid
+  users             User[]
+  positions         Position[]
 }
 
 model Profile {

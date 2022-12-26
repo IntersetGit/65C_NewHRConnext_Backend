@@ -26,26 +26,40 @@ export type Amphoe = {
 
 export type Company = {
   __typename?: 'Company';
-  address?: Maybe<Scalars['String']>;
-  address_2?: Maybe<Scalars['String']>;
   branch?: Maybe<Array<Maybe<CompanyBranch>>>;
-  city?: Maybe<Scalars['String']>;
   companyCode?: Maybe<Scalars['String']>;
   company_registration_id?: Maybe<Scalars['String']>;
-  company_type?: Maybe<Scalars['String']>;
   company_vat_id?: Maybe<Scalars['String']>;
+  createdAt?: Maybe<Scalars['Date']>;
+  icon?: Maybe<Scalars['String']>;
+  id: Scalars['ID'];
+  name?: Maybe<Scalars['String']>;
+  owner?: Maybe<User>;
+  ownerId?: Maybe<Scalars['String']>;
+  updatedAt?: Maybe<Scalars['Date']>;
+  userlimit?: Maybe<Scalars['Int']>;
+  users?: Maybe<Array<Maybe<User>>>;
+};
+
+export type CompanyBranch = {
+  __typename?: 'CompanyBranch';
+  _count?: Maybe<Scalars['String']>;
+  address?: Maybe<Scalars['String']>;
+  address_2?: Maybe<Scalars['String']>;
+  city?: Maybe<Scalars['String']>;
+  company?: Maybe<Company>;
+  companyId?: Maybe<Scalars['String']>;
+  company_type?: Maybe<Scalars['String']>;
   country?: Maybe<Scalars['String']>;
   createdAt?: Maybe<Scalars['Date']>;
   email?: Maybe<Scalars['String']>;
   email_2?: Maybe<Scalars['String']>;
   fax?: Maybe<Scalars['String']>;
-  icon?: Maybe<Scalars['String']>;
   id: Scalars['ID'];
   lat?: Maybe<Scalars['String']>;
   lng?: Maybe<Scalars['String']>;
   name?: Maybe<Scalars['String']>;
-  owner?: Maybe<User>;
-  ownerId?: Maybe<Scalars['String']>;
+  positions?: Maybe<Array<Maybe<Position>>>;
   registeredamount?: Maybe<Scalars['String']>;
   social_facebook?: Maybe<Scalars['String']>;
   social_instragram?: Maybe<Scalars['String']>;
@@ -55,26 +69,8 @@ export type Company = {
   sub_company_type?: Maybe<Scalars['String']>;
   tel?: Maybe<Scalars['String']>;
   updatedAt?: Maybe<Scalars['Date']>;
-  userlimit?: Maybe<Scalars['Int']>;
   users?: Maybe<Array<Maybe<User>>>;
   website?: Maybe<Scalars['String']>;
-  zip?: Maybe<Scalars['String']>;
-};
-
-export type CompanyBranch = {
-  __typename?: 'CompanyBranch';
-  address?: Maybe<Scalars['String']>;
-  city?: Maybe<Scalars['String']>;
-  company?: Maybe<Company>;
-  companyId?: Maybe<Scalars['String']>;
-  country?: Maybe<Scalars['String']>;
-  createdAt?: Maybe<Scalars['Date']>;
-  id: Scalars['ID'];
-  name?: Maybe<Scalars['String']>;
-  positions?: Maybe<Array<Maybe<Position>>>;
-  state?: Maybe<Scalars['String']>;
-  updatedAt?: Maybe<Scalars['Date']>;
-  users?: Maybe<Array<Maybe<User>>>;
   zip?: Maybe<Scalars['String']>;
 };
 
@@ -182,10 +178,13 @@ export type MeprofileType = {
   avatar?: Maybe<Scalars['String']>;
   bio?: Maybe<Scalars['String']>;
   dob?: Maybe<Scalars['Date']>;
-  firstname?: Maybe<Scalars['String']>;
+  firstname_en?: Maybe<Scalars['String']>;
+  firstname_th?: Maybe<Scalars['String']>;
   gender?: Maybe<Scalars['String']>;
-  lastname?: Maybe<Scalars['String']>;
-  prefix?: Maybe<Scalars['String']>;
+  lastname_en?: Maybe<Scalars['String']>;
+  lastname_th?: Maybe<Scalars['String']>;
+  prefix_en?: Maybe<Scalars['String']>;
+  prefix_th?: Maybe<Scalars['String']>;
   staff_code?: Maybe<Scalars['String']>;
   tel?: Maybe<Scalars['String']>;
 };
@@ -289,11 +288,17 @@ export type Province = {
 
 export type Query = {
   __typename?: 'Query';
+  company?: Maybe<Company>;
   getProvince?: Maybe<Array<Maybe<Province>>>;
   getownCompany?: Maybe<GetOwncompanytype>;
   me?: Maybe<Me>;
   users?: Maybe<Array<Maybe<User>>>;
   verifyCompanycode?: Maybe<Scalars['Boolean']>;
+};
+
+
+export type QueryCompanyArgs = {
+  name?: InputMaybe<Scalars['String']>;
 };
 
 
@@ -510,26 +515,40 @@ export type AmphoeResolvers<ContextType = ApolloContext, ParentType extends Reso
 }>;
 
 export type CompanyResolvers<ContextType = ApolloContext, ParentType extends ResolversParentTypes['Company'] = ResolversParentTypes['Company']> = ResolversObject<{
-  address?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
-  address_2?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   branch?: Resolver<Maybe<Array<Maybe<ResolversTypes['CompanyBranch']>>>, ParentType, ContextType>;
-  city?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   companyCode?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   company_registration_id?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
-  company_type?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   company_vat_id?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  createdAt?: Resolver<Maybe<ResolversTypes['Date']>, ParentType, ContextType>;
+  icon?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
+  name?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  owner?: Resolver<Maybe<ResolversTypes['User']>, ParentType, ContextType>;
+  ownerId?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  updatedAt?: Resolver<Maybe<ResolversTypes['Date']>, ParentType, ContextType>;
+  userlimit?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
+  users?: Resolver<Maybe<Array<Maybe<ResolversTypes['User']>>>, ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+}>;
+
+export type CompanyBranchResolvers<ContextType = ApolloContext, ParentType extends ResolversParentTypes['CompanyBranch'] = ResolversParentTypes['CompanyBranch']> = ResolversObject<{
+  _count?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  address?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  address_2?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  city?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  company?: Resolver<Maybe<ResolversTypes['Company']>, ParentType, ContextType>;
+  companyId?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  company_type?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   country?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   createdAt?: Resolver<Maybe<ResolversTypes['Date']>, ParentType, ContextType>;
   email?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   email_2?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   fax?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
-  icon?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
   lat?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   lng?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   name?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
-  owner?: Resolver<Maybe<ResolversTypes['User']>, ParentType, ContextType>;
-  ownerId?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  positions?: Resolver<Maybe<Array<Maybe<ResolversTypes['Position']>>>, ParentType, ContextType>;
   registeredamount?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   social_facebook?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   social_instragram?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
@@ -539,26 +558,8 @@ export type CompanyResolvers<ContextType = ApolloContext, ParentType extends Res
   sub_company_type?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   tel?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   updatedAt?: Resolver<Maybe<ResolversTypes['Date']>, ParentType, ContextType>;
-  userlimit?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
   users?: Resolver<Maybe<Array<Maybe<ResolversTypes['User']>>>, ParentType, ContextType>;
   website?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
-  zip?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
-  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
-}>;
-
-export type CompanyBranchResolvers<ContextType = ApolloContext, ParentType extends ResolversParentTypes['CompanyBranch'] = ResolversParentTypes['CompanyBranch']> = ResolversObject<{
-  address?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
-  city?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
-  company?: Resolver<Maybe<ResolversTypes['Company']>, ParentType, ContextType>;
-  companyId?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
-  country?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
-  createdAt?: Resolver<Maybe<ResolversTypes['Date']>, ParentType, ContextType>;
-  id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
-  name?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
-  positions?: Resolver<Maybe<Array<Maybe<ResolversTypes['Position']>>>, ParentType, ContextType>;
-  state?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
-  updatedAt?: Resolver<Maybe<ResolversTypes['Date']>, ParentType, ContextType>;
-  users?: Resolver<Maybe<Array<Maybe<ResolversTypes['User']>>>, ParentType, ContextType>;
   zip?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 }>;
@@ -649,10 +650,13 @@ export type MeprofileTypeResolvers<ContextType = ApolloContext, ParentType exten
   avatar?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   bio?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   dob?: Resolver<Maybe<ResolversTypes['Date']>, ParentType, ContextType>;
-  firstname?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  firstname_en?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  firstname_th?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   gender?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
-  lastname?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
-  prefix?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  lastname_en?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  lastname_th?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  prefix_en?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  prefix_th?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   staff_code?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   tel?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
@@ -740,6 +744,7 @@ export type ProvinceResolvers<ContextType = ApolloContext, ParentType extends Re
 }>;
 
 export type QueryResolvers<ContextType = ApolloContext, ParentType extends ResolversParentTypes['Query'] = ResolversParentTypes['Query']> = ResolversObject<{
+  company?: Resolver<Maybe<ResolversTypes['Company']>, ParentType, ContextType, Partial<QueryCompanyArgs>>;
   getProvince?: Resolver<Maybe<Array<Maybe<ResolversTypes['Province']>>>, ParentType, ContextType>;
   getownCompany?: Resolver<Maybe<ResolversTypes['GetOwncompanytype']>, ParentType, ContextType>;
   me?: Resolver<Maybe<ResolversTypes['Me']>, ParentType, ContextType>;

@@ -8,16 +8,27 @@ export const companyTypedef = gql`
     id: ID!
     name: String
     companyCode: String
-    address: String
-    city: String
     userlimit: Int
     company_registration_id: String
     company_vat_id: String
+    icon: String
+    createdAt: Date
+    updatedAt: Date
+    users: [User]
+    ownerId: String
+    owner: User
+    branch: [CompanyBranch]
+  }
+
+  type CompanyBranch {
+    id: ID!
+    name: String
+    address: String
     address_2: String
+    city: String
     state: String
     zip: String
     country: String
-    icon: String
     tel: String
     fax: String
     website: String
@@ -33,22 +44,7 @@ export const companyTypedef = gql`
     social_instragram: String
     social_line: String
     createdAt: Date
-    updatedAt: Date
-    users: [User]
-    ownerId: String
-    owner: User
-    branch: [CompanyBranch]
-  }
-
-  type CompanyBranch {
-    id: ID!
-    name: String
-    address: String
-    city: String
-    state: String
-    zip: String
-    country: String
-    createdAt: Date
+    _count: String
     updatedAt: Date
     company: Company
     companyId: String
@@ -96,12 +92,25 @@ export const companyTypedef = gql`
   }
 
   type Query {
+    company(name: String): Company
     getownCompany: GetOwncompanytype
   }
 `;
 
 const resolvers: Resolvers = {
   Query: {
+    async company(p, args, ctx) {
+      const result = await ctx.prisma.company.findUnique({
+        include: {
+          _count: true,
+          branch: {
+            include: { _count: true },
+          },
+        },
+        where: { id: ctx.currentUser?.compayId },
+      });
+      return result;
+    },
     async getownCompany(p, args, ctx) {
       const fetchCompany = await ctx.prisma.user.findUnique({
         where: { id: ctx.currentUser?.id },
@@ -149,6 +158,7 @@ const resolvers: Resolvers = {
 
 const resolversComposition = {
   'Query.getownCompany': [authenticate()],
+  'Query.company': [authenticate()],
 };
 
 export const companyResolvers = composeResolvers(

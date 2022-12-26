@@ -23,27 +23,7 @@ export type Company = {
   userlimit: number
   company_registration_id: string | null
   company_vat_id: string | null
-  address: string
-  address_2: string | null
-  city: string
-  state: string
-  zip: string
-  country: string | null
   icon: string | null
-  tel: string | null
-  fax: string | null
-  website: string | null
-  lat: string | null
-  lng: string | null
-  email: string | null
-  email_2: string | null
-  company_type: string | null
-  sub_company_type: string | null
-  registeredamount: string | null
-  social_facebook: string | null
-  social_likedin: string | null
-  social_instragram: string | null
-  social_line: string | null
   createdAt: Date
   updatedAt: Date
   ownerId: string
@@ -58,10 +38,25 @@ export type CompanyBranch = {
   isMainbranch: boolean
   name: string
   address: string
+  address_2: string | null
   city: string
   state: string
   zip: string
   country: string | null
+  tel: string | null
+  fax: string | null
+  website: string | null
+  lat: string | null
+  lng: string | null
+  email: string | null
+  email_2: string | null
+  company_type: string | null
+  sub_company_type: string | null
+  registeredamount: string | null
+  social_facebook: string | null
+  social_likedin: string | null
+  social_instragram: string | null
+  social_line: string | null
   createdAt: Date
   updatedAt: Date
   companyId: string | null
@@ -1391,27 +1386,7 @@ export namespace Prisma {
     userlimit: number | null
     company_registration_id: string | null
     company_vat_id: string | null
-    address: string | null
-    address_2: string | null
-    city: string | null
-    state: string | null
-    zip: string | null
-    country: string | null
     icon: string | null
-    tel: string | null
-    fax: string | null
-    website: string | null
-    lat: string | null
-    lng: string | null
-    email: string | null
-    email_2: string | null
-    company_type: string | null
-    sub_company_type: string | null
-    registeredamount: string | null
-    social_facebook: string | null
-    social_likedin: string | null
-    social_instragram: string | null
-    social_line: string | null
     createdAt: Date | null
     updatedAt: Date | null
     ownerId: string | null
@@ -1424,27 +1399,7 @@ export namespace Prisma {
     userlimit: number | null
     company_registration_id: string | null
     company_vat_id: string | null
-    address: string | null
-    address_2: string | null
-    city: string | null
-    state: string | null
-    zip: string | null
-    country: string | null
     icon: string | null
-    tel: string | null
-    fax: string | null
-    website: string | null
-    lat: string | null
-    lng: string | null
-    email: string | null
-    email_2: string | null
-    company_type: string | null
-    sub_company_type: string | null
-    registeredamount: string | null
-    social_facebook: string | null
-    social_likedin: string | null
-    social_instragram: string | null
-    social_line: string | null
     createdAt: Date | null
     updatedAt: Date | null
     ownerId: string | null
@@ -1457,27 +1412,7 @@ export namespace Prisma {
     userlimit: number
     company_registration_id: number
     company_vat_id: number
-    address: number
-    address_2: number
-    city: number
-    state: number
-    zip: number
-    country: number
     icon: number
-    tel: number
-    fax: number
-    website: number
-    lat: number
-    lng: number
-    email: number
-    email_2: number
-    company_type: number
-    sub_company_type: number
-    registeredamount: number
-    social_facebook: number
-    social_likedin: number
-    social_instragram: number
-    social_line: number
     createdAt: number
     updatedAt: number
     ownerId: number
@@ -1500,27 +1435,7 @@ export namespace Prisma {
     userlimit?: true
     company_registration_id?: true
     company_vat_id?: true
-    address?: true
-    address_2?: true
-    city?: true
-    state?: true
-    zip?: true
-    country?: true
     icon?: true
-    tel?: true
-    fax?: true
-    website?: true
-    lat?: true
-    lng?: true
-    email?: true
-    email_2?: true
-    company_type?: true
-    sub_company_type?: true
-    registeredamount?: true
-    social_facebook?: true
-    social_likedin?: true
-    social_instragram?: true
-    social_line?: true
     createdAt?: true
     updatedAt?: true
     ownerId?: true
@@ -1533,27 +1448,7 @@ export namespace Prisma {
     userlimit?: true
     company_registration_id?: true
     company_vat_id?: true
-    address?: true
-    address_2?: true
-    city?: true
-    state?: true
-    zip?: true
-    country?: true
     icon?: true
-    tel?: true
-    fax?: true
-    website?: true
-    lat?: true
-    lng?: true
-    email?: true
-    email_2?: true
-    company_type?: true
-    sub_company_type?: true
-    registeredamount?: true
-    social_facebook?: true
-    social_likedin?: true
-    social_instragram?: true
-    social_line?: true
     createdAt?: true
     updatedAt?: true
     ownerId?: true
@@ -1566,27 +1461,7 @@ export namespace Prisma {
     userlimit?: true
     company_registration_id?: true
     company_vat_id?: true
-    address?: true
-    address_2?: true
-    city?: true
-    state?: true
-    zip?: true
-    country?: true
     icon?: true
-    tel?: true
-    fax?: true
-    website?: true
-    lat?: true
-    lng?: true
-    email?: true
-    email_2?: true
-    company_type?: true
-    sub_company_type?: true
-    registeredamount?: true
-    social_facebook?: true
-    social_likedin?: true
-    social_instragram?: true
-    social_line?: true
     createdAt?: true
     updatedAt?: true
     ownerId?: true
@@ -1692,27 +1567,7 @@ export namespace Prisma {
     userlimit: number
     company_registration_id: string | null
     company_vat_id: string | null
-    address: string
-    address_2: string | null
-    city: string
-    state: string
-    zip: string
-    country: string | null
     icon: string | null
-    tel: string | null
-    fax: string | null
-    website: string | null
-    lat: string | null
-    lng: string | null
-    email: string | null
-    email_2: string | null
-    company_type: string | null
-    sub_company_type: string | null
-    registeredamount: string | null
-    social_facebook: string | null
-    social_likedin: string | null
-    social_instragram: string | null
-    social_line: string | null
     createdAt: Date
     updatedAt: Date
     ownerId: string
@@ -1744,27 +1599,7 @@ export namespace Prisma {
     userlimit?: boolean
     company_registration_id?: boolean
     company_vat_id?: boolean
-    address?: boolean
-    address_2?: boolean
-    city?: boolean
-    state?: boolean
-    zip?: boolean
-    country?: boolean
     icon?: boolean
-    tel?: boolean
-    fax?: boolean
-    website?: boolean
-    lat?: boolean
-    lng?: boolean
-    email?: boolean
-    email_2?: boolean
-    company_type?: boolean
-    sub_company_type?: boolean
-    registeredamount?: boolean
-    social_facebook?: boolean
-    social_likedin?: boolean
-    social_instragram?: boolean
-    social_line?: boolean
     createdAt?: boolean
     updatedAt?: boolean
     ownerId?: boolean
@@ -2611,10 +2446,25 @@ export namespace Prisma {
     isMainbranch: boolean | null
     name: string | null
     address: string | null
+    address_2: string | null
     city: string | null
     state: string | null
     zip: string | null
     country: string | null
+    tel: string | null
+    fax: string | null
+    website: string | null
+    lat: string | null
+    lng: string | null
+    email: string | null
+    email_2: string | null
+    company_type: string | null
+    sub_company_type: string | null
+    registeredamount: string | null
+    social_facebook: string | null
+    social_likedin: string | null
+    social_instragram: string | null
+    social_line: string | null
     createdAt: Date | null
     updatedAt: Date | null
     companyId: string | null
@@ -2625,10 +2475,25 @@ export namespace Prisma {
     isMainbranch: boolean | null
     name: string | null
     address: string | null
+    address_2: string | null
     city: string | null
     state: string | null
     zip: string | null
     country: string | null
+    tel: string | null
+    fax: string | null
+    website: string | null
+    lat: string | null
+    lng: string | null
+    email: string | null
+    email_2: string | null
+    company_type: string | null
+    sub_company_type: string | null
+    registeredamount: string | null
+    social_facebook: string | null
+    social_likedin: string | null
+    social_instragram: string | null
+    social_line: string | null
     createdAt: Date | null
     updatedAt: Date | null
     companyId: string | null
@@ -2639,10 +2504,25 @@ export namespace Prisma {
     isMainbranch: number
     name: number
     address: number
+    address_2: number
     city: number
     state: number
     zip: number
     country: number
+    tel: number
+    fax: number
+    website: number
+    lat: number
+    lng: number
+    email: number
+    email_2: number
+    company_type: number
+    sub_company_type: number
+    registeredamount: number
+    social_facebook: number
+    social_likedin: number
+    social_instragram: number
+    social_line: number
     createdAt: number
     updatedAt: number
     companyId: number
@@ -2655,10 +2535,25 @@ export namespace Prisma {
     isMainbranch?: true
     name?: true
     address?: true
+    address_2?: true
     city?: true
     state?: true
     zip?: true
     country?: true
+    tel?: true
+    fax?: true
+    website?: true
+    lat?: true
+    lng?: true
+    email?: true
+    email_2?: true
+    company_type?: true
+    sub_company_type?: true
+    registeredamount?: true
+    social_facebook?: true
+    social_likedin?: true
+    social_instragram?: true
+    social_line?: true
     createdAt?: true
     updatedAt?: true
     companyId?: true
@@ -2669,10 +2564,25 @@ export namespace Prisma {
     isMainbranch?: true
     name?: true
     address?: true
+    address_2?: true
     city?: true
     state?: true
     zip?: true
     country?: true
+    tel?: true
+    fax?: true
+    website?: true
+    lat?: true
+    lng?: true
+    email?: true
+    email_2?: true
+    company_type?: true
+    sub_company_type?: true
+    registeredamount?: true
+    social_facebook?: true
+    social_likedin?: true
+    social_instragram?: true
+    social_line?: true
     createdAt?: true
     updatedAt?: true
     companyId?: true
@@ -2683,10 +2593,25 @@ export namespace Prisma {
     isMainbranch?: true
     name?: true
     address?: true
+    address_2?: true
     city?: true
     state?: true
     zip?: true
     country?: true
+    tel?: true
+    fax?: true
+    website?: true
+    lat?: true
+    lng?: true
+    email?: true
+    email_2?: true
+    company_type?: true
+    sub_company_type?: true
+    registeredamount?: true
+    social_facebook?: true
+    social_likedin?: true
+    social_instragram?: true
+    social_line?: true
     createdAt?: true
     updatedAt?: true
     companyId?: true
@@ -2776,10 +2701,25 @@ export namespace Prisma {
     isMainbranch: boolean
     name: string
     address: string
+    address_2: string | null
     city: string
     state: string
     zip: string
     country: string | null
+    tel: string | null
+    fax: string | null
+    website: string | null
+    lat: string | null
+    lng: string | null
+    email: string | null
+    email_2: string | null
+    company_type: string | null
+    sub_company_type: string | null
+    registeredamount: string | null
+    social_facebook: string | null
+    social_likedin: string | null
+    social_instragram: string | null
+    social_line: string | null
     createdAt: Date
     updatedAt: Date
     companyId: string | null
@@ -2807,10 +2747,25 @@ export namespace Prisma {
     isMainbranch?: boolean
     name?: boolean
     address?: boolean
+    address_2?: boolean
     city?: boolean
     state?: boolean
     zip?: boolean
     country?: boolean
+    tel?: boolean
+    fax?: boolean
+    website?: boolean
+    lat?: boolean
+    lng?: boolean
+    email?: boolean
+    email_2?: boolean
+    company_type?: boolean
+    sub_company_type?: boolean
+    registeredamount?: boolean
+    social_facebook?: boolean
+    social_likedin?: boolean
+    social_instragram?: boolean
+    social_line?: boolean
     createdAt?: boolean
     updatedAt?: boolean
     company?: boolean | CompanyArgs
@@ -10917,10 +10872,25 @@ export namespace Prisma {
     isMainbranch: 'isMainbranch',
     name: 'name',
     address: 'address',
+    address_2: 'address_2',
     city: 'city',
     state: 'state',
     zip: 'zip',
     country: 'country',
+    tel: 'tel',
+    fax: 'fax',
+    website: 'website',
+    lat: 'lat',
+    lng: 'lng',
+    email: 'email',
+    email_2: 'email_2',
+    company_type: 'company_type',
+    sub_company_type: 'sub_company_type',
+    registeredamount: 'registeredamount',
+    social_facebook: 'social_facebook',
+    social_likedin: 'social_likedin',
+    social_instragram: 'social_instragram',
+    social_line: 'social_line',
     createdAt: 'createdAt',
     updatedAt: 'updatedAt',
     companyId: 'companyId'
@@ -10936,27 +10906,7 @@ export namespace Prisma {
     userlimit: 'userlimit',
     company_registration_id: 'company_registration_id',
     company_vat_id: 'company_vat_id',
-    address: 'address',
-    address_2: 'address_2',
-    city: 'city',
-    state: 'state',
-    zip: 'zip',
-    country: 'country',
     icon: 'icon',
-    tel: 'tel',
-    fax: 'fax',
-    website: 'website',
-    lat: 'lat',
-    lng: 'lng',
-    email: 'email',
-    email_2: 'email_2',
-    company_type: 'company_type',
-    sub_company_type: 'sub_company_type',
-    registeredamount: 'registeredamount',
-    social_facebook: 'social_facebook',
-    social_likedin: 'social_likedin',
-    social_instragram: 'social_instragram',
-    social_line: 'social_line',
     createdAt: 'createdAt',
     updatedAt: 'updatedAt',
     ownerId: 'ownerId'
@@ -11124,27 +11074,7 @@ export namespace Prisma {
     userlimit?: IntFilter | number
     company_registration_id?: StringNullableFilter | string | null
     company_vat_id?: StringNullableFilter | string | null
-    address?: StringFilter | string
-    address_2?: StringNullableFilter | string | null
-    city?: StringFilter | string
-    state?: StringFilter | string
-    zip?: StringFilter | string
-    country?: StringNullableFilter | string | null
     icon?: StringNullableFilter | string | null
-    tel?: StringNullableFilter | string | null
-    fax?: StringNullableFilter | string | null
-    website?: StringNullableFilter | string | null
-    lat?: StringNullableFilter | string | null
-    lng?: StringNullableFilter | string | null
-    email?: StringNullableFilter | string | null
-    email_2?: StringNullableFilter | string | null
-    company_type?: StringNullableFilter | string | null
-    sub_company_type?: StringNullableFilter | string | null
-    registeredamount?: StringNullableFilter | string | null
-    social_facebook?: StringNullableFilter | string | null
-    social_likedin?: StringNullableFilter | string | null
-    social_instragram?: StringNullableFilter | string | null
-    social_line?: StringNullableFilter | string | null
     createdAt?: DateTimeFilter | Date | string
     updatedAt?: DateTimeFilter | Date | string
     ownerId?: UuidFilter | string
@@ -11159,27 +11089,7 @@ export namespace Prisma {
     userlimit?: SortOrder
     company_registration_id?: SortOrder
     company_vat_id?: SortOrder
-    address?: SortOrder
-    address_2?: SortOrder
-    city?: SortOrder
-    state?: SortOrder
-    zip?: SortOrder
-    country?: SortOrder
     icon?: SortOrder
-    tel?: SortOrder
-    fax?: SortOrder
-    website?: SortOrder
-    lat?: SortOrder
-    lng?: SortOrder
-    email?: SortOrder
-    email_2?: SortOrder
-    company_type?: SortOrder
-    sub_company_type?: SortOrder
-    registeredamount?: SortOrder
-    social_facebook?: SortOrder
-    social_likedin?: SortOrder
-    social_instragram?: SortOrder
-    social_line?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     ownerId?: SortOrder
@@ -11199,27 +11109,7 @@ export namespace Prisma {
     userlimit?: SortOrder
     company_registration_id?: SortOrder
     company_vat_id?: SortOrder
-    address?: SortOrder
-    address_2?: SortOrder
-    city?: SortOrder
-    state?: SortOrder
-    zip?: SortOrder
-    country?: SortOrder
     icon?: SortOrder
-    tel?: SortOrder
-    fax?: SortOrder
-    website?: SortOrder
-    lat?: SortOrder
-    lng?: SortOrder
-    email?: SortOrder
-    email_2?: SortOrder
-    company_type?: SortOrder
-    sub_company_type?: SortOrder
-    registeredamount?: SortOrder
-    social_facebook?: SortOrder
-    social_likedin?: SortOrder
-    social_instragram?: SortOrder
-    social_line?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     ownerId?: SortOrder
@@ -11240,27 +11130,7 @@ export namespace Prisma {
     userlimit?: IntWithAggregatesFilter | number
     company_registration_id?: StringNullableWithAggregatesFilter | string | null
     company_vat_id?: StringNullableWithAggregatesFilter | string | null
-    address?: StringWithAggregatesFilter | string
-    address_2?: StringNullableWithAggregatesFilter | string | null
-    city?: StringWithAggregatesFilter | string
-    state?: StringWithAggregatesFilter | string
-    zip?: StringWithAggregatesFilter | string
-    country?: StringNullableWithAggregatesFilter | string | null
     icon?: StringNullableWithAggregatesFilter | string | null
-    tel?: StringNullableWithAggregatesFilter | string | null
-    fax?: StringNullableWithAggregatesFilter | string | null
-    website?: StringNullableWithAggregatesFilter | string | null
-    lat?: StringNullableWithAggregatesFilter | string | null
-    lng?: StringNullableWithAggregatesFilter | string | null
-    email?: StringNullableWithAggregatesFilter | string | null
-    email_2?: StringNullableWithAggregatesFilter | string | null
-    company_type?: StringNullableWithAggregatesFilter | string | null
-    sub_company_type?: StringNullableWithAggregatesFilter | string | null
-    registeredamount?: StringNullableWithAggregatesFilter | string | null
-    social_facebook?: StringNullableWithAggregatesFilter | string | null
-    social_likedin?: StringNullableWithAggregatesFilter | string | null
-    social_instragram?: StringNullableWithAggregatesFilter | string | null
-    social_line?: StringNullableWithAggregatesFilter | string | null
     createdAt?: DateTimeWithAggregatesFilter | Date | string
     updatedAt?: DateTimeWithAggregatesFilter | Date | string
     ownerId?: UuidWithAggregatesFilter | string
@@ -11274,10 +11144,25 @@ export namespace Prisma {
     isMainbranch?: BoolFilter | boolean
     name?: StringFilter | string
     address?: StringFilter | string
+    address_2?: StringNullableFilter | string | null
     city?: StringFilter | string
     state?: StringFilter | string
     zip?: StringFilter | string
     country?: StringNullableFilter | string | null
+    tel?: StringNullableFilter | string | null
+    fax?: StringNullableFilter | string | null
+    website?: StringNullableFilter | string | null
+    lat?: StringNullableFilter | string | null
+    lng?: StringNullableFilter | string | null
+    email?: StringNullableFilter | string | null
+    email_2?: StringNullableFilter | string | null
+    company_type?: StringNullableFilter | string | null
+    sub_company_type?: StringNullableFilter | string | null
+    registeredamount?: StringNullableFilter | string | null
+    social_facebook?: StringNullableFilter | string | null
+    social_likedin?: StringNullableFilter | string | null
+    social_instragram?: StringNullableFilter | string | null
+    social_line?: StringNullableFilter | string | null
     createdAt?: DateTimeFilter | Date | string
     updatedAt?: DateTimeFilter | Date | string
     company?: XOR<CompanyRelationFilter, CompanyWhereInput> | null
@@ -11291,10 +11176,25 @@ export namespace Prisma {
     isMainbranch?: SortOrder
     name?: SortOrder
     address?: SortOrder
+    address_2?: SortOrder
     city?: SortOrder
     state?: SortOrder
     zip?: SortOrder
     country?: SortOrder
+    tel?: SortOrder
+    fax?: SortOrder
+    website?: SortOrder
+    lat?: SortOrder
+    lng?: SortOrder
+    email?: SortOrder
+    email_2?: SortOrder
+    company_type?: SortOrder
+    sub_company_type?: SortOrder
+    registeredamount?: SortOrder
+    social_facebook?: SortOrder
+    social_likedin?: SortOrder
+    social_instragram?: SortOrder
+    social_line?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     company?: CompanyOrderByWithRelationInput
@@ -11312,10 +11212,25 @@ export namespace Prisma {
     isMainbranch?: SortOrder
     name?: SortOrder
     address?: SortOrder
+    address_2?: SortOrder
     city?: SortOrder
     state?: SortOrder
     zip?: SortOrder
     country?: SortOrder
+    tel?: SortOrder
+    fax?: SortOrder
+    website?: SortOrder
+    lat?: SortOrder
+    lng?: SortOrder
+    email?: SortOrder
+    email_2?: SortOrder
+    company_type?: SortOrder
+    sub_company_type?: SortOrder
+    registeredamount?: SortOrder
+    social_facebook?: SortOrder
+    social_likedin?: SortOrder
+    social_instragram?: SortOrder
+    social_line?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     companyId?: SortOrder
@@ -11332,10 +11247,25 @@ export namespace Prisma {
     isMainbranch?: BoolWithAggregatesFilter | boolean
     name?: StringWithAggregatesFilter | string
     address?: StringWithAggregatesFilter | string
+    address_2?: StringNullableWithAggregatesFilter | string | null
     city?: StringWithAggregatesFilter | string
     state?: StringWithAggregatesFilter | string
     zip?: StringWithAggregatesFilter | string
     country?: StringNullableWithAggregatesFilter | string | null
+    tel?: StringNullableWithAggregatesFilter | string | null
+    fax?: StringNullableWithAggregatesFilter | string | null
+    website?: StringNullableWithAggregatesFilter | string | null
+    lat?: StringNullableWithAggregatesFilter | string | null
+    lng?: StringNullableWithAggregatesFilter | string | null
+    email?: StringNullableWithAggregatesFilter | string | null
+    email_2?: StringNullableWithAggregatesFilter | string | null
+    company_type?: StringNullableWithAggregatesFilter | string | null
+    sub_company_type?: StringNullableWithAggregatesFilter | string | null
+    registeredamount?: StringNullableWithAggregatesFilter | string | null
+    social_facebook?: StringNullableWithAggregatesFilter | string | null
+    social_likedin?: StringNullableWithAggregatesFilter | string | null
+    social_instragram?: StringNullableWithAggregatesFilter | string | null
+    social_line?: StringNullableWithAggregatesFilter | string | null
     createdAt?: DateTimeWithAggregatesFilter | Date | string
     updatedAt?: DateTimeWithAggregatesFilter | Date | string
     companyId?: UuidNullableWithAggregatesFilter | string | null
@@ -11832,27 +11762,7 @@ export namespace Prisma {
     userlimit?: number
     company_registration_id?: string | null
     company_vat_id?: string | null
-    address: string
-    address_2?: string | null
-    city: string
-    state: string
-    zip: string
-    country?: string | null
     icon?: string | null
-    tel?: string | null
-    fax?: string | null
-    website?: string | null
-    lat?: string | null
-    lng?: string | null
-    email?: string | null
-    email_2?: string | null
-    company_type?: string | null
-    sub_company_type?: string | null
-    registeredamount?: string | null
-    social_facebook?: string | null
-    social_likedin?: string | null
-    social_instragram?: string | null
-    social_line?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     owner: UserCreateNestedOneWithoutCompanyInput
@@ -11866,27 +11776,7 @@ export namespace Prisma {
     userlimit?: number
     company_registration_id?: string | null
     company_vat_id?: string | null
-    address: string
-    address_2?: string | null
-    city: string
-    state: string
-    zip: string
-    country?: string | null
     icon?: string | null
-    tel?: string | null
-    fax?: string | null
-    website?: string | null
-    lat?: string | null
-    lng?: string | null
-    email?: string | null
-    email_2?: string | null
-    company_type?: string | null
-    sub_company_type?: string | null
-    registeredamount?: string | null
-    social_facebook?: string | null
-    social_likedin?: string | null
-    social_instragram?: string | null
-    social_line?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     ownerId: string
@@ -11900,27 +11790,7 @@ export namespace Prisma {
     userlimit?: IntFieldUpdateOperationsInput | number
     company_registration_id?: NullableStringFieldUpdateOperationsInput | string | null
     company_vat_id?: NullableStringFieldUpdateOperationsInput | string | null
-    address?: StringFieldUpdateOperationsInput | string
-    address_2?: NullableStringFieldUpdateOperationsInput | string | null
-    city?: StringFieldUpdateOperationsInput | string
-    state?: StringFieldUpdateOperationsInput | string
-    zip?: StringFieldUpdateOperationsInput | string
-    country?: NullableStringFieldUpdateOperationsInput | string | null
     icon?: NullableStringFieldUpdateOperationsInput | string | null
-    tel?: NullableStringFieldUpdateOperationsInput | string | null
-    fax?: NullableStringFieldUpdateOperationsInput | string | null
-    website?: NullableStringFieldUpdateOperationsInput | string | null
-    lat?: NullableStringFieldUpdateOperationsInput | string | null
-    lng?: NullableStringFieldUpdateOperationsInput | string | null
-    email?: NullableStringFieldUpdateOperationsInput | string | null
-    email_2?: NullableStringFieldUpdateOperationsInput | string | null
-    company_type?: NullableStringFieldUpdateOperationsInput | string | null
-    sub_company_type?: NullableStringFieldUpdateOperationsInput | string | null
-    registeredamount?: NullableStringFieldUpdateOperationsInput | string | null
-    social_facebook?: NullableStringFieldUpdateOperationsInput | string | null
-    social_likedin?: NullableStringFieldUpdateOperationsInput | string | null
-    social_instragram?: NullableStringFieldUpdateOperationsInput | string | null
-    social_line?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     owner?: UserUpdateOneRequiredWithoutCompanyNestedInput
@@ -11934,27 +11804,7 @@ export namespace Prisma {
     userlimit?: IntFieldUpdateOperationsInput | number
     company_registration_id?: NullableStringFieldUpdateOperationsInput | string | null
     company_vat_id?: NullableStringFieldUpdateOperationsInput | string | null
-    address?: StringFieldUpdateOperationsInput | string
-    address_2?: NullableStringFieldUpdateOperationsInput | string | null
-    city?: StringFieldUpdateOperationsInput | string
-    state?: StringFieldUpdateOperationsInput | string
-    zip?: StringFieldUpdateOperationsInput | string
-    country?: NullableStringFieldUpdateOperationsInput | string | null
     icon?: NullableStringFieldUpdateOperationsInput | string | null
-    tel?: NullableStringFieldUpdateOperationsInput | string | null
-    fax?: NullableStringFieldUpdateOperationsInput | string | null
-    website?: NullableStringFieldUpdateOperationsInput | string | null
-    lat?: NullableStringFieldUpdateOperationsInput | string | null
-    lng?: NullableStringFieldUpdateOperationsInput | string | null
-    email?: NullableStringFieldUpdateOperationsInput | string | null
-    email_2?: NullableStringFieldUpdateOperationsInput | string | null
-    company_type?: NullableStringFieldUpdateOperationsInput | string | null
-    sub_company_type?: NullableStringFieldUpdateOperationsInput | string | null
-    registeredamount?: NullableStringFieldUpdateOperationsInput | string | null
-    social_facebook?: NullableStringFieldUpdateOperationsInput | string | null
-    social_likedin?: NullableStringFieldUpdateOperationsInput | string | null
-    social_instragram?: NullableStringFieldUpdateOperationsInput | string | null
-    social_line?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     ownerId?: StringFieldUpdateOperationsInput | string
@@ -11968,13 +11818,47 @@ export namespace Prisma {
     userlimit?: number
     company_registration_id?: string | null
     company_vat_id?: string | null
+    icon?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    ownerId: string
+  }
+
+  export type CompanyUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    companyCode?: StringFieldUpdateOperationsInput | string
+    userlimit?: IntFieldUpdateOperationsInput | number
+    company_registration_id?: NullableStringFieldUpdateOperationsInput | string | null
+    company_vat_id?: NullableStringFieldUpdateOperationsInput | string | null
+    icon?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type CompanyUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    companyCode?: StringFieldUpdateOperationsInput | string
+    userlimit?: IntFieldUpdateOperationsInput | number
+    company_registration_id?: NullableStringFieldUpdateOperationsInput | string | null
+    company_vat_id?: NullableStringFieldUpdateOperationsInput | string | null
+    icon?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    ownerId?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type CompanyBranchCreateInput = {
+    id: string
+    isMainbranch?: boolean
+    name: string
     address: string
     address_2?: string | null
     city: string
     state: string
     zip: string
     country?: string | null
-    icon?: string | null
     tel?: string | null
     fax?: string | null
     website?: string | null
@@ -11991,85 +11875,6 @@ export namespace Prisma {
     social_line?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
-    ownerId: string
-  }
-
-  export type CompanyUpdateManyMutationInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    name?: StringFieldUpdateOperationsInput | string
-    companyCode?: StringFieldUpdateOperationsInput | string
-    userlimit?: IntFieldUpdateOperationsInput | number
-    company_registration_id?: NullableStringFieldUpdateOperationsInput | string | null
-    company_vat_id?: NullableStringFieldUpdateOperationsInput | string | null
-    address?: StringFieldUpdateOperationsInput | string
-    address_2?: NullableStringFieldUpdateOperationsInput | string | null
-    city?: StringFieldUpdateOperationsInput | string
-    state?: StringFieldUpdateOperationsInput | string
-    zip?: StringFieldUpdateOperationsInput | string
-    country?: NullableStringFieldUpdateOperationsInput | string | null
-    icon?: NullableStringFieldUpdateOperationsInput | string | null
-    tel?: NullableStringFieldUpdateOperationsInput | string | null
-    fax?: NullableStringFieldUpdateOperationsInput | string | null
-    website?: NullableStringFieldUpdateOperationsInput | string | null
-    lat?: NullableStringFieldUpdateOperationsInput | string | null
-    lng?: NullableStringFieldUpdateOperationsInput | string | null
-    email?: NullableStringFieldUpdateOperationsInput | string | null
-    email_2?: NullableStringFieldUpdateOperationsInput | string | null
-    company_type?: NullableStringFieldUpdateOperationsInput | string | null
-    sub_company_type?: NullableStringFieldUpdateOperationsInput | string | null
-    registeredamount?: NullableStringFieldUpdateOperationsInput | string | null
-    social_facebook?: NullableStringFieldUpdateOperationsInput | string | null
-    social_likedin?: NullableStringFieldUpdateOperationsInput | string | null
-    social_instragram?: NullableStringFieldUpdateOperationsInput | string | null
-    social_line?: NullableStringFieldUpdateOperationsInput | string | null
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-  }
-
-  export type CompanyUncheckedUpdateManyInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    name?: StringFieldUpdateOperationsInput | string
-    companyCode?: StringFieldUpdateOperationsInput | string
-    userlimit?: IntFieldUpdateOperationsInput | number
-    company_registration_id?: NullableStringFieldUpdateOperationsInput | string | null
-    company_vat_id?: NullableStringFieldUpdateOperationsInput | string | null
-    address?: StringFieldUpdateOperationsInput | string
-    address_2?: NullableStringFieldUpdateOperationsInput | string | null
-    city?: StringFieldUpdateOperationsInput | string
-    state?: StringFieldUpdateOperationsInput | string
-    zip?: StringFieldUpdateOperationsInput | string
-    country?: NullableStringFieldUpdateOperationsInput | string | null
-    icon?: NullableStringFieldUpdateOperationsInput | string | null
-    tel?: NullableStringFieldUpdateOperationsInput | string | null
-    fax?: NullableStringFieldUpdateOperationsInput | string | null
-    website?: NullableStringFieldUpdateOperationsInput | string | null
-    lat?: NullableStringFieldUpdateOperationsInput | string | null
-    lng?: NullableStringFieldUpdateOperationsInput | string | null
-    email?: NullableStringFieldUpdateOperationsInput | string | null
-    email_2?: NullableStringFieldUpdateOperationsInput | string | null
-    company_type?: NullableStringFieldUpdateOperationsInput | string | null
-    sub_company_type?: NullableStringFieldUpdateOperationsInput | string | null
-    registeredamount?: NullableStringFieldUpdateOperationsInput | string | null
-    social_facebook?: NullableStringFieldUpdateOperationsInput | string | null
-    social_likedin?: NullableStringFieldUpdateOperationsInput | string | null
-    social_instragram?: NullableStringFieldUpdateOperationsInput | string | null
-    social_line?: NullableStringFieldUpdateOperationsInput | string | null
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    ownerId?: StringFieldUpdateOperationsInput | string
-  }
-
-  export type CompanyBranchCreateInput = {
-    id: string
-    isMainbranch?: boolean
-    name: string
-    address: string
-    city: string
-    state: string
-    zip: string
-    country?: string | null
-    createdAt?: Date | string
-    updatedAt?: Date | string
     company?: CompanyCreateNestedOneWithoutBranchInput
     users?: UserCreateNestedManyWithoutCompanyBranchInput
     positions?: PositionCreateNestedManyWithoutCompanyBranchInput
@@ -12080,10 +11885,25 @@ export namespace Prisma {
     isMainbranch?: boolean
     name: string
     address: string
+    address_2?: string | null
     city: string
     state: string
     zip: string
     country?: string | null
+    tel?: string | null
+    fax?: string | null
+    website?: string | null
+    lat?: string | null
+    lng?: string | null
+    email?: string | null
+    email_2?: string | null
+    company_type?: string | null
+    sub_company_type?: string | null
+    registeredamount?: string | null
+    social_facebook?: string | null
+    social_likedin?: string | null
+    social_instragram?: string | null
+    social_line?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     companyId?: string | null
@@ -12096,10 +11916,25 @@ export namespace Prisma {
     isMainbranch?: BoolFieldUpdateOperationsInput | boolean
     name?: StringFieldUpdateOperationsInput | string
     address?: StringFieldUpdateOperationsInput | string
+    address_2?: NullableStringFieldUpdateOperationsInput | string | null
     city?: StringFieldUpdateOperationsInput | string
     state?: StringFieldUpdateOperationsInput | string
     zip?: StringFieldUpdateOperationsInput | string
     country?: NullableStringFieldUpdateOperationsInput | string | null
+    tel?: NullableStringFieldUpdateOperationsInput | string | null
+    fax?: NullableStringFieldUpdateOperationsInput | string | null
+    website?: NullableStringFieldUpdateOperationsInput | string | null
+    lat?: NullableStringFieldUpdateOperationsInput | string | null
+    lng?: NullableStringFieldUpdateOperationsInput | string | null
+    email?: NullableStringFieldUpdateOperationsInput | string | null
+    email_2?: NullableStringFieldUpdateOperationsInput | string | null
+    company_type?: NullableStringFieldUpdateOperationsInput | string | null
+    sub_company_type?: NullableStringFieldUpdateOperationsInput | string | null
+    registeredamount?: NullableStringFieldUpdateOperationsInput | string | null
+    social_facebook?: NullableStringFieldUpdateOperationsInput | string | null
+    social_likedin?: NullableStringFieldUpdateOperationsInput | string | null
+    social_instragram?: NullableStringFieldUpdateOperationsInput | string | null
+    social_line?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     company?: CompanyUpdateOneWithoutBranchNestedInput
@@ -12112,10 +11947,25 @@ export namespace Prisma {
     isMainbranch?: BoolFieldUpdateOperationsInput | boolean
     name?: StringFieldUpdateOperationsInput | string
     address?: StringFieldUpdateOperationsInput | string
+    address_2?: NullableStringFieldUpdateOperationsInput | string | null
     city?: StringFieldUpdateOperationsInput | string
     state?: StringFieldUpdateOperationsInput | string
     zip?: StringFieldUpdateOperationsInput | string
     country?: NullableStringFieldUpdateOperationsInput | string | null
+    tel?: NullableStringFieldUpdateOperationsInput | string | null
+    fax?: NullableStringFieldUpdateOperationsInput | string | null
+    website?: NullableStringFieldUpdateOperationsInput | string | null
+    lat?: NullableStringFieldUpdateOperationsInput | string | null
+    lng?: NullableStringFieldUpdateOperationsInput | string | null
+    email?: NullableStringFieldUpdateOperationsInput | string | null
+    email_2?: NullableStringFieldUpdateOperationsInput | string | null
+    company_type?: NullableStringFieldUpdateOperationsInput | string | null
+    sub_company_type?: NullableStringFieldUpdateOperationsInput | string | null
+    registeredamount?: NullableStringFieldUpdateOperationsInput | string | null
+    social_facebook?: NullableStringFieldUpdateOperationsInput | string | null
+    social_likedin?: NullableStringFieldUpdateOperationsInput | string | null
+    social_instragram?: NullableStringFieldUpdateOperationsInput | string | null
+    social_line?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     companyId?: NullableStringFieldUpdateOperationsInput | string | null
@@ -12128,10 +11978,25 @@ export namespace Prisma {
     isMainbranch?: boolean
     name: string
     address: string
+    address_2?: string | null
     city: string
     state: string
     zip: string
     country?: string | null
+    tel?: string | null
+    fax?: string | null
+    website?: string | null
+    lat?: string | null
+    lng?: string | null
+    email?: string | null
+    email_2?: string | null
+    company_type?: string | null
+    sub_company_type?: string | null
+    registeredamount?: string | null
+    social_facebook?: string | null
+    social_likedin?: string | null
+    social_instragram?: string | null
+    social_line?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     companyId?: string | null
@@ -12142,10 +12007,25 @@ export namespace Prisma {
     isMainbranch?: BoolFieldUpdateOperationsInput | boolean
     name?: StringFieldUpdateOperationsInput | string
     address?: StringFieldUpdateOperationsInput | string
+    address_2?: NullableStringFieldUpdateOperationsInput | string | null
     city?: StringFieldUpdateOperationsInput | string
     state?: StringFieldUpdateOperationsInput | string
     zip?: StringFieldUpdateOperationsInput | string
     country?: NullableStringFieldUpdateOperationsInput | string | null
+    tel?: NullableStringFieldUpdateOperationsInput | string | null
+    fax?: NullableStringFieldUpdateOperationsInput | string | null
+    website?: NullableStringFieldUpdateOperationsInput | string | null
+    lat?: NullableStringFieldUpdateOperationsInput | string | null
+    lng?: NullableStringFieldUpdateOperationsInput | string | null
+    email?: NullableStringFieldUpdateOperationsInput | string | null
+    email_2?: NullableStringFieldUpdateOperationsInput | string | null
+    company_type?: NullableStringFieldUpdateOperationsInput | string | null
+    sub_company_type?: NullableStringFieldUpdateOperationsInput | string | null
+    registeredamount?: NullableStringFieldUpdateOperationsInput | string | null
+    social_facebook?: NullableStringFieldUpdateOperationsInput | string | null
+    social_likedin?: NullableStringFieldUpdateOperationsInput | string | null
+    social_instragram?: NullableStringFieldUpdateOperationsInput | string | null
+    social_line?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -12155,10 +12035,25 @@ export namespace Prisma {
     isMainbranch?: BoolFieldUpdateOperationsInput | boolean
     name?: StringFieldUpdateOperationsInput | string
     address?: StringFieldUpdateOperationsInput | string
+    address_2?: NullableStringFieldUpdateOperationsInput | string | null
     city?: StringFieldUpdateOperationsInput | string
     state?: StringFieldUpdateOperationsInput | string
     zip?: StringFieldUpdateOperationsInput | string
     country?: NullableStringFieldUpdateOperationsInput | string | null
+    tel?: NullableStringFieldUpdateOperationsInput | string | null
+    fax?: NullableStringFieldUpdateOperationsInput | string | null
+    website?: NullableStringFieldUpdateOperationsInput | string | null
+    lat?: NullableStringFieldUpdateOperationsInput | string | null
+    lng?: NullableStringFieldUpdateOperationsInput | string | null
+    email?: NullableStringFieldUpdateOperationsInput | string | null
+    email_2?: NullableStringFieldUpdateOperationsInput | string | null
+    company_type?: NullableStringFieldUpdateOperationsInput | string | null
+    sub_company_type?: NullableStringFieldUpdateOperationsInput | string | null
+    registeredamount?: NullableStringFieldUpdateOperationsInput | string | null
+    social_facebook?: NullableStringFieldUpdateOperationsInput | string | null
+    social_likedin?: NullableStringFieldUpdateOperationsInput | string | null
+    social_instragram?: NullableStringFieldUpdateOperationsInput | string | null
+    social_line?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     companyId?: NullableStringFieldUpdateOperationsInput | string | null
@@ -12904,27 +12799,7 @@ export namespace Prisma {
     userlimit?: SortOrder
     company_registration_id?: SortOrder
     company_vat_id?: SortOrder
-    address?: SortOrder
-    address_2?: SortOrder
-    city?: SortOrder
-    state?: SortOrder
-    zip?: SortOrder
-    country?: SortOrder
     icon?: SortOrder
-    tel?: SortOrder
-    fax?: SortOrder
-    website?: SortOrder
-    lat?: SortOrder
-    lng?: SortOrder
-    email?: SortOrder
-    email_2?: SortOrder
-    company_type?: SortOrder
-    sub_company_type?: SortOrder
-    registeredamount?: SortOrder
-    social_facebook?: SortOrder
-    social_likedin?: SortOrder
-    social_instragram?: SortOrder
-    social_line?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     ownerId?: SortOrder
@@ -12941,27 +12816,7 @@ export namespace Prisma {
     userlimit?: SortOrder
     company_registration_id?: SortOrder
     company_vat_id?: SortOrder
-    address?: SortOrder
-    address_2?: SortOrder
-    city?: SortOrder
-    state?: SortOrder
-    zip?: SortOrder
-    country?: SortOrder
     icon?: SortOrder
-    tel?: SortOrder
-    fax?: SortOrder
-    website?: SortOrder
-    lat?: SortOrder
-    lng?: SortOrder
-    email?: SortOrder
-    email_2?: SortOrder
-    company_type?: SortOrder
-    sub_company_type?: SortOrder
-    registeredamount?: SortOrder
-    social_facebook?: SortOrder
-    social_likedin?: SortOrder
-    social_instragram?: SortOrder
-    social_line?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     ownerId?: SortOrder
@@ -12974,27 +12829,7 @@ export namespace Prisma {
     userlimit?: SortOrder
     company_registration_id?: SortOrder
     company_vat_id?: SortOrder
-    address?: SortOrder
-    address_2?: SortOrder
-    city?: SortOrder
-    state?: SortOrder
-    zip?: SortOrder
-    country?: SortOrder
     icon?: SortOrder
-    tel?: SortOrder
-    fax?: SortOrder
-    website?: SortOrder
-    lat?: SortOrder
-    lng?: SortOrder
-    email?: SortOrder
-    email_2?: SortOrder
-    company_type?: SortOrder
-    sub_company_type?: SortOrder
-    registeredamount?: SortOrder
-    social_facebook?: SortOrder
-    social_likedin?: SortOrder
-    social_instragram?: SortOrder
-    social_line?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     ownerId?: SortOrder
@@ -13132,10 +12967,25 @@ export namespace Prisma {
     isMainbranch?: SortOrder
     name?: SortOrder
     address?: SortOrder
+    address_2?: SortOrder
     city?: SortOrder
     state?: SortOrder
     zip?: SortOrder
     country?: SortOrder
+    tel?: SortOrder
+    fax?: SortOrder
+    website?: SortOrder
+    lat?: SortOrder
+    lng?: SortOrder
+    email?: SortOrder
+    email_2?: SortOrder
+    company_type?: SortOrder
+    sub_company_type?: SortOrder
+    registeredamount?: SortOrder
+    social_facebook?: SortOrder
+    social_likedin?: SortOrder
+    social_instragram?: SortOrder
+    social_line?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     companyId?: SortOrder
@@ -13146,10 +12996,25 @@ export namespace Prisma {
     isMainbranch?: SortOrder
     name?: SortOrder
     address?: SortOrder
+    address_2?: SortOrder
     city?: SortOrder
     state?: SortOrder
     zip?: SortOrder
     country?: SortOrder
+    tel?: SortOrder
+    fax?: SortOrder
+    website?: SortOrder
+    lat?: SortOrder
+    lng?: SortOrder
+    email?: SortOrder
+    email_2?: SortOrder
+    company_type?: SortOrder
+    sub_company_type?: SortOrder
+    registeredamount?: SortOrder
+    social_facebook?: SortOrder
+    social_likedin?: SortOrder
+    social_instragram?: SortOrder
+    social_line?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     companyId?: SortOrder
@@ -13160,10 +13025,25 @@ export namespace Prisma {
     isMainbranch?: SortOrder
     name?: SortOrder
     address?: SortOrder
+    address_2?: SortOrder
     city?: SortOrder
     state?: SortOrder
     zip?: SortOrder
     country?: SortOrder
+    tel?: SortOrder
+    fax?: SortOrder
+    website?: SortOrder
+    lat?: SortOrder
+    lng?: SortOrder
+    email?: SortOrder
+    email_2?: SortOrder
+    company_type?: SortOrder
+    sub_company_type?: SortOrder
+    registeredamount?: SortOrder
+    social_facebook?: SortOrder
+    social_likedin?: SortOrder
+    social_instragram?: SortOrder
+    social_line?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     companyId?: SortOrder
@@ -14413,10 +14293,25 @@ export namespace Prisma {
     isMainbranch?: boolean
     name: string
     address: string
+    address_2?: string | null
     city: string
     state: string
     zip: string
     country?: string | null
+    tel?: string | null
+    fax?: string | null
+    website?: string | null
+    lat?: string | null
+    lng?: string | null
+    email?: string | null
+    email_2?: string | null
+    company_type?: string | null
+    sub_company_type?: string | null
+    registeredamount?: string | null
+    social_facebook?: string | null
+    social_likedin?: string | null
+    social_instragram?: string | null
+    social_line?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     users?: UserCreateNestedManyWithoutCompanyBranchInput
@@ -14428,10 +14323,25 @@ export namespace Prisma {
     isMainbranch?: boolean
     name: string
     address: string
+    address_2?: string | null
     city: string
     state: string
     zip: string
     country?: string | null
+    tel?: string | null
+    fax?: string | null
+    website?: string | null
+    lat?: string | null
+    lng?: string | null
+    email?: string | null
+    email_2?: string | null
+    company_type?: string | null
+    sub_company_type?: string | null
+    registeredamount?: string | null
+    social_facebook?: string | null
+    social_likedin?: string | null
+    social_instragram?: string | null
+    social_line?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     users?: UserUncheckedCreateNestedManyWithoutCompanyBranchInput
@@ -14507,10 +14417,25 @@ export namespace Prisma {
     isMainbranch?: BoolFilter | boolean
     name?: StringFilter | string
     address?: StringFilter | string
+    address_2?: StringNullableFilter | string | null
     city?: StringFilter | string
     state?: StringFilter | string
     zip?: StringFilter | string
     country?: StringNullableFilter | string | null
+    tel?: StringNullableFilter | string | null
+    fax?: StringNullableFilter | string | null
+    website?: StringNullableFilter | string | null
+    lat?: StringNullableFilter | string | null
+    lng?: StringNullableFilter | string | null
+    email?: StringNullableFilter | string | null
+    email_2?: StringNullableFilter | string | null
+    company_type?: StringNullableFilter | string | null
+    sub_company_type?: StringNullableFilter | string | null
+    registeredamount?: StringNullableFilter | string | null
+    social_facebook?: StringNullableFilter | string | null
+    social_likedin?: StringNullableFilter | string | null
+    social_instragram?: StringNullableFilter | string | null
+    social_line?: StringNullableFilter | string | null
     createdAt?: DateTimeFilter | Date | string
     updatedAt?: DateTimeFilter | Date | string
     companyId?: UuidNullableFilter | string | null
@@ -14523,27 +14448,7 @@ export namespace Prisma {
     userlimit?: number
     company_registration_id?: string | null
     company_vat_id?: string | null
-    address: string
-    address_2?: string | null
-    city: string
-    state: string
-    zip: string
-    country?: string | null
     icon?: string | null
-    tel?: string | null
-    fax?: string | null
-    website?: string | null
-    lat?: string | null
-    lng?: string | null
-    email?: string | null
-    email_2?: string | null
-    company_type?: string | null
-    sub_company_type?: string | null
-    registeredamount?: string | null
-    social_facebook?: string | null
-    social_likedin?: string | null
-    social_instragram?: string | null
-    social_line?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     owner: UserCreateNestedOneWithoutCompanyInput
@@ -14556,27 +14461,7 @@ export namespace Prisma {
     userlimit?: number
     company_registration_id?: string | null
     company_vat_id?: string | null
-    address: string
-    address_2?: string | null
-    city: string
-    state: string
-    zip: string
-    country?: string | null
     icon?: string | null
-    tel?: string | null
-    fax?: string | null
-    website?: string | null
-    lat?: string | null
-    lng?: string | null
-    email?: string | null
-    email_2?: string | null
-    company_type?: string | null
-    sub_company_type?: string | null
-    registeredamount?: string | null
-    social_facebook?: string | null
-    social_likedin?: string | null
-    social_instragram?: string | null
-    social_line?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     ownerId: string
@@ -14663,27 +14548,7 @@ export namespace Prisma {
     userlimit?: IntFieldUpdateOperationsInput | number
     company_registration_id?: NullableStringFieldUpdateOperationsInput | string | null
     company_vat_id?: NullableStringFieldUpdateOperationsInput | string | null
-    address?: StringFieldUpdateOperationsInput | string
-    address_2?: NullableStringFieldUpdateOperationsInput | string | null
-    city?: StringFieldUpdateOperationsInput | string
-    state?: StringFieldUpdateOperationsInput | string
-    zip?: StringFieldUpdateOperationsInput | string
-    country?: NullableStringFieldUpdateOperationsInput | string | null
     icon?: NullableStringFieldUpdateOperationsInput | string | null
-    tel?: NullableStringFieldUpdateOperationsInput | string | null
-    fax?: NullableStringFieldUpdateOperationsInput | string | null
-    website?: NullableStringFieldUpdateOperationsInput | string | null
-    lat?: NullableStringFieldUpdateOperationsInput | string | null
-    lng?: NullableStringFieldUpdateOperationsInput | string | null
-    email?: NullableStringFieldUpdateOperationsInput | string | null
-    email_2?: NullableStringFieldUpdateOperationsInput | string | null
-    company_type?: NullableStringFieldUpdateOperationsInput | string | null
-    sub_company_type?: NullableStringFieldUpdateOperationsInput | string | null
-    registeredamount?: NullableStringFieldUpdateOperationsInput | string | null
-    social_facebook?: NullableStringFieldUpdateOperationsInput | string | null
-    social_likedin?: NullableStringFieldUpdateOperationsInput | string | null
-    social_instragram?: NullableStringFieldUpdateOperationsInput | string | null
-    social_line?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     owner?: UserUpdateOneRequiredWithoutCompanyNestedInput
@@ -14696,27 +14561,7 @@ export namespace Prisma {
     userlimit?: IntFieldUpdateOperationsInput | number
     company_registration_id?: NullableStringFieldUpdateOperationsInput | string | null
     company_vat_id?: NullableStringFieldUpdateOperationsInput | string | null
-    address?: StringFieldUpdateOperationsInput | string
-    address_2?: NullableStringFieldUpdateOperationsInput | string | null
-    city?: StringFieldUpdateOperationsInput | string
-    state?: StringFieldUpdateOperationsInput | string
-    zip?: StringFieldUpdateOperationsInput | string
-    country?: NullableStringFieldUpdateOperationsInput | string | null
     icon?: NullableStringFieldUpdateOperationsInput | string | null
-    tel?: NullableStringFieldUpdateOperationsInput | string | null
-    fax?: NullableStringFieldUpdateOperationsInput | string | null
-    website?: NullableStringFieldUpdateOperationsInput | string | null
-    lat?: NullableStringFieldUpdateOperationsInput | string | null
-    lng?: NullableStringFieldUpdateOperationsInput | string | null
-    email?: NullableStringFieldUpdateOperationsInput | string | null
-    email_2?: NullableStringFieldUpdateOperationsInput | string | null
-    company_type?: NullableStringFieldUpdateOperationsInput | string | null
-    sub_company_type?: NullableStringFieldUpdateOperationsInput | string | null
-    registeredamount?: NullableStringFieldUpdateOperationsInput | string | null
-    social_facebook?: NullableStringFieldUpdateOperationsInput | string | null
-    social_likedin?: NullableStringFieldUpdateOperationsInput | string | null
-    social_instragram?: NullableStringFieldUpdateOperationsInput | string | null
-    social_line?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     ownerId?: StringFieldUpdateOperationsInput | string
@@ -14970,27 +14815,7 @@ export namespace Prisma {
     userlimit?: number
     company_registration_id?: string | null
     company_vat_id?: string | null
-    address: string
-    address_2?: string | null
-    city: string
-    state: string
-    zip: string
-    country?: string | null
     icon?: string | null
-    tel?: string | null
-    fax?: string | null
-    website?: string | null
-    lat?: string | null
-    lng?: string | null
-    email?: string | null
-    email_2?: string | null
-    company_type?: string | null
-    sub_company_type?: string | null
-    registeredamount?: string | null
-    social_facebook?: string | null
-    social_likedin?: string | null
-    social_instragram?: string | null
-    social_line?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     branch?: CompanyBranchCreateNestedManyWithoutCompanyInput
@@ -15003,27 +14828,7 @@ export namespace Prisma {
     userlimit?: number
     company_registration_id?: string | null
     company_vat_id?: string | null
-    address: string
-    address_2?: string | null
-    city: string
-    state: string
-    zip: string
-    country?: string | null
     icon?: string | null
-    tel?: string | null
-    fax?: string | null
-    website?: string | null
-    lat?: string | null
-    lng?: string | null
-    email?: string | null
-    email_2?: string | null
-    company_type?: string | null
-    sub_company_type?: string | null
-    registeredamount?: string | null
-    social_facebook?: string | null
-    social_likedin?: string | null
-    social_instragram?: string | null
-    social_line?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     branch?: CompanyBranchUncheckedCreateNestedManyWithoutCompanyInput
@@ -15044,10 +14849,25 @@ export namespace Prisma {
     isMainbranch?: boolean
     name: string
     address: string
+    address_2?: string | null
     city: string
     state: string
     zip: string
     country?: string | null
+    tel?: string | null
+    fax?: string | null
+    website?: string | null
+    lat?: string | null
+    lng?: string | null
+    email?: string | null
+    email_2?: string | null
+    company_type?: string | null
+    sub_company_type?: string | null
+    registeredamount?: string | null
+    social_facebook?: string | null
+    social_likedin?: string | null
+    social_instragram?: string | null
+    social_line?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     company?: CompanyCreateNestedOneWithoutBranchInput
@@ -15059,10 +14879,25 @@ export namespace Prisma {
     isMainbranch?: boolean
     name: string
     address: string
+    address_2?: string | null
     city: string
     state: string
     zip: string
     country?: string | null
+    tel?: string | null
+    fax?: string | null
+    website?: string | null
+    lat?: string | null
+    lng?: string | null
+    email?: string | null
+    email_2?: string | null
+    company_type?: string | null
+    sub_company_type?: string | null
+    registeredamount?: string | null
+    social_facebook?: string | null
+    social_likedin?: string | null
+    social_instragram?: string | null
+    social_line?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     companyId?: string | null
@@ -15231,27 +15066,7 @@ export namespace Prisma {
     userlimit?: IntFilter | number
     company_registration_id?: StringNullableFilter | string | null
     company_vat_id?: StringNullableFilter | string | null
-    address?: StringFilter | string
-    address_2?: StringNullableFilter | string | null
-    city?: StringFilter | string
-    state?: StringFilter | string
-    zip?: StringFilter | string
-    country?: StringNullableFilter | string | null
     icon?: StringNullableFilter | string | null
-    tel?: StringNullableFilter | string | null
-    fax?: StringNullableFilter | string | null
-    website?: StringNullableFilter | string | null
-    lat?: StringNullableFilter | string | null
-    lng?: StringNullableFilter | string | null
-    email?: StringNullableFilter | string | null
-    email_2?: StringNullableFilter | string | null
-    company_type?: StringNullableFilter | string | null
-    sub_company_type?: StringNullableFilter | string | null
-    registeredamount?: StringNullableFilter | string | null
-    social_facebook?: StringNullableFilter | string | null
-    social_likedin?: StringNullableFilter | string | null
-    social_instragram?: StringNullableFilter | string | null
-    social_line?: StringNullableFilter | string | null
     createdAt?: DateTimeFilter | Date | string
     updatedAt?: DateTimeFilter | Date | string
     ownerId?: UuidFilter | string
@@ -15267,10 +15082,25 @@ export namespace Prisma {
     isMainbranch?: BoolFieldUpdateOperationsInput | boolean
     name?: StringFieldUpdateOperationsInput | string
     address?: StringFieldUpdateOperationsInput | string
+    address_2?: NullableStringFieldUpdateOperationsInput | string | null
     city?: StringFieldUpdateOperationsInput | string
     state?: StringFieldUpdateOperationsInput | string
     zip?: StringFieldUpdateOperationsInput | string
     country?: NullableStringFieldUpdateOperationsInput | string | null
+    tel?: NullableStringFieldUpdateOperationsInput | string | null
+    fax?: NullableStringFieldUpdateOperationsInput | string | null
+    website?: NullableStringFieldUpdateOperationsInput | string | null
+    lat?: NullableStringFieldUpdateOperationsInput | string | null
+    lng?: NullableStringFieldUpdateOperationsInput | string | null
+    email?: NullableStringFieldUpdateOperationsInput | string | null
+    email_2?: NullableStringFieldUpdateOperationsInput | string | null
+    company_type?: NullableStringFieldUpdateOperationsInput | string | null
+    sub_company_type?: NullableStringFieldUpdateOperationsInput | string | null
+    registeredamount?: NullableStringFieldUpdateOperationsInput | string | null
+    social_facebook?: NullableStringFieldUpdateOperationsInput | string | null
+    social_likedin?: NullableStringFieldUpdateOperationsInput | string | null
+    social_instragram?: NullableStringFieldUpdateOperationsInput | string | null
+    social_line?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     company?: CompanyUpdateOneWithoutBranchNestedInput
@@ -15282,10 +15112,25 @@ export namespace Prisma {
     isMainbranch?: BoolFieldUpdateOperationsInput | boolean
     name?: StringFieldUpdateOperationsInput | string
     address?: StringFieldUpdateOperationsInput | string
+    address_2?: NullableStringFieldUpdateOperationsInput | string | null
     city?: StringFieldUpdateOperationsInput | string
     state?: StringFieldUpdateOperationsInput | string
     zip?: StringFieldUpdateOperationsInput | string
     country?: NullableStringFieldUpdateOperationsInput | string | null
+    tel?: NullableStringFieldUpdateOperationsInput | string | null
+    fax?: NullableStringFieldUpdateOperationsInput | string | null
+    website?: NullableStringFieldUpdateOperationsInput | string | null
+    lat?: NullableStringFieldUpdateOperationsInput | string | null
+    lng?: NullableStringFieldUpdateOperationsInput | string | null
+    email?: NullableStringFieldUpdateOperationsInput | string | null
+    email_2?: NullableStringFieldUpdateOperationsInput | string | null
+    company_type?: NullableStringFieldUpdateOperationsInput | string | null
+    sub_company_type?: NullableStringFieldUpdateOperationsInput | string | null
+    registeredamount?: NullableStringFieldUpdateOperationsInput | string | null
+    social_facebook?: NullableStringFieldUpdateOperationsInput | string | null
+    social_likedin?: NullableStringFieldUpdateOperationsInput | string | null
+    social_instragram?: NullableStringFieldUpdateOperationsInput | string | null
+    social_line?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     companyId?: NullableStringFieldUpdateOperationsInput | string | null
@@ -15412,10 +15257,25 @@ export namespace Prisma {
     isMainbranch?: boolean
     name: string
     address: string
+    address_2?: string | null
     city: string
     state: string
     zip: string
     country?: string | null
+    tel?: string | null
+    fax?: string | null
+    website?: string | null
+    lat?: string | null
+    lng?: string | null
+    email?: string | null
+    email_2?: string | null
+    company_type?: string | null
+    sub_company_type?: string | null
+    registeredamount?: string | null
+    social_facebook?: string | null
+    social_likedin?: string | null
+    social_instragram?: string | null
+    social_line?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     company?: CompanyCreateNestedOneWithoutBranchInput
@@ -15427,10 +15287,25 @@ export namespace Prisma {
     isMainbranch?: boolean
     name: string
     address: string
+    address_2?: string | null
     city: string
     state: string
     zip: string
     country?: string | null
+    tel?: string | null
+    fax?: string | null
+    website?: string | null
+    lat?: string | null
+    lng?: string | null
+    email?: string | null
+    email_2?: string | null
+    company_type?: string | null
+    sub_company_type?: string | null
+    registeredamount?: string | null
+    social_facebook?: string | null
+    social_likedin?: string | null
+    social_instragram?: string | null
+    social_line?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     companyId?: string | null
@@ -15468,10 +15343,25 @@ export namespace Prisma {
     isMainbranch?: BoolFieldUpdateOperationsInput | boolean
     name?: StringFieldUpdateOperationsInput | string
     address?: StringFieldUpdateOperationsInput | string
+    address_2?: NullableStringFieldUpdateOperationsInput | string | null
     city?: StringFieldUpdateOperationsInput | string
     state?: StringFieldUpdateOperationsInput | string
     zip?: StringFieldUpdateOperationsInput | string
     country?: NullableStringFieldUpdateOperationsInput | string | null
+    tel?: NullableStringFieldUpdateOperationsInput | string | null
+    fax?: NullableStringFieldUpdateOperationsInput | string | null
+    website?: NullableStringFieldUpdateOperationsInput | string | null
+    lat?: NullableStringFieldUpdateOperationsInput | string | null
+    lng?: NullableStringFieldUpdateOperationsInput | string | null
+    email?: NullableStringFieldUpdateOperationsInput | string | null
+    email_2?: NullableStringFieldUpdateOperationsInput | string | null
+    company_type?: NullableStringFieldUpdateOperationsInput | string | null
+    sub_company_type?: NullableStringFieldUpdateOperationsInput | string | null
+    registeredamount?: NullableStringFieldUpdateOperationsInput | string | null
+    social_facebook?: NullableStringFieldUpdateOperationsInput | string | null
+    social_likedin?: NullableStringFieldUpdateOperationsInput | string | null
+    social_instragram?: NullableStringFieldUpdateOperationsInput | string | null
+    social_line?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     company?: CompanyUpdateOneWithoutBranchNestedInput
@@ -15483,10 +15373,25 @@ export namespace Prisma {
     isMainbranch?: BoolFieldUpdateOperationsInput | boolean
     name?: StringFieldUpdateOperationsInput | string
     address?: StringFieldUpdateOperationsInput | string
+    address_2?: NullableStringFieldUpdateOperationsInput | string | null
     city?: StringFieldUpdateOperationsInput | string
     state?: StringFieldUpdateOperationsInput | string
     zip?: StringFieldUpdateOperationsInput | string
     country?: NullableStringFieldUpdateOperationsInput | string | null
+    tel?: NullableStringFieldUpdateOperationsInput | string | null
+    fax?: NullableStringFieldUpdateOperationsInput | string | null
+    website?: NullableStringFieldUpdateOperationsInput | string | null
+    lat?: NullableStringFieldUpdateOperationsInput | string | null
+    lng?: NullableStringFieldUpdateOperationsInput | string | null
+    email?: NullableStringFieldUpdateOperationsInput | string | null
+    email_2?: NullableStringFieldUpdateOperationsInput | string | null
+    company_type?: NullableStringFieldUpdateOperationsInput | string | null
+    sub_company_type?: NullableStringFieldUpdateOperationsInput | string | null
+    registeredamount?: NullableStringFieldUpdateOperationsInput | string | null
+    social_facebook?: NullableStringFieldUpdateOperationsInput | string | null
+    social_likedin?: NullableStringFieldUpdateOperationsInput | string | null
+    social_instragram?: NullableStringFieldUpdateOperationsInput | string | null
+    social_line?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     companyId?: NullableStringFieldUpdateOperationsInput | string | null
@@ -15657,10 +15562,25 @@ export namespace Prisma {
     isMainbranch?: boolean
     name: string
     address: string
+    address_2?: string | null
     city: string
     state: string
     zip: string
     country?: string | null
+    tel?: string | null
+    fax?: string | null
+    website?: string | null
+    lat?: string | null
+    lng?: string | null
+    email?: string | null
+    email_2?: string | null
+    company_type?: string | null
+    sub_company_type?: string | null
+    registeredamount?: string | null
+    social_facebook?: string | null
+    social_likedin?: string | null
+    social_instragram?: string | null
+    social_line?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -15670,10 +15590,25 @@ export namespace Prisma {
     isMainbranch?: BoolFieldUpdateOperationsInput | boolean
     name?: StringFieldUpdateOperationsInput | string
     address?: StringFieldUpdateOperationsInput | string
+    address_2?: NullableStringFieldUpdateOperationsInput | string | null
     city?: StringFieldUpdateOperationsInput | string
     state?: StringFieldUpdateOperationsInput | string
     zip?: StringFieldUpdateOperationsInput | string
     country?: NullableStringFieldUpdateOperationsInput | string | null
+    tel?: NullableStringFieldUpdateOperationsInput | string | null
+    fax?: NullableStringFieldUpdateOperationsInput | string | null
+    website?: NullableStringFieldUpdateOperationsInput | string | null
+    lat?: NullableStringFieldUpdateOperationsInput | string | null
+    lng?: NullableStringFieldUpdateOperationsInput | string | null
+    email?: NullableStringFieldUpdateOperationsInput | string | null
+    email_2?: NullableStringFieldUpdateOperationsInput | string | null
+    company_type?: NullableStringFieldUpdateOperationsInput | string | null
+    sub_company_type?: NullableStringFieldUpdateOperationsInput | string | null
+    registeredamount?: NullableStringFieldUpdateOperationsInput | string | null
+    social_facebook?: NullableStringFieldUpdateOperationsInput | string | null
+    social_likedin?: NullableStringFieldUpdateOperationsInput | string | null
+    social_instragram?: NullableStringFieldUpdateOperationsInput | string | null
+    social_line?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     users?: UserUpdateManyWithoutCompanyBranchNestedInput
@@ -15685,10 +15620,25 @@ export namespace Prisma {
     isMainbranch?: BoolFieldUpdateOperationsInput | boolean
     name?: StringFieldUpdateOperationsInput | string
     address?: StringFieldUpdateOperationsInput | string
+    address_2?: NullableStringFieldUpdateOperationsInput | string | null
     city?: StringFieldUpdateOperationsInput | string
     state?: StringFieldUpdateOperationsInput | string
     zip?: StringFieldUpdateOperationsInput | string
     country?: NullableStringFieldUpdateOperationsInput | string | null
+    tel?: NullableStringFieldUpdateOperationsInput | string | null
+    fax?: NullableStringFieldUpdateOperationsInput | string | null
+    website?: NullableStringFieldUpdateOperationsInput | string | null
+    lat?: NullableStringFieldUpdateOperationsInput | string | null
+    lng?: NullableStringFieldUpdateOperationsInput | string | null
+    email?: NullableStringFieldUpdateOperationsInput | string | null
+    email_2?: NullableStringFieldUpdateOperationsInput | string | null
+    company_type?: NullableStringFieldUpdateOperationsInput | string | null
+    sub_company_type?: NullableStringFieldUpdateOperationsInput | string | null
+    registeredamount?: NullableStringFieldUpdateOperationsInput | string | null
+    social_facebook?: NullableStringFieldUpdateOperationsInput | string | null
+    social_likedin?: NullableStringFieldUpdateOperationsInput | string | null
+    social_instragram?: NullableStringFieldUpdateOperationsInput | string | null
+    social_line?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     users?: UserUncheckedUpdateManyWithoutCompanyBranchNestedInput
@@ -15700,10 +15650,25 @@ export namespace Prisma {
     isMainbranch?: BoolFieldUpdateOperationsInput | boolean
     name?: StringFieldUpdateOperationsInput | string
     address?: StringFieldUpdateOperationsInput | string
+    address_2?: NullableStringFieldUpdateOperationsInput | string | null
     city?: StringFieldUpdateOperationsInput | string
     state?: StringFieldUpdateOperationsInput | string
     zip?: StringFieldUpdateOperationsInput | string
     country?: NullableStringFieldUpdateOperationsInput | string | null
+    tel?: NullableStringFieldUpdateOperationsInput | string | null
+    fax?: NullableStringFieldUpdateOperationsInput | string | null
+    website?: NullableStringFieldUpdateOperationsInput | string | null
+    lat?: NullableStringFieldUpdateOperationsInput | string | null
+    lng?: NullableStringFieldUpdateOperationsInput | string | null
+    email?: NullableStringFieldUpdateOperationsInput | string | null
+    email_2?: NullableStringFieldUpdateOperationsInput | string | null
+    company_type?: NullableStringFieldUpdateOperationsInput | string | null
+    sub_company_type?: NullableStringFieldUpdateOperationsInput | string | null
+    registeredamount?: NullableStringFieldUpdateOperationsInput | string | null
+    social_facebook?: NullableStringFieldUpdateOperationsInput | string | null
+    social_likedin?: NullableStringFieldUpdateOperationsInput | string | null
+    social_instragram?: NullableStringFieldUpdateOperationsInput | string | null
+    social_line?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -15797,27 +15762,7 @@ export namespace Prisma {
     userlimit?: number
     company_registration_id?: string | null
     company_vat_id?: string | null
-    address: string
-    address_2?: string | null
-    city: string
-    state: string
-    zip: string
-    country?: string | null
     icon?: string | null
-    tel?: string | null
-    fax?: string | null
-    website?: string | null
-    lat?: string | null
-    lng?: string | null
-    email?: string | null
-    email_2?: string | null
-    company_type?: string | null
-    sub_company_type?: string | null
-    registeredamount?: string | null
-    social_facebook?: string | null
-    social_likedin?: string | null
-    social_instragram?: string | null
-    social_line?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -15829,27 +15774,7 @@ export namespace Prisma {
     userlimit?: IntFieldUpdateOperationsInput | number
     company_registration_id?: NullableStringFieldUpdateOperationsInput | string | null
     company_vat_id?: NullableStringFieldUpdateOperationsInput | string | null
-    address?: StringFieldUpdateOperationsInput | string
-    address_2?: NullableStringFieldUpdateOperationsInput | string | null
-    city?: StringFieldUpdateOperationsInput | string
-    state?: StringFieldUpdateOperationsInput | string
-    zip?: StringFieldUpdateOperationsInput | string
-    country?: NullableStringFieldUpdateOperationsInput | string | null
     icon?: NullableStringFieldUpdateOperationsInput | string | null
-    tel?: NullableStringFieldUpdateOperationsInput | string | null
-    fax?: NullableStringFieldUpdateOperationsInput | string | null
-    website?: NullableStringFieldUpdateOperationsInput | string | null
-    lat?: NullableStringFieldUpdateOperationsInput | string | null
-    lng?: NullableStringFieldUpdateOperationsInput | string | null
-    email?: NullableStringFieldUpdateOperationsInput | string | null
-    email_2?: NullableStringFieldUpdateOperationsInput | string | null
-    company_type?: NullableStringFieldUpdateOperationsInput | string | null
-    sub_company_type?: NullableStringFieldUpdateOperationsInput | string | null
-    registeredamount?: NullableStringFieldUpdateOperationsInput | string | null
-    social_facebook?: NullableStringFieldUpdateOperationsInput | string | null
-    social_likedin?: NullableStringFieldUpdateOperationsInput | string | null
-    social_instragram?: NullableStringFieldUpdateOperationsInput | string | null
-    social_line?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     branch?: CompanyBranchUpdateManyWithoutCompanyNestedInput
@@ -15862,27 +15787,7 @@ export namespace Prisma {
     userlimit?: IntFieldUpdateOperationsInput | number
     company_registration_id?: NullableStringFieldUpdateOperationsInput | string | null
     company_vat_id?: NullableStringFieldUpdateOperationsInput | string | null
-    address?: StringFieldUpdateOperationsInput | string
-    address_2?: NullableStringFieldUpdateOperationsInput | string | null
-    city?: StringFieldUpdateOperationsInput | string
-    state?: StringFieldUpdateOperationsInput | string
-    zip?: StringFieldUpdateOperationsInput | string
-    country?: NullableStringFieldUpdateOperationsInput | string | null
     icon?: NullableStringFieldUpdateOperationsInput | string | null
-    tel?: NullableStringFieldUpdateOperationsInput | string | null
-    fax?: NullableStringFieldUpdateOperationsInput | string | null
-    website?: NullableStringFieldUpdateOperationsInput | string | null
-    lat?: NullableStringFieldUpdateOperationsInput | string | null
-    lng?: NullableStringFieldUpdateOperationsInput | string | null
-    email?: NullableStringFieldUpdateOperationsInput | string | null
-    email_2?: NullableStringFieldUpdateOperationsInput | string | null
-    company_type?: NullableStringFieldUpdateOperationsInput | string | null
-    sub_company_type?: NullableStringFieldUpdateOperationsInput | string | null
-    registeredamount?: NullableStringFieldUpdateOperationsInput | string | null
-    social_facebook?: NullableStringFieldUpdateOperationsInput | string | null
-    social_likedin?: NullableStringFieldUpdateOperationsInput | string | null
-    social_instragram?: NullableStringFieldUpdateOperationsInput | string | null
-    social_line?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     branch?: CompanyBranchUncheckedUpdateManyWithoutCompanyNestedInput
@@ -15895,27 +15800,7 @@ export namespace Prisma {
     userlimit?: IntFieldUpdateOperationsInput | number
     company_registration_id?: NullableStringFieldUpdateOperationsInput | string | null
     company_vat_id?: NullableStringFieldUpdateOperationsInput | string | null
-    address?: StringFieldUpdateOperationsInput | string
-    address_2?: NullableStringFieldUpdateOperationsInput | string | null
-    city?: StringFieldUpdateOperationsInput | string
-    state?: StringFieldUpdateOperationsInput | string
-    zip?: StringFieldUpdateOperationsInput | string
-    country?: NullableStringFieldUpdateOperationsInput | string | null
     icon?: NullableStringFieldUpdateOperationsInput | string | null
-    tel?: NullableStringFieldUpdateOperationsInput | string | null
-    fax?: NullableStringFieldUpdateOperationsInput | string | null
-    website?: NullableStringFieldUpdateOperationsInput | string | null
-    lat?: NullableStringFieldUpdateOperationsInput | string | null
-    lng?: NullableStringFieldUpdateOperationsInput | string | null
-    email?: NullableStringFieldUpdateOperationsInput | string | null
-    email_2?: NullableStringFieldUpdateOperationsInput | string | null
-    company_type?: NullableStringFieldUpdateOperationsInput | string | null
-    sub_company_type?: NullableStringFieldUpdateOperationsInput | string | null
-    registeredamount?: NullableStringFieldUpdateOperationsInput | string | null
-    social_facebook?: NullableStringFieldUpdateOperationsInput | string | null
-    social_likedin?: NullableStringFieldUpdateOperationsInput | string | null
-    social_instragram?: NullableStringFieldUpdateOperationsInput | string | null
-    social_line?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
