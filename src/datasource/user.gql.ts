@@ -114,6 +114,9 @@ const resolvers: Resolvers = {
             select: {
               firstname_th: true,
               firstname_en: true,
+              lastname_en: true,
+              lastname_th: true,
+              prefix_en: true,
               avatar: true,
               prefix_th: true,
               dob: true,
@@ -243,6 +246,7 @@ const resolvers: Resolvers = {
       const createBranch = await ctx.prisma.companyBranch.create({
         data: {
           id: genbranchid,
+          isMainbranch: true,
           name: 'สาขาใหญ่',
           city: args.data.company_city,
           address: args.data.company_address,

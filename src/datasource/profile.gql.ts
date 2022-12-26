@@ -50,10 +50,13 @@ export const profileTypedef = gql`
   }
 
   type MeprofileType {
-    firstname: String
-    lastname: String
+    firstname_th: String
+    lastname_th: String
+    firstname_en: String
+    lastname_en: String
     avatar: String
-    prefix: String
+    prefix_th: String
+    prefix_en: String
     dob: Date
     gender: String
     bio: String
