@@ -151,6 +151,7 @@ const resolversComposition = {
   'Query.getownCompany': [authenticate()],
 };
 
+
 export const companyResolvers = composeResolvers(
   resolvers,
   resolversComposition,
