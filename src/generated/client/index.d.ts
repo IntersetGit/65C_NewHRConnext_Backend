@@ -429,8 +429,8 @@ export namespace Prisma {
 
 
   /**
-   * Prisma Client JS version: 4.8.0
-   * Query Engine version: d6e67a83f971b175a593ccc12e15c4a757f93ffe
+   * Prisma Client JS version: 4.7.1
+   * Query Engine version: 272861e07ab64f234d3ffc4094e32bd61775599c
    */
   export type PrismaVersion = {
     client: string
@@ -890,7 +890,6 @@ export namespace Prisma {
     db?: Datasource
   }
 
-  export type DefaultPrismaClient = PrismaClient
   export type RejectOnNotFound = boolean | ((error: Error) => Error)
   export type RejectPerModel = { [P in ModelName]?: RejectOnNotFound }
   export type RejectPerOperation =  { [P in "findUnique" | "findFirst"]?: RejectPerModel | RejectOnNotFound } 
@@ -1034,7 +1033,7 @@ export namespace Prisma {
   /**
    * `PrismaClient` proxy available in interactive transactions.
    */
-  export type TransactionClient = Omit<Prisma.DefaultPrismaClient, '$connect' | '$disconnect' | '$on' | '$transaction' | '$use'>
+  export type TransactionClient = Omit<PrismaClient, '$connect' | '$disconnect' | '$on' | '$transaction' | '$use'>
 
   export type Datasource = {
     url?: string
@@ -1605,14 +1604,14 @@ export namespace Prisma {
     updatedAt?: boolean
     ownerId?: boolean
     owner?: boolean | UserArgs
-    branch?: boolean | CompanyBranchArgs
+    branch?: boolean | CompanyBranchFindManyArgs
     _count?: boolean | CompanyCountOutputTypeArgs
   }
 
 
   export type CompanyInclude = {
     owner?: boolean | UserArgs
-    branch?: boolean | CompanyBranchArgs
+    branch?: boolean | CompanyBranchFindManyArgs
     _count?: boolean | CompanyCountOutputTypeArgs
   } 
 
@@ -2008,7 +2007,7 @@ export namespace Prisma {
 
     owner<T extends UserArgs= {}>(args?: Subset<T, UserArgs>): Prisma__UserClient<UserGetPayload<T> | Null>;
 
-    branch<T extends CompanyBranchArgs= {}>(args?: Subset<T, CompanyBranchArgs>): PrismaPromise<Array<CompanyBranchGetPayload<T>>| Null>;
+    branch<T extends CompanyBranchFindManyArgs= {}>(args?: Subset<T, CompanyBranchFindManyArgs>): PrismaPromise<Array<CompanyBranchGetPayload<T>>| Null>;
 
     private get _document();
     /**
@@ -2059,7 +2058,7 @@ export namespace Prisma {
   }
 
   /**
-   * Company findUnique
+   * Company: findUnique
    */
   export interface CompanyFindUniqueArgs extends CompanyFindUniqueArgsBase {
    /**
@@ -2149,7 +2148,7 @@ export namespace Prisma {
   }
 
   /**
-   * Company findFirst
+   * Company: findFirst
    */
   export interface CompanyFindFirstArgs extends CompanyFindFirstArgsBase {
    /**
@@ -2410,29 +2409,6 @@ export namespace Prisma {
      * 
     **/
     where?: CompanyWhereInput
-  }
-
-
-  /**
-   * Company.branch
-   */
-  export type CompanyBranchArgs = {
-    /**
-     * Select specific fields to fetch from the CompanyBranch
-     * 
-    **/
-    select?: CompanyBranchSelect | null
-    /**
-     * Choose, which related nodes to fetch as well.
-     * 
-    **/
-    include?: CompanyBranchInclude | null
-    where?: CompanyBranchWhereInput
-    orderBy?: Enumerable<CompanyBranchOrderByWithRelationInput>
-    cursor?: CompanyBranchWhereUniqueInput
-    take?: number
-    skip?: number
-    distinct?: Enumerable<CompanyBranchScalarFieldEnum>
   }
 
 
@@ -2794,16 +2770,16 @@ export namespace Prisma {
     updatedAt?: boolean
     company?: boolean | CompanyArgs
     companyId?: boolean
-    users?: boolean | CompanyBranchUsersArgs
-    positions?: boolean | CompanyBranchPositionsArgs
+    users?: boolean | UserFindManyArgs
+    positions?: boolean | PositionFindManyArgs
     _count?: boolean | CompanyBranchCountOutputTypeArgs
   }
 
 
   export type CompanyBranchInclude = {
     company?: boolean | CompanyArgs
-    users?: boolean | CompanyBranchUsersArgs
-    positions?: boolean | CompanyBranchPositionsArgs
+    users?: boolean | UserFindManyArgs
+    positions?: boolean | PositionFindManyArgs
     _count?: boolean | CompanyBranchCountOutputTypeArgs
   } 
 
@@ -3201,9 +3177,9 @@ export namespace Prisma {
 
     company<T extends CompanyArgs= {}>(args?: Subset<T, CompanyArgs>): Prisma__CompanyClient<CompanyGetPayload<T> | Null>;
 
-    users<T extends CompanyBranchUsersArgs= {}>(args?: Subset<T, CompanyBranchUsersArgs>): PrismaPromise<Array<UserGetPayload<T>>| Null>;
+    users<T extends UserFindManyArgs= {}>(args?: Subset<T, UserFindManyArgs>): PrismaPromise<Array<UserGetPayload<T>>| Null>;
 
-    positions<T extends CompanyBranchPositionsArgs= {}>(args?: Subset<T, CompanyBranchPositionsArgs>): PrismaPromise<Array<PositionGetPayload<T>>| Null>;
+    positions<T extends PositionFindManyArgs= {}>(args?: Subset<T, PositionFindManyArgs>): PrismaPromise<Array<PositionGetPayload<T>>| Null>;
 
     private get _document();
     /**
@@ -3254,7 +3230,7 @@ export namespace Prisma {
   }
 
   /**
-   * CompanyBranch findUnique
+   * CompanyBranch: findUnique
    */
   export interface CompanyBranchFindUniqueArgs extends CompanyBranchFindUniqueArgsBase {
    /**
@@ -3344,7 +3320,7 @@ export namespace Prisma {
   }
 
   /**
-   * CompanyBranch findFirst
+   * CompanyBranch: findFirst
    */
   export interface CompanyBranchFindFirstArgs extends CompanyBranchFindFirstArgsBase {
    /**
@@ -3605,52 +3581,6 @@ export namespace Prisma {
      * 
     **/
     where?: CompanyBranchWhereInput
-  }
-
-
-  /**
-   * CompanyBranch.users
-   */
-  export type CompanyBranchUsersArgs = {
-    /**
-     * Select specific fields to fetch from the User
-     * 
-    **/
-    select?: UserSelect | null
-    /**
-     * Choose, which related nodes to fetch as well.
-     * 
-    **/
-    include?: UserInclude | null
-    where?: UserWhereInput
-    orderBy?: Enumerable<UserOrderByWithRelationInput>
-    cursor?: UserWhereUniqueInput
-    take?: number
-    skip?: number
-    distinct?: Enumerable<UserScalarFieldEnum>
-  }
-
-
-  /**
-   * CompanyBranch.positions
-   */
-  export type CompanyBranchPositionsArgs = {
-    /**
-     * Select specific fields to fetch from the Position
-     * 
-    **/
-    select?: PositionSelect | null
-    /**
-     * Choose, which related nodes to fetch as well.
-     * 
-    **/
-    include?: PositionInclude | null
-    where?: PositionWhereInput
-    orderBy?: Enumerable<PositionOrderByWithRelationInput>
-    cursor?: PositionWhereUniqueInput
-    take?: number
-    skip?: number
-    distinct?: Enumerable<PositionScalarFieldEnum>
   }
 
 
@@ -4600,7 +4530,7 @@ export namespace Prisma {
   }
 
   /**
-   * Profile findUnique
+   * Profile: findUnique
    */
   export interface ProfileFindUniqueArgs extends ProfileFindUniqueArgsBase {
    /**
@@ -4690,7 +4620,7 @@ export namespace Prisma {
   }
 
   /**
-   * Profile findFirst
+   * Profile: findFirst
    */
   export interface ProfileFindFirstArgs extends ProfileFindFirstArgsBase {
    /**
@@ -5192,7 +5122,7 @@ export namespace Prisma {
     roleId?: boolean
     role?: boolean | RoleArgs
     positionId?: boolean
-    company?: boolean | UserCompanyArgs
+    company?: boolean | CompanyFindManyArgs
     companyBranch?: boolean | CompanyBranchArgs
     companyBranchId?: boolean
     Position?: boolean | PositionArgs
@@ -5203,7 +5133,7 @@ export namespace Prisma {
   export type UserInclude = {
     profile?: boolean | ProfileArgs
     role?: boolean | RoleArgs
-    company?: boolean | UserCompanyArgs
+    company?: boolean | CompanyFindManyArgs
     companyBranch?: boolean | CompanyBranchArgs
     Position?: boolean | PositionArgs
     _count?: boolean | UserCountOutputTypeArgs
@@ -5609,7 +5539,7 @@ export namespace Prisma {
 
     role<T extends RoleArgs= {}>(args?: Subset<T, RoleArgs>): Prisma__RoleClient<RoleGetPayload<T> | Null>;
 
-    company<T extends UserCompanyArgs= {}>(args?: Subset<T, UserCompanyArgs>): PrismaPromise<Array<CompanyGetPayload<T>>| Null>;
+    company<T extends CompanyFindManyArgs= {}>(args?: Subset<T, CompanyFindManyArgs>): PrismaPromise<Array<CompanyGetPayload<T>>| Null>;
 
     companyBranch<T extends CompanyBranchArgs= {}>(args?: Subset<T, CompanyBranchArgs>): Prisma__CompanyBranchClient<CompanyBranchGetPayload<T> | Null>;
 
@@ -5664,7 +5594,7 @@ export namespace Prisma {
   }
 
   /**
-   * User findUnique
+   * User: findUnique
    */
   export interface UserFindUniqueArgs extends UserFindUniqueArgsBase {
    /**
@@ -5754,7 +5684,7 @@ export namespace Prisma {
   }
 
   /**
-   * User findFirst
+   * User: findFirst
    */
   export interface UserFindFirstArgs extends UserFindFirstArgsBase {
    /**
@@ -6019,29 +5949,6 @@ export namespace Prisma {
 
 
   /**
-   * User.company
-   */
-  export type UserCompanyArgs = {
-    /**
-     * Select specific fields to fetch from the Company
-     * 
-    **/
-    select?: CompanySelect | null
-    /**
-     * Choose, which related nodes to fetch as well.
-     * 
-    **/
-    include?: CompanyInclude | null
-    where?: CompanyWhereInput
-    orderBy?: Enumerable<CompanyOrderByWithRelationInput>
-    cursor?: CompanyWhereUniqueInput
-    take?: number
-    skip?: number
-    distinct?: Enumerable<CompanyScalarFieldEnum>
-  }
-
-
-  /**
    * User without action
    */
   export type UserArgs = {
@@ -6206,13 +6113,13 @@ export namespace Prisma {
   export type RoleSelect = {
     id?: boolean
     name?: boolean
-    users?: boolean | RoleUsersArgs
+    users?: boolean | UserFindManyArgs
     _count?: boolean | RoleCountOutputTypeArgs
   }
 
 
   export type RoleInclude = {
-    users?: boolean | RoleUsersArgs
+    users?: boolean | UserFindManyArgs
     _count?: boolean | RoleCountOutputTypeArgs
   } 
 
@@ -6604,7 +6511,7 @@ export namespace Prisma {
     constructor(_dmmf: runtime.DMMFClass, _fetcher: PrismaClientFetcher, _queryType: 'query' | 'mutation', _rootField: string, _clientMethod: string, _args: any, _dataPath: string[], _errorFormat: ErrorFormat, _measurePerformance?: boolean | undefined, _isList?: boolean);
     readonly [Symbol.toStringTag]: 'PrismaClientPromise';
 
-    users<T extends RoleUsersArgs= {}>(args?: Subset<T, RoleUsersArgs>): PrismaPromise<Array<UserGetPayload<T>>| Null>;
+    users<T extends UserFindManyArgs= {}>(args?: Subset<T, UserFindManyArgs>): PrismaPromise<Array<UserGetPayload<T>>| Null>;
 
     private get _document();
     /**
@@ -6655,7 +6562,7 @@ export namespace Prisma {
   }
 
   /**
-   * Role findUnique
+   * Role: findUnique
    */
   export interface RoleFindUniqueArgs extends RoleFindUniqueArgsBase {
    /**
@@ -6745,7 +6652,7 @@ export namespace Prisma {
   }
 
   /**
-   * Role findFirst
+   * Role: findFirst
    */
   export interface RoleFindFirstArgs extends RoleFindFirstArgsBase {
    /**
@@ -7010,29 +6917,6 @@ export namespace Prisma {
 
 
   /**
-   * Role.users
-   */
-  export type RoleUsersArgs = {
-    /**
-     * Select specific fields to fetch from the User
-     * 
-    **/
-    select?: UserSelect | null
-    /**
-     * Choose, which related nodes to fetch as well.
-     * 
-    **/
-    include?: UserInclude | null
-    where?: UserWhereInput
-    orderBy?: Enumerable<UserOrderByWithRelationInput>
-    cursor?: UserWhereUniqueInput
-    take?: number
-    skip?: number
-    distinct?: Enumerable<UserScalarFieldEnum>
-  }
-
-
-  /**
    * Role without action
    */
   export type RoleArgs = {
@@ -7208,7 +7092,7 @@ export namespace Prisma {
     id?: boolean
     name?: boolean
     access?: boolean
-    users?: boolean | PositionUsersArgs
+    users?: boolean | UserFindManyArgs
     companyBranch?: boolean | CompanyBranchArgs
     companyBranchId?: boolean
     _count?: boolean | PositionCountOutputTypeArgs
@@ -7216,7 +7100,7 @@ export namespace Prisma {
 
 
   export type PositionInclude = {
-    users?: boolean | PositionUsersArgs
+    users?: boolean | UserFindManyArgs
     companyBranch?: boolean | CompanyBranchArgs
     _count?: boolean | PositionCountOutputTypeArgs
   } 
@@ -7611,7 +7495,7 @@ export namespace Prisma {
     constructor(_dmmf: runtime.DMMFClass, _fetcher: PrismaClientFetcher, _queryType: 'query' | 'mutation', _rootField: string, _clientMethod: string, _args: any, _dataPath: string[], _errorFormat: ErrorFormat, _measurePerformance?: boolean | undefined, _isList?: boolean);
     readonly [Symbol.toStringTag]: 'PrismaClientPromise';
 
-    users<T extends PositionUsersArgs= {}>(args?: Subset<T, PositionUsersArgs>): PrismaPromise<Array<UserGetPayload<T>>| Null>;
+    users<T extends UserFindManyArgs= {}>(args?: Subset<T, UserFindManyArgs>): PrismaPromise<Array<UserGetPayload<T>>| Null>;
 
     companyBranch<T extends CompanyBranchArgs= {}>(args?: Subset<T, CompanyBranchArgs>): Prisma__CompanyBranchClient<CompanyBranchGetPayload<T> | Null>;
 
@@ -7664,7 +7548,7 @@ export namespace Prisma {
   }
 
   /**
-   * Position findUnique
+   * Position: findUnique
    */
   export interface PositionFindUniqueArgs extends PositionFindUniqueArgsBase {
    /**
@@ -7754,7 +7638,7 @@ export namespace Prisma {
   }
 
   /**
-   * Position findFirst
+   * Position: findFirst
    */
   export interface PositionFindFirstArgs extends PositionFindFirstArgsBase {
    /**
@@ -8019,29 +7903,6 @@ export namespace Prisma {
 
 
   /**
-   * Position.users
-   */
-  export type PositionUsersArgs = {
-    /**
-     * Select specific fields to fetch from the User
-     * 
-    **/
-    select?: UserSelect | null
-    /**
-     * Choose, which related nodes to fetch as well.
-     * 
-    **/
-    include?: UserInclude | null
-    where?: UserWhereInput
-    orderBy?: Enumerable<UserOrderByWithRelationInput>
-    cursor?: UserWhereUniqueInput
-    take?: number
-    skip?: number
-    distinct?: Enumerable<UserScalarFieldEnum>
-  }
-
-
-  /**
    * Position without action
    */
   export type PositionArgs = {
@@ -8206,13 +8067,13 @@ export namespace Prisma {
   export type ProvinceSelect = {
     id?: boolean
     name?: boolean
-    district?: boolean | ProvinceDistrictArgs
+    district?: boolean | DistrictFindManyArgs
     _count?: boolean | ProvinceCountOutputTypeArgs
   }
 
 
   export type ProvinceInclude = {
-    district?: boolean | ProvinceDistrictArgs
+    district?: boolean | DistrictFindManyArgs
     _count?: boolean | ProvinceCountOutputTypeArgs
   } 
 
@@ -8604,7 +8465,7 @@ export namespace Prisma {
     constructor(_dmmf: runtime.DMMFClass, _fetcher: PrismaClientFetcher, _queryType: 'query' | 'mutation', _rootField: string, _clientMethod: string, _args: any, _dataPath: string[], _errorFormat: ErrorFormat, _measurePerformance?: boolean | undefined, _isList?: boolean);
     readonly [Symbol.toStringTag]: 'PrismaClientPromise';
 
-    district<T extends ProvinceDistrictArgs= {}>(args?: Subset<T, ProvinceDistrictArgs>): PrismaPromise<Array<DistrictGetPayload<T>>| Null>;
+    district<T extends DistrictFindManyArgs= {}>(args?: Subset<T, DistrictFindManyArgs>): PrismaPromise<Array<DistrictGetPayload<T>>| Null>;
 
     private get _document();
     /**
@@ -8655,7 +8516,7 @@ export namespace Prisma {
   }
 
   /**
-   * Province findUnique
+   * Province: findUnique
    */
   export interface ProvinceFindUniqueArgs extends ProvinceFindUniqueArgsBase {
    /**
@@ -8745,7 +8606,7 @@ export namespace Prisma {
   }
 
   /**
-   * Province findFirst
+   * Province: findFirst
    */
   export interface ProvinceFindFirstArgs extends ProvinceFindFirstArgsBase {
    /**
@@ -9010,29 +8871,6 @@ export namespace Prisma {
 
 
   /**
-   * Province.district
-   */
-  export type ProvinceDistrictArgs = {
-    /**
-     * Select specific fields to fetch from the District
-     * 
-    **/
-    select?: DistrictSelect | null
-    /**
-     * Choose, which related nodes to fetch as well.
-     * 
-    **/
-    include?: DistrictInclude | null
-    where?: DistrictWhereInput
-    orderBy?: Enumerable<DistrictOrderByWithRelationInput>
-    cursor?: DistrictWhereUniqueInput
-    take?: number
-    skip?: number
-    distinct?: Enumerable<DistrictScalarFieldEnum>
-  }
-
-
-  /**
    * Province without action
    */
   export type ProvinceArgs = {
@@ -9206,14 +9044,14 @@ export namespace Prisma {
     name?: boolean
     provinceId?: boolean
     province?: boolean | ProvinceArgs
-    amphoe?: boolean | DistrictAmphoeArgs
+    amphoe?: boolean | AmphoeFindManyArgs
     _count?: boolean | DistrictCountOutputTypeArgs
   }
 
 
   export type DistrictInclude = {
     province?: boolean | ProvinceArgs
-    amphoe?: boolean | DistrictAmphoeArgs
+    amphoe?: boolean | AmphoeFindManyArgs
     _count?: boolean | DistrictCountOutputTypeArgs
   } 
 
@@ -9609,7 +9447,7 @@ export namespace Prisma {
 
     province<T extends ProvinceArgs= {}>(args?: Subset<T, ProvinceArgs>): Prisma__ProvinceClient<ProvinceGetPayload<T> | Null>;
 
-    amphoe<T extends DistrictAmphoeArgs= {}>(args?: Subset<T, DistrictAmphoeArgs>): PrismaPromise<Array<AmphoeGetPayload<T>>| Null>;
+    amphoe<T extends AmphoeFindManyArgs= {}>(args?: Subset<T, AmphoeFindManyArgs>): PrismaPromise<Array<AmphoeGetPayload<T>>| Null>;
 
     private get _document();
     /**
@@ -9660,7 +9498,7 @@ export namespace Prisma {
   }
 
   /**
-   * District findUnique
+   * District: findUnique
    */
   export interface DistrictFindUniqueArgs extends DistrictFindUniqueArgsBase {
    /**
@@ -9750,7 +9588,7 @@ export namespace Prisma {
   }
 
   /**
-   * District findFirst
+   * District: findFirst
    */
   export interface DistrictFindFirstArgs extends DistrictFindFirstArgsBase {
    /**
@@ -10011,29 +9849,6 @@ export namespace Prisma {
      * 
     **/
     where?: DistrictWhereInput
-  }
-
-
-  /**
-   * District.amphoe
-   */
-  export type DistrictAmphoeArgs = {
-    /**
-     * Select specific fields to fetch from the Amphoe
-     * 
-    **/
-    select?: AmphoeSelect | null
-    /**
-     * Choose, which related nodes to fetch as well.
-     * 
-    **/
-    include?: AmphoeInclude | null
-    where?: AmphoeWhereInput
-    orderBy?: Enumerable<AmphoeOrderByWithRelationInput>
-    cursor?: AmphoeWhereUniqueInput
-    take?: number
-    skip?: number
-    distinct?: Enumerable<AmphoeScalarFieldEnum>
   }
 
 
@@ -10663,7 +10478,7 @@ export namespace Prisma {
   }
 
   /**
-   * Amphoe findUnique
+   * Amphoe: findUnique
    */
   export interface AmphoeFindUniqueArgs extends AmphoeFindUniqueArgsBase {
    /**
@@ -10753,7 +10568,7 @@ export namespace Prisma {
   }
 
   /**
-   * Amphoe findFirst
+   * Amphoe: findFirst
    */
   export interface AmphoeFindFirstArgs extends AmphoeFindFirstArgsBase {
    /**
