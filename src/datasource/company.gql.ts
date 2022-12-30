@@ -157,16 +157,17 @@ export const companyTypedef = gql`
 const resolvers: Resolvers = {
   Query: {
     async company(p, args, ctx) {
+      const name_filter = args.name ? args.name : undefined;
       const result = await ctx.prisma.company.findUnique({
         include: {
           _count: true,
           branch: {
             include: { _count: true },
+            where: { name: { contains: name_filter } },
           },
         },
         where: { id: ctx.currentUser?.compayId },
       });
-      console.log(result?.branch[0]._count.positions);
       return result;
     },
     async getownCompany(p, args, ctx) {
