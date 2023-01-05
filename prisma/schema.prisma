@@ -36,6 +36,7 @@ model Company {
   branch                  CompanyBranch[]
 }
 
+
 model CompanyBranch {
   id                String     @unique @db.Uuid
   isMainbranch      Boolean    @default(false)
