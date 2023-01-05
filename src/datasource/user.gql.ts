@@ -9,8 +9,8 @@ import { GraphQLError } from 'graphql';
 
 export const userTypedef = gql`
   type User {
-    email: String!    
-    password :String!
+    email: String!
+    password: String!
     id: ID!
     profile: Profile
     islogin: Boolean!
@@ -28,13 +28,11 @@ export const userTypedef = gql`
     companyBranchId: String
   }
 
-
   input RegisterProfileInput {
     firstname: String!
     lastname: String!
     dob: String!
   }
-
 
   type Profile {
     bio: String
@@ -102,7 +100,6 @@ export const userTypedef = gql`
     company_phone: String!
     company_icon: String
   }
-
 
   input CreateAccountUserInput {
     email: String!
@@ -181,7 +178,6 @@ export const userTypedef = gql`
     createAccount(data: CreateAccountInput!): CreateCompanyResponseType
     createAccountUser(data: CreateAccountUserInput!): CreateUserResponseType
   }
-
 `;
 
 const resolvers: Resolvers = {
@@ -195,10 +191,9 @@ const resolvers: Resolvers = {
           AND: {
             profile: {
               firstname_th: { contains: filter },
-            }
-          }
+            },
+          },
         },
-
       });
       return result;
     },
@@ -339,7 +334,6 @@ const resolvers: Resolvers = {
         },
       });
 
-
       const createCompany = await ctx.prisma.company.create({
         data: {
           id: genCompanyId,
@@ -373,12 +367,12 @@ const resolvers: Resolvers = {
     },
 
     /**
-       * ?สร้าง User ธรรมดา 
-       * @param p
-       * @param args
-       * @param ctx
-       * @returns
-       */
+     * ?สร้าง User ธรรมดา
+     * @param p
+     * @param args
+     * @param ctx
+     * @returns
+     */
     async createAccountUser(p, args, ctx) {
       const genUserid = v4();
       const genProfileid = v4();
@@ -437,10 +431,10 @@ const resolvers: Resolvers = {
               social_facebook: args.data.social_facebook,
               social_likedin: args.data.social_likedin,
               social_line: args.data.social_line,
-              social_telegram: args.data.social_telegram
-            }
-          }
-        }
+              social_telegram: args.data.social_telegram,
+            },
+          },
+        },
       });
       return {
         message: 'success',
@@ -451,10 +445,9 @@ const resolvers: Resolvers = {
 };
 
 const resolversComposition = {
-  'Query.me': [authenticate()],
   'Query.users': [authenticate()],
+  'Query.me': [authenticate()],
   'Mutation.createAccountUser': [authenticate()],
 };
-
 
 export const userResolvers = composeResolvers(resolvers, resolversComposition);
