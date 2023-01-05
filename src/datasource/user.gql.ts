@@ -454,6 +454,7 @@ const resolvers: Resolvers = {
 const resolversComposition = {
   'Query.me': [authenticate()],
   'Query.users': [authenticate()],
+  'Mutation.createAccountUser': [authenticate()],
 };
 
 
