@@ -104,8 +104,62 @@ export type CreateAccountInput = {
   userlimit?: InputMaybe<Scalars['Int']>;
 };
 
+export type CreateAccountUserInput = {
+  address?: InputMaybe<Scalars['String']>;
+  age?: InputMaybe<Scalars['String']>;
+  avatar?: InputMaybe<Scalars['String']>;
+  bio?: InputMaybe<Scalars['String']>;
+  citizen_address?: InputMaybe<Scalars['String']>;
+  citizen_addressnumber?: InputMaybe<Scalars['String']>;
+  citizen_country?: InputMaybe<Scalars['String']>;
+  citizen_district?: InputMaybe<Scalars['String']>;
+  citizen_id?: InputMaybe<Scalars['String']>;
+  citizen_province?: InputMaybe<Scalars['String']>;
+  citizen_state?: InputMaybe<Scalars['String']>;
+  citizen_tel?: InputMaybe<Scalars['String']>;
+  citizen_zipcode?: InputMaybe<Scalars['String']>;
+  contract_address?: InputMaybe<Scalars['String']>;
+  contract_addressnumber?: InputMaybe<Scalars['String']>;
+  contract_companyemail?: InputMaybe<Scalars['String']>;
+  contract_country?: InputMaybe<Scalars['String']>;
+  contract_district?: InputMaybe<Scalars['String']>;
+  contract_email?: InputMaybe<Scalars['String']>;
+  contract_province?: InputMaybe<Scalars['String']>;
+  contract_sameCitizen: Scalars['Boolean'];
+  contract_state?: InputMaybe<Scalars['String']>;
+  contract_zipcode?: InputMaybe<Scalars['String']>;
+  dob?: InputMaybe<Scalars['Date']>;
+  email: Scalars['String'];
+  firstname_en?: InputMaybe<Scalars['String']>;
+  firstname_th?: InputMaybe<Scalars['String']>;
+  gender?: InputMaybe<Scalars['String']>;
+  lastname_en?: InputMaybe<Scalars['String']>;
+  lastname_th?: InputMaybe<Scalars['String']>;
+  password: Scalars['String'];
+  prefix_en?: InputMaybe<Scalars['String']>;
+  prefix_th?: InputMaybe<Scalars['String']>;
+  relationship?: InputMaybe<Scalars['String']>;
+  religion?: InputMaybe<Scalars['String']>;
+  shirt_size?: InputMaybe<Scalars['String']>;
+  social_facebook?: InputMaybe<Scalars['String']>;
+  social_id?: InputMaybe<Scalars['String']>;
+  social_likedin?: InputMaybe<Scalars['String']>;
+  social_line?: InputMaybe<Scalars['String']>;
+  social_telegram?: InputMaybe<Scalars['String']>;
+  staff_code?: InputMaybe<Scalars['String']>;
+  staff_status?: InputMaybe<Scalars['String']>;
+  tel?: InputMaybe<Scalars['String']>;
+  userId: Scalars['String'];
+};
+
 export type CreateCompanyResponseType = {
   __typename?: 'CreateCompanyResponseType';
+  message?: Maybe<Scalars['String']>;
+  status?: Maybe<Scalars['Boolean']>;
+};
+
+export type CreateUserResponseType = {
+  __typename?: 'CreateUserResponseType';
   message?: Maybe<Scalars['String']>;
   status?: Maybe<Scalars['Boolean']>;
 };
@@ -202,6 +256,7 @@ export type MeprofileType = {
 export type Mutation = {
   __typename?: 'Mutation';
   createAccount?: Maybe<CreateCompanyResponseType>;
+  createAccountUser?: Maybe<CreateUserResponseType>;
   login?: Maybe<LoginResponse>;
   refreshToken?: Maybe<RefreshtokenResponseType>;
   validateRoute?: Maybe<ValidateRoute>;
@@ -210,6 +265,11 @@ export type Mutation = {
 
 export type MutationCreateAccountArgs = {
   data: CreateAccountInput;
+};
+
+
+export type MutationCreateAccountUserArgs = {
+  data: CreateAccountUserInput;
 };
 
 
@@ -406,12 +466,13 @@ export type User = {
   companyBranchId?: Maybe<Scalars['String']>;
   companyId?: Maybe<Scalars['String']>;
   createdAt?: Maybe<Scalars['Date']>;
-  email?: Maybe<Scalars['String']>;
+  email: Scalars['String'];
   id: Scalars['ID'];
   isActive: Scalars['Boolean'];
   isOwner: Scalars['Boolean'];
   islogin: Scalars['Boolean'];
   lastlogin?: Maybe<Scalars['Date']>;
+  password: Scalars['String'];
   positionId?: Maybe<Scalars['String']>;
   profile?: Maybe<Profile>;
   role?: Maybe<Role>;
@@ -503,7 +564,9 @@ export type ResolversTypes = ResolversObject<{
   CountBranch: ResolverTypeWrapper<CountBranch>;
   CountInsideBranch: ResolverTypeWrapper<CountInsideBranch>;
   CreateAccountInput: CreateAccountInput;
+  CreateAccountUserInput: CreateAccountUserInput;
   CreateCompanyResponseType: ResolverTypeWrapper<CreateCompanyResponseType>;
+  CreateUserResponseType: ResolverTypeWrapper<CreateUserResponseType>;
   Date: ResolverTypeWrapper<Scalars['Date']>;
   District: ResolverTypeWrapper<District>;
   GetCompanyAccessType: ResolverTypeWrapper<GetCompanyAccessType>;
@@ -544,7 +607,9 @@ export type ResolversParentTypes = ResolversObject<{
   CountBranch: CountBranch;
   CountInsideBranch: CountInsideBranch;
   CreateAccountInput: CreateAccountInput;
+  CreateAccountUserInput: CreateAccountUserInput;
   CreateCompanyResponseType: CreateCompanyResponseType;
+  CreateUserResponseType: CreateUserResponseType;
   Date: Scalars['Date'];
   District: District;
   GetCompanyAccessType: GetCompanyAccessType;
@@ -649,6 +714,12 @@ export type CreateCompanyResponseTypeResolvers<ContextType = ApolloContext, Pare
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 }>;
 
+export type CreateUserResponseTypeResolvers<ContextType = ApolloContext, ParentType extends ResolversParentTypes['CreateUserResponseType'] = ResolversParentTypes['CreateUserResponseType']> = ResolversObject<{
+  message?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  status?: Resolver<Maybe<ResolversTypes['Boolean']>, ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+}>;
+
 export interface DateScalarConfig extends GraphQLScalarTypeConfig<ResolversTypes['Date'], any> {
   name: 'Date';
 }
@@ -743,6 +814,7 @@ export type MeprofileTypeResolvers<ContextType = ApolloContext, ParentType exten
 
 export type MutationResolvers<ContextType = ApolloContext, ParentType extends ResolversParentTypes['Mutation'] = ResolversParentTypes['Mutation']> = ResolversObject<{
   createAccount?: Resolver<Maybe<ResolversTypes['CreateCompanyResponseType']>, ParentType, ContextType, RequireFields<MutationCreateAccountArgs, 'data'>>;
+  createAccountUser?: Resolver<Maybe<ResolversTypes['CreateUserResponseType']>, ParentType, ContextType, RequireFields<MutationCreateAccountUserArgs, 'data'>>;
   login?: Resolver<Maybe<ResolversTypes['LoginResponse']>, ParentType, ContextType, RequireFields<MutationLoginArgs, 'data'>>;
   refreshToken?: Resolver<Maybe<ResolversTypes['RefreshtokenResponseType']>, ParentType, ContextType>;
   validateRoute?: Resolver<Maybe<ResolversTypes['ValidateRoute']>, ParentType, ContextType, RequireFields<MutationValidateRouteArgs, 'args'>>;
@@ -909,12 +981,13 @@ export type UserResolvers<ContextType = ApolloContext, ParentType extends Resolv
   companyBranchId?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   companyId?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   createdAt?: Resolver<Maybe<ResolversTypes['Date']>, ParentType, ContextType>;
-  email?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  email?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
   isActive?: Resolver<ResolversTypes['Boolean'], ParentType, ContextType>;
   isOwner?: Resolver<ResolversTypes['Boolean'], ParentType, ContextType>;
   islogin?: Resolver<ResolversTypes['Boolean'], ParentType, ContextType>;
   lastlogin?: Resolver<Maybe<ResolversTypes['Date']>, ParentType, ContextType>;
+  password?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   positionId?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   profile?: Resolver<Maybe<ResolversTypes['Profile']>, ParentType, ContextType>;
   role?: Resolver<Maybe<ResolversTypes['Role']>, ParentType, ContextType>;
@@ -937,6 +1010,7 @@ export type Resolvers<ContextType = ApolloContext> = ResolversObject<{
   CountBranch?: CountBranchResolvers<ContextType>;
   CountInsideBranch?: CountInsideBranchResolvers<ContextType>;
   CreateCompanyResponseType?: CreateCompanyResponseTypeResolvers<ContextType>;
+  CreateUserResponseType?: CreateUserResponseTypeResolvers<ContextType>;
   Date?: GraphQLScalarType;
   District?: DistrictResolvers<ContextType>;
   GetCompanyAccessType?: GetCompanyAccessTypeResolvers<ContextType>;
