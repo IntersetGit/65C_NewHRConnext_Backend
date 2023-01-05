@@ -55,7 +55,6 @@ export const userTypedef = gql`
     gender: String
     staff_code: String
     religion: String
-    userId: String
     citizen_addressnumber: String
     citizen_address: String
     citizen_country: String
