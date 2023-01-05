@@ -391,7 +391,7 @@ const resolvers: Resolvers = {
               id: genProfileid,
               bio: args.data.bio,
               firstname_th: args.data.firstname_th,
-              lastname_th: args.data.firstname_th,
+              lastname_th: args.data.lastname_th,
               firstname_en: args.data.firstname_en,
               lastname_en: args.data.lastname_en,
               avatar: args.data.avatar,
