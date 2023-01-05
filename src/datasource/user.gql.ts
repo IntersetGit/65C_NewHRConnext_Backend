@@ -87,8 +87,11 @@ const resolvers: Resolvers = {
       const result = await ctx.prisma.user.findMany({
         include: { profile: true, company: true, Position: true },
         where: {
-          profile: {
-            firstname_th: { contains: filter },
+          companyBranchId: ctx.currentUser?.branchId,
+          AND: {
+            profile: {
+              firstname_th: { contains: filter },
+            },
           },
         },
       });
@@ -266,6 +269,7 @@ const resolvers: Resolvers = {
 };
 
 const resolversComposition = {
+  'Query.users': [authenticate()],
   'Query.me': [authenticate()],
 };
 
