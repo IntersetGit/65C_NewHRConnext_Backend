@@ -88,9 +88,11 @@ const resolvers: Resolvers = {
         include: { profile: true, company: true, Position: true },
         where: {
           companyBranchId: ctx.currentUser?.branchId,
-          profile: {
+          AND : {  
+            profile: {
             firstname_th: { contains: filter },
-          },
+          }
+        }
         },
 
       });
@@ -233,6 +235,30 @@ const resolvers: Resolvers = {
         },
       });
 
+
+      const createUserNormal = await ctx.prisma.user.create({
+        data: {
+          id: genUserid,
+          email: args.data.email,
+          password: await createPassword(args.data.password),
+          roleId: 'd0bff324-e70c-494e-b4c3-da220cd0d9af',
+          isActive: true,
+          isOwner: true,
+          islogin: false,
+          createdAt: new Date(),
+          profile: {
+            create: {
+              id: genProfileid,
+              contract_email: args.data.email,
+              firstname_th: args.data.firstname,
+              lastname_th: args.data.lastname,
+              dob: new Date(args.data.dob),
+              tel: args.data.tel,
+            },
+          },
+        },
+      });
+
       const createCompany = await ctx.prisma.company.create({
         data: {
           id: genCompanyId,
@@ -264,6 +290,49 @@ const resolvers: Resolvers = {
         status: true,
       };
     },
+
+  /**
+     * ?สร้าง User ธรรมดา 
+     * @param p
+     * @param args
+     * @param ctx
+     * @returns
+     */
+    // async createAccountUser(p, args, ctx) {
+    //   const genCompanyId = v4();
+    //   const genUserid = v4();
+    //   const genProfileid = v4();
+    //   const genbranchid = v4();
+
+    //   const createUser = await ctx.prisma.user.create({
+    //     data: {
+    //       id: genUserid,
+    //       email: args.data.email,
+    //       password: await createPassword(args.data.password),
+    //       roleId: 'd0bff324-e70c-494e-b4c3-da220cd0d9af',
+    //       isActive: true,
+    //       isOwner: true,
+    //       islogin: false,
+    //       createdAt: new Date(),
+    //       profile: {
+    //         create: {
+    //           id: genProfileid,
+    //           contract_email: args.data.email,
+    //           firstname_th: args.data.firstname,
+    //           lastname_th: args.data.lastname,
+    //           dob: new Date(args.data.dob),
+    //           tel: args.data.tel,
+    //         },
+    //       },
+    //     },
+    //   });
+
+
+    //   return {
+    //     message: 'success',
+    //     status: true,
+    //   };
+    // },
   },
 };
 
