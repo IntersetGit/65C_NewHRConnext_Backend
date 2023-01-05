@@ -393,6 +393,7 @@ const resolvers: Resolvers = {
           isOwner: false,
           islogin: false,
           createdAt: new Date(),
+          companyBranchId: ctx.currentUser?.branchId,
           profile: {
             create: {
               id: genProfileid,
