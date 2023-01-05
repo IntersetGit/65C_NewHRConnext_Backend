@@ -338,6 +338,8 @@ const resolvers: Resolvers = {
 
 const resolversComposition = {
   'Query.me': [authenticate()],
+  'Query.users': [authenticate()],
 };
+
 
 export const userResolvers = composeResolvers(resolvers, resolversComposition);
