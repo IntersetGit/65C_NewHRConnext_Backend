@@ -146,6 +146,7 @@ model Role_Company {
   id              String         @unique @db.Uuid
   name            String         @db.VarChar(255)
   access          Json
+  status          Int
   users           User[]
   companyBranch   CompanyBranch? @relation(fields: [companyBranchId], references: [id])
   companyBranchId String?        @db.Uuid

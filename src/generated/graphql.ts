@@ -158,6 +158,12 @@ export type CreateCompanyResponseType = {
   status?: Maybe<Scalars['Boolean']>;
 };
 
+export type CreateRoleCompanyResponseType = {
+  __typename?: 'CreateRoleCompanyResponseType';
+  message?: Maybe<Scalars['String']>;
+  status?: Maybe<Scalars['Boolean']>;
+};
+
 export type CreateUserResponseType = {
   __typename?: 'CreateUserResponseType';
   message?: Maybe<Scalars['String']>;
@@ -257,6 +263,7 @@ export type Mutation = {
   __typename?: 'Mutation';
   createAccount?: Maybe<CreateCompanyResponseType>;
   createAccountUser?: Maybe<CreateUserResponseType>;
+  createRoleCompany?: Maybe<CreateRoleCompanyResponseType>;
   login?: Maybe<LoginResponse>;
   refreshToken?: Maybe<RefreshtokenResponseType>;
   validateRoute?: Maybe<ValidateRoute>;
@@ -270,6 +277,11 @@ export type MutationCreateAccountArgs = {
 
 export type MutationCreateAccountUserArgs = {
   data: CreateAccountUserInput;
+};
+
+
+export type MutationCreateRoleCompanyArgs = {
+  data: CreateRoleCompanyGroup;
 };
 
 
@@ -455,6 +467,7 @@ export type Role_Company = {
   companyBranchId?: Maybe<Scalars['String']>;
   id: Scalars['ID'];
   name?: Maybe<Scalars['String']>;
+  status?: Maybe<Scalars['Int']>;
   users?: Maybe<Array<Maybe<User>>>;
 };
 
@@ -485,6 +498,14 @@ export type ValidateRoute = {
   currentBranch?: Maybe<ResponseBranchValidateRouteType>;
   path?: Maybe<Scalars['String']>;
   reAccess?: Maybe<Scalars['String']>;
+};
+
+export type CreateRoleCompanyGroup = {
+  access?: InputMaybe<Scalars['JSON']>;
+  companyBranchId?: InputMaybe<Scalars['String']>;
+  id?: InputMaybe<Scalars['ID']>;
+  name?: InputMaybe<Scalars['String']>;
+  status: Scalars['Int'];
 };
 
 export type WithIndex<TObject> = TObject & Record<string, any>;
@@ -566,6 +587,7 @@ export type ResolversTypes = ResolversObject<{
   CreateAccountInput: CreateAccountInput;
   CreateAccountUserInput: CreateAccountUserInput;
   CreateCompanyResponseType: ResolverTypeWrapper<CreateCompanyResponseType>;
+  CreateRoleCompanyResponseType: ResolverTypeWrapper<CreateRoleCompanyResponseType>;
   CreateUserResponseType: ResolverTypeWrapper<CreateUserResponseType>;
   Date: ResolverTypeWrapper<Scalars['Date']>;
   District: ResolverTypeWrapper<District>;
@@ -596,6 +618,7 @@ export type ResolversTypes = ResolversObject<{
   String: ResolverTypeWrapper<Scalars['String']>;
   User: ResolverTypeWrapper<User>;
   ValidateRoute: ResolverTypeWrapper<ValidateRoute>;
+  createRoleCompanyGroup: CreateRoleCompanyGroup;
 }>;
 
 /** Mapping between all available schema types and the resolvers parents */
@@ -609,6 +632,7 @@ export type ResolversParentTypes = ResolversObject<{
   CreateAccountInput: CreateAccountInput;
   CreateAccountUserInput: CreateAccountUserInput;
   CreateCompanyResponseType: CreateCompanyResponseType;
+  CreateRoleCompanyResponseType: CreateRoleCompanyResponseType;
   CreateUserResponseType: CreateUserResponseType;
   Date: Scalars['Date'];
   District: District;
@@ -639,6 +663,7 @@ export type ResolversParentTypes = ResolversObject<{
   String: Scalars['String'];
   User: User;
   ValidateRoute: ValidateRoute;
+  createRoleCompanyGroup: CreateRoleCompanyGroup;
 }>;
 
 export type AmphoeResolvers<ContextType = ApolloContext, ParentType extends ResolversParentTypes['Amphoe'] = ResolversParentTypes['Amphoe']> = ResolversObject<{
@@ -709,6 +734,12 @@ export type CountInsideBranchResolvers<ContextType = ApolloContext, ParentType e
 }>;
 
 export type CreateCompanyResponseTypeResolvers<ContextType = ApolloContext, ParentType extends ResolversParentTypes['CreateCompanyResponseType'] = ResolversParentTypes['CreateCompanyResponseType']> = ResolversObject<{
+  message?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  status?: Resolver<Maybe<ResolversTypes['Boolean']>, ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+}>;
+
+export type CreateRoleCompanyResponseTypeResolvers<ContextType = ApolloContext, ParentType extends ResolversParentTypes['CreateRoleCompanyResponseType'] = ResolversParentTypes['CreateRoleCompanyResponseType']> = ResolversObject<{
   message?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   status?: Resolver<Maybe<ResolversTypes['Boolean']>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
@@ -815,6 +846,7 @@ export type MeprofileTypeResolvers<ContextType = ApolloContext, ParentType exten
 export type MutationResolvers<ContextType = ApolloContext, ParentType extends ResolversParentTypes['Mutation'] = ResolversParentTypes['Mutation']> = ResolversObject<{
   createAccount?: Resolver<Maybe<ResolversTypes['CreateCompanyResponseType']>, ParentType, ContextType, RequireFields<MutationCreateAccountArgs, 'data'>>;
   createAccountUser?: Resolver<Maybe<ResolversTypes['CreateUserResponseType']>, ParentType, ContextType, RequireFields<MutationCreateAccountUserArgs, 'data'>>;
+  createRoleCompany?: Resolver<Maybe<ResolversTypes['CreateRoleCompanyResponseType']>, ParentType, ContextType, RequireFields<MutationCreateRoleCompanyArgs, 'data'>>;
   login?: Resolver<Maybe<ResolversTypes['LoginResponse']>, ParentType, ContextType, RequireFields<MutationLoginArgs, 'data'>>;
   refreshToken?: Resolver<Maybe<ResolversTypes['RefreshtokenResponseType']>, ParentType, ContextType>;
   validateRoute?: Resolver<Maybe<ResolversTypes['ValidateRoute']>, ParentType, ContextType, RequireFields<MutationValidateRouteArgs, 'args'>>;
@@ -970,6 +1002,7 @@ export type Role_CompanyResolvers<ContextType = ApolloContext, ParentType extend
   companyBranchId?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
   name?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  status?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
   users?: Resolver<Maybe<Array<Maybe<ResolversTypes['User']>>>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 }>;
@@ -1010,6 +1043,7 @@ export type Resolvers<ContextType = ApolloContext> = ResolversObject<{
   CountBranch?: CountBranchResolvers<ContextType>;
   CountInsideBranch?: CountInsideBranchResolvers<ContextType>;
   CreateCompanyResponseType?: CreateCompanyResponseTypeResolvers<ContextType>;
+  CreateRoleCompanyResponseType?: CreateRoleCompanyResponseTypeResolvers<ContextType>;
   CreateUserResponseType?: CreateUserResponseTypeResolvers<ContextType>;
   Date?: GraphQLScalarType;
   District?: DistrictResolvers<ContextType>;

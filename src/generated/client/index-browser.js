@@ -220,6 +220,7 @@ exports.Prisma.Role_CompanyScalarFieldEnum = makeEnum({
   id: 'id',
   name: 'name',
   access: 'access',
+  status: 'status',
   companyBranchId: 'companyBranchId'
 });
 

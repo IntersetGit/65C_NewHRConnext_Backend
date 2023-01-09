@@ -148,6 +148,7 @@ export type Role_Company = {
   id: string
   name: string
   access: Prisma.JsonValue
+  status: number
   companyBranchId: string | null
 }
 
@@ -6941,19 +6942,31 @@ export namespace Prisma {
 
   export type AggregateRole_Company = {
     _count: Role_CompanyCountAggregateOutputType | null
+    _avg: Role_CompanyAvgAggregateOutputType | null
+    _sum: Role_CompanySumAggregateOutputType | null
     _min: Role_CompanyMinAggregateOutputType | null
     _max: Role_CompanyMaxAggregateOutputType | null
+  }
+
+  export type Role_CompanyAvgAggregateOutputType = {
+    status: number | null
+  }
+
+  export type Role_CompanySumAggregateOutputType = {
+    status: number | null
   }
 
   export type Role_CompanyMinAggregateOutputType = {
     id: string | null
     name: string | null
+    status: number | null
     companyBranchId: string | null
   }
 
   export type Role_CompanyMaxAggregateOutputType = {
     id: string | null
     name: string | null
+    status: number | null
     companyBranchId: string | null
   }
 
@@ -6961,20 +6974,31 @@ export namespace Prisma {
     id: number
     name: number
     access: number
+    status: number
     companyBranchId: number
     _all: number
   }
 
 
+  export type Role_CompanyAvgAggregateInputType = {
+    status?: true
+  }
+
+  export type Role_CompanySumAggregateInputType = {
+    status?: true
+  }
+
   export type Role_CompanyMinAggregateInputType = {
     id?: true
     name?: true
+    status?: true
     companyBranchId?: true
   }
 
   export type Role_CompanyMaxAggregateInputType = {
     id?: true
     name?: true
+    status?: true
     companyBranchId?: true
   }
 
@@ -6982,6 +7006,7 @@ export namespace Prisma {
     id?: true
     name?: true
     access?: true
+    status?: true
     companyBranchId?: true
     _all?: true
   }
@@ -7029,6 +7054,18 @@ export namespace Prisma {
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
+     * Select which fields to average
+    **/
+    _avg?: Role_CompanyAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: Role_CompanySumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
      * Select which fields to find the minimum value
     **/
     _min?: Role_CompanyMinAggregateInputType
@@ -7059,6 +7096,8 @@ export namespace Prisma {
     take?: number
     skip?: number
     _count?: Role_CompanyCountAggregateInputType | true
+    _avg?: Role_CompanyAvgAggregateInputType
+    _sum?: Role_CompanySumAggregateInputType
     _min?: Role_CompanyMinAggregateInputType
     _max?: Role_CompanyMaxAggregateInputType
   }
@@ -7068,8 +7107,11 @@ export namespace Prisma {
     id: string
     name: string
     access: JsonValue
+    status: number
     companyBranchId: string | null
     _count: Role_CompanyCountAggregateOutputType | null
+    _avg: Role_CompanyAvgAggregateOutputType | null
+    _sum: Role_CompanySumAggregateOutputType | null
     _min: Role_CompanyMinAggregateOutputType | null
     _max: Role_CompanyMaxAggregateOutputType | null
   }
@@ -7092,6 +7134,7 @@ export namespace Prisma {
     id?: boolean
     name?: boolean
     access?: boolean
+    status?: boolean
     users?: boolean | UserFindManyArgs
     companyBranch?: boolean | CompanyBranchArgs
     companyBranchId?: boolean
@@ -11018,6 +11061,7 @@ export namespace Prisma {
     id: 'id',
     name: 'name',
     access: 'access',
+    status: 'status',
     companyBranchId: 'companyBranchId'
   };
 
@@ -11598,6 +11642,7 @@ export namespace Prisma {
     id?: UuidFilter | string
     name?: StringFilter | string
     access?: JsonFilter
+    status?: IntFilter | number
     users?: UserListRelationFilter
     companyBranch?: XOR<CompanyBranchRelationFilter, CompanyBranchWhereInput> | null
     companyBranchId?: UuidNullableFilter | string | null
@@ -11607,6 +11652,7 @@ export namespace Prisma {
     id?: SortOrder
     name?: SortOrder
     access?: SortOrder
+    status?: SortOrder
     users?: UserOrderByRelationAggregateInput
     companyBranch?: CompanyBranchOrderByWithRelationInput
     companyBranchId?: SortOrder
@@ -11620,10 +11666,13 @@ export namespace Prisma {
     id?: SortOrder
     name?: SortOrder
     access?: SortOrder
+    status?: SortOrder
     companyBranchId?: SortOrder
     _count?: Role_CompanyCountOrderByAggregateInput
+    _avg?: Role_CompanyAvgOrderByAggregateInput
     _max?: Role_CompanyMaxOrderByAggregateInput
     _min?: Role_CompanyMinOrderByAggregateInput
+    _sum?: Role_CompanySumOrderByAggregateInput
   }
 
   export type Role_CompanyScalarWhereWithAggregatesInput = {
@@ -11633,6 +11682,7 @@ export namespace Prisma {
     id?: UuidWithAggregatesFilter | string
     name?: StringWithAggregatesFilter | string
     access?: JsonWithAggregatesFilter
+    status?: IntWithAggregatesFilter | number
     companyBranchId?: UuidNullableWithAggregatesFilter | string | null
   }
 
@@ -12533,6 +12583,7 @@ export namespace Prisma {
     id: string
     name: string
     access: JsonNullValueInput | InputJsonValue
+    status: number
     users?: UserCreateNestedManyWithoutRole_CompanyInput
     companyBranch?: CompanyBranchCreateNestedOneWithoutRole_CompanyInput
   }
@@ -12541,6 +12592,7 @@ export namespace Prisma {
     id: string
     name: string
     access: JsonNullValueInput | InputJsonValue
+    status: number
     users?: UserUncheckedCreateNestedManyWithoutRole_CompanyInput
     companyBranchId?: string | null
   }
@@ -12549,6 +12601,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     access?: JsonNullValueInput | InputJsonValue
+    status?: IntFieldUpdateOperationsInput | number
     users?: UserUpdateManyWithoutRole_CompanyNestedInput
     companyBranch?: CompanyBranchUpdateOneWithoutRole_CompanyNestedInput
   }
@@ -12557,6 +12610,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     access?: JsonNullValueInput | InputJsonValue
+    status?: IntFieldUpdateOperationsInput | number
     users?: UserUncheckedUpdateManyWithoutRole_CompanyNestedInput
     companyBranchId?: NullableStringFieldUpdateOperationsInput | string | null
   }
@@ -12565,6 +12619,7 @@ export namespace Prisma {
     id: string
     name: string
     access: JsonNullValueInput | InputJsonValue
+    status: number
     companyBranchId?: string | null
   }
 
@@ -12572,12 +12627,14 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     access?: JsonNullValueInput | InputJsonValue
+    status?: IntFieldUpdateOperationsInput | number
   }
 
   export type Role_CompanyUncheckedUpdateManyInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     access?: JsonNullValueInput | InputJsonValue
+    status?: IntFieldUpdateOperationsInput | number
     companyBranchId?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
@@ -13351,19 +13408,30 @@ export namespace Prisma {
     id?: SortOrder
     name?: SortOrder
     access?: SortOrder
+    status?: SortOrder
     companyBranchId?: SortOrder
+  }
+
+  export type Role_CompanyAvgOrderByAggregateInput = {
+    status?: SortOrder
   }
 
   export type Role_CompanyMaxOrderByAggregateInput = {
     id?: SortOrder
     name?: SortOrder
+    status?: SortOrder
     companyBranchId?: SortOrder
   }
 
   export type Role_CompanyMinOrderByAggregateInput = {
     id?: SortOrder
     name?: SortOrder
+    status?: SortOrder
     companyBranchId?: SortOrder
+  }
+
+  export type Role_CompanySumOrderByAggregateInput = {
+    status?: SortOrder
   }
   export type JsonWithAggregatesFilter = 
     | PatchUndefined<
@@ -14516,6 +14584,7 @@ export namespace Prisma {
     id: string
     name: string
     access: JsonNullValueInput | InputJsonValue
+    status: number
     users?: UserCreateNestedManyWithoutRole_CompanyInput
   }
 
@@ -14523,6 +14592,7 @@ export namespace Prisma {
     id: string
     name: string
     access: JsonNullValueInput | InputJsonValue
+    status: number
     users?: UserUncheckedCreateNestedManyWithoutRole_CompanyInput
   }
 
@@ -14623,6 +14693,7 @@ export namespace Prisma {
     id?: UuidFilter | string
     name?: StringFilter | string
     access?: JsonFilter
+    status?: IntFilter | number
     companyBranchId?: UuidNullableFilter | string | null
   }
 
@@ -14913,6 +14984,7 @@ export namespace Prisma {
     id: string
     name: string
     access: JsonNullValueInput | InputJsonValue
+    status: number
     companyBranch?: CompanyBranchCreateNestedOneWithoutRole_CompanyInput
   }
 
@@ -14920,6 +14992,7 @@ export namespace Prisma {
     id: string
     name: string
     access: JsonNullValueInput | InputJsonValue
+    status: number
     companyBranchId?: string | null
   }
 
@@ -15146,6 +15219,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     access?: JsonNullValueInput | InputJsonValue
+    status?: IntFieldUpdateOperationsInput | number
     companyBranch?: CompanyBranchUpdateOneWithoutRole_CompanyNestedInput
   }
 
@@ -15153,6 +15227,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     access?: JsonNullValueInput | InputJsonValue
+    status?: IntFieldUpdateOperationsInput | number
     companyBranchId?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
@@ -15690,6 +15765,7 @@ export namespace Prisma {
     id: string
     name: string
     access: JsonNullValueInput | InputJsonValue
+    status: number
   }
 
   export type UserUpdateWithoutCompanyBranchInput = {
@@ -15739,6 +15815,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     access?: JsonNullValueInput | InputJsonValue
+    status?: IntFieldUpdateOperationsInput | number
     users?: UserUpdateManyWithoutRole_CompanyNestedInput
   }
 
@@ -15746,6 +15823,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     access?: JsonNullValueInput | InputJsonValue
+    status?: IntFieldUpdateOperationsInput | number
     users?: UserUncheckedUpdateManyWithoutRole_CompanyNestedInput
   }
 
@@ -15753,6 +15831,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     access?: JsonNullValueInput | InputJsonValue
+    status?: IntFieldUpdateOperationsInput | number
   }
 
   export type CompanyCreateManyOwnerInput = {
