@@ -1,3 +1,4 @@
+ 
 {
   "name": "hr-connext-backend",
   "version": "1.0.1",
@@ -10,7 +11,7 @@
     "dev": "nodemon",
     "dev:tsc": "tsc",
     "db-seed": "prisma db seed",
-    "db-migrate-dev": "pnpm prisma migrate dev && pnpm run postinstall",
+    "db-migrate-dev": "pnpm prisma migrate dev && pnpm run postinstall", 
     "db-nuke": "docker-compose down --volumes --remove-orphans",
     "db-monitor": "npx prisma studio",
     "format-db": "prisma format",

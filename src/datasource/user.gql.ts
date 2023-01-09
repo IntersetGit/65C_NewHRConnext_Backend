@@ -101,6 +101,7 @@ export const userTypedef = gql`
   }
 
   input CreateAccountUserInput {
+    id: ID!
     email: String!
     password: String!
     bio: String
@@ -375,6 +376,63 @@ const resolvers: Resolvers = {
     async createAccountUser(p, args, ctx) {
       const genUserid = v4();
       const genProfileid = v4();
+      if(args.data.id){
+        const EditUser = await ctx.prisma.user.update({
+          data: {
+            id: genUserid,
+            email: args.data.email,
+            password: await createPassword(args.data.password),   
+            profile: {
+              create: {
+                id: genProfileid,
+                bio: args.data.bio,
+                firstname_th: args.data.firstname_th,
+                lastname_th: args.data.lastname_th,
+                firstname_en: args.data.firstname_en,
+                lastname_en: args.data.lastname_en,
+                avatar: args.data.avatar,
+                dob: new Date(args.data.dob),
+                age: args.data.age,
+                relationship: args.data.relationship,
+                shirt_size: args.data.shirt_size,
+                prefix_th: args.data.prefix_th,
+                prefix_en: args.data.prefix_en,
+                citizen_id: args.data.citizen_id,
+                social_id: args.data.social_id,
+                staff_status: args.data.staff_status,
+                tel: args.data.tel,
+                address: args.data.address,
+                gender: args.data.gender,
+                staff_code: args.data.staff_code,
+                religion: args.data.religion,
+                citizen_addressnumber: args.data.citizen_addressnumber,
+                citizen_address: args.data.citizen_address,
+                citizen_country: args.data.citizen_country,
+                citizen_province: args.data.citizen_province,
+                citizen_district: args.data.citizen_district,
+                citizen_state: args.data.citizen_state,
+                citizen_zipcode: args.data.citizen_zipcode,
+                citizen_tel: args.data.citizen_tel,
+                contract_sameCitizen: args.data.contract_sameCitizen,
+                contract_addressnumber: args.data.contract_addressnumber,
+                contract_address: args.data.contract_address,
+                contract_country: args.data.contract_country,
+                contract_province: args.data.contract_province,
+                contract_district: args.data.contract_district,
+                contract_state: args.data.contract_state,
+                contract_zipcode: args.data.contract_zipcode,
+                contract_email: args.data.contract_email,
+                contract_companyemail: args.data.contract_companyemail,
+                social_facebook: args.data.social_facebook,
+                social_likedin: args.data.social_likedin,
+                social_line: args.data.social_line,
+                social_telegram: args.data.social_telegram,
+              },
+            },
+          },
+          where : {id:args.data.id}
+        });
+      }
       const createUser = await ctx.prisma.user.create({
         data: {
           id: genUserid,

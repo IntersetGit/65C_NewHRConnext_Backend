@@ -133,6 +133,7 @@ export type CreateAccountUserInput = {
   firstname_en?: InputMaybe<Scalars['String']>;
   firstname_th?: InputMaybe<Scalars['String']>;
   gender?: InputMaybe<Scalars['String']>;
+  id: Scalars['ID'];
   lastname_en?: InputMaybe<Scalars['String']>;
   lastname_th?: InputMaybe<Scalars['String']>;
   password: Scalars['String'];
@@ -149,7 +150,6 @@ export type CreateAccountUserInput = {
   staff_code?: InputMaybe<Scalars['String']>;
   staff_status?: InputMaybe<Scalars['String']>;
   tel?: InputMaybe<Scalars['String']>;
-  userId: Scalars['String'];
 };
 
 export type CreateCompanyResponseType = {
