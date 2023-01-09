@@ -36,6 +36,7 @@ model Company {
   branch                  CompanyBranch[]
 }
 
+
 model CompanyBranch {
   id                String     @unique @db.Uuid
   isMainbranch      Boolean    @default(false)
@@ -65,7 +66,7 @@ model CompanyBranch {
   company           Company?   @relation(fields: [companyId], references: [id])
   companyId         String?    @db.Uuid
   users             User[]
-  positions         Position[]
+  Role_Company      Role_Company[]
 }
 
 model Profile {
@@ -128,11 +129,11 @@ model User {
   createdAt       DateTime       @default(now())
   roleId          String?        @db.Uuid
   role            Role?          @relation(fields: [roleId], references: [id])
-  positionId      String?        @db.Uuid
+  RoleCompanyID   String?        @db.Uuid
   company         Company[]
   companyBranch   CompanyBranch? @relation(fields: [companyBranchId], references: [id])
   companyBranchId String?        @db.Uuid
-  Position        Position?      @relation(fields: [positionId], references: [id])
+  Role_Company    Role_Company?  @relation(fields: [RoleCompanyID], references: [id])
 }
 
 model Role {
@@ -141,7 +142,7 @@ model Role {
   users User[]
 }
 
-model Position {
+model Role_Company {
   id              String         @unique @db.Uuid
   name            String         @db.VarChar(255)
   access          Json

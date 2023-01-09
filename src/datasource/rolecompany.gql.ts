@@ -1,7 +1,7 @@
 import gql from 'graphql-tag';
 
 export const positionTypedef = gql`
-  type Position {
+  type Role_Company {
     id: ID!
     name: String
     access: JSON

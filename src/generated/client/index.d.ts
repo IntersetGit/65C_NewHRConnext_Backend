@@ -127,7 +127,7 @@ export type User = {
   lastlogin: Date | null
   createdAt: Date
   roleId: string | null
-  positionId: string | null
+  RoleCompanyID: string | null
   companyBranchId: string | null
 }
 
@@ -141,10 +141,10 @@ export type Role = {
 }
 
 /**
- * Model Position
+ * Model Role_Company
  * 
  */
-export type Position = {
+export type Role_Company = {
   id: string
   name: string
   access: Prisma.JsonValue
@@ -350,14 +350,14 @@ export class PrismaClient<
   get role(): Prisma.RoleDelegate<GlobalReject>;
 
   /**
-   * `prisma.position`: Exposes CRUD operations for the **Position** model.
+   * `prisma.role_Company`: Exposes CRUD operations for the **Role_Company** model.
     * Example usage:
     * ```ts
-    * // Fetch zero or more Positions
-    * const positions = await prisma.position.findMany()
+    * // Fetch zero or more Role_Companies
+    * const role_Companies = await prisma.role_Company.findMany()
     * ```
     */
-  get position(): Prisma.PositionDelegate<GlobalReject>;
+  get role_Company(): Prisma.Role_CompanyDelegate<GlobalReject>;
 
   /**
    * `prisma.province`: Exposes CRUD operations for the **Province** model.
@@ -877,7 +877,7 @@ export namespace Prisma {
     Profile: 'Profile',
     User: 'User',
     Role: 'Role',
-    Position: 'Position',
+    Role_Company: 'Role_Company',
     Province: 'Province',
     District: 'District',
     Amphoe: 'Amphoe'
@@ -1095,12 +1095,12 @@ export namespace Prisma {
 
   export type CompanyBranchCountOutputType = {
     users: number
-    positions: number
+    Role_Company: number
   }
 
   export type CompanyBranchCountOutputTypeSelect = {
     users?: boolean
-    positions?: boolean
+    Role_Company?: boolean
   }
 
   export type CompanyBranchCountOutputTypeGetPayload<S extends boolean | null | undefined | CompanyBranchCountOutputTypeArgs> =
@@ -1223,30 +1223,30 @@ export namespace Prisma {
 
 
   /**
-   * Count Type PositionCountOutputType
+   * Count Type Role_CompanyCountOutputType
    */
 
 
-  export type PositionCountOutputType = {
+  export type Role_CompanyCountOutputType = {
     users: number
   }
 
-  export type PositionCountOutputTypeSelect = {
+  export type Role_CompanyCountOutputTypeSelect = {
     users?: boolean
   }
 
-  export type PositionCountOutputTypeGetPayload<S extends boolean | null | undefined | PositionCountOutputTypeArgs> =
+  export type Role_CompanyCountOutputTypeGetPayload<S extends boolean | null | undefined | Role_CompanyCountOutputTypeArgs> =
     S extends { select: any, include: any } ? 'Please either choose `select` or `include`' :
-    S extends true ? PositionCountOutputType :
+    S extends true ? Role_CompanyCountOutputType :
     S extends undefined ? never :
-    S extends { include: any } & (PositionCountOutputTypeArgs)
-    ? PositionCountOutputType 
-    : S extends { select: any } & (PositionCountOutputTypeArgs)
+    S extends { include: any } & (Role_CompanyCountOutputTypeArgs)
+    ? Role_CompanyCountOutputType 
+    : S extends { select: any } & (Role_CompanyCountOutputTypeArgs)
       ? {
     [P in TruthyKeys<S['select']>]:
-    P extends keyof PositionCountOutputType ? PositionCountOutputType[P] : never
+    P extends keyof Role_CompanyCountOutputType ? Role_CompanyCountOutputType[P] : never
   } 
-      : PositionCountOutputType
+      : Role_CompanyCountOutputType
 
 
 
@@ -1254,14 +1254,14 @@ export namespace Prisma {
   // Custom InputTypes
 
   /**
-   * PositionCountOutputType without action
+   * Role_CompanyCountOutputType without action
    */
-  export type PositionCountOutputTypeArgs = {
+  export type Role_CompanyCountOutputTypeArgs = {
     /**
-     * Select specific fields to fetch from the PositionCountOutputType
+     * Select specific fields to fetch from the Role_CompanyCountOutputType
      * 
     **/
-    select?: PositionCountOutputTypeSelect | null
+    select?: Role_CompanyCountOutputTypeSelect | null
   }
 
 
@@ -2771,7 +2771,7 @@ export namespace Prisma {
     company?: boolean | CompanyArgs
     companyId?: boolean
     users?: boolean | UserFindManyArgs
-    positions?: boolean | PositionFindManyArgs
+    Role_Company?: boolean | Role_CompanyFindManyArgs
     _count?: boolean | CompanyBranchCountOutputTypeArgs
   }
 
@@ -2779,7 +2779,7 @@ export namespace Prisma {
   export type CompanyBranchInclude = {
     company?: boolean | CompanyArgs
     users?: boolean | UserFindManyArgs
-    positions?: boolean | PositionFindManyArgs
+    Role_Company?: boolean | Role_CompanyFindManyArgs
     _count?: boolean | CompanyBranchCountOutputTypeArgs
   } 
 
@@ -2792,7 +2792,7 @@ export namespace Prisma {
     [P in TruthyKeys<S['include']>]:
         P extends 'company' ? CompanyGetPayload<S['include'][P]> | null :
         P extends 'users' ? Array < UserGetPayload<S['include'][P]>>  :
-        P extends 'positions' ? Array < PositionGetPayload<S['include'][P]>>  :
+        P extends 'Role_Company' ? Array < Role_CompanyGetPayload<S['include'][P]>>  :
         P extends '_count' ? CompanyBranchCountOutputTypeGetPayload<S['include'][P]> :  never
   } 
     : S extends { select: any } & (CompanyBranchArgs | CompanyBranchFindManyArgs)
@@ -2800,7 +2800,7 @@ export namespace Prisma {
     [P in TruthyKeys<S['select']>]:
         P extends 'company' ? CompanyGetPayload<S['select'][P]> | null :
         P extends 'users' ? Array < UserGetPayload<S['select'][P]>>  :
-        P extends 'positions' ? Array < PositionGetPayload<S['select'][P]>>  :
+        P extends 'Role_Company' ? Array < Role_CompanyGetPayload<S['select'][P]>>  :
         P extends '_count' ? CompanyBranchCountOutputTypeGetPayload<S['select'][P]> :  P extends keyof CompanyBranch ? CompanyBranch[P] : never
   } 
       : CompanyBranch
@@ -3179,7 +3179,7 @@ export namespace Prisma {
 
     users<T extends UserFindManyArgs= {}>(args?: Subset<T, UserFindManyArgs>): PrismaPromise<Array<UserGetPayload<T>>| Null>;
 
-    positions<T extends PositionFindManyArgs= {}>(args?: Subset<T, PositionFindManyArgs>): PrismaPromise<Array<PositionGetPayload<T>>| Null>;
+    Role_Company<T extends Role_CompanyFindManyArgs= {}>(args?: Subset<T, Role_CompanyFindManyArgs>): PrismaPromise<Array<Role_CompanyGetPayload<T>>| Null>;
 
     private get _document();
     /**
@@ -4923,7 +4923,7 @@ export namespace Prisma {
     lastlogin: Date | null
     createdAt: Date | null
     roleId: string | null
-    positionId: string | null
+    RoleCompanyID: string | null
     companyBranchId: string | null
   }
 
@@ -4937,7 +4937,7 @@ export namespace Prisma {
     lastlogin: Date | null
     createdAt: Date | null
     roleId: string | null
-    positionId: string | null
+    RoleCompanyID: string | null
     companyBranchId: string | null
   }
 
@@ -4951,7 +4951,7 @@ export namespace Prisma {
     lastlogin: number
     createdAt: number
     roleId: number
-    positionId: number
+    RoleCompanyID: number
     companyBranchId: number
     _all: number
   }
@@ -4967,7 +4967,7 @@ export namespace Prisma {
     lastlogin?: true
     createdAt?: true
     roleId?: true
-    positionId?: true
+    RoleCompanyID?: true
     companyBranchId?: true
   }
 
@@ -4981,7 +4981,7 @@ export namespace Prisma {
     lastlogin?: true
     createdAt?: true
     roleId?: true
-    positionId?: true
+    RoleCompanyID?: true
     companyBranchId?: true
   }
 
@@ -4995,7 +4995,7 @@ export namespace Prisma {
     lastlogin?: true
     createdAt?: true
     roleId?: true
-    positionId?: true
+    RoleCompanyID?: true
     companyBranchId?: true
     _all?: true
   }
@@ -5088,7 +5088,7 @@ export namespace Prisma {
     lastlogin: Date | null
     createdAt: Date
     roleId: string | null
-    positionId: string | null
+    RoleCompanyID: string | null
     companyBranchId: string | null
     _count: UserCountAggregateOutputType | null
     _min: UserMinAggregateOutputType | null
@@ -5121,11 +5121,11 @@ export namespace Prisma {
     createdAt?: boolean
     roleId?: boolean
     role?: boolean | RoleArgs
-    positionId?: boolean
+    RoleCompanyID?: boolean
     company?: boolean | CompanyFindManyArgs
     companyBranch?: boolean | CompanyBranchArgs
     companyBranchId?: boolean
-    Position?: boolean | PositionArgs
+    Role_Company?: boolean | Role_CompanyArgs
     _count?: boolean | UserCountOutputTypeArgs
   }
 
@@ -5135,7 +5135,7 @@ export namespace Prisma {
     role?: boolean | RoleArgs
     company?: boolean | CompanyFindManyArgs
     companyBranch?: boolean | CompanyBranchArgs
-    Position?: boolean | PositionArgs
+    Role_Company?: boolean | Role_CompanyArgs
     _count?: boolean | UserCountOutputTypeArgs
   } 
 
@@ -5150,7 +5150,7 @@ export namespace Prisma {
         P extends 'role' ? RoleGetPayload<S['include'][P]> | null :
         P extends 'company' ? Array < CompanyGetPayload<S['include'][P]>>  :
         P extends 'companyBranch' ? CompanyBranchGetPayload<S['include'][P]> | null :
-        P extends 'Position' ? PositionGetPayload<S['include'][P]> | null :
+        P extends 'Role_Company' ? Role_CompanyGetPayload<S['include'][P]> | null :
         P extends '_count' ? UserCountOutputTypeGetPayload<S['include'][P]> :  never
   } 
     : S extends { select: any } & (UserArgs | UserFindManyArgs)
@@ -5160,7 +5160,7 @@ export namespace Prisma {
         P extends 'role' ? RoleGetPayload<S['select'][P]> | null :
         P extends 'company' ? Array < CompanyGetPayload<S['select'][P]>>  :
         P extends 'companyBranch' ? CompanyBranchGetPayload<S['select'][P]> | null :
-        P extends 'Position' ? PositionGetPayload<S['select'][P]> | null :
+        P extends 'Role_Company' ? Role_CompanyGetPayload<S['select'][P]> | null :
         P extends '_count' ? UserCountOutputTypeGetPayload<S['select'][P]> :  P extends keyof User ? User[P] : never
   } 
       : User
@@ -5543,7 +5543,7 @@ export namespace Prisma {
 
     companyBranch<T extends CompanyBranchArgs= {}>(args?: Subset<T, CompanyBranchArgs>): Prisma__CompanyBranchClient<CompanyBranchGetPayload<T> | Null>;
 
-    Position<T extends PositionArgs= {}>(args?: Subset<T, PositionArgs>): Prisma__PositionClient<PositionGetPayload<T> | Null>;
+    Role_Company<T extends Role_CompanyArgs= {}>(args?: Subset<T, Role_CompanyArgs>): Prisma__Role_CompanyClient<Role_CompanyGetPayload<T> | Null>;
 
     private get _document();
     /**
@@ -6935,29 +6935,29 @@ export namespace Prisma {
 
 
   /**
-   * Model Position
+   * Model Role_Company
    */
 
 
-  export type AggregatePosition = {
-    _count: PositionCountAggregateOutputType | null
-    _min: PositionMinAggregateOutputType | null
-    _max: PositionMaxAggregateOutputType | null
+  export type AggregateRole_Company = {
+    _count: Role_CompanyCountAggregateOutputType | null
+    _min: Role_CompanyMinAggregateOutputType | null
+    _max: Role_CompanyMaxAggregateOutputType | null
   }
 
-  export type PositionMinAggregateOutputType = {
+  export type Role_CompanyMinAggregateOutputType = {
     id: string | null
     name: string | null
     companyBranchId: string | null
   }
 
-  export type PositionMaxAggregateOutputType = {
+  export type Role_CompanyMaxAggregateOutputType = {
     id: string | null
     name: string | null
     companyBranchId: string | null
   }
 
-  export type PositionCountAggregateOutputType = {
+  export type Role_CompanyCountAggregateOutputType = {
     id: number
     name: number
     access: number
@@ -6966,19 +6966,19 @@ export namespace Prisma {
   }
 
 
-  export type PositionMinAggregateInputType = {
+  export type Role_CompanyMinAggregateInputType = {
     id?: true
     name?: true
     companyBranchId?: true
   }
 
-  export type PositionMaxAggregateInputType = {
+  export type Role_CompanyMaxAggregateInputType = {
     id?: true
     name?: true
     companyBranchId?: true
   }
 
-  export type PositionCountAggregateInputType = {
+  export type Role_CompanyCountAggregateInputType = {
     id?: true
     name?: true
     access?: true
@@ -6986,293 +6986,293 @@ export namespace Prisma {
     _all?: true
   }
 
-  export type PositionAggregateArgs = {
+  export type Role_CompanyAggregateArgs = {
     /**
-     * Filter which Position to aggregate.
+     * Filter which Role_Company to aggregate.
      * 
     **/
-    where?: PositionWhereInput
+    where?: Role_CompanyWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
      * 
-     * Determine the order of Positions to fetch.
+     * Determine the order of Role_Companies to fetch.
      * 
     **/
-    orderBy?: Enumerable<PositionOrderByWithRelationInput>
+    orderBy?: Enumerable<Role_CompanyOrderByWithRelationInput>
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      * 
      * Sets the start position
      * 
     **/
-    cursor?: PositionWhereUniqueInput
+    cursor?: Role_CompanyWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Take `±n` Positions from the position of the cursor.
+     * Take `±n` Role_Companies from the position of the cursor.
      * 
     **/
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Skip the first `n` Positions.
+     * Skip the first `n` Role_Companies.
      * 
     **/
     skip?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
-     * Count returned Positions
+     * Count returned Role_Companies
     **/
-    _count?: true | PositionCountAggregateInputType
+    _count?: true | Role_CompanyCountAggregateInputType
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
      * Select which fields to find the minimum value
     **/
-    _min?: PositionMinAggregateInputType
+    _min?: Role_CompanyMinAggregateInputType
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
      * Select which fields to find the maximum value
     **/
-    _max?: PositionMaxAggregateInputType
+    _max?: Role_CompanyMaxAggregateInputType
   }
 
-  export type GetPositionAggregateType<T extends PositionAggregateArgs> = {
-        [P in keyof T & keyof AggregatePosition]: P extends '_count' | 'count'
+  export type GetRole_CompanyAggregateType<T extends Role_CompanyAggregateArgs> = {
+        [P in keyof T & keyof AggregateRole_Company]: P extends '_count' | 'count'
       ? T[P] extends true
         ? number
-        : GetScalarType<T[P], AggregatePosition[P]>
-      : GetScalarType<T[P], AggregatePosition[P]>
+        : GetScalarType<T[P], AggregateRole_Company[P]>
+      : GetScalarType<T[P], AggregateRole_Company[P]>
   }
 
 
 
 
-  export type PositionGroupByArgs = {
-    where?: PositionWhereInput
-    orderBy?: Enumerable<PositionOrderByWithAggregationInput>
-    by: Array<PositionScalarFieldEnum>
-    having?: PositionScalarWhereWithAggregatesInput
+  export type Role_CompanyGroupByArgs = {
+    where?: Role_CompanyWhereInput
+    orderBy?: Enumerable<Role_CompanyOrderByWithAggregationInput>
+    by: Array<Role_CompanyScalarFieldEnum>
+    having?: Role_CompanyScalarWhereWithAggregatesInput
     take?: number
     skip?: number
-    _count?: PositionCountAggregateInputType | true
-    _min?: PositionMinAggregateInputType
-    _max?: PositionMaxAggregateInputType
+    _count?: Role_CompanyCountAggregateInputType | true
+    _min?: Role_CompanyMinAggregateInputType
+    _max?: Role_CompanyMaxAggregateInputType
   }
 
 
-  export type PositionGroupByOutputType = {
+  export type Role_CompanyGroupByOutputType = {
     id: string
     name: string
     access: JsonValue
     companyBranchId: string | null
-    _count: PositionCountAggregateOutputType | null
-    _min: PositionMinAggregateOutputType | null
-    _max: PositionMaxAggregateOutputType | null
+    _count: Role_CompanyCountAggregateOutputType | null
+    _min: Role_CompanyMinAggregateOutputType | null
+    _max: Role_CompanyMaxAggregateOutputType | null
   }
 
-  type GetPositionGroupByPayload<T extends PositionGroupByArgs> = PrismaPromise<
+  type GetRole_CompanyGroupByPayload<T extends Role_CompanyGroupByArgs> = PrismaPromise<
     Array<
-      PickArray<PositionGroupByOutputType, T['by']> &
+      PickArray<Role_CompanyGroupByOutputType, T['by']> &
         {
-          [P in ((keyof T) & (keyof PositionGroupByOutputType))]: P extends '_count'
+          [P in ((keyof T) & (keyof Role_CompanyGroupByOutputType))]: P extends '_count'
             ? T[P] extends boolean
               ? number
-              : GetScalarType<T[P], PositionGroupByOutputType[P]>
-            : GetScalarType<T[P], PositionGroupByOutputType[P]>
+              : GetScalarType<T[P], Role_CompanyGroupByOutputType[P]>
+            : GetScalarType<T[P], Role_CompanyGroupByOutputType[P]>
         }
       >
     >
 
 
-  export type PositionSelect = {
+  export type Role_CompanySelect = {
     id?: boolean
     name?: boolean
     access?: boolean
     users?: boolean | UserFindManyArgs
     companyBranch?: boolean | CompanyBranchArgs
     companyBranchId?: boolean
-    _count?: boolean | PositionCountOutputTypeArgs
+    _count?: boolean | Role_CompanyCountOutputTypeArgs
   }
 
 
-  export type PositionInclude = {
+  export type Role_CompanyInclude = {
     users?: boolean | UserFindManyArgs
     companyBranch?: boolean | CompanyBranchArgs
-    _count?: boolean | PositionCountOutputTypeArgs
+    _count?: boolean | Role_CompanyCountOutputTypeArgs
   } 
 
-  export type PositionGetPayload<S extends boolean | null | undefined | PositionArgs> =
+  export type Role_CompanyGetPayload<S extends boolean | null | undefined | Role_CompanyArgs> =
     S extends { select: any, include: any } ? 'Please either choose `select` or `include`' :
-    S extends true ? Position :
+    S extends true ? Role_Company :
     S extends undefined ? never :
-    S extends { include: any } & (PositionArgs | PositionFindManyArgs)
-    ? Position  & {
+    S extends { include: any } & (Role_CompanyArgs | Role_CompanyFindManyArgs)
+    ? Role_Company  & {
     [P in TruthyKeys<S['include']>]:
         P extends 'users' ? Array < UserGetPayload<S['include'][P]>>  :
         P extends 'companyBranch' ? CompanyBranchGetPayload<S['include'][P]> | null :
-        P extends '_count' ? PositionCountOutputTypeGetPayload<S['include'][P]> :  never
+        P extends '_count' ? Role_CompanyCountOutputTypeGetPayload<S['include'][P]> :  never
   } 
-    : S extends { select: any } & (PositionArgs | PositionFindManyArgs)
+    : S extends { select: any } & (Role_CompanyArgs | Role_CompanyFindManyArgs)
       ? {
     [P in TruthyKeys<S['select']>]:
         P extends 'users' ? Array < UserGetPayload<S['select'][P]>>  :
         P extends 'companyBranch' ? CompanyBranchGetPayload<S['select'][P]> | null :
-        P extends '_count' ? PositionCountOutputTypeGetPayload<S['select'][P]> :  P extends keyof Position ? Position[P] : never
+        P extends '_count' ? Role_CompanyCountOutputTypeGetPayload<S['select'][P]> :  P extends keyof Role_Company ? Role_Company[P] : never
   } 
-      : Position
+      : Role_Company
 
 
-  type PositionCountArgs = Merge<
-    Omit<PositionFindManyArgs, 'select' | 'include'> & {
-      select?: PositionCountAggregateInputType | true
+  type Role_CompanyCountArgs = Merge<
+    Omit<Role_CompanyFindManyArgs, 'select' | 'include'> & {
+      select?: Role_CompanyCountAggregateInputType | true
     }
   >
 
-  export interface PositionDelegate<GlobalRejectSettings extends Prisma.RejectOnNotFound | Prisma.RejectPerOperation | false | undefined> {
+  export interface Role_CompanyDelegate<GlobalRejectSettings extends Prisma.RejectOnNotFound | Prisma.RejectPerOperation | false | undefined> {
     /**
-     * Find zero or one Position that matches the filter.
-     * @param {PositionFindUniqueArgs} args - Arguments to find a Position
+     * Find zero or one Role_Company that matches the filter.
+     * @param {Role_CompanyFindUniqueArgs} args - Arguments to find a Role_Company
      * @example
-     * // Get one Position
-     * const position = await prisma.position.findUnique({
+     * // Get one Role_Company
+     * const role_Company = await prisma.role_Company.findUnique({
      *   where: {
      *     // ... provide filter here
      *   }
      * })
     **/
-    findUnique<T extends PositionFindUniqueArgs,  LocalRejectSettings = T["rejectOnNotFound"] extends RejectOnNotFound ? T['rejectOnNotFound'] : undefined>(
-      args: SelectSubset<T, PositionFindUniqueArgs>
-    ): HasReject<GlobalRejectSettings, LocalRejectSettings, 'findUnique', 'Position'> extends True ? Prisma__PositionClient<PositionGetPayload<T>> : Prisma__PositionClient<PositionGetPayload<T> | null, null>
+    findUnique<T extends Role_CompanyFindUniqueArgs,  LocalRejectSettings = T["rejectOnNotFound"] extends RejectOnNotFound ? T['rejectOnNotFound'] : undefined>(
+      args: SelectSubset<T, Role_CompanyFindUniqueArgs>
+    ): HasReject<GlobalRejectSettings, LocalRejectSettings, 'findUnique', 'Role_Company'> extends True ? Prisma__Role_CompanyClient<Role_CompanyGetPayload<T>> : Prisma__Role_CompanyClient<Role_CompanyGetPayload<T> | null, null>
 
     /**
-     * Find one Position that matches the filter or throw an error  with `error.code='P2025'` 
+     * Find one Role_Company that matches the filter or throw an error  with `error.code='P2025'` 
      *     if no matches were found.
-     * @param {PositionFindUniqueOrThrowArgs} args - Arguments to find a Position
+     * @param {Role_CompanyFindUniqueOrThrowArgs} args - Arguments to find a Role_Company
      * @example
-     * // Get one Position
-     * const position = await prisma.position.findUniqueOrThrow({
+     * // Get one Role_Company
+     * const role_Company = await prisma.role_Company.findUniqueOrThrow({
      *   where: {
      *     // ... provide filter here
      *   }
      * })
     **/
-    findUniqueOrThrow<T extends PositionFindUniqueOrThrowArgs>(
-      args?: SelectSubset<T, PositionFindUniqueOrThrowArgs>
-    ): Prisma__PositionClient<PositionGetPayload<T>>
+    findUniqueOrThrow<T extends Role_CompanyFindUniqueOrThrowArgs>(
+      args?: SelectSubset<T, Role_CompanyFindUniqueOrThrowArgs>
+    ): Prisma__Role_CompanyClient<Role_CompanyGetPayload<T>>
 
     /**
-     * Find the first Position that matches the filter.
+     * Find the first Role_Company that matches the filter.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {PositionFindFirstArgs} args - Arguments to find a Position
+     * @param {Role_CompanyFindFirstArgs} args - Arguments to find a Role_Company
      * @example
-     * // Get one Position
-     * const position = await prisma.position.findFirst({
+     * // Get one Role_Company
+     * const role_Company = await prisma.role_Company.findFirst({
      *   where: {
      *     // ... provide filter here
      *   }
      * })
     **/
-    findFirst<T extends PositionFindFirstArgs,  LocalRejectSettings = T["rejectOnNotFound"] extends RejectOnNotFound ? T['rejectOnNotFound'] : undefined>(
-      args?: SelectSubset<T, PositionFindFirstArgs>
-    ): HasReject<GlobalRejectSettings, LocalRejectSettings, 'findFirst', 'Position'> extends True ? Prisma__PositionClient<PositionGetPayload<T>> : Prisma__PositionClient<PositionGetPayload<T> | null, null>
+    findFirst<T extends Role_CompanyFindFirstArgs,  LocalRejectSettings = T["rejectOnNotFound"] extends RejectOnNotFound ? T['rejectOnNotFound'] : undefined>(
+      args?: SelectSubset<T, Role_CompanyFindFirstArgs>
+    ): HasReject<GlobalRejectSettings, LocalRejectSettings, 'findFirst', 'Role_Company'> extends True ? Prisma__Role_CompanyClient<Role_CompanyGetPayload<T>> : Prisma__Role_CompanyClient<Role_CompanyGetPayload<T> | null, null>
 
     /**
-     * Find the first Position that matches the filter or
+     * Find the first Role_Company that matches the filter or
      * throw `NotFoundError` if no matches were found.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {PositionFindFirstOrThrowArgs} args - Arguments to find a Position
+     * @param {Role_CompanyFindFirstOrThrowArgs} args - Arguments to find a Role_Company
      * @example
-     * // Get one Position
-     * const position = await prisma.position.findFirstOrThrow({
+     * // Get one Role_Company
+     * const role_Company = await prisma.role_Company.findFirstOrThrow({
      *   where: {
      *     // ... provide filter here
      *   }
      * })
     **/
-    findFirstOrThrow<T extends PositionFindFirstOrThrowArgs>(
-      args?: SelectSubset<T, PositionFindFirstOrThrowArgs>
-    ): Prisma__PositionClient<PositionGetPayload<T>>
+    findFirstOrThrow<T extends Role_CompanyFindFirstOrThrowArgs>(
+      args?: SelectSubset<T, Role_CompanyFindFirstOrThrowArgs>
+    ): Prisma__Role_CompanyClient<Role_CompanyGetPayload<T>>
 
     /**
-     * Find zero or more Positions that matches the filter.
+     * Find zero or more Role_Companies that matches the filter.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {PositionFindManyArgs=} args - Arguments to filter and select certain fields only.
+     * @param {Role_CompanyFindManyArgs=} args - Arguments to filter and select certain fields only.
      * @example
-     * // Get all Positions
-     * const positions = await prisma.position.findMany()
+     * // Get all Role_Companies
+     * const role_Companies = await prisma.role_Company.findMany()
      * 
-     * // Get first 10 Positions
-     * const positions = await prisma.position.findMany({ take: 10 })
+     * // Get first 10 Role_Companies
+     * const role_Companies = await prisma.role_Company.findMany({ take: 10 })
      * 
      * // Only select the `id`
-     * const positionWithIdOnly = await prisma.position.findMany({ select: { id: true } })
+     * const role_CompanyWithIdOnly = await prisma.role_Company.findMany({ select: { id: true } })
      * 
     **/
-    findMany<T extends PositionFindManyArgs>(
-      args?: SelectSubset<T, PositionFindManyArgs>
-    ): PrismaPromise<Array<PositionGetPayload<T>>>
+    findMany<T extends Role_CompanyFindManyArgs>(
+      args?: SelectSubset<T, Role_CompanyFindManyArgs>
+    ): PrismaPromise<Array<Role_CompanyGetPayload<T>>>
 
     /**
-     * Create a Position.
-     * @param {PositionCreateArgs} args - Arguments to create a Position.
+     * Create a Role_Company.
+     * @param {Role_CompanyCreateArgs} args - Arguments to create a Role_Company.
      * @example
-     * // Create one Position
-     * const Position = await prisma.position.create({
+     * // Create one Role_Company
+     * const Role_Company = await prisma.role_Company.create({
      *   data: {
-     *     // ... data to create a Position
+     *     // ... data to create a Role_Company
      *   }
      * })
      * 
     **/
-    create<T extends PositionCreateArgs>(
-      args: SelectSubset<T, PositionCreateArgs>
-    ): Prisma__PositionClient<PositionGetPayload<T>>
+    create<T extends Role_CompanyCreateArgs>(
+      args: SelectSubset<T, Role_CompanyCreateArgs>
+    ): Prisma__Role_CompanyClient<Role_CompanyGetPayload<T>>
 
     /**
-     * Create many Positions.
-     *     @param {PositionCreateManyArgs} args - Arguments to create many Positions.
+     * Create many Role_Companies.
+     *     @param {Role_CompanyCreateManyArgs} args - Arguments to create many Role_Companies.
      *     @example
-     *     // Create many Positions
-     *     const position = await prisma.position.createMany({
+     *     // Create many Role_Companies
+     *     const role_Company = await prisma.role_Company.createMany({
      *       data: {
      *         // ... provide data here
      *       }
      *     })
      *     
     **/
-    createMany<T extends PositionCreateManyArgs>(
-      args?: SelectSubset<T, PositionCreateManyArgs>
+    createMany<T extends Role_CompanyCreateManyArgs>(
+      args?: SelectSubset<T, Role_CompanyCreateManyArgs>
     ): PrismaPromise<BatchPayload>
 
     /**
-     * Delete a Position.
-     * @param {PositionDeleteArgs} args - Arguments to delete one Position.
+     * Delete a Role_Company.
+     * @param {Role_CompanyDeleteArgs} args - Arguments to delete one Role_Company.
      * @example
-     * // Delete one Position
-     * const Position = await prisma.position.delete({
+     * // Delete one Role_Company
+     * const Role_Company = await prisma.role_Company.delete({
      *   where: {
-     *     // ... filter to delete one Position
+     *     // ... filter to delete one Role_Company
      *   }
      * })
      * 
     **/
-    delete<T extends PositionDeleteArgs>(
-      args: SelectSubset<T, PositionDeleteArgs>
-    ): Prisma__PositionClient<PositionGetPayload<T>>
+    delete<T extends Role_CompanyDeleteArgs>(
+      args: SelectSubset<T, Role_CompanyDeleteArgs>
+    ): Prisma__Role_CompanyClient<Role_CompanyGetPayload<T>>
 
     /**
-     * Update one Position.
-     * @param {PositionUpdateArgs} args - Arguments to update one Position.
+     * Update one Role_Company.
+     * @param {Role_CompanyUpdateArgs} args - Arguments to update one Role_Company.
      * @example
-     * // Update one Position
-     * const position = await prisma.position.update({
+     * // Update one Role_Company
+     * const role_Company = await prisma.role_Company.update({
      *   where: {
      *     // ... provide filter here
      *   },
@@ -7282,34 +7282,34 @@ export namespace Prisma {
      * })
      * 
     **/
-    update<T extends PositionUpdateArgs>(
-      args: SelectSubset<T, PositionUpdateArgs>
-    ): Prisma__PositionClient<PositionGetPayload<T>>
+    update<T extends Role_CompanyUpdateArgs>(
+      args: SelectSubset<T, Role_CompanyUpdateArgs>
+    ): Prisma__Role_CompanyClient<Role_CompanyGetPayload<T>>
 
     /**
-     * Delete zero or more Positions.
-     * @param {PositionDeleteManyArgs} args - Arguments to filter Positions to delete.
+     * Delete zero or more Role_Companies.
+     * @param {Role_CompanyDeleteManyArgs} args - Arguments to filter Role_Companies to delete.
      * @example
-     * // Delete a few Positions
-     * const { count } = await prisma.position.deleteMany({
+     * // Delete a few Role_Companies
+     * const { count } = await prisma.role_Company.deleteMany({
      *   where: {
      *     // ... provide filter here
      *   }
      * })
      * 
     **/
-    deleteMany<T extends PositionDeleteManyArgs>(
-      args?: SelectSubset<T, PositionDeleteManyArgs>
+    deleteMany<T extends Role_CompanyDeleteManyArgs>(
+      args?: SelectSubset<T, Role_CompanyDeleteManyArgs>
     ): PrismaPromise<BatchPayload>
 
     /**
-     * Update zero or more Positions.
+     * Update zero or more Role_Companies.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {PositionUpdateManyArgs} args - Arguments to update one or more rows.
+     * @param {Role_CompanyUpdateManyArgs} args - Arguments to update one or more rows.
      * @example
-     * // Update many Positions
-     * const position = await prisma.position.updateMany({
+     * // Update many Role_Companies
+     * const role_Company = await prisma.role_Company.updateMany({
      *   where: {
      *     // ... provide filter here
      *   },
@@ -7319,59 +7319,59 @@ export namespace Prisma {
      * })
      * 
     **/
-    updateMany<T extends PositionUpdateManyArgs>(
-      args: SelectSubset<T, PositionUpdateManyArgs>
+    updateMany<T extends Role_CompanyUpdateManyArgs>(
+      args: SelectSubset<T, Role_CompanyUpdateManyArgs>
     ): PrismaPromise<BatchPayload>
 
     /**
-     * Create or update one Position.
-     * @param {PositionUpsertArgs} args - Arguments to update or create a Position.
+     * Create or update one Role_Company.
+     * @param {Role_CompanyUpsertArgs} args - Arguments to update or create a Role_Company.
      * @example
-     * // Update or create a Position
-     * const position = await prisma.position.upsert({
+     * // Update or create a Role_Company
+     * const role_Company = await prisma.role_Company.upsert({
      *   create: {
-     *     // ... data to create a Position
+     *     // ... data to create a Role_Company
      *   },
      *   update: {
      *     // ... in case it already exists, update
      *   },
      *   where: {
-     *     // ... the filter for the Position we want to update
+     *     // ... the filter for the Role_Company we want to update
      *   }
      * })
     **/
-    upsert<T extends PositionUpsertArgs>(
-      args: SelectSubset<T, PositionUpsertArgs>
-    ): Prisma__PositionClient<PositionGetPayload<T>>
+    upsert<T extends Role_CompanyUpsertArgs>(
+      args: SelectSubset<T, Role_CompanyUpsertArgs>
+    ): Prisma__Role_CompanyClient<Role_CompanyGetPayload<T>>
 
     /**
-     * Count the number of Positions.
+     * Count the number of Role_Companies.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {PositionCountArgs} args - Arguments to filter Positions to count.
+     * @param {Role_CompanyCountArgs} args - Arguments to filter Role_Companies to count.
      * @example
-     * // Count the number of Positions
-     * const count = await prisma.position.count({
+     * // Count the number of Role_Companies
+     * const count = await prisma.role_Company.count({
      *   where: {
-     *     // ... the filter for the Positions we want to count
+     *     // ... the filter for the Role_Companies we want to count
      *   }
      * })
     **/
-    count<T extends PositionCountArgs>(
-      args?: Subset<T, PositionCountArgs>,
+    count<T extends Role_CompanyCountArgs>(
+      args?: Subset<T, Role_CompanyCountArgs>,
     ): PrismaPromise<
       T extends _Record<'select', any>
         ? T['select'] extends true
           ? number
-          : GetScalarType<T['select'], PositionCountAggregateOutputType>
+          : GetScalarType<T['select'], Role_CompanyCountAggregateOutputType>
         : number
     >
 
     /**
-     * Allows you to perform aggregations operations on a Position.
+     * Allows you to perform aggregations operations on a Role_Company.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {PositionAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @param {Role_CompanyAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
      * @example
      * // Ordered by age ascending
      * // Where email contains prisma.io
@@ -7391,13 +7391,13 @@ export namespace Prisma {
      *   take: 10,
      * })
     **/
-    aggregate<T extends PositionAggregateArgs>(args: Subset<T, PositionAggregateArgs>): PrismaPromise<GetPositionAggregateType<T>>
+    aggregate<T extends Role_CompanyAggregateArgs>(args: Subset<T, Role_CompanyAggregateArgs>): PrismaPromise<GetRole_CompanyAggregateType<T>>
 
     /**
-     * Group by Position.
+     * Group by Role_Company.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {PositionGroupByArgs} args - Group by arguments.
+     * @param {Role_CompanyGroupByArgs} args - Group by arguments.
      * @example
      * // Group by city, order by createdAt, get count
      * const result = await prisma.user.groupBy({
@@ -7412,14 +7412,14 @@ export namespace Prisma {
      * 
     **/
     groupBy<
-      T extends PositionGroupByArgs,
+      T extends Role_CompanyGroupByArgs,
       HasSelectOrTake extends Or<
         Extends<'skip', Keys<T>>,
         Extends<'take', Keys<T>>
       >,
       OrderByArg extends True extends HasSelectOrTake
-        ? { orderBy: PositionGroupByArgs['orderBy'] }
-        : { orderBy?: PositionGroupByArgs['orderBy'] },
+        ? { orderBy: Role_CompanyGroupByArgs['orderBy'] }
+        : { orderBy?: Role_CompanyGroupByArgs['orderBy'] },
       OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
       ByFields extends TupleToUnion<T['by']>,
       ByValid extends Has<ByFields, OrderFields>,
@@ -7468,17 +7468,17 @@ export namespace Prisma {
             ? never
             : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
         }[OrderFields]
-    >(args: SubsetIntersection<T, PositionGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetPositionGroupByPayload<T> : PrismaPromise<InputErrors>
+    >(args: SubsetIntersection<T, Role_CompanyGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetRole_CompanyGroupByPayload<T> : PrismaPromise<InputErrors>
 
   }
 
   /**
-   * The delegate class that acts as a "Promise-like" for Position.
+   * The delegate class that acts as a "Promise-like" for Role_Company.
    * Why is this prefixed with `Prisma__`?
    * Because we want to prevent naming conflicts as mentioned in
    * https://github.com/prisma/prisma-client-js/issues/707
    */
-  export class Prisma__PositionClient<T, Null = never> implements PrismaPromise<T> {
+  export class Prisma__Role_CompanyClient<T, Null = never> implements PrismaPromise<T> {
     [prisma]: true;
     private readonly _dmmf;
     private readonly _fetcher;
@@ -7527,30 +7527,30 @@ export namespace Prisma {
   // Custom InputTypes
 
   /**
-   * Position base type for findUnique actions
+   * Role_Company base type for findUnique actions
    */
-  export type PositionFindUniqueArgsBase = {
+  export type Role_CompanyFindUniqueArgsBase = {
     /**
-     * Select specific fields to fetch from the Position
+     * Select specific fields to fetch from the Role_Company
      * 
     **/
-    select?: PositionSelect | null
+    select?: Role_CompanySelect | null
     /**
      * Choose, which related nodes to fetch as well.
      * 
     **/
-    include?: PositionInclude | null
+    include?: Role_CompanyInclude | null
     /**
-     * Filter, which Position to fetch.
+     * Filter, which Role_Company to fetch.
      * 
     **/
-    where: PositionWhereUniqueInput
+    where: Role_CompanyWhereUniqueInput
   }
 
   /**
-   * Position: findUnique
+   * Role_Company: findUnique
    */
-  export interface PositionFindUniqueArgs extends PositionFindUniqueArgsBase {
+  export interface Role_CompanyFindUniqueArgs extends Role_CompanyFindUniqueArgsBase {
    /**
     * Throw an Error if query returns no results
     * @deprecated since 4.0.0: use `findUniqueOrThrow` method instead
@@ -7560,87 +7560,87 @@ export namespace Prisma {
       
 
   /**
-   * Position findUniqueOrThrow
+   * Role_Company findUniqueOrThrow
    */
-  export type PositionFindUniqueOrThrowArgs = {
+  export type Role_CompanyFindUniqueOrThrowArgs = {
     /**
-     * Select specific fields to fetch from the Position
+     * Select specific fields to fetch from the Role_Company
      * 
     **/
-    select?: PositionSelect | null
+    select?: Role_CompanySelect | null
     /**
      * Choose, which related nodes to fetch as well.
      * 
     **/
-    include?: PositionInclude | null
+    include?: Role_CompanyInclude | null
     /**
-     * Filter, which Position to fetch.
+     * Filter, which Role_Company to fetch.
      * 
     **/
-    where: PositionWhereUniqueInput
+    where: Role_CompanyWhereUniqueInput
   }
 
 
   /**
-   * Position base type for findFirst actions
+   * Role_Company base type for findFirst actions
    */
-  export type PositionFindFirstArgsBase = {
+  export type Role_CompanyFindFirstArgsBase = {
     /**
-     * Select specific fields to fetch from the Position
+     * Select specific fields to fetch from the Role_Company
      * 
     **/
-    select?: PositionSelect | null
+    select?: Role_CompanySelect | null
     /**
      * Choose, which related nodes to fetch as well.
      * 
     **/
-    include?: PositionInclude | null
+    include?: Role_CompanyInclude | null
     /**
-     * Filter, which Position to fetch.
+     * Filter, which Role_Company to fetch.
      * 
     **/
-    where?: PositionWhereInput
+    where?: Role_CompanyWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
      * 
-     * Determine the order of Positions to fetch.
+     * Determine the order of Role_Companies to fetch.
      * 
     **/
-    orderBy?: Enumerable<PositionOrderByWithRelationInput>
+    orderBy?: Enumerable<Role_CompanyOrderByWithRelationInput>
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      * 
-     * Sets the position for searching for Positions.
+     * Sets the position for searching for Role_Companies.
      * 
     **/
-    cursor?: PositionWhereUniqueInput
+    cursor?: Role_CompanyWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Take `±n` Positions from the position of the cursor.
+     * Take `±n` Role_Companies from the position of the cursor.
      * 
     **/
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Skip the first `n` Positions.
+     * Skip the first `n` Role_Companies.
      * 
     **/
     skip?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
      * 
-     * Filter by unique combinations of Positions.
+     * Filter by unique combinations of Role_Companies.
      * 
     **/
-    distinct?: Enumerable<PositionScalarFieldEnum>
+    distinct?: Enumerable<Role_CompanyScalarFieldEnum>
   }
 
   /**
-   * Position: findFirst
+   * Role_Company: findFirst
    */
-  export interface PositionFindFirstArgs extends PositionFindFirstArgsBase {
+  export interface Role_CompanyFindFirstArgs extends Role_CompanyFindFirstArgsBase {
    /**
     * Throw an Error if query returns no results
     * @deprecated since 4.0.0: use `findFirstOrThrow` method instead
@@ -7650,272 +7650,272 @@ export namespace Prisma {
       
 
   /**
-   * Position findFirstOrThrow
+   * Role_Company findFirstOrThrow
    */
-  export type PositionFindFirstOrThrowArgs = {
+  export type Role_CompanyFindFirstOrThrowArgs = {
     /**
-     * Select specific fields to fetch from the Position
+     * Select specific fields to fetch from the Role_Company
      * 
     **/
-    select?: PositionSelect | null
+    select?: Role_CompanySelect | null
     /**
      * Choose, which related nodes to fetch as well.
      * 
     **/
-    include?: PositionInclude | null
+    include?: Role_CompanyInclude | null
     /**
-     * Filter, which Position to fetch.
+     * Filter, which Role_Company to fetch.
      * 
     **/
-    where?: PositionWhereInput
+    where?: Role_CompanyWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
      * 
-     * Determine the order of Positions to fetch.
+     * Determine the order of Role_Companies to fetch.
      * 
     **/
-    orderBy?: Enumerable<PositionOrderByWithRelationInput>
+    orderBy?: Enumerable<Role_CompanyOrderByWithRelationInput>
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      * 
-     * Sets the position for searching for Positions.
+     * Sets the position for searching for Role_Companies.
      * 
     **/
-    cursor?: PositionWhereUniqueInput
+    cursor?: Role_CompanyWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Take `±n` Positions from the position of the cursor.
+     * Take `±n` Role_Companies from the position of the cursor.
      * 
     **/
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Skip the first `n` Positions.
+     * Skip the first `n` Role_Companies.
      * 
     **/
     skip?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
      * 
-     * Filter by unique combinations of Positions.
+     * Filter by unique combinations of Role_Companies.
      * 
     **/
-    distinct?: Enumerable<PositionScalarFieldEnum>
+    distinct?: Enumerable<Role_CompanyScalarFieldEnum>
   }
 
 
   /**
-   * Position findMany
+   * Role_Company findMany
    */
-  export type PositionFindManyArgs = {
+  export type Role_CompanyFindManyArgs = {
     /**
-     * Select specific fields to fetch from the Position
+     * Select specific fields to fetch from the Role_Company
      * 
     **/
-    select?: PositionSelect | null
+    select?: Role_CompanySelect | null
     /**
      * Choose, which related nodes to fetch as well.
      * 
     **/
-    include?: PositionInclude | null
+    include?: Role_CompanyInclude | null
     /**
-     * Filter, which Positions to fetch.
+     * Filter, which Role_Companies to fetch.
      * 
     **/
-    where?: PositionWhereInput
+    where?: Role_CompanyWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
      * 
-     * Determine the order of Positions to fetch.
+     * Determine the order of Role_Companies to fetch.
      * 
     **/
-    orderBy?: Enumerable<PositionOrderByWithRelationInput>
+    orderBy?: Enumerable<Role_CompanyOrderByWithRelationInput>
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      * 
-     * Sets the position for listing Positions.
+     * Sets the position for listing Role_Companies.
      * 
     **/
-    cursor?: PositionWhereUniqueInput
+    cursor?: Role_CompanyWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Take `±n` Positions from the position of the cursor.
+     * Take `±n` Role_Companies from the position of the cursor.
      * 
     **/
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Skip the first `n` Positions.
+     * Skip the first `n` Role_Companies.
      * 
     **/
     skip?: number
-    distinct?: Enumerable<PositionScalarFieldEnum>
+    distinct?: Enumerable<Role_CompanyScalarFieldEnum>
   }
 
 
   /**
-   * Position create
+   * Role_Company create
    */
-  export type PositionCreateArgs = {
+  export type Role_CompanyCreateArgs = {
     /**
-     * Select specific fields to fetch from the Position
+     * Select specific fields to fetch from the Role_Company
      * 
     **/
-    select?: PositionSelect | null
+    select?: Role_CompanySelect | null
     /**
      * Choose, which related nodes to fetch as well.
      * 
     **/
-    include?: PositionInclude | null
+    include?: Role_CompanyInclude | null
     /**
-     * The data needed to create a Position.
+     * The data needed to create a Role_Company.
      * 
     **/
-    data: XOR<PositionCreateInput, PositionUncheckedCreateInput>
+    data: XOR<Role_CompanyCreateInput, Role_CompanyUncheckedCreateInput>
   }
 
 
   /**
-   * Position createMany
+   * Role_Company createMany
    */
-  export type PositionCreateManyArgs = {
+  export type Role_CompanyCreateManyArgs = {
     /**
-     * The data used to create many Positions.
+     * The data used to create many Role_Companies.
      * 
     **/
-    data: Enumerable<PositionCreateManyInput>
+    data: Enumerable<Role_CompanyCreateManyInput>
     skipDuplicates?: boolean
   }
 
 
   /**
-   * Position update
+   * Role_Company update
    */
-  export type PositionUpdateArgs = {
+  export type Role_CompanyUpdateArgs = {
     /**
-     * Select specific fields to fetch from the Position
+     * Select specific fields to fetch from the Role_Company
      * 
     **/
-    select?: PositionSelect | null
+    select?: Role_CompanySelect | null
     /**
      * Choose, which related nodes to fetch as well.
      * 
     **/
-    include?: PositionInclude | null
+    include?: Role_CompanyInclude | null
     /**
-     * The data needed to update a Position.
+     * The data needed to update a Role_Company.
      * 
     **/
-    data: XOR<PositionUpdateInput, PositionUncheckedUpdateInput>
+    data: XOR<Role_CompanyUpdateInput, Role_CompanyUncheckedUpdateInput>
     /**
-     * Choose, which Position to update.
+     * Choose, which Role_Company to update.
      * 
     **/
-    where: PositionWhereUniqueInput
+    where: Role_CompanyWhereUniqueInput
   }
 
 
   /**
-   * Position updateMany
+   * Role_Company updateMany
    */
-  export type PositionUpdateManyArgs = {
+  export type Role_CompanyUpdateManyArgs = {
     /**
-     * The data used to update Positions.
+     * The data used to update Role_Companies.
      * 
     **/
-    data: XOR<PositionUpdateManyMutationInput, PositionUncheckedUpdateManyInput>
+    data: XOR<Role_CompanyUpdateManyMutationInput, Role_CompanyUncheckedUpdateManyInput>
     /**
-     * Filter which Positions to update
+     * Filter which Role_Companies to update
      * 
     **/
-    where?: PositionWhereInput
+    where?: Role_CompanyWhereInput
   }
 
 
   /**
-   * Position upsert
+   * Role_Company upsert
    */
-  export type PositionUpsertArgs = {
+  export type Role_CompanyUpsertArgs = {
     /**
-     * Select specific fields to fetch from the Position
+     * Select specific fields to fetch from the Role_Company
      * 
     **/
-    select?: PositionSelect | null
+    select?: Role_CompanySelect | null
     /**
      * Choose, which related nodes to fetch as well.
      * 
     **/
-    include?: PositionInclude | null
+    include?: Role_CompanyInclude | null
     /**
-     * The filter to search for the Position to update in case it exists.
+     * The filter to search for the Role_Company to update in case it exists.
      * 
     **/
-    where: PositionWhereUniqueInput
+    where: Role_CompanyWhereUniqueInput
     /**
-     * In case the Position found by the `where` argument doesn't exist, create a new Position with this data.
+     * In case the Role_Company found by the `where` argument doesn't exist, create a new Role_Company with this data.
      * 
     **/
-    create: XOR<PositionCreateInput, PositionUncheckedCreateInput>
+    create: XOR<Role_CompanyCreateInput, Role_CompanyUncheckedCreateInput>
     /**
-     * In case the Position was found with the provided `where` argument, update it with this data.
+     * In case the Role_Company was found with the provided `where` argument, update it with this data.
      * 
     **/
-    update: XOR<PositionUpdateInput, PositionUncheckedUpdateInput>
+    update: XOR<Role_CompanyUpdateInput, Role_CompanyUncheckedUpdateInput>
   }
 
 
   /**
-   * Position delete
+   * Role_Company delete
    */
-  export type PositionDeleteArgs = {
+  export type Role_CompanyDeleteArgs = {
     /**
-     * Select specific fields to fetch from the Position
+     * Select specific fields to fetch from the Role_Company
      * 
     **/
-    select?: PositionSelect | null
+    select?: Role_CompanySelect | null
     /**
      * Choose, which related nodes to fetch as well.
      * 
     **/
-    include?: PositionInclude | null
+    include?: Role_CompanyInclude | null
     /**
-     * Filter which Position to delete.
+     * Filter which Role_Company to delete.
      * 
     **/
-    where: PositionWhereUniqueInput
+    where: Role_CompanyWhereUniqueInput
   }
 
 
   /**
-   * Position deleteMany
+   * Role_Company deleteMany
    */
-  export type PositionDeleteManyArgs = {
+  export type Role_CompanyDeleteManyArgs = {
     /**
-     * Filter which Positions to delete
+     * Filter which Role_Companies to delete
      * 
     **/
-    where?: PositionWhereInput
+    where?: Role_CompanyWhereInput
   }
 
 
   /**
-   * Position without action
+   * Role_Company without action
    */
-  export type PositionArgs = {
+  export type Role_CompanyArgs = {
     /**
-     * Select specific fields to fetch from the Position
+     * Select specific fields to fetch from the Role_Company
      * 
     **/
-    select?: PositionSelect | null
+    select?: Role_CompanySelect | null
     /**
      * Choose, which related nodes to fetch as well.
      * 
     **/
-    include?: PositionInclude | null
+    include?: Role_CompanyInclude | null
   }
 
 
@@ -10940,16 +10940,6 @@ export namespace Prisma {
   export type JsonNullValueInput = (typeof JsonNullValueInput)[keyof typeof JsonNullValueInput]
 
 
-  export const PositionScalarFieldEnum: {
-    id: 'id',
-    name: 'name',
-    access: 'access',
-    companyBranchId: 'companyBranchId'
-  };
-
-  export type PositionScalarFieldEnum = (typeof PositionScalarFieldEnum)[keyof typeof PositionScalarFieldEnum]
-
-
   export const ProfileScalarFieldEnum: {
     id: 'id',
     bio: 'bio',
@@ -11024,6 +11014,16 @@ export namespace Prisma {
   export type RoleScalarFieldEnum = (typeof RoleScalarFieldEnum)[keyof typeof RoleScalarFieldEnum]
 
 
+  export const Role_CompanyScalarFieldEnum: {
+    id: 'id',
+    name: 'name',
+    access: 'access',
+    companyBranchId: 'companyBranchId'
+  };
+
+  export type Role_CompanyScalarFieldEnum = (typeof Role_CompanyScalarFieldEnum)[keyof typeof Role_CompanyScalarFieldEnum]
+
+
   export const SortOrder: {
     asc: 'asc',
     desc: 'desc'
@@ -11052,7 +11052,7 @@ export namespace Prisma {
     lastlogin: 'lastlogin',
     createdAt: 'createdAt',
     roleId: 'roleId',
-    positionId: 'positionId',
+    RoleCompanyID: 'RoleCompanyID',
     companyBranchId: 'companyBranchId'
   };
 
@@ -11168,7 +11168,7 @@ export namespace Prisma {
     company?: XOR<CompanyRelationFilter, CompanyWhereInput> | null
     companyId?: UuidNullableFilter | string | null
     users?: UserListRelationFilter
-    positions?: PositionListRelationFilter
+    Role_Company?: Role_CompanyListRelationFilter
   }
 
   export type CompanyBranchOrderByWithRelationInput = {
@@ -11200,7 +11200,7 @@ export namespace Prisma {
     company?: CompanyOrderByWithRelationInput
     companyId?: SortOrder
     users?: UserOrderByRelationAggregateInput
-    positions?: PositionOrderByRelationAggregateInput
+    Role_Company?: Role_CompanyOrderByRelationAggregateInput
   }
 
   export type CompanyBranchWhereUniqueInput = {
@@ -11491,11 +11491,11 @@ export namespace Prisma {
     createdAt?: DateTimeFilter | Date | string
     roleId?: UuidNullableFilter | string | null
     role?: XOR<RoleRelationFilter, RoleWhereInput> | null
-    positionId?: UuidNullableFilter | string | null
+    RoleCompanyID?: UuidNullableFilter | string | null
     company?: CompanyListRelationFilter
     companyBranch?: XOR<CompanyBranchRelationFilter, CompanyBranchWhereInput> | null
     companyBranchId?: UuidNullableFilter | string | null
-    Position?: XOR<PositionRelationFilter, PositionWhereInput> | null
+    Role_Company?: XOR<Role_CompanyRelationFilter, Role_CompanyWhereInput> | null
   }
 
   export type UserOrderByWithRelationInput = {
@@ -11510,11 +11510,11 @@ export namespace Prisma {
     createdAt?: SortOrder
     roleId?: SortOrder
     role?: RoleOrderByWithRelationInput
-    positionId?: SortOrder
+    RoleCompanyID?: SortOrder
     company?: CompanyOrderByRelationAggregateInput
     companyBranch?: CompanyBranchOrderByWithRelationInput
     companyBranchId?: SortOrder
-    Position?: PositionOrderByWithRelationInput
+    Role_Company?: Role_CompanyOrderByWithRelationInput
   }
 
   export type UserWhereUniqueInput = {
@@ -11532,7 +11532,7 @@ export namespace Prisma {
     lastlogin?: SortOrder
     createdAt?: SortOrder
     roleId?: SortOrder
-    positionId?: SortOrder
+    RoleCompanyID?: SortOrder
     companyBranchId?: SortOrder
     _count?: UserCountOrderByAggregateInput
     _max?: UserMaxOrderByAggregateInput
@@ -11552,7 +11552,7 @@ export namespace Prisma {
     lastlogin?: DateTimeNullableWithAggregatesFilter | Date | string | null
     createdAt?: DateTimeWithAggregatesFilter | Date | string
     roleId?: UuidNullableWithAggregatesFilter | string | null
-    positionId?: UuidNullableWithAggregatesFilter | string | null
+    RoleCompanyID?: UuidNullableWithAggregatesFilter | string | null
     companyBranchId?: UuidNullableWithAggregatesFilter | string | null
   }
 
@@ -11591,10 +11591,10 @@ export namespace Prisma {
     name?: StringWithAggregatesFilter | string
   }
 
-  export type PositionWhereInput = {
-    AND?: Enumerable<PositionWhereInput>
-    OR?: Enumerable<PositionWhereInput>
-    NOT?: Enumerable<PositionWhereInput>
+  export type Role_CompanyWhereInput = {
+    AND?: Enumerable<Role_CompanyWhereInput>
+    OR?: Enumerable<Role_CompanyWhereInput>
+    NOT?: Enumerable<Role_CompanyWhereInput>
     id?: UuidFilter | string
     name?: StringFilter | string
     access?: JsonFilter
@@ -11603,7 +11603,7 @@ export namespace Prisma {
     companyBranchId?: UuidNullableFilter | string | null
   }
 
-  export type PositionOrderByWithRelationInput = {
+  export type Role_CompanyOrderByWithRelationInput = {
     id?: SortOrder
     name?: SortOrder
     access?: SortOrder
@@ -11612,24 +11612,24 @@ export namespace Prisma {
     companyBranchId?: SortOrder
   }
 
-  export type PositionWhereUniqueInput = {
+  export type Role_CompanyWhereUniqueInput = {
     id?: string
   }
 
-  export type PositionOrderByWithAggregationInput = {
+  export type Role_CompanyOrderByWithAggregationInput = {
     id?: SortOrder
     name?: SortOrder
     access?: SortOrder
     companyBranchId?: SortOrder
-    _count?: PositionCountOrderByAggregateInput
-    _max?: PositionMaxOrderByAggregateInput
-    _min?: PositionMinOrderByAggregateInput
+    _count?: Role_CompanyCountOrderByAggregateInput
+    _max?: Role_CompanyMaxOrderByAggregateInput
+    _min?: Role_CompanyMinOrderByAggregateInput
   }
 
-  export type PositionScalarWhereWithAggregatesInput = {
-    AND?: Enumerable<PositionScalarWhereWithAggregatesInput>
-    OR?: Enumerable<PositionScalarWhereWithAggregatesInput>
-    NOT?: Enumerable<PositionScalarWhereWithAggregatesInput>
+  export type Role_CompanyScalarWhereWithAggregatesInput = {
+    AND?: Enumerable<Role_CompanyScalarWhereWithAggregatesInput>
+    OR?: Enumerable<Role_CompanyScalarWhereWithAggregatesInput>
+    NOT?: Enumerable<Role_CompanyScalarWhereWithAggregatesInput>
     id?: UuidWithAggregatesFilter | string
     name?: StringWithAggregatesFilter | string
     access?: JsonWithAggregatesFilter
@@ -11877,7 +11877,7 @@ export namespace Prisma {
     updatedAt?: Date | string
     company?: CompanyCreateNestedOneWithoutBranchInput
     users?: UserCreateNestedManyWithoutCompanyBranchInput
-    positions?: PositionCreateNestedManyWithoutCompanyBranchInput
+    Role_Company?: Role_CompanyCreateNestedManyWithoutCompanyBranchInput
   }
 
   export type CompanyBranchUncheckedCreateInput = {
@@ -11908,7 +11908,7 @@ export namespace Prisma {
     updatedAt?: Date | string
     companyId?: string | null
     users?: UserUncheckedCreateNestedManyWithoutCompanyBranchInput
-    positions?: PositionUncheckedCreateNestedManyWithoutCompanyBranchInput
+    Role_Company?: Role_CompanyUncheckedCreateNestedManyWithoutCompanyBranchInput
   }
 
   export type CompanyBranchUpdateInput = {
@@ -11939,7 +11939,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     company?: CompanyUpdateOneWithoutBranchNestedInput
     users?: UserUpdateManyWithoutCompanyBranchNestedInput
-    positions?: PositionUpdateManyWithoutCompanyBranchNestedInput
+    Role_Company?: Role_CompanyUpdateManyWithoutCompanyBranchNestedInput
   }
 
   export type CompanyBranchUncheckedUpdateInput = {
@@ -11970,7 +11970,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     companyId?: NullableStringFieldUpdateOperationsInput | string | null
     users?: UserUncheckedUpdateManyWithoutCompanyBranchNestedInput
-    positions?: PositionUncheckedUpdateManyWithoutCompanyBranchNestedInput
+    Role_Company?: Role_CompanyUncheckedUpdateManyWithoutCompanyBranchNestedInput
   }
 
   export type CompanyBranchCreateManyInput = {
@@ -12400,7 +12400,7 @@ export namespace Prisma {
     role?: RoleCreateNestedOneWithoutUsersInput
     company?: CompanyCreateNestedManyWithoutOwnerInput
     companyBranch?: CompanyBranchCreateNestedOneWithoutUsersInput
-    Position?: PositionCreateNestedOneWithoutUsersInput
+    Role_Company?: Role_CompanyCreateNestedOneWithoutUsersInput
   }
 
   export type UserUncheckedCreateInput = {
@@ -12414,7 +12414,7 @@ export namespace Prisma {
     lastlogin?: Date | string | null
     createdAt?: Date | string
     roleId?: string | null
-    positionId?: string | null
+    RoleCompanyID?: string | null
     company?: CompanyUncheckedCreateNestedManyWithoutOwnerInput
     companyBranchId?: string | null
   }
@@ -12432,7 +12432,7 @@ export namespace Prisma {
     role?: RoleUpdateOneWithoutUsersNestedInput
     company?: CompanyUpdateManyWithoutOwnerNestedInput
     companyBranch?: CompanyBranchUpdateOneWithoutUsersNestedInput
-    Position?: PositionUpdateOneWithoutUsersNestedInput
+    Role_Company?: Role_CompanyUpdateOneWithoutUsersNestedInput
   }
 
   export type UserUncheckedUpdateInput = {
@@ -12446,7 +12446,7 @@ export namespace Prisma {
     lastlogin?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     roleId?: NullableStringFieldUpdateOperationsInput | string | null
-    positionId?: NullableStringFieldUpdateOperationsInput | string | null
+    RoleCompanyID?: NullableStringFieldUpdateOperationsInput | string | null
     company?: CompanyUncheckedUpdateManyWithoutOwnerNestedInput
     companyBranchId?: NullableStringFieldUpdateOperationsInput | string | null
   }
@@ -12461,7 +12461,7 @@ export namespace Prisma {
     lastlogin?: Date | string | null
     createdAt?: Date | string
     roleId?: string | null
-    positionId?: string | null
+    RoleCompanyID?: string | null
     companyBranchId?: string | null
   }
 
@@ -12486,7 +12486,7 @@ export namespace Prisma {
     lastlogin?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     roleId?: NullableStringFieldUpdateOperationsInput | string | null
-    positionId?: NullableStringFieldUpdateOperationsInput | string | null
+    RoleCompanyID?: NullableStringFieldUpdateOperationsInput | string | null
     companyBranchId?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
@@ -12529,52 +12529,52 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
   }
 
-  export type PositionCreateInput = {
+  export type Role_CompanyCreateInput = {
     id: string
     name: string
     access: JsonNullValueInput | InputJsonValue
-    users?: UserCreateNestedManyWithoutPositionInput
-    companyBranch?: CompanyBranchCreateNestedOneWithoutPositionsInput
+    users?: UserCreateNestedManyWithoutRole_CompanyInput
+    companyBranch?: CompanyBranchCreateNestedOneWithoutRole_CompanyInput
   }
 
-  export type PositionUncheckedCreateInput = {
+  export type Role_CompanyUncheckedCreateInput = {
     id: string
     name: string
     access: JsonNullValueInput | InputJsonValue
-    users?: UserUncheckedCreateNestedManyWithoutPositionInput
+    users?: UserUncheckedCreateNestedManyWithoutRole_CompanyInput
     companyBranchId?: string | null
   }
 
-  export type PositionUpdateInput = {
+  export type Role_CompanyUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     access?: JsonNullValueInput | InputJsonValue
-    users?: UserUpdateManyWithoutPositionNestedInput
-    companyBranch?: CompanyBranchUpdateOneWithoutPositionsNestedInput
+    users?: UserUpdateManyWithoutRole_CompanyNestedInput
+    companyBranch?: CompanyBranchUpdateOneWithoutRole_CompanyNestedInput
   }
 
-  export type PositionUncheckedUpdateInput = {
+  export type Role_CompanyUncheckedUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     access?: JsonNullValueInput | InputJsonValue
-    users?: UserUncheckedUpdateManyWithoutPositionNestedInput
+    users?: UserUncheckedUpdateManyWithoutRole_CompanyNestedInput
     companyBranchId?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
-  export type PositionCreateManyInput = {
+  export type Role_CompanyCreateManyInput = {
     id: string
     name: string
     access: JsonNullValueInput | InputJsonValue
     companyBranchId?: string | null
   }
 
-  export type PositionUpdateManyMutationInput = {
+  export type Role_CompanyUpdateManyMutationInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     access?: JsonNullValueInput | InputJsonValue
   }
 
-  export type PositionUncheckedUpdateManyInput = {
+  export type Role_CompanyUncheckedUpdateManyInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     access?: JsonNullValueInput | InputJsonValue
@@ -12948,17 +12948,17 @@ export namespace Prisma {
     none?: UserWhereInput
   }
 
-  export type PositionListRelationFilter = {
-    every?: PositionWhereInput
-    some?: PositionWhereInput
-    none?: PositionWhereInput
+  export type Role_CompanyListRelationFilter = {
+    every?: Role_CompanyWhereInput
+    some?: Role_CompanyWhereInput
+    none?: Role_CompanyWhereInput
   }
 
   export type UserOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
-  export type PositionOrderByRelationAggregateInput = {
+  export type Role_CompanyOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
@@ -13259,9 +13259,9 @@ export namespace Prisma {
     isNot?: CompanyBranchWhereInput | null
   }
 
-  export type PositionRelationFilter = {
-    is?: PositionWhereInput | null
-    isNot?: PositionWhereInput | null
+  export type Role_CompanyRelationFilter = {
+    is?: Role_CompanyWhereInput | null
+    isNot?: Role_CompanyWhereInput | null
   }
 
   export type CompanyOrderByRelationAggregateInput = {
@@ -13278,7 +13278,7 @@ export namespace Prisma {
     lastlogin?: SortOrder
     createdAt?: SortOrder
     roleId?: SortOrder
-    positionId?: SortOrder
+    RoleCompanyID?: SortOrder
     companyBranchId?: SortOrder
   }
 
@@ -13292,7 +13292,7 @@ export namespace Prisma {
     lastlogin?: SortOrder
     createdAt?: SortOrder
     roleId?: SortOrder
-    positionId?: SortOrder
+    RoleCompanyID?: SortOrder
     companyBranchId?: SortOrder
   }
 
@@ -13306,7 +13306,7 @@ export namespace Prisma {
     lastlogin?: SortOrder
     createdAt?: SortOrder
     roleId?: SortOrder
-    positionId?: SortOrder
+    RoleCompanyID?: SortOrder
     companyBranchId?: SortOrder
   }
 
@@ -13347,20 +13347,20 @@ export namespace Prisma {
     not?: InputJsonValue | JsonNullValueFilter
   }
 
-  export type PositionCountOrderByAggregateInput = {
+  export type Role_CompanyCountOrderByAggregateInput = {
     id?: SortOrder
     name?: SortOrder
     access?: SortOrder
     companyBranchId?: SortOrder
   }
 
-  export type PositionMaxOrderByAggregateInput = {
+  export type Role_CompanyMaxOrderByAggregateInput = {
     id?: SortOrder
     name?: SortOrder
     companyBranchId?: SortOrder
   }
 
-  export type PositionMinOrderByAggregateInput = {
+  export type Role_CompanyMinOrderByAggregateInput = {
     id?: SortOrder
     name?: SortOrder
     companyBranchId?: SortOrder
@@ -13564,11 +13564,11 @@ export namespace Prisma {
     connect?: Enumerable<UserWhereUniqueInput>
   }
 
-  export type PositionCreateNestedManyWithoutCompanyBranchInput = {
-    create?: XOR<Enumerable<PositionCreateWithoutCompanyBranchInput>, Enumerable<PositionUncheckedCreateWithoutCompanyBranchInput>>
-    connectOrCreate?: Enumerable<PositionCreateOrConnectWithoutCompanyBranchInput>
-    createMany?: PositionCreateManyCompanyBranchInputEnvelope
-    connect?: Enumerable<PositionWhereUniqueInput>
+  export type Role_CompanyCreateNestedManyWithoutCompanyBranchInput = {
+    create?: XOR<Enumerable<Role_CompanyCreateWithoutCompanyBranchInput>, Enumerable<Role_CompanyUncheckedCreateWithoutCompanyBranchInput>>
+    connectOrCreate?: Enumerable<Role_CompanyCreateOrConnectWithoutCompanyBranchInput>
+    createMany?: Role_CompanyCreateManyCompanyBranchInputEnvelope
+    connect?: Enumerable<Role_CompanyWhereUniqueInput>
   }
 
   export type UserUncheckedCreateNestedManyWithoutCompanyBranchInput = {
@@ -13578,11 +13578,11 @@ export namespace Prisma {
     connect?: Enumerable<UserWhereUniqueInput>
   }
 
-  export type PositionUncheckedCreateNestedManyWithoutCompanyBranchInput = {
-    create?: XOR<Enumerable<PositionCreateWithoutCompanyBranchInput>, Enumerable<PositionUncheckedCreateWithoutCompanyBranchInput>>
-    connectOrCreate?: Enumerable<PositionCreateOrConnectWithoutCompanyBranchInput>
-    createMany?: PositionCreateManyCompanyBranchInputEnvelope
-    connect?: Enumerable<PositionWhereUniqueInput>
+  export type Role_CompanyUncheckedCreateNestedManyWithoutCompanyBranchInput = {
+    create?: XOR<Enumerable<Role_CompanyCreateWithoutCompanyBranchInput>, Enumerable<Role_CompanyUncheckedCreateWithoutCompanyBranchInput>>
+    connectOrCreate?: Enumerable<Role_CompanyCreateOrConnectWithoutCompanyBranchInput>
+    createMany?: Role_CompanyCreateManyCompanyBranchInputEnvelope
+    connect?: Enumerable<Role_CompanyWhereUniqueInput>
   }
 
   export type BoolFieldUpdateOperationsInput = {
@@ -13613,18 +13613,18 @@ export namespace Prisma {
     deleteMany?: Enumerable<UserScalarWhereInput>
   }
 
-  export type PositionUpdateManyWithoutCompanyBranchNestedInput = {
-    create?: XOR<Enumerable<PositionCreateWithoutCompanyBranchInput>, Enumerable<PositionUncheckedCreateWithoutCompanyBranchInput>>
-    connectOrCreate?: Enumerable<PositionCreateOrConnectWithoutCompanyBranchInput>
-    upsert?: Enumerable<PositionUpsertWithWhereUniqueWithoutCompanyBranchInput>
-    createMany?: PositionCreateManyCompanyBranchInputEnvelope
-    set?: Enumerable<PositionWhereUniqueInput>
-    disconnect?: Enumerable<PositionWhereUniqueInput>
-    delete?: Enumerable<PositionWhereUniqueInput>
-    connect?: Enumerable<PositionWhereUniqueInput>
-    update?: Enumerable<PositionUpdateWithWhereUniqueWithoutCompanyBranchInput>
-    updateMany?: Enumerable<PositionUpdateManyWithWhereWithoutCompanyBranchInput>
-    deleteMany?: Enumerable<PositionScalarWhereInput>
+  export type Role_CompanyUpdateManyWithoutCompanyBranchNestedInput = {
+    create?: XOR<Enumerable<Role_CompanyCreateWithoutCompanyBranchInput>, Enumerable<Role_CompanyUncheckedCreateWithoutCompanyBranchInput>>
+    connectOrCreate?: Enumerable<Role_CompanyCreateOrConnectWithoutCompanyBranchInput>
+    upsert?: Enumerable<Role_CompanyUpsertWithWhereUniqueWithoutCompanyBranchInput>
+    createMany?: Role_CompanyCreateManyCompanyBranchInputEnvelope
+    set?: Enumerable<Role_CompanyWhereUniqueInput>
+    disconnect?: Enumerable<Role_CompanyWhereUniqueInput>
+    delete?: Enumerable<Role_CompanyWhereUniqueInput>
+    connect?: Enumerable<Role_CompanyWhereUniqueInput>
+    update?: Enumerable<Role_CompanyUpdateWithWhereUniqueWithoutCompanyBranchInput>
+    updateMany?: Enumerable<Role_CompanyUpdateManyWithWhereWithoutCompanyBranchInput>
+    deleteMany?: Enumerable<Role_CompanyScalarWhereInput>
   }
 
   export type UserUncheckedUpdateManyWithoutCompanyBranchNestedInput = {
@@ -13641,18 +13641,18 @@ export namespace Prisma {
     deleteMany?: Enumerable<UserScalarWhereInput>
   }
 
-  export type PositionUncheckedUpdateManyWithoutCompanyBranchNestedInput = {
-    create?: XOR<Enumerable<PositionCreateWithoutCompanyBranchInput>, Enumerable<PositionUncheckedCreateWithoutCompanyBranchInput>>
-    connectOrCreate?: Enumerable<PositionCreateOrConnectWithoutCompanyBranchInput>
-    upsert?: Enumerable<PositionUpsertWithWhereUniqueWithoutCompanyBranchInput>
-    createMany?: PositionCreateManyCompanyBranchInputEnvelope
-    set?: Enumerable<PositionWhereUniqueInput>
-    disconnect?: Enumerable<PositionWhereUniqueInput>
-    delete?: Enumerable<PositionWhereUniqueInput>
-    connect?: Enumerable<PositionWhereUniqueInput>
-    update?: Enumerable<PositionUpdateWithWhereUniqueWithoutCompanyBranchInput>
-    updateMany?: Enumerable<PositionUpdateManyWithWhereWithoutCompanyBranchInput>
-    deleteMany?: Enumerable<PositionScalarWhereInput>
+  export type Role_CompanyUncheckedUpdateManyWithoutCompanyBranchNestedInput = {
+    create?: XOR<Enumerable<Role_CompanyCreateWithoutCompanyBranchInput>, Enumerable<Role_CompanyUncheckedCreateWithoutCompanyBranchInput>>
+    connectOrCreate?: Enumerable<Role_CompanyCreateOrConnectWithoutCompanyBranchInput>
+    upsert?: Enumerable<Role_CompanyUpsertWithWhereUniqueWithoutCompanyBranchInput>
+    createMany?: Role_CompanyCreateManyCompanyBranchInputEnvelope
+    set?: Enumerable<Role_CompanyWhereUniqueInput>
+    disconnect?: Enumerable<Role_CompanyWhereUniqueInput>
+    delete?: Enumerable<Role_CompanyWhereUniqueInput>
+    connect?: Enumerable<Role_CompanyWhereUniqueInput>
+    update?: Enumerable<Role_CompanyUpdateWithWhereUniqueWithoutCompanyBranchInput>
+    updateMany?: Enumerable<Role_CompanyUpdateManyWithWhereWithoutCompanyBranchInput>
+    deleteMany?: Enumerable<Role_CompanyScalarWhereInput>
   }
 
   export type UserCreateNestedOneWithoutProfileInput = {
@@ -13698,10 +13698,10 @@ export namespace Prisma {
     connect?: CompanyBranchWhereUniqueInput
   }
 
-  export type PositionCreateNestedOneWithoutUsersInput = {
-    create?: XOR<PositionCreateWithoutUsersInput, PositionUncheckedCreateWithoutUsersInput>
-    connectOrCreate?: PositionCreateOrConnectWithoutUsersInput
-    connect?: PositionWhereUniqueInput
+  export type Role_CompanyCreateNestedOneWithoutUsersInput = {
+    create?: XOR<Role_CompanyCreateWithoutUsersInput, Role_CompanyUncheckedCreateWithoutUsersInput>
+    connectOrCreate?: Role_CompanyCreateOrConnectWithoutUsersInput
+    connect?: Role_CompanyWhereUniqueInput
   }
 
   export type ProfileUncheckedCreateNestedOneWithoutUserInput = {
@@ -13761,14 +13761,14 @@ export namespace Prisma {
     update?: XOR<CompanyBranchUpdateWithoutUsersInput, CompanyBranchUncheckedUpdateWithoutUsersInput>
   }
 
-  export type PositionUpdateOneWithoutUsersNestedInput = {
-    create?: XOR<PositionCreateWithoutUsersInput, PositionUncheckedCreateWithoutUsersInput>
-    connectOrCreate?: PositionCreateOrConnectWithoutUsersInput
-    upsert?: PositionUpsertWithoutUsersInput
+  export type Role_CompanyUpdateOneWithoutUsersNestedInput = {
+    create?: XOR<Role_CompanyCreateWithoutUsersInput, Role_CompanyUncheckedCreateWithoutUsersInput>
+    connectOrCreate?: Role_CompanyCreateOrConnectWithoutUsersInput
+    upsert?: Role_CompanyUpsertWithoutUsersInput
     disconnect?: boolean
     delete?: boolean
-    connect?: PositionWhereUniqueInput
-    update?: XOR<PositionUpdateWithoutUsersInput, PositionUncheckedUpdateWithoutUsersInput>
+    connect?: Role_CompanyWhereUniqueInput
+    update?: XOR<Role_CompanyUpdateWithoutUsersInput, Role_CompanyUncheckedUpdateWithoutUsersInput>
   }
 
   export type ProfileUncheckedUpdateOneWithoutUserNestedInput = {
@@ -13837,61 +13837,61 @@ export namespace Prisma {
     deleteMany?: Enumerable<UserScalarWhereInput>
   }
 
-  export type UserCreateNestedManyWithoutPositionInput = {
-    create?: XOR<Enumerable<UserCreateWithoutPositionInput>, Enumerable<UserUncheckedCreateWithoutPositionInput>>
-    connectOrCreate?: Enumerable<UserCreateOrConnectWithoutPositionInput>
-    createMany?: UserCreateManyPositionInputEnvelope
+  export type UserCreateNestedManyWithoutRole_CompanyInput = {
+    create?: XOR<Enumerable<UserCreateWithoutRole_CompanyInput>, Enumerable<UserUncheckedCreateWithoutRole_CompanyInput>>
+    connectOrCreate?: Enumerable<UserCreateOrConnectWithoutRole_CompanyInput>
+    createMany?: UserCreateManyRole_CompanyInputEnvelope
     connect?: Enumerable<UserWhereUniqueInput>
   }
 
-  export type CompanyBranchCreateNestedOneWithoutPositionsInput = {
-    create?: XOR<CompanyBranchCreateWithoutPositionsInput, CompanyBranchUncheckedCreateWithoutPositionsInput>
-    connectOrCreate?: CompanyBranchCreateOrConnectWithoutPositionsInput
+  export type CompanyBranchCreateNestedOneWithoutRole_CompanyInput = {
+    create?: XOR<CompanyBranchCreateWithoutRole_CompanyInput, CompanyBranchUncheckedCreateWithoutRole_CompanyInput>
+    connectOrCreate?: CompanyBranchCreateOrConnectWithoutRole_CompanyInput
     connect?: CompanyBranchWhereUniqueInput
   }
 
-  export type UserUncheckedCreateNestedManyWithoutPositionInput = {
-    create?: XOR<Enumerable<UserCreateWithoutPositionInput>, Enumerable<UserUncheckedCreateWithoutPositionInput>>
-    connectOrCreate?: Enumerable<UserCreateOrConnectWithoutPositionInput>
-    createMany?: UserCreateManyPositionInputEnvelope
+  export type UserUncheckedCreateNestedManyWithoutRole_CompanyInput = {
+    create?: XOR<Enumerable<UserCreateWithoutRole_CompanyInput>, Enumerable<UserUncheckedCreateWithoutRole_CompanyInput>>
+    connectOrCreate?: Enumerable<UserCreateOrConnectWithoutRole_CompanyInput>
+    createMany?: UserCreateManyRole_CompanyInputEnvelope
     connect?: Enumerable<UserWhereUniqueInput>
   }
 
-  export type UserUpdateManyWithoutPositionNestedInput = {
-    create?: XOR<Enumerable<UserCreateWithoutPositionInput>, Enumerable<UserUncheckedCreateWithoutPositionInput>>
-    connectOrCreate?: Enumerable<UserCreateOrConnectWithoutPositionInput>
-    upsert?: Enumerable<UserUpsertWithWhereUniqueWithoutPositionInput>
-    createMany?: UserCreateManyPositionInputEnvelope
+  export type UserUpdateManyWithoutRole_CompanyNestedInput = {
+    create?: XOR<Enumerable<UserCreateWithoutRole_CompanyInput>, Enumerable<UserUncheckedCreateWithoutRole_CompanyInput>>
+    connectOrCreate?: Enumerable<UserCreateOrConnectWithoutRole_CompanyInput>
+    upsert?: Enumerable<UserUpsertWithWhereUniqueWithoutRole_CompanyInput>
+    createMany?: UserCreateManyRole_CompanyInputEnvelope
     set?: Enumerable<UserWhereUniqueInput>
     disconnect?: Enumerable<UserWhereUniqueInput>
     delete?: Enumerable<UserWhereUniqueInput>
     connect?: Enumerable<UserWhereUniqueInput>
-    update?: Enumerable<UserUpdateWithWhereUniqueWithoutPositionInput>
-    updateMany?: Enumerable<UserUpdateManyWithWhereWithoutPositionInput>
+    update?: Enumerable<UserUpdateWithWhereUniqueWithoutRole_CompanyInput>
+    updateMany?: Enumerable<UserUpdateManyWithWhereWithoutRole_CompanyInput>
     deleteMany?: Enumerable<UserScalarWhereInput>
   }
 
-  export type CompanyBranchUpdateOneWithoutPositionsNestedInput = {
-    create?: XOR<CompanyBranchCreateWithoutPositionsInput, CompanyBranchUncheckedCreateWithoutPositionsInput>
-    connectOrCreate?: CompanyBranchCreateOrConnectWithoutPositionsInput
-    upsert?: CompanyBranchUpsertWithoutPositionsInput
+  export type CompanyBranchUpdateOneWithoutRole_CompanyNestedInput = {
+    create?: XOR<CompanyBranchCreateWithoutRole_CompanyInput, CompanyBranchUncheckedCreateWithoutRole_CompanyInput>
+    connectOrCreate?: CompanyBranchCreateOrConnectWithoutRole_CompanyInput
+    upsert?: CompanyBranchUpsertWithoutRole_CompanyInput
     disconnect?: boolean
     delete?: boolean
     connect?: CompanyBranchWhereUniqueInput
-    update?: XOR<CompanyBranchUpdateWithoutPositionsInput, CompanyBranchUncheckedUpdateWithoutPositionsInput>
+    update?: XOR<CompanyBranchUpdateWithoutRole_CompanyInput, CompanyBranchUncheckedUpdateWithoutRole_CompanyInput>
   }
 
-  export type UserUncheckedUpdateManyWithoutPositionNestedInput = {
-    create?: XOR<Enumerable<UserCreateWithoutPositionInput>, Enumerable<UserUncheckedCreateWithoutPositionInput>>
-    connectOrCreate?: Enumerable<UserCreateOrConnectWithoutPositionInput>
-    upsert?: Enumerable<UserUpsertWithWhereUniqueWithoutPositionInput>
-    createMany?: UserCreateManyPositionInputEnvelope
+  export type UserUncheckedUpdateManyWithoutRole_CompanyNestedInput = {
+    create?: XOR<Enumerable<UserCreateWithoutRole_CompanyInput>, Enumerable<UserUncheckedCreateWithoutRole_CompanyInput>>
+    connectOrCreate?: Enumerable<UserCreateOrConnectWithoutRole_CompanyInput>
+    upsert?: Enumerable<UserUpsertWithWhereUniqueWithoutRole_CompanyInput>
+    createMany?: UserCreateManyRole_CompanyInputEnvelope
     set?: Enumerable<UserWhereUniqueInput>
     disconnect?: Enumerable<UserWhereUniqueInput>
     delete?: Enumerable<UserWhereUniqueInput>
     connect?: Enumerable<UserWhereUniqueInput>
-    update?: Enumerable<UserUpdateWithWhereUniqueWithoutPositionInput>
-    updateMany?: Enumerable<UserUpdateManyWithWhereWithoutPositionInput>
+    update?: Enumerable<UserUpdateWithWhereUniqueWithoutRole_CompanyInput>
+    updateMany?: Enumerable<UserUpdateManyWithWhereWithoutRole_CompanyInput>
     deleteMany?: Enumerable<UserScalarWhereInput>
   }
 
@@ -14265,7 +14265,7 @@ export namespace Prisma {
     createdAt?: Date | string
     role?: RoleCreateNestedOneWithoutUsersInput
     companyBranch?: CompanyBranchCreateNestedOneWithoutUsersInput
-    Position?: PositionCreateNestedOneWithoutUsersInput
+    Role_Company?: Role_CompanyCreateNestedOneWithoutUsersInput
   }
 
   export type UserUncheckedCreateWithoutCompanyInput = {
@@ -14279,7 +14279,7 @@ export namespace Prisma {
     lastlogin?: Date | string | null
     createdAt?: Date | string
     roleId?: string | null
-    positionId?: string | null
+    RoleCompanyID?: string | null
     companyBranchId?: string | null
   }
 
@@ -14315,7 +14315,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     users?: UserCreateNestedManyWithoutCompanyBranchInput
-    positions?: PositionCreateNestedManyWithoutCompanyBranchInput
+    Role_Company?: Role_CompanyCreateNestedManyWithoutCompanyBranchInput
   }
 
   export type CompanyBranchUncheckedCreateWithoutCompanyInput = {
@@ -14345,7 +14345,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     users?: UserUncheckedCreateNestedManyWithoutCompanyBranchInput
-    positions?: PositionUncheckedCreateNestedManyWithoutCompanyBranchInput
+    Role_Company?: Role_CompanyUncheckedCreateNestedManyWithoutCompanyBranchInput
   }
 
   export type CompanyBranchCreateOrConnectWithoutCompanyInput = {
@@ -14375,7 +14375,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     role?: RoleUpdateOneWithoutUsersNestedInput
     companyBranch?: CompanyBranchUpdateOneWithoutUsersNestedInput
-    Position?: PositionUpdateOneWithoutUsersNestedInput
+    Role_Company?: Role_CompanyUpdateOneWithoutUsersNestedInput
   }
 
   export type UserUncheckedUpdateWithoutCompanyInput = {
@@ -14389,7 +14389,7 @@ export namespace Prisma {
     lastlogin?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     roleId?: NullableStringFieldUpdateOperationsInput | string | null
-    positionId?: NullableStringFieldUpdateOperationsInput | string | null
+    RoleCompanyID?: NullableStringFieldUpdateOperationsInput | string | null
     companyBranchId?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
@@ -14484,7 +14484,7 @@ export namespace Prisma {
     createdAt?: Date | string
     role?: RoleCreateNestedOneWithoutUsersInput
     company?: CompanyCreateNestedManyWithoutOwnerInput
-    Position?: PositionCreateNestedOneWithoutUsersInput
+    Role_Company?: Role_CompanyCreateNestedOneWithoutUsersInput
   }
 
   export type UserUncheckedCreateWithoutCompanyBranchInput = {
@@ -14498,7 +14498,7 @@ export namespace Prisma {
     lastlogin?: Date | string | null
     createdAt?: Date | string
     roleId?: string | null
-    positionId?: string | null
+    RoleCompanyID?: string | null
     company?: CompanyUncheckedCreateNestedManyWithoutOwnerInput
   }
 
@@ -14512,27 +14512,27 @@ export namespace Prisma {
     skipDuplicates?: boolean
   }
 
-  export type PositionCreateWithoutCompanyBranchInput = {
+  export type Role_CompanyCreateWithoutCompanyBranchInput = {
     id: string
     name: string
     access: JsonNullValueInput | InputJsonValue
-    users?: UserCreateNestedManyWithoutPositionInput
+    users?: UserCreateNestedManyWithoutRole_CompanyInput
   }
 
-  export type PositionUncheckedCreateWithoutCompanyBranchInput = {
+  export type Role_CompanyUncheckedCreateWithoutCompanyBranchInput = {
     id: string
     name: string
     access: JsonNullValueInput | InputJsonValue
-    users?: UserUncheckedCreateNestedManyWithoutPositionInput
+    users?: UserUncheckedCreateNestedManyWithoutRole_CompanyInput
   }
 
-  export type PositionCreateOrConnectWithoutCompanyBranchInput = {
-    where: PositionWhereUniqueInput
-    create: XOR<PositionCreateWithoutCompanyBranchInput, PositionUncheckedCreateWithoutCompanyBranchInput>
+  export type Role_CompanyCreateOrConnectWithoutCompanyBranchInput = {
+    where: Role_CompanyWhereUniqueInput
+    create: XOR<Role_CompanyCreateWithoutCompanyBranchInput, Role_CompanyUncheckedCreateWithoutCompanyBranchInput>
   }
 
-  export type PositionCreateManyCompanyBranchInputEnvelope = {
-    data: Enumerable<PositionCreateManyCompanyBranchInput>
+  export type Role_CompanyCreateManyCompanyBranchInputEnvelope = {
+    data: Enumerable<Role_CompanyCreateManyCompanyBranchInput>
     skipDuplicates?: boolean
   }
 
@@ -14596,30 +14596,30 @@ export namespace Prisma {
     lastlogin?: DateTimeNullableFilter | Date | string | null
     createdAt?: DateTimeFilter | Date | string
     roleId?: UuidNullableFilter | string | null
-    positionId?: UuidNullableFilter | string | null
+    RoleCompanyID?: UuidNullableFilter | string | null
     companyBranchId?: UuidNullableFilter | string | null
   }
 
-  export type PositionUpsertWithWhereUniqueWithoutCompanyBranchInput = {
-    where: PositionWhereUniqueInput
-    update: XOR<PositionUpdateWithoutCompanyBranchInput, PositionUncheckedUpdateWithoutCompanyBranchInput>
-    create: XOR<PositionCreateWithoutCompanyBranchInput, PositionUncheckedCreateWithoutCompanyBranchInput>
+  export type Role_CompanyUpsertWithWhereUniqueWithoutCompanyBranchInput = {
+    where: Role_CompanyWhereUniqueInput
+    update: XOR<Role_CompanyUpdateWithoutCompanyBranchInput, Role_CompanyUncheckedUpdateWithoutCompanyBranchInput>
+    create: XOR<Role_CompanyCreateWithoutCompanyBranchInput, Role_CompanyUncheckedCreateWithoutCompanyBranchInput>
   }
 
-  export type PositionUpdateWithWhereUniqueWithoutCompanyBranchInput = {
-    where: PositionWhereUniqueInput
-    data: XOR<PositionUpdateWithoutCompanyBranchInput, PositionUncheckedUpdateWithoutCompanyBranchInput>
+  export type Role_CompanyUpdateWithWhereUniqueWithoutCompanyBranchInput = {
+    where: Role_CompanyWhereUniqueInput
+    data: XOR<Role_CompanyUpdateWithoutCompanyBranchInput, Role_CompanyUncheckedUpdateWithoutCompanyBranchInput>
   }
 
-  export type PositionUpdateManyWithWhereWithoutCompanyBranchInput = {
-    where: PositionScalarWhereInput
-    data: XOR<PositionUpdateManyMutationInput, PositionUncheckedUpdateManyWithoutPositionsInput>
+  export type Role_CompanyUpdateManyWithWhereWithoutCompanyBranchInput = {
+    where: Role_CompanyScalarWhereInput
+    data: XOR<Role_CompanyUpdateManyMutationInput, Role_CompanyUncheckedUpdateManyWithoutRole_CompanyInput>
   }
 
-  export type PositionScalarWhereInput = {
-    AND?: Enumerable<PositionScalarWhereInput>
-    OR?: Enumerable<PositionScalarWhereInput>
-    NOT?: Enumerable<PositionScalarWhereInput>
+  export type Role_CompanyScalarWhereInput = {
+    AND?: Enumerable<Role_CompanyScalarWhereInput>
+    OR?: Enumerable<Role_CompanyScalarWhereInput>
+    NOT?: Enumerable<Role_CompanyScalarWhereInput>
     id?: UuidFilter | string
     name?: StringFilter | string
     access?: JsonFilter
@@ -14638,7 +14638,7 @@ export namespace Prisma {
     role?: RoleCreateNestedOneWithoutUsersInput
     company?: CompanyCreateNestedManyWithoutOwnerInput
     companyBranch?: CompanyBranchCreateNestedOneWithoutUsersInput
-    Position?: PositionCreateNestedOneWithoutUsersInput
+    Role_Company?: Role_CompanyCreateNestedOneWithoutUsersInput
   }
 
   export type UserUncheckedCreateWithoutProfileInput = {
@@ -14651,7 +14651,7 @@ export namespace Prisma {
     lastlogin?: Date | string | null
     createdAt?: Date | string
     roleId?: string | null
-    positionId?: string | null
+    RoleCompanyID?: string | null
     company?: CompanyUncheckedCreateNestedManyWithoutOwnerInput
     companyBranchId?: string | null
   }
@@ -14678,7 +14678,7 @@ export namespace Prisma {
     role?: RoleUpdateOneWithoutUsersNestedInput
     company?: CompanyUpdateManyWithoutOwnerNestedInput
     companyBranch?: CompanyBranchUpdateOneWithoutUsersNestedInput
-    Position?: PositionUpdateOneWithoutUsersNestedInput
+    Role_Company?: Role_CompanyUpdateOneWithoutUsersNestedInput
   }
 
   export type UserUncheckedUpdateWithoutProfileInput = {
@@ -14691,7 +14691,7 @@ export namespace Prisma {
     lastlogin?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     roleId?: NullableStringFieldUpdateOperationsInput | string | null
-    positionId?: NullableStringFieldUpdateOperationsInput | string | null
+    RoleCompanyID?: NullableStringFieldUpdateOperationsInput | string | null
     company?: CompanyUncheckedUpdateManyWithoutOwnerNestedInput
     companyBranchId?: NullableStringFieldUpdateOperationsInput | string | null
   }
@@ -14871,7 +14871,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     company?: CompanyCreateNestedOneWithoutBranchInput
-    positions?: PositionCreateNestedManyWithoutCompanyBranchInput
+    Role_Company?: Role_CompanyCreateNestedManyWithoutCompanyBranchInput
   }
 
   export type CompanyBranchUncheckedCreateWithoutUsersInput = {
@@ -14901,7 +14901,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     companyId?: string | null
-    positions?: PositionUncheckedCreateNestedManyWithoutCompanyBranchInput
+    Role_Company?: Role_CompanyUncheckedCreateNestedManyWithoutCompanyBranchInput
   }
 
   export type CompanyBranchCreateOrConnectWithoutUsersInput = {
@@ -14909,23 +14909,23 @@ export namespace Prisma {
     create: XOR<CompanyBranchCreateWithoutUsersInput, CompanyBranchUncheckedCreateWithoutUsersInput>
   }
 
-  export type PositionCreateWithoutUsersInput = {
+  export type Role_CompanyCreateWithoutUsersInput = {
     id: string
     name: string
     access: JsonNullValueInput | InputJsonValue
-    companyBranch?: CompanyBranchCreateNestedOneWithoutPositionsInput
+    companyBranch?: CompanyBranchCreateNestedOneWithoutRole_CompanyInput
   }
 
-  export type PositionUncheckedCreateWithoutUsersInput = {
+  export type Role_CompanyUncheckedCreateWithoutUsersInput = {
     id: string
     name: string
     access: JsonNullValueInput | InputJsonValue
     companyBranchId?: string | null
   }
 
-  export type PositionCreateOrConnectWithoutUsersInput = {
-    where: PositionWhereUniqueInput
-    create: XOR<PositionCreateWithoutUsersInput, PositionUncheckedCreateWithoutUsersInput>
+  export type Role_CompanyCreateOrConnectWithoutUsersInput = {
+    where: Role_CompanyWhereUniqueInput
+    create: XOR<Role_CompanyCreateWithoutUsersInput, Role_CompanyUncheckedCreateWithoutUsersInput>
   }
 
   export type ProfileUpsertWithoutUserInput = {
@@ -15104,7 +15104,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     company?: CompanyUpdateOneWithoutBranchNestedInput
-    positions?: PositionUpdateManyWithoutCompanyBranchNestedInput
+    Role_Company?: Role_CompanyUpdateManyWithoutCompanyBranchNestedInput
   }
 
   export type CompanyBranchUncheckedUpdateWithoutUsersInput = {
@@ -15134,22 +15134,22 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     companyId?: NullableStringFieldUpdateOperationsInput | string | null
-    positions?: PositionUncheckedUpdateManyWithoutCompanyBranchNestedInput
+    Role_Company?: Role_CompanyUncheckedUpdateManyWithoutCompanyBranchNestedInput
   }
 
-  export type PositionUpsertWithoutUsersInput = {
-    update: XOR<PositionUpdateWithoutUsersInput, PositionUncheckedUpdateWithoutUsersInput>
-    create: XOR<PositionCreateWithoutUsersInput, PositionUncheckedCreateWithoutUsersInput>
+  export type Role_CompanyUpsertWithoutUsersInput = {
+    update: XOR<Role_CompanyUpdateWithoutUsersInput, Role_CompanyUncheckedUpdateWithoutUsersInput>
+    create: XOR<Role_CompanyCreateWithoutUsersInput, Role_CompanyUncheckedCreateWithoutUsersInput>
   }
 
-  export type PositionUpdateWithoutUsersInput = {
+  export type Role_CompanyUpdateWithoutUsersInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     access?: JsonNullValueInput | InputJsonValue
-    companyBranch?: CompanyBranchUpdateOneWithoutPositionsNestedInput
+    companyBranch?: CompanyBranchUpdateOneWithoutRole_CompanyNestedInput
   }
 
-  export type PositionUncheckedUpdateWithoutUsersInput = {
+  export type Role_CompanyUncheckedUpdateWithoutUsersInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     access?: JsonNullValueInput | InputJsonValue
@@ -15168,7 +15168,7 @@ export namespace Prisma {
     createdAt?: Date | string
     company?: CompanyCreateNestedManyWithoutOwnerInput
     companyBranch?: CompanyBranchCreateNestedOneWithoutUsersInput
-    Position?: PositionCreateNestedOneWithoutUsersInput
+    Role_Company?: Role_CompanyCreateNestedOneWithoutUsersInput
   }
 
   export type UserUncheckedCreateWithoutRoleInput = {
@@ -15181,7 +15181,7 @@ export namespace Prisma {
     isOwner?: boolean
     lastlogin?: Date | string | null
     createdAt?: Date | string
-    positionId?: string | null
+    RoleCompanyID?: string | null
     company?: CompanyUncheckedCreateNestedManyWithoutOwnerInput
     companyBranchId?: string | null
   }
@@ -15212,7 +15212,7 @@ export namespace Prisma {
     data: XOR<UserUpdateManyMutationInput, UserUncheckedUpdateManyWithoutUsersInput>
   }
 
-  export type UserCreateWithoutPositionInput = {
+  export type UserCreateWithoutRole_CompanyInput = {
     id: string
     email: string
     password: string
@@ -15227,7 +15227,7 @@ export namespace Prisma {
     companyBranch?: CompanyBranchCreateNestedOneWithoutUsersInput
   }
 
-  export type UserUncheckedCreateWithoutPositionInput = {
+  export type UserUncheckedCreateWithoutRole_CompanyInput = {
     id: string
     email: string
     password: string
@@ -15242,17 +15242,17 @@ export namespace Prisma {
     companyBranchId?: string | null
   }
 
-  export type UserCreateOrConnectWithoutPositionInput = {
+  export type UserCreateOrConnectWithoutRole_CompanyInput = {
     where: UserWhereUniqueInput
-    create: XOR<UserCreateWithoutPositionInput, UserUncheckedCreateWithoutPositionInput>
+    create: XOR<UserCreateWithoutRole_CompanyInput, UserUncheckedCreateWithoutRole_CompanyInput>
   }
 
-  export type UserCreateManyPositionInputEnvelope = {
-    data: Enumerable<UserCreateManyPositionInput>
+  export type UserCreateManyRole_CompanyInputEnvelope = {
+    data: Enumerable<UserCreateManyRole_CompanyInput>
     skipDuplicates?: boolean
   }
 
-  export type CompanyBranchCreateWithoutPositionsInput = {
+  export type CompanyBranchCreateWithoutRole_CompanyInput = {
     id: string
     isMainbranch?: boolean
     name: string
@@ -15282,7 +15282,7 @@ export namespace Prisma {
     users?: UserCreateNestedManyWithoutCompanyBranchInput
   }
 
-  export type CompanyBranchUncheckedCreateWithoutPositionsInput = {
+  export type CompanyBranchUncheckedCreateWithoutRole_CompanyInput = {
     id: string
     isMainbranch?: boolean
     name: string
@@ -15312,33 +15312,33 @@ export namespace Prisma {
     users?: UserUncheckedCreateNestedManyWithoutCompanyBranchInput
   }
 
-  export type CompanyBranchCreateOrConnectWithoutPositionsInput = {
+  export type CompanyBranchCreateOrConnectWithoutRole_CompanyInput = {
     where: CompanyBranchWhereUniqueInput
-    create: XOR<CompanyBranchCreateWithoutPositionsInput, CompanyBranchUncheckedCreateWithoutPositionsInput>
+    create: XOR<CompanyBranchCreateWithoutRole_CompanyInput, CompanyBranchUncheckedCreateWithoutRole_CompanyInput>
   }
 
-  export type UserUpsertWithWhereUniqueWithoutPositionInput = {
+  export type UserUpsertWithWhereUniqueWithoutRole_CompanyInput = {
     where: UserWhereUniqueInput
-    update: XOR<UserUpdateWithoutPositionInput, UserUncheckedUpdateWithoutPositionInput>
-    create: XOR<UserCreateWithoutPositionInput, UserUncheckedCreateWithoutPositionInput>
+    update: XOR<UserUpdateWithoutRole_CompanyInput, UserUncheckedUpdateWithoutRole_CompanyInput>
+    create: XOR<UserCreateWithoutRole_CompanyInput, UserUncheckedCreateWithoutRole_CompanyInput>
   }
 
-  export type UserUpdateWithWhereUniqueWithoutPositionInput = {
+  export type UserUpdateWithWhereUniqueWithoutRole_CompanyInput = {
     where: UserWhereUniqueInput
-    data: XOR<UserUpdateWithoutPositionInput, UserUncheckedUpdateWithoutPositionInput>
+    data: XOR<UserUpdateWithoutRole_CompanyInput, UserUncheckedUpdateWithoutRole_CompanyInput>
   }
 
-  export type UserUpdateManyWithWhereWithoutPositionInput = {
+  export type UserUpdateManyWithWhereWithoutRole_CompanyInput = {
     where: UserScalarWhereInput
     data: XOR<UserUpdateManyMutationInput, UserUncheckedUpdateManyWithoutUsersInput>
   }
 
-  export type CompanyBranchUpsertWithoutPositionsInput = {
-    update: XOR<CompanyBranchUpdateWithoutPositionsInput, CompanyBranchUncheckedUpdateWithoutPositionsInput>
-    create: XOR<CompanyBranchCreateWithoutPositionsInput, CompanyBranchUncheckedCreateWithoutPositionsInput>
+  export type CompanyBranchUpsertWithoutRole_CompanyInput = {
+    update: XOR<CompanyBranchUpdateWithoutRole_CompanyInput, CompanyBranchUncheckedUpdateWithoutRole_CompanyInput>
+    create: XOR<CompanyBranchCreateWithoutRole_CompanyInput, CompanyBranchUncheckedCreateWithoutRole_CompanyInput>
   }
 
-  export type CompanyBranchUpdateWithoutPositionsInput = {
+  export type CompanyBranchUpdateWithoutRole_CompanyInput = {
     id?: StringFieldUpdateOperationsInput | string
     isMainbranch?: BoolFieldUpdateOperationsInput | boolean
     name?: StringFieldUpdateOperationsInput | string
@@ -15368,7 +15368,7 @@ export namespace Prisma {
     users?: UserUpdateManyWithoutCompanyBranchNestedInput
   }
 
-  export type CompanyBranchUncheckedUpdateWithoutPositionsInput = {
+  export type CompanyBranchUncheckedUpdateWithoutRole_CompanyInput = {
     id?: StringFieldUpdateOperationsInput | string
     isMainbranch?: BoolFieldUpdateOperationsInput | boolean
     name?: StringFieldUpdateOperationsInput | string
@@ -15612,7 +15612,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     users?: UserUpdateManyWithoutCompanyBranchNestedInput
-    positions?: PositionUpdateManyWithoutCompanyBranchNestedInput
+    Role_Company?: Role_CompanyUpdateManyWithoutCompanyBranchNestedInput
   }
 
   export type CompanyBranchUncheckedUpdateWithoutCompanyInput = {
@@ -15642,7 +15642,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     users?: UserUncheckedUpdateManyWithoutCompanyBranchNestedInput
-    positions?: PositionUncheckedUpdateManyWithoutCompanyBranchNestedInput
+    Role_Company?: Role_CompanyUncheckedUpdateManyWithoutCompanyBranchNestedInput
   }
 
   export type CompanyBranchUncheckedUpdateManyWithoutBranchInput = {
@@ -15683,10 +15683,10 @@ export namespace Prisma {
     lastlogin?: Date | string | null
     createdAt?: Date | string
     roleId?: string | null
-    positionId?: string | null
+    RoleCompanyID?: string | null
   }
 
-  export type PositionCreateManyCompanyBranchInput = {
+  export type Role_CompanyCreateManyCompanyBranchInput = {
     id: string
     name: string
     access: JsonNullValueInput | InputJsonValue
@@ -15704,7 +15704,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     role?: RoleUpdateOneWithoutUsersNestedInput
     company?: CompanyUpdateManyWithoutOwnerNestedInput
-    Position?: PositionUpdateOneWithoutUsersNestedInput
+    Role_Company?: Role_CompanyUpdateOneWithoutUsersNestedInput
   }
 
   export type UserUncheckedUpdateWithoutCompanyBranchInput = {
@@ -15718,7 +15718,7 @@ export namespace Prisma {
     lastlogin?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     roleId?: NullableStringFieldUpdateOperationsInput | string | null
-    positionId?: NullableStringFieldUpdateOperationsInput | string | null
+    RoleCompanyID?: NullableStringFieldUpdateOperationsInput | string | null
     company?: CompanyUncheckedUpdateManyWithoutOwnerNestedInput
   }
 
@@ -15732,24 +15732,24 @@ export namespace Prisma {
     lastlogin?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     roleId?: NullableStringFieldUpdateOperationsInput | string | null
-    positionId?: NullableStringFieldUpdateOperationsInput | string | null
+    RoleCompanyID?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
-  export type PositionUpdateWithoutCompanyBranchInput = {
+  export type Role_CompanyUpdateWithoutCompanyBranchInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     access?: JsonNullValueInput | InputJsonValue
-    users?: UserUpdateManyWithoutPositionNestedInput
+    users?: UserUpdateManyWithoutRole_CompanyNestedInput
   }
 
-  export type PositionUncheckedUpdateWithoutCompanyBranchInput = {
+  export type Role_CompanyUncheckedUpdateWithoutCompanyBranchInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     access?: JsonNullValueInput | InputJsonValue
-    users?: UserUncheckedUpdateManyWithoutPositionNestedInput
+    users?: UserUncheckedUpdateManyWithoutRole_CompanyNestedInput
   }
 
-  export type PositionUncheckedUpdateManyWithoutPositionsInput = {
+  export type Role_CompanyUncheckedUpdateManyWithoutRole_CompanyInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     access?: JsonNullValueInput | InputJsonValue
@@ -15814,7 +15814,7 @@ export namespace Prisma {
     isOwner?: boolean
     lastlogin?: Date | string | null
     createdAt?: Date | string
-    positionId?: string | null
+    RoleCompanyID?: string | null
     companyBranchId?: string | null
   }
 
@@ -15830,7 +15830,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     company?: CompanyUpdateManyWithoutOwnerNestedInput
     companyBranch?: CompanyBranchUpdateOneWithoutUsersNestedInput
-    Position?: PositionUpdateOneWithoutUsersNestedInput
+    Role_Company?: Role_CompanyUpdateOneWithoutUsersNestedInput
   }
 
   export type UserUncheckedUpdateWithoutRoleInput = {
@@ -15843,12 +15843,12 @@ export namespace Prisma {
     isOwner?: BoolFieldUpdateOperationsInput | boolean
     lastlogin?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    positionId?: NullableStringFieldUpdateOperationsInput | string | null
+    RoleCompanyID?: NullableStringFieldUpdateOperationsInput | string | null
     company?: CompanyUncheckedUpdateManyWithoutOwnerNestedInput
     companyBranchId?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
-  export type UserCreateManyPositionInput = {
+  export type UserCreateManyRole_CompanyInput = {
     id: string
     email: string
     password: string
@@ -15861,7 +15861,7 @@ export namespace Prisma {
     companyBranchId?: string | null
   }
 
-  export type UserUpdateWithoutPositionInput = {
+  export type UserUpdateWithoutRole_CompanyInput = {
     id?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
@@ -15876,7 +15876,7 @@ export namespace Prisma {
     companyBranch?: CompanyBranchUpdateOneWithoutUsersNestedInput
   }
 
-  export type UserUncheckedUpdateWithoutPositionInput = {
+  export type UserUncheckedUpdateWithoutRole_CompanyInput = {
     id?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string

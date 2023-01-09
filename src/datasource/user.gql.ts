@@ -21,8 +21,8 @@ export const userTypedef = gql`
     roleId: String
     companyId: String
     role: Role
-    positionId: String
-    Position: Position
+    RoleCompanyID: String
+    Role_Company: Role_Company
     company: [Company]
     companyBranch: CompanyBranch
     companyBranchId: String
@@ -101,7 +101,7 @@ export const userTypedef = gql`
   }
 
   input CreateAccountUserInput {
-    id: ID!
+    id: ID
     email: String!
     password: String!
     bio: String
@@ -162,7 +162,7 @@ export const userTypedef = gql`
     id: ID!
     email: String
     isOwner: Boolean
-    Position: MePositionType
+    Role_Company: MePositionType
     profile: MeprofileType
     role: Role
     companyBranch: MeCompanyBranch
@@ -185,7 +185,7 @@ const resolvers: Resolvers = {
     async users(parent, args, ctx) {
       const filter = args?.userid ? args?.userid : undefined;
       const result = await ctx.prisma.user.findMany({
-        include: { profile: true, company: true, Position: true },
+        include: { profile: true, company: true, Role_Company: true },
         where: {
           companyBranchId: ctx.currentUser?.branchId,
           AND: {
@@ -210,7 +210,7 @@ const resolvers: Resolvers = {
           id: true,
           email: true,
           isOwner: true,
-          Position: {
+          Role_Company: {
             select: {
               id: true,
               access: true,
@@ -270,7 +270,7 @@ const resolvers: Resolvers = {
       }
 
       if (result?.role?.name === 'Owner') {
-        result.Position = {
+        result.Role_Company = {
           name: 'Owner',
           id: 'OWNER_POSITION',
           access: [

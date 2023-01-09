@@ -154,13 +154,6 @@ exports.Prisma.JsonNullValueInput = makeEnum({
   JsonNull: Prisma.JsonNull
 });
 
-exports.Prisma.PositionScalarFieldEnum = makeEnum({
-  id: 'id',
-  name: 'name',
-  access: 'access',
-  companyBranchId: 'companyBranchId'
-});
-
 exports.Prisma.ProfileScalarFieldEnum = makeEnum({
   id: 'id',
   bio: 'bio',
@@ -223,6 +216,13 @@ exports.Prisma.RoleScalarFieldEnum = makeEnum({
   name: 'name'
 });
 
+exports.Prisma.Role_CompanyScalarFieldEnum = makeEnum({
+  id: 'id',
+  name: 'name',
+  access: 'access',
+  companyBranchId: 'companyBranchId'
+});
+
 exports.Prisma.SortOrder = makeEnum({
   asc: 'asc',
   desc: 'desc'
@@ -245,7 +245,7 @@ exports.Prisma.UserScalarFieldEnum = makeEnum({
   lastlogin: 'lastlogin',
   createdAt: 'createdAt',
   roleId: 'roleId',
-  positionId: 'positionId',
+  RoleCompanyID: 'RoleCompanyID',
   companyBranchId: 'companyBranchId'
 });
 
@@ -256,7 +256,7 @@ exports.Prisma.ModelName = makeEnum({
   Profile: 'Profile',
   User: 'User',
   Role: 'Role',
-  Position: 'Position',
+  Role_Company: 'Role_Company',
   Province: 'Province',
   District: 'District',
   Amphoe: 'Amphoe'

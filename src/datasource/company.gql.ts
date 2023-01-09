@@ -48,11 +48,11 @@ export const companyTypedef = gql`
     company: Company
     companyId: String
     users: [User]
-    positions: [Position]
+    Role_Company: [Role_Company]
   }
 
   type CountInsideBranch {
-    positions: Int
+    Role_Company: Int
     users: Int
   }
 
@@ -88,7 +88,7 @@ export const companyTypedef = gql`
     company: Company
     companyId: String
     users: [User]
-    positions: [Position]
+    Role_Company: [Role_Company]
     _count: CountInsideBranch
   }
 

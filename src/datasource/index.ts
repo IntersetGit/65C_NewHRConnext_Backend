@@ -3,7 +3,7 @@ import { companyResolvers, companyTypedef } from './company.gql';
 import { dateResolvers, dateTypedef } from './date.scalar';
 import { josnResolvers, jsonTypedef } from './json.scalar';
 import { masterResolvers, masterTypedef } from './master.gql';
-import { positionTypedef } from './position.gql';
+import { positionTypedef } from './rolecompany.gql';
 import { profileTypedef } from './profile.gql';
 import { providerResolvers, providerTypedef } from './provider.gql';
 import { roleTypedef } from './role.gql';
