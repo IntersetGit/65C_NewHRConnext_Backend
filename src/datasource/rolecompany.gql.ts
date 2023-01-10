@@ -19,10 +19,8 @@ export const roleCompanyTypedef = gql`
   }
 
   input createRoleCompanyGroup {
-    id: ID
     name: String
     access: JSON
-    companyBranchId: String
     status: Int!
   }
 
