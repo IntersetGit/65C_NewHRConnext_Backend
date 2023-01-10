@@ -57,7 +57,7 @@ export const companyTypedef = gql`
   }
 
   input createCompanyBranch {
-    id: ID!
+    id: ID
     name: String
     address: String
     address_2: String
@@ -277,42 +277,80 @@ const resolvers: Resolvers = {
     }
   },
 
-  Mutation : {
+  Mutation: {
     async createAndUpdateComBarance(p, args, ctx) {
       const genComBranchid = v4();
-      const createBranch = await ctx.prisma.companyBranch.create({
-        data: {
-          id: genComBranchid,
-          name: args.data?.name as string,
-          address: args.data?.address as string,
-          address_2: args.data?.address_2,
-          city: args.data?.city as string,
-          state: args.data?.state as string,
-          zip: args.data?.zip as string,
-          country: args.data?.country,
-          tel: args.data?.tel,
-          fax: args.data?.fax,
-          website: args.data?.website,
-          lat: args.data?.lat,
-          lng: args.data?.lng,
-          email: args.data?.email,
-          email_2: args.data?.email_2,
-          company_type: 'สาขา',
-          sub_company_type: args.data?.sub_company_type,
-          registeredamount: args.data?.registeredamount,
-          social_facebook: args.data?.social_facebook,
-          social_likedin: args.data?.social_likedin,
-          social_instragram: args.data?.social_facebook,
-          social_line: args.data?.social_line,
-          createdAt: new Date(),
-          companyId: ctx.currentUser?.compayId
-        },
-      });
+      if (args.data?.id) {
+        const createBranch = await ctx.prisma.companyBranch.update({
+          data: {
+            id: genComBranchid,
+            name: args.data?.name as string,
+            address: args.data?.address as string,
+            address_2: args.data?.address_2,
+            city: args.data?.city as string,
+            state: args.data?.state as string,
+            zip: args.data?.zip as string,
+            country: args.data?.country,
+            tel: args.data?.tel,
+            fax: args.data?.fax,
+            website: args.data?.website,
+            lat: args.data?.lat,
+            lng: args.data?.lng,
+            email: args.data?.email,
+            email_2: args.data?.email_2,
+            company_type: 'สาขา',
+            sub_company_type: args.data?.sub_company_type,
+            registeredamount: args.data?.registeredamount,
+            social_facebook: args.data?.social_facebook,
+            social_likedin: args.data?.social_likedin,
+            social_instragram: args.data?.social_facebook,
+            social_line: args.data?.social_line,
+            createdAt: new Date(),
+            companyId: ctx.currentUser?.compayId
+          },
+          where: {
+            id: args.data.id
+          }
+        });
+        return {
+          message: 'success',
+          status: true,
+        };
+      } else {
+        const createBranch = await ctx.prisma.companyBranch.create({
+          data: {
+            id: genComBranchid,
+            name: args.data?.name as string,
+            address: args.data?.address as string,
+            address_2: args.data?.address_2,
+            city: args.data?.city as string,
+            state: args.data?.state as string,
+            zip: args.data?.zip as string,
+            country: args.data?.country,
+            tel: args.data?.tel,
+            fax: args.data?.fax,
+            website: args.data?.website,
+            lat: args.data?.lat,
+            lng: args.data?.lng,
+            email: args.data?.email,
+            email_2: args.data?.email_2,
+            company_type: 'สาขา',
+            sub_company_type: args.data?.sub_company_type,
+            registeredamount: args.data?.registeredamount,
+            social_facebook: args.data?.social_facebook,
+            social_likedin: args.data?.social_likedin,
+            social_instragram: args.data?.social_facebook,
+            social_line: args.data?.social_line,
+            createdAt: new Date(),
+            companyId: ctx.currentUser?.compayId
+          },
+        });
 
-      return {
-        message: 'success',
-        status: true,
-      };
+        return {
+          message: 'success',
+          status: true,
+        };
+      }
     }
   }
 };

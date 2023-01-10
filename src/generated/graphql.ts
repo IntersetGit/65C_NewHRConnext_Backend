@@ -534,7 +534,7 @@ export type CreateCompanyBranch = {
   email?: InputMaybe<Scalars['String']>;
   email_2?: InputMaybe<Scalars['String']>;
   fax?: InputMaybe<Scalars['String']>;
-  id: Scalars['ID'];
+  id?: InputMaybe<Scalars['ID']>;
   lat?: InputMaybe<Scalars['String']>;
   lng?: InputMaybe<Scalars['String']>;
   name?: InputMaybe<Scalars['String']>;
