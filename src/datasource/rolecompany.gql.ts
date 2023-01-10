@@ -37,11 +37,9 @@ export const roleCompanyTypedef = gql`
     status: Boolean
   }
 
-  # type Query {
-  #   users(userid: String): [User]
-  #   verifyCompanycode(companyname: String!): Boolean
-  #   me: Me
-  # }
+  type Query {
+    getcompanyRole(role_name: String): [Role_Company]
+  }
 
   type Mutation {
     createRoleCompany(data: createRoleCompanyGroup!): CreateRoleCompanyResponseType
@@ -50,6 +48,29 @@ export const roleCompanyTypedef = gql`
 
 
 const resolvers: Resolvers = {
+  Query: {
+    /**
+     * ?สร้าง role comapny
+     * @param p
+     * @param args
+     * @param ctx
+     * @returns
+     */
+    async getcompanyRole(p, args, ctx) {
+      const search = args.role_name ? args.role_name : undefined
+      const rolesCompanyget = await ctx.prisma.role_Company.findMany({
+        where: {
+          companyBranch: {
+            companyId: ctx.currentUser?.compayId
+          },
+          AND: {
+            name: { contains: search }
+          }
+        },
+      });
+      return rolesCompanyget;
+    }
+  },
   Mutation: {
     /**
      * ?สร้าง role comapny
@@ -99,6 +120,7 @@ const resolvers: Resolvers = {
 
 const resolversComposition = {
   'Mutation.createRoleCompany': [authenticate()],
+  'Query.getcompanyRole' : [authenticate()],
 };
 
 export const Role_CompanyResolvers = composeResolvers(resolvers, resolversComposition);

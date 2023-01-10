@@ -361,6 +361,7 @@ export type Query = {
   __typename?: 'Query';
   company?: Maybe<ResponseCompany>;
   getProvince?: Maybe<Array<Maybe<Province>>>;
+  getcompanyRole?: Maybe<Array<Maybe<Role_Company>>>;
   getownCompany?: Maybe<GetOwncompanytype>;
   me?: Maybe<Me>;
   users?: Maybe<Array<Maybe<User>>>;
@@ -370,6 +371,11 @@ export type Query = {
 
 export type QueryCompanyArgs = {
   name?: InputMaybe<Scalars['String']>;
+};
+
+
+export type QueryGetcompanyRoleArgs = {
+  role_name?: InputMaybe<Scalars['String']>;
 };
 
 
@@ -917,6 +923,7 @@ export type ProvinceResolvers<ContextType = ApolloContext, ParentType extends Re
 export type QueryResolvers<ContextType = ApolloContext, ParentType extends ResolversParentTypes['Query'] = ResolversParentTypes['Query']> = ResolversObject<{
   company?: Resolver<Maybe<ResolversTypes['ResponseCompany']>, ParentType, ContextType, Partial<QueryCompanyArgs>>;
   getProvince?: Resolver<Maybe<Array<Maybe<ResolversTypes['Province']>>>, ParentType, ContextType>;
+  getcompanyRole?: Resolver<Maybe<Array<Maybe<ResolversTypes['Role_Company']>>>, ParentType, ContextType, Partial<QueryGetcompanyRoleArgs>>;
   getownCompany?: Resolver<Maybe<ResolversTypes['GetOwncompanytype']>, ParentType, ContextType>;
   me?: Resolver<Maybe<ResolversTypes['Me']>, ParentType, ContextType>;
   users?: Resolver<Maybe<Array<Maybe<ResolversTypes['User']>>>, ParentType, ContextType, Partial<QueryUsersArgs>>;

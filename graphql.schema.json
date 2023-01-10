@@ -3262,6 +3262,35 @@
             "deprecationReason": null
           },
           {
+            "name": "getcompanyRole",
+            "description": null,
+            "args": [
+              {
+                "name": "role_name",
+                "description": null,
+                "type": {
+                  "kind": "SCALAR",
+                  "name": "String",
+                  "ofType": null
+                },
+                "defaultValue": null,
+                "isDeprecated": false,
+                "deprecationReason": null
+              }
+            ],
+            "type": {
+              "kind": "LIST",
+              "name": null,
+              "ofType": {
+                "kind": "OBJECT",
+                "name": "Role_Company",
+                "ofType": null
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
             "name": "getownCompany",
             "description": null,
             "args": [],
