@@ -140,7 +140,6 @@ export const userTypedef = gql`
     contract_district: String
     contract_state: String
     contract_zipcode: String
-    contract_email: String
     contract_companyemail: String
     social_facebook: String
     social_likedin: String
@@ -421,7 +420,7 @@ const resolvers: Resolvers = {
                 contract_district: args.data.contract_district,
                 contract_state: args.data.contract_state,
                 contract_zipcode: args.data.contract_zipcode,
-                contract_email: args.data.contract_email,
+                contract_email: args.data.email,
                 contract_companyemail: args.data.contract_companyemail,
                 social_facebook: args.data.social_facebook,
                 social_likedin: args.data.social_likedin,
@@ -483,7 +482,7 @@ const resolvers: Resolvers = {
               contract_district: args.data.contract_district,
               contract_state: args.data.contract_state,
               contract_zipcode: args.data.contract_zipcode,
-              contract_email: args.data.contract_email,
+              contract_email: args.data.email,
               contract_companyemail: args.data.contract_companyemail,
               social_facebook: args.data.social_facebook,
               social_likedin: args.data.social_likedin,

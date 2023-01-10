@@ -123,7 +123,6 @@ export type CreateAccountUserInput = {
   contract_companyemail?: InputMaybe<Scalars['String']>;
   contract_country?: InputMaybe<Scalars['String']>;
   contract_district?: InputMaybe<Scalars['String']>;
-  contract_email?: InputMaybe<Scalars['String']>;
   contract_province?: InputMaybe<Scalars['String']>;
   contract_sameCitizen: Scalars['Boolean'];
   contract_state?: InputMaybe<Scalars['String']>;
