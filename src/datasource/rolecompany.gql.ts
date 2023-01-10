@@ -69,7 +69,6 @@ const resolvers: Resolvers = {
             name: args.data.name as string,
             access: args.data.access,
             status: args.data.status,
-            companyBranchId: ctx.currentUser?.branchId
           },
           where: { id: args.data.id }
         });
