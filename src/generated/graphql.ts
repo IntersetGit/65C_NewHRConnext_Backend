@@ -502,8 +502,6 @@ export type ValidateRoute = {
 
 export type CreateRoleCompanyGroup = {
   access?: InputMaybe<Scalars['JSON']>;
-  companyBranchId?: InputMaybe<Scalars['String']>;
-  id?: InputMaybe<Scalars['ID']>;
   name?: InputMaybe<Scalars['String']>;
   status: Scalars['Int'];
 };

@@ -5,6 +5,7 @@ import { v4 } from 'uuid';
 import { composeResolvers } from '@graphql-tools/resolvers-composition';
 import { authenticate } from '../middleware/authenticatetoken';
 import _ from 'lodash';
+import { GraphQLError } from 'graphql';
 
 
 export const roleCompanyTypedef = gql`
@@ -42,8 +43,7 @@ export const roleCompanyTypedef = gql`
   # }
 
   type Mutation {
-    createRoleCompany(data: createRoleCompanyGroup!):  
- 
+    createRoleCompany(data: createRoleCompanyGroup!): CreateRoleCompanyResponseType
   }
 `;
 
@@ -59,11 +59,12 @@ const resolvers: Resolvers = {
      */
     async createRoleCompany(p, args, ctx) {
       const genRoleid = v4();
+    
       const create_RoleCompany = await ctx.prisma.role_Company.create({
         data: {
           id: genRoleid,
           name : args.data.name as string ,
-          access: args.data.access,
+          access: args.data.access ,
           status: args.data.status,
           companyBranchId: ctx.currentUser?.branchId
         },
