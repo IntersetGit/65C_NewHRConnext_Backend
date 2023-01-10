@@ -1,7 +1,12 @@
+import { Mutation } from './../generated/graphql';
+// import { Or } from './../generated/client/index.d';
+import { CompanyBranch } from './../generated/graphql';
+import { string } from 'zod';
 import { composeResolvers } from '@graphql-tools/resolvers-composition';
 import gql from 'graphql-tag';
 import { Resolvers } from 'src/generated/graphql';
 import { authenticate } from '../middleware/authenticatetoken';
+import { v4 } from 'uuid';
 
 export const companyTypedef = gql`
   type Company {
@@ -50,6 +55,35 @@ export const companyTypedef = gql`
     users: [User]
     Role_Company: [Role_Company]
   }
+
+  input createCompanyBranch {
+    id: ID!
+    name: String
+    address: String
+    address_2: String
+    city: String
+    state: String
+    zip: String
+    country: String
+    tel: String
+    fax: String
+    website: String
+    lat: String
+    lng: String
+    email: String
+    email_2: String
+    company_type: String
+    sub_company_type: String
+    registeredamount: String
+    social_facebook: String
+    social_likedin: String
+    social_instragram: String
+    social_line: String
+    createdAt: Date
+    updatedAt: Date
+    companyId: String
+  }
+
 
   type CountInsideBranch {
     Role_Company: Int
@@ -148,9 +182,24 @@ export const companyTypedef = gql`
     company: OwnCompanyType
   }
 
+  # type GetAllcompanyRes {
+  #   company: OwnCompanyType
+  #   CompanyBranch: 
+  # }
+
+  type CreateComapnyBranchResponseType {
+    message: String
+    status: Boolean
+  }
+
   type Query {
     company(name: String): ResponseCompany
+    getAllcompany(name: String): [CompanyBranch]
     getownCompany: GetOwncompanytype
+  }
+
+  type Mutation  {
+    createAndUpdateComBarance(data: createCompanyBranch): CreateComapnyBranchResponseType
   }
 `;
 
@@ -212,12 +261,67 @@ const resolvers: Resolvers = {
         };
       }
     },
+
+    async getAllcompany(p, args, ctx) {
+      const search = args.name ? args.name : undefined
+      const rolesCompanyget = await ctx.prisma.companyBranch.findMany({
+        include: { company: true },
+        where: {
+          companyId: ctx.currentUser?.compayId,
+          AND: {
+            name: { contains: search }
+          }
+        },
+      });
+      return rolesCompanyget;
+    }
   },
+
+  Mutation : {
+    async createAndUpdateComBarance(p, args, ctx) {
+      const genComBranchid = v4();
+      const createBranch = await ctx.prisma.companyBranch.create({
+        data: {
+          id: genComBranchid,
+          name: args.data?.name as string,
+          address: args.data?.address as string,
+          address_2: args.data?.address_2,
+          city: args.data?.city as string,
+          state: args.data?.state as string,
+          zip: args.data?.zip as string,
+          country: args.data?.country,
+          tel: args.data?.tel,
+          fax: args.data?.fax,
+          website: args.data?.website,
+          lat: args.data?.lat,
+          lng: args.data?.lng,
+          email: args.data?.email,
+          email_2: args.data?.email_2,
+          company_type: 'สาขา',
+          sub_company_type: args.data?.sub_company_type,
+          registeredamount: args.data?.registeredamount,
+          social_facebook: args.data?.social_facebook,
+          social_likedin: args.data?.social_likedin,
+          social_instragram: args.data?.social_facebook,
+          social_line: args.data?.social_line,
+          createdAt: new Date(),
+          companyId: ctx.currentUser?.compayId
+        },
+      });
+
+      return {
+        message: 'success',
+        status: true,
+      };
+    }
+  }
 };
 
 const resolversComposition = {
   'Query.getownCompany': [authenticate()],
   'Query.company': [authenticate()],
+  'Query.getAllcompany': [authenticate()],
+  'Mutation.createAndUpdateComBarance': [authenticate()],
 };
 
 export const companyResolvers = composeResolvers(

@@ -151,6 +151,12 @@ export type CreateAccountUserInput = {
   tel?: InputMaybe<Scalars['String']>;
 };
 
+export type CreateComapnyBranchResponseType = {
+  __typename?: 'CreateComapnyBranchResponseType';
+  message?: Maybe<Scalars['String']>;
+  status?: Maybe<Scalars['Boolean']>;
+};
+
 export type CreateCompanyResponseType = {
   __typename?: 'CreateCompanyResponseType';
   message?: Maybe<Scalars['String']>;
@@ -262,6 +268,7 @@ export type Mutation = {
   __typename?: 'Mutation';
   createAccount?: Maybe<CreateCompanyResponseType>;
   createAccountUser?: Maybe<CreateUserResponseType>;
+  createAndUpdateComBarance?: Maybe<CreateComapnyBranchResponseType>;
   createRoleCompany?: Maybe<CreateRoleCompanyResponseType>;
   login?: Maybe<LoginResponse>;
   refreshToken?: Maybe<RefreshtokenResponseType>;
@@ -276,6 +283,11 @@ export type MutationCreateAccountArgs = {
 
 export type MutationCreateAccountUserArgs = {
   data: CreateAccountUserInput;
+};
+
+
+export type MutationCreateAndUpdateComBaranceArgs = {
+  data?: InputMaybe<CreateCompanyBranch>;
 };
 
 
@@ -360,6 +372,7 @@ export type Province = {
 export type Query = {
   __typename?: 'Query';
   company?: Maybe<ResponseCompany>;
+  getAllcompany?: Maybe<Array<Maybe<CompanyBranch>>>;
   getProvince?: Maybe<Array<Maybe<Province>>>;
   getcompanyRole?: Maybe<Array<Maybe<Role_Company>>>;
   getownCompany?: Maybe<GetOwncompanytype>;
@@ -370,6 +383,11 @@ export type Query = {
 
 
 export type QueryCompanyArgs = {
+  name?: InputMaybe<Scalars['String']>;
+};
+
+
+export type QueryGetAllcompanyArgs = {
   name?: InputMaybe<Scalars['String']>;
 };
 
@@ -505,6 +523,34 @@ export type ValidateRoute = {
   reAccess?: Maybe<Scalars['String']>;
 };
 
+export type CreateCompanyBranch = {
+  address?: InputMaybe<Scalars['String']>;
+  address_2?: InputMaybe<Scalars['String']>;
+  city?: InputMaybe<Scalars['String']>;
+  companyId?: InputMaybe<Scalars['String']>;
+  company_type?: InputMaybe<Scalars['String']>;
+  country?: InputMaybe<Scalars['String']>;
+  createdAt?: InputMaybe<Scalars['Date']>;
+  email?: InputMaybe<Scalars['String']>;
+  email_2?: InputMaybe<Scalars['String']>;
+  fax?: InputMaybe<Scalars['String']>;
+  id: Scalars['ID'];
+  lat?: InputMaybe<Scalars['String']>;
+  lng?: InputMaybe<Scalars['String']>;
+  name?: InputMaybe<Scalars['String']>;
+  registeredamount?: InputMaybe<Scalars['String']>;
+  social_facebook?: InputMaybe<Scalars['String']>;
+  social_instragram?: InputMaybe<Scalars['String']>;
+  social_likedin?: InputMaybe<Scalars['String']>;
+  social_line?: InputMaybe<Scalars['String']>;
+  state?: InputMaybe<Scalars['String']>;
+  sub_company_type?: InputMaybe<Scalars['String']>;
+  tel?: InputMaybe<Scalars['String']>;
+  updatedAt?: InputMaybe<Scalars['Date']>;
+  website?: InputMaybe<Scalars['String']>;
+  zip?: InputMaybe<Scalars['String']>;
+};
+
 export type CreateRoleCompanyGroup = {
   access?: InputMaybe<Scalars['JSON']>;
   id?: InputMaybe<Scalars['ID']>;
@@ -590,6 +636,7 @@ export type ResolversTypes = ResolversObject<{
   CountInsideBranch: ResolverTypeWrapper<CountInsideBranch>;
   CreateAccountInput: CreateAccountInput;
   CreateAccountUserInput: CreateAccountUserInput;
+  CreateComapnyBranchResponseType: ResolverTypeWrapper<CreateComapnyBranchResponseType>;
   CreateCompanyResponseType: ResolverTypeWrapper<CreateCompanyResponseType>;
   CreateRoleCompanyResponseType: ResolverTypeWrapper<CreateRoleCompanyResponseType>;
   CreateUserResponseType: ResolverTypeWrapper<CreateUserResponseType>;
@@ -622,6 +669,7 @@ export type ResolversTypes = ResolversObject<{
   String: ResolverTypeWrapper<Scalars['String']>;
   User: ResolverTypeWrapper<User>;
   ValidateRoute: ResolverTypeWrapper<ValidateRoute>;
+  createCompanyBranch: CreateCompanyBranch;
   createRoleCompanyGroup: CreateRoleCompanyGroup;
 }>;
 
@@ -635,6 +683,7 @@ export type ResolversParentTypes = ResolversObject<{
   CountInsideBranch: CountInsideBranch;
   CreateAccountInput: CreateAccountInput;
   CreateAccountUserInput: CreateAccountUserInput;
+  CreateComapnyBranchResponseType: CreateComapnyBranchResponseType;
   CreateCompanyResponseType: CreateCompanyResponseType;
   CreateRoleCompanyResponseType: CreateRoleCompanyResponseType;
   CreateUserResponseType: CreateUserResponseType;
@@ -667,6 +716,7 @@ export type ResolversParentTypes = ResolversObject<{
   String: Scalars['String'];
   User: User;
   ValidateRoute: ValidateRoute;
+  createCompanyBranch: CreateCompanyBranch;
   createRoleCompanyGroup: CreateRoleCompanyGroup;
 }>;
 
@@ -734,6 +784,12 @@ export type CountBranchResolvers<ContextType = ApolloContext, ParentType extends
 export type CountInsideBranchResolvers<ContextType = ApolloContext, ParentType extends ResolversParentTypes['CountInsideBranch'] = ResolversParentTypes['CountInsideBranch']> = ResolversObject<{
   Role_Company?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
   users?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+}>;
+
+export type CreateComapnyBranchResponseTypeResolvers<ContextType = ApolloContext, ParentType extends ResolversParentTypes['CreateComapnyBranchResponseType'] = ResolversParentTypes['CreateComapnyBranchResponseType']> = ResolversObject<{
+  message?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  status?: Resolver<Maybe<ResolversTypes['Boolean']>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 }>;
 
@@ -850,6 +906,7 @@ export type MeprofileTypeResolvers<ContextType = ApolloContext, ParentType exten
 export type MutationResolvers<ContextType = ApolloContext, ParentType extends ResolversParentTypes['Mutation'] = ResolversParentTypes['Mutation']> = ResolversObject<{
   createAccount?: Resolver<Maybe<ResolversTypes['CreateCompanyResponseType']>, ParentType, ContextType, RequireFields<MutationCreateAccountArgs, 'data'>>;
   createAccountUser?: Resolver<Maybe<ResolversTypes['CreateUserResponseType']>, ParentType, ContextType, RequireFields<MutationCreateAccountUserArgs, 'data'>>;
+  createAndUpdateComBarance?: Resolver<Maybe<ResolversTypes['CreateComapnyBranchResponseType']>, ParentType, ContextType, Partial<MutationCreateAndUpdateComBaranceArgs>>;
   createRoleCompany?: Resolver<Maybe<ResolversTypes['CreateRoleCompanyResponseType']>, ParentType, ContextType, RequireFields<MutationCreateRoleCompanyArgs, 'data'>>;
   login?: Resolver<Maybe<ResolversTypes['LoginResponse']>, ParentType, ContextType, RequireFields<MutationLoginArgs, 'data'>>;
   refreshToken?: Resolver<Maybe<ResolversTypes['RefreshtokenResponseType']>, ParentType, ContextType>;
@@ -922,6 +979,7 @@ export type ProvinceResolvers<ContextType = ApolloContext, ParentType extends Re
 
 export type QueryResolvers<ContextType = ApolloContext, ParentType extends ResolversParentTypes['Query'] = ResolversParentTypes['Query']> = ResolversObject<{
   company?: Resolver<Maybe<ResolversTypes['ResponseCompany']>, ParentType, ContextType, Partial<QueryCompanyArgs>>;
+  getAllcompany?: Resolver<Maybe<Array<Maybe<ResolversTypes['CompanyBranch']>>>, ParentType, ContextType, Partial<QueryGetAllcompanyArgs>>;
   getProvince?: Resolver<Maybe<Array<Maybe<ResolversTypes['Province']>>>, ParentType, ContextType>;
   getcompanyRole?: Resolver<Maybe<Array<Maybe<ResolversTypes['Role_Company']>>>, ParentType, ContextType, Partial<QueryGetcompanyRoleArgs>>;
   getownCompany?: Resolver<Maybe<ResolversTypes['GetOwncompanytype']>, ParentType, ContextType>;
@@ -1047,6 +1105,7 @@ export type Resolvers<ContextType = ApolloContext> = ResolversObject<{
   CompanyBranch?: CompanyBranchResolvers<ContextType>;
   CountBranch?: CountBranchResolvers<ContextType>;
   CountInsideBranch?: CountInsideBranchResolvers<ContextType>;
+  CreateComapnyBranchResponseType?: CreateComapnyBranchResponseTypeResolvers<ContextType>;
   CreateCompanyResponseType?: CreateCompanyResponseTypeResolvers<ContextType>;
   CreateRoleCompanyResponseType?: CreateRoleCompanyResponseTypeResolvers<ContextType>;
   CreateUserResponseType?: CreateUserResponseTypeResolvers<ContextType>;

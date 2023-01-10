@@ -348,7 +348,8 @@ const resolvers: Resolvers = {
         data: {
           id: genbranchid,
           isMainbranch: true,
-          name: 'สาขาใหญ่',
+          company_type:'สำนักงานใหญ่',
+          name: args.data.company_name,
           city: args.data.company_city,
           address: args.data.company_address,
           zip: args.data.company_zip,
