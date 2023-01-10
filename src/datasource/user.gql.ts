@@ -382,8 +382,7 @@ const resolvers: Resolvers = {
             email: args.data.email,
             password: await createPassword(args.data.password),   
             profile: {
-              create: {
-                id: genProfileid,
+              update : {
                 bio: args.data.bio,
                 firstname_th: args.data.firstname_th,
                 lastname_th: args.data.lastname_th,

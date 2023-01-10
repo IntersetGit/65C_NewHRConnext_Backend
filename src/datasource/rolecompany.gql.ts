@@ -20,6 +20,7 @@ export const roleCompanyTypedef = gql`
   }
 
   input createRoleCompanyGroup {
+    id: ID
     name: String
     access: JSON
     status: Int!
@@ -59,21 +60,39 @@ const resolvers: Resolvers = {
      */
     async createRoleCompany(p, args, ctx) {
       const genRoleid = v4();
-    
-      const create_RoleCompany = await ctx.prisma.role_Company.create({
-        data: {
-          id: genRoleid,
-          name : args.data.name as string ,
-          access: args.data.access ,
-          status: args.data.status,
-          companyBranchId: ctx.currentUser?.branchId
-        },
-      });
-      return {
-        message: 'success',
-        status: true,
-      };
-    },   
+      if (args.data.access == undefined) {
+        args.data.access = {}
+      }
+      if (args.data.id) {
+        const create_RoleCompany = await ctx.prisma.role_Company.update({
+          data: {
+            name: args.data.name as string,
+            access: args.data.access,
+            status: args.data.status,
+            companyBranchId: ctx.currentUser?.branchId
+          },
+          where: { id: args.data.id }
+        });
+        return {
+          message: 'success',
+          status: true,
+        };
+      } else {
+        const create_RoleCompany = await ctx.prisma.role_Company.create({
+          data: {
+            id: genRoleid,
+            name: args.data.name as string,
+            access: args.data.access,
+            status: args.data.status,
+            companyBranchId: ctx.currentUser?.branchId
+          },
+        });
+        return {
+          message: 'success',
+          status: true,
+        };
+      }
+    },
   },
 };
 
