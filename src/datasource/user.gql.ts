@@ -378,7 +378,6 @@ const resolvers: Resolvers = {
       if(args.data.id){
         const EditUser = await ctx.prisma.user.update({
           data: {
-            id: genUserid,
             email: args.data.email,
             password: await createPassword(args.data.password),   
             profile: {
