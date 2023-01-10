@@ -64,7 +64,7 @@ const resolvers: Resolvers = {
         args.data.access = {}
       }
       if (args.data.id) {
-        const create_RoleCompany = await ctx.prisma.role_Company.update({
+        const updete_RoleCompany = await ctx.prisma.role_Company.update({
           data: {
             name: args.data.name as string,
             access: args.data.access,
