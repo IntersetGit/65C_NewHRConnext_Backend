@@ -200,6 +200,7 @@ export const companyTypedef = gql`
 
   type Mutation  {
     createAndUpdateComBarance(data: createCompanyBranch): CreateComapnyBranchResponseType
+
   }
 `;
 
@@ -286,7 +287,7 @@ const resolvers: Resolvers = {
             id: genComBranchid,
             name: args.data?.name as string,
             address: args.data?.address as string,
-            address_2: args.data?.address_2,
+            address_2: args.data?.address_2 as string ,
             city: args.data?.city as string,
             state: args.data?.state as string,
             zip: args.data?.zip as string,
