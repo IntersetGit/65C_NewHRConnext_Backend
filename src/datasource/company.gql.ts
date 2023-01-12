@@ -205,7 +205,7 @@ export const companyTypedef = gql`
 
   type Mutation  {
     createAndUpdateComBarance(data: createCompanyBranch!): CreateComapnyBranchResponseType
-    deleteComBarance(id: createCompanyBranch!) : DeleteComapnyBranchResponseType
+    deleteComBarance(id: ID!) : DeleteComapnyBranchResponseType
   }
 `;
 
@@ -292,7 +292,7 @@ const resolvers: Resolvers = {
             id: genComBranchid,
             name: args.data?.name as string,
             address: args.data?.address as string,
-            address_2: args.data?.address_2 as string ,
+            address_2: args.data?.address_2 as string,
             city: args.data?.city as string,
             state: args.data?.state as string,
             zip: args.data?.zip as string,
@@ -357,8 +357,22 @@ const resolvers: Resolvers = {
           status: true,
         };
       }
+    },
+
+    async deleteComBarance(p, args, ctx) {
+      const deleteid = args.id ? args.id : undefined
+      const deleteCompany = await ctx.prisma.companyBranch.delete({
+        where: {
+          id: args.id as string
+        }
+      })
+      return {
+        message: 'success',
+        status: true,
+      }
     }
   }
+
 };
 
 const resolversComposition = {
@@ -366,6 +380,7 @@ const resolversComposition = {
   'Query.company': [authenticate()],
   'Query.getAllcompany': [authenticate()],
   'Mutation.createAndUpdateComBarance': [authenticate()],
+  'Mutation.deleteComBarance': [authenticate()],
 };
 
 export const companyResolvers = composeResolvers(

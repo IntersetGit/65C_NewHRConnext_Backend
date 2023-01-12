@@ -305,7 +305,7 @@ export type MutationCreateRoleCompanyArgs = {
 
 
 export type MutationDeleteComBaranceArgs = {
-  id: CreateCompanyBranch;
+  id: Scalars['ID'];
 };
 
 
