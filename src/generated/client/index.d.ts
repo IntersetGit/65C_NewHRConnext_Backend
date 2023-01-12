@@ -147,7 +147,7 @@ export type Role = {
 export type Role_Company = {
   id: string
   name: string
-  access: Prisma.JsonValue
+  access: Prisma.JsonValue[]
   status: number
   companyBranchId: string | null
 }
@@ -7106,7 +7106,7 @@ export namespace Prisma {
   export type Role_CompanyGroupByOutputType = {
     id: string
     name: string
-    access: JsonValue
+    access: JsonValue[]
     status: number
     companyBranchId: string | null
     _count: Role_CompanyCountAggregateOutputType | null
@@ -10967,22 +10967,6 @@ export namespace Prisma {
   export type DistrictScalarFieldEnum = (typeof DistrictScalarFieldEnum)[keyof typeof DistrictScalarFieldEnum]
 
 
-  export const JsonNullValueFilter: {
-    DbNull: typeof DbNull,
-    JsonNull: typeof JsonNull,
-    AnyNull: typeof AnyNull
-  };
-
-  export type JsonNullValueFilter = (typeof JsonNullValueFilter)[keyof typeof JsonNullValueFilter]
-
-
-  export const JsonNullValueInput: {
-    JsonNull: typeof JsonNull
-  };
-
-  export type JsonNullValueInput = (typeof JsonNullValueInput)[keyof typeof JsonNullValueInput]
-
-
   export const ProfileScalarFieldEnum: {
     id: 'id',
     bio: 'bio',
@@ -11641,7 +11625,7 @@ export namespace Prisma {
     NOT?: Enumerable<Role_CompanyWhereInput>
     id?: UuidFilter | string
     name?: StringFilter | string
-    access?: JsonFilter
+    access?: JsonNullableListFilter
     status?: IntFilter | number
     users?: UserListRelationFilter
     companyBranch?: XOR<CompanyBranchRelationFilter, CompanyBranchWhereInput> | null
@@ -11681,7 +11665,7 @@ export namespace Prisma {
     NOT?: Enumerable<Role_CompanyScalarWhereWithAggregatesInput>
     id?: UuidWithAggregatesFilter | string
     name?: StringWithAggregatesFilter | string
-    access?: JsonWithAggregatesFilter
+    access?: JsonNullableListFilter
     status?: IntWithAggregatesFilter | number
     companyBranchId?: UuidNullableWithAggregatesFilter | string | null
   }
@@ -12582,7 +12566,7 @@ export namespace Prisma {
   export type Role_CompanyCreateInput = {
     id: string
     name: string
-    access: JsonNullValueInput | InputJsonValue
+    access?: Role_CompanyCreateaccessInput | Enumerable<InputJsonValue>
     status: number
     users?: UserCreateNestedManyWithoutRole_CompanyInput
     companyBranch?: CompanyBranchCreateNestedOneWithoutRole_CompanyInput
@@ -12591,7 +12575,7 @@ export namespace Prisma {
   export type Role_CompanyUncheckedCreateInput = {
     id: string
     name: string
-    access: JsonNullValueInput | InputJsonValue
+    access?: Role_CompanyCreateaccessInput | Enumerable<InputJsonValue>
     status: number
     users?: UserUncheckedCreateNestedManyWithoutRole_CompanyInput
     companyBranchId?: string | null
@@ -12600,7 +12584,7 @@ export namespace Prisma {
   export type Role_CompanyUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
-    access?: JsonNullValueInput | InputJsonValue
+    access?: Role_CompanyUpdateaccessInput | Enumerable<InputJsonValue>
     status?: IntFieldUpdateOperationsInput | number
     users?: UserUpdateManyWithoutRole_CompanyNestedInput
     companyBranch?: CompanyBranchUpdateOneWithoutRole_CompanyNestedInput
@@ -12609,7 +12593,7 @@ export namespace Prisma {
   export type Role_CompanyUncheckedUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
-    access?: JsonNullValueInput | InputJsonValue
+    access?: Role_CompanyUpdateaccessInput | Enumerable<InputJsonValue>
     status?: IntFieldUpdateOperationsInput | number
     users?: UserUncheckedUpdateManyWithoutRole_CompanyNestedInput
     companyBranchId?: NullableStringFieldUpdateOperationsInput | string | null
@@ -12618,7 +12602,7 @@ export namespace Prisma {
   export type Role_CompanyCreateManyInput = {
     id: string
     name: string
-    access: JsonNullValueInput | InputJsonValue
+    access?: Role_CompanyCreateaccessInput | Enumerable<InputJsonValue>
     status: number
     companyBranchId?: string | null
   }
@@ -12626,14 +12610,14 @@ export namespace Prisma {
   export type Role_CompanyUpdateManyMutationInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
-    access?: JsonNullValueInput | InputJsonValue
+    access?: Role_CompanyUpdateaccessInput | Enumerable<InputJsonValue>
     status?: IntFieldUpdateOperationsInput | number
   }
 
   export type Role_CompanyUncheckedUpdateManyInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
-    access?: JsonNullValueInput | InputJsonValue
+    access?: Role_CompanyUpdateaccessInput | Enumerable<InputJsonValue>
     status?: IntFieldUpdateOperationsInput | number
     companyBranchId?: NullableStringFieldUpdateOperationsInput | string | null
   }
@@ -13381,27 +13365,19 @@ export namespace Prisma {
     id?: SortOrder
     name?: SortOrder
   }
-  export type JsonFilter = 
+  export type JsonNullableListFilter = 
     | PatchUndefined<
-        Either<Required<JsonFilterBase>, Exclude<keyof Required<JsonFilterBase>, 'path'>>,
-        Required<JsonFilterBase>
+        Either<Required<JsonNullableListFilterBase>, Exclude<keyof Required<JsonNullableListFilterBase>, 'path'>>,
+        Required<JsonNullableListFilterBase>
       >
-    | OptionalFlat<Omit<Required<JsonFilterBase>, 'path'>>
+    | OptionalFlat<Omit<Required<JsonNullableListFilterBase>, 'path'>>
 
-  export type JsonFilterBase = {
-    equals?: InputJsonValue | JsonNullValueFilter
-    path?: Array<string>
-    string_contains?: string
-    string_starts_with?: string
-    string_ends_with?: string
-    array_contains?: InputJsonValue | null
-    array_starts_with?: InputJsonValue | null
-    array_ends_with?: InputJsonValue | null
-    lt?: InputJsonValue
-    lte?: InputJsonValue
-    gt?: InputJsonValue
-    gte?: InputJsonValue
-    not?: InputJsonValue | JsonNullValueFilter
+  export type JsonNullableListFilterBase = {
+    equals?: Enumerable<InputJsonValue> | null
+    has?: InputJsonValue | null
+    hasEvery?: Enumerable<InputJsonValue>
+    hasSome?: Enumerable<InputJsonValue>
+    isEmpty?: boolean
   }
 
   export type Role_CompanyCountOrderByAggregateInput = {
@@ -13432,31 +13408,6 @@ export namespace Prisma {
 
   export type Role_CompanySumOrderByAggregateInput = {
     status?: SortOrder
-  }
-  export type JsonWithAggregatesFilter = 
-    | PatchUndefined<
-        Either<Required<JsonWithAggregatesFilterBase>, Exclude<keyof Required<JsonWithAggregatesFilterBase>, 'path'>>,
-        Required<JsonWithAggregatesFilterBase>
-      >
-    | OptionalFlat<Omit<Required<JsonWithAggregatesFilterBase>, 'path'>>
-
-  export type JsonWithAggregatesFilterBase = {
-    equals?: InputJsonValue | JsonNullValueFilter
-    path?: Array<string>
-    string_contains?: string
-    string_starts_with?: string
-    string_ends_with?: string
-    array_contains?: InputJsonValue | null
-    array_starts_with?: InputJsonValue | null
-    array_ends_with?: InputJsonValue | null
-    lt?: InputJsonValue
-    lte?: InputJsonValue
-    gt?: InputJsonValue
-    gte?: InputJsonValue
-    not?: InputJsonValue | JsonNullValueFilter
-    _count?: NestedIntFilter
-    _min?: NestedJsonFilter
-    _max?: NestedJsonFilter
   }
 
   export type DistrictListRelationFilter = {
@@ -13905,6 +13856,10 @@ export namespace Prisma {
     deleteMany?: Enumerable<UserScalarWhereInput>
   }
 
+  export type Role_CompanyCreateaccessInput = {
+    set: Enumerable<InputJsonValue>
+  }
+
   export type UserCreateNestedManyWithoutRole_CompanyInput = {
     create?: XOR<Enumerable<UserCreateWithoutRole_CompanyInput>, Enumerable<UserUncheckedCreateWithoutRole_CompanyInput>>
     connectOrCreate?: Enumerable<UserCreateOrConnectWithoutRole_CompanyInput>
@@ -13923,6 +13878,11 @@ export namespace Prisma {
     connectOrCreate?: Enumerable<UserCreateOrConnectWithoutRole_CompanyInput>
     createMany?: UserCreateManyRole_CompanyInputEnvelope
     connect?: Enumerable<UserWhereUniqueInput>
+  }
+
+  export type Role_CompanyUpdateaccessInput = {
+    set?: Enumerable<InputJsonValue>
+    push?: InputJsonValue | Enumerable<InputJsonValue>
   }
 
   export type UserUpdateManyWithoutRole_CompanyNestedInput = {
@@ -14298,28 +14258,6 @@ export namespace Prisma {
     _min?: NestedDateTimeNullableFilter
     _max?: NestedDateTimeNullableFilter
   }
-  export type NestedJsonFilter = 
-    | PatchUndefined<
-        Either<Required<NestedJsonFilterBase>, Exclude<keyof Required<NestedJsonFilterBase>, 'path'>>,
-        Required<NestedJsonFilterBase>
-      >
-    | OptionalFlat<Omit<Required<NestedJsonFilterBase>, 'path'>>
-
-  export type NestedJsonFilterBase = {
-    equals?: InputJsonValue | JsonNullValueFilter
-    path?: Array<string>
-    string_contains?: string
-    string_starts_with?: string
-    string_ends_with?: string
-    array_contains?: InputJsonValue | null
-    array_starts_with?: InputJsonValue | null
-    array_ends_with?: InputJsonValue | null
-    lt?: InputJsonValue
-    lte?: InputJsonValue
-    gt?: InputJsonValue
-    gte?: InputJsonValue
-    not?: InputJsonValue | JsonNullValueFilter
-  }
 
   export type UserCreateWithoutCompanyInput = {
     id: string
@@ -14583,7 +14521,7 @@ export namespace Prisma {
   export type Role_CompanyCreateWithoutCompanyBranchInput = {
     id: string
     name: string
-    access: JsonNullValueInput | InputJsonValue
+    access?: Role_CompanyCreateaccessInput | Enumerable<InputJsonValue>
     status: number
     users?: UserCreateNestedManyWithoutRole_CompanyInput
   }
@@ -14591,7 +14529,7 @@ export namespace Prisma {
   export type Role_CompanyUncheckedCreateWithoutCompanyBranchInput = {
     id: string
     name: string
-    access: JsonNullValueInput | InputJsonValue
+    access?: Role_CompanyCreateaccessInput | Enumerable<InputJsonValue>
     status: number
     users?: UserUncheckedCreateNestedManyWithoutRole_CompanyInput
   }
@@ -14692,7 +14630,7 @@ export namespace Prisma {
     NOT?: Enumerable<Role_CompanyScalarWhereInput>
     id?: UuidFilter | string
     name?: StringFilter | string
-    access?: JsonFilter
+    access?: JsonNullableListFilter
     status?: IntFilter | number
     companyBranchId?: UuidNullableFilter | string | null
   }
@@ -14983,7 +14921,7 @@ export namespace Prisma {
   export type Role_CompanyCreateWithoutUsersInput = {
     id: string
     name: string
-    access: JsonNullValueInput | InputJsonValue
+    access?: Role_CompanyCreateaccessInput | Enumerable<InputJsonValue>
     status: number
     companyBranch?: CompanyBranchCreateNestedOneWithoutRole_CompanyInput
   }
@@ -14991,7 +14929,7 @@ export namespace Prisma {
   export type Role_CompanyUncheckedCreateWithoutUsersInput = {
     id: string
     name: string
-    access: JsonNullValueInput | InputJsonValue
+    access?: Role_CompanyCreateaccessInput | Enumerable<InputJsonValue>
     status: number
     companyBranchId?: string | null
   }
@@ -15218,7 +15156,7 @@ export namespace Prisma {
   export type Role_CompanyUpdateWithoutUsersInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
-    access?: JsonNullValueInput | InputJsonValue
+    access?: Role_CompanyUpdateaccessInput | Enumerable<InputJsonValue>
     status?: IntFieldUpdateOperationsInput | number
     companyBranch?: CompanyBranchUpdateOneWithoutRole_CompanyNestedInput
   }
@@ -15226,7 +15164,7 @@ export namespace Prisma {
   export type Role_CompanyUncheckedUpdateWithoutUsersInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
-    access?: JsonNullValueInput | InputJsonValue
+    access?: Role_CompanyUpdateaccessInput | Enumerable<InputJsonValue>
     status?: IntFieldUpdateOperationsInput | number
     companyBranchId?: NullableStringFieldUpdateOperationsInput | string | null
   }
@@ -15764,7 +15702,7 @@ export namespace Prisma {
   export type Role_CompanyCreateManyCompanyBranchInput = {
     id: string
     name: string
-    access: JsonNullValueInput | InputJsonValue
+    access?: Role_CompanyCreateaccessInput | Enumerable<InputJsonValue>
     status: number
   }
 
@@ -15814,7 +15752,7 @@ export namespace Prisma {
   export type Role_CompanyUpdateWithoutCompanyBranchInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
-    access?: JsonNullValueInput | InputJsonValue
+    access?: Role_CompanyUpdateaccessInput | Enumerable<InputJsonValue>
     status?: IntFieldUpdateOperationsInput | number
     users?: UserUpdateManyWithoutRole_CompanyNestedInput
   }
@@ -15822,7 +15760,7 @@ export namespace Prisma {
   export type Role_CompanyUncheckedUpdateWithoutCompanyBranchInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
-    access?: JsonNullValueInput | InputJsonValue
+    access?: Role_CompanyUpdateaccessInput | Enumerable<InputJsonValue>
     status?: IntFieldUpdateOperationsInput | number
     users?: UserUncheckedUpdateManyWithoutRole_CompanyNestedInput
   }
@@ -15830,7 +15768,7 @@ export namespace Prisma {
   export type Role_CompanyUncheckedUpdateManyWithoutRole_CompanyInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
-    access?: JsonNullValueInput | InputJsonValue
+    access?: Role_CompanyUpdateaccessInput | Enumerable<InputJsonValue>
     status?: IntFieldUpdateOperationsInput | number
   }
 

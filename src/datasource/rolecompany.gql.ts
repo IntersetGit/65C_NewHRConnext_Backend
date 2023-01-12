@@ -26,6 +26,11 @@ export const roleCompanyTypedef = gql`
     status: Int!
   }
 
+  input UpdateRoleCompanyMangementType {
+    id: ID!
+    access: JSON!
+  }
+
   type MePositionType {
     id: ID!
     access: JSON
@@ -43,6 +48,7 @@ export const roleCompanyTypedef = gql`
 
   type Mutation {
     createRoleCompany(data: createRoleCompanyGroup!): CreateRoleCompanyResponseType
+    updateRoleCompanyMangement(data: [UpdateRoleCompanyMangementType!]!):CreateRoleCompanyResponseType
   }
 `;
 
@@ -113,6 +119,20 @@ const resolvers: Resolvers = {
         };
       }
     },
+    async updateRoleCompanyMangement(_, args, ctx) {
+      args.data.forEach(async (e) => {
+        const update = await ctx.prisma.role_Company.update({
+          data: {
+            access: e.access,
+          },
+          where: { id: e.id }
+        })
+      })
+      return {
+        message: 'success',
+        status: true
+      }
+    }
   },
 };
 
@@ -120,7 +140,7 @@ const resolvers: Resolvers = {
 
 const resolversComposition = {
   'Mutation.createRoleCompany': [authenticate()],
-  'Query.getcompanyRole' : [authenticate()],
+  'Query.getcompanyRole': [authenticate()],
 };
 
 export const Role_CompanyResolvers = composeResolvers(resolvers, resolversComposition);

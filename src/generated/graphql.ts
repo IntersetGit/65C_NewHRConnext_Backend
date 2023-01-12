@@ -272,6 +272,7 @@ export type Mutation = {
   createRoleCompany?: Maybe<CreateRoleCompanyResponseType>;
   login?: Maybe<LoginResponse>;
   refreshToken?: Maybe<RefreshtokenResponseType>;
+  updateRoleCompanyMangement?: Maybe<CreateRoleCompanyResponseType>;
   validateRoute?: Maybe<ValidateRoute>;
 };
 
@@ -298,6 +299,11 @@ export type MutationCreateRoleCompanyArgs = {
 
 export type MutationLoginArgs = {
   data: LoginaInput;
+};
+
+
+export type MutationUpdateRoleCompanyMangementArgs = {
+  data: Array<UpdateRoleCompanyMangementType>;
 };
 
 
@@ -494,6 +500,11 @@ export type Role_Company = {
   users?: Maybe<Array<Maybe<User>>>;
 };
 
+export type UpdateRoleCompanyMangementType = {
+  access: Scalars['JSON'];
+  id: Scalars['ID'];
+};
+
 export type User = {
   __typename?: 'User';
   RoleCompanyID?: Maybe<Scalars['String']>;
@@ -667,6 +678,7 @@ export type ResolversTypes = ResolversObject<{
   Role: ResolverTypeWrapper<Role>;
   Role_Company: ResolverTypeWrapper<Role_Company>;
   String: ResolverTypeWrapper<Scalars['String']>;
+  UpdateRoleCompanyMangementType: UpdateRoleCompanyMangementType;
   User: ResolverTypeWrapper<User>;
   ValidateRoute: ResolverTypeWrapper<ValidateRoute>;
   createCompanyBranch: CreateCompanyBranch;
@@ -714,6 +726,7 @@ export type ResolversParentTypes = ResolversObject<{
   Role: Role;
   Role_Company: Role_Company;
   String: Scalars['String'];
+  UpdateRoleCompanyMangementType: UpdateRoleCompanyMangementType;
   User: User;
   ValidateRoute: ValidateRoute;
   createCompanyBranch: CreateCompanyBranch;
@@ -910,6 +923,7 @@ export type MutationResolvers<ContextType = ApolloContext, ParentType extends Re
   createRoleCompany?: Resolver<Maybe<ResolversTypes['CreateRoleCompanyResponseType']>, ParentType, ContextType, RequireFields<MutationCreateRoleCompanyArgs, 'data'>>;
   login?: Resolver<Maybe<ResolversTypes['LoginResponse']>, ParentType, ContextType, RequireFields<MutationLoginArgs, 'data'>>;
   refreshToken?: Resolver<Maybe<ResolversTypes['RefreshtokenResponseType']>, ParentType, ContextType>;
+  updateRoleCompanyMangement?: Resolver<Maybe<ResolversTypes['CreateRoleCompanyResponseType']>, ParentType, ContextType, RequireFields<MutationUpdateRoleCompanyMangementArgs, 'data'>>;
   validateRoute?: Resolver<Maybe<ResolversTypes['ValidateRoute']>, ParentType, ContextType, RequireFields<MutationValidateRouteArgs, 'args'>>;
 }>;
 

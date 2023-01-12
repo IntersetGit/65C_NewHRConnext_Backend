@@ -144,16 +144,6 @@ exports.Prisma.DistrictScalarFieldEnum = makeEnum({
   provinceId: 'provinceId'
 });
 
-exports.Prisma.JsonNullValueFilter = makeEnum({
-  DbNull: Prisma.DbNull,
-  JsonNull: Prisma.JsonNull,
-  AnyNull: Prisma.AnyNull
-});
-
-exports.Prisma.JsonNullValueInput = makeEnum({
-  JsonNull: Prisma.JsonNull
-});
-
 exports.Prisma.ProfileScalarFieldEnum = makeEnum({
   id: 'id',
   bio: 'bio',
