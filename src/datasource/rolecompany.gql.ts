@@ -119,6 +119,7 @@ const resolvers: Resolvers = {
         };
       }
     },
+    /** อัพเดท จัดการสิทธิ์ ของ Role ทั้งหมด */
     async updateRoleCompanyMangement(_, args, ctx) {
       args.data.forEach(async (e) => {
         const update = await ctx.prisma.role_Company.update({
@@ -140,6 +141,7 @@ const resolvers: Resolvers = {
 
 const resolversComposition = {
   'Mutation.createRoleCompany': [authenticate()],
+  'Mutation.updateRoleCompanyMangement': [authenticate()],
   'Query.getcompanyRole': [authenticate()],
 };
 
