@@ -1,4 +1,3 @@
-
 import gql from 'graphql-tag';
 import { Resolvers } from '../generated/graphql';
 import { v4 } from 'uuid';
@@ -6,7 +5,6 @@ import { composeResolvers } from '@graphql-tools/resolvers-composition';
 import { authenticate } from '../middleware/authenticatetoken';
 import _ from 'lodash';
 import { GraphQLError } from 'graphql';
-
 
 export const roleCompanyTypedef = gql`
   type Role_Company {
@@ -28,7 +26,7 @@ export const roleCompanyTypedef = gql`
 
   input UpdateRoleCompanyMangementType {
     id: ID!
-    access: JSON!
+    access: [JSON!]!
   }
 
   type MePositionType {
@@ -47,11 +45,14 @@ export const roleCompanyTypedef = gql`
   }
 
   type Mutation {
-    createRoleCompany(data: createRoleCompanyGroup!): CreateRoleCompanyResponseType
-    updateRoleCompanyMangement(data: [UpdateRoleCompanyMangementType!]!):CreateRoleCompanyResponseType
+    createRoleCompany(
+      data: createRoleCompanyGroup!
+    ): CreateRoleCompanyResponseType
+    updateRoleCompanyMangement(
+      data: [UpdateRoleCompanyMangementType!]!
+    ): CreateRoleCompanyResponseType
   }
 `;
-
 
 const resolvers: Resolvers = {
   Query: {
@@ -63,19 +64,19 @@ const resolvers: Resolvers = {
      * @returns
      */
     async getcompanyRole(p, args, ctx) {
-      const search = args.role_name ? args.role_name : undefined
+      const search = args.role_name ? args.role_name : undefined;
       const rolesCompanyget = await ctx.prisma.role_Company.findMany({
         where: {
           companyBranch: {
-            companyId: ctx.currentUser?.compayId
+            companyId: ctx.currentUser?.compayId,
           },
           AND: {
-            name: { contains: search }
-          }
+            name: { contains: search },
+          },
         },
       });
       return rolesCompanyget;
-    }
+    },
   },
   Mutation: {
     /**
@@ -88,7 +89,7 @@ const resolvers: Resolvers = {
     async createRoleCompany(p, args, ctx) {
       const genRoleid = v4();
       if (args.data.access == undefined) {
-        args.data.access = {}
+        args.data.access = [];
       }
       if (args.data.id) {
         const updete_RoleCompany = await ctx.prisma.role_Company.update({
@@ -97,7 +98,7 @@ const resolvers: Resolvers = {
             access: args.data.access,
             status: args.data.status,
           },
-          where: { id: args.data.id }
+          where: { id: args.data.id },
         });
         return {
           message: 'success',
@@ -110,7 +111,7 @@ const resolvers: Resolvers = {
             name: args.data.name as string,
             access: args.data.access,
             status: args.data.status,
-            companyBranchId: ctx.currentUser?.branchId
+            companyBranchId: ctx.currentUser?.branchId,
           },
         });
         return {
@@ -126,18 +127,16 @@ const resolvers: Resolvers = {
           data: {
             access: e.access,
           },
-          where: { id: e.id }
-        })
-      })
+          where: { id: e.id },
+        });
+      });
       return {
         message: 'success',
-        status: true
-      }
-    }
+        status: true,
+      };
+    },
   },
 };
-
-
 
 const resolversComposition = {
   'Mutation.createRoleCompany': [authenticate()],
@@ -145,4 +144,7 @@ const resolversComposition = {
   'Query.getcompanyRole': [authenticate()],
 };
 
-export const Role_CompanyResolvers = composeResolvers(resolvers, resolversComposition);
+export const Role_CompanyResolvers = composeResolvers(
+  resolvers,
+  resolversComposition,
+);

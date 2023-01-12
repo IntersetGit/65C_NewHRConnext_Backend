@@ -513,7 +513,7 @@ export type Role_Company = {
 };
 
 export type UpdateRoleCompanyMangementType = {
-  access: Scalars['JSON'];
+  access: Array<Scalars['JSON']>;
   id: Scalars['ID'];
 };
 

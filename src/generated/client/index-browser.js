@@ -13,12 +13,12 @@ const Prisma = {}
 exports.Prisma = Prisma
 
 /**
- * Prisma Client JS version: 4.7.1
- * Query Engine version: 272861e07ab64f234d3ffc4094e32bd61775599c
+ * Prisma Client JS version: 4.7.0
+ * Query Engine version: 39190b250ebc338586e25e6da45e5e783bc8a635
  */
 Prisma.prismaVersion = {
-  client: "4.7.1",
-  engine: "272861e07ab64f234d3ffc4094e32bd61775599c"
+  client: "4.7.0",
+  engine: "39190b250ebc338586e25e6da45e5e783bc8a635"
 }
 
 Prisma.PrismaClientKnownRequestError = () => {
@@ -142,6 +142,16 @@ exports.Prisma.DistrictScalarFieldEnum = makeEnum({
   id: 'id',
   name: 'name',
   provinceId: 'provinceId'
+});
+
+exports.Prisma.JsonNullValueFilter = makeEnum({
+  DbNull: Prisma.DbNull,
+  JsonNull: Prisma.JsonNull,
+  AnyNull: Prisma.AnyNull
+});
+
+exports.Prisma.JsonNullValueInput = makeEnum({
+  JsonNull: Prisma.JsonNull
 });
 
 exports.Prisma.ProfileScalarFieldEnum = makeEnum({
