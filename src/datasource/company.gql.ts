@@ -198,9 +198,14 @@ export const companyTypedef = gql`
     getownCompany: GetOwncompanytype
   }
 
-  type Mutation  {
-    createAndUpdateComBarance(data: createCompanyBranch): CreateComapnyBranchResponseType
+  type DeleteComapnyBranchResponseType{
+    message: String
+    status: Boolean
+  }
 
+  type Mutation  {
+    createAndUpdateComBarance(data: createCompanyBranch!): CreateComapnyBranchResponseType
+    deleteComBarance(id: createCompanyBranch!) : DeleteComapnyBranchResponseType
   }
 `;
 
