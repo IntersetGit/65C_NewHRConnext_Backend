@@ -154,6 +154,11 @@ exports.Prisma.JsonNullValueInput = makeEnum({
   JsonNull: Prisma.JsonNull
 });
 
+exports.Prisma.PosotionScalarFieldEnum = makeEnum({
+  id: 'id',
+  detail: 'detail'
+});
+
 exports.Prisma.ProfileScalarFieldEnum = makeEnum({
   id: 'id',
   bio: 'bio',
@@ -260,7 +265,8 @@ exports.Prisma.ModelName = makeEnum({
   Role_Company: 'Role_Company',
   Province: 'Province',
   District: 'District',
-  Amphoe: 'Amphoe'
+  Amphoe: 'Amphoe',
+  Posotion: 'Posotion'
 });
 
 /**

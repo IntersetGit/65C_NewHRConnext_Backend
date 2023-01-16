@@ -182,6 +182,15 @@ export type Amphoe = {
   zipcode: string | null
 }
 
+/**
+ * Model Posotion
+ * 
+ */
+export type Posotion = {
+  id: string
+  detail: Prisma.JsonValue[]
+}
+
 
 /**
  * ##  Prisma Client ʲˢ
@@ -389,6 +398,16 @@ export class PrismaClient<
     * ```
     */
   get amphoe(): Prisma.AmphoeDelegate<GlobalReject>;
+
+  /**
+   * `prisma.posotion`: Exposes CRUD operations for the **Posotion** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more Posotions
+    * const posotions = await prisma.posotion.findMany()
+    * ```
+    */
+  get posotion(): Prisma.PosotionDelegate<GlobalReject>;
 }
 
 export namespace Prisma {
@@ -881,7 +900,8 @@ export namespace Prisma {
     Role_Company: 'Role_Company',
     Province: 'Province',
     District: 'District',
-    Amphoe: 'Amphoe'
+    Amphoe: 'Amphoe',
+    Posotion: 'Posotion'
   };
 
   export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -10894,6 +10914,907 @@ export namespace Prisma {
 
 
   /**
+   * Model Posotion
+   */
+
+
+  export type AggregatePosotion = {
+    _count: PosotionCountAggregateOutputType | null
+    _min: PosotionMinAggregateOutputType | null
+    _max: PosotionMaxAggregateOutputType | null
+  }
+
+  export type PosotionMinAggregateOutputType = {
+    id: string | null
+  }
+
+  export type PosotionMaxAggregateOutputType = {
+    id: string | null
+  }
+
+  export type PosotionCountAggregateOutputType = {
+    id: number
+    detail: number
+    _all: number
+  }
+
+
+  export type PosotionMinAggregateInputType = {
+    id?: true
+  }
+
+  export type PosotionMaxAggregateInputType = {
+    id?: true
+  }
+
+  export type PosotionCountAggregateInputType = {
+    id?: true
+    detail?: true
+    _all?: true
+  }
+
+  export type PosotionAggregateArgs = {
+    /**
+     * Filter which Posotion to aggregate.
+     * 
+    **/
+    where?: PosotionWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Posotions to fetch.
+     * 
+    **/
+    orderBy?: Enumerable<PosotionOrderByWithRelationInput>
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     * 
+    **/
+    cursor?: PosotionWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Posotions from the position of the cursor.
+     * 
+    **/
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Posotions.
+     * 
+    **/
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned Posotions
+    **/
+    _count?: true | PosotionCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: PosotionMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: PosotionMaxAggregateInputType
+  }
+
+  export type GetPosotionAggregateType<T extends PosotionAggregateArgs> = {
+        [P in keyof T & keyof AggregatePosotion]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregatePosotion[P]>
+      : GetScalarType<T[P], AggregatePosotion[P]>
+  }
+
+
+
+
+  export type PosotionGroupByArgs = {
+    where?: PosotionWhereInput
+    orderBy?: Enumerable<PosotionOrderByWithAggregationInput>
+    by: Array<PosotionScalarFieldEnum>
+    having?: PosotionScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: PosotionCountAggregateInputType | true
+    _min?: PosotionMinAggregateInputType
+    _max?: PosotionMaxAggregateInputType
+  }
+
+
+  export type PosotionGroupByOutputType = {
+    id: string
+    detail: JsonValue[]
+    _count: PosotionCountAggregateOutputType | null
+    _min: PosotionMinAggregateOutputType | null
+    _max: PosotionMaxAggregateOutputType | null
+  }
+
+  type GetPosotionGroupByPayload<T extends PosotionGroupByArgs> = PrismaPromise<
+    Array<
+      PickArray<PosotionGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof PosotionGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], PosotionGroupByOutputType[P]>
+            : GetScalarType<T[P], PosotionGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type PosotionSelect = {
+    id?: boolean
+    detail?: boolean
+  }
+
+
+  export type PosotionGetPayload<S extends boolean | null | undefined | PosotionArgs> =
+    S extends { select: any, include: any } ? 'Please either choose `select` or `include`' :
+    S extends true ? Posotion :
+    S extends undefined ? never :
+    S extends { include: any } & (PosotionArgs | PosotionFindManyArgs)
+    ? Posotion 
+    : S extends { select: any } & (PosotionArgs | PosotionFindManyArgs)
+      ? {
+    [P in TruthyKeys<S['select']>]:
+    P extends keyof Posotion ? Posotion[P] : never
+  } 
+      : Posotion
+
+
+  type PosotionCountArgs = Merge<
+    Omit<PosotionFindManyArgs, 'select' | 'include'> & {
+      select?: PosotionCountAggregateInputType | true
+    }
+  >
+
+  export interface PosotionDelegate<GlobalRejectSettings extends Prisma.RejectOnNotFound | Prisma.RejectPerOperation | false | undefined> {
+    /**
+     * Find zero or one Posotion that matches the filter.
+     * @param {PosotionFindUniqueArgs} args - Arguments to find a Posotion
+     * @example
+     * // Get one Posotion
+     * const posotion = await prisma.posotion.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+    **/
+    findUnique<T extends PosotionFindUniqueArgs,  LocalRejectSettings = T["rejectOnNotFound"] extends RejectOnNotFound ? T['rejectOnNotFound'] : undefined>(
+      args: SelectSubset<T, PosotionFindUniqueArgs>
+    ): HasReject<GlobalRejectSettings, LocalRejectSettings, 'findUnique', 'Posotion'> extends True ? Prisma__PosotionClient<PosotionGetPayload<T>> : Prisma__PosotionClient<PosotionGetPayload<T> | null, null>
+
+    /**
+     * Find one Posotion that matches the filter or throw an error  with `error.code='P2025'` 
+     *     if no matches were found.
+     * @param {PosotionFindUniqueOrThrowArgs} args - Arguments to find a Posotion
+     * @example
+     * // Get one Posotion
+     * const posotion = await prisma.posotion.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+    **/
+    findUniqueOrThrow<T extends PosotionFindUniqueOrThrowArgs>(
+      args?: SelectSubset<T, PosotionFindUniqueOrThrowArgs>
+    ): Prisma__PosotionClient<PosotionGetPayload<T>>
+
+    /**
+     * Find the first Posotion that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PosotionFindFirstArgs} args - Arguments to find a Posotion
+     * @example
+     * // Get one Posotion
+     * const posotion = await prisma.posotion.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+    **/
+    findFirst<T extends PosotionFindFirstArgs,  LocalRejectSettings = T["rejectOnNotFound"] extends RejectOnNotFound ? T['rejectOnNotFound'] : undefined>(
+      args?: SelectSubset<T, PosotionFindFirstArgs>
+    ): HasReject<GlobalRejectSettings, LocalRejectSettings, 'findFirst', 'Posotion'> extends True ? Prisma__PosotionClient<PosotionGetPayload<T>> : Prisma__PosotionClient<PosotionGetPayload<T> | null, null>
+
+    /**
+     * Find the first Posotion that matches the filter or
+     * throw `NotFoundError` if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PosotionFindFirstOrThrowArgs} args - Arguments to find a Posotion
+     * @example
+     * // Get one Posotion
+     * const posotion = await prisma.posotion.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+    **/
+    findFirstOrThrow<T extends PosotionFindFirstOrThrowArgs>(
+      args?: SelectSubset<T, PosotionFindFirstOrThrowArgs>
+    ): Prisma__PosotionClient<PosotionGetPayload<T>>
+
+    /**
+     * Find zero or more Posotions that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PosotionFindManyArgs=} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all Posotions
+     * const posotions = await prisma.posotion.findMany()
+     * 
+     * // Get first 10 Posotions
+     * const posotions = await prisma.posotion.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const posotionWithIdOnly = await prisma.posotion.findMany({ select: { id: true } })
+     * 
+    **/
+    findMany<T extends PosotionFindManyArgs>(
+      args?: SelectSubset<T, PosotionFindManyArgs>
+    ): PrismaPromise<Array<PosotionGetPayload<T>>>
+
+    /**
+     * Create a Posotion.
+     * @param {PosotionCreateArgs} args - Arguments to create a Posotion.
+     * @example
+     * // Create one Posotion
+     * const Posotion = await prisma.posotion.create({
+     *   data: {
+     *     // ... data to create a Posotion
+     *   }
+     * })
+     * 
+    **/
+    create<T extends PosotionCreateArgs>(
+      args: SelectSubset<T, PosotionCreateArgs>
+    ): Prisma__PosotionClient<PosotionGetPayload<T>>
+
+    /**
+     * Create many Posotions.
+     *     @param {PosotionCreateManyArgs} args - Arguments to create many Posotions.
+     *     @example
+     *     // Create many Posotions
+     *     const posotion = await prisma.posotion.createMany({
+     *       data: {
+     *         // ... provide data here
+     *       }
+     *     })
+     *     
+    **/
+    createMany<T extends PosotionCreateManyArgs>(
+      args?: SelectSubset<T, PosotionCreateManyArgs>
+    ): PrismaPromise<BatchPayload>
+
+    /**
+     * Delete a Posotion.
+     * @param {PosotionDeleteArgs} args - Arguments to delete one Posotion.
+     * @example
+     * // Delete one Posotion
+     * const Posotion = await prisma.posotion.delete({
+     *   where: {
+     *     // ... filter to delete one Posotion
+     *   }
+     * })
+     * 
+    **/
+    delete<T extends PosotionDeleteArgs>(
+      args: SelectSubset<T, PosotionDeleteArgs>
+    ): Prisma__PosotionClient<PosotionGetPayload<T>>
+
+    /**
+     * Update one Posotion.
+     * @param {PosotionUpdateArgs} args - Arguments to update one Posotion.
+     * @example
+     * // Update one Posotion
+     * const posotion = await prisma.posotion.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+    **/
+    update<T extends PosotionUpdateArgs>(
+      args: SelectSubset<T, PosotionUpdateArgs>
+    ): Prisma__PosotionClient<PosotionGetPayload<T>>
+
+    /**
+     * Delete zero or more Posotions.
+     * @param {PosotionDeleteManyArgs} args - Arguments to filter Posotions to delete.
+     * @example
+     * // Delete a few Posotions
+     * const { count } = await prisma.posotion.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+    **/
+    deleteMany<T extends PosotionDeleteManyArgs>(
+      args?: SelectSubset<T, PosotionDeleteManyArgs>
+    ): PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Posotions.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PosotionUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many Posotions
+     * const posotion = await prisma.posotion.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+    **/
+    updateMany<T extends PosotionUpdateManyArgs>(
+      args: SelectSubset<T, PosotionUpdateManyArgs>
+    ): PrismaPromise<BatchPayload>
+
+    /**
+     * Create or update one Posotion.
+     * @param {PosotionUpsertArgs} args - Arguments to update or create a Posotion.
+     * @example
+     * // Update or create a Posotion
+     * const posotion = await prisma.posotion.upsert({
+     *   create: {
+     *     // ... data to create a Posotion
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the Posotion we want to update
+     *   }
+     * })
+    **/
+    upsert<T extends PosotionUpsertArgs>(
+      args: SelectSubset<T, PosotionUpsertArgs>
+    ): Prisma__PosotionClient<PosotionGetPayload<T>>
+
+    /**
+     * Count the number of Posotions.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PosotionCountArgs} args - Arguments to filter Posotions to count.
+     * @example
+     * // Count the number of Posotions
+     * const count = await prisma.posotion.count({
+     *   where: {
+     *     // ... the filter for the Posotions we want to count
+     *   }
+     * })
+    **/
+    count<T extends PosotionCountArgs>(
+      args?: Subset<T, PosotionCountArgs>,
+    ): PrismaPromise<
+      T extends _Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], PosotionCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a Posotion.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PosotionAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends PosotionAggregateArgs>(args: Subset<T, PosotionAggregateArgs>): PrismaPromise<GetPosotionAggregateType<T>>
+
+    /**
+     * Group by Posotion.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PosotionGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends PosotionGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: PosotionGroupByArgs['orderBy'] }
+        : { orderBy?: PosotionGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends TupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, PosotionGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetPosotionGroupByPayload<T> : PrismaPromise<InputErrors>
+
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for Posotion.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export class Prisma__PosotionClient<T, Null = never> implements PrismaPromise<T> {
+    [prisma]: true;
+    private readonly _dmmf;
+    private readonly _fetcher;
+    private readonly _queryType;
+    private readonly _rootField;
+    private readonly _clientMethod;
+    private readonly _args;
+    private readonly _dataPath;
+    private readonly _errorFormat;
+    private readonly _measurePerformance?;
+    private _isList;
+    private _callsite;
+    private _requestPromise?;
+    constructor(_dmmf: runtime.DMMFClass, _fetcher: PrismaClientFetcher, _queryType: 'query' | 'mutation', _rootField: string, _clientMethod: string, _args: any, _dataPath: string[], _errorFormat: ErrorFormat, _measurePerformance?: boolean | undefined, _isList?: boolean);
+    readonly [Symbol.toStringTag]: 'PrismaClientPromise';
+
+
+    private get _document();
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): Promise<TResult1 | TResult2>;
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): Promise<T | TResult>;
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): Promise<T>;
+  }
+
+
+
+  // Custom InputTypes
+
+  /**
+   * Posotion base type for findUnique actions
+   */
+  export type PosotionFindUniqueArgsBase = {
+    /**
+     * Select specific fields to fetch from the Posotion
+     * 
+    **/
+    select?: PosotionSelect | null
+    /**
+     * Filter, which Posotion to fetch.
+     * 
+    **/
+    where: PosotionWhereUniqueInput
+  }
+
+  /**
+   * Posotion: findUnique
+   */
+  export interface PosotionFindUniqueArgs extends PosotionFindUniqueArgsBase {
+   /**
+    * Throw an Error if query returns no results
+    * @deprecated since 4.0.0: use `findUniqueOrThrow` method instead
+    */
+    rejectOnNotFound?: RejectOnNotFound
+  }
+      
+
+  /**
+   * Posotion findUniqueOrThrow
+   */
+  export type PosotionFindUniqueOrThrowArgs = {
+    /**
+     * Select specific fields to fetch from the Posotion
+     * 
+    **/
+    select?: PosotionSelect | null
+    /**
+     * Filter, which Posotion to fetch.
+     * 
+    **/
+    where: PosotionWhereUniqueInput
+  }
+
+
+  /**
+   * Posotion base type for findFirst actions
+   */
+  export type PosotionFindFirstArgsBase = {
+    /**
+     * Select specific fields to fetch from the Posotion
+     * 
+    **/
+    select?: PosotionSelect | null
+    /**
+     * Filter, which Posotion to fetch.
+     * 
+    **/
+    where?: PosotionWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Posotions to fetch.
+     * 
+    **/
+    orderBy?: Enumerable<PosotionOrderByWithRelationInput>
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Posotions.
+     * 
+    **/
+    cursor?: PosotionWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Posotions from the position of the cursor.
+     * 
+    **/
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Posotions.
+     * 
+    **/
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Posotions.
+     * 
+    **/
+    distinct?: Enumerable<PosotionScalarFieldEnum>
+  }
+
+  /**
+   * Posotion: findFirst
+   */
+  export interface PosotionFindFirstArgs extends PosotionFindFirstArgsBase {
+   /**
+    * Throw an Error if query returns no results
+    * @deprecated since 4.0.0: use `findFirstOrThrow` method instead
+    */
+    rejectOnNotFound?: RejectOnNotFound
+  }
+      
+
+  /**
+   * Posotion findFirstOrThrow
+   */
+  export type PosotionFindFirstOrThrowArgs = {
+    /**
+     * Select specific fields to fetch from the Posotion
+     * 
+    **/
+    select?: PosotionSelect | null
+    /**
+     * Filter, which Posotion to fetch.
+     * 
+    **/
+    where?: PosotionWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Posotions to fetch.
+     * 
+    **/
+    orderBy?: Enumerable<PosotionOrderByWithRelationInput>
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Posotions.
+     * 
+    **/
+    cursor?: PosotionWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Posotions from the position of the cursor.
+     * 
+    **/
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Posotions.
+     * 
+    **/
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Posotions.
+     * 
+    **/
+    distinct?: Enumerable<PosotionScalarFieldEnum>
+  }
+
+
+  /**
+   * Posotion findMany
+   */
+  export type PosotionFindManyArgs = {
+    /**
+     * Select specific fields to fetch from the Posotion
+     * 
+    **/
+    select?: PosotionSelect | null
+    /**
+     * Filter, which Posotions to fetch.
+     * 
+    **/
+    where?: PosotionWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Posotions to fetch.
+     * 
+    **/
+    orderBy?: Enumerable<PosotionOrderByWithRelationInput>
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing Posotions.
+     * 
+    **/
+    cursor?: PosotionWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Posotions from the position of the cursor.
+     * 
+    **/
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Posotions.
+     * 
+    **/
+    skip?: number
+    distinct?: Enumerable<PosotionScalarFieldEnum>
+  }
+
+
+  /**
+   * Posotion create
+   */
+  export type PosotionCreateArgs = {
+    /**
+     * Select specific fields to fetch from the Posotion
+     * 
+    **/
+    select?: PosotionSelect | null
+    /**
+     * The data needed to create a Posotion.
+     * 
+    **/
+    data: XOR<PosotionCreateInput, PosotionUncheckedCreateInput>
+  }
+
+
+  /**
+   * Posotion createMany
+   */
+  export type PosotionCreateManyArgs = {
+    /**
+     * The data used to create many Posotions.
+     * 
+    **/
+    data: Enumerable<PosotionCreateManyInput>
+    skipDuplicates?: boolean
+  }
+
+
+  /**
+   * Posotion update
+   */
+  export type PosotionUpdateArgs = {
+    /**
+     * Select specific fields to fetch from the Posotion
+     * 
+    **/
+    select?: PosotionSelect | null
+    /**
+     * The data needed to update a Posotion.
+     * 
+    **/
+    data: XOR<PosotionUpdateInput, PosotionUncheckedUpdateInput>
+    /**
+     * Choose, which Posotion to update.
+     * 
+    **/
+    where: PosotionWhereUniqueInput
+  }
+
+
+  /**
+   * Posotion updateMany
+   */
+  export type PosotionUpdateManyArgs = {
+    /**
+     * The data used to update Posotions.
+     * 
+    **/
+    data: XOR<PosotionUpdateManyMutationInput, PosotionUncheckedUpdateManyInput>
+    /**
+     * Filter which Posotions to update
+     * 
+    **/
+    where?: PosotionWhereInput
+  }
+
+
+  /**
+   * Posotion upsert
+   */
+  export type PosotionUpsertArgs = {
+    /**
+     * Select specific fields to fetch from the Posotion
+     * 
+    **/
+    select?: PosotionSelect | null
+    /**
+     * The filter to search for the Posotion to update in case it exists.
+     * 
+    **/
+    where: PosotionWhereUniqueInput
+    /**
+     * In case the Posotion found by the `where` argument doesn't exist, create a new Posotion with this data.
+     * 
+    **/
+    create: XOR<PosotionCreateInput, PosotionUncheckedCreateInput>
+    /**
+     * In case the Posotion was found with the provided `where` argument, update it with this data.
+     * 
+    **/
+    update: XOR<PosotionUpdateInput, PosotionUncheckedUpdateInput>
+  }
+
+
+  /**
+   * Posotion delete
+   */
+  export type PosotionDeleteArgs = {
+    /**
+     * Select specific fields to fetch from the Posotion
+     * 
+    **/
+    select?: PosotionSelect | null
+    /**
+     * Filter which Posotion to delete.
+     * 
+    **/
+    where: PosotionWhereUniqueInput
+  }
+
+
+  /**
+   * Posotion deleteMany
+   */
+  export type PosotionDeleteManyArgs = {
+    /**
+     * Filter which Posotions to delete
+     * 
+    **/
+    where?: PosotionWhereInput
+  }
+
+
+  /**
+   * Posotion without action
+   */
+  export type PosotionArgs = {
+    /**
+     * Select specific fields to fetch from the Posotion
+     * 
+    **/
+    select?: PosotionSelect | null
+  }
+
+
+
+  /**
    * Enums
    */
 
@@ -10981,6 +11902,14 @@ export namespace Prisma {
   };
 
   export type JsonNullValueInput = (typeof JsonNullValueInput)[keyof typeof JsonNullValueInput]
+
+
+  export const PosotionScalarFieldEnum: {
+    id: 'id',
+    detail: 'detail'
+  };
+
+  export type PosotionScalarFieldEnum = (typeof PosotionScalarFieldEnum)[keyof typeof PosotionScalarFieldEnum]
 
 
   export const ProfileScalarFieldEnum: {
@@ -11803,6 +12732,39 @@ export namespace Prisma {
     name?: StringWithAggregatesFilter | string
     districtId?: UuidWithAggregatesFilter | string
     zipcode?: StringNullableWithAggregatesFilter | string | null
+  }
+
+  export type PosotionWhereInput = {
+    AND?: Enumerable<PosotionWhereInput>
+    OR?: Enumerable<PosotionWhereInput>
+    NOT?: Enumerable<PosotionWhereInput>
+    id?: UuidFilter | string
+    detail?: JsonNullableListFilter
+  }
+
+  export type PosotionOrderByWithRelationInput = {
+    id?: SortOrder
+    detail?: SortOrder
+  }
+
+  export type PosotionWhereUniqueInput = {
+    id?: string
+  }
+
+  export type PosotionOrderByWithAggregationInput = {
+    id?: SortOrder
+    detail?: SortOrder
+    _count?: PosotionCountOrderByAggregateInput
+    _max?: PosotionMaxOrderByAggregateInput
+    _min?: PosotionMinOrderByAggregateInput
+  }
+
+  export type PosotionScalarWhereWithAggregatesInput = {
+    AND?: Enumerable<PosotionScalarWhereWithAggregatesInput>
+    OR?: Enumerable<PosotionScalarWhereWithAggregatesInput>
+    NOT?: Enumerable<PosotionScalarWhereWithAggregatesInput>
+    id?: UuidWithAggregatesFilter | string
+    detail?: JsonNullableListFilter
   }
 
   export type CompanyCreateInput = {
@@ -12770,6 +13732,41 @@ export namespace Prisma {
     zipcode?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
+  export type PosotionCreateInput = {
+    id: string
+    detail?: PosotionCreatedetailInput | Enumerable<InputJsonValue>
+  }
+
+  export type PosotionUncheckedCreateInput = {
+    id: string
+    detail?: PosotionCreatedetailInput | Enumerable<InputJsonValue>
+  }
+
+  export type PosotionUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    detail?: PosotionUpdatedetailInput | Enumerable<InputJsonValue>
+  }
+
+  export type PosotionUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    detail?: PosotionUpdatedetailInput | Enumerable<InputJsonValue>
+  }
+
+  export type PosotionCreateManyInput = {
+    id: string
+    detail?: PosotionCreatedetailInput | Enumerable<InputJsonValue>
+  }
+
+  export type PosotionUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    detail?: PosotionUpdatedetailInput | Enumerable<InputJsonValue>
+  }
+
+  export type PosotionUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    detail?: PosotionUpdatedetailInput | Enumerable<InputJsonValue>
+  }
+
   export type UuidFilter = {
     equals?: string
     in?: Enumerable<string>
@@ -13542,6 +14539,33 @@ export namespace Prisma {
     districtId?: SortOrder
     zipcode?: SortOrder
   }
+  export type JsonNullableListFilter = 
+    | PatchUndefined<
+        Either<Required<JsonNullableListFilterBase>, Exclude<keyof Required<JsonNullableListFilterBase>, 'path'>>,
+        Required<JsonNullableListFilterBase>
+      >
+    | OptionalFlat<Omit<Required<JsonNullableListFilterBase>, 'path'>>
+
+  export type JsonNullableListFilterBase = {
+    equals?: Enumerable<InputJsonValue> | null
+    has?: InputJsonValue | null
+    hasEvery?: Enumerable<InputJsonValue>
+    hasSome?: Enumerable<InputJsonValue>
+    isEmpty?: boolean
+  }
+
+  export type PosotionCountOrderByAggregateInput = {
+    id?: SortOrder
+    detail?: SortOrder
+  }
+
+  export type PosotionMaxOrderByAggregateInput = {
+    id?: SortOrder
+  }
+
+  export type PosotionMinOrderByAggregateInput = {
+    id?: SortOrder
+  }
 
   export type UserCreateNestedOneWithoutCompanyInput = {
     create?: XOR<UserCreateWithoutCompanyInput, UserUncheckedCreateWithoutCompanyInput>
@@ -14073,6 +15097,15 @@ export namespace Prisma {
     upsert?: DistrictUpsertWithoutAmphoeInput
     connect?: DistrictWhereUniqueInput
     update?: XOR<DistrictUpdateWithoutAmphoeInput, DistrictUncheckedUpdateWithoutAmphoeInput>
+  }
+
+  export type PosotionCreatedetailInput = {
+    set: Enumerable<InputJsonValue>
+  }
+
+  export type PosotionUpdatedetailInput = {
+    set?: Enumerable<InputJsonValue>
+    push?: InputJsonValue | Enumerable<InputJsonValue>
   }
 
   export type NestedUuidFilter = {
