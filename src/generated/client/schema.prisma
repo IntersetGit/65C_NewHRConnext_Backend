@@ -172,3 +172,10 @@ model Amphoe {
   zipcode    String?
   district   District @relation(fields: [districtId], references: [id])
 }
+
+
+model Posotion {
+  id         String   @unique @db.Uuid
+  detail     Json[]
+}
+
