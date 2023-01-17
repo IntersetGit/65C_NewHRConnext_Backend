@@ -515,9 +515,6 @@ const resolvers: Resolvers = {
       const deleteProfile = await ctx.prisma.profile.delete({
         where: {
           userId : args.id,
-          // User: {
-          //   id: args.id as 
-          // }
         }
       }
       );
