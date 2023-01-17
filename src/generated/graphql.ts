@@ -175,6 +175,12 @@ export type CreateUserResponseType = {
   status?: Maybe<Scalars['Boolean']>;
 };
 
+export type DeleteAccountUserResponseType = {
+  __typename?: 'DeleteAccountUserResponseType';
+  message?: Maybe<Scalars['String']>;
+  status?: Maybe<Scalars['Boolean']>;
+};
+
 export type DeleteComapnyBranchResponseType = {
   __typename?: 'DeleteComapnyBranchResponseType';
   message?: Maybe<Scalars['String']>;
@@ -276,6 +282,7 @@ export type Mutation = {
   createAccountUser?: Maybe<CreateUserResponseType>;
   createAndUpdateComBarance?: Maybe<CreateComapnyBranchResponseType>;
   createRoleCompany?: Maybe<CreateRoleCompanyResponseType>;
+  deleteAccountUser?: Maybe<DeleteAccountUserResponseType>;
   deleteComBarance?: Maybe<DeleteComapnyBranchResponseType>;
   login?: Maybe<LoginResponse>;
   refreshToken?: Maybe<RefreshtokenResponseType>;
@@ -301,6 +308,11 @@ export type MutationCreateAndUpdateComBaranceArgs = {
 
 export type MutationCreateRoleCompanyArgs = {
   data: CreateRoleCompanyGroup;
+};
+
+
+export type MutationDeleteAccountUserArgs = {
+  id: Scalars['ID'];
 };
 
 
@@ -664,6 +676,7 @@ export type ResolversTypes = ResolversObject<{
   CreateRoleCompanyResponseType: ResolverTypeWrapper<CreateRoleCompanyResponseType>;
   CreateUserResponseType: ResolverTypeWrapper<CreateUserResponseType>;
   Date: ResolverTypeWrapper<Scalars['Date']>;
+  DeleteAccountUserResponseType: ResolverTypeWrapper<DeleteAccountUserResponseType>;
   DeleteComapnyBranchResponseType: ResolverTypeWrapper<DeleteComapnyBranchResponseType>;
   District: ResolverTypeWrapper<District>;
   GetCompanyAccessType: ResolverTypeWrapper<GetCompanyAccessType>;
@@ -713,6 +726,7 @@ export type ResolversParentTypes = ResolversObject<{
   CreateRoleCompanyResponseType: CreateRoleCompanyResponseType;
   CreateUserResponseType: CreateUserResponseType;
   Date: Scalars['Date'];
+  DeleteAccountUserResponseType: DeleteAccountUserResponseType;
   DeleteComapnyBranchResponseType: DeleteComapnyBranchResponseType;
   District: District;
   GetCompanyAccessType: GetCompanyAccessType;
@@ -842,6 +856,12 @@ export interface DateScalarConfig extends GraphQLScalarTypeConfig<ResolversTypes
   name: 'Date';
 }
 
+export type DeleteAccountUserResponseTypeResolvers<ContextType = ApolloContext, ParentType extends ResolversParentTypes['DeleteAccountUserResponseType'] = ResolversParentTypes['DeleteAccountUserResponseType']> = ResolversObject<{
+  message?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  status?: Resolver<Maybe<ResolversTypes['Boolean']>, ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+}>;
+
 export type DeleteComapnyBranchResponseTypeResolvers<ContextType = ApolloContext, ParentType extends ResolversParentTypes['DeleteComapnyBranchResponseType'] = ResolversParentTypes['DeleteComapnyBranchResponseType']> = ResolversObject<{
   message?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   status?: Resolver<Maybe<ResolversTypes['Boolean']>, ParentType, ContextType>;
@@ -941,6 +961,7 @@ export type MutationResolvers<ContextType = ApolloContext, ParentType extends Re
   createAccountUser?: Resolver<Maybe<ResolversTypes['CreateUserResponseType']>, ParentType, ContextType, RequireFields<MutationCreateAccountUserArgs, 'data'>>;
   createAndUpdateComBarance?: Resolver<Maybe<ResolversTypes['CreateComapnyBranchResponseType']>, ParentType, ContextType, RequireFields<MutationCreateAndUpdateComBaranceArgs, 'data'>>;
   createRoleCompany?: Resolver<Maybe<ResolversTypes['CreateRoleCompanyResponseType']>, ParentType, ContextType, RequireFields<MutationCreateRoleCompanyArgs, 'data'>>;
+  deleteAccountUser?: Resolver<Maybe<ResolversTypes['DeleteAccountUserResponseType']>, ParentType, ContextType, RequireFields<MutationDeleteAccountUserArgs, 'id'>>;
   deleteComBarance?: Resolver<Maybe<ResolversTypes['DeleteComapnyBranchResponseType']>, ParentType, ContextType, RequireFields<MutationDeleteComBaranceArgs, 'id'>>;
   login?: Resolver<Maybe<ResolversTypes['LoginResponse']>, ParentType, ContextType, RequireFields<MutationLoginArgs, 'data'>>;
   refreshToken?: Resolver<Maybe<ResolversTypes['RefreshtokenResponseType']>, ParentType, ContextType>;
@@ -1145,6 +1166,7 @@ export type Resolvers<ContextType = ApolloContext> = ResolversObject<{
   CreateRoleCompanyResponseType?: CreateRoleCompanyResponseTypeResolvers<ContextType>;
   CreateUserResponseType?: CreateUserResponseTypeResolvers<ContextType>;
   Date?: GraphQLScalarType;
+  DeleteAccountUserResponseType?: DeleteAccountUserResponseTypeResolvers<ContextType>;
   DeleteComapnyBranchResponseType?: DeleteComapnyBranchResponseTypeResolvers<ContextType>;
   District?: DistrictResolvers<ContextType>;
   GetCompanyAccessType?: GetCompanyAccessTypeResolvers<ContextType>;

@@ -1,3 +1,4 @@
+import { Profile, User } from './../generated/graphql';
 import { Resolvers } from '../generated/graphql';
 import { createPassword } from '../utils/passwords';
 import gql from 'graphql-tag';
@@ -6,6 +7,8 @@ import { v4 } from 'uuid';
 import { composeResolvers } from '@graphql-tools/resolvers-composition';
 import { authenticate } from '../middleware/authenticatetoken';
 import { GraphQLError } from 'graphql';
+import { createContext } from 'vm';
+import { argsToArgsConfig } from 'graphql/type/definition';
 
 export const userTypedef = gql`
   type User {
@@ -77,6 +80,7 @@ export const userTypedef = gql`
     social_likedin: String
     social_line: String
     social_telegram: String
+    userId: String
   }
 
   #สร้าง Type ของการสร้าง account
@@ -167,6 +171,11 @@ export const userTypedef = gql`
     companyBranch: MeCompanyBranch
   }
 
+  type DeleteAccountUserResponseType {
+    message: String
+    status: Boolean
+  }
+
   type Query {
     users(userid: String): [User]
     verifyCompanycode(companyname: String!): Boolean
@@ -176,6 +185,7 @@ export const userTypedef = gql`
   type Mutation {
     createAccount(data: CreateAccountInput!): CreateCompanyResponseType
     createAccountUser(data: CreateAccountUserInput!): CreateUserResponseType
+    deleteAccountUser(id: ID!) : DeleteAccountUserResponseType
   }
 `;
 
@@ -501,6 +511,26 @@ const resolvers: Resolvers = {
         };
       }
     },
+    async deleteAccountUser(p, args, ctx) {
+      const deleteProfile = await ctx.prisma.profile.delete({
+        where: {
+          userId : args.id,
+          // User: {
+          //   id: args.id as 
+          // }
+        }
+      }
+      );
+      const deleteuser = await ctx.prisma.user.delete({
+        where: {
+          id: args.id,
+        }
+      })
+      return {
+        message: 'success',
+        status: true,
+      };
+    },
   },
 };
 
@@ -508,6 +538,7 @@ const resolversComposition = {
   'Query.users': [authenticate()],
   'Query.me': [authenticate()],
   'Mutation.createAccountUser': [authenticate()],
+  'Mutation.deleteAccountUser': [authenticate()],
 };
 
 export const userResolvers = composeResolvers(resolvers, resolversComposition);
