@@ -80,6 +80,7 @@ export const userTypedef = gql`
     social_likedin: String
     social_line: String
     social_telegram: String
+    user: User
     userId: String
   }
 
