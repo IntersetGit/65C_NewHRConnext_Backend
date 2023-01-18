@@ -10,7 +10,22 @@ import { GraphQLError } from 'graphql';
 import { createContext } from 'vm';
 import { argsToArgsConfig } from 'graphql/type/definition';
 
+
 export const userTypedef = gql`
+type MeCompanyBranch {
+    id: ID!
+    name: String
+    address: String
+    city: String
+    state: String
+    zip: String
+    country: String
+    createdAt: Date
+    updatedAt: Date
+    company: MecompanyType
+    companyId: String
+}
+
   type User {
     email: String!
     password: String!
@@ -360,7 +375,7 @@ const resolvers: Resolvers = {
           id: genbranchid,
           isMainbranch: true,
           company_type: 'สำนักงานใหญ่',
-          name: 'สำนักงานใหญ่',
+          name: args.data.company_name,
           city: args.data.company_city,
           address: args.data.company_address,
           zip: args.data.company_zip,
