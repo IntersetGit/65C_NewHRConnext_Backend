@@ -365,7 +365,12 @@ const resolvers: Resolvers = {
         where: {
           id: args.id as string
         }
-      })
+      });
+      //const deleteCompanyHead = await ctx.prisma.company.delete({
+       // where: { 
+
+       // }
+      //});
       return {
         message: 'success',
         status: true,
