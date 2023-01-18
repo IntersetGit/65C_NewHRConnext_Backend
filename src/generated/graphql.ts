@@ -430,6 +430,7 @@ export type QueryCompanyArgs = {
 
 
 export type QueryGetAllcompanyArgs = {
+  Sort?: InputMaybe<Sort>;
   name?: InputMaybe<Scalars['String']>;
 };
 
@@ -536,6 +537,11 @@ export type Role_Company = {
   users?: Maybe<Array<Maybe<User>>>;
 };
 
+export enum Sort {
+  Asc = 'asc',
+  Desc = 'desc'
+}
+
 export type UpdateRoleCompanyMangementType = {
   access: Array<Scalars['JSON']>;
   id: Scalars['ID'];
@@ -568,6 +574,7 @@ export type ValidateRoute = {
   currentBranch?: Maybe<ResponseBranchValidateRouteType>;
   path?: Maybe<Scalars['String']>;
   reAccess?: Maybe<Scalars['String']>;
+  reFresh?: Maybe<Scalars['String']>;
 };
 
 export type CreateCompanyBranch = {
@@ -716,6 +723,7 @@ export type ResolversTypes = ResolversObject<{
   ResponseCompany_Branch: ResolverTypeWrapper<ResponseCompany_Branch>;
   Role: ResolverTypeWrapper<Role>;
   Role_Company: ResolverTypeWrapper<Role_Company>;
+  Sort: Sort;
   String: ResolverTypeWrapper<Scalars['String']>;
   UpdateRoleCompanyMangementType: UpdateRoleCompanyMangementType;
   User: ResolverTypeWrapper<User>;
@@ -1173,6 +1181,7 @@ export type ValidateRouteResolvers<ContextType = ApolloContext, ParentType exten
   currentBranch?: Resolver<Maybe<ResolversTypes['ResponseBranchValidateRouteType']>, ParentType, ContextType>;
   path?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   reAccess?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  reFresh?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 }>;
 
