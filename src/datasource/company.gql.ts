@@ -7,8 +7,20 @@ import gql from 'graphql-tag';
 import { Resolvers } from 'src/generated/graphql';
 import { authenticate } from '../middleware/authenticatetoken';
 import { v4 } from 'uuid';
+import { orderBy } from 'lodash';
+import { assertCompositeType } from 'graphql';
 
 export const companyTypedef = gql`
+
+enum Sort {
+  asc
+  desc
+}
+
+input LinkOrderByInput {
+  company_type: Sort
+}
+
   type Company {
     id: ID!
     name: String
@@ -194,7 +206,7 @@ export const companyTypedef = gql`
 
   type Query {
     company(name: String): ResponseCompany
-    getAllcompany(name: String): [CompanyBranch]
+    getAllcompany:LinkOrderByInput,(name: String): [CompanyBranch]
     getownCompany: GetOwncompanytype
   }
 
@@ -276,9 +288,11 @@ const resolvers: Resolvers = {
           companyId: ctx.currentUser?.compayId,
           AND: {
             name: { contains: search }
-          }
+          },
         },
+        orderBy : {LinkOrderByInput}
       });
+      // rolesCompanyget.sort()
       return rolesCompanyget;
     }
   },

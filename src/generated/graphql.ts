@@ -430,7 +430,6 @@ export type QueryCompanyArgs = {
 
 
 export type QueryGetAllcompanyArgs = {
-  Sort?: InputMaybe<Sort>;
   name?: InputMaybe<Scalars['String']>;
 };
 
@@ -536,11 +535,6 @@ export type Role_Company = {
   status?: Maybe<Scalars['Int']>;
   users?: Maybe<Array<Maybe<User>>>;
 };
-
-export enum Sort {
-  Asc = 'asc',
-  Desc = 'desc'
-}
 
 export type UpdateRoleCompanyMangementType = {
   access: Array<Scalars['JSON']>;
@@ -723,7 +717,6 @@ export type ResolversTypes = ResolversObject<{
   ResponseCompany_Branch: ResolverTypeWrapper<ResponseCompany_Branch>;
   Role: ResolverTypeWrapper<Role>;
   Role_Company: ResolverTypeWrapper<Role_Company>;
-  Sort: Sort;
   String: ResolverTypeWrapper<Scalars['String']>;
   UpdateRoleCompanyMangementType: UpdateRoleCompanyMangementType;
   User: ResolverTypeWrapper<User>;
