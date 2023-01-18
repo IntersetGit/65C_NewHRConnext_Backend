@@ -31,6 +31,7 @@ export const providerTypedef = gql`
     path: String
     currentBranch: ResponseBranchValidateRouteType
     reAccess: String
+    reFresh: String
   }
 
   type RefreshtokenResponseType {
@@ -232,6 +233,9 @@ const resolvers: Resolvers = {
       const access_token = await jwt.sign(credential, secret, {
         expiresIn: expire,
       });
+      const refresh_token = await jwt.sign(credential,secret , {
+        expiresIn: '7d'
+      })
       // console.log(result?.company[0].branch[0]);
       return {
         acess: result?.isOwner
@@ -254,6 +258,7 @@ const resolvers: Resolvers = {
               companyName: result.companyBranch?.company?.name,
             },
         reAccess: access_token,
+        reFresh : refresh_token
       };
     },
   },
