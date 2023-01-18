@@ -1,4 +1,3 @@
-import { Prisma } from '@prisma/client';
 // import {  DecimalJsLike } from './../generated/client/index.d';
 import { Role_Company } from './../generated/graphql';
 import gql from 'graphql-tag';
@@ -53,9 +52,13 @@ export const roleCompanyTypedef = gql`
   }
 
   type Mutation {
-    createRoleCompany(data: createRoleCompanyGroup!): CreateRoleCompanyResponseType
-    updateRoleCompanyMangement(data: [UpdateRoleCompanyMangementType!]!): CreateRoleCompanyResponseType
-    deleteRoleCompany(id: ID!) : DeleteRoleCompanyRespnsetType
+    createRoleCompany(
+      data: createRoleCompanyGroup!
+    ): CreateRoleCompanyResponseType
+    updateRoleCompanyMangement(
+      data: [UpdateRoleCompanyMangementType!]!
+    ): CreateRoleCompanyResponseType
+    deleteRoleCompany(id: ID!): DeleteRoleCompanyRespnsetType
   }
 `;
 
@@ -143,14 +146,13 @@ const resolvers: Resolvers = {
 
     async deleteRoleCompany(p, args, ctx) {
       const deleteRole = await ctx.prisma.role_Company.delete({
-       where:{id: args.id}
-      })
+        where: { id: args.id },
+      });
       return {
         message: 'success',
         status: true,
       };
-    }
-      
+    },
   },
 };
 
