@@ -5,7 +5,7 @@
 
 import * as runtime from './runtime/index';
 declare const prisma: unique symbol
-export type PrismaPromise<A> = Promise<A> & {[prisma]: true}
+export interface PrismaPromise<A> extends Promise<A> {[prisma]: true}
 type UnwrapPromise<P extends any> = P extends Promise<infer R> ? R : P
 type UnwrapTuple<Tuple extends readonly unknown[]> = {
   [K in keyof Tuple]: K extends `${number}` ? Tuple[K] extends PrismaPromise<infer X> ? X : UnwrapPromise<Tuple[K]> : UnwrapPromise<Tuple[K]>
@@ -305,9 +305,9 @@ export class PrismaClient<
    * 
    * Read more in our [docs](https://www.prisma.io/docs/concepts/components/prisma-client/transactions).
    */
-  $transaction<P extends PrismaPromise<any>[]>(arg: [...P], options?: { isolationLevel?: Prisma.TransactionIsolationLevel }): Promise<UnwrapTuple<P>>;
+  $transaction<P extends PrismaPromise<any>[]>(arg: [...P], options?: { isolationLevel?: Prisma.TransactionIsolationLevel }): Promise<UnwrapTuple<P>>
 
-  $transaction<R>(fn: (prisma: Prisma.TransactionClient) => Promise<R>, options?: {maxWait?: number, timeout?: number, isolationLevel?: Prisma.TransactionIsolationLevel}): Promise<R>;
+  $transaction<R>(fn: (prisma: Prisma.TransactionClient) => Promise<R>, options?: { maxWait?: number, timeout?: number, isolationLevel?: Prisma.TransactionIsolationLevel }): Promise<R>
 
       /**
    * `prisma.company`: Exposes CRUD operations for the **Company** model.
@@ -449,8 +449,8 @@ export namespace Prisma {
 
 
   /**
-   * Prisma Client JS version: 4.7.1
-   * Query Engine version: 272861e07ab64f234d3ffc4094e32bd61775599c
+   * Prisma Client JS version: 4.9.0
+   * Query Engine version: ceb5c99003b99c9ee2c1d2e618e359c14aef2ea5
    */
   export type PrismaVersion = {
     client: string
@@ -814,19 +814,11 @@ export namespace Prisma {
 
   export type Keys<U extends Union> = U extends unknown ? keyof U : never
 
-  type Exact<A, W = unknown> = 
-  W extends unknown ? A extends Narrowable ? Cast<A, W> : Cast<
-  {[K in keyof A]: K extends keyof W ? Exact<A[K], W[K]> : never},
-  {[K in keyof W]: K extends keyof A ? Exact<A[K], W[K]> : W[K]}>
-  : never;
-
-  type Narrowable = string | number | boolean | bigint;
-
   type Cast<A, B> = A extends B ? A : B;
 
   export const type: unique symbol;
 
-  export function validator<V>(): <S>(select: Exact<S, V>) => S;
+  export function validator<V>(): <S>(select: runtime.Types.Utils.LegacyExact<S, V>) => S;
 
   /**
    * Used by group by
@@ -911,6 +903,7 @@ export namespace Prisma {
     db?: Datasource
   }
 
+  export type DefaultPrismaClient = PrismaClient
   export type RejectOnNotFound = boolean | ((error: Error) => Error)
   export type RejectPerModel = { [P in ModelName]?: RejectOnNotFound }
   export type RejectPerOperation =  { [P in "findUnique" | "findFirst"]?: RejectPerModel | RejectOnNotFound } 
@@ -1054,7 +1047,7 @@ export namespace Prisma {
   /**
    * `PrismaClient` proxy available in interactive transactions.
    */
-  export type TransactionClient = Omit<PrismaClient, '$connect' | '$disconnect' | '$on' | '$transaction' | '$use'>
+  export type TransactionClient = Omit<Prisma.DefaultPrismaClient, '$connect' | '$disconnect' | '$on' | '$transaction' | '$use'>
 
   export type Datasource = {
     url?: string
@@ -1102,8 +1095,7 @@ export namespace Prisma {
   export type CompanyCountOutputTypeArgs = {
     /**
      * Select specific fields to fetch from the CompanyCountOutputType
-     * 
-    **/
+     */
     select?: CompanyCountOutputTypeSelect | null
   }
 
@@ -1148,8 +1140,7 @@ export namespace Prisma {
   export type CompanyBranchCountOutputTypeArgs = {
     /**
      * Select specific fields to fetch from the CompanyBranchCountOutputType
-     * 
-    **/
+     */
     select?: CompanyBranchCountOutputTypeSelect | null
   }
 
@@ -1192,8 +1183,7 @@ export namespace Prisma {
   export type UserCountOutputTypeArgs = {
     /**
      * Select specific fields to fetch from the UserCountOutputType
-     * 
-    **/
+     */
     select?: UserCountOutputTypeSelect | null
   }
 
@@ -1236,8 +1226,7 @@ export namespace Prisma {
   export type RoleCountOutputTypeArgs = {
     /**
      * Select specific fields to fetch from the RoleCountOutputType
-     * 
-    **/
+     */
     select?: RoleCountOutputTypeSelect | null
   }
 
@@ -1280,8 +1269,7 @@ export namespace Prisma {
   export type Role_CompanyCountOutputTypeArgs = {
     /**
      * Select specific fields to fetch from the Role_CompanyCountOutputType
-     * 
-    **/
+     */
     select?: Role_CompanyCountOutputTypeSelect | null
   }
 
@@ -1324,8 +1312,7 @@ export namespace Prisma {
   export type ProvinceCountOutputTypeArgs = {
     /**
      * Select specific fields to fetch from the ProvinceCountOutputType
-     * 
-    **/
+     */
     select?: ProvinceCountOutputTypeSelect | null
   }
 
@@ -1368,8 +1355,7 @@ export namespace Prisma {
   export type DistrictCountOutputTypeArgs = {
     /**
      * Select specific fields to fetch from the DistrictCountOutputType
-     * 
-    **/
+     */
     select?: DistrictCountOutputTypeSelect | null
   }
 
@@ -1492,36 +1478,31 @@ export namespace Prisma {
   export type CompanyAggregateArgs = {
     /**
      * Filter which Company to aggregate.
-     * 
-    **/
+     */
     where?: CompanyWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
      * 
      * Determine the order of Companies to fetch.
-     * 
-    **/
+     */
     orderBy?: Enumerable<CompanyOrderByWithRelationInput>
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      * 
      * Sets the start position
-     * 
-    **/
+     */
     cursor?: CompanyWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
      * Take `±n` Companies from the position of the cursor.
-     * 
-    **/
+     */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
      * Skip the first `n` Companies.
-     * 
-    **/
+     */
     skip?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
@@ -1569,7 +1550,7 @@ export namespace Prisma {
   export type CompanyGroupByArgs = {
     where?: CompanyWhereInput
     orderBy?: Enumerable<CompanyOrderByWithAggregationInput>
-    by: Array<CompanyScalarFieldEnum>
+    by: CompanyScalarFieldEnum[]
     having?: CompanyScalarWhereWithAggregatesInput
     take?: number
     skip?: number
@@ -1625,16 +1606,16 @@ export namespace Prisma {
     updatedAt?: boolean
     ownerId?: boolean
     owner?: boolean | UserArgs
-    branch?: boolean | CompanyBranchFindManyArgs
+    branch?: boolean | Company$branchArgs
     _count?: boolean | CompanyCountOutputTypeArgs
   }
 
 
   export type CompanyInclude = {
     owner?: boolean | UserArgs
-    branch?: boolean | CompanyBranchFindManyArgs
+    branch?: boolean | Company$branchArgs
     _count?: boolean | CompanyCountOutputTypeArgs
-  } 
+  }
 
   export type CompanyGetPayload<S extends boolean | null | undefined | CompanyArgs> =
     S extends { select: any, include: any } ? 'Please either choose `select` or `include`' :
@@ -1657,13 +1638,13 @@ export namespace Prisma {
       : Company
 
 
-  type CompanyCountArgs = Merge<
+  type CompanyCountArgs = 
     Omit<CompanyFindManyArgs, 'select' | 'include'> & {
       select?: CompanyCountAggregateInputType | true
     }
-  >
 
   export interface CompanyDelegate<GlobalRejectSettings extends Prisma.RejectOnNotFound | Prisma.RejectPerOperation | false | undefined> {
+
     /**
      * Find zero or one Company that matches the filter.
      * @param {CompanyFindUniqueArgs} args - Arguments to find a Company
@@ -2028,7 +2009,7 @@ export namespace Prisma {
 
     owner<T extends UserArgs= {}>(args?: Subset<T, UserArgs>): Prisma__UserClient<UserGetPayload<T> | Null>;
 
-    branch<T extends CompanyBranchFindManyArgs= {}>(args?: Subset<T, CompanyBranchFindManyArgs>): PrismaPromise<Array<CompanyBranchGetPayload<T>>| Null>;
+    branch<T extends Company$branchArgs= {}>(args?: Subset<T, Company$branchArgs>): PrismaPromise<Array<CompanyBranchGetPayload<T>>| Null>;
 
     private get _document();
     /**
@@ -2063,23 +2044,20 @@ export namespace Prisma {
   export type CompanyFindUniqueArgsBase = {
     /**
      * Select specific fields to fetch from the Company
-     * 
-    **/
+     */
     select?: CompanySelect | null
     /**
      * Choose, which related nodes to fetch as well.
-     * 
-    **/
+     */
     include?: CompanyInclude | null
     /**
      * Filter, which Company to fetch.
-     * 
-    **/
+     */
     where: CompanyWhereUniqueInput
   }
 
   /**
-   * Company: findUnique
+   * Company findUnique
    */
   export interface CompanyFindUniqueArgs extends CompanyFindUniqueArgsBase {
    /**
@@ -2096,18 +2074,15 @@ export namespace Prisma {
   export type CompanyFindUniqueOrThrowArgs = {
     /**
      * Select specific fields to fetch from the Company
-     * 
-    **/
+     */
     select?: CompanySelect | null
     /**
      * Choose, which related nodes to fetch as well.
-     * 
-    **/
+     */
     include?: CompanyInclude | null
     /**
      * Filter, which Company to fetch.
-     * 
-    **/
+     */
     where: CompanyWhereUniqueInput
   }
 
@@ -2118,58 +2093,50 @@ export namespace Prisma {
   export type CompanyFindFirstArgsBase = {
     /**
      * Select specific fields to fetch from the Company
-     * 
-    **/
+     */
     select?: CompanySelect | null
     /**
      * Choose, which related nodes to fetch as well.
-     * 
-    **/
+     */
     include?: CompanyInclude | null
     /**
      * Filter, which Company to fetch.
-     * 
-    **/
+     */
     where?: CompanyWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
      * 
      * Determine the order of Companies to fetch.
-     * 
-    **/
+     */
     orderBy?: Enumerable<CompanyOrderByWithRelationInput>
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      * 
      * Sets the position for searching for Companies.
-     * 
-    **/
+     */
     cursor?: CompanyWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
      * Take `±n` Companies from the position of the cursor.
-     * 
-    **/
+     */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
      * Skip the first `n` Companies.
-     * 
-    **/
+     */
     skip?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
      * 
      * Filter by unique combinations of Companies.
-     * 
-    **/
+     */
     distinct?: Enumerable<CompanyScalarFieldEnum>
   }
 
   /**
-   * Company: findFirst
+   * Company findFirst
    */
   export interface CompanyFindFirstArgs extends CompanyFindFirstArgsBase {
    /**
@@ -2186,53 +2153,45 @@ export namespace Prisma {
   export type CompanyFindFirstOrThrowArgs = {
     /**
      * Select specific fields to fetch from the Company
-     * 
-    **/
+     */
     select?: CompanySelect | null
     /**
      * Choose, which related nodes to fetch as well.
-     * 
-    **/
+     */
     include?: CompanyInclude | null
     /**
      * Filter, which Company to fetch.
-     * 
-    **/
+     */
     where?: CompanyWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
      * 
      * Determine the order of Companies to fetch.
-     * 
-    **/
+     */
     orderBy?: Enumerable<CompanyOrderByWithRelationInput>
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      * 
      * Sets the position for searching for Companies.
-     * 
-    **/
+     */
     cursor?: CompanyWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
      * Take `±n` Companies from the position of the cursor.
-     * 
-    **/
+     */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
      * Skip the first `n` Companies.
-     * 
-    **/
+     */
     skip?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
      * 
      * Filter by unique combinations of Companies.
-     * 
-    **/
+     */
     distinct?: Enumerable<CompanyScalarFieldEnum>
   }
 
@@ -2243,46 +2202,39 @@ export namespace Prisma {
   export type CompanyFindManyArgs = {
     /**
      * Select specific fields to fetch from the Company
-     * 
-    **/
+     */
     select?: CompanySelect | null
     /**
      * Choose, which related nodes to fetch as well.
-     * 
-    **/
+     */
     include?: CompanyInclude | null
     /**
      * Filter, which Companies to fetch.
-     * 
-    **/
+     */
     where?: CompanyWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
      * 
      * Determine the order of Companies to fetch.
-     * 
-    **/
+     */
     orderBy?: Enumerable<CompanyOrderByWithRelationInput>
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      * 
      * Sets the position for listing Companies.
-     * 
-    **/
+     */
     cursor?: CompanyWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
      * Take `±n` Companies from the position of the cursor.
-     * 
-    **/
+     */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
      * Skip the first `n` Companies.
-     * 
-    **/
+     */
     skip?: number
     distinct?: Enumerable<CompanyScalarFieldEnum>
   }
@@ -2294,18 +2246,15 @@ export namespace Prisma {
   export type CompanyCreateArgs = {
     /**
      * Select specific fields to fetch from the Company
-     * 
-    **/
+     */
     select?: CompanySelect | null
     /**
      * Choose, which related nodes to fetch as well.
-     * 
-    **/
+     */
     include?: CompanyInclude | null
     /**
      * The data needed to create a Company.
-     * 
-    **/
+     */
     data: XOR<CompanyCreateInput, CompanyUncheckedCreateInput>
   }
 
@@ -2316,8 +2265,7 @@ export namespace Prisma {
   export type CompanyCreateManyArgs = {
     /**
      * The data used to create many Companies.
-     * 
-    **/
+     */
     data: Enumerable<CompanyCreateManyInput>
     skipDuplicates?: boolean
   }
@@ -2329,23 +2277,19 @@ export namespace Prisma {
   export type CompanyUpdateArgs = {
     /**
      * Select specific fields to fetch from the Company
-     * 
-    **/
+     */
     select?: CompanySelect | null
     /**
      * Choose, which related nodes to fetch as well.
-     * 
-    **/
+     */
     include?: CompanyInclude | null
     /**
      * The data needed to update a Company.
-     * 
-    **/
+     */
     data: XOR<CompanyUpdateInput, CompanyUncheckedUpdateInput>
     /**
      * Choose, which Company to update.
-     * 
-    **/
+     */
     where: CompanyWhereUniqueInput
   }
 
@@ -2356,13 +2300,11 @@ export namespace Prisma {
   export type CompanyUpdateManyArgs = {
     /**
      * The data used to update Companies.
-     * 
-    **/
+     */
     data: XOR<CompanyUpdateManyMutationInput, CompanyUncheckedUpdateManyInput>
     /**
      * Filter which Companies to update
-     * 
-    **/
+     */
     where?: CompanyWhereInput
   }
 
@@ -2373,28 +2315,23 @@ export namespace Prisma {
   export type CompanyUpsertArgs = {
     /**
      * Select specific fields to fetch from the Company
-     * 
-    **/
+     */
     select?: CompanySelect | null
     /**
      * Choose, which related nodes to fetch as well.
-     * 
-    **/
+     */
     include?: CompanyInclude | null
     /**
      * The filter to search for the Company to update in case it exists.
-     * 
-    **/
+     */
     where: CompanyWhereUniqueInput
     /**
      * In case the Company found by the `where` argument doesn't exist, create a new Company with this data.
-     * 
-    **/
+     */
     create: XOR<CompanyCreateInput, CompanyUncheckedCreateInput>
     /**
      * In case the Company was found with the provided `where` argument, update it with this data.
-     * 
-    **/
+     */
     update: XOR<CompanyUpdateInput, CompanyUncheckedUpdateInput>
   }
 
@@ -2405,18 +2342,15 @@ export namespace Prisma {
   export type CompanyDeleteArgs = {
     /**
      * Select specific fields to fetch from the Company
-     * 
-    **/
+     */
     select?: CompanySelect | null
     /**
      * Choose, which related nodes to fetch as well.
-     * 
-    **/
+     */
     include?: CompanyInclude | null
     /**
      * Filter which Company to delete.
-     * 
-    **/
+     */
     where: CompanyWhereUniqueInput
   }
 
@@ -2427,9 +2361,29 @@ export namespace Prisma {
   export type CompanyDeleteManyArgs = {
     /**
      * Filter which Companies to delete
-     * 
-    **/
+     */
     where?: CompanyWhereInput
+  }
+
+
+  /**
+   * Company.branch
+   */
+  export type Company$branchArgs = {
+    /**
+     * Select specific fields to fetch from the CompanyBranch
+     */
+    select?: CompanyBranchSelect | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: CompanyBranchInclude | null
+    where?: CompanyBranchWhereInput
+    orderBy?: Enumerable<CompanyBranchOrderByWithRelationInput>
+    cursor?: CompanyBranchWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: Enumerable<CompanyBranchScalarFieldEnum>
   }
 
 
@@ -2439,13 +2393,11 @@ export namespace Prisma {
   export type CompanyArgs = {
     /**
      * Select specific fields to fetch from the Company
-     * 
-    **/
+     */
     select?: CompanySelect | null
     /**
      * Choose, which related nodes to fetch as well.
-     * 
-    **/
+     */
     include?: CompanyInclude | null
   }
 
@@ -2642,36 +2594,31 @@ export namespace Prisma {
   export type CompanyBranchAggregateArgs = {
     /**
      * Filter which CompanyBranch to aggregate.
-     * 
-    **/
+     */
     where?: CompanyBranchWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
      * 
      * Determine the order of CompanyBranches to fetch.
-     * 
-    **/
+     */
     orderBy?: Enumerable<CompanyBranchOrderByWithRelationInput>
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      * 
      * Sets the start position
-     * 
-    **/
+     */
     cursor?: CompanyBranchWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
      * Take `±n` CompanyBranches from the position of the cursor.
-     * 
-    **/
+     */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
      * Skip the first `n` CompanyBranches.
-     * 
-    **/
+     */
     skip?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
@@ -2707,7 +2654,7 @@ export namespace Prisma {
   export type CompanyBranchGroupByArgs = {
     where?: CompanyBranchWhereInput
     orderBy?: Enumerable<CompanyBranchOrderByWithAggregationInput>
-    by: Array<CompanyBranchScalarFieldEnum>
+    by: CompanyBranchScalarFieldEnum[]
     having?: CompanyBranchScalarWhereWithAggregatesInput
     take?: number
     skip?: number
@@ -2791,18 +2738,18 @@ export namespace Prisma {
     updatedAt?: boolean
     company?: boolean | CompanyArgs
     companyId?: boolean
-    users?: boolean | UserFindManyArgs
-    Role_Company?: boolean | Role_CompanyFindManyArgs
+    users?: boolean | CompanyBranch$usersArgs
+    Role_Company?: boolean | CompanyBranch$Role_CompanyArgs
     _count?: boolean | CompanyBranchCountOutputTypeArgs
   }
 
 
   export type CompanyBranchInclude = {
     company?: boolean | CompanyArgs
-    users?: boolean | UserFindManyArgs
-    Role_Company?: boolean | Role_CompanyFindManyArgs
+    users?: boolean | CompanyBranch$usersArgs
+    Role_Company?: boolean | CompanyBranch$Role_CompanyArgs
     _count?: boolean | CompanyBranchCountOutputTypeArgs
-  } 
+  }
 
   export type CompanyBranchGetPayload<S extends boolean | null | undefined | CompanyBranchArgs> =
     S extends { select: any, include: any } ? 'Please either choose `select` or `include`' :
@@ -2827,13 +2774,13 @@ export namespace Prisma {
       : CompanyBranch
 
 
-  type CompanyBranchCountArgs = Merge<
+  type CompanyBranchCountArgs = 
     Omit<CompanyBranchFindManyArgs, 'select' | 'include'> & {
       select?: CompanyBranchCountAggregateInputType | true
     }
-  >
 
   export interface CompanyBranchDelegate<GlobalRejectSettings extends Prisma.RejectOnNotFound | Prisma.RejectPerOperation | false | undefined> {
+
     /**
      * Find zero or one CompanyBranch that matches the filter.
      * @param {CompanyBranchFindUniqueArgs} args - Arguments to find a CompanyBranch
@@ -3198,9 +3145,9 @@ export namespace Prisma {
 
     company<T extends CompanyArgs= {}>(args?: Subset<T, CompanyArgs>): Prisma__CompanyClient<CompanyGetPayload<T> | Null>;
 
-    users<T extends UserFindManyArgs= {}>(args?: Subset<T, UserFindManyArgs>): PrismaPromise<Array<UserGetPayload<T>>| Null>;
+    users<T extends CompanyBranch$usersArgs= {}>(args?: Subset<T, CompanyBranch$usersArgs>): PrismaPromise<Array<UserGetPayload<T>>| Null>;
 
-    Role_Company<T extends Role_CompanyFindManyArgs= {}>(args?: Subset<T, Role_CompanyFindManyArgs>): PrismaPromise<Array<Role_CompanyGetPayload<T>>| Null>;
+    Role_Company<T extends CompanyBranch$Role_CompanyArgs= {}>(args?: Subset<T, CompanyBranch$Role_CompanyArgs>): PrismaPromise<Array<Role_CompanyGetPayload<T>>| Null>;
 
     private get _document();
     /**
@@ -3235,23 +3182,20 @@ export namespace Prisma {
   export type CompanyBranchFindUniqueArgsBase = {
     /**
      * Select specific fields to fetch from the CompanyBranch
-     * 
-    **/
+     */
     select?: CompanyBranchSelect | null
     /**
      * Choose, which related nodes to fetch as well.
-     * 
-    **/
+     */
     include?: CompanyBranchInclude | null
     /**
      * Filter, which CompanyBranch to fetch.
-     * 
-    **/
+     */
     where: CompanyBranchWhereUniqueInput
   }
 
   /**
-   * CompanyBranch: findUnique
+   * CompanyBranch findUnique
    */
   export interface CompanyBranchFindUniqueArgs extends CompanyBranchFindUniqueArgsBase {
    /**
@@ -3268,18 +3212,15 @@ export namespace Prisma {
   export type CompanyBranchFindUniqueOrThrowArgs = {
     /**
      * Select specific fields to fetch from the CompanyBranch
-     * 
-    **/
+     */
     select?: CompanyBranchSelect | null
     /**
      * Choose, which related nodes to fetch as well.
-     * 
-    **/
+     */
     include?: CompanyBranchInclude | null
     /**
      * Filter, which CompanyBranch to fetch.
-     * 
-    **/
+     */
     where: CompanyBranchWhereUniqueInput
   }
 
@@ -3290,58 +3231,50 @@ export namespace Prisma {
   export type CompanyBranchFindFirstArgsBase = {
     /**
      * Select specific fields to fetch from the CompanyBranch
-     * 
-    **/
+     */
     select?: CompanyBranchSelect | null
     /**
      * Choose, which related nodes to fetch as well.
-     * 
-    **/
+     */
     include?: CompanyBranchInclude | null
     /**
      * Filter, which CompanyBranch to fetch.
-     * 
-    **/
+     */
     where?: CompanyBranchWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
      * 
      * Determine the order of CompanyBranches to fetch.
-     * 
-    **/
+     */
     orderBy?: Enumerable<CompanyBranchOrderByWithRelationInput>
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      * 
      * Sets the position for searching for CompanyBranches.
-     * 
-    **/
+     */
     cursor?: CompanyBranchWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
      * Take `±n` CompanyBranches from the position of the cursor.
-     * 
-    **/
+     */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
      * Skip the first `n` CompanyBranches.
-     * 
-    **/
+     */
     skip?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
      * 
      * Filter by unique combinations of CompanyBranches.
-     * 
-    **/
+     */
     distinct?: Enumerable<CompanyBranchScalarFieldEnum>
   }
 
   /**
-   * CompanyBranch: findFirst
+   * CompanyBranch findFirst
    */
   export interface CompanyBranchFindFirstArgs extends CompanyBranchFindFirstArgsBase {
    /**
@@ -3358,53 +3291,45 @@ export namespace Prisma {
   export type CompanyBranchFindFirstOrThrowArgs = {
     /**
      * Select specific fields to fetch from the CompanyBranch
-     * 
-    **/
+     */
     select?: CompanyBranchSelect | null
     /**
      * Choose, which related nodes to fetch as well.
-     * 
-    **/
+     */
     include?: CompanyBranchInclude | null
     /**
      * Filter, which CompanyBranch to fetch.
-     * 
-    **/
+     */
     where?: CompanyBranchWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
      * 
      * Determine the order of CompanyBranches to fetch.
-     * 
-    **/
+     */
     orderBy?: Enumerable<CompanyBranchOrderByWithRelationInput>
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      * 
      * Sets the position for searching for CompanyBranches.
-     * 
-    **/
+     */
     cursor?: CompanyBranchWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
      * Take `±n` CompanyBranches from the position of the cursor.
-     * 
-    **/
+     */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
      * Skip the first `n` CompanyBranches.
-     * 
-    **/
+     */
     skip?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
      * 
      * Filter by unique combinations of CompanyBranches.
-     * 
-    **/
+     */
     distinct?: Enumerable<CompanyBranchScalarFieldEnum>
   }
 
@@ -3415,46 +3340,39 @@ export namespace Prisma {
   export type CompanyBranchFindManyArgs = {
     /**
      * Select specific fields to fetch from the CompanyBranch
-     * 
-    **/
+     */
     select?: CompanyBranchSelect | null
     /**
      * Choose, which related nodes to fetch as well.
-     * 
-    **/
+     */
     include?: CompanyBranchInclude | null
     /**
      * Filter, which CompanyBranches to fetch.
-     * 
-    **/
+     */
     where?: CompanyBranchWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
      * 
      * Determine the order of CompanyBranches to fetch.
-     * 
-    **/
+     */
     orderBy?: Enumerable<CompanyBranchOrderByWithRelationInput>
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      * 
      * Sets the position for listing CompanyBranches.
-     * 
-    **/
+     */
     cursor?: CompanyBranchWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
      * Take `±n` CompanyBranches from the position of the cursor.
-     * 
-    **/
+     */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
      * Skip the first `n` CompanyBranches.
-     * 
-    **/
+     */
     skip?: number
     distinct?: Enumerable<CompanyBranchScalarFieldEnum>
   }
@@ -3466,18 +3384,15 @@ export namespace Prisma {
   export type CompanyBranchCreateArgs = {
     /**
      * Select specific fields to fetch from the CompanyBranch
-     * 
-    **/
+     */
     select?: CompanyBranchSelect | null
     /**
      * Choose, which related nodes to fetch as well.
-     * 
-    **/
+     */
     include?: CompanyBranchInclude | null
     /**
      * The data needed to create a CompanyBranch.
-     * 
-    **/
+     */
     data: XOR<CompanyBranchCreateInput, CompanyBranchUncheckedCreateInput>
   }
 
@@ -3488,8 +3403,7 @@ export namespace Prisma {
   export type CompanyBranchCreateManyArgs = {
     /**
      * The data used to create many CompanyBranches.
-     * 
-    **/
+     */
     data: Enumerable<CompanyBranchCreateManyInput>
     skipDuplicates?: boolean
   }
@@ -3501,23 +3415,19 @@ export namespace Prisma {
   export type CompanyBranchUpdateArgs = {
     /**
      * Select specific fields to fetch from the CompanyBranch
-     * 
-    **/
+     */
     select?: CompanyBranchSelect | null
     /**
      * Choose, which related nodes to fetch as well.
-     * 
-    **/
+     */
     include?: CompanyBranchInclude | null
     /**
      * The data needed to update a CompanyBranch.
-     * 
-    **/
+     */
     data: XOR<CompanyBranchUpdateInput, CompanyBranchUncheckedUpdateInput>
     /**
      * Choose, which CompanyBranch to update.
-     * 
-    **/
+     */
     where: CompanyBranchWhereUniqueInput
   }
 
@@ -3528,13 +3438,11 @@ export namespace Prisma {
   export type CompanyBranchUpdateManyArgs = {
     /**
      * The data used to update CompanyBranches.
-     * 
-    **/
+     */
     data: XOR<CompanyBranchUpdateManyMutationInput, CompanyBranchUncheckedUpdateManyInput>
     /**
      * Filter which CompanyBranches to update
-     * 
-    **/
+     */
     where?: CompanyBranchWhereInput
   }
 
@@ -3545,28 +3453,23 @@ export namespace Prisma {
   export type CompanyBranchUpsertArgs = {
     /**
      * Select specific fields to fetch from the CompanyBranch
-     * 
-    **/
+     */
     select?: CompanyBranchSelect | null
     /**
      * Choose, which related nodes to fetch as well.
-     * 
-    **/
+     */
     include?: CompanyBranchInclude | null
     /**
      * The filter to search for the CompanyBranch to update in case it exists.
-     * 
-    **/
+     */
     where: CompanyBranchWhereUniqueInput
     /**
      * In case the CompanyBranch found by the `where` argument doesn't exist, create a new CompanyBranch with this data.
-     * 
-    **/
+     */
     create: XOR<CompanyBranchCreateInput, CompanyBranchUncheckedCreateInput>
     /**
      * In case the CompanyBranch was found with the provided `where` argument, update it with this data.
-     * 
-    **/
+     */
     update: XOR<CompanyBranchUpdateInput, CompanyBranchUncheckedUpdateInput>
   }
 
@@ -3577,18 +3480,15 @@ export namespace Prisma {
   export type CompanyBranchDeleteArgs = {
     /**
      * Select specific fields to fetch from the CompanyBranch
-     * 
-    **/
+     */
     select?: CompanyBranchSelect | null
     /**
      * Choose, which related nodes to fetch as well.
-     * 
-    **/
+     */
     include?: CompanyBranchInclude | null
     /**
      * Filter which CompanyBranch to delete.
-     * 
-    **/
+     */
     where: CompanyBranchWhereUniqueInput
   }
 
@@ -3599,9 +3499,50 @@ export namespace Prisma {
   export type CompanyBranchDeleteManyArgs = {
     /**
      * Filter which CompanyBranches to delete
-     * 
-    **/
+     */
     where?: CompanyBranchWhereInput
+  }
+
+
+  /**
+   * CompanyBranch.users
+   */
+  export type CompanyBranch$usersArgs = {
+    /**
+     * Select specific fields to fetch from the User
+     */
+    select?: UserSelect | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: UserInclude | null
+    where?: UserWhereInput
+    orderBy?: Enumerable<UserOrderByWithRelationInput>
+    cursor?: UserWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: Enumerable<UserScalarFieldEnum>
+  }
+
+
+  /**
+   * CompanyBranch.Role_Company
+   */
+  export type CompanyBranch$Role_CompanyArgs = {
+    /**
+     * Select specific fields to fetch from the Role_Company
+     */
+    select?: Role_CompanySelect | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: Role_CompanyInclude | null
+    where?: Role_CompanyWhereInput
+    orderBy?: Enumerable<Role_CompanyOrderByWithRelationInput>
+    cursor?: Role_CompanyWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: Enumerable<Role_CompanyScalarFieldEnum>
   }
 
 
@@ -3611,13 +3552,11 @@ export namespace Prisma {
   export type CompanyBranchArgs = {
     /**
      * Select specific fields to fetch from the CompanyBranch
-     * 
-    **/
+     */
     select?: CompanyBranchSelect | null
     /**
      * Choose, which related nodes to fetch as well.
-     * 
-    **/
+     */
     include?: CompanyBranchInclude | null
   }
 
@@ -3922,36 +3861,31 @@ export namespace Prisma {
   export type ProfileAggregateArgs = {
     /**
      * Filter which Profile to aggregate.
-     * 
-    **/
+     */
     where?: ProfileWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
      * 
      * Determine the order of Profiles to fetch.
-     * 
-    **/
+     */
     orderBy?: Enumerable<ProfileOrderByWithRelationInput>
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      * 
      * Sets the start position
-     * 
-    **/
+     */
     cursor?: ProfileWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
      * Take `±n` Profiles from the position of the cursor.
-     * 
-    **/
+     */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
      * Skip the first `n` Profiles.
-     * 
-    **/
+     */
     skip?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
@@ -3987,7 +3921,7 @@ export namespace Prisma {
   export type ProfileGroupByArgs = {
     where?: ProfileWhereInput
     orderBy?: Enumerable<ProfileOrderByWithAggregationInput>
-    by: Array<ProfileScalarFieldEnum>
+    by: ProfileScalarFieldEnum[]
     having?: ProfileScalarWhereWithAggregatesInput
     take?: number
     skip?: number
@@ -4112,7 +4046,7 @@ export namespace Prisma {
 
   export type ProfileInclude = {
     user?: boolean | UserArgs
-  } 
+  }
 
   export type ProfileGetPayload<S extends boolean | null | undefined | ProfileArgs> =
     S extends { select: any, include: any } ? 'Please either choose `select` or `include`' :
@@ -4131,13 +4065,13 @@ export namespace Prisma {
       : Profile
 
 
-  type ProfileCountArgs = Merge<
+  type ProfileCountArgs = 
     Omit<ProfileFindManyArgs, 'select' | 'include'> & {
       select?: ProfileCountAggregateInputType | true
     }
-  >
 
   export interface ProfileDelegate<GlobalRejectSettings extends Prisma.RejectOnNotFound | Prisma.RejectPerOperation | false | undefined> {
+
     /**
      * Find zero or one Profile that matches the filter.
      * @param {ProfileFindUniqueArgs} args - Arguments to find a Profile
@@ -4535,23 +4469,20 @@ export namespace Prisma {
   export type ProfileFindUniqueArgsBase = {
     /**
      * Select specific fields to fetch from the Profile
-     * 
-    **/
+     */
     select?: ProfileSelect | null
     /**
      * Choose, which related nodes to fetch as well.
-     * 
-    **/
+     */
     include?: ProfileInclude | null
     /**
      * Filter, which Profile to fetch.
-     * 
-    **/
+     */
     where: ProfileWhereUniqueInput
   }
 
   /**
-   * Profile: findUnique
+   * Profile findUnique
    */
   export interface ProfileFindUniqueArgs extends ProfileFindUniqueArgsBase {
    /**
@@ -4568,18 +4499,15 @@ export namespace Prisma {
   export type ProfileFindUniqueOrThrowArgs = {
     /**
      * Select specific fields to fetch from the Profile
-     * 
-    **/
+     */
     select?: ProfileSelect | null
     /**
      * Choose, which related nodes to fetch as well.
-     * 
-    **/
+     */
     include?: ProfileInclude | null
     /**
      * Filter, which Profile to fetch.
-     * 
-    **/
+     */
     where: ProfileWhereUniqueInput
   }
 
@@ -4590,58 +4518,50 @@ export namespace Prisma {
   export type ProfileFindFirstArgsBase = {
     /**
      * Select specific fields to fetch from the Profile
-     * 
-    **/
+     */
     select?: ProfileSelect | null
     /**
      * Choose, which related nodes to fetch as well.
-     * 
-    **/
+     */
     include?: ProfileInclude | null
     /**
      * Filter, which Profile to fetch.
-     * 
-    **/
+     */
     where?: ProfileWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
      * 
      * Determine the order of Profiles to fetch.
-     * 
-    **/
+     */
     orderBy?: Enumerable<ProfileOrderByWithRelationInput>
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      * 
      * Sets the position for searching for Profiles.
-     * 
-    **/
+     */
     cursor?: ProfileWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
      * Take `±n` Profiles from the position of the cursor.
-     * 
-    **/
+     */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
      * Skip the first `n` Profiles.
-     * 
-    **/
+     */
     skip?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
      * 
      * Filter by unique combinations of Profiles.
-     * 
-    **/
+     */
     distinct?: Enumerable<ProfileScalarFieldEnum>
   }
 
   /**
-   * Profile: findFirst
+   * Profile findFirst
    */
   export interface ProfileFindFirstArgs extends ProfileFindFirstArgsBase {
    /**
@@ -4658,53 +4578,45 @@ export namespace Prisma {
   export type ProfileFindFirstOrThrowArgs = {
     /**
      * Select specific fields to fetch from the Profile
-     * 
-    **/
+     */
     select?: ProfileSelect | null
     /**
      * Choose, which related nodes to fetch as well.
-     * 
-    **/
+     */
     include?: ProfileInclude | null
     /**
      * Filter, which Profile to fetch.
-     * 
-    **/
+     */
     where?: ProfileWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
      * 
      * Determine the order of Profiles to fetch.
-     * 
-    **/
+     */
     orderBy?: Enumerable<ProfileOrderByWithRelationInput>
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      * 
      * Sets the position for searching for Profiles.
-     * 
-    **/
+     */
     cursor?: ProfileWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
      * Take `±n` Profiles from the position of the cursor.
-     * 
-    **/
+     */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
      * Skip the first `n` Profiles.
-     * 
-    **/
+     */
     skip?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
      * 
      * Filter by unique combinations of Profiles.
-     * 
-    **/
+     */
     distinct?: Enumerable<ProfileScalarFieldEnum>
   }
 
@@ -4715,46 +4627,39 @@ export namespace Prisma {
   export type ProfileFindManyArgs = {
     /**
      * Select specific fields to fetch from the Profile
-     * 
-    **/
+     */
     select?: ProfileSelect | null
     /**
      * Choose, which related nodes to fetch as well.
-     * 
-    **/
+     */
     include?: ProfileInclude | null
     /**
      * Filter, which Profiles to fetch.
-     * 
-    **/
+     */
     where?: ProfileWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
      * 
      * Determine the order of Profiles to fetch.
-     * 
-    **/
+     */
     orderBy?: Enumerable<ProfileOrderByWithRelationInput>
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      * 
      * Sets the position for listing Profiles.
-     * 
-    **/
+     */
     cursor?: ProfileWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
      * Take `±n` Profiles from the position of the cursor.
-     * 
-    **/
+     */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
      * Skip the first `n` Profiles.
-     * 
-    **/
+     */
     skip?: number
     distinct?: Enumerable<ProfileScalarFieldEnum>
   }
@@ -4766,18 +4671,15 @@ export namespace Prisma {
   export type ProfileCreateArgs = {
     /**
      * Select specific fields to fetch from the Profile
-     * 
-    **/
+     */
     select?: ProfileSelect | null
     /**
      * Choose, which related nodes to fetch as well.
-     * 
-    **/
+     */
     include?: ProfileInclude | null
     /**
      * The data needed to create a Profile.
-     * 
-    **/
+     */
     data: XOR<ProfileCreateInput, ProfileUncheckedCreateInput>
   }
 
@@ -4788,8 +4690,7 @@ export namespace Prisma {
   export type ProfileCreateManyArgs = {
     /**
      * The data used to create many Profiles.
-     * 
-    **/
+     */
     data: Enumerable<ProfileCreateManyInput>
     skipDuplicates?: boolean
   }
@@ -4801,23 +4702,19 @@ export namespace Prisma {
   export type ProfileUpdateArgs = {
     /**
      * Select specific fields to fetch from the Profile
-     * 
-    **/
+     */
     select?: ProfileSelect | null
     /**
      * Choose, which related nodes to fetch as well.
-     * 
-    **/
+     */
     include?: ProfileInclude | null
     /**
      * The data needed to update a Profile.
-     * 
-    **/
+     */
     data: XOR<ProfileUpdateInput, ProfileUncheckedUpdateInput>
     /**
      * Choose, which Profile to update.
-     * 
-    **/
+     */
     where: ProfileWhereUniqueInput
   }
 
@@ -4828,13 +4725,11 @@ export namespace Prisma {
   export type ProfileUpdateManyArgs = {
     /**
      * The data used to update Profiles.
-     * 
-    **/
+     */
     data: XOR<ProfileUpdateManyMutationInput, ProfileUncheckedUpdateManyInput>
     /**
      * Filter which Profiles to update
-     * 
-    **/
+     */
     where?: ProfileWhereInput
   }
 
@@ -4845,28 +4740,23 @@ export namespace Prisma {
   export type ProfileUpsertArgs = {
     /**
      * Select specific fields to fetch from the Profile
-     * 
-    **/
+     */
     select?: ProfileSelect | null
     /**
      * Choose, which related nodes to fetch as well.
-     * 
-    **/
+     */
     include?: ProfileInclude | null
     /**
      * The filter to search for the Profile to update in case it exists.
-     * 
-    **/
+     */
     where: ProfileWhereUniqueInput
     /**
      * In case the Profile found by the `where` argument doesn't exist, create a new Profile with this data.
-     * 
-    **/
+     */
     create: XOR<ProfileCreateInput, ProfileUncheckedCreateInput>
     /**
      * In case the Profile was found with the provided `where` argument, update it with this data.
-     * 
-    **/
+     */
     update: XOR<ProfileUpdateInput, ProfileUncheckedUpdateInput>
   }
 
@@ -4877,18 +4767,15 @@ export namespace Prisma {
   export type ProfileDeleteArgs = {
     /**
      * Select specific fields to fetch from the Profile
-     * 
-    **/
+     */
     select?: ProfileSelect | null
     /**
      * Choose, which related nodes to fetch as well.
-     * 
-    **/
+     */
     include?: ProfileInclude | null
     /**
      * Filter which Profile to delete.
-     * 
-    **/
+     */
     where: ProfileWhereUniqueInput
   }
 
@@ -4899,8 +4786,7 @@ export namespace Prisma {
   export type ProfileDeleteManyArgs = {
     /**
      * Filter which Profiles to delete
-     * 
-    **/
+     */
     where?: ProfileWhereInput
   }
 
@@ -4911,13 +4797,11 @@ export namespace Prisma {
   export type ProfileArgs = {
     /**
      * Select specific fields to fetch from the Profile
-     * 
-    **/
+     */
     select?: ProfileSelect | null
     /**
      * Choose, which related nodes to fetch as well.
-     * 
-    **/
+     */
     include?: ProfileInclude | null
   }
 
@@ -5024,36 +4908,31 @@ export namespace Prisma {
   export type UserAggregateArgs = {
     /**
      * Filter which User to aggregate.
-     * 
-    **/
+     */
     where?: UserWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
      * 
      * Determine the order of Users to fetch.
-     * 
-    **/
+     */
     orderBy?: Enumerable<UserOrderByWithRelationInput>
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      * 
      * Sets the start position
-     * 
-    **/
+     */
     cursor?: UserWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
      * Take `±n` Users from the position of the cursor.
-     * 
-    **/
+     */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
      * Skip the first `n` Users.
-     * 
-    **/
+     */
     skip?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
@@ -5089,7 +4968,7 @@ export namespace Prisma {
   export type UserGroupByArgs = {
     where?: UserWhereInput
     orderBy?: Enumerable<UserOrderByWithAggregationInput>
-    by: Array<UserScalarFieldEnum>
+    by: UserScalarFieldEnum[]
     having?: UserScalarWhereWithAggregatesInput
     take?: number
     skip?: number
@@ -5143,7 +5022,7 @@ export namespace Prisma {
     roleId?: boolean
     role?: boolean | RoleArgs
     RoleCompanyID?: boolean
-    company?: boolean | CompanyFindManyArgs
+    company?: boolean | User$companyArgs
     companyBranch?: boolean | CompanyBranchArgs
     companyBranchId?: boolean
     Role_Company?: boolean | Role_CompanyArgs
@@ -5154,11 +5033,11 @@ export namespace Prisma {
   export type UserInclude = {
     profile?: boolean | ProfileArgs
     role?: boolean | RoleArgs
-    company?: boolean | CompanyFindManyArgs
+    company?: boolean | User$companyArgs
     companyBranch?: boolean | CompanyBranchArgs
     Role_Company?: boolean | Role_CompanyArgs
     _count?: boolean | UserCountOutputTypeArgs
-  } 
+  }
 
   export type UserGetPayload<S extends boolean | null | undefined | UserArgs> =
     S extends { select: any, include: any } ? 'Please either choose `select` or `include`' :
@@ -5187,13 +5066,13 @@ export namespace Prisma {
       : User
 
 
-  type UserCountArgs = Merge<
+  type UserCountArgs = 
     Omit<UserFindManyArgs, 'select' | 'include'> & {
       select?: UserCountAggregateInputType | true
     }
-  >
 
   export interface UserDelegate<GlobalRejectSettings extends Prisma.RejectOnNotFound | Prisma.RejectPerOperation | false | undefined> {
+
     /**
      * Find zero or one User that matches the filter.
      * @param {UserFindUniqueArgs} args - Arguments to find a User
@@ -5560,7 +5439,7 @@ export namespace Prisma {
 
     role<T extends RoleArgs= {}>(args?: Subset<T, RoleArgs>): Prisma__RoleClient<RoleGetPayload<T> | Null>;
 
-    company<T extends CompanyFindManyArgs= {}>(args?: Subset<T, CompanyFindManyArgs>): PrismaPromise<Array<CompanyGetPayload<T>>| Null>;
+    company<T extends User$companyArgs= {}>(args?: Subset<T, User$companyArgs>): PrismaPromise<Array<CompanyGetPayload<T>>| Null>;
 
     companyBranch<T extends CompanyBranchArgs= {}>(args?: Subset<T, CompanyBranchArgs>): Prisma__CompanyBranchClient<CompanyBranchGetPayload<T> | Null>;
 
@@ -5599,23 +5478,20 @@ export namespace Prisma {
   export type UserFindUniqueArgsBase = {
     /**
      * Select specific fields to fetch from the User
-     * 
-    **/
+     */
     select?: UserSelect | null
     /**
      * Choose, which related nodes to fetch as well.
-     * 
-    **/
+     */
     include?: UserInclude | null
     /**
      * Filter, which User to fetch.
-     * 
-    **/
+     */
     where: UserWhereUniqueInput
   }
 
   /**
-   * User: findUnique
+   * User findUnique
    */
   export interface UserFindUniqueArgs extends UserFindUniqueArgsBase {
    /**
@@ -5632,18 +5508,15 @@ export namespace Prisma {
   export type UserFindUniqueOrThrowArgs = {
     /**
      * Select specific fields to fetch from the User
-     * 
-    **/
+     */
     select?: UserSelect | null
     /**
      * Choose, which related nodes to fetch as well.
-     * 
-    **/
+     */
     include?: UserInclude | null
     /**
      * Filter, which User to fetch.
-     * 
-    **/
+     */
     where: UserWhereUniqueInput
   }
 
@@ -5654,58 +5527,50 @@ export namespace Prisma {
   export type UserFindFirstArgsBase = {
     /**
      * Select specific fields to fetch from the User
-     * 
-    **/
+     */
     select?: UserSelect | null
     /**
      * Choose, which related nodes to fetch as well.
-     * 
-    **/
+     */
     include?: UserInclude | null
     /**
      * Filter, which User to fetch.
-     * 
-    **/
+     */
     where?: UserWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
      * 
      * Determine the order of Users to fetch.
-     * 
-    **/
+     */
     orderBy?: Enumerable<UserOrderByWithRelationInput>
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      * 
      * Sets the position for searching for Users.
-     * 
-    **/
+     */
     cursor?: UserWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
      * Take `±n` Users from the position of the cursor.
-     * 
-    **/
+     */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
      * Skip the first `n` Users.
-     * 
-    **/
+     */
     skip?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
      * 
      * Filter by unique combinations of Users.
-     * 
-    **/
+     */
     distinct?: Enumerable<UserScalarFieldEnum>
   }
 
   /**
-   * User: findFirst
+   * User findFirst
    */
   export interface UserFindFirstArgs extends UserFindFirstArgsBase {
    /**
@@ -5722,53 +5587,45 @@ export namespace Prisma {
   export type UserFindFirstOrThrowArgs = {
     /**
      * Select specific fields to fetch from the User
-     * 
-    **/
+     */
     select?: UserSelect | null
     /**
      * Choose, which related nodes to fetch as well.
-     * 
-    **/
+     */
     include?: UserInclude | null
     /**
      * Filter, which User to fetch.
-     * 
-    **/
+     */
     where?: UserWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
      * 
      * Determine the order of Users to fetch.
-     * 
-    **/
+     */
     orderBy?: Enumerable<UserOrderByWithRelationInput>
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      * 
      * Sets the position for searching for Users.
-     * 
-    **/
+     */
     cursor?: UserWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
      * Take `±n` Users from the position of the cursor.
-     * 
-    **/
+     */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
      * Skip the first `n` Users.
-     * 
-    **/
+     */
     skip?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
      * 
      * Filter by unique combinations of Users.
-     * 
-    **/
+     */
     distinct?: Enumerable<UserScalarFieldEnum>
   }
 
@@ -5779,46 +5636,39 @@ export namespace Prisma {
   export type UserFindManyArgs = {
     /**
      * Select specific fields to fetch from the User
-     * 
-    **/
+     */
     select?: UserSelect | null
     /**
      * Choose, which related nodes to fetch as well.
-     * 
-    **/
+     */
     include?: UserInclude | null
     /**
      * Filter, which Users to fetch.
-     * 
-    **/
+     */
     where?: UserWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
      * 
      * Determine the order of Users to fetch.
-     * 
-    **/
+     */
     orderBy?: Enumerable<UserOrderByWithRelationInput>
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      * 
      * Sets the position for listing Users.
-     * 
-    **/
+     */
     cursor?: UserWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
      * Take `±n` Users from the position of the cursor.
-     * 
-    **/
+     */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
      * Skip the first `n` Users.
-     * 
-    **/
+     */
     skip?: number
     distinct?: Enumerable<UserScalarFieldEnum>
   }
@@ -5830,18 +5680,15 @@ export namespace Prisma {
   export type UserCreateArgs = {
     /**
      * Select specific fields to fetch from the User
-     * 
-    **/
+     */
     select?: UserSelect | null
     /**
      * Choose, which related nodes to fetch as well.
-     * 
-    **/
+     */
     include?: UserInclude | null
     /**
      * The data needed to create a User.
-     * 
-    **/
+     */
     data: XOR<UserCreateInput, UserUncheckedCreateInput>
   }
 
@@ -5852,8 +5699,7 @@ export namespace Prisma {
   export type UserCreateManyArgs = {
     /**
      * The data used to create many Users.
-     * 
-    **/
+     */
     data: Enumerable<UserCreateManyInput>
     skipDuplicates?: boolean
   }
@@ -5865,23 +5711,19 @@ export namespace Prisma {
   export type UserUpdateArgs = {
     /**
      * Select specific fields to fetch from the User
-     * 
-    **/
+     */
     select?: UserSelect | null
     /**
      * Choose, which related nodes to fetch as well.
-     * 
-    **/
+     */
     include?: UserInclude | null
     /**
      * The data needed to update a User.
-     * 
-    **/
+     */
     data: XOR<UserUpdateInput, UserUncheckedUpdateInput>
     /**
      * Choose, which User to update.
-     * 
-    **/
+     */
     where: UserWhereUniqueInput
   }
 
@@ -5892,13 +5734,11 @@ export namespace Prisma {
   export type UserUpdateManyArgs = {
     /**
      * The data used to update Users.
-     * 
-    **/
+     */
     data: XOR<UserUpdateManyMutationInput, UserUncheckedUpdateManyInput>
     /**
      * Filter which Users to update
-     * 
-    **/
+     */
     where?: UserWhereInput
   }
 
@@ -5909,28 +5749,23 @@ export namespace Prisma {
   export type UserUpsertArgs = {
     /**
      * Select specific fields to fetch from the User
-     * 
-    **/
+     */
     select?: UserSelect | null
     /**
      * Choose, which related nodes to fetch as well.
-     * 
-    **/
+     */
     include?: UserInclude | null
     /**
      * The filter to search for the User to update in case it exists.
-     * 
-    **/
+     */
     where: UserWhereUniqueInput
     /**
      * In case the User found by the `where` argument doesn't exist, create a new User with this data.
-     * 
-    **/
+     */
     create: XOR<UserCreateInput, UserUncheckedCreateInput>
     /**
      * In case the User was found with the provided `where` argument, update it with this data.
-     * 
-    **/
+     */
     update: XOR<UserUpdateInput, UserUncheckedUpdateInput>
   }
 
@@ -5941,18 +5776,15 @@ export namespace Prisma {
   export type UserDeleteArgs = {
     /**
      * Select specific fields to fetch from the User
-     * 
-    **/
+     */
     select?: UserSelect | null
     /**
      * Choose, which related nodes to fetch as well.
-     * 
-    **/
+     */
     include?: UserInclude | null
     /**
      * Filter which User to delete.
-     * 
-    **/
+     */
     where: UserWhereUniqueInput
   }
 
@@ -5963,9 +5795,29 @@ export namespace Prisma {
   export type UserDeleteManyArgs = {
     /**
      * Filter which Users to delete
-     * 
-    **/
+     */
     where?: UserWhereInput
+  }
+
+
+  /**
+   * User.company
+   */
+  export type User$companyArgs = {
+    /**
+     * Select specific fields to fetch from the Company
+     */
+    select?: CompanySelect | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: CompanyInclude | null
+    where?: CompanyWhereInput
+    orderBy?: Enumerable<CompanyOrderByWithRelationInput>
+    cursor?: CompanyWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: Enumerable<CompanyScalarFieldEnum>
   }
 
 
@@ -5975,13 +5827,11 @@ export namespace Prisma {
   export type UserArgs = {
     /**
      * Select specific fields to fetch from the User
-     * 
-    **/
+     */
     select?: UserSelect | null
     /**
      * Choose, which related nodes to fetch as well.
-     * 
-    **/
+     */
     include?: UserInclude | null
   }
 
@@ -6034,36 +5884,31 @@ export namespace Prisma {
   export type RoleAggregateArgs = {
     /**
      * Filter which Role to aggregate.
-     * 
-    **/
+     */
     where?: RoleWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
      * 
      * Determine the order of Roles to fetch.
-     * 
-    **/
+     */
     orderBy?: Enumerable<RoleOrderByWithRelationInput>
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      * 
      * Sets the start position
-     * 
-    **/
+     */
     cursor?: RoleWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
      * Take `±n` Roles from the position of the cursor.
-     * 
-    **/
+     */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
      * Skip the first `n` Roles.
-     * 
-    **/
+     */
     skip?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
@@ -6099,7 +5944,7 @@ export namespace Prisma {
   export type RoleGroupByArgs = {
     where?: RoleWhereInput
     orderBy?: Enumerable<RoleOrderByWithAggregationInput>
-    by: Array<RoleScalarFieldEnum>
+    by: RoleScalarFieldEnum[]
     having?: RoleScalarWhereWithAggregatesInput
     take?: number
     skip?: number
@@ -6134,15 +5979,15 @@ export namespace Prisma {
   export type RoleSelect = {
     id?: boolean
     name?: boolean
-    users?: boolean | UserFindManyArgs
+    users?: boolean | Role$usersArgs
     _count?: boolean | RoleCountOutputTypeArgs
   }
 
 
   export type RoleInclude = {
-    users?: boolean | UserFindManyArgs
+    users?: boolean | Role$usersArgs
     _count?: boolean | RoleCountOutputTypeArgs
-  } 
+  }
 
   export type RoleGetPayload<S extends boolean | null | undefined | RoleArgs> =
     S extends { select: any, include: any } ? 'Please either choose `select` or `include`' :
@@ -6163,13 +6008,13 @@ export namespace Prisma {
       : Role
 
 
-  type RoleCountArgs = Merge<
+  type RoleCountArgs = 
     Omit<RoleFindManyArgs, 'select' | 'include'> & {
       select?: RoleCountAggregateInputType | true
     }
-  >
 
   export interface RoleDelegate<GlobalRejectSettings extends Prisma.RejectOnNotFound | Prisma.RejectPerOperation | false | undefined> {
+
     /**
      * Find zero or one Role that matches the filter.
      * @param {RoleFindUniqueArgs} args - Arguments to find a Role
@@ -6532,7 +6377,7 @@ export namespace Prisma {
     constructor(_dmmf: runtime.DMMFClass, _fetcher: PrismaClientFetcher, _queryType: 'query' | 'mutation', _rootField: string, _clientMethod: string, _args: any, _dataPath: string[], _errorFormat: ErrorFormat, _measurePerformance?: boolean | undefined, _isList?: boolean);
     readonly [Symbol.toStringTag]: 'PrismaClientPromise';
 
-    users<T extends UserFindManyArgs= {}>(args?: Subset<T, UserFindManyArgs>): PrismaPromise<Array<UserGetPayload<T>>| Null>;
+    users<T extends Role$usersArgs= {}>(args?: Subset<T, Role$usersArgs>): PrismaPromise<Array<UserGetPayload<T>>| Null>;
 
     private get _document();
     /**
@@ -6567,23 +6412,20 @@ export namespace Prisma {
   export type RoleFindUniqueArgsBase = {
     /**
      * Select specific fields to fetch from the Role
-     * 
-    **/
+     */
     select?: RoleSelect | null
     /**
      * Choose, which related nodes to fetch as well.
-     * 
-    **/
+     */
     include?: RoleInclude | null
     /**
      * Filter, which Role to fetch.
-     * 
-    **/
+     */
     where: RoleWhereUniqueInput
   }
 
   /**
-   * Role: findUnique
+   * Role findUnique
    */
   export interface RoleFindUniqueArgs extends RoleFindUniqueArgsBase {
    /**
@@ -6600,18 +6442,15 @@ export namespace Prisma {
   export type RoleFindUniqueOrThrowArgs = {
     /**
      * Select specific fields to fetch from the Role
-     * 
-    **/
+     */
     select?: RoleSelect | null
     /**
      * Choose, which related nodes to fetch as well.
-     * 
-    **/
+     */
     include?: RoleInclude | null
     /**
      * Filter, which Role to fetch.
-     * 
-    **/
+     */
     where: RoleWhereUniqueInput
   }
 
@@ -6622,58 +6461,50 @@ export namespace Prisma {
   export type RoleFindFirstArgsBase = {
     /**
      * Select specific fields to fetch from the Role
-     * 
-    **/
+     */
     select?: RoleSelect | null
     /**
      * Choose, which related nodes to fetch as well.
-     * 
-    **/
+     */
     include?: RoleInclude | null
     /**
      * Filter, which Role to fetch.
-     * 
-    **/
+     */
     where?: RoleWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
      * 
      * Determine the order of Roles to fetch.
-     * 
-    **/
+     */
     orderBy?: Enumerable<RoleOrderByWithRelationInput>
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      * 
      * Sets the position for searching for Roles.
-     * 
-    **/
+     */
     cursor?: RoleWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
      * Take `±n` Roles from the position of the cursor.
-     * 
-    **/
+     */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
      * Skip the first `n` Roles.
-     * 
-    **/
+     */
     skip?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
      * 
      * Filter by unique combinations of Roles.
-     * 
-    **/
+     */
     distinct?: Enumerable<RoleScalarFieldEnum>
   }
 
   /**
-   * Role: findFirst
+   * Role findFirst
    */
   export interface RoleFindFirstArgs extends RoleFindFirstArgsBase {
    /**
@@ -6690,53 +6521,45 @@ export namespace Prisma {
   export type RoleFindFirstOrThrowArgs = {
     /**
      * Select specific fields to fetch from the Role
-     * 
-    **/
+     */
     select?: RoleSelect | null
     /**
      * Choose, which related nodes to fetch as well.
-     * 
-    **/
+     */
     include?: RoleInclude | null
     /**
      * Filter, which Role to fetch.
-     * 
-    **/
+     */
     where?: RoleWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
      * 
      * Determine the order of Roles to fetch.
-     * 
-    **/
+     */
     orderBy?: Enumerable<RoleOrderByWithRelationInput>
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      * 
      * Sets the position for searching for Roles.
-     * 
-    **/
+     */
     cursor?: RoleWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
      * Take `±n` Roles from the position of the cursor.
-     * 
-    **/
+     */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
      * Skip the first `n` Roles.
-     * 
-    **/
+     */
     skip?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
      * 
      * Filter by unique combinations of Roles.
-     * 
-    **/
+     */
     distinct?: Enumerable<RoleScalarFieldEnum>
   }
 
@@ -6747,46 +6570,39 @@ export namespace Prisma {
   export type RoleFindManyArgs = {
     /**
      * Select specific fields to fetch from the Role
-     * 
-    **/
+     */
     select?: RoleSelect | null
     /**
      * Choose, which related nodes to fetch as well.
-     * 
-    **/
+     */
     include?: RoleInclude | null
     /**
      * Filter, which Roles to fetch.
-     * 
-    **/
+     */
     where?: RoleWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
      * 
      * Determine the order of Roles to fetch.
-     * 
-    **/
+     */
     orderBy?: Enumerable<RoleOrderByWithRelationInput>
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      * 
      * Sets the position for listing Roles.
-     * 
-    **/
+     */
     cursor?: RoleWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
      * Take `±n` Roles from the position of the cursor.
-     * 
-    **/
+     */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
      * Skip the first `n` Roles.
-     * 
-    **/
+     */
     skip?: number
     distinct?: Enumerable<RoleScalarFieldEnum>
   }
@@ -6798,18 +6614,15 @@ export namespace Prisma {
   export type RoleCreateArgs = {
     /**
      * Select specific fields to fetch from the Role
-     * 
-    **/
+     */
     select?: RoleSelect | null
     /**
      * Choose, which related nodes to fetch as well.
-     * 
-    **/
+     */
     include?: RoleInclude | null
     /**
      * The data needed to create a Role.
-     * 
-    **/
+     */
     data: XOR<RoleCreateInput, RoleUncheckedCreateInput>
   }
 
@@ -6820,8 +6633,7 @@ export namespace Prisma {
   export type RoleCreateManyArgs = {
     /**
      * The data used to create many Roles.
-     * 
-    **/
+     */
     data: Enumerable<RoleCreateManyInput>
     skipDuplicates?: boolean
   }
@@ -6833,23 +6645,19 @@ export namespace Prisma {
   export type RoleUpdateArgs = {
     /**
      * Select specific fields to fetch from the Role
-     * 
-    **/
+     */
     select?: RoleSelect | null
     /**
      * Choose, which related nodes to fetch as well.
-     * 
-    **/
+     */
     include?: RoleInclude | null
     /**
      * The data needed to update a Role.
-     * 
-    **/
+     */
     data: XOR<RoleUpdateInput, RoleUncheckedUpdateInput>
     /**
      * Choose, which Role to update.
-     * 
-    **/
+     */
     where: RoleWhereUniqueInput
   }
 
@@ -6860,13 +6668,11 @@ export namespace Prisma {
   export type RoleUpdateManyArgs = {
     /**
      * The data used to update Roles.
-     * 
-    **/
+     */
     data: XOR<RoleUpdateManyMutationInput, RoleUncheckedUpdateManyInput>
     /**
      * Filter which Roles to update
-     * 
-    **/
+     */
     where?: RoleWhereInput
   }
 
@@ -6877,28 +6683,23 @@ export namespace Prisma {
   export type RoleUpsertArgs = {
     /**
      * Select specific fields to fetch from the Role
-     * 
-    **/
+     */
     select?: RoleSelect | null
     /**
      * Choose, which related nodes to fetch as well.
-     * 
-    **/
+     */
     include?: RoleInclude | null
     /**
      * The filter to search for the Role to update in case it exists.
-     * 
-    **/
+     */
     where: RoleWhereUniqueInput
     /**
      * In case the Role found by the `where` argument doesn't exist, create a new Role with this data.
-     * 
-    **/
+     */
     create: XOR<RoleCreateInput, RoleUncheckedCreateInput>
     /**
      * In case the Role was found with the provided `where` argument, update it with this data.
-     * 
-    **/
+     */
     update: XOR<RoleUpdateInput, RoleUncheckedUpdateInput>
   }
 
@@ -6909,18 +6710,15 @@ export namespace Prisma {
   export type RoleDeleteArgs = {
     /**
      * Select specific fields to fetch from the Role
-     * 
-    **/
+     */
     select?: RoleSelect | null
     /**
      * Choose, which related nodes to fetch as well.
-     * 
-    **/
+     */
     include?: RoleInclude | null
     /**
      * Filter which Role to delete.
-     * 
-    **/
+     */
     where: RoleWhereUniqueInput
   }
 
@@ -6931,9 +6729,29 @@ export namespace Prisma {
   export type RoleDeleteManyArgs = {
     /**
      * Filter which Roles to delete
-     * 
-    **/
+     */
     where?: RoleWhereInput
+  }
+
+
+  /**
+   * Role.users
+   */
+  export type Role$usersArgs = {
+    /**
+     * Select specific fields to fetch from the User
+     */
+    select?: UserSelect | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: UserInclude | null
+    where?: UserWhereInput
+    orderBy?: Enumerable<UserOrderByWithRelationInput>
+    cursor?: UserWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: Enumerable<UserScalarFieldEnum>
   }
 
 
@@ -6943,13 +6761,11 @@ export namespace Prisma {
   export type RoleArgs = {
     /**
      * Select specific fields to fetch from the Role
-     * 
-    **/
+     */
     select?: RoleSelect | null
     /**
      * Choose, which related nodes to fetch as well.
-     * 
-    **/
+     */
     include?: RoleInclude | null
   }
 
@@ -7034,36 +6850,31 @@ export namespace Prisma {
   export type Role_CompanyAggregateArgs = {
     /**
      * Filter which Role_Company to aggregate.
-     * 
-    **/
+     */
     where?: Role_CompanyWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
      * 
      * Determine the order of Role_Companies to fetch.
-     * 
-    **/
+     */
     orderBy?: Enumerable<Role_CompanyOrderByWithRelationInput>
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      * 
      * Sets the start position
-     * 
-    **/
+     */
     cursor?: Role_CompanyWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
      * Take `±n` Role_Companies from the position of the cursor.
-     * 
-    **/
+     */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
      * Skip the first `n` Role_Companies.
-     * 
-    **/
+     */
     skip?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
@@ -7111,7 +6922,7 @@ export namespace Prisma {
   export type Role_CompanyGroupByArgs = {
     where?: Role_CompanyWhereInput
     orderBy?: Enumerable<Role_CompanyOrderByWithAggregationInput>
-    by: Array<Role_CompanyScalarFieldEnum>
+    by: Role_CompanyScalarFieldEnum[]
     having?: Role_CompanyScalarWhereWithAggregatesInput
     take?: number
     skip?: number
@@ -7155,7 +6966,7 @@ export namespace Prisma {
     name?: boolean
     access?: boolean
     status?: boolean
-    users?: boolean | UserFindManyArgs
+    users?: boolean | Role_Company$usersArgs
     companyBranch?: boolean | CompanyBranchArgs
     companyBranchId?: boolean
     _count?: boolean | Role_CompanyCountOutputTypeArgs
@@ -7163,10 +6974,10 @@ export namespace Prisma {
 
 
   export type Role_CompanyInclude = {
-    users?: boolean | UserFindManyArgs
+    users?: boolean | Role_Company$usersArgs
     companyBranch?: boolean | CompanyBranchArgs
     _count?: boolean | Role_CompanyCountOutputTypeArgs
-  } 
+  }
 
   export type Role_CompanyGetPayload<S extends boolean | null | undefined | Role_CompanyArgs> =
     S extends { select: any, include: any } ? 'Please either choose `select` or `include`' :
@@ -7189,13 +7000,13 @@ export namespace Prisma {
       : Role_Company
 
 
-  type Role_CompanyCountArgs = Merge<
+  type Role_CompanyCountArgs = 
     Omit<Role_CompanyFindManyArgs, 'select' | 'include'> & {
       select?: Role_CompanyCountAggregateInputType | true
     }
-  >
 
   export interface Role_CompanyDelegate<GlobalRejectSettings extends Prisma.RejectOnNotFound | Prisma.RejectPerOperation | false | undefined> {
+
     /**
      * Find zero or one Role_Company that matches the filter.
      * @param {Role_CompanyFindUniqueArgs} args - Arguments to find a Role_Company
@@ -7558,7 +7369,7 @@ export namespace Prisma {
     constructor(_dmmf: runtime.DMMFClass, _fetcher: PrismaClientFetcher, _queryType: 'query' | 'mutation', _rootField: string, _clientMethod: string, _args: any, _dataPath: string[], _errorFormat: ErrorFormat, _measurePerformance?: boolean | undefined, _isList?: boolean);
     readonly [Symbol.toStringTag]: 'PrismaClientPromise';
 
-    users<T extends UserFindManyArgs= {}>(args?: Subset<T, UserFindManyArgs>): PrismaPromise<Array<UserGetPayload<T>>| Null>;
+    users<T extends Role_Company$usersArgs= {}>(args?: Subset<T, Role_Company$usersArgs>): PrismaPromise<Array<UserGetPayload<T>>| Null>;
 
     companyBranch<T extends CompanyBranchArgs= {}>(args?: Subset<T, CompanyBranchArgs>): Prisma__CompanyBranchClient<CompanyBranchGetPayload<T> | Null>;
 
@@ -7595,23 +7406,20 @@ export namespace Prisma {
   export type Role_CompanyFindUniqueArgsBase = {
     /**
      * Select specific fields to fetch from the Role_Company
-     * 
-    **/
+     */
     select?: Role_CompanySelect | null
     /**
      * Choose, which related nodes to fetch as well.
-     * 
-    **/
+     */
     include?: Role_CompanyInclude | null
     /**
      * Filter, which Role_Company to fetch.
-     * 
-    **/
+     */
     where: Role_CompanyWhereUniqueInput
   }
 
   /**
-   * Role_Company: findUnique
+   * Role_Company findUnique
    */
   export interface Role_CompanyFindUniqueArgs extends Role_CompanyFindUniqueArgsBase {
    /**
@@ -7628,18 +7436,15 @@ export namespace Prisma {
   export type Role_CompanyFindUniqueOrThrowArgs = {
     /**
      * Select specific fields to fetch from the Role_Company
-     * 
-    **/
+     */
     select?: Role_CompanySelect | null
     /**
      * Choose, which related nodes to fetch as well.
-     * 
-    **/
+     */
     include?: Role_CompanyInclude | null
     /**
      * Filter, which Role_Company to fetch.
-     * 
-    **/
+     */
     where: Role_CompanyWhereUniqueInput
   }
 
@@ -7650,58 +7455,50 @@ export namespace Prisma {
   export type Role_CompanyFindFirstArgsBase = {
     /**
      * Select specific fields to fetch from the Role_Company
-     * 
-    **/
+     */
     select?: Role_CompanySelect | null
     /**
      * Choose, which related nodes to fetch as well.
-     * 
-    **/
+     */
     include?: Role_CompanyInclude | null
     /**
      * Filter, which Role_Company to fetch.
-     * 
-    **/
+     */
     where?: Role_CompanyWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
      * 
      * Determine the order of Role_Companies to fetch.
-     * 
-    **/
+     */
     orderBy?: Enumerable<Role_CompanyOrderByWithRelationInput>
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      * 
      * Sets the position for searching for Role_Companies.
-     * 
-    **/
+     */
     cursor?: Role_CompanyWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
      * Take `±n` Role_Companies from the position of the cursor.
-     * 
-    **/
+     */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
      * Skip the first `n` Role_Companies.
-     * 
-    **/
+     */
     skip?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
      * 
      * Filter by unique combinations of Role_Companies.
-     * 
-    **/
+     */
     distinct?: Enumerable<Role_CompanyScalarFieldEnum>
   }
 
   /**
-   * Role_Company: findFirst
+   * Role_Company findFirst
    */
   export interface Role_CompanyFindFirstArgs extends Role_CompanyFindFirstArgsBase {
    /**
@@ -7718,53 +7515,45 @@ export namespace Prisma {
   export type Role_CompanyFindFirstOrThrowArgs = {
     /**
      * Select specific fields to fetch from the Role_Company
-     * 
-    **/
+     */
     select?: Role_CompanySelect | null
     /**
      * Choose, which related nodes to fetch as well.
-     * 
-    **/
+     */
     include?: Role_CompanyInclude | null
     /**
      * Filter, which Role_Company to fetch.
-     * 
-    **/
+     */
     where?: Role_CompanyWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
      * 
      * Determine the order of Role_Companies to fetch.
-     * 
-    **/
+     */
     orderBy?: Enumerable<Role_CompanyOrderByWithRelationInput>
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      * 
      * Sets the position for searching for Role_Companies.
-     * 
-    **/
+     */
     cursor?: Role_CompanyWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
      * Take `±n` Role_Companies from the position of the cursor.
-     * 
-    **/
+     */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
      * Skip the first `n` Role_Companies.
-     * 
-    **/
+     */
     skip?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
      * 
      * Filter by unique combinations of Role_Companies.
-     * 
-    **/
+     */
     distinct?: Enumerable<Role_CompanyScalarFieldEnum>
   }
 
@@ -7775,46 +7564,39 @@ export namespace Prisma {
   export type Role_CompanyFindManyArgs = {
     /**
      * Select specific fields to fetch from the Role_Company
-     * 
-    **/
+     */
     select?: Role_CompanySelect | null
     /**
      * Choose, which related nodes to fetch as well.
-     * 
-    **/
+     */
     include?: Role_CompanyInclude | null
     /**
      * Filter, which Role_Companies to fetch.
-     * 
-    **/
+     */
     where?: Role_CompanyWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
      * 
      * Determine the order of Role_Companies to fetch.
-     * 
-    **/
+     */
     orderBy?: Enumerable<Role_CompanyOrderByWithRelationInput>
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      * 
      * Sets the position for listing Role_Companies.
-     * 
-    **/
+     */
     cursor?: Role_CompanyWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
      * Take `±n` Role_Companies from the position of the cursor.
-     * 
-    **/
+     */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
      * Skip the first `n` Role_Companies.
-     * 
-    **/
+     */
     skip?: number
     distinct?: Enumerable<Role_CompanyScalarFieldEnum>
   }
@@ -7826,18 +7608,15 @@ export namespace Prisma {
   export type Role_CompanyCreateArgs = {
     /**
      * Select specific fields to fetch from the Role_Company
-     * 
-    **/
+     */
     select?: Role_CompanySelect | null
     /**
      * Choose, which related nodes to fetch as well.
-     * 
-    **/
+     */
     include?: Role_CompanyInclude | null
     /**
      * The data needed to create a Role_Company.
-     * 
-    **/
+     */
     data: XOR<Role_CompanyCreateInput, Role_CompanyUncheckedCreateInput>
   }
 
@@ -7848,8 +7627,7 @@ export namespace Prisma {
   export type Role_CompanyCreateManyArgs = {
     /**
      * The data used to create many Role_Companies.
-     * 
-    **/
+     */
     data: Enumerable<Role_CompanyCreateManyInput>
     skipDuplicates?: boolean
   }
@@ -7861,23 +7639,19 @@ export namespace Prisma {
   export type Role_CompanyUpdateArgs = {
     /**
      * Select specific fields to fetch from the Role_Company
-     * 
-    **/
+     */
     select?: Role_CompanySelect | null
     /**
      * Choose, which related nodes to fetch as well.
-     * 
-    **/
+     */
     include?: Role_CompanyInclude | null
     /**
      * The data needed to update a Role_Company.
-     * 
-    **/
+     */
     data: XOR<Role_CompanyUpdateInput, Role_CompanyUncheckedUpdateInput>
     /**
      * Choose, which Role_Company to update.
-     * 
-    **/
+     */
     where: Role_CompanyWhereUniqueInput
   }
 
@@ -7888,13 +7662,11 @@ export namespace Prisma {
   export type Role_CompanyUpdateManyArgs = {
     /**
      * The data used to update Role_Companies.
-     * 
-    **/
+     */
     data: XOR<Role_CompanyUpdateManyMutationInput, Role_CompanyUncheckedUpdateManyInput>
     /**
      * Filter which Role_Companies to update
-     * 
-    **/
+     */
     where?: Role_CompanyWhereInput
   }
 
@@ -7905,28 +7677,23 @@ export namespace Prisma {
   export type Role_CompanyUpsertArgs = {
     /**
      * Select specific fields to fetch from the Role_Company
-     * 
-    **/
+     */
     select?: Role_CompanySelect | null
     /**
      * Choose, which related nodes to fetch as well.
-     * 
-    **/
+     */
     include?: Role_CompanyInclude | null
     /**
      * The filter to search for the Role_Company to update in case it exists.
-     * 
-    **/
+     */
     where: Role_CompanyWhereUniqueInput
     /**
      * In case the Role_Company found by the `where` argument doesn't exist, create a new Role_Company with this data.
-     * 
-    **/
+     */
     create: XOR<Role_CompanyCreateInput, Role_CompanyUncheckedCreateInput>
     /**
      * In case the Role_Company was found with the provided `where` argument, update it with this data.
-     * 
-    **/
+     */
     update: XOR<Role_CompanyUpdateInput, Role_CompanyUncheckedUpdateInput>
   }
 
@@ -7937,18 +7704,15 @@ export namespace Prisma {
   export type Role_CompanyDeleteArgs = {
     /**
      * Select specific fields to fetch from the Role_Company
-     * 
-    **/
+     */
     select?: Role_CompanySelect | null
     /**
      * Choose, which related nodes to fetch as well.
-     * 
-    **/
+     */
     include?: Role_CompanyInclude | null
     /**
      * Filter which Role_Company to delete.
-     * 
-    **/
+     */
     where: Role_CompanyWhereUniqueInput
   }
 
@@ -7959,9 +7723,29 @@ export namespace Prisma {
   export type Role_CompanyDeleteManyArgs = {
     /**
      * Filter which Role_Companies to delete
-     * 
-    **/
+     */
     where?: Role_CompanyWhereInput
+  }
+
+
+  /**
+   * Role_Company.users
+   */
+  export type Role_Company$usersArgs = {
+    /**
+     * Select specific fields to fetch from the User
+     */
+    select?: UserSelect | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: UserInclude | null
+    where?: UserWhereInput
+    orderBy?: Enumerable<UserOrderByWithRelationInput>
+    cursor?: UserWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: Enumerable<UserScalarFieldEnum>
   }
 
 
@@ -7971,13 +7755,11 @@ export namespace Prisma {
   export type Role_CompanyArgs = {
     /**
      * Select specific fields to fetch from the Role_Company
-     * 
-    **/
+     */
     select?: Role_CompanySelect | null
     /**
      * Choose, which related nodes to fetch as well.
-     * 
-    **/
+     */
     include?: Role_CompanyInclude | null
   }
 
@@ -8030,36 +7812,31 @@ export namespace Prisma {
   export type ProvinceAggregateArgs = {
     /**
      * Filter which Province to aggregate.
-     * 
-    **/
+     */
     where?: ProvinceWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
      * 
      * Determine the order of Provinces to fetch.
-     * 
-    **/
+     */
     orderBy?: Enumerable<ProvinceOrderByWithRelationInput>
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      * 
      * Sets the start position
-     * 
-    **/
+     */
     cursor?: ProvinceWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
      * Take `±n` Provinces from the position of the cursor.
-     * 
-    **/
+     */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
      * Skip the first `n` Provinces.
-     * 
-    **/
+     */
     skip?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
@@ -8095,7 +7872,7 @@ export namespace Prisma {
   export type ProvinceGroupByArgs = {
     where?: ProvinceWhereInput
     orderBy?: Enumerable<ProvinceOrderByWithAggregationInput>
-    by: Array<ProvinceScalarFieldEnum>
+    by: ProvinceScalarFieldEnum[]
     having?: ProvinceScalarWhereWithAggregatesInput
     take?: number
     skip?: number
@@ -8130,15 +7907,15 @@ export namespace Prisma {
   export type ProvinceSelect = {
     id?: boolean
     name?: boolean
-    district?: boolean | DistrictFindManyArgs
+    district?: boolean | Province$districtArgs
     _count?: boolean | ProvinceCountOutputTypeArgs
   }
 
 
   export type ProvinceInclude = {
-    district?: boolean | DistrictFindManyArgs
+    district?: boolean | Province$districtArgs
     _count?: boolean | ProvinceCountOutputTypeArgs
-  } 
+  }
 
   export type ProvinceGetPayload<S extends boolean | null | undefined | ProvinceArgs> =
     S extends { select: any, include: any } ? 'Please either choose `select` or `include`' :
@@ -8159,13 +7936,13 @@ export namespace Prisma {
       : Province
 
 
-  type ProvinceCountArgs = Merge<
+  type ProvinceCountArgs = 
     Omit<ProvinceFindManyArgs, 'select' | 'include'> & {
       select?: ProvinceCountAggregateInputType | true
     }
-  >
 
   export interface ProvinceDelegate<GlobalRejectSettings extends Prisma.RejectOnNotFound | Prisma.RejectPerOperation | false | undefined> {
+
     /**
      * Find zero or one Province that matches the filter.
      * @param {ProvinceFindUniqueArgs} args - Arguments to find a Province
@@ -8528,7 +8305,7 @@ export namespace Prisma {
     constructor(_dmmf: runtime.DMMFClass, _fetcher: PrismaClientFetcher, _queryType: 'query' | 'mutation', _rootField: string, _clientMethod: string, _args: any, _dataPath: string[], _errorFormat: ErrorFormat, _measurePerformance?: boolean | undefined, _isList?: boolean);
     readonly [Symbol.toStringTag]: 'PrismaClientPromise';
 
-    district<T extends DistrictFindManyArgs= {}>(args?: Subset<T, DistrictFindManyArgs>): PrismaPromise<Array<DistrictGetPayload<T>>| Null>;
+    district<T extends Province$districtArgs= {}>(args?: Subset<T, Province$districtArgs>): PrismaPromise<Array<DistrictGetPayload<T>>| Null>;
 
     private get _document();
     /**
@@ -8563,23 +8340,20 @@ export namespace Prisma {
   export type ProvinceFindUniqueArgsBase = {
     /**
      * Select specific fields to fetch from the Province
-     * 
-    **/
+     */
     select?: ProvinceSelect | null
     /**
      * Choose, which related nodes to fetch as well.
-     * 
-    **/
+     */
     include?: ProvinceInclude | null
     /**
      * Filter, which Province to fetch.
-     * 
-    **/
+     */
     where: ProvinceWhereUniqueInput
   }
 
   /**
-   * Province: findUnique
+   * Province findUnique
    */
   export interface ProvinceFindUniqueArgs extends ProvinceFindUniqueArgsBase {
    /**
@@ -8596,18 +8370,15 @@ export namespace Prisma {
   export type ProvinceFindUniqueOrThrowArgs = {
     /**
      * Select specific fields to fetch from the Province
-     * 
-    **/
+     */
     select?: ProvinceSelect | null
     /**
      * Choose, which related nodes to fetch as well.
-     * 
-    **/
+     */
     include?: ProvinceInclude | null
     /**
      * Filter, which Province to fetch.
-     * 
-    **/
+     */
     where: ProvinceWhereUniqueInput
   }
 
@@ -8618,58 +8389,50 @@ export namespace Prisma {
   export type ProvinceFindFirstArgsBase = {
     /**
      * Select specific fields to fetch from the Province
-     * 
-    **/
+     */
     select?: ProvinceSelect | null
     /**
      * Choose, which related nodes to fetch as well.
-     * 
-    **/
+     */
     include?: ProvinceInclude | null
     /**
      * Filter, which Province to fetch.
-     * 
-    **/
+     */
     where?: ProvinceWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
      * 
      * Determine the order of Provinces to fetch.
-     * 
-    **/
+     */
     orderBy?: Enumerable<ProvinceOrderByWithRelationInput>
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      * 
      * Sets the position for searching for Provinces.
-     * 
-    **/
+     */
     cursor?: ProvinceWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
      * Take `±n` Provinces from the position of the cursor.
-     * 
-    **/
+     */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
      * Skip the first `n` Provinces.
-     * 
-    **/
+     */
     skip?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
      * 
      * Filter by unique combinations of Provinces.
-     * 
-    **/
+     */
     distinct?: Enumerable<ProvinceScalarFieldEnum>
   }
 
   /**
-   * Province: findFirst
+   * Province findFirst
    */
   export interface ProvinceFindFirstArgs extends ProvinceFindFirstArgsBase {
    /**
@@ -8686,53 +8449,45 @@ export namespace Prisma {
   export type ProvinceFindFirstOrThrowArgs = {
     /**
      * Select specific fields to fetch from the Province
-     * 
-    **/
+     */
     select?: ProvinceSelect | null
     /**
      * Choose, which related nodes to fetch as well.
-     * 
-    **/
+     */
     include?: ProvinceInclude | null
     /**
      * Filter, which Province to fetch.
-     * 
-    **/
+     */
     where?: ProvinceWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
      * 
      * Determine the order of Provinces to fetch.
-     * 
-    **/
+     */
     orderBy?: Enumerable<ProvinceOrderByWithRelationInput>
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      * 
      * Sets the position for searching for Provinces.
-     * 
-    **/
+     */
     cursor?: ProvinceWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
      * Take `±n` Provinces from the position of the cursor.
-     * 
-    **/
+     */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
      * Skip the first `n` Provinces.
-     * 
-    **/
+     */
     skip?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
      * 
      * Filter by unique combinations of Provinces.
-     * 
-    **/
+     */
     distinct?: Enumerable<ProvinceScalarFieldEnum>
   }
 
@@ -8743,46 +8498,39 @@ export namespace Prisma {
   export type ProvinceFindManyArgs = {
     /**
      * Select specific fields to fetch from the Province
-     * 
-    **/
+     */
     select?: ProvinceSelect | null
     /**
      * Choose, which related nodes to fetch as well.
-     * 
-    **/
+     */
     include?: ProvinceInclude | null
     /**
      * Filter, which Provinces to fetch.
-     * 
-    **/
+     */
     where?: ProvinceWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
      * 
      * Determine the order of Provinces to fetch.
-     * 
-    **/
+     */
     orderBy?: Enumerable<ProvinceOrderByWithRelationInput>
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      * 
      * Sets the position for listing Provinces.
-     * 
-    **/
+     */
     cursor?: ProvinceWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
      * Take `±n` Provinces from the position of the cursor.
-     * 
-    **/
+     */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
      * Skip the first `n` Provinces.
-     * 
-    **/
+     */
     skip?: number
     distinct?: Enumerable<ProvinceScalarFieldEnum>
   }
@@ -8794,18 +8542,15 @@ export namespace Prisma {
   export type ProvinceCreateArgs = {
     /**
      * Select specific fields to fetch from the Province
-     * 
-    **/
+     */
     select?: ProvinceSelect | null
     /**
      * Choose, which related nodes to fetch as well.
-     * 
-    **/
+     */
     include?: ProvinceInclude | null
     /**
      * The data needed to create a Province.
-     * 
-    **/
+     */
     data: XOR<ProvinceCreateInput, ProvinceUncheckedCreateInput>
   }
 
@@ -8816,8 +8561,7 @@ export namespace Prisma {
   export type ProvinceCreateManyArgs = {
     /**
      * The data used to create many Provinces.
-     * 
-    **/
+     */
     data: Enumerable<ProvinceCreateManyInput>
     skipDuplicates?: boolean
   }
@@ -8829,23 +8573,19 @@ export namespace Prisma {
   export type ProvinceUpdateArgs = {
     /**
      * Select specific fields to fetch from the Province
-     * 
-    **/
+     */
     select?: ProvinceSelect | null
     /**
      * Choose, which related nodes to fetch as well.
-     * 
-    **/
+     */
     include?: ProvinceInclude | null
     /**
      * The data needed to update a Province.
-     * 
-    **/
+     */
     data: XOR<ProvinceUpdateInput, ProvinceUncheckedUpdateInput>
     /**
      * Choose, which Province to update.
-     * 
-    **/
+     */
     where: ProvinceWhereUniqueInput
   }
 
@@ -8856,13 +8596,11 @@ export namespace Prisma {
   export type ProvinceUpdateManyArgs = {
     /**
      * The data used to update Provinces.
-     * 
-    **/
+     */
     data: XOR<ProvinceUpdateManyMutationInput, ProvinceUncheckedUpdateManyInput>
     /**
      * Filter which Provinces to update
-     * 
-    **/
+     */
     where?: ProvinceWhereInput
   }
 
@@ -8873,28 +8611,23 @@ export namespace Prisma {
   export type ProvinceUpsertArgs = {
     /**
      * Select specific fields to fetch from the Province
-     * 
-    **/
+     */
     select?: ProvinceSelect | null
     /**
      * Choose, which related nodes to fetch as well.
-     * 
-    **/
+     */
     include?: ProvinceInclude | null
     /**
      * The filter to search for the Province to update in case it exists.
-     * 
-    **/
+     */
     where: ProvinceWhereUniqueInput
     /**
      * In case the Province found by the `where` argument doesn't exist, create a new Province with this data.
-     * 
-    **/
+     */
     create: XOR<ProvinceCreateInput, ProvinceUncheckedCreateInput>
     /**
      * In case the Province was found with the provided `where` argument, update it with this data.
-     * 
-    **/
+     */
     update: XOR<ProvinceUpdateInput, ProvinceUncheckedUpdateInput>
   }
 
@@ -8905,18 +8638,15 @@ export namespace Prisma {
   export type ProvinceDeleteArgs = {
     /**
      * Select specific fields to fetch from the Province
-     * 
-    **/
+     */
     select?: ProvinceSelect | null
     /**
      * Choose, which related nodes to fetch as well.
-     * 
-    **/
+     */
     include?: ProvinceInclude | null
     /**
      * Filter which Province to delete.
-     * 
-    **/
+     */
     where: ProvinceWhereUniqueInput
   }
 
@@ -8927,9 +8657,29 @@ export namespace Prisma {
   export type ProvinceDeleteManyArgs = {
     /**
      * Filter which Provinces to delete
-     * 
-    **/
+     */
     where?: ProvinceWhereInput
+  }
+
+
+  /**
+   * Province.district
+   */
+  export type Province$districtArgs = {
+    /**
+     * Select specific fields to fetch from the District
+     */
+    select?: DistrictSelect | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: DistrictInclude | null
+    where?: DistrictWhereInput
+    orderBy?: Enumerable<DistrictOrderByWithRelationInput>
+    cursor?: DistrictWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: Enumerable<DistrictScalarFieldEnum>
   }
 
 
@@ -8939,13 +8689,11 @@ export namespace Prisma {
   export type ProvinceArgs = {
     /**
      * Select specific fields to fetch from the Province
-     * 
-    **/
+     */
     select?: ProvinceSelect | null
     /**
      * Choose, which related nodes to fetch as well.
-     * 
-    **/
+     */
     include?: ProvinceInclude | null
   }
 
@@ -9004,36 +8752,31 @@ export namespace Prisma {
   export type DistrictAggregateArgs = {
     /**
      * Filter which District to aggregate.
-     * 
-    **/
+     */
     where?: DistrictWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
      * 
      * Determine the order of Districts to fetch.
-     * 
-    **/
+     */
     orderBy?: Enumerable<DistrictOrderByWithRelationInput>
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      * 
      * Sets the start position
-     * 
-    **/
+     */
     cursor?: DistrictWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
      * Take `±n` Districts from the position of the cursor.
-     * 
-    **/
+     */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
      * Skip the first `n` Districts.
-     * 
-    **/
+     */
     skip?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
@@ -9069,7 +8812,7 @@ export namespace Prisma {
   export type DistrictGroupByArgs = {
     where?: DistrictWhereInput
     orderBy?: Enumerable<DistrictOrderByWithAggregationInput>
-    by: Array<DistrictScalarFieldEnum>
+    by: DistrictScalarFieldEnum[]
     having?: DistrictScalarWhereWithAggregatesInput
     take?: number
     skip?: number
@@ -9107,16 +8850,16 @@ export namespace Prisma {
     name?: boolean
     provinceId?: boolean
     province?: boolean | ProvinceArgs
-    amphoe?: boolean | AmphoeFindManyArgs
+    amphoe?: boolean | District$amphoeArgs
     _count?: boolean | DistrictCountOutputTypeArgs
   }
 
 
   export type DistrictInclude = {
     province?: boolean | ProvinceArgs
-    amphoe?: boolean | AmphoeFindManyArgs
+    amphoe?: boolean | District$amphoeArgs
     _count?: boolean | DistrictCountOutputTypeArgs
-  } 
+  }
 
   export type DistrictGetPayload<S extends boolean | null | undefined | DistrictArgs> =
     S extends { select: any, include: any } ? 'Please either choose `select` or `include`' :
@@ -9139,13 +8882,13 @@ export namespace Prisma {
       : District
 
 
-  type DistrictCountArgs = Merge<
+  type DistrictCountArgs = 
     Omit<DistrictFindManyArgs, 'select' | 'include'> & {
       select?: DistrictCountAggregateInputType | true
     }
-  >
 
   export interface DistrictDelegate<GlobalRejectSettings extends Prisma.RejectOnNotFound | Prisma.RejectPerOperation | false | undefined> {
+
     /**
      * Find zero or one District that matches the filter.
      * @param {DistrictFindUniqueArgs} args - Arguments to find a District
@@ -9510,7 +9253,7 @@ export namespace Prisma {
 
     province<T extends ProvinceArgs= {}>(args?: Subset<T, ProvinceArgs>): Prisma__ProvinceClient<ProvinceGetPayload<T> | Null>;
 
-    amphoe<T extends AmphoeFindManyArgs= {}>(args?: Subset<T, AmphoeFindManyArgs>): PrismaPromise<Array<AmphoeGetPayload<T>>| Null>;
+    amphoe<T extends District$amphoeArgs= {}>(args?: Subset<T, District$amphoeArgs>): PrismaPromise<Array<AmphoeGetPayload<T>>| Null>;
 
     private get _document();
     /**
@@ -9545,23 +9288,20 @@ export namespace Prisma {
   export type DistrictFindUniqueArgsBase = {
     /**
      * Select specific fields to fetch from the District
-     * 
-    **/
+     */
     select?: DistrictSelect | null
     /**
      * Choose, which related nodes to fetch as well.
-     * 
-    **/
+     */
     include?: DistrictInclude | null
     /**
      * Filter, which District to fetch.
-     * 
-    **/
+     */
     where: DistrictWhereUniqueInput
   }
 
   /**
-   * District: findUnique
+   * District findUnique
    */
   export interface DistrictFindUniqueArgs extends DistrictFindUniqueArgsBase {
    /**
@@ -9578,18 +9318,15 @@ export namespace Prisma {
   export type DistrictFindUniqueOrThrowArgs = {
     /**
      * Select specific fields to fetch from the District
-     * 
-    **/
+     */
     select?: DistrictSelect | null
     /**
      * Choose, which related nodes to fetch as well.
-     * 
-    **/
+     */
     include?: DistrictInclude | null
     /**
      * Filter, which District to fetch.
-     * 
-    **/
+     */
     where: DistrictWhereUniqueInput
   }
 
@@ -9600,58 +9337,50 @@ export namespace Prisma {
   export type DistrictFindFirstArgsBase = {
     /**
      * Select specific fields to fetch from the District
-     * 
-    **/
+     */
     select?: DistrictSelect | null
     /**
      * Choose, which related nodes to fetch as well.
-     * 
-    **/
+     */
     include?: DistrictInclude | null
     /**
      * Filter, which District to fetch.
-     * 
-    **/
+     */
     where?: DistrictWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
      * 
      * Determine the order of Districts to fetch.
-     * 
-    **/
+     */
     orderBy?: Enumerable<DistrictOrderByWithRelationInput>
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      * 
      * Sets the position for searching for Districts.
-     * 
-    **/
+     */
     cursor?: DistrictWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
      * Take `±n` Districts from the position of the cursor.
-     * 
-    **/
+     */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
      * Skip the first `n` Districts.
-     * 
-    **/
+     */
     skip?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
      * 
      * Filter by unique combinations of Districts.
-     * 
-    **/
+     */
     distinct?: Enumerable<DistrictScalarFieldEnum>
   }
 
   /**
-   * District: findFirst
+   * District findFirst
    */
   export interface DistrictFindFirstArgs extends DistrictFindFirstArgsBase {
    /**
@@ -9668,53 +9397,45 @@ export namespace Prisma {
   export type DistrictFindFirstOrThrowArgs = {
     /**
      * Select specific fields to fetch from the District
-     * 
-    **/
+     */
     select?: DistrictSelect | null
     /**
      * Choose, which related nodes to fetch as well.
-     * 
-    **/
+     */
     include?: DistrictInclude | null
     /**
      * Filter, which District to fetch.
-     * 
-    **/
+     */
     where?: DistrictWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
      * 
      * Determine the order of Districts to fetch.
-     * 
-    **/
+     */
     orderBy?: Enumerable<DistrictOrderByWithRelationInput>
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      * 
      * Sets the position for searching for Districts.
-     * 
-    **/
+     */
     cursor?: DistrictWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
      * Take `±n` Districts from the position of the cursor.
-     * 
-    **/
+     */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
      * Skip the first `n` Districts.
-     * 
-    **/
+     */
     skip?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
      * 
      * Filter by unique combinations of Districts.
-     * 
-    **/
+     */
     distinct?: Enumerable<DistrictScalarFieldEnum>
   }
 
@@ -9725,46 +9446,39 @@ export namespace Prisma {
   export type DistrictFindManyArgs = {
     /**
      * Select specific fields to fetch from the District
-     * 
-    **/
+     */
     select?: DistrictSelect | null
     /**
      * Choose, which related nodes to fetch as well.
-     * 
-    **/
+     */
     include?: DistrictInclude | null
     /**
      * Filter, which Districts to fetch.
-     * 
-    **/
+     */
     where?: DistrictWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
      * 
      * Determine the order of Districts to fetch.
-     * 
-    **/
+     */
     orderBy?: Enumerable<DistrictOrderByWithRelationInput>
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      * 
      * Sets the position for listing Districts.
-     * 
-    **/
+     */
     cursor?: DistrictWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
      * Take `±n` Districts from the position of the cursor.
-     * 
-    **/
+     */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
      * Skip the first `n` Districts.
-     * 
-    **/
+     */
     skip?: number
     distinct?: Enumerable<DistrictScalarFieldEnum>
   }
@@ -9776,18 +9490,15 @@ export namespace Prisma {
   export type DistrictCreateArgs = {
     /**
      * Select specific fields to fetch from the District
-     * 
-    **/
+     */
     select?: DistrictSelect | null
     /**
      * Choose, which related nodes to fetch as well.
-     * 
-    **/
+     */
     include?: DistrictInclude | null
     /**
      * The data needed to create a District.
-     * 
-    **/
+     */
     data: XOR<DistrictCreateInput, DistrictUncheckedCreateInput>
   }
 
@@ -9798,8 +9509,7 @@ export namespace Prisma {
   export type DistrictCreateManyArgs = {
     /**
      * The data used to create many Districts.
-     * 
-    **/
+     */
     data: Enumerable<DistrictCreateManyInput>
     skipDuplicates?: boolean
   }
@@ -9811,23 +9521,19 @@ export namespace Prisma {
   export type DistrictUpdateArgs = {
     /**
      * Select specific fields to fetch from the District
-     * 
-    **/
+     */
     select?: DistrictSelect | null
     /**
      * Choose, which related nodes to fetch as well.
-     * 
-    **/
+     */
     include?: DistrictInclude | null
     /**
      * The data needed to update a District.
-     * 
-    **/
+     */
     data: XOR<DistrictUpdateInput, DistrictUncheckedUpdateInput>
     /**
      * Choose, which District to update.
-     * 
-    **/
+     */
     where: DistrictWhereUniqueInput
   }
 
@@ -9838,13 +9544,11 @@ export namespace Prisma {
   export type DistrictUpdateManyArgs = {
     /**
      * The data used to update Districts.
-     * 
-    **/
+     */
     data: XOR<DistrictUpdateManyMutationInput, DistrictUncheckedUpdateManyInput>
     /**
      * Filter which Districts to update
-     * 
-    **/
+     */
     where?: DistrictWhereInput
   }
 
@@ -9855,28 +9559,23 @@ export namespace Prisma {
   export type DistrictUpsertArgs = {
     /**
      * Select specific fields to fetch from the District
-     * 
-    **/
+     */
     select?: DistrictSelect | null
     /**
      * Choose, which related nodes to fetch as well.
-     * 
-    **/
+     */
     include?: DistrictInclude | null
     /**
      * The filter to search for the District to update in case it exists.
-     * 
-    **/
+     */
     where: DistrictWhereUniqueInput
     /**
      * In case the District found by the `where` argument doesn't exist, create a new District with this data.
-     * 
-    **/
+     */
     create: XOR<DistrictCreateInput, DistrictUncheckedCreateInput>
     /**
      * In case the District was found with the provided `where` argument, update it with this data.
-     * 
-    **/
+     */
     update: XOR<DistrictUpdateInput, DistrictUncheckedUpdateInput>
   }
 
@@ -9887,18 +9586,15 @@ export namespace Prisma {
   export type DistrictDeleteArgs = {
     /**
      * Select specific fields to fetch from the District
-     * 
-    **/
+     */
     select?: DistrictSelect | null
     /**
      * Choose, which related nodes to fetch as well.
-     * 
-    **/
+     */
     include?: DistrictInclude | null
     /**
      * Filter which District to delete.
-     * 
-    **/
+     */
     where: DistrictWhereUniqueInput
   }
 
@@ -9909,9 +9605,29 @@ export namespace Prisma {
   export type DistrictDeleteManyArgs = {
     /**
      * Filter which Districts to delete
-     * 
-    **/
+     */
     where?: DistrictWhereInput
+  }
+
+
+  /**
+   * District.amphoe
+   */
+  export type District$amphoeArgs = {
+    /**
+     * Select specific fields to fetch from the Amphoe
+     */
+    select?: AmphoeSelect | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: AmphoeInclude | null
+    where?: AmphoeWhereInput
+    orderBy?: Enumerable<AmphoeOrderByWithRelationInput>
+    cursor?: AmphoeWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: Enumerable<AmphoeScalarFieldEnum>
   }
 
 
@@ -9921,13 +9637,11 @@ export namespace Prisma {
   export type DistrictArgs = {
     /**
      * Select specific fields to fetch from the District
-     * 
-    **/
+     */
     select?: DistrictSelect | null
     /**
      * Choose, which related nodes to fetch as well.
-     * 
-    **/
+     */
     include?: DistrictInclude | null
   }
 
@@ -9992,36 +9706,31 @@ export namespace Prisma {
   export type AmphoeAggregateArgs = {
     /**
      * Filter which Amphoe to aggregate.
-     * 
-    **/
+     */
     where?: AmphoeWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
      * 
      * Determine the order of Amphoes to fetch.
-     * 
-    **/
+     */
     orderBy?: Enumerable<AmphoeOrderByWithRelationInput>
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      * 
      * Sets the start position
-     * 
-    **/
+     */
     cursor?: AmphoeWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
      * Take `±n` Amphoes from the position of the cursor.
-     * 
-    **/
+     */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
      * Skip the first `n` Amphoes.
-     * 
-    **/
+     */
     skip?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
@@ -10057,7 +9766,7 @@ export namespace Prisma {
   export type AmphoeGroupByArgs = {
     where?: AmphoeWhereInput
     orderBy?: Enumerable<AmphoeOrderByWithAggregationInput>
-    by: Array<AmphoeScalarFieldEnum>
+    by: AmphoeScalarFieldEnum[]
     having?: AmphoeScalarWhereWithAggregatesInput
     take?: number
     skip?: number
@@ -10102,7 +9811,7 @@ export namespace Prisma {
 
   export type AmphoeInclude = {
     district?: boolean | DistrictArgs
-  } 
+  }
 
   export type AmphoeGetPayload<S extends boolean | null | undefined | AmphoeArgs> =
     S extends { select: any, include: any } ? 'Please either choose `select` or `include`' :
@@ -10121,13 +9830,13 @@ export namespace Prisma {
       : Amphoe
 
 
-  type AmphoeCountArgs = Merge<
+  type AmphoeCountArgs = 
     Omit<AmphoeFindManyArgs, 'select' | 'include'> & {
       select?: AmphoeCountAggregateInputType | true
     }
-  >
 
   export interface AmphoeDelegate<GlobalRejectSettings extends Prisma.RejectOnNotFound | Prisma.RejectPerOperation | false | undefined> {
+
     /**
      * Find zero or one Amphoe that matches the filter.
      * @param {AmphoeFindUniqueArgs} args - Arguments to find a Amphoe
@@ -10525,23 +10234,20 @@ export namespace Prisma {
   export type AmphoeFindUniqueArgsBase = {
     /**
      * Select specific fields to fetch from the Amphoe
-     * 
-    **/
+     */
     select?: AmphoeSelect | null
     /**
      * Choose, which related nodes to fetch as well.
-     * 
-    **/
+     */
     include?: AmphoeInclude | null
     /**
      * Filter, which Amphoe to fetch.
-     * 
-    **/
+     */
     where: AmphoeWhereUniqueInput
   }
 
   /**
-   * Amphoe: findUnique
+   * Amphoe findUnique
    */
   export interface AmphoeFindUniqueArgs extends AmphoeFindUniqueArgsBase {
    /**
@@ -10558,18 +10264,15 @@ export namespace Prisma {
   export type AmphoeFindUniqueOrThrowArgs = {
     /**
      * Select specific fields to fetch from the Amphoe
-     * 
-    **/
+     */
     select?: AmphoeSelect | null
     /**
      * Choose, which related nodes to fetch as well.
-     * 
-    **/
+     */
     include?: AmphoeInclude | null
     /**
      * Filter, which Amphoe to fetch.
-     * 
-    **/
+     */
     where: AmphoeWhereUniqueInput
   }
 
@@ -10580,58 +10283,50 @@ export namespace Prisma {
   export type AmphoeFindFirstArgsBase = {
     /**
      * Select specific fields to fetch from the Amphoe
-     * 
-    **/
+     */
     select?: AmphoeSelect | null
     /**
      * Choose, which related nodes to fetch as well.
-     * 
-    **/
+     */
     include?: AmphoeInclude | null
     /**
      * Filter, which Amphoe to fetch.
-     * 
-    **/
+     */
     where?: AmphoeWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
      * 
      * Determine the order of Amphoes to fetch.
-     * 
-    **/
+     */
     orderBy?: Enumerable<AmphoeOrderByWithRelationInput>
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      * 
      * Sets the position for searching for Amphoes.
-     * 
-    **/
+     */
     cursor?: AmphoeWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
      * Take `±n` Amphoes from the position of the cursor.
-     * 
-    **/
+     */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
      * Skip the first `n` Amphoes.
-     * 
-    **/
+     */
     skip?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
      * 
      * Filter by unique combinations of Amphoes.
-     * 
-    **/
+     */
     distinct?: Enumerable<AmphoeScalarFieldEnum>
   }
 
   /**
-   * Amphoe: findFirst
+   * Amphoe findFirst
    */
   export interface AmphoeFindFirstArgs extends AmphoeFindFirstArgsBase {
    /**
@@ -10648,53 +10343,45 @@ export namespace Prisma {
   export type AmphoeFindFirstOrThrowArgs = {
     /**
      * Select specific fields to fetch from the Amphoe
-     * 
-    **/
+     */
     select?: AmphoeSelect | null
     /**
      * Choose, which related nodes to fetch as well.
-     * 
-    **/
+     */
     include?: AmphoeInclude | null
     /**
      * Filter, which Amphoe to fetch.
-     * 
-    **/
+     */
     where?: AmphoeWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
      * 
      * Determine the order of Amphoes to fetch.
-     * 
-    **/
+     */
     orderBy?: Enumerable<AmphoeOrderByWithRelationInput>
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      * 
      * Sets the position for searching for Amphoes.
-     * 
-    **/
+     */
     cursor?: AmphoeWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
      * Take `±n` Amphoes from the position of the cursor.
-     * 
-    **/
+     */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
      * Skip the first `n` Amphoes.
-     * 
-    **/
+     */
     skip?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
      * 
      * Filter by unique combinations of Amphoes.
-     * 
-    **/
+     */
     distinct?: Enumerable<AmphoeScalarFieldEnum>
   }
 
@@ -10705,46 +10392,39 @@ export namespace Prisma {
   export type AmphoeFindManyArgs = {
     /**
      * Select specific fields to fetch from the Amphoe
-     * 
-    **/
+     */
     select?: AmphoeSelect | null
     /**
      * Choose, which related nodes to fetch as well.
-     * 
-    **/
+     */
     include?: AmphoeInclude | null
     /**
      * Filter, which Amphoes to fetch.
-     * 
-    **/
+     */
     where?: AmphoeWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
      * 
      * Determine the order of Amphoes to fetch.
-     * 
-    **/
+     */
     orderBy?: Enumerable<AmphoeOrderByWithRelationInput>
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      * 
      * Sets the position for listing Amphoes.
-     * 
-    **/
+     */
     cursor?: AmphoeWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
      * Take `±n` Amphoes from the position of the cursor.
-     * 
-    **/
+     */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
      * Skip the first `n` Amphoes.
-     * 
-    **/
+     */
     skip?: number
     distinct?: Enumerable<AmphoeScalarFieldEnum>
   }
@@ -10756,18 +10436,15 @@ export namespace Prisma {
   export type AmphoeCreateArgs = {
     /**
      * Select specific fields to fetch from the Amphoe
-     * 
-    **/
+     */
     select?: AmphoeSelect | null
     /**
      * Choose, which related nodes to fetch as well.
-     * 
-    **/
+     */
     include?: AmphoeInclude | null
     /**
      * The data needed to create a Amphoe.
-     * 
-    **/
+     */
     data: XOR<AmphoeCreateInput, AmphoeUncheckedCreateInput>
   }
 
@@ -10778,8 +10455,7 @@ export namespace Prisma {
   export type AmphoeCreateManyArgs = {
     /**
      * The data used to create many Amphoes.
-     * 
-    **/
+     */
     data: Enumerable<AmphoeCreateManyInput>
     skipDuplicates?: boolean
   }
@@ -10791,23 +10467,19 @@ export namespace Prisma {
   export type AmphoeUpdateArgs = {
     /**
      * Select specific fields to fetch from the Amphoe
-     * 
-    **/
+     */
     select?: AmphoeSelect | null
     /**
      * Choose, which related nodes to fetch as well.
-     * 
-    **/
+     */
     include?: AmphoeInclude | null
     /**
      * The data needed to update a Amphoe.
-     * 
-    **/
+     */
     data: XOR<AmphoeUpdateInput, AmphoeUncheckedUpdateInput>
     /**
      * Choose, which Amphoe to update.
-     * 
-    **/
+     */
     where: AmphoeWhereUniqueInput
   }
 
@@ -10818,13 +10490,11 @@ export namespace Prisma {
   export type AmphoeUpdateManyArgs = {
     /**
      * The data used to update Amphoes.
-     * 
-    **/
+     */
     data: XOR<AmphoeUpdateManyMutationInput, AmphoeUncheckedUpdateManyInput>
     /**
      * Filter which Amphoes to update
-     * 
-    **/
+     */
     where?: AmphoeWhereInput
   }
 
@@ -10835,28 +10505,23 @@ export namespace Prisma {
   export type AmphoeUpsertArgs = {
     /**
      * Select specific fields to fetch from the Amphoe
-     * 
-    **/
+     */
     select?: AmphoeSelect | null
     /**
      * Choose, which related nodes to fetch as well.
-     * 
-    **/
+     */
     include?: AmphoeInclude | null
     /**
      * The filter to search for the Amphoe to update in case it exists.
-     * 
-    **/
+     */
     where: AmphoeWhereUniqueInput
     /**
      * In case the Amphoe found by the `where` argument doesn't exist, create a new Amphoe with this data.
-     * 
-    **/
+     */
     create: XOR<AmphoeCreateInput, AmphoeUncheckedCreateInput>
     /**
      * In case the Amphoe was found with the provided `where` argument, update it with this data.
-     * 
-    **/
+     */
     update: XOR<AmphoeUpdateInput, AmphoeUncheckedUpdateInput>
   }
 
@@ -10867,18 +10532,15 @@ export namespace Prisma {
   export type AmphoeDeleteArgs = {
     /**
      * Select specific fields to fetch from the Amphoe
-     * 
-    **/
+     */
     select?: AmphoeSelect | null
     /**
      * Choose, which related nodes to fetch as well.
-     * 
-    **/
+     */
     include?: AmphoeInclude | null
     /**
      * Filter which Amphoe to delete.
-     * 
-    **/
+     */
     where: AmphoeWhereUniqueInput
   }
 
@@ -10889,8 +10551,7 @@ export namespace Prisma {
   export type AmphoeDeleteManyArgs = {
     /**
      * Filter which Amphoes to delete
-     * 
-    **/
+     */
     where?: AmphoeWhereInput
   }
 
@@ -10901,13 +10562,11 @@ export namespace Prisma {
   export type AmphoeArgs = {
     /**
      * Select specific fields to fetch from the Amphoe
-     * 
-    **/
+     */
     select?: AmphoeSelect | null
     /**
      * Choose, which related nodes to fetch as well.
-     * 
-    **/
+     */
     include?: AmphoeInclude | null
   }
 
@@ -10956,36 +10615,31 @@ export namespace Prisma {
   export type PosotionAggregateArgs = {
     /**
      * Filter which Posotion to aggregate.
-     * 
-    **/
+     */
     where?: PosotionWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
      * 
      * Determine the order of Posotions to fetch.
-     * 
-    **/
+     */
     orderBy?: Enumerable<PosotionOrderByWithRelationInput>
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      * 
      * Sets the start position
-     * 
-    **/
+     */
     cursor?: PosotionWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
      * Take `±n` Posotions from the position of the cursor.
-     * 
-    **/
+     */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
      * Skip the first `n` Posotions.
-     * 
-    **/
+     */
     skip?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
@@ -11021,7 +10675,7 @@ export namespace Prisma {
   export type PosotionGroupByArgs = {
     where?: PosotionWhereInput
     orderBy?: Enumerable<PosotionOrderByWithAggregationInput>
-    by: Array<PosotionScalarFieldEnum>
+    by: PosotionScalarFieldEnum[]
     having?: PosotionScalarWhereWithAggregatesInput
     take?: number
     skip?: number
@@ -11073,13 +10727,13 @@ export namespace Prisma {
       : Posotion
 
 
-  type PosotionCountArgs = Merge<
+  type PosotionCountArgs = 
     Omit<PosotionFindManyArgs, 'select' | 'include'> & {
       select?: PosotionCountAggregateInputType | true
     }
-  >
 
   export interface PosotionDelegate<GlobalRejectSettings extends Prisma.RejectOnNotFound | Prisma.RejectPerOperation | false | undefined> {
+
     /**
      * Find zero or one Posotion that matches the filter.
      * @param {PosotionFindUniqueArgs} args - Arguments to find a Posotion
@@ -11476,18 +11130,16 @@ export namespace Prisma {
   export type PosotionFindUniqueArgsBase = {
     /**
      * Select specific fields to fetch from the Posotion
-     * 
-    **/
+     */
     select?: PosotionSelect | null
     /**
      * Filter, which Posotion to fetch.
-     * 
-    **/
+     */
     where: PosotionWhereUniqueInput
   }
 
   /**
-   * Posotion: findUnique
+   * Posotion findUnique
    */
   export interface PosotionFindUniqueArgs extends PosotionFindUniqueArgsBase {
    /**
@@ -11504,13 +11156,11 @@ export namespace Prisma {
   export type PosotionFindUniqueOrThrowArgs = {
     /**
      * Select specific fields to fetch from the Posotion
-     * 
-    **/
+     */
     select?: PosotionSelect | null
     /**
      * Filter, which Posotion to fetch.
-     * 
-    **/
+     */
     where: PosotionWhereUniqueInput
   }
 
@@ -11521,53 +11171,46 @@ export namespace Prisma {
   export type PosotionFindFirstArgsBase = {
     /**
      * Select specific fields to fetch from the Posotion
-     * 
-    **/
+     */
     select?: PosotionSelect | null
     /**
      * Filter, which Posotion to fetch.
-     * 
-    **/
+     */
     where?: PosotionWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
      * 
      * Determine the order of Posotions to fetch.
-     * 
-    **/
+     */
     orderBy?: Enumerable<PosotionOrderByWithRelationInput>
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      * 
      * Sets the position for searching for Posotions.
-     * 
-    **/
+     */
     cursor?: PosotionWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
      * Take `±n` Posotions from the position of the cursor.
-     * 
-    **/
+     */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
      * Skip the first `n` Posotions.
-     * 
-    **/
+     */
     skip?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
      * 
      * Filter by unique combinations of Posotions.
-     * 
-    **/
+     */
     distinct?: Enumerable<PosotionScalarFieldEnum>
   }
 
   /**
-   * Posotion: findFirst
+   * Posotion findFirst
    */
   export interface PosotionFindFirstArgs extends PosotionFindFirstArgsBase {
    /**
@@ -11584,48 +11227,41 @@ export namespace Prisma {
   export type PosotionFindFirstOrThrowArgs = {
     /**
      * Select specific fields to fetch from the Posotion
-     * 
-    **/
+     */
     select?: PosotionSelect | null
     /**
      * Filter, which Posotion to fetch.
-     * 
-    **/
+     */
     where?: PosotionWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
      * 
      * Determine the order of Posotions to fetch.
-     * 
-    **/
+     */
     orderBy?: Enumerable<PosotionOrderByWithRelationInput>
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      * 
      * Sets the position for searching for Posotions.
-     * 
-    **/
+     */
     cursor?: PosotionWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
      * Take `±n` Posotions from the position of the cursor.
-     * 
-    **/
+     */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
      * Skip the first `n` Posotions.
-     * 
-    **/
+     */
     skip?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
      * 
      * Filter by unique combinations of Posotions.
-     * 
-    **/
+     */
     distinct?: Enumerable<PosotionScalarFieldEnum>
   }
 
@@ -11636,41 +11272,35 @@ export namespace Prisma {
   export type PosotionFindManyArgs = {
     /**
      * Select specific fields to fetch from the Posotion
-     * 
-    **/
+     */
     select?: PosotionSelect | null
     /**
      * Filter, which Posotions to fetch.
-     * 
-    **/
+     */
     where?: PosotionWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
      * 
      * Determine the order of Posotions to fetch.
-     * 
-    **/
+     */
     orderBy?: Enumerable<PosotionOrderByWithRelationInput>
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      * 
      * Sets the position for listing Posotions.
-     * 
-    **/
+     */
     cursor?: PosotionWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
      * Take `±n` Posotions from the position of the cursor.
-     * 
-    **/
+     */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
      * Skip the first `n` Posotions.
-     * 
-    **/
+     */
     skip?: number
     distinct?: Enumerable<PosotionScalarFieldEnum>
   }
@@ -11682,13 +11312,11 @@ export namespace Prisma {
   export type PosotionCreateArgs = {
     /**
      * Select specific fields to fetch from the Posotion
-     * 
-    **/
+     */
     select?: PosotionSelect | null
     /**
      * The data needed to create a Posotion.
-     * 
-    **/
+     */
     data: XOR<PosotionCreateInput, PosotionUncheckedCreateInput>
   }
 
@@ -11699,8 +11327,7 @@ export namespace Prisma {
   export type PosotionCreateManyArgs = {
     /**
      * The data used to create many Posotions.
-     * 
-    **/
+     */
     data: Enumerable<PosotionCreateManyInput>
     skipDuplicates?: boolean
   }
@@ -11712,18 +11339,15 @@ export namespace Prisma {
   export type PosotionUpdateArgs = {
     /**
      * Select specific fields to fetch from the Posotion
-     * 
-    **/
+     */
     select?: PosotionSelect | null
     /**
      * The data needed to update a Posotion.
-     * 
-    **/
+     */
     data: XOR<PosotionUpdateInput, PosotionUncheckedUpdateInput>
     /**
      * Choose, which Posotion to update.
-     * 
-    **/
+     */
     where: PosotionWhereUniqueInput
   }
 
@@ -11734,13 +11358,11 @@ export namespace Prisma {
   export type PosotionUpdateManyArgs = {
     /**
      * The data used to update Posotions.
-     * 
-    **/
+     */
     data: XOR<PosotionUpdateManyMutationInput, PosotionUncheckedUpdateManyInput>
     /**
      * Filter which Posotions to update
-     * 
-    **/
+     */
     where?: PosotionWhereInput
   }
 
@@ -11751,23 +11373,19 @@ export namespace Prisma {
   export type PosotionUpsertArgs = {
     /**
      * Select specific fields to fetch from the Posotion
-     * 
-    **/
+     */
     select?: PosotionSelect | null
     /**
      * The filter to search for the Posotion to update in case it exists.
-     * 
-    **/
+     */
     where: PosotionWhereUniqueInput
     /**
      * In case the Posotion found by the `where` argument doesn't exist, create a new Posotion with this data.
-     * 
-    **/
+     */
     create: XOR<PosotionCreateInput, PosotionUncheckedCreateInput>
     /**
      * In case the Posotion was found with the provided `where` argument, update it with this data.
-     * 
-    **/
+     */
     update: XOR<PosotionUpdateInput, PosotionUncheckedUpdateInput>
   }
 
@@ -11778,13 +11396,11 @@ export namespace Prisma {
   export type PosotionDeleteArgs = {
     /**
      * Select specific fields to fetch from the Posotion
-     * 
-    **/
+     */
     select?: PosotionSelect | null
     /**
      * Filter which Posotion to delete.
-     * 
-    **/
+     */
     where: PosotionWhereUniqueInput
   }
 
@@ -11795,8 +11411,7 @@ export namespace Prisma {
   export type PosotionDeleteManyArgs = {
     /**
      * Filter which Posotions to delete
-     * 
-    **/
+     */
     where?: PosotionWhereInput
   }
 
@@ -11807,8 +11422,7 @@ export namespace Prisma {
   export type PosotionArgs = {
     /**
      * Select specific fields to fetch from the Posotion
-     * 
-    **/
+     */
     select?: PosotionSelect | null
   }
 
@@ -14387,7 +14001,7 @@ export namespace Prisma {
 
   export type JsonFilterBase = {
     equals?: InputJsonValue | JsonNullValueFilter
-    path?: Array<string>
+    path?: string[]
     string_contains?: string
     string_starts_with?: string
     string_ends_with?: string
@@ -14439,7 +14053,7 @@ export namespace Prisma {
 
   export type JsonWithAggregatesFilterBase = {
     equals?: InputJsonValue | JsonNullValueFilter
-    path?: Array<string>
+    path?: string[]
     string_contains?: string
     string_starts_with?: string
     string_ends_with?: string
@@ -15340,7 +14954,7 @@ export namespace Prisma {
 
   export type NestedJsonFilterBase = {
     equals?: InputJsonValue | JsonNullValueFilter
-    path?: Array<string>
+    path?: string[]
     string_contains?: string
     string_starts_with?: string
     string_ends_with?: string
