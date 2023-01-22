@@ -42,14 +42,14 @@ type mas_positionlevel1 {
 
 
 type Query {
-    MasPositon: [mas_positionlevel1]
+    getMasPositon: [mas_positionlevel1]
   }
 
 `;
 
 export const positionResolvers: Resolvers = {
     Query: {
-      async MasPositon(p, args, ctx) {
+      async getMasPositon(p, args, ctx) {
         const result = await ctx.prisma.mas_positionlevel1.findMany({
           include: { mas_positionlevel2: { include: { mas_positionlevel3: true } }},
           where: {

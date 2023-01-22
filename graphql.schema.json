@@ -3613,22 +3613,6 @@
         "description": null,
         "fields": [
           {
-            "name": "MasPositon",
-            "description": null,
-            "args": [],
-            "type": {
-              "kind": "LIST",
-              "name": null,
-              "ofType": {
-                "kind": "OBJECT",
-                "name": "mas_positionlevel1",
-                "ofType": null
-              }
-            },
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
             "name": "company",
             "description": null,
             "args": [
@@ -3676,6 +3660,22 @@
               "ofType": {
                 "kind": "OBJECT",
                 "name": "CompanyBranch",
+                "ofType": null
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "getMasPositon",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "LIST",
+              "name": null,
+              "ofType": {
+                "kind": "OBJECT",
+                "name": "mas_positionlevel1",
                 "ofType": null
               }
             },
