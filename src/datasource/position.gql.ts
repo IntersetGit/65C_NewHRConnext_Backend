@@ -42,14 +42,14 @@ type mas_positionlevel1 {
 
 
 type Query {
-    getMasPositon: [mas_positionlevel1]
+    MasPositon: [mas_positionlevel1]
   }
 
-`
+`;
 
 export const positionResolvers: Resolvers = {
     Query: {
-      async getMasPositon(p, args, ctx) {
+      async MasPositon(p, args, ctx) {
         const result = await ctx.prisma.mas_positionlevel1.findMany({
           include: { mas_positionlevel2: { include: { mas_positionlevel3: true } }},
           where: {
@@ -63,7 +63,7 @@ export const positionResolvers: Resolvers = {
 
 
   const resolversPosition = {
-    'Query.getMasPositon': [authenticate()],
+    'Query.MasPositon': [authenticate()],
   };
   
   export const companyResolvers = composeResolvers(
