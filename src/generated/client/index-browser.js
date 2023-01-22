@@ -144,6 +144,13 @@ exports.Prisma.DistrictScalarFieldEnum = makeEnum({
   provinceId: 'provinceId'
 });
 
+exports.Prisma.Holiday_dateScalarFieldEnum = makeEnum({
+  id: 'id',
+  holiday_name: 'holiday_name',
+  date: 'date',
+  CompanyId: 'CompanyId'
+});
+
 exports.Prisma.JsonNullValueFilter = makeEnum({
   DbNull: Prisma.DbNull,
   JsonNull: Prisma.JsonNull,
@@ -154,9 +161,34 @@ exports.Prisma.JsonNullValueInput = makeEnum({
   JsonNull: Prisma.JsonNull
 });
 
-exports.Prisma.PosotionScalarFieldEnum = makeEnum({
+exports.Prisma.Mas_positionlevel1ScalarFieldEnum = makeEnum({
   id: 'id',
-  detail: 'detail'
+  name: 'name',
+  CompanyId: 'CompanyId'
+});
+
+exports.Prisma.Mas_positionlevel2ScalarFieldEnum = makeEnum({
+  id: 'id',
+  name: 'name',
+  positionlevel1_id: 'positionlevel1_id',
+  CompanyId: 'CompanyId'
+});
+
+exports.Prisma.Mas_positionlevel3ScalarFieldEnum = makeEnum({
+  id: 'id',
+  name: 'name',
+  positionlevel2_id: 'positionlevel2_id',
+  CompanyId: 'CompanyId'
+});
+
+exports.Prisma.Position_userScalarFieldEnum = makeEnum({
+  id: 'id',
+  user_id: 'user_id',
+  position1_id: 'position1_id',
+  position2_id: 'position2_id',
+  position3_id: 'position3_id',
+  role: 'role',
+  leader: 'leader'
 });
 
 exports.Prisma.ProfileScalarFieldEnum = makeEnum({
@@ -266,7 +298,11 @@ exports.Prisma.ModelName = makeEnum({
   Province: 'Province',
   District: 'District',
   Amphoe: 'Amphoe',
-  Posotion: 'Posotion'
+  mas_positionlevel1: 'mas_positionlevel1',
+  mas_positionlevel2: 'mas_positionlevel2',
+  mas_positionlevel3: 'mas_positionlevel3',
+  Position_user: 'Position_user',
+  holiday_date: 'holiday_date'
 });
 
 /**

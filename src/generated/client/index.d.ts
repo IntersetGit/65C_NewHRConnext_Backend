@@ -183,12 +183,60 @@ export type Amphoe = {
 }
 
 /**
- * Model Posotion
+ * Model mas_positionlevel1
  * 
  */
-export type Posotion = {
+export type mas_positionlevel1 = {
   id: string
-  detail: Prisma.JsonValue[]
+  name: string
+  CompanyId: string | null
+}
+
+/**
+ * Model mas_positionlevel2
+ * 
+ */
+export type mas_positionlevel2 = {
+  id: string
+  name: string
+  positionlevel1_id: string | null
+  CompanyId: string | null
+}
+
+/**
+ * Model mas_positionlevel3
+ * 
+ */
+export type mas_positionlevel3 = {
+  id: string
+  name: string
+  positionlevel2_id: string | null
+  CompanyId: string | null
+}
+
+/**
+ * Model Position_user
+ * 
+ */
+export type Position_user = {
+  id: string
+  user_id: string | null
+  position1_id: string | null
+  position2_id: string | null
+  position3_id: string | null
+  role: string | null
+  leader: string | null
+}
+
+/**
+ * Model holiday_date
+ * 
+ */
+export type holiday_date = {
+  id: string
+  holiday_name: string | null
+  date: Date
+  CompanyId: string | null
 }
 
 
@@ -400,14 +448,54 @@ export class PrismaClient<
   get amphoe(): Prisma.AmphoeDelegate<GlobalReject>;
 
   /**
-   * `prisma.posotion`: Exposes CRUD operations for the **Posotion** model.
+   * `prisma.mas_positionlevel1`: Exposes CRUD operations for the **mas_positionlevel1** model.
     * Example usage:
     * ```ts
-    * // Fetch zero or more Posotions
-    * const posotions = await prisma.posotion.findMany()
+    * // Fetch zero or more Mas_positionlevel1s
+    * const mas_positionlevel1s = await prisma.mas_positionlevel1.findMany()
     * ```
     */
-  get posotion(): Prisma.PosotionDelegate<GlobalReject>;
+  get mas_positionlevel1(): Prisma.mas_positionlevel1Delegate<GlobalReject>;
+
+  /**
+   * `prisma.mas_positionlevel2`: Exposes CRUD operations for the **mas_positionlevel2** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more Mas_positionlevel2s
+    * const mas_positionlevel2s = await prisma.mas_positionlevel2.findMany()
+    * ```
+    */
+  get mas_positionlevel2(): Prisma.mas_positionlevel2Delegate<GlobalReject>;
+
+  /**
+   * `prisma.mas_positionlevel3`: Exposes CRUD operations for the **mas_positionlevel3** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more Mas_positionlevel3s
+    * const mas_positionlevel3s = await prisma.mas_positionlevel3.findMany()
+    * ```
+    */
+  get mas_positionlevel3(): Prisma.mas_positionlevel3Delegate<GlobalReject>;
+
+  /**
+   * `prisma.position_user`: Exposes CRUD operations for the **Position_user** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more Position_users
+    * const position_users = await prisma.position_user.findMany()
+    * ```
+    */
+  get position_user(): Prisma.Position_userDelegate<GlobalReject>;
+
+  /**
+   * `prisma.holiday_date`: Exposes CRUD operations for the **holiday_date** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more Holiday_dates
+    * const holiday_dates = await prisma.holiday_date.findMany()
+    * ```
+    */
+  get holiday_date(): Prisma.holiday_dateDelegate<GlobalReject>;
 }
 
 export namespace Prisma {
@@ -893,7 +981,11 @@ export namespace Prisma {
     Province: 'Province',
     District: 'District',
     Amphoe: 'Amphoe',
-    Posotion: 'Posotion'
+    mas_positionlevel1: 'mas_positionlevel1',
+    mas_positionlevel2: 'mas_positionlevel2',
+    mas_positionlevel3: 'mas_positionlevel3',
+    Position_user: 'Position_user',
+    holiday_date: 'holiday_date'
   };
 
   export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -1065,10 +1157,18 @@ export namespace Prisma {
 
   export type CompanyCountOutputType = {
     branch: number
+    mas_positionlevel3: number
+    mas_positionlevel2: number
+    mas_positionlevel1: number
+    holiday_date: number
   }
 
   export type CompanyCountOutputTypeSelect = {
     branch?: boolean
+    mas_positionlevel3?: boolean
+    mas_positionlevel2?: boolean
+    mas_positionlevel1?: boolean
+    holiday_date?: boolean
   }
 
   export type CompanyCountOutputTypeGetPayload<S extends boolean | null | undefined | CompanyCountOutputTypeArgs> =
@@ -1153,10 +1253,12 @@ export namespace Prisma {
 
   export type UserCountOutputType = {
     company: number
+    Position_user: number
   }
 
   export type UserCountOutputTypeSelect = {
     company?: boolean
+    Position_user?: boolean
   }
 
   export type UserCountOutputTypeGetPayload<S extends boolean | null | undefined | UserCountOutputTypeArgs> =
@@ -1357,6 +1459,139 @@ export namespace Prisma {
      * Select specific fields to fetch from the DistrictCountOutputType
      */
     select?: DistrictCountOutputTypeSelect | null
+  }
+
+
+
+  /**
+   * Count Type Mas_positionlevel1CountOutputType
+   */
+
+
+  export type Mas_positionlevel1CountOutputType = {
+    mas_positionlevel2: number
+    Position_user: number
+  }
+
+  export type Mas_positionlevel1CountOutputTypeSelect = {
+    mas_positionlevel2?: boolean
+    Position_user?: boolean
+  }
+
+  export type Mas_positionlevel1CountOutputTypeGetPayload<S extends boolean | null | undefined | Mas_positionlevel1CountOutputTypeArgs> =
+    S extends { select: any, include: any } ? 'Please either choose `select` or `include`' :
+    S extends true ? Mas_positionlevel1CountOutputType :
+    S extends undefined ? never :
+    S extends { include: any } & (Mas_positionlevel1CountOutputTypeArgs)
+    ? Mas_positionlevel1CountOutputType 
+    : S extends { select: any } & (Mas_positionlevel1CountOutputTypeArgs)
+      ? {
+    [P in TruthyKeys<S['select']>]:
+    P extends keyof Mas_positionlevel1CountOutputType ? Mas_positionlevel1CountOutputType[P] : never
+  } 
+      : Mas_positionlevel1CountOutputType
+
+
+
+
+  // Custom InputTypes
+
+  /**
+   * Mas_positionlevel1CountOutputType without action
+   */
+  export type Mas_positionlevel1CountOutputTypeArgs = {
+    /**
+     * Select specific fields to fetch from the Mas_positionlevel1CountOutputType
+     */
+    select?: Mas_positionlevel1CountOutputTypeSelect | null
+  }
+
+
+
+  /**
+   * Count Type Mas_positionlevel2CountOutputType
+   */
+
+
+  export type Mas_positionlevel2CountOutputType = {
+    mas_positionlevel3: number
+    position_user: number
+  }
+
+  export type Mas_positionlevel2CountOutputTypeSelect = {
+    mas_positionlevel3?: boolean
+    position_user?: boolean
+  }
+
+  export type Mas_positionlevel2CountOutputTypeGetPayload<S extends boolean | null | undefined | Mas_positionlevel2CountOutputTypeArgs> =
+    S extends { select: any, include: any } ? 'Please either choose `select` or `include`' :
+    S extends true ? Mas_positionlevel2CountOutputType :
+    S extends undefined ? never :
+    S extends { include: any } & (Mas_positionlevel2CountOutputTypeArgs)
+    ? Mas_positionlevel2CountOutputType 
+    : S extends { select: any } & (Mas_positionlevel2CountOutputTypeArgs)
+      ? {
+    [P in TruthyKeys<S['select']>]:
+    P extends keyof Mas_positionlevel2CountOutputType ? Mas_positionlevel2CountOutputType[P] : never
+  } 
+      : Mas_positionlevel2CountOutputType
+
+
+
+
+  // Custom InputTypes
+
+  /**
+   * Mas_positionlevel2CountOutputType without action
+   */
+  export type Mas_positionlevel2CountOutputTypeArgs = {
+    /**
+     * Select specific fields to fetch from the Mas_positionlevel2CountOutputType
+     */
+    select?: Mas_positionlevel2CountOutputTypeSelect | null
+  }
+
+
+
+  /**
+   * Count Type Mas_positionlevel3CountOutputType
+   */
+
+
+  export type Mas_positionlevel3CountOutputType = {
+    Position_user: number
+  }
+
+  export type Mas_positionlevel3CountOutputTypeSelect = {
+    Position_user?: boolean
+  }
+
+  export type Mas_positionlevel3CountOutputTypeGetPayload<S extends boolean | null | undefined | Mas_positionlevel3CountOutputTypeArgs> =
+    S extends { select: any, include: any } ? 'Please either choose `select` or `include`' :
+    S extends true ? Mas_positionlevel3CountOutputType :
+    S extends undefined ? never :
+    S extends { include: any } & (Mas_positionlevel3CountOutputTypeArgs)
+    ? Mas_positionlevel3CountOutputType 
+    : S extends { select: any } & (Mas_positionlevel3CountOutputTypeArgs)
+      ? {
+    [P in TruthyKeys<S['select']>]:
+    P extends keyof Mas_positionlevel3CountOutputType ? Mas_positionlevel3CountOutputType[P] : never
+  } 
+      : Mas_positionlevel3CountOutputType
+
+
+
+
+  // Custom InputTypes
+
+  /**
+   * Mas_positionlevel3CountOutputType without action
+   */
+  export type Mas_positionlevel3CountOutputTypeArgs = {
+    /**
+     * Select specific fields to fetch from the Mas_positionlevel3CountOutputType
+     */
+    select?: Mas_positionlevel3CountOutputTypeSelect | null
   }
 
 
@@ -1607,6 +1842,10 @@ export namespace Prisma {
     ownerId?: boolean
     owner?: boolean | UserArgs
     branch?: boolean | Company$branchArgs
+    mas_positionlevel3?: boolean | Company$mas_positionlevel3Args
+    mas_positionlevel2?: boolean | Company$mas_positionlevel2Args
+    mas_positionlevel1?: boolean | Company$mas_positionlevel1Args
+    holiday_date?: boolean | Company$holiday_dateArgs
     _count?: boolean | CompanyCountOutputTypeArgs
   }
 
@@ -1614,6 +1853,10 @@ export namespace Prisma {
   export type CompanyInclude = {
     owner?: boolean | UserArgs
     branch?: boolean | Company$branchArgs
+    mas_positionlevel3?: boolean | Company$mas_positionlevel3Args
+    mas_positionlevel2?: boolean | Company$mas_positionlevel2Args
+    mas_positionlevel1?: boolean | Company$mas_positionlevel1Args
+    holiday_date?: boolean | Company$holiday_dateArgs
     _count?: boolean | CompanyCountOutputTypeArgs
   }
 
@@ -1626,6 +1869,10 @@ export namespace Prisma {
     [P in TruthyKeys<S['include']>]:
         P extends 'owner' ? UserGetPayload<S['include'][P]> :
         P extends 'branch' ? Array < CompanyBranchGetPayload<S['include'][P]>>  :
+        P extends 'mas_positionlevel3' ? Array < mas_positionlevel3GetPayload<S['include'][P]>>  :
+        P extends 'mas_positionlevel2' ? Array < mas_positionlevel2GetPayload<S['include'][P]>>  :
+        P extends 'mas_positionlevel1' ? Array < mas_positionlevel1GetPayload<S['include'][P]>>  :
+        P extends 'holiday_date' ? Array < holiday_dateGetPayload<S['include'][P]>>  :
         P extends '_count' ? CompanyCountOutputTypeGetPayload<S['include'][P]> :  never
   } 
     : S extends { select: any } & (CompanyArgs | CompanyFindManyArgs)
@@ -1633,6 +1880,10 @@ export namespace Prisma {
     [P in TruthyKeys<S['select']>]:
         P extends 'owner' ? UserGetPayload<S['select'][P]> :
         P extends 'branch' ? Array < CompanyBranchGetPayload<S['select'][P]>>  :
+        P extends 'mas_positionlevel3' ? Array < mas_positionlevel3GetPayload<S['select'][P]>>  :
+        P extends 'mas_positionlevel2' ? Array < mas_positionlevel2GetPayload<S['select'][P]>>  :
+        P extends 'mas_positionlevel1' ? Array < mas_positionlevel1GetPayload<S['select'][P]>>  :
+        P extends 'holiday_date' ? Array < holiday_dateGetPayload<S['select'][P]>>  :
         P extends '_count' ? CompanyCountOutputTypeGetPayload<S['select'][P]> :  P extends keyof Company ? Company[P] : never
   } 
       : Company
@@ -2011,6 +2262,14 @@ export namespace Prisma {
 
     branch<T extends Company$branchArgs= {}>(args?: Subset<T, Company$branchArgs>): PrismaPromise<Array<CompanyBranchGetPayload<T>>| Null>;
 
+    mas_positionlevel3<T extends Company$mas_positionlevel3Args= {}>(args?: Subset<T, Company$mas_positionlevel3Args>): PrismaPromise<Array<mas_positionlevel3GetPayload<T>>| Null>;
+
+    mas_positionlevel2<T extends Company$mas_positionlevel2Args= {}>(args?: Subset<T, Company$mas_positionlevel2Args>): PrismaPromise<Array<mas_positionlevel2GetPayload<T>>| Null>;
+
+    mas_positionlevel1<T extends Company$mas_positionlevel1Args= {}>(args?: Subset<T, Company$mas_positionlevel1Args>): PrismaPromise<Array<mas_positionlevel1GetPayload<T>>| Null>;
+
+    holiday_date<T extends Company$holiday_dateArgs= {}>(args?: Subset<T, Company$holiday_dateArgs>): PrismaPromise<Array<holiday_dateGetPayload<T>>| Null>;
+
     private get _document();
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
@@ -2384,6 +2643,90 @@ export namespace Prisma {
     take?: number
     skip?: number
     distinct?: Enumerable<CompanyBranchScalarFieldEnum>
+  }
+
+
+  /**
+   * Company.mas_positionlevel3
+   */
+  export type Company$mas_positionlevel3Args = {
+    /**
+     * Select specific fields to fetch from the mas_positionlevel3
+     */
+    select?: mas_positionlevel3Select | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: mas_positionlevel3Include | null
+    where?: mas_positionlevel3WhereInput
+    orderBy?: Enumerable<mas_positionlevel3OrderByWithRelationInput>
+    cursor?: mas_positionlevel3WhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: Enumerable<Mas_positionlevel3ScalarFieldEnum>
+  }
+
+
+  /**
+   * Company.mas_positionlevel2
+   */
+  export type Company$mas_positionlevel2Args = {
+    /**
+     * Select specific fields to fetch from the mas_positionlevel2
+     */
+    select?: mas_positionlevel2Select | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: mas_positionlevel2Include | null
+    where?: mas_positionlevel2WhereInput
+    orderBy?: Enumerable<mas_positionlevel2OrderByWithRelationInput>
+    cursor?: mas_positionlevel2WhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: Enumerable<Mas_positionlevel2ScalarFieldEnum>
+  }
+
+
+  /**
+   * Company.mas_positionlevel1
+   */
+  export type Company$mas_positionlevel1Args = {
+    /**
+     * Select specific fields to fetch from the mas_positionlevel1
+     */
+    select?: mas_positionlevel1Select | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: mas_positionlevel1Include | null
+    where?: mas_positionlevel1WhereInput
+    orderBy?: Enumerable<mas_positionlevel1OrderByWithRelationInput>
+    cursor?: mas_positionlevel1WhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: Enumerable<Mas_positionlevel1ScalarFieldEnum>
+  }
+
+
+  /**
+   * Company.holiday_date
+   */
+  export type Company$holiday_dateArgs = {
+    /**
+     * Select specific fields to fetch from the holiday_date
+     */
+    select?: holiday_dateSelect | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: holiday_dateInclude | null
+    where?: holiday_dateWhereInput
+    orderBy?: Enumerable<holiday_dateOrderByWithRelationInput>
+    cursor?: holiday_dateWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: Enumerable<Holiday_dateScalarFieldEnum>
   }
 
 
@@ -5026,6 +5369,7 @@ export namespace Prisma {
     companyBranch?: boolean | CompanyBranchArgs
     companyBranchId?: boolean
     Role_Company?: boolean | Role_CompanyArgs
+    Position_user?: boolean | User$Position_userArgs
     _count?: boolean | UserCountOutputTypeArgs
   }
 
@@ -5036,6 +5380,7 @@ export namespace Prisma {
     company?: boolean | User$companyArgs
     companyBranch?: boolean | CompanyBranchArgs
     Role_Company?: boolean | Role_CompanyArgs
+    Position_user?: boolean | User$Position_userArgs
     _count?: boolean | UserCountOutputTypeArgs
   }
 
@@ -5051,6 +5396,7 @@ export namespace Prisma {
         P extends 'company' ? Array < CompanyGetPayload<S['include'][P]>>  :
         P extends 'companyBranch' ? CompanyBranchGetPayload<S['include'][P]> | null :
         P extends 'Role_Company' ? Role_CompanyGetPayload<S['include'][P]> | null :
+        P extends 'Position_user' ? Array < Position_userGetPayload<S['include'][P]>>  :
         P extends '_count' ? UserCountOutputTypeGetPayload<S['include'][P]> :  never
   } 
     : S extends { select: any } & (UserArgs | UserFindManyArgs)
@@ -5061,6 +5407,7 @@ export namespace Prisma {
         P extends 'company' ? Array < CompanyGetPayload<S['select'][P]>>  :
         P extends 'companyBranch' ? CompanyBranchGetPayload<S['select'][P]> | null :
         P extends 'Role_Company' ? Role_CompanyGetPayload<S['select'][P]> | null :
+        P extends 'Position_user' ? Array < Position_userGetPayload<S['select'][P]>>  :
         P extends '_count' ? UserCountOutputTypeGetPayload<S['select'][P]> :  P extends keyof User ? User[P] : never
   } 
       : User
@@ -5445,6 +5792,8 @@ export namespace Prisma {
 
     Role_Company<T extends Role_CompanyArgs= {}>(args?: Subset<T, Role_CompanyArgs>): Prisma__Role_CompanyClient<Role_CompanyGetPayload<T> | Null>;
 
+    Position_user<T extends User$Position_userArgs= {}>(args?: Subset<T, User$Position_userArgs>): PrismaPromise<Array<Position_userGetPayload<T>>| Null>;
+
     private get _document();
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
@@ -5818,6 +6167,27 @@ export namespace Prisma {
     take?: number
     skip?: number
     distinct?: Enumerable<CompanyScalarFieldEnum>
+  }
+
+
+  /**
+   * User.Position_user
+   */
+  export type User$Position_userArgs = {
+    /**
+     * Select specific fields to fetch from the Position_user
+     */
+    select?: Position_userSelect | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: Position_userInclude | null
+    where?: Position_userWhereInput
+    orderBy?: Enumerable<Position_userOrderByWithRelationInput>
+    cursor?: Position_userWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: Enumerable<Position_userScalarFieldEnum>
   }
 
 
@@ -10573,307 +10943,339 @@ export namespace Prisma {
 
 
   /**
-   * Model Posotion
+   * Model mas_positionlevel1
    */
 
 
-  export type AggregatePosotion = {
-    _count: PosotionCountAggregateOutputType | null
-    _min: PosotionMinAggregateOutputType | null
-    _max: PosotionMaxAggregateOutputType | null
+  export type AggregateMas_positionlevel1 = {
+    _count: Mas_positionlevel1CountAggregateOutputType | null
+    _min: Mas_positionlevel1MinAggregateOutputType | null
+    _max: Mas_positionlevel1MaxAggregateOutputType | null
   }
 
-  export type PosotionMinAggregateOutputType = {
+  export type Mas_positionlevel1MinAggregateOutputType = {
     id: string | null
+    name: string | null
+    CompanyId: string | null
   }
 
-  export type PosotionMaxAggregateOutputType = {
+  export type Mas_positionlevel1MaxAggregateOutputType = {
     id: string | null
+    name: string | null
+    CompanyId: string | null
   }
 
-  export type PosotionCountAggregateOutputType = {
+  export type Mas_positionlevel1CountAggregateOutputType = {
     id: number
-    detail: number
+    name: number
+    CompanyId: number
     _all: number
   }
 
 
-  export type PosotionMinAggregateInputType = {
+  export type Mas_positionlevel1MinAggregateInputType = {
     id?: true
+    name?: true
+    CompanyId?: true
   }
 
-  export type PosotionMaxAggregateInputType = {
+  export type Mas_positionlevel1MaxAggregateInputType = {
     id?: true
+    name?: true
+    CompanyId?: true
   }
 
-  export type PosotionCountAggregateInputType = {
+  export type Mas_positionlevel1CountAggregateInputType = {
     id?: true
-    detail?: true
+    name?: true
+    CompanyId?: true
     _all?: true
   }
 
-  export type PosotionAggregateArgs = {
+  export type Mas_positionlevel1AggregateArgs = {
     /**
-     * Filter which Posotion to aggregate.
+     * Filter which mas_positionlevel1 to aggregate.
      */
-    where?: PosotionWhereInput
+    where?: mas_positionlevel1WhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
      * 
-     * Determine the order of Posotions to fetch.
+     * Determine the order of mas_positionlevel1s to fetch.
      */
-    orderBy?: Enumerable<PosotionOrderByWithRelationInput>
+    orderBy?: Enumerable<mas_positionlevel1OrderByWithRelationInput>
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      * 
      * Sets the start position
      */
-    cursor?: PosotionWhereUniqueInput
+    cursor?: mas_positionlevel1WhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Take `±n` Posotions from the position of the cursor.
+     * Take `±n` mas_positionlevel1s from the position of the cursor.
      */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Skip the first `n` Posotions.
+     * Skip the first `n` mas_positionlevel1s.
      */
     skip?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
-     * Count returned Posotions
+     * Count returned mas_positionlevel1s
     **/
-    _count?: true | PosotionCountAggregateInputType
+    _count?: true | Mas_positionlevel1CountAggregateInputType
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
      * Select which fields to find the minimum value
     **/
-    _min?: PosotionMinAggregateInputType
+    _min?: Mas_positionlevel1MinAggregateInputType
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
      * Select which fields to find the maximum value
     **/
-    _max?: PosotionMaxAggregateInputType
+    _max?: Mas_positionlevel1MaxAggregateInputType
   }
 
-  export type GetPosotionAggregateType<T extends PosotionAggregateArgs> = {
-        [P in keyof T & keyof AggregatePosotion]: P extends '_count' | 'count'
+  export type GetMas_positionlevel1AggregateType<T extends Mas_positionlevel1AggregateArgs> = {
+        [P in keyof T & keyof AggregateMas_positionlevel1]: P extends '_count' | 'count'
       ? T[P] extends true
         ? number
-        : GetScalarType<T[P], AggregatePosotion[P]>
-      : GetScalarType<T[P], AggregatePosotion[P]>
+        : GetScalarType<T[P], AggregateMas_positionlevel1[P]>
+      : GetScalarType<T[P], AggregateMas_positionlevel1[P]>
   }
 
 
 
 
-  export type PosotionGroupByArgs = {
-    where?: PosotionWhereInput
-    orderBy?: Enumerable<PosotionOrderByWithAggregationInput>
-    by: PosotionScalarFieldEnum[]
-    having?: PosotionScalarWhereWithAggregatesInput
+  export type Mas_positionlevel1GroupByArgs = {
+    where?: mas_positionlevel1WhereInput
+    orderBy?: Enumerable<mas_positionlevel1OrderByWithAggregationInput>
+    by: Mas_positionlevel1ScalarFieldEnum[]
+    having?: mas_positionlevel1ScalarWhereWithAggregatesInput
     take?: number
     skip?: number
-    _count?: PosotionCountAggregateInputType | true
-    _min?: PosotionMinAggregateInputType
-    _max?: PosotionMaxAggregateInputType
+    _count?: Mas_positionlevel1CountAggregateInputType | true
+    _min?: Mas_positionlevel1MinAggregateInputType
+    _max?: Mas_positionlevel1MaxAggregateInputType
   }
 
 
-  export type PosotionGroupByOutputType = {
+  export type Mas_positionlevel1GroupByOutputType = {
     id: string
-    detail: JsonValue[]
-    _count: PosotionCountAggregateOutputType | null
-    _min: PosotionMinAggregateOutputType | null
-    _max: PosotionMaxAggregateOutputType | null
+    name: string
+    CompanyId: string | null
+    _count: Mas_positionlevel1CountAggregateOutputType | null
+    _min: Mas_positionlevel1MinAggregateOutputType | null
+    _max: Mas_positionlevel1MaxAggregateOutputType | null
   }
 
-  type GetPosotionGroupByPayload<T extends PosotionGroupByArgs> = PrismaPromise<
+  type GetMas_positionlevel1GroupByPayload<T extends Mas_positionlevel1GroupByArgs> = PrismaPromise<
     Array<
-      PickArray<PosotionGroupByOutputType, T['by']> &
+      PickArray<Mas_positionlevel1GroupByOutputType, T['by']> &
         {
-          [P in ((keyof T) & (keyof PosotionGroupByOutputType))]: P extends '_count'
+          [P in ((keyof T) & (keyof Mas_positionlevel1GroupByOutputType))]: P extends '_count'
             ? T[P] extends boolean
               ? number
-              : GetScalarType<T[P], PosotionGroupByOutputType[P]>
-            : GetScalarType<T[P], PosotionGroupByOutputType[P]>
+              : GetScalarType<T[P], Mas_positionlevel1GroupByOutputType[P]>
+            : GetScalarType<T[P], Mas_positionlevel1GroupByOutputType[P]>
         }
       >
     >
 
 
-  export type PosotionSelect = {
+  export type mas_positionlevel1Select = {
     id?: boolean
-    detail?: boolean
+    name?: boolean
+    mas_positionlevel2?: boolean | mas_positionlevel1$mas_positionlevel2Args
+    Company?: boolean | CompanyArgs
+    CompanyId?: boolean
+    Position_user?: boolean | mas_positionlevel1$Position_userArgs
+    _count?: boolean | Mas_positionlevel1CountOutputTypeArgs
   }
 
 
-  export type PosotionGetPayload<S extends boolean | null | undefined | PosotionArgs> =
+  export type mas_positionlevel1Include = {
+    mas_positionlevel2?: boolean | mas_positionlevel1$mas_positionlevel2Args
+    Company?: boolean | CompanyArgs
+    Position_user?: boolean | mas_positionlevel1$Position_userArgs
+    _count?: boolean | Mas_positionlevel1CountOutputTypeArgs
+  }
+
+  export type mas_positionlevel1GetPayload<S extends boolean | null | undefined | mas_positionlevel1Args> =
     S extends { select: any, include: any } ? 'Please either choose `select` or `include`' :
-    S extends true ? Posotion :
+    S extends true ? mas_positionlevel1 :
     S extends undefined ? never :
-    S extends { include: any } & (PosotionArgs | PosotionFindManyArgs)
-    ? Posotion 
-    : S extends { select: any } & (PosotionArgs | PosotionFindManyArgs)
+    S extends { include: any } & (mas_positionlevel1Args | mas_positionlevel1FindManyArgs)
+    ? mas_positionlevel1  & {
+    [P in TruthyKeys<S['include']>]:
+        P extends 'mas_positionlevel2' ? Array < mas_positionlevel2GetPayload<S['include'][P]>>  :
+        P extends 'Company' ? CompanyGetPayload<S['include'][P]> | null :
+        P extends 'Position_user' ? Array < Position_userGetPayload<S['include'][P]>>  :
+        P extends '_count' ? Mas_positionlevel1CountOutputTypeGetPayload<S['include'][P]> :  never
+  } 
+    : S extends { select: any } & (mas_positionlevel1Args | mas_positionlevel1FindManyArgs)
       ? {
     [P in TruthyKeys<S['select']>]:
-    P extends keyof Posotion ? Posotion[P] : never
+        P extends 'mas_positionlevel2' ? Array < mas_positionlevel2GetPayload<S['select'][P]>>  :
+        P extends 'Company' ? CompanyGetPayload<S['select'][P]> | null :
+        P extends 'Position_user' ? Array < Position_userGetPayload<S['select'][P]>>  :
+        P extends '_count' ? Mas_positionlevel1CountOutputTypeGetPayload<S['select'][P]> :  P extends keyof mas_positionlevel1 ? mas_positionlevel1[P] : never
   } 
-      : Posotion
+      : mas_positionlevel1
 
 
-  type PosotionCountArgs = 
-    Omit<PosotionFindManyArgs, 'select' | 'include'> & {
-      select?: PosotionCountAggregateInputType | true
+  type mas_positionlevel1CountArgs = 
+    Omit<mas_positionlevel1FindManyArgs, 'select' | 'include'> & {
+      select?: Mas_positionlevel1CountAggregateInputType | true
     }
 
-  export interface PosotionDelegate<GlobalRejectSettings extends Prisma.RejectOnNotFound | Prisma.RejectPerOperation | false | undefined> {
+  export interface mas_positionlevel1Delegate<GlobalRejectSettings extends Prisma.RejectOnNotFound | Prisma.RejectPerOperation | false | undefined> {
 
     /**
-     * Find zero or one Posotion that matches the filter.
-     * @param {PosotionFindUniqueArgs} args - Arguments to find a Posotion
+     * Find zero or one Mas_positionlevel1 that matches the filter.
+     * @param {mas_positionlevel1FindUniqueArgs} args - Arguments to find a Mas_positionlevel1
      * @example
-     * // Get one Posotion
-     * const posotion = await prisma.posotion.findUnique({
+     * // Get one Mas_positionlevel1
+     * const mas_positionlevel1 = await prisma.mas_positionlevel1.findUnique({
      *   where: {
      *     // ... provide filter here
      *   }
      * })
     **/
-    findUnique<T extends PosotionFindUniqueArgs,  LocalRejectSettings = T["rejectOnNotFound"] extends RejectOnNotFound ? T['rejectOnNotFound'] : undefined>(
-      args: SelectSubset<T, PosotionFindUniqueArgs>
-    ): HasReject<GlobalRejectSettings, LocalRejectSettings, 'findUnique', 'Posotion'> extends True ? Prisma__PosotionClient<PosotionGetPayload<T>> : Prisma__PosotionClient<PosotionGetPayload<T> | null, null>
+    findUnique<T extends mas_positionlevel1FindUniqueArgs,  LocalRejectSettings = T["rejectOnNotFound"] extends RejectOnNotFound ? T['rejectOnNotFound'] : undefined>(
+      args: SelectSubset<T, mas_positionlevel1FindUniqueArgs>
+    ): HasReject<GlobalRejectSettings, LocalRejectSettings, 'findUnique', 'mas_positionlevel1'> extends True ? Prisma__mas_positionlevel1Client<mas_positionlevel1GetPayload<T>> : Prisma__mas_positionlevel1Client<mas_positionlevel1GetPayload<T> | null, null>
 
     /**
-     * Find one Posotion that matches the filter or throw an error  with `error.code='P2025'` 
+     * Find one Mas_positionlevel1 that matches the filter or throw an error  with `error.code='P2025'` 
      *     if no matches were found.
-     * @param {PosotionFindUniqueOrThrowArgs} args - Arguments to find a Posotion
+     * @param {mas_positionlevel1FindUniqueOrThrowArgs} args - Arguments to find a Mas_positionlevel1
      * @example
-     * // Get one Posotion
-     * const posotion = await prisma.posotion.findUniqueOrThrow({
+     * // Get one Mas_positionlevel1
+     * const mas_positionlevel1 = await prisma.mas_positionlevel1.findUniqueOrThrow({
      *   where: {
      *     // ... provide filter here
      *   }
      * })
     **/
-    findUniqueOrThrow<T extends PosotionFindUniqueOrThrowArgs>(
-      args?: SelectSubset<T, PosotionFindUniqueOrThrowArgs>
-    ): Prisma__PosotionClient<PosotionGetPayload<T>>
+    findUniqueOrThrow<T extends mas_positionlevel1FindUniqueOrThrowArgs>(
+      args?: SelectSubset<T, mas_positionlevel1FindUniqueOrThrowArgs>
+    ): Prisma__mas_positionlevel1Client<mas_positionlevel1GetPayload<T>>
 
     /**
-     * Find the first Posotion that matches the filter.
+     * Find the first Mas_positionlevel1 that matches the filter.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {PosotionFindFirstArgs} args - Arguments to find a Posotion
+     * @param {mas_positionlevel1FindFirstArgs} args - Arguments to find a Mas_positionlevel1
      * @example
-     * // Get one Posotion
-     * const posotion = await prisma.posotion.findFirst({
+     * // Get one Mas_positionlevel1
+     * const mas_positionlevel1 = await prisma.mas_positionlevel1.findFirst({
      *   where: {
      *     // ... provide filter here
      *   }
      * })
     **/
-    findFirst<T extends PosotionFindFirstArgs,  LocalRejectSettings = T["rejectOnNotFound"] extends RejectOnNotFound ? T['rejectOnNotFound'] : undefined>(
-      args?: SelectSubset<T, PosotionFindFirstArgs>
-    ): HasReject<GlobalRejectSettings, LocalRejectSettings, 'findFirst', 'Posotion'> extends True ? Prisma__PosotionClient<PosotionGetPayload<T>> : Prisma__PosotionClient<PosotionGetPayload<T> | null, null>
+    findFirst<T extends mas_positionlevel1FindFirstArgs,  LocalRejectSettings = T["rejectOnNotFound"] extends RejectOnNotFound ? T['rejectOnNotFound'] : undefined>(
+      args?: SelectSubset<T, mas_positionlevel1FindFirstArgs>
+    ): HasReject<GlobalRejectSettings, LocalRejectSettings, 'findFirst', 'mas_positionlevel1'> extends True ? Prisma__mas_positionlevel1Client<mas_positionlevel1GetPayload<T>> : Prisma__mas_positionlevel1Client<mas_positionlevel1GetPayload<T> | null, null>
 
     /**
-     * Find the first Posotion that matches the filter or
+     * Find the first Mas_positionlevel1 that matches the filter or
      * throw `NotFoundError` if no matches were found.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {PosotionFindFirstOrThrowArgs} args - Arguments to find a Posotion
+     * @param {mas_positionlevel1FindFirstOrThrowArgs} args - Arguments to find a Mas_positionlevel1
      * @example
-     * // Get one Posotion
-     * const posotion = await prisma.posotion.findFirstOrThrow({
+     * // Get one Mas_positionlevel1
+     * const mas_positionlevel1 = await prisma.mas_positionlevel1.findFirstOrThrow({
      *   where: {
      *     // ... provide filter here
      *   }
      * })
     **/
-    findFirstOrThrow<T extends PosotionFindFirstOrThrowArgs>(
-      args?: SelectSubset<T, PosotionFindFirstOrThrowArgs>
-    ): Prisma__PosotionClient<PosotionGetPayload<T>>
+    findFirstOrThrow<T extends mas_positionlevel1FindFirstOrThrowArgs>(
+      args?: SelectSubset<T, mas_positionlevel1FindFirstOrThrowArgs>
+    ): Prisma__mas_positionlevel1Client<mas_positionlevel1GetPayload<T>>
 
     /**
-     * Find zero or more Posotions that matches the filter.
+     * Find zero or more Mas_positionlevel1s that matches the filter.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {PosotionFindManyArgs=} args - Arguments to filter and select certain fields only.
+     * @param {mas_positionlevel1FindManyArgs=} args - Arguments to filter and select certain fields only.
      * @example
-     * // Get all Posotions
-     * const posotions = await prisma.posotion.findMany()
+     * // Get all Mas_positionlevel1s
+     * const mas_positionlevel1s = await prisma.mas_positionlevel1.findMany()
      * 
-     * // Get first 10 Posotions
-     * const posotions = await prisma.posotion.findMany({ take: 10 })
+     * // Get first 10 Mas_positionlevel1s
+     * const mas_positionlevel1s = await prisma.mas_positionlevel1.findMany({ take: 10 })
      * 
      * // Only select the `id`
-     * const posotionWithIdOnly = await prisma.posotion.findMany({ select: { id: true } })
+     * const mas_positionlevel1WithIdOnly = await prisma.mas_positionlevel1.findMany({ select: { id: true } })
      * 
     **/
-    findMany<T extends PosotionFindManyArgs>(
-      args?: SelectSubset<T, PosotionFindManyArgs>
-    ): PrismaPromise<Array<PosotionGetPayload<T>>>
+    findMany<T extends mas_positionlevel1FindManyArgs>(
+      args?: SelectSubset<T, mas_positionlevel1FindManyArgs>
+    ): PrismaPromise<Array<mas_positionlevel1GetPayload<T>>>
 
     /**
-     * Create a Posotion.
-     * @param {PosotionCreateArgs} args - Arguments to create a Posotion.
+     * Create a Mas_positionlevel1.
+     * @param {mas_positionlevel1CreateArgs} args - Arguments to create a Mas_positionlevel1.
      * @example
-     * // Create one Posotion
-     * const Posotion = await prisma.posotion.create({
+     * // Create one Mas_positionlevel1
+     * const Mas_positionlevel1 = await prisma.mas_positionlevel1.create({
      *   data: {
-     *     // ... data to create a Posotion
+     *     // ... data to create a Mas_positionlevel1
      *   }
      * })
      * 
     **/
-    create<T extends PosotionCreateArgs>(
-      args: SelectSubset<T, PosotionCreateArgs>
-    ): Prisma__PosotionClient<PosotionGetPayload<T>>
+    create<T extends mas_positionlevel1CreateArgs>(
+      args: SelectSubset<T, mas_positionlevel1CreateArgs>
+    ): Prisma__mas_positionlevel1Client<mas_positionlevel1GetPayload<T>>
 
     /**
-     * Create many Posotions.
-     *     @param {PosotionCreateManyArgs} args - Arguments to create many Posotions.
+     * Create many Mas_positionlevel1s.
+     *     @param {mas_positionlevel1CreateManyArgs} args - Arguments to create many Mas_positionlevel1s.
      *     @example
-     *     // Create many Posotions
-     *     const posotion = await prisma.posotion.createMany({
+     *     // Create many Mas_positionlevel1s
+     *     const mas_positionlevel1 = await prisma.mas_positionlevel1.createMany({
      *       data: {
      *         // ... provide data here
      *       }
      *     })
      *     
     **/
-    createMany<T extends PosotionCreateManyArgs>(
-      args?: SelectSubset<T, PosotionCreateManyArgs>
+    createMany<T extends mas_positionlevel1CreateManyArgs>(
+      args?: SelectSubset<T, mas_positionlevel1CreateManyArgs>
     ): PrismaPromise<BatchPayload>
 
     /**
-     * Delete a Posotion.
-     * @param {PosotionDeleteArgs} args - Arguments to delete one Posotion.
+     * Delete a Mas_positionlevel1.
+     * @param {mas_positionlevel1DeleteArgs} args - Arguments to delete one Mas_positionlevel1.
      * @example
-     * // Delete one Posotion
-     * const Posotion = await prisma.posotion.delete({
+     * // Delete one Mas_positionlevel1
+     * const Mas_positionlevel1 = await prisma.mas_positionlevel1.delete({
      *   where: {
-     *     // ... filter to delete one Posotion
+     *     // ... filter to delete one Mas_positionlevel1
      *   }
      * })
      * 
     **/
-    delete<T extends PosotionDeleteArgs>(
-      args: SelectSubset<T, PosotionDeleteArgs>
-    ): Prisma__PosotionClient<PosotionGetPayload<T>>
+    delete<T extends mas_positionlevel1DeleteArgs>(
+      args: SelectSubset<T, mas_positionlevel1DeleteArgs>
+    ): Prisma__mas_positionlevel1Client<mas_positionlevel1GetPayload<T>>
 
     /**
-     * Update one Posotion.
-     * @param {PosotionUpdateArgs} args - Arguments to update one Posotion.
+     * Update one Mas_positionlevel1.
+     * @param {mas_positionlevel1UpdateArgs} args - Arguments to update one Mas_positionlevel1.
      * @example
-     * // Update one Posotion
-     * const posotion = await prisma.posotion.update({
+     * // Update one Mas_positionlevel1
+     * const mas_positionlevel1 = await prisma.mas_positionlevel1.update({
      *   where: {
      *     // ... provide filter here
      *   },
@@ -10883,34 +11285,34 @@ export namespace Prisma {
      * })
      * 
     **/
-    update<T extends PosotionUpdateArgs>(
-      args: SelectSubset<T, PosotionUpdateArgs>
-    ): Prisma__PosotionClient<PosotionGetPayload<T>>
+    update<T extends mas_positionlevel1UpdateArgs>(
+      args: SelectSubset<T, mas_positionlevel1UpdateArgs>
+    ): Prisma__mas_positionlevel1Client<mas_positionlevel1GetPayload<T>>
 
     /**
-     * Delete zero or more Posotions.
-     * @param {PosotionDeleteManyArgs} args - Arguments to filter Posotions to delete.
+     * Delete zero or more Mas_positionlevel1s.
+     * @param {mas_positionlevel1DeleteManyArgs} args - Arguments to filter Mas_positionlevel1s to delete.
      * @example
-     * // Delete a few Posotions
-     * const { count } = await prisma.posotion.deleteMany({
+     * // Delete a few Mas_positionlevel1s
+     * const { count } = await prisma.mas_positionlevel1.deleteMany({
      *   where: {
      *     // ... provide filter here
      *   }
      * })
      * 
     **/
-    deleteMany<T extends PosotionDeleteManyArgs>(
-      args?: SelectSubset<T, PosotionDeleteManyArgs>
+    deleteMany<T extends mas_positionlevel1DeleteManyArgs>(
+      args?: SelectSubset<T, mas_positionlevel1DeleteManyArgs>
     ): PrismaPromise<BatchPayload>
 
     /**
-     * Update zero or more Posotions.
+     * Update zero or more Mas_positionlevel1s.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {PosotionUpdateManyArgs} args - Arguments to update one or more rows.
+     * @param {mas_positionlevel1UpdateManyArgs} args - Arguments to update one or more rows.
      * @example
-     * // Update many Posotions
-     * const posotion = await prisma.posotion.updateMany({
+     * // Update many Mas_positionlevel1s
+     * const mas_positionlevel1 = await prisma.mas_positionlevel1.updateMany({
      *   where: {
      *     // ... provide filter here
      *   },
@@ -10920,59 +11322,59 @@ export namespace Prisma {
      * })
      * 
     **/
-    updateMany<T extends PosotionUpdateManyArgs>(
-      args: SelectSubset<T, PosotionUpdateManyArgs>
+    updateMany<T extends mas_positionlevel1UpdateManyArgs>(
+      args: SelectSubset<T, mas_positionlevel1UpdateManyArgs>
     ): PrismaPromise<BatchPayload>
 
     /**
-     * Create or update one Posotion.
-     * @param {PosotionUpsertArgs} args - Arguments to update or create a Posotion.
+     * Create or update one Mas_positionlevel1.
+     * @param {mas_positionlevel1UpsertArgs} args - Arguments to update or create a Mas_positionlevel1.
      * @example
-     * // Update or create a Posotion
-     * const posotion = await prisma.posotion.upsert({
+     * // Update or create a Mas_positionlevel1
+     * const mas_positionlevel1 = await prisma.mas_positionlevel1.upsert({
      *   create: {
-     *     // ... data to create a Posotion
+     *     // ... data to create a Mas_positionlevel1
      *   },
      *   update: {
      *     // ... in case it already exists, update
      *   },
      *   where: {
-     *     // ... the filter for the Posotion we want to update
+     *     // ... the filter for the Mas_positionlevel1 we want to update
      *   }
      * })
     **/
-    upsert<T extends PosotionUpsertArgs>(
-      args: SelectSubset<T, PosotionUpsertArgs>
-    ): Prisma__PosotionClient<PosotionGetPayload<T>>
+    upsert<T extends mas_positionlevel1UpsertArgs>(
+      args: SelectSubset<T, mas_positionlevel1UpsertArgs>
+    ): Prisma__mas_positionlevel1Client<mas_positionlevel1GetPayload<T>>
 
     /**
-     * Count the number of Posotions.
+     * Count the number of Mas_positionlevel1s.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {PosotionCountArgs} args - Arguments to filter Posotions to count.
+     * @param {mas_positionlevel1CountArgs} args - Arguments to filter Mas_positionlevel1s to count.
      * @example
-     * // Count the number of Posotions
-     * const count = await prisma.posotion.count({
+     * // Count the number of Mas_positionlevel1s
+     * const count = await prisma.mas_positionlevel1.count({
      *   where: {
-     *     // ... the filter for the Posotions we want to count
+     *     // ... the filter for the Mas_positionlevel1s we want to count
      *   }
      * })
     **/
-    count<T extends PosotionCountArgs>(
-      args?: Subset<T, PosotionCountArgs>,
+    count<T extends mas_positionlevel1CountArgs>(
+      args?: Subset<T, mas_positionlevel1CountArgs>,
     ): PrismaPromise<
       T extends _Record<'select', any>
         ? T['select'] extends true
           ? number
-          : GetScalarType<T['select'], PosotionCountAggregateOutputType>
+          : GetScalarType<T['select'], Mas_positionlevel1CountAggregateOutputType>
         : number
     >
 
     /**
-     * Allows you to perform aggregations operations on a Posotion.
+     * Allows you to perform aggregations operations on a Mas_positionlevel1.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {PosotionAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @param {Mas_positionlevel1AggregateArgs} args - Select which aggregations you would like to apply and on what fields.
      * @example
      * // Ordered by age ascending
      * // Where email contains prisma.io
@@ -10992,13 +11394,13 @@ export namespace Prisma {
      *   take: 10,
      * })
     **/
-    aggregate<T extends PosotionAggregateArgs>(args: Subset<T, PosotionAggregateArgs>): PrismaPromise<GetPosotionAggregateType<T>>
+    aggregate<T extends Mas_positionlevel1AggregateArgs>(args: Subset<T, Mas_positionlevel1AggregateArgs>): PrismaPromise<GetMas_positionlevel1AggregateType<T>>
 
     /**
-     * Group by Posotion.
+     * Group by Mas_positionlevel1.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {PosotionGroupByArgs} args - Group by arguments.
+     * @param {Mas_positionlevel1GroupByArgs} args - Group by arguments.
      * @example
      * // Group by city, order by createdAt, get count
      * const result = await prisma.user.groupBy({
@@ -11013,14 +11415,14 @@ export namespace Prisma {
      * 
     **/
     groupBy<
-      T extends PosotionGroupByArgs,
+      T extends Mas_positionlevel1GroupByArgs,
       HasSelectOrTake extends Or<
         Extends<'skip', Keys<T>>,
         Extends<'take', Keys<T>>
       >,
       OrderByArg extends True extends HasSelectOrTake
-        ? { orderBy: PosotionGroupByArgs['orderBy'] }
-        : { orderBy?: PosotionGroupByArgs['orderBy'] },
+        ? { orderBy: Mas_positionlevel1GroupByArgs['orderBy'] }
+        : { orderBy?: Mas_positionlevel1GroupByArgs['orderBy'] },
       OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
       ByFields extends TupleToUnion<T['by']>,
       ByValid extends Has<ByFields, OrderFields>,
@@ -11069,17 +11471,17 @@ export namespace Prisma {
             ? never
             : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
         }[OrderFields]
-    >(args: SubsetIntersection<T, PosotionGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetPosotionGroupByPayload<T> : PrismaPromise<InputErrors>
+    >(args: SubsetIntersection<T, Mas_positionlevel1GroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetMas_positionlevel1GroupByPayload<T> : PrismaPromise<InputErrors>
 
   }
 
   /**
-   * The delegate class that acts as a "Promise-like" for Posotion.
+   * The delegate class that acts as a "Promise-like" for mas_positionlevel1.
    * Why is this prefixed with `Prisma__`?
    * Because we want to prevent naming conflicts as mentioned in
    * https://github.com/prisma/prisma-client-js/issues/707
    */
-  export class Prisma__PosotionClient<T, Null = never> implements PrismaPromise<T> {
+  export class Prisma__mas_positionlevel1Client<T, Null = never> implements PrismaPromise<T> {
     [prisma]: true;
     private readonly _dmmf;
     private readonly _fetcher;
@@ -11096,6 +11498,11 @@ export namespace Prisma {
     constructor(_dmmf: runtime.DMMFClass, _fetcher: PrismaClientFetcher, _queryType: 'query' | 'mutation', _rootField: string, _clientMethod: string, _args: any, _dataPath: string[], _errorFormat: ErrorFormat, _measurePerformance?: boolean | undefined, _isList?: boolean);
     readonly [Symbol.toStringTag]: 'PrismaClientPromise';
 
+    mas_positionlevel2<T extends mas_positionlevel1$mas_positionlevel2Args= {}>(args?: Subset<T, mas_positionlevel1$mas_positionlevel2Args>): PrismaPromise<Array<mas_positionlevel2GetPayload<T>>| Null>;
+
+    Company<T extends CompanyArgs= {}>(args?: Subset<T, CompanyArgs>): Prisma__CompanyClient<CompanyGetPayload<T> | Null>;
+
+    Position_user<T extends mas_positionlevel1$Position_userArgs= {}>(args?: Subset<T, mas_positionlevel1$Position_userArgs>): PrismaPromise<Array<Position_userGetPayload<T>>| Null>;
 
     private get _document();
     /**
@@ -11125,23 +11532,27 @@ export namespace Prisma {
   // Custom InputTypes
 
   /**
-   * Posotion base type for findUnique actions
+   * mas_positionlevel1 base type for findUnique actions
    */
-  export type PosotionFindUniqueArgsBase = {
+  export type mas_positionlevel1FindUniqueArgsBase = {
     /**
-     * Select specific fields to fetch from the Posotion
+     * Select specific fields to fetch from the mas_positionlevel1
      */
-    select?: PosotionSelect | null
+    select?: mas_positionlevel1Select | null
     /**
-     * Filter, which Posotion to fetch.
+     * Choose, which related nodes to fetch as well.
      */
-    where: PosotionWhereUniqueInput
+    include?: mas_positionlevel1Include | null
+    /**
+     * Filter, which mas_positionlevel1 to fetch.
+     */
+    where: mas_positionlevel1WhereUniqueInput
   }
 
   /**
-   * Posotion findUnique
+   * mas_positionlevel1 findUnique
    */
-  export interface PosotionFindUniqueArgs extends PosotionFindUniqueArgsBase {
+  export interface mas_positionlevel1FindUniqueArgs extends mas_positionlevel1FindUniqueArgsBase {
    /**
     * Throw an Error if query returns no results
     * @deprecated since 4.0.0: use `findUniqueOrThrow` method instead
@@ -11151,68 +11562,76 @@ export namespace Prisma {
       
 
   /**
-   * Posotion findUniqueOrThrow
+   * mas_positionlevel1 findUniqueOrThrow
    */
-  export type PosotionFindUniqueOrThrowArgs = {
+  export type mas_positionlevel1FindUniqueOrThrowArgs = {
     /**
-     * Select specific fields to fetch from the Posotion
+     * Select specific fields to fetch from the mas_positionlevel1
      */
-    select?: PosotionSelect | null
+    select?: mas_positionlevel1Select | null
     /**
-     * Filter, which Posotion to fetch.
+     * Choose, which related nodes to fetch as well.
      */
-    where: PosotionWhereUniqueInput
+    include?: mas_positionlevel1Include | null
+    /**
+     * Filter, which mas_positionlevel1 to fetch.
+     */
+    where: mas_positionlevel1WhereUniqueInput
   }
 
 
   /**
-   * Posotion base type for findFirst actions
+   * mas_positionlevel1 base type for findFirst actions
    */
-  export type PosotionFindFirstArgsBase = {
+  export type mas_positionlevel1FindFirstArgsBase = {
     /**
-     * Select specific fields to fetch from the Posotion
+     * Select specific fields to fetch from the mas_positionlevel1
      */
-    select?: PosotionSelect | null
+    select?: mas_positionlevel1Select | null
     /**
-     * Filter, which Posotion to fetch.
+     * Choose, which related nodes to fetch as well.
      */
-    where?: PosotionWhereInput
+    include?: mas_positionlevel1Include | null
+    /**
+     * Filter, which mas_positionlevel1 to fetch.
+     */
+    where?: mas_positionlevel1WhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
      * 
-     * Determine the order of Posotions to fetch.
+     * Determine the order of mas_positionlevel1s to fetch.
      */
-    orderBy?: Enumerable<PosotionOrderByWithRelationInput>
+    orderBy?: Enumerable<mas_positionlevel1OrderByWithRelationInput>
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      * 
-     * Sets the position for searching for Posotions.
+     * Sets the position for searching for mas_positionlevel1s.
      */
-    cursor?: PosotionWhereUniqueInput
+    cursor?: mas_positionlevel1WhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Take `±n` Posotions from the position of the cursor.
+     * Take `±n` mas_positionlevel1s from the position of the cursor.
      */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Skip the first `n` Posotions.
+     * Skip the first `n` mas_positionlevel1s.
      */
     skip?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
      * 
-     * Filter by unique combinations of Posotions.
+     * Filter by unique combinations of mas_positionlevel1s.
      */
-    distinct?: Enumerable<PosotionScalarFieldEnum>
+    distinct?: Enumerable<Mas_positionlevel1ScalarFieldEnum>
   }
 
   /**
-   * Posotion findFirst
+   * mas_positionlevel1 findFirst
    */
-  export interface PosotionFindFirstArgs extends PosotionFindFirstArgsBase {
+  export interface mas_positionlevel1FindFirstArgs extends mas_positionlevel1FindFirstArgsBase {
    /**
     * Throw an Error if query returns no results
     * @deprecated since 4.0.0: use `findFirstOrThrow` method instead
@@ -11222,208 +11641,4121 @@ export namespace Prisma {
       
 
   /**
-   * Posotion findFirstOrThrow
+   * mas_positionlevel1 findFirstOrThrow
    */
-  export type PosotionFindFirstOrThrowArgs = {
+  export type mas_positionlevel1FindFirstOrThrowArgs = {
     /**
-     * Select specific fields to fetch from the Posotion
+     * Select specific fields to fetch from the mas_positionlevel1
      */
-    select?: PosotionSelect | null
+    select?: mas_positionlevel1Select | null
     /**
-     * Filter, which Posotion to fetch.
+     * Choose, which related nodes to fetch as well.
      */
-    where?: PosotionWhereInput
+    include?: mas_positionlevel1Include | null
+    /**
+     * Filter, which mas_positionlevel1 to fetch.
+     */
+    where?: mas_positionlevel1WhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
      * 
-     * Determine the order of Posotions to fetch.
+     * Determine the order of mas_positionlevel1s to fetch.
      */
-    orderBy?: Enumerable<PosotionOrderByWithRelationInput>
+    orderBy?: Enumerable<mas_positionlevel1OrderByWithRelationInput>
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      * 
-     * Sets the position for searching for Posotions.
+     * Sets the position for searching for mas_positionlevel1s.
      */
-    cursor?: PosotionWhereUniqueInput
+    cursor?: mas_positionlevel1WhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Take `±n` Posotions from the position of the cursor.
+     * Take `±n` mas_positionlevel1s from the position of the cursor.
      */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Skip the first `n` Posotions.
+     * Skip the first `n` mas_positionlevel1s.
      */
     skip?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
      * 
-     * Filter by unique combinations of Posotions.
+     * Filter by unique combinations of mas_positionlevel1s.
      */
-    distinct?: Enumerable<PosotionScalarFieldEnum>
+    distinct?: Enumerable<Mas_positionlevel1ScalarFieldEnum>
   }
 
 
   /**
-   * Posotion findMany
+   * mas_positionlevel1 findMany
    */
-  export type PosotionFindManyArgs = {
+  export type mas_positionlevel1FindManyArgs = {
     /**
-     * Select specific fields to fetch from the Posotion
+     * Select specific fields to fetch from the mas_positionlevel1
      */
-    select?: PosotionSelect | null
+    select?: mas_positionlevel1Select | null
     /**
-     * Filter, which Posotions to fetch.
+     * Choose, which related nodes to fetch as well.
      */
-    where?: PosotionWhereInput
+    include?: mas_positionlevel1Include | null
+    /**
+     * Filter, which mas_positionlevel1s to fetch.
+     */
+    where?: mas_positionlevel1WhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
      * 
-     * Determine the order of Posotions to fetch.
+     * Determine the order of mas_positionlevel1s to fetch.
      */
-    orderBy?: Enumerable<PosotionOrderByWithRelationInput>
+    orderBy?: Enumerable<mas_positionlevel1OrderByWithRelationInput>
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      * 
-     * Sets the position for listing Posotions.
+     * Sets the position for listing mas_positionlevel1s.
      */
-    cursor?: PosotionWhereUniqueInput
+    cursor?: mas_positionlevel1WhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Take `±n` Posotions from the position of the cursor.
+     * Take `±n` mas_positionlevel1s from the position of the cursor.
      */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Skip the first `n` Posotions.
+     * Skip the first `n` mas_positionlevel1s.
      */
     skip?: number
-    distinct?: Enumerable<PosotionScalarFieldEnum>
+    distinct?: Enumerable<Mas_positionlevel1ScalarFieldEnum>
   }
 
 
   /**
-   * Posotion create
+   * mas_positionlevel1 create
    */
-  export type PosotionCreateArgs = {
+  export type mas_positionlevel1CreateArgs = {
     /**
-     * Select specific fields to fetch from the Posotion
+     * Select specific fields to fetch from the mas_positionlevel1
      */
-    select?: PosotionSelect | null
+    select?: mas_positionlevel1Select | null
     /**
-     * The data needed to create a Posotion.
+     * Choose, which related nodes to fetch as well.
      */
-    data: XOR<PosotionCreateInput, PosotionUncheckedCreateInput>
+    include?: mas_positionlevel1Include | null
+    /**
+     * The data needed to create a mas_positionlevel1.
+     */
+    data: XOR<mas_positionlevel1CreateInput, mas_positionlevel1UncheckedCreateInput>
   }
 
 
   /**
-   * Posotion createMany
+   * mas_positionlevel1 createMany
    */
-  export type PosotionCreateManyArgs = {
+  export type mas_positionlevel1CreateManyArgs = {
     /**
-     * The data used to create many Posotions.
+     * The data used to create many mas_positionlevel1s.
      */
-    data: Enumerable<PosotionCreateManyInput>
+    data: Enumerable<mas_positionlevel1CreateManyInput>
     skipDuplicates?: boolean
   }
 
 
   /**
-   * Posotion update
+   * mas_positionlevel1 update
    */
-  export type PosotionUpdateArgs = {
+  export type mas_positionlevel1UpdateArgs = {
     /**
-     * Select specific fields to fetch from the Posotion
+     * Select specific fields to fetch from the mas_positionlevel1
      */
-    select?: PosotionSelect | null
+    select?: mas_positionlevel1Select | null
     /**
-     * The data needed to update a Posotion.
+     * Choose, which related nodes to fetch as well.
      */
-    data: XOR<PosotionUpdateInput, PosotionUncheckedUpdateInput>
+    include?: mas_positionlevel1Include | null
     /**
-     * Choose, which Posotion to update.
+     * The data needed to update a mas_positionlevel1.
      */
-    where: PosotionWhereUniqueInput
+    data: XOR<mas_positionlevel1UpdateInput, mas_positionlevel1UncheckedUpdateInput>
+    /**
+     * Choose, which mas_positionlevel1 to update.
+     */
+    where: mas_positionlevel1WhereUniqueInput
   }
 
 
   /**
-   * Posotion updateMany
+   * mas_positionlevel1 updateMany
    */
-  export type PosotionUpdateManyArgs = {
+  export type mas_positionlevel1UpdateManyArgs = {
     /**
-     * The data used to update Posotions.
+     * The data used to update mas_positionlevel1s.
      */
-    data: XOR<PosotionUpdateManyMutationInput, PosotionUncheckedUpdateManyInput>
+    data: XOR<mas_positionlevel1UpdateManyMutationInput, mas_positionlevel1UncheckedUpdateManyInput>
     /**
-     * Filter which Posotions to update
+     * Filter which mas_positionlevel1s to update
      */
-    where?: PosotionWhereInput
+    where?: mas_positionlevel1WhereInput
   }
 
 
   /**
-   * Posotion upsert
+   * mas_positionlevel1 upsert
    */
-  export type PosotionUpsertArgs = {
+  export type mas_positionlevel1UpsertArgs = {
     /**
-     * Select specific fields to fetch from the Posotion
+     * Select specific fields to fetch from the mas_positionlevel1
      */
-    select?: PosotionSelect | null
+    select?: mas_positionlevel1Select | null
     /**
-     * The filter to search for the Posotion to update in case it exists.
+     * Choose, which related nodes to fetch as well.
      */
-    where: PosotionWhereUniqueInput
+    include?: mas_positionlevel1Include | null
     /**
-     * In case the Posotion found by the `where` argument doesn't exist, create a new Posotion with this data.
+     * The filter to search for the mas_positionlevel1 to update in case it exists.
      */
-    create: XOR<PosotionCreateInput, PosotionUncheckedCreateInput>
+    where: mas_positionlevel1WhereUniqueInput
     /**
-     * In case the Posotion was found with the provided `where` argument, update it with this data.
+     * In case the mas_positionlevel1 found by the `where` argument doesn't exist, create a new mas_positionlevel1 with this data.
      */
-    update: XOR<PosotionUpdateInput, PosotionUncheckedUpdateInput>
+    create: XOR<mas_positionlevel1CreateInput, mas_positionlevel1UncheckedCreateInput>
+    /**
+     * In case the mas_positionlevel1 was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<mas_positionlevel1UpdateInput, mas_positionlevel1UncheckedUpdateInput>
   }
 
 
   /**
-   * Posotion delete
+   * mas_positionlevel1 delete
    */
-  export type PosotionDeleteArgs = {
+  export type mas_positionlevel1DeleteArgs = {
     /**
-     * Select specific fields to fetch from the Posotion
+     * Select specific fields to fetch from the mas_positionlevel1
      */
-    select?: PosotionSelect | null
+    select?: mas_positionlevel1Select | null
     /**
-     * Filter which Posotion to delete.
+     * Choose, which related nodes to fetch as well.
      */
-    where: PosotionWhereUniqueInput
+    include?: mas_positionlevel1Include | null
+    /**
+     * Filter which mas_positionlevel1 to delete.
+     */
+    where: mas_positionlevel1WhereUniqueInput
   }
 
 
   /**
-   * Posotion deleteMany
+   * mas_positionlevel1 deleteMany
    */
-  export type PosotionDeleteManyArgs = {
+  export type mas_positionlevel1DeleteManyArgs = {
     /**
-     * Filter which Posotions to delete
+     * Filter which mas_positionlevel1s to delete
      */
-    where?: PosotionWhereInput
+    where?: mas_positionlevel1WhereInput
   }
 
 
   /**
-   * Posotion without action
+   * mas_positionlevel1.mas_positionlevel2
    */
-  export type PosotionArgs = {
+  export type mas_positionlevel1$mas_positionlevel2Args = {
     /**
-     * Select specific fields to fetch from the Posotion
+     * Select specific fields to fetch from the mas_positionlevel2
      */
-    select?: PosotionSelect | null
+    select?: mas_positionlevel2Select | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: mas_positionlevel2Include | null
+    where?: mas_positionlevel2WhereInput
+    orderBy?: Enumerable<mas_positionlevel2OrderByWithRelationInput>
+    cursor?: mas_positionlevel2WhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: Enumerable<Mas_positionlevel2ScalarFieldEnum>
+  }
+
+
+  /**
+   * mas_positionlevel1.Position_user
+   */
+  export type mas_positionlevel1$Position_userArgs = {
+    /**
+     * Select specific fields to fetch from the Position_user
+     */
+    select?: Position_userSelect | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: Position_userInclude | null
+    where?: Position_userWhereInput
+    orderBy?: Enumerable<Position_userOrderByWithRelationInput>
+    cursor?: Position_userWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: Enumerable<Position_userScalarFieldEnum>
+  }
+
+
+  /**
+   * mas_positionlevel1 without action
+   */
+  export type mas_positionlevel1Args = {
+    /**
+     * Select specific fields to fetch from the mas_positionlevel1
+     */
+    select?: mas_positionlevel1Select | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: mas_positionlevel1Include | null
+  }
+
+
+
+  /**
+   * Model mas_positionlevel2
+   */
+
+
+  export type AggregateMas_positionlevel2 = {
+    _count: Mas_positionlevel2CountAggregateOutputType | null
+    _min: Mas_positionlevel2MinAggregateOutputType | null
+    _max: Mas_positionlevel2MaxAggregateOutputType | null
+  }
+
+  export type Mas_positionlevel2MinAggregateOutputType = {
+    id: string | null
+    name: string | null
+    positionlevel1_id: string | null
+    CompanyId: string | null
+  }
+
+  export type Mas_positionlevel2MaxAggregateOutputType = {
+    id: string | null
+    name: string | null
+    positionlevel1_id: string | null
+    CompanyId: string | null
+  }
+
+  export type Mas_positionlevel2CountAggregateOutputType = {
+    id: number
+    name: number
+    positionlevel1_id: number
+    CompanyId: number
+    _all: number
+  }
+
+
+  export type Mas_positionlevel2MinAggregateInputType = {
+    id?: true
+    name?: true
+    positionlevel1_id?: true
+    CompanyId?: true
+  }
+
+  export type Mas_positionlevel2MaxAggregateInputType = {
+    id?: true
+    name?: true
+    positionlevel1_id?: true
+    CompanyId?: true
+  }
+
+  export type Mas_positionlevel2CountAggregateInputType = {
+    id?: true
+    name?: true
+    positionlevel1_id?: true
+    CompanyId?: true
+    _all?: true
+  }
+
+  export type Mas_positionlevel2AggregateArgs = {
+    /**
+     * Filter which mas_positionlevel2 to aggregate.
+     */
+    where?: mas_positionlevel2WhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of mas_positionlevel2s to fetch.
+     */
+    orderBy?: Enumerable<mas_positionlevel2OrderByWithRelationInput>
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: mas_positionlevel2WhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` mas_positionlevel2s from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` mas_positionlevel2s.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned mas_positionlevel2s
+    **/
+    _count?: true | Mas_positionlevel2CountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: Mas_positionlevel2MinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: Mas_positionlevel2MaxAggregateInputType
+  }
+
+  export type GetMas_positionlevel2AggregateType<T extends Mas_positionlevel2AggregateArgs> = {
+        [P in keyof T & keyof AggregateMas_positionlevel2]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateMas_positionlevel2[P]>
+      : GetScalarType<T[P], AggregateMas_positionlevel2[P]>
+  }
+
+
+
+
+  export type Mas_positionlevel2GroupByArgs = {
+    where?: mas_positionlevel2WhereInput
+    orderBy?: Enumerable<mas_positionlevel2OrderByWithAggregationInput>
+    by: Mas_positionlevel2ScalarFieldEnum[]
+    having?: mas_positionlevel2ScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: Mas_positionlevel2CountAggregateInputType | true
+    _min?: Mas_positionlevel2MinAggregateInputType
+    _max?: Mas_positionlevel2MaxAggregateInputType
+  }
+
+
+  export type Mas_positionlevel2GroupByOutputType = {
+    id: string
+    name: string
+    positionlevel1_id: string | null
+    CompanyId: string | null
+    _count: Mas_positionlevel2CountAggregateOutputType | null
+    _min: Mas_positionlevel2MinAggregateOutputType | null
+    _max: Mas_positionlevel2MaxAggregateOutputType | null
+  }
+
+  type GetMas_positionlevel2GroupByPayload<T extends Mas_positionlevel2GroupByArgs> = PrismaPromise<
+    Array<
+      PickArray<Mas_positionlevel2GroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof Mas_positionlevel2GroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], Mas_positionlevel2GroupByOutputType[P]>
+            : GetScalarType<T[P], Mas_positionlevel2GroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type mas_positionlevel2Select = {
+    id?: boolean
+    name?: boolean
+    positionlevel1_id?: boolean
+    mas_positionlevel1?: boolean | mas_positionlevel1Args
+    mas_positionlevel3?: boolean | mas_positionlevel2$mas_positionlevel3Args
+    Company?: boolean | CompanyArgs
+    CompanyId?: boolean
+    position_user?: boolean | mas_positionlevel2$position_userArgs
+    _count?: boolean | Mas_positionlevel2CountOutputTypeArgs
+  }
+
+
+  export type mas_positionlevel2Include = {
+    mas_positionlevel1?: boolean | mas_positionlevel1Args
+    mas_positionlevel3?: boolean | mas_positionlevel2$mas_positionlevel3Args
+    Company?: boolean | CompanyArgs
+    position_user?: boolean | mas_positionlevel2$position_userArgs
+    _count?: boolean | Mas_positionlevel2CountOutputTypeArgs
+  }
+
+  export type mas_positionlevel2GetPayload<S extends boolean | null | undefined | mas_positionlevel2Args> =
+    S extends { select: any, include: any } ? 'Please either choose `select` or `include`' :
+    S extends true ? mas_positionlevel2 :
+    S extends undefined ? never :
+    S extends { include: any } & (mas_positionlevel2Args | mas_positionlevel2FindManyArgs)
+    ? mas_positionlevel2  & {
+    [P in TruthyKeys<S['include']>]:
+        P extends 'mas_positionlevel1' ? mas_positionlevel1GetPayload<S['include'][P]> | null :
+        P extends 'mas_positionlevel3' ? Array < mas_positionlevel3GetPayload<S['include'][P]>>  :
+        P extends 'Company' ? CompanyGetPayload<S['include'][P]> | null :
+        P extends 'position_user' ? Array < Position_userGetPayload<S['include'][P]>>  :
+        P extends '_count' ? Mas_positionlevel2CountOutputTypeGetPayload<S['include'][P]> :  never
+  } 
+    : S extends { select: any } & (mas_positionlevel2Args | mas_positionlevel2FindManyArgs)
+      ? {
+    [P in TruthyKeys<S['select']>]:
+        P extends 'mas_positionlevel1' ? mas_positionlevel1GetPayload<S['select'][P]> | null :
+        P extends 'mas_positionlevel3' ? Array < mas_positionlevel3GetPayload<S['select'][P]>>  :
+        P extends 'Company' ? CompanyGetPayload<S['select'][P]> | null :
+        P extends 'position_user' ? Array < Position_userGetPayload<S['select'][P]>>  :
+        P extends '_count' ? Mas_positionlevel2CountOutputTypeGetPayload<S['select'][P]> :  P extends keyof mas_positionlevel2 ? mas_positionlevel2[P] : never
+  } 
+      : mas_positionlevel2
+
+
+  type mas_positionlevel2CountArgs = 
+    Omit<mas_positionlevel2FindManyArgs, 'select' | 'include'> & {
+      select?: Mas_positionlevel2CountAggregateInputType | true
+    }
+
+  export interface mas_positionlevel2Delegate<GlobalRejectSettings extends Prisma.RejectOnNotFound | Prisma.RejectPerOperation | false | undefined> {
+
+    /**
+     * Find zero or one Mas_positionlevel2 that matches the filter.
+     * @param {mas_positionlevel2FindUniqueArgs} args - Arguments to find a Mas_positionlevel2
+     * @example
+     * // Get one Mas_positionlevel2
+     * const mas_positionlevel2 = await prisma.mas_positionlevel2.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+    **/
+    findUnique<T extends mas_positionlevel2FindUniqueArgs,  LocalRejectSettings = T["rejectOnNotFound"] extends RejectOnNotFound ? T['rejectOnNotFound'] : undefined>(
+      args: SelectSubset<T, mas_positionlevel2FindUniqueArgs>
+    ): HasReject<GlobalRejectSettings, LocalRejectSettings, 'findUnique', 'mas_positionlevel2'> extends True ? Prisma__mas_positionlevel2Client<mas_positionlevel2GetPayload<T>> : Prisma__mas_positionlevel2Client<mas_positionlevel2GetPayload<T> | null, null>
+
+    /**
+     * Find one Mas_positionlevel2 that matches the filter or throw an error  with `error.code='P2025'` 
+     *     if no matches were found.
+     * @param {mas_positionlevel2FindUniqueOrThrowArgs} args - Arguments to find a Mas_positionlevel2
+     * @example
+     * // Get one Mas_positionlevel2
+     * const mas_positionlevel2 = await prisma.mas_positionlevel2.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+    **/
+    findUniqueOrThrow<T extends mas_positionlevel2FindUniqueOrThrowArgs>(
+      args?: SelectSubset<T, mas_positionlevel2FindUniqueOrThrowArgs>
+    ): Prisma__mas_positionlevel2Client<mas_positionlevel2GetPayload<T>>
+
+    /**
+     * Find the first Mas_positionlevel2 that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {mas_positionlevel2FindFirstArgs} args - Arguments to find a Mas_positionlevel2
+     * @example
+     * // Get one Mas_positionlevel2
+     * const mas_positionlevel2 = await prisma.mas_positionlevel2.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+    **/
+    findFirst<T extends mas_positionlevel2FindFirstArgs,  LocalRejectSettings = T["rejectOnNotFound"] extends RejectOnNotFound ? T['rejectOnNotFound'] : undefined>(
+      args?: SelectSubset<T, mas_positionlevel2FindFirstArgs>
+    ): HasReject<GlobalRejectSettings, LocalRejectSettings, 'findFirst', 'mas_positionlevel2'> extends True ? Prisma__mas_positionlevel2Client<mas_positionlevel2GetPayload<T>> : Prisma__mas_positionlevel2Client<mas_positionlevel2GetPayload<T> | null, null>
+
+    /**
+     * Find the first Mas_positionlevel2 that matches the filter or
+     * throw `NotFoundError` if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {mas_positionlevel2FindFirstOrThrowArgs} args - Arguments to find a Mas_positionlevel2
+     * @example
+     * // Get one Mas_positionlevel2
+     * const mas_positionlevel2 = await prisma.mas_positionlevel2.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+    **/
+    findFirstOrThrow<T extends mas_positionlevel2FindFirstOrThrowArgs>(
+      args?: SelectSubset<T, mas_positionlevel2FindFirstOrThrowArgs>
+    ): Prisma__mas_positionlevel2Client<mas_positionlevel2GetPayload<T>>
+
+    /**
+     * Find zero or more Mas_positionlevel2s that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {mas_positionlevel2FindManyArgs=} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all Mas_positionlevel2s
+     * const mas_positionlevel2s = await prisma.mas_positionlevel2.findMany()
+     * 
+     * // Get first 10 Mas_positionlevel2s
+     * const mas_positionlevel2s = await prisma.mas_positionlevel2.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const mas_positionlevel2WithIdOnly = await prisma.mas_positionlevel2.findMany({ select: { id: true } })
+     * 
+    **/
+    findMany<T extends mas_positionlevel2FindManyArgs>(
+      args?: SelectSubset<T, mas_positionlevel2FindManyArgs>
+    ): PrismaPromise<Array<mas_positionlevel2GetPayload<T>>>
+
+    /**
+     * Create a Mas_positionlevel2.
+     * @param {mas_positionlevel2CreateArgs} args - Arguments to create a Mas_positionlevel2.
+     * @example
+     * // Create one Mas_positionlevel2
+     * const Mas_positionlevel2 = await prisma.mas_positionlevel2.create({
+     *   data: {
+     *     // ... data to create a Mas_positionlevel2
+     *   }
+     * })
+     * 
+    **/
+    create<T extends mas_positionlevel2CreateArgs>(
+      args: SelectSubset<T, mas_positionlevel2CreateArgs>
+    ): Prisma__mas_positionlevel2Client<mas_positionlevel2GetPayload<T>>
+
+    /**
+     * Create many Mas_positionlevel2s.
+     *     @param {mas_positionlevel2CreateManyArgs} args - Arguments to create many Mas_positionlevel2s.
+     *     @example
+     *     // Create many Mas_positionlevel2s
+     *     const mas_positionlevel2 = await prisma.mas_positionlevel2.createMany({
+     *       data: {
+     *         // ... provide data here
+     *       }
+     *     })
+     *     
+    **/
+    createMany<T extends mas_positionlevel2CreateManyArgs>(
+      args?: SelectSubset<T, mas_positionlevel2CreateManyArgs>
+    ): PrismaPromise<BatchPayload>
+
+    /**
+     * Delete a Mas_positionlevel2.
+     * @param {mas_positionlevel2DeleteArgs} args - Arguments to delete one Mas_positionlevel2.
+     * @example
+     * // Delete one Mas_positionlevel2
+     * const Mas_positionlevel2 = await prisma.mas_positionlevel2.delete({
+     *   where: {
+     *     // ... filter to delete one Mas_positionlevel2
+     *   }
+     * })
+     * 
+    **/
+    delete<T extends mas_positionlevel2DeleteArgs>(
+      args: SelectSubset<T, mas_positionlevel2DeleteArgs>
+    ): Prisma__mas_positionlevel2Client<mas_positionlevel2GetPayload<T>>
+
+    /**
+     * Update one Mas_positionlevel2.
+     * @param {mas_positionlevel2UpdateArgs} args - Arguments to update one Mas_positionlevel2.
+     * @example
+     * // Update one Mas_positionlevel2
+     * const mas_positionlevel2 = await prisma.mas_positionlevel2.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+    **/
+    update<T extends mas_positionlevel2UpdateArgs>(
+      args: SelectSubset<T, mas_positionlevel2UpdateArgs>
+    ): Prisma__mas_positionlevel2Client<mas_positionlevel2GetPayload<T>>
+
+    /**
+     * Delete zero or more Mas_positionlevel2s.
+     * @param {mas_positionlevel2DeleteManyArgs} args - Arguments to filter Mas_positionlevel2s to delete.
+     * @example
+     * // Delete a few Mas_positionlevel2s
+     * const { count } = await prisma.mas_positionlevel2.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+    **/
+    deleteMany<T extends mas_positionlevel2DeleteManyArgs>(
+      args?: SelectSubset<T, mas_positionlevel2DeleteManyArgs>
+    ): PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Mas_positionlevel2s.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {mas_positionlevel2UpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many Mas_positionlevel2s
+     * const mas_positionlevel2 = await prisma.mas_positionlevel2.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+    **/
+    updateMany<T extends mas_positionlevel2UpdateManyArgs>(
+      args: SelectSubset<T, mas_positionlevel2UpdateManyArgs>
+    ): PrismaPromise<BatchPayload>
+
+    /**
+     * Create or update one Mas_positionlevel2.
+     * @param {mas_positionlevel2UpsertArgs} args - Arguments to update or create a Mas_positionlevel2.
+     * @example
+     * // Update or create a Mas_positionlevel2
+     * const mas_positionlevel2 = await prisma.mas_positionlevel2.upsert({
+     *   create: {
+     *     // ... data to create a Mas_positionlevel2
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the Mas_positionlevel2 we want to update
+     *   }
+     * })
+    **/
+    upsert<T extends mas_positionlevel2UpsertArgs>(
+      args: SelectSubset<T, mas_positionlevel2UpsertArgs>
+    ): Prisma__mas_positionlevel2Client<mas_positionlevel2GetPayload<T>>
+
+    /**
+     * Count the number of Mas_positionlevel2s.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {mas_positionlevel2CountArgs} args - Arguments to filter Mas_positionlevel2s to count.
+     * @example
+     * // Count the number of Mas_positionlevel2s
+     * const count = await prisma.mas_positionlevel2.count({
+     *   where: {
+     *     // ... the filter for the Mas_positionlevel2s we want to count
+     *   }
+     * })
+    **/
+    count<T extends mas_positionlevel2CountArgs>(
+      args?: Subset<T, mas_positionlevel2CountArgs>,
+    ): PrismaPromise<
+      T extends _Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], Mas_positionlevel2CountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a Mas_positionlevel2.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {Mas_positionlevel2AggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends Mas_positionlevel2AggregateArgs>(args: Subset<T, Mas_positionlevel2AggregateArgs>): PrismaPromise<GetMas_positionlevel2AggregateType<T>>
+
+    /**
+     * Group by Mas_positionlevel2.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {Mas_positionlevel2GroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends Mas_positionlevel2GroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: Mas_positionlevel2GroupByArgs['orderBy'] }
+        : { orderBy?: Mas_positionlevel2GroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends TupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, Mas_positionlevel2GroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetMas_positionlevel2GroupByPayload<T> : PrismaPromise<InputErrors>
+
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for mas_positionlevel2.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export class Prisma__mas_positionlevel2Client<T, Null = never> implements PrismaPromise<T> {
+    [prisma]: true;
+    private readonly _dmmf;
+    private readonly _fetcher;
+    private readonly _queryType;
+    private readonly _rootField;
+    private readonly _clientMethod;
+    private readonly _args;
+    private readonly _dataPath;
+    private readonly _errorFormat;
+    private readonly _measurePerformance?;
+    private _isList;
+    private _callsite;
+    private _requestPromise?;
+    constructor(_dmmf: runtime.DMMFClass, _fetcher: PrismaClientFetcher, _queryType: 'query' | 'mutation', _rootField: string, _clientMethod: string, _args: any, _dataPath: string[], _errorFormat: ErrorFormat, _measurePerformance?: boolean | undefined, _isList?: boolean);
+    readonly [Symbol.toStringTag]: 'PrismaClientPromise';
+
+    mas_positionlevel1<T extends mas_positionlevel1Args= {}>(args?: Subset<T, mas_positionlevel1Args>): Prisma__mas_positionlevel1Client<mas_positionlevel1GetPayload<T> | Null>;
+
+    mas_positionlevel3<T extends mas_positionlevel2$mas_positionlevel3Args= {}>(args?: Subset<T, mas_positionlevel2$mas_positionlevel3Args>): PrismaPromise<Array<mas_positionlevel3GetPayload<T>>| Null>;
+
+    Company<T extends CompanyArgs= {}>(args?: Subset<T, CompanyArgs>): Prisma__CompanyClient<CompanyGetPayload<T> | Null>;
+
+    position_user<T extends mas_positionlevel2$position_userArgs= {}>(args?: Subset<T, mas_positionlevel2$position_userArgs>): PrismaPromise<Array<Position_userGetPayload<T>>| Null>;
+
+    private get _document();
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): Promise<TResult1 | TResult2>;
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): Promise<T | TResult>;
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): Promise<T>;
+  }
+
+
+
+  // Custom InputTypes
+
+  /**
+   * mas_positionlevel2 base type for findUnique actions
+   */
+  export type mas_positionlevel2FindUniqueArgsBase = {
+    /**
+     * Select specific fields to fetch from the mas_positionlevel2
+     */
+    select?: mas_positionlevel2Select | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: mas_positionlevel2Include | null
+    /**
+     * Filter, which mas_positionlevel2 to fetch.
+     */
+    where: mas_positionlevel2WhereUniqueInput
+  }
+
+  /**
+   * mas_positionlevel2 findUnique
+   */
+  export interface mas_positionlevel2FindUniqueArgs extends mas_positionlevel2FindUniqueArgsBase {
+   /**
+    * Throw an Error if query returns no results
+    * @deprecated since 4.0.0: use `findUniqueOrThrow` method instead
+    */
+    rejectOnNotFound?: RejectOnNotFound
+  }
+      
+
+  /**
+   * mas_positionlevel2 findUniqueOrThrow
+   */
+  export type mas_positionlevel2FindUniqueOrThrowArgs = {
+    /**
+     * Select specific fields to fetch from the mas_positionlevel2
+     */
+    select?: mas_positionlevel2Select | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: mas_positionlevel2Include | null
+    /**
+     * Filter, which mas_positionlevel2 to fetch.
+     */
+    where: mas_positionlevel2WhereUniqueInput
+  }
+
+
+  /**
+   * mas_positionlevel2 base type for findFirst actions
+   */
+  export type mas_positionlevel2FindFirstArgsBase = {
+    /**
+     * Select specific fields to fetch from the mas_positionlevel2
+     */
+    select?: mas_positionlevel2Select | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: mas_positionlevel2Include | null
+    /**
+     * Filter, which mas_positionlevel2 to fetch.
+     */
+    where?: mas_positionlevel2WhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of mas_positionlevel2s to fetch.
+     */
+    orderBy?: Enumerable<mas_positionlevel2OrderByWithRelationInput>
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for mas_positionlevel2s.
+     */
+    cursor?: mas_positionlevel2WhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` mas_positionlevel2s from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` mas_positionlevel2s.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of mas_positionlevel2s.
+     */
+    distinct?: Enumerable<Mas_positionlevel2ScalarFieldEnum>
+  }
+
+  /**
+   * mas_positionlevel2 findFirst
+   */
+  export interface mas_positionlevel2FindFirstArgs extends mas_positionlevel2FindFirstArgsBase {
+   /**
+    * Throw an Error if query returns no results
+    * @deprecated since 4.0.0: use `findFirstOrThrow` method instead
+    */
+    rejectOnNotFound?: RejectOnNotFound
+  }
+      
+
+  /**
+   * mas_positionlevel2 findFirstOrThrow
+   */
+  export type mas_positionlevel2FindFirstOrThrowArgs = {
+    /**
+     * Select specific fields to fetch from the mas_positionlevel2
+     */
+    select?: mas_positionlevel2Select | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: mas_positionlevel2Include | null
+    /**
+     * Filter, which mas_positionlevel2 to fetch.
+     */
+    where?: mas_positionlevel2WhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of mas_positionlevel2s to fetch.
+     */
+    orderBy?: Enumerable<mas_positionlevel2OrderByWithRelationInput>
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for mas_positionlevel2s.
+     */
+    cursor?: mas_positionlevel2WhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` mas_positionlevel2s from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` mas_positionlevel2s.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of mas_positionlevel2s.
+     */
+    distinct?: Enumerable<Mas_positionlevel2ScalarFieldEnum>
+  }
+
+
+  /**
+   * mas_positionlevel2 findMany
+   */
+  export type mas_positionlevel2FindManyArgs = {
+    /**
+     * Select specific fields to fetch from the mas_positionlevel2
+     */
+    select?: mas_positionlevel2Select | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: mas_positionlevel2Include | null
+    /**
+     * Filter, which mas_positionlevel2s to fetch.
+     */
+    where?: mas_positionlevel2WhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of mas_positionlevel2s to fetch.
+     */
+    orderBy?: Enumerable<mas_positionlevel2OrderByWithRelationInput>
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing mas_positionlevel2s.
+     */
+    cursor?: mas_positionlevel2WhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` mas_positionlevel2s from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` mas_positionlevel2s.
+     */
+    skip?: number
+    distinct?: Enumerable<Mas_positionlevel2ScalarFieldEnum>
+  }
+
+
+  /**
+   * mas_positionlevel2 create
+   */
+  export type mas_positionlevel2CreateArgs = {
+    /**
+     * Select specific fields to fetch from the mas_positionlevel2
+     */
+    select?: mas_positionlevel2Select | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: mas_positionlevel2Include | null
+    /**
+     * The data needed to create a mas_positionlevel2.
+     */
+    data: XOR<mas_positionlevel2CreateInput, mas_positionlevel2UncheckedCreateInput>
+  }
+
+
+  /**
+   * mas_positionlevel2 createMany
+   */
+  export type mas_positionlevel2CreateManyArgs = {
+    /**
+     * The data used to create many mas_positionlevel2s.
+     */
+    data: Enumerable<mas_positionlevel2CreateManyInput>
+    skipDuplicates?: boolean
+  }
+
+
+  /**
+   * mas_positionlevel2 update
+   */
+  export type mas_positionlevel2UpdateArgs = {
+    /**
+     * Select specific fields to fetch from the mas_positionlevel2
+     */
+    select?: mas_positionlevel2Select | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: mas_positionlevel2Include | null
+    /**
+     * The data needed to update a mas_positionlevel2.
+     */
+    data: XOR<mas_positionlevel2UpdateInput, mas_positionlevel2UncheckedUpdateInput>
+    /**
+     * Choose, which mas_positionlevel2 to update.
+     */
+    where: mas_positionlevel2WhereUniqueInput
+  }
+
+
+  /**
+   * mas_positionlevel2 updateMany
+   */
+  export type mas_positionlevel2UpdateManyArgs = {
+    /**
+     * The data used to update mas_positionlevel2s.
+     */
+    data: XOR<mas_positionlevel2UpdateManyMutationInput, mas_positionlevel2UncheckedUpdateManyInput>
+    /**
+     * Filter which mas_positionlevel2s to update
+     */
+    where?: mas_positionlevel2WhereInput
+  }
+
+
+  /**
+   * mas_positionlevel2 upsert
+   */
+  export type mas_positionlevel2UpsertArgs = {
+    /**
+     * Select specific fields to fetch from the mas_positionlevel2
+     */
+    select?: mas_positionlevel2Select | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: mas_positionlevel2Include | null
+    /**
+     * The filter to search for the mas_positionlevel2 to update in case it exists.
+     */
+    where: mas_positionlevel2WhereUniqueInput
+    /**
+     * In case the mas_positionlevel2 found by the `where` argument doesn't exist, create a new mas_positionlevel2 with this data.
+     */
+    create: XOR<mas_positionlevel2CreateInput, mas_positionlevel2UncheckedCreateInput>
+    /**
+     * In case the mas_positionlevel2 was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<mas_positionlevel2UpdateInput, mas_positionlevel2UncheckedUpdateInput>
+  }
+
+
+  /**
+   * mas_positionlevel2 delete
+   */
+  export type mas_positionlevel2DeleteArgs = {
+    /**
+     * Select specific fields to fetch from the mas_positionlevel2
+     */
+    select?: mas_positionlevel2Select | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: mas_positionlevel2Include | null
+    /**
+     * Filter which mas_positionlevel2 to delete.
+     */
+    where: mas_positionlevel2WhereUniqueInput
+  }
+
+
+  /**
+   * mas_positionlevel2 deleteMany
+   */
+  export type mas_positionlevel2DeleteManyArgs = {
+    /**
+     * Filter which mas_positionlevel2s to delete
+     */
+    where?: mas_positionlevel2WhereInput
+  }
+
+
+  /**
+   * mas_positionlevel2.mas_positionlevel3
+   */
+  export type mas_positionlevel2$mas_positionlevel3Args = {
+    /**
+     * Select specific fields to fetch from the mas_positionlevel3
+     */
+    select?: mas_positionlevel3Select | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: mas_positionlevel3Include | null
+    where?: mas_positionlevel3WhereInput
+    orderBy?: Enumerable<mas_positionlevel3OrderByWithRelationInput>
+    cursor?: mas_positionlevel3WhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: Enumerable<Mas_positionlevel3ScalarFieldEnum>
+  }
+
+
+  /**
+   * mas_positionlevel2.position_user
+   */
+  export type mas_positionlevel2$position_userArgs = {
+    /**
+     * Select specific fields to fetch from the Position_user
+     */
+    select?: Position_userSelect | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: Position_userInclude | null
+    where?: Position_userWhereInput
+    orderBy?: Enumerable<Position_userOrderByWithRelationInput>
+    cursor?: Position_userWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: Enumerable<Position_userScalarFieldEnum>
+  }
+
+
+  /**
+   * mas_positionlevel2 without action
+   */
+  export type mas_positionlevel2Args = {
+    /**
+     * Select specific fields to fetch from the mas_positionlevel2
+     */
+    select?: mas_positionlevel2Select | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: mas_positionlevel2Include | null
+  }
+
+
+
+  /**
+   * Model mas_positionlevel3
+   */
+
+
+  export type AggregateMas_positionlevel3 = {
+    _count: Mas_positionlevel3CountAggregateOutputType | null
+    _min: Mas_positionlevel3MinAggregateOutputType | null
+    _max: Mas_positionlevel3MaxAggregateOutputType | null
+  }
+
+  export type Mas_positionlevel3MinAggregateOutputType = {
+    id: string | null
+    name: string | null
+    positionlevel2_id: string | null
+    CompanyId: string | null
+  }
+
+  export type Mas_positionlevel3MaxAggregateOutputType = {
+    id: string | null
+    name: string | null
+    positionlevel2_id: string | null
+    CompanyId: string | null
+  }
+
+  export type Mas_positionlevel3CountAggregateOutputType = {
+    id: number
+    name: number
+    positionlevel2_id: number
+    CompanyId: number
+    _all: number
+  }
+
+
+  export type Mas_positionlevel3MinAggregateInputType = {
+    id?: true
+    name?: true
+    positionlevel2_id?: true
+    CompanyId?: true
+  }
+
+  export type Mas_positionlevel3MaxAggregateInputType = {
+    id?: true
+    name?: true
+    positionlevel2_id?: true
+    CompanyId?: true
+  }
+
+  export type Mas_positionlevel3CountAggregateInputType = {
+    id?: true
+    name?: true
+    positionlevel2_id?: true
+    CompanyId?: true
+    _all?: true
+  }
+
+  export type Mas_positionlevel3AggregateArgs = {
+    /**
+     * Filter which mas_positionlevel3 to aggregate.
+     */
+    where?: mas_positionlevel3WhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of mas_positionlevel3s to fetch.
+     */
+    orderBy?: Enumerable<mas_positionlevel3OrderByWithRelationInput>
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: mas_positionlevel3WhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` mas_positionlevel3s from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` mas_positionlevel3s.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned mas_positionlevel3s
+    **/
+    _count?: true | Mas_positionlevel3CountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: Mas_positionlevel3MinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: Mas_positionlevel3MaxAggregateInputType
+  }
+
+  export type GetMas_positionlevel3AggregateType<T extends Mas_positionlevel3AggregateArgs> = {
+        [P in keyof T & keyof AggregateMas_positionlevel3]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateMas_positionlevel3[P]>
+      : GetScalarType<T[P], AggregateMas_positionlevel3[P]>
+  }
+
+
+
+
+  export type Mas_positionlevel3GroupByArgs = {
+    where?: mas_positionlevel3WhereInput
+    orderBy?: Enumerable<mas_positionlevel3OrderByWithAggregationInput>
+    by: Mas_positionlevel3ScalarFieldEnum[]
+    having?: mas_positionlevel3ScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: Mas_positionlevel3CountAggregateInputType | true
+    _min?: Mas_positionlevel3MinAggregateInputType
+    _max?: Mas_positionlevel3MaxAggregateInputType
+  }
+
+
+  export type Mas_positionlevel3GroupByOutputType = {
+    id: string
+    name: string
+    positionlevel2_id: string | null
+    CompanyId: string | null
+    _count: Mas_positionlevel3CountAggregateOutputType | null
+    _min: Mas_positionlevel3MinAggregateOutputType | null
+    _max: Mas_positionlevel3MaxAggregateOutputType | null
+  }
+
+  type GetMas_positionlevel3GroupByPayload<T extends Mas_positionlevel3GroupByArgs> = PrismaPromise<
+    Array<
+      PickArray<Mas_positionlevel3GroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof Mas_positionlevel3GroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], Mas_positionlevel3GroupByOutputType[P]>
+            : GetScalarType<T[P], Mas_positionlevel3GroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type mas_positionlevel3Select = {
+    id?: boolean
+    name?: boolean
+    positionlevel2_id?: boolean
+    mas_positionlevel2?: boolean | mas_positionlevel2Args
+    Company?: boolean | CompanyArgs
+    CompanyId?: boolean
+    Position_user?: boolean | mas_positionlevel3$Position_userArgs
+    _count?: boolean | Mas_positionlevel3CountOutputTypeArgs
+  }
+
+
+  export type mas_positionlevel3Include = {
+    mas_positionlevel2?: boolean | mas_positionlevel2Args
+    Company?: boolean | CompanyArgs
+    Position_user?: boolean | mas_positionlevel3$Position_userArgs
+    _count?: boolean | Mas_positionlevel3CountOutputTypeArgs
+  }
+
+  export type mas_positionlevel3GetPayload<S extends boolean | null | undefined | mas_positionlevel3Args> =
+    S extends { select: any, include: any } ? 'Please either choose `select` or `include`' :
+    S extends true ? mas_positionlevel3 :
+    S extends undefined ? never :
+    S extends { include: any } & (mas_positionlevel3Args | mas_positionlevel3FindManyArgs)
+    ? mas_positionlevel3  & {
+    [P in TruthyKeys<S['include']>]:
+        P extends 'mas_positionlevel2' ? mas_positionlevel2GetPayload<S['include'][P]> | null :
+        P extends 'Company' ? CompanyGetPayload<S['include'][P]> | null :
+        P extends 'Position_user' ? Array < Position_userGetPayload<S['include'][P]>>  :
+        P extends '_count' ? Mas_positionlevel3CountOutputTypeGetPayload<S['include'][P]> :  never
+  } 
+    : S extends { select: any } & (mas_positionlevel3Args | mas_positionlevel3FindManyArgs)
+      ? {
+    [P in TruthyKeys<S['select']>]:
+        P extends 'mas_positionlevel2' ? mas_positionlevel2GetPayload<S['select'][P]> | null :
+        P extends 'Company' ? CompanyGetPayload<S['select'][P]> | null :
+        P extends 'Position_user' ? Array < Position_userGetPayload<S['select'][P]>>  :
+        P extends '_count' ? Mas_positionlevel3CountOutputTypeGetPayload<S['select'][P]> :  P extends keyof mas_positionlevel3 ? mas_positionlevel3[P] : never
+  } 
+      : mas_positionlevel3
+
+
+  type mas_positionlevel3CountArgs = 
+    Omit<mas_positionlevel3FindManyArgs, 'select' | 'include'> & {
+      select?: Mas_positionlevel3CountAggregateInputType | true
+    }
+
+  export interface mas_positionlevel3Delegate<GlobalRejectSettings extends Prisma.RejectOnNotFound | Prisma.RejectPerOperation | false | undefined> {
+
+    /**
+     * Find zero or one Mas_positionlevel3 that matches the filter.
+     * @param {mas_positionlevel3FindUniqueArgs} args - Arguments to find a Mas_positionlevel3
+     * @example
+     * // Get one Mas_positionlevel3
+     * const mas_positionlevel3 = await prisma.mas_positionlevel3.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+    **/
+    findUnique<T extends mas_positionlevel3FindUniqueArgs,  LocalRejectSettings = T["rejectOnNotFound"] extends RejectOnNotFound ? T['rejectOnNotFound'] : undefined>(
+      args: SelectSubset<T, mas_positionlevel3FindUniqueArgs>
+    ): HasReject<GlobalRejectSettings, LocalRejectSettings, 'findUnique', 'mas_positionlevel3'> extends True ? Prisma__mas_positionlevel3Client<mas_positionlevel3GetPayload<T>> : Prisma__mas_positionlevel3Client<mas_positionlevel3GetPayload<T> | null, null>
+
+    /**
+     * Find one Mas_positionlevel3 that matches the filter or throw an error  with `error.code='P2025'` 
+     *     if no matches were found.
+     * @param {mas_positionlevel3FindUniqueOrThrowArgs} args - Arguments to find a Mas_positionlevel3
+     * @example
+     * // Get one Mas_positionlevel3
+     * const mas_positionlevel3 = await prisma.mas_positionlevel3.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+    **/
+    findUniqueOrThrow<T extends mas_positionlevel3FindUniqueOrThrowArgs>(
+      args?: SelectSubset<T, mas_positionlevel3FindUniqueOrThrowArgs>
+    ): Prisma__mas_positionlevel3Client<mas_positionlevel3GetPayload<T>>
+
+    /**
+     * Find the first Mas_positionlevel3 that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {mas_positionlevel3FindFirstArgs} args - Arguments to find a Mas_positionlevel3
+     * @example
+     * // Get one Mas_positionlevel3
+     * const mas_positionlevel3 = await prisma.mas_positionlevel3.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+    **/
+    findFirst<T extends mas_positionlevel3FindFirstArgs,  LocalRejectSettings = T["rejectOnNotFound"] extends RejectOnNotFound ? T['rejectOnNotFound'] : undefined>(
+      args?: SelectSubset<T, mas_positionlevel3FindFirstArgs>
+    ): HasReject<GlobalRejectSettings, LocalRejectSettings, 'findFirst', 'mas_positionlevel3'> extends True ? Prisma__mas_positionlevel3Client<mas_positionlevel3GetPayload<T>> : Prisma__mas_positionlevel3Client<mas_positionlevel3GetPayload<T> | null, null>
+
+    /**
+     * Find the first Mas_positionlevel3 that matches the filter or
+     * throw `NotFoundError` if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {mas_positionlevel3FindFirstOrThrowArgs} args - Arguments to find a Mas_positionlevel3
+     * @example
+     * // Get one Mas_positionlevel3
+     * const mas_positionlevel3 = await prisma.mas_positionlevel3.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+    **/
+    findFirstOrThrow<T extends mas_positionlevel3FindFirstOrThrowArgs>(
+      args?: SelectSubset<T, mas_positionlevel3FindFirstOrThrowArgs>
+    ): Prisma__mas_positionlevel3Client<mas_positionlevel3GetPayload<T>>
+
+    /**
+     * Find zero or more Mas_positionlevel3s that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {mas_positionlevel3FindManyArgs=} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all Mas_positionlevel3s
+     * const mas_positionlevel3s = await prisma.mas_positionlevel3.findMany()
+     * 
+     * // Get first 10 Mas_positionlevel3s
+     * const mas_positionlevel3s = await prisma.mas_positionlevel3.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const mas_positionlevel3WithIdOnly = await prisma.mas_positionlevel3.findMany({ select: { id: true } })
+     * 
+    **/
+    findMany<T extends mas_positionlevel3FindManyArgs>(
+      args?: SelectSubset<T, mas_positionlevel3FindManyArgs>
+    ): PrismaPromise<Array<mas_positionlevel3GetPayload<T>>>
+
+    /**
+     * Create a Mas_positionlevel3.
+     * @param {mas_positionlevel3CreateArgs} args - Arguments to create a Mas_positionlevel3.
+     * @example
+     * // Create one Mas_positionlevel3
+     * const Mas_positionlevel3 = await prisma.mas_positionlevel3.create({
+     *   data: {
+     *     // ... data to create a Mas_positionlevel3
+     *   }
+     * })
+     * 
+    **/
+    create<T extends mas_positionlevel3CreateArgs>(
+      args: SelectSubset<T, mas_positionlevel3CreateArgs>
+    ): Prisma__mas_positionlevel3Client<mas_positionlevel3GetPayload<T>>
+
+    /**
+     * Create many Mas_positionlevel3s.
+     *     @param {mas_positionlevel3CreateManyArgs} args - Arguments to create many Mas_positionlevel3s.
+     *     @example
+     *     // Create many Mas_positionlevel3s
+     *     const mas_positionlevel3 = await prisma.mas_positionlevel3.createMany({
+     *       data: {
+     *         // ... provide data here
+     *       }
+     *     })
+     *     
+    **/
+    createMany<T extends mas_positionlevel3CreateManyArgs>(
+      args?: SelectSubset<T, mas_positionlevel3CreateManyArgs>
+    ): PrismaPromise<BatchPayload>
+
+    /**
+     * Delete a Mas_positionlevel3.
+     * @param {mas_positionlevel3DeleteArgs} args - Arguments to delete one Mas_positionlevel3.
+     * @example
+     * // Delete one Mas_positionlevel3
+     * const Mas_positionlevel3 = await prisma.mas_positionlevel3.delete({
+     *   where: {
+     *     // ... filter to delete one Mas_positionlevel3
+     *   }
+     * })
+     * 
+    **/
+    delete<T extends mas_positionlevel3DeleteArgs>(
+      args: SelectSubset<T, mas_positionlevel3DeleteArgs>
+    ): Prisma__mas_positionlevel3Client<mas_positionlevel3GetPayload<T>>
+
+    /**
+     * Update one Mas_positionlevel3.
+     * @param {mas_positionlevel3UpdateArgs} args - Arguments to update one Mas_positionlevel3.
+     * @example
+     * // Update one Mas_positionlevel3
+     * const mas_positionlevel3 = await prisma.mas_positionlevel3.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+    **/
+    update<T extends mas_positionlevel3UpdateArgs>(
+      args: SelectSubset<T, mas_positionlevel3UpdateArgs>
+    ): Prisma__mas_positionlevel3Client<mas_positionlevel3GetPayload<T>>
+
+    /**
+     * Delete zero or more Mas_positionlevel3s.
+     * @param {mas_positionlevel3DeleteManyArgs} args - Arguments to filter Mas_positionlevel3s to delete.
+     * @example
+     * // Delete a few Mas_positionlevel3s
+     * const { count } = await prisma.mas_positionlevel3.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+    **/
+    deleteMany<T extends mas_positionlevel3DeleteManyArgs>(
+      args?: SelectSubset<T, mas_positionlevel3DeleteManyArgs>
+    ): PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Mas_positionlevel3s.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {mas_positionlevel3UpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many Mas_positionlevel3s
+     * const mas_positionlevel3 = await prisma.mas_positionlevel3.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+    **/
+    updateMany<T extends mas_positionlevel3UpdateManyArgs>(
+      args: SelectSubset<T, mas_positionlevel3UpdateManyArgs>
+    ): PrismaPromise<BatchPayload>
+
+    /**
+     * Create or update one Mas_positionlevel3.
+     * @param {mas_positionlevel3UpsertArgs} args - Arguments to update or create a Mas_positionlevel3.
+     * @example
+     * // Update or create a Mas_positionlevel3
+     * const mas_positionlevel3 = await prisma.mas_positionlevel3.upsert({
+     *   create: {
+     *     // ... data to create a Mas_positionlevel3
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the Mas_positionlevel3 we want to update
+     *   }
+     * })
+    **/
+    upsert<T extends mas_positionlevel3UpsertArgs>(
+      args: SelectSubset<T, mas_positionlevel3UpsertArgs>
+    ): Prisma__mas_positionlevel3Client<mas_positionlevel3GetPayload<T>>
+
+    /**
+     * Count the number of Mas_positionlevel3s.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {mas_positionlevel3CountArgs} args - Arguments to filter Mas_positionlevel3s to count.
+     * @example
+     * // Count the number of Mas_positionlevel3s
+     * const count = await prisma.mas_positionlevel3.count({
+     *   where: {
+     *     // ... the filter for the Mas_positionlevel3s we want to count
+     *   }
+     * })
+    **/
+    count<T extends mas_positionlevel3CountArgs>(
+      args?: Subset<T, mas_positionlevel3CountArgs>,
+    ): PrismaPromise<
+      T extends _Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], Mas_positionlevel3CountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a Mas_positionlevel3.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {Mas_positionlevel3AggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends Mas_positionlevel3AggregateArgs>(args: Subset<T, Mas_positionlevel3AggregateArgs>): PrismaPromise<GetMas_positionlevel3AggregateType<T>>
+
+    /**
+     * Group by Mas_positionlevel3.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {Mas_positionlevel3GroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends Mas_positionlevel3GroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: Mas_positionlevel3GroupByArgs['orderBy'] }
+        : { orderBy?: Mas_positionlevel3GroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends TupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, Mas_positionlevel3GroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetMas_positionlevel3GroupByPayload<T> : PrismaPromise<InputErrors>
+
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for mas_positionlevel3.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export class Prisma__mas_positionlevel3Client<T, Null = never> implements PrismaPromise<T> {
+    [prisma]: true;
+    private readonly _dmmf;
+    private readonly _fetcher;
+    private readonly _queryType;
+    private readonly _rootField;
+    private readonly _clientMethod;
+    private readonly _args;
+    private readonly _dataPath;
+    private readonly _errorFormat;
+    private readonly _measurePerformance?;
+    private _isList;
+    private _callsite;
+    private _requestPromise?;
+    constructor(_dmmf: runtime.DMMFClass, _fetcher: PrismaClientFetcher, _queryType: 'query' | 'mutation', _rootField: string, _clientMethod: string, _args: any, _dataPath: string[], _errorFormat: ErrorFormat, _measurePerformance?: boolean | undefined, _isList?: boolean);
+    readonly [Symbol.toStringTag]: 'PrismaClientPromise';
+
+    mas_positionlevel2<T extends mas_positionlevel2Args= {}>(args?: Subset<T, mas_positionlevel2Args>): Prisma__mas_positionlevel2Client<mas_positionlevel2GetPayload<T> | Null>;
+
+    Company<T extends CompanyArgs= {}>(args?: Subset<T, CompanyArgs>): Prisma__CompanyClient<CompanyGetPayload<T> | Null>;
+
+    Position_user<T extends mas_positionlevel3$Position_userArgs= {}>(args?: Subset<T, mas_positionlevel3$Position_userArgs>): PrismaPromise<Array<Position_userGetPayload<T>>| Null>;
+
+    private get _document();
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): Promise<TResult1 | TResult2>;
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): Promise<T | TResult>;
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): Promise<T>;
+  }
+
+
+
+  // Custom InputTypes
+
+  /**
+   * mas_positionlevel3 base type for findUnique actions
+   */
+  export type mas_positionlevel3FindUniqueArgsBase = {
+    /**
+     * Select specific fields to fetch from the mas_positionlevel3
+     */
+    select?: mas_positionlevel3Select | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: mas_positionlevel3Include | null
+    /**
+     * Filter, which mas_positionlevel3 to fetch.
+     */
+    where: mas_positionlevel3WhereUniqueInput
+  }
+
+  /**
+   * mas_positionlevel3 findUnique
+   */
+  export interface mas_positionlevel3FindUniqueArgs extends mas_positionlevel3FindUniqueArgsBase {
+   /**
+    * Throw an Error if query returns no results
+    * @deprecated since 4.0.0: use `findUniqueOrThrow` method instead
+    */
+    rejectOnNotFound?: RejectOnNotFound
+  }
+      
+
+  /**
+   * mas_positionlevel3 findUniqueOrThrow
+   */
+  export type mas_positionlevel3FindUniqueOrThrowArgs = {
+    /**
+     * Select specific fields to fetch from the mas_positionlevel3
+     */
+    select?: mas_positionlevel3Select | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: mas_positionlevel3Include | null
+    /**
+     * Filter, which mas_positionlevel3 to fetch.
+     */
+    where: mas_positionlevel3WhereUniqueInput
+  }
+
+
+  /**
+   * mas_positionlevel3 base type for findFirst actions
+   */
+  export type mas_positionlevel3FindFirstArgsBase = {
+    /**
+     * Select specific fields to fetch from the mas_positionlevel3
+     */
+    select?: mas_positionlevel3Select | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: mas_positionlevel3Include | null
+    /**
+     * Filter, which mas_positionlevel3 to fetch.
+     */
+    where?: mas_positionlevel3WhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of mas_positionlevel3s to fetch.
+     */
+    orderBy?: Enumerable<mas_positionlevel3OrderByWithRelationInput>
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for mas_positionlevel3s.
+     */
+    cursor?: mas_positionlevel3WhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` mas_positionlevel3s from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` mas_positionlevel3s.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of mas_positionlevel3s.
+     */
+    distinct?: Enumerable<Mas_positionlevel3ScalarFieldEnum>
+  }
+
+  /**
+   * mas_positionlevel3 findFirst
+   */
+  export interface mas_positionlevel3FindFirstArgs extends mas_positionlevel3FindFirstArgsBase {
+   /**
+    * Throw an Error if query returns no results
+    * @deprecated since 4.0.0: use `findFirstOrThrow` method instead
+    */
+    rejectOnNotFound?: RejectOnNotFound
+  }
+      
+
+  /**
+   * mas_positionlevel3 findFirstOrThrow
+   */
+  export type mas_positionlevel3FindFirstOrThrowArgs = {
+    /**
+     * Select specific fields to fetch from the mas_positionlevel3
+     */
+    select?: mas_positionlevel3Select | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: mas_positionlevel3Include | null
+    /**
+     * Filter, which mas_positionlevel3 to fetch.
+     */
+    where?: mas_positionlevel3WhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of mas_positionlevel3s to fetch.
+     */
+    orderBy?: Enumerable<mas_positionlevel3OrderByWithRelationInput>
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for mas_positionlevel3s.
+     */
+    cursor?: mas_positionlevel3WhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` mas_positionlevel3s from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` mas_positionlevel3s.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of mas_positionlevel3s.
+     */
+    distinct?: Enumerable<Mas_positionlevel3ScalarFieldEnum>
+  }
+
+
+  /**
+   * mas_positionlevel3 findMany
+   */
+  export type mas_positionlevel3FindManyArgs = {
+    /**
+     * Select specific fields to fetch from the mas_positionlevel3
+     */
+    select?: mas_positionlevel3Select | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: mas_positionlevel3Include | null
+    /**
+     * Filter, which mas_positionlevel3s to fetch.
+     */
+    where?: mas_positionlevel3WhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of mas_positionlevel3s to fetch.
+     */
+    orderBy?: Enumerable<mas_positionlevel3OrderByWithRelationInput>
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing mas_positionlevel3s.
+     */
+    cursor?: mas_positionlevel3WhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` mas_positionlevel3s from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` mas_positionlevel3s.
+     */
+    skip?: number
+    distinct?: Enumerable<Mas_positionlevel3ScalarFieldEnum>
+  }
+
+
+  /**
+   * mas_positionlevel3 create
+   */
+  export type mas_positionlevel3CreateArgs = {
+    /**
+     * Select specific fields to fetch from the mas_positionlevel3
+     */
+    select?: mas_positionlevel3Select | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: mas_positionlevel3Include | null
+    /**
+     * The data needed to create a mas_positionlevel3.
+     */
+    data: XOR<mas_positionlevel3CreateInput, mas_positionlevel3UncheckedCreateInput>
+  }
+
+
+  /**
+   * mas_positionlevel3 createMany
+   */
+  export type mas_positionlevel3CreateManyArgs = {
+    /**
+     * The data used to create many mas_positionlevel3s.
+     */
+    data: Enumerable<mas_positionlevel3CreateManyInput>
+    skipDuplicates?: boolean
+  }
+
+
+  /**
+   * mas_positionlevel3 update
+   */
+  export type mas_positionlevel3UpdateArgs = {
+    /**
+     * Select specific fields to fetch from the mas_positionlevel3
+     */
+    select?: mas_positionlevel3Select | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: mas_positionlevel3Include | null
+    /**
+     * The data needed to update a mas_positionlevel3.
+     */
+    data: XOR<mas_positionlevel3UpdateInput, mas_positionlevel3UncheckedUpdateInput>
+    /**
+     * Choose, which mas_positionlevel3 to update.
+     */
+    where: mas_positionlevel3WhereUniqueInput
+  }
+
+
+  /**
+   * mas_positionlevel3 updateMany
+   */
+  export type mas_positionlevel3UpdateManyArgs = {
+    /**
+     * The data used to update mas_positionlevel3s.
+     */
+    data: XOR<mas_positionlevel3UpdateManyMutationInput, mas_positionlevel3UncheckedUpdateManyInput>
+    /**
+     * Filter which mas_positionlevel3s to update
+     */
+    where?: mas_positionlevel3WhereInput
+  }
+
+
+  /**
+   * mas_positionlevel3 upsert
+   */
+  export type mas_positionlevel3UpsertArgs = {
+    /**
+     * Select specific fields to fetch from the mas_positionlevel3
+     */
+    select?: mas_positionlevel3Select | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: mas_positionlevel3Include | null
+    /**
+     * The filter to search for the mas_positionlevel3 to update in case it exists.
+     */
+    where: mas_positionlevel3WhereUniqueInput
+    /**
+     * In case the mas_positionlevel3 found by the `where` argument doesn't exist, create a new mas_positionlevel3 with this data.
+     */
+    create: XOR<mas_positionlevel3CreateInput, mas_positionlevel3UncheckedCreateInput>
+    /**
+     * In case the mas_positionlevel3 was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<mas_positionlevel3UpdateInput, mas_positionlevel3UncheckedUpdateInput>
+  }
+
+
+  /**
+   * mas_positionlevel3 delete
+   */
+  export type mas_positionlevel3DeleteArgs = {
+    /**
+     * Select specific fields to fetch from the mas_positionlevel3
+     */
+    select?: mas_positionlevel3Select | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: mas_positionlevel3Include | null
+    /**
+     * Filter which mas_positionlevel3 to delete.
+     */
+    where: mas_positionlevel3WhereUniqueInput
+  }
+
+
+  /**
+   * mas_positionlevel3 deleteMany
+   */
+  export type mas_positionlevel3DeleteManyArgs = {
+    /**
+     * Filter which mas_positionlevel3s to delete
+     */
+    where?: mas_positionlevel3WhereInput
+  }
+
+
+  /**
+   * mas_positionlevel3.Position_user
+   */
+  export type mas_positionlevel3$Position_userArgs = {
+    /**
+     * Select specific fields to fetch from the Position_user
+     */
+    select?: Position_userSelect | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: Position_userInclude | null
+    where?: Position_userWhereInput
+    orderBy?: Enumerable<Position_userOrderByWithRelationInput>
+    cursor?: Position_userWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: Enumerable<Position_userScalarFieldEnum>
+  }
+
+
+  /**
+   * mas_positionlevel3 without action
+   */
+  export type mas_positionlevel3Args = {
+    /**
+     * Select specific fields to fetch from the mas_positionlevel3
+     */
+    select?: mas_positionlevel3Select | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: mas_positionlevel3Include | null
+  }
+
+
+
+  /**
+   * Model Position_user
+   */
+
+
+  export type AggregatePosition_user = {
+    _count: Position_userCountAggregateOutputType | null
+    _min: Position_userMinAggregateOutputType | null
+    _max: Position_userMaxAggregateOutputType | null
+  }
+
+  export type Position_userMinAggregateOutputType = {
+    id: string | null
+    user_id: string | null
+    position1_id: string | null
+    position2_id: string | null
+    position3_id: string | null
+    role: string | null
+    leader: string | null
+  }
+
+  export type Position_userMaxAggregateOutputType = {
+    id: string | null
+    user_id: string | null
+    position1_id: string | null
+    position2_id: string | null
+    position3_id: string | null
+    role: string | null
+    leader: string | null
+  }
+
+  export type Position_userCountAggregateOutputType = {
+    id: number
+    user_id: number
+    position1_id: number
+    position2_id: number
+    position3_id: number
+    role: number
+    leader: number
+    _all: number
+  }
+
+
+  export type Position_userMinAggregateInputType = {
+    id?: true
+    user_id?: true
+    position1_id?: true
+    position2_id?: true
+    position3_id?: true
+    role?: true
+    leader?: true
+  }
+
+  export type Position_userMaxAggregateInputType = {
+    id?: true
+    user_id?: true
+    position1_id?: true
+    position2_id?: true
+    position3_id?: true
+    role?: true
+    leader?: true
+  }
+
+  export type Position_userCountAggregateInputType = {
+    id?: true
+    user_id?: true
+    position1_id?: true
+    position2_id?: true
+    position3_id?: true
+    role?: true
+    leader?: true
+    _all?: true
+  }
+
+  export type Position_userAggregateArgs = {
+    /**
+     * Filter which Position_user to aggregate.
+     */
+    where?: Position_userWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Position_users to fetch.
+     */
+    orderBy?: Enumerable<Position_userOrderByWithRelationInput>
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: Position_userWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Position_users from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Position_users.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned Position_users
+    **/
+    _count?: true | Position_userCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: Position_userMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: Position_userMaxAggregateInputType
+  }
+
+  export type GetPosition_userAggregateType<T extends Position_userAggregateArgs> = {
+        [P in keyof T & keyof AggregatePosition_user]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregatePosition_user[P]>
+      : GetScalarType<T[P], AggregatePosition_user[P]>
+  }
+
+
+
+
+  export type Position_userGroupByArgs = {
+    where?: Position_userWhereInput
+    orderBy?: Enumerable<Position_userOrderByWithAggregationInput>
+    by: Position_userScalarFieldEnum[]
+    having?: Position_userScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: Position_userCountAggregateInputType | true
+    _min?: Position_userMinAggregateInputType
+    _max?: Position_userMaxAggregateInputType
+  }
+
+
+  export type Position_userGroupByOutputType = {
+    id: string
+    user_id: string | null
+    position1_id: string | null
+    position2_id: string | null
+    position3_id: string | null
+    role: string | null
+    leader: string | null
+    _count: Position_userCountAggregateOutputType | null
+    _min: Position_userMinAggregateOutputType | null
+    _max: Position_userMaxAggregateOutputType | null
+  }
+
+  type GetPosition_userGroupByPayload<T extends Position_userGroupByArgs> = PrismaPromise<
+    Array<
+      PickArray<Position_userGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof Position_userGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], Position_userGroupByOutputType[P]>
+            : GetScalarType<T[P], Position_userGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type Position_userSelect = {
+    id?: boolean
+    user_id?: boolean
+    position1_id?: boolean
+    position2_id?: boolean
+    position3_id?: boolean
+    role?: boolean
+    leader?: boolean
+    user?: boolean | UserArgs
+    mas_positionlevel1?: boolean | mas_positionlevel1Args
+    mas_positionlevel2?: boolean | mas_positionlevel2Args
+    mas_positionlevel3?: boolean | mas_positionlevel3Args
+  }
+
+
+  export type Position_userInclude = {
+    user?: boolean | UserArgs
+    mas_positionlevel1?: boolean | mas_positionlevel1Args
+    mas_positionlevel2?: boolean | mas_positionlevel2Args
+    mas_positionlevel3?: boolean | mas_positionlevel3Args
+  }
+
+  export type Position_userGetPayload<S extends boolean | null | undefined | Position_userArgs> =
+    S extends { select: any, include: any } ? 'Please either choose `select` or `include`' :
+    S extends true ? Position_user :
+    S extends undefined ? never :
+    S extends { include: any } & (Position_userArgs | Position_userFindManyArgs)
+    ? Position_user  & {
+    [P in TruthyKeys<S['include']>]:
+        P extends 'user' ? UserGetPayload<S['include'][P]> | null :
+        P extends 'mas_positionlevel1' ? mas_positionlevel1GetPayload<S['include'][P]> | null :
+        P extends 'mas_positionlevel2' ? mas_positionlevel2GetPayload<S['include'][P]> | null :
+        P extends 'mas_positionlevel3' ? mas_positionlevel3GetPayload<S['include'][P]> | null :  never
+  } 
+    : S extends { select: any } & (Position_userArgs | Position_userFindManyArgs)
+      ? {
+    [P in TruthyKeys<S['select']>]:
+        P extends 'user' ? UserGetPayload<S['select'][P]> | null :
+        P extends 'mas_positionlevel1' ? mas_positionlevel1GetPayload<S['select'][P]> | null :
+        P extends 'mas_positionlevel2' ? mas_positionlevel2GetPayload<S['select'][P]> | null :
+        P extends 'mas_positionlevel3' ? mas_positionlevel3GetPayload<S['select'][P]> | null :  P extends keyof Position_user ? Position_user[P] : never
+  } 
+      : Position_user
+
+
+  type Position_userCountArgs = 
+    Omit<Position_userFindManyArgs, 'select' | 'include'> & {
+      select?: Position_userCountAggregateInputType | true
+    }
+
+  export interface Position_userDelegate<GlobalRejectSettings extends Prisma.RejectOnNotFound | Prisma.RejectPerOperation | false | undefined> {
+
+    /**
+     * Find zero or one Position_user that matches the filter.
+     * @param {Position_userFindUniqueArgs} args - Arguments to find a Position_user
+     * @example
+     * // Get one Position_user
+     * const position_user = await prisma.position_user.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+    **/
+    findUnique<T extends Position_userFindUniqueArgs,  LocalRejectSettings = T["rejectOnNotFound"] extends RejectOnNotFound ? T['rejectOnNotFound'] : undefined>(
+      args: SelectSubset<T, Position_userFindUniqueArgs>
+    ): HasReject<GlobalRejectSettings, LocalRejectSettings, 'findUnique', 'Position_user'> extends True ? Prisma__Position_userClient<Position_userGetPayload<T>> : Prisma__Position_userClient<Position_userGetPayload<T> | null, null>
+
+    /**
+     * Find one Position_user that matches the filter or throw an error  with `error.code='P2025'` 
+     *     if no matches were found.
+     * @param {Position_userFindUniqueOrThrowArgs} args - Arguments to find a Position_user
+     * @example
+     * // Get one Position_user
+     * const position_user = await prisma.position_user.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+    **/
+    findUniqueOrThrow<T extends Position_userFindUniqueOrThrowArgs>(
+      args?: SelectSubset<T, Position_userFindUniqueOrThrowArgs>
+    ): Prisma__Position_userClient<Position_userGetPayload<T>>
+
+    /**
+     * Find the first Position_user that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {Position_userFindFirstArgs} args - Arguments to find a Position_user
+     * @example
+     * // Get one Position_user
+     * const position_user = await prisma.position_user.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+    **/
+    findFirst<T extends Position_userFindFirstArgs,  LocalRejectSettings = T["rejectOnNotFound"] extends RejectOnNotFound ? T['rejectOnNotFound'] : undefined>(
+      args?: SelectSubset<T, Position_userFindFirstArgs>
+    ): HasReject<GlobalRejectSettings, LocalRejectSettings, 'findFirst', 'Position_user'> extends True ? Prisma__Position_userClient<Position_userGetPayload<T>> : Prisma__Position_userClient<Position_userGetPayload<T> | null, null>
+
+    /**
+     * Find the first Position_user that matches the filter or
+     * throw `NotFoundError` if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {Position_userFindFirstOrThrowArgs} args - Arguments to find a Position_user
+     * @example
+     * // Get one Position_user
+     * const position_user = await prisma.position_user.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+    **/
+    findFirstOrThrow<T extends Position_userFindFirstOrThrowArgs>(
+      args?: SelectSubset<T, Position_userFindFirstOrThrowArgs>
+    ): Prisma__Position_userClient<Position_userGetPayload<T>>
+
+    /**
+     * Find zero or more Position_users that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {Position_userFindManyArgs=} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all Position_users
+     * const position_users = await prisma.position_user.findMany()
+     * 
+     * // Get first 10 Position_users
+     * const position_users = await prisma.position_user.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const position_userWithIdOnly = await prisma.position_user.findMany({ select: { id: true } })
+     * 
+    **/
+    findMany<T extends Position_userFindManyArgs>(
+      args?: SelectSubset<T, Position_userFindManyArgs>
+    ): PrismaPromise<Array<Position_userGetPayload<T>>>
+
+    /**
+     * Create a Position_user.
+     * @param {Position_userCreateArgs} args - Arguments to create a Position_user.
+     * @example
+     * // Create one Position_user
+     * const Position_user = await prisma.position_user.create({
+     *   data: {
+     *     // ... data to create a Position_user
+     *   }
+     * })
+     * 
+    **/
+    create<T extends Position_userCreateArgs>(
+      args: SelectSubset<T, Position_userCreateArgs>
+    ): Prisma__Position_userClient<Position_userGetPayload<T>>
+
+    /**
+     * Create many Position_users.
+     *     @param {Position_userCreateManyArgs} args - Arguments to create many Position_users.
+     *     @example
+     *     // Create many Position_users
+     *     const position_user = await prisma.position_user.createMany({
+     *       data: {
+     *         // ... provide data here
+     *       }
+     *     })
+     *     
+    **/
+    createMany<T extends Position_userCreateManyArgs>(
+      args?: SelectSubset<T, Position_userCreateManyArgs>
+    ): PrismaPromise<BatchPayload>
+
+    /**
+     * Delete a Position_user.
+     * @param {Position_userDeleteArgs} args - Arguments to delete one Position_user.
+     * @example
+     * // Delete one Position_user
+     * const Position_user = await prisma.position_user.delete({
+     *   where: {
+     *     // ... filter to delete one Position_user
+     *   }
+     * })
+     * 
+    **/
+    delete<T extends Position_userDeleteArgs>(
+      args: SelectSubset<T, Position_userDeleteArgs>
+    ): Prisma__Position_userClient<Position_userGetPayload<T>>
+
+    /**
+     * Update one Position_user.
+     * @param {Position_userUpdateArgs} args - Arguments to update one Position_user.
+     * @example
+     * // Update one Position_user
+     * const position_user = await prisma.position_user.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+    **/
+    update<T extends Position_userUpdateArgs>(
+      args: SelectSubset<T, Position_userUpdateArgs>
+    ): Prisma__Position_userClient<Position_userGetPayload<T>>
+
+    /**
+     * Delete zero or more Position_users.
+     * @param {Position_userDeleteManyArgs} args - Arguments to filter Position_users to delete.
+     * @example
+     * // Delete a few Position_users
+     * const { count } = await prisma.position_user.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+    **/
+    deleteMany<T extends Position_userDeleteManyArgs>(
+      args?: SelectSubset<T, Position_userDeleteManyArgs>
+    ): PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Position_users.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {Position_userUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many Position_users
+     * const position_user = await prisma.position_user.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+    **/
+    updateMany<T extends Position_userUpdateManyArgs>(
+      args: SelectSubset<T, Position_userUpdateManyArgs>
+    ): PrismaPromise<BatchPayload>
+
+    /**
+     * Create or update one Position_user.
+     * @param {Position_userUpsertArgs} args - Arguments to update or create a Position_user.
+     * @example
+     * // Update or create a Position_user
+     * const position_user = await prisma.position_user.upsert({
+     *   create: {
+     *     // ... data to create a Position_user
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the Position_user we want to update
+     *   }
+     * })
+    **/
+    upsert<T extends Position_userUpsertArgs>(
+      args: SelectSubset<T, Position_userUpsertArgs>
+    ): Prisma__Position_userClient<Position_userGetPayload<T>>
+
+    /**
+     * Count the number of Position_users.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {Position_userCountArgs} args - Arguments to filter Position_users to count.
+     * @example
+     * // Count the number of Position_users
+     * const count = await prisma.position_user.count({
+     *   where: {
+     *     // ... the filter for the Position_users we want to count
+     *   }
+     * })
+    **/
+    count<T extends Position_userCountArgs>(
+      args?: Subset<T, Position_userCountArgs>,
+    ): PrismaPromise<
+      T extends _Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], Position_userCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a Position_user.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {Position_userAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends Position_userAggregateArgs>(args: Subset<T, Position_userAggregateArgs>): PrismaPromise<GetPosition_userAggregateType<T>>
+
+    /**
+     * Group by Position_user.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {Position_userGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends Position_userGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: Position_userGroupByArgs['orderBy'] }
+        : { orderBy?: Position_userGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends TupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, Position_userGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetPosition_userGroupByPayload<T> : PrismaPromise<InputErrors>
+
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for Position_user.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export class Prisma__Position_userClient<T, Null = never> implements PrismaPromise<T> {
+    [prisma]: true;
+    private readonly _dmmf;
+    private readonly _fetcher;
+    private readonly _queryType;
+    private readonly _rootField;
+    private readonly _clientMethod;
+    private readonly _args;
+    private readonly _dataPath;
+    private readonly _errorFormat;
+    private readonly _measurePerformance?;
+    private _isList;
+    private _callsite;
+    private _requestPromise?;
+    constructor(_dmmf: runtime.DMMFClass, _fetcher: PrismaClientFetcher, _queryType: 'query' | 'mutation', _rootField: string, _clientMethod: string, _args: any, _dataPath: string[], _errorFormat: ErrorFormat, _measurePerformance?: boolean | undefined, _isList?: boolean);
+    readonly [Symbol.toStringTag]: 'PrismaClientPromise';
+
+    user<T extends UserArgs= {}>(args?: Subset<T, UserArgs>): Prisma__UserClient<UserGetPayload<T> | Null>;
+
+    mas_positionlevel1<T extends mas_positionlevel1Args= {}>(args?: Subset<T, mas_positionlevel1Args>): Prisma__mas_positionlevel1Client<mas_positionlevel1GetPayload<T> | Null>;
+
+    mas_positionlevel2<T extends mas_positionlevel2Args= {}>(args?: Subset<T, mas_positionlevel2Args>): Prisma__mas_positionlevel2Client<mas_positionlevel2GetPayload<T> | Null>;
+
+    mas_positionlevel3<T extends mas_positionlevel3Args= {}>(args?: Subset<T, mas_positionlevel3Args>): Prisma__mas_positionlevel3Client<mas_positionlevel3GetPayload<T> | Null>;
+
+    private get _document();
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): Promise<TResult1 | TResult2>;
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): Promise<T | TResult>;
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): Promise<T>;
+  }
+
+
+
+  // Custom InputTypes
+
+  /**
+   * Position_user base type for findUnique actions
+   */
+  export type Position_userFindUniqueArgsBase = {
+    /**
+     * Select specific fields to fetch from the Position_user
+     */
+    select?: Position_userSelect | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: Position_userInclude | null
+    /**
+     * Filter, which Position_user to fetch.
+     */
+    where: Position_userWhereUniqueInput
+  }
+
+  /**
+   * Position_user findUnique
+   */
+  export interface Position_userFindUniqueArgs extends Position_userFindUniqueArgsBase {
+   /**
+    * Throw an Error if query returns no results
+    * @deprecated since 4.0.0: use `findUniqueOrThrow` method instead
+    */
+    rejectOnNotFound?: RejectOnNotFound
+  }
+      
+
+  /**
+   * Position_user findUniqueOrThrow
+   */
+  export type Position_userFindUniqueOrThrowArgs = {
+    /**
+     * Select specific fields to fetch from the Position_user
+     */
+    select?: Position_userSelect | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: Position_userInclude | null
+    /**
+     * Filter, which Position_user to fetch.
+     */
+    where: Position_userWhereUniqueInput
+  }
+
+
+  /**
+   * Position_user base type for findFirst actions
+   */
+  export type Position_userFindFirstArgsBase = {
+    /**
+     * Select specific fields to fetch from the Position_user
+     */
+    select?: Position_userSelect | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: Position_userInclude | null
+    /**
+     * Filter, which Position_user to fetch.
+     */
+    where?: Position_userWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Position_users to fetch.
+     */
+    orderBy?: Enumerable<Position_userOrderByWithRelationInput>
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Position_users.
+     */
+    cursor?: Position_userWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Position_users from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Position_users.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Position_users.
+     */
+    distinct?: Enumerable<Position_userScalarFieldEnum>
+  }
+
+  /**
+   * Position_user findFirst
+   */
+  export interface Position_userFindFirstArgs extends Position_userFindFirstArgsBase {
+   /**
+    * Throw an Error if query returns no results
+    * @deprecated since 4.0.0: use `findFirstOrThrow` method instead
+    */
+    rejectOnNotFound?: RejectOnNotFound
+  }
+      
+
+  /**
+   * Position_user findFirstOrThrow
+   */
+  export type Position_userFindFirstOrThrowArgs = {
+    /**
+     * Select specific fields to fetch from the Position_user
+     */
+    select?: Position_userSelect | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: Position_userInclude | null
+    /**
+     * Filter, which Position_user to fetch.
+     */
+    where?: Position_userWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Position_users to fetch.
+     */
+    orderBy?: Enumerable<Position_userOrderByWithRelationInput>
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Position_users.
+     */
+    cursor?: Position_userWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Position_users from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Position_users.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Position_users.
+     */
+    distinct?: Enumerable<Position_userScalarFieldEnum>
+  }
+
+
+  /**
+   * Position_user findMany
+   */
+  export type Position_userFindManyArgs = {
+    /**
+     * Select specific fields to fetch from the Position_user
+     */
+    select?: Position_userSelect | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: Position_userInclude | null
+    /**
+     * Filter, which Position_users to fetch.
+     */
+    where?: Position_userWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Position_users to fetch.
+     */
+    orderBy?: Enumerable<Position_userOrderByWithRelationInput>
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing Position_users.
+     */
+    cursor?: Position_userWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Position_users from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Position_users.
+     */
+    skip?: number
+    distinct?: Enumerable<Position_userScalarFieldEnum>
+  }
+
+
+  /**
+   * Position_user create
+   */
+  export type Position_userCreateArgs = {
+    /**
+     * Select specific fields to fetch from the Position_user
+     */
+    select?: Position_userSelect | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: Position_userInclude | null
+    /**
+     * The data needed to create a Position_user.
+     */
+    data: XOR<Position_userCreateInput, Position_userUncheckedCreateInput>
+  }
+
+
+  /**
+   * Position_user createMany
+   */
+  export type Position_userCreateManyArgs = {
+    /**
+     * The data used to create many Position_users.
+     */
+    data: Enumerable<Position_userCreateManyInput>
+    skipDuplicates?: boolean
+  }
+
+
+  /**
+   * Position_user update
+   */
+  export type Position_userUpdateArgs = {
+    /**
+     * Select specific fields to fetch from the Position_user
+     */
+    select?: Position_userSelect | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: Position_userInclude | null
+    /**
+     * The data needed to update a Position_user.
+     */
+    data: XOR<Position_userUpdateInput, Position_userUncheckedUpdateInput>
+    /**
+     * Choose, which Position_user to update.
+     */
+    where: Position_userWhereUniqueInput
+  }
+
+
+  /**
+   * Position_user updateMany
+   */
+  export type Position_userUpdateManyArgs = {
+    /**
+     * The data used to update Position_users.
+     */
+    data: XOR<Position_userUpdateManyMutationInput, Position_userUncheckedUpdateManyInput>
+    /**
+     * Filter which Position_users to update
+     */
+    where?: Position_userWhereInput
+  }
+
+
+  /**
+   * Position_user upsert
+   */
+  export type Position_userUpsertArgs = {
+    /**
+     * Select specific fields to fetch from the Position_user
+     */
+    select?: Position_userSelect | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: Position_userInclude | null
+    /**
+     * The filter to search for the Position_user to update in case it exists.
+     */
+    where: Position_userWhereUniqueInput
+    /**
+     * In case the Position_user found by the `where` argument doesn't exist, create a new Position_user with this data.
+     */
+    create: XOR<Position_userCreateInput, Position_userUncheckedCreateInput>
+    /**
+     * In case the Position_user was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<Position_userUpdateInput, Position_userUncheckedUpdateInput>
+  }
+
+
+  /**
+   * Position_user delete
+   */
+  export type Position_userDeleteArgs = {
+    /**
+     * Select specific fields to fetch from the Position_user
+     */
+    select?: Position_userSelect | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: Position_userInclude | null
+    /**
+     * Filter which Position_user to delete.
+     */
+    where: Position_userWhereUniqueInput
+  }
+
+
+  /**
+   * Position_user deleteMany
+   */
+  export type Position_userDeleteManyArgs = {
+    /**
+     * Filter which Position_users to delete
+     */
+    where?: Position_userWhereInput
+  }
+
+
+  /**
+   * Position_user without action
+   */
+  export type Position_userArgs = {
+    /**
+     * Select specific fields to fetch from the Position_user
+     */
+    select?: Position_userSelect | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: Position_userInclude | null
+  }
+
+
+
+  /**
+   * Model holiday_date
+   */
+
+
+  export type AggregateHoliday_date = {
+    _count: Holiday_dateCountAggregateOutputType | null
+    _min: Holiday_dateMinAggregateOutputType | null
+    _max: Holiday_dateMaxAggregateOutputType | null
+  }
+
+  export type Holiday_dateMinAggregateOutputType = {
+    id: string | null
+    holiday_name: string | null
+    date: Date | null
+    CompanyId: string | null
+  }
+
+  export type Holiday_dateMaxAggregateOutputType = {
+    id: string | null
+    holiday_name: string | null
+    date: Date | null
+    CompanyId: string | null
+  }
+
+  export type Holiday_dateCountAggregateOutputType = {
+    id: number
+    holiday_name: number
+    date: number
+    CompanyId: number
+    _all: number
+  }
+
+
+  export type Holiday_dateMinAggregateInputType = {
+    id?: true
+    holiday_name?: true
+    date?: true
+    CompanyId?: true
+  }
+
+  export type Holiday_dateMaxAggregateInputType = {
+    id?: true
+    holiday_name?: true
+    date?: true
+    CompanyId?: true
+  }
+
+  export type Holiday_dateCountAggregateInputType = {
+    id?: true
+    holiday_name?: true
+    date?: true
+    CompanyId?: true
+    _all?: true
+  }
+
+  export type Holiday_dateAggregateArgs = {
+    /**
+     * Filter which holiday_date to aggregate.
+     */
+    where?: holiday_dateWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of holiday_dates to fetch.
+     */
+    orderBy?: Enumerable<holiday_dateOrderByWithRelationInput>
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: holiday_dateWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` holiday_dates from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` holiday_dates.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned holiday_dates
+    **/
+    _count?: true | Holiday_dateCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: Holiday_dateMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: Holiday_dateMaxAggregateInputType
+  }
+
+  export type GetHoliday_dateAggregateType<T extends Holiday_dateAggregateArgs> = {
+        [P in keyof T & keyof AggregateHoliday_date]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateHoliday_date[P]>
+      : GetScalarType<T[P], AggregateHoliday_date[P]>
+  }
+
+
+
+
+  export type Holiday_dateGroupByArgs = {
+    where?: holiday_dateWhereInput
+    orderBy?: Enumerable<holiday_dateOrderByWithAggregationInput>
+    by: Holiday_dateScalarFieldEnum[]
+    having?: holiday_dateScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: Holiday_dateCountAggregateInputType | true
+    _min?: Holiday_dateMinAggregateInputType
+    _max?: Holiday_dateMaxAggregateInputType
+  }
+
+
+  export type Holiday_dateGroupByOutputType = {
+    id: string
+    holiday_name: string | null
+    date: Date
+    CompanyId: string | null
+    _count: Holiday_dateCountAggregateOutputType | null
+    _min: Holiday_dateMinAggregateOutputType | null
+    _max: Holiday_dateMaxAggregateOutputType | null
+  }
+
+  type GetHoliday_dateGroupByPayload<T extends Holiday_dateGroupByArgs> = PrismaPromise<
+    Array<
+      PickArray<Holiday_dateGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof Holiday_dateGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], Holiday_dateGroupByOutputType[P]>
+            : GetScalarType<T[P], Holiday_dateGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type holiday_dateSelect = {
+    id?: boolean
+    holiday_name?: boolean
+    date?: boolean
+    Company?: boolean | CompanyArgs
+    CompanyId?: boolean
+  }
+
+
+  export type holiday_dateInclude = {
+    Company?: boolean | CompanyArgs
+  }
+
+  export type holiday_dateGetPayload<S extends boolean | null | undefined | holiday_dateArgs> =
+    S extends { select: any, include: any } ? 'Please either choose `select` or `include`' :
+    S extends true ? holiday_date :
+    S extends undefined ? never :
+    S extends { include: any } & (holiday_dateArgs | holiday_dateFindManyArgs)
+    ? holiday_date  & {
+    [P in TruthyKeys<S['include']>]:
+        P extends 'Company' ? CompanyGetPayload<S['include'][P]> | null :  never
+  } 
+    : S extends { select: any } & (holiday_dateArgs | holiday_dateFindManyArgs)
+      ? {
+    [P in TruthyKeys<S['select']>]:
+        P extends 'Company' ? CompanyGetPayload<S['select'][P]> | null :  P extends keyof holiday_date ? holiday_date[P] : never
+  } 
+      : holiday_date
+
+
+  type holiday_dateCountArgs = 
+    Omit<holiday_dateFindManyArgs, 'select' | 'include'> & {
+      select?: Holiday_dateCountAggregateInputType | true
+    }
+
+  export interface holiday_dateDelegate<GlobalRejectSettings extends Prisma.RejectOnNotFound | Prisma.RejectPerOperation | false | undefined> {
+
+    /**
+     * Find zero or one Holiday_date that matches the filter.
+     * @param {holiday_dateFindUniqueArgs} args - Arguments to find a Holiday_date
+     * @example
+     * // Get one Holiday_date
+     * const holiday_date = await prisma.holiday_date.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+    **/
+    findUnique<T extends holiday_dateFindUniqueArgs,  LocalRejectSettings = T["rejectOnNotFound"] extends RejectOnNotFound ? T['rejectOnNotFound'] : undefined>(
+      args: SelectSubset<T, holiday_dateFindUniqueArgs>
+    ): HasReject<GlobalRejectSettings, LocalRejectSettings, 'findUnique', 'holiday_date'> extends True ? Prisma__holiday_dateClient<holiday_dateGetPayload<T>> : Prisma__holiday_dateClient<holiday_dateGetPayload<T> | null, null>
+
+    /**
+     * Find one Holiday_date that matches the filter or throw an error  with `error.code='P2025'` 
+     *     if no matches were found.
+     * @param {holiday_dateFindUniqueOrThrowArgs} args - Arguments to find a Holiday_date
+     * @example
+     * // Get one Holiday_date
+     * const holiday_date = await prisma.holiday_date.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+    **/
+    findUniqueOrThrow<T extends holiday_dateFindUniqueOrThrowArgs>(
+      args?: SelectSubset<T, holiday_dateFindUniqueOrThrowArgs>
+    ): Prisma__holiday_dateClient<holiday_dateGetPayload<T>>
+
+    /**
+     * Find the first Holiday_date that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {holiday_dateFindFirstArgs} args - Arguments to find a Holiday_date
+     * @example
+     * // Get one Holiday_date
+     * const holiday_date = await prisma.holiday_date.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+    **/
+    findFirst<T extends holiday_dateFindFirstArgs,  LocalRejectSettings = T["rejectOnNotFound"] extends RejectOnNotFound ? T['rejectOnNotFound'] : undefined>(
+      args?: SelectSubset<T, holiday_dateFindFirstArgs>
+    ): HasReject<GlobalRejectSettings, LocalRejectSettings, 'findFirst', 'holiday_date'> extends True ? Prisma__holiday_dateClient<holiday_dateGetPayload<T>> : Prisma__holiday_dateClient<holiday_dateGetPayload<T> | null, null>
+
+    /**
+     * Find the first Holiday_date that matches the filter or
+     * throw `NotFoundError` if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {holiday_dateFindFirstOrThrowArgs} args - Arguments to find a Holiday_date
+     * @example
+     * // Get one Holiday_date
+     * const holiday_date = await prisma.holiday_date.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+    **/
+    findFirstOrThrow<T extends holiday_dateFindFirstOrThrowArgs>(
+      args?: SelectSubset<T, holiday_dateFindFirstOrThrowArgs>
+    ): Prisma__holiday_dateClient<holiday_dateGetPayload<T>>
+
+    /**
+     * Find zero or more Holiday_dates that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {holiday_dateFindManyArgs=} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all Holiday_dates
+     * const holiday_dates = await prisma.holiday_date.findMany()
+     * 
+     * // Get first 10 Holiday_dates
+     * const holiday_dates = await prisma.holiday_date.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const holiday_dateWithIdOnly = await prisma.holiday_date.findMany({ select: { id: true } })
+     * 
+    **/
+    findMany<T extends holiday_dateFindManyArgs>(
+      args?: SelectSubset<T, holiday_dateFindManyArgs>
+    ): PrismaPromise<Array<holiday_dateGetPayload<T>>>
+
+    /**
+     * Create a Holiday_date.
+     * @param {holiday_dateCreateArgs} args - Arguments to create a Holiday_date.
+     * @example
+     * // Create one Holiday_date
+     * const Holiday_date = await prisma.holiday_date.create({
+     *   data: {
+     *     // ... data to create a Holiday_date
+     *   }
+     * })
+     * 
+    **/
+    create<T extends holiday_dateCreateArgs>(
+      args: SelectSubset<T, holiday_dateCreateArgs>
+    ): Prisma__holiday_dateClient<holiday_dateGetPayload<T>>
+
+    /**
+     * Create many Holiday_dates.
+     *     @param {holiday_dateCreateManyArgs} args - Arguments to create many Holiday_dates.
+     *     @example
+     *     // Create many Holiday_dates
+     *     const holiday_date = await prisma.holiday_date.createMany({
+     *       data: {
+     *         // ... provide data here
+     *       }
+     *     })
+     *     
+    **/
+    createMany<T extends holiday_dateCreateManyArgs>(
+      args?: SelectSubset<T, holiday_dateCreateManyArgs>
+    ): PrismaPromise<BatchPayload>
+
+    /**
+     * Delete a Holiday_date.
+     * @param {holiday_dateDeleteArgs} args - Arguments to delete one Holiday_date.
+     * @example
+     * // Delete one Holiday_date
+     * const Holiday_date = await prisma.holiday_date.delete({
+     *   where: {
+     *     // ... filter to delete one Holiday_date
+     *   }
+     * })
+     * 
+    **/
+    delete<T extends holiday_dateDeleteArgs>(
+      args: SelectSubset<T, holiday_dateDeleteArgs>
+    ): Prisma__holiday_dateClient<holiday_dateGetPayload<T>>
+
+    /**
+     * Update one Holiday_date.
+     * @param {holiday_dateUpdateArgs} args - Arguments to update one Holiday_date.
+     * @example
+     * // Update one Holiday_date
+     * const holiday_date = await prisma.holiday_date.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+    **/
+    update<T extends holiday_dateUpdateArgs>(
+      args: SelectSubset<T, holiday_dateUpdateArgs>
+    ): Prisma__holiday_dateClient<holiday_dateGetPayload<T>>
+
+    /**
+     * Delete zero or more Holiday_dates.
+     * @param {holiday_dateDeleteManyArgs} args - Arguments to filter Holiday_dates to delete.
+     * @example
+     * // Delete a few Holiday_dates
+     * const { count } = await prisma.holiday_date.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+    **/
+    deleteMany<T extends holiday_dateDeleteManyArgs>(
+      args?: SelectSubset<T, holiday_dateDeleteManyArgs>
+    ): PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Holiday_dates.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {holiday_dateUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many Holiday_dates
+     * const holiday_date = await prisma.holiday_date.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+    **/
+    updateMany<T extends holiday_dateUpdateManyArgs>(
+      args: SelectSubset<T, holiday_dateUpdateManyArgs>
+    ): PrismaPromise<BatchPayload>
+
+    /**
+     * Create or update one Holiday_date.
+     * @param {holiday_dateUpsertArgs} args - Arguments to update or create a Holiday_date.
+     * @example
+     * // Update or create a Holiday_date
+     * const holiday_date = await prisma.holiday_date.upsert({
+     *   create: {
+     *     // ... data to create a Holiday_date
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the Holiday_date we want to update
+     *   }
+     * })
+    **/
+    upsert<T extends holiday_dateUpsertArgs>(
+      args: SelectSubset<T, holiday_dateUpsertArgs>
+    ): Prisma__holiday_dateClient<holiday_dateGetPayload<T>>
+
+    /**
+     * Count the number of Holiday_dates.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {holiday_dateCountArgs} args - Arguments to filter Holiday_dates to count.
+     * @example
+     * // Count the number of Holiday_dates
+     * const count = await prisma.holiday_date.count({
+     *   where: {
+     *     // ... the filter for the Holiday_dates we want to count
+     *   }
+     * })
+    **/
+    count<T extends holiday_dateCountArgs>(
+      args?: Subset<T, holiday_dateCountArgs>,
+    ): PrismaPromise<
+      T extends _Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], Holiday_dateCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a Holiday_date.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {Holiday_dateAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends Holiday_dateAggregateArgs>(args: Subset<T, Holiday_dateAggregateArgs>): PrismaPromise<GetHoliday_dateAggregateType<T>>
+
+    /**
+     * Group by Holiday_date.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {Holiday_dateGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends Holiday_dateGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: Holiday_dateGroupByArgs['orderBy'] }
+        : { orderBy?: Holiday_dateGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends TupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, Holiday_dateGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetHoliday_dateGroupByPayload<T> : PrismaPromise<InputErrors>
+
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for holiday_date.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export class Prisma__holiday_dateClient<T, Null = never> implements PrismaPromise<T> {
+    [prisma]: true;
+    private readonly _dmmf;
+    private readonly _fetcher;
+    private readonly _queryType;
+    private readonly _rootField;
+    private readonly _clientMethod;
+    private readonly _args;
+    private readonly _dataPath;
+    private readonly _errorFormat;
+    private readonly _measurePerformance?;
+    private _isList;
+    private _callsite;
+    private _requestPromise?;
+    constructor(_dmmf: runtime.DMMFClass, _fetcher: PrismaClientFetcher, _queryType: 'query' | 'mutation', _rootField: string, _clientMethod: string, _args: any, _dataPath: string[], _errorFormat: ErrorFormat, _measurePerformance?: boolean | undefined, _isList?: boolean);
+    readonly [Symbol.toStringTag]: 'PrismaClientPromise';
+
+    Company<T extends CompanyArgs= {}>(args?: Subset<T, CompanyArgs>): Prisma__CompanyClient<CompanyGetPayload<T> | Null>;
+
+    private get _document();
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): Promise<TResult1 | TResult2>;
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): Promise<T | TResult>;
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): Promise<T>;
+  }
+
+
+
+  // Custom InputTypes
+
+  /**
+   * holiday_date base type for findUnique actions
+   */
+  export type holiday_dateFindUniqueArgsBase = {
+    /**
+     * Select specific fields to fetch from the holiday_date
+     */
+    select?: holiday_dateSelect | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: holiday_dateInclude | null
+    /**
+     * Filter, which holiday_date to fetch.
+     */
+    where: holiday_dateWhereUniqueInput
+  }
+
+  /**
+   * holiday_date findUnique
+   */
+  export interface holiday_dateFindUniqueArgs extends holiday_dateFindUniqueArgsBase {
+   /**
+    * Throw an Error if query returns no results
+    * @deprecated since 4.0.0: use `findUniqueOrThrow` method instead
+    */
+    rejectOnNotFound?: RejectOnNotFound
+  }
+      
+
+  /**
+   * holiday_date findUniqueOrThrow
+   */
+  export type holiday_dateFindUniqueOrThrowArgs = {
+    /**
+     * Select specific fields to fetch from the holiday_date
+     */
+    select?: holiday_dateSelect | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: holiday_dateInclude | null
+    /**
+     * Filter, which holiday_date to fetch.
+     */
+    where: holiday_dateWhereUniqueInput
+  }
+
+
+  /**
+   * holiday_date base type for findFirst actions
+   */
+  export type holiday_dateFindFirstArgsBase = {
+    /**
+     * Select specific fields to fetch from the holiday_date
+     */
+    select?: holiday_dateSelect | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: holiday_dateInclude | null
+    /**
+     * Filter, which holiday_date to fetch.
+     */
+    where?: holiday_dateWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of holiday_dates to fetch.
+     */
+    orderBy?: Enumerable<holiday_dateOrderByWithRelationInput>
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for holiday_dates.
+     */
+    cursor?: holiday_dateWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` holiday_dates from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` holiday_dates.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of holiday_dates.
+     */
+    distinct?: Enumerable<Holiday_dateScalarFieldEnum>
+  }
+
+  /**
+   * holiday_date findFirst
+   */
+  export interface holiday_dateFindFirstArgs extends holiday_dateFindFirstArgsBase {
+   /**
+    * Throw an Error if query returns no results
+    * @deprecated since 4.0.0: use `findFirstOrThrow` method instead
+    */
+    rejectOnNotFound?: RejectOnNotFound
+  }
+      
+
+  /**
+   * holiday_date findFirstOrThrow
+   */
+  export type holiday_dateFindFirstOrThrowArgs = {
+    /**
+     * Select specific fields to fetch from the holiday_date
+     */
+    select?: holiday_dateSelect | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: holiday_dateInclude | null
+    /**
+     * Filter, which holiday_date to fetch.
+     */
+    where?: holiday_dateWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of holiday_dates to fetch.
+     */
+    orderBy?: Enumerable<holiday_dateOrderByWithRelationInput>
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for holiday_dates.
+     */
+    cursor?: holiday_dateWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` holiday_dates from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` holiday_dates.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of holiday_dates.
+     */
+    distinct?: Enumerable<Holiday_dateScalarFieldEnum>
+  }
+
+
+  /**
+   * holiday_date findMany
+   */
+  export type holiday_dateFindManyArgs = {
+    /**
+     * Select specific fields to fetch from the holiday_date
+     */
+    select?: holiday_dateSelect | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: holiday_dateInclude | null
+    /**
+     * Filter, which holiday_dates to fetch.
+     */
+    where?: holiday_dateWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of holiday_dates to fetch.
+     */
+    orderBy?: Enumerable<holiday_dateOrderByWithRelationInput>
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing holiday_dates.
+     */
+    cursor?: holiday_dateWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` holiday_dates from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` holiday_dates.
+     */
+    skip?: number
+    distinct?: Enumerable<Holiday_dateScalarFieldEnum>
+  }
+
+
+  /**
+   * holiday_date create
+   */
+  export type holiday_dateCreateArgs = {
+    /**
+     * Select specific fields to fetch from the holiday_date
+     */
+    select?: holiday_dateSelect | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: holiday_dateInclude | null
+    /**
+     * The data needed to create a holiday_date.
+     */
+    data: XOR<holiday_dateCreateInput, holiday_dateUncheckedCreateInput>
+  }
+
+
+  /**
+   * holiday_date createMany
+   */
+  export type holiday_dateCreateManyArgs = {
+    /**
+     * The data used to create many holiday_dates.
+     */
+    data: Enumerable<holiday_dateCreateManyInput>
+    skipDuplicates?: boolean
+  }
+
+
+  /**
+   * holiday_date update
+   */
+  export type holiday_dateUpdateArgs = {
+    /**
+     * Select specific fields to fetch from the holiday_date
+     */
+    select?: holiday_dateSelect | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: holiday_dateInclude | null
+    /**
+     * The data needed to update a holiday_date.
+     */
+    data: XOR<holiday_dateUpdateInput, holiday_dateUncheckedUpdateInput>
+    /**
+     * Choose, which holiday_date to update.
+     */
+    where: holiday_dateWhereUniqueInput
+  }
+
+
+  /**
+   * holiday_date updateMany
+   */
+  export type holiday_dateUpdateManyArgs = {
+    /**
+     * The data used to update holiday_dates.
+     */
+    data: XOR<holiday_dateUpdateManyMutationInput, holiday_dateUncheckedUpdateManyInput>
+    /**
+     * Filter which holiday_dates to update
+     */
+    where?: holiday_dateWhereInput
+  }
+
+
+  /**
+   * holiday_date upsert
+   */
+  export type holiday_dateUpsertArgs = {
+    /**
+     * Select specific fields to fetch from the holiday_date
+     */
+    select?: holiday_dateSelect | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: holiday_dateInclude | null
+    /**
+     * The filter to search for the holiday_date to update in case it exists.
+     */
+    where: holiday_dateWhereUniqueInput
+    /**
+     * In case the holiday_date found by the `where` argument doesn't exist, create a new holiday_date with this data.
+     */
+    create: XOR<holiday_dateCreateInput, holiday_dateUncheckedCreateInput>
+    /**
+     * In case the holiday_date was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<holiday_dateUpdateInput, holiday_dateUncheckedUpdateInput>
+  }
+
+
+  /**
+   * holiday_date delete
+   */
+  export type holiday_dateDeleteArgs = {
+    /**
+     * Select specific fields to fetch from the holiday_date
+     */
+    select?: holiday_dateSelect | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: holiday_dateInclude | null
+    /**
+     * Filter which holiday_date to delete.
+     */
+    where: holiday_dateWhereUniqueInput
+  }
+
+
+  /**
+   * holiday_date deleteMany
+   */
+  export type holiday_dateDeleteManyArgs = {
+    /**
+     * Filter which holiday_dates to delete
+     */
+    where?: holiday_dateWhereInput
+  }
+
+
+  /**
+   * holiday_date without action
+   */
+  export type holiday_dateArgs = {
+    /**
+     * Select specific fields to fetch from the holiday_date
+     */
+    select?: holiday_dateSelect | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: holiday_dateInclude | null
   }
 
 
@@ -11502,6 +15834,16 @@ export namespace Prisma {
   export type DistrictScalarFieldEnum = (typeof DistrictScalarFieldEnum)[keyof typeof DistrictScalarFieldEnum]
 
 
+  export const Holiday_dateScalarFieldEnum: {
+    id: 'id',
+    holiday_name: 'holiday_name',
+    date: 'date',
+    CompanyId: 'CompanyId'
+  };
+
+  export type Holiday_dateScalarFieldEnum = (typeof Holiday_dateScalarFieldEnum)[keyof typeof Holiday_dateScalarFieldEnum]
+
+
   export const JsonNullValueFilter: {
     DbNull: typeof DbNull,
     JsonNull: typeof JsonNull,
@@ -11518,12 +15860,46 @@ export namespace Prisma {
   export type JsonNullValueInput = (typeof JsonNullValueInput)[keyof typeof JsonNullValueInput]
 
 
-  export const PosotionScalarFieldEnum: {
+  export const Mas_positionlevel1ScalarFieldEnum: {
     id: 'id',
-    detail: 'detail'
+    name: 'name',
+    CompanyId: 'CompanyId'
   };
 
-  export type PosotionScalarFieldEnum = (typeof PosotionScalarFieldEnum)[keyof typeof PosotionScalarFieldEnum]
+  export type Mas_positionlevel1ScalarFieldEnum = (typeof Mas_positionlevel1ScalarFieldEnum)[keyof typeof Mas_positionlevel1ScalarFieldEnum]
+
+
+  export const Mas_positionlevel2ScalarFieldEnum: {
+    id: 'id',
+    name: 'name',
+    positionlevel1_id: 'positionlevel1_id',
+    CompanyId: 'CompanyId'
+  };
+
+  export type Mas_positionlevel2ScalarFieldEnum = (typeof Mas_positionlevel2ScalarFieldEnum)[keyof typeof Mas_positionlevel2ScalarFieldEnum]
+
+
+  export const Mas_positionlevel3ScalarFieldEnum: {
+    id: 'id',
+    name: 'name',
+    positionlevel2_id: 'positionlevel2_id',
+    CompanyId: 'CompanyId'
+  };
+
+  export type Mas_positionlevel3ScalarFieldEnum = (typeof Mas_positionlevel3ScalarFieldEnum)[keyof typeof Mas_positionlevel3ScalarFieldEnum]
+
+
+  export const Position_userScalarFieldEnum: {
+    id: 'id',
+    user_id: 'user_id',
+    position1_id: 'position1_id',
+    position2_id: 'position2_id',
+    position3_id: 'position3_id',
+    role: 'role',
+    leader: 'leader'
+  };
+
+  export type Position_userScalarFieldEnum = (typeof Position_userScalarFieldEnum)[keyof typeof Position_userScalarFieldEnum]
 
 
   export const ProfileScalarFieldEnum: {
@@ -11667,6 +16043,10 @@ export namespace Prisma {
     ownerId?: UuidFilter | string
     owner?: XOR<UserRelationFilter, UserWhereInput>
     branch?: CompanyBranchListRelationFilter
+    mas_positionlevel3?: Mas_positionlevel3ListRelationFilter
+    mas_positionlevel2?: Mas_positionlevel2ListRelationFilter
+    mas_positionlevel1?: Mas_positionlevel1ListRelationFilter
+    holiday_date?: Holiday_dateListRelationFilter
   }
 
   export type CompanyOrderByWithRelationInput = {
@@ -11682,6 +16062,10 @@ export namespace Prisma {
     ownerId?: SortOrder
     owner?: UserOrderByWithRelationInput
     branch?: CompanyBranchOrderByRelationAggregateInput
+    mas_positionlevel3?: mas_positionlevel3OrderByRelationAggregateInput
+    mas_positionlevel2?: mas_positionlevel2OrderByRelationAggregateInput
+    mas_positionlevel1?: mas_positionlevel1OrderByRelationAggregateInput
+    holiday_date?: holiday_dateOrderByRelationAggregateInput
   }
 
   export type CompanyWhereUniqueInput = {
@@ -12083,6 +16467,7 @@ export namespace Prisma {
     companyBranch?: XOR<CompanyBranchRelationFilter, CompanyBranchWhereInput> | null
     companyBranchId?: UuidNullableFilter | string | null
     Role_Company?: XOR<Role_CompanyRelationFilter, Role_CompanyWhereInput> | null
+    Position_user?: Position_userListRelationFilter
   }
 
   export type UserOrderByWithRelationInput = {
@@ -12102,6 +16487,7 @@ export namespace Prisma {
     companyBranch?: CompanyBranchOrderByWithRelationInput
     companyBranchId?: SortOrder
     Role_Company?: Role_CompanyOrderByWithRelationInput
+    Position_user?: Position_userOrderByRelationAggregateInput
   }
 
   export type UserWhereUniqueInput = {
@@ -12348,37 +16734,247 @@ export namespace Prisma {
     zipcode?: StringNullableWithAggregatesFilter | string | null
   }
 
-  export type PosotionWhereInput = {
-    AND?: Enumerable<PosotionWhereInput>
-    OR?: Enumerable<PosotionWhereInput>
-    NOT?: Enumerable<PosotionWhereInput>
+  export type mas_positionlevel1WhereInput = {
+    AND?: Enumerable<mas_positionlevel1WhereInput>
+    OR?: Enumerable<mas_positionlevel1WhereInput>
+    NOT?: Enumerable<mas_positionlevel1WhereInput>
     id?: UuidFilter | string
-    detail?: JsonNullableListFilter
+    name?: StringFilter | string
+    mas_positionlevel2?: Mas_positionlevel2ListRelationFilter
+    Company?: XOR<CompanyRelationFilter, CompanyWhereInput> | null
+    CompanyId?: UuidNullableFilter | string | null
+    Position_user?: Position_userListRelationFilter
   }
 
-  export type PosotionOrderByWithRelationInput = {
+  export type mas_positionlevel1OrderByWithRelationInput = {
     id?: SortOrder
-    detail?: SortOrder
+    name?: SortOrder
+    mas_positionlevel2?: mas_positionlevel2OrderByRelationAggregateInput
+    Company?: CompanyOrderByWithRelationInput
+    CompanyId?: SortOrder
+    Position_user?: Position_userOrderByRelationAggregateInput
   }
 
-  export type PosotionWhereUniqueInput = {
+  export type mas_positionlevel1WhereUniqueInput = {
     id?: string
   }
 
-  export type PosotionOrderByWithAggregationInput = {
+  export type mas_positionlevel1OrderByWithAggregationInput = {
     id?: SortOrder
-    detail?: SortOrder
-    _count?: PosotionCountOrderByAggregateInput
-    _max?: PosotionMaxOrderByAggregateInput
-    _min?: PosotionMinOrderByAggregateInput
+    name?: SortOrder
+    CompanyId?: SortOrder
+    _count?: mas_positionlevel1CountOrderByAggregateInput
+    _max?: mas_positionlevel1MaxOrderByAggregateInput
+    _min?: mas_positionlevel1MinOrderByAggregateInput
   }
 
-  export type PosotionScalarWhereWithAggregatesInput = {
-    AND?: Enumerable<PosotionScalarWhereWithAggregatesInput>
-    OR?: Enumerable<PosotionScalarWhereWithAggregatesInput>
-    NOT?: Enumerable<PosotionScalarWhereWithAggregatesInput>
+  export type mas_positionlevel1ScalarWhereWithAggregatesInput = {
+    AND?: Enumerable<mas_positionlevel1ScalarWhereWithAggregatesInput>
+    OR?: Enumerable<mas_positionlevel1ScalarWhereWithAggregatesInput>
+    NOT?: Enumerable<mas_positionlevel1ScalarWhereWithAggregatesInput>
     id?: UuidWithAggregatesFilter | string
-    detail?: JsonNullableListFilter
+    name?: StringWithAggregatesFilter | string
+    CompanyId?: UuidNullableWithAggregatesFilter | string | null
+  }
+
+  export type mas_positionlevel2WhereInput = {
+    AND?: Enumerable<mas_positionlevel2WhereInput>
+    OR?: Enumerable<mas_positionlevel2WhereInput>
+    NOT?: Enumerable<mas_positionlevel2WhereInput>
+    id?: UuidFilter | string
+    name?: StringFilter | string
+    positionlevel1_id?: UuidNullableFilter | string | null
+    mas_positionlevel1?: XOR<Mas_positionlevel1RelationFilter, mas_positionlevel1WhereInput> | null
+    mas_positionlevel3?: Mas_positionlevel3ListRelationFilter
+    Company?: XOR<CompanyRelationFilter, CompanyWhereInput> | null
+    CompanyId?: UuidNullableFilter | string | null
+    position_user?: Position_userListRelationFilter
+  }
+
+  export type mas_positionlevel2OrderByWithRelationInput = {
+    id?: SortOrder
+    name?: SortOrder
+    positionlevel1_id?: SortOrder
+    mas_positionlevel1?: mas_positionlevel1OrderByWithRelationInput
+    mas_positionlevel3?: mas_positionlevel3OrderByRelationAggregateInput
+    Company?: CompanyOrderByWithRelationInput
+    CompanyId?: SortOrder
+    position_user?: Position_userOrderByRelationAggregateInput
+  }
+
+  export type mas_positionlevel2WhereUniqueInput = {
+    id?: string
+  }
+
+  export type mas_positionlevel2OrderByWithAggregationInput = {
+    id?: SortOrder
+    name?: SortOrder
+    positionlevel1_id?: SortOrder
+    CompanyId?: SortOrder
+    _count?: mas_positionlevel2CountOrderByAggregateInput
+    _max?: mas_positionlevel2MaxOrderByAggregateInput
+    _min?: mas_positionlevel2MinOrderByAggregateInput
+  }
+
+  export type mas_positionlevel2ScalarWhereWithAggregatesInput = {
+    AND?: Enumerable<mas_positionlevel2ScalarWhereWithAggregatesInput>
+    OR?: Enumerable<mas_positionlevel2ScalarWhereWithAggregatesInput>
+    NOT?: Enumerable<mas_positionlevel2ScalarWhereWithAggregatesInput>
+    id?: UuidWithAggregatesFilter | string
+    name?: StringWithAggregatesFilter | string
+    positionlevel1_id?: UuidNullableWithAggregatesFilter | string | null
+    CompanyId?: UuidNullableWithAggregatesFilter | string | null
+  }
+
+  export type mas_positionlevel3WhereInput = {
+    AND?: Enumerable<mas_positionlevel3WhereInput>
+    OR?: Enumerable<mas_positionlevel3WhereInput>
+    NOT?: Enumerable<mas_positionlevel3WhereInput>
+    id?: UuidFilter | string
+    name?: StringFilter | string
+    positionlevel2_id?: UuidNullableFilter | string | null
+    mas_positionlevel2?: XOR<Mas_positionlevel2RelationFilter, mas_positionlevel2WhereInput> | null
+    Company?: XOR<CompanyRelationFilter, CompanyWhereInput> | null
+    CompanyId?: UuidNullableFilter | string | null
+    Position_user?: Position_userListRelationFilter
+  }
+
+  export type mas_positionlevel3OrderByWithRelationInput = {
+    id?: SortOrder
+    name?: SortOrder
+    positionlevel2_id?: SortOrder
+    mas_positionlevel2?: mas_positionlevel2OrderByWithRelationInput
+    Company?: CompanyOrderByWithRelationInput
+    CompanyId?: SortOrder
+    Position_user?: Position_userOrderByRelationAggregateInput
+  }
+
+  export type mas_positionlevel3WhereUniqueInput = {
+    id?: string
+  }
+
+  export type mas_positionlevel3OrderByWithAggregationInput = {
+    id?: SortOrder
+    name?: SortOrder
+    positionlevel2_id?: SortOrder
+    CompanyId?: SortOrder
+    _count?: mas_positionlevel3CountOrderByAggregateInput
+    _max?: mas_positionlevel3MaxOrderByAggregateInput
+    _min?: mas_positionlevel3MinOrderByAggregateInput
+  }
+
+  export type mas_positionlevel3ScalarWhereWithAggregatesInput = {
+    AND?: Enumerable<mas_positionlevel3ScalarWhereWithAggregatesInput>
+    OR?: Enumerable<mas_positionlevel3ScalarWhereWithAggregatesInput>
+    NOT?: Enumerable<mas_positionlevel3ScalarWhereWithAggregatesInput>
+    id?: UuidWithAggregatesFilter | string
+    name?: StringWithAggregatesFilter | string
+    positionlevel2_id?: UuidNullableWithAggregatesFilter | string | null
+    CompanyId?: UuidNullableWithAggregatesFilter | string | null
+  }
+
+  export type Position_userWhereInput = {
+    AND?: Enumerable<Position_userWhereInput>
+    OR?: Enumerable<Position_userWhereInput>
+    NOT?: Enumerable<Position_userWhereInput>
+    id?: UuidFilter | string
+    user_id?: UuidNullableFilter | string | null
+    position1_id?: UuidNullableFilter | string | null
+    position2_id?: UuidNullableFilter | string | null
+    position3_id?: UuidNullableFilter | string | null
+    role?: StringNullableFilter | string | null
+    leader?: StringNullableFilter | string | null
+    user?: XOR<UserRelationFilter, UserWhereInput> | null
+    mas_positionlevel1?: XOR<Mas_positionlevel1RelationFilter, mas_positionlevel1WhereInput> | null
+    mas_positionlevel2?: XOR<Mas_positionlevel2RelationFilter, mas_positionlevel2WhereInput> | null
+    mas_positionlevel3?: XOR<Mas_positionlevel3RelationFilter, mas_positionlevel3WhereInput> | null
+  }
+
+  export type Position_userOrderByWithRelationInput = {
+    id?: SortOrder
+    user_id?: SortOrder
+    position1_id?: SortOrder
+    position2_id?: SortOrder
+    position3_id?: SortOrder
+    role?: SortOrder
+    leader?: SortOrder
+    user?: UserOrderByWithRelationInput
+    mas_positionlevel1?: mas_positionlevel1OrderByWithRelationInput
+    mas_positionlevel2?: mas_positionlevel2OrderByWithRelationInput
+    mas_positionlevel3?: mas_positionlevel3OrderByWithRelationInput
+  }
+
+  export type Position_userWhereUniqueInput = {
+    id?: string
+  }
+
+  export type Position_userOrderByWithAggregationInput = {
+    id?: SortOrder
+    user_id?: SortOrder
+    position1_id?: SortOrder
+    position2_id?: SortOrder
+    position3_id?: SortOrder
+    role?: SortOrder
+    leader?: SortOrder
+    _count?: Position_userCountOrderByAggregateInput
+    _max?: Position_userMaxOrderByAggregateInput
+    _min?: Position_userMinOrderByAggregateInput
+  }
+
+  export type Position_userScalarWhereWithAggregatesInput = {
+    AND?: Enumerable<Position_userScalarWhereWithAggregatesInput>
+    OR?: Enumerable<Position_userScalarWhereWithAggregatesInput>
+    NOT?: Enumerable<Position_userScalarWhereWithAggregatesInput>
+    id?: UuidWithAggregatesFilter | string
+    user_id?: UuidNullableWithAggregatesFilter | string | null
+    position1_id?: UuidNullableWithAggregatesFilter | string | null
+    position2_id?: UuidNullableWithAggregatesFilter | string | null
+    position3_id?: UuidNullableWithAggregatesFilter | string | null
+    role?: StringNullableWithAggregatesFilter | string | null
+    leader?: StringNullableWithAggregatesFilter | string | null
+  }
+
+  export type holiday_dateWhereInput = {
+    AND?: Enumerable<holiday_dateWhereInput>
+    OR?: Enumerable<holiday_dateWhereInput>
+    NOT?: Enumerable<holiday_dateWhereInput>
+    id?: UuidFilter | string
+    holiday_name?: StringNullableFilter | string | null
+    date?: DateTimeFilter | Date | string
+    Company?: XOR<CompanyRelationFilter, CompanyWhereInput> | null
+    CompanyId?: UuidNullableFilter | string | null
+  }
+
+  export type holiday_dateOrderByWithRelationInput = {
+    id?: SortOrder
+    holiday_name?: SortOrder
+    date?: SortOrder
+    Company?: CompanyOrderByWithRelationInput
+    CompanyId?: SortOrder
+  }
+
+  export type holiday_dateWhereUniqueInput = {
+    id?: string
+  }
+
+  export type holiday_dateOrderByWithAggregationInput = {
+    id?: SortOrder
+    holiday_name?: SortOrder
+    date?: SortOrder
+    CompanyId?: SortOrder
+    _count?: holiday_dateCountOrderByAggregateInput
+    _max?: holiday_dateMaxOrderByAggregateInput
+    _min?: holiday_dateMinOrderByAggregateInput
+  }
+
+  export type holiday_dateScalarWhereWithAggregatesInput = {
+    AND?: Enumerable<holiday_dateScalarWhereWithAggregatesInput>
+    OR?: Enumerable<holiday_dateScalarWhereWithAggregatesInput>
+    NOT?: Enumerable<holiday_dateScalarWhereWithAggregatesInput>
+    id?: UuidWithAggregatesFilter | string
+    holiday_name?: StringNullableWithAggregatesFilter | string | null
+    date?: DateTimeWithAggregatesFilter | Date | string
+    CompanyId?: UuidNullableWithAggregatesFilter | string | null
   }
 
   export type CompanyCreateInput = {
@@ -12393,6 +16989,10 @@ export namespace Prisma {
     updatedAt?: Date | string
     owner: UserCreateNestedOneWithoutCompanyInput
     branch?: CompanyBranchCreateNestedManyWithoutCompanyInput
+    mas_positionlevel3?: mas_positionlevel3CreateNestedManyWithoutCompanyInput
+    mas_positionlevel2?: mas_positionlevel2CreateNestedManyWithoutCompanyInput
+    mas_positionlevel1?: mas_positionlevel1CreateNestedManyWithoutCompanyInput
+    holiday_date?: holiday_dateCreateNestedManyWithoutCompanyInput
   }
 
   export type CompanyUncheckedCreateInput = {
@@ -12407,6 +17007,10 @@ export namespace Prisma {
     updatedAt?: Date | string
     ownerId: string
     branch?: CompanyBranchUncheckedCreateNestedManyWithoutCompanyInput
+    mas_positionlevel3?: mas_positionlevel3UncheckedCreateNestedManyWithoutCompanyInput
+    mas_positionlevel2?: mas_positionlevel2UncheckedCreateNestedManyWithoutCompanyInput
+    mas_positionlevel1?: mas_positionlevel1UncheckedCreateNestedManyWithoutCompanyInput
+    holiday_date?: holiday_dateUncheckedCreateNestedManyWithoutCompanyInput
   }
 
   export type CompanyUpdateInput = {
@@ -12421,6 +17025,10 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     owner?: UserUpdateOneRequiredWithoutCompanyNestedInput
     branch?: CompanyBranchUpdateManyWithoutCompanyNestedInput
+    mas_positionlevel3?: mas_positionlevel3UpdateManyWithoutCompanyNestedInput
+    mas_positionlevel2?: mas_positionlevel2UpdateManyWithoutCompanyNestedInput
+    mas_positionlevel1?: mas_positionlevel1UpdateManyWithoutCompanyNestedInput
+    holiday_date?: holiday_dateUpdateManyWithoutCompanyNestedInput
   }
 
   export type CompanyUncheckedUpdateInput = {
@@ -12435,6 +17043,10 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     ownerId?: StringFieldUpdateOperationsInput | string
     branch?: CompanyBranchUncheckedUpdateManyWithoutCompanyNestedInput
+    mas_positionlevel3?: mas_positionlevel3UncheckedUpdateManyWithoutCompanyNestedInput
+    mas_positionlevel2?: mas_positionlevel2UncheckedUpdateManyWithoutCompanyNestedInput
+    mas_positionlevel1?: mas_positionlevel1UncheckedUpdateManyWithoutCompanyNestedInput
+    holiday_date?: holiday_dateUncheckedUpdateManyWithoutCompanyNestedInput
   }
 
   export type CompanyCreateManyInput = {
@@ -13027,6 +17639,7 @@ export namespace Prisma {
     company?: CompanyCreateNestedManyWithoutOwnerInput
     companyBranch?: CompanyBranchCreateNestedOneWithoutUsersInput
     Role_Company?: Role_CompanyCreateNestedOneWithoutUsersInput
+    Position_user?: Position_userCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateInput = {
@@ -13043,6 +17656,7 @@ export namespace Prisma {
     RoleCompanyID?: string | null
     company?: CompanyUncheckedCreateNestedManyWithoutOwnerInput
     companyBranchId?: string | null
+    Position_user?: Position_userUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserUpdateInput = {
@@ -13059,6 +17673,7 @@ export namespace Prisma {
     company?: CompanyUpdateManyWithoutOwnerNestedInput
     companyBranch?: CompanyBranchUpdateOneWithoutUsersNestedInput
     Role_Company?: Role_CompanyUpdateOneWithoutUsersNestedInput
+    Position_user?: Position_userUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateInput = {
@@ -13075,6 +17690,7 @@ export namespace Prisma {
     RoleCompanyID?: NullableStringFieldUpdateOperationsInput | string | null
     company?: CompanyUncheckedUpdateManyWithoutOwnerNestedInput
     companyBranchId?: NullableStringFieldUpdateOperationsInput | string | null
+    Position_user?: Position_userUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type UserCreateManyInput = {
@@ -13346,39 +17962,273 @@ export namespace Prisma {
     zipcode?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
-  export type PosotionCreateInput = {
+  export type mas_positionlevel1CreateInput = {
     id: string
-    detail?: PosotionCreatedetailInput | Enumerable<InputJsonValue>
+    name: string
+    mas_positionlevel2?: mas_positionlevel2CreateNestedManyWithoutMas_positionlevel1Input
+    Company?: CompanyCreateNestedOneWithoutMas_positionlevel1Input
+    Position_user?: Position_userCreateNestedManyWithoutMas_positionlevel1Input
   }
 
-  export type PosotionUncheckedCreateInput = {
+  export type mas_positionlevel1UncheckedCreateInput = {
     id: string
-    detail?: PosotionCreatedetailInput | Enumerable<InputJsonValue>
+    name: string
+    mas_positionlevel2?: mas_positionlevel2UncheckedCreateNestedManyWithoutMas_positionlevel1Input
+    CompanyId?: string | null
+    Position_user?: Position_userUncheckedCreateNestedManyWithoutMas_positionlevel1Input
   }
 
-  export type PosotionUpdateInput = {
+  export type mas_positionlevel1UpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
-    detail?: PosotionUpdatedetailInput | Enumerable<InputJsonValue>
+    name?: StringFieldUpdateOperationsInput | string
+    mas_positionlevel2?: mas_positionlevel2UpdateManyWithoutMas_positionlevel1NestedInput
+    Company?: CompanyUpdateOneWithoutMas_positionlevel1NestedInput
+    Position_user?: Position_userUpdateManyWithoutMas_positionlevel1NestedInput
   }
 
-  export type PosotionUncheckedUpdateInput = {
+  export type mas_positionlevel1UncheckedUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
-    detail?: PosotionUpdatedetailInput | Enumerable<InputJsonValue>
+    name?: StringFieldUpdateOperationsInput | string
+    mas_positionlevel2?: mas_positionlevel2UncheckedUpdateManyWithoutMas_positionlevel1NestedInput
+    CompanyId?: NullableStringFieldUpdateOperationsInput | string | null
+    Position_user?: Position_userUncheckedUpdateManyWithoutMas_positionlevel1NestedInput
   }
 
-  export type PosotionCreateManyInput = {
+  export type mas_positionlevel1CreateManyInput = {
     id: string
-    detail?: PosotionCreatedetailInput | Enumerable<InputJsonValue>
+    name: string
+    CompanyId?: string | null
   }
 
-  export type PosotionUpdateManyMutationInput = {
+  export type mas_positionlevel1UpdateManyMutationInput = {
     id?: StringFieldUpdateOperationsInput | string
-    detail?: PosotionUpdatedetailInput | Enumerable<InputJsonValue>
+    name?: StringFieldUpdateOperationsInput | string
   }
 
-  export type PosotionUncheckedUpdateManyInput = {
+  export type mas_positionlevel1UncheckedUpdateManyInput = {
     id?: StringFieldUpdateOperationsInput | string
-    detail?: PosotionUpdatedetailInput | Enumerable<InputJsonValue>
+    name?: StringFieldUpdateOperationsInput | string
+    CompanyId?: NullableStringFieldUpdateOperationsInput | string | null
+  }
+
+  export type mas_positionlevel2CreateInput = {
+    id: string
+    name: string
+    mas_positionlevel1?: mas_positionlevel1CreateNestedOneWithoutMas_positionlevel2Input
+    mas_positionlevel3?: mas_positionlevel3CreateNestedManyWithoutMas_positionlevel2Input
+    Company?: CompanyCreateNestedOneWithoutMas_positionlevel2Input
+    position_user?: Position_userCreateNestedManyWithoutMas_positionlevel2Input
+  }
+
+  export type mas_positionlevel2UncheckedCreateInput = {
+    id: string
+    name: string
+    positionlevel1_id?: string | null
+    mas_positionlevel3?: mas_positionlevel3UncheckedCreateNestedManyWithoutMas_positionlevel2Input
+    CompanyId?: string | null
+    position_user?: Position_userUncheckedCreateNestedManyWithoutMas_positionlevel2Input
+  }
+
+  export type mas_positionlevel2UpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    mas_positionlevel1?: mas_positionlevel1UpdateOneWithoutMas_positionlevel2NestedInput
+    mas_positionlevel3?: mas_positionlevel3UpdateManyWithoutMas_positionlevel2NestedInput
+    Company?: CompanyUpdateOneWithoutMas_positionlevel2NestedInput
+    position_user?: Position_userUpdateManyWithoutMas_positionlevel2NestedInput
+  }
+
+  export type mas_positionlevel2UncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    positionlevel1_id?: NullableStringFieldUpdateOperationsInput | string | null
+    mas_positionlevel3?: mas_positionlevel3UncheckedUpdateManyWithoutMas_positionlevel2NestedInput
+    CompanyId?: NullableStringFieldUpdateOperationsInput | string | null
+    position_user?: Position_userUncheckedUpdateManyWithoutMas_positionlevel2NestedInput
+  }
+
+  export type mas_positionlevel2CreateManyInput = {
+    id: string
+    name: string
+    positionlevel1_id?: string | null
+    CompanyId?: string | null
+  }
+
+  export type mas_positionlevel2UpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type mas_positionlevel2UncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    positionlevel1_id?: NullableStringFieldUpdateOperationsInput | string | null
+    CompanyId?: NullableStringFieldUpdateOperationsInput | string | null
+  }
+
+  export type mas_positionlevel3CreateInput = {
+    id: string
+    name: string
+    mas_positionlevel2?: mas_positionlevel2CreateNestedOneWithoutMas_positionlevel3Input
+    Company?: CompanyCreateNestedOneWithoutMas_positionlevel3Input
+    Position_user?: Position_userCreateNestedManyWithoutMas_positionlevel3Input
+  }
+
+  export type mas_positionlevel3UncheckedCreateInput = {
+    id: string
+    name: string
+    positionlevel2_id?: string | null
+    CompanyId?: string | null
+    Position_user?: Position_userUncheckedCreateNestedManyWithoutMas_positionlevel3Input
+  }
+
+  export type mas_positionlevel3UpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    mas_positionlevel2?: mas_positionlevel2UpdateOneWithoutMas_positionlevel3NestedInput
+    Company?: CompanyUpdateOneWithoutMas_positionlevel3NestedInput
+    Position_user?: Position_userUpdateManyWithoutMas_positionlevel3NestedInput
+  }
+
+  export type mas_positionlevel3UncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    positionlevel2_id?: NullableStringFieldUpdateOperationsInput | string | null
+    CompanyId?: NullableStringFieldUpdateOperationsInput | string | null
+    Position_user?: Position_userUncheckedUpdateManyWithoutMas_positionlevel3NestedInput
+  }
+
+  export type mas_positionlevel3CreateManyInput = {
+    id: string
+    name: string
+    positionlevel2_id?: string | null
+    CompanyId?: string | null
+  }
+
+  export type mas_positionlevel3UpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type mas_positionlevel3UncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    positionlevel2_id?: NullableStringFieldUpdateOperationsInput | string | null
+    CompanyId?: NullableStringFieldUpdateOperationsInput | string | null
+  }
+
+  export type Position_userCreateInput = {
+    id: string
+    role?: string | null
+    leader?: string | null
+    user?: UserCreateNestedOneWithoutPosition_userInput
+    mas_positionlevel1?: mas_positionlevel1CreateNestedOneWithoutPosition_userInput
+    mas_positionlevel2?: mas_positionlevel2CreateNestedOneWithoutPosition_userInput
+    mas_positionlevel3?: mas_positionlevel3CreateNestedOneWithoutPosition_userInput
+  }
+
+  export type Position_userUncheckedCreateInput = {
+    id: string
+    user_id?: string | null
+    position1_id?: string | null
+    position2_id?: string | null
+    position3_id?: string | null
+    role?: string | null
+    leader?: string | null
+  }
+
+  export type Position_userUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    role?: NullableStringFieldUpdateOperationsInput | string | null
+    leader?: NullableStringFieldUpdateOperationsInput | string | null
+    user?: UserUpdateOneWithoutPosition_userNestedInput
+    mas_positionlevel1?: mas_positionlevel1UpdateOneWithoutPosition_userNestedInput
+    mas_positionlevel2?: mas_positionlevel2UpdateOneWithoutPosition_userNestedInput
+    mas_positionlevel3?: mas_positionlevel3UpdateOneWithoutPosition_userNestedInput
+  }
+
+  export type Position_userUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    user_id?: NullableStringFieldUpdateOperationsInput | string | null
+    position1_id?: NullableStringFieldUpdateOperationsInput | string | null
+    position2_id?: NullableStringFieldUpdateOperationsInput | string | null
+    position3_id?: NullableStringFieldUpdateOperationsInput | string | null
+    role?: NullableStringFieldUpdateOperationsInput | string | null
+    leader?: NullableStringFieldUpdateOperationsInput | string | null
+  }
+
+  export type Position_userCreateManyInput = {
+    id: string
+    user_id?: string | null
+    position1_id?: string | null
+    position2_id?: string | null
+    position3_id?: string | null
+    role?: string | null
+    leader?: string | null
+  }
+
+  export type Position_userUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    role?: NullableStringFieldUpdateOperationsInput | string | null
+    leader?: NullableStringFieldUpdateOperationsInput | string | null
+  }
+
+  export type Position_userUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    user_id?: NullableStringFieldUpdateOperationsInput | string | null
+    position1_id?: NullableStringFieldUpdateOperationsInput | string | null
+    position2_id?: NullableStringFieldUpdateOperationsInput | string | null
+    position3_id?: NullableStringFieldUpdateOperationsInput | string | null
+    role?: NullableStringFieldUpdateOperationsInput | string | null
+    leader?: NullableStringFieldUpdateOperationsInput | string | null
+  }
+
+  export type holiday_dateCreateInput = {
+    id: string
+    holiday_name?: string | null
+    date: Date | string
+    Company?: CompanyCreateNestedOneWithoutHoliday_dateInput
+  }
+
+  export type holiday_dateUncheckedCreateInput = {
+    id: string
+    holiday_name?: string | null
+    date: Date | string
+    CompanyId?: string | null
+  }
+
+  export type holiday_dateUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    holiday_name?: NullableStringFieldUpdateOperationsInput | string | null
+    date?: DateTimeFieldUpdateOperationsInput | Date | string
+    Company?: CompanyUpdateOneWithoutHoliday_dateNestedInput
+  }
+
+  export type holiday_dateUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    holiday_name?: NullableStringFieldUpdateOperationsInput | string | null
+    date?: DateTimeFieldUpdateOperationsInput | Date | string
+    CompanyId?: NullableStringFieldUpdateOperationsInput | string | null
+  }
+
+  export type holiday_dateCreateManyInput = {
+    id: string
+    holiday_name?: string | null
+    date: Date | string
+    CompanyId?: string | null
+  }
+
+  export type holiday_dateUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    holiday_name?: NullableStringFieldUpdateOperationsInput | string | null
+    date?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type holiday_dateUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    holiday_name?: NullableStringFieldUpdateOperationsInput | string | null
+    date?: DateTimeFieldUpdateOperationsInput | Date | string
+    CompanyId?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type UuidFilter = {
@@ -13456,7 +18306,47 @@ export namespace Prisma {
     none?: CompanyBranchWhereInput
   }
 
+  export type Mas_positionlevel3ListRelationFilter = {
+    every?: mas_positionlevel3WhereInput
+    some?: mas_positionlevel3WhereInput
+    none?: mas_positionlevel3WhereInput
+  }
+
+  export type Mas_positionlevel2ListRelationFilter = {
+    every?: mas_positionlevel2WhereInput
+    some?: mas_positionlevel2WhereInput
+    none?: mas_positionlevel2WhereInput
+  }
+
+  export type Mas_positionlevel1ListRelationFilter = {
+    every?: mas_positionlevel1WhereInput
+    some?: mas_positionlevel1WhereInput
+    none?: mas_positionlevel1WhereInput
+  }
+
+  export type Holiday_dateListRelationFilter = {
+    every?: holiday_dateWhereInput
+    some?: holiday_dateWhereInput
+    none?: holiday_dateWhereInput
+  }
+
   export type CompanyBranchOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type mas_positionlevel3OrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type mas_positionlevel2OrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type mas_positionlevel1OrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type holiday_dateOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
@@ -13932,7 +18822,17 @@ export namespace Prisma {
     isNot?: Role_CompanyWhereInput | null
   }
 
+  export type Position_userListRelationFilter = {
+    every?: Position_userWhereInput
+    some?: Position_userWhereInput
+    none?: Position_userWhereInput
+  }
+
   export type CompanyOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type Position_userOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
@@ -14153,32 +19053,131 @@ export namespace Prisma {
     districtId?: SortOrder
     zipcode?: SortOrder
   }
-  export type JsonNullableListFilter = 
-    | PatchUndefined<
-        Either<Required<JsonNullableListFilterBase>, Exclude<keyof Required<JsonNullableListFilterBase>, 'path'>>,
-        Required<JsonNullableListFilterBase>
-      >
-    | OptionalFlat<Omit<Required<JsonNullableListFilterBase>, 'path'>>
 
-  export type JsonNullableListFilterBase = {
-    equals?: Enumerable<InputJsonValue> | null
-    has?: InputJsonValue | null
-    hasEvery?: Enumerable<InputJsonValue>
-    hasSome?: Enumerable<InputJsonValue>
-    isEmpty?: boolean
+  export type mas_positionlevel1CountOrderByAggregateInput = {
+    id?: SortOrder
+    name?: SortOrder
+    CompanyId?: SortOrder
   }
 
-  export type PosotionCountOrderByAggregateInput = {
+  export type mas_positionlevel1MaxOrderByAggregateInput = {
     id?: SortOrder
-    detail?: SortOrder
+    name?: SortOrder
+    CompanyId?: SortOrder
   }
 
-  export type PosotionMaxOrderByAggregateInput = {
+  export type mas_positionlevel1MinOrderByAggregateInput = {
     id?: SortOrder
+    name?: SortOrder
+    CompanyId?: SortOrder
   }
 
-  export type PosotionMinOrderByAggregateInput = {
+  export type Mas_positionlevel1RelationFilter = {
+    is?: mas_positionlevel1WhereInput | null
+    isNot?: mas_positionlevel1WhereInput | null
+  }
+
+  export type mas_positionlevel2CountOrderByAggregateInput = {
     id?: SortOrder
+    name?: SortOrder
+    positionlevel1_id?: SortOrder
+    CompanyId?: SortOrder
+  }
+
+  export type mas_positionlevel2MaxOrderByAggregateInput = {
+    id?: SortOrder
+    name?: SortOrder
+    positionlevel1_id?: SortOrder
+    CompanyId?: SortOrder
+  }
+
+  export type mas_positionlevel2MinOrderByAggregateInput = {
+    id?: SortOrder
+    name?: SortOrder
+    positionlevel1_id?: SortOrder
+    CompanyId?: SortOrder
+  }
+
+  export type Mas_positionlevel2RelationFilter = {
+    is?: mas_positionlevel2WhereInput | null
+    isNot?: mas_positionlevel2WhereInput | null
+  }
+
+  export type mas_positionlevel3CountOrderByAggregateInput = {
+    id?: SortOrder
+    name?: SortOrder
+    positionlevel2_id?: SortOrder
+    CompanyId?: SortOrder
+  }
+
+  export type mas_positionlevel3MaxOrderByAggregateInput = {
+    id?: SortOrder
+    name?: SortOrder
+    positionlevel2_id?: SortOrder
+    CompanyId?: SortOrder
+  }
+
+  export type mas_positionlevel3MinOrderByAggregateInput = {
+    id?: SortOrder
+    name?: SortOrder
+    positionlevel2_id?: SortOrder
+    CompanyId?: SortOrder
+  }
+
+  export type Mas_positionlevel3RelationFilter = {
+    is?: mas_positionlevel3WhereInput | null
+    isNot?: mas_positionlevel3WhereInput | null
+  }
+
+  export type Position_userCountOrderByAggregateInput = {
+    id?: SortOrder
+    user_id?: SortOrder
+    position1_id?: SortOrder
+    position2_id?: SortOrder
+    position3_id?: SortOrder
+    role?: SortOrder
+    leader?: SortOrder
+  }
+
+  export type Position_userMaxOrderByAggregateInput = {
+    id?: SortOrder
+    user_id?: SortOrder
+    position1_id?: SortOrder
+    position2_id?: SortOrder
+    position3_id?: SortOrder
+    role?: SortOrder
+    leader?: SortOrder
+  }
+
+  export type Position_userMinOrderByAggregateInput = {
+    id?: SortOrder
+    user_id?: SortOrder
+    position1_id?: SortOrder
+    position2_id?: SortOrder
+    position3_id?: SortOrder
+    role?: SortOrder
+    leader?: SortOrder
+  }
+
+  export type holiday_dateCountOrderByAggregateInput = {
+    id?: SortOrder
+    holiday_name?: SortOrder
+    date?: SortOrder
+    CompanyId?: SortOrder
+  }
+
+  export type holiday_dateMaxOrderByAggregateInput = {
+    id?: SortOrder
+    holiday_name?: SortOrder
+    date?: SortOrder
+    CompanyId?: SortOrder
+  }
+
+  export type holiday_dateMinOrderByAggregateInput = {
+    id?: SortOrder
+    holiday_name?: SortOrder
+    date?: SortOrder
+    CompanyId?: SortOrder
   }
 
   export type UserCreateNestedOneWithoutCompanyInput = {
@@ -14194,11 +19193,67 @@ export namespace Prisma {
     connect?: Enumerable<CompanyBranchWhereUniqueInput>
   }
 
+  export type mas_positionlevel3CreateNestedManyWithoutCompanyInput = {
+    create?: XOR<Enumerable<mas_positionlevel3CreateWithoutCompanyInput>, Enumerable<mas_positionlevel3UncheckedCreateWithoutCompanyInput>>
+    connectOrCreate?: Enumerable<mas_positionlevel3CreateOrConnectWithoutCompanyInput>
+    createMany?: mas_positionlevel3CreateManyCompanyInputEnvelope
+    connect?: Enumerable<mas_positionlevel3WhereUniqueInput>
+  }
+
+  export type mas_positionlevel2CreateNestedManyWithoutCompanyInput = {
+    create?: XOR<Enumerable<mas_positionlevel2CreateWithoutCompanyInput>, Enumerable<mas_positionlevel2UncheckedCreateWithoutCompanyInput>>
+    connectOrCreate?: Enumerable<mas_positionlevel2CreateOrConnectWithoutCompanyInput>
+    createMany?: mas_positionlevel2CreateManyCompanyInputEnvelope
+    connect?: Enumerable<mas_positionlevel2WhereUniqueInput>
+  }
+
+  export type mas_positionlevel1CreateNestedManyWithoutCompanyInput = {
+    create?: XOR<Enumerable<mas_positionlevel1CreateWithoutCompanyInput>, Enumerable<mas_positionlevel1UncheckedCreateWithoutCompanyInput>>
+    connectOrCreate?: Enumerable<mas_positionlevel1CreateOrConnectWithoutCompanyInput>
+    createMany?: mas_positionlevel1CreateManyCompanyInputEnvelope
+    connect?: Enumerable<mas_positionlevel1WhereUniqueInput>
+  }
+
+  export type holiday_dateCreateNestedManyWithoutCompanyInput = {
+    create?: XOR<Enumerable<holiday_dateCreateWithoutCompanyInput>, Enumerable<holiday_dateUncheckedCreateWithoutCompanyInput>>
+    connectOrCreate?: Enumerable<holiday_dateCreateOrConnectWithoutCompanyInput>
+    createMany?: holiday_dateCreateManyCompanyInputEnvelope
+    connect?: Enumerable<holiday_dateWhereUniqueInput>
+  }
+
   export type CompanyBranchUncheckedCreateNestedManyWithoutCompanyInput = {
     create?: XOR<Enumerable<CompanyBranchCreateWithoutCompanyInput>, Enumerable<CompanyBranchUncheckedCreateWithoutCompanyInput>>
     connectOrCreate?: Enumerable<CompanyBranchCreateOrConnectWithoutCompanyInput>
     createMany?: CompanyBranchCreateManyCompanyInputEnvelope
     connect?: Enumerable<CompanyBranchWhereUniqueInput>
+  }
+
+  export type mas_positionlevel3UncheckedCreateNestedManyWithoutCompanyInput = {
+    create?: XOR<Enumerable<mas_positionlevel3CreateWithoutCompanyInput>, Enumerable<mas_positionlevel3UncheckedCreateWithoutCompanyInput>>
+    connectOrCreate?: Enumerable<mas_positionlevel3CreateOrConnectWithoutCompanyInput>
+    createMany?: mas_positionlevel3CreateManyCompanyInputEnvelope
+    connect?: Enumerable<mas_positionlevel3WhereUniqueInput>
+  }
+
+  export type mas_positionlevel2UncheckedCreateNestedManyWithoutCompanyInput = {
+    create?: XOR<Enumerable<mas_positionlevel2CreateWithoutCompanyInput>, Enumerable<mas_positionlevel2UncheckedCreateWithoutCompanyInput>>
+    connectOrCreate?: Enumerable<mas_positionlevel2CreateOrConnectWithoutCompanyInput>
+    createMany?: mas_positionlevel2CreateManyCompanyInputEnvelope
+    connect?: Enumerable<mas_positionlevel2WhereUniqueInput>
+  }
+
+  export type mas_positionlevel1UncheckedCreateNestedManyWithoutCompanyInput = {
+    create?: XOR<Enumerable<mas_positionlevel1CreateWithoutCompanyInput>, Enumerable<mas_positionlevel1UncheckedCreateWithoutCompanyInput>>
+    connectOrCreate?: Enumerable<mas_positionlevel1CreateOrConnectWithoutCompanyInput>
+    createMany?: mas_positionlevel1CreateManyCompanyInputEnvelope
+    connect?: Enumerable<mas_positionlevel1WhereUniqueInput>
+  }
+
+  export type holiday_dateUncheckedCreateNestedManyWithoutCompanyInput = {
+    create?: XOR<Enumerable<holiday_dateCreateWithoutCompanyInput>, Enumerable<holiday_dateUncheckedCreateWithoutCompanyInput>>
+    connectOrCreate?: Enumerable<holiday_dateCreateOrConnectWithoutCompanyInput>
+    createMany?: holiday_dateCreateManyCompanyInputEnvelope
+    connect?: Enumerable<holiday_dateWhereUniqueInput>
   }
 
   export type StringFieldUpdateOperationsInput = {
@@ -14243,6 +19298,62 @@ export namespace Prisma {
     deleteMany?: Enumerable<CompanyBranchScalarWhereInput>
   }
 
+  export type mas_positionlevel3UpdateManyWithoutCompanyNestedInput = {
+    create?: XOR<Enumerable<mas_positionlevel3CreateWithoutCompanyInput>, Enumerable<mas_positionlevel3UncheckedCreateWithoutCompanyInput>>
+    connectOrCreate?: Enumerable<mas_positionlevel3CreateOrConnectWithoutCompanyInput>
+    upsert?: Enumerable<mas_positionlevel3UpsertWithWhereUniqueWithoutCompanyInput>
+    createMany?: mas_positionlevel3CreateManyCompanyInputEnvelope
+    set?: Enumerable<mas_positionlevel3WhereUniqueInput>
+    disconnect?: Enumerable<mas_positionlevel3WhereUniqueInput>
+    delete?: Enumerable<mas_positionlevel3WhereUniqueInput>
+    connect?: Enumerable<mas_positionlevel3WhereUniqueInput>
+    update?: Enumerable<mas_positionlevel3UpdateWithWhereUniqueWithoutCompanyInput>
+    updateMany?: Enumerable<mas_positionlevel3UpdateManyWithWhereWithoutCompanyInput>
+    deleteMany?: Enumerable<mas_positionlevel3ScalarWhereInput>
+  }
+
+  export type mas_positionlevel2UpdateManyWithoutCompanyNestedInput = {
+    create?: XOR<Enumerable<mas_positionlevel2CreateWithoutCompanyInput>, Enumerable<mas_positionlevel2UncheckedCreateWithoutCompanyInput>>
+    connectOrCreate?: Enumerable<mas_positionlevel2CreateOrConnectWithoutCompanyInput>
+    upsert?: Enumerable<mas_positionlevel2UpsertWithWhereUniqueWithoutCompanyInput>
+    createMany?: mas_positionlevel2CreateManyCompanyInputEnvelope
+    set?: Enumerable<mas_positionlevel2WhereUniqueInput>
+    disconnect?: Enumerable<mas_positionlevel2WhereUniqueInput>
+    delete?: Enumerable<mas_positionlevel2WhereUniqueInput>
+    connect?: Enumerable<mas_positionlevel2WhereUniqueInput>
+    update?: Enumerable<mas_positionlevel2UpdateWithWhereUniqueWithoutCompanyInput>
+    updateMany?: Enumerable<mas_positionlevel2UpdateManyWithWhereWithoutCompanyInput>
+    deleteMany?: Enumerable<mas_positionlevel2ScalarWhereInput>
+  }
+
+  export type mas_positionlevel1UpdateManyWithoutCompanyNestedInput = {
+    create?: XOR<Enumerable<mas_positionlevel1CreateWithoutCompanyInput>, Enumerable<mas_positionlevel1UncheckedCreateWithoutCompanyInput>>
+    connectOrCreate?: Enumerable<mas_positionlevel1CreateOrConnectWithoutCompanyInput>
+    upsert?: Enumerable<mas_positionlevel1UpsertWithWhereUniqueWithoutCompanyInput>
+    createMany?: mas_positionlevel1CreateManyCompanyInputEnvelope
+    set?: Enumerable<mas_positionlevel1WhereUniqueInput>
+    disconnect?: Enumerable<mas_positionlevel1WhereUniqueInput>
+    delete?: Enumerable<mas_positionlevel1WhereUniqueInput>
+    connect?: Enumerable<mas_positionlevel1WhereUniqueInput>
+    update?: Enumerable<mas_positionlevel1UpdateWithWhereUniqueWithoutCompanyInput>
+    updateMany?: Enumerable<mas_positionlevel1UpdateManyWithWhereWithoutCompanyInput>
+    deleteMany?: Enumerable<mas_positionlevel1ScalarWhereInput>
+  }
+
+  export type holiday_dateUpdateManyWithoutCompanyNestedInput = {
+    create?: XOR<Enumerable<holiday_dateCreateWithoutCompanyInput>, Enumerable<holiday_dateUncheckedCreateWithoutCompanyInput>>
+    connectOrCreate?: Enumerable<holiday_dateCreateOrConnectWithoutCompanyInput>
+    upsert?: Enumerable<holiday_dateUpsertWithWhereUniqueWithoutCompanyInput>
+    createMany?: holiday_dateCreateManyCompanyInputEnvelope
+    set?: Enumerable<holiday_dateWhereUniqueInput>
+    disconnect?: Enumerable<holiday_dateWhereUniqueInput>
+    delete?: Enumerable<holiday_dateWhereUniqueInput>
+    connect?: Enumerable<holiday_dateWhereUniqueInput>
+    update?: Enumerable<holiday_dateUpdateWithWhereUniqueWithoutCompanyInput>
+    updateMany?: Enumerable<holiday_dateUpdateManyWithWhereWithoutCompanyInput>
+    deleteMany?: Enumerable<holiday_dateScalarWhereInput>
+  }
+
   export type CompanyBranchUncheckedUpdateManyWithoutCompanyNestedInput = {
     create?: XOR<Enumerable<CompanyBranchCreateWithoutCompanyInput>, Enumerable<CompanyBranchUncheckedCreateWithoutCompanyInput>>
     connectOrCreate?: Enumerable<CompanyBranchCreateOrConnectWithoutCompanyInput>
@@ -14255,6 +19366,62 @@ export namespace Prisma {
     update?: Enumerable<CompanyBranchUpdateWithWhereUniqueWithoutCompanyInput>
     updateMany?: Enumerable<CompanyBranchUpdateManyWithWhereWithoutCompanyInput>
     deleteMany?: Enumerable<CompanyBranchScalarWhereInput>
+  }
+
+  export type mas_positionlevel3UncheckedUpdateManyWithoutCompanyNestedInput = {
+    create?: XOR<Enumerable<mas_positionlevel3CreateWithoutCompanyInput>, Enumerable<mas_positionlevel3UncheckedCreateWithoutCompanyInput>>
+    connectOrCreate?: Enumerable<mas_positionlevel3CreateOrConnectWithoutCompanyInput>
+    upsert?: Enumerable<mas_positionlevel3UpsertWithWhereUniqueWithoutCompanyInput>
+    createMany?: mas_positionlevel3CreateManyCompanyInputEnvelope
+    set?: Enumerable<mas_positionlevel3WhereUniqueInput>
+    disconnect?: Enumerable<mas_positionlevel3WhereUniqueInput>
+    delete?: Enumerable<mas_positionlevel3WhereUniqueInput>
+    connect?: Enumerable<mas_positionlevel3WhereUniqueInput>
+    update?: Enumerable<mas_positionlevel3UpdateWithWhereUniqueWithoutCompanyInput>
+    updateMany?: Enumerable<mas_positionlevel3UpdateManyWithWhereWithoutCompanyInput>
+    deleteMany?: Enumerable<mas_positionlevel3ScalarWhereInput>
+  }
+
+  export type mas_positionlevel2UncheckedUpdateManyWithoutCompanyNestedInput = {
+    create?: XOR<Enumerable<mas_positionlevel2CreateWithoutCompanyInput>, Enumerable<mas_positionlevel2UncheckedCreateWithoutCompanyInput>>
+    connectOrCreate?: Enumerable<mas_positionlevel2CreateOrConnectWithoutCompanyInput>
+    upsert?: Enumerable<mas_positionlevel2UpsertWithWhereUniqueWithoutCompanyInput>
+    createMany?: mas_positionlevel2CreateManyCompanyInputEnvelope
+    set?: Enumerable<mas_positionlevel2WhereUniqueInput>
+    disconnect?: Enumerable<mas_positionlevel2WhereUniqueInput>
+    delete?: Enumerable<mas_positionlevel2WhereUniqueInput>
+    connect?: Enumerable<mas_positionlevel2WhereUniqueInput>
+    update?: Enumerable<mas_positionlevel2UpdateWithWhereUniqueWithoutCompanyInput>
+    updateMany?: Enumerable<mas_positionlevel2UpdateManyWithWhereWithoutCompanyInput>
+    deleteMany?: Enumerable<mas_positionlevel2ScalarWhereInput>
+  }
+
+  export type mas_positionlevel1UncheckedUpdateManyWithoutCompanyNestedInput = {
+    create?: XOR<Enumerable<mas_positionlevel1CreateWithoutCompanyInput>, Enumerable<mas_positionlevel1UncheckedCreateWithoutCompanyInput>>
+    connectOrCreate?: Enumerable<mas_positionlevel1CreateOrConnectWithoutCompanyInput>
+    upsert?: Enumerable<mas_positionlevel1UpsertWithWhereUniqueWithoutCompanyInput>
+    createMany?: mas_positionlevel1CreateManyCompanyInputEnvelope
+    set?: Enumerable<mas_positionlevel1WhereUniqueInput>
+    disconnect?: Enumerable<mas_positionlevel1WhereUniqueInput>
+    delete?: Enumerable<mas_positionlevel1WhereUniqueInput>
+    connect?: Enumerable<mas_positionlevel1WhereUniqueInput>
+    update?: Enumerable<mas_positionlevel1UpdateWithWhereUniqueWithoutCompanyInput>
+    updateMany?: Enumerable<mas_positionlevel1UpdateManyWithWhereWithoutCompanyInput>
+    deleteMany?: Enumerable<mas_positionlevel1ScalarWhereInput>
+  }
+
+  export type holiday_dateUncheckedUpdateManyWithoutCompanyNestedInput = {
+    create?: XOR<Enumerable<holiday_dateCreateWithoutCompanyInput>, Enumerable<holiday_dateUncheckedCreateWithoutCompanyInput>>
+    connectOrCreate?: Enumerable<holiday_dateCreateOrConnectWithoutCompanyInput>
+    upsert?: Enumerable<holiday_dateUpsertWithWhereUniqueWithoutCompanyInput>
+    createMany?: holiday_dateCreateManyCompanyInputEnvelope
+    set?: Enumerable<holiday_dateWhereUniqueInput>
+    disconnect?: Enumerable<holiday_dateWhereUniqueInput>
+    delete?: Enumerable<holiday_dateWhereUniqueInput>
+    connect?: Enumerable<holiday_dateWhereUniqueInput>
+    update?: Enumerable<holiday_dateUpdateWithWhereUniqueWithoutCompanyInput>
+    updateMany?: Enumerable<holiday_dateUpdateManyWithWhereWithoutCompanyInput>
+    deleteMany?: Enumerable<holiday_dateScalarWhereInput>
   }
 
   export type CompanyCreateNestedOneWithoutBranchInput = {
@@ -14410,6 +19577,13 @@ export namespace Prisma {
     connect?: Role_CompanyWhereUniqueInput
   }
 
+  export type Position_userCreateNestedManyWithoutUserInput = {
+    create?: XOR<Enumerable<Position_userCreateWithoutUserInput>, Enumerable<Position_userUncheckedCreateWithoutUserInput>>
+    connectOrCreate?: Enumerable<Position_userCreateOrConnectWithoutUserInput>
+    createMany?: Position_userCreateManyUserInputEnvelope
+    connect?: Enumerable<Position_userWhereUniqueInput>
+  }
+
   export type ProfileUncheckedCreateNestedOneWithoutUserInput = {
     create?: XOR<ProfileCreateWithoutUserInput, ProfileUncheckedCreateWithoutUserInput>
     connectOrCreate?: ProfileCreateOrConnectWithoutUserInput
@@ -14421,6 +19595,13 @@ export namespace Prisma {
     connectOrCreate?: Enumerable<CompanyCreateOrConnectWithoutOwnerInput>
     createMany?: CompanyCreateManyOwnerInputEnvelope
     connect?: Enumerable<CompanyWhereUniqueInput>
+  }
+
+  export type Position_userUncheckedCreateNestedManyWithoutUserInput = {
+    create?: XOR<Enumerable<Position_userCreateWithoutUserInput>, Enumerable<Position_userUncheckedCreateWithoutUserInput>>
+    connectOrCreate?: Enumerable<Position_userCreateOrConnectWithoutUserInput>
+    createMany?: Position_userCreateManyUserInputEnvelope
+    connect?: Enumerable<Position_userWhereUniqueInput>
   }
 
   export type ProfileUpdateOneWithoutUserNestedInput = {
@@ -14477,6 +19658,20 @@ export namespace Prisma {
     update?: XOR<Role_CompanyUpdateWithoutUsersInput, Role_CompanyUncheckedUpdateWithoutUsersInput>
   }
 
+  export type Position_userUpdateManyWithoutUserNestedInput = {
+    create?: XOR<Enumerable<Position_userCreateWithoutUserInput>, Enumerable<Position_userUncheckedCreateWithoutUserInput>>
+    connectOrCreate?: Enumerable<Position_userCreateOrConnectWithoutUserInput>
+    upsert?: Enumerable<Position_userUpsertWithWhereUniqueWithoutUserInput>
+    createMany?: Position_userCreateManyUserInputEnvelope
+    set?: Enumerable<Position_userWhereUniqueInput>
+    disconnect?: Enumerable<Position_userWhereUniqueInput>
+    delete?: Enumerable<Position_userWhereUniqueInput>
+    connect?: Enumerable<Position_userWhereUniqueInput>
+    update?: Enumerable<Position_userUpdateWithWhereUniqueWithoutUserInput>
+    updateMany?: Enumerable<Position_userUpdateManyWithWhereWithoutUserInput>
+    deleteMany?: Enumerable<Position_userScalarWhereInput>
+  }
+
   export type ProfileUncheckedUpdateOneWithoutUserNestedInput = {
     create?: XOR<ProfileCreateWithoutUserInput, ProfileUncheckedCreateWithoutUserInput>
     connectOrCreate?: ProfileCreateOrConnectWithoutUserInput
@@ -14499,6 +19694,20 @@ export namespace Prisma {
     update?: Enumerable<CompanyUpdateWithWhereUniqueWithoutOwnerInput>
     updateMany?: Enumerable<CompanyUpdateManyWithWhereWithoutOwnerInput>
     deleteMany?: Enumerable<CompanyScalarWhereInput>
+  }
+
+  export type Position_userUncheckedUpdateManyWithoutUserNestedInput = {
+    create?: XOR<Enumerable<Position_userCreateWithoutUserInput>, Enumerable<Position_userUncheckedCreateWithoutUserInput>>
+    connectOrCreate?: Enumerable<Position_userCreateOrConnectWithoutUserInput>
+    upsert?: Enumerable<Position_userUpsertWithWhereUniqueWithoutUserInput>
+    createMany?: Position_userCreateManyUserInputEnvelope
+    set?: Enumerable<Position_userWhereUniqueInput>
+    disconnect?: Enumerable<Position_userWhereUniqueInput>
+    delete?: Enumerable<Position_userWhereUniqueInput>
+    connect?: Enumerable<Position_userWhereUniqueInput>
+    update?: Enumerable<Position_userUpdateWithWhereUniqueWithoutUserInput>
+    updateMany?: Enumerable<Position_userUpdateManyWithWhereWithoutUserInput>
+    deleteMany?: Enumerable<Position_userScalarWhereInput>
   }
 
   export type UserCreateNestedManyWithoutRoleInput = {
@@ -14713,13 +19922,374 @@ export namespace Prisma {
     update?: XOR<DistrictUpdateWithoutAmphoeInput, DistrictUncheckedUpdateWithoutAmphoeInput>
   }
 
-  export type PosotionCreatedetailInput = {
-    set: Enumerable<InputJsonValue>
+  export type mas_positionlevel2CreateNestedManyWithoutMas_positionlevel1Input = {
+    create?: XOR<Enumerable<mas_positionlevel2CreateWithoutMas_positionlevel1Input>, Enumerable<mas_positionlevel2UncheckedCreateWithoutMas_positionlevel1Input>>
+    connectOrCreate?: Enumerable<mas_positionlevel2CreateOrConnectWithoutMas_positionlevel1Input>
+    createMany?: mas_positionlevel2CreateManyMas_positionlevel1InputEnvelope
+    connect?: Enumerable<mas_positionlevel2WhereUniqueInput>
   }
 
-  export type PosotionUpdatedetailInput = {
-    set?: Enumerable<InputJsonValue>
-    push?: InputJsonValue | Enumerable<InputJsonValue>
+  export type CompanyCreateNestedOneWithoutMas_positionlevel1Input = {
+    create?: XOR<CompanyCreateWithoutMas_positionlevel1Input, CompanyUncheckedCreateWithoutMas_positionlevel1Input>
+    connectOrCreate?: CompanyCreateOrConnectWithoutMas_positionlevel1Input
+    connect?: CompanyWhereUniqueInput
+  }
+
+  export type Position_userCreateNestedManyWithoutMas_positionlevel1Input = {
+    create?: XOR<Enumerable<Position_userCreateWithoutMas_positionlevel1Input>, Enumerable<Position_userUncheckedCreateWithoutMas_positionlevel1Input>>
+    connectOrCreate?: Enumerable<Position_userCreateOrConnectWithoutMas_positionlevel1Input>
+    createMany?: Position_userCreateManyMas_positionlevel1InputEnvelope
+    connect?: Enumerable<Position_userWhereUniqueInput>
+  }
+
+  export type mas_positionlevel2UncheckedCreateNestedManyWithoutMas_positionlevel1Input = {
+    create?: XOR<Enumerable<mas_positionlevel2CreateWithoutMas_positionlevel1Input>, Enumerable<mas_positionlevel2UncheckedCreateWithoutMas_positionlevel1Input>>
+    connectOrCreate?: Enumerable<mas_positionlevel2CreateOrConnectWithoutMas_positionlevel1Input>
+    createMany?: mas_positionlevel2CreateManyMas_positionlevel1InputEnvelope
+    connect?: Enumerable<mas_positionlevel2WhereUniqueInput>
+  }
+
+  export type Position_userUncheckedCreateNestedManyWithoutMas_positionlevel1Input = {
+    create?: XOR<Enumerable<Position_userCreateWithoutMas_positionlevel1Input>, Enumerable<Position_userUncheckedCreateWithoutMas_positionlevel1Input>>
+    connectOrCreate?: Enumerable<Position_userCreateOrConnectWithoutMas_positionlevel1Input>
+    createMany?: Position_userCreateManyMas_positionlevel1InputEnvelope
+    connect?: Enumerable<Position_userWhereUniqueInput>
+  }
+
+  export type mas_positionlevel2UpdateManyWithoutMas_positionlevel1NestedInput = {
+    create?: XOR<Enumerable<mas_positionlevel2CreateWithoutMas_positionlevel1Input>, Enumerable<mas_positionlevel2UncheckedCreateWithoutMas_positionlevel1Input>>
+    connectOrCreate?: Enumerable<mas_positionlevel2CreateOrConnectWithoutMas_positionlevel1Input>
+    upsert?: Enumerable<mas_positionlevel2UpsertWithWhereUniqueWithoutMas_positionlevel1Input>
+    createMany?: mas_positionlevel2CreateManyMas_positionlevel1InputEnvelope
+    set?: Enumerable<mas_positionlevel2WhereUniqueInput>
+    disconnect?: Enumerable<mas_positionlevel2WhereUniqueInput>
+    delete?: Enumerable<mas_positionlevel2WhereUniqueInput>
+    connect?: Enumerable<mas_positionlevel2WhereUniqueInput>
+    update?: Enumerable<mas_positionlevel2UpdateWithWhereUniqueWithoutMas_positionlevel1Input>
+    updateMany?: Enumerable<mas_positionlevel2UpdateManyWithWhereWithoutMas_positionlevel1Input>
+    deleteMany?: Enumerable<mas_positionlevel2ScalarWhereInput>
+  }
+
+  export type CompanyUpdateOneWithoutMas_positionlevel1NestedInput = {
+    create?: XOR<CompanyCreateWithoutMas_positionlevel1Input, CompanyUncheckedCreateWithoutMas_positionlevel1Input>
+    connectOrCreate?: CompanyCreateOrConnectWithoutMas_positionlevel1Input
+    upsert?: CompanyUpsertWithoutMas_positionlevel1Input
+    disconnect?: boolean
+    delete?: boolean
+    connect?: CompanyWhereUniqueInput
+    update?: XOR<CompanyUpdateWithoutMas_positionlevel1Input, CompanyUncheckedUpdateWithoutMas_positionlevel1Input>
+  }
+
+  export type Position_userUpdateManyWithoutMas_positionlevel1NestedInput = {
+    create?: XOR<Enumerable<Position_userCreateWithoutMas_positionlevel1Input>, Enumerable<Position_userUncheckedCreateWithoutMas_positionlevel1Input>>
+    connectOrCreate?: Enumerable<Position_userCreateOrConnectWithoutMas_positionlevel1Input>
+    upsert?: Enumerable<Position_userUpsertWithWhereUniqueWithoutMas_positionlevel1Input>
+    createMany?: Position_userCreateManyMas_positionlevel1InputEnvelope
+    set?: Enumerable<Position_userWhereUniqueInput>
+    disconnect?: Enumerable<Position_userWhereUniqueInput>
+    delete?: Enumerable<Position_userWhereUniqueInput>
+    connect?: Enumerable<Position_userWhereUniqueInput>
+    update?: Enumerable<Position_userUpdateWithWhereUniqueWithoutMas_positionlevel1Input>
+    updateMany?: Enumerable<Position_userUpdateManyWithWhereWithoutMas_positionlevel1Input>
+    deleteMany?: Enumerable<Position_userScalarWhereInput>
+  }
+
+  export type mas_positionlevel2UncheckedUpdateManyWithoutMas_positionlevel1NestedInput = {
+    create?: XOR<Enumerable<mas_positionlevel2CreateWithoutMas_positionlevel1Input>, Enumerable<mas_positionlevel2UncheckedCreateWithoutMas_positionlevel1Input>>
+    connectOrCreate?: Enumerable<mas_positionlevel2CreateOrConnectWithoutMas_positionlevel1Input>
+    upsert?: Enumerable<mas_positionlevel2UpsertWithWhereUniqueWithoutMas_positionlevel1Input>
+    createMany?: mas_positionlevel2CreateManyMas_positionlevel1InputEnvelope
+    set?: Enumerable<mas_positionlevel2WhereUniqueInput>
+    disconnect?: Enumerable<mas_positionlevel2WhereUniqueInput>
+    delete?: Enumerable<mas_positionlevel2WhereUniqueInput>
+    connect?: Enumerable<mas_positionlevel2WhereUniqueInput>
+    update?: Enumerable<mas_positionlevel2UpdateWithWhereUniqueWithoutMas_positionlevel1Input>
+    updateMany?: Enumerable<mas_positionlevel2UpdateManyWithWhereWithoutMas_positionlevel1Input>
+    deleteMany?: Enumerable<mas_positionlevel2ScalarWhereInput>
+  }
+
+  export type Position_userUncheckedUpdateManyWithoutMas_positionlevel1NestedInput = {
+    create?: XOR<Enumerable<Position_userCreateWithoutMas_positionlevel1Input>, Enumerable<Position_userUncheckedCreateWithoutMas_positionlevel1Input>>
+    connectOrCreate?: Enumerable<Position_userCreateOrConnectWithoutMas_positionlevel1Input>
+    upsert?: Enumerable<Position_userUpsertWithWhereUniqueWithoutMas_positionlevel1Input>
+    createMany?: Position_userCreateManyMas_positionlevel1InputEnvelope
+    set?: Enumerable<Position_userWhereUniqueInput>
+    disconnect?: Enumerable<Position_userWhereUniqueInput>
+    delete?: Enumerable<Position_userWhereUniqueInput>
+    connect?: Enumerable<Position_userWhereUniqueInput>
+    update?: Enumerable<Position_userUpdateWithWhereUniqueWithoutMas_positionlevel1Input>
+    updateMany?: Enumerable<Position_userUpdateManyWithWhereWithoutMas_positionlevel1Input>
+    deleteMany?: Enumerable<Position_userScalarWhereInput>
+  }
+
+  export type mas_positionlevel1CreateNestedOneWithoutMas_positionlevel2Input = {
+    create?: XOR<mas_positionlevel1CreateWithoutMas_positionlevel2Input, mas_positionlevel1UncheckedCreateWithoutMas_positionlevel2Input>
+    connectOrCreate?: mas_positionlevel1CreateOrConnectWithoutMas_positionlevel2Input
+    connect?: mas_positionlevel1WhereUniqueInput
+  }
+
+  export type mas_positionlevel3CreateNestedManyWithoutMas_positionlevel2Input = {
+    create?: XOR<Enumerable<mas_positionlevel3CreateWithoutMas_positionlevel2Input>, Enumerable<mas_positionlevel3UncheckedCreateWithoutMas_positionlevel2Input>>
+    connectOrCreate?: Enumerable<mas_positionlevel3CreateOrConnectWithoutMas_positionlevel2Input>
+    createMany?: mas_positionlevel3CreateManyMas_positionlevel2InputEnvelope
+    connect?: Enumerable<mas_positionlevel3WhereUniqueInput>
+  }
+
+  export type CompanyCreateNestedOneWithoutMas_positionlevel2Input = {
+    create?: XOR<CompanyCreateWithoutMas_positionlevel2Input, CompanyUncheckedCreateWithoutMas_positionlevel2Input>
+    connectOrCreate?: CompanyCreateOrConnectWithoutMas_positionlevel2Input
+    connect?: CompanyWhereUniqueInput
+  }
+
+  export type Position_userCreateNestedManyWithoutMas_positionlevel2Input = {
+    create?: XOR<Enumerable<Position_userCreateWithoutMas_positionlevel2Input>, Enumerable<Position_userUncheckedCreateWithoutMas_positionlevel2Input>>
+    connectOrCreate?: Enumerable<Position_userCreateOrConnectWithoutMas_positionlevel2Input>
+    createMany?: Position_userCreateManyMas_positionlevel2InputEnvelope
+    connect?: Enumerable<Position_userWhereUniqueInput>
+  }
+
+  export type mas_positionlevel3UncheckedCreateNestedManyWithoutMas_positionlevel2Input = {
+    create?: XOR<Enumerable<mas_positionlevel3CreateWithoutMas_positionlevel2Input>, Enumerable<mas_positionlevel3UncheckedCreateWithoutMas_positionlevel2Input>>
+    connectOrCreate?: Enumerable<mas_positionlevel3CreateOrConnectWithoutMas_positionlevel2Input>
+    createMany?: mas_positionlevel3CreateManyMas_positionlevel2InputEnvelope
+    connect?: Enumerable<mas_positionlevel3WhereUniqueInput>
+  }
+
+  export type Position_userUncheckedCreateNestedManyWithoutMas_positionlevel2Input = {
+    create?: XOR<Enumerable<Position_userCreateWithoutMas_positionlevel2Input>, Enumerable<Position_userUncheckedCreateWithoutMas_positionlevel2Input>>
+    connectOrCreate?: Enumerable<Position_userCreateOrConnectWithoutMas_positionlevel2Input>
+    createMany?: Position_userCreateManyMas_positionlevel2InputEnvelope
+    connect?: Enumerable<Position_userWhereUniqueInput>
+  }
+
+  export type mas_positionlevel1UpdateOneWithoutMas_positionlevel2NestedInput = {
+    create?: XOR<mas_positionlevel1CreateWithoutMas_positionlevel2Input, mas_positionlevel1UncheckedCreateWithoutMas_positionlevel2Input>
+    connectOrCreate?: mas_positionlevel1CreateOrConnectWithoutMas_positionlevel2Input
+    upsert?: mas_positionlevel1UpsertWithoutMas_positionlevel2Input
+    disconnect?: boolean
+    delete?: boolean
+    connect?: mas_positionlevel1WhereUniqueInput
+    update?: XOR<mas_positionlevel1UpdateWithoutMas_positionlevel2Input, mas_positionlevel1UncheckedUpdateWithoutMas_positionlevel2Input>
+  }
+
+  export type mas_positionlevel3UpdateManyWithoutMas_positionlevel2NestedInput = {
+    create?: XOR<Enumerable<mas_positionlevel3CreateWithoutMas_positionlevel2Input>, Enumerable<mas_positionlevel3UncheckedCreateWithoutMas_positionlevel2Input>>
+    connectOrCreate?: Enumerable<mas_positionlevel3CreateOrConnectWithoutMas_positionlevel2Input>
+    upsert?: Enumerable<mas_positionlevel3UpsertWithWhereUniqueWithoutMas_positionlevel2Input>
+    createMany?: mas_positionlevel3CreateManyMas_positionlevel2InputEnvelope
+    set?: Enumerable<mas_positionlevel3WhereUniqueInput>
+    disconnect?: Enumerable<mas_positionlevel3WhereUniqueInput>
+    delete?: Enumerable<mas_positionlevel3WhereUniqueInput>
+    connect?: Enumerable<mas_positionlevel3WhereUniqueInput>
+    update?: Enumerable<mas_positionlevel3UpdateWithWhereUniqueWithoutMas_positionlevel2Input>
+    updateMany?: Enumerable<mas_positionlevel3UpdateManyWithWhereWithoutMas_positionlevel2Input>
+    deleteMany?: Enumerable<mas_positionlevel3ScalarWhereInput>
+  }
+
+  export type CompanyUpdateOneWithoutMas_positionlevel2NestedInput = {
+    create?: XOR<CompanyCreateWithoutMas_positionlevel2Input, CompanyUncheckedCreateWithoutMas_positionlevel2Input>
+    connectOrCreate?: CompanyCreateOrConnectWithoutMas_positionlevel2Input
+    upsert?: CompanyUpsertWithoutMas_positionlevel2Input
+    disconnect?: boolean
+    delete?: boolean
+    connect?: CompanyWhereUniqueInput
+    update?: XOR<CompanyUpdateWithoutMas_positionlevel2Input, CompanyUncheckedUpdateWithoutMas_positionlevel2Input>
+  }
+
+  export type Position_userUpdateManyWithoutMas_positionlevel2NestedInput = {
+    create?: XOR<Enumerable<Position_userCreateWithoutMas_positionlevel2Input>, Enumerable<Position_userUncheckedCreateWithoutMas_positionlevel2Input>>
+    connectOrCreate?: Enumerable<Position_userCreateOrConnectWithoutMas_positionlevel2Input>
+    upsert?: Enumerable<Position_userUpsertWithWhereUniqueWithoutMas_positionlevel2Input>
+    createMany?: Position_userCreateManyMas_positionlevel2InputEnvelope
+    set?: Enumerable<Position_userWhereUniqueInput>
+    disconnect?: Enumerable<Position_userWhereUniqueInput>
+    delete?: Enumerable<Position_userWhereUniqueInput>
+    connect?: Enumerable<Position_userWhereUniqueInput>
+    update?: Enumerable<Position_userUpdateWithWhereUniqueWithoutMas_positionlevel2Input>
+    updateMany?: Enumerable<Position_userUpdateManyWithWhereWithoutMas_positionlevel2Input>
+    deleteMany?: Enumerable<Position_userScalarWhereInput>
+  }
+
+  export type mas_positionlevel3UncheckedUpdateManyWithoutMas_positionlevel2NestedInput = {
+    create?: XOR<Enumerable<mas_positionlevel3CreateWithoutMas_positionlevel2Input>, Enumerable<mas_positionlevel3UncheckedCreateWithoutMas_positionlevel2Input>>
+    connectOrCreate?: Enumerable<mas_positionlevel3CreateOrConnectWithoutMas_positionlevel2Input>
+    upsert?: Enumerable<mas_positionlevel3UpsertWithWhereUniqueWithoutMas_positionlevel2Input>
+    createMany?: mas_positionlevel3CreateManyMas_positionlevel2InputEnvelope
+    set?: Enumerable<mas_positionlevel3WhereUniqueInput>
+    disconnect?: Enumerable<mas_positionlevel3WhereUniqueInput>
+    delete?: Enumerable<mas_positionlevel3WhereUniqueInput>
+    connect?: Enumerable<mas_positionlevel3WhereUniqueInput>
+    update?: Enumerable<mas_positionlevel3UpdateWithWhereUniqueWithoutMas_positionlevel2Input>
+    updateMany?: Enumerable<mas_positionlevel3UpdateManyWithWhereWithoutMas_positionlevel2Input>
+    deleteMany?: Enumerable<mas_positionlevel3ScalarWhereInput>
+  }
+
+  export type Position_userUncheckedUpdateManyWithoutMas_positionlevel2NestedInput = {
+    create?: XOR<Enumerable<Position_userCreateWithoutMas_positionlevel2Input>, Enumerable<Position_userUncheckedCreateWithoutMas_positionlevel2Input>>
+    connectOrCreate?: Enumerable<Position_userCreateOrConnectWithoutMas_positionlevel2Input>
+    upsert?: Enumerable<Position_userUpsertWithWhereUniqueWithoutMas_positionlevel2Input>
+    createMany?: Position_userCreateManyMas_positionlevel2InputEnvelope
+    set?: Enumerable<Position_userWhereUniqueInput>
+    disconnect?: Enumerable<Position_userWhereUniqueInput>
+    delete?: Enumerable<Position_userWhereUniqueInput>
+    connect?: Enumerable<Position_userWhereUniqueInput>
+    update?: Enumerable<Position_userUpdateWithWhereUniqueWithoutMas_positionlevel2Input>
+    updateMany?: Enumerable<Position_userUpdateManyWithWhereWithoutMas_positionlevel2Input>
+    deleteMany?: Enumerable<Position_userScalarWhereInput>
+  }
+
+  export type mas_positionlevel2CreateNestedOneWithoutMas_positionlevel3Input = {
+    create?: XOR<mas_positionlevel2CreateWithoutMas_positionlevel3Input, mas_positionlevel2UncheckedCreateWithoutMas_positionlevel3Input>
+    connectOrCreate?: mas_positionlevel2CreateOrConnectWithoutMas_positionlevel3Input
+    connect?: mas_positionlevel2WhereUniqueInput
+  }
+
+  export type CompanyCreateNestedOneWithoutMas_positionlevel3Input = {
+    create?: XOR<CompanyCreateWithoutMas_positionlevel3Input, CompanyUncheckedCreateWithoutMas_positionlevel3Input>
+    connectOrCreate?: CompanyCreateOrConnectWithoutMas_positionlevel3Input
+    connect?: CompanyWhereUniqueInput
+  }
+
+  export type Position_userCreateNestedManyWithoutMas_positionlevel3Input = {
+    create?: XOR<Enumerable<Position_userCreateWithoutMas_positionlevel3Input>, Enumerable<Position_userUncheckedCreateWithoutMas_positionlevel3Input>>
+    connectOrCreate?: Enumerable<Position_userCreateOrConnectWithoutMas_positionlevel3Input>
+    createMany?: Position_userCreateManyMas_positionlevel3InputEnvelope
+    connect?: Enumerable<Position_userWhereUniqueInput>
+  }
+
+  export type Position_userUncheckedCreateNestedManyWithoutMas_positionlevel3Input = {
+    create?: XOR<Enumerable<Position_userCreateWithoutMas_positionlevel3Input>, Enumerable<Position_userUncheckedCreateWithoutMas_positionlevel3Input>>
+    connectOrCreate?: Enumerable<Position_userCreateOrConnectWithoutMas_positionlevel3Input>
+    createMany?: Position_userCreateManyMas_positionlevel3InputEnvelope
+    connect?: Enumerable<Position_userWhereUniqueInput>
+  }
+
+  export type mas_positionlevel2UpdateOneWithoutMas_positionlevel3NestedInput = {
+    create?: XOR<mas_positionlevel2CreateWithoutMas_positionlevel3Input, mas_positionlevel2UncheckedCreateWithoutMas_positionlevel3Input>
+    connectOrCreate?: mas_positionlevel2CreateOrConnectWithoutMas_positionlevel3Input
+    upsert?: mas_positionlevel2UpsertWithoutMas_positionlevel3Input
+    disconnect?: boolean
+    delete?: boolean
+    connect?: mas_positionlevel2WhereUniqueInput
+    update?: XOR<mas_positionlevel2UpdateWithoutMas_positionlevel3Input, mas_positionlevel2UncheckedUpdateWithoutMas_positionlevel3Input>
+  }
+
+  export type CompanyUpdateOneWithoutMas_positionlevel3NestedInput = {
+    create?: XOR<CompanyCreateWithoutMas_positionlevel3Input, CompanyUncheckedCreateWithoutMas_positionlevel3Input>
+    connectOrCreate?: CompanyCreateOrConnectWithoutMas_positionlevel3Input
+    upsert?: CompanyUpsertWithoutMas_positionlevel3Input
+    disconnect?: boolean
+    delete?: boolean
+    connect?: CompanyWhereUniqueInput
+    update?: XOR<CompanyUpdateWithoutMas_positionlevel3Input, CompanyUncheckedUpdateWithoutMas_positionlevel3Input>
+  }
+
+  export type Position_userUpdateManyWithoutMas_positionlevel3NestedInput = {
+    create?: XOR<Enumerable<Position_userCreateWithoutMas_positionlevel3Input>, Enumerable<Position_userUncheckedCreateWithoutMas_positionlevel3Input>>
+    connectOrCreate?: Enumerable<Position_userCreateOrConnectWithoutMas_positionlevel3Input>
+    upsert?: Enumerable<Position_userUpsertWithWhereUniqueWithoutMas_positionlevel3Input>
+    createMany?: Position_userCreateManyMas_positionlevel3InputEnvelope
+    set?: Enumerable<Position_userWhereUniqueInput>
+    disconnect?: Enumerable<Position_userWhereUniqueInput>
+    delete?: Enumerable<Position_userWhereUniqueInput>
+    connect?: Enumerable<Position_userWhereUniqueInput>
+    update?: Enumerable<Position_userUpdateWithWhereUniqueWithoutMas_positionlevel3Input>
+    updateMany?: Enumerable<Position_userUpdateManyWithWhereWithoutMas_positionlevel3Input>
+    deleteMany?: Enumerable<Position_userScalarWhereInput>
+  }
+
+  export type Position_userUncheckedUpdateManyWithoutMas_positionlevel3NestedInput = {
+    create?: XOR<Enumerable<Position_userCreateWithoutMas_positionlevel3Input>, Enumerable<Position_userUncheckedCreateWithoutMas_positionlevel3Input>>
+    connectOrCreate?: Enumerable<Position_userCreateOrConnectWithoutMas_positionlevel3Input>
+    upsert?: Enumerable<Position_userUpsertWithWhereUniqueWithoutMas_positionlevel3Input>
+    createMany?: Position_userCreateManyMas_positionlevel3InputEnvelope
+    set?: Enumerable<Position_userWhereUniqueInput>
+    disconnect?: Enumerable<Position_userWhereUniqueInput>
+    delete?: Enumerable<Position_userWhereUniqueInput>
+    connect?: Enumerable<Position_userWhereUniqueInput>
+    update?: Enumerable<Position_userUpdateWithWhereUniqueWithoutMas_positionlevel3Input>
+    updateMany?: Enumerable<Position_userUpdateManyWithWhereWithoutMas_positionlevel3Input>
+    deleteMany?: Enumerable<Position_userScalarWhereInput>
+  }
+
+  export type UserCreateNestedOneWithoutPosition_userInput = {
+    create?: XOR<UserCreateWithoutPosition_userInput, UserUncheckedCreateWithoutPosition_userInput>
+    connectOrCreate?: UserCreateOrConnectWithoutPosition_userInput
+    connect?: UserWhereUniqueInput
+  }
+
+  export type mas_positionlevel1CreateNestedOneWithoutPosition_userInput = {
+    create?: XOR<mas_positionlevel1CreateWithoutPosition_userInput, mas_positionlevel1UncheckedCreateWithoutPosition_userInput>
+    connectOrCreate?: mas_positionlevel1CreateOrConnectWithoutPosition_userInput
+    connect?: mas_positionlevel1WhereUniqueInput
+  }
+
+  export type mas_positionlevel2CreateNestedOneWithoutPosition_userInput = {
+    create?: XOR<mas_positionlevel2CreateWithoutPosition_userInput, mas_positionlevel2UncheckedCreateWithoutPosition_userInput>
+    connectOrCreate?: mas_positionlevel2CreateOrConnectWithoutPosition_userInput
+    connect?: mas_positionlevel2WhereUniqueInput
+  }
+
+  export type mas_positionlevel3CreateNestedOneWithoutPosition_userInput = {
+    create?: XOR<mas_positionlevel3CreateWithoutPosition_userInput, mas_positionlevel3UncheckedCreateWithoutPosition_userInput>
+    connectOrCreate?: mas_positionlevel3CreateOrConnectWithoutPosition_userInput
+    connect?: mas_positionlevel3WhereUniqueInput
+  }
+
+  export type UserUpdateOneWithoutPosition_userNestedInput = {
+    create?: XOR<UserCreateWithoutPosition_userInput, UserUncheckedCreateWithoutPosition_userInput>
+    connectOrCreate?: UserCreateOrConnectWithoutPosition_userInput
+    upsert?: UserUpsertWithoutPosition_userInput
+    disconnect?: boolean
+    delete?: boolean
+    connect?: UserWhereUniqueInput
+    update?: XOR<UserUpdateWithoutPosition_userInput, UserUncheckedUpdateWithoutPosition_userInput>
+  }
+
+  export type mas_positionlevel1UpdateOneWithoutPosition_userNestedInput = {
+    create?: XOR<mas_positionlevel1CreateWithoutPosition_userInput, mas_positionlevel1UncheckedCreateWithoutPosition_userInput>
+    connectOrCreate?: mas_positionlevel1CreateOrConnectWithoutPosition_userInput
+    upsert?: mas_positionlevel1UpsertWithoutPosition_userInput
+    disconnect?: boolean
+    delete?: boolean
+    connect?: mas_positionlevel1WhereUniqueInput
+    update?: XOR<mas_positionlevel1UpdateWithoutPosition_userInput, mas_positionlevel1UncheckedUpdateWithoutPosition_userInput>
+  }
+
+  export type mas_positionlevel2UpdateOneWithoutPosition_userNestedInput = {
+    create?: XOR<mas_positionlevel2CreateWithoutPosition_userInput, mas_positionlevel2UncheckedCreateWithoutPosition_userInput>
+    connectOrCreate?: mas_positionlevel2CreateOrConnectWithoutPosition_userInput
+    upsert?: mas_positionlevel2UpsertWithoutPosition_userInput
+    disconnect?: boolean
+    delete?: boolean
+    connect?: mas_positionlevel2WhereUniqueInput
+    update?: XOR<mas_positionlevel2UpdateWithoutPosition_userInput, mas_positionlevel2UncheckedUpdateWithoutPosition_userInput>
+  }
+
+  export type mas_positionlevel3UpdateOneWithoutPosition_userNestedInput = {
+    create?: XOR<mas_positionlevel3CreateWithoutPosition_userInput, mas_positionlevel3UncheckedCreateWithoutPosition_userInput>
+    connectOrCreate?: mas_positionlevel3CreateOrConnectWithoutPosition_userInput
+    upsert?: mas_positionlevel3UpsertWithoutPosition_userInput
+    disconnect?: boolean
+    delete?: boolean
+    connect?: mas_positionlevel3WhereUniqueInput
+    update?: XOR<mas_positionlevel3UpdateWithoutPosition_userInput, mas_positionlevel3UncheckedUpdateWithoutPosition_userInput>
+  }
+
+  export type CompanyCreateNestedOneWithoutHoliday_dateInput = {
+    create?: XOR<CompanyCreateWithoutHoliday_dateInput, CompanyUncheckedCreateWithoutHoliday_dateInput>
+    connectOrCreate?: CompanyCreateOrConnectWithoutHoliday_dateInput
+    connect?: CompanyWhereUniqueInput
+  }
+
+  export type CompanyUpdateOneWithoutHoliday_dateNestedInput = {
+    create?: XOR<CompanyCreateWithoutHoliday_dateInput, CompanyUncheckedCreateWithoutHoliday_dateInput>
+    connectOrCreate?: CompanyCreateOrConnectWithoutHoliday_dateInput
+    upsert?: CompanyUpsertWithoutHoliday_dateInput
+    disconnect?: boolean
+    delete?: boolean
+    connect?: CompanyWhereUniqueInput
+    update?: XOR<CompanyUpdateWithoutHoliday_dateInput, CompanyUncheckedUpdateWithoutHoliday_dateInput>
   }
 
   export type NestedUuidFilter = {
@@ -14981,6 +20551,7 @@ export namespace Prisma {
     role?: RoleCreateNestedOneWithoutUsersInput
     companyBranch?: CompanyBranchCreateNestedOneWithoutUsersInput
     Role_Company?: Role_CompanyCreateNestedOneWithoutUsersInput
+    Position_user?: Position_userCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutCompanyInput = {
@@ -14996,6 +20567,7 @@ export namespace Prisma {
     roleId?: string | null
     RoleCompanyID?: string | null
     companyBranchId?: string | null
+    Position_user?: Position_userUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutCompanyInput = {
@@ -15073,6 +20645,102 @@ export namespace Prisma {
     skipDuplicates?: boolean
   }
 
+  export type mas_positionlevel3CreateWithoutCompanyInput = {
+    id: string
+    name: string
+    mas_positionlevel2?: mas_positionlevel2CreateNestedOneWithoutMas_positionlevel3Input
+    Position_user?: Position_userCreateNestedManyWithoutMas_positionlevel3Input
+  }
+
+  export type mas_positionlevel3UncheckedCreateWithoutCompanyInput = {
+    id: string
+    name: string
+    positionlevel2_id?: string | null
+    Position_user?: Position_userUncheckedCreateNestedManyWithoutMas_positionlevel3Input
+  }
+
+  export type mas_positionlevel3CreateOrConnectWithoutCompanyInput = {
+    where: mas_positionlevel3WhereUniqueInput
+    create: XOR<mas_positionlevel3CreateWithoutCompanyInput, mas_positionlevel3UncheckedCreateWithoutCompanyInput>
+  }
+
+  export type mas_positionlevel3CreateManyCompanyInputEnvelope = {
+    data: Enumerable<mas_positionlevel3CreateManyCompanyInput>
+    skipDuplicates?: boolean
+  }
+
+  export type mas_positionlevel2CreateWithoutCompanyInput = {
+    id: string
+    name: string
+    mas_positionlevel1?: mas_positionlevel1CreateNestedOneWithoutMas_positionlevel2Input
+    mas_positionlevel3?: mas_positionlevel3CreateNestedManyWithoutMas_positionlevel2Input
+    position_user?: Position_userCreateNestedManyWithoutMas_positionlevel2Input
+  }
+
+  export type mas_positionlevel2UncheckedCreateWithoutCompanyInput = {
+    id: string
+    name: string
+    positionlevel1_id?: string | null
+    mas_positionlevel3?: mas_positionlevel3UncheckedCreateNestedManyWithoutMas_positionlevel2Input
+    position_user?: Position_userUncheckedCreateNestedManyWithoutMas_positionlevel2Input
+  }
+
+  export type mas_positionlevel2CreateOrConnectWithoutCompanyInput = {
+    where: mas_positionlevel2WhereUniqueInput
+    create: XOR<mas_positionlevel2CreateWithoutCompanyInput, mas_positionlevel2UncheckedCreateWithoutCompanyInput>
+  }
+
+  export type mas_positionlevel2CreateManyCompanyInputEnvelope = {
+    data: Enumerable<mas_positionlevel2CreateManyCompanyInput>
+    skipDuplicates?: boolean
+  }
+
+  export type mas_positionlevel1CreateWithoutCompanyInput = {
+    id: string
+    name: string
+    mas_positionlevel2?: mas_positionlevel2CreateNestedManyWithoutMas_positionlevel1Input
+    Position_user?: Position_userCreateNestedManyWithoutMas_positionlevel1Input
+  }
+
+  export type mas_positionlevel1UncheckedCreateWithoutCompanyInput = {
+    id: string
+    name: string
+    mas_positionlevel2?: mas_positionlevel2UncheckedCreateNestedManyWithoutMas_positionlevel1Input
+    Position_user?: Position_userUncheckedCreateNestedManyWithoutMas_positionlevel1Input
+  }
+
+  export type mas_positionlevel1CreateOrConnectWithoutCompanyInput = {
+    where: mas_positionlevel1WhereUniqueInput
+    create: XOR<mas_positionlevel1CreateWithoutCompanyInput, mas_positionlevel1UncheckedCreateWithoutCompanyInput>
+  }
+
+  export type mas_positionlevel1CreateManyCompanyInputEnvelope = {
+    data: Enumerable<mas_positionlevel1CreateManyCompanyInput>
+    skipDuplicates?: boolean
+  }
+
+  export type holiday_dateCreateWithoutCompanyInput = {
+    id: string
+    holiday_name?: string | null
+    date: Date | string
+  }
+
+  export type holiday_dateUncheckedCreateWithoutCompanyInput = {
+    id: string
+    holiday_name?: string | null
+    date: Date | string
+  }
+
+  export type holiday_dateCreateOrConnectWithoutCompanyInput = {
+    where: holiday_dateWhereUniqueInput
+    create: XOR<holiday_dateCreateWithoutCompanyInput, holiday_dateUncheckedCreateWithoutCompanyInput>
+  }
+
+  export type holiday_dateCreateManyCompanyInputEnvelope = {
+    data: Enumerable<holiday_dateCreateManyCompanyInput>
+    skipDuplicates?: boolean
+  }
+
   export type UserUpsertWithoutCompanyInput = {
     update: XOR<UserUpdateWithoutCompanyInput, UserUncheckedUpdateWithoutCompanyInput>
     create: XOR<UserCreateWithoutCompanyInput, UserUncheckedCreateWithoutCompanyInput>
@@ -15091,6 +20759,7 @@ export namespace Prisma {
     role?: RoleUpdateOneWithoutUsersNestedInput
     companyBranch?: CompanyBranchUpdateOneWithoutUsersNestedInput
     Role_Company?: Role_CompanyUpdateOneWithoutUsersNestedInput
+    Position_user?: Position_userUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutCompanyInput = {
@@ -15106,6 +20775,7 @@ export namespace Prisma {
     roleId?: NullableStringFieldUpdateOperationsInput | string | null
     RoleCompanyID?: NullableStringFieldUpdateOperationsInput | string | null
     companyBranchId?: NullableStringFieldUpdateOperationsInput | string | null
+    Position_user?: Position_userUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type CompanyBranchUpsertWithWhereUniqueWithoutCompanyInput = {
@@ -15156,6 +20826,109 @@ export namespace Prisma {
     companyId?: UuidNullableFilter | string | null
   }
 
+  export type mas_positionlevel3UpsertWithWhereUniqueWithoutCompanyInput = {
+    where: mas_positionlevel3WhereUniqueInput
+    update: XOR<mas_positionlevel3UpdateWithoutCompanyInput, mas_positionlevel3UncheckedUpdateWithoutCompanyInput>
+    create: XOR<mas_positionlevel3CreateWithoutCompanyInput, mas_positionlevel3UncheckedCreateWithoutCompanyInput>
+  }
+
+  export type mas_positionlevel3UpdateWithWhereUniqueWithoutCompanyInput = {
+    where: mas_positionlevel3WhereUniqueInput
+    data: XOR<mas_positionlevel3UpdateWithoutCompanyInput, mas_positionlevel3UncheckedUpdateWithoutCompanyInput>
+  }
+
+  export type mas_positionlevel3UpdateManyWithWhereWithoutCompanyInput = {
+    where: mas_positionlevel3ScalarWhereInput
+    data: XOR<mas_positionlevel3UpdateManyMutationInput, mas_positionlevel3UncheckedUpdateManyWithoutMas_positionlevel3Input>
+  }
+
+  export type mas_positionlevel3ScalarWhereInput = {
+    AND?: Enumerable<mas_positionlevel3ScalarWhereInput>
+    OR?: Enumerable<mas_positionlevel3ScalarWhereInput>
+    NOT?: Enumerable<mas_positionlevel3ScalarWhereInput>
+    id?: UuidFilter | string
+    name?: StringFilter | string
+    positionlevel2_id?: UuidNullableFilter | string | null
+    CompanyId?: UuidNullableFilter | string | null
+  }
+
+  export type mas_positionlevel2UpsertWithWhereUniqueWithoutCompanyInput = {
+    where: mas_positionlevel2WhereUniqueInput
+    update: XOR<mas_positionlevel2UpdateWithoutCompanyInput, mas_positionlevel2UncheckedUpdateWithoutCompanyInput>
+    create: XOR<mas_positionlevel2CreateWithoutCompanyInput, mas_positionlevel2UncheckedCreateWithoutCompanyInput>
+  }
+
+  export type mas_positionlevel2UpdateWithWhereUniqueWithoutCompanyInput = {
+    where: mas_positionlevel2WhereUniqueInput
+    data: XOR<mas_positionlevel2UpdateWithoutCompanyInput, mas_positionlevel2UncheckedUpdateWithoutCompanyInput>
+  }
+
+  export type mas_positionlevel2UpdateManyWithWhereWithoutCompanyInput = {
+    where: mas_positionlevel2ScalarWhereInput
+    data: XOR<mas_positionlevel2UpdateManyMutationInput, mas_positionlevel2UncheckedUpdateManyWithoutMas_positionlevel2Input>
+  }
+
+  export type mas_positionlevel2ScalarWhereInput = {
+    AND?: Enumerable<mas_positionlevel2ScalarWhereInput>
+    OR?: Enumerable<mas_positionlevel2ScalarWhereInput>
+    NOT?: Enumerable<mas_positionlevel2ScalarWhereInput>
+    id?: UuidFilter | string
+    name?: StringFilter | string
+    positionlevel1_id?: UuidNullableFilter | string | null
+    CompanyId?: UuidNullableFilter | string | null
+  }
+
+  export type mas_positionlevel1UpsertWithWhereUniqueWithoutCompanyInput = {
+    where: mas_positionlevel1WhereUniqueInput
+    update: XOR<mas_positionlevel1UpdateWithoutCompanyInput, mas_positionlevel1UncheckedUpdateWithoutCompanyInput>
+    create: XOR<mas_positionlevel1CreateWithoutCompanyInput, mas_positionlevel1UncheckedCreateWithoutCompanyInput>
+  }
+
+  export type mas_positionlevel1UpdateWithWhereUniqueWithoutCompanyInput = {
+    where: mas_positionlevel1WhereUniqueInput
+    data: XOR<mas_positionlevel1UpdateWithoutCompanyInput, mas_positionlevel1UncheckedUpdateWithoutCompanyInput>
+  }
+
+  export type mas_positionlevel1UpdateManyWithWhereWithoutCompanyInput = {
+    where: mas_positionlevel1ScalarWhereInput
+    data: XOR<mas_positionlevel1UpdateManyMutationInput, mas_positionlevel1UncheckedUpdateManyWithoutMas_positionlevel1Input>
+  }
+
+  export type mas_positionlevel1ScalarWhereInput = {
+    AND?: Enumerable<mas_positionlevel1ScalarWhereInput>
+    OR?: Enumerable<mas_positionlevel1ScalarWhereInput>
+    NOT?: Enumerable<mas_positionlevel1ScalarWhereInput>
+    id?: UuidFilter | string
+    name?: StringFilter | string
+    CompanyId?: UuidNullableFilter | string | null
+  }
+
+  export type holiday_dateUpsertWithWhereUniqueWithoutCompanyInput = {
+    where: holiday_dateWhereUniqueInput
+    update: XOR<holiday_dateUpdateWithoutCompanyInput, holiday_dateUncheckedUpdateWithoutCompanyInput>
+    create: XOR<holiday_dateCreateWithoutCompanyInput, holiday_dateUncheckedCreateWithoutCompanyInput>
+  }
+
+  export type holiday_dateUpdateWithWhereUniqueWithoutCompanyInput = {
+    where: holiday_dateWhereUniqueInput
+    data: XOR<holiday_dateUpdateWithoutCompanyInput, holiday_dateUncheckedUpdateWithoutCompanyInput>
+  }
+
+  export type holiday_dateUpdateManyWithWhereWithoutCompanyInput = {
+    where: holiday_dateScalarWhereInput
+    data: XOR<holiday_dateUpdateManyMutationInput, holiday_dateUncheckedUpdateManyWithoutHoliday_dateInput>
+  }
+
+  export type holiday_dateScalarWhereInput = {
+    AND?: Enumerable<holiday_dateScalarWhereInput>
+    OR?: Enumerable<holiday_dateScalarWhereInput>
+    NOT?: Enumerable<holiday_dateScalarWhereInput>
+    id?: UuidFilter | string
+    holiday_name?: StringNullableFilter | string | null
+    date?: DateTimeFilter | Date | string
+    CompanyId?: UuidNullableFilter | string | null
+  }
+
   export type CompanyCreateWithoutBranchInput = {
     id: string
     name: string
@@ -15167,6 +20940,10 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     owner: UserCreateNestedOneWithoutCompanyInput
+    mas_positionlevel3?: mas_positionlevel3CreateNestedManyWithoutCompanyInput
+    mas_positionlevel2?: mas_positionlevel2CreateNestedManyWithoutCompanyInput
+    mas_positionlevel1?: mas_positionlevel1CreateNestedManyWithoutCompanyInput
+    holiday_date?: holiday_dateCreateNestedManyWithoutCompanyInput
   }
 
   export type CompanyUncheckedCreateWithoutBranchInput = {
@@ -15180,6 +20957,10 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     ownerId: string
+    mas_positionlevel3?: mas_positionlevel3UncheckedCreateNestedManyWithoutCompanyInput
+    mas_positionlevel2?: mas_positionlevel2UncheckedCreateNestedManyWithoutCompanyInput
+    mas_positionlevel1?: mas_positionlevel1UncheckedCreateNestedManyWithoutCompanyInput
+    holiday_date?: holiday_dateUncheckedCreateNestedManyWithoutCompanyInput
   }
 
   export type CompanyCreateOrConnectWithoutBranchInput = {
@@ -15200,6 +20981,7 @@ export namespace Prisma {
     role?: RoleCreateNestedOneWithoutUsersInput
     company?: CompanyCreateNestedManyWithoutOwnerInput
     Role_Company?: Role_CompanyCreateNestedOneWithoutUsersInput
+    Position_user?: Position_userCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutCompanyBranchInput = {
@@ -15215,6 +20997,7 @@ export namespace Prisma {
     roleId?: string | null
     RoleCompanyID?: string | null
     company?: CompanyUncheckedCreateNestedManyWithoutOwnerInput
+    Position_user?: Position_userUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutCompanyBranchInput = {
@@ -15269,6 +21052,10 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     owner?: UserUpdateOneRequiredWithoutCompanyNestedInput
+    mas_positionlevel3?: mas_positionlevel3UpdateManyWithoutCompanyNestedInput
+    mas_positionlevel2?: mas_positionlevel2UpdateManyWithoutCompanyNestedInput
+    mas_positionlevel1?: mas_positionlevel1UpdateManyWithoutCompanyNestedInput
+    holiday_date?: holiday_dateUpdateManyWithoutCompanyNestedInput
   }
 
   export type CompanyUncheckedUpdateWithoutBranchInput = {
@@ -15282,6 +21069,10 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     ownerId?: StringFieldUpdateOperationsInput | string
+    mas_positionlevel3?: mas_positionlevel3UncheckedUpdateManyWithoutCompanyNestedInput
+    mas_positionlevel2?: mas_positionlevel2UncheckedUpdateManyWithoutCompanyNestedInput
+    mas_positionlevel1?: mas_positionlevel1UncheckedUpdateManyWithoutCompanyNestedInput
+    holiday_date?: holiday_dateUncheckedUpdateManyWithoutCompanyNestedInput
   }
 
   export type UserUpsertWithWhereUniqueWithoutCompanyBranchInput = {
@@ -15357,6 +21148,7 @@ export namespace Prisma {
     company?: CompanyCreateNestedManyWithoutOwnerInput
     companyBranch?: CompanyBranchCreateNestedOneWithoutUsersInput
     Role_Company?: Role_CompanyCreateNestedOneWithoutUsersInput
+    Position_user?: Position_userCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutProfileInput = {
@@ -15372,6 +21164,7 @@ export namespace Prisma {
     RoleCompanyID?: string | null
     company?: CompanyUncheckedCreateNestedManyWithoutOwnerInput
     companyBranchId?: string | null
+    Position_user?: Position_userUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutProfileInput = {
@@ -15397,6 +21190,7 @@ export namespace Prisma {
     company?: CompanyUpdateManyWithoutOwnerNestedInput
     companyBranch?: CompanyBranchUpdateOneWithoutUsersNestedInput
     Role_Company?: Role_CompanyUpdateOneWithoutUsersNestedInput
+    Position_user?: Position_userUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutProfileInput = {
@@ -15412,6 +21206,7 @@ export namespace Prisma {
     RoleCompanyID?: NullableStringFieldUpdateOperationsInput | string | null
     company?: CompanyUncheckedUpdateManyWithoutOwnerNestedInput
     companyBranchId?: NullableStringFieldUpdateOperationsInput | string | null
+    Position_user?: Position_userUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type ProfileCreateWithoutUserInput = {
@@ -15537,6 +21332,10 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     branch?: CompanyBranchCreateNestedManyWithoutCompanyInput
+    mas_positionlevel3?: mas_positionlevel3CreateNestedManyWithoutCompanyInput
+    mas_positionlevel2?: mas_positionlevel2CreateNestedManyWithoutCompanyInput
+    mas_positionlevel1?: mas_positionlevel1CreateNestedManyWithoutCompanyInput
+    holiday_date?: holiday_dateCreateNestedManyWithoutCompanyInput
   }
 
   export type CompanyUncheckedCreateWithoutOwnerInput = {
@@ -15550,6 +21349,10 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     branch?: CompanyBranchUncheckedCreateNestedManyWithoutCompanyInput
+    mas_positionlevel3?: mas_positionlevel3UncheckedCreateNestedManyWithoutCompanyInput
+    mas_positionlevel2?: mas_positionlevel2UncheckedCreateNestedManyWithoutCompanyInput
+    mas_positionlevel1?: mas_positionlevel1UncheckedCreateNestedManyWithoutCompanyInput
+    holiday_date?: holiday_dateUncheckedCreateNestedManyWithoutCompanyInput
   }
 
   export type CompanyCreateOrConnectWithoutOwnerInput = {
@@ -15646,6 +21449,34 @@ export namespace Prisma {
   export type Role_CompanyCreateOrConnectWithoutUsersInput = {
     where: Role_CompanyWhereUniqueInput
     create: XOR<Role_CompanyCreateWithoutUsersInput, Role_CompanyUncheckedCreateWithoutUsersInput>
+  }
+
+  export type Position_userCreateWithoutUserInput = {
+    id: string
+    role?: string | null
+    leader?: string | null
+    mas_positionlevel1?: mas_positionlevel1CreateNestedOneWithoutPosition_userInput
+    mas_positionlevel2?: mas_positionlevel2CreateNestedOneWithoutPosition_userInput
+    mas_positionlevel3?: mas_positionlevel3CreateNestedOneWithoutPosition_userInput
+  }
+
+  export type Position_userUncheckedCreateWithoutUserInput = {
+    id: string
+    position1_id?: string | null
+    position2_id?: string | null
+    position3_id?: string | null
+    role?: string | null
+    leader?: string | null
+  }
+
+  export type Position_userCreateOrConnectWithoutUserInput = {
+    where: Position_userWhereUniqueInput
+    create: XOR<Position_userCreateWithoutUserInput, Position_userUncheckedCreateWithoutUserInput>
+  }
+
+  export type Position_userCreateManyUserInputEnvelope = {
+    data: Enumerable<Position_userCreateManyUserInput>
+    skipDuplicates?: boolean
   }
 
   export type ProfileUpsertWithoutUserInput = {
@@ -15878,6 +21709,35 @@ export namespace Prisma {
     companyBranchId?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
+  export type Position_userUpsertWithWhereUniqueWithoutUserInput = {
+    where: Position_userWhereUniqueInput
+    update: XOR<Position_userUpdateWithoutUserInput, Position_userUncheckedUpdateWithoutUserInput>
+    create: XOR<Position_userCreateWithoutUserInput, Position_userUncheckedCreateWithoutUserInput>
+  }
+
+  export type Position_userUpdateWithWhereUniqueWithoutUserInput = {
+    where: Position_userWhereUniqueInput
+    data: XOR<Position_userUpdateWithoutUserInput, Position_userUncheckedUpdateWithoutUserInput>
+  }
+
+  export type Position_userUpdateManyWithWhereWithoutUserInput = {
+    where: Position_userScalarWhereInput
+    data: XOR<Position_userUpdateManyMutationInput, Position_userUncheckedUpdateManyWithoutPosition_userInput>
+  }
+
+  export type Position_userScalarWhereInput = {
+    AND?: Enumerable<Position_userScalarWhereInput>
+    OR?: Enumerable<Position_userScalarWhereInput>
+    NOT?: Enumerable<Position_userScalarWhereInput>
+    id?: UuidFilter | string
+    user_id?: UuidNullableFilter | string | null
+    position1_id?: UuidNullableFilter | string | null
+    position2_id?: UuidNullableFilter | string | null
+    position3_id?: UuidNullableFilter | string | null
+    role?: StringNullableFilter | string | null
+    leader?: StringNullableFilter | string | null
+  }
+
   export type UserCreateWithoutRoleInput = {
     id: string
     email: string
@@ -15891,6 +21751,7 @@ export namespace Prisma {
     company?: CompanyCreateNestedManyWithoutOwnerInput
     companyBranch?: CompanyBranchCreateNestedOneWithoutUsersInput
     Role_Company?: Role_CompanyCreateNestedOneWithoutUsersInput
+    Position_user?: Position_userCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutRoleInput = {
@@ -15906,6 +21767,7 @@ export namespace Prisma {
     RoleCompanyID?: string | null
     company?: CompanyUncheckedCreateNestedManyWithoutOwnerInput
     companyBranchId?: string | null
+    Position_user?: Position_userUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutRoleInput = {
@@ -15947,6 +21809,7 @@ export namespace Prisma {
     role?: RoleCreateNestedOneWithoutUsersInput
     company?: CompanyCreateNestedManyWithoutOwnerInput
     companyBranch?: CompanyBranchCreateNestedOneWithoutUsersInput
+    Position_user?: Position_userCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutRole_CompanyInput = {
@@ -15962,6 +21825,7 @@ export namespace Prisma {
     roleId?: string | null
     company?: CompanyUncheckedCreateNestedManyWithoutOwnerInput
     companyBranchId?: string | null
+    Position_user?: Position_userUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutRole_CompanyInput = {
@@ -16279,6 +22143,804 @@ export namespace Prisma {
     provinceId?: StringFieldUpdateOperationsInput | string
   }
 
+  export type mas_positionlevel2CreateWithoutMas_positionlevel1Input = {
+    id: string
+    name: string
+    mas_positionlevel3?: mas_positionlevel3CreateNestedManyWithoutMas_positionlevel2Input
+    Company?: CompanyCreateNestedOneWithoutMas_positionlevel2Input
+    position_user?: Position_userCreateNestedManyWithoutMas_positionlevel2Input
+  }
+
+  export type mas_positionlevel2UncheckedCreateWithoutMas_positionlevel1Input = {
+    id: string
+    name: string
+    mas_positionlevel3?: mas_positionlevel3UncheckedCreateNestedManyWithoutMas_positionlevel2Input
+    CompanyId?: string | null
+    position_user?: Position_userUncheckedCreateNestedManyWithoutMas_positionlevel2Input
+  }
+
+  export type mas_positionlevel2CreateOrConnectWithoutMas_positionlevel1Input = {
+    where: mas_positionlevel2WhereUniqueInput
+    create: XOR<mas_positionlevel2CreateWithoutMas_positionlevel1Input, mas_positionlevel2UncheckedCreateWithoutMas_positionlevel1Input>
+  }
+
+  export type mas_positionlevel2CreateManyMas_positionlevel1InputEnvelope = {
+    data: Enumerable<mas_positionlevel2CreateManyMas_positionlevel1Input>
+    skipDuplicates?: boolean
+  }
+
+  export type CompanyCreateWithoutMas_positionlevel1Input = {
+    id: string
+    name: string
+    companyCode: string
+    userlimit?: number
+    company_registration_id?: string | null
+    company_vat_id?: string | null
+    icon?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    owner: UserCreateNestedOneWithoutCompanyInput
+    branch?: CompanyBranchCreateNestedManyWithoutCompanyInput
+    mas_positionlevel3?: mas_positionlevel3CreateNestedManyWithoutCompanyInput
+    mas_positionlevel2?: mas_positionlevel2CreateNestedManyWithoutCompanyInput
+    holiday_date?: holiday_dateCreateNestedManyWithoutCompanyInput
+  }
+
+  export type CompanyUncheckedCreateWithoutMas_positionlevel1Input = {
+    id: string
+    name: string
+    companyCode: string
+    userlimit?: number
+    company_registration_id?: string | null
+    company_vat_id?: string | null
+    icon?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    ownerId: string
+    branch?: CompanyBranchUncheckedCreateNestedManyWithoutCompanyInput
+    mas_positionlevel3?: mas_positionlevel3UncheckedCreateNestedManyWithoutCompanyInput
+    mas_positionlevel2?: mas_positionlevel2UncheckedCreateNestedManyWithoutCompanyInput
+    holiday_date?: holiday_dateUncheckedCreateNestedManyWithoutCompanyInput
+  }
+
+  export type CompanyCreateOrConnectWithoutMas_positionlevel1Input = {
+    where: CompanyWhereUniqueInput
+    create: XOR<CompanyCreateWithoutMas_positionlevel1Input, CompanyUncheckedCreateWithoutMas_positionlevel1Input>
+  }
+
+  export type Position_userCreateWithoutMas_positionlevel1Input = {
+    id: string
+    role?: string | null
+    leader?: string | null
+    user?: UserCreateNestedOneWithoutPosition_userInput
+    mas_positionlevel2?: mas_positionlevel2CreateNestedOneWithoutPosition_userInput
+    mas_positionlevel3?: mas_positionlevel3CreateNestedOneWithoutPosition_userInput
+  }
+
+  export type Position_userUncheckedCreateWithoutMas_positionlevel1Input = {
+    id: string
+    user_id?: string | null
+    position2_id?: string | null
+    position3_id?: string | null
+    role?: string | null
+    leader?: string | null
+  }
+
+  export type Position_userCreateOrConnectWithoutMas_positionlevel1Input = {
+    where: Position_userWhereUniqueInput
+    create: XOR<Position_userCreateWithoutMas_positionlevel1Input, Position_userUncheckedCreateWithoutMas_positionlevel1Input>
+  }
+
+  export type Position_userCreateManyMas_positionlevel1InputEnvelope = {
+    data: Enumerable<Position_userCreateManyMas_positionlevel1Input>
+    skipDuplicates?: boolean
+  }
+
+  export type mas_positionlevel2UpsertWithWhereUniqueWithoutMas_positionlevel1Input = {
+    where: mas_positionlevel2WhereUniqueInput
+    update: XOR<mas_positionlevel2UpdateWithoutMas_positionlevel1Input, mas_positionlevel2UncheckedUpdateWithoutMas_positionlevel1Input>
+    create: XOR<mas_positionlevel2CreateWithoutMas_positionlevel1Input, mas_positionlevel2UncheckedCreateWithoutMas_positionlevel1Input>
+  }
+
+  export type mas_positionlevel2UpdateWithWhereUniqueWithoutMas_positionlevel1Input = {
+    where: mas_positionlevel2WhereUniqueInput
+    data: XOR<mas_positionlevel2UpdateWithoutMas_positionlevel1Input, mas_positionlevel2UncheckedUpdateWithoutMas_positionlevel1Input>
+  }
+
+  export type mas_positionlevel2UpdateManyWithWhereWithoutMas_positionlevel1Input = {
+    where: mas_positionlevel2ScalarWhereInput
+    data: XOR<mas_positionlevel2UpdateManyMutationInput, mas_positionlevel2UncheckedUpdateManyWithoutMas_positionlevel2Input>
+  }
+
+  export type CompanyUpsertWithoutMas_positionlevel1Input = {
+    update: XOR<CompanyUpdateWithoutMas_positionlevel1Input, CompanyUncheckedUpdateWithoutMas_positionlevel1Input>
+    create: XOR<CompanyCreateWithoutMas_positionlevel1Input, CompanyUncheckedCreateWithoutMas_positionlevel1Input>
+  }
+
+  export type CompanyUpdateWithoutMas_positionlevel1Input = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    companyCode?: StringFieldUpdateOperationsInput | string
+    userlimit?: IntFieldUpdateOperationsInput | number
+    company_registration_id?: NullableStringFieldUpdateOperationsInput | string | null
+    company_vat_id?: NullableStringFieldUpdateOperationsInput | string | null
+    icon?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    owner?: UserUpdateOneRequiredWithoutCompanyNestedInput
+    branch?: CompanyBranchUpdateManyWithoutCompanyNestedInput
+    mas_positionlevel3?: mas_positionlevel3UpdateManyWithoutCompanyNestedInput
+    mas_positionlevel2?: mas_positionlevel2UpdateManyWithoutCompanyNestedInput
+    holiday_date?: holiday_dateUpdateManyWithoutCompanyNestedInput
+  }
+
+  export type CompanyUncheckedUpdateWithoutMas_positionlevel1Input = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    companyCode?: StringFieldUpdateOperationsInput | string
+    userlimit?: IntFieldUpdateOperationsInput | number
+    company_registration_id?: NullableStringFieldUpdateOperationsInput | string | null
+    company_vat_id?: NullableStringFieldUpdateOperationsInput | string | null
+    icon?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    ownerId?: StringFieldUpdateOperationsInput | string
+    branch?: CompanyBranchUncheckedUpdateManyWithoutCompanyNestedInput
+    mas_positionlevel3?: mas_positionlevel3UncheckedUpdateManyWithoutCompanyNestedInput
+    mas_positionlevel2?: mas_positionlevel2UncheckedUpdateManyWithoutCompanyNestedInput
+    holiday_date?: holiday_dateUncheckedUpdateManyWithoutCompanyNestedInput
+  }
+
+  export type Position_userUpsertWithWhereUniqueWithoutMas_positionlevel1Input = {
+    where: Position_userWhereUniqueInput
+    update: XOR<Position_userUpdateWithoutMas_positionlevel1Input, Position_userUncheckedUpdateWithoutMas_positionlevel1Input>
+    create: XOR<Position_userCreateWithoutMas_positionlevel1Input, Position_userUncheckedCreateWithoutMas_positionlevel1Input>
+  }
+
+  export type Position_userUpdateWithWhereUniqueWithoutMas_positionlevel1Input = {
+    where: Position_userWhereUniqueInput
+    data: XOR<Position_userUpdateWithoutMas_positionlevel1Input, Position_userUncheckedUpdateWithoutMas_positionlevel1Input>
+  }
+
+  export type Position_userUpdateManyWithWhereWithoutMas_positionlevel1Input = {
+    where: Position_userScalarWhereInput
+    data: XOR<Position_userUpdateManyMutationInput, Position_userUncheckedUpdateManyWithoutPosition_userInput>
+  }
+
+  export type mas_positionlevel1CreateWithoutMas_positionlevel2Input = {
+    id: string
+    name: string
+    Company?: CompanyCreateNestedOneWithoutMas_positionlevel1Input
+    Position_user?: Position_userCreateNestedManyWithoutMas_positionlevel1Input
+  }
+
+  export type mas_positionlevel1UncheckedCreateWithoutMas_positionlevel2Input = {
+    id: string
+    name: string
+    CompanyId?: string | null
+    Position_user?: Position_userUncheckedCreateNestedManyWithoutMas_positionlevel1Input
+  }
+
+  export type mas_positionlevel1CreateOrConnectWithoutMas_positionlevel2Input = {
+    where: mas_positionlevel1WhereUniqueInput
+    create: XOR<mas_positionlevel1CreateWithoutMas_positionlevel2Input, mas_positionlevel1UncheckedCreateWithoutMas_positionlevel2Input>
+  }
+
+  export type mas_positionlevel3CreateWithoutMas_positionlevel2Input = {
+    id: string
+    name: string
+    Company?: CompanyCreateNestedOneWithoutMas_positionlevel3Input
+    Position_user?: Position_userCreateNestedManyWithoutMas_positionlevel3Input
+  }
+
+  export type mas_positionlevel3UncheckedCreateWithoutMas_positionlevel2Input = {
+    id: string
+    name: string
+    CompanyId?: string | null
+    Position_user?: Position_userUncheckedCreateNestedManyWithoutMas_positionlevel3Input
+  }
+
+  export type mas_positionlevel3CreateOrConnectWithoutMas_positionlevel2Input = {
+    where: mas_positionlevel3WhereUniqueInput
+    create: XOR<mas_positionlevel3CreateWithoutMas_positionlevel2Input, mas_positionlevel3UncheckedCreateWithoutMas_positionlevel2Input>
+  }
+
+  export type mas_positionlevel3CreateManyMas_positionlevel2InputEnvelope = {
+    data: Enumerable<mas_positionlevel3CreateManyMas_positionlevel2Input>
+    skipDuplicates?: boolean
+  }
+
+  export type CompanyCreateWithoutMas_positionlevel2Input = {
+    id: string
+    name: string
+    companyCode: string
+    userlimit?: number
+    company_registration_id?: string | null
+    company_vat_id?: string | null
+    icon?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    owner: UserCreateNestedOneWithoutCompanyInput
+    branch?: CompanyBranchCreateNestedManyWithoutCompanyInput
+    mas_positionlevel3?: mas_positionlevel3CreateNestedManyWithoutCompanyInput
+    mas_positionlevel1?: mas_positionlevel1CreateNestedManyWithoutCompanyInput
+    holiday_date?: holiday_dateCreateNestedManyWithoutCompanyInput
+  }
+
+  export type CompanyUncheckedCreateWithoutMas_positionlevel2Input = {
+    id: string
+    name: string
+    companyCode: string
+    userlimit?: number
+    company_registration_id?: string | null
+    company_vat_id?: string | null
+    icon?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    ownerId: string
+    branch?: CompanyBranchUncheckedCreateNestedManyWithoutCompanyInput
+    mas_positionlevel3?: mas_positionlevel3UncheckedCreateNestedManyWithoutCompanyInput
+    mas_positionlevel1?: mas_positionlevel1UncheckedCreateNestedManyWithoutCompanyInput
+    holiday_date?: holiday_dateUncheckedCreateNestedManyWithoutCompanyInput
+  }
+
+  export type CompanyCreateOrConnectWithoutMas_positionlevel2Input = {
+    where: CompanyWhereUniqueInput
+    create: XOR<CompanyCreateWithoutMas_positionlevel2Input, CompanyUncheckedCreateWithoutMas_positionlevel2Input>
+  }
+
+  export type Position_userCreateWithoutMas_positionlevel2Input = {
+    id: string
+    role?: string | null
+    leader?: string | null
+    user?: UserCreateNestedOneWithoutPosition_userInput
+    mas_positionlevel1?: mas_positionlevel1CreateNestedOneWithoutPosition_userInput
+    mas_positionlevel3?: mas_positionlevel3CreateNestedOneWithoutPosition_userInput
+  }
+
+  export type Position_userUncheckedCreateWithoutMas_positionlevel2Input = {
+    id: string
+    user_id?: string | null
+    position1_id?: string | null
+    position3_id?: string | null
+    role?: string | null
+    leader?: string | null
+  }
+
+  export type Position_userCreateOrConnectWithoutMas_positionlevel2Input = {
+    where: Position_userWhereUniqueInput
+    create: XOR<Position_userCreateWithoutMas_positionlevel2Input, Position_userUncheckedCreateWithoutMas_positionlevel2Input>
+  }
+
+  export type Position_userCreateManyMas_positionlevel2InputEnvelope = {
+    data: Enumerable<Position_userCreateManyMas_positionlevel2Input>
+    skipDuplicates?: boolean
+  }
+
+  export type mas_positionlevel1UpsertWithoutMas_positionlevel2Input = {
+    update: XOR<mas_positionlevel1UpdateWithoutMas_positionlevel2Input, mas_positionlevel1UncheckedUpdateWithoutMas_positionlevel2Input>
+    create: XOR<mas_positionlevel1CreateWithoutMas_positionlevel2Input, mas_positionlevel1UncheckedCreateWithoutMas_positionlevel2Input>
+  }
+
+  export type mas_positionlevel1UpdateWithoutMas_positionlevel2Input = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    Company?: CompanyUpdateOneWithoutMas_positionlevel1NestedInput
+    Position_user?: Position_userUpdateManyWithoutMas_positionlevel1NestedInput
+  }
+
+  export type mas_positionlevel1UncheckedUpdateWithoutMas_positionlevel2Input = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    CompanyId?: NullableStringFieldUpdateOperationsInput | string | null
+    Position_user?: Position_userUncheckedUpdateManyWithoutMas_positionlevel1NestedInput
+  }
+
+  export type mas_positionlevel3UpsertWithWhereUniqueWithoutMas_positionlevel2Input = {
+    where: mas_positionlevel3WhereUniqueInput
+    update: XOR<mas_positionlevel3UpdateWithoutMas_positionlevel2Input, mas_positionlevel3UncheckedUpdateWithoutMas_positionlevel2Input>
+    create: XOR<mas_positionlevel3CreateWithoutMas_positionlevel2Input, mas_positionlevel3UncheckedCreateWithoutMas_positionlevel2Input>
+  }
+
+  export type mas_positionlevel3UpdateWithWhereUniqueWithoutMas_positionlevel2Input = {
+    where: mas_positionlevel3WhereUniqueInput
+    data: XOR<mas_positionlevel3UpdateWithoutMas_positionlevel2Input, mas_positionlevel3UncheckedUpdateWithoutMas_positionlevel2Input>
+  }
+
+  export type mas_positionlevel3UpdateManyWithWhereWithoutMas_positionlevel2Input = {
+    where: mas_positionlevel3ScalarWhereInput
+    data: XOR<mas_positionlevel3UpdateManyMutationInput, mas_positionlevel3UncheckedUpdateManyWithoutMas_positionlevel3Input>
+  }
+
+  export type CompanyUpsertWithoutMas_positionlevel2Input = {
+    update: XOR<CompanyUpdateWithoutMas_positionlevel2Input, CompanyUncheckedUpdateWithoutMas_positionlevel2Input>
+    create: XOR<CompanyCreateWithoutMas_positionlevel2Input, CompanyUncheckedCreateWithoutMas_positionlevel2Input>
+  }
+
+  export type CompanyUpdateWithoutMas_positionlevel2Input = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    companyCode?: StringFieldUpdateOperationsInput | string
+    userlimit?: IntFieldUpdateOperationsInput | number
+    company_registration_id?: NullableStringFieldUpdateOperationsInput | string | null
+    company_vat_id?: NullableStringFieldUpdateOperationsInput | string | null
+    icon?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    owner?: UserUpdateOneRequiredWithoutCompanyNestedInput
+    branch?: CompanyBranchUpdateManyWithoutCompanyNestedInput
+    mas_positionlevel3?: mas_positionlevel3UpdateManyWithoutCompanyNestedInput
+    mas_positionlevel1?: mas_positionlevel1UpdateManyWithoutCompanyNestedInput
+    holiday_date?: holiday_dateUpdateManyWithoutCompanyNestedInput
+  }
+
+  export type CompanyUncheckedUpdateWithoutMas_positionlevel2Input = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    companyCode?: StringFieldUpdateOperationsInput | string
+    userlimit?: IntFieldUpdateOperationsInput | number
+    company_registration_id?: NullableStringFieldUpdateOperationsInput | string | null
+    company_vat_id?: NullableStringFieldUpdateOperationsInput | string | null
+    icon?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    ownerId?: StringFieldUpdateOperationsInput | string
+    branch?: CompanyBranchUncheckedUpdateManyWithoutCompanyNestedInput
+    mas_positionlevel3?: mas_positionlevel3UncheckedUpdateManyWithoutCompanyNestedInput
+    mas_positionlevel1?: mas_positionlevel1UncheckedUpdateManyWithoutCompanyNestedInput
+    holiday_date?: holiday_dateUncheckedUpdateManyWithoutCompanyNestedInput
+  }
+
+  export type Position_userUpsertWithWhereUniqueWithoutMas_positionlevel2Input = {
+    where: Position_userWhereUniqueInput
+    update: XOR<Position_userUpdateWithoutMas_positionlevel2Input, Position_userUncheckedUpdateWithoutMas_positionlevel2Input>
+    create: XOR<Position_userCreateWithoutMas_positionlevel2Input, Position_userUncheckedCreateWithoutMas_positionlevel2Input>
+  }
+
+  export type Position_userUpdateWithWhereUniqueWithoutMas_positionlevel2Input = {
+    where: Position_userWhereUniqueInput
+    data: XOR<Position_userUpdateWithoutMas_positionlevel2Input, Position_userUncheckedUpdateWithoutMas_positionlevel2Input>
+  }
+
+  export type Position_userUpdateManyWithWhereWithoutMas_positionlevel2Input = {
+    where: Position_userScalarWhereInput
+    data: XOR<Position_userUpdateManyMutationInput, Position_userUncheckedUpdateManyWithoutPosition_userInput>
+  }
+
+  export type mas_positionlevel2CreateWithoutMas_positionlevel3Input = {
+    id: string
+    name: string
+    mas_positionlevel1?: mas_positionlevel1CreateNestedOneWithoutMas_positionlevel2Input
+    Company?: CompanyCreateNestedOneWithoutMas_positionlevel2Input
+    position_user?: Position_userCreateNestedManyWithoutMas_positionlevel2Input
+  }
+
+  export type mas_positionlevel2UncheckedCreateWithoutMas_positionlevel3Input = {
+    id: string
+    name: string
+    positionlevel1_id?: string | null
+    CompanyId?: string | null
+    position_user?: Position_userUncheckedCreateNestedManyWithoutMas_positionlevel2Input
+  }
+
+  export type mas_positionlevel2CreateOrConnectWithoutMas_positionlevel3Input = {
+    where: mas_positionlevel2WhereUniqueInput
+    create: XOR<mas_positionlevel2CreateWithoutMas_positionlevel3Input, mas_positionlevel2UncheckedCreateWithoutMas_positionlevel3Input>
+  }
+
+  export type CompanyCreateWithoutMas_positionlevel3Input = {
+    id: string
+    name: string
+    companyCode: string
+    userlimit?: number
+    company_registration_id?: string | null
+    company_vat_id?: string | null
+    icon?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    owner: UserCreateNestedOneWithoutCompanyInput
+    branch?: CompanyBranchCreateNestedManyWithoutCompanyInput
+    mas_positionlevel2?: mas_positionlevel2CreateNestedManyWithoutCompanyInput
+    mas_positionlevel1?: mas_positionlevel1CreateNestedManyWithoutCompanyInput
+    holiday_date?: holiday_dateCreateNestedManyWithoutCompanyInput
+  }
+
+  export type CompanyUncheckedCreateWithoutMas_positionlevel3Input = {
+    id: string
+    name: string
+    companyCode: string
+    userlimit?: number
+    company_registration_id?: string | null
+    company_vat_id?: string | null
+    icon?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    ownerId: string
+    branch?: CompanyBranchUncheckedCreateNestedManyWithoutCompanyInput
+    mas_positionlevel2?: mas_positionlevel2UncheckedCreateNestedManyWithoutCompanyInput
+    mas_positionlevel1?: mas_positionlevel1UncheckedCreateNestedManyWithoutCompanyInput
+    holiday_date?: holiday_dateUncheckedCreateNestedManyWithoutCompanyInput
+  }
+
+  export type CompanyCreateOrConnectWithoutMas_positionlevel3Input = {
+    where: CompanyWhereUniqueInput
+    create: XOR<CompanyCreateWithoutMas_positionlevel3Input, CompanyUncheckedCreateWithoutMas_positionlevel3Input>
+  }
+
+  export type Position_userCreateWithoutMas_positionlevel3Input = {
+    id: string
+    role?: string | null
+    leader?: string | null
+    user?: UserCreateNestedOneWithoutPosition_userInput
+    mas_positionlevel1?: mas_positionlevel1CreateNestedOneWithoutPosition_userInput
+    mas_positionlevel2?: mas_positionlevel2CreateNestedOneWithoutPosition_userInput
+  }
+
+  export type Position_userUncheckedCreateWithoutMas_positionlevel3Input = {
+    id: string
+    user_id?: string | null
+    position1_id?: string | null
+    position2_id?: string | null
+    role?: string | null
+    leader?: string | null
+  }
+
+  export type Position_userCreateOrConnectWithoutMas_positionlevel3Input = {
+    where: Position_userWhereUniqueInput
+    create: XOR<Position_userCreateWithoutMas_positionlevel3Input, Position_userUncheckedCreateWithoutMas_positionlevel3Input>
+  }
+
+  export type Position_userCreateManyMas_positionlevel3InputEnvelope = {
+    data: Enumerable<Position_userCreateManyMas_positionlevel3Input>
+    skipDuplicates?: boolean
+  }
+
+  export type mas_positionlevel2UpsertWithoutMas_positionlevel3Input = {
+    update: XOR<mas_positionlevel2UpdateWithoutMas_positionlevel3Input, mas_positionlevel2UncheckedUpdateWithoutMas_positionlevel3Input>
+    create: XOR<mas_positionlevel2CreateWithoutMas_positionlevel3Input, mas_positionlevel2UncheckedCreateWithoutMas_positionlevel3Input>
+  }
+
+  export type mas_positionlevel2UpdateWithoutMas_positionlevel3Input = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    mas_positionlevel1?: mas_positionlevel1UpdateOneWithoutMas_positionlevel2NestedInput
+    Company?: CompanyUpdateOneWithoutMas_positionlevel2NestedInput
+    position_user?: Position_userUpdateManyWithoutMas_positionlevel2NestedInput
+  }
+
+  export type mas_positionlevel2UncheckedUpdateWithoutMas_positionlevel3Input = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    positionlevel1_id?: NullableStringFieldUpdateOperationsInput | string | null
+    CompanyId?: NullableStringFieldUpdateOperationsInput | string | null
+    position_user?: Position_userUncheckedUpdateManyWithoutMas_positionlevel2NestedInput
+  }
+
+  export type CompanyUpsertWithoutMas_positionlevel3Input = {
+    update: XOR<CompanyUpdateWithoutMas_positionlevel3Input, CompanyUncheckedUpdateWithoutMas_positionlevel3Input>
+    create: XOR<CompanyCreateWithoutMas_positionlevel3Input, CompanyUncheckedCreateWithoutMas_positionlevel3Input>
+  }
+
+  export type CompanyUpdateWithoutMas_positionlevel3Input = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    companyCode?: StringFieldUpdateOperationsInput | string
+    userlimit?: IntFieldUpdateOperationsInput | number
+    company_registration_id?: NullableStringFieldUpdateOperationsInput | string | null
+    company_vat_id?: NullableStringFieldUpdateOperationsInput | string | null
+    icon?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    owner?: UserUpdateOneRequiredWithoutCompanyNestedInput
+    branch?: CompanyBranchUpdateManyWithoutCompanyNestedInput
+    mas_positionlevel2?: mas_positionlevel2UpdateManyWithoutCompanyNestedInput
+    mas_positionlevel1?: mas_positionlevel1UpdateManyWithoutCompanyNestedInput
+    holiday_date?: holiday_dateUpdateManyWithoutCompanyNestedInput
+  }
+
+  export type CompanyUncheckedUpdateWithoutMas_positionlevel3Input = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    companyCode?: StringFieldUpdateOperationsInput | string
+    userlimit?: IntFieldUpdateOperationsInput | number
+    company_registration_id?: NullableStringFieldUpdateOperationsInput | string | null
+    company_vat_id?: NullableStringFieldUpdateOperationsInput | string | null
+    icon?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    ownerId?: StringFieldUpdateOperationsInput | string
+    branch?: CompanyBranchUncheckedUpdateManyWithoutCompanyNestedInput
+    mas_positionlevel2?: mas_positionlevel2UncheckedUpdateManyWithoutCompanyNestedInput
+    mas_positionlevel1?: mas_positionlevel1UncheckedUpdateManyWithoutCompanyNestedInput
+    holiday_date?: holiday_dateUncheckedUpdateManyWithoutCompanyNestedInput
+  }
+
+  export type Position_userUpsertWithWhereUniqueWithoutMas_positionlevel3Input = {
+    where: Position_userWhereUniqueInput
+    update: XOR<Position_userUpdateWithoutMas_positionlevel3Input, Position_userUncheckedUpdateWithoutMas_positionlevel3Input>
+    create: XOR<Position_userCreateWithoutMas_positionlevel3Input, Position_userUncheckedCreateWithoutMas_positionlevel3Input>
+  }
+
+  export type Position_userUpdateWithWhereUniqueWithoutMas_positionlevel3Input = {
+    where: Position_userWhereUniqueInput
+    data: XOR<Position_userUpdateWithoutMas_positionlevel3Input, Position_userUncheckedUpdateWithoutMas_positionlevel3Input>
+  }
+
+  export type Position_userUpdateManyWithWhereWithoutMas_positionlevel3Input = {
+    where: Position_userScalarWhereInput
+    data: XOR<Position_userUpdateManyMutationInput, Position_userUncheckedUpdateManyWithoutPosition_userInput>
+  }
+
+  export type UserCreateWithoutPosition_userInput = {
+    id: string
+    email: string
+    password: string
+    profile?: ProfileCreateNestedOneWithoutUserInput
+    islogin?: boolean
+    isActive?: boolean
+    isOwner?: boolean
+    lastlogin?: Date | string | null
+    createdAt?: Date | string
+    role?: RoleCreateNestedOneWithoutUsersInput
+    company?: CompanyCreateNestedManyWithoutOwnerInput
+    companyBranch?: CompanyBranchCreateNestedOneWithoutUsersInput
+    Role_Company?: Role_CompanyCreateNestedOneWithoutUsersInput
+  }
+
+  export type UserUncheckedCreateWithoutPosition_userInput = {
+    id: string
+    email: string
+    password: string
+    profile?: ProfileUncheckedCreateNestedOneWithoutUserInput
+    islogin?: boolean
+    isActive?: boolean
+    isOwner?: boolean
+    lastlogin?: Date | string | null
+    createdAt?: Date | string
+    roleId?: string | null
+    RoleCompanyID?: string | null
+    company?: CompanyUncheckedCreateNestedManyWithoutOwnerInput
+    companyBranchId?: string | null
+  }
+
+  export type UserCreateOrConnectWithoutPosition_userInput = {
+    where: UserWhereUniqueInput
+    create: XOR<UserCreateWithoutPosition_userInput, UserUncheckedCreateWithoutPosition_userInput>
+  }
+
+  export type mas_positionlevel1CreateWithoutPosition_userInput = {
+    id: string
+    name: string
+    mas_positionlevel2?: mas_positionlevel2CreateNestedManyWithoutMas_positionlevel1Input
+    Company?: CompanyCreateNestedOneWithoutMas_positionlevel1Input
+  }
+
+  export type mas_positionlevel1UncheckedCreateWithoutPosition_userInput = {
+    id: string
+    name: string
+    mas_positionlevel2?: mas_positionlevel2UncheckedCreateNestedManyWithoutMas_positionlevel1Input
+    CompanyId?: string | null
+  }
+
+  export type mas_positionlevel1CreateOrConnectWithoutPosition_userInput = {
+    where: mas_positionlevel1WhereUniqueInput
+    create: XOR<mas_positionlevel1CreateWithoutPosition_userInput, mas_positionlevel1UncheckedCreateWithoutPosition_userInput>
+  }
+
+  export type mas_positionlevel2CreateWithoutPosition_userInput = {
+    id: string
+    name: string
+    mas_positionlevel1?: mas_positionlevel1CreateNestedOneWithoutMas_positionlevel2Input
+    mas_positionlevel3?: mas_positionlevel3CreateNestedManyWithoutMas_positionlevel2Input
+    Company?: CompanyCreateNestedOneWithoutMas_positionlevel2Input
+  }
+
+  export type mas_positionlevel2UncheckedCreateWithoutPosition_userInput = {
+    id: string
+    name: string
+    positionlevel1_id?: string | null
+    mas_positionlevel3?: mas_positionlevel3UncheckedCreateNestedManyWithoutMas_positionlevel2Input
+    CompanyId?: string | null
+  }
+
+  export type mas_positionlevel2CreateOrConnectWithoutPosition_userInput = {
+    where: mas_positionlevel2WhereUniqueInput
+    create: XOR<mas_positionlevel2CreateWithoutPosition_userInput, mas_positionlevel2UncheckedCreateWithoutPosition_userInput>
+  }
+
+  export type mas_positionlevel3CreateWithoutPosition_userInput = {
+    id: string
+    name: string
+    mas_positionlevel2?: mas_positionlevel2CreateNestedOneWithoutMas_positionlevel3Input
+    Company?: CompanyCreateNestedOneWithoutMas_positionlevel3Input
+  }
+
+  export type mas_positionlevel3UncheckedCreateWithoutPosition_userInput = {
+    id: string
+    name: string
+    positionlevel2_id?: string | null
+    CompanyId?: string | null
+  }
+
+  export type mas_positionlevel3CreateOrConnectWithoutPosition_userInput = {
+    where: mas_positionlevel3WhereUniqueInput
+    create: XOR<mas_positionlevel3CreateWithoutPosition_userInput, mas_positionlevel3UncheckedCreateWithoutPosition_userInput>
+  }
+
+  export type UserUpsertWithoutPosition_userInput = {
+    update: XOR<UserUpdateWithoutPosition_userInput, UserUncheckedUpdateWithoutPosition_userInput>
+    create: XOR<UserCreateWithoutPosition_userInput, UserUncheckedCreateWithoutPosition_userInput>
+  }
+
+  export type UserUpdateWithoutPosition_userInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    password?: StringFieldUpdateOperationsInput | string
+    profile?: ProfileUpdateOneWithoutUserNestedInput
+    islogin?: BoolFieldUpdateOperationsInput | boolean
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    isOwner?: BoolFieldUpdateOperationsInput | boolean
+    lastlogin?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    role?: RoleUpdateOneWithoutUsersNestedInput
+    company?: CompanyUpdateManyWithoutOwnerNestedInput
+    companyBranch?: CompanyBranchUpdateOneWithoutUsersNestedInput
+    Role_Company?: Role_CompanyUpdateOneWithoutUsersNestedInput
+  }
+
+  export type UserUncheckedUpdateWithoutPosition_userInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    password?: StringFieldUpdateOperationsInput | string
+    profile?: ProfileUncheckedUpdateOneWithoutUserNestedInput
+    islogin?: BoolFieldUpdateOperationsInput | boolean
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    isOwner?: BoolFieldUpdateOperationsInput | boolean
+    lastlogin?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    roleId?: NullableStringFieldUpdateOperationsInput | string | null
+    RoleCompanyID?: NullableStringFieldUpdateOperationsInput | string | null
+    company?: CompanyUncheckedUpdateManyWithoutOwnerNestedInput
+    companyBranchId?: NullableStringFieldUpdateOperationsInput | string | null
+  }
+
+  export type mas_positionlevel1UpsertWithoutPosition_userInput = {
+    update: XOR<mas_positionlevel1UpdateWithoutPosition_userInput, mas_positionlevel1UncheckedUpdateWithoutPosition_userInput>
+    create: XOR<mas_positionlevel1CreateWithoutPosition_userInput, mas_positionlevel1UncheckedCreateWithoutPosition_userInput>
+  }
+
+  export type mas_positionlevel1UpdateWithoutPosition_userInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    mas_positionlevel2?: mas_positionlevel2UpdateManyWithoutMas_positionlevel1NestedInput
+    Company?: CompanyUpdateOneWithoutMas_positionlevel1NestedInput
+  }
+
+  export type mas_positionlevel1UncheckedUpdateWithoutPosition_userInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    mas_positionlevel2?: mas_positionlevel2UncheckedUpdateManyWithoutMas_positionlevel1NestedInput
+    CompanyId?: NullableStringFieldUpdateOperationsInput | string | null
+  }
+
+  export type mas_positionlevel2UpsertWithoutPosition_userInput = {
+    update: XOR<mas_positionlevel2UpdateWithoutPosition_userInput, mas_positionlevel2UncheckedUpdateWithoutPosition_userInput>
+    create: XOR<mas_positionlevel2CreateWithoutPosition_userInput, mas_positionlevel2UncheckedCreateWithoutPosition_userInput>
+  }
+
+  export type mas_positionlevel2UpdateWithoutPosition_userInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    mas_positionlevel1?: mas_positionlevel1UpdateOneWithoutMas_positionlevel2NestedInput
+    mas_positionlevel3?: mas_positionlevel3UpdateManyWithoutMas_positionlevel2NestedInput
+    Company?: CompanyUpdateOneWithoutMas_positionlevel2NestedInput
+  }
+
+  export type mas_positionlevel2UncheckedUpdateWithoutPosition_userInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    positionlevel1_id?: NullableStringFieldUpdateOperationsInput | string | null
+    mas_positionlevel3?: mas_positionlevel3UncheckedUpdateManyWithoutMas_positionlevel2NestedInput
+    CompanyId?: NullableStringFieldUpdateOperationsInput | string | null
+  }
+
+  export type mas_positionlevel3UpsertWithoutPosition_userInput = {
+    update: XOR<mas_positionlevel3UpdateWithoutPosition_userInput, mas_positionlevel3UncheckedUpdateWithoutPosition_userInput>
+    create: XOR<mas_positionlevel3CreateWithoutPosition_userInput, mas_positionlevel3UncheckedCreateWithoutPosition_userInput>
+  }
+
+  export type mas_positionlevel3UpdateWithoutPosition_userInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    mas_positionlevel2?: mas_positionlevel2UpdateOneWithoutMas_positionlevel3NestedInput
+    Company?: CompanyUpdateOneWithoutMas_positionlevel3NestedInput
+  }
+
+  export type mas_positionlevel3UncheckedUpdateWithoutPosition_userInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    positionlevel2_id?: NullableStringFieldUpdateOperationsInput | string | null
+    CompanyId?: NullableStringFieldUpdateOperationsInput | string | null
+  }
+
+  export type CompanyCreateWithoutHoliday_dateInput = {
+    id: string
+    name: string
+    companyCode: string
+    userlimit?: number
+    company_registration_id?: string | null
+    company_vat_id?: string | null
+    icon?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    owner: UserCreateNestedOneWithoutCompanyInput
+    branch?: CompanyBranchCreateNestedManyWithoutCompanyInput
+    mas_positionlevel3?: mas_positionlevel3CreateNestedManyWithoutCompanyInput
+    mas_positionlevel2?: mas_positionlevel2CreateNestedManyWithoutCompanyInput
+    mas_positionlevel1?: mas_positionlevel1CreateNestedManyWithoutCompanyInput
+  }
+
+  export type CompanyUncheckedCreateWithoutHoliday_dateInput = {
+    id: string
+    name: string
+    companyCode: string
+    userlimit?: number
+    company_registration_id?: string | null
+    company_vat_id?: string | null
+    icon?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    ownerId: string
+    branch?: CompanyBranchUncheckedCreateNestedManyWithoutCompanyInput
+    mas_positionlevel3?: mas_positionlevel3UncheckedCreateNestedManyWithoutCompanyInput
+    mas_positionlevel2?: mas_positionlevel2UncheckedCreateNestedManyWithoutCompanyInput
+    mas_positionlevel1?: mas_positionlevel1UncheckedCreateNestedManyWithoutCompanyInput
+  }
+
+  export type CompanyCreateOrConnectWithoutHoliday_dateInput = {
+    where: CompanyWhereUniqueInput
+    create: XOR<CompanyCreateWithoutHoliday_dateInput, CompanyUncheckedCreateWithoutHoliday_dateInput>
+  }
+
+  export type CompanyUpsertWithoutHoliday_dateInput = {
+    update: XOR<CompanyUpdateWithoutHoliday_dateInput, CompanyUncheckedUpdateWithoutHoliday_dateInput>
+    create: XOR<CompanyCreateWithoutHoliday_dateInput, CompanyUncheckedCreateWithoutHoliday_dateInput>
+  }
+
+  export type CompanyUpdateWithoutHoliday_dateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    companyCode?: StringFieldUpdateOperationsInput | string
+    userlimit?: IntFieldUpdateOperationsInput | number
+    company_registration_id?: NullableStringFieldUpdateOperationsInput | string | null
+    company_vat_id?: NullableStringFieldUpdateOperationsInput | string | null
+    icon?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    owner?: UserUpdateOneRequiredWithoutCompanyNestedInput
+    branch?: CompanyBranchUpdateManyWithoutCompanyNestedInput
+    mas_positionlevel3?: mas_positionlevel3UpdateManyWithoutCompanyNestedInput
+    mas_positionlevel2?: mas_positionlevel2UpdateManyWithoutCompanyNestedInput
+    mas_positionlevel1?: mas_positionlevel1UpdateManyWithoutCompanyNestedInput
+  }
+
+  export type CompanyUncheckedUpdateWithoutHoliday_dateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    companyCode?: StringFieldUpdateOperationsInput | string
+    userlimit?: IntFieldUpdateOperationsInput | number
+    company_registration_id?: NullableStringFieldUpdateOperationsInput | string | null
+    company_vat_id?: NullableStringFieldUpdateOperationsInput | string | null
+    icon?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    ownerId?: StringFieldUpdateOperationsInput | string
+    branch?: CompanyBranchUncheckedUpdateManyWithoutCompanyNestedInput
+    mas_positionlevel3?: mas_positionlevel3UncheckedUpdateManyWithoutCompanyNestedInput
+    mas_positionlevel2?: mas_positionlevel2UncheckedUpdateManyWithoutCompanyNestedInput
+    mas_positionlevel1?: mas_positionlevel1UncheckedUpdateManyWithoutCompanyNestedInput
+  }
+
   export type CompanyBranchCreateManyCompanyInput = {
     id: string
     isMainbranch?: boolean
@@ -16305,6 +22967,29 @@ export namespace Prisma {
     social_line?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
+  }
+
+  export type mas_positionlevel3CreateManyCompanyInput = {
+    id: string
+    name: string
+    positionlevel2_id?: string | null
+  }
+
+  export type mas_positionlevel2CreateManyCompanyInput = {
+    id: string
+    name: string
+    positionlevel1_id?: string | null
+  }
+
+  export type mas_positionlevel1CreateManyCompanyInput = {
+    id: string
+    name: string
+  }
+
+  export type holiday_dateCreateManyCompanyInput = {
+    id: string
+    holiday_name?: string | null
+    date: Date | string
   }
 
   export type CompanyBranchUpdateWithoutCompanyInput = {
@@ -16395,6 +23080,85 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
+  export type mas_positionlevel3UpdateWithoutCompanyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    mas_positionlevel2?: mas_positionlevel2UpdateOneWithoutMas_positionlevel3NestedInput
+    Position_user?: Position_userUpdateManyWithoutMas_positionlevel3NestedInput
+  }
+
+  export type mas_positionlevel3UncheckedUpdateWithoutCompanyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    positionlevel2_id?: NullableStringFieldUpdateOperationsInput | string | null
+    Position_user?: Position_userUncheckedUpdateManyWithoutMas_positionlevel3NestedInput
+  }
+
+  export type mas_positionlevel3UncheckedUpdateManyWithoutMas_positionlevel3Input = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    positionlevel2_id?: NullableStringFieldUpdateOperationsInput | string | null
+  }
+
+  export type mas_positionlevel2UpdateWithoutCompanyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    mas_positionlevel1?: mas_positionlevel1UpdateOneWithoutMas_positionlevel2NestedInput
+    mas_positionlevel3?: mas_positionlevel3UpdateManyWithoutMas_positionlevel2NestedInput
+    position_user?: Position_userUpdateManyWithoutMas_positionlevel2NestedInput
+  }
+
+  export type mas_positionlevel2UncheckedUpdateWithoutCompanyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    positionlevel1_id?: NullableStringFieldUpdateOperationsInput | string | null
+    mas_positionlevel3?: mas_positionlevel3UncheckedUpdateManyWithoutMas_positionlevel2NestedInput
+    position_user?: Position_userUncheckedUpdateManyWithoutMas_positionlevel2NestedInput
+  }
+
+  export type mas_positionlevel2UncheckedUpdateManyWithoutMas_positionlevel2Input = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    positionlevel1_id?: NullableStringFieldUpdateOperationsInput | string | null
+  }
+
+  export type mas_positionlevel1UpdateWithoutCompanyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    mas_positionlevel2?: mas_positionlevel2UpdateManyWithoutMas_positionlevel1NestedInput
+    Position_user?: Position_userUpdateManyWithoutMas_positionlevel1NestedInput
+  }
+
+  export type mas_positionlevel1UncheckedUpdateWithoutCompanyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    mas_positionlevel2?: mas_positionlevel2UncheckedUpdateManyWithoutMas_positionlevel1NestedInput
+    Position_user?: Position_userUncheckedUpdateManyWithoutMas_positionlevel1NestedInput
+  }
+
+  export type mas_positionlevel1UncheckedUpdateManyWithoutMas_positionlevel1Input = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type holiday_dateUpdateWithoutCompanyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    holiday_name?: NullableStringFieldUpdateOperationsInput | string | null
+    date?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type holiday_dateUncheckedUpdateWithoutCompanyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    holiday_name?: NullableStringFieldUpdateOperationsInput | string | null
+    date?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type holiday_dateUncheckedUpdateManyWithoutHoliday_dateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    holiday_name?: NullableStringFieldUpdateOperationsInput | string | null
+    date?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
   export type UserCreateManyCompanyBranchInput = {
     id: string
     email: string
@@ -16428,6 +23192,7 @@ export namespace Prisma {
     role?: RoleUpdateOneWithoutUsersNestedInput
     company?: CompanyUpdateManyWithoutOwnerNestedInput
     Role_Company?: Role_CompanyUpdateOneWithoutUsersNestedInput
+    Position_user?: Position_userUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutCompanyBranchInput = {
@@ -16443,6 +23208,7 @@ export namespace Prisma {
     roleId?: NullableStringFieldUpdateOperationsInput | string | null
     RoleCompanyID?: NullableStringFieldUpdateOperationsInput | string | null
     company?: CompanyUncheckedUpdateManyWithoutOwnerNestedInput
+    Position_user?: Position_userUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateManyWithoutUsersInput = {
@@ -16493,6 +23259,15 @@ export namespace Prisma {
     updatedAt?: Date | string
   }
 
+  export type Position_userCreateManyUserInput = {
+    id: string
+    position1_id?: string | null
+    position2_id?: string | null
+    position3_id?: string | null
+    role?: string | null
+    leader?: string | null
+  }
+
   export type CompanyUpdateWithoutOwnerInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
@@ -16504,6 +23279,10 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     branch?: CompanyBranchUpdateManyWithoutCompanyNestedInput
+    mas_positionlevel3?: mas_positionlevel3UpdateManyWithoutCompanyNestedInput
+    mas_positionlevel2?: mas_positionlevel2UpdateManyWithoutCompanyNestedInput
+    mas_positionlevel1?: mas_positionlevel1UpdateManyWithoutCompanyNestedInput
+    holiday_date?: holiday_dateUpdateManyWithoutCompanyNestedInput
   }
 
   export type CompanyUncheckedUpdateWithoutOwnerInput = {
@@ -16517,6 +23296,10 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     branch?: CompanyBranchUncheckedUpdateManyWithoutCompanyNestedInput
+    mas_positionlevel3?: mas_positionlevel3UncheckedUpdateManyWithoutCompanyNestedInput
+    mas_positionlevel2?: mas_positionlevel2UncheckedUpdateManyWithoutCompanyNestedInput
+    mas_positionlevel1?: mas_positionlevel1UncheckedUpdateManyWithoutCompanyNestedInput
+    holiday_date?: holiday_dateUncheckedUpdateManyWithoutCompanyNestedInput
   }
 
   export type CompanyUncheckedUpdateManyWithoutCompanyInput = {
@@ -16529,6 +23312,33 @@ export namespace Prisma {
     icon?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type Position_userUpdateWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    role?: NullableStringFieldUpdateOperationsInput | string | null
+    leader?: NullableStringFieldUpdateOperationsInput | string | null
+    mas_positionlevel1?: mas_positionlevel1UpdateOneWithoutPosition_userNestedInput
+    mas_positionlevel2?: mas_positionlevel2UpdateOneWithoutPosition_userNestedInput
+    mas_positionlevel3?: mas_positionlevel3UpdateOneWithoutPosition_userNestedInput
+  }
+
+  export type Position_userUncheckedUpdateWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    position1_id?: NullableStringFieldUpdateOperationsInput | string | null
+    position2_id?: NullableStringFieldUpdateOperationsInput | string | null
+    position3_id?: NullableStringFieldUpdateOperationsInput | string | null
+    role?: NullableStringFieldUpdateOperationsInput | string | null
+    leader?: NullableStringFieldUpdateOperationsInput | string | null
+  }
+
+  export type Position_userUncheckedUpdateManyWithoutPosition_userInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    position1_id?: NullableStringFieldUpdateOperationsInput | string | null
+    position2_id?: NullableStringFieldUpdateOperationsInput | string | null
+    position3_id?: NullableStringFieldUpdateOperationsInput | string | null
+    role?: NullableStringFieldUpdateOperationsInput | string | null
+    leader?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type UserCreateManyRoleInput = {
@@ -16557,6 +23367,7 @@ export namespace Prisma {
     company?: CompanyUpdateManyWithoutOwnerNestedInput
     companyBranch?: CompanyBranchUpdateOneWithoutUsersNestedInput
     Role_Company?: Role_CompanyUpdateOneWithoutUsersNestedInput
+    Position_user?: Position_userUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutRoleInput = {
@@ -16572,6 +23383,7 @@ export namespace Prisma {
     RoleCompanyID?: NullableStringFieldUpdateOperationsInput | string | null
     company?: CompanyUncheckedUpdateManyWithoutOwnerNestedInput
     companyBranchId?: NullableStringFieldUpdateOperationsInput | string | null
+    Position_user?: Position_userUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type UserCreateManyRole_CompanyInput = {
@@ -16600,6 +23412,7 @@ export namespace Prisma {
     role?: RoleUpdateOneWithoutUsersNestedInput
     company?: CompanyUpdateManyWithoutOwnerNestedInput
     companyBranch?: CompanyBranchUpdateOneWithoutUsersNestedInput
+    Position_user?: Position_userUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutRole_CompanyInput = {
@@ -16615,6 +23428,7 @@ export namespace Prisma {
     roleId?: NullableStringFieldUpdateOperationsInput | string | null
     company?: CompanyUncheckedUpdateManyWithoutOwnerNestedInput
     companyBranchId?: NullableStringFieldUpdateOperationsInput | string | null
+    Position_user?: Position_userUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type DistrictCreateManyProvinceInput = {
@@ -16661,6 +23475,129 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     zipcode?: NullableStringFieldUpdateOperationsInput | string | null
+  }
+
+  export type mas_positionlevel2CreateManyMas_positionlevel1Input = {
+    id: string
+    name: string
+    CompanyId?: string | null
+  }
+
+  export type Position_userCreateManyMas_positionlevel1Input = {
+    id: string
+    user_id?: string | null
+    position2_id?: string | null
+    position3_id?: string | null
+    role?: string | null
+    leader?: string | null
+  }
+
+  export type mas_positionlevel2UpdateWithoutMas_positionlevel1Input = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    mas_positionlevel3?: mas_positionlevel3UpdateManyWithoutMas_positionlevel2NestedInput
+    Company?: CompanyUpdateOneWithoutMas_positionlevel2NestedInput
+    position_user?: Position_userUpdateManyWithoutMas_positionlevel2NestedInput
+  }
+
+  export type mas_positionlevel2UncheckedUpdateWithoutMas_positionlevel1Input = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    mas_positionlevel3?: mas_positionlevel3UncheckedUpdateManyWithoutMas_positionlevel2NestedInput
+    CompanyId?: NullableStringFieldUpdateOperationsInput | string | null
+    position_user?: Position_userUncheckedUpdateManyWithoutMas_positionlevel2NestedInput
+  }
+
+  export type Position_userUpdateWithoutMas_positionlevel1Input = {
+    id?: StringFieldUpdateOperationsInput | string
+    role?: NullableStringFieldUpdateOperationsInput | string | null
+    leader?: NullableStringFieldUpdateOperationsInput | string | null
+    user?: UserUpdateOneWithoutPosition_userNestedInput
+    mas_positionlevel2?: mas_positionlevel2UpdateOneWithoutPosition_userNestedInput
+    mas_positionlevel3?: mas_positionlevel3UpdateOneWithoutPosition_userNestedInput
+  }
+
+  export type Position_userUncheckedUpdateWithoutMas_positionlevel1Input = {
+    id?: StringFieldUpdateOperationsInput | string
+    user_id?: NullableStringFieldUpdateOperationsInput | string | null
+    position2_id?: NullableStringFieldUpdateOperationsInput | string | null
+    position3_id?: NullableStringFieldUpdateOperationsInput | string | null
+    role?: NullableStringFieldUpdateOperationsInput | string | null
+    leader?: NullableStringFieldUpdateOperationsInput | string | null
+  }
+
+  export type mas_positionlevel3CreateManyMas_positionlevel2Input = {
+    id: string
+    name: string
+    CompanyId?: string | null
+  }
+
+  export type Position_userCreateManyMas_positionlevel2Input = {
+    id: string
+    user_id?: string | null
+    position1_id?: string | null
+    position3_id?: string | null
+    role?: string | null
+    leader?: string | null
+  }
+
+  export type mas_positionlevel3UpdateWithoutMas_positionlevel2Input = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    Company?: CompanyUpdateOneWithoutMas_positionlevel3NestedInput
+    Position_user?: Position_userUpdateManyWithoutMas_positionlevel3NestedInput
+  }
+
+  export type mas_positionlevel3UncheckedUpdateWithoutMas_positionlevel2Input = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    CompanyId?: NullableStringFieldUpdateOperationsInput | string | null
+    Position_user?: Position_userUncheckedUpdateManyWithoutMas_positionlevel3NestedInput
+  }
+
+  export type Position_userUpdateWithoutMas_positionlevel2Input = {
+    id?: StringFieldUpdateOperationsInput | string
+    role?: NullableStringFieldUpdateOperationsInput | string | null
+    leader?: NullableStringFieldUpdateOperationsInput | string | null
+    user?: UserUpdateOneWithoutPosition_userNestedInput
+    mas_positionlevel1?: mas_positionlevel1UpdateOneWithoutPosition_userNestedInput
+    mas_positionlevel3?: mas_positionlevel3UpdateOneWithoutPosition_userNestedInput
+  }
+
+  export type Position_userUncheckedUpdateWithoutMas_positionlevel2Input = {
+    id?: StringFieldUpdateOperationsInput | string
+    user_id?: NullableStringFieldUpdateOperationsInput | string | null
+    position1_id?: NullableStringFieldUpdateOperationsInput | string | null
+    position3_id?: NullableStringFieldUpdateOperationsInput | string | null
+    role?: NullableStringFieldUpdateOperationsInput | string | null
+    leader?: NullableStringFieldUpdateOperationsInput | string | null
+  }
+
+  export type Position_userCreateManyMas_positionlevel3Input = {
+    id: string
+    user_id?: string | null
+    position1_id?: string | null
+    position2_id?: string | null
+    role?: string | null
+    leader?: string | null
+  }
+
+  export type Position_userUpdateWithoutMas_positionlevel3Input = {
+    id?: StringFieldUpdateOperationsInput | string
+    role?: NullableStringFieldUpdateOperationsInput | string | null
+    leader?: NullableStringFieldUpdateOperationsInput | string | null
+    user?: UserUpdateOneWithoutPosition_userNestedInput
+    mas_positionlevel1?: mas_positionlevel1UpdateOneWithoutPosition_userNestedInput
+    mas_positionlevel2?: mas_positionlevel2UpdateOneWithoutPosition_userNestedInput
+  }
+
+  export type Position_userUncheckedUpdateWithoutMas_positionlevel3Input = {
+    id?: StringFieldUpdateOperationsInput | string
+    user_id?: NullableStringFieldUpdateOperationsInput | string | null
+    position1_id?: NullableStringFieldUpdateOperationsInput | string | null
+    position2_id?: NullableStringFieldUpdateOperationsInput | string | null
+    role?: NullableStringFieldUpdateOperationsInput | string | null
+    leader?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
 

@@ -34,6 +34,10 @@ model Company {
   ownerId                 String          @db.Uuid
   owner                   User            @relation(fields: [ownerId], references: [id])
   branch                  CompanyBranch[]
+  mas_positionlevel3      mas_positionlevel3[]
+  mas_positionlevel2      mas_positionlevel2[]
+  mas_positionlevel1      mas_positionlevel1[]
+  holiday_date            holiday_date[]
 }
 
 model CompanyBranch {
@@ -133,6 +137,8 @@ model User {
   companyBranch   CompanyBranch? @relation(fields: [companyBranchId], references: [id])
   companyBranchId String?        @db.Uuid
   Role_Company    Role_Company?  @relation(fields: [RoleCompanyID], references: [id])
+  Position_user  Position_user[]
+     
 }
 
 model Role {
@@ -174,8 +180,66 @@ model Amphoe {
 }
 
 
-model Posotion {
-  id         String   @unique @db.Uuid
-  detail     Json[]
+model mas_positionlevel1 {
+  id                  String   @unique @db.Uuid
+  name                String
+  mas_positionlevel2  mas_positionlevel2[]
+  Company             Company? @relation(fields: [CompanyId], references: [id])
+  CompanyId           String?  @db.Uuid
+  Position_user       Position_user[]
+
+
 }
+
+model mas_positionlevel2 {
+  id                  String   @unique @db.Uuid
+  name                String
+  positionlevel1_id   String?  @db.Uuid
+  mas_positionlevel1  mas_positionlevel1? @relation(fields: [positionlevel1_id], references: [id])
+  mas_positionlevel3  mas_positionlevel3[]
+  Company             Company? @relation(fields: [CompanyId], references: [id])
+  CompanyId           String?        @db.Uuid
+  position_user       Position_user[]
+}
+
+
+model mas_positionlevel3 {
+  id                  String   @unique @db.Uuid
+  name                String
+  positionlevel2_id   String?  @db.Uuid
+  mas_positionlevel2  mas_positionlevel2? @relation(fields: [positionlevel2_id], references: [id])
+  Company             Company? @relation(fields: [CompanyId], references: [id])
+  CompanyId           String?  @db.Uuid
+  Position_user       Position_user[]
+}
+
+model Position_user{
+  id                    String   @unique @db.Uuid
+  user_id               String?  @db.Uuid
+  position1_id          String?  @db.Uuid
+  position2_id          String?  @db.Uuid
+  position3_id          String?  @db.Uuid
+  role                  String? 
+  leader                String?  
+  user                  User? @relation(fields: [user_id], references: [id])
+  mas_positionlevel1    mas_positionlevel1? @relation(fields: [position1_id], references: [id])
+  mas_positionlevel2    mas_positionlevel2? @relation(fields: [position2_id], references: [id])
+  mas_positionlevel3    mas_positionlevel3? @relation(fields: [position3_id], references: [id])
+}
+
+
+model holiday_date {
+  id                String   @unique @db.Uuid
+  holiday_name      String?  
+  date              DateTime
+  Company           Company? @relation(fields: [CompanyId], references: [id])
+  CompanyId         String?  @db.Uuid
+}
+
+
+
+
+
+
+
 
