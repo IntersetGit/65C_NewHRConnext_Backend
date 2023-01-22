@@ -1,5 +1,3 @@
-import { string } from 'zod';
-
 import { composeResolvers } from '@graphql-tools/resolvers-composition';
 import { authenticate } from '../middleware/authenticatetoken';
 import { Resolvers } from '../generated/graphql';
