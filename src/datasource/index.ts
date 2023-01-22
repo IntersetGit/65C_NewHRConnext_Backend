@@ -6,6 +6,7 @@ import { masterResolvers, masterTypedef } from './master.gql';
 import { profileTypedef } from './profile.gql';
 import { providerResolvers, providerTypedef } from './provider.gql';
 import { roleTypedef } from './role.gql';
+import { positionTypedef,positionResolvers } from './position.gql';
 import { userTypedef, userResolvers } from './user.gql';
 import {Role_CompanyResolvers,roleCompanyTypedef} from './rolecompany.gql'
 
@@ -21,6 +22,7 @@ export const typeDefs = [
   masterTypedef,
   companyTypedef,
   providerTypedef,
+  positionTypedef,
   userTypedef,
   jsonTypedef,
 ];
@@ -35,6 +37,7 @@ export const resolvers = merge(
   providerResolvers,
   userResolvers,
   Role_CompanyResolvers,
+  positionResolvers,
   companyResolvers,
   josnResolvers,
 );
