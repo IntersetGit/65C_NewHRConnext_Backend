@@ -12,4 +12,3 @@ export const comparePassword = async (password: string, hash: string) => {
     return result;
 }
 
-console.log(comparePassword)
