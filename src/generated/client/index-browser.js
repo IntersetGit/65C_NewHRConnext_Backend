@@ -13,12 +13,12 @@ const Prisma = {}
 exports.Prisma = Prisma
 
 /**
- * Prisma Client JS version: 4.9.0
- * Query Engine version: ceb5c99003b99c9ee2c1d2e618e359c14aef2ea5
+ * Prisma Client JS version: 4.7.1
+ * Query Engine version: 272861e07ab64f234d3ffc4094e32bd61775599c
  */
 Prisma.prismaVersion = {
-  client: "4.9.0",
-  engine: "ceb5c99003b99c9ee2c1d2e618e359c14aef2ea5"
+  client: "4.7.1",
+  engine: "272861e07ab64f234d3ffc4094e32bd61775599c"
 }
 
 Prisma.PrismaClientKnownRequestError = () => {
@@ -167,23 +167,36 @@ exports.Prisma.JsonNullValueInput = makeEnum({
   JsonNull: Prisma.JsonNull
 });
 
+exports.Prisma.Mas_positionScalarFieldEnum = makeEnum({
+  id: 'id',
+  name: 'name',
+  level: 'level',
+  CompanyId: 'CompanyId'
+});
+
 exports.Prisma.Mas_positionlevel1ScalarFieldEnum = makeEnum({
   id: 'id',
   name: 'name',
+  level: 'level',
+  mas_position_Id: 'mas_position_Id',
   CompanyId: 'CompanyId'
 });
 
 exports.Prisma.Mas_positionlevel2ScalarFieldEnum = makeEnum({
   id: 'id',
   name: 'name',
+  level: 'level',
   positionlevel1_id: 'positionlevel1_id',
+  mas_position_Id: 'mas_position_Id',
   CompanyId: 'CompanyId'
 });
 
 exports.Prisma.Mas_positionlevel3ScalarFieldEnum = makeEnum({
   id: 'id',
   name: 'name',
+  level: 'level',
   positionlevel2_id: 'positionlevel2_id',
+  mas_position_Id: 'mas_position_Id',
   CompanyId: 'CompanyId'
 });
 
@@ -304,6 +317,7 @@ exports.Prisma.ModelName = makeEnum({
   Province: 'Province',
   District: 'District',
   Amphoe: 'Amphoe',
+  mas_position: 'mas_position',
   mas_positionlevel1: 'mas_positionlevel1',
   mas_positionlevel2: 'mas_positionlevel2',
   mas_positionlevel3: 'mas_positionlevel3',
