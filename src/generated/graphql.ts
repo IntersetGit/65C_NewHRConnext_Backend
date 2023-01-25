@@ -687,6 +687,7 @@ export type Mas_Positionlevel2 = {
   level?: Maybe<Scalars['Int']>;
   mas_positionlevel3?: Maybe<Array<Maybe<Mas_Positionlevel3>>>;
   name?: Maybe<Scalars['String']>;
+  positionlevel1_id?: Maybe<Scalars['String']>;
   type?: Maybe<Scalars['String']>;
 };
 
@@ -697,6 +698,7 @@ export type Mas_Positionlevel3 = {
   id: Scalars['ID'];
   level?: Maybe<Scalars['Int']>;
   name?: Maybe<Scalars['String']>;
+  positionlevel2_id?: Maybe<Scalars['String']>;
   type?: Maybe<Scalars['String']>;
 };
 
@@ -1346,6 +1348,7 @@ export type Mas_Positionlevel2Resolvers<ContextType = ApolloContext, ParentType 
   level?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
   mas_positionlevel3?: Resolver<Maybe<Array<Maybe<ResolversTypes['mas_positionlevel3']>>>, ParentType, ContextType>;
   name?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  positionlevel1_id?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   type?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 }>;
@@ -1356,6 +1359,7 @@ export type Mas_Positionlevel3Resolvers<ContextType = ApolloContext, ParentType 
   id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
   level?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
   name?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  positionlevel2_id?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   type?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 }>;
