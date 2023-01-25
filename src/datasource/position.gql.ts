@@ -8,17 +8,10 @@ import { v4 } from 'uuid';
 
 export const positionTypedef = gql`
 
-
-input createdandupdate {
-  name: String
-  level: Int 
-  masPosition1: [masPosition1 ]   
-}
-
-
-input masPosition1{
-  name: String
-  level: Int 
+input createdandupdate{
+  name_Position1: String
+  level_Position1: Int 
+  code_position1: String
   masPosition2: [masPosition2]    
 }
 
@@ -40,7 +33,6 @@ type mas_position{
   name: String
   level: Int     
   CompanyId: String
-  mas_positionlevel1: [mas_positionlevel1]
 }
 
 type Position_user {
@@ -97,22 +89,23 @@ type Query {
 `;
 
 export const positionResolvers: Resolvers = {
-    Query: {
-      async getMasPositon(p, args, ctx) {
-        const result = await ctx.prisma.mas_position.findMany({
-          include:{mas_positionlevel1: {include:{ mas_positionlevel2: { include: { mas_positionlevel3: true } }}}},
-          where: {
-             CompanyId : ctx.currentUser?.compayId
-            },
-          orderBy: {
-            level: "asc"
-          }
-        });
-        return result;
-      },
-    },
-  };
+  // Query: {
+  //   async getMasPositon(p, args, ctx) {
+  //     const result = await ctx.prisma.mas_position.findMany({
+  //       include: { mas_positionlevel1: { include: { mas_positionlevel2: { include: { mas_positionlevel3: true } } } } },
+  //       where: {
+  //         CompanyId: ctx.currentUser?.compayId
+  //       },
+  //       orderBy: {
+  //         level: "asc"
+  //       }
+  //     });
+  //     return result;
+  //   },
+  // },
 
+
+}
 
 
 
