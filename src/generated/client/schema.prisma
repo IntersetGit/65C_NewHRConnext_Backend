@@ -38,6 +38,7 @@ model Company {
   mas_positionlevel2      mas_positionlevel2[]
   mas_positionlevel1      mas_positionlevel1[]
   holiday_date            holiday_date[]
+  mas_position            mas_position[]
 }
 
 model CompanyBranch {
@@ -179,10 +180,23 @@ model Amphoe {
   district   District @relation(fields: [districtId], references: [id])
 }
 
+model mas_position {
+  id                  String   @unique @db.Uuid
+  name                String
+  level               Int      @db.SmallInt
+  mas_positionlevel1  mas_positionlevel1[]
+  mas_positionlevel2  mas_positionlevel2[]
+  mas_positionlevel3  mas_positionlevel3[]
+  Company             Company? @relation(fields: [CompanyId], references: [id])
+  CompanyId           String?  @db.Uuid
+}
 
 model mas_positionlevel1 {
   id                  String   @unique @db.Uuid
   name                String
+  level               Int      @db.SmallInt
+  mas_position_Id     String   @db.Uuid
+  mas_position        mas_position? @relation(fields: [mas_position_Id], references: [id])
   mas_positionlevel2  mas_positionlevel2[]
   Company             Company? @relation(fields: [CompanyId], references: [id])
   CompanyId           String?  @db.Uuid
@@ -192,13 +206,16 @@ model mas_positionlevel1 {
 }
 
 model mas_positionlevel2 {
-  id                  String   @unique @db.Uuid
+  id                  String       @unique @db.Uuid
   name                String
-  positionlevel1_id   String?  @db.Uuid
+  level               Int          @db.SmallInt
+  positionlevel1_id   String?      @db.Uuid
   mas_positionlevel1  mas_positionlevel1? @relation(fields: [positionlevel1_id], references: [id])
   mas_positionlevel3  mas_positionlevel3[]
   Company             Company? @relation(fields: [CompanyId], references: [id])
-  CompanyId           String?        @db.Uuid
+  mas_position_Id     String        @db.Uuid
+  mas_position        mas_position? @relation(fields: [mas_position_Id], references: [id])
+  CompanyId           String?       @db.Uuid
   position_user       Position_user[]
 }
 
@@ -206,8 +223,11 @@ model mas_positionlevel2 {
 model mas_positionlevel3 {
   id                  String   @unique @db.Uuid
   name                String
+  level               Int      @db.SmallInt
   positionlevel2_id   String?  @db.Uuid
   mas_positionlevel2  mas_positionlevel2? @relation(fields: [positionlevel2_id], references: [id])
+  mas_position_Id     String   @db.Uuid
+  mas_position        mas_position? @relation(fields: [mas_position_Id], references: [id])
   Company             Company? @relation(fields: [CompanyId], references: [id])
   CompanyId           String?  @db.Uuid
   Position_user       Position_user[]
