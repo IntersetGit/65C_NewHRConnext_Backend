@@ -151,6 +151,12 @@ exports.Prisma.Holiday_dateScalarFieldEnum = makeEnum({
   CompanyId: 'CompanyId'
 });
 
+exports.Prisma.Holiday_yearScalarFieldEnum = makeEnum({
+  id: 'id',
+  date: 'date',
+  holiday_name: 'holiday_name'
+});
+
 exports.Prisma.JsonNullValueFilter = makeEnum({
   DbNull: Prisma.DbNull,
   JsonNull: Prisma.JsonNull,
@@ -302,7 +308,8 @@ exports.Prisma.ModelName = makeEnum({
   mas_positionlevel2: 'mas_positionlevel2',
   mas_positionlevel3: 'mas_positionlevel3',
   Position_user: 'Position_user',
-  holiday_date: 'holiday_date'
+  holiday_date: 'holiday_date',
+  holiday_year: 'holiday_year'
 });
 
 /**

@@ -239,6 +239,16 @@ export type holiday_date = {
   CompanyId: string | null
 }
 
+/**
+ * Model holiday_year
+ * 
+ */
+export type holiday_year = {
+  id: string
+  date: Date
+  holiday_name: string | null
+}
+
 
 /**
  * ##  Prisma Client ʲˢ
@@ -496,6 +506,16 @@ export class PrismaClient<
     * ```
     */
   get holiday_date(): Prisma.holiday_dateDelegate<GlobalReject>;
+
+  /**
+   * `prisma.holiday_year`: Exposes CRUD operations for the **holiday_year** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more Holiday_years
+    * const holiday_years = await prisma.holiday_year.findMany()
+    * ```
+    */
+  get holiday_year(): Prisma.holiday_yearDelegate<GlobalReject>;
 }
 
 export namespace Prisma {
@@ -985,7 +1005,8 @@ export namespace Prisma {
     mas_positionlevel2: 'mas_positionlevel2',
     mas_positionlevel3: 'mas_positionlevel3',
     Position_user: 'Position_user',
-    holiday_date: 'holiday_date'
+    holiday_date: 'holiday_date',
+    holiday_year: 'holiday_year'
   };
 
   export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -15761,6 +15782,874 @@ export namespace Prisma {
 
 
   /**
+   * Model holiday_year
+   */
+
+
+  export type AggregateHoliday_year = {
+    _count: Holiday_yearCountAggregateOutputType | null
+    _min: Holiday_yearMinAggregateOutputType | null
+    _max: Holiday_yearMaxAggregateOutputType | null
+  }
+
+  export type Holiday_yearMinAggregateOutputType = {
+    id: string | null
+    date: Date | null
+    holiday_name: string | null
+  }
+
+  export type Holiday_yearMaxAggregateOutputType = {
+    id: string | null
+    date: Date | null
+    holiday_name: string | null
+  }
+
+  export type Holiday_yearCountAggregateOutputType = {
+    id: number
+    date: number
+    holiday_name: number
+    _all: number
+  }
+
+
+  export type Holiday_yearMinAggregateInputType = {
+    id?: true
+    date?: true
+    holiday_name?: true
+  }
+
+  export type Holiday_yearMaxAggregateInputType = {
+    id?: true
+    date?: true
+    holiday_name?: true
+  }
+
+  export type Holiday_yearCountAggregateInputType = {
+    id?: true
+    date?: true
+    holiday_name?: true
+    _all?: true
+  }
+
+  export type Holiday_yearAggregateArgs = {
+    /**
+     * Filter which holiday_year to aggregate.
+     */
+    where?: holiday_yearWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of holiday_years to fetch.
+     */
+    orderBy?: Enumerable<holiday_yearOrderByWithRelationInput>
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: holiday_yearWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` holiday_years from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` holiday_years.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned holiday_years
+    **/
+    _count?: true | Holiday_yearCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: Holiday_yearMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: Holiday_yearMaxAggregateInputType
+  }
+
+  export type GetHoliday_yearAggregateType<T extends Holiday_yearAggregateArgs> = {
+        [P in keyof T & keyof AggregateHoliday_year]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateHoliday_year[P]>
+      : GetScalarType<T[P], AggregateHoliday_year[P]>
+  }
+
+
+
+
+  export type Holiday_yearGroupByArgs = {
+    where?: holiday_yearWhereInput
+    orderBy?: Enumerable<holiday_yearOrderByWithAggregationInput>
+    by: Holiday_yearScalarFieldEnum[]
+    having?: holiday_yearScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: Holiday_yearCountAggregateInputType | true
+    _min?: Holiday_yearMinAggregateInputType
+    _max?: Holiday_yearMaxAggregateInputType
+  }
+
+
+  export type Holiday_yearGroupByOutputType = {
+    id: string
+    date: Date
+    holiday_name: string | null
+    _count: Holiday_yearCountAggregateOutputType | null
+    _min: Holiday_yearMinAggregateOutputType | null
+    _max: Holiday_yearMaxAggregateOutputType | null
+  }
+
+  type GetHoliday_yearGroupByPayload<T extends Holiday_yearGroupByArgs> = PrismaPromise<
+    Array<
+      PickArray<Holiday_yearGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof Holiday_yearGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], Holiday_yearGroupByOutputType[P]>
+            : GetScalarType<T[P], Holiday_yearGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type holiday_yearSelect = {
+    id?: boolean
+    date?: boolean
+    holiday_name?: boolean
+  }
+
+
+  export type holiday_yearGetPayload<S extends boolean | null | undefined | holiday_yearArgs> =
+    S extends { select: any, include: any } ? 'Please either choose `select` or `include`' :
+    S extends true ? holiday_year :
+    S extends undefined ? never :
+    S extends { include: any } & (holiday_yearArgs | holiday_yearFindManyArgs)
+    ? holiday_year 
+    : S extends { select: any } & (holiday_yearArgs | holiday_yearFindManyArgs)
+      ? {
+    [P in TruthyKeys<S['select']>]:
+    P extends keyof holiday_year ? holiday_year[P] : never
+  } 
+      : holiday_year
+
+
+  type holiday_yearCountArgs = 
+    Omit<holiday_yearFindManyArgs, 'select' | 'include'> & {
+      select?: Holiday_yearCountAggregateInputType | true
+    }
+
+  export interface holiday_yearDelegate<GlobalRejectSettings extends Prisma.RejectOnNotFound | Prisma.RejectPerOperation | false | undefined> {
+
+    /**
+     * Find zero or one Holiday_year that matches the filter.
+     * @param {holiday_yearFindUniqueArgs} args - Arguments to find a Holiday_year
+     * @example
+     * // Get one Holiday_year
+     * const holiday_year = await prisma.holiday_year.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+    **/
+    findUnique<T extends holiday_yearFindUniqueArgs,  LocalRejectSettings = T["rejectOnNotFound"] extends RejectOnNotFound ? T['rejectOnNotFound'] : undefined>(
+      args: SelectSubset<T, holiday_yearFindUniqueArgs>
+    ): HasReject<GlobalRejectSettings, LocalRejectSettings, 'findUnique', 'holiday_year'> extends True ? Prisma__holiday_yearClient<holiday_yearGetPayload<T>> : Prisma__holiday_yearClient<holiday_yearGetPayload<T> | null, null>
+
+    /**
+     * Find one Holiday_year that matches the filter or throw an error  with `error.code='P2025'` 
+     *     if no matches were found.
+     * @param {holiday_yearFindUniqueOrThrowArgs} args - Arguments to find a Holiday_year
+     * @example
+     * // Get one Holiday_year
+     * const holiday_year = await prisma.holiday_year.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+    **/
+    findUniqueOrThrow<T extends holiday_yearFindUniqueOrThrowArgs>(
+      args?: SelectSubset<T, holiday_yearFindUniqueOrThrowArgs>
+    ): Prisma__holiday_yearClient<holiday_yearGetPayload<T>>
+
+    /**
+     * Find the first Holiday_year that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {holiday_yearFindFirstArgs} args - Arguments to find a Holiday_year
+     * @example
+     * // Get one Holiday_year
+     * const holiday_year = await prisma.holiday_year.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+    **/
+    findFirst<T extends holiday_yearFindFirstArgs,  LocalRejectSettings = T["rejectOnNotFound"] extends RejectOnNotFound ? T['rejectOnNotFound'] : undefined>(
+      args?: SelectSubset<T, holiday_yearFindFirstArgs>
+    ): HasReject<GlobalRejectSettings, LocalRejectSettings, 'findFirst', 'holiday_year'> extends True ? Prisma__holiday_yearClient<holiday_yearGetPayload<T>> : Prisma__holiday_yearClient<holiday_yearGetPayload<T> | null, null>
+
+    /**
+     * Find the first Holiday_year that matches the filter or
+     * throw `NotFoundError` if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {holiday_yearFindFirstOrThrowArgs} args - Arguments to find a Holiday_year
+     * @example
+     * // Get one Holiday_year
+     * const holiday_year = await prisma.holiday_year.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+    **/
+    findFirstOrThrow<T extends holiday_yearFindFirstOrThrowArgs>(
+      args?: SelectSubset<T, holiday_yearFindFirstOrThrowArgs>
+    ): Prisma__holiday_yearClient<holiday_yearGetPayload<T>>
+
+    /**
+     * Find zero or more Holiday_years that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {holiday_yearFindManyArgs=} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all Holiday_years
+     * const holiday_years = await prisma.holiday_year.findMany()
+     * 
+     * // Get first 10 Holiday_years
+     * const holiday_years = await prisma.holiday_year.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const holiday_yearWithIdOnly = await prisma.holiday_year.findMany({ select: { id: true } })
+     * 
+    **/
+    findMany<T extends holiday_yearFindManyArgs>(
+      args?: SelectSubset<T, holiday_yearFindManyArgs>
+    ): PrismaPromise<Array<holiday_yearGetPayload<T>>>
+
+    /**
+     * Create a Holiday_year.
+     * @param {holiday_yearCreateArgs} args - Arguments to create a Holiday_year.
+     * @example
+     * // Create one Holiday_year
+     * const Holiday_year = await prisma.holiday_year.create({
+     *   data: {
+     *     // ... data to create a Holiday_year
+     *   }
+     * })
+     * 
+    **/
+    create<T extends holiday_yearCreateArgs>(
+      args: SelectSubset<T, holiday_yearCreateArgs>
+    ): Prisma__holiday_yearClient<holiday_yearGetPayload<T>>
+
+    /**
+     * Create many Holiday_years.
+     *     @param {holiday_yearCreateManyArgs} args - Arguments to create many Holiday_years.
+     *     @example
+     *     // Create many Holiday_years
+     *     const holiday_year = await prisma.holiday_year.createMany({
+     *       data: {
+     *         // ... provide data here
+     *       }
+     *     })
+     *     
+    **/
+    createMany<T extends holiday_yearCreateManyArgs>(
+      args?: SelectSubset<T, holiday_yearCreateManyArgs>
+    ): PrismaPromise<BatchPayload>
+
+    /**
+     * Delete a Holiday_year.
+     * @param {holiday_yearDeleteArgs} args - Arguments to delete one Holiday_year.
+     * @example
+     * // Delete one Holiday_year
+     * const Holiday_year = await prisma.holiday_year.delete({
+     *   where: {
+     *     // ... filter to delete one Holiday_year
+     *   }
+     * })
+     * 
+    **/
+    delete<T extends holiday_yearDeleteArgs>(
+      args: SelectSubset<T, holiday_yearDeleteArgs>
+    ): Prisma__holiday_yearClient<holiday_yearGetPayload<T>>
+
+    /**
+     * Update one Holiday_year.
+     * @param {holiday_yearUpdateArgs} args - Arguments to update one Holiday_year.
+     * @example
+     * // Update one Holiday_year
+     * const holiday_year = await prisma.holiday_year.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+    **/
+    update<T extends holiday_yearUpdateArgs>(
+      args: SelectSubset<T, holiday_yearUpdateArgs>
+    ): Prisma__holiday_yearClient<holiday_yearGetPayload<T>>
+
+    /**
+     * Delete zero or more Holiday_years.
+     * @param {holiday_yearDeleteManyArgs} args - Arguments to filter Holiday_years to delete.
+     * @example
+     * // Delete a few Holiday_years
+     * const { count } = await prisma.holiday_year.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+    **/
+    deleteMany<T extends holiday_yearDeleteManyArgs>(
+      args?: SelectSubset<T, holiday_yearDeleteManyArgs>
+    ): PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Holiday_years.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {holiday_yearUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many Holiday_years
+     * const holiday_year = await prisma.holiday_year.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+    **/
+    updateMany<T extends holiday_yearUpdateManyArgs>(
+      args: SelectSubset<T, holiday_yearUpdateManyArgs>
+    ): PrismaPromise<BatchPayload>
+
+    /**
+     * Create or update one Holiday_year.
+     * @param {holiday_yearUpsertArgs} args - Arguments to update or create a Holiday_year.
+     * @example
+     * // Update or create a Holiday_year
+     * const holiday_year = await prisma.holiday_year.upsert({
+     *   create: {
+     *     // ... data to create a Holiday_year
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the Holiday_year we want to update
+     *   }
+     * })
+    **/
+    upsert<T extends holiday_yearUpsertArgs>(
+      args: SelectSubset<T, holiday_yearUpsertArgs>
+    ): Prisma__holiday_yearClient<holiday_yearGetPayload<T>>
+
+    /**
+     * Count the number of Holiday_years.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {holiday_yearCountArgs} args - Arguments to filter Holiday_years to count.
+     * @example
+     * // Count the number of Holiday_years
+     * const count = await prisma.holiday_year.count({
+     *   where: {
+     *     // ... the filter for the Holiday_years we want to count
+     *   }
+     * })
+    **/
+    count<T extends holiday_yearCountArgs>(
+      args?: Subset<T, holiday_yearCountArgs>,
+    ): PrismaPromise<
+      T extends _Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], Holiday_yearCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a Holiday_year.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {Holiday_yearAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends Holiday_yearAggregateArgs>(args: Subset<T, Holiday_yearAggregateArgs>): PrismaPromise<GetHoliday_yearAggregateType<T>>
+
+    /**
+     * Group by Holiday_year.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {Holiday_yearGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends Holiday_yearGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: Holiday_yearGroupByArgs['orderBy'] }
+        : { orderBy?: Holiday_yearGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends TupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, Holiday_yearGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetHoliday_yearGroupByPayload<T> : PrismaPromise<InputErrors>
+
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for holiday_year.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export class Prisma__holiday_yearClient<T, Null = never> implements PrismaPromise<T> {
+    [prisma]: true;
+    private readonly _dmmf;
+    private readonly _fetcher;
+    private readonly _queryType;
+    private readonly _rootField;
+    private readonly _clientMethod;
+    private readonly _args;
+    private readonly _dataPath;
+    private readonly _errorFormat;
+    private readonly _measurePerformance?;
+    private _isList;
+    private _callsite;
+    private _requestPromise?;
+    constructor(_dmmf: runtime.DMMFClass, _fetcher: PrismaClientFetcher, _queryType: 'query' | 'mutation', _rootField: string, _clientMethod: string, _args: any, _dataPath: string[], _errorFormat: ErrorFormat, _measurePerformance?: boolean | undefined, _isList?: boolean);
+    readonly [Symbol.toStringTag]: 'PrismaClientPromise';
+
+
+    private get _document();
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): Promise<TResult1 | TResult2>;
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): Promise<T | TResult>;
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): Promise<T>;
+  }
+
+
+
+  // Custom InputTypes
+
+  /**
+   * holiday_year base type for findUnique actions
+   */
+  export type holiday_yearFindUniqueArgsBase = {
+    /**
+     * Select specific fields to fetch from the holiday_year
+     */
+    select?: holiday_yearSelect | null
+    /**
+     * Filter, which holiday_year to fetch.
+     */
+    where: holiday_yearWhereUniqueInput
+  }
+
+  /**
+   * holiday_year findUnique
+   */
+  export interface holiday_yearFindUniqueArgs extends holiday_yearFindUniqueArgsBase {
+   /**
+    * Throw an Error if query returns no results
+    * @deprecated since 4.0.0: use `findUniqueOrThrow` method instead
+    */
+    rejectOnNotFound?: RejectOnNotFound
+  }
+      
+
+  /**
+   * holiday_year findUniqueOrThrow
+   */
+  export type holiday_yearFindUniqueOrThrowArgs = {
+    /**
+     * Select specific fields to fetch from the holiday_year
+     */
+    select?: holiday_yearSelect | null
+    /**
+     * Filter, which holiday_year to fetch.
+     */
+    where: holiday_yearWhereUniqueInput
+  }
+
+
+  /**
+   * holiday_year base type for findFirst actions
+   */
+  export type holiday_yearFindFirstArgsBase = {
+    /**
+     * Select specific fields to fetch from the holiday_year
+     */
+    select?: holiday_yearSelect | null
+    /**
+     * Filter, which holiday_year to fetch.
+     */
+    where?: holiday_yearWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of holiday_years to fetch.
+     */
+    orderBy?: Enumerable<holiday_yearOrderByWithRelationInput>
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for holiday_years.
+     */
+    cursor?: holiday_yearWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` holiday_years from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` holiday_years.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of holiday_years.
+     */
+    distinct?: Enumerable<Holiday_yearScalarFieldEnum>
+  }
+
+  /**
+   * holiday_year findFirst
+   */
+  export interface holiday_yearFindFirstArgs extends holiday_yearFindFirstArgsBase {
+   /**
+    * Throw an Error if query returns no results
+    * @deprecated since 4.0.0: use `findFirstOrThrow` method instead
+    */
+    rejectOnNotFound?: RejectOnNotFound
+  }
+      
+
+  /**
+   * holiday_year findFirstOrThrow
+   */
+  export type holiday_yearFindFirstOrThrowArgs = {
+    /**
+     * Select specific fields to fetch from the holiday_year
+     */
+    select?: holiday_yearSelect | null
+    /**
+     * Filter, which holiday_year to fetch.
+     */
+    where?: holiday_yearWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of holiday_years to fetch.
+     */
+    orderBy?: Enumerable<holiday_yearOrderByWithRelationInput>
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for holiday_years.
+     */
+    cursor?: holiday_yearWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` holiday_years from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` holiday_years.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of holiday_years.
+     */
+    distinct?: Enumerable<Holiday_yearScalarFieldEnum>
+  }
+
+
+  /**
+   * holiday_year findMany
+   */
+  export type holiday_yearFindManyArgs = {
+    /**
+     * Select specific fields to fetch from the holiday_year
+     */
+    select?: holiday_yearSelect | null
+    /**
+     * Filter, which holiday_years to fetch.
+     */
+    where?: holiday_yearWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of holiday_years to fetch.
+     */
+    orderBy?: Enumerable<holiday_yearOrderByWithRelationInput>
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing holiday_years.
+     */
+    cursor?: holiday_yearWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` holiday_years from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` holiday_years.
+     */
+    skip?: number
+    distinct?: Enumerable<Holiday_yearScalarFieldEnum>
+  }
+
+
+  /**
+   * holiday_year create
+   */
+  export type holiday_yearCreateArgs = {
+    /**
+     * Select specific fields to fetch from the holiday_year
+     */
+    select?: holiday_yearSelect | null
+    /**
+     * The data needed to create a holiday_year.
+     */
+    data: XOR<holiday_yearCreateInput, holiday_yearUncheckedCreateInput>
+  }
+
+
+  /**
+   * holiday_year createMany
+   */
+  export type holiday_yearCreateManyArgs = {
+    /**
+     * The data used to create many holiday_years.
+     */
+    data: Enumerable<holiday_yearCreateManyInput>
+    skipDuplicates?: boolean
+  }
+
+
+  /**
+   * holiday_year update
+   */
+  export type holiday_yearUpdateArgs = {
+    /**
+     * Select specific fields to fetch from the holiday_year
+     */
+    select?: holiday_yearSelect | null
+    /**
+     * The data needed to update a holiday_year.
+     */
+    data: XOR<holiday_yearUpdateInput, holiday_yearUncheckedUpdateInput>
+    /**
+     * Choose, which holiday_year to update.
+     */
+    where: holiday_yearWhereUniqueInput
+  }
+
+
+  /**
+   * holiday_year updateMany
+   */
+  export type holiday_yearUpdateManyArgs = {
+    /**
+     * The data used to update holiday_years.
+     */
+    data: XOR<holiday_yearUpdateManyMutationInput, holiday_yearUncheckedUpdateManyInput>
+    /**
+     * Filter which holiday_years to update
+     */
+    where?: holiday_yearWhereInput
+  }
+
+
+  /**
+   * holiday_year upsert
+   */
+  export type holiday_yearUpsertArgs = {
+    /**
+     * Select specific fields to fetch from the holiday_year
+     */
+    select?: holiday_yearSelect | null
+    /**
+     * The filter to search for the holiday_year to update in case it exists.
+     */
+    where: holiday_yearWhereUniqueInput
+    /**
+     * In case the holiday_year found by the `where` argument doesn't exist, create a new holiday_year with this data.
+     */
+    create: XOR<holiday_yearCreateInput, holiday_yearUncheckedCreateInput>
+    /**
+     * In case the holiday_year was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<holiday_yearUpdateInput, holiday_yearUncheckedUpdateInput>
+  }
+
+
+  /**
+   * holiday_year delete
+   */
+  export type holiday_yearDeleteArgs = {
+    /**
+     * Select specific fields to fetch from the holiday_year
+     */
+    select?: holiday_yearSelect | null
+    /**
+     * Filter which holiday_year to delete.
+     */
+    where: holiday_yearWhereUniqueInput
+  }
+
+
+  /**
+   * holiday_year deleteMany
+   */
+  export type holiday_yearDeleteManyArgs = {
+    /**
+     * Filter which holiday_years to delete
+     */
+    where?: holiday_yearWhereInput
+  }
+
+
+  /**
+   * holiday_year without action
+   */
+  export type holiday_yearArgs = {
+    /**
+     * Select specific fields to fetch from the holiday_year
+     */
+    select?: holiday_yearSelect | null
+  }
+
+
+
+  /**
    * Enums
    */
 
@@ -15842,6 +16731,15 @@ export namespace Prisma {
   };
 
   export type Holiday_dateScalarFieldEnum = (typeof Holiday_dateScalarFieldEnum)[keyof typeof Holiday_dateScalarFieldEnum]
+
+
+  export const Holiday_yearScalarFieldEnum: {
+    id: 'id',
+    date: 'date',
+    holiday_name: 'holiday_name'
+  };
+
+  export type Holiday_yearScalarFieldEnum = (typeof Holiday_yearScalarFieldEnum)[keyof typeof Holiday_yearScalarFieldEnum]
 
 
   export const JsonNullValueFilter: {
@@ -16975,6 +17873,43 @@ export namespace Prisma {
     holiday_name?: StringNullableWithAggregatesFilter | string | null
     date?: DateTimeWithAggregatesFilter | Date | string
     CompanyId?: UuidNullableWithAggregatesFilter | string | null
+  }
+
+  export type holiday_yearWhereInput = {
+    AND?: Enumerable<holiday_yearWhereInput>
+    OR?: Enumerable<holiday_yearWhereInput>
+    NOT?: Enumerable<holiday_yearWhereInput>
+    id?: UuidFilter | string
+    date?: DateTimeFilter | Date | string
+    holiday_name?: StringNullableFilter | string | null
+  }
+
+  export type holiday_yearOrderByWithRelationInput = {
+    id?: SortOrder
+    date?: SortOrder
+    holiday_name?: SortOrder
+  }
+
+  export type holiday_yearWhereUniqueInput = {
+    id?: string
+  }
+
+  export type holiday_yearOrderByWithAggregationInput = {
+    id?: SortOrder
+    date?: SortOrder
+    holiday_name?: SortOrder
+    _count?: holiday_yearCountOrderByAggregateInput
+    _max?: holiday_yearMaxOrderByAggregateInput
+    _min?: holiday_yearMinOrderByAggregateInput
+  }
+
+  export type holiday_yearScalarWhereWithAggregatesInput = {
+    AND?: Enumerable<holiday_yearScalarWhereWithAggregatesInput>
+    OR?: Enumerable<holiday_yearScalarWhereWithAggregatesInput>
+    NOT?: Enumerable<holiday_yearScalarWhereWithAggregatesInput>
+    id?: UuidWithAggregatesFilter | string
+    date?: DateTimeWithAggregatesFilter | Date | string
+    holiday_name?: StringNullableWithAggregatesFilter | string | null
   }
 
   export type CompanyCreateInput = {
@@ -18231,6 +19166,48 @@ export namespace Prisma {
     CompanyId?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
+  export type holiday_yearCreateInput = {
+    id: string
+    date: Date | string
+    holiday_name?: string | null
+  }
+
+  export type holiday_yearUncheckedCreateInput = {
+    id: string
+    date: Date | string
+    holiday_name?: string | null
+  }
+
+  export type holiday_yearUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    date?: DateTimeFieldUpdateOperationsInput | Date | string
+    holiday_name?: NullableStringFieldUpdateOperationsInput | string | null
+  }
+
+  export type holiday_yearUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    date?: DateTimeFieldUpdateOperationsInput | Date | string
+    holiday_name?: NullableStringFieldUpdateOperationsInput | string | null
+  }
+
+  export type holiday_yearCreateManyInput = {
+    id: string
+    date: Date | string
+    holiday_name?: string | null
+  }
+
+  export type holiday_yearUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    date?: DateTimeFieldUpdateOperationsInput | Date | string
+    holiday_name?: NullableStringFieldUpdateOperationsInput | string | null
+  }
+
+  export type holiday_yearUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    date?: DateTimeFieldUpdateOperationsInput | Date | string
+    holiday_name?: NullableStringFieldUpdateOperationsInput | string | null
+  }
+
   export type UuidFilter = {
     equals?: string
     in?: Enumerable<string>
@@ -19178,6 +20155,24 @@ export namespace Prisma {
     holiday_name?: SortOrder
     date?: SortOrder
     CompanyId?: SortOrder
+  }
+
+  export type holiday_yearCountOrderByAggregateInput = {
+    id?: SortOrder
+    date?: SortOrder
+    holiday_name?: SortOrder
+  }
+
+  export type holiday_yearMaxOrderByAggregateInput = {
+    id?: SortOrder
+    date?: SortOrder
+    holiday_name?: SortOrder
+  }
+
+  export type holiday_yearMinOrderByAggregateInput = {
+    id?: SortOrder
+    date?: SortOrder
+    holiday_name?: SortOrder
   }
 
   export type UserCreateNestedOneWithoutCompanyInput = {
