@@ -201,7 +201,8 @@ export type mas_positionlevel1 = {
   id: string
   name: string
   level: number
-  mas_position_Id: string
+  code: string
+  type: string
   CompanyId: string | null
 }
 
@@ -213,8 +214,9 @@ export type mas_positionlevel2 = {
   id: string
   name: string
   level: number
+  code: string
+  type: string
   positionlevel1_id: string | null
-  mas_position_Id: string
   CompanyId: string | null
 }
 
@@ -226,8 +228,9 @@ export type mas_positionlevel3 = {
   id: string
   name: string
   level: number
+  code: string
+  type: string
   positionlevel2_id: string | null
-  mas_position_Id: string
   CompanyId: string | null
 }
 
@@ -1510,53 +1513,6 @@ export namespace Prisma {
      * Select specific fields to fetch from the DistrictCountOutputType
      */
     select?: DistrictCountOutputTypeSelect | null
-  }
-
-
-
-  /**
-   * Count Type Mas_positionCountOutputType
-   */
-
-
-  export type Mas_positionCountOutputType = {
-    mas_positionlevel1: number
-    mas_positionlevel2: number
-    mas_positionlevel3: number
-  }
-
-  export type Mas_positionCountOutputTypeSelect = {
-    mas_positionlevel1?: boolean
-    mas_positionlevel2?: boolean
-    mas_positionlevel3?: boolean
-  }
-
-  export type Mas_positionCountOutputTypeGetPayload<S extends boolean | null | undefined | Mas_positionCountOutputTypeArgs> =
-    S extends { select: any, include: any } ? 'Please either choose `select` or `include`' :
-    S extends true ? Mas_positionCountOutputType :
-    S extends undefined ? never :
-    S extends { include: any } & (Mas_positionCountOutputTypeArgs)
-    ? Mas_positionCountOutputType 
-    : S extends { select: any } & (Mas_positionCountOutputTypeArgs)
-      ? {
-    [P in TruthyKeys<S['select']>]:
-    P extends keyof Mas_positionCountOutputType ? Mas_positionCountOutputType[P] : never
-  } 
-      : Mas_positionCountOutputType
-
-
-
-
-  // Custom InputTypes
-
-  /**
-   * Mas_positionCountOutputType without action
-   */
-  export type Mas_positionCountOutputTypeArgs = {
-    /**
-     * Select specific fields to fetch from the Mas_positionCountOutputType
-     */
-    select?: Mas_positionCountOutputTypeSelect | null
   }
 
 
@@ -11258,21 +11214,13 @@ export namespace Prisma {
     id?: boolean
     name?: boolean
     level?: boolean
-    mas_positionlevel1?: boolean | mas_position$mas_positionlevel1Args
-    mas_positionlevel2?: boolean | mas_position$mas_positionlevel2Args
-    mas_positionlevel3?: boolean | mas_position$mas_positionlevel3Args
     Company?: boolean | CompanyArgs
     CompanyId?: boolean
-    _count?: boolean | Mas_positionCountOutputTypeArgs
   }
 
 
   export type mas_positionInclude = {
-    mas_positionlevel1?: boolean | mas_position$mas_positionlevel1Args
-    mas_positionlevel2?: boolean | mas_position$mas_positionlevel2Args
-    mas_positionlevel3?: boolean | mas_position$mas_positionlevel3Args
     Company?: boolean | CompanyArgs
-    _count?: boolean | Mas_positionCountOutputTypeArgs
   }
 
   export type mas_positionGetPayload<S extends boolean | null | undefined | mas_positionArgs> =
@@ -11282,20 +11230,12 @@ export namespace Prisma {
     S extends { include: any } & (mas_positionArgs | mas_positionFindManyArgs)
     ? mas_position  & {
     [P in TruthyKeys<S['include']>]:
-        P extends 'mas_positionlevel1' ? Array < mas_positionlevel1GetPayload<S['include'][P]>>  :
-        P extends 'mas_positionlevel2' ? Array < mas_positionlevel2GetPayload<S['include'][P]>>  :
-        P extends 'mas_positionlevel3' ? Array < mas_positionlevel3GetPayload<S['include'][P]>>  :
-        P extends 'Company' ? CompanyGetPayload<S['include'][P]> | null :
-        P extends '_count' ? Mas_positionCountOutputTypeGetPayload<S['include'][P]> :  never
+        P extends 'Company' ? CompanyGetPayload<S['include'][P]> | null :  never
   } 
     : S extends { select: any } & (mas_positionArgs | mas_positionFindManyArgs)
       ? {
     [P in TruthyKeys<S['select']>]:
-        P extends 'mas_positionlevel1' ? Array < mas_positionlevel1GetPayload<S['select'][P]>>  :
-        P extends 'mas_positionlevel2' ? Array < mas_positionlevel2GetPayload<S['select'][P]>>  :
-        P extends 'mas_positionlevel3' ? Array < mas_positionlevel3GetPayload<S['select'][P]>>  :
-        P extends 'Company' ? CompanyGetPayload<S['select'][P]> | null :
-        P extends '_count' ? Mas_positionCountOutputTypeGetPayload<S['select'][P]> :  P extends keyof mas_position ? mas_position[P] : never
+        P extends 'Company' ? CompanyGetPayload<S['select'][P]> | null :  P extends keyof mas_position ? mas_position[P] : never
   } 
       : mas_position
 
@@ -11669,12 +11609,6 @@ export namespace Prisma {
     constructor(_dmmf: runtime.DMMFClass, _fetcher: PrismaClientFetcher, _queryType: 'query' | 'mutation', _rootField: string, _clientMethod: string, _args: any, _dataPath: string[], _errorFormat: ErrorFormat, _measurePerformance?: boolean | undefined, _isList?: boolean);
     readonly [Symbol.toStringTag]: 'PrismaClientPromise';
 
-    mas_positionlevel1<T extends mas_position$mas_positionlevel1Args= {}>(args?: Subset<T, mas_position$mas_positionlevel1Args>): PrismaPromise<Array<mas_positionlevel1GetPayload<T>>| Null>;
-
-    mas_positionlevel2<T extends mas_position$mas_positionlevel2Args= {}>(args?: Subset<T, mas_position$mas_positionlevel2Args>): PrismaPromise<Array<mas_positionlevel2GetPayload<T>>| Null>;
-
-    mas_positionlevel3<T extends mas_position$mas_positionlevel3Args= {}>(args?: Subset<T, mas_position$mas_positionlevel3Args>): PrismaPromise<Array<mas_positionlevel3GetPayload<T>>| Null>;
-
     Company<T extends CompanyArgs= {}>(args?: Subset<T, CompanyArgs>): Prisma__CompanyClient<CompanyGetPayload<T> | Null>;
 
     private get _document();
@@ -12033,69 +11967,6 @@ export namespace Prisma {
 
 
   /**
-   * mas_position.mas_positionlevel1
-   */
-  export type mas_position$mas_positionlevel1Args = {
-    /**
-     * Select specific fields to fetch from the mas_positionlevel1
-     */
-    select?: mas_positionlevel1Select | null
-    /**
-     * Choose, which related nodes to fetch as well.
-     */
-    include?: mas_positionlevel1Include | null
-    where?: mas_positionlevel1WhereInput
-    orderBy?: Enumerable<mas_positionlevel1OrderByWithRelationInput>
-    cursor?: mas_positionlevel1WhereUniqueInput
-    take?: number
-    skip?: number
-    distinct?: Enumerable<Mas_positionlevel1ScalarFieldEnum>
-  }
-
-
-  /**
-   * mas_position.mas_positionlevel2
-   */
-  export type mas_position$mas_positionlevel2Args = {
-    /**
-     * Select specific fields to fetch from the mas_positionlevel2
-     */
-    select?: mas_positionlevel2Select | null
-    /**
-     * Choose, which related nodes to fetch as well.
-     */
-    include?: mas_positionlevel2Include | null
-    where?: mas_positionlevel2WhereInput
-    orderBy?: Enumerable<mas_positionlevel2OrderByWithRelationInput>
-    cursor?: mas_positionlevel2WhereUniqueInput
-    take?: number
-    skip?: number
-    distinct?: Enumerable<Mas_positionlevel2ScalarFieldEnum>
-  }
-
-
-  /**
-   * mas_position.mas_positionlevel3
-   */
-  export type mas_position$mas_positionlevel3Args = {
-    /**
-     * Select specific fields to fetch from the mas_positionlevel3
-     */
-    select?: mas_positionlevel3Select | null
-    /**
-     * Choose, which related nodes to fetch as well.
-     */
-    include?: mas_positionlevel3Include | null
-    where?: mas_positionlevel3WhereInput
-    orderBy?: Enumerable<mas_positionlevel3OrderByWithRelationInput>
-    cursor?: mas_positionlevel3WhereUniqueInput
-    take?: number
-    skip?: number
-    distinct?: Enumerable<Mas_positionlevel3ScalarFieldEnum>
-  }
-
-
-  /**
    * mas_position without action
    */
   export type mas_positionArgs = {
@@ -12136,7 +12007,8 @@ export namespace Prisma {
     id: string | null
     name: string | null
     level: number | null
-    mas_position_Id: string | null
+    code: string | null
+    type: string | null
     CompanyId: string | null
   }
 
@@ -12144,7 +12016,8 @@ export namespace Prisma {
     id: string | null
     name: string | null
     level: number | null
-    mas_position_Id: string | null
+    code: string | null
+    type: string | null
     CompanyId: string | null
   }
 
@@ -12152,7 +12025,8 @@ export namespace Prisma {
     id: number
     name: number
     level: number
-    mas_position_Id: number
+    code: number
+    type: number
     CompanyId: number
     _all: number
   }
@@ -12170,7 +12044,8 @@ export namespace Prisma {
     id?: true
     name?: true
     level?: true
-    mas_position_Id?: true
+    code?: true
+    type?: true
     CompanyId?: true
   }
 
@@ -12178,7 +12053,8 @@ export namespace Prisma {
     id?: true
     name?: true
     level?: true
-    mas_position_Id?: true
+    code?: true
+    type?: true
     CompanyId?: true
   }
 
@@ -12186,7 +12062,8 @@ export namespace Prisma {
     id?: true
     name?: true
     level?: true
-    mas_position_Id?: true
+    code?: true
+    type?: true
     CompanyId?: true
     _all?: true
   }
@@ -12282,7 +12159,8 @@ export namespace Prisma {
     id: string
     name: string
     level: number
-    mas_position_Id: string
+    code: string
+    type: string
     CompanyId: string | null
     _count: Mas_positionlevel1CountAggregateOutputType | null
     _avg: Mas_positionlevel1AvgAggregateOutputType | null
@@ -12309,8 +12187,8 @@ export namespace Prisma {
     id?: boolean
     name?: boolean
     level?: boolean
-    mas_position_Id?: boolean
-    mas_position?: boolean | mas_positionArgs
+    code?: boolean
+    type?: boolean
     mas_positionlevel2?: boolean | mas_positionlevel1$mas_positionlevel2Args
     Company?: boolean | CompanyArgs
     CompanyId?: boolean
@@ -12320,7 +12198,6 @@ export namespace Prisma {
 
 
   export type mas_positionlevel1Include = {
-    mas_position?: boolean | mas_positionArgs
     mas_positionlevel2?: boolean | mas_positionlevel1$mas_positionlevel2Args
     Company?: boolean | CompanyArgs
     Position_user?: boolean | mas_positionlevel1$Position_userArgs
@@ -12334,7 +12211,6 @@ export namespace Prisma {
     S extends { include: any } & (mas_positionlevel1Args | mas_positionlevel1FindManyArgs)
     ? mas_positionlevel1  & {
     [P in TruthyKeys<S['include']>]:
-        P extends 'mas_position' ? mas_positionGetPayload<S['include'][P]> | null :
         P extends 'mas_positionlevel2' ? Array < mas_positionlevel2GetPayload<S['include'][P]>>  :
         P extends 'Company' ? CompanyGetPayload<S['include'][P]> | null :
         P extends 'Position_user' ? Array < Position_userGetPayload<S['include'][P]>>  :
@@ -12343,7 +12219,6 @@ export namespace Prisma {
     : S extends { select: any } & (mas_positionlevel1Args | mas_positionlevel1FindManyArgs)
       ? {
     [P in TruthyKeys<S['select']>]:
-        P extends 'mas_position' ? mas_positionGetPayload<S['select'][P]> | null :
         P extends 'mas_positionlevel2' ? Array < mas_positionlevel2GetPayload<S['select'][P]>>  :
         P extends 'Company' ? CompanyGetPayload<S['select'][P]> | null :
         P extends 'Position_user' ? Array < Position_userGetPayload<S['select'][P]>>  :
@@ -12720,8 +12595,6 @@ export namespace Prisma {
     private _requestPromise?;
     constructor(_dmmf: runtime.DMMFClass, _fetcher: PrismaClientFetcher, _queryType: 'query' | 'mutation', _rootField: string, _clientMethod: string, _args: any, _dataPath: string[], _errorFormat: ErrorFormat, _measurePerformance?: boolean | undefined, _isList?: boolean);
     readonly [Symbol.toStringTag]: 'PrismaClientPromise';
-
-    mas_position<T extends mas_positionArgs= {}>(args?: Subset<T, mas_positionArgs>): Prisma__mas_positionClient<mas_positionGetPayload<T> | Null>;
 
     mas_positionlevel2<T extends mas_positionlevel1$mas_positionlevel2Args= {}>(args?: Subset<T, mas_positionlevel1$mas_positionlevel2Args>): PrismaPromise<Array<mas_positionlevel2GetPayload<T>>| Null>;
 
@@ -13167,8 +13040,9 @@ export namespace Prisma {
     id: string | null
     name: string | null
     level: number | null
+    code: string | null
+    type: string | null
     positionlevel1_id: string | null
-    mas_position_Id: string | null
     CompanyId: string | null
   }
 
@@ -13176,8 +13050,9 @@ export namespace Prisma {
     id: string | null
     name: string | null
     level: number | null
+    code: string | null
+    type: string | null
     positionlevel1_id: string | null
-    mas_position_Id: string | null
     CompanyId: string | null
   }
 
@@ -13185,8 +13060,9 @@ export namespace Prisma {
     id: number
     name: number
     level: number
+    code: number
+    type: number
     positionlevel1_id: number
-    mas_position_Id: number
     CompanyId: number
     _all: number
   }
@@ -13204,8 +13080,9 @@ export namespace Prisma {
     id?: true
     name?: true
     level?: true
+    code?: true
+    type?: true
     positionlevel1_id?: true
-    mas_position_Id?: true
     CompanyId?: true
   }
 
@@ -13213,8 +13090,9 @@ export namespace Prisma {
     id?: true
     name?: true
     level?: true
+    code?: true
+    type?: true
     positionlevel1_id?: true
-    mas_position_Id?: true
     CompanyId?: true
   }
 
@@ -13222,8 +13100,9 @@ export namespace Prisma {
     id?: true
     name?: true
     level?: true
+    code?: true
+    type?: true
     positionlevel1_id?: true
-    mas_position_Id?: true
     CompanyId?: true
     _all?: true
   }
@@ -13319,8 +13198,9 @@ export namespace Prisma {
     id: string
     name: string
     level: number
+    code: string
+    type: string
     positionlevel1_id: string | null
-    mas_position_Id: string
     CompanyId: string | null
     _count: Mas_positionlevel2CountAggregateOutputType | null
     _avg: Mas_positionlevel2AvgAggregateOutputType | null
@@ -13347,12 +13227,12 @@ export namespace Prisma {
     id?: boolean
     name?: boolean
     level?: boolean
+    code?: boolean
+    type?: boolean
     positionlevel1_id?: boolean
     mas_positionlevel1?: boolean | mas_positionlevel1Args
     mas_positionlevel3?: boolean | mas_positionlevel2$mas_positionlevel3Args
     Company?: boolean | CompanyArgs
-    mas_position_Id?: boolean
-    mas_position?: boolean | mas_positionArgs
     CompanyId?: boolean
     position_user?: boolean | mas_positionlevel2$position_userArgs
     _count?: boolean | Mas_positionlevel2CountOutputTypeArgs
@@ -13363,7 +13243,6 @@ export namespace Prisma {
     mas_positionlevel1?: boolean | mas_positionlevel1Args
     mas_positionlevel3?: boolean | mas_positionlevel2$mas_positionlevel3Args
     Company?: boolean | CompanyArgs
-    mas_position?: boolean | mas_positionArgs
     position_user?: boolean | mas_positionlevel2$position_userArgs
     _count?: boolean | Mas_positionlevel2CountOutputTypeArgs
   }
@@ -13378,7 +13257,6 @@ export namespace Prisma {
         P extends 'mas_positionlevel1' ? mas_positionlevel1GetPayload<S['include'][P]> | null :
         P extends 'mas_positionlevel3' ? Array < mas_positionlevel3GetPayload<S['include'][P]>>  :
         P extends 'Company' ? CompanyGetPayload<S['include'][P]> | null :
-        P extends 'mas_position' ? mas_positionGetPayload<S['include'][P]> | null :
         P extends 'position_user' ? Array < Position_userGetPayload<S['include'][P]>>  :
         P extends '_count' ? Mas_positionlevel2CountOutputTypeGetPayload<S['include'][P]> :  never
   } 
@@ -13388,7 +13266,6 @@ export namespace Prisma {
         P extends 'mas_positionlevel1' ? mas_positionlevel1GetPayload<S['select'][P]> | null :
         P extends 'mas_positionlevel3' ? Array < mas_positionlevel3GetPayload<S['select'][P]>>  :
         P extends 'Company' ? CompanyGetPayload<S['select'][P]> | null :
-        P extends 'mas_position' ? mas_positionGetPayload<S['select'][P]> | null :
         P extends 'position_user' ? Array < Position_userGetPayload<S['select'][P]>>  :
         P extends '_count' ? Mas_positionlevel2CountOutputTypeGetPayload<S['select'][P]> :  P extends keyof mas_positionlevel2 ? mas_positionlevel2[P] : never
   } 
@@ -13769,8 +13646,6 @@ export namespace Prisma {
     mas_positionlevel3<T extends mas_positionlevel2$mas_positionlevel3Args= {}>(args?: Subset<T, mas_positionlevel2$mas_positionlevel3Args>): PrismaPromise<Array<mas_positionlevel3GetPayload<T>>| Null>;
 
     Company<T extends CompanyArgs= {}>(args?: Subset<T, CompanyArgs>): Prisma__CompanyClient<CompanyGetPayload<T> | Null>;
-
-    mas_position<T extends mas_positionArgs= {}>(args?: Subset<T, mas_positionArgs>): Prisma__mas_positionClient<mas_positionGetPayload<T> | Null>;
 
     position_user<T extends mas_positionlevel2$position_userArgs= {}>(args?: Subset<T, mas_positionlevel2$position_userArgs>): PrismaPromise<Array<Position_userGetPayload<T>>| Null>;
 
@@ -14212,8 +14087,9 @@ export namespace Prisma {
     id: string | null
     name: string | null
     level: number | null
+    code: string | null
+    type: string | null
     positionlevel2_id: string | null
-    mas_position_Id: string | null
     CompanyId: string | null
   }
 
@@ -14221,8 +14097,9 @@ export namespace Prisma {
     id: string | null
     name: string | null
     level: number | null
+    code: string | null
+    type: string | null
     positionlevel2_id: string | null
-    mas_position_Id: string | null
     CompanyId: string | null
   }
 
@@ -14230,8 +14107,9 @@ export namespace Prisma {
     id: number
     name: number
     level: number
+    code: number
+    type: number
     positionlevel2_id: number
-    mas_position_Id: number
     CompanyId: number
     _all: number
   }
@@ -14249,8 +14127,9 @@ export namespace Prisma {
     id?: true
     name?: true
     level?: true
+    code?: true
+    type?: true
     positionlevel2_id?: true
-    mas_position_Id?: true
     CompanyId?: true
   }
 
@@ -14258,8 +14137,9 @@ export namespace Prisma {
     id?: true
     name?: true
     level?: true
+    code?: true
+    type?: true
     positionlevel2_id?: true
-    mas_position_Id?: true
     CompanyId?: true
   }
 
@@ -14267,8 +14147,9 @@ export namespace Prisma {
     id?: true
     name?: true
     level?: true
+    code?: true
+    type?: true
     positionlevel2_id?: true
-    mas_position_Id?: true
     CompanyId?: true
     _all?: true
   }
@@ -14364,8 +14245,9 @@ export namespace Prisma {
     id: string
     name: string
     level: number
+    code: string
+    type: string
     positionlevel2_id: string | null
-    mas_position_Id: string
     CompanyId: string | null
     _count: Mas_positionlevel3CountAggregateOutputType | null
     _avg: Mas_positionlevel3AvgAggregateOutputType | null
@@ -14392,10 +14274,10 @@ export namespace Prisma {
     id?: boolean
     name?: boolean
     level?: boolean
+    code?: boolean
+    type?: boolean
     positionlevel2_id?: boolean
     mas_positionlevel2?: boolean | mas_positionlevel2Args
-    mas_position_Id?: boolean
-    mas_position?: boolean | mas_positionArgs
     Company?: boolean | CompanyArgs
     CompanyId?: boolean
     Position_user?: boolean | mas_positionlevel3$Position_userArgs
@@ -14405,7 +14287,6 @@ export namespace Prisma {
 
   export type mas_positionlevel3Include = {
     mas_positionlevel2?: boolean | mas_positionlevel2Args
-    mas_position?: boolean | mas_positionArgs
     Company?: boolean | CompanyArgs
     Position_user?: boolean | mas_positionlevel3$Position_userArgs
     _count?: boolean | Mas_positionlevel3CountOutputTypeArgs
@@ -14419,7 +14300,6 @@ export namespace Prisma {
     ? mas_positionlevel3  & {
     [P in TruthyKeys<S['include']>]:
         P extends 'mas_positionlevel2' ? mas_positionlevel2GetPayload<S['include'][P]> | null :
-        P extends 'mas_position' ? mas_positionGetPayload<S['include'][P]> | null :
         P extends 'Company' ? CompanyGetPayload<S['include'][P]> | null :
         P extends 'Position_user' ? Array < Position_userGetPayload<S['include'][P]>>  :
         P extends '_count' ? Mas_positionlevel3CountOutputTypeGetPayload<S['include'][P]> :  never
@@ -14428,7 +14308,6 @@ export namespace Prisma {
       ? {
     [P in TruthyKeys<S['select']>]:
         P extends 'mas_positionlevel2' ? mas_positionlevel2GetPayload<S['select'][P]> | null :
-        P extends 'mas_position' ? mas_positionGetPayload<S['select'][P]> | null :
         P extends 'Company' ? CompanyGetPayload<S['select'][P]> | null :
         P extends 'Position_user' ? Array < Position_userGetPayload<S['select'][P]>>  :
         P extends '_count' ? Mas_positionlevel3CountOutputTypeGetPayload<S['select'][P]> :  P extends keyof mas_positionlevel3 ? mas_positionlevel3[P] : never
@@ -14806,8 +14685,6 @@ export namespace Prisma {
     readonly [Symbol.toStringTag]: 'PrismaClientPromise';
 
     mas_positionlevel2<T extends mas_positionlevel2Args= {}>(args?: Subset<T, mas_positionlevel2Args>): Prisma__mas_positionlevel2Client<mas_positionlevel2GetPayload<T> | Null>;
-
-    mas_position<T extends mas_positionArgs= {}>(args?: Subset<T, mas_positionArgs>): Prisma__mas_positionClient<mas_positionGetPayload<T> | Null>;
 
     Company<T extends CompanyArgs= {}>(args?: Subset<T, CompanyArgs>): Prisma__CompanyClient<CompanyGetPayload<T> | Null>;
 
@@ -18088,7 +17965,8 @@ export namespace Prisma {
     id: 'id',
     name: 'name',
     level: 'level',
-    mas_position_Id: 'mas_position_Id',
+    code: 'code',
+    type: 'type',
     CompanyId: 'CompanyId'
   };
 
@@ -18099,8 +17977,9 @@ export namespace Prisma {
     id: 'id',
     name: 'name',
     level: 'level',
+    code: 'code',
+    type: 'type',
     positionlevel1_id: 'positionlevel1_id',
-    mas_position_Id: 'mas_position_Id',
     CompanyId: 'CompanyId'
   };
 
@@ -18111,8 +17990,9 @@ export namespace Prisma {
     id: 'id',
     name: 'name',
     level: 'level',
+    code: 'code',
+    type: 'type',
     positionlevel2_id: 'positionlevel2_id',
-    mas_position_Id: 'mas_position_Id',
     CompanyId: 'CompanyId'
   };
 
@@ -18973,9 +18853,6 @@ export namespace Prisma {
     id?: UuidFilter | string
     name?: StringFilter | string
     level?: IntFilter | number
-    mas_positionlevel1?: Mas_positionlevel1ListRelationFilter
-    mas_positionlevel2?: Mas_positionlevel2ListRelationFilter
-    mas_positionlevel3?: Mas_positionlevel3ListRelationFilter
     Company?: XOR<CompanyRelationFilter, CompanyWhereInput> | null
     CompanyId?: UuidNullableFilter | string | null
   }
@@ -18984,9 +18861,6 @@ export namespace Prisma {
     id?: SortOrder
     name?: SortOrder
     level?: SortOrder
-    mas_positionlevel1?: mas_positionlevel1OrderByRelationAggregateInput
-    mas_positionlevel2?: mas_positionlevel2OrderByRelationAggregateInput
-    mas_positionlevel3?: mas_positionlevel3OrderByRelationAggregateInput
     Company?: CompanyOrderByWithRelationInput
     CompanyId?: SortOrder
   }
@@ -19024,8 +18898,8 @@ export namespace Prisma {
     id?: UuidFilter | string
     name?: StringFilter | string
     level?: IntFilter | number
-    mas_position_Id?: UuidFilter | string
-    mas_position?: XOR<Mas_positionRelationFilter, mas_positionWhereInput> | null
+    code?: StringFilter | string
+    type?: StringFilter | string
     mas_positionlevel2?: Mas_positionlevel2ListRelationFilter
     Company?: XOR<CompanyRelationFilter, CompanyWhereInput> | null
     CompanyId?: UuidNullableFilter | string | null
@@ -19036,8 +18910,8 @@ export namespace Prisma {
     id?: SortOrder
     name?: SortOrder
     level?: SortOrder
-    mas_position_Id?: SortOrder
-    mas_position?: mas_positionOrderByWithRelationInput
+    code?: SortOrder
+    type?: SortOrder
     mas_positionlevel2?: mas_positionlevel2OrderByRelationAggregateInput
     Company?: CompanyOrderByWithRelationInput
     CompanyId?: SortOrder
@@ -19052,7 +18926,8 @@ export namespace Prisma {
     id?: SortOrder
     name?: SortOrder
     level?: SortOrder
-    mas_position_Id?: SortOrder
+    code?: SortOrder
+    type?: SortOrder
     CompanyId?: SortOrder
     _count?: mas_positionlevel1CountOrderByAggregateInput
     _avg?: mas_positionlevel1AvgOrderByAggregateInput
@@ -19068,7 +18943,8 @@ export namespace Prisma {
     id?: UuidWithAggregatesFilter | string
     name?: StringWithAggregatesFilter | string
     level?: IntWithAggregatesFilter | number
-    mas_position_Id?: UuidWithAggregatesFilter | string
+    code?: StringWithAggregatesFilter | string
+    type?: StringWithAggregatesFilter | string
     CompanyId?: UuidNullableWithAggregatesFilter | string | null
   }
 
@@ -19079,12 +18955,12 @@ export namespace Prisma {
     id?: UuidFilter | string
     name?: StringFilter | string
     level?: IntFilter | number
+    code?: StringFilter | string
+    type?: StringFilter | string
     positionlevel1_id?: UuidNullableFilter | string | null
     mas_positionlevel1?: XOR<Mas_positionlevel1RelationFilter, mas_positionlevel1WhereInput> | null
     mas_positionlevel3?: Mas_positionlevel3ListRelationFilter
     Company?: XOR<CompanyRelationFilter, CompanyWhereInput> | null
-    mas_position_Id?: UuidFilter | string
-    mas_position?: XOR<Mas_positionRelationFilter, mas_positionWhereInput> | null
     CompanyId?: UuidNullableFilter | string | null
     position_user?: Position_userListRelationFilter
   }
@@ -19093,12 +18969,12 @@ export namespace Prisma {
     id?: SortOrder
     name?: SortOrder
     level?: SortOrder
+    code?: SortOrder
+    type?: SortOrder
     positionlevel1_id?: SortOrder
     mas_positionlevel1?: mas_positionlevel1OrderByWithRelationInput
     mas_positionlevel3?: mas_positionlevel3OrderByRelationAggregateInput
     Company?: CompanyOrderByWithRelationInput
-    mas_position_Id?: SortOrder
-    mas_position?: mas_positionOrderByWithRelationInput
     CompanyId?: SortOrder
     position_user?: Position_userOrderByRelationAggregateInput
   }
@@ -19111,8 +18987,9 @@ export namespace Prisma {
     id?: SortOrder
     name?: SortOrder
     level?: SortOrder
+    code?: SortOrder
+    type?: SortOrder
     positionlevel1_id?: SortOrder
-    mas_position_Id?: SortOrder
     CompanyId?: SortOrder
     _count?: mas_positionlevel2CountOrderByAggregateInput
     _avg?: mas_positionlevel2AvgOrderByAggregateInput
@@ -19128,8 +19005,9 @@ export namespace Prisma {
     id?: UuidWithAggregatesFilter | string
     name?: StringWithAggregatesFilter | string
     level?: IntWithAggregatesFilter | number
+    code?: StringWithAggregatesFilter | string
+    type?: StringWithAggregatesFilter | string
     positionlevel1_id?: UuidNullableWithAggregatesFilter | string | null
-    mas_position_Id?: UuidWithAggregatesFilter | string
     CompanyId?: UuidNullableWithAggregatesFilter | string | null
   }
 
@@ -19140,10 +19018,10 @@ export namespace Prisma {
     id?: UuidFilter | string
     name?: StringFilter | string
     level?: IntFilter | number
+    code?: StringFilter | string
+    type?: StringFilter | string
     positionlevel2_id?: UuidNullableFilter | string | null
     mas_positionlevel2?: XOR<Mas_positionlevel2RelationFilter, mas_positionlevel2WhereInput> | null
-    mas_position_Id?: UuidFilter | string
-    mas_position?: XOR<Mas_positionRelationFilter, mas_positionWhereInput> | null
     Company?: XOR<CompanyRelationFilter, CompanyWhereInput> | null
     CompanyId?: UuidNullableFilter | string | null
     Position_user?: Position_userListRelationFilter
@@ -19153,10 +19031,10 @@ export namespace Prisma {
     id?: SortOrder
     name?: SortOrder
     level?: SortOrder
+    code?: SortOrder
+    type?: SortOrder
     positionlevel2_id?: SortOrder
     mas_positionlevel2?: mas_positionlevel2OrderByWithRelationInput
-    mas_position_Id?: SortOrder
-    mas_position?: mas_positionOrderByWithRelationInput
     Company?: CompanyOrderByWithRelationInput
     CompanyId?: SortOrder
     Position_user?: Position_userOrderByRelationAggregateInput
@@ -19170,8 +19048,9 @@ export namespace Prisma {
     id?: SortOrder
     name?: SortOrder
     level?: SortOrder
+    code?: SortOrder
+    type?: SortOrder
     positionlevel2_id?: SortOrder
-    mas_position_Id?: SortOrder
     CompanyId?: SortOrder
     _count?: mas_positionlevel3CountOrderByAggregateInput
     _avg?: mas_positionlevel3AvgOrderByAggregateInput
@@ -19187,8 +19066,9 @@ export namespace Prisma {
     id?: UuidWithAggregatesFilter | string
     name?: StringWithAggregatesFilter | string
     level?: IntWithAggregatesFilter | number
+    code?: StringWithAggregatesFilter | string
+    type?: StringWithAggregatesFilter | string
     positionlevel2_id?: UuidNullableWithAggregatesFilter | string | null
-    mas_position_Id?: UuidWithAggregatesFilter | string
     CompanyId?: UuidNullableWithAggregatesFilter | string | null
   }
 
@@ -20326,9 +20206,6 @@ export namespace Prisma {
     id: string
     name: string
     level: number
-    mas_positionlevel1?: mas_positionlevel1CreateNestedManyWithoutMas_positionInput
-    mas_positionlevel2?: mas_positionlevel2CreateNestedManyWithoutMas_positionInput
-    mas_positionlevel3?: mas_positionlevel3CreateNestedManyWithoutMas_positionInput
     Company?: CompanyCreateNestedOneWithoutMas_positionInput
   }
 
@@ -20336,9 +20213,6 @@ export namespace Prisma {
     id: string
     name: string
     level: number
-    mas_positionlevel1?: mas_positionlevel1UncheckedCreateNestedManyWithoutMas_positionInput
-    mas_positionlevel2?: mas_positionlevel2UncheckedCreateNestedManyWithoutMas_positionInput
-    mas_positionlevel3?: mas_positionlevel3UncheckedCreateNestedManyWithoutMas_positionInput
     CompanyId?: string | null
   }
 
@@ -20346,9 +20220,6 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     level?: IntFieldUpdateOperationsInput | number
-    mas_positionlevel1?: mas_positionlevel1UpdateManyWithoutMas_positionNestedInput
-    mas_positionlevel2?: mas_positionlevel2UpdateManyWithoutMas_positionNestedInput
-    mas_positionlevel3?: mas_positionlevel3UpdateManyWithoutMas_positionNestedInput
     Company?: CompanyUpdateOneWithoutMas_positionNestedInput
   }
 
@@ -20356,9 +20227,6 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     level?: IntFieldUpdateOperationsInput | number
-    mas_positionlevel1?: mas_positionlevel1UncheckedUpdateManyWithoutMas_positionNestedInput
-    mas_positionlevel2?: mas_positionlevel2UncheckedUpdateManyWithoutMas_positionNestedInput
-    mas_positionlevel3?: mas_positionlevel3UncheckedUpdateManyWithoutMas_positionNestedInput
     CompanyId?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
@@ -20386,7 +20254,8 @@ export namespace Prisma {
     id: string
     name: string
     level: number
-    mas_position?: mas_positionCreateNestedOneWithoutMas_positionlevel1Input
+    code: string
+    type: string
     mas_positionlevel2?: mas_positionlevel2CreateNestedManyWithoutMas_positionlevel1Input
     Company?: CompanyCreateNestedOneWithoutMas_positionlevel1Input
     Position_user?: Position_userCreateNestedManyWithoutMas_positionlevel1Input
@@ -20396,7 +20265,8 @@ export namespace Prisma {
     id: string
     name: string
     level: number
-    mas_position_Id: string
+    code: string
+    type: string
     mas_positionlevel2?: mas_positionlevel2UncheckedCreateNestedManyWithoutMas_positionlevel1Input
     CompanyId?: string | null
     Position_user?: Position_userUncheckedCreateNestedManyWithoutMas_positionlevel1Input
@@ -20406,7 +20276,8 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     level?: IntFieldUpdateOperationsInput | number
-    mas_position?: mas_positionUpdateOneWithoutMas_positionlevel1NestedInput
+    code?: StringFieldUpdateOperationsInput | string
+    type?: StringFieldUpdateOperationsInput | string
     mas_positionlevel2?: mas_positionlevel2UpdateManyWithoutMas_positionlevel1NestedInput
     Company?: CompanyUpdateOneWithoutMas_positionlevel1NestedInput
     Position_user?: Position_userUpdateManyWithoutMas_positionlevel1NestedInput
@@ -20416,7 +20287,8 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     level?: IntFieldUpdateOperationsInput | number
-    mas_position_Id?: StringFieldUpdateOperationsInput | string
+    code?: StringFieldUpdateOperationsInput | string
+    type?: StringFieldUpdateOperationsInput | string
     mas_positionlevel2?: mas_positionlevel2UncheckedUpdateManyWithoutMas_positionlevel1NestedInput
     CompanyId?: NullableStringFieldUpdateOperationsInput | string | null
     Position_user?: Position_userUncheckedUpdateManyWithoutMas_positionlevel1NestedInput
@@ -20426,7 +20298,8 @@ export namespace Prisma {
     id: string
     name: string
     level: number
-    mas_position_Id: string
+    code: string
+    type: string
     CompanyId?: string | null
   }
 
@@ -20434,13 +20307,16 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     level?: IntFieldUpdateOperationsInput | number
+    code?: StringFieldUpdateOperationsInput | string
+    type?: StringFieldUpdateOperationsInput | string
   }
 
   export type mas_positionlevel1UncheckedUpdateManyInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     level?: IntFieldUpdateOperationsInput | number
-    mas_position_Id?: StringFieldUpdateOperationsInput | string
+    code?: StringFieldUpdateOperationsInput | string
+    type?: StringFieldUpdateOperationsInput | string
     CompanyId?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
@@ -20448,10 +20324,11 @@ export namespace Prisma {
     id: string
     name: string
     level: number
+    code: string
+    type: string
     mas_positionlevel1?: mas_positionlevel1CreateNestedOneWithoutMas_positionlevel2Input
     mas_positionlevel3?: mas_positionlevel3CreateNestedManyWithoutMas_positionlevel2Input
     Company?: CompanyCreateNestedOneWithoutMas_positionlevel2Input
-    mas_position?: mas_positionCreateNestedOneWithoutMas_positionlevel2Input
     position_user?: Position_userCreateNestedManyWithoutMas_positionlevel2Input
   }
 
@@ -20459,9 +20336,10 @@ export namespace Prisma {
     id: string
     name: string
     level: number
+    code: string
+    type: string
     positionlevel1_id?: string | null
     mas_positionlevel3?: mas_positionlevel3UncheckedCreateNestedManyWithoutMas_positionlevel2Input
-    mas_position_Id: string
     CompanyId?: string | null
     position_user?: Position_userUncheckedCreateNestedManyWithoutMas_positionlevel2Input
   }
@@ -20470,10 +20348,11 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     level?: IntFieldUpdateOperationsInput | number
+    code?: StringFieldUpdateOperationsInput | string
+    type?: StringFieldUpdateOperationsInput | string
     mas_positionlevel1?: mas_positionlevel1UpdateOneWithoutMas_positionlevel2NestedInput
     mas_positionlevel3?: mas_positionlevel3UpdateManyWithoutMas_positionlevel2NestedInput
     Company?: CompanyUpdateOneWithoutMas_positionlevel2NestedInput
-    mas_position?: mas_positionUpdateOneWithoutMas_positionlevel2NestedInput
     position_user?: Position_userUpdateManyWithoutMas_positionlevel2NestedInput
   }
 
@@ -20481,9 +20360,10 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     level?: IntFieldUpdateOperationsInput | number
+    code?: StringFieldUpdateOperationsInput | string
+    type?: StringFieldUpdateOperationsInput | string
     positionlevel1_id?: NullableStringFieldUpdateOperationsInput | string | null
     mas_positionlevel3?: mas_positionlevel3UncheckedUpdateManyWithoutMas_positionlevel2NestedInput
-    mas_position_Id?: StringFieldUpdateOperationsInput | string
     CompanyId?: NullableStringFieldUpdateOperationsInput | string | null
     position_user?: Position_userUncheckedUpdateManyWithoutMas_positionlevel2NestedInput
   }
@@ -20492,8 +20372,9 @@ export namespace Prisma {
     id: string
     name: string
     level: number
+    code: string
+    type: string
     positionlevel1_id?: string | null
-    mas_position_Id: string
     CompanyId?: string | null
   }
 
@@ -20501,14 +20382,17 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     level?: IntFieldUpdateOperationsInput | number
+    code?: StringFieldUpdateOperationsInput | string
+    type?: StringFieldUpdateOperationsInput | string
   }
 
   export type mas_positionlevel2UncheckedUpdateManyInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     level?: IntFieldUpdateOperationsInput | number
+    code?: StringFieldUpdateOperationsInput | string
+    type?: StringFieldUpdateOperationsInput | string
     positionlevel1_id?: NullableStringFieldUpdateOperationsInput | string | null
-    mas_position_Id?: StringFieldUpdateOperationsInput | string
     CompanyId?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
@@ -20516,8 +20400,9 @@ export namespace Prisma {
     id: string
     name: string
     level: number
+    code: string
+    type: string
     mas_positionlevel2?: mas_positionlevel2CreateNestedOneWithoutMas_positionlevel3Input
-    mas_position?: mas_positionCreateNestedOneWithoutMas_positionlevel3Input
     Company?: CompanyCreateNestedOneWithoutMas_positionlevel3Input
     Position_user?: Position_userCreateNestedManyWithoutMas_positionlevel3Input
   }
@@ -20526,8 +20411,9 @@ export namespace Prisma {
     id: string
     name: string
     level: number
+    code: string
+    type: string
     positionlevel2_id?: string | null
-    mas_position_Id: string
     CompanyId?: string | null
     Position_user?: Position_userUncheckedCreateNestedManyWithoutMas_positionlevel3Input
   }
@@ -20536,8 +20422,9 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     level?: IntFieldUpdateOperationsInput | number
+    code?: StringFieldUpdateOperationsInput | string
+    type?: StringFieldUpdateOperationsInput | string
     mas_positionlevel2?: mas_positionlevel2UpdateOneWithoutMas_positionlevel3NestedInput
-    mas_position?: mas_positionUpdateOneWithoutMas_positionlevel3NestedInput
     Company?: CompanyUpdateOneWithoutMas_positionlevel3NestedInput
     Position_user?: Position_userUpdateManyWithoutMas_positionlevel3NestedInput
   }
@@ -20546,8 +20433,9 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     level?: IntFieldUpdateOperationsInput | number
+    code?: StringFieldUpdateOperationsInput | string
+    type?: StringFieldUpdateOperationsInput | string
     positionlevel2_id?: NullableStringFieldUpdateOperationsInput | string | null
-    mas_position_Id?: StringFieldUpdateOperationsInput | string
     CompanyId?: NullableStringFieldUpdateOperationsInput | string | null
     Position_user?: Position_userUncheckedUpdateManyWithoutMas_positionlevel3NestedInput
   }
@@ -20556,8 +20444,9 @@ export namespace Prisma {
     id: string
     name: string
     level: number
+    code: string
+    type: string
     positionlevel2_id?: string | null
-    mas_position_Id: string
     CompanyId?: string | null
   }
 
@@ -20565,14 +20454,17 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     level?: IntFieldUpdateOperationsInput | number
+    code?: StringFieldUpdateOperationsInput | string
+    type?: StringFieldUpdateOperationsInput | string
   }
 
   export type mas_positionlevel3UncheckedUpdateManyInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     level?: IntFieldUpdateOperationsInput | number
+    code?: StringFieldUpdateOperationsInput | string
+    type?: StringFieldUpdateOperationsInput | string
     positionlevel2_id?: NullableStringFieldUpdateOperationsInput | string | null
-    mas_position_Id?: StringFieldUpdateOperationsInput | string
     CompanyId?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
@@ -21594,16 +21486,12 @@ export namespace Prisma {
     level?: SortOrder
   }
 
-  export type Mas_positionRelationFilter = {
-    is?: mas_positionWhereInput | null
-    isNot?: mas_positionWhereInput | null
-  }
-
   export type mas_positionlevel1CountOrderByAggregateInput = {
     id?: SortOrder
     name?: SortOrder
     level?: SortOrder
-    mas_position_Id?: SortOrder
+    code?: SortOrder
+    type?: SortOrder
     CompanyId?: SortOrder
   }
 
@@ -21615,7 +21503,8 @@ export namespace Prisma {
     id?: SortOrder
     name?: SortOrder
     level?: SortOrder
-    mas_position_Id?: SortOrder
+    code?: SortOrder
+    type?: SortOrder
     CompanyId?: SortOrder
   }
 
@@ -21623,7 +21512,8 @@ export namespace Prisma {
     id?: SortOrder
     name?: SortOrder
     level?: SortOrder
-    mas_position_Id?: SortOrder
+    code?: SortOrder
+    type?: SortOrder
     CompanyId?: SortOrder
   }
 
@@ -21640,8 +21530,9 @@ export namespace Prisma {
     id?: SortOrder
     name?: SortOrder
     level?: SortOrder
+    code?: SortOrder
+    type?: SortOrder
     positionlevel1_id?: SortOrder
-    mas_position_Id?: SortOrder
     CompanyId?: SortOrder
   }
 
@@ -21653,8 +21544,9 @@ export namespace Prisma {
     id?: SortOrder
     name?: SortOrder
     level?: SortOrder
+    code?: SortOrder
+    type?: SortOrder
     positionlevel1_id?: SortOrder
-    mas_position_Id?: SortOrder
     CompanyId?: SortOrder
   }
 
@@ -21662,8 +21554,9 @@ export namespace Prisma {
     id?: SortOrder
     name?: SortOrder
     level?: SortOrder
+    code?: SortOrder
+    type?: SortOrder
     positionlevel1_id?: SortOrder
-    mas_position_Id?: SortOrder
     CompanyId?: SortOrder
   }
 
@@ -21680,8 +21573,9 @@ export namespace Prisma {
     id?: SortOrder
     name?: SortOrder
     level?: SortOrder
+    code?: SortOrder
+    type?: SortOrder
     positionlevel2_id?: SortOrder
-    mas_position_Id?: SortOrder
     CompanyId?: SortOrder
   }
 
@@ -21693,8 +21587,9 @@ export namespace Prisma {
     id?: SortOrder
     name?: SortOrder
     level?: SortOrder
+    code?: SortOrder
+    type?: SortOrder
     positionlevel2_id?: SortOrder
-    mas_position_Id?: SortOrder
     CompanyId?: SortOrder
   }
 
@@ -21702,8 +21597,9 @@ export namespace Prisma {
     id?: SortOrder
     name?: SortOrder
     level?: SortOrder
+    code?: SortOrder
+    type?: SortOrder
     positionlevel2_id?: SortOrder
-    mas_position_Id?: SortOrder
     CompanyId?: SortOrder
   }
 
@@ -22569,94 +22465,10 @@ export namespace Prisma {
     update?: XOR<DistrictUpdateWithoutAmphoeInput, DistrictUncheckedUpdateWithoutAmphoeInput>
   }
 
-  export type mas_positionlevel1CreateNestedManyWithoutMas_positionInput = {
-    create?: XOR<Enumerable<mas_positionlevel1CreateWithoutMas_positionInput>, Enumerable<mas_positionlevel1UncheckedCreateWithoutMas_positionInput>>
-    connectOrCreate?: Enumerable<mas_positionlevel1CreateOrConnectWithoutMas_positionInput>
-    createMany?: mas_positionlevel1CreateManyMas_positionInputEnvelope
-    connect?: Enumerable<mas_positionlevel1WhereUniqueInput>
-  }
-
-  export type mas_positionlevel2CreateNestedManyWithoutMas_positionInput = {
-    create?: XOR<Enumerable<mas_positionlevel2CreateWithoutMas_positionInput>, Enumerable<mas_positionlevel2UncheckedCreateWithoutMas_positionInput>>
-    connectOrCreate?: Enumerable<mas_positionlevel2CreateOrConnectWithoutMas_positionInput>
-    createMany?: mas_positionlevel2CreateManyMas_positionInputEnvelope
-    connect?: Enumerable<mas_positionlevel2WhereUniqueInput>
-  }
-
-  export type mas_positionlevel3CreateNestedManyWithoutMas_positionInput = {
-    create?: XOR<Enumerable<mas_positionlevel3CreateWithoutMas_positionInput>, Enumerable<mas_positionlevel3UncheckedCreateWithoutMas_positionInput>>
-    connectOrCreate?: Enumerable<mas_positionlevel3CreateOrConnectWithoutMas_positionInput>
-    createMany?: mas_positionlevel3CreateManyMas_positionInputEnvelope
-    connect?: Enumerable<mas_positionlevel3WhereUniqueInput>
-  }
-
   export type CompanyCreateNestedOneWithoutMas_positionInput = {
     create?: XOR<CompanyCreateWithoutMas_positionInput, CompanyUncheckedCreateWithoutMas_positionInput>
     connectOrCreate?: CompanyCreateOrConnectWithoutMas_positionInput
     connect?: CompanyWhereUniqueInput
-  }
-
-  export type mas_positionlevel1UncheckedCreateNestedManyWithoutMas_positionInput = {
-    create?: XOR<Enumerable<mas_positionlevel1CreateWithoutMas_positionInput>, Enumerable<mas_positionlevel1UncheckedCreateWithoutMas_positionInput>>
-    connectOrCreate?: Enumerable<mas_positionlevel1CreateOrConnectWithoutMas_positionInput>
-    createMany?: mas_positionlevel1CreateManyMas_positionInputEnvelope
-    connect?: Enumerable<mas_positionlevel1WhereUniqueInput>
-  }
-
-  export type mas_positionlevel2UncheckedCreateNestedManyWithoutMas_positionInput = {
-    create?: XOR<Enumerable<mas_positionlevel2CreateWithoutMas_positionInput>, Enumerable<mas_positionlevel2UncheckedCreateWithoutMas_positionInput>>
-    connectOrCreate?: Enumerable<mas_positionlevel2CreateOrConnectWithoutMas_positionInput>
-    createMany?: mas_positionlevel2CreateManyMas_positionInputEnvelope
-    connect?: Enumerable<mas_positionlevel2WhereUniqueInput>
-  }
-
-  export type mas_positionlevel3UncheckedCreateNestedManyWithoutMas_positionInput = {
-    create?: XOR<Enumerable<mas_positionlevel3CreateWithoutMas_positionInput>, Enumerable<mas_positionlevel3UncheckedCreateWithoutMas_positionInput>>
-    connectOrCreate?: Enumerable<mas_positionlevel3CreateOrConnectWithoutMas_positionInput>
-    createMany?: mas_positionlevel3CreateManyMas_positionInputEnvelope
-    connect?: Enumerable<mas_positionlevel3WhereUniqueInput>
-  }
-
-  export type mas_positionlevel1UpdateManyWithoutMas_positionNestedInput = {
-    create?: XOR<Enumerable<mas_positionlevel1CreateWithoutMas_positionInput>, Enumerable<mas_positionlevel1UncheckedCreateWithoutMas_positionInput>>
-    connectOrCreate?: Enumerable<mas_positionlevel1CreateOrConnectWithoutMas_positionInput>
-    upsert?: Enumerable<mas_positionlevel1UpsertWithWhereUniqueWithoutMas_positionInput>
-    createMany?: mas_positionlevel1CreateManyMas_positionInputEnvelope
-    set?: Enumerable<mas_positionlevel1WhereUniqueInput>
-    disconnect?: Enumerable<mas_positionlevel1WhereUniqueInput>
-    delete?: Enumerable<mas_positionlevel1WhereUniqueInput>
-    connect?: Enumerable<mas_positionlevel1WhereUniqueInput>
-    update?: Enumerable<mas_positionlevel1UpdateWithWhereUniqueWithoutMas_positionInput>
-    updateMany?: Enumerable<mas_positionlevel1UpdateManyWithWhereWithoutMas_positionInput>
-    deleteMany?: Enumerable<mas_positionlevel1ScalarWhereInput>
-  }
-
-  export type mas_positionlevel2UpdateManyWithoutMas_positionNestedInput = {
-    create?: XOR<Enumerable<mas_positionlevel2CreateWithoutMas_positionInput>, Enumerable<mas_positionlevel2UncheckedCreateWithoutMas_positionInput>>
-    connectOrCreate?: Enumerable<mas_positionlevel2CreateOrConnectWithoutMas_positionInput>
-    upsert?: Enumerable<mas_positionlevel2UpsertWithWhereUniqueWithoutMas_positionInput>
-    createMany?: mas_positionlevel2CreateManyMas_positionInputEnvelope
-    set?: Enumerable<mas_positionlevel2WhereUniqueInput>
-    disconnect?: Enumerable<mas_positionlevel2WhereUniqueInput>
-    delete?: Enumerable<mas_positionlevel2WhereUniqueInput>
-    connect?: Enumerable<mas_positionlevel2WhereUniqueInput>
-    update?: Enumerable<mas_positionlevel2UpdateWithWhereUniqueWithoutMas_positionInput>
-    updateMany?: Enumerable<mas_positionlevel2UpdateManyWithWhereWithoutMas_positionInput>
-    deleteMany?: Enumerable<mas_positionlevel2ScalarWhereInput>
-  }
-
-  export type mas_positionlevel3UpdateManyWithoutMas_positionNestedInput = {
-    create?: XOR<Enumerable<mas_positionlevel3CreateWithoutMas_positionInput>, Enumerable<mas_positionlevel3UncheckedCreateWithoutMas_positionInput>>
-    connectOrCreate?: Enumerable<mas_positionlevel3CreateOrConnectWithoutMas_positionInput>
-    upsert?: Enumerable<mas_positionlevel3UpsertWithWhereUniqueWithoutMas_positionInput>
-    createMany?: mas_positionlevel3CreateManyMas_positionInputEnvelope
-    set?: Enumerable<mas_positionlevel3WhereUniqueInput>
-    disconnect?: Enumerable<mas_positionlevel3WhereUniqueInput>
-    delete?: Enumerable<mas_positionlevel3WhereUniqueInput>
-    connect?: Enumerable<mas_positionlevel3WhereUniqueInput>
-    update?: Enumerable<mas_positionlevel3UpdateWithWhereUniqueWithoutMas_positionInput>
-    updateMany?: Enumerable<mas_positionlevel3UpdateManyWithWhereWithoutMas_positionInput>
-    deleteMany?: Enumerable<mas_positionlevel3ScalarWhereInput>
   }
 
   export type CompanyUpdateOneWithoutMas_positionNestedInput = {
@@ -22667,54 +22479,6 @@ export namespace Prisma {
     delete?: boolean
     connect?: CompanyWhereUniqueInput
     update?: XOR<CompanyUpdateWithoutMas_positionInput, CompanyUncheckedUpdateWithoutMas_positionInput>
-  }
-
-  export type mas_positionlevel1UncheckedUpdateManyWithoutMas_positionNestedInput = {
-    create?: XOR<Enumerable<mas_positionlevel1CreateWithoutMas_positionInput>, Enumerable<mas_positionlevel1UncheckedCreateWithoutMas_positionInput>>
-    connectOrCreate?: Enumerable<mas_positionlevel1CreateOrConnectWithoutMas_positionInput>
-    upsert?: Enumerable<mas_positionlevel1UpsertWithWhereUniqueWithoutMas_positionInput>
-    createMany?: mas_positionlevel1CreateManyMas_positionInputEnvelope
-    set?: Enumerable<mas_positionlevel1WhereUniqueInput>
-    disconnect?: Enumerable<mas_positionlevel1WhereUniqueInput>
-    delete?: Enumerable<mas_positionlevel1WhereUniqueInput>
-    connect?: Enumerable<mas_positionlevel1WhereUniqueInput>
-    update?: Enumerable<mas_positionlevel1UpdateWithWhereUniqueWithoutMas_positionInput>
-    updateMany?: Enumerable<mas_positionlevel1UpdateManyWithWhereWithoutMas_positionInput>
-    deleteMany?: Enumerable<mas_positionlevel1ScalarWhereInput>
-  }
-
-  export type mas_positionlevel2UncheckedUpdateManyWithoutMas_positionNestedInput = {
-    create?: XOR<Enumerable<mas_positionlevel2CreateWithoutMas_positionInput>, Enumerable<mas_positionlevel2UncheckedCreateWithoutMas_positionInput>>
-    connectOrCreate?: Enumerable<mas_positionlevel2CreateOrConnectWithoutMas_positionInput>
-    upsert?: Enumerable<mas_positionlevel2UpsertWithWhereUniqueWithoutMas_positionInput>
-    createMany?: mas_positionlevel2CreateManyMas_positionInputEnvelope
-    set?: Enumerable<mas_positionlevel2WhereUniqueInput>
-    disconnect?: Enumerable<mas_positionlevel2WhereUniqueInput>
-    delete?: Enumerable<mas_positionlevel2WhereUniqueInput>
-    connect?: Enumerable<mas_positionlevel2WhereUniqueInput>
-    update?: Enumerable<mas_positionlevel2UpdateWithWhereUniqueWithoutMas_positionInput>
-    updateMany?: Enumerable<mas_positionlevel2UpdateManyWithWhereWithoutMas_positionInput>
-    deleteMany?: Enumerable<mas_positionlevel2ScalarWhereInput>
-  }
-
-  export type mas_positionlevel3UncheckedUpdateManyWithoutMas_positionNestedInput = {
-    create?: XOR<Enumerable<mas_positionlevel3CreateWithoutMas_positionInput>, Enumerable<mas_positionlevel3UncheckedCreateWithoutMas_positionInput>>
-    connectOrCreate?: Enumerable<mas_positionlevel3CreateOrConnectWithoutMas_positionInput>
-    upsert?: Enumerable<mas_positionlevel3UpsertWithWhereUniqueWithoutMas_positionInput>
-    createMany?: mas_positionlevel3CreateManyMas_positionInputEnvelope
-    set?: Enumerable<mas_positionlevel3WhereUniqueInput>
-    disconnect?: Enumerable<mas_positionlevel3WhereUniqueInput>
-    delete?: Enumerable<mas_positionlevel3WhereUniqueInput>
-    connect?: Enumerable<mas_positionlevel3WhereUniqueInput>
-    update?: Enumerable<mas_positionlevel3UpdateWithWhereUniqueWithoutMas_positionInput>
-    updateMany?: Enumerable<mas_positionlevel3UpdateManyWithWhereWithoutMas_positionInput>
-    deleteMany?: Enumerable<mas_positionlevel3ScalarWhereInput>
-  }
-
-  export type mas_positionCreateNestedOneWithoutMas_positionlevel1Input = {
-    create?: XOR<mas_positionCreateWithoutMas_positionlevel1Input, mas_positionUncheckedCreateWithoutMas_positionlevel1Input>
-    connectOrCreate?: mas_positionCreateOrConnectWithoutMas_positionlevel1Input
-    connect?: mas_positionWhereUniqueInput
   }
 
   export type mas_positionlevel2CreateNestedManyWithoutMas_positionlevel1Input = {
@@ -22749,16 +22513,6 @@ export namespace Prisma {
     connectOrCreate?: Enumerable<Position_userCreateOrConnectWithoutMas_positionlevel1Input>
     createMany?: Position_userCreateManyMas_positionlevel1InputEnvelope
     connect?: Enumerable<Position_userWhereUniqueInput>
-  }
-
-  export type mas_positionUpdateOneWithoutMas_positionlevel1NestedInput = {
-    create?: XOR<mas_positionCreateWithoutMas_positionlevel1Input, mas_positionUncheckedCreateWithoutMas_positionlevel1Input>
-    connectOrCreate?: mas_positionCreateOrConnectWithoutMas_positionlevel1Input
-    upsert?: mas_positionUpsertWithoutMas_positionlevel1Input
-    disconnect?: boolean
-    delete?: boolean
-    connect?: mas_positionWhereUniqueInput
-    update?: XOR<mas_positionUpdateWithoutMas_positionlevel1Input, mas_positionUncheckedUpdateWithoutMas_positionlevel1Input>
   }
 
   export type mas_positionlevel2UpdateManyWithoutMas_positionlevel1NestedInput = {
@@ -22846,12 +22600,6 @@ export namespace Prisma {
     connect?: CompanyWhereUniqueInput
   }
 
-  export type mas_positionCreateNestedOneWithoutMas_positionlevel2Input = {
-    create?: XOR<mas_positionCreateWithoutMas_positionlevel2Input, mas_positionUncheckedCreateWithoutMas_positionlevel2Input>
-    connectOrCreate?: mas_positionCreateOrConnectWithoutMas_positionlevel2Input
-    connect?: mas_positionWhereUniqueInput
-  }
-
   export type Position_userCreateNestedManyWithoutMas_positionlevel2Input = {
     create?: XOR<Enumerable<Position_userCreateWithoutMas_positionlevel2Input>, Enumerable<Position_userUncheckedCreateWithoutMas_positionlevel2Input>>
     connectOrCreate?: Enumerable<Position_userCreateOrConnectWithoutMas_positionlevel2Input>
@@ -22907,16 +22655,6 @@ export namespace Prisma {
     update?: XOR<CompanyUpdateWithoutMas_positionlevel2Input, CompanyUncheckedUpdateWithoutMas_positionlevel2Input>
   }
 
-  export type mas_positionUpdateOneWithoutMas_positionlevel2NestedInput = {
-    create?: XOR<mas_positionCreateWithoutMas_positionlevel2Input, mas_positionUncheckedCreateWithoutMas_positionlevel2Input>
-    connectOrCreate?: mas_positionCreateOrConnectWithoutMas_positionlevel2Input
-    upsert?: mas_positionUpsertWithoutMas_positionlevel2Input
-    disconnect?: boolean
-    delete?: boolean
-    connect?: mas_positionWhereUniqueInput
-    update?: XOR<mas_positionUpdateWithoutMas_positionlevel2Input, mas_positionUncheckedUpdateWithoutMas_positionlevel2Input>
-  }
-
   export type Position_userUpdateManyWithoutMas_positionlevel2NestedInput = {
     create?: XOR<Enumerable<Position_userCreateWithoutMas_positionlevel2Input>, Enumerable<Position_userUncheckedCreateWithoutMas_positionlevel2Input>>
     connectOrCreate?: Enumerable<Position_userCreateOrConnectWithoutMas_positionlevel2Input>
@@ -22965,12 +22703,6 @@ export namespace Prisma {
     connect?: mas_positionlevel2WhereUniqueInput
   }
 
-  export type mas_positionCreateNestedOneWithoutMas_positionlevel3Input = {
-    create?: XOR<mas_positionCreateWithoutMas_positionlevel3Input, mas_positionUncheckedCreateWithoutMas_positionlevel3Input>
-    connectOrCreate?: mas_positionCreateOrConnectWithoutMas_positionlevel3Input
-    connect?: mas_positionWhereUniqueInput
-  }
-
   export type CompanyCreateNestedOneWithoutMas_positionlevel3Input = {
     create?: XOR<CompanyCreateWithoutMas_positionlevel3Input, CompanyUncheckedCreateWithoutMas_positionlevel3Input>
     connectOrCreate?: CompanyCreateOrConnectWithoutMas_positionlevel3Input
@@ -22999,16 +22731,6 @@ export namespace Prisma {
     delete?: boolean
     connect?: mas_positionlevel2WhereUniqueInput
     update?: XOR<mas_positionlevel2UpdateWithoutMas_positionlevel3Input, mas_positionlevel2UncheckedUpdateWithoutMas_positionlevel3Input>
-  }
-
-  export type mas_positionUpdateOneWithoutMas_positionlevel3NestedInput = {
-    create?: XOR<mas_positionCreateWithoutMas_positionlevel3Input, mas_positionUncheckedCreateWithoutMas_positionlevel3Input>
-    connectOrCreate?: mas_positionCreateOrConnectWithoutMas_positionlevel3Input
-    upsert?: mas_positionUpsertWithoutMas_positionlevel3Input
-    disconnect?: boolean
-    delete?: boolean
-    connect?: mas_positionWhereUniqueInput
-    update?: XOR<mas_positionUpdateWithoutMas_positionlevel3Input, mas_positionUncheckedUpdateWithoutMas_positionlevel3Input>
   }
 
   export type CompanyUpdateOneWithoutMas_positionlevel3NestedInput = {
@@ -23486,8 +23208,9 @@ export namespace Prisma {
     id: string
     name: string
     level: number
+    code: string
+    type: string
     mas_positionlevel2?: mas_positionlevel2CreateNestedOneWithoutMas_positionlevel3Input
-    mas_position?: mas_positionCreateNestedOneWithoutMas_positionlevel3Input
     Position_user?: Position_userCreateNestedManyWithoutMas_positionlevel3Input
   }
 
@@ -23495,8 +23218,9 @@ export namespace Prisma {
     id: string
     name: string
     level: number
+    code: string
+    type: string
     positionlevel2_id?: string | null
-    mas_position_Id: string
     Position_user?: Position_userUncheckedCreateNestedManyWithoutMas_positionlevel3Input
   }
 
@@ -23514,9 +23238,10 @@ export namespace Prisma {
     id: string
     name: string
     level: number
+    code: string
+    type: string
     mas_positionlevel1?: mas_positionlevel1CreateNestedOneWithoutMas_positionlevel2Input
     mas_positionlevel3?: mas_positionlevel3CreateNestedManyWithoutMas_positionlevel2Input
-    mas_position?: mas_positionCreateNestedOneWithoutMas_positionlevel2Input
     position_user?: Position_userCreateNestedManyWithoutMas_positionlevel2Input
   }
 
@@ -23524,9 +23249,10 @@ export namespace Prisma {
     id: string
     name: string
     level: number
+    code: string
+    type: string
     positionlevel1_id?: string | null
     mas_positionlevel3?: mas_positionlevel3UncheckedCreateNestedManyWithoutMas_positionlevel2Input
-    mas_position_Id: string
     position_user?: Position_userUncheckedCreateNestedManyWithoutMas_positionlevel2Input
   }
 
@@ -23544,7 +23270,8 @@ export namespace Prisma {
     id: string
     name: string
     level: number
-    mas_position?: mas_positionCreateNestedOneWithoutMas_positionlevel1Input
+    code: string
+    type: string
     mas_positionlevel2?: mas_positionlevel2CreateNestedManyWithoutMas_positionlevel1Input
     Position_user?: Position_userCreateNestedManyWithoutMas_positionlevel1Input
   }
@@ -23553,7 +23280,8 @@ export namespace Prisma {
     id: string
     name: string
     level: number
-    mas_position_Id: string
+    code: string
+    type: string
     mas_positionlevel2?: mas_positionlevel2UncheckedCreateNestedManyWithoutMas_positionlevel1Input
     Position_user?: Position_userUncheckedCreateNestedManyWithoutMas_positionlevel1Input
   }
@@ -23594,18 +23322,12 @@ export namespace Prisma {
     id: string
     name: string
     level: number
-    mas_positionlevel1?: mas_positionlevel1CreateNestedManyWithoutMas_positionInput
-    mas_positionlevel2?: mas_positionlevel2CreateNestedManyWithoutMas_positionInput
-    mas_positionlevel3?: mas_positionlevel3CreateNestedManyWithoutMas_positionInput
   }
 
   export type mas_positionUncheckedCreateWithoutCompanyInput = {
     id: string
     name: string
     level: number
-    mas_positionlevel1?: mas_positionlevel1UncheckedCreateNestedManyWithoutMas_positionInput
-    mas_positionlevel2?: mas_positionlevel2UncheckedCreateNestedManyWithoutMas_positionInput
-    mas_positionlevel3?: mas_positionlevel3UncheckedCreateNestedManyWithoutMas_positionInput
   }
 
   export type mas_positionCreateOrConnectWithoutCompanyInput = {
@@ -23726,8 +23448,9 @@ export namespace Prisma {
     id?: UuidFilter | string
     name?: StringFilter | string
     level?: IntFilter | number
+    code?: StringFilter | string
+    type?: StringFilter | string
     positionlevel2_id?: UuidNullableFilter | string | null
-    mas_position_Id?: UuidFilter | string
     CompanyId?: UuidNullableFilter | string | null
   }
 
@@ -23754,8 +23477,9 @@ export namespace Prisma {
     id?: UuidFilter | string
     name?: StringFilter | string
     level?: IntFilter | number
+    code?: StringFilter | string
+    type?: StringFilter | string
     positionlevel1_id?: UuidNullableFilter | string | null
-    mas_position_Id?: UuidFilter | string
     CompanyId?: UuidNullableFilter | string | null
   }
 
@@ -23782,7 +23506,8 @@ export namespace Prisma {
     id?: UuidFilter | string
     name?: StringFilter | string
     level?: IntFilter | number
-    mas_position_Id?: UuidFilter | string
+    code?: StringFilter | string
+    type?: StringFilter | string
     CompanyId?: UuidNullableFilter | string | null
   }
 
@@ -25058,92 +24783,6 @@ export namespace Prisma {
     provinceId?: StringFieldUpdateOperationsInput | string
   }
 
-  export type mas_positionlevel1CreateWithoutMas_positionInput = {
-    id: string
-    name: string
-    level: number
-    mas_positionlevel2?: mas_positionlevel2CreateNestedManyWithoutMas_positionlevel1Input
-    Company?: CompanyCreateNestedOneWithoutMas_positionlevel1Input
-    Position_user?: Position_userCreateNestedManyWithoutMas_positionlevel1Input
-  }
-
-  export type mas_positionlevel1UncheckedCreateWithoutMas_positionInput = {
-    id: string
-    name: string
-    level: number
-    mas_positionlevel2?: mas_positionlevel2UncheckedCreateNestedManyWithoutMas_positionlevel1Input
-    CompanyId?: string | null
-    Position_user?: Position_userUncheckedCreateNestedManyWithoutMas_positionlevel1Input
-  }
-
-  export type mas_positionlevel1CreateOrConnectWithoutMas_positionInput = {
-    where: mas_positionlevel1WhereUniqueInput
-    create: XOR<mas_positionlevel1CreateWithoutMas_positionInput, mas_positionlevel1UncheckedCreateWithoutMas_positionInput>
-  }
-
-  export type mas_positionlevel1CreateManyMas_positionInputEnvelope = {
-    data: Enumerable<mas_positionlevel1CreateManyMas_positionInput>
-    skipDuplicates?: boolean
-  }
-
-  export type mas_positionlevel2CreateWithoutMas_positionInput = {
-    id: string
-    name: string
-    level: number
-    mas_positionlevel1?: mas_positionlevel1CreateNestedOneWithoutMas_positionlevel2Input
-    mas_positionlevel3?: mas_positionlevel3CreateNestedManyWithoutMas_positionlevel2Input
-    Company?: CompanyCreateNestedOneWithoutMas_positionlevel2Input
-    position_user?: Position_userCreateNestedManyWithoutMas_positionlevel2Input
-  }
-
-  export type mas_positionlevel2UncheckedCreateWithoutMas_positionInput = {
-    id: string
-    name: string
-    level: number
-    positionlevel1_id?: string | null
-    mas_positionlevel3?: mas_positionlevel3UncheckedCreateNestedManyWithoutMas_positionlevel2Input
-    CompanyId?: string | null
-    position_user?: Position_userUncheckedCreateNestedManyWithoutMas_positionlevel2Input
-  }
-
-  export type mas_positionlevel2CreateOrConnectWithoutMas_positionInput = {
-    where: mas_positionlevel2WhereUniqueInput
-    create: XOR<mas_positionlevel2CreateWithoutMas_positionInput, mas_positionlevel2UncheckedCreateWithoutMas_positionInput>
-  }
-
-  export type mas_positionlevel2CreateManyMas_positionInputEnvelope = {
-    data: Enumerable<mas_positionlevel2CreateManyMas_positionInput>
-    skipDuplicates?: boolean
-  }
-
-  export type mas_positionlevel3CreateWithoutMas_positionInput = {
-    id: string
-    name: string
-    level: number
-    mas_positionlevel2?: mas_positionlevel2CreateNestedOneWithoutMas_positionlevel3Input
-    Company?: CompanyCreateNestedOneWithoutMas_positionlevel3Input
-    Position_user?: Position_userCreateNestedManyWithoutMas_positionlevel3Input
-  }
-
-  export type mas_positionlevel3UncheckedCreateWithoutMas_positionInput = {
-    id: string
-    name: string
-    level: number
-    positionlevel2_id?: string | null
-    CompanyId?: string | null
-    Position_user?: Position_userUncheckedCreateNestedManyWithoutMas_positionlevel3Input
-  }
-
-  export type mas_positionlevel3CreateOrConnectWithoutMas_positionInput = {
-    where: mas_positionlevel3WhereUniqueInput
-    create: XOR<mas_positionlevel3CreateWithoutMas_positionInput, mas_positionlevel3UncheckedCreateWithoutMas_positionInput>
-  }
-
-  export type mas_positionlevel3CreateManyMas_positionInputEnvelope = {
-    data: Enumerable<mas_positionlevel3CreateManyMas_positionInput>
-    skipDuplicates?: boolean
-  }
-
   export type CompanyCreateWithoutMas_positionInput = {
     id: string
     name: string
@@ -25183,54 +24822,6 @@ export namespace Prisma {
   export type CompanyCreateOrConnectWithoutMas_positionInput = {
     where: CompanyWhereUniqueInput
     create: XOR<CompanyCreateWithoutMas_positionInput, CompanyUncheckedCreateWithoutMas_positionInput>
-  }
-
-  export type mas_positionlevel1UpsertWithWhereUniqueWithoutMas_positionInput = {
-    where: mas_positionlevel1WhereUniqueInput
-    update: XOR<mas_positionlevel1UpdateWithoutMas_positionInput, mas_positionlevel1UncheckedUpdateWithoutMas_positionInput>
-    create: XOR<mas_positionlevel1CreateWithoutMas_positionInput, mas_positionlevel1UncheckedCreateWithoutMas_positionInput>
-  }
-
-  export type mas_positionlevel1UpdateWithWhereUniqueWithoutMas_positionInput = {
-    where: mas_positionlevel1WhereUniqueInput
-    data: XOR<mas_positionlevel1UpdateWithoutMas_positionInput, mas_positionlevel1UncheckedUpdateWithoutMas_positionInput>
-  }
-
-  export type mas_positionlevel1UpdateManyWithWhereWithoutMas_positionInput = {
-    where: mas_positionlevel1ScalarWhereInput
-    data: XOR<mas_positionlevel1UpdateManyMutationInput, mas_positionlevel1UncheckedUpdateManyWithoutMas_positionlevel1Input>
-  }
-
-  export type mas_positionlevel2UpsertWithWhereUniqueWithoutMas_positionInput = {
-    where: mas_positionlevel2WhereUniqueInput
-    update: XOR<mas_positionlevel2UpdateWithoutMas_positionInput, mas_positionlevel2UncheckedUpdateWithoutMas_positionInput>
-    create: XOR<mas_positionlevel2CreateWithoutMas_positionInput, mas_positionlevel2UncheckedCreateWithoutMas_positionInput>
-  }
-
-  export type mas_positionlevel2UpdateWithWhereUniqueWithoutMas_positionInput = {
-    where: mas_positionlevel2WhereUniqueInput
-    data: XOR<mas_positionlevel2UpdateWithoutMas_positionInput, mas_positionlevel2UncheckedUpdateWithoutMas_positionInput>
-  }
-
-  export type mas_positionlevel2UpdateManyWithWhereWithoutMas_positionInput = {
-    where: mas_positionlevel2ScalarWhereInput
-    data: XOR<mas_positionlevel2UpdateManyMutationInput, mas_positionlevel2UncheckedUpdateManyWithoutMas_positionlevel2Input>
-  }
-
-  export type mas_positionlevel3UpsertWithWhereUniqueWithoutMas_positionInput = {
-    where: mas_positionlevel3WhereUniqueInput
-    update: XOR<mas_positionlevel3UpdateWithoutMas_positionInput, mas_positionlevel3UncheckedUpdateWithoutMas_positionInput>
-    create: XOR<mas_positionlevel3CreateWithoutMas_positionInput, mas_positionlevel3UncheckedCreateWithoutMas_positionInput>
-  }
-
-  export type mas_positionlevel3UpdateWithWhereUniqueWithoutMas_positionInput = {
-    where: mas_positionlevel3WhereUniqueInput
-    data: XOR<mas_positionlevel3UpdateWithoutMas_positionInput, mas_positionlevel3UncheckedUpdateWithoutMas_positionInput>
-  }
-
-  export type mas_positionlevel3UpdateManyWithWhereWithoutMas_positionInput = {
-    where: mas_positionlevel3ScalarWhereInput
-    data: XOR<mas_positionlevel3UpdateManyMutationInput, mas_positionlevel3UncheckedUpdateManyWithoutMas_positionlevel3Input>
   }
 
   export type CompanyUpsertWithoutMas_positionInput = {
@@ -25274,36 +24865,14 @@ export namespace Prisma {
     holiday_date?: holiday_dateUncheckedUpdateManyWithoutCompanyNestedInput
   }
 
-  export type mas_positionCreateWithoutMas_positionlevel1Input = {
-    id: string
-    name: string
-    level: number
-    mas_positionlevel2?: mas_positionlevel2CreateNestedManyWithoutMas_positionInput
-    mas_positionlevel3?: mas_positionlevel3CreateNestedManyWithoutMas_positionInput
-    Company?: CompanyCreateNestedOneWithoutMas_positionInput
-  }
-
-  export type mas_positionUncheckedCreateWithoutMas_positionlevel1Input = {
-    id: string
-    name: string
-    level: number
-    mas_positionlevel2?: mas_positionlevel2UncheckedCreateNestedManyWithoutMas_positionInput
-    mas_positionlevel3?: mas_positionlevel3UncheckedCreateNestedManyWithoutMas_positionInput
-    CompanyId?: string | null
-  }
-
-  export type mas_positionCreateOrConnectWithoutMas_positionlevel1Input = {
-    where: mas_positionWhereUniqueInput
-    create: XOR<mas_positionCreateWithoutMas_positionlevel1Input, mas_positionUncheckedCreateWithoutMas_positionlevel1Input>
-  }
-
   export type mas_positionlevel2CreateWithoutMas_positionlevel1Input = {
     id: string
     name: string
     level: number
+    code: string
+    type: string
     mas_positionlevel3?: mas_positionlevel3CreateNestedManyWithoutMas_positionlevel2Input
     Company?: CompanyCreateNestedOneWithoutMas_positionlevel2Input
-    mas_position?: mas_positionCreateNestedOneWithoutMas_positionlevel2Input
     position_user?: Position_userCreateNestedManyWithoutMas_positionlevel2Input
   }
 
@@ -25311,8 +24880,9 @@ export namespace Prisma {
     id: string
     name: string
     level: number
+    code: string
+    type: string
     mas_positionlevel3?: mas_positionlevel3UncheckedCreateNestedManyWithoutMas_positionlevel2Input
-    mas_position_Id: string
     CompanyId?: string | null
     position_user?: Position_userUncheckedCreateNestedManyWithoutMas_positionlevel2Input
   }
@@ -25396,29 +24966,6 @@ export namespace Prisma {
     skipDuplicates?: boolean
   }
 
-  export type mas_positionUpsertWithoutMas_positionlevel1Input = {
-    update: XOR<mas_positionUpdateWithoutMas_positionlevel1Input, mas_positionUncheckedUpdateWithoutMas_positionlevel1Input>
-    create: XOR<mas_positionCreateWithoutMas_positionlevel1Input, mas_positionUncheckedCreateWithoutMas_positionlevel1Input>
-  }
-
-  export type mas_positionUpdateWithoutMas_positionlevel1Input = {
-    id?: StringFieldUpdateOperationsInput | string
-    name?: StringFieldUpdateOperationsInput | string
-    level?: IntFieldUpdateOperationsInput | number
-    mas_positionlevel2?: mas_positionlevel2UpdateManyWithoutMas_positionNestedInput
-    mas_positionlevel3?: mas_positionlevel3UpdateManyWithoutMas_positionNestedInput
-    Company?: CompanyUpdateOneWithoutMas_positionNestedInput
-  }
-
-  export type mas_positionUncheckedUpdateWithoutMas_positionlevel1Input = {
-    id?: StringFieldUpdateOperationsInput | string
-    name?: StringFieldUpdateOperationsInput | string
-    level?: IntFieldUpdateOperationsInput | number
-    mas_positionlevel2?: mas_positionlevel2UncheckedUpdateManyWithoutMas_positionNestedInput
-    mas_positionlevel3?: mas_positionlevel3UncheckedUpdateManyWithoutMas_positionNestedInput
-    CompanyId?: NullableStringFieldUpdateOperationsInput | string | null
-  }
-
   export type mas_positionlevel2UpsertWithWhereUniqueWithoutMas_positionlevel1Input = {
     where: mas_positionlevel2WhereUniqueInput
     update: XOR<mas_positionlevel2UpdateWithoutMas_positionlevel1Input, mas_positionlevel2UncheckedUpdateWithoutMas_positionlevel1Input>
@@ -25496,7 +25043,8 @@ export namespace Prisma {
     id: string
     name: string
     level: number
-    mas_position?: mas_positionCreateNestedOneWithoutMas_positionlevel1Input
+    code: string
+    type: string
     Company?: CompanyCreateNestedOneWithoutMas_positionlevel1Input
     Position_user?: Position_userCreateNestedManyWithoutMas_positionlevel1Input
   }
@@ -25505,7 +25053,8 @@ export namespace Prisma {
     id: string
     name: string
     level: number
-    mas_position_Id: string
+    code: string
+    type: string
     CompanyId?: string | null
     Position_user?: Position_userUncheckedCreateNestedManyWithoutMas_positionlevel1Input
   }
@@ -25519,7 +25068,8 @@ export namespace Prisma {
     id: string
     name: string
     level: number
-    mas_position?: mas_positionCreateNestedOneWithoutMas_positionlevel3Input
+    code: string
+    type: string
     Company?: CompanyCreateNestedOneWithoutMas_positionlevel3Input
     Position_user?: Position_userCreateNestedManyWithoutMas_positionlevel3Input
   }
@@ -25528,7 +25078,8 @@ export namespace Prisma {
     id: string
     name: string
     level: number
-    mas_position_Id: string
+    code: string
+    type: string
     CompanyId?: string | null
     Position_user?: Position_userUncheckedCreateNestedManyWithoutMas_positionlevel3Input
   }
@@ -25584,29 +25135,6 @@ export namespace Prisma {
     create: XOR<CompanyCreateWithoutMas_positionlevel2Input, CompanyUncheckedCreateWithoutMas_positionlevel2Input>
   }
 
-  export type mas_positionCreateWithoutMas_positionlevel2Input = {
-    id: string
-    name: string
-    level: number
-    mas_positionlevel1?: mas_positionlevel1CreateNestedManyWithoutMas_positionInput
-    mas_positionlevel3?: mas_positionlevel3CreateNestedManyWithoutMas_positionInput
-    Company?: CompanyCreateNestedOneWithoutMas_positionInput
-  }
-
-  export type mas_positionUncheckedCreateWithoutMas_positionlevel2Input = {
-    id: string
-    name: string
-    level: number
-    mas_positionlevel1?: mas_positionlevel1UncheckedCreateNestedManyWithoutMas_positionInput
-    mas_positionlevel3?: mas_positionlevel3UncheckedCreateNestedManyWithoutMas_positionInput
-    CompanyId?: string | null
-  }
-
-  export type mas_positionCreateOrConnectWithoutMas_positionlevel2Input = {
-    where: mas_positionWhereUniqueInput
-    create: XOR<mas_positionCreateWithoutMas_positionlevel2Input, mas_positionUncheckedCreateWithoutMas_positionlevel2Input>
-  }
-
   export type Position_userCreateWithoutMas_positionlevel2Input = {
     id: string
     role?: string | null
@@ -25644,7 +25172,8 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     level?: IntFieldUpdateOperationsInput | number
-    mas_position?: mas_positionUpdateOneWithoutMas_positionlevel1NestedInput
+    code?: StringFieldUpdateOperationsInput | string
+    type?: StringFieldUpdateOperationsInput | string
     Company?: CompanyUpdateOneWithoutMas_positionlevel1NestedInput
     Position_user?: Position_userUpdateManyWithoutMas_positionlevel1NestedInput
   }
@@ -25653,7 +25182,8 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     level?: IntFieldUpdateOperationsInput | number
-    mas_position_Id?: StringFieldUpdateOperationsInput | string
+    code?: StringFieldUpdateOperationsInput | string
+    type?: StringFieldUpdateOperationsInput | string
     CompanyId?: NullableStringFieldUpdateOperationsInput | string | null
     Position_user?: Position_userUncheckedUpdateManyWithoutMas_positionlevel1NestedInput
   }
@@ -25715,29 +25245,6 @@ export namespace Prisma {
     mas_position?: mas_positionUncheckedUpdateManyWithoutCompanyNestedInput
   }
 
-  export type mas_positionUpsertWithoutMas_positionlevel2Input = {
-    update: XOR<mas_positionUpdateWithoutMas_positionlevel2Input, mas_positionUncheckedUpdateWithoutMas_positionlevel2Input>
-    create: XOR<mas_positionCreateWithoutMas_positionlevel2Input, mas_positionUncheckedCreateWithoutMas_positionlevel2Input>
-  }
-
-  export type mas_positionUpdateWithoutMas_positionlevel2Input = {
-    id?: StringFieldUpdateOperationsInput | string
-    name?: StringFieldUpdateOperationsInput | string
-    level?: IntFieldUpdateOperationsInput | number
-    mas_positionlevel1?: mas_positionlevel1UpdateManyWithoutMas_positionNestedInput
-    mas_positionlevel3?: mas_positionlevel3UpdateManyWithoutMas_positionNestedInput
-    Company?: CompanyUpdateOneWithoutMas_positionNestedInput
-  }
-
-  export type mas_positionUncheckedUpdateWithoutMas_positionlevel2Input = {
-    id?: StringFieldUpdateOperationsInput | string
-    name?: StringFieldUpdateOperationsInput | string
-    level?: IntFieldUpdateOperationsInput | number
-    mas_positionlevel1?: mas_positionlevel1UncheckedUpdateManyWithoutMas_positionNestedInput
-    mas_positionlevel3?: mas_positionlevel3UncheckedUpdateManyWithoutMas_positionNestedInput
-    CompanyId?: NullableStringFieldUpdateOperationsInput | string | null
-  }
-
   export type Position_userUpsertWithWhereUniqueWithoutMas_positionlevel2Input = {
     where: Position_userWhereUniqueInput
     update: XOR<Position_userUpdateWithoutMas_positionlevel2Input, Position_userUncheckedUpdateWithoutMas_positionlevel2Input>
@@ -25758,9 +25265,10 @@ export namespace Prisma {
     id: string
     name: string
     level: number
+    code: string
+    type: string
     mas_positionlevel1?: mas_positionlevel1CreateNestedOneWithoutMas_positionlevel2Input
     Company?: CompanyCreateNestedOneWithoutMas_positionlevel2Input
-    mas_position?: mas_positionCreateNestedOneWithoutMas_positionlevel2Input
     position_user?: Position_userCreateNestedManyWithoutMas_positionlevel2Input
   }
 
@@ -25768,8 +25276,9 @@ export namespace Prisma {
     id: string
     name: string
     level: number
+    code: string
+    type: string
     positionlevel1_id?: string | null
-    mas_position_Id: string
     CompanyId?: string | null
     position_user?: Position_userUncheckedCreateNestedManyWithoutMas_positionlevel2Input
   }
@@ -25777,29 +25286,6 @@ export namespace Prisma {
   export type mas_positionlevel2CreateOrConnectWithoutMas_positionlevel3Input = {
     where: mas_positionlevel2WhereUniqueInput
     create: XOR<mas_positionlevel2CreateWithoutMas_positionlevel3Input, mas_positionlevel2UncheckedCreateWithoutMas_positionlevel3Input>
-  }
-
-  export type mas_positionCreateWithoutMas_positionlevel3Input = {
-    id: string
-    name: string
-    level: number
-    mas_positionlevel1?: mas_positionlevel1CreateNestedManyWithoutMas_positionInput
-    mas_positionlevel2?: mas_positionlevel2CreateNestedManyWithoutMas_positionInput
-    Company?: CompanyCreateNestedOneWithoutMas_positionInput
-  }
-
-  export type mas_positionUncheckedCreateWithoutMas_positionlevel3Input = {
-    id: string
-    name: string
-    level: number
-    mas_positionlevel1?: mas_positionlevel1UncheckedCreateNestedManyWithoutMas_positionInput
-    mas_positionlevel2?: mas_positionlevel2UncheckedCreateNestedManyWithoutMas_positionInput
-    CompanyId?: string | null
-  }
-
-  export type mas_positionCreateOrConnectWithoutMas_positionlevel3Input = {
-    where: mas_positionWhereUniqueInput
-    create: XOR<mas_positionCreateWithoutMas_positionlevel3Input, mas_positionUncheckedCreateWithoutMas_positionlevel3Input>
   }
 
   export type CompanyCreateWithoutMas_positionlevel3Input = {
@@ -25880,9 +25366,10 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     level?: IntFieldUpdateOperationsInput | number
+    code?: StringFieldUpdateOperationsInput | string
+    type?: StringFieldUpdateOperationsInput | string
     mas_positionlevel1?: mas_positionlevel1UpdateOneWithoutMas_positionlevel2NestedInput
     Company?: CompanyUpdateOneWithoutMas_positionlevel2NestedInput
-    mas_position?: mas_positionUpdateOneWithoutMas_positionlevel2NestedInput
     position_user?: Position_userUpdateManyWithoutMas_positionlevel2NestedInput
   }
 
@@ -25890,33 +25377,11 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     level?: IntFieldUpdateOperationsInput | number
+    code?: StringFieldUpdateOperationsInput | string
+    type?: StringFieldUpdateOperationsInput | string
     positionlevel1_id?: NullableStringFieldUpdateOperationsInput | string | null
-    mas_position_Id?: StringFieldUpdateOperationsInput | string
     CompanyId?: NullableStringFieldUpdateOperationsInput | string | null
     position_user?: Position_userUncheckedUpdateManyWithoutMas_positionlevel2NestedInput
-  }
-
-  export type mas_positionUpsertWithoutMas_positionlevel3Input = {
-    update: XOR<mas_positionUpdateWithoutMas_positionlevel3Input, mas_positionUncheckedUpdateWithoutMas_positionlevel3Input>
-    create: XOR<mas_positionCreateWithoutMas_positionlevel3Input, mas_positionUncheckedCreateWithoutMas_positionlevel3Input>
-  }
-
-  export type mas_positionUpdateWithoutMas_positionlevel3Input = {
-    id?: StringFieldUpdateOperationsInput | string
-    name?: StringFieldUpdateOperationsInput | string
-    level?: IntFieldUpdateOperationsInput | number
-    mas_positionlevel1?: mas_positionlevel1UpdateManyWithoutMas_positionNestedInput
-    mas_positionlevel2?: mas_positionlevel2UpdateManyWithoutMas_positionNestedInput
-    Company?: CompanyUpdateOneWithoutMas_positionNestedInput
-  }
-
-  export type mas_positionUncheckedUpdateWithoutMas_positionlevel3Input = {
-    id?: StringFieldUpdateOperationsInput | string
-    name?: StringFieldUpdateOperationsInput | string
-    level?: IntFieldUpdateOperationsInput | number
-    mas_positionlevel1?: mas_positionlevel1UncheckedUpdateManyWithoutMas_positionNestedInput
-    mas_positionlevel2?: mas_positionlevel2UncheckedUpdateManyWithoutMas_positionNestedInput
-    CompanyId?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type CompanyUpsertWithoutMas_positionlevel3Input = {
@@ -26017,7 +25482,8 @@ export namespace Prisma {
     id: string
     name: string
     level: number
-    mas_position?: mas_positionCreateNestedOneWithoutMas_positionlevel1Input
+    code: string
+    type: string
     mas_positionlevel2?: mas_positionlevel2CreateNestedManyWithoutMas_positionlevel1Input
     Company?: CompanyCreateNestedOneWithoutMas_positionlevel1Input
   }
@@ -26026,7 +25492,8 @@ export namespace Prisma {
     id: string
     name: string
     level: number
-    mas_position_Id: string
+    code: string
+    type: string
     mas_positionlevel2?: mas_positionlevel2UncheckedCreateNestedManyWithoutMas_positionlevel1Input
     CompanyId?: string | null
   }
@@ -26040,19 +25507,21 @@ export namespace Prisma {
     id: string
     name: string
     level: number
+    code: string
+    type: string
     mas_positionlevel1?: mas_positionlevel1CreateNestedOneWithoutMas_positionlevel2Input
     mas_positionlevel3?: mas_positionlevel3CreateNestedManyWithoutMas_positionlevel2Input
     Company?: CompanyCreateNestedOneWithoutMas_positionlevel2Input
-    mas_position?: mas_positionCreateNestedOneWithoutMas_positionlevel2Input
   }
 
   export type mas_positionlevel2UncheckedCreateWithoutPosition_userInput = {
     id: string
     name: string
     level: number
+    code: string
+    type: string
     positionlevel1_id?: string | null
     mas_positionlevel3?: mas_positionlevel3UncheckedCreateNestedManyWithoutMas_positionlevel2Input
-    mas_position_Id: string
     CompanyId?: string | null
   }
 
@@ -26065,8 +25534,9 @@ export namespace Prisma {
     id: string
     name: string
     level: number
+    code: string
+    type: string
     mas_positionlevel2?: mas_positionlevel2CreateNestedOneWithoutMas_positionlevel3Input
-    mas_position?: mas_positionCreateNestedOneWithoutMas_positionlevel3Input
     Company?: CompanyCreateNestedOneWithoutMas_positionlevel3Input
   }
 
@@ -26074,8 +25544,9 @@ export namespace Prisma {
     id: string
     name: string
     level: number
+    code: string
+    type: string
     positionlevel2_id?: string | null
-    mas_position_Id: string
     CompanyId?: string | null
   }
 
@@ -26130,7 +25601,8 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     level?: IntFieldUpdateOperationsInput | number
-    mas_position?: mas_positionUpdateOneWithoutMas_positionlevel1NestedInput
+    code?: StringFieldUpdateOperationsInput | string
+    type?: StringFieldUpdateOperationsInput | string
     mas_positionlevel2?: mas_positionlevel2UpdateManyWithoutMas_positionlevel1NestedInput
     Company?: CompanyUpdateOneWithoutMas_positionlevel1NestedInput
   }
@@ -26139,7 +25611,8 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     level?: IntFieldUpdateOperationsInput | number
-    mas_position_Id?: StringFieldUpdateOperationsInput | string
+    code?: StringFieldUpdateOperationsInput | string
+    type?: StringFieldUpdateOperationsInput | string
     mas_positionlevel2?: mas_positionlevel2UncheckedUpdateManyWithoutMas_positionlevel1NestedInput
     CompanyId?: NullableStringFieldUpdateOperationsInput | string | null
   }
@@ -26153,19 +25626,21 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     level?: IntFieldUpdateOperationsInput | number
+    code?: StringFieldUpdateOperationsInput | string
+    type?: StringFieldUpdateOperationsInput | string
     mas_positionlevel1?: mas_positionlevel1UpdateOneWithoutMas_positionlevel2NestedInput
     mas_positionlevel3?: mas_positionlevel3UpdateManyWithoutMas_positionlevel2NestedInput
     Company?: CompanyUpdateOneWithoutMas_positionlevel2NestedInput
-    mas_position?: mas_positionUpdateOneWithoutMas_positionlevel2NestedInput
   }
 
   export type mas_positionlevel2UncheckedUpdateWithoutPosition_userInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     level?: IntFieldUpdateOperationsInput | number
+    code?: StringFieldUpdateOperationsInput | string
+    type?: StringFieldUpdateOperationsInput | string
     positionlevel1_id?: NullableStringFieldUpdateOperationsInput | string | null
     mas_positionlevel3?: mas_positionlevel3UncheckedUpdateManyWithoutMas_positionlevel2NestedInput
-    mas_position_Id?: StringFieldUpdateOperationsInput | string
     CompanyId?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
@@ -26178,8 +25653,9 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     level?: IntFieldUpdateOperationsInput | number
+    code?: StringFieldUpdateOperationsInput | string
+    type?: StringFieldUpdateOperationsInput | string
     mas_positionlevel2?: mas_positionlevel2UpdateOneWithoutMas_positionlevel3NestedInput
-    mas_position?: mas_positionUpdateOneWithoutMas_positionlevel3NestedInput
     Company?: CompanyUpdateOneWithoutMas_positionlevel3NestedInput
   }
 
@@ -26187,8 +25663,9 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     level?: IntFieldUpdateOperationsInput | number
+    code?: StringFieldUpdateOperationsInput | string
+    type?: StringFieldUpdateOperationsInput | string
     positionlevel2_id?: NullableStringFieldUpdateOperationsInput | string | null
-    mas_position_Id?: StringFieldUpdateOperationsInput | string
     CompanyId?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
@@ -26306,23 +25783,26 @@ export namespace Prisma {
     id: string
     name: string
     level: number
+    code: string
+    type: string
     positionlevel2_id?: string | null
-    mas_position_Id: string
   }
 
   export type mas_positionlevel2CreateManyCompanyInput = {
     id: string
     name: string
     level: number
+    code: string
+    type: string
     positionlevel1_id?: string | null
-    mas_position_Id: string
   }
 
   export type mas_positionlevel1CreateManyCompanyInput = {
     id: string
     name: string
     level: number
-    mas_position_Id: string
+    code: string
+    type: string
   }
 
   export type holiday_dateCreateManyCompanyInput = {
@@ -26429,8 +25909,9 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     level?: IntFieldUpdateOperationsInput | number
+    code?: StringFieldUpdateOperationsInput | string
+    type?: StringFieldUpdateOperationsInput | string
     mas_positionlevel2?: mas_positionlevel2UpdateOneWithoutMas_positionlevel3NestedInput
-    mas_position?: mas_positionUpdateOneWithoutMas_positionlevel3NestedInput
     Position_user?: Position_userUpdateManyWithoutMas_positionlevel3NestedInput
   }
 
@@ -26438,8 +25919,9 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     level?: IntFieldUpdateOperationsInput | number
+    code?: StringFieldUpdateOperationsInput | string
+    type?: StringFieldUpdateOperationsInput | string
     positionlevel2_id?: NullableStringFieldUpdateOperationsInput | string | null
-    mas_position_Id?: StringFieldUpdateOperationsInput | string
     Position_user?: Position_userUncheckedUpdateManyWithoutMas_positionlevel3NestedInput
   }
 
@@ -26447,17 +25929,19 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     level?: IntFieldUpdateOperationsInput | number
+    code?: StringFieldUpdateOperationsInput | string
+    type?: StringFieldUpdateOperationsInput | string
     positionlevel2_id?: NullableStringFieldUpdateOperationsInput | string | null
-    mas_position_Id?: StringFieldUpdateOperationsInput | string
   }
 
   export type mas_positionlevel2UpdateWithoutCompanyInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     level?: IntFieldUpdateOperationsInput | number
+    code?: StringFieldUpdateOperationsInput | string
+    type?: StringFieldUpdateOperationsInput | string
     mas_positionlevel1?: mas_positionlevel1UpdateOneWithoutMas_positionlevel2NestedInput
     mas_positionlevel3?: mas_positionlevel3UpdateManyWithoutMas_positionlevel2NestedInput
-    mas_position?: mas_positionUpdateOneWithoutMas_positionlevel2NestedInput
     position_user?: Position_userUpdateManyWithoutMas_positionlevel2NestedInput
   }
 
@@ -26465,9 +25949,10 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     level?: IntFieldUpdateOperationsInput | number
+    code?: StringFieldUpdateOperationsInput | string
+    type?: StringFieldUpdateOperationsInput | string
     positionlevel1_id?: NullableStringFieldUpdateOperationsInput | string | null
     mas_positionlevel3?: mas_positionlevel3UncheckedUpdateManyWithoutMas_positionlevel2NestedInput
-    mas_position_Id?: StringFieldUpdateOperationsInput | string
     position_user?: Position_userUncheckedUpdateManyWithoutMas_positionlevel2NestedInput
   }
 
@@ -26475,15 +25960,17 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     level?: IntFieldUpdateOperationsInput | number
+    code?: StringFieldUpdateOperationsInput | string
+    type?: StringFieldUpdateOperationsInput | string
     positionlevel1_id?: NullableStringFieldUpdateOperationsInput | string | null
-    mas_position_Id?: StringFieldUpdateOperationsInput | string
   }
 
   export type mas_positionlevel1UpdateWithoutCompanyInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     level?: IntFieldUpdateOperationsInput | number
-    mas_position?: mas_positionUpdateOneWithoutMas_positionlevel1NestedInput
+    code?: StringFieldUpdateOperationsInput | string
+    type?: StringFieldUpdateOperationsInput | string
     mas_positionlevel2?: mas_positionlevel2UpdateManyWithoutMas_positionlevel1NestedInput
     Position_user?: Position_userUpdateManyWithoutMas_positionlevel1NestedInput
   }
@@ -26492,7 +25979,8 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     level?: IntFieldUpdateOperationsInput | number
-    mas_position_Id?: StringFieldUpdateOperationsInput | string
+    code?: StringFieldUpdateOperationsInput | string
+    type?: StringFieldUpdateOperationsInput | string
     mas_positionlevel2?: mas_positionlevel2UncheckedUpdateManyWithoutMas_positionlevel1NestedInput
     Position_user?: Position_userUncheckedUpdateManyWithoutMas_positionlevel1NestedInput
   }
@@ -26501,7 +25989,8 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     level?: IntFieldUpdateOperationsInput | number
-    mas_position_Id?: StringFieldUpdateOperationsInput | string
+    code?: StringFieldUpdateOperationsInput | string
+    type?: StringFieldUpdateOperationsInput | string
   }
 
   export type holiday_dateUpdateWithoutCompanyInput = {
@@ -26526,18 +26015,12 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     level?: IntFieldUpdateOperationsInput | number
-    mas_positionlevel1?: mas_positionlevel1UpdateManyWithoutMas_positionNestedInput
-    mas_positionlevel2?: mas_positionlevel2UpdateManyWithoutMas_positionNestedInput
-    mas_positionlevel3?: mas_positionlevel3UpdateManyWithoutMas_positionNestedInput
   }
 
   export type mas_positionUncheckedUpdateWithoutCompanyInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     level?: IntFieldUpdateOperationsInput | number
-    mas_positionlevel1?: mas_positionlevel1UncheckedUpdateManyWithoutMas_positionNestedInput
-    mas_positionlevel2?: mas_positionlevel2UncheckedUpdateManyWithoutMas_positionNestedInput
-    mas_positionlevel3?: mas_positionlevel3UncheckedUpdateManyWithoutMas_positionNestedInput
   }
 
   export type mas_positionUncheckedUpdateManyWithoutMas_positionInput = {
@@ -26866,90 +26349,12 @@ export namespace Prisma {
     zipcode?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
-  export type mas_positionlevel1CreateManyMas_positionInput = {
-    id: string
-    name: string
-    level: number
-    CompanyId?: string | null
-  }
-
-  export type mas_positionlevel2CreateManyMas_positionInput = {
-    id: string
-    name: string
-    level: number
-    positionlevel1_id?: string | null
-    CompanyId?: string | null
-  }
-
-  export type mas_positionlevel3CreateManyMas_positionInput = {
-    id: string
-    name: string
-    level: number
-    positionlevel2_id?: string | null
-    CompanyId?: string | null
-  }
-
-  export type mas_positionlevel1UpdateWithoutMas_positionInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    name?: StringFieldUpdateOperationsInput | string
-    level?: IntFieldUpdateOperationsInput | number
-    mas_positionlevel2?: mas_positionlevel2UpdateManyWithoutMas_positionlevel1NestedInput
-    Company?: CompanyUpdateOneWithoutMas_positionlevel1NestedInput
-    Position_user?: Position_userUpdateManyWithoutMas_positionlevel1NestedInput
-  }
-
-  export type mas_positionlevel1UncheckedUpdateWithoutMas_positionInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    name?: StringFieldUpdateOperationsInput | string
-    level?: IntFieldUpdateOperationsInput | number
-    mas_positionlevel2?: mas_positionlevel2UncheckedUpdateManyWithoutMas_positionlevel1NestedInput
-    CompanyId?: NullableStringFieldUpdateOperationsInput | string | null
-    Position_user?: Position_userUncheckedUpdateManyWithoutMas_positionlevel1NestedInput
-  }
-
-  export type mas_positionlevel2UpdateWithoutMas_positionInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    name?: StringFieldUpdateOperationsInput | string
-    level?: IntFieldUpdateOperationsInput | number
-    mas_positionlevel1?: mas_positionlevel1UpdateOneWithoutMas_positionlevel2NestedInput
-    mas_positionlevel3?: mas_positionlevel3UpdateManyWithoutMas_positionlevel2NestedInput
-    Company?: CompanyUpdateOneWithoutMas_positionlevel2NestedInput
-    position_user?: Position_userUpdateManyWithoutMas_positionlevel2NestedInput
-  }
-
-  export type mas_positionlevel2UncheckedUpdateWithoutMas_positionInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    name?: StringFieldUpdateOperationsInput | string
-    level?: IntFieldUpdateOperationsInput | number
-    positionlevel1_id?: NullableStringFieldUpdateOperationsInput | string | null
-    mas_positionlevel3?: mas_positionlevel3UncheckedUpdateManyWithoutMas_positionlevel2NestedInput
-    CompanyId?: NullableStringFieldUpdateOperationsInput | string | null
-    position_user?: Position_userUncheckedUpdateManyWithoutMas_positionlevel2NestedInput
-  }
-
-  export type mas_positionlevel3UpdateWithoutMas_positionInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    name?: StringFieldUpdateOperationsInput | string
-    level?: IntFieldUpdateOperationsInput | number
-    mas_positionlevel2?: mas_positionlevel2UpdateOneWithoutMas_positionlevel3NestedInput
-    Company?: CompanyUpdateOneWithoutMas_positionlevel3NestedInput
-    Position_user?: Position_userUpdateManyWithoutMas_positionlevel3NestedInput
-  }
-
-  export type mas_positionlevel3UncheckedUpdateWithoutMas_positionInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    name?: StringFieldUpdateOperationsInput | string
-    level?: IntFieldUpdateOperationsInput | number
-    positionlevel2_id?: NullableStringFieldUpdateOperationsInput | string | null
-    CompanyId?: NullableStringFieldUpdateOperationsInput | string | null
-    Position_user?: Position_userUncheckedUpdateManyWithoutMas_positionlevel3NestedInput
-  }
-
   export type mas_positionlevel2CreateManyMas_positionlevel1Input = {
     id: string
     name: string
     level: number
-    mas_position_Id: string
+    code: string
+    type: string
     CompanyId?: string | null
   }
 
@@ -26966,9 +26371,10 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     level?: IntFieldUpdateOperationsInput | number
+    code?: StringFieldUpdateOperationsInput | string
+    type?: StringFieldUpdateOperationsInput | string
     mas_positionlevel3?: mas_positionlevel3UpdateManyWithoutMas_positionlevel2NestedInput
     Company?: CompanyUpdateOneWithoutMas_positionlevel2NestedInput
-    mas_position?: mas_positionUpdateOneWithoutMas_positionlevel2NestedInput
     position_user?: Position_userUpdateManyWithoutMas_positionlevel2NestedInput
   }
 
@@ -26976,8 +26382,9 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     level?: IntFieldUpdateOperationsInput | number
+    code?: StringFieldUpdateOperationsInput | string
+    type?: StringFieldUpdateOperationsInput | string
     mas_positionlevel3?: mas_positionlevel3UncheckedUpdateManyWithoutMas_positionlevel2NestedInput
-    mas_position_Id?: StringFieldUpdateOperationsInput | string
     CompanyId?: NullableStringFieldUpdateOperationsInput | string | null
     position_user?: Position_userUncheckedUpdateManyWithoutMas_positionlevel2NestedInput
   }
@@ -27004,7 +26411,8 @@ export namespace Prisma {
     id: string
     name: string
     level: number
-    mas_position_Id: string
+    code: string
+    type: string
     CompanyId?: string | null
   }
 
@@ -27021,7 +26429,8 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     level?: IntFieldUpdateOperationsInput | number
-    mas_position?: mas_positionUpdateOneWithoutMas_positionlevel3NestedInput
+    code?: StringFieldUpdateOperationsInput | string
+    type?: StringFieldUpdateOperationsInput | string
     Company?: CompanyUpdateOneWithoutMas_positionlevel3NestedInput
     Position_user?: Position_userUpdateManyWithoutMas_positionlevel3NestedInput
   }
@@ -27030,7 +26439,8 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     level?: IntFieldUpdateOperationsInput | number
-    mas_position_Id?: StringFieldUpdateOperationsInput | string
+    code?: StringFieldUpdateOperationsInput | string
+    type?: StringFieldUpdateOperationsInput | string
     CompanyId?: NullableStringFieldUpdateOperationsInput | string | null
     Position_user?: Position_userUncheckedUpdateManyWithoutMas_positionlevel3NestedInput
   }

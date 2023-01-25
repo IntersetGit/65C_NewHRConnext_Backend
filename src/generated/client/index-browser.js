@@ -178,7 +178,8 @@ exports.Prisma.Mas_positionlevel1ScalarFieldEnum = makeEnum({
   id: 'id',
   name: 'name',
   level: 'level',
-  mas_position_Id: 'mas_position_Id',
+  code: 'code',
+  type: 'type',
   CompanyId: 'CompanyId'
 });
 
@@ -186,8 +187,9 @@ exports.Prisma.Mas_positionlevel2ScalarFieldEnum = makeEnum({
   id: 'id',
   name: 'name',
   level: 'level',
+  code: 'code',
+  type: 'type',
   positionlevel1_id: 'positionlevel1_id',
-  mas_position_Id: 'mas_position_Id',
   CompanyId: 'CompanyId'
 });
 
@@ -195,8 +197,9 @@ exports.Prisma.Mas_positionlevel3ScalarFieldEnum = makeEnum({
   id: 'id',
   name: 'name',
   level: 'level',
+  code: 'code',
+  type: 'type',
   positionlevel2_id: 'positionlevel2_id',
-  mas_position_Id: 'mas_position_Id',
   CompanyId: 'CompanyId'
 });
 
