@@ -20,8 +20,15 @@ export const masterTypedef = gql`
     district: [District]
   }
 
+  type holiday_year {
+    id: ID!
+    date: Date              
+    holiday_name: String     
+  }
+
   type Query {
     getProvince: [Province]
+    getHoliday: [holiday_year]
   }
 `;
 

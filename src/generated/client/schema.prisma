@@ -236,6 +236,12 @@ model holiday_date {
   CompanyId         String?  @db.Uuid
 }
 
+model holiday_year {
+  id                String    @unique @db.Uuid
+  date              DateTime
+  holiday_name      String?    
+}
+
 
 
 
