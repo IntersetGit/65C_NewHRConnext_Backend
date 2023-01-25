@@ -22,17 +22,17 @@ generator client {
 //   authorId  Int
 // }
 model Company {
-  id                      String          @unique @db.Uuid
-  name                    String          @db.VarChar(255)
-  companyCode             String          @unique
-  userlimit               Int             @default(0)
+  id                      String               @unique @db.Uuid
+  name                    String               @db.VarChar(255)
+  companyCode             String               @unique
+  userlimit               Int                  @default(0)
   company_registration_id String?
   company_vat_id          String?
   icon                    String?
-  createdAt               DateTime        @default(now())
-  updatedAt               DateTime        @updatedAt
-  ownerId                 String          @db.Uuid
-  owner                   User            @relation(fields: [ownerId], references: [id])
+  createdAt               DateTime             @default(now())
+  updatedAt               DateTime             @updatedAt
+  ownerId                 String               @db.Uuid
+  owner                   User                 @relation(fields: [ownerId], references: [id])
   branch                  CompanyBranch[]
   mas_positionlevel3      mas_positionlevel3[]
   mas_positionlevel2      mas_positionlevel2[]
@@ -122,24 +122,23 @@ model Profile {
 }
 
 model User {
-  id              String         @unique @db.Uuid
-  email           String         @unique
+  id              String          @unique @db.Uuid
+  email           String          @unique
   password        String
   profile         Profile?
-  islogin         Boolean        @default(false)
-  isActive        Boolean        @default(false)
-  isOwner         Boolean        @default(false)
-  lastlogin       DateTime?      @updatedAt
-  createdAt       DateTime       @default(now())
-  roleId          String?        @db.Uuid
-  role            Role?          @relation(fields: [roleId], references: [id])
-  RoleCompanyID   String?        @db.Uuid
+  islogin         Boolean         @default(false)
+  isActive        Boolean         @default(false)
+  isOwner         Boolean         @default(false)
+  lastlogin       DateTime?       @updatedAt
+  createdAt       DateTime        @default(now())
+  roleId          String?         @db.Uuid
+  role            Role?           @relation(fields: [roleId], references: [id])
+  RoleCompanyID   String?         @db.Uuid
   company         Company[]
-  companyBranch   CompanyBranch? @relation(fields: [companyBranchId], references: [id])
-  companyBranchId String?        @db.Uuid
-  Role_Company    Role_Company?  @relation(fields: [RoleCompanyID], references: [id])
-  Position_user  Position_user[]
-     
+  companyBranch   CompanyBranch?  @relation(fields: [companyBranchId], references: [id])
+  companyBranchId String?         @db.Uuid
+  Role_Company    Role_Company?   @relation(fields: [RoleCompanyID], references: [id])
+  Position_user   Position_user[]
 }
 
 model Role {
@@ -181,91 +180,79 @@ model Amphoe {
 }
 
 model mas_position {
-  id                  String   @unique @db.Uuid
-  name                String
-  level               Int      @db.SmallInt
-  mas_positionlevel1  mas_positionlevel1[]
-  mas_positionlevel2  mas_positionlevel2[]
-  mas_positionlevel3  mas_positionlevel3[]
-  Company             Company? @relation(fields: [CompanyId], references: [id])
-  CompanyId           String?  @db.Uuid
+  id                 String               @unique @db.Uuid
+  name               String
+  level              Int                  @db.SmallInt
+  mas_positionlevel1 mas_positionlevel1[]
+  mas_positionlevel2 mas_positionlevel2[]
+  mas_positionlevel3 mas_positionlevel3[]
+  Company            Company?             @relation(fields: [CompanyId], references: [id])
+  CompanyId          String?              @db.Uuid
 }
 
 model mas_positionlevel1 {
-  id                  String   @unique @db.Uuid
-  name                String
-  level               Int      @db.SmallInt
-  mas_position_Id     String   @db.Uuid
-  mas_position        mas_position? @relation(fields: [mas_position_Id], references: [id])
-  mas_positionlevel2  mas_positionlevel2[]
-  Company             Company? @relation(fields: [CompanyId], references: [id])
-  CompanyId           String?  @db.Uuid
-  Position_user       Position_user[]
-
-
+  id                 String               @unique @db.Uuid
+  name               String
+  level              Int                  @db.SmallInt
+  mas_position_Id    String               @db.Uuid
+  mas_position       mas_position?        @relation(fields: [mas_position_Id], references: [id])
+  mas_positionlevel2 mas_positionlevel2[]
+  Company            Company?             @relation(fields: [CompanyId], references: [id])
+  CompanyId          String?              @db.Uuid
+  Position_user      Position_user[]
 }
 
 model mas_positionlevel2 {
-  id                  String       @unique @db.Uuid
-  name                String
-  level               Int          @db.SmallInt
-  positionlevel1_id   String?      @db.Uuid
-  mas_positionlevel1  mas_positionlevel1? @relation(fields: [positionlevel1_id], references: [id])
-  mas_positionlevel3  mas_positionlevel3[]
-  Company             Company? @relation(fields: [CompanyId], references: [id])
-  mas_position_Id     String        @db.Uuid
-  mas_position        mas_position? @relation(fields: [mas_position_Id], references: [id])
-  CompanyId           String?       @db.Uuid
-  position_user       Position_user[]
+  id                 String               @unique @db.Uuid
+  name               String
+  level              Int                  @db.SmallInt
+  positionlevel1_id  String?              @db.Uuid
+  mas_positionlevel1 mas_positionlevel1?  @relation(fields: [positionlevel1_id], references: [id])
+  mas_positionlevel3 mas_positionlevel3[]
+  Company            Company?             @relation(fields: [CompanyId], references: [id])
+  mas_position_Id    String               @db.Uuid
+  mas_position       mas_position?        @relation(fields: [mas_position_Id], references: [id])
+  CompanyId          String?              @db.Uuid
+  position_user      Position_user[]
 }
-
 
 model mas_positionlevel3 {
-  id                  String   @unique @db.Uuid
-  name                String
-  level               Int      @db.SmallInt
-  positionlevel2_id   String?  @db.Uuid
-  mas_positionlevel2  mas_positionlevel2? @relation(fields: [positionlevel2_id], references: [id])
-  mas_position_Id     String   @db.Uuid
-  mas_position        mas_position? @relation(fields: [mas_position_Id], references: [id])
-  Company             Company? @relation(fields: [CompanyId], references: [id])
-  CompanyId           String?  @db.Uuid
-  Position_user       Position_user[]
+  id                 String              @unique @db.Uuid
+  name               String
+  level              Int                 @db.SmallInt
+  positionlevel2_id  String?             @db.Uuid
+  mas_positionlevel2 mas_positionlevel2? @relation(fields: [positionlevel2_id], references: [id])
+  mas_position_Id    String              @db.Uuid
+  mas_position       mas_position?       @relation(fields: [mas_position_Id], references: [id])
+  Company            Company?            @relation(fields: [CompanyId], references: [id])
+  CompanyId          String?             @db.Uuid
+  Position_user      Position_user[]
 }
 
-model Position_user{
-  id                    String   @unique @db.Uuid
-  user_id               String?  @db.Uuid
-  position1_id          String?  @db.Uuid
-  position2_id          String?  @db.Uuid
-  position3_id          String?  @db.Uuid
-  role                  String? 
-  leader                String?  
-  user                  User? @relation(fields: [user_id], references: [id])
-  mas_positionlevel1    mas_positionlevel1? @relation(fields: [position1_id], references: [id])
-  mas_positionlevel2    mas_positionlevel2? @relation(fields: [position2_id], references: [id])
-  mas_positionlevel3    mas_positionlevel3? @relation(fields: [position3_id], references: [id])
+model Position_user {
+  id                 String              @unique @db.Uuid
+  user_id            String?             @db.Uuid
+  position1_id       String?             @db.Uuid
+  position2_id       String?             @db.Uuid
+  position3_id       String?             @db.Uuid
+  role               String?
+  leader             String?
+  user               User?               @relation(fields: [user_id], references: [id])
+  mas_positionlevel1 mas_positionlevel1? @relation(fields: [position1_id], references: [id])
+  mas_positionlevel2 mas_positionlevel2? @relation(fields: [position2_id], references: [id])
+  mas_positionlevel3 mas_positionlevel3? @relation(fields: [position3_id], references: [id])
 }
-
 
 model holiday_date {
-  id                String   @unique @db.Uuid
-  holiday_name      String?  
-  date              DateTime
-  Company           Company? @relation(fields: [CompanyId], references: [id])
-  CompanyId         String?  @db.Uuid
+  id           String   @unique @db.Uuid
+  holiday_name String?
+  date         DateTime
+  Company      Company? @relation(fields: [CompanyId], references: [id])
+  CompanyId    String?  @db.Uuid
 }
 
 model holiday_year {
-  id                String    @unique @db.Uuid
-  date              DateTime
-  holiday_name      String?    
+  id           String   @unique @db.Uuid
+  date         DateTime
+  holiday_name String?
 }
-
-
-
-
-
-
-
-
