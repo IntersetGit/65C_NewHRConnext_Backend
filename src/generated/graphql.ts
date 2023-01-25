@@ -357,6 +357,7 @@ export type MutationUpdateRoleCompanyMangementArgs = {
 
 export type MutationValidateRouteArgs = {
   args: Scalars['String'];
+  branch?: InputMaybe<Scalars['String']>;
 };
 
 export type OwnCompanyType = {

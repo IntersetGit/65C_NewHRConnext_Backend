@@ -40,7 +40,7 @@ export const providerTypedef = gql`
 
   type Mutation {
     login(data: LoginaInput!): LoginResponse
-    validateRoute(args: String!): ValidateRoute
+    validateRoute(args: String!, branch: String): ValidateRoute
     refreshToken: RefreshtokenResponseType
   }
 `;
@@ -152,7 +152,7 @@ const resolvers: Resolvers = {
     /**
      * ?Validate company sub path
      */
-    async validateRoute(p, { args }, ctx) {
+    async validateRoute(p, { args, branch }, ctx) {
       if (!args)
         throw new GraphQLError('Argument must be valid', {
           extensions: {
@@ -162,6 +162,7 @@ const resolvers: Resolvers = {
             },
           },
         });
+      const branchfilter = branch ? branch : null;
       const result = await ctx.prisma.user.findUnique({
         where: {
           id: ctx.currentUser?.id,
@@ -180,8 +181,8 @@ const resolvers: Resolvers = {
                   id: true,
                   name: true,
                 },
-                where: { isMainbranch: true },
-                take: 1,
+                //where: { isMainbranch: true },
+                //take: 1,
               },
             },
             where: { companyCode: args },
@@ -216,6 +217,9 @@ const resolvers: Resolvers = {
       /**
        * ?Set token ใหม่
        */
+      const branchSearch = branchfilter
+        ? result.company[0].branch.find((e) => e.id === branchfilter)
+        : undefined;
       const credential = {
         id: result?.id,
         roleId: result?.roleId,
@@ -224,7 +228,9 @@ const resolvers: Resolvers = {
           ? result.company[0].id
           : result?.companyBranch?.company?.id,
         branchId: result?.isOwner
-          ? result.company[0].branch[0].id
+          ? branchSearch
+            ? branchSearch.id
+            : result.company[0].branch[0].id
           : result?.companyBranch?.id,
       };
 
@@ -233,9 +239,9 @@ const resolvers: Resolvers = {
       const access_token = await jwt.sign(credential, secret, {
         expiresIn: expire,
       });
-      const refresh_token = await jwt.sign(credential,secret , {
-        expiresIn: '7d'
-      })
+      const refresh_token = await jwt.sign(credential, secret, {
+        expiresIn: '7d',
+      });
       // console.log(result?.company[0].branch[0]);
       return {
         acess: result?.isOwner
@@ -246,8 +252,12 @@ const resolvers: Resolvers = {
         path: args,
         currentBranch: result?.isOwner
           ? {
-              branchId: result.company[0].branch[0].id,
-              branchName: result.company[0].branch[0].name,
+              branchId: branchSearch
+                ? branchSearch.id
+                : result.company[0].branch[0].id,
+              branchName: branchSearch
+                ? branchSearch.name
+                : result.company[0].branch[0].name,
               companyName: result.company[0].name,
               companyId: result.company[0].id,
             }
@@ -258,7 +268,7 @@ const resolvers: Resolvers = {
               companyName: result.companyBranch?.company?.name,
             },
         reAccess: access_token,
-        reFresh : refresh_token
+        reFresh: refresh_token,
       };
     },
   },
