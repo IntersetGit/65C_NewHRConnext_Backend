@@ -12,6 +12,7 @@ import { v4 } from 'uuid';
 export const positionTypedef = gql`
 
 input CreatedAndUpdatePosition{
+  id_Position1: ID!
   name_Position1: String
   level_Position1: Int 
   code_position1: String
@@ -20,17 +21,21 @@ input CreatedAndUpdatePosition{
 
 
 input CreatedmasPosition2{
+  id_Position2: ID!
   name_Position2: String
   level_Position2: Int 
   code_position2: String
+  positionlevel1_id: ID
   masPosition3: [CreatedmasPosition3] 
 }
 
 
 input CreatedmasPosition3{
+  id_Position3: ID!
   name_Position3: String
   level_Position3: Int 
   code_position3: String
+  positionlevel2_id: ID
 }
 
 type mas_position{
@@ -97,7 +102,8 @@ type Query {
 
 
   type Mutation {
-    CreatedAndEditPosition(data:[CreatedAndUpdatePosition!]): CreatepositionResponseType
+    CreatedPosition(data:[CreatedAndUpdatePosition!]): CreatepositionResponseType
+    EditPosition(data:[CreatedAndUpdatePosition!]): CreatepositionResponseType
   }
 `;
 
@@ -142,7 +148,58 @@ export const positionResolvers: Resolvers = {
      * @param ctx
      * @returns
      */
-    async CreatedAndEditPosition(p, args, ctx) {
+    async EditPosition(p, args, ctx) {
+      // const genPo_1id = v4();
+      // const genPo_2id = v4();
+      // const genPo_3id = v4();
+      args.data?.forEach(async (e) => {
+        const createdPo_1 = await ctx.prisma.mas_positionlevel1.update({
+          // include: { mas_positionlevel2: { include: { mas_positionlevel3: true } } },
+          data: {
+            name: e.name_Position1 as string,
+            level: e.level_Position1 as number,
+            code: e.code_position1 as string,
+          },
+          where:{
+            id: e.id_Position1
+          }
+        })
+        e.masPosition2?.forEach(async (a) => {
+          const CretePo_2 = await ctx.prisma.mas_positionlevel2.update({
+            data: {
+              positionlevel1_id: a?.positionlevel1_id,
+              name: a?.name_Position2 as string,
+              level: a?.level_Position2 as number,
+              code: a?.code_position2 as string,
+            },
+            where:{
+              id: a?.id_Position2
+            }
+          })
+          a?.masPosition3?.forEach(async (b) => {
+            const CretePo_3 = await ctx.prisma.mas_positionlevel3.update({
+              data: {
+                positionlevel2_id: b?.positionlevel2_id,
+                name: b?.name_Position3 as string,
+                level: b?.level_Position3 as number,
+                code: b?.code_position3 as string,
+              },
+              where:{
+                id: b?.id_Position3
+              }
+            })
+          })
+        })
+      })
+      return {
+        message: 'success',
+        status: true,
+      };
+
+    },
+
+
+    async CreatedPosition(p, args, ctx) {
       // const genPo_1id = v4();
       // const genPo_2id = v4();
       // const genPo_3id = v4();
@@ -200,7 +257,8 @@ export const positionResolvers: Resolvers = {
 
 const resolversPosition = {
   'Query.getMasPositon': [authenticate()],
-  'Mutation.CreatedAndEditPosition': [authenticate()],
+  'Mutation.CreatedPosition': [authenticate()],
+  'Mutation.EditPosition': [authenticate()],
 };
 
 export const companyResolvers = composeResolvers(

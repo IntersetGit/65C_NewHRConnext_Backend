@@ -177,6 +177,7 @@ export type CreateUserResponseType = {
 
 export type CreatedAndUpdatePosition = {
   code_position1?: InputMaybe<Scalars['String']>;
+  id_Position1: Scalars['ID'];
   level_Position1?: InputMaybe<Scalars['Int']>;
   masPosition2?: InputMaybe<Array<InputMaybe<CreatedmasPosition2>>>;
   name_Position1?: InputMaybe<Scalars['String']>;
@@ -184,15 +185,19 @@ export type CreatedAndUpdatePosition = {
 
 export type CreatedmasPosition2 = {
   code_position2?: InputMaybe<Scalars['String']>;
+  id_Position2: Scalars['ID'];
   level_Position2?: InputMaybe<Scalars['Int']>;
   masPosition3?: InputMaybe<Array<InputMaybe<CreatedmasPosition3>>>;
   name_Position2?: InputMaybe<Scalars['String']>;
+  positionlevel1_id?: InputMaybe<Scalars['ID']>;
 };
 
 export type CreatedmasPosition3 = {
   code_position3?: InputMaybe<Scalars['String']>;
+  id_Position3: Scalars['ID'];
   level_Position3?: InputMaybe<Scalars['Int']>;
   name_Position3?: InputMaybe<Scalars['String']>;
+  positionlevel2_id?: InputMaybe<Scalars['ID']>;
 };
 
 export type CreatepositionResponseType = {
@@ -310,7 +315,8 @@ export type MeprofileType = {
 
 export type Mutation = {
   __typename?: 'Mutation';
-  CreatedAndEditPosition?: Maybe<CreatepositionResponseType>;
+  CreatedPosition?: Maybe<CreatepositionResponseType>;
+  EditPosition?: Maybe<CreatepositionResponseType>;
   createAccount?: Maybe<CreateCompanyResponseType>;
   createAccountUser?: Maybe<CreateUserResponseType>;
   createAndUpdateComBarance?: Maybe<CreateComapnyBranchResponseType>;
@@ -325,7 +331,12 @@ export type Mutation = {
 };
 
 
-export type MutationCreatedAndEditPositionArgs = {
+export type MutationCreatedPositionArgs = {
+  data?: InputMaybe<Array<CreatedAndUpdatePosition>>;
+};
+
+
+export type MutationEditPositionArgs = {
   data?: InputMaybe<Array<CreatedAndUpdatePosition>>;
 };
 
@@ -1100,7 +1111,8 @@ export type MeprofileTypeResolvers<ContextType = ApolloContext, ParentType exten
 }>;
 
 export type MutationResolvers<ContextType = ApolloContext, ParentType extends ResolversParentTypes['Mutation'] = ResolversParentTypes['Mutation']> = ResolversObject<{
-  CreatedAndEditPosition?: Resolver<Maybe<ResolversTypes['CreatepositionResponseType']>, ParentType, ContextType, Partial<MutationCreatedAndEditPositionArgs>>;
+  CreatedPosition?: Resolver<Maybe<ResolversTypes['CreatepositionResponseType']>, ParentType, ContextType, Partial<MutationCreatedPositionArgs>>;
+  EditPosition?: Resolver<Maybe<ResolversTypes['CreatepositionResponseType']>, ParentType, ContextType, Partial<MutationEditPositionArgs>>;
   createAccount?: Resolver<Maybe<ResolversTypes['CreateCompanyResponseType']>, ParentType, ContextType, RequireFields<MutationCreateAccountArgs, 'data'>>;
   createAccountUser?: Resolver<Maybe<ResolversTypes['CreateUserResponseType']>, ParentType, ContextType, RequireFields<MutationCreateAccountUserArgs, 'data'>>;
   createAndUpdateComBarance?: Resolver<Maybe<ResolversTypes['CreateComapnyBranchResponseType']>, ParentType, ContextType, RequireFields<MutationCreateAndUpdateComBaranceArgs, 'data'>>;
