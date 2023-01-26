@@ -1,6 +1,3 @@
-import { Prisma } from '@prisma/client';
-import { Mutation } from './../generated/graphql';
-import { date, string } from 'zod';
 import gql from 'graphql-tag';
 import { Resolvers } from '../generated/graphql';
 
@@ -41,14 +38,8 @@ export const holidayResolvers: Resolvers ={
     // async getHolidayYear (p, args, ctx) {
     //   const result = await ctx.prisma.holiday_year.
 
-    //   // const result = await ctx.pris
-    //   // return result
-    // }
 
-  },
 
   Mutation:{
 
-  }
-}
 
