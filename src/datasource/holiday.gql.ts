@@ -35,18 +35,10 @@ export const holidayTypedef = gql`
   type Mutation{
     createHoliday: (data: createHolidayYear) : CreateHolidayYearResponseType
   }
-
 `;
 
 export const holidayResolvers: Resolvers = {
   Query: {
-    /**
-     * ?สร้าง role comapny
-     * @param p
-     * @param args
-     * @param ctx
-     * @returns
-     */
     async GetHoliDayYear(p, args, ctx) {
       const rolesCompanyget = await ctx.prisma.holiday_year.findMany();
       return rolesCompanyget;
