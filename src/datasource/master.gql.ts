@@ -41,11 +41,9 @@ export const masterResolvers: Resolvers = {
       return result;
     },
 
-    // async getHoliday(p, args, ctx) {
-    //   const result = await ctx.prisma.holiday_year.findMany({
-    //     include: { }
-    //   });
-    //   return result
-    // }
+    async getHoliday(p, args, ctx) {
+      const result = await ctx.prisma.holiday_year.findMany();
+      return result
+    }
   },
 };
