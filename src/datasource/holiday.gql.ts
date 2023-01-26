@@ -1,16 +1,22 @@
+import { holiday_year } from './../generated/client/index.d';
 import gql from 'graphql-tag';
 import { Resolvers } from '../generated/graphql';
+import { v4 } from 'uuid';
+import { composeResolvers } from '@graphql-tools/resolvers-composition';
+import { authenticate } from '../middleware/authenticatetoken';
+import _ from 'lodash';
 
 export const holidayTypedef = gql`
-  type holiday_year {
-    id: ID!
+
+  type holiday_year{
+    id: ID
     day: Int
     month: Int
     year: Int
-    holiday_name: String?    
+    holiday_name: String!  
   }
 
-  input createHolidayYear {
+  input createHolidayYear{
     id: ID
     day: Int
     month: Int
@@ -18,28 +24,48 @@ export const holidayTypedef = gql`
     holiday_name: String?
   }
 
-  type CreateHolidayYearResponseType {
+  type CreateHolidayYearResponseType{
     message: String
     status: Boolean
   }
 
-  type Query {
-    getHolidayYear: [holiday_year]
+  type Query{
+    GetHoliDayYear: [holiday_year]
   }
 
-  type Mutation {
+  type Mutation{
     createHoliday: (data: createHolidayYear) : CreateHolidayYearResponseType
   }
 
 `;
 
-export const holidayResolvers: Resolvers ={
-  Query:{
-    // async getHolidayYear (p, args, ctx) {
-    //   const result = await ctx.prisma.holiday_year.
+export const holidayResolvers: Resolvers = {
+  Query: {
+    /**
+     * ?สร้าง role comapny
+     * @param p
+     * @param args
+     * @param ctx
+     * @returns
+     */
+    async GetHoliDayYear(p, args, ctx) {
+      const rolesCompanyget = await ctx.prisma.holiday_year.findMany();
+      return rolesCompanyget;
+    },
+  },
+};
+
+const HolidayComposition = {
+  // 'Mutation.createRoleCompany': [authenticate()],
+  // 'Mutation.updateRoleCompanyMangement': [authenticate()],
+  // 'Mutation.deleteRoleCompany': [authenticate()],
+  'Query._getHoliDayYear': [authenticate()],
+};
 
 
-
-  Mutation:{
+export const Role_CompanyResolvers = composeResolvers(
+  holidayResolvers,
+  HolidayComposition
+);
 
 

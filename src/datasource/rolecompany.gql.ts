@@ -1,12 +1,11 @@
-// import {  DecimalJsLike } from './../generated/client/index.d';
-import { Role_Company } from './../generated/graphql';
+
 import gql from 'graphql-tag';
 import { Resolvers } from '../generated/graphql';
 import { v4 } from 'uuid';
 import { composeResolvers } from '@graphql-tools/resolvers-composition';
 import { authenticate } from '../middleware/authenticatetoken';
 import _ from 'lodash';
-import { GraphQLError } from 'graphql';
+
 
 export const roleCompanyTypedef = gql`
   type Role_Company {
