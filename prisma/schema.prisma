@@ -238,7 +238,9 @@ model holiday_date {
 
 model holiday_year {
   id                String    @unique @db.Uuid
-  date              DateTime
+  day               Int
+  month             Int
+  year              Int
   holiday_name      String?    
 }
 
