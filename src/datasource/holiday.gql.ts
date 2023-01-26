@@ -1,4 +1,3 @@
-import { holiday_year } from './../generated/client/index.d';
 import gql from 'graphql-tag';
 import { Resolvers } from '../generated/graphql';
 import { v4 } from 'uuid';
