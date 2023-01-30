@@ -255,7 +255,9 @@ export type Position_user = {
 export type holiday_date = {
   id: string
   holiday_name: string | null
-  date: Date
+  day: number
+  month: number
+  yaer: number
   CompanyId: string | null
 }
 
@@ -16446,51 +16448,89 @@ export namespace Prisma {
 
   export type AggregateHoliday_date = {
     _count: Holiday_dateCountAggregateOutputType | null
+    _avg: Holiday_dateAvgAggregateOutputType | null
+    _sum: Holiday_dateSumAggregateOutputType | null
     _min: Holiday_dateMinAggregateOutputType | null
     _max: Holiday_dateMaxAggregateOutputType | null
+  }
+
+  export type Holiday_dateAvgAggregateOutputType = {
+    day: number | null
+    month: number | null
+    yaer: number | null
+  }
+
+  export type Holiday_dateSumAggregateOutputType = {
+    day: number | null
+    month: number | null
+    yaer: number | null
   }
 
   export type Holiday_dateMinAggregateOutputType = {
     id: string | null
     holiday_name: string | null
-    date: Date | null
+    day: number | null
+    month: number | null
+    yaer: number | null
     CompanyId: string | null
   }
 
   export type Holiday_dateMaxAggregateOutputType = {
     id: string | null
     holiday_name: string | null
-    date: Date | null
+    day: number | null
+    month: number | null
+    yaer: number | null
     CompanyId: string | null
   }
 
   export type Holiday_dateCountAggregateOutputType = {
     id: number
     holiday_name: number
-    date: number
+    day: number
+    month: number
+    yaer: number
     CompanyId: number
     _all: number
   }
 
 
+  export type Holiday_dateAvgAggregateInputType = {
+    day?: true
+    month?: true
+    yaer?: true
+  }
+
+  export type Holiday_dateSumAggregateInputType = {
+    day?: true
+    month?: true
+    yaer?: true
+  }
+
   export type Holiday_dateMinAggregateInputType = {
     id?: true
     holiday_name?: true
-    date?: true
+    day?: true
+    month?: true
+    yaer?: true
     CompanyId?: true
   }
 
   export type Holiday_dateMaxAggregateInputType = {
     id?: true
     holiday_name?: true
-    date?: true
+    day?: true
+    month?: true
+    yaer?: true
     CompanyId?: true
   }
 
   export type Holiday_dateCountAggregateInputType = {
     id?: true
     holiday_name?: true
-    date?: true
+    day?: true
+    month?: true
+    yaer?: true
     CompanyId?: true
     _all?: true
   }
@@ -16538,6 +16578,18 @@ export namespace Prisma {
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
+     * Select which fields to average
+    **/
+    _avg?: Holiday_dateAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: Holiday_dateSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
      * Select which fields to find the minimum value
     **/
     _min?: Holiday_dateMinAggregateInputType
@@ -16568,6 +16620,8 @@ export namespace Prisma {
     take?: number
     skip?: number
     _count?: Holiday_dateCountAggregateInputType | true
+    _avg?: Holiday_dateAvgAggregateInputType
+    _sum?: Holiday_dateSumAggregateInputType
     _min?: Holiday_dateMinAggregateInputType
     _max?: Holiday_dateMaxAggregateInputType
   }
@@ -16576,9 +16630,13 @@ export namespace Prisma {
   export type Holiday_dateGroupByOutputType = {
     id: string
     holiday_name: string | null
-    date: Date
+    day: number
+    month: number
+    yaer: number
     CompanyId: string | null
     _count: Holiday_dateCountAggregateOutputType | null
+    _avg: Holiday_dateAvgAggregateOutputType | null
+    _sum: Holiday_dateSumAggregateOutputType | null
     _min: Holiday_dateMinAggregateOutputType | null
     _max: Holiday_dateMaxAggregateOutputType | null
   }
@@ -16600,7 +16658,9 @@ export namespace Prisma {
   export type holiday_dateSelect = {
     id?: boolean
     holiday_name?: boolean
-    date?: boolean
+    day?: boolean
+    month?: boolean
+    yaer?: boolean
     Company?: boolean | CompanyArgs
     CompanyId?: boolean
   }
@@ -18467,7 +18527,9 @@ export namespace Prisma {
   export const Holiday_dateScalarFieldEnum: {
     id: 'id',
     holiday_name: 'holiday_name',
-    date: 'date',
+    day: 'day',
+    month: 'month',
+    yaer: 'yaer',
     CompanyId: 'CompanyId'
   };
 
@@ -19689,7 +19751,9 @@ export namespace Prisma {
     NOT?: Enumerable<holiday_dateWhereInput>
     id?: UuidFilter | string
     holiday_name?: StringNullableFilter | string | null
-    date?: DateTimeFilter | Date | string
+    day?: IntFilter | number
+    month?: IntFilter | number
+    yaer?: IntFilter | number
     Company?: XOR<CompanyRelationFilter, CompanyWhereInput> | null
     CompanyId?: UuidNullableFilter | string | null
   }
@@ -19697,7 +19761,9 @@ export namespace Prisma {
   export type holiday_dateOrderByWithRelationInput = {
     id?: SortOrder
     holiday_name?: SortOrder
-    date?: SortOrder
+    day?: SortOrder
+    month?: SortOrder
+    yaer?: SortOrder
     Company?: CompanyOrderByWithRelationInput
     CompanyId?: SortOrder
   }
@@ -19709,11 +19775,15 @@ export namespace Prisma {
   export type holiday_dateOrderByWithAggregationInput = {
     id?: SortOrder
     holiday_name?: SortOrder
-    date?: SortOrder
+    day?: SortOrder
+    month?: SortOrder
+    yaer?: SortOrder
     CompanyId?: SortOrder
     _count?: holiday_dateCountOrderByAggregateInput
+    _avg?: holiday_dateAvgOrderByAggregateInput
     _max?: holiday_dateMaxOrderByAggregateInput
     _min?: holiday_dateMinOrderByAggregateInput
+    _sum?: holiday_dateSumOrderByAggregateInput
   }
 
   export type holiday_dateScalarWhereWithAggregatesInput = {
@@ -19722,7 +19792,9 @@ export namespace Prisma {
     NOT?: Enumerable<holiday_dateScalarWhereWithAggregatesInput>
     id?: UuidWithAggregatesFilter | string
     holiday_name?: StringNullableWithAggregatesFilter | string | null
-    date?: DateTimeWithAggregatesFilter | Date | string
+    day?: IntWithAggregatesFilter | number
+    month?: IntWithAggregatesFilter | number
+    yaer?: IntWithAggregatesFilter | number
     CompanyId?: UuidNullableWithAggregatesFilter | string | null
   }
 
@@ -21097,48 +21169,62 @@ export namespace Prisma {
   export type holiday_dateCreateInput = {
     id: string
     holiday_name?: string | null
-    date: Date | string
+    day: number
+    month: number
+    yaer: number
     Company?: CompanyCreateNestedOneWithoutHoliday_dateInput
   }
 
   export type holiday_dateUncheckedCreateInput = {
     id: string
     holiday_name?: string | null
-    date: Date | string
+    day: number
+    month: number
+    yaer: number
     CompanyId?: string | null
   }
 
   export type holiday_dateUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
     holiday_name?: NullableStringFieldUpdateOperationsInput | string | null
-    date?: DateTimeFieldUpdateOperationsInput | Date | string
+    day?: IntFieldUpdateOperationsInput | number
+    month?: IntFieldUpdateOperationsInput | number
+    yaer?: IntFieldUpdateOperationsInput | number
     Company?: CompanyUpdateOneWithoutHoliday_dateNestedInput
   }
 
   export type holiday_dateUncheckedUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
     holiday_name?: NullableStringFieldUpdateOperationsInput | string | null
-    date?: DateTimeFieldUpdateOperationsInput | Date | string
+    day?: IntFieldUpdateOperationsInput | number
+    month?: IntFieldUpdateOperationsInput | number
+    yaer?: IntFieldUpdateOperationsInput | number
     CompanyId?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type holiday_dateCreateManyInput = {
     id: string
     holiday_name?: string | null
-    date: Date | string
+    day: number
+    month: number
+    yaer: number
     CompanyId?: string | null
   }
 
   export type holiday_dateUpdateManyMutationInput = {
     id?: StringFieldUpdateOperationsInput | string
     holiday_name?: NullableStringFieldUpdateOperationsInput | string | null
-    date?: DateTimeFieldUpdateOperationsInput | Date | string
+    day?: IntFieldUpdateOperationsInput | number
+    month?: IntFieldUpdateOperationsInput | number
+    yaer?: IntFieldUpdateOperationsInput | number
   }
 
   export type holiday_dateUncheckedUpdateManyInput = {
     id?: StringFieldUpdateOperationsInput | string
     holiday_name?: NullableStringFieldUpdateOperationsInput | string | null
-    date?: DateTimeFieldUpdateOperationsInput | Date | string
+    day?: IntFieldUpdateOperationsInput | number
+    month?: IntFieldUpdateOperationsInput | number
+    yaer?: IntFieldUpdateOperationsInput | number
     CompanyId?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
@@ -22219,22 +22305,40 @@ export namespace Prisma {
   export type holiday_dateCountOrderByAggregateInput = {
     id?: SortOrder
     holiday_name?: SortOrder
-    date?: SortOrder
+    day?: SortOrder
+    month?: SortOrder
+    yaer?: SortOrder
     CompanyId?: SortOrder
+  }
+
+  export type holiday_dateAvgOrderByAggregateInput = {
+    day?: SortOrder
+    month?: SortOrder
+    yaer?: SortOrder
   }
 
   export type holiday_dateMaxOrderByAggregateInput = {
     id?: SortOrder
     holiday_name?: SortOrder
-    date?: SortOrder
+    day?: SortOrder
+    month?: SortOrder
+    yaer?: SortOrder
     CompanyId?: SortOrder
   }
 
   export type holiday_dateMinOrderByAggregateInput = {
     id?: SortOrder
     holiday_name?: SortOrder
-    date?: SortOrder
+    day?: SortOrder
+    month?: SortOrder
+    yaer?: SortOrder
     CompanyId?: SortOrder
+  }
+
+  export type holiday_dateSumOrderByAggregateInput = {
+    day?: SortOrder
+    month?: SortOrder
+    yaer?: SortOrder
   }
 
   export type holiday_yearCountOrderByAggregateInput = {
@@ -23891,13 +23995,17 @@ export namespace Prisma {
   export type holiday_dateCreateWithoutCompanyInput = {
     id: string
     holiday_name?: string | null
-    date: Date | string
+    day: number
+    month: number
+    yaer: number
   }
 
   export type holiday_dateUncheckedCreateWithoutCompanyInput = {
     id: string
     holiday_name?: string | null
-    date: Date | string
+    day: number
+    month: number
+    yaer: number
   }
 
   export type holiday_dateCreateOrConnectWithoutCompanyInput = {
@@ -24125,7 +24233,9 @@ export namespace Prisma {
     NOT?: Enumerable<holiday_dateScalarWhereInput>
     id?: UuidFilter | string
     holiday_name?: StringNullableFilter | string | null
-    date?: DateTimeFilter | Date | string
+    day?: IntFilter | number
+    month?: IntFilter | number
+    yaer?: IntFilter | number
     CompanyId?: UuidNullableFilter | string | null
   }
 
@@ -26400,7 +26510,9 @@ export namespace Prisma {
   export type holiday_dateCreateManyCompanyInput = {
     id: string
     holiday_name?: string | null
-    date: Date | string
+    day: number
+    month: number
+    yaer: number
   }
 
   export type mas_positionCreateManyCompanyInput = {
@@ -26588,19 +26700,25 @@ export namespace Prisma {
   export type holiday_dateUpdateWithoutCompanyInput = {
     id?: StringFieldUpdateOperationsInput | string
     holiday_name?: NullableStringFieldUpdateOperationsInput | string | null
-    date?: DateTimeFieldUpdateOperationsInput | Date | string
+    day?: IntFieldUpdateOperationsInput | number
+    month?: IntFieldUpdateOperationsInput | number
+    yaer?: IntFieldUpdateOperationsInput | number
   }
 
   export type holiday_dateUncheckedUpdateWithoutCompanyInput = {
     id?: StringFieldUpdateOperationsInput | string
     holiday_name?: NullableStringFieldUpdateOperationsInput | string | null
-    date?: DateTimeFieldUpdateOperationsInput | Date | string
+    day?: IntFieldUpdateOperationsInput | number
+    month?: IntFieldUpdateOperationsInput | number
+    yaer?: IntFieldUpdateOperationsInput | number
   }
 
   export type holiday_dateUncheckedUpdateManyWithoutHoliday_dateInput = {
     id?: StringFieldUpdateOperationsInput | string
     holiday_name?: NullableStringFieldUpdateOperationsInput | string | null
-    date?: DateTimeFieldUpdateOperationsInput | Date | string
+    day?: IntFieldUpdateOperationsInput | number
+    month?: IntFieldUpdateOperationsInput | number
+    yaer?: IntFieldUpdateOperationsInput | number
   }
 
   export type mas_positionUpdateWithoutCompanyInput = {

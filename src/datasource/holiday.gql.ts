@@ -1,4 +1,5 @@
-import { date } from 'zod';
+import { Company } from './../generated/graphql';
+import { date, string } from 'zod';
 import gql from 'graphql-tag';
 import { Resolvers } from '../generated/graphql';
 import { v4 } from 'uuid';
@@ -24,7 +25,21 @@ export const holidayTypedef = gql`
     holiday_name: String
   }
 
+  input CreateHolidayDate{
+    id: ID   
+    holiday_name: String
+    day: Int
+    month: Int
+    year: Int
+    Company: ID
+  }
+
   type CreateHolidayYearResponseType{
+    message: String
+    status: Boolean
+  }
+
+  type CreateHolidayDateResponseType{
     message: String
     status: Boolean
   }
@@ -41,6 +56,7 @@ export const holidayTypedef = gql`
   type Mutation{
     createHolidayYear(data:[CreateHolidayYears!]): CreateHolidayYearResponseType
     deleteHolidayYear(id: ID!) : DeleteHolidayYearResponseType
+    createHolidayDate(data:[CreateHolidayDate]) : CreateHolidayDateResponseType
   }
 `;
 

@@ -163,6 +163,21 @@ export type CreateCompanyResponseType = {
   status?: Maybe<Scalars['Boolean']>;
 };
 
+export type CreateHolidayDate = {
+  Company?: InputMaybe<Scalars['ID']>;
+  day?: InputMaybe<Scalars['Int']>;
+  holiday_name?: InputMaybe<Scalars['String']>;
+  id?: InputMaybe<Scalars['ID']>;
+  month?: InputMaybe<Scalars['Int']>;
+  year?: InputMaybe<Scalars['Int']>;
+};
+
+export type CreateHolidayDateResponseType = {
+  __typename?: 'CreateHolidayDateResponseType';
+  message?: Maybe<Scalars['String']>;
+  status?: Maybe<Scalars['Boolean']>;
+};
+
 export type CreateHolidayYearResponseType = {
   __typename?: 'CreateHolidayYearResponseType';
   message?: Maybe<Scalars['String']>;
@@ -340,6 +355,7 @@ export type Mutation = {
   createAccount?: Maybe<CreateCompanyResponseType>;
   createAccountUser?: Maybe<CreateUserResponseType>;
   createAndUpdateComBarance?: Maybe<CreateComapnyBranchResponseType>;
+  createHolidayDate?: Maybe<CreateHolidayDateResponseType>;
   createHolidayYear?: Maybe<CreateHolidayYearResponseType>;
   createRoleCompany?: Maybe<CreateRoleCompanyResponseType>;
   deleteAccountUser?: Maybe<DeleteAccountUserResponseType>;
@@ -375,6 +391,11 @@ export type MutationCreateAccountUserArgs = {
 
 export type MutationCreateAndUpdateComBaranceArgs = {
   data: CreateCompanyBranch;
+};
+
+
+export type MutationCreateHolidayDateArgs = {
+  data?: InputMaybe<Array<InputMaybe<CreateHolidayDate>>>;
 };
 
 
@@ -827,6 +848,8 @@ export type ResolversTypes = ResolversObject<{
   CreateAccountUserInput: CreateAccountUserInput;
   CreateComapnyBranchResponseType: ResolverTypeWrapper<CreateComapnyBranchResponseType>;
   CreateCompanyResponseType: ResolverTypeWrapper<CreateCompanyResponseType>;
+  CreateHolidayDate: CreateHolidayDate;
+  CreateHolidayDateResponseType: ResolverTypeWrapper<CreateHolidayDateResponseType>;
   CreateHolidayYearResponseType: ResolverTypeWrapper<CreateHolidayYearResponseType>;
   CreateHolidayYears: CreateHolidayYears;
   CreateRoleCompanyResponseType: ResolverTypeWrapper<CreateRoleCompanyResponseType>;
@@ -891,6 +914,8 @@ export type ResolversParentTypes = ResolversObject<{
   CreateAccountUserInput: CreateAccountUserInput;
   CreateComapnyBranchResponseType: CreateComapnyBranchResponseType;
   CreateCompanyResponseType: CreateCompanyResponseType;
+  CreateHolidayDate: CreateHolidayDate;
+  CreateHolidayDateResponseType: CreateHolidayDateResponseType;
   CreateHolidayYearResponseType: CreateHolidayYearResponseType;
   CreateHolidayYears: CreateHolidayYears;
   CreateRoleCompanyResponseType: CreateRoleCompanyResponseType;
@@ -1017,6 +1042,12 @@ export type CreateComapnyBranchResponseTypeResolvers<ContextType = ApolloContext
 }>;
 
 export type CreateCompanyResponseTypeResolvers<ContextType = ApolloContext, ParentType extends ResolversParentTypes['CreateCompanyResponseType'] = ResolversParentTypes['CreateCompanyResponseType']> = ResolversObject<{
+  message?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  status?: Resolver<Maybe<ResolversTypes['Boolean']>, ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+}>;
+
+export type CreateHolidayDateResponseTypeResolvers<ContextType = ApolloContext, ParentType extends ResolversParentTypes['CreateHolidayDateResponseType'] = ResolversParentTypes['CreateHolidayDateResponseType']> = ResolversObject<{
   message?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   status?: Resolver<Maybe<ResolversTypes['Boolean']>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
@@ -1168,6 +1199,7 @@ export type MutationResolvers<ContextType = ApolloContext, ParentType extends Re
   createAccount?: Resolver<Maybe<ResolversTypes['CreateCompanyResponseType']>, ParentType, ContextType, RequireFields<MutationCreateAccountArgs, 'data'>>;
   createAccountUser?: Resolver<Maybe<ResolversTypes['CreateUserResponseType']>, ParentType, ContextType, RequireFields<MutationCreateAccountUserArgs, 'data'>>;
   createAndUpdateComBarance?: Resolver<Maybe<ResolversTypes['CreateComapnyBranchResponseType']>, ParentType, ContextType, RequireFields<MutationCreateAndUpdateComBaranceArgs, 'data'>>;
+  createHolidayDate?: Resolver<Maybe<ResolversTypes['CreateHolidayDateResponseType']>, ParentType, ContextType, Partial<MutationCreateHolidayDateArgs>>;
   createHolidayYear?: Resolver<Maybe<ResolversTypes['CreateHolidayYearResponseType']>, ParentType, ContextType, Partial<MutationCreateHolidayYearArgs>>;
   createRoleCompany?: Resolver<Maybe<ResolversTypes['CreateRoleCompanyResponseType']>, ParentType, ContextType, RequireFields<MutationCreateRoleCompanyArgs, 'data'>>;
   deleteAccountUser?: Resolver<Maybe<ResolversTypes['DeleteAccountUserResponseType']>, ParentType, ContextType, RequireFields<MutationDeleteAccountUserArgs, 'id'>>;
@@ -1440,6 +1472,7 @@ export type Resolvers<ContextType = ApolloContext> = ResolversObject<{
   CountInsideBranch?: CountInsideBranchResolvers<ContextType>;
   CreateComapnyBranchResponseType?: CreateComapnyBranchResponseTypeResolvers<ContextType>;
   CreateCompanyResponseType?: CreateCompanyResponseTypeResolvers<ContextType>;
+  CreateHolidayDateResponseType?: CreateHolidayDateResponseTypeResolvers<ContextType>;
   CreateHolidayYearResponseType?: CreateHolidayYearResponseTypeResolvers<ContextType>;
   CreateRoleCompanyResponseType?: CreateRoleCompanyResponseTypeResolvers<ContextType>;
   CreateUserResponseType?: CreateUserResponseTypeResolvers<ContextType>;

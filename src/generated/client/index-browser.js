@@ -147,7 +147,9 @@ exports.Prisma.DistrictScalarFieldEnum = makeEnum({
 exports.Prisma.Holiday_dateScalarFieldEnum = makeEnum({
   id: 'id',
   holiday_name: 'holiday_name',
-  date: 'date',
+  day: 'day',
+  month: 'month',
+  yaer: 'yaer',
   CompanyId: 'CompanyId'
 });
 
