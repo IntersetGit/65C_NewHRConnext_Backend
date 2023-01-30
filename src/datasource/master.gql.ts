@@ -1,3 +1,4 @@
+import { Mutation } from './../generated/graphql';
 import gql from 'graphql-tag';
 import { Resolvers } from '../generated/graphql';
 
@@ -20,16 +21,10 @@ export const masterTypedef = gql`
     district: [District]
   }
 
-  type holiday_year {
-    id: ID!
-    date: Date              
-    holiday_name: String     
-  }
-
   type Query {
     getProvince: [Province]
-    getHoliday: [holiday_year]
   }
+
 `;
 
 export const masterResolvers: Resolvers = {
@@ -41,4 +36,5 @@ export const masterResolvers: Resolvers = {
       return result;
     },
   },
+
 };

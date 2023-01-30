@@ -13,12 +13,12 @@ const Prisma = {}
 exports.Prisma = Prisma
 
 /**
- * Prisma Client JS version: 4.9.0
- * Query Engine version: ceb5c99003b99c9ee2c1d2e618e359c14aef2ea5
+ * Prisma Client JS version: 4.7.1
+ * Query Engine version: 272861e07ab64f234d3ffc4094e32bd61775599c
  */
 Prisma.prismaVersion = {
-  client: "4.9.0",
-  engine: "ceb5c99003b99c9ee2c1d2e618e359c14aef2ea5"
+  client: "4.7.1",
+  engine: "272861e07ab64f234d3ffc4094e32bd61775599c"
 }
 
 Prisma.PrismaClientKnownRequestError = () => {
@@ -147,13 +147,17 @@ exports.Prisma.DistrictScalarFieldEnum = makeEnum({
 exports.Prisma.Holiday_dateScalarFieldEnum = makeEnum({
   id: 'id',
   holiday_name: 'holiday_name',
-  date: 'date',
+  day: 'day',
+  month: 'month',
+  yaer: 'yaer',
   CompanyId: 'CompanyId'
 });
 
 exports.Prisma.Holiday_yearScalarFieldEnum = makeEnum({
   id: 'id',
-  date: 'date',
+  day: 'day',
+  month: 'month',
+  year: 'year',
   holiday_name: 'holiday_name'
 });
 
