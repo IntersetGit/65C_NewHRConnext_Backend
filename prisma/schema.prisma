@@ -245,13 +245,17 @@ model Position_user {
 model holiday_date {
   id           String   @unique @db.Uuid
   holiday_name String?
-  date         DateTime
+  day          Int
+  month        Int
+  yaer         Int
   Company      Company? @relation(fields: [CompanyId], references: [id])
   CompanyId    String?  @db.Uuid
 }
 
 model holiday_year {
-  id           String   @unique @db.Uuid
-  date         DateTime
-  holiday_name String?
+  id                String    @unique @db.Uuid
+  day               Int
+  month             Int
+  year              Int
+  holiday_name      String?    
 }
