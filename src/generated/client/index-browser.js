@@ -214,7 +214,7 @@ exports.Prisma.Position_userScalarFieldEnum = makeEnum({
   position2_id: 'position2_id',
   position3_id: 'position3_id',
   role: 'role',
-  headder: 'headder'
+  headderId: 'headderId'
 });
 
 exports.Prisma.ProfileScalarFieldEnum = makeEnum({
@@ -227,6 +227,7 @@ exports.Prisma.ProfileScalarFieldEnum = makeEnum({
   nickname: 'nickname',
   blood_type: 'blood_type',
   employee_status: 'employee_status',
+  start_date_work: 'start_date_work',
   avatar: 'avatar',
   dob: 'dob',
   age: 'age',

@@ -83,6 +83,7 @@ model Profile {
   nickname               String?   @db.VarChar(255)
   blood_type             String?
   employee_status        String?
+  start_date_work        DateTime?
   avatar                 String?
   dob                    DateTime?
   age                    String?
@@ -141,7 +142,8 @@ model User {
   companyBranch   CompanyBranch?  @relation(fields: [companyBranchId], references: [id])
   companyBranchId String?         @db.Uuid
   Role_Company    Role_Company?   @relation(fields: [RoleCompanyID], references: [id])
-  Position_user   Position_user[]
+  Position_user   Position_user?  @relation("user")
+  henchman        Position_user[] 
 }
 
 model Role {
@@ -231,13 +233,14 @@ model mas_positionlevel3 {
 
 model Position_user {
   id                 String              @unique @db.Uuid
-  user_id            String?             @db.Uuid
+  user_id            String?             @db.Uuid @unique
   position1_id       String?             @db.Uuid
   position2_id       String?             @db.Uuid
   position3_id       String?             @db.Uuid
   role               String?
-  headder            String?             @db.Uuid
-  user               User?               @relation(fields: [user_id], references: [id])
+  headderId          String?             @db.Uuid
+  header             User?                @relation(fields: [headderId] , references: [id])
+  user               User?               @relation("user",fields: [user_id], references: [id])
   mas_positionlevel1 mas_positionlevel1? @relation(fields: [position1_id], references: [id])
   mas_positionlevel2 mas_positionlevel2? @relation(fields: [position2_id], references: [id])
   mas_positionlevel3 mas_positionlevel3? @relation(fields: [position3_id], references: [id])
