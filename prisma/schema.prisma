@@ -236,7 +236,7 @@ model Position_user {
   position2_id       String?             @db.Uuid
   position3_id       String?             @db.Uuid
   role               String?
-  leader_id          String?             @db.Uuid
+  header             String?             
   user               User?               @relation(fields: [user_id], references: [id])
   mas_positionlevel1 mas_positionlevel1? @relation(fields: [position1_id], references: [id])
   mas_positionlevel2 mas_positionlevel2? @relation(fields: [position2_id], references: [id])

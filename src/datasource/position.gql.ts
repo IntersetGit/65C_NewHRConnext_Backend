@@ -52,7 +52,6 @@ type Position_user {
   position2_id: String  
   position3_id: String  
   role: String 
-  leader: String 
 }
 
 type mas_positionlevel3{

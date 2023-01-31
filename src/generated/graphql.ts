@@ -455,7 +455,6 @@ export type OwnCompanyType = {
 export type Position_User = {
   __typename?: 'Position_user';
   id: Scalars['ID'];
-  leader?: Maybe<Scalars['String']>;
   position1_id?: Maybe<Scalars['String']>;
   position2_id?: Maybe<Scalars['String']>;
   position3_id?: Maybe<Scalars['String']>;
@@ -1222,7 +1221,6 @@ export type OwnCompanyTypeResolvers<ContextType = ApolloContext, ParentType exte
 
 export type Position_UserResolvers<ContextType = ApolloContext, ParentType extends ResolversParentTypes['Position_user'] = ResolversParentTypes['Position_user']> = ResolversObject<{
   id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
-  leader?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   position1_id?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   position2_id?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   position3_id?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
