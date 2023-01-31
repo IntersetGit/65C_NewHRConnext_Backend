@@ -473,6 +473,7 @@ export type Profile = {
   age?: Maybe<Scalars['String']>;
   avatar?: Maybe<Scalars['String']>;
   bio?: Maybe<Scalars['String']>;
+  blood_type?: Maybe<Scalars['String']>;
   citizen_address?: Maybe<Scalars['String']>;
   citizen_addressnumber?: Maybe<Scalars['String']>;
   citizen_country?: Maybe<Scalars['String']>;
@@ -493,12 +494,14 @@ export type Profile = {
   contract_state?: Maybe<Scalars['String']>;
   contract_zipcode?: Maybe<Scalars['String']>;
   dob?: Maybe<Scalars['Date']>;
+  employee_status?: Maybe<Scalars['String']>;
   firstname_en?: Maybe<Scalars['String']>;
   firstname_th?: Maybe<Scalars['String']>;
   gender?: Maybe<Scalars['String']>;
   id: Scalars['ID'];
   lastname_en?: Maybe<Scalars['String']>;
   lastname_th?: Maybe<Scalars['String']>;
+  nickname?: Maybe<Scalars['String']>;
   prefix_en?: Maybe<Scalars['String']>;
   prefix_th?: Maybe<Scalars['String']>;
   relationship?: Maybe<Scalars['String']>;
@@ -511,6 +514,7 @@ export type Profile = {
   social_telegram?: Maybe<Scalars['String']>;
   staff_code?: Maybe<Scalars['String']>;
   staff_status?: Maybe<Scalars['String']>;
+  start_date_work?: Maybe<Scalars['Date']>;
   tel?: Maybe<Scalars['String']>;
   user?: Maybe<User>;
   userId?: Maybe<Scalars['String']>;
@@ -1240,6 +1244,7 @@ export type ProfileResolvers<ContextType = ApolloContext, ParentType extends Res
   age?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   avatar?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   bio?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  blood_type?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   citizen_address?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   citizen_addressnumber?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   citizen_country?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
@@ -1260,12 +1265,14 @@ export type ProfileResolvers<ContextType = ApolloContext, ParentType extends Res
   contract_state?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   contract_zipcode?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   dob?: Resolver<Maybe<ResolversTypes['Date']>, ParentType, ContextType>;
+  employee_status?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   firstname_en?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   firstname_th?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   gender?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
   lastname_en?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   lastname_th?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  nickname?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   prefix_en?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   prefix_th?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   relationship?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
@@ -1278,6 +1285,7 @@ export type ProfileResolvers<ContextType = ApolloContext, ParentType extends Res
   social_telegram?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   staff_code?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   staff_status?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  start_date_work?: Resolver<Maybe<ResolversTypes['Date']>, ParentType, ContextType>;
   tel?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   user?: Resolver<Maybe<ResolversTypes['User']>, ParentType, ContextType>;
   userId?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;

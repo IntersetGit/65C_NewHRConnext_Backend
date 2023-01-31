@@ -59,6 +59,10 @@ type MeCompanyBranch {
     lastname_th: String
     firstname_en: String
     lastname_en: String
+    nickname: String
+    blood_type: String
+    employee_status: String
+    start_date_work: Date
     avatar: String
     dob: Date
     age: String
