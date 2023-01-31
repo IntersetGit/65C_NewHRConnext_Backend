@@ -13,12 +13,12 @@ const Prisma = {}
 exports.Prisma = Prisma
 
 /**
- * Prisma Client JS version: 4.7.1
- * Query Engine version: 272861e07ab64f234d3ffc4094e32bd61775599c
+ * Prisma Client JS version: 4.9.0
+ * Query Engine version: ceb5c99003b99c9ee2c1d2e618e359c14aef2ea5
  */
 Prisma.prismaVersion = {
-  client: "4.7.1",
-  engine: "272861e07ab64f234d3ffc4094e32bd61775599c"
+  client: "4.9.0",
+  engine: "ceb5c99003b99c9ee2c1d2e618e359c14aef2ea5"
 }
 
 Prisma.PrismaClientKnownRequestError = () => {
@@ -214,7 +214,7 @@ exports.Prisma.Position_userScalarFieldEnum = makeEnum({
   position2_id: 'position2_id',
   position3_id: 'position3_id',
   role: 'role',
-  leader: 'leader'
+  headder: 'headder'
 });
 
 exports.Prisma.ProfileScalarFieldEnum = makeEnum({
@@ -224,6 +224,9 @@ exports.Prisma.ProfileScalarFieldEnum = makeEnum({
   lastname_th: 'lastname_th',
   firstname_en: 'firstname_en',
   lastname_en: 'lastname_en',
+  nickname: 'nickname',
+  blood_type: 'blood_type',
+  employee_status: 'employee_status',
   avatar: 'avatar',
   dob: 'dob',
   age: 'age',

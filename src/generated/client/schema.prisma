@@ -80,6 +80,9 @@ model Profile {
   lastname_th            String?   @db.VarChar(255)
   firstname_en           String?   @db.VarChar(255)
   lastname_en            String?   @db.VarChar(255)
+  nickname               String?   @db.VarChar(255)
+  blood_type             String?
+  employee_status        String?
   avatar                 String?
   dob                    DateTime?
   age                    String?
@@ -233,7 +236,7 @@ model Position_user {
   position2_id       String?             @db.Uuid
   position3_id       String?             @db.Uuid
   role               String?
-  leader             String?
+  headder            String?             @db.Uuid
   user               User?               @relation(fields: [user_id], references: [id])
   mas_positionlevel1 mas_positionlevel1? @relation(fields: [position1_id], references: [id])
   mas_positionlevel2 mas_positionlevel2? @relation(fields: [position2_id], references: [id])

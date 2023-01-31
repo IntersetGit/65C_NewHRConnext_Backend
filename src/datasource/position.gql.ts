@@ -12,7 +12,7 @@ import { v4 } from 'uuid';
 export const positionTypedef = gql`
 
 input CreatedAndUpdatePosition{
-  id_Position1: ID!
+  id_Position1: ID
   name_Position1: String
   level_Position1: Int 
   code_position1: String
@@ -21,7 +21,7 @@ input CreatedAndUpdatePosition{
 
 
 input CreatedmasPosition2{
-  id_Position2: ID!
+  id_Position2: ID
   name_Position2: String
   level_Position2: Int 
   code_position2: String
@@ -31,7 +31,7 @@ input CreatedmasPosition2{
 
 
 input CreatedmasPosition3{
-  id_Position3: ID!
+  id_Position3: ID
   name_Position3: String
   level_Position3: Int 
   code_position3: String
@@ -161,7 +161,7 @@ export const positionResolvers: Resolvers = {
             code: e.code_position1 as string,
           },
           where:{
-            id: e.id_Position1
+            id: e.id_Position1 as string
           }
         })
         e.masPosition2?.forEach(async (a) => {
@@ -173,7 +173,7 @@ export const positionResolvers: Resolvers = {
               code: a?.code_position2 as string,
             },
             where:{
-              id: a?.id_Position2
+              id: a?.id_Position2 as string
             }
           })
           a?.masPosition3?.forEach(async (b) => {
@@ -185,7 +185,7 @@ export const positionResolvers: Resolvers = {
                 code: b?.code_position3 as string,
               },
               where:{
-                id: b?.id_Position3
+                id: b?.id_Position3 as string
               }
             })
           })
