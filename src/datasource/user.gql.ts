@@ -1,3 +1,4 @@
+import { date } from 'zod';
 import { Profile, User } from './../generated/graphql';
 import { Resolvers } from '../generated/graphql';
 import { createPassword } from '../utils/passwords';
@@ -129,6 +130,10 @@ type MeCompanyBranch {
     lastname_th: String
     firstname_en: String
     lastname_en: String
+    nickname: String
+    blood_type: String
+    employee_status: String
+    start_date_work: Date
     avatar: String
     dob: Date
     age: String

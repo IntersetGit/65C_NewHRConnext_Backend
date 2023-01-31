@@ -227,6 +227,7 @@ exports.Prisma.ProfileScalarFieldEnum = makeEnum({
   nickname: 'nickname',
   blood_type: 'blood_type',
   employee_status: 'employee_status',
+  start_date_work: 'start_date_work',
   avatar: 'avatar',
   dob: 'dob',
   age: 'age',
