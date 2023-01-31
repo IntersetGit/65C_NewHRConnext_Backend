@@ -248,7 +248,7 @@ export type Position_user = {
   position2_id: string | null
   position3_id: string | null
   role: string | null
-  headder: string | null
+  headderId: string | null
 }
 
 /**
@@ -1314,12 +1314,12 @@ export namespace Prisma {
 
   export type UserCountOutputType = {
     company: number
-    Position_user: number
+    henchman: number
   }
 
   export type UserCountOutputTypeSelect = {
     company?: boolean
-    Position_user?: boolean
+    henchman?: boolean
   }
 
   export type UserCountOutputTypeGetPayload<S extends boolean | null | undefined | UserCountOutputTypeArgs> =
@@ -5481,7 +5481,8 @@ export namespace Prisma {
     companyBranch?: boolean | CompanyBranchArgs
     companyBranchId?: boolean
     Role_Company?: boolean | Role_CompanyArgs
-    Position_user?: boolean | User$Position_userArgs
+    Position_user?: boolean | Position_userArgs
+    henchman?: boolean | User$henchmanArgs
     _count?: boolean | UserCountOutputTypeArgs
   }
 
@@ -5492,7 +5493,8 @@ export namespace Prisma {
     company?: boolean | User$companyArgs
     companyBranch?: boolean | CompanyBranchArgs
     Role_Company?: boolean | Role_CompanyArgs
-    Position_user?: boolean | User$Position_userArgs
+    Position_user?: boolean | Position_userArgs
+    henchman?: boolean | User$henchmanArgs
     _count?: boolean | UserCountOutputTypeArgs
   }
 
@@ -5508,7 +5510,8 @@ export namespace Prisma {
         P extends 'company' ? Array < CompanyGetPayload<S['include'][P]>>  :
         P extends 'companyBranch' ? CompanyBranchGetPayload<S['include'][P]> | null :
         P extends 'Role_Company' ? Role_CompanyGetPayload<S['include'][P]> | null :
-        P extends 'Position_user' ? Array < Position_userGetPayload<S['include'][P]>>  :
+        P extends 'Position_user' ? Position_userGetPayload<S['include'][P]> | null :
+        P extends 'henchman' ? Array < Position_userGetPayload<S['include'][P]>>  :
         P extends '_count' ? UserCountOutputTypeGetPayload<S['include'][P]> :  never
   } 
     : S extends { select: any } & (UserArgs | UserFindManyArgs)
@@ -5519,7 +5522,8 @@ export namespace Prisma {
         P extends 'company' ? Array < CompanyGetPayload<S['select'][P]>>  :
         P extends 'companyBranch' ? CompanyBranchGetPayload<S['select'][P]> | null :
         P extends 'Role_Company' ? Role_CompanyGetPayload<S['select'][P]> | null :
-        P extends 'Position_user' ? Array < Position_userGetPayload<S['select'][P]>>  :
+        P extends 'Position_user' ? Position_userGetPayload<S['select'][P]> | null :
+        P extends 'henchman' ? Array < Position_userGetPayload<S['select'][P]>>  :
         P extends '_count' ? UserCountOutputTypeGetPayload<S['select'][P]> :  P extends keyof User ? User[P] : never
   } 
       : User
@@ -5904,7 +5908,9 @@ export namespace Prisma {
 
     Role_Company<T extends Role_CompanyArgs= {}>(args?: Subset<T, Role_CompanyArgs>): Prisma__Role_CompanyClient<Role_CompanyGetPayload<T> | Null>;
 
-    Position_user<T extends User$Position_userArgs= {}>(args?: Subset<T, User$Position_userArgs>): PrismaPromise<Array<Position_userGetPayload<T>>| Null>;
+    Position_user<T extends Position_userArgs= {}>(args?: Subset<T, Position_userArgs>): Prisma__Position_userClient<Position_userGetPayload<T> | Null>;
+
+    henchman<T extends User$henchmanArgs= {}>(args?: Subset<T, User$henchmanArgs>): PrismaPromise<Array<Position_userGetPayload<T>>| Null>;
 
     private get _document();
     /**
@@ -6283,9 +6289,9 @@ export namespace Prisma {
 
 
   /**
-   * User.Position_user
+   * User.henchman
    */
-  export type User$Position_userArgs = {
+  export type User$henchmanArgs = {
     /**
      * Select specific fields to fetch from the Position_user
      */
@@ -15131,7 +15137,7 @@ export namespace Prisma {
     position2_id: string | null
     position3_id: string | null
     role: string | null
-    headder: string | null
+    headderId: string | null
   }
 
   export type Position_userMaxAggregateOutputType = {
@@ -15141,7 +15147,7 @@ export namespace Prisma {
     position2_id: string | null
     position3_id: string | null
     role: string | null
-    headder: string | null
+    headderId: string | null
   }
 
   export type Position_userCountAggregateOutputType = {
@@ -15151,7 +15157,7 @@ export namespace Prisma {
     position2_id: number
     position3_id: number
     role: number
-    headder: number
+    headderId: number
     _all: number
   }
 
@@ -15163,7 +15169,7 @@ export namespace Prisma {
     position2_id?: true
     position3_id?: true
     role?: true
-    headder?: true
+    headderId?: true
   }
 
   export type Position_userMaxAggregateInputType = {
@@ -15173,7 +15179,7 @@ export namespace Prisma {
     position2_id?: true
     position3_id?: true
     role?: true
-    headder?: true
+    headderId?: true
   }
 
   export type Position_userCountAggregateInputType = {
@@ -15183,7 +15189,7 @@ export namespace Prisma {
     position2_id?: true
     position3_id?: true
     role?: true
-    headder?: true
+    headderId?: true
     _all?: true
   }
 
@@ -15267,7 +15273,7 @@ export namespace Prisma {
     position2_id: string | null
     position3_id: string | null
     role: string | null
-    headder: string | null
+    headderId: string | null
     _count: Position_userCountAggregateOutputType | null
     _min: Position_userMinAggregateOutputType | null
     _max: Position_userMaxAggregateOutputType | null
@@ -15294,7 +15300,8 @@ export namespace Prisma {
     position2_id?: boolean
     position3_id?: boolean
     role?: boolean
-    headder?: boolean
+    headderId?: boolean
+    header?: boolean | UserArgs
     user?: boolean | UserArgs
     mas_positionlevel1?: boolean | mas_positionlevel1Args
     mas_positionlevel2?: boolean | mas_positionlevel2Args
@@ -15303,6 +15310,7 @@ export namespace Prisma {
 
 
   export type Position_userInclude = {
+    header?: boolean | UserArgs
     user?: boolean | UserArgs
     mas_positionlevel1?: boolean | mas_positionlevel1Args
     mas_positionlevel2?: boolean | mas_positionlevel2Args
@@ -15316,6 +15324,7 @@ export namespace Prisma {
     S extends { include: any } & (Position_userArgs | Position_userFindManyArgs)
     ? Position_user  & {
     [P in TruthyKeys<S['include']>]:
+        P extends 'header' ? UserGetPayload<S['include'][P]> | null :
         P extends 'user' ? UserGetPayload<S['include'][P]> | null :
         P extends 'mas_positionlevel1' ? mas_positionlevel1GetPayload<S['include'][P]> | null :
         P extends 'mas_positionlevel2' ? mas_positionlevel2GetPayload<S['include'][P]> | null :
@@ -15324,6 +15333,7 @@ export namespace Prisma {
     : S extends { select: any } & (Position_userArgs | Position_userFindManyArgs)
       ? {
     [P in TruthyKeys<S['select']>]:
+        P extends 'header' ? UserGetPayload<S['select'][P]> | null :
         P extends 'user' ? UserGetPayload<S['select'][P]> | null :
         P extends 'mas_positionlevel1' ? mas_positionlevel1GetPayload<S['select'][P]> | null :
         P extends 'mas_positionlevel2' ? mas_positionlevel2GetPayload<S['select'][P]> | null :
@@ -15700,6 +15710,8 @@ export namespace Prisma {
     private _requestPromise?;
     constructor(_dmmf: runtime.DMMFClass, _fetcher: PrismaClientFetcher, _queryType: 'query' | 'mutation', _rootField: string, _clientMethod: string, _args: any, _dataPath: string[], _errorFormat: ErrorFormat, _measurePerformance?: boolean | undefined, _isList?: boolean);
     readonly [Symbol.toStringTag]: 'PrismaClientPromise';
+
+    header<T extends UserArgs= {}>(args?: Subset<T, UserArgs>): Prisma__UserClient<UserGetPayload<T> | Null>;
 
     user<T extends UserArgs= {}>(args?: Subset<T, UserArgs>): Prisma__UserClient<UserGetPayload<T> | Null>;
 
@@ -18157,7 +18169,7 @@ export namespace Prisma {
     position2_id: 'position2_id',
     position3_id: 'position3_id',
     role: 'role',
-    headder: 'headder'
+    headderId: 'headderId'
   };
 
   export type Position_userScalarFieldEnum = (typeof Position_userScalarFieldEnum)[keyof typeof Position_userScalarFieldEnum]
@@ -18745,7 +18757,8 @@ export namespace Prisma {
     companyBranch?: XOR<CompanyBranchRelationFilter, CompanyBranchWhereInput> | null
     companyBranchId?: UuidNullableFilter | string | null
     Role_Company?: XOR<Role_CompanyRelationFilter, Role_CompanyWhereInput> | null
-    Position_user?: Position_userListRelationFilter
+    Position_user?: XOR<Position_userRelationFilter, Position_userWhereInput> | null
+    henchman?: Position_userListRelationFilter
   }
 
   export type UserOrderByWithRelationInput = {
@@ -18765,7 +18778,8 @@ export namespace Prisma {
     companyBranch?: CompanyBranchOrderByWithRelationInput
     companyBranchId?: SortOrder
     Role_Company?: Role_CompanyOrderByWithRelationInput
-    Position_user?: Position_userOrderByRelationAggregateInput
+    Position_user?: Position_userOrderByWithRelationInput
+    henchman?: Position_userOrderByRelationAggregateInput
   }
 
   export type UserWhereUniqueInput = {
@@ -19248,7 +19262,8 @@ export namespace Prisma {
     position2_id?: UuidNullableFilter | string | null
     position3_id?: UuidNullableFilter | string | null
     role?: StringNullableFilter | string | null
-    headder?: UuidNullableFilter | string | null
+    headderId?: UuidNullableFilter | string | null
+    header?: XOR<UserRelationFilter, UserWhereInput> | null
     user?: XOR<UserRelationFilter, UserWhereInput> | null
     mas_positionlevel1?: XOR<Mas_positionlevel1RelationFilter, mas_positionlevel1WhereInput> | null
     mas_positionlevel2?: XOR<Mas_positionlevel2RelationFilter, mas_positionlevel2WhereInput> | null
@@ -19262,7 +19277,8 @@ export namespace Prisma {
     position2_id?: SortOrder
     position3_id?: SortOrder
     role?: SortOrder
-    headder?: SortOrder
+    headderId?: SortOrder
+    header?: UserOrderByWithRelationInput
     user?: UserOrderByWithRelationInput
     mas_positionlevel1?: mas_positionlevel1OrderByWithRelationInput
     mas_positionlevel2?: mas_positionlevel2OrderByWithRelationInput
@@ -19271,6 +19287,7 @@ export namespace Prisma {
 
   export type Position_userWhereUniqueInput = {
     id?: string
+    user_id?: string
   }
 
   export type Position_userOrderByWithAggregationInput = {
@@ -19280,7 +19297,7 @@ export namespace Prisma {
     position2_id?: SortOrder
     position3_id?: SortOrder
     role?: SortOrder
-    headder?: SortOrder
+    headderId?: SortOrder
     _count?: Position_userCountOrderByAggregateInput
     _max?: Position_userMaxOrderByAggregateInput
     _min?: Position_userMinOrderByAggregateInput
@@ -19296,7 +19313,7 @@ export namespace Prisma {
     position2_id?: UuidNullableWithAggregatesFilter | string | null
     position3_id?: UuidNullableWithAggregatesFilter | string | null
     role?: StringNullableWithAggregatesFilter | string | null
-    headder?: UuidNullableWithAggregatesFilter | string | null
+    headderId?: UuidNullableWithAggregatesFilter | string | null
   }
 
   export type holiday_dateWhereInput = {
@@ -20086,7 +20103,8 @@ export namespace Prisma {
     company?: CompanyCreateNestedManyWithoutOwnerInput
     companyBranch?: CompanyBranchCreateNestedOneWithoutUsersInput
     Role_Company?: Role_CompanyCreateNestedOneWithoutUsersInput
-    Position_user?: Position_userCreateNestedManyWithoutUserInput
+    Position_user?: Position_userCreateNestedOneWithoutUserInput
+    henchman?: Position_userCreateNestedManyWithoutHeaderInput
   }
 
   export type UserUncheckedCreateInput = {
@@ -20103,7 +20121,8 @@ export namespace Prisma {
     RoleCompanyID?: string | null
     company?: CompanyUncheckedCreateNestedManyWithoutOwnerInput
     companyBranchId?: string | null
-    Position_user?: Position_userUncheckedCreateNestedManyWithoutUserInput
+    Position_user?: Position_userUncheckedCreateNestedOneWithoutUserInput
+    henchman?: Position_userUncheckedCreateNestedManyWithoutHeaderInput
   }
 
   export type UserUpdateInput = {
@@ -20120,7 +20139,8 @@ export namespace Prisma {
     company?: CompanyUpdateManyWithoutOwnerNestedInput
     companyBranch?: CompanyBranchUpdateOneWithoutUsersNestedInput
     Role_Company?: Role_CompanyUpdateOneWithoutUsersNestedInput
-    Position_user?: Position_userUpdateManyWithoutUserNestedInput
+    Position_user?: Position_userUpdateOneWithoutUserNestedInput
+    henchman?: Position_userUpdateManyWithoutHeaderNestedInput
   }
 
   export type UserUncheckedUpdateInput = {
@@ -20137,7 +20157,8 @@ export namespace Prisma {
     RoleCompanyID?: NullableStringFieldUpdateOperationsInput | string | null
     company?: CompanyUncheckedUpdateManyWithoutOwnerNestedInput
     companyBranchId?: NullableStringFieldUpdateOperationsInput | string | null
-    Position_user?: Position_userUncheckedUpdateManyWithoutUserNestedInput
+    Position_user?: Position_userUncheckedUpdateOneWithoutUserNestedInput
+    henchman?: Position_userUncheckedUpdateManyWithoutHeaderNestedInput
   }
 
   export type UserCreateManyInput = {
@@ -20678,7 +20699,7 @@ export namespace Prisma {
   export type Position_userCreateInput = {
     id: string
     role?: string | null
-    headder?: string | null
+    header?: UserCreateNestedOneWithoutHenchmanInput
     user?: UserCreateNestedOneWithoutPosition_userInput
     mas_positionlevel1?: mas_positionlevel1CreateNestedOneWithoutPosition_userInput
     mas_positionlevel2?: mas_positionlevel2CreateNestedOneWithoutPosition_userInput
@@ -20692,13 +20713,13 @@ export namespace Prisma {
     position2_id?: string | null
     position3_id?: string | null
     role?: string | null
-    headder?: string | null
+    headderId?: string | null
   }
 
   export type Position_userUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
     role?: NullableStringFieldUpdateOperationsInput | string | null
-    headder?: NullableStringFieldUpdateOperationsInput | string | null
+    header?: UserUpdateOneWithoutHenchmanNestedInput
     user?: UserUpdateOneWithoutPosition_userNestedInput
     mas_positionlevel1?: mas_positionlevel1UpdateOneWithoutPosition_userNestedInput
     mas_positionlevel2?: mas_positionlevel2UpdateOneWithoutPosition_userNestedInput
@@ -20712,7 +20733,7 @@ export namespace Prisma {
     position2_id?: NullableStringFieldUpdateOperationsInput | string | null
     position3_id?: NullableStringFieldUpdateOperationsInput | string | null
     role?: NullableStringFieldUpdateOperationsInput | string | null
-    headder?: NullableStringFieldUpdateOperationsInput | string | null
+    headderId?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type Position_userCreateManyInput = {
@@ -20722,13 +20743,12 @@ export namespace Prisma {
     position2_id?: string | null
     position3_id?: string | null
     role?: string | null
-    headder?: string | null
+    headderId?: string | null
   }
 
   export type Position_userUpdateManyMutationInput = {
     id?: StringFieldUpdateOperationsInput | string
     role?: NullableStringFieldUpdateOperationsInput | string | null
-    headder?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type Position_userUncheckedUpdateManyInput = {
@@ -20738,7 +20758,7 @@ export namespace Prisma {
     position2_id?: NullableStringFieldUpdateOperationsInput | string | null
     position3_id?: NullableStringFieldUpdateOperationsInput | string | null
     role?: NullableStringFieldUpdateOperationsInput | string | null
-    headder?: NullableStringFieldUpdateOperationsInput | string | null
+    headderId?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type holiday_dateCreateInput = {
@@ -21469,6 +21489,11 @@ export namespace Prisma {
     isNot?: Role_CompanyWhereInput | null
   }
 
+  export type Position_userRelationFilter = {
+    is?: Position_userWhereInput | null
+    isNot?: Position_userWhereInput | null
+  }
+
   export type Position_userListRelationFilter = {
     every?: Position_userWhereInput
     some?: Position_userWhereInput
@@ -21863,7 +21888,7 @@ export namespace Prisma {
     position2_id?: SortOrder
     position3_id?: SortOrder
     role?: SortOrder
-    headder?: SortOrder
+    headderId?: SortOrder
   }
 
   export type Position_userMaxOrderByAggregateInput = {
@@ -21873,7 +21898,7 @@ export namespace Prisma {
     position2_id?: SortOrder
     position3_id?: SortOrder
     role?: SortOrder
-    headder?: SortOrder
+    headderId?: SortOrder
   }
 
   export type Position_userMinOrderByAggregateInput = {
@@ -21883,7 +21908,7 @@ export namespace Prisma {
     position2_id?: SortOrder
     position3_id?: SortOrder
     role?: SortOrder
-    headder?: SortOrder
+    headderId?: SortOrder
   }
 
   export type holiday_dateCountOrderByAggregateInput = {
@@ -22400,10 +22425,16 @@ export namespace Prisma {
     connect?: Role_CompanyWhereUniqueInput
   }
 
-  export type Position_userCreateNestedManyWithoutUserInput = {
-    create?: XOR<Enumerable<Position_userCreateWithoutUserInput>, Enumerable<Position_userUncheckedCreateWithoutUserInput>>
-    connectOrCreate?: Enumerable<Position_userCreateOrConnectWithoutUserInput>
-    createMany?: Position_userCreateManyUserInputEnvelope
+  export type Position_userCreateNestedOneWithoutUserInput = {
+    create?: XOR<Position_userCreateWithoutUserInput, Position_userUncheckedCreateWithoutUserInput>
+    connectOrCreate?: Position_userCreateOrConnectWithoutUserInput
+    connect?: Position_userWhereUniqueInput
+  }
+
+  export type Position_userCreateNestedManyWithoutHeaderInput = {
+    create?: XOR<Enumerable<Position_userCreateWithoutHeaderInput>, Enumerable<Position_userUncheckedCreateWithoutHeaderInput>>
+    connectOrCreate?: Enumerable<Position_userCreateOrConnectWithoutHeaderInput>
+    createMany?: Position_userCreateManyHeaderInputEnvelope
     connect?: Enumerable<Position_userWhereUniqueInput>
   }
 
@@ -22420,10 +22451,16 @@ export namespace Prisma {
     connect?: Enumerable<CompanyWhereUniqueInput>
   }
 
-  export type Position_userUncheckedCreateNestedManyWithoutUserInput = {
-    create?: XOR<Enumerable<Position_userCreateWithoutUserInput>, Enumerable<Position_userUncheckedCreateWithoutUserInput>>
-    connectOrCreate?: Enumerable<Position_userCreateOrConnectWithoutUserInput>
-    createMany?: Position_userCreateManyUserInputEnvelope
+  export type Position_userUncheckedCreateNestedOneWithoutUserInput = {
+    create?: XOR<Position_userCreateWithoutUserInput, Position_userUncheckedCreateWithoutUserInput>
+    connectOrCreate?: Position_userCreateOrConnectWithoutUserInput
+    connect?: Position_userWhereUniqueInput
+  }
+
+  export type Position_userUncheckedCreateNestedManyWithoutHeaderInput = {
+    create?: XOR<Enumerable<Position_userCreateWithoutHeaderInput>, Enumerable<Position_userUncheckedCreateWithoutHeaderInput>>
+    connectOrCreate?: Enumerable<Position_userCreateOrConnectWithoutHeaderInput>
+    createMany?: Position_userCreateManyHeaderInputEnvelope
     connect?: Enumerable<Position_userWhereUniqueInput>
   }
 
@@ -22481,17 +22518,27 @@ export namespace Prisma {
     update?: XOR<Role_CompanyUpdateWithoutUsersInput, Role_CompanyUncheckedUpdateWithoutUsersInput>
   }
 
-  export type Position_userUpdateManyWithoutUserNestedInput = {
-    create?: XOR<Enumerable<Position_userCreateWithoutUserInput>, Enumerable<Position_userUncheckedCreateWithoutUserInput>>
-    connectOrCreate?: Enumerable<Position_userCreateOrConnectWithoutUserInput>
-    upsert?: Enumerable<Position_userUpsertWithWhereUniqueWithoutUserInput>
-    createMany?: Position_userCreateManyUserInputEnvelope
+  export type Position_userUpdateOneWithoutUserNestedInput = {
+    create?: XOR<Position_userCreateWithoutUserInput, Position_userUncheckedCreateWithoutUserInput>
+    connectOrCreate?: Position_userCreateOrConnectWithoutUserInput
+    upsert?: Position_userUpsertWithoutUserInput
+    disconnect?: boolean
+    delete?: boolean
+    connect?: Position_userWhereUniqueInput
+    update?: XOR<Position_userUpdateWithoutUserInput, Position_userUncheckedUpdateWithoutUserInput>
+  }
+
+  export type Position_userUpdateManyWithoutHeaderNestedInput = {
+    create?: XOR<Enumerable<Position_userCreateWithoutHeaderInput>, Enumerable<Position_userUncheckedCreateWithoutHeaderInput>>
+    connectOrCreate?: Enumerable<Position_userCreateOrConnectWithoutHeaderInput>
+    upsert?: Enumerable<Position_userUpsertWithWhereUniqueWithoutHeaderInput>
+    createMany?: Position_userCreateManyHeaderInputEnvelope
     set?: Enumerable<Position_userWhereUniqueInput>
     disconnect?: Enumerable<Position_userWhereUniqueInput>
     delete?: Enumerable<Position_userWhereUniqueInput>
     connect?: Enumerable<Position_userWhereUniqueInput>
-    update?: Enumerable<Position_userUpdateWithWhereUniqueWithoutUserInput>
-    updateMany?: Enumerable<Position_userUpdateManyWithWhereWithoutUserInput>
+    update?: Enumerable<Position_userUpdateWithWhereUniqueWithoutHeaderInput>
+    updateMany?: Enumerable<Position_userUpdateManyWithWhereWithoutHeaderInput>
     deleteMany?: Enumerable<Position_userScalarWhereInput>
   }
 
@@ -22519,17 +22566,27 @@ export namespace Prisma {
     deleteMany?: Enumerable<CompanyScalarWhereInput>
   }
 
-  export type Position_userUncheckedUpdateManyWithoutUserNestedInput = {
-    create?: XOR<Enumerable<Position_userCreateWithoutUserInput>, Enumerable<Position_userUncheckedCreateWithoutUserInput>>
-    connectOrCreate?: Enumerable<Position_userCreateOrConnectWithoutUserInput>
-    upsert?: Enumerable<Position_userUpsertWithWhereUniqueWithoutUserInput>
-    createMany?: Position_userCreateManyUserInputEnvelope
+  export type Position_userUncheckedUpdateOneWithoutUserNestedInput = {
+    create?: XOR<Position_userCreateWithoutUserInput, Position_userUncheckedCreateWithoutUserInput>
+    connectOrCreate?: Position_userCreateOrConnectWithoutUserInput
+    upsert?: Position_userUpsertWithoutUserInput
+    disconnect?: boolean
+    delete?: boolean
+    connect?: Position_userWhereUniqueInput
+    update?: XOR<Position_userUpdateWithoutUserInput, Position_userUncheckedUpdateWithoutUserInput>
+  }
+
+  export type Position_userUncheckedUpdateManyWithoutHeaderNestedInput = {
+    create?: XOR<Enumerable<Position_userCreateWithoutHeaderInput>, Enumerable<Position_userUncheckedCreateWithoutHeaderInput>>
+    connectOrCreate?: Enumerable<Position_userCreateOrConnectWithoutHeaderInput>
+    upsert?: Enumerable<Position_userUpsertWithWhereUniqueWithoutHeaderInput>
+    createMany?: Position_userCreateManyHeaderInputEnvelope
     set?: Enumerable<Position_userWhereUniqueInput>
     disconnect?: Enumerable<Position_userWhereUniqueInput>
     delete?: Enumerable<Position_userWhereUniqueInput>
     connect?: Enumerable<Position_userWhereUniqueInput>
-    update?: Enumerable<Position_userUpdateWithWhereUniqueWithoutUserInput>
-    updateMany?: Enumerable<Position_userUpdateManyWithWhereWithoutUserInput>
+    update?: Enumerable<Position_userUpdateWithWhereUniqueWithoutHeaderInput>
+    updateMany?: Enumerable<Position_userUpdateManyWithWhereWithoutHeaderInput>
     deleteMany?: Enumerable<Position_userScalarWhereInput>
   }
 
@@ -23051,6 +23108,12 @@ export namespace Prisma {
     deleteMany?: Enumerable<Position_userScalarWhereInput>
   }
 
+  export type UserCreateNestedOneWithoutHenchmanInput = {
+    create?: XOR<UserCreateWithoutHenchmanInput, UserUncheckedCreateWithoutHenchmanInput>
+    connectOrCreate?: UserCreateOrConnectWithoutHenchmanInput
+    connect?: UserWhereUniqueInput
+  }
+
   export type UserCreateNestedOneWithoutPosition_userInput = {
     create?: XOR<UserCreateWithoutPosition_userInput, UserUncheckedCreateWithoutPosition_userInput>
     connectOrCreate?: UserCreateOrConnectWithoutPosition_userInput
@@ -23073,6 +23136,16 @@ export namespace Prisma {
     create?: XOR<mas_positionlevel3CreateWithoutPosition_userInput, mas_positionlevel3UncheckedCreateWithoutPosition_userInput>
     connectOrCreate?: mas_positionlevel3CreateOrConnectWithoutPosition_userInput
     connect?: mas_positionlevel3WhereUniqueInput
+  }
+
+  export type UserUpdateOneWithoutHenchmanNestedInput = {
+    create?: XOR<UserCreateWithoutHenchmanInput, UserUncheckedCreateWithoutHenchmanInput>
+    connectOrCreate?: UserCreateOrConnectWithoutHenchmanInput
+    upsert?: UserUpsertWithoutHenchmanInput
+    disconnect?: boolean
+    delete?: boolean
+    connect?: UserWhereUniqueInput
+    update?: XOR<UserUpdateWithoutHenchmanInput, UserUncheckedUpdateWithoutHenchmanInput>
   }
 
   export type UserUpdateOneWithoutPosition_userNestedInput = {
@@ -23390,7 +23463,8 @@ export namespace Prisma {
     role?: RoleCreateNestedOneWithoutUsersInput
     companyBranch?: CompanyBranchCreateNestedOneWithoutUsersInput
     Role_Company?: Role_CompanyCreateNestedOneWithoutUsersInput
-    Position_user?: Position_userCreateNestedManyWithoutUserInput
+    Position_user?: Position_userCreateNestedOneWithoutUserInput
+    henchman?: Position_userCreateNestedManyWithoutHeaderInput
   }
 
   export type UserUncheckedCreateWithoutCompanyInput = {
@@ -23406,7 +23480,8 @@ export namespace Prisma {
     roleId?: string | null
     RoleCompanyID?: string | null
     companyBranchId?: string | null
-    Position_user?: Position_userUncheckedCreateNestedManyWithoutUserInput
+    Position_user?: Position_userUncheckedCreateNestedOneWithoutUserInput
+    henchman?: Position_userUncheckedCreateNestedManyWithoutHeaderInput
   }
 
   export type UserCreateOrConnectWithoutCompanyInput = {
@@ -23642,7 +23717,8 @@ export namespace Prisma {
     role?: RoleUpdateOneWithoutUsersNestedInput
     companyBranch?: CompanyBranchUpdateOneWithoutUsersNestedInput
     Role_Company?: Role_CompanyUpdateOneWithoutUsersNestedInput
-    Position_user?: Position_userUpdateManyWithoutUserNestedInput
+    Position_user?: Position_userUpdateOneWithoutUserNestedInput
+    henchman?: Position_userUpdateManyWithoutHeaderNestedInput
   }
 
   export type UserUncheckedUpdateWithoutCompanyInput = {
@@ -23658,7 +23734,8 @@ export namespace Prisma {
     roleId?: NullableStringFieldUpdateOperationsInput | string | null
     RoleCompanyID?: NullableStringFieldUpdateOperationsInput | string | null
     companyBranchId?: NullableStringFieldUpdateOperationsInput | string | null
-    Position_user?: Position_userUncheckedUpdateManyWithoutUserNestedInput
+    Position_user?: Position_userUncheckedUpdateOneWithoutUserNestedInput
+    henchman?: Position_userUncheckedUpdateManyWithoutHeaderNestedInput
   }
 
   export type CompanyBranchUpsertWithWhereUniqueWithoutCompanyInput = {
@@ -23903,7 +23980,8 @@ export namespace Prisma {
     role?: RoleCreateNestedOneWithoutUsersInput
     company?: CompanyCreateNestedManyWithoutOwnerInput
     Role_Company?: Role_CompanyCreateNestedOneWithoutUsersInput
-    Position_user?: Position_userCreateNestedManyWithoutUserInput
+    Position_user?: Position_userCreateNestedOneWithoutUserInput
+    henchman?: Position_userCreateNestedManyWithoutHeaderInput
   }
 
   export type UserUncheckedCreateWithoutCompanyBranchInput = {
@@ -23919,7 +23997,8 @@ export namespace Prisma {
     roleId?: string | null
     RoleCompanyID?: string | null
     company?: CompanyUncheckedCreateNestedManyWithoutOwnerInput
-    Position_user?: Position_userUncheckedCreateNestedManyWithoutUserInput
+    Position_user?: Position_userUncheckedCreateNestedOneWithoutUserInput
+    henchman?: Position_userUncheckedCreateNestedManyWithoutHeaderInput
   }
 
   export type UserCreateOrConnectWithoutCompanyBranchInput = {
@@ -24072,7 +24151,8 @@ export namespace Prisma {
     company?: CompanyCreateNestedManyWithoutOwnerInput
     companyBranch?: CompanyBranchCreateNestedOneWithoutUsersInput
     Role_Company?: Role_CompanyCreateNestedOneWithoutUsersInput
-    Position_user?: Position_userCreateNestedManyWithoutUserInput
+    Position_user?: Position_userCreateNestedOneWithoutUserInput
+    henchman?: Position_userCreateNestedManyWithoutHeaderInput
   }
 
   export type UserUncheckedCreateWithoutProfileInput = {
@@ -24088,7 +24168,8 @@ export namespace Prisma {
     RoleCompanyID?: string | null
     company?: CompanyUncheckedCreateNestedManyWithoutOwnerInput
     companyBranchId?: string | null
-    Position_user?: Position_userUncheckedCreateNestedManyWithoutUserInput
+    Position_user?: Position_userUncheckedCreateNestedOneWithoutUserInput
+    henchman?: Position_userUncheckedCreateNestedManyWithoutHeaderInput
   }
 
   export type UserCreateOrConnectWithoutProfileInput = {
@@ -24114,7 +24195,8 @@ export namespace Prisma {
     company?: CompanyUpdateManyWithoutOwnerNestedInput
     companyBranch?: CompanyBranchUpdateOneWithoutUsersNestedInput
     Role_Company?: Role_CompanyUpdateOneWithoutUsersNestedInput
-    Position_user?: Position_userUpdateManyWithoutUserNestedInput
+    Position_user?: Position_userUpdateOneWithoutUserNestedInput
+    henchman?: Position_userUpdateManyWithoutHeaderNestedInput
   }
 
   export type UserUncheckedUpdateWithoutProfileInput = {
@@ -24130,7 +24212,8 @@ export namespace Prisma {
     RoleCompanyID?: NullableStringFieldUpdateOperationsInput | string | null
     company?: CompanyUncheckedUpdateManyWithoutOwnerNestedInput
     companyBranchId?: NullableStringFieldUpdateOperationsInput | string | null
-    Position_user?: Position_userUncheckedUpdateManyWithoutUserNestedInput
+    Position_user?: Position_userUncheckedUpdateOneWithoutUserNestedInput
+    henchman?: Position_userUncheckedUpdateManyWithoutHeaderNestedInput
   }
 
   export type ProfileCreateWithoutUserInput = {
@@ -24386,7 +24469,7 @@ export namespace Prisma {
   export type Position_userCreateWithoutUserInput = {
     id: string
     role?: string | null
-    headder?: string | null
+    header?: UserCreateNestedOneWithoutHenchmanInput
     mas_positionlevel1?: mas_positionlevel1CreateNestedOneWithoutPosition_userInput
     mas_positionlevel2?: mas_positionlevel2CreateNestedOneWithoutPosition_userInput
     mas_positionlevel3?: mas_positionlevel3CreateNestedOneWithoutPosition_userInput
@@ -24398,7 +24481,7 @@ export namespace Prisma {
     position2_id?: string | null
     position3_id?: string | null
     role?: string | null
-    headder?: string | null
+    headderId?: string | null
   }
 
   export type Position_userCreateOrConnectWithoutUserInput = {
@@ -24406,8 +24489,31 @@ export namespace Prisma {
     create: XOR<Position_userCreateWithoutUserInput, Position_userUncheckedCreateWithoutUserInput>
   }
 
-  export type Position_userCreateManyUserInputEnvelope = {
-    data: Enumerable<Position_userCreateManyUserInput>
+  export type Position_userCreateWithoutHeaderInput = {
+    id: string
+    role?: string | null
+    user?: UserCreateNestedOneWithoutPosition_userInput
+    mas_positionlevel1?: mas_positionlevel1CreateNestedOneWithoutPosition_userInput
+    mas_positionlevel2?: mas_positionlevel2CreateNestedOneWithoutPosition_userInput
+    mas_positionlevel3?: mas_positionlevel3CreateNestedOneWithoutPosition_userInput
+  }
+
+  export type Position_userUncheckedCreateWithoutHeaderInput = {
+    id: string
+    user_id?: string | null
+    position1_id?: string | null
+    position2_id?: string | null
+    position3_id?: string | null
+    role?: string | null
+  }
+
+  export type Position_userCreateOrConnectWithoutHeaderInput = {
+    where: Position_userWhereUniqueInput
+    create: XOR<Position_userCreateWithoutHeaderInput, Position_userUncheckedCreateWithoutHeaderInput>
+  }
+
+  export type Position_userCreateManyHeaderInputEnvelope = {
+    data: Enumerable<Position_userCreateManyHeaderInput>
     skipDuplicates?: boolean
   }
 
@@ -24647,20 +24753,43 @@ export namespace Prisma {
     companyBranchId?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
-  export type Position_userUpsertWithWhereUniqueWithoutUserInput = {
-    where: Position_userWhereUniqueInput
+  export type Position_userUpsertWithoutUserInput = {
     update: XOR<Position_userUpdateWithoutUserInput, Position_userUncheckedUpdateWithoutUserInput>
     create: XOR<Position_userCreateWithoutUserInput, Position_userUncheckedCreateWithoutUserInput>
   }
 
-  export type Position_userUpdateWithWhereUniqueWithoutUserInput = {
-    where: Position_userWhereUniqueInput
-    data: XOR<Position_userUpdateWithoutUserInput, Position_userUncheckedUpdateWithoutUserInput>
+  export type Position_userUpdateWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    role?: NullableStringFieldUpdateOperationsInput | string | null
+    header?: UserUpdateOneWithoutHenchmanNestedInput
+    mas_positionlevel1?: mas_positionlevel1UpdateOneWithoutPosition_userNestedInput
+    mas_positionlevel2?: mas_positionlevel2UpdateOneWithoutPosition_userNestedInput
+    mas_positionlevel3?: mas_positionlevel3UpdateOneWithoutPosition_userNestedInput
   }
 
-  export type Position_userUpdateManyWithWhereWithoutUserInput = {
+  export type Position_userUncheckedUpdateWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    position1_id?: NullableStringFieldUpdateOperationsInput | string | null
+    position2_id?: NullableStringFieldUpdateOperationsInput | string | null
+    position3_id?: NullableStringFieldUpdateOperationsInput | string | null
+    role?: NullableStringFieldUpdateOperationsInput | string | null
+    headderId?: NullableStringFieldUpdateOperationsInput | string | null
+  }
+
+  export type Position_userUpsertWithWhereUniqueWithoutHeaderInput = {
+    where: Position_userWhereUniqueInput
+    update: XOR<Position_userUpdateWithoutHeaderInput, Position_userUncheckedUpdateWithoutHeaderInput>
+    create: XOR<Position_userCreateWithoutHeaderInput, Position_userUncheckedCreateWithoutHeaderInput>
+  }
+
+  export type Position_userUpdateWithWhereUniqueWithoutHeaderInput = {
+    where: Position_userWhereUniqueInput
+    data: XOR<Position_userUpdateWithoutHeaderInput, Position_userUncheckedUpdateWithoutHeaderInput>
+  }
+
+  export type Position_userUpdateManyWithWhereWithoutHeaderInput = {
     where: Position_userScalarWhereInput
-    data: XOR<Position_userUpdateManyMutationInput, Position_userUncheckedUpdateManyWithoutPosition_userInput>
+    data: XOR<Position_userUpdateManyMutationInput, Position_userUncheckedUpdateManyWithoutHenchmanInput>
   }
 
   export type Position_userScalarWhereInput = {
@@ -24673,7 +24802,7 @@ export namespace Prisma {
     position2_id?: UuidNullableFilter | string | null
     position3_id?: UuidNullableFilter | string | null
     role?: StringNullableFilter | string | null
-    headder?: UuidNullableFilter | string | null
+    headderId?: UuidNullableFilter | string | null
   }
 
   export type UserCreateWithoutRoleInput = {
@@ -24689,7 +24818,8 @@ export namespace Prisma {
     company?: CompanyCreateNestedManyWithoutOwnerInput
     companyBranch?: CompanyBranchCreateNestedOneWithoutUsersInput
     Role_Company?: Role_CompanyCreateNestedOneWithoutUsersInput
-    Position_user?: Position_userCreateNestedManyWithoutUserInput
+    Position_user?: Position_userCreateNestedOneWithoutUserInput
+    henchman?: Position_userCreateNestedManyWithoutHeaderInput
   }
 
   export type UserUncheckedCreateWithoutRoleInput = {
@@ -24705,7 +24835,8 @@ export namespace Prisma {
     RoleCompanyID?: string | null
     company?: CompanyUncheckedCreateNestedManyWithoutOwnerInput
     companyBranchId?: string | null
-    Position_user?: Position_userUncheckedCreateNestedManyWithoutUserInput
+    Position_user?: Position_userUncheckedCreateNestedOneWithoutUserInput
+    henchman?: Position_userUncheckedCreateNestedManyWithoutHeaderInput
   }
 
   export type UserCreateOrConnectWithoutRoleInput = {
@@ -24747,7 +24878,8 @@ export namespace Prisma {
     role?: RoleCreateNestedOneWithoutUsersInput
     company?: CompanyCreateNestedManyWithoutOwnerInput
     companyBranch?: CompanyBranchCreateNestedOneWithoutUsersInput
-    Position_user?: Position_userCreateNestedManyWithoutUserInput
+    Position_user?: Position_userCreateNestedOneWithoutUserInput
+    henchman?: Position_userCreateNestedManyWithoutHeaderInput
   }
 
   export type UserUncheckedCreateWithoutRole_CompanyInput = {
@@ -24763,7 +24895,8 @@ export namespace Prisma {
     roleId?: string | null
     company?: CompanyUncheckedCreateNestedManyWithoutOwnerInput
     companyBranchId?: string | null
-    Position_user?: Position_userUncheckedCreateNestedManyWithoutUserInput
+    Position_user?: Position_userUncheckedCreateNestedOneWithoutUserInput
+    henchman?: Position_userUncheckedCreateNestedManyWithoutHeaderInput
   }
 
   export type UserCreateOrConnectWithoutRole_CompanyInput = {
@@ -25239,7 +25372,7 @@ export namespace Prisma {
   export type Position_userCreateWithoutMas_positionlevel1Input = {
     id: string
     role?: string | null
-    headder?: string | null
+    header?: UserCreateNestedOneWithoutHenchmanInput
     user?: UserCreateNestedOneWithoutPosition_userInput
     mas_positionlevel2?: mas_positionlevel2CreateNestedOneWithoutPosition_userInput
     mas_positionlevel3?: mas_positionlevel3CreateNestedOneWithoutPosition_userInput
@@ -25251,7 +25384,7 @@ export namespace Prisma {
     position2_id?: string | null
     position3_id?: string | null
     role?: string | null
-    headder?: string | null
+    headderId?: string | null
   }
 
   export type Position_userCreateOrConnectWithoutMas_positionlevel1Input = {
@@ -25436,7 +25569,7 @@ export namespace Prisma {
   export type Position_userCreateWithoutMas_positionlevel2Input = {
     id: string
     role?: string | null
-    headder?: string | null
+    header?: UserCreateNestedOneWithoutHenchmanInput
     user?: UserCreateNestedOneWithoutPosition_userInput
     mas_positionlevel1?: mas_positionlevel1CreateNestedOneWithoutPosition_userInput
     mas_positionlevel3?: mas_positionlevel3CreateNestedOneWithoutPosition_userInput
@@ -25448,7 +25581,7 @@ export namespace Prisma {
     position1_id?: string | null
     position3_id?: string | null
     role?: string | null
-    headder?: string | null
+    headderId?: string | null
   }
 
   export type Position_userCreateOrConnectWithoutMas_positionlevel2Input = {
@@ -25630,7 +25763,7 @@ export namespace Prisma {
   export type Position_userCreateWithoutMas_positionlevel3Input = {
     id: string
     role?: string | null
-    headder?: string | null
+    header?: UserCreateNestedOneWithoutHenchmanInput
     user?: UserCreateNestedOneWithoutPosition_userInput
     mas_positionlevel1?: mas_positionlevel1CreateNestedOneWithoutPosition_userInput
     mas_positionlevel2?: mas_positionlevel2CreateNestedOneWithoutPosition_userInput
@@ -25642,7 +25775,7 @@ export namespace Prisma {
     position1_id?: string | null
     position2_id?: string | null
     role?: string | null
-    headder?: string | null
+    headderId?: string | null
   }
 
   export type Position_userCreateOrConnectWithoutMas_positionlevel3Input = {
@@ -25739,6 +25872,45 @@ export namespace Prisma {
     data: XOR<Position_userUpdateManyMutationInput, Position_userUncheckedUpdateManyWithoutPosition_userInput>
   }
 
+  export type UserCreateWithoutHenchmanInput = {
+    id: string
+    email: string
+    password: string
+    profile?: ProfileCreateNestedOneWithoutUserInput
+    islogin?: boolean
+    isActive?: boolean
+    isOwner?: boolean
+    lastlogin?: Date | string | null
+    createdAt?: Date | string
+    role?: RoleCreateNestedOneWithoutUsersInput
+    company?: CompanyCreateNestedManyWithoutOwnerInput
+    companyBranch?: CompanyBranchCreateNestedOneWithoutUsersInput
+    Role_Company?: Role_CompanyCreateNestedOneWithoutUsersInput
+    Position_user?: Position_userCreateNestedOneWithoutUserInput
+  }
+
+  export type UserUncheckedCreateWithoutHenchmanInput = {
+    id: string
+    email: string
+    password: string
+    profile?: ProfileUncheckedCreateNestedOneWithoutUserInput
+    islogin?: boolean
+    isActive?: boolean
+    isOwner?: boolean
+    lastlogin?: Date | string | null
+    createdAt?: Date | string
+    roleId?: string | null
+    RoleCompanyID?: string | null
+    company?: CompanyUncheckedCreateNestedManyWithoutOwnerInput
+    companyBranchId?: string | null
+    Position_user?: Position_userUncheckedCreateNestedOneWithoutUserInput
+  }
+
+  export type UserCreateOrConnectWithoutHenchmanInput = {
+    where: UserWhereUniqueInput
+    create: XOR<UserCreateWithoutHenchmanInput, UserUncheckedCreateWithoutHenchmanInput>
+  }
+
   export type UserCreateWithoutPosition_userInput = {
     id: string
     email: string
@@ -25753,6 +25925,7 @@ export namespace Prisma {
     company?: CompanyCreateNestedManyWithoutOwnerInput
     companyBranch?: CompanyBranchCreateNestedOneWithoutUsersInput
     Role_Company?: Role_CompanyCreateNestedOneWithoutUsersInput
+    henchman?: Position_userCreateNestedManyWithoutHeaderInput
   }
 
   export type UserUncheckedCreateWithoutPosition_userInput = {
@@ -25769,6 +25942,7 @@ export namespace Prisma {
     RoleCompanyID?: string | null
     company?: CompanyUncheckedCreateNestedManyWithoutOwnerInput
     companyBranchId?: string | null
+    henchman?: Position_userUncheckedCreateNestedManyWithoutHeaderInput
   }
 
   export type UserCreateOrConnectWithoutPosition_userInput = {
@@ -25853,6 +26027,45 @@ export namespace Prisma {
     create: XOR<mas_positionlevel3CreateWithoutPosition_userInput, mas_positionlevel3UncheckedCreateWithoutPosition_userInput>
   }
 
+  export type UserUpsertWithoutHenchmanInput = {
+    update: XOR<UserUpdateWithoutHenchmanInput, UserUncheckedUpdateWithoutHenchmanInput>
+    create: XOR<UserCreateWithoutHenchmanInput, UserUncheckedCreateWithoutHenchmanInput>
+  }
+
+  export type UserUpdateWithoutHenchmanInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    password?: StringFieldUpdateOperationsInput | string
+    profile?: ProfileUpdateOneWithoutUserNestedInput
+    islogin?: BoolFieldUpdateOperationsInput | boolean
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    isOwner?: BoolFieldUpdateOperationsInput | boolean
+    lastlogin?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    role?: RoleUpdateOneWithoutUsersNestedInput
+    company?: CompanyUpdateManyWithoutOwnerNestedInput
+    companyBranch?: CompanyBranchUpdateOneWithoutUsersNestedInput
+    Role_Company?: Role_CompanyUpdateOneWithoutUsersNestedInput
+    Position_user?: Position_userUpdateOneWithoutUserNestedInput
+  }
+
+  export type UserUncheckedUpdateWithoutHenchmanInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    password?: StringFieldUpdateOperationsInput | string
+    profile?: ProfileUncheckedUpdateOneWithoutUserNestedInput
+    islogin?: BoolFieldUpdateOperationsInput | boolean
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    isOwner?: BoolFieldUpdateOperationsInput | boolean
+    lastlogin?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    roleId?: NullableStringFieldUpdateOperationsInput | string | null
+    RoleCompanyID?: NullableStringFieldUpdateOperationsInput | string | null
+    company?: CompanyUncheckedUpdateManyWithoutOwnerNestedInput
+    companyBranchId?: NullableStringFieldUpdateOperationsInput | string | null
+    Position_user?: Position_userUncheckedUpdateOneWithoutUserNestedInput
+  }
+
   export type UserUpsertWithoutPosition_userInput = {
     update: XOR<UserUpdateWithoutPosition_userInput, UserUncheckedUpdateWithoutPosition_userInput>
     create: XOR<UserCreateWithoutPosition_userInput, UserUncheckedCreateWithoutPosition_userInput>
@@ -25872,6 +26085,7 @@ export namespace Prisma {
     company?: CompanyUpdateManyWithoutOwnerNestedInput
     companyBranch?: CompanyBranchUpdateOneWithoutUsersNestedInput
     Role_Company?: Role_CompanyUpdateOneWithoutUsersNestedInput
+    henchman?: Position_userUpdateManyWithoutHeaderNestedInput
   }
 
   export type UserUncheckedUpdateWithoutPosition_userInput = {
@@ -25888,6 +26102,7 @@ export namespace Prisma {
     RoleCompanyID?: NullableStringFieldUpdateOperationsInput | string | null
     company?: CompanyUncheckedUpdateManyWithoutOwnerNestedInput
     companyBranchId?: NullableStringFieldUpdateOperationsInput | string | null
+    henchman?: Position_userUncheckedUpdateManyWithoutHeaderNestedInput
   }
 
   export type mas_positionlevel1UpsertWithoutPosition_userInput = {
@@ -26368,7 +26583,8 @@ export namespace Prisma {
     role?: RoleUpdateOneWithoutUsersNestedInput
     company?: CompanyUpdateManyWithoutOwnerNestedInput
     Role_Company?: Role_CompanyUpdateOneWithoutUsersNestedInput
-    Position_user?: Position_userUpdateManyWithoutUserNestedInput
+    Position_user?: Position_userUpdateOneWithoutUserNestedInput
+    henchman?: Position_userUpdateManyWithoutHeaderNestedInput
   }
 
   export type UserUncheckedUpdateWithoutCompanyBranchInput = {
@@ -26384,7 +26600,8 @@ export namespace Prisma {
     roleId?: NullableStringFieldUpdateOperationsInput | string | null
     RoleCompanyID?: NullableStringFieldUpdateOperationsInput | string | null
     company?: CompanyUncheckedUpdateManyWithoutOwnerNestedInput
-    Position_user?: Position_userUncheckedUpdateManyWithoutUserNestedInput
+    Position_user?: Position_userUncheckedUpdateOneWithoutUserNestedInput
+    henchman?: Position_userUncheckedUpdateManyWithoutHeaderNestedInput
   }
 
   export type UserUncheckedUpdateManyWithoutUsersInput = {
@@ -26435,13 +26652,13 @@ export namespace Prisma {
     updatedAt?: Date | string
   }
 
-  export type Position_userCreateManyUserInput = {
+  export type Position_userCreateManyHeaderInput = {
     id: string
+    user_id?: string | null
     position1_id?: string | null
     position2_id?: string | null
     position3_id?: string | null
     role?: string | null
-    headder?: string | null
   }
 
   export type CompanyUpdateWithoutOwnerInput = {
@@ -26492,31 +26709,31 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
-  export type Position_userUpdateWithoutUserInput = {
+  export type Position_userUpdateWithoutHeaderInput = {
     id?: StringFieldUpdateOperationsInput | string
     role?: NullableStringFieldUpdateOperationsInput | string | null
-    headder?: NullableStringFieldUpdateOperationsInput | string | null
+    user?: UserUpdateOneWithoutPosition_userNestedInput
     mas_positionlevel1?: mas_positionlevel1UpdateOneWithoutPosition_userNestedInput
     mas_positionlevel2?: mas_positionlevel2UpdateOneWithoutPosition_userNestedInput
     mas_positionlevel3?: mas_positionlevel3UpdateOneWithoutPosition_userNestedInput
   }
 
-  export type Position_userUncheckedUpdateWithoutUserInput = {
+  export type Position_userUncheckedUpdateWithoutHeaderInput = {
     id?: StringFieldUpdateOperationsInput | string
+    user_id?: NullableStringFieldUpdateOperationsInput | string | null
     position1_id?: NullableStringFieldUpdateOperationsInput | string | null
     position2_id?: NullableStringFieldUpdateOperationsInput | string | null
     position3_id?: NullableStringFieldUpdateOperationsInput | string | null
     role?: NullableStringFieldUpdateOperationsInput | string | null
-    headder?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
-  export type Position_userUncheckedUpdateManyWithoutPosition_userInput = {
+  export type Position_userUncheckedUpdateManyWithoutHenchmanInput = {
     id?: StringFieldUpdateOperationsInput | string
+    user_id?: NullableStringFieldUpdateOperationsInput | string | null
     position1_id?: NullableStringFieldUpdateOperationsInput | string | null
     position2_id?: NullableStringFieldUpdateOperationsInput | string | null
     position3_id?: NullableStringFieldUpdateOperationsInput | string | null
     role?: NullableStringFieldUpdateOperationsInput | string | null
-    headder?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type UserCreateManyRoleInput = {
@@ -26545,7 +26762,8 @@ export namespace Prisma {
     company?: CompanyUpdateManyWithoutOwnerNestedInput
     companyBranch?: CompanyBranchUpdateOneWithoutUsersNestedInput
     Role_Company?: Role_CompanyUpdateOneWithoutUsersNestedInput
-    Position_user?: Position_userUpdateManyWithoutUserNestedInput
+    Position_user?: Position_userUpdateOneWithoutUserNestedInput
+    henchman?: Position_userUpdateManyWithoutHeaderNestedInput
   }
 
   export type UserUncheckedUpdateWithoutRoleInput = {
@@ -26561,7 +26779,8 @@ export namespace Prisma {
     RoleCompanyID?: NullableStringFieldUpdateOperationsInput | string | null
     company?: CompanyUncheckedUpdateManyWithoutOwnerNestedInput
     companyBranchId?: NullableStringFieldUpdateOperationsInput | string | null
-    Position_user?: Position_userUncheckedUpdateManyWithoutUserNestedInput
+    Position_user?: Position_userUncheckedUpdateOneWithoutUserNestedInput
+    henchman?: Position_userUncheckedUpdateManyWithoutHeaderNestedInput
   }
 
   export type UserCreateManyRole_CompanyInput = {
@@ -26590,7 +26809,8 @@ export namespace Prisma {
     role?: RoleUpdateOneWithoutUsersNestedInput
     company?: CompanyUpdateManyWithoutOwnerNestedInput
     companyBranch?: CompanyBranchUpdateOneWithoutUsersNestedInput
-    Position_user?: Position_userUpdateManyWithoutUserNestedInput
+    Position_user?: Position_userUpdateOneWithoutUserNestedInput
+    henchman?: Position_userUpdateManyWithoutHeaderNestedInput
   }
 
   export type UserUncheckedUpdateWithoutRole_CompanyInput = {
@@ -26606,7 +26826,8 @@ export namespace Prisma {
     roleId?: NullableStringFieldUpdateOperationsInput | string | null
     company?: CompanyUncheckedUpdateManyWithoutOwnerNestedInput
     companyBranchId?: NullableStringFieldUpdateOperationsInput | string | null
-    Position_user?: Position_userUncheckedUpdateManyWithoutUserNestedInput
+    Position_user?: Position_userUncheckedUpdateOneWithoutUserNestedInput
+    henchman?: Position_userUncheckedUpdateManyWithoutHeaderNestedInput
   }
 
   export type DistrictCreateManyProvinceInput = {
@@ -26670,7 +26891,7 @@ export namespace Prisma {
     position2_id?: string | null
     position3_id?: string | null
     role?: string | null
-    headder?: string | null
+    headderId?: string | null
   }
 
   export type mas_positionlevel2UpdateWithoutMas_positionlevel1Input = {
@@ -26698,7 +26919,7 @@ export namespace Prisma {
   export type Position_userUpdateWithoutMas_positionlevel1Input = {
     id?: StringFieldUpdateOperationsInput | string
     role?: NullableStringFieldUpdateOperationsInput | string | null
-    headder?: NullableStringFieldUpdateOperationsInput | string | null
+    header?: UserUpdateOneWithoutHenchmanNestedInput
     user?: UserUpdateOneWithoutPosition_userNestedInput
     mas_positionlevel2?: mas_positionlevel2UpdateOneWithoutPosition_userNestedInput
     mas_positionlevel3?: mas_positionlevel3UpdateOneWithoutPosition_userNestedInput
@@ -26710,7 +26931,16 @@ export namespace Prisma {
     position2_id?: NullableStringFieldUpdateOperationsInput | string | null
     position3_id?: NullableStringFieldUpdateOperationsInput | string | null
     role?: NullableStringFieldUpdateOperationsInput | string | null
-    headder?: NullableStringFieldUpdateOperationsInput | string | null
+    headderId?: NullableStringFieldUpdateOperationsInput | string | null
+  }
+
+  export type Position_userUncheckedUpdateManyWithoutPosition_userInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    user_id?: NullableStringFieldUpdateOperationsInput | string | null
+    position2_id?: NullableStringFieldUpdateOperationsInput | string | null
+    position3_id?: NullableStringFieldUpdateOperationsInput | string | null
+    role?: NullableStringFieldUpdateOperationsInput | string | null
+    headderId?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type mas_positionlevel3CreateManyMas_positionlevel2Input = {
@@ -26728,7 +26958,7 @@ export namespace Prisma {
     position1_id?: string | null
     position3_id?: string | null
     role?: string | null
-    headder?: string | null
+    headderId?: string | null
   }
 
   export type mas_positionlevel3UpdateWithoutMas_positionlevel2Input = {
@@ -26754,7 +26984,7 @@ export namespace Prisma {
   export type Position_userUpdateWithoutMas_positionlevel2Input = {
     id?: StringFieldUpdateOperationsInput | string
     role?: NullableStringFieldUpdateOperationsInput | string | null
-    headder?: NullableStringFieldUpdateOperationsInput | string | null
+    header?: UserUpdateOneWithoutHenchmanNestedInput
     user?: UserUpdateOneWithoutPosition_userNestedInput
     mas_positionlevel1?: mas_positionlevel1UpdateOneWithoutPosition_userNestedInput
     mas_positionlevel3?: mas_positionlevel3UpdateOneWithoutPosition_userNestedInput
@@ -26766,7 +26996,7 @@ export namespace Prisma {
     position1_id?: NullableStringFieldUpdateOperationsInput | string | null
     position3_id?: NullableStringFieldUpdateOperationsInput | string | null
     role?: NullableStringFieldUpdateOperationsInput | string | null
-    headder?: NullableStringFieldUpdateOperationsInput | string | null
+    headderId?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type Position_userCreateManyMas_positionlevel3Input = {
@@ -26775,13 +27005,13 @@ export namespace Prisma {
     position1_id?: string | null
     position2_id?: string | null
     role?: string | null
-    headder?: string | null
+    headderId?: string | null
   }
 
   export type Position_userUpdateWithoutMas_positionlevel3Input = {
     id?: StringFieldUpdateOperationsInput | string
     role?: NullableStringFieldUpdateOperationsInput | string | null
-    headder?: NullableStringFieldUpdateOperationsInput | string | null
+    header?: UserUpdateOneWithoutHenchmanNestedInput
     user?: UserUpdateOneWithoutPosition_userNestedInput
     mas_positionlevel1?: mas_positionlevel1UpdateOneWithoutPosition_userNestedInput
     mas_positionlevel2?: mas_positionlevel2UpdateOneWithoutPosition_userNestedInput
@@ -26793,7 +27023,7 @@ export namespace Prisma {
     position1_id?: NullableStringFieldUpdateOperationsInput | string | null
     position2_id?: NullableStringFieldUpdateOperationsInput | string | null
     role?: NullableStringFieldUpdateOperationsInput | string | null
-    headder?: NullableStringFieldUpdateOperationsInput | string | null
+    headderId?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
 
