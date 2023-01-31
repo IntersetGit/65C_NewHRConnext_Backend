@@ -76,6 +76,7 @@ export type Profile = {
   nickname: string | null
   blood_type: string | null
   employee_status: string | null
+  start_date_work: Date | null
   avatar: string | null
   dob: Date | null
   age: string | null
@@ -4014,6 +4015,7 @@ export namespace Prisma {
     nickname: string | null
     blood_type: string | null
     employee_status: string | null
+    start_date_work: Date | null
     avatar: string | null
     dob: Date | null
     age: string | null
@@ -4064,6 +4066,7 @@ export namespace Prisma {
     nickname: string | null
     blood_type: string | null
     employee_status: string | null
+    start_date_work: Date | null
     avatar: string | null
     dob: Date | null
     age: string | null
@@ -4114,6 +4117,7 @@ export namespace Prisma {
     nickname: number
     blood_type: number
     employee_status: number
+    start_date_work: number
     avatar: number
     dob: number
     age: number
@@ -4166,6 +4170,7 @@ export namespace Prisma {
     nickname?: true
     blood_type?: true
     employee_status?: true
+    start_date_work?: true
     avatar?: true
     dob?: true
     age?: true
@@ -4216,6 +4221,7 @@ export namespace Prisma {
     nickname?: true
     blood_type?: true
     employee_status?: true
+    start_date_work?: true
     avatar?: true
     dob?: true
     age?: true
@@ -4266,6 +4272,7 @@ export namespace Prisma {
     nickname?: true
     blood_type?: true
     employee_status?: true
+    start_date_work?: true
     avatar?: true
     dob?: true
     age?: true
@@ -4390,6 +4397,7 @@ export namespace Prisma {
     nickname: string | null
     blood_type: string | null
     employee_status: string | null
+    start_date_work: Date | null
     avatar: string | null
     dob: Date | null
     age: string | null
@@ -4457,6 +4465,7 @@ export namespace Prisma {
     nickname?: boolean
     blood_type?: boolean
     employee_status?: boolean
+    start_date_work?: boolean
     avatar?: boolean
     dob?: boolean
     age?: boolean
@@ -18185,6 +18194,7 @@ export namespace Prisma {
     nickname: 'nickname',
     blood_type: 'blood_type',
     employee_status: 'employee_status',
+    start_date_work: 'start_date_work',
     avatar: 'avatar',
     dob: 'dob',
     age: 'age',
@@ -18533,6 +18543,7 @@ export namespace Prisma {
     nickname?: StringNullableFilter | string | null
     blood_type?: StringNullableFilter | string | null
     employee_status?: StringNullableFilter | string | null
+    start_date_work?: DateTimeNullableFilter | Date | string | null
     avatar?: StringNullableFilter | string | null
     dob?: DateTimeNullableFilter | Date | string | null
     age?: StringNullableFilter | string | null
@@ -18584,6 +18595,7 @@ export namespace Prisma {
     nickname?: SortOrder
     blood_type?: SortOrder
     employee_status?: SortOrder
+    start_date_work?: SortOrder
     avatar?: SortOrder
     dob?: SortOrder
     age?: SortOrder
@@ -18641,6 +18653,7 @@ export namespace Prisma {
     nickname?: SortOrder
     blood_type?: SortOrder
     employee_status?: SortOrder
+    start_date_work?: SortOrder
     avatar?: SortOrder
     dob?: SortOrder
     age?: SortOrder
@@ -18697,6 +18710,7 @@ export namespace Prisma {
     nickname?: StringNullableWithAggregatesFilter | string | null
     blood_type?: StringNullableWithAggregatesFilter | string | null
     employee_status?: StringNullableWithAggregatesFilter | string | null
+    start_date_work?: DateTimeNullableWithAggregatesFilter | Date | string | null
     avatar?: StringNullableWithAggregatesFilter | string | null
     dob?: DateTimeNullableWithAggregatesFilter | Date | string | null
     age?: StringNullableWithAggregatesFilter | string | null
@@ -19750,6 +19764,7 @@ export namespace Prisma {
     nickname?: string | null
     blood_type?: string | null
     employee_status?: string | null
+    start_date_work?: Date | string | null
     avatar?: string | null
     dob?: Date | string | null
     age?: string | null
@@ -19800,6 +19815,7 @@ export namespace Prisma {
     nickname?: string | null
     blood_type?: string | null
     employee_status?: string | null
+    start_date_work?: Date | string | null
     avatar?: string | null
     dob?: Date | string | null
     age?: string | null
@@ -19850,6 +19866,7 @@ export namespace Prisma {
     nickname?: NullableStringFieldUpdateOperationsInput | string | null
     blood_type?: NullableStringFieldUpdateOperationsInput | string | null
     employee_status?: NullableStringFieldUpdateOperationsInput | string | null
+    start_date_work?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     avatar?: NullableStringFieldUpdateOperationsInput | string | null
     dob?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     age?: NullableStringFieldUpdateOperationsInput | string | null
@@ -19900,6 +19917,7 @@ export namespace Prisma {
     nickname?: NullableStringFieldUpdateOperationsInput | string | null
     blood_type?: NullableStringFieldUpdateOperationsInput | string | null
     employee_status?: NullableStringFieldUpdateOperationsInput | string | null
+    start_date_work?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     avatar?: NullableStringFieldUpdateOperationsInput | string | null
     dob?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     age?: NullableStringFieldUpdateOperationsInput | string | null
@@ -19950,6 +19968,7 @@ export namespace Prisma {
     nickname?: string | null
     blood_type?: string | null
     employee_status?: string | null
+    start_date_work?: Date | string | null
     avatar?: string | null
     dob?: Date | string | null
     age?: string | null
@@ -20000,6 +20019,7 @@ export namespace Prisma {
     nickname?: NullableStringFieldUpdateOperationsInput | string | null
     blood_type?: NullableStringFieldUpdateOperationsInput | string | null
     employee_status?: NullableStringFieldUpdateOperationsInput | string | null
+    start_date_work?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     avatar?: NullableStringFieldUpdateOperationsInput | string | null
     dob?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     age?: NullableStringFieldUpdateOperationsInput | string | null
@@ -20049,6 +20069,7 @@ export namespace Prisma {
     nickname?: NullableStringFieldUpdateOperationsInput | string | null
     blood_type?: NullableStringFieldUpdateOperationsInput | string | null
     employee_status?: NullableStringFieldUpdateOperationsInput | string | null
+    start_date_work?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     avatar?: NullableStringFieldUpdateOperationsInput | string | null
     dob?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     age?: NullableStringFieldUpdateOperationsInput | string | null
@@ -21309,6 +21330,7 @@ export namespace Prisma {
     nickname?: SortOrder
     blood_type?: SortOrder
     employee_status?: SortOrder
+    start_date_work?: SortOrder
     avatar?: SortOrder
     dob?: SortOrder
     age?: SortOrder
@@ -21359,6 +21381,7 @@ export namespace Prisma {
     nickname?: SortOrder
     blood_type?: SortOrder
     employee_status?: SortOrder
+    start_date_work?: SortOrder
     avatar?: SortOrder
     dob?: SortOrder
     age?: SortOrder
@@ -21409,6 +21432,7 @@ export namespace Prisma {
     nickname?: SortOrder
     blood_type?: SortOrder
     employee_status?: SortOrder
+    start_date_work?: SortOrder
     avatar?: SortOrder
     dob?: SortOrder
     age?: SortOrder
@@ -24226,6 +24250,7 @@ export namespace Prisma {
     nickname?: string | null
     blood_type?: string | null
     employee_status?: string | null
+    start_date_work?: Date | string | null
     avatar?: string | null
     dob?: Date | string | null
     age?: string | null
@@ -24275,6 +24300,7 @@ export namespace Prisma {
     nickname?: string | null
     blood_type?: string | null
     employee_status?: string | null
+    start_date_work?: Date | string | null
     avatar?: string | null
     dob?: Date | string | null
     age?: string | null
@@ -24532,6 +24558,7 @@ export namespace Prisma {
     nickname?: NullableStringFieldUpdateOperationsInput | string | null
     blood_type?: NullableStringFieldUpdateOperationsInput | string | null
     employee_status?: NullableStringFieldUpdateOperationsInput | string | null
+    start_date_work?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     avatar?: NullableStringFieldUpdateOperationsInput | string | null
     dob?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     age?: NullableStringFieldUpdateOperationsInput | string | null
@@ -24581,6 +24608,7 @@ export namespace Prisma {
     nickname?: NullableStringFieldUpdateOperationsInput | string | null
     blood_type?: NullableStringFieldUpdateOperationsInput | string | null
     employee_status?: NullableStringFieldUpdateOperationsInput | string | null
+    start_date_work?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     avatar?: NullableStringFieldUpdateOperationsInput | string | null
     dob?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     age?: NullableStringFieldUpdateOperationsInput | string | null

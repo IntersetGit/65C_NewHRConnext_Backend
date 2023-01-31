@@ -83,6 +83,7 @@ model Profile {
   nickname               String?   @db.VarChar(255)
   blood_type             String?
   employee_status        String?
+  start_date_work        DateTime?
   avatar                 String?
   dob                    DateTime?
   age                    String?

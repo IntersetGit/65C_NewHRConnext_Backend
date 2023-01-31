@@ -109,6 +109,7 @@ export type CreateAccountUserInput = {
   age?: InputMaybe<Scalars['String']>;
   avatar?: InputMaybe<Scalars['String']>;
   bio?: InputMaybe<Scalars['String']>;
+  blood_type?: InputMaybe<Scalars['String']>;
   citizen_address?: InputMaybe<Scalars['String']>;
   citizen_addressnumber?: InputMaybe<Scalars['String']>;
   citizen_country?: InputMaybe<Scalars['String']>;
@@ -129,12 +130,14 @@ export type CreateAccountUserInput = {
   contract_zipcode?: InputMaybe<Scalars['String']>;
   dob?: InputMaybe<Scalars['Date']>;
   email: Scalars['String'];
+  employee_status?: InputMaybe<Scalars['String']>;
   firstname_en?: InputMaybe<Scalars['String']>;
   firstname_th?: InputMaybe<Scalars['String']>;
   gender?: InputMaybe<Scalars['String']>;
   id?: InputMaybe<Scalars['ID']>;
   lastname_en?: InputMaybe<Scalars['String']>;
   lastname_th?: InputMaybe<Scalars['String']>;
+  nickname?: InputMaybe<Scalars['String']>;
   password: Scalars['String'];
   prefix_en?: InputMaybe<Scalars['String']>;
   prefix_th?: InputMaybe<Scalars['String']>;
@@ -148,6 +151,7 @@ export type CreateAccountUserInput = {
   social_telegram?: InputMaybe<Scalars['String']>;
   staff_code?: InputMaybe<Scalars['String']>;
   staff_status?: InputMaybe<Scalars['String']>;
+  start_date_work?: InputMaybe<Scalars['Date']>;
   tel?: InputMaybe<Scalars['String']>;
 };
 
