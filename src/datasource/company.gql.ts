@@ -1,8 +1,3 @@
-import { orderBy } from 'lodash';
-import { Mutation, Company } from './../generated/graphql';
-// import { Or, CompanyBranchCreateWithoutRole_CompanyInput } from './../generated/client/index.d';
-import { CompanyBranch } from './../generated/graphql';
-import { string } from 'zod';
 import { composeResolvers } from '@graphql-tools/resolvers-composition';
 import gql from 'graphql-tag';
 import { Resolvers } from 'src/generated/graphql';
