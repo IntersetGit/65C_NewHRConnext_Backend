@@ -191,7 +191,7 @@ type MeCompanyBranch {
     email: String
     isOwner: Boolean
     Role_Company: MePositionType
-    profile: MeprofileType
+    profile: Profile
     role: Role
     companyBranch: MeCompanyBranch
   }
@@ -251,43 +251,9 @@ const resolvers: Resolvers = {
               name: true,
             },
           },
-          profile: {
-            select: {
-              firstname_th: true,
-              firstname_en: true,
-              lastname_en: true,
-              lastname_th: true,
-              prefix_en: true,
-              avatar: true,
-              prefix_th: true,
-              dob: true,
-              gender: true,
-              bio: true,
-              staff_code: true,
-              tel: true,
-            },
-          },
+          profile: true,
           role: true,
-          companyBranch: {
-            select: {
-              id: true,
-              name: true,
-              address: true,
-              city: true,
-              state: true,
-              zip: true,
-              country: true,
-              createdAt: true,
-              company: {
-                select: {
-                  id: true,
-                  name: true,
-                  companyCode: true,
-                  icon: true,
-                },
-              },
-            },
-          },
+          companyBranch:true
         },
         where: { id: ctx.currentUser?.id },
       });

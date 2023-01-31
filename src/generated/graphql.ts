@@ -302,7 +302,7 @@ export type Me = {
   email?: Maybe<Scalars['String']>;
   id: Scalars['ID'];
   isOwner?: Maybe<Scalars['Boolean']>;
-  profile?: Maybe<MeprofileType>;
+  profile?: Maybe<Profile>;
   role?: Maybe<Role>;
 };
 
@@ -1150,7 +1150,7 @@ export type MeResolvers<ContextType = ApolloContext, ParentType extends Resolver
   email?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
   isOwner?: Resolver<Maybe<ResolversTypes['Boolean']>, ParentType, ContextType>;
-  profile?: Resolver<Maybe<ResolversTypes['MeprofileType']>, ParentType, ContextType>;
+  profile?: Resolver<Maybe<ResolversTypes['Profile']>, ParentType, ContextType>;
   role?: Resolver<Maybe<ResolversTypes['Role']>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 }>;

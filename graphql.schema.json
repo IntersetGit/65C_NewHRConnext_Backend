@@ -2653,7 +2653,7 @@
             "args": [],
             "type": {
               "kind": "OBJECT",
-              "name": "MeprofileType",
+              "name": "Profile",
               "ofType": null
             },
             "isDeprecated": false,
