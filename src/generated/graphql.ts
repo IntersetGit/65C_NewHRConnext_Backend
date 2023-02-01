@@ -550,6 +550,7 @@ export type Province = {
 export type Query = {
   __typename?: 'Query';
   GetHoliDayYear?: Maybe<Array<Maybe<Holiday_Years>>>;
+  GetHolidayDate?: Maybe<Array<Maybe<Holiday_Date>>>;
   company?: Maybe<ResponseCompany>;
   getAllcompany?: Maybe<Array<Maybe<CompanyBranch>>>;
   getMasPositon?: Maybe<Array<Maybe<Mas_Positionlevel1>>>;
@@ -772,6 +773,17 @@ export type Headderdata = {
   headder_data?: Maybe<Profile>;
 };
 
+export type Holiday_Date = {
+  __typename?: 'holiday_date';
+  Company?: Maybe<Array<Maybe<Company>>>;
+  CompanyId?: Maybe<Scalars['String']>;
+  day?: Maybe<Scalars['Int']>;
+  holiday_name?: Maybe<Scalars['String']>;
+  id: Scalars['ID'];
+  month?: Maybe<Scalars['Int']>;
+  yaer?: Maybe<Scalars['Int']>;
+};
+
 export type Holiday_Years = {
   __typename?: 'holiday_years';
   day?: Maybe<Scalars['Int']>;
@@ -965,6 +977,7 @@ export type ResolversTypes = ResolversObject<{
   createRoleCompanyGroup: CreateRoleCompanyGroup;
   getPositionUser: ResolverTypeWrapper<GetPositionUser>;
   headderdata: ResolverTypeWrapper<Headderdata>;
+  holiday_date: ResolverTypeWrapper<Holiday_Date>;
   holiday_years: ResolverTypeWrapper<Holiday_Years>;
   mas_position: ResolverTypeWrapper<Mas_Position>;
   mas_positionlevel1: ResolverTypeWrapper<Mas_Positionlevel1>;
@@ -1035,6 +1048,7 @@ export type ResolversParentTypes = ResolversObject<{
   createRoleCompanyGroup: CreateRoleCompanyGroup;
   getPositionUser: GetPositionUser;
   headderdata: Headderdata;
+  holiday_date: Holiday_Date;
   holiday_years: Holiday_Years;
   mas_position: Mas_Position;
   mas_positionlevel1: Mas_Positionlevel1;
@@ -1524,6 +1538,17 @@ export type HeadderdataResolvers<ContextType = ApolloContext, ParentType extends
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 }>;
 
+export type Holiday_DateResolvers<ContextType = ApolloContext, ParentType extends ResolversParentTypes['holiday_date'] = ResolversParentTypes['holiday_date']> = ResolversObject<{
+  Company?: Resolver<Maybe<Array<Maybe<ResolversTypes['Company']>>>, ParentType, ContextType>;
+  CompanyId?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  day?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
+  holiday_name?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
+  month?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
+  yaer?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+}>;
+
 export type Holiday_YearsResolvers<ContextType = ApolloContext, ParentType extends ResolversParentTypes['holiday_years'] = ResolversParentTypes['holiday_years']> = ResolversObject<{
   day?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
   holiday_name?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
@@ -1621,6 +1646,7 @@ export type Resolvers<ContextType = ApolloContext> = ResolversObject<{
   ValidateRoute?: ValidateRouteResolvers<ContextType>;
   getPositionUser?: GetPositionUserResolvers<ContextType>;
   headderdata?: HeadderdataResolvers<ContextType>;
+  holiday_date?: Holiday_DateResolvers<ContextType>;
   holiday_years?: Holiday_YearsResolvers<ContextType>;
   mas_position?: Mas_PositionResolvers<ContextType>;
   mas_positionlevel1?: Mas_Positionlevel1Resolvers<ContextType>;
