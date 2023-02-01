@@ -1,3 +1,4 @@
+import { holiday_date } from './../generated/client/index.d';
 import { Company } from './../generated/graphql';
 import { date, string } from 'zod';
 import gql from 'graphql-tag';
@@ -10,11 +11,21 @@ import _ from 'lodash';
 export const holidayTypedef = gql`
 
   type holiday_years{
-    id: ID
+    id: ID!
     day: Int
     month: Int
     year: Int
     holiday_name: String 
+  }
+
+  type holiday_date{
+    id: ID!
+    holiday_name: String
+    day: Int
+    month: Int
+    yaer: Int
+    Company: [Company]
+    CompanyId: String
   }
 
   input CreateHolidayYears{
@@ -31,7 +42,7 @@ export const holidayTypedef = gql`
     day: Int
     month: Int
     year: Int
-    Company: ID
+    CompanyId: ID
   }
 
   type CreateHolidayYearResponseType{
@@ -49,14 +60,21 @@ export const holidayTypedef = gql`
     status: Boolean
   }
 
+  type DeleteHolidayDateResponseType{
+    message: String
+    status: Boolean
+  }
+
   type Query{
     GetHoliDayYear: [holiday_years]
+    GetHolidayDate: [holiday_date]
   }
 
   type Mutation{
     createHolidayYear(data:[CreateHolidayYears!]): CreateHolidayYearResponseType
     deleteHolidayYear(id: ID!) : DeleteHolidayYearResponseType
-    createHolidayDate(data:[CreateHolidayDate]) : CreateHolidayDateResponseType
+    createAndUpdateHolidayDate(data: CreateHolidayDate!) : CreateHolidayDateResponseType
+    deleteHolidayDate(id: ID!) : DeleteHolidayDateResponseType
   }
 `;
 
@@ -71,16 +89,34 @@ export const holidayResolvers: Resolvers = {
           year: true,
           holiday_name: true,
         },
-        orderBy: [{ 
-          year: "asc" 
-        },{
+        orderBy: [{
+          year: "asc"
+        }, {
           month: "asc"
-        },{
+        }, {
           day: "asc"
-        } ]
+        }]
       });
       return result;
     },
+
+    async GetHolidayDate (p, args, ctx) {
+      const result = await ctx.prisma.holiday_date.findUnique({
+        
+        select: {
+            id: true,
+            holiday_name: true,
+            day: true,
+            month: true,
+            yaer: true,
+            CompanyId: true
+        },
+        where: { id: ctx.currentUser?.compayId },
+      });
+      return result;
+    }
+
+    
   },
 
   Mutation: {
@@ -112,14 +148,66 @@ export const holidayResolvers: Resolvers = {
         message: 'success',
         status: true,
       };
+    },
+
+    async createAndUpdateHolidayDate(p, args, ctx) {
+      if (args.data.id) {
+        const updateHolidayDate = await ctx.prisma.holiday_date.update({
+          data: {
+            id: v4(),
+            holiday_name: args.data.holiday_name as string,
+            day: args.data.day as number,
+            month: args.data.month as number,
+            yaer: args.data.year as number,
+            CompanyId: ctx.currentUser?.compayId
+          },
+          where: {
+            id: args.data.id
+          }
+        });
+        return {
+          message: 'success',
+          status: true,
+        };
+      } else {
+        const createHolidayDate = await ctx.prisma.holiday_date.create({
+          data: {
+            id: v4(),
+            holiday_name: args.data.holiday_name as string,
+            day: args.data.day as number,
+            month: args.data.month as number,
+            yaer: args.data.year as number,
+            CompanyId: ctx.currentUser?.compayId
+          }
+        });
+        return {
+          message: 'success',
+          status: true,
+        };
+      }
+    },
+
+    async deleteHolidayDate(p, args, ctx) {
+      const deleteHolidayDates = await ctx.prisma.holiday_date.delete({
+        where: {
+          id: args.id as string
+        }
+      });
+      return {
+        message: 'success',
+        status: true,
+      };
     }
   },
 };
 
 const HolidayComposition = {
   'Query.GetHoliDayYear': [authenticate()],
+  'Query.GetHoliDayDate': [authenticate()],
   'Mutation.createHolidayYear': [authenticate()],
   'Mutation.deleteHolidayYear': [authenticate()],
+  'Mutation.createAndUpdateHolidayDate': [authenticate()],
+  'Mutation.deleteHolidayDate': [authenticate()],
 };
 
 
