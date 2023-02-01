@@ -245,6 +245,7 @@ export type mas_positionlevel3 = {
 export type Position_user = {
   id: string
   user_id: string | null
+  date: Date | null
   position1_id: string | null
   position2_id: string | null
   position3_id: string | null
@@ -15142,6 +15143,7 @@ export namespace Prisma {
   export type Position_userMinAggregateOutputType = {
     id: string | null
     user_id: string | null
+    date: Date | null
     position1_id: string | null
     position2_id: string | null
     position3_id: string | null
@@ -15152,6 +15154,7 @@ export namespace Prisma {
   export type Position_userMaxAggregateOutputType = {
     id: string | null
     user_id: string | null
+    date: Date | null
     position1_id: string | null
     position2_id: string | null
     position3_id: string | null
@@ -15162,6 +15165,7 @@ export namespace Prisma {
   export type Position_userCountAggregateOutputType = {
     id: number
     user_id: number
+    date: number
     position1_id: number
     position2_id: number
     position3_id: number
@@ -15174,6 +15178,7 @@ export namespace Prisma {
   export type Position_userMinAggregateInputType = {
     id?: true
     user_id?: true
+    date?: true
     position1_id?: true
     position2_id?: true
     position3_id?: true
@@ -15184,6 +15189,7 @@ export namespace Prisma {
   export type Position_userMaxAggregateInputType = {
     id?: true
     user_id?: true
+    date?: true
     position1_id?: true
     position2_id?: true
     position3_id?: true
@@ -15194,6 +15200,7 @@ export namespace Prisma {
   export type Position_userCountAggregateInputType = {
     id?: true
     user_id?: true
+    date?: true
     position1_id?: true
     position2_id?: true
     position3_id?: true
@@ -15278,6 +15285,7 @@ export namespace Prisma {
   export type Position_userGroupByOutputType = {
     id: string
     user_id: string | null
+    date: Date | null
     position1_id: string | null
     position2_id: string | null
     position3_id: string | null
@@ -15305,6 +15313,7 @@ export namespace Prisma {
   export type Position_userSelect = {
     id?: boolean
     user_id?: boolean
+    date?: boolean
     position1_id?: boolean
     position2_id?: boolean
     position3_id?: boolean
@@ -18174,6 +18183,7 @@ export namespace Prisma {
   export const Position_userScalarFieldEnum: {
     id: 'id',
     user_id: 'user_id',
+    date: 'date',
     position1_id: 'position1_id',
     position2_id: 'position2_id',
     position3_id: 'position3_id',
@@ -19272,6 +19282,7 @@ export namespace Prisma {
     NOT?: Enumerable<Position_userWhereInput>
     id?: UuidFilter | string
     user_id?: UuidNullableFilter | string | null
+    date?: DateTimeNullableFilter | Date | string | null
     position1_id?: UuidNullableFilter | string | null
     position2_id?: UuidNullableFilter | string | null
     position3_id?: UuidNullableFilter | string | null
@@ -19287,6 +19298,7 @@ export namespace Prisma {
   export type Position_userOrderByWithRelationInput = {
     id?: SortOrder
     user_id?: SortOrder
+    date?: SortOrder
     position1_id?: SortOrder
     position2_id?: SortOrder
     position3_id?: SortOrder
@@ -19307,6 +19319,7 @@ export namespace Prisma {
   export type Position_userOrderByWithAggregationInput = {
     id?: SortOrder
     user_id?: SortOrder
+    date?: SortOrder
     position1_id?: SortOrder
     position2_id?: SortOrder
     position3_id?: SortOrder
@@ -19323,6 +19336,7 @@ export namespace Prisma {
     NOT?: Enumerable<Position_userScalarWhereWithAggregatesInput>
     id?: UuidWithAggregatesFilter | string
     user_id?: UuidNullableWithAggregatesFilter | string | null
+    date?: DateTimeNullableWithAggregatesFilter | Date | string | null
     position1_id?: UuidNullableWithAggregatesFilter | string | null
     position2_id?: UuidNullableWithAggregatesFilter | string | null
     position3_id?: UuidNullableWithAggregatesFilter | string | null
@@ -20719,6 +20733,7 @@ export namespace Prisma {
 
   export type Position_userCreateInput = {
     id: string
+    date?: Date | string | null
     role?: string | null
     header?: UserCreateNestedOneWithoutHenchmanInput
     user?: UserCreateNestedOneWithoutPosition_userInput
@@ -20730,6 +20745,7 @@ export namespace Prisma {
   export type Position_userUncheckedCreateInput = {
     id: string
     user_id?: string | null
+    date?: Date | string | null
     position1_id?: string | null
     position2_id?: string | null
     position3_id?: string | null
@@ -20739,6 +20755,7 @@ export namespace Prisma {
 
   export type Position_userUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
+    date?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     role?: NullableStringFieldUpdateOperationsInput | string | null
     header?: UserUpdateOneWithoutHenchmanNestedInput
     user?: UserUpdateOneWithoutPosition_userNestedInput
@@ -20750,6 +20767,7 @@ export namespace Prisma {
   export type Position_userUncheckedUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
     user_id?: NullableStringFieldUpdateOperationsInput | string | null
+    date?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     position1_id?: NullableStringFieldUpdateOperationsInput | string | null
     position2_id?: NullableStringFieldUpdateOperationsInput | string | null
     position3_id?: NullableStringFieldUpdateOperationsInput | string | null
@@ -20760,6 +20778,7 @@ export namespace Prisma {
   export type Position_userCreateManyInput = {
     id: string
     user_id?: string | null
+    date?: Date | string | null
     position1_id?: string | null
     position2_id?: string | null
     position3_id?: string | null
@@ -20769,12 +20788,14 @@ export namespace Prisma {
 
   export type Position_userUpdateManyMutationInput = {
     id?: StringFieldUpdateOperationsInput | string
+    date?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     role?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type Position_userUncheckedUpdateManyInput = {
     id?: StringFieldUpdateOperationsInput | string
     user_id?: NullableStringFieldUpdateOperationsInput | string | null
+    date?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     position1_id?: NullableStringFieldUpdateOperationsInput | string | null
     position2_id?: NullableStringFieldUpdateOperationsInput | string | null
     position3_id?: NullableStringFieldUpdateOperationsInput | string | null
@@ -21908,6 +21929,7 @@ export namespace Prisma {
   export type Position_userCountOrderByAggregateInput = {
     id?: SortOrder
     user_id?: SortOrder
+    date?: SortOrder
     position1_id?: SortOrder
     position2_id?: SortOrder
     position3_id?: SortOrder
@@ -21918,6 +21940,7 @@ export namespace Prisma {
   export type Position_userMaxOrderByAggregateInput = {
     id?: SortOrder
     user_id?: SortOrder
+    date?: SortOrder
     position1_id?: SortOrder
     position2_id?: SortOrder
     position3_id?: SortOrder
@@ -21928,6 +21951,7 @@ export namespace Prisma {
   export type Position_userMinOrderByAggregateInput = {
     id?: SortOrder
     user_id?: SortOrder
+    date?: SortOrder
     position1_id?: SortOrder
     position2_id?: SortOrder
     position3_id?: SortOrder
@@ -24494,6 +24518,7 @@ export namespace Prisma {
 
   export type Position_userCreateWithoutUserInput = {
     id: string
+    date?: Date | string | null
     role?: string | null
     header?: UserCreateNestedOneWithoutHenchmanInput
     mas_positionlevel1?: mas_positionlevel1CreateNestedOneWithoutPosition_userInput
@@ -24503,6 +24528,7 @@ export namespace Prisma {
 
   export type Position_userUncheckedCreateWithoutUserInput = {
     id: string
+    date?: Date | string | null
     position1_id?: string | null
     position2_id?: string | null
     position3_id?: string | null
@@ -24517,6 +24543,7 @@ export namespace Prisma {
 
   export type Position_userCreateWithoutHeaderInput = {
     id: string
+    date?: Date | string | null
     role?: string | null
     user?: UserCreateNestedOneWithoutPosition_userInput
     mas_positionlevel1?: mas_positionlevel1CreateNestedOneWithoutPosition_userInput
@@ -24527,6 +24554,7 @@ export namespace Prisma {
   export type Position_userUncheckedCreateWithoutHeaderInput = {
     id: string
     user_id?: string | null
+    date?: Date | string | null
     position1_id?: string | null
     position2_id?: string | null
     position3_id?: string | null
@@ -24788,6 +24816,7 @@ export namespace Prisma {
 
   export type Position_userUpdateWithoutUserInput = {
     id?: StringFieldUpdateOperationsInput | string
+    date?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     role?: NullableStringFieldUpdateOperationsInput | string | null
     header?: UserUpdateOneWithoutHenchmanNestedInput
     mas_positionlevel1?: mas_positionlevel1UpdateOneWithoutPosition_userNestedInput
@@ -24797,6 +24826,7 @@ export namespace Prisma {
 
   export type Position_userUncheckedUpdateWithoutUserInput = {
     id?: StringFieldUpdateOperationsInput | string
+    date?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     position1_id?: NullableStringFieldUpdateOperationsInput | string | null
     position2_id?: NullableStringFieldUpdateOperationsInput | string | null
     position3_id?: NullableStringFieldUpdateOperationsInput | string | null
@@ -24826,6 +24856,7 @@ export namespace Prisma {
     NOT?: Enumerable<Position_userScalarWhereInput>
     id?: UuidFilter | string
     user_id?: UuidNullableFilter | string | null
+    date?: DateTimeNullableFilter | Date | string | null
     position1_id?: UuidNullableFilter | string | null
     position2_id?: UuidNullableFilter | string | null
     position3_id?: UuidNullableFilter | string | null
@@ -25399,6 +25430,7 @@ export namespace Prisma {
 
   export type Position_userCreateWithoutMas_positionlevel1Input = {
     id: string
+    date?: Date | string | null
     role?: string | null
     header?: UserCreateNestedOneWithoutHenchmanInput
     user?: UserCreateNestedOneWithoutPosition_userInput
@@ -25409,6 +25441,7 @@ export namespace Prisma {
   export type Position_userUncheckedCreateWithoutMas_positionlevel1Input = {
     id: string
     user_id?: string | null
+    date?: Date | string | null
     position2_id?: string | null
     position3_id?: string | null
     role?: string | null
@@ -25596,6 +25629,7 @@ export namespace Prisma {
 
   export type Position_userCreateWithoutMas_positionlevel2Input = {
     id: string
+    date?: Date | string | null
     role?: string | null
     header?: UserCreateNestedOneWithoutHenchmanInput
     user?: UserCreateNestedOneWithoutPosition_userInput
@@ -25606,6 +25640,7 @@ export namespace Prisma {
   export type Position_userUncheckedCreateWithoutMas_positionlevel2Input = {
     id: string
     user_id?: string | null
+    date?: Date | string | null
     position1_id?: string | null
     position3_id?: string | null
     role?: string | null
@@ -25790,6 +25825,7 @@ export namespace Prisma {
 
   export type Position_userCreateWithoutMas_positionlevel3Input = {
     id: string
+    date?: Date | string | null
     role?: string | null
     header?: UserCreateNestedOneWithoutHenchmanInput
     user?: UserCreateNestedOneWithoutPosition_userInput
@@ -25800,6 +25836,7 @@ export namespace Prisma {
   export type Position_userUncheckedCreateWithoutMas_positionlevel3Input = {
     id: string
     user_id?: string | null
+    date?: Date | string | null
     position1_id?: string | null
     position2_id?: string | null
     role?: string | null
@@ -26683,6 +26720,7 @@ export namespace Prisma {
   export type Position_userCreateManyHeaderInput = {
     id: string
     user_id?: string | null
+    date?: Date | string | null
     position1_id?: string | null
     position2_id?: string | null
     position3_id?: string | null
@@ -26739,6 +26777,7 @@ export namespace Prisma {
 
   export type Position_userUpdateWithoutHeaderInput = {
     id?: StringFieldUpdateOperationsInput | string
+    date?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     role?: NullableStringFieldUpdateOperationsInput | string | null
     user?: UserUpdateOneWithoutPosition_userNestedInput
     mas_positionlevel1?: mas_positionlevel1UpdateOneWithoutPosition_userNestedInput
@@ -26749,6 +26788,7 @@ export namespace Prisma {
   export type Position_userUncheckedUpdateWithoutHeaderInput = {
     id?: StringFieldUpdateOperationsInput | string
     user_id?: NullableStringFieldUpdateOperationsInput | string | null
+    date?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     position1_id?: NullableStringFieldUpdateOperationsInput | string | null
     position2_id?: NullableStringFieldUpdateOperationsInput | string | null
     position3_id?: NullableStringFieldUpdateOperationsInput | string | null
@@ -26758,6 +26798,7 @@ export namespace Prisma {
   export type Position_userUncheckedUpdateManyWithoutHenchmanInput = {
     id?: StringFieldUpdateOperationsInput | string
     user_id?: NullableStringFieldUpdateOperationsInput | string | null
+    date?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     position1_id?: NullableStringFieldUpdateOperationsInput | string | null
     position2_id?: NullableStringFieldUpdateOperationsInput | string | null
     position3_id?: NullableStringFieldUpdateOperationsInput | string | null
@@ -26916,6 +26957,7 @@ export namespace Prisma {
   export type Position_userCreateManyMas_positionlevel1Input = {
     id: string
     user_id?: string | null
+    date?: Date | string | null
     position2_id?: string | null
     position3_id?: string | null
     role?: string | null
@@ -26946,6 +26988,7 @@ export namespace Prisma {
 
   export type Position_userUpdateWithoutMas_positionlevel1Input = {
     id?: StringFieldUpdateOperationsInput | string
+    date?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     role?: NullableStringFieldUpdateOperationsInput | string | null
     header?: UserUpdateOneWithoutHenchmanNestedInput
     user?: UserUpdateOneWithoutPosition_userNestedInput
@@ -26956,6 +26999,7 @@ export namespace Prisma {
   export type Position_userUncheckedUpdateWithoutMas_positionlevel1Input = {
     id?: StringFieldUpdateOperationsInput | string
     user_id?: NullableStringFieldUpdateOperationsInput | string | null
+    date?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     position2_id?: NullableStringFieldUpdateOperationsInput | string | null
     position3_id?: NullableStringFieldUpdateOperationsInput | string | null
     role?: NullableStringFieldUpdateOperationsInput | string | null
@@ -26965,6 +27009,7 @@ export namespace Prisma {
   export type Position_userUncheckedUpdateManyWithoutPosition_userInput = {
     id?: StringFieldUpdateOperationsInput | string
     user_id?: NullableStringFieldUpdateOperationsInput | string | null
+    date?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     position2_id?: NullableStringFieldUpdateOperationsInput | string | null
     position3_id?: NullableStringFieldUpdateOperationsInput | string | null
     role?: NullableStringFieldUpdateOperationsInput | string | null
@@ -26983,6 +27028,7 @@ export namespace Prisma {
   export type Position_userCreateManyMas_positionlevel2Input = {
     id: string
     user_id?: string | null
+    date?: Date | string | null
     position1_id?: string | null
     position3_id?: string | null
     role?: string | null
@@ -27011,6 +27057,7 @@ export namespace Prisma {
 
   export type Position_userUpdateWithoutMas_positionlevel2Input = {
     id?: StringFieldUpdateOperationsInput | string
+    date?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     role?: NullableStringFieldUpdateOperationsInput | string | null
     header?: UserUpdateOneWithoutHenchmanNestedInput
     user?: UserUpdateOneWithoutPosition_userNestedInput
@@ -27021,6 +27068,7 @@ export namespace Prisma {
   export type Position_userUncheckedUpdateWithoutMas_positionlevel2Input = {
     id?: StringFieldUpdateOperationsInput | string
     user_id?: NullableStringFieldUpdateOperationsInput | string | null
+    date?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     position1_id?: NullableStringFieldUpdateOperationsInput | string | null
     position3_id?: NullableStringFieldUpdateOperationsInput | string | null
     role?: NullableStringFieldUpdateOperationsInput | string | null
@@ -27030,6 +27078,7 @@ export namespace Prisma {
   export type Position_userCreateManyMas_positionlevel3Input = {
     id: string
     user_id?: string | null
+    date?: Date | string | null
     position1_id?: string | null
     position2_id?: string | null
     role?: string | null
@@ -27038,6 +27087,7 @@ export namespace Prisma {
 
   export type Position_userUpdateWithoutMas_positionlevel3Input = {
     id?: StringFieldUpdateOperationsInput | string
+    date?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     role?: NullableStringFieldUpdateOperationsInput | string | null
     header?: UserUpdateOneWithoutHenchmanNestedInput
     user?: UserUpdateOneWithoutPosition_userNestedInput
@@ -27048,6 +27098,7 @@ export namespace Prisma {
   export type Position_userUncheckedUpdateWithoutMas_positionlevel3Input = {
     id?: StringFieldUpdateOperationsInput | string
     user_id?: NullableStringFieldUpdateOperationsInput | string | null
+    date?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     position1_id?: NullableStringFieldUpdateOperationsInput | string | null
     position2_id?: NullableStringFieldUpdateOperationsInput | string | null
     role?: NullableStringFieldUpdateOperationsInput | string | null
