@@ -1411,6 +1411,18 @@
             "deprecationReason": null
           },
           {
+            "name": "role_company",
+            "description": null,
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
             "name": "shirt_size",
             "description": null,
             "type": {

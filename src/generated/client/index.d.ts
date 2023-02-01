@@ -278,6 +278,122 @@ export type holiday_year = {
   holiday_name: string | null
 }
 
+/**
+ * Model mas_bank
+ * 
+ */
+export type mas_bank = {
+  id: string
+  name: string
+}
+
+/**
+ * Model mas_month
+ * 
+ */
+export type mas_month = {
+  id: string
+  name: string
+}
+
+/**
+ * Model mas_years
+ * 
+ */
+export type mas_years = {
+  id: string
+  name: string
+}
+
+/**
+ * Model mas_salary_status
+ * 
+ */
+export type mas_salary_status = {
+  id: string
+  no: number
+  name: string
+}
+
+/**
+ * Model mas_income_type
+ * 
+ */
+export type mas_income_type = {
+  id: string
+  name: string
+}
+
+/**
+ * Model expense_company
+ * 
+ */
+export type expense_company = {
+  id: string
+  monthId: string
+  bankId: string
+  vat_per: number | null
+  social_security: number | null
+  companyBranchId: string | null
+}
+
+/**
+ * Model salary
+ * 
+ */
+export type salary = {
+  id: string
+  base_salary: number
+  commission: number
+  position_income: number
+  ot: number
+  bonus: number
+  special_income: number
+  other_income: number
+  travel_income: number
+  bursary: number
+  welfare_money: number
+  vat: number
+  social_security: number
+  miss: number
+  ra: number
+  late: number
+  other: number
+  provident_employee: number
+  provident_company: number
+  total_income: number
+  total_expense: number
+  net: number
+  date: Date
+  userId: string | null
+}
+
+/**
+ * Model all_collect
+ * 
+ */
+export type all_collect = {
+  id: string
+  userId: string | null
+  income_collect: number
+  vat_collect: number
+  social_secu_collect: number
+  provident_collect_employee: number
+  provident_collect_company: number
+}
+
+/**
+ * Model bookbank_log
+ * 
+ */
+export type bookbank_log = {
+  id: string
+  date: Date
+  mas_bankId: string | null
+  bank_number: string
+  all_collectId: string | null
+}
+
 
 /**
  * ##  Prisma Client ʲˢ
@@ -555,6 +671,96 @@ export class PrismaClient<
     * ```
     */
   get holiday_year(): Prisma.holiday_yearDelegate<GlobalReject>;
+
+  /**
+   * `prisma.mas_bank`: Exposes CRUD operations for the **mas_bank** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more Mas_banks
+    * const mas_banks = await prisma.mas_bank.findMany()
+    * ```
+    */
+  get mas_bank(): Prisma.mas_bankDelegate<GlobalReject>;
+
+  /**
+   * `prisma.mas_month`: Exposes CRUD operations for the **mas_month** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more Mas_months
+    * const mas_months = await prisma.mas_month.findMany()
+    * ```
+    */
+  get mas_month(): Prisma.mas_monthDelegate<GlobalReject>;
+
+  /**
+   * `prisma.mas_years`: Exposes CRUD operations for the **mas_years** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more Mas_years
+    * const mas_years = await prisma.mas_years.findMany()
+    * ```
+    */
+  get mas_years(): Prisma.mas_yearsDelegate<GlobalReject>;
+
+  /**
+   * `prisma.mas_salary_status`: Exposes CRUD operations for the **mas_salary_status** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more Mas_salary_statuses
+    * const mas_salary_statuses = await prisma.mas_salary_status.findMany()
+    * ```
+    */
+  get mas_salary_status(): Prisma.mas_salary_statusDelegate<GlobalReject>;
+
+  /**
+   * `prisma.mas_income_type`: Exposes CRUD operations for the **mas_income_type** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more Mas_income_types
+    * const mas_income_types = await prisma.mas_income_type.findMany()
+    * ```
+    */
+  get mas_income_type(): Prisma.mas_income_typeDelegate<GlobalReject>;
+
+  /**
+   * `prisma.expense_company`: Exposes CRUD operations for the **expense_company** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more Expense_companies
+    * const expense_companies = await prisma.expense_company.findMany()
+    * ```
+    */
+  get expense_company(): Prisma.expense_companyDelegate<GlobalReject>;
+
+  /**
+   * `prisma.salary`: Exposes CRUD operations for the **salary** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more Salaries
+    * const salaries = await prisma.salary.findMany()
+    * ```
+    */
+  get salary(): Prisma.salaryDelegate<GlobalReject>;
+
+  /**
+   * `prisma.all_collect`: Exposes CRUD operations for the **all_collect** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more All_collects
+    * const all_collects = await prisma.all_collect.findMany()
+    * ```
+    */
+  get all_collect(): Prisma.all_collectDelegate<GlobalReject>;
+
+  /**
+   * `prisma.bookbank_log`: Exposes CRUD operations for the **bookbank_log** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more Bookbank_logs
+    * const bookbank_logs = await prisma.bookbank_log.findMany()
+    * ```
+    */
+  get bookbank_log(): Prisma.bookbank_logDelegate<GlobalReject>;
 }
 
 export namespace Prisma {
@@ -1046,7 +1252,16 @@ export namespace Prisma {
     mas_positionlevel3: 'mas_positionlevel3',
     Position_user: 'Position_user',
     holiday_date: 'holiday_date',
-    holiday_year: 'holiday_year'
+    holiday_year: 'holiday_year',
+    mas_bank: 'mas_bank',
+    mas_month: 'mas_month',
+    mas_years: 'mas_years',
+    mas_salary_status: 'mas_salary_status',
+    mas_income_type: 'mas_income_type',
+    expense_company: 'expense_company',
+    salary: 'salary',
+    all_collect: 'all_collect',
+    bookbank_log: 'bookbank_log'
   };
 
   export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -1272,11 +1487,13 @@ export namespace Prisma {
   export type CompanyBranchCountOutputType = {
     users: number
     Role_Company: number
+    expense_company: number
   }
 
   export type CompanyBranchCountOutputTypeSelect = {
     users?: boolean
     Role_Company?: boolean
+    expense_company?: boolean
   }
 
   export type CompanyBranchCountOutputTypeGetPayload<S extends boolean | null | undefined | CompanyBranchCountOutputTypeArgs> =
@@ -1317,11 +1534,15 @@ export namespace Prisma {
   export type UserCountOutputType = {
     company: number
     henchman: number
+    all_collect: number
+    salary: number
   }
 
   export type UserCountOutputTypeSelect = {
     company?: boolean
     henchman?: boolean
+    all_collect?: boolean
+    salary?: boolean
   }
 
   export type UserCountOutputTypeGetPayload<S extends boolean | null | undefined | UserCountOutputTypeArgs> =
@@ -1655,6 +1876,137 @@ export namespace Prisma {
      * Select specific fields to fetch from the Mas_positionlevel3CountOutputType
      */
     select?: Mas_positionlevel3CountOutputTypeSelect | null
+  }
+
+
+
+  /**
+   * Count Type Mas_bankCountOutputType
+   */
+
+
+  export type Mas_bankCountOutputType = {
+    expense_company: number
+    bookbank_log: number
+  }
+
+  export type Mas_bankCountOutputTypeSelect = {
+    expense_company?: boolean
+    bookbank_log?: boolean
+  }
+
+  export type Mas_bankCountOutputTypeGetPayload<S extends boolean | null | undefined | Mas_bankCountOutputTypeArgs> =
+    S extends { select: any, include: any } ? 'Please either choose `select` or `include`' :
+    S extends true ? Mas_bankCountOutputType :
+    S extends undefined ? never :
+    S extends { include: any } & (Mas_bankCountOutputTypeArgs)
+    ? Mas_bankCountOutputType 
+    : S extends { select: any } & (Mas_bankCountOutputTypeArgs)
+      ? {
+    [P in TruthyKeys<S['select']>]:
+    P extends keyof Mas_bankCountOutputType ? Mas_bankCountOutputType[P] : never
+  } 
+      : Mas_bankCountOutputType
+
+
+
+
+  // Custom InputTypes
+
+  /**
+   * Mas_bankCountOutputType without action
+   */
+  export type Mas_bankCountOutputTypeArgs = {
+    /**
+     * Select specific fields to fetch from the Mas_bankCountOutputType
+     */
+    select?: Mas_bankCountOutputTypeSelect | null
+  }
+
+
+
+  /**
+   * Count Type Mas_monthCountOutputType
+   */
+
+
+  export type Mas_monthCountOutputType = {
+    expense_company: number
+  }
+
+  export type Mas_monthCountOutputTypeSelect = {
+    expense_company?: boolean
+  }
+
+  export type Mas_monthCountOutputTypeGetPayload<S extends boolean | null | undefined | Mas_monthCountOutputTypeArgs> =
+    S extends { select: any, include: any } ? 'Please either choose `select` or `include`' :
+    S extends true ? Mas_monthCountOutputType :
+    S extends undefined ? never :
+    S extends { include: any } & (Mas_monthCountOutputTypeArgs)
+    ? Mas_monthCountOutputType 
+    : S extends { select: any } & (Mas_monthCountOutputTypeArgs)
+      ? {
+    [P in TruthyKeys<S['select']>]:
+    P extends keyof Mas_monthCountOutputType ? Mas_monthCountOutputType[P] : never
+  } 
+      : Mas_monthCountOutputType
+
+
+
+
+  // Custom InputTypes
+
+  /**
+   * Mas_monthCountOutputType without action
+   */
+  export type Mas_monthCountOutputTypeArgs = {
+    /**
+     * Select specific fields to fetch from the Mas_monthCountOutputType
+     */
+    select?: Mas_monthCountOutputTypeSelect | null
+  }
+
+
+
+  /**
+   * Count Type All_collectCountOutputType
+   */
+
+
+  export type All_collectCountOutputType = {
+    bookbank_log: number
+  }
+
+  export type All_collectCountOutputTypeSelect = {
+    bookbank_log?: boolean
+  }
+
+  export type All_collectCountOutputTypeGetPayload<S extends boolean | null | undefined | All_collectCountOutputTypeArgs> =
+    S extends { select: any, include: any } ? 'Please either choose `select` or `include`' :
+    S extends true ? All_collectCountOutputType :
+    S extends undefined ? never :
+    S extends { include: any } & (All_collectCountOutputTypeArgs)
+    ? All_collectCountOutputType 
+    : S extends { select: any } & (All_collectCountOutputTypeArgs)
+      ? {
+    [P in TruthyKeys<S['select']>]:
+    P extends keyof All_collectCountOutputType ? All_collectCountOutputType[P] : never
+  } 
+      : All_collectCountOutputType
+
+
+
+
+  // Custom InputTypes
+
+  /**
+   * All_collectCountOutputType without action
+   */
+  export type All_collectCountOutputTypeArgs = {
+    /**
+     * Select specific fields to fetch from the All_collectCountOutputType
+     */
+    select?: All_collectCountOutputTypeSelect | null
   }
 
 
@@ -3173,6 +3525,7 @@ export namespace Prisma {
     companyId?: boolean
     users?: boolean | CompanyBranch$usersArgs
     Role_Company?: boolean | CompanyBranch$Role_CompanyArgs
+    expense_company?: boolean | CompanyBranch$expense_companyArgs
     _count?: boolean | CompanyBranchCountOutputTypeArgs
   }
 
@@ -3181,6 +3534,7 @@ export namespace Prisma {
     company?: boolean | CompanyArgs
     users?: boolean | CompanyBranch$usersArgs
     Role_Company?: boolean | CompanyBranch$Role_CompanyArgs
+    expense_company?: boolean | CompanyBranch$expense_companyArgs
     _count?: boolean | CompanyBranchCountOutputTypeArgs
   }
 
@@ -3194,6 +3548,7 @@ export namespace Prisma {
         P extends 'company' ? CompanyGetPayload<S['include'][P]> | null :
         P extends 'users' ? Array < UserGetPayload<S['include'][P]>>  :
         P extends 'Role_Company' ? Array < Role_CompanyGetPayload<S['include'][P]>>  :
+        P extends 'expense_company' ? Array < expense_companyGetPayload<S['include'][P]>>  :
         P extends '_count' ? CompanyBranchCountOutputTypeGetPayload<S['include'][P]> :  never
   } 
     : S extends { select: any } & (CompanyBranchArgs | CompanyBranchFindManyArgs)
@@ -3202,6 +3557,7 @@ export namespace Prisma {
         P extends 'company' ? CompanyGetPayload<S['select'][P]> | null :
         P extends 'users' ? Array < UserGetPayload<S['select'][P]>>  :
         P extends 'Role_Company' ? Array < Role_CompanyGetPayload<S['select'][P]>>  :
+        P extends 'expense_company' ? Array < expense_companyGetPayload<S['select'][P]>>  :
         P extends '_count' ? CompanyBranchCountOutputTypeGetPayload<S['select'][P]> :  P extends keyof CompanyBranch ? CompanyBranch[P] : never
   } 
       : CompanyBranch
@@ -3581,6 +3937,8 @@ export namespace Prisma {
     users<T extends CompanyBranch$usersArgs= {}>(args?: Subset<T, CompanyBranch$usersArgs>): PrismaPromise<Array<UserGetPayload<T>>| Null>;
 
     Role_Company<T extends CompanyBranch$Role_CompanyArgs= {}>(args?: Subset<T, CompanyBranch$Role_CompanyArgs>): PrismaPromise<Array<Role_CompanyGetPayload<T>>| Null>;
+
+    expense_company<T extends CompanyBranch$expense_companyArgs= {}>(args?: Subset<T, CompanyBranch$expense_companyArgs>): PrismaPromise<Array<expense_companyGetPayload<T>>| Null>;
 
     private get _document();
     /**
@@ -3976,6 +4334,27 @@ export namespace Prisma {
     take?: number
     skip?: number
     distinct?: Enumerable<Role_CompanyScalarFieldEnum>
+  }
+
+
+  /**
+   * CompanyBranch.expense_company
+   */
+  export type CompanyBranch$expense_companyArgs = {
+    /**
+     * Select specific fields to fetch from the expense_company
+     */
+    select?: expense_companySelect | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: expense_companyInclude | null
+    where?: expense_companyWhereInput
+    orderBy?: Enumerable<expense_companyOrderByWithRelationInput>
+    cursor?: expense_companyWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: Enumerable<Expense_companyScalarFieldEnum>
   }
 
 
@@ -5493,6 +5872,8 @@ export namespace Prisma {
     Role_Company?: boolean | Role_CompanyArgs
     Position_user?: boolean | Position_userArgs
     henchman?: boolean | User$henchmanArgs
+    all_collect?: boolean | User$all_collectArgs
+    salary?: boolean | User$salaryArgs
     _count?: boolean | UserCountOutputTypeArgs
   }
 
@@ -5505,6 +5886,8 @@ export namespace Prisma {
     Role_Company?: boolean | Role_CompanyArgs
     Position_user?: boolean | Position_userArgs
     henchman?: boolean | User$henchmanArgs
+    all_collect?: boolean | User$all_collectArgs
+    salary?: boolean | User$salaryArgs
     _count?: boolean | UserCountOutputTypeArgs
   }
 
@@ -5522,6 +5905,8 @@ export namespace Prisma {
         P extends 'Role_Company' ? Role_CompanyGetPayload<S['include'][P]> | null :
         P extends 'Position_user' ? Position_userGetPayload<S['include'][P]> | null :
         P extends 'henchman' ? Array < Position_userGetPayload<S['include'][P]>>  :
+        P extends 'all_collect' ? Array < all_collectGetPayload<S['include'][P]>>  :
+        P extends 'salary' ? Array < salaryGetPayload<S['include'][P]>>  :
         P extends '_count' ? UserCountOutputTypeGetPayload<S['include'][P]> :  never
   } 
     : S extends { select: any } & (UserArgs | UserFindManyArgs)
@@ -5534,6 +5919,8 @@ export namespace Prisma {
         P extends 'Role_Company' ? Role_CompanyGetPayload<S['select'][P]> | null :
         P extends 'Position_user' ? Position_userGetPayload<S['select'][P]> | null :
         P extends 'henchman' ? Array < Position_userGetPayload<S['select'][P]>>  :
+        P extends 'all_collect' ? Array < all_collectGetPayload<S['select'][P]>>  :
+        P extends 'salary' ? Array < salaryGetPayload<S['select'][P]>>  :
         P extends '_count' ? UserCountOutputTypeGetPayload<S['select'][P]> :  P extends keyof User ? User[P] : never
   } 
       : User
@@ -5921,6 +6308,10 @@ export namespace Prisma {
     Position_user<T extends Position_userArgs= {}>(args?: Subset<T, Position_userArgs>): Prisma__Position_userClient<Position_userGetPayload<T> | Null>;
 
     henchman<T extends User$henchmanArgs= {}>(args?: Subset<T, User$henchmanArgs>): PrismaPromise<Array<Position_userGetPayload<T>>| Null>;
+
+    all_collect<T extends User$all_collectArgs= {}>(args?: Subset<T, User$all_collectArgs>): PrismaPromise<Array<all_collectGetPayload<T>>| Null>;
+
+    salary<T extends User$salaryArgs= {}>(args?: Subset<T, User$salaryArgs>): PrismaPromise<Array<salaryGetPayload<T>>| Null>;
 
     private get _document();
     /**
@@ -6316,6 +6707,48 @@ export namespace Prisma {
     take?: number
     skip?: number
     distinct?: Enumerable<Position_userScalarFieldEnum>
+  }
+
+
+  /**
+   * User.all_collect
+   */
+  export type User$all_collectArgs = {
+    /**
+     * Select specific fields to fetch from the all_collect
+     */
+    select?: all_collectSelect | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: all_collectInclude | null
+    where?: all_collectWhereInput
+    orderBy?: Enumerable<all_collectOrderByWithRelationInput>
+    cursor?: all_collectWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: Enumerable<All_collectScalarFieldEnum>
+  }
+
+
+  /**
+   * User.salary
+   */
+  export type User$salaryArgs = {
+    /**
+     * Select specific fields to fetch from the salary
+     */
+    select?: salarySelect | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: salaryInclude | null
+    where?: salaryWhereInput
+    orderBy?: Enumerable<salaryOrderByWithRelationInput>
+    cursor?: salaryWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: Enumerable<SalaryScalarFieldEnum>
   }
 
 
@@ -18020,11 +18453,8700 @@ export namespace Prisma {
 
 
   /**
+   * Model mas_bank
+   */
+
+
+  export type AggregateMas_bank = {
+    _count: Mas_bankCountAggregateOutputType | null
+    _min: Mas_bankMinAggregateOutputType | null
+    _max: Mas_bankMaxAggregateOutputType | null
+  }
+
+  export type Mas_bankMinAggregateOutputType = {
+    id: string | null
+    name: string | null
+  }
+
+  export type Mas_bankMaxAggregateOutputType = {
+    id: string | null
+    name: string | null
+  }
+
+  export type Mas_bankCountAggregateOutputType = {
+    id: number
+    name: number
+    _all: number
+  }
+
+
+  export type Mas_bankMinAggregateInputType = {
+    id?: true
+    name?: true
+  }
+
+  export type Mas_bankMaxAggregateInputType = {
+    id?: true
+    name?: true
+  }
+
+  export type Mas_bankCountAggregateInputType = {
+    id?: true
+    name?: true
+    _all?: true
+  }
+
+  export type Mas_bankAggregateArgs = {
+    /**
+     * Filter which mas_bank to aggregate.
+     */
+    where?: mas_bankWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of mas_banks to fetch.
+     */
+    orderBy?: Enumerable<mas_bankOrderByWithRelationInput>
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: mas_bankWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` mas_banks from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` mas_banks.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned mas_banks
+    **/
+    _count?: true | Mas_bankCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: Mas_bankMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: Mas_bankMaxAggregateInputType
+  }
+
+  export type GetMas_bankAggregateType<T extends Mas_bankAggregateArgs> = {
+        [P in keyof T & keyof AggregateMas_bank]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateMas_bank[P]>
+      : GetScalarType<T[P], AggregateMas_bank[P]>
+  }
+
+
+
+
+  export type Mas_bankGroupByArgs = {
+    where?: mas_bankWhereInput
+    orderBy?: Enumerable<mas_bankOrderByWithAggregationInput>
+    by: Mas_bankScalarFieldEnum[]
+    having?: mas_bankScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: Mas_bankCountAggregateInputType | true
+    _min?: Mas_bankMinAggregateInputType
+    _max?: Mas_bankMaxAggregateInputType
+  }
+
+
+  export type Mas_bankGroupByOutputType = {
+    id: string
+    name: string
+    _count: Mas_bankCountAggregateOutputType | null
+    _min: Mas_bankMinAggregateOutputType | null
+    _max: Mas_bankMaxAggregateOutputType | null
+  }
+
+  type GetMas_bankGroupByPayload<T extends Mas_bankGroupByArgs> = PrismaPromise<
+    Array<
+      PickArray<Mas_bankGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof Mas_bankGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], Mas_bankGroupByOutputType[P]>
+            : GetScalarType<T[P], Mas_bankGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type mas_bankSelect = {
+    id?: boolean
+    name?: boolean
+    expense_company?: boolean | mas_bank$expense_companyArgs
+    bookbank_log?: boolean | mas_bank$bookbank_logArgs
+    _count?: boolean | Mas_bankCountOutputTypeArgs
+  }
+
+
+  export type mas_bankInclude = {
+    expense_company?: boolean | mas_bank$expense_companyArgs
+    bookbank_log?: boolean | mas_bank$bookbank_logArgs
+    _count?: boolean | Mas_bankCountOutputTypeArgs
+  }
+
+  export type mas_bankGetPayload<S extends boolean | null | undefined | mas_bankArgs> =
+    S extends { select: any, include: any } ? 'Please either choose `select` or `include`' :
+    S extends true ? mas_bank :
+    S extends undefined ? never :
+    S extends { include: any } & (mas_bankArgs | mas_bankFindManyArgs)
+    ? mas_bank  & {
+    [P in TruthyKeys<S['include']>]:
+        P extends 'expense_company' ? Array < expense_companyGetPayload<S['include'][P]>>  :
+        P extends 'bookbank_log' ? Array < bookbank_logGetPayload<S['include'][P]>>  :
+        P extends '_count' ? Mas_bankCountOutputTypeGetPayload<S['include'][P]> :  never
+  } 
+    : S extends { select: any } & (mas_bankArgs | mas_bankFindManyArgs)
+      ? {
+    [P in TruthyKeys<S['select']>]:
+        P extends 'expense_company' ? Array < expense_companyGetPayload<S['select'][P]>>  :
+        P extends 'bookbank_log' ? Array < bookbank_logGetPayload<S['select'][P]>>  :
+        P extends '_count' ? Mas_bankCountOutputTypeGetPayload<S['select'][P]> :  P extends keyof mas_bank ? mas_bank[P] : never
+  } 
+      : mas_bank
+
+
+  type mas_bankCountArgs = 
+    Omit<mas_bankFindManyArgs, 'select' | 'include'> & {
+      select?: Mas_bankCountAggregateInputType | true
+    }
+
+  export interface mas_bankDelegate<GlobalRejectSettings extends Prisma.RejectOnNotFound | Prisma.RejectPerOperation | false | undefined> {
+
+    /**
+     * Find zero or one Mas_bank that matches the filter.
+     * @param {mas_bankFindUniqueArgs} args - Arguments to find a Mas_bank
+     * @example
+     * // Get one Mas_bank
+     * const mas_bank = await prisma.mas_bank.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+    **/
+    findUnique<T extends mas_bankFindUniqueArgs,  LocalRejectSettings = T["rejectOnNotFound"] extends RejectOnNotFound ? T['rejectOnNotFound'] : undefined>(
+      args: SelectSubset<T, mas_bankFindUniqueArgs>
+    ): HasReject<GlobalRejectSettings, LocalRejectSettings, 'findUnique', 'mas_bank'> extends True ? Prisma__mas_bankClient<mas_bankGetPayload<T>> : Prisma__mas_bankClient<mas_bankGetPayload<T> | null, null>
+
+    /**
+     * Find one Mas_bank that matches the filter or throw an error  with `error.code='P2025'` 
+     *     if no matches were found.
+     * @param {mas_bankFindUniqueOrThrowArgs} args - Arguments to find a Mas_bank
+     * @example
+     * // Get one Mas_bank
+     * const mas_bank = await prisma.mas_bank.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+    **/
+    findUniqueOrThrow<T extends mas_bankFindUniqueOrThrowArgs>(
+      args?: SelectSubset<T, mas_bankFindUniqueOrThrowArgs>
+    ): Prisma__mas_bankClient<mas_bankGetPayload<T>>
+
+    /**
+     * Find the first Mas_bank that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {mas_bankFindFirstArgs} args - Arguments to find a Mas_bank
+     * @example
+     * // Get one Mas_bank
+     * const mas_bank = await prisma.mas_bank.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+    **/
+    findFirst<T extends mas_bankFindFirstArgs,  LocalRejectSettings = T["rejectOnNotFound"] extends RejectOnNotFound ? T['rejectOnNotFound'] : undefined>(
+      args?: SelectSubset<T, mas_bankFindFirstArgs>
+    ): HasReject<GlobalRejectSettings, LocalRejectSettings, 'findFirst', 'mas_bank'> extends True ? Prisma__mas_bankClient<mas_bankGetPayload<T>> : Prisma__mas_bankClient<mas_bankGetPayload<T> | null, null>
+
+    /**
+     * Find the first Mas_bank that matches the filter or
+     * throw `NotFoundError` if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {mas_bankFindFirstOrThrowArgs} args - Arguments to find a Mas_bank
+     * @example
+     * // Get one Mas_bank
+     * const mas_bank = await prisma.mas_bank.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+    **/
+    findFirstOrThrow<T extends mas_bankFindFirstOrThrowArgs>(
+      args?: SelectSubset<T, mas_bankFindFirstOrThrowArgs>
+    ): Prisma__mas_bankClient<mas_bankGetPayload<T>>
+
+    /**
+     * Find zero or more Mas_banks that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {mas_bankFindManyArgs=} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all Mas_banks
+     * const mas_banks = await prisma.mas_bank.findMany()
+     * 
+     * // Get first 10 Mas_banks
+     * const mas_banks = await prisma.mas_bank.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const mas_bankWithIdOnly = await prisma.mas_bank.findMany({ select: { id: true } })
+     * 
+    **/
+    findMany<T extends mas_bankFindManyArgs>(
+      args?: SelectSubset<T, mas_bankFindManyArgs>
+    ): PrismaPromise<Array<mas_bankGetPayload<T>>>
+
+    /**
+     * Create a Mas_bank.
+     * @param {mas_bankCreateArgs} args - Arguments to create a Mas_bank.
+     * @example
+     * // Create one Mas_bank
+     * const Mas_bank = await prisma.mas_bank.create({
+     *   data: {
+     *     // ... data to create a Mas_bank
+     *   }
+     * })
+     * 
+    **/
+    create<T extends mas_bankCreateArgs>(
+      args: SelectSubset<T, mas_bankCreateArgs>
+    ): Prisma__mas_bankClient<mas_bankGetPayload<T>>
+
+    /**
+     * Create many Mas_banks.
+     *     @param {mas_bankCreateManyArgs} args - Arguments to create many Mas_banks.
+     *     @example
+     *     // Create many Mas_banks
+     *     const mas_bank = await prisma.mas_bank.createMany({
+     *       data: {
+     *         // ... provide data here
+     *       }
+     *     })
+     *     
+    **/
+    createMany<T extends mas_bankCreateManyArgs>(
+      args?: SelectSubset<T, mas_bankCreateManyArgs>
+    ): PrismaPromise<BatchPayload>
+
+    /**
+     * Delete a Mas_bank.
+     * @param {mas_bankDeleteArgs} args - Arguments to delete one Mas_bank.
+     * @example
+     * // Delete one Mas_bank
+     * const Mas_bank = await prisma.mas_bank.delete({
+     *   where: {
+     *     // ... filter to delete one Mas_bank
+     *   }
+     * })
+     * 
+    **/
+    delete<T extends mas_bankDeleteArgs>(
+      args: SelectSubset<T, mas_bankDeleteArgs>
+    ): Prisma__mas_bankClient<mas_bankGetPayload<T>>
+
+    /**
+     * Update one Mas_bank.
+     * @param {mas_bankUpdateArgs} args - Arguments to update one Mas_bank.
+     * @example
+     * // Update one Mas_bank
+     * const mas_bank = await prisma.mas_bank.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+    **/
+    update<T extends mas_bankUpdateArgs>(
+      args: SelectSubset<T, mas_bankUpdateArgs>
+    ): Prisma__mas_bankClient<mas_bankGetPayload<T>>
+
+    /**
+     * Delete zero or more Mas_banks.
+     * @param {mas_bankDeleteManyArgs} args - Arguments to filter Mas_banks to delete.
+     * @example
+     * // Delete a few Mas_banks
+     * const { count } = await prisma.mas_bank.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+    **/
+    deleteMany<T extends mas_bankDeleteManyArgs>(
+      args?: SelectSubset<T, mas_bankDeleteManyArgs>
+    ): PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Mas_banks.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {mas_bankUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many Mas_banks
+     * const mas_bank = await prisma.mas_bank.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+    **/
+    updateMany<T extends mas_bankUpdateManyArgs>(
+      args: SelectSubset<T, mas_bankUpdateManyArgs>
+    ): PrismaPromise<BatchPayload>
+
+    /**
+     * Create or update one Mas_bank.
+     * @param {mas_bankUpsertArgs} args - Arguments to update or create a Mas_bank.
+     * @example
+     * // Update or create a Mas_bank
+     * const mas_bank = await prisma.mas_bank.upsert({
+     *   create: {
+     *     // ... data to create a Mas_bank
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the Mas_bank we want to update
+     *   }
+     * })
+    **/
+    upsert<T extends mas_bankUpsertArgs>(
+      args: SelectSubset<T, mas_bankUpsertArgs>
+    ): Prisma__mas_bankClient<mas_bankGetPayload<T>>
+
+    /**
+     * Count the number of Mas_banks.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {mas_bankCountArgs} args - Arguments to filter Mas_banks to count.
+     * @example
+     * // Count the number of Mas_banks
+     * const count = await prisma.mas_bank.count({
+     *   where: {
+     *     // ... the filter for the Mas_banks we want to count
+     *   }
+     * })
+    **/
+    count<T extends mas_bankCountArgs>(
+      args?: Subset<T, mas_bankCountArgs>,
+    ): PrismaPromise<
+      T extends _Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], Mas_bankCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a Mas_bank.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {Mas_bankAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends Mas_bankAggregateArgs>(args: Subset<T, Mas_bankAggregateArgs>): PrismaPromise<GetMas_bankAggregateType<T>>
+
+    /**
+     * Group by Mas_bank.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {Mas_bankGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends Mas_bankGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: Mas_bankGroupByArgs['orderBy'] }
+        : { orderBy?: Mas_bankGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends TupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, Mas_bankGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetMas_bankGroupByPayload<T> : PrismaPromise<InputErrors>
+
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for mas_bank.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export class Prisma__mas_bankClient<T, Null = never> implements PrismaPromise<T> {
+    [prisma]: true;
+    private readonly _dmmf;
+    private readonly _fetcher;
+    private readonly _queryType;
+    private readonly _rootField;
+    private readonly _clientMethod;
+    private readonly _args;
+    private readonly _dataPath;
+    private readonly _errorFormat;
+    private readonly _measurePerformance?;
+    private _isList;
+    private _callsite;
+    private _requestPromise?;
+    constructor(_dmmf: runtime.DMMFClass, _fetcher: PrismaClientFetcher, _queryType: 'query' | 'mutation', _rootField: string, _clientMethod: string, _args: any, _dataPath: string[], _errorFormat: ErrorFormat, _measurePerformance?: boolean | undefined, _isList?: boolean);
+    readonly [Symbol.toStringTag]: 'PrismaClientPromise';
+
+    expense_company<T extends mas_bank$expense_companyArgs= {}>(args?: Subset<T, mas_bank$expense_companyArgs>): PrismaPromise<Array<expense_companyGetPayload<T>>| Null>;
+
+    bookbank_log<T extends mas_bank$bookbank_logArgs= {}>(args?: Subset<T, mas_bank$bookbank_logArgs>): PrismaPromise<Array<bookbank_logGetPayload<T>>| Null>;
+
+    private get _document();
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): Promise<TResult1 | TResult2>;
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): Promise<T | TResult>;
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): Promise<T>;
+  }
+
+
+
+  // Custom InputTypes
+
+  /**
+   * mas_bank base type for findUnique actions
+   */
+  export type mas_bankFindUniqueArgsBase = {
+    /**
+     * Select specific fields to fetch from the mas_bank
+     */
+    select?: mas_bankSelect | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: mas_bankInclude | null
+    /**
+     * Filter, which mas_bank to fetch.
+     */
+    where: mas_bankWhereUniqueInput
+  }
+
+  /**
+   * mas_bank findUnique
+   */
+  export interface mas_bankFindUniqueArgs extends mas_bankFindUniqueArgsBase {
+   /**
+    * Throw an Error if query returns no results
+    * @deprecated since 4.0.0: use `findUniqueOrThrow` method instead
+    */
+    rejectOnNotFound?: RejectOnNotFound
+  }
+      
+
+  /**
+   * mas_bank findUniqueOrThrow
+   */
+  export type mas_bankFindUniqueOrThrowArgs = {
+    /**
+     * Select specific fields to fetch from the mas_bank
+     */
+    select?: mas_bankSelect | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: mas_bankInclude | null
+    /**
+     * Filter, which mas_bank to fetch.
+     */
+    where: mas_bankWhereUniqueInput
+  }
+
+
+  /**
+   * mas_bank base type for findFirst actions
+   */
+  export type mas_bankFindFirstArgsBase = {
+    /**
+     * Select specific fields to fetch from the mas_bank
+     */
+    select?: mas_bankSelect | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: mas_bankInclude | null
+    /**
+     * Filter, which mas_bank to fetch.
+     */
+    where?: mas_bankWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of mas_banks to fetch.
+     */
+    orderBy?: Enumerable<mas_bankOrderByWithRelationInput>
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for mas_banks.
+     */
+    cursor?: mas_bankWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` mas_banks from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` mas_banks.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of mas_banks.
+     */
+    distinct?: Enumerable<Mas_bankScalarFieldEnum>
+  }
+
+  /**
+   * mas_bank findFirst
+   */
+  export interface mas_bankFindFirstArgs extends mas_bankFindFirstArgsBase {
+   /**
+    * Throw an Error if query returns no results
+    * @deprecated since 4.0.0: use `findFirstOrThrow` method instead
+    */
+    rejectOnNotFound?: RejectOnNotFound
+  }
+      
+
+  /**
+   * mas_bank findFirstOrThrow
+   */
+  export type mas_bankFindFirstOrThrowArgs = {
+    /**
+     * Select specific fields to fetch from the mas_bank
+     */
+    select?: mas_bankSelect | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: mas_bankInclude | null
+    /**
+     * Filter, which mas_bank to fetch.
+     */
+    where?: mas_bankWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of mas_banks to fetch.
+     */
+    orderBy?: Enumerable<mas_bankOrderByWithRelationInput>
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for mas_banks.
+     */
+    cursor?: mas_bankWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` mas_banks from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` mas_banks.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of mas_banks.
+     */
+    distinct?: Enumerable<Mas_bankScalarFieldEnum>
+  }
+
+
+  /**
+   * mas_bank findMany
+   */
+  export type mas_bankFindManyArgs = {
+    /**
+     * Select specific fields to fetch from the mas_bank
+     */
+    select?: mas_bankSelect | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: mas_bankInclude | null
+    /**
+     * Filter, which mas_banks to fetch.
+     */
+    where?: mas_bankWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of mas_banks to fetch.
+     */
+    orderBy?: Enumerable<mas_bankOrderByWithRelationInput>
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing mas_banks.
+     */
+    cursor?: mas_bankWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` mas_banks from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` mas_banks.
+     */
+    skip?: number
+    distinct?: Enumerable<Mas_bankScalarFieldEnum>
+  }
+
+
+  /**
+   * mas_bank create
+   */
+  export type mas_bankCreateArgs = {
+    /**
+     * Select specific fields to fetch from the mas_bank
+     */
+    select?: mas_bankSelect | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: mas_bankInclude | null
+    /**
+     * The data needed to create a mas_bank.
+     */
+    data: XOR<mas_bankCreateInput, mas_bankUncheckedCreateInput>
+  }
+
+
+  /**
+   * mas_bank createMany
+   */
+  export type mas_bankCreateManyArgs = {
+    /**
+     * The data used to create many mas_banks.
+     */
+    data: Enumerable<mas_bankCreateManyInput>
+    skipDuplicates?: boolean
+  }
+
+
+  /**
+   * mas_bank update
+   */
+  export type mas_bankUpdateArgs = {
+    /**
+     * Select specific fields to fetch from the mas_bank
+     */
+    select?: mas_bankSelect | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: mas_bankInclude | null
+    /**
+     * The data needed to update a mas_bank.
+     */
+    data: XOR<mas_bankUpdateInput, mas_bankUncheckedUpdateInput>
+    /**
+     * Choose, which mas_bank to update.
+     */
+    where: mas_bankWhereUniqueInput
+  }
+
+
+  /**
+   * mas_bank updateMany
+   */
+  export type mas_bankUpdateManyArgs = {
+    /**
+     * The data used to update mas_banks.
+     */
+    data: XOR<mas_bankUpdateManyMutationInput, mas_bankUncheckedUpdateManyInput>
+    /**
+     * Filter which mas_banks to update
+     */
+    where?: mas_bankWhereInput
+  }
+
+
+  /**
+   * mas_bank upsert
+   */
+  export type mas_bankUpsertArgs = {
+    /**
+     * Select specific fields to fetch from the mas_bank
+     */
+    select?: mas_bankSelect | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: mas_bankInclude | null
+    /**
+     * The filter to search for the mas_bank to update in case it exists.
+     */
+    where: mas_bankWhereUniqueInput
+    /**
+     * In case the mas_bank found by the `where` argument doesn't exist, create a new mas_bank with this data.
+     */
+    create: XOR<mas_bankCreateInput, mas_bankUncheckedCreateInput>
+    /**
+     * In case the mas_bank was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<mas_bankUpdateInput, mas_bankUncheckedUpdateInput>
+  }
+
+
+  /**
+   * mas_bank delete
+   */
+  export type mas_bankDeleteArgs = {
+    /**
+     * Select specific fields to fetch from the mas_bank
+     */
+    select?: mas_bankSelect | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: mas_bankInclude | null
+    /**
+     * Filter which mas_bank to delete.
+     */
+    where: mas_bankWhereUniqueInput
+  }
+
+
+  /**
+   * mas_bank deleteMany
+   */
+  export type mas_bankDeleteManyArgs = {
+    /**
+     * Filter which mas_banks to delete
+     */
+    where?: mas_bankWhereInput
+  }
+
+
+  /**
+   * mas_bank.expense_company
+   */
+  export type mas_bank$expense_companyArgs = {
+    /**
+     * Select specific fields to fetch from the expense_company
+     */
+    select?: expense_companySelect | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: expense_companyInclude | null
+    where?: expense_companyWhereInput
+    orderBy?: Enumerable<expense_companyOrderByWithRelationInput>
+    cursor?: expense_companyWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: Enumerable<Expense_companyScalarFieldEnum>
+  }
+
+
+  /**
+   * mas_bank.bookbank_log
+   */
+  export type mas_bank$bookbank_logArgs = {
+    /**
+     * Select specific fields to fetch from the bookbank_log
+     */
+    select?: bookbank_logSelect | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: bookbank_logInclude | null
+    where?: bookbank_logWhereInput
+    orderBy?: Enumerable<bookbank_logOrderByWithRelationInput>
+    cursor?: bookbank_logWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: Enumerable<Bookbank_logScalarFieldEnum>
+  }
+
+
+  /**
+   * mas_bank without action
+   */
+  export type mas_bankArgs = {
+    /**
+     * Select specific fields to fetch from the mas_bank
+     */
+    select?: mas_bankSelect | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: mas_bankInclude | null
+  }
+
+
+
+  /**
+   * Model mas_month
+   */
+
+
+  export type AggregateMas_month = {
+    _count: Mas_monthCountAggregateOutputType | null
+    _min: Mas_monthMinAggregateOutputType | null
+    _max: Mas_monthMaxAggregateOutputType | null
+  }
+
+  export type Mas_monthMinAggregateOutputType = {
+    id: string | null
+    name: string | null
+  }
+
+  export type Mas_monthMaxAggregateOutputType = {
+    id: string | null
+    name: string | null
+  }
+
+  export type Mas_monthCountAggregateOutputType = {
+    id: number
+    name: number
+    _all: number
+  }
+
+
+  export type Mas_monthMinAggregateInputType = {
+    id?: true
+    name?: true
+  }
+
+  export type Mas_monthMaxAggregateInputType = {
+    id?: true
+    name?: true
+  }
+
+  export type Mas_monthCountAggregateInputType = {
+    id?: true
+    name?: true
+    _all?: true
+  }
+
+  export type Mas_monthAggregateArgs = {
+    /**
+     * Filter which mas_month to aggregate.
+     */
+    where?: mas_monthWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of mas_months to fetch.
+     */
+    orderBy?: Enumerable<mas_monthOrderByWithRelationInput>
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: mas_monthWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` mas_months from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` mas_months.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned mas_months
+    **/
+    _count?: true | Mas_monthCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: Mas_monthMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: Mas_monthMaxAggregateInputType
+  }
+
+  export type GetMas_monthAggregateType<T extends Mas_monthAggregateArgs> = {
+        [P in keyof T & keyof AggregateMas_month]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateMas_month[P]>
+      : GetScalarType<T[P], AggregateMas_month[P]>
+  }
+
+
+
+
+  export type Mas_monthGroupByArgs = {
+    where?: mas_monthWhereInput
+    orderBy?: Enumerable<mas_monthOrderByWithAggregationInput>
+    by: Mas_monthScalarFieldEnum[]
+    having?: mas_monthScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: Mas_monthCountAggregateInputType | true
+    _min?: Mas_monthMinAggregateInputType
+    _max?: Mas_monthMaxAggregateInputType
+  }
+
+
+  export type Mas_monthGroupByOutputType = {
+    id: string
+    name: string
+    _count: Mas_monthCountAggregateOutputType | null
+    _min: Mas_monthMinAggregateOutputType | null
+    _max: Mas_monthMaxAggregateOutputType | null
+  }
+
+  type GetMas_monthGroupByPayload<T extends Mas_monthGroupByArgs> = PrismaPromise<
+    Array<
+      PickArray<Mas_monthGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof Mas_monthGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], Mas_monthGroupByOutputType[P]>
+            : GetScalarType<T[P], Mas_monthGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type mas_monthSelect = {
+    id?: boolean
+    name?: boolean
+    expense_company?: boolean | mas_month$expense_companyArgs
+    _count?: boolean | Mas_monthCountOutputTypeArgs
+  }
+
+
+  export type mas_monthInclude = {
+    expense_company?: boolean | mas_month$expense_companyArgs
+    _count?: boolean | Mas_monthCountOutputTypeArgs
+  }
+
+  export type mas_monthGetPayload<S extends boolean | null | undefined | mas_monthArgs> =
+    S extends { select: any, include: any } ? 'Please either choose `select` or `include`' :
+    S extends true ? mas_month :
+    S extends undefined ? never :
+    S extends { include: any } & (mas_monthArgs | mas_monthFindManyArgs)
+    ? mas_month  & {
+    [P in TruthyKeys<S['include']>]:
+        P extends 'expense_company' ? Array < expense_companyGetPayload<S['include'][P]>>  :
+        P extends '_count' ? Mas_monthCountOutputTypeGetPayload<S['include'][P]> :  never
+  } 
+    : S extends { select: any } & (mas_monthArgs | mas_monthFindManyArgs)
+      ? {
+    [P in TruthyKeys<S['select']>]:
+        P extends 'expense_company' ? Array < expense_companyGetPayload<S['select'][P]>>  :
+        P extends '_count' ? Mas_monthCountOutputTypeGetPayload<S['select'][P]> :  P extends keyof mas_month ? mas_month[P] : never
+  } 
+      : mas_month
+
+
+  type mas_monthCountArgs = 
+    Omit<mas_monthFindManyArgs, 'select' | 'include'> & {
+      select?: Mas_monthCountAggregateInputType | true
+    }
+
+  export interface mas_monthDelegate<GlobalRejectSettings extends Prisma.RejectOnNotFound | Prisma.RejectPerOperation | false | undefined> {
+
+    /**
+     * Find zero or one Mas_month that matches the filter.
+     * @param {mas_monthFindUniqueArgs} args - Arguments to find a Mas_month
+     * @example
+     * // Get one Mas_month
+     * const mas_month = await prisma.mas_month.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+    **/
+    findUnique<T extends mas_monthFindUniqueArgs,  LocalRejectSettings = T["rejectOnNotFound"] extends RejectOnNotFound ? T['rejectOnNotFound'] : undefined>(
+      args: SelectSubset<T, mas_monthFindUniqueArgs>
+    ): HasReject<GlobalRejectSettings, LocalRejectSettings, 'findUnique', 'mas_month'> extends True ? Prisma__mas_monthClient<mas_monthGetPayload<T>> : Prisma__mas_monthClient<mas_monthGetPayload<T> | null, null>
+
+    /**
+     * Find one Mas_month that matches the filter or throw an error  with `error.code='P2025'` 
+     *     if no matches were found.
+     * @param {mas_monthFindUniqueOrThrowArgs} args - Arguments to find a Mas_month
+     * @example
+     * // Get one Mas_month
+     * const mas_month = await prisma.mas_month.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+    **/
+    findUniqueOrThrow<T extends mas_monthFindUniqueOrThrowArgs>(
+      args?: SelectSubset<T, mas_monthFindUniqueOrThrowArgs>
+    ): Prisma__mas_monthClient<mas_monthGetPayload<T>>
+
+    /**
+     * Find the first Mas_month that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {mas_monthFindFirstArgs} args - Arguments to find a Mas_month
+     * @example
+     * // Get one Mas_month
+     * const mas_month = await prisma.mas_month.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+    **/
+    findFirst<T extends mas_monthFindFirstArgs,  LocalRejectSettings = T["rejectOnNotFound"] extends RejectOnNotFound ? T['rejectOnNotFound'] : undefined>(
+      args?: SelectSubset<T, mas_monthFindFirstArgs>
+    ): HasReject<GlobalRejectSettings, LocalRejectSettings, 'findFirst', 'mas_month'> extends True ? Prisma__mas_monthClient<mas_monthGetPayload<T>> : Prisma__mas_monthClient<mas_monthGetPayload<T> | null, null>
+
+    /**
+     * Find the first Mas_month that matches the filter or
+     * throw `NotFoundError` if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {mas_monthFindFirstOrThrowArgs} args - Arguments to find a Mas_month
+     * @example
+     * // Get one Mas_month
+     * const mas_month = await prisma.mas_month.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+    **/
+    findFirstOrThrow<T extends mas_monthFindFirstOrThrowArgs>(
+      args?: SelectSubset<T, mas_monthFindFirstOrThrowArgs>
+    ): Prisma__mas_monthClient<mas_monthGetPayload<T>>
+
+    /**
+     * Find zero or more Mas_months that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {mas_monthFindManyArgs=} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all Mas_months
+     * const mas_months = await prisma.mas_month.findMany()
+     * 
+     * // Get first 10 Mas_months
+     * const mas_months = await prisma.mas_month.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const mas_monthWithIdOnly = await prisma.mas_month.findMany({ select: { id: true } })
+     * 
+    **/
+    findMany<T extends mas_monthFindManyArgs>(
+      args?: SelectSubset<T, mas_monthFindManyArgs>
+    ): PrismaPromise<Array<mas_monthGetPayload<T>>>
+
+    /**
+     * Create a Mas_month.
+     * @param {mas_monthCreateArgs} args - Arguments to create a Mas_month.
+     * @example
+     * // Create one Mas_month
+     * const Mas_month = await prisma.mas_month.create({
+     *   data: {
+     *     // ... data to create a Mas_month
+     *   }
+     * })
+     * 
+    **/
+    create<T extends mas_monthCreateArgs>(
+      args: SelectSubset<T, mas_monthCreateArgs>
+    ): Prisma__mas_monthClient<mas_monthGetPayload<T>>
+
+    /**
+     * Create many Mas_months.
+     *     @param {mas_monthCreateManyArgs} args - Arguments to create many Mas_months.
+     *     @example
+     *     // Create many Mas_months
+     *     const mas_month = await prisma.mas_month.createMany({
+     *       data: {
+     *         // ... provide data here
+     *       }
+     *     })
+     *     
+    **/
+    createMany<T extends mas_monthCreateManyArgs>(
+      args?: SelectSubset<T, mas_monthCreateManyArgs>
+    ): PrismaPromise<BatchPayload>
+
+    /**
+     * Delete a Mas_month.
+     * @param {mas_monthDeleteArgs} args - Arguments to delete one Mas_month.
+     * @example
+     * // Delete one Mas_month
+     * const Mas_month = await prisma.mas_month.delete({
+     *   where: {
+     *     // ... filter to delete one Mas_month
+     *   }
+     * })
+     * 
+    **/
+    delete<T extends mas_monthDeleteArgs>(
+      args: SelectSubset<T, mas_monthDeleteArgs>
+    ): Prisma__mas_monthClient<mas_monthGetPayload<T>>
+
+    /**
+     * Update one Mas_month.
+     * @param {mas_monthUpdateArgs} args - Arguments to update one Mas_month.
+     * @example
+     * // Update one Mas_month
+     * const mas_month = await prisma.mas_month.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+    **/
+    update<T extends mas_monthUpdateArgs>(
+      args: SelectSubset<T, mas_monthUpdateArgs>
+    ): Prisma__mas_monthClient<mas_monthGetPayload<T>>
+
+    /**
+     * Delete zero or more Mas_months.
+     * @param {mas_monthDeleteManyArgs} args - Arguments to filter Mas_months to delete.
+     * @example
+     * // Delete a few Mas_months
+     * const { count } = await prisma.mas_month.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+    **/
+    deleteMany<T extends mas_monthDeleteManyArgs>(
+      args?: SelectSubset<T, mas_monthDeleteManyArgs>
+    ): PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Mas_months.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {mas_monthUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many Mas_months
+     * const mas_month = await prisma.mas_month.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+    **/
+    updateMany<T extends mas_monthUpdateManyArgs>(
+      args: SelectSubset<T, mas_monthUpdateManyArgs>
+    ): PrismaPromise<BatchPayload>
+
+    /**
+     * Create or update one Mas_month.
+     * @param {mas_monthUpsertArgs} args - Arguments to update or create a Mas_month.
+     * @example
+     * // Update or create a Mas_month
+     * const mas_month = await prisma.mas_month.upsert({
+     *   create: {
+     *     // ... data to create a Mas_month
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the Mas_month we want to update
+     *   }
+     * })
+    **/
+    upsert<T extends mas_monthUpsertArgs>(
+      args: SelectSubset<T, mas_monthUpsertArgs>
+    ): Prisma__mas_monthClient<mas_monthGetPayload<T>>
+
+    /**
+     * Count the number of Mas_months.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {mas_monthCountArgs} args - Arguments to filter Mas_months to count.
+     * @example
+     * // Count the number of Mas_months
+     * const count = await prisma.mas_month.count({
+     *   where: {
+     *     // ... the filter for the Mas_months we want to count
+     *   }
+     * })
+    **/
+    count<T extends mas_monthCountArgs>(
+      args?: Subset<T, mas_monthCountArgs>,
+    ): PrismaPromise<
+      T extends _Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], Mas_monthCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a Mas_month.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {Mas_monthAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends Mas_monthAggregateArgs>(args: Subset<T, Mas_monthAggregateArgs>): PrismaPromise<GetMas_monthAggregateType<T>>
+
+    /**
+     * Group by Mas_month.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {Mas_monthGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends Mas_monthGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: Mas_monthGroupByArgs['orderBy'] }
+        : { orderBy?: Mas_monthGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends TupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, Mas_monthGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetMas_monthGroupByPayload<T> : PrismaPromise<InputErrors>
+
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for mas_month.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export class Prisma__mas_monthClient<T, Null = never> implements PrismaPromise<T> {
+    [prisma]: true;
+    private readonly _dmmf;
+    private readonly _fetcher;
+    private readonly _queryType;
+    private readonly _rootField;
+    private readonly _clientMethod;
+    private readonly _args;
+    private readonly _dataPath;
+    private readonly _errorFormat;
+    private readonly _measurePerformance?;
+    private _isList;
+    private _callsite;
+    private _requestPromise?;
+    constructor(_dmmf: runtime.DMMFClass, _fetcher: PrismaClientFetcher, _queryType: 'query' | 'mutation', _rootField: string, _clientMethod: string, _args: any, _dataPath: string[], _errorFormat: ErrorFormat, _measurePerformance?: boolean | undefined, _isList?: boolean);
+    readonly [Symbol.toStringTag]: 'PrismaClientPromise';
+
+    expense_company<T extends mas_month$expense_companyArgs= {}>(args?: Subset<T, mas_month$expense_companyArgs>): PrismaPromise<Array<expense_companyGetPayload<T>>| Null>;
+
+    private get _document();
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): Promise<TResult1 | TResult2>;
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): Promise<T | TResult>;
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): Promise<T>;
+  }
+
+
+
+  // Custom InputTypes
+
+  /**
+   * mas_month base type for findUnique actions
+   */
+  export type mas_monthFindUniqueArgsBase = {
+    /**
+     * Select specific fields to fetch from the mas_month
+     */
+    select?: mas_monthSelect | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: mas_monthInclude | null
+    /**
+     * Filter, which mas_month to fetch.
+     */
+    where: mas_monthWhereUniqueInput
+  }
+
+  /**
+   * mas_month findUnique
+   */
+  export interface mas_monthFindUniqueArgs extends mas_monthFindUniqueArgsBase {
+   /**
+    * Throw an Error if query returns no results
+    * @deprecated since 4.0.0: use `findUniqueOrThrow` method instead
+    */
+    rejectOnNotFound?: RejectOnNotFound
+  }
+      
+
+  /**
+   * mas_month findUniqueOrThrow
+   */
+  export type mas_monthFindUniqueOrThrowArgs = {
+    /**
+     * Select specific fields to fetch from the mas_month
+     */
+    select?: mas_monthSelect | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: mas_monthInclude | null
+    /**
+     * Filter, which mas_month to fetch.
+     */
+    where: mas_monthWhereUniqueInput
+  }
+
+
+  /**
+   * mas_month base type for findFirst actions
+   */
+  export type mas_monthFindFirstArgsBase = {
+    /**
+     * Select specific fields to fetch from the mas_month
+     */
+    select?: mas_monthSelect | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: mas_monthInclude | null
+    /**
+     * Filter, which mas_month to fetch.
+     */
+    where?: mas_monthWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of mas_months to fetch.
+     */
+    orderBy?: Enumerable<mas_monthOrderByWithRelationInput>
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for mas_months.
+     */
+    cursor?: mas_monthWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` mas_months from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` mas_months.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of mas_months.
+     */
+    distinct?: Enumerable<Mas_monthScalarFieldEnum>
+  }
+
+  /**
+   * mas_month findFirst
+   */
+  export interface mas_monthFindFirstArgs extends mas_monthFindFirstArgsBase {
+   /**
+    * Throw an Error if query returns no results
+    * @deprecated since 4.0.0: use `findFirstOrThrow` method instead
+    */
+    rejectOnNotFound?: RejectOnNotFound
+  }
+      
+
+  /**
+   * mas_month findFirstOrThrow
+   */
+  export type mas_monthFindFirstOrThrowArgs = {
+    /**
+     * Select specific fields to fetch from the mas_month
+     */
+    select?: mas_monthSelect | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: mas_monthInclude | null
+    /**
+     * Filter, which mas_month to fetch.
+     */
+    where?: mas_monthWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of mas_months to fetch.
+     */
+    orderBy?: Enumerable<mas_monthOrderByWithRelationInput>
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for mas_months.
+     */
+    cursor?: mas_monthWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` mas_months from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` mas_months.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of mas_months.
+     */
+    distinct?: Enumerable<Mas_monthScalarFieldEnum>
+  }
+
+
+  /**
+   * mas_month findMany
+   */
+  export type mas_monthFindManyArgs = {
+    /**
+     * Select specific fields to fetch from the mas_month
+     */
+    select?: mas_monthSelect | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: mas_monthInclude | null
+    /**
+     * Filter, which mas_months to fetch.
+     */
+    where?: mas_monthWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of mas_months to fetch.
+     */
+    orderBy?: Enumerable<mas_monthOrderByWithRelationInput>
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing mas_months.
+     */
+    cursor?: mas_monthWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` mas_months from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` mas_months.
+     */
+    skip?: number
+    distinct?: Enumerable<Mas_monthScalarFieldEnum>
+  }
+
+
+  /**
+   * mas_month create
+   */
+  export type mas_monthCreateArgs = {
+    /**
+     * Select specific fields to fetch from the mas_month
+     */
+    select?: mas_monthSelect | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: mas_monthInclude | null
+    /**
+     * The data needed to create a mas_month.
+     */
+    data: XOR<mas_monthCreateInput, mas_monthUncheckedCreateInput>
+  }
+
+
+  /**
+   * mas_month createMany
+   */
+  export type mas_monthCreateManyArgs = {
+    /**
+     * The data used to create many mas_months.
+     */
+    data: Enumerable<mas_monthCreateManyInput>
+    skipDuplicates?: boolean
+  }
+
+
+  /**
+   * mas_month update
+   */
+  export type mas_monthUpdateArgs = {
+    /**
+     * Select specific fields to fetch from the mas_month
+     */
+    select?: mas_monthSelect | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: mas_monthInclude | null
+    /**
+     * The data needed to update a mas_month.
+     */
+    data: XOR<mas_monthUpdateInput, mas_monthUncheckedUpdateInput>
+    /**
+     * Choose, which mas_month to update.
+     */
+    where: mas_monthWhereUniqueInput
+  }
+
+
+  /**
+   * mas_month updateMany
+   */
+  export type mas_monthUpdateManyArgs = {
+    /**
+     * The data used to update mas_months.
+     */
+    data: XOR<mas_monthUpdateManyMutationInput, mas_monthUncheckedUpdateManyInput>
+    /**
+     * Filter which mas_months to update
+     */
+    where?: mas_monthWhereInput
+  }
+
+
+  /**
+   * mas_month upsert
+   */
+  export type mas_monthUpsertArgs = {
+    /**
+     * Select specific fields to fetch from the mas_month
+     */
+    select?: mas_monthSelect | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: mas_monthInclude | null
+    /**
+     * The filter to search for the mas_month to update in case it exists.
+     */
+    where: mas_monthWhereUniqueInput
+    /**
+     * In case the mas_month found by the `where` argument doesn't exist, create a new mas_month with this data.
+     */
+    create: XOR<mas_monthCreateInput, mas_monthUncheckedCreateInput>
+    /**
+     * In case the mas_month was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<mas_monthUpdateInput, mas_monthUncheckedUpdateInput>
+  }
+
+
+  /**
+   * mas_month delete
+   */
+  export type mas_monthDeleteArgs = {
+    /**
+     * Select specific fields to fetch from the mas_month
+     */
+    select?: mas_monthSelect | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: mas_monthInclude | null
+    /**
+     * Filter which mas_month to delete.
+     */
+    where: mas_monthWhereUniqueInput
+  }
+
+
+  /**
+   * mas_month deleteMany
+   */
+  export type mas_monthDeleteManyArgs = {
+    /**
+     * Filter which mas_months to delete
+     */
+    where?: mas_monthWhereInput
+  }
+
+
+  /**
+   * mas_month.expense_company
+   */
+  export type mas_month$expense_companyArgs = {
+    /**
+     * Select specific fields to fetch from the expense_company
+     */
+    select?: expense_companySelect | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: expense_companyInclude | null
+    where?: expense_companyWhereInput
+    orderBy?: Enumerable<expense_companyOrderByWithRelationInput>
+    cursor?: expense_companyWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: Enumerable<Expense_companyScalarFieldEnum>
+  }
+
+
+  /**
+   * mas_month without action
+   */
+  export type mas_monthArgs = {
+    /**
+     * Select specific fields to fetch from the mas_month
+     */
+    select?: mas_monthSelect | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: mas_monthInclude | null
+  }
+
+
+
+  /**
+   * Model mas_years
+   */
+
+
+  export type AggregateMas_years = {
+    _count: Mas_yearsCountAggregateOutputType | null
+    _min: Mas_yearsMinAggregateOutputType | null
+    _max: Mas_yearsMaxAggregateOutputType | null
+  }
+
+  export type Mas_yearsMinAggregateOutputType = {
+    id: string | null
+    name: string | null
+  }
+
+  export type Mas_yearsMaxAggregateOutputType = {
+    id: string | null
+    name: string | null
+  }
+
+  export type Mas_yearsCountAggregateOutputType = {
+    id: number
+    name: number
+    _all: number
+  }
+
+
+  export type Mas_yearsMinAggregateInputType = {
+    id?: true
+    name?: true
+  }
+
+  export type Mas_yearsMaxAggregateInputType = {
+    id?: true
+    name?: true
+  }
+
+  export type Mas_yearsCountAggregateInputType = {
+    id?: true
+    name?: true
+    _all?: true
+  }
+
+  export type Mas_yearsAggregateArgs = {
+    /**
+     * Filter which mas_years to aggregate.
+     */
+    where?: mas_yearsWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of mas_years to fetch.
+     */
+    orderBy?: Enumerable<mas_yearsOrderByWithRelationInput>
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: mas_yearsWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` mas_years from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` mas_years.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned mas_years
+    **/
+    _count?: true | Mas_yearsCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: Mas_yearsMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: Mas_yearsMaxAggregateInputType
+  }
+
+  export type GetMas_yearsAggregateType<T extends Mas_yearsAggregateArgs> = {
+        [P in keyof T & keyof AggregateMas_years]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateMas_years[P]>
+      : GetScalarType<T[P], AggregateMas_years[P]>
+  }
+
+
+
+
+  export type Mas_yearsGroupByArgs = {
+    where?: mas_yearsWhereInput
+    orderBy?: Enumerable<mas_yearsOrderByWithAggregationInput>
+    by: Mas_yearsScalarFieldEnum[]
+    having?: mas_yearsScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: Mas_yearsCountAggregateInputType | true
+    _min?: Mas_yearsMinAggregateInputType
+    _max?: Mas_yearsMaxAggregateInputType
+  }
+
+
+  export type Mas_yearsGroupByOutputType = {
+    id: string
+    name: string
+    _count: Mas_yearsCountAggregateOutputType | null
+    _min: Mas_yearsMinAggregateOutputType | null
+    _max: Mas_yearsMaxAggregateOutputType | null
+  }
+
+  type GetMas_yearsGroupByPayload<T extends Mas_yearsGroupByArgs> = PrismaPromise<
+    Array<
+      PickArray<Mas_yearsGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof Mas_yearsGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], Mas_yearsGroupByOutputType[P]>
+            : GetScalarType<T[P], Mas_yearsGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type mas_yearsSelect = {
+    id?: boolean
+    name?: boolean
+  }
+
+
+  export type mas_yearsGetPayload<S extends boolean | null | undefined | mas_yearsArgs> =
+    S extends { select: any, include: any } ? 'Please either choose `select` or `include`' :
+    S extends true ? mas_years :
+    S extends undefined ? never :
+    S extends { include: any } & (mas_yearsArgs | mas_yearsFindManyArgs)
+    ? mas_years 
+    : S extends { select: any } & (mas_yearsArgs | mas_yearsFindManyArgs)
+      ? {
+    [P in TruthyKeys<S['select']>]:
+    P extends keyof mas_years ? mas_years[P] : never
+  } 
+      : mas_years
+
+
+  type mas_yearsCountArgs = 
+    Omit<mas_yearsFindManyArgs, 'select' | 'include'> & {
+      select?: Mas_yearsCountAggregateInputType | true
+    }
+
+  export interface mas_yearsDelegate<GlobalRejectSettings extends Prisma.RejectOnNotFound | Prisma.RejectPerOperation | false | undefined> {
+
+    /**
+     * Find zero or one Mas_years that matches the filter.
+     * @param {mas_yearsFindUniqueArgs} args - Arguments to find a Mas_years
+     * @example
+     * // Get one Mas_years
+     * const mas_years = await prisma.mas_years.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+    **/
+    findUnique<T extends mas_yearsFindUniqueArgs,  LocalRejectSettings = T["rejectOnNotFound"] extends RejectOnNotFound ? T['rejectOnNotFound'] : undefined>(
+      args: SelectSubset<T, mas_yearsFindUniqueArgs>
+    ): HasReject<GlobalRejectSettings, LocalRejectSettings, 'findUnique', 'mas_years'> extends True ? Prisma__mas_yearsClient<mas_yearsGetPayload<T>> : Prisma__mas_yearsClient<mas_yearsGetPayload<T> | null, null>
+
+    /**
+     * Find one Mas_years that matches the filter or throw an error  with `error.code='P2025'` 
+     *     if no matches were found.
+     * @param {mas_yearsFindUniqueOrThrowArgs} args - Arguments to find a Mas_years
+     * @example
+     * // Get one Mas_years
+     * const mas_years = await prisma.mas_years.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+    **/
+    findUniqueOrThrow<T extends mas_yearsFindUniqueOrThrowArgs>(
+      args?: SelectSubset<T, mas_yearsFindUniqueOrThrowArgs>
+    ): Prisma__mas_yearsClient<mas_yearsGetPayload<T>>
+
+    /**
+     * Find the first Mas_years that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {mas_yearsFindFirstArgs} args - Arguments to find a Mas_years
+     * @example
+     * // Get one Mas_years
+     * const mas_years = await prisma.mas_years.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+    **/
+    findFirst<T extends mas_yearsFindFirstArgs,  LocalRejectSettings = T["rejectOnNotFound"] extends RejectOnNotFound ? T['rejectOnNotFound'] : undefined>(
+      args?: SelectSubset<T, mas_yearsFindFirstArgs>
+    ): HasReject<GlobalRejectSettings, LocalRejectSettings, 'findFirst', 'mas_years'> extends True ? Prisma__mas_yearsClient<mas_yearsGetPayload<T>> : Prisma__mas_yearsClient<mas_yearsGetPayload<T> | null, null>
+
+    /**
+     * Find the first Mas_years that matches the filter or
+     * throw `NotFoundError` if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {mas_yearsFindFirstOrThrowArgs} args - Arguments to find a Mas_years
+     * @example
+     * // Get one Mas_years
+     * const mas_years = await prisma.mas_years.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+    **/
+    findFirstOrThrow<T extends mas_yearsFindFirstOrThrowArgs>(
+      args?: SelectSubset<T, mas_yearsFindFirstOrThrowArgs>
+    ): Prisma__mas_yearsClient<mas_yearsGetPayload<T>>
+
+    /**
+     * Find zero or more Mas_years that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {mas_yearsFindManyArgs=} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all Mas_years
+     * const mas_years = await prisma.mas_years.findMany()
+     * 
+     * // Get first 10 Mas_years
+     * const mas_years = await prisma.mas_years.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const mas_yearsWithIdOnly = await prisma.mas_years.findMany({ select: { id: true } })
+     * 
+    **/
+    findMany<T extends mas_yearsFindManyArgs>(
+      args?: SelectSubset<T, mas_yearsFindManyArgs>
+    ): PrismaPromise<Array<mas_yearsGetPayload<T>>>
+
+    /**
+     * Create a Mas_years.
+     * @param {mas_yearsCreateArgs} args - Arguments to create a Mas_years.
+     * @example
+     * // Create one Mas_years
+     * const Mas_years = await prisma.mas_years.create({
+     *   data: {
+     *     // ... data to create a Mas_years
+     *   }
+     * })
+     * 
+    **/
+    create<T extends mas_yearsCreateArgs>(
+      args: SelectSubset<T, mas_yearsCreateArgs>
+    ): Prisma__mas_yearsClient<mas_yearsGetPayload<T>>
+
+    /**
+     * Create many Mas_years.
+     *     @param {mas_yearsCreateManyArgs} args - Arguments to create many Mas_years.
+     *     @example
+     *     // Create many Mas_years
+     *     const mas_years = await prisma.mas_years.createMany({
+     *       data: {
+     *         // ... provide data here
+     *       }
+     *     })
+     *     
+    **/
+    createMany<T extends mas_yearsCreateManyArgs>(
+      args?: SelectSubset<T, mas_yearsCreateManyArgs>
+    ): PrismaPromise<BatchPayload>
+
+    /**
+     * Delete a Mas_years.
+     * @param {mas_yearsDeleteArgs} args - Arguments to delete one Mas_years.
+     * @example
+     * // Delete one Mas_years
+     * const Mas_years = await prisma.mas_years.delete({
+     *   where: {
+     *     // ... filter to delete one Mas_years
+     *   }
+     * })
+     * 
+    **/
+    delete<T extends mas_yearsDeleteArgs>(
+      args: SelectSubset<T, mas_yearsDeleteArgs>
+    ): Prisma__mas_yearsClient<mas_yearsGetPayload<T>>
+
+    /**
+     * Update one Mas_years.
+     * @param {mas_yearsUpdateArgs} args - Arguments to update one Mas_years.
+     * @example
+     * // Update one Mas_years
+     * const mas_years = await prisma.mas_years.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+    **/
+    update<T extends mas_yearsUpdateArgs>(
+      args: SelectSubset<T, mas_yearsUpdateArgs>
+    ): Prisma__mas_yearsClient<mas_yearsGetPayload<T>>
+
+    /**
+     * Delete zero or more Mas_years.
+     * @param {mas_yearsDeleteManyArgs} args - Arguments to filter Mas_years to delete.
+     * @example
+     * // Delete a few Mas_years
+     * const { count } = await prisma.mas_years.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+    **/
+    deleteMany<T extends mas_yearsDeleteManyArgs>(
+      args?: SelectSubset<T, mas_yearsDeleteManyArgs>
+    ): PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Mas_years.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {mas_yearsUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many Mas_years
+     * const mas_years = await prisma.mas_years.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+    **/
+    updateMany<T extends mas_yearsUpdateManyArgs>(
+      args: SelectSubset<T, mas_yearsUpdateManyArgs>
+    ): PrismaPromise<BatchPayload>
+
+    /**
+     * Create or update one Mas_years.
+     * @param {mas_yearsUpsertArgs} args - Arguments to update or create a Mas_years.
+     * @example
+     * // Update or create a Mas_years
+     * const mas_years = await prisma.mas_years.upsert({
+     *   create: {
+     *     // ... data to create a Mas_years
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the Mas_years we want to update
+     *   }
+     * })
+    **/
+    upsert<T extends mas_yearsUpsertArgs>(
+      args: SelectSubset<T, mas_yearsUpsertArgs>
+    ): Prisma__mas_yearsClient<mas_yearsGetPayload<T>>
+
+    /**
+     * Count the number of Mas_years.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {mas_yearsCountArgs} args - Arguments to filter Mas_years to count.
+     * @example
+     * // Count the number of Mas_years
+     * const count = await prisma.mas_years.count({
+     *   where: {
+     *     // ... the filter for the Mas_years we want to count
+     *   }
+     * })
+    **/
+    count<T extends mas_yearsCountArgs>(
+      args?: Subset<T, mas_yearsCountArgs>,
+    ): PrismaPromise<
+      T extends _Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], Mas_yearsCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a Mas_years.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {Mas_yearsAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends Mas_yearsAggregateArgs>(args: Subset<T, Mas_yearsAggregateArgs>): PrismaPromise<GetMas_yearsAggregateType<T>>
+
+    /**
+     * Group by Mas_years.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {Mas_yearsGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends Mas_yearsGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: Mas_yearsGroupByArgs['orderBy'] }
+        : { orderBy?: Mas_yearsGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends TupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, Mas_yearsGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetMas_yearsGroupByPayload<T> : PrismaPromise<InputErrors>
+
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for mas_years.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export class Prisma__mas_yearsClient<T, Null = never> implements PrismaPromise<T> {
+    [prisma]: true;
+    private readonly _dmmf;
+    private readonly _fetcher;
+    private readonly _queryType;
+    private readonly _rootField;
+    private readonly _clientMethod;
+    private readonly _args;
+    private readonly _dataPath;
+    private readonly _errorFormat;
+    private readonly _measurePerformance?;
+    private _isList;
+    private _callsite;
+    private _requestPromise?;
+    constructor(_dmmf: runtime.DMMFClass, _fetcher: PrismaClientFetcher, _queryType: 'query' | 'mutation', _rootField: string, _clientMethod: string, _args: any, _dataPath: string[], _errorFormat: ErrorFormat, _measurePerformance?: boolean | undefined, _isList?: boolean);
+    readonly [Symbol.toStringTag]: 'PrismaClientPromise';
+
+
+    private get _document();
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): Promise<TResult1 | TResult2>;
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): Promise<T | TResult>;
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): Promise<T>;
+  }
+
+
+
+  // Custom InputTypes
+
+  /**
+   * mas_years base type for findUnique actions
+   */
+  export type mas_yearsFindUniqueArgsBase = {
+    /**
+     * Select specific fields to fetch from the mas_years
+     */
+    select?: mas_yearsSelect | null
+    /**
+     * Filter, which mas_years to fetch.
+     */
+    where: mas_yearsWhereUniqueInput
+  }
+
+  /**
+   * mas_years findUnique
+   */
+  export interface mas_yearsFindUniqueArgs extends mas_yearsFindUniqueArgsBase {
+   /**
+    * Throw an Error if query returns no results
+    * @deprecated since 4.0.0: use `findUniqueOrThrow` method instead
+    */
+    rejectOnNotFound?: RejectOnNotFound
+  }
+      
+
+  /**
+   * mas_years findUniqueOrThrow
+   */
+  export type mas_yearsFindUniqueOrThrowArgs = {
+    /**
+     * Select specific fields to fetch from the mas_years
+     */
+    select?: mas_yearsSelect | null
+    /**
+     * Filter, which mas_years to fetch.
+     */
+    where: mas_yearsWhereUniqueInput
+  }
+
+
+  /**
+   * mas_years base type for findFirst actions
+   */
+  export type mas_yearsFindFirstArgsBase = {
+    /**
+     * Select specific fields to fetch from the mas_years
+     */
+    select?: mas_yearsSelect | null
+    /**
+     * Filter, which mas_years to fetch.
+     */
+    where?: mas_yearsWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of mas_years to fetch.
+     */
+    orderBy?: Enumerable<mas_yearsOrderByWithRelationInput>
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for mas_years.
+     */
+    cursor?: mas_yearsWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` mas_years from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` mas_years.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of mas_years.
+     */
+    distinct?: Enumerable<Mas_yearsScalarFieldEnum>
+  }
+
+  /**
+   * mas_years findFirst
+   */
+  export interface mas_yearsFindFirstArgs extends mas_yearsFindFirstArgsBase {
+   /**
+    * Throw an Error if query returns no results
+    * @deprecated since 4.0.0: use `findFirstOrThrow` method instead
+    */
+    rejectOnNotFound?: RejectOnNotFound
+  }
+      
+
+  /**
+   * mas_years findFirstOrThrow
+   */
+  export type mas_yearsFindFirstOrThrowArgs = {
+    /**
+     * Select specific fields to fetch from the mas_years
+     */
+    select?: mas_yearsSelect | null
+    /**
+     * Filter, which mas_years to fetch.
+     */
+    where?: mas_yearsWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of mas_years to fetch.
+     */
+    orderBy?: Enumerable<mas_yearsOrderByWithRelationInput>
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for mas_years.
+     */
+    cursor?: mas_yearsWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` mas_years from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` mas_years.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of mas_years.
+     */
+    distinct?: Enumerable<Mas_yearsScalarFieldEnum>
+  }
+
+
+  /**
+   * mas_years findMany
+   */
+  export type mas_yearsFindManyArgs = {
+    /**
+     * Select specific fields to fetch from the mas_years
+     */
+    select?: mas_yearsSelect | null
+    /**
+     * Filter, which mas_years to fetch.
+     */
+    where?: mas_yearsWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of mas_years to fetch.
+     */
+    orderBy?: Enumerable<mas_yearsOrderByWithRelationInput>
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing mas_years.
+     */
+    cursor?: mas_yearsWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` mas_years from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` mas_years.
+     */
+    skip?: number
+    distinct?: Enumerable<Mas_yearsScalarFieldEnum>
+  }
+
+
+  /**
+   * mas_years create
+   */
+  export type mas_yearsCreateArgs = {
+    /**
+     * Select specific fields to fetch from the mas_years
+     */
+    select?: mas_yearsSelect | null
+    /**
+     * The data needed to create a mas_years.
+     */
+    data: XOR<mas_yearsCreateInput, mas_yearsUncheckedCreateInput>
+  }
+
+
+  /**
+   * mas_years createMany
+   */
+  export type mas_yearsCreateManyArgs = {
+    /**
+     * The data used to create many mas_years.
+     */
+    data: Enumerable<mas_yearsCreateManyInput>
+    skipDuplicates?: boolean
+  }
+
+
+  /**
+   * mas_years update
+   */
+  export type mas_yearsUpdateArgs = {
+    /**
+     * Select specific fields to fetch from the mas_years
+     */
+    select?: mas_yearsSelect | null
+    /**
+     * The data needed to update a mas_years.
+     */
+    data: XOR<mas_yearsUpdateInput, mas_yearsUncheckedUpdateInput>
+    /**
+     * Choose, which mas_years to update.
+     */
+    where: mas_yearsWhereUniqueInput
+  }
+
+
+  /**
+   * mas_years updateMany
+   */
+  export type mas_yearsUpdateManyArgs = {
+    /**
+     * The data used to update mas_years.
+     */
+    data: XOR<mas_yearsUpdateManyMutationInput, mas_yearsUncheckedUpdateManyInput>
+    /**
+     * Filter which mas_years to update
+     */
+    where?: mas_yearsWhereInput
+  }
+
+
+  /**
+   * mas_years upsert
+   */
+  export type mas_yearsUpsertArgs = {
+    /**
+     * Select specific fields to fetch from the mas_years
+     */
+    select?: mas_yearsSelect | null
+    /**
+     * The filter to search for the mas_years to update in case it exists.
+     */
+    where: mas_yearsWhereUniqueInput
+    /**
+     * In case the mas_years found by the `where` argument doesn't exist, create a new mas_years with this data.
+     */
+    create: XOR<mas_yearsCreateInput, mas_yearsUncheckedCreateInput>
+    /**
+     * In case the mas_years was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<mas_yearsUpdateInput, mas_yearsUncheckedUpdateInput>
+  }
+
+
+  /**
+   * mas_years delete
+   */
+  export type mas_yearsDeleteArgs = {
+    /**
+     * Select specific fields to fetch from the mas_years
+     */
+    select?: mas_yearsSelect | null
+    /**
+     * Filter which mas_years to delete.
+     */
+    where: mas_yearsWhereUniqueInput
+  }
+
+
+  /**
+   * mas_years deleteMany
+   */
+  export type mas_yearsDeleteManyArgs = {
+    /**
+     * Filter which mas_years to delete
+     */
+    where?: mas_yearsWhereInput
+  }
+
+
+  /**
+   * mas_years without action
+   */
+  export type mas_yearsArgs = {
+    /**
+     * Select specific fields to fetch from the mas_years
+     */
+    select?: mas_yearsSelect | null
+  }
+
+
+
+  /**
+   * Model mas_salary_status
+   */
+
+
+  export type AggregateMas_salary_status = {
+    _count: Mas_salary_statusCountAggregateOutputType | null
+    _avg: Mas_salary_statusAvgAggregateOutputType | null
+    _sum: Mas_salary_statusSumAggregateOutputType | null
+    _min: Mas_salary_statusMinAggregateOutputType | null
+    _max: Mas_salary_statusMaxAggregateOutputType | null
+  }
+
+  export type Mas_salary_statusAvgAggregateOutputType = {
+    no: number | null
+  }
+
+  export type Mas_salary_statusSumAggregateOutputType = {
+    no: number | null
+  }
+
+  export type Mas_salary_statusMinAggregateOutputType = {
+    id: string | null
+    no: number | null
+    name: string | null
+  }
+
+  export type Mas_salary_statusMaxAggregateOutputType = {
+    id: string | null
+    no: number | null
+    name: string | null
+  }
+
+  export type Mas_salary_statusCountAggregateOutputType = {
+    id: number
+    no: number
+    name: number
+    _all: number
+  }
+
+
+  export type Mas_salary_statusAvgAggregateInputType = {
+    no?: true
+  }
+
+  export type Mas_salary_statusSumAggregateInputType = {
+    no?: true
+  }
+
+  export type Mas_salary_statusMinAggregateInputType = {
+    id?: true
+    no?: true
+    name?: true
+  }
+
+  export type Mas_salary_statusMaxAggregateInputType = {
+    id?: true
+    no?: true
+    name?: true
+  }
+
+  export type Mas_salary_statusCountAggregateInputType = {
+    id?: true
+    no?: true
+    name?: true
+    _all?: true
+  }
+
+  export type Mas_salary_statusAggregateArgs = {
+    /**
+     * Filter which mas_salary_status to aggregate.
+     */
+    where?: mas_salary_statusWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of mas_salary_statuses to fetch.
+     */
+    orderBy?: Enumerable<mas_salary_statusOrderByWithRelationInput>
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: mas_salary_statusWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` mas_salary_statuses from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` mas_salary_statuses.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned mas_salary_statuses
+    **/
+    _count?: true | Mas_salary_statusCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: Mas_salary_statusAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: Mas_salary_statusSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: Mas_salary_statusMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: Mas_salary_statusMaxAggregateInputType
+  }
+
+  export type GetMas_salary_statusAggregateType<T extends Mas_salary_statusAggregateArgs> = {
+        [P in keyof T & keyof AggregateMas_salary_status]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateMas_salary_status[P]>
+      : GetScalarType<T[P], AggregateMas_salary_status[P]>
+  }
+
+
+
+
+  export type Mas_salary_statusGroupByArgs = {
+    where?: mas_salary_statusWhereInput
+    orderBy?: Enumerable<mas_salary_statusOrderByWithAggregationInput>
+    by: Mas_salary_statusScalarFieldEnum[]
+    having?: mas_salary_statusScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: Mas_salary_statusCountAggregateInputType | true
+    _avg?: Mas_salary_statusAvgAggregateInputType
+    _sum?: Mas_salary_statusSumAggregateInputType
+    _min?: Mas_salary_statusMinAggregateInputType
+    _max?: Mas_salary_statusMaxAggregateInputType
+  }
+
+
+  export type Mas_salary_statusGroupByOutputType = {
+    id: string
+    no: number
+    name: string
+    _count: Mas_salary_statusCountAggregateOutputType | null
+    _avg: Mas_salary_statusAvgAggregateOutputType | null
+    _sum: Mas_salary_statusSumAggregateOutputType | null
+    _min: Mas_salary_statusMinAggregateOutputType | null
+    _max: Mas_salary_statusMaxAggregateOutputType | null
+  }
+
+  type GetMas_salary_statusGroupByPayload<T extends Mas_salary_statusGroupByArgs> = PrismaPromise<
+    Array<
+      PickArray<Mas_salary_statusGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof Mas_salary_statusGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], Mas_salary_statusGroupByOutputType[P]>
+            : GetScalarType<T[P], Mas_salary_statusGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type mas_salary_statusSelect = {
+    id?: boolean
+    no?: boolean
+    name?: boolean
+  }
+
+
+  export type mas_salary_statusGetPayload<S extends boolean | null | undefined | mas_salary_statusArgs> =
+    S extends { select: any, include: any } ? 'Please either choose `select` or `include`' :
+    S extends true ? mas_salary_status :
+    S extends undefined ? never :
+    S extends { include: any } & (mas_salary_statusArgs | mas_salary_statusFindManyArgs)
+    ? mas_salary_status 
+    : S extends { select: any } & (mas_salary_statusArgs | mas_salary_statusFindManyArgs)
+      ? {
+    [P in TruthyKeys<S['select']>]:
+    P extends keyof mas_salary_status ? mas_salary_status[P] : never
+  } 
+      : mas_salary_status
+
+
+  type mas_salary_statusCountArgs = 
+    Omit<mas_salary_statusFindManyArgs, 'select' | 'include'> & {
+      select?: Mas_salary_statusCountAggregateInputType | true
+    }
+
+  export interface mas_salary_statusDelegate<GlobalRejectSettings extends Prisma.RejectOnNotFound | Prisma.RejectPerOperation | false | undefined> {
+
+    /**
+     * Find zero or one Mas_salary_status that matches the filter.
+     * @param {mas_salary_statusFindUniqueArgs} args - Arguments to find a Mas_salary_status
+     * @example
+     * // Get one Mas_salary_status
+     * const mas_salary_status = await prisma.mas_salary_status.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+    **/
+    findUnique<T extends mas_salary_statusFindUniqueArgs,  LocalRejectSettings = T["rejectOnNotFound"] extends RejectOnNotFound ? T['rejectOnNotFound'] : undefined>(
+      args: SelectSubset<T, mas_salary_statusFindUniqueArgs>
+    ): HasReject<GlobalRejectSettings, LocalRejectSettings, 'findUnique', 'mas_salary_status'> extends True ? Prisma__mas_salary_statusClient<mas_salary_statusGetPayload<T>> : Prisma__mas_salary_statusClient<mas_salary_statusGetPayload<T> | null, null>
+
+    /**
+     * Find one Mas_salary_status that matches the filter or throw an error  with `error.code='P2025'` 
+     *     if no matches were found.
+     * @param {mas_salary_statusFindUniqueOrThrowArgs} args - Arguments to find a Mas_salary_status
+     * @example
+     * // Get one Mas_salary_status
+     * const mas_salary_status = await prisma.mas_salary_status.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+    **/
+    findUniqueOrThrow<T extends mas_salary_statusFindUniqueOrThrowArgs>(
+      args?: SelectSubset<T, mas_salary_statusFindUniqueOrThrowArgs>
+    ): Prisma__mas_salary_statusClient<mas_salary_statusGetPayload<T>>
+
+    /**
+     * Find the first Mas_salary_status that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {mas_salary_statusFindFirstArgs} args - Arguments to find a Mas_salary_status
+     * @example
+     * // Get one Mas_salary_status
+     * const mas_salary_status = await prisma.mas_salary_status.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+    **/
+    findFirst<T extends mas_salary_statusFindFirstArgs,  LocalRejectSettings = T["rejectOnNotFound"] extends RejectOnNotFound ? T['rejectOnNotFound'] : undefined>(
+      args?: SelectSubset<T, mas_salary_statusFindFirstArgs>
+    ): HasReject<GlobalRejectSettings, LocalRejectSettings, 'findFirst', 'mas_salary_status'> extends True ? Prisma__mas_salary_statusClient<mas_salary_statusGetPayload<T>> : Prisma__mas_salary_statusClient<mas_salary_statusGetPayload<T> | null, null>
+
+    /**
+     * Find the first Mas_salary_status that matches the filter or
+     * throw `NotFoundError` if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {mas_salary_statusFindFirstOrThrowArgs} args - Arguments to find a Mas_salary_status
+     * @example
+     * // Get one Mas_salary_status
+     * const mas_salary_status = await prisma.mas_salary_status.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+    **/
+    findFirstOrThrow<T extends mas_salary_statusFindFirstOrThrowArgs>(
+      args?: SelectSubset<T, mas_salary_statusFindFirstOrThrowArgs>
+    ): Prisma__mas_salary_statusClient<mas_salary_statusGetPayload<T>>
+
+    /**
+     * Find zero or more Mas_salary_statuses that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {mas_salary_statusFindManyArgs=} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all Mas_salary_statuses
+     * const mas_salary_statuses = await prisma.mas_salary_status.findMany()
+     * 
+     * // Get first 10 Mas_salary_statuses
+     * const mas_salary_statuses = await prisma.mas_salary_status.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const mas_salary_statusWithIdOnly = await prisma.mas_salary_status.findMany({ select: { id: true } })
+     * 
+    **/
+    findMany<T extends mas_salary_statusFindManyArgs>(
+      args?: SelectSubset<T, mas_salary_statusFindManyArgs>
+    ): PrismaPromise<Array<mas_salary_statusGetPayload<T>>>
+
+    /**
+     * Create a Mas_salary_status.
+     * @param {mas_salary_statusCreateArgs} args - Arguments to create a Mas_salary_status.
+     * @example
+     * // Create one Mas_salary_status
+     * const Mas_salary_status = await prisma.mas_salary_status.create({
+     *   data: {
+     *     // ... data to create a Mas_salary_status
+     *   }
+     * })
+     * 
+    **/
+    create<T extends mas_salary_statusCreateArgs>(
+      args: SelectSubset<T, mas_salary_statusCreateArgs>
+    ): Prisma__mas_salary_statusClient<mas_salary_statusGetPayload<T>>
+
+    /**
+     * Create many Mas_salary_statuses.
+     *     @param {mas_salary_statusCreateManyArgs} args - Arguments to create many Mas_salary_statuses.
+     *     @example
+     *     // Create many Mas_salary_statuses
+     *     const mas_salary_status = await prisma.mas_salary_status.createMany({
+     *       data: {
+     *         // ... provide data here
+     *       }
+     *     })
+     *     
+    **/
+    createMany<T extends mas_salary_statusCreateManyArgs>(
+      args?: SelectSubset<T, mas_salary_statusCreateManyArgs>
+    ): PrismaPromise<BatchPayload>
+
+    /**
+     * Delete a Mas_salary_status.
+     * @param {mas_salary_statusDeleteArgs} args - Arguments to delete one Mas_salary_status.
+     * @example
+     * // Delete one Mas_salary_status
+     * const Mas_salary_status = await prisma.mas_salary_status.delete({
+     *   where: {
+     *     // ... filter to delete one Mas_salary_status
+     *   }
+     * })
+     * 
+    **/
+    delete<T extends mas_salary_statusDeleteArgs>(
+      args: SelectSubset<T, mas_salary_statusDeleteArgs>
+    ): Prisma__mas_salary_statusClient<mas_salary_statusGetPayload<T>>
+
+    /**
+     * Update one Mas_salary_status.
+     * @param {mas_salary_statusUpdateArgs} args - Arguments to update one Mas_salary_status.
+     * @example
+     * // Update one Mas_salary_status
+     * const mas_salary_status = await prisma.mas_salary_status.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+    **/
+    update<T extends mas_salary_statusUpdateArgs>(
+      args: SelectSubset<T, mas_salary_statusUpdateArgs>
+    ): Prisma__mas_salary_statusClient<mas_salary_statusGetPayload<T>>
+
+    /**
+     * Delete zero or more Mas_salary_statuses.
+     * @param {mas_salary_statusDeleteManyArgs} args - Arguments to filter Mas_salary_statuses to delete.
+     * @example
+     * // Delete a few Mas_salary_statuses
+     * const { count } = await prisma.mas_salary_status.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+    **/
+    deleteMany<T extends mas_salary_statusDeleteManyArgs>(
+      args?: SelectSubset<T, mas_salary_statusDeleteManyArgs>
+    ): PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Mas_salary_statuses.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {mas_salary_statusUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many Mas_salary_statuses
+     * const mas_salary_status = await prisma.mas_salary_status.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+    **/
+    updateMany<T extends mas_salary_statusUpdateManyArgs>(
+      args: SelectSubset<T, mas_salary_statusUpdateManyArgs>
+    ): PrismaPromise<BatchPayload>
+
+    /**
+     * Create or update one Mas_salary_status.
+     * @param {mas_salary_statusUpsertArgs} args - Arguments to update or create a Mas_salary_status.
+     * @example
+     * // Update or create a Mas_salary_status
+     * const mas_salary_status = await prisma.mas_salary_status.upsert({
+     *   create: {
+     *     // ... data to create a Mas_salary_status
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the Mas_salary_status we want to update
+     *   }
+     * })
+    **/
+    upsert<T extends mas_salary_statusUpsertArgs>(
+      args: SelectSubset<T, mas_salary_statusUpsertArgs>
+    ): Prisma__mas_salary_statusClient<mas_salary_statusGetPayload<T>>
+
+    /**
+     * Count the number of Mas_salary_statuses.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {mas_salary_statusCountArgs} args - Arguments to filter Mas_salary_statuses to count.
+     * @example
+     * // Count the number of Mas_salary_statuses
+     * const count = await prisma.mas_salary_status.count({
+     *   where: {
+     *     // ... the filter for the Mas_salary_statuses we want to count
+     *   }
+     * })
+    **/
+    count<T extends mas_salary_statusCountArgs>(
+      args?: Subset<T, mas_salary_statusCountArgs>,
+    ): PrismaPromise<
+      T extends _Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], Mas_salary_statusCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a Mas_salary_status.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {Mas_salary_statusAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends Mas_salary_statusAggregateArgs>(args: Subset<T, Mas_salary_statusAggregateArgs>): PrismaPromise<GetMas_salary_statusAggregateType<T>>
+
+    /**
+     * Group by Mas_salary_status.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {Mas_salary_statusGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends Mas_salary_statusGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: Mas_salary_statusGroupByArgs['orderBy'] }
+        : { orderBy?: Mas_salary_statusGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends TupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, Mas_salary_statusGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetMas_salary_statusGroupByPayload<T> : PrismaPromise<InputErrors>
+
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for mas_salary_status.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export class Prisma__mas_salary_statusClient<T, Null = never> implements PrismaPromise<T> {
+    [prisma]: true;
+    private readonly _dmmf;
+    private readonly _fetcher;
+    private readonly _queryType;
+    private readonly _rootField;
+    private readonly _clientMethod;
+    private readonly _args;
+    private readonly _dataPath;
+    private readonly _errorFormat;
+    private readonly _measurePerformance?;
+    private _isList;
+    private _callsite;
+    private _requestPromise?;
+    constructor(_dmmf: runtime.DMMFClass, _fetcher: PrismaClientFetcher, _queryType: 'query' | 'mutation', _rootField: string, _clientMethod: string, _args: any, _dataPath: string[], _errorFormat: ErrorFormat, _measurePerformance?: boolean | undefined, _isList?: boolean);
+    readonly [Symbol.toStringTag]: 'PrismaClientPromise';
+
+
+    private get _document();
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): Promise<TResult1 | TResult2>;
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): Promise<T | TResult>;
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): Promise<T>;
+  }
+
+
+
+  // Custom InputTypes
+
+  /**
+   * mas_salary_status base type for findUnique actions
+   */
+  export type mas_salary_statusFindUniqueArgsBase = {
+    /**
+     * Select specific fields to fetch from the mas_salary_status
+     */
+    select?: mas_salary_statusSelect | null
+    /**
+     * Filter, which mas_salary_status to fetch.
+     */
+    where: mas_salary_statusWhereUniqueInput
+  }
+
+  /**
+   * mas_salary_status findUnique
+   */
+  export interface mas_salary_statusFindUniqueArgs extends mas_salary_statusFindUniqueArgsBase {
+   /**
+    * Throw an Error if query returns no results
+    * @deprecated since 4.0.0: use `findUniqueOrThrow` method instead
+    */
+    rejectOnNotFound?: RejectOnNotFound
+  }
+      
+
+  /**
+   * mas_salary_status findUniqueOrThrow
+   */
+  export type mas_salary_statusFindUniqueOrThrowArgs = {
+    /**
+     * Select specific fields to fetch from the mas_salary_status
+     */
+    select?: mas_salary_statusSelect | null
+    /**
+     * Filter, which mas_salary_status to fetch.
+     */
+    where: mas_salary_statusWhereUniqueInput
+  }
+
+
+  /**
+   * mas_salary_status base type for findFirst actions
+   */
+  export type mas_salary_statusFindFirstArgsBase = {
+    /**
+     * Select specific fields to fetch from the mas_salary_status
+     */
+    select?: mas_salary_statusSelect | null
+    /**
+     * Filter, which mas_salary_status to fetch.
+     */
+    where?: mas_salary_statusWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of mas_salary_statuses to fetch.
+     */
+    orderBy?: Enumerable<mas_salary_statusOrderByWithRelationInput>
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for mas_salary_statuses.
+     */
+    cursor?: mas_salary_statusWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` mas_salary_statuses from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` mas_salary_statuses.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of mas_salary_statuses.
+     */
+    distinct?: Enumerable<Mas_salary_statusScalarFieldEnum>
+  }
+
+  /**
+   * mas_salary_status findFirst
+   */
+  export interface mas_salary_statusFindFirstArgs extends mas_salary_statusFindFirstArgsBase {
+   /**
+    * Throw an Error if query returns no results
+    * @deprecated since 4.0.0: use `findFirstOrThrow` method instead
+    */
+    rejectOnNotFound?: RejectOnNotFound
+  }
+      
+
+  /**
+   * mas_salary_status findFirstOrThrow
+   */
+  export type mas_salary_statusFindFirstOrThrowArgs = {
+    /**
+     * Select specific fields to fetch from the mas_salary_status
+     */
+    select?: mas_salary_statusSelect | null
+    /**
+     * Filter, which mas_salary_status to fetch.
+     */
+    where?: mas_salary_statusWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of mas_salary_statuses to fetch.
+     */
+    orderBy?: Enumerable<mas_salary_statusOrderByWithRelationInput>
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for mas_salary_statuses.
+     */
+    cursor?: mas_salary_statusWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` mas_salary_statuses from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` mas_salary_statuses.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of mas_salary_statuses.
+     */
+    distinct?: Enumerable<Mas_salary_statusScalarFieldEnum>
+  }
+
+
+  /**
+   * mas_salary_status findMany
+   */
+  export type mas_salary_statusFindManyArgs = {
+    /**
+     * Select specific fields to fetch from the mas_salary_status
+     */
+    select?: mas_salary_statusSelect | null
+    /**
+     * Filter, which mas_salary_statuses to fetch.
+     */
+    where?: mas_salary_statusWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of mas_salary_statuses to fetch.
+     */
+    orderBy?: Enumerable<mas_salary_statusOrderByWithRelationInput>
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing mas_salary_statuses.
+     */
+    cursor?: mas_salary_statusWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` mas_salary_statuses from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` mas_salary_statuses.
+     */
+    skip?: number
+    distinct?: Enumerable<Mas_salary_statusScalarFieldEnum>
+  }
+
+
+  /**
+   * mas_salary_status create
+   */
+  export type mas_salary_statusCreateArgs = {
+    /**
+     * Select specific fields to fetch from the mas_salary_status
+     */
+    select?: mas_salary_statusSelect | null
+    /**
+     * The data needed to create a mas_salary_status.
+     */
+    data: XOR<mas_salary_statusCreateInput, mas_salary_statusUncheckedCreateInput>
+  }
+
+
+  /**
+   * mas_salary_status createMany
+   */
+  export type mas_salary_statusCreateManyArgs = {
+    /**
+     * The data used to create many mas_salary_statuses.
+     */
+    data: Enumerable<mas_salary_statusCreateManyInput>
+    skipDuplicates?: boolean
+  }
+
+
+  /**
+   * mas_salary_status update
+   */
+  export type mas_salary_statusUpdateArgs = {
+    /**
+     * Select specific fields to fetch from the mas_salary_status
+     */
+    select?: mas_salary_statusSelect | null
+    /**
+     * The data needed to update a mas_salary_status.
+     */
+    data: XOR<mas_salary_statusUpdateInput, mas_salary_statusUncheckedUpdateInput>
+    /**
+     * Choose, which mas_salary_status to update.
+     */
+    where: mas_salary_statusWhereUniqueInput
+  }
+
+
+  /**
+   * mas_salary_status updateMany
+   */
+  export type mas_salary_statusUpdateManyArgs = {
+    /**
+     * The data used to update mas_salary_statuses.
+     */
+    data: XOR<mas_salary_statusUpdateManyMutationInput, mas_salary_statusUncheckedUpdateManyInput>
+    /**
+     * Filter which mas_salary_statuses to update
+     */
+    where?: mas_salary_statusWhereInput
+  }
+
+
+  /**
+   * mas_salary_status upsert
+   */
+  export type mas_salary_statusUpsertArgs = {
+    /**
+     * Select specific fields to fetch from the mas_salary_status
+     */
+    select?: mas_salary_statusSelect | null
+    /**
+     * The filter to search for the mas_salary_status to update in case it exists.
+     */
+    where: mas_salary_statusWhereUniqueInput
+    /**
+     * In case the mas_salary_status found by the `where` argument doesn't exist, create a new mas_salary_status with this data.
+     */
+    create: XOR<mas_salary_statusCreateInput, mas_salary_statusUncheckedCreateInput>
+    /**
+     * In case the mas_salary_status was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<mas_salary_statusUpdateInput, mas_salary_statusUncheckedUpdateInput>
+  }
+
+
+  /**
+   * mas_salary_status delete
+   */
+  export type mas_salary_statusDeleteArgs = {
+    /**
+     * Select specific fields to fetch from the mas_salary_status
+     */
+    select?: mas_salary_statusSelect | null
+    /**
+     * Filter which mas_salary_status to delete.
+     */
+    where: mas_salary_statusWhereUniqueInput
+  }
+
+
+  /**
+   * mas_salary_status deleteMany
+   */
+  export type mas_salary_statusDeleteManyArgs = {
+    /**
+     * Filter which mas_salary_statuses to delete
+     */
+    where?: mas_salary_statusWhereInput
+  }
+
+
+  /**
+   * mas_salary_status without action
+   */
+  export type mas_salary_statusArgs = {
+    /**
+     * Select specific fields to fetch from the mas_salary_status
+     */
+    select?: mas_salary_statusSelect | null
+  }
+
+
+
+  /**
+   * Model mas_income_type
+   */
+
+
+  export type AggregateMas_income_type = {
+    _count: Mas_income_typeCountAggregateOutputType | null
+    _min: Mas_income_typeMinAggregateOutputType | null
+    _max: Mas_income_typeMaxAggregateOutputType | null
+  }
+
+  export type Mas_income_typeMinAggregateOutputType = {
+    id: string | null
+    name: string | null
+  }
+
+  export type Mas_income_typeMaxAggregateOutputType = {
+    id: string | null
+    name: string | null
+  }
+
+  export type Mas_income_typeCountAggregateOutputType = {
+    id: number
+    name: number
+    _all: number
+  }
+
+
+  export type Mas_income_typeMinAggregateInputType = {
+    id?: true
+    name?: true
+  }
+
+  export type Mas_income_typeMaxAggregateInputType = {
+    id?: true
+    name?: true
+  }
+
+  export type Mas_income_typeCountAggregateInputType = {
+    id?: true
+    name?: true
+    _all?: true
+  }
+
+  export type Mas_income_typeAggregateArgs = {
+    /**
+     * Filter which mas_income_type to aggregate.
+     */
+    where?: mas_income_typeWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of mas_income_types to fetch.
+     */
+    orderBy?: Enumerable<mas_income_typeOrderByWithRelationInput>
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: mas_income_typeWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` mas_income_types from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` mas_income_types.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned mas_income_types
+    **/
+    _count?: true | Mas_income_typeCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: Mas_income_typeMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: Mas_income_typeMaxAggregateInputType
+  }
+
+  export type GetMas_income_typeAggregateType<T extends Mas_income_typeAggregateArgs> = {
+        [P in keyof T & keyof AggregateMas_income_type]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateMas_income_type[P]>
+      : GetScalarType<T[P], AggregateMas_income_type[P]>
+  }
+
+
+
+
+  export type Mas_income_typeGroupByArgs = {
+    where?: mas_income_typeWhereInput
+    orderBy?: Enumerable<mas_income_typeOrderByWithAggregationInput>
+    by: Mas_income_typeScalarFieldEnum[]
+    having?: mas_income_typeScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: Mas_income_typeCountAggregateInputType | true
+    _min?: Mas_income_typeMinAggregateInputType
+    _max?: Mas_income_typeMaxAggregateInputType
+  }
+
+
+  export type Mas_income_typeGroupByOutputType = {
+    id: string
+    name: string
+    _count: Mas_income_typeCountAggregateOutputType | null
+    _min: Mas_income_typeMinAggregateOutputType | null
+    _max: Mas_income_typeMaxAggregateOutputType | null
+  }
+
+  type GetMas_income_typeGroupByPayload<T extends Mas_income_typeGroupByArgs> = PrismaPromise<
+    Array<
+      PickArray<Mas_income_typeGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof Mas_income_typeGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], Mas_income_typeGroupByOutputType[P]>
+            : GetScalarType<T[P], Mas_income_typeGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type mas_income_typeSelect = {
+    id?: boolean
+    name?: boolean
+  }
+
+
+  export type mas_income_typeGetPayload<S extends boolean | null | undefined | mas_income_typeArgs> =
+    S extends { select: any, include: any } ? 'Please either choose `select` or `include`' :
+    S extends true ? mas_income_type :
+    S extends undefined ? never :
+    S extends { include: any } & (mas_income_typeArgs | mas_income_typeFindManyArgs)
+    ? mas_income_type 
+    : S extends { select: any } & (mas_income_typeArgs | mas_income_typeFindManyArgs)
+      ? {
+    [P in TruthyKeys<S['select']>]:
+    P extends keyof mas_income_type ? mas_income_type[P] : never
+  } 
+      : mas_income_type
+
+
+  type mas_income_typeCountArgs = 
+    Omit<mas_income_typeFindManyArgs, 'select' | 'include'> & {
+      select?: Mas_income_typeCountAggregateInputType | true
+    }
+
+  export interface mas_income_typeDelegate<GlobalRejectSettings extends Prisma.RejectOnNotFound | Prisma.RejectPerOperation | false | undefined> {
+
+    /**
+     * Find zero or one Mas_income_type that matches the filter.
+     * @param {mas_income_typeFindUniqueArgs} args - Arguments to find a Mas_income_type
+     * @example
+     * // Get one Mas_income_type
+     * const mas_income_type = await prisma.mas_income_type.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+    **/
+    findUnique<T extends mas_income_typeFindUniqueArgs,  LocalRejectSettings = T["rejectOnNotFound"] extends RejectOnNotFound ? T['rejectOnNotFound'] : undefined>(
+      args: SelectSubset<T, mas_income_typeFindUniqueArgs>
+    ): HasReject<GlobalRejectSettings, LocalRejectSettings, 'findUnique', 'mas_income_type'> extends True ? Prisma__mas_income_typeClient<mas_income_typeGetPayload<T>> : Prisma__mas_income_typeClient<mas_income_typeGetPayload<T> | null, null>
+
+    /**
+     * Find one Mas_income_type that matches the filter or throw an error  with `error.code='P2025'` 
+     *     if no matches were found.
+     * @param {mas_income_typeFindUniqueOrThrowArgs} args - Arguments to find a Mas_income_type
+     * @example
+     * // Get one Mas_income_type
+     * const mas_income_type = await prisma.mas_income_type.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+    **/
+    findUniqueOrThrow<T extends mas_income_typeFindUniqueOrThrowArgs>(
+      args?: SelectSubset<T, mas_income_typeFindUniqueOrThrowArgs>
+    ): Prisma__mas_income_typeClient<mas_income_typeGetPayload<T>>
+
+    /**
+     * Find the first Mas_income_type that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {mas_income_typeFindFirstArgs} args - Arguments to find a Mas_income_type
+     * @example
+     * // Get one Mas_income_type
+     * const mas_income_type = await prisma.mas_income_type.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+    **/
+    findFirst<T extends mas_income_typeFindFirstArgs,  LocalRejectSettings = T["rejectOnNotFound"] extends RejectOnNotFound ? T['rejectOnNotFound'] : undefined>(
+      args?: SelectSubset<T, mas_income_typeFindFirstArgs>
+    ): HasReject<GlobalRejectSettings, LocalRejectSettings, 'findFirst', 'mas_income_type'> extends True ? Prisma__mas_income_typeClient<mas_income_typeGetPayload<T>> : Prisma__mas_income_typeClient<mas_income_typeGetPayload<T> | null, null>
+
+    /**
+     * Find the first Mas_income_type that matches the filter or
+     * throw `NotFoundError` if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {mas_income_typeFindFirstOrThrowArgs} args - Arguments to find a Mas_income_type
+     * @example
+     * // Get one Mas_income_type
+     * const mas_income_type = await prisma.mas_income_type.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+    **/
+    findFirstOrThrow<T extends mas_income_typeFindFirstOrThrowArgs>(
+      args?: SelectSubset<T, mas_income_typeFindFirstOrThrowArgs>
+    ): Prisma__mas_income_typeClient<mas_income_typeGetPayload<T>>
+
+    /**
+     * Find zero or more Mas_income_types that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {mas_income_typeFindManyArgs=} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all Mas_income_types
+     * const mas_income_types = await prisma.mas_income_type.findMany()
+     * 
+     * // Get first 10 Mas_income_types
+     * const mas_income_types = await prisma.mas_income_type.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const mas_income_typeWithIdOnly = await prisma.mas_income_type.findMany({ select: { id: true } })
+     * 
+    **/
+    findMany<T extends mas_income_typeFindManyArgs>(
+      args?: SelectSubset<T, mas_income_typeFindManyArgs>
+    ): PrismaPromise<Array<mas_income_typeGetPayload<T>>>
+
+    /**
+     * Create a Mas_income_type.
+     * @param {mas_income_typeCreateArgs} args - Arguments to create a Mas_income_type.
+     * @example
+     * // Create one Mas_income_type
+     * const Mas_income_type = await prisma.mas_income_type.create({
+     *   data: {
+     *     // ... data to create a Mas_income_type
+     *   }
+     * })
+     * 
+    **/
+    create<T extends mas_income_typeCreateArgs>(
+      args: SelectSubset<T, mas_income_typeCreateArgs>
+    ): Prisma__mas_income_typeClient<mas_income_typeGetPayload<T>>
+
+    /**
+     * Create many Mas_income_types.
+     *     @param {mas_income_typeCreateManyArgs} args - Arguments to create many Mas_income_types.
+     *     @example
+     *     // Create many Mas_income_types
+     *     const mas_income_type = await prisma.mas_income_type.createMany({
+     *       data: {
+     *         // ... provide data here
+     *       }
+     *     })
+     *     
+    **/
+    createMany<T extends mas_income_typeCreateManyArgs>(
+      args?: SelectSubset<T, mas_income_typeCreateManyArgs>
+    ): PrismaPromise<BatchPayload>
+
+    /**
+     * Delete a Mas_income_type.
+     * @param {mas_income_typeDeleteArgs} args - Arguments to delete one Mas_income_type.
+     * @example
+     * // Delete one Mas_income_type
+     * const Mas_income_type = await prisma.mas_income_type.delete({
+     *   where: {
+     *     // ... filter to delete one Mas_income_type
+     *   }
+     * })
+     * 
+    **/
+    delete<T extends mas_income_typeDeleteArgs>(
+      args: SelectSubset<T, mas_income_typeDeleteArgs>
+    ): Prisma__mas_income_typeClient<mas_income_typeGetPayload<T>>
+
+    /**
+     * Update one Mas_income_type.
+     * @param {mas_income_typeUpdateArgs} args - Arguments to update one Mas_income_type.
+     * @example
+     * // Update one Mas_income_type
+     * const mas_income_type = await prisma.mas_income_type.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+    **/
+    update<T extends mas_income_typeUpdateArgs>(
+      args: SelectSubset<T, mas_income_typeUpdateArgs>
+    ): Prisma__mas_income_typeClient<mas_income_typeGetPayload<T>>
+
+    /**
+     * Delete zero or more Mas_income_types.
+     * @param {mas_income_typeDeleteManyArgs} args - Arguments to filter Mas_income_types to delete.
+     * @example
+     * // Delete a few Mas_income_types
+     * const { count } = await prisma.mas_income_type.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+    **/
+    deleteMany<T extends mas_income_typeDeleteManyArgs>(
+      args?: SelectSubset<T, mas_income_typeDeleteManyArgs>
+    ): PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Mas_income_types.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {mas_income_typeUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many Mas_income_types
+     * const mas_income_type = await prisma.mas_income_type.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+    **/
+    updateMany<T extends mas_income_typeUpdateManyArgs>(
+      args: SelectSubset<T, mas_income_typeUpdateManyArgs>
+    ): PrismaPromise<BatchPayload>
+
+    /**
+     * Create or update one Mas_income_type.
+     * @param {mas_income_typeUpsertArgs} args - Arguments to update or create a Mas_income_type.
+     * @example
+     * // Update or create a Mas_income_type
+     * const mas_income_type = await prisma.mas_income_type.upsert({
+     *   create: {
+     *     // ... data to create a Mas_income_type
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the Mas_income_type we want to update
+     *   }
+     * })
+    **/
+    upsert<T extends mas_income_typeUpsertArgs>(
+      args: SelectSubset<T, mas_income_typeUpsertArgs>
+    ): Prisma__mas_income_typeClient<mas_income_typeGetPayload<T>>
+
+    /**
+     * Count the number of Mas_income_types.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {mas_income_typeCountArgs} args - Arguments to filter Mas_income_types to count.
+     * @example
+     * // Count the number of Mas_income_types
+     * const count = await prisma.mas_income_type.count({
+     *   where: {
+     *     // ... the filter for the Mas_income_types we want to count
+     *   }
+     * })
+    **/
+    count<T extends mas_income_typeCountArgs>(
+      args?: Subset<T, mas_income_typeCountArgs>,
+    ): PrismaPromise<
+      T extends _Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], Mas_income_typeCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a Mas_income_type.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {Mas_income_typeAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends Mas_income_typeAggregateArgs>(args: Subset<T, Mas_income_typeAggregateArgs>): PrismaPromise<GetMas_income_typeAggregateType<T>>
+
+    /**
+     * Group by Mas_income_type.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {Mas_income_typeGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends Mas_income_typeGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: Mas_income_typeGroupByArgs['orderBy'] }
+        : { orderBy?: Mas_income_typeGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends TupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, Mas_income_typeGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetMas_income_typeGroupByPayload<T> : PrismaPromise<InputErrors>
+
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for mas_income_type.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export class Prisma__mas_income_typeClient<T, Null = never> implements PrismaPromise<T> {
+    [prisma]: true;
+    private readonly _dmmf;
+    private readonly _fetcher;
+    private readonly _queryType;
+    private readonly _rootField;
+    private readonly _clientMethod;
+    private readonly _args;
+    private readonly _dataPath;
+    private readonly _errorFormat;
+    private readonly _measurePerformance?;
+    private _isList;
+    private _callsite;
+    private _requestPromise?;
+    constructor(_dmmf: runtime.DMMFClass, _fetcher: PrismaClientFetcher, _queryType: 'query' | 'mutation', _rootField: string, _clientMethod: string, _args: any, _dataPath: string[], _errorFormat: ErrorFormat, _measurePerformance?: boolean | undefined, _isList?: boolean);
+    readonly [Symbol.toStringTag]: 'PrismaClientPromise';
+
+
+    private get _document();
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): Promise<TResult1 | TResult2>;
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): Promise<T | TResult>;
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): Promise<T>;
+  }
+
+
+
+  // Custom InputTypes
+
+  /**
+   * mas_income_type base type for findUnique actions
+   */
+  export type mas_income_typeFindUniqueArgsBase = {
+    /**
+     * Select specific fields to fetch from the mas_income_type
+     */
+    select?: mas_income_typeSelect | null
+    /**
+     * Filter, which mas_income_type to fetch.
+     */
+    where: mas_income_typeWhereUniqueInput
+  }
+
+  /**
+   * mas_income_type findUnique
+   */
+  export interface mas_income_typeFindUniqueArgs extends mas_income_typeFindUniqueArgsBase {
+   /**
+    * Throw an Error if query returns no results
+    * @deprecated since 4.0.0: use `findUniqueOrThrow` method instead
+    */
+    rejectOnNotFound?: RejectOnNotFound
+  }
+      
+
+  /**
+   * mas_income_type findUniqueOrThrow
+   */
+  export type mas_income_typeFindUniqueOrThrowArgs = {
+    /**
+     * Select specific fields to fetch from the mas_income_type
+     */
+    select?: mas_income_typeSelect | null
+    /**
+     * Filter, which mas_income_type to fetch.
+     */
+    where: mas_income_typeWhereUniqueInput
+  }
+
+
+  /**
+   * mas_income_type base type for findFirst actions
+   */
+  export type mas_income_typeFindFirstArgsBase = {
+    /**
+     * Select specific fields to fetch from the mas_income_type
+     */
+    select?: mas_income_typeSelect | null
+    /**
+     * Filter, which mas_income_type to fetch.
+     */
+    where?: mas_income_typeWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of mas_income_types to fetch.
+     */
+    orderBy?: Enumerable<mas_income_typeOrderByWithRelationInput>
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for mas_income_types.
+     */
+    cursor?: mas_income_typeWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` mas_income_types from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` mas_income_types.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of mas_income_types.
+     */
+    distinct?: Enumerable<Mas_income_typeScalarFieldEnum>
+  }
+
+  /**
+   * mas_income_type findFirst
+   */
+  export interface mas_income_typeFindFirstArgs extends mas_income_typeFindFirstArgsBase {
+   /**
+    * Throw an Error if query returns no results
+    * @deprecated since 4.0.0: use `findFirstOrThrow` method instead
+    */
+    rejectOnNotFound?: RejectOnNotFound
+  }
+      
+
+  /**
+   * mas_income_type findFirstOrThrow
+   */
+  export type mas_income_typeFindFirstOrThrowArgs = {
+    /**
+     * Select specific fields to fetch from the mas_income_type
+     */
+    select?: mas_income_typeSelect | null
+    /**
+     * Filter, which mas_income_type to fetch.
+     */
+    where?: mas_income_typeWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of mas_income_types to fetch.
+     */
+    orderBy?: Enumerable<mas_income_typeOrderByWithRelationInput>
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for mas_income_types.
+     */
+    cursor?: mas_income_typeWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` mas_income_types from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` mas_income_types.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of mas_income_types.
+     */
+    distinct?: Enumerable<Mas_income_typeScalarFieldEnum>
+  }
+
+
+  /**
+   * mas_income_type findMany
+   */
+  export type mas_income_typeFindManyArgs = {
+    /**
+     * Select specific fields to fetch from the mas_income_type
+     */
+    select?: mas_income_typeSelect | null
+    /**
+     * Filter, which mas_income_types to fetch.
+     */
+    where?: mas_income_typeWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of mas_income_types to fetch.
+     */
+    orderBy?: Enumerable<mas_income_typeOrderByWithRelationInput>
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing mas_income_types.
+     */
+    cursor?: mas_income_typeWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` mas_income_types from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` mas_income_types.
+     */
+    skip?: number
+    distinct?: Enumerable<Mas_income_typeScalarFieldEnum>
+  }
+
+
+  /**
+   * mas_income_type create
+   */
+  export type mas_income_typeCreateArgs = {
+    /**
+     * Select specific fields to fetch from the mas_income_type
+     */
+    select?: mas_income_typeSelect | null
+    /**
+     * The data needed to create a mas_income_type.
+     */
+    data: XOR<mas_income_typeCreateInput, mas_income_typeUncheckedCreateInput>
+  }
+
+
+  /**
+   * mas_income_type createMany
+   */
+  export type mas_income_typeCreateManyArgs = {
+    /**
+     * The data used to create many mas_income_types.
+     */
+    data: Enumerable<mas_income_typeCreateManyInput>
+    skipDuplicates?: boolean
+  }
+
+
+  /**
+   * mas_income_type update
+   */
+  export type mas_income_typeUpdateArgs = {
+    /**
+     * Select specific fields to fetch from the mas_income_type
+     */
+    select?: mas_income_typeSelect | null
+    /**
+     * The data needed to update a mas_income_type.
+     */
+    data: XOR<mas_income_typeUpdateInput, mas_income_typeUncheckedUpdateInput>
+    /**
+     * Choose, which mas_income_type to update.
+     */
+    where: mas_income_typeWhereUniqueInput
+  }
+
+
+  /**
+   * mas_income_type updateMany
+   */
+  export type mas_income_typeUpdateManyArgs = {
+    /**
+     * The data used to update mas_income_types.
+     */
+    data: XOR<mas_income_typeUpdateManyMutationInput, mas_income_typeUncheckedUpdateManyInput>
+    /**
+     * Filter which mas_income_types to update
+     */
+    where?: mas_income_typeWhereInput
+  }
+
+
+  /**
+   * mas_income_type upsert
+   */
+  export type mas_income_typeUpsertArgs = {
+    /**
+     * Select specific fields to fetch from the mas_income_type
+     */
+    select?: mas_income_typeSelect | null
+    /**
+     * The filter to search for the mas_income_type to update in case it exists.
+     */
+    where: mas_income_typeWhereUniqueInput
+    /**
+     * In case the mas_income_type found by the `where` argument doesn't exist, create a new mas_income_type with this data.
+     */
+    create: XOR<mas_income_typeCreateInput, mas_income_typeUncheckedCreateInput>
+    /**
+     * In case the mas_income_type was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<mas_income_typeUpdateInput, mas_income_typeUncheckedUpdateInput>
+  }
+
+
+  /**
+   * mas_income_type delete
+   */
+  export type mas_income_typeDeleteArgs = {
+    /**
+     * Select specific fields to fetch from the mas_income_type
+     */
+    select?: mas_income_typeSelect | null
+    /**
+     * Filter which mas_income_type to delete.
+     */
+    where: mas_income_typeWhereUniqueInput
+  }
+
+
+  /**
+   * mas_income_type deleteMany
+   */
+  export type mas_income_typeDeleteManyArgs = {
+    /**
+     * Filter which mas_income_types to delete
+     */
+    where?: mas_income_typeWhereInput
+  }
+
+
+  /**
+   * mas_income_type without action
+   */
+  export type mas_income_typeArgs = {
+    /**
+     * Select specific fields to fetch from the mas_income_type
+     */
+    select?: mas_income_typeSelect | null
+  }
+
+
+
+  /**
+   * Model expense_company
+   */
+
+
+  export type AggregateExpense_company = {
+    _count: Expense_companyCountAggregateOutputType | null
+    _avg: Expense_companyAvgAggregateOutputType | null
+    _sum: Expense_companySumAggregateOutputType | null
+    _min: Expense_companyMinAggregateOutputType | null
+    _max: Expense_companyMaxAggregateOutputType | null
+  }
+
+  export type Expense_companyAvgAggregateOutputType = {
+    vat_per: number | null
+    social_security: number | null
+  }
+
+  export type Expense_companySumAggregateOutputType = {
+    vat_per: number | null
+    social_security: number | null
+  }
+
+  export type Expense_companyMinAggregateOutputType = {
+    id: string | null
+    monthId: string | null
+    bankId: string | null
+    vat_per: number | null
+    social_security: number | null
+    companyBranchId: string | null
+  }
+
+  export type Expense_companyMaxAggregateOutputType = {
+    id: string | null
+    monthId: string | null
+    bankId: string | null
+    vat_per: number | null
+    social_security: number | null
+    companyBranchId: string | null
+  }
+
+  export type Expense_companyCountAggregateOutputType = {
+    id: number
+    monthId: number
+    bankId: number
+    vat_per: number
+    social_security: number
+    companyBranchId: number
+    _all: number
+  }
+
+
+  export type Expense_companyAvgAggregateInputType = {
+    vat_per?: true
+    social_security?: true
+  }
+
+  export type Expense_companySumAggregateInputType = {
+    vat_per?: true
+    social_security?: true
+  }
+
+  export type Expense_companyMinAggregateInputType = {
+    id?: true
+    monthId?: true
+    bankId?: true
+    vat_per?: true
+    social_security?: true
+    companyBranchId?: true
+  }
+
+  export type Expense_companyMaxAggregateInputType = {
+    id?: true
+    monthId?: true
+    bankId?: true
+    vat_per?: true
+    social_security?: true
+    companyBranchId?: true
+  }
+
+  export type Expense_companyCountAggregateInputType = {
+    id?: true
+    monthId?: true
+    bankId?: true
+    vat_per?: true
+    social_security?: true
+    companyBranchId?: true
+    _all?: true
+  }
+
+  export type Expense_companyAggregateArgs = {
+    /**
+     * Filter which expense_company to aggregate.
+     */
+    where?: expense_companyWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of expense_companies to fetch.
+     */
+    orderBy?: Enumerable<expense_companyOrderByWithRelationInput>
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: expense_companyWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` expense_companies from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` expense_companies.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned expense_companies
+    **/
+    _count?: true | Expense_companyCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: Expense_companyAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: Expense_companySumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: Expense_companyMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: Expense_companyMaxAggregateInputType
+  }
+
+  export type GetExpense_companyAggregateType<T extends Expense_companyAggregateArgs> = {
+        [P in keyof T & keyof AggregateExpense_company]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateExpense_company[P]>
+      : GetScalarType<T[P], AggregateExpense_company[P]>
+  }
+
+
+
+
+  export type Expense_companyGroupByArgs = {
+    where?: expense_companyWhereInput
+    orderBy?: Enumerable<expense_companyOrderByWithAggregationInput>
+    by: Expense_companyScalarFieldEnum[]
+    having?: expense_companyScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: Expense_companyCountAggregateInputType | true
+    _avg?: Expense_companyAvgAggregateInputType
+    _sum?: Expense_companySumAggregateInputType
+    _min?: Expense_companyMinAggregateInputType
+    _max?: Expense_companyMaxAggregateInputType
+  }
+
+
+  export type Expense_companyGroupByOutputType = {
+    id: string
+    monthId: string
+    bankId: string
+    vat_per: number | null
+    social_security: number | null
+    companyBranchId: string | null
+    _count: Expense_companyCountAggregateOutputType | null
+    _avg: Expense_companyAvgAggregateOutputType | null
+    _sum: Expense_companySumAggregateOutputType | null
+    _min: Expense_companyMinAggregateOutputType | null
+    _max: Expense_companyMaxAggregateOutputType | null
+  }
+
+  type GetExpense_companyGroupByPayload<T extends Expense_companyGroupByArgs> = PrismaPromise<
+    Array<
+      PickArray<Expense_companyGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof Expense_companyGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], Expense_companyGroupByOutputType[P]>
+            : GetScalarType<T[P], Expense_companyGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type expense_companySelect = {
+    id?: boolean
+    monthId?: boolean
+    bankId?: boolean
+    vat_per?: boolean
+    social_security?: boolean
+    companyBranchId?: boolean
+    Mas_month?: boolean | mas_monthArgs
+    mas_bank?: boolean | mas_bankArgs
+    CompanyBranch?: boolean | CompanyBranchArgs
+  }
+
+
+  export type expense_companyInclude = {
+    Mas_month?: boolean | mas_monthArgs
+    mas_bank?: boolean | mas_bankArgs
+    CompanyBranch?: boolean | CompanyBranchArgs
+  }
+
+  export type expense_companyGetPayload<S extends boolean | null | undefined | expense_companyArgs> =
+    S extends { select: any, include: any } ? 'Please either choose `select` or `include`' :
+    S extends true ? expense_company :
+    S extends undefined ? never :
+    S extends { include: any } & (expense_companyArgs | expense_companyFindManyArgs)
+    ? expense_company  & {
+    [P in TruthyKeys<S['include']>]:
+        P extends 'Mas_month' ? mas_monthGetPayload<S['include'][P]> | null :
+        P extends 'mas_bank' ? mas_bankGetPayload<S['include'][P]> | null :
+        P extends 'CompanyBranch' ? CompanyBranchGetPayload<S['include'][P]> | null :  never
+  } 
+    : S extends { select: any } & (expense_companyArgs | expense_companyFindManyArgs)
+      ? {
+    [P in TruthyKeys<S['select']>]:
+        P extends 'Mas_month' ? mas_monthGetPayload<S['select'][P]> | null :
+        P extends 'mas_bank' ? mas_bankGetPayload<S['select'][P]> | null :
+        P extends 'CompanyBranch' ? CompanyBranchGetPayload<S['select'][P]> | null :  P extends keyof expense_company ? expense_company[P] : never
+  } 
+      : expense_company
+
+
+  type expense_companyCountArgs = 
+    Omit<expense_companyFindManyArgs, 'select' | 'include'> & {
+      select?: Expense_companyCountAggregateInputType | true
+    }
+
+  export interface expense_companyDelegate<GlobalRejectSettings extends Prisma.RejectOnNotFound | Prisma.RejectPerOperation | false | undefined> {
+
+    /**
+     * Find zero or one Expense_company that matches the filter.
+     * @param {expense_companyFindUniqueArgs} args - Arguments to find a Expense_company
+     * @example
+     * // Get one Expense_company
+     * const expense_company = await prisma.expense_company.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+    **/
+    findUnique<T extends expense_companyFindUniqueArgs,  LocalRejectSettings = T["rejectOnNotFound"] extends RejectOnNotFound ? T['rejectOnNotFound'] : undefined>(
+      args: SelectSubset<T, expense_companyFindUniqueArgs>
+    ): HasReject<GlobalRejectSettings, LocalRejectSettings, 'findUnique', 'expense_company'> extends True ? Prisma__expense_companyClient<expense_companyGetPayload<T>> : Prisma__expense_companyClient<expense_companyGetPayload<T> | null, null>
+
+    /**
+     * Find one Expense_company that matches the filter or throw an error  with `error.code='P2025'` 
+     *     if no matches were found.
+     * @param {expense_companyFindUniqueOrThrowArgs} args - Arguments to find a Expense_company
+     * @example
+     * // Get one Expense_company
+     * const expense_company = await prisma.expense_company.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+    **/
+    findUniqueOrThrow<T extends expense_companyFindUniqueOrThrowArgs>(
+      args?: SelectSubset<T, expense_companyFindUniqueOrThrowArgs>
+    ): Prisma__expense_companyClient<expense_companyGetPayload<T>>
+
+    /**
+     * Find the first Expense_company that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {expense_companyFindFirstArgs} args - Arguments to find a Expense_company
+     * @example
+     * // Get one Expense_company
+     * const expense_company = await prisma.expense_company.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+    **/
+    findFirst<T extends expense_companyFindFirstArgs,  LocalRejectSettings = T["rejectOnNotFound"] extends RejectOnNotFound ? T['rejectOnNotFound'] : undefined>(
+      args?: SelectSubset<T, expense_companyFindFirstArgs>
+    ): HasReject<GlobalRejectSettings, LocalRejectSettings, 'findFirst', 'expense_company'> extends True ? Prisma__expense_companyClient<expense_companyGetPayload<T>> : Prisma__expense_companyClient<expense_companyGetPayload<T> | null, null>
+
+    /**
+     * Find the first Expense_company that matches the filter or
+     * throw `NotFoundError` if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {expense_companyFindFirstOrThrowArgs} args - Arguments to find a Expense_company
+     * @example
+     * // Get one Expense_company
+     * const expense_company = await prisma.expense_company.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+    **/
+    findFirstOrThrow<T extends expense_companyFindFirstOrThrowArgs>(
+      args?: SelectSubset<T, expense_companyFindFirstOrThrowArgs>
+    ): Prisma__expense_companyClient<expense_companyGetPayload<T>>
+
+    /**
+     * Find zero or more Expense_companies that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {expense_companyFindManyArgs=} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all Expense_companies
+     * const expense_companies = await prisma.expense_company.findMany()
+     * 
+     * // Get first 10 Expense_companies
+     * const expense_companies = await prisma.expense_company.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const expense_companyWithIdOnly = await prisma.expense_company.findMany({ select: { id: true } })
+     * 
+    **/
+    findMany<T extends expense_companyFindManyArgs>(
+      args?: SelectSubset<T, expense_companyFindManyArgs>
+    ): PrismaPromise<Array<expense_companyGetPayload<T>>>
+
+    /**
+     * Create a Expense_company.
+     * @param {expense_companyCreateArgs} args - Arguments to create a Expense_company.
+     * @example
+     * // Create one Expense_company
+     * const Expense_company = await prisma.expense_company.create({
+     *   data: {
+     *     // ... data to create a Expense_company
+     *   }
+     * })
+     * 
+    **/
+    create<T extends expense_companyCreateArgs>(
+      args: SelectSubset<T, expense_companyCreateArgs>
+    ): Prisma__expense_companyClient<expense_companyGetPayload<T>>
+
+    /**
+     * Create many Expense_companies.
+     *     @param {expense_companyCreateManyArgs} args - Arguments to create many Expense_companies.
+     *     @example
+     *     // Create many Expense_companies
+     *     const expense_company = await prisma.expense_company.createMany({
+     *       data: {
+     *         // ... provide data here
+     *       }
+     *     })
+     *     
+    **/
+    createMany<T extends expense_companyCreateManyArgs>(
+      args?: SelectSubset<T, expense_companyCreateManyArgs>
+    ): PrismaPromise<BatchPayload>
+
+    /**
+     * Delete a Expense_company.
+     * @param {expense_companyDeleteArgs} args - Arguments to delete one Expense_company.
+     * @example
+     * // Delete one Expense_company
+     * const Expense_company = await prisma.expense_company.delete({
+     *   where: {
+     *     // ... filter to delete one Expense_company
+     *   }
+     * })
+     * 
+    **/
+    delete<T extends expense_companyDeleteArgs>(
+      args: SelectSubset<T, expense_companyDeleteArgs>
+    ): Prisma__expense_companyClient<expense_companyGetPayload<T>>
+
+    /**
+     * Update one Expense_company.
+     * @param {expense_companyUpdateArgs} args - Arguments to update one Expense_company.
+     * @example
+     * // Update one Expense_company
+     * const expense_company = await prisma.expense_company.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+    **/
+    update<T extends expense_companyUpdateArgs>(
+      args: SelectSubset<T, expense_companyUpdateArgs>
+    ): Prisma__expense_companyClient<expense_companyGetPayload<T>>
+
+    /**
+     * Delete zero or more Expense_companies.
+     * @param {expense_companyDeleteManyArgs} args - Arguments to filter Expense_companies to delete.
+     * @example
+     * // Delete a few Expense_companies
+     * const { count } = await prisma.expense_company.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+    **/
+    deleteMany<T extends expense_companyDeleteManyArgs>(
+      args?: SelectSubset<T, expense_companyDeleteManyArgs>
+    ): PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Expense_companies.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {expense_companyUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many Expense_companies
+     * const expense_company = await prisma.expense_company.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+    **/
+    updateMany<T extends expense_companyUpdateManyArgs>(
+      args: SelectSubset<T, expense_companyUpdateManyArgs>
+    ): PrismaPromise<BatchPayload>
+
+    /**
+     * Create or update one Expense_company.
+     * @param {expense_companyUpsertArgs} args - Arguments to update or create a Expense_company.
+     * @example
+     * // Update or create a Expense_company
+     * const expense_company = await prisma.expense_company.upsert({
+     *   create: {
+     *     // ... data to create a Expense_company
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the Expense_company we want to update
+     *   }
+     * })
+    **/
+    upsert<T extends expense_companyUpsertArgs>(
+      args: SelectSubset<T, expense_companyUpsertArgs>
+    ): Prisma__expense_companyClient<expense_companyGetPayload<T>>
+
+    /**
+     * Count the number of Expense_companies.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {expense_companyCountArgs} args - Arguments to filter Expense_companies to count.
+     * @example
+     * // Count the number of Expense_companies
+     * const count = await prisma.expense_company.count({
+     *   where: {
+     *     // ... the filter for the Expense_companies we want to count
+     *   }
+     * })
+    **/
+    count<T extends expense_companyCountArgs>(
+      args?: Subset<T, expense_companyCountArgs>,
+    ): PrismaPromise<
+      T extends _Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], Expense_companyCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a Expense_company.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {Expense_companyAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends Expense_companyAggregateArgs>(args: Subset<T, Expense_companyAggregateArgs>): PrismaPromise<GetExpense_companyAggregateType<T>>
+
+    /**
+     * Group by Expense_company.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {Expense_companyGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends Expense_companyGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: Expense_companyGroupByArgs['orderBy'] }
+        : { orderBy?: Expense_companyGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends TupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, Expense_companyGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetExpense_companyGroupByPayload<T> : PrismaPromise<InputErrors>
+
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for expense_company.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export class Prisma__expense_companyClient<T, Null = never> implements PrismaPromise<T> {
+    [prisma]: true;
+    private readonly _dmmf;
+    private readonly _fetcher;
+    private readonly _queryType;
+    private readonly _rootField;
+    private readonly _clientMethod;
+    private readonly _args;
+    private readonly _dataPath;
+    private readonly _errorFormat;
+    private readonly _measurePerformance?;
+    private _isList;
+    private _callsite;
+    private _requestPromise?;
+    constructor(_dmmf: runtime.DMMFClass, _fetcher: PrismaClientFetcher, _queryType: 'query' | 'mutation', _rootField: string, _clientMethod: string, _args: any, _dataPath: string[], _errorFormat: ErrorFormat, _measurePerformance?: boolean | undefined, _isList?: boolean);
+    readonly [Symbol.toStringTag]: 'PrismaClientPromise';
+
+    Mas_month<T extends mas_monthArgs= {}>(args?: Subset<T, mas_monthArgs>): Prisma__mas_monthClient<mas_monthGetPayload<T> | Null>;
+
+    mas_bank<T extends mas_bankArgs= {}>(args?: Subset<T, mas_bankArgs>): Prisma__mas_bankClient<mas_bankGetPayload<T> | Null>;
+
+    CompanyBranch<T extends CompanyBranchArgs= {}>(args?: Subset<T, CompanyBranchArgs>): Prisma__CompanyBranchClient<CompanyBranchGetPayload<T> | Null>;
+
+    private get _document();
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): Promise<TResult1 | TResult2>;
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): Promise<T | TResult>;
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): Promise<T>;
+  }
+
+
+
+  // Custom InputTypes
+
+  /**
+   * expense_company base type for findUnique actions
+   */
+  export type expense_companyFindUniqueArgsBase = {
+    /**
+     * Select specific fields to fetch from the expense_company
+     */
+    select?: expense_companySelect | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: expense_companyInclude | null
+    /**
+     * Filter, which expense_company to fetch.
+     */
+    where: expense_companyWhereUniqueInput
+  }
+
+  /**
+   * expense_company findUnique
+   */
+  export interface expense_companyFindUniqueArgs extends expense_companyFindUniqueArgsBase {
+   /**
+    * Throw an Error if query returns no results
+    * @deprecated since 4.0.0: use `findUniqueOrThrow` method instead
+    */
+    rejectOnNotFound?: RejectOnNotFound
+  }
+      
+
+  /**
+   * expense_company findUniqueOrThrow
+   */
+  export type expense_companyFindUniqueOrThrowArgs = {
+    /**
+     * Select specific fields to fetch from the expense_company
+     */
+    select?: expense_companySelect | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: expense_companyInclude | null
+    /**
+     * Filter, which expense_company to fetch.
+     */
+    where: expense_companyWhereUniqueInput
+  }
+
+
+  /**
+   * expense_company base type for findFirst actions
+   */
+  export type expense_companyFindFirstArgsBase = {
+    /**
+     * Select specific fields to fetch from the expense_company
+     */
+    select?: expense_companySelect | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: expense_companyInclude | null
+    /**
+     * Filter, which expense_company to fetch.
+     */
+    where?: expense_companyWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of expense_companies to fetch.
+     */
+    orderBy?: Enumerable<expense_companyOrderByWithRelationInput>
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for expense_companies.
+     */
+    cursor?: expense_companyWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` expense_companies from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` expense_companies.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of expense_companies.
+     */
+    distinct?: Enumerable<Expense_companyScalarFieldEnum>
+  }
+
+  /**
+   * expense_company findFirst
+   */
+  export interface expense_companyFindFirstArgs extends expense_companyFindFirstArgsBase {
+   /**
+    * Throw an Error if query returns no results
+    * @deprecated since 4.0.0: use `findFirstOrThrow` method instead
+    */
+    rejectOnNotFound?: RejectOnNotFound
+  }
+      
+
+  /**
+   * expense_company findFirstOrThrow
+   */
+  export type expense_companyFindFirstOrThrowArgs = {
+    /**
+     * Select specific fields to fetch from the expense_company
+     */
+    select?: expense_companySelect | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: expense_companyInclude | null
+    /**
+     * Filter, which expense_company to fetch.
+     */
+    where?: expense_companyWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of expense_companies to fetch.
+     */
+    orderBy?: Enumerable<expense_companyOrderByWithRelationInput>
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for expense_companies.
+     */
+    cursor?: expense_companyWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` expense_companies from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` expense_companies.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of expense_companies.
+     */
+    distinct?: Enumerable<Expense_companyScalarFieldEnum>
+  }
+
+
+  /**
+   * expense_company findMany
+   */
+  export type expense_companyFindManyArgs = {
+    /**
+     * Select specific fields to fetch from the expense_company
+     */
+    select?: expense_companySelect | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: expense_companyInclude | null
+    /**
+     * Filter, which expense_companies to fetch.
+     */
+    where?: expense_companyWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of expense_companies to fetch.
+     */
+    orderBy?: Enumerable<expense_companyOrderByWithRelationInput>
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing expense_companies.
+     */
+    cursor?: expense_companyWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` expense_companies from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` expense_companies.
+     */
+    skip?: number
+    distinct?: Enumerable<Expense_companyScalarFieldEnum>
+  }
+
+
+  /**
+   * expense_company create
+   */
+  export type expense_companyCreateArgs = {
+    /**
+     * Select specific fields to fetch from the expense_company
+     */
+    select?: expense_companySelect | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: expense_companyInclude | null
+    /**
+     * The data needed to create a expense_company.
+     */
+    data: XOR<expense_companyCreateInput, expense_companyUncheckedCreateInput>
+  }
+
+
+  /**
+   * expense_company createMany
+   */
+  export type expense_companyCreateManyArgs = {
+    /**
+     * The data used to create many expense_companies.
+     */
+    data: Enumerable<expense_companyCreateManyInput>
+    skipDuplicates?: boolean
+  }
+
+
+  /**
+   * expense_company update
+   */
+  export type expense_companyUpdateArgs = {
+    /**
+     * Select specific fields to fetch from the expense_company
+     */
+    select?: expense_companySelect | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: expense_companyInclude | null
+    /**
+     * The data needed to update a expense_company.
+     */
+    data: XOR<expense_companyUpdateInput, expense_companyUncheckedUpdateInput>
+    /**
+     * Choose, which expense_company to update.
+     */
+    where: expense_companyWhereUniqueInput
+  }
+
+
+  /**
+   * expense_company updateMany
+   */
+  export type expense_companyUpdateManyArgs = {
+    /**
+     * The data used to update expense_companies.
+     */
+    data: XOR<expense_companyUpdateManyMutationInput, expense_companyUncheckedUpdateManyInput>
+    /**
+     * Filter which expense_companies to update
+     */
+    where?: expense_companyWhereInput
+  }
+
+
+  /**
+   * expense_company upsert
+   */
+  export type expense_companyUpsertArgs = {
+    /**
+     * Select specific fields to fetch from the expense_company
+     */
+    select?: expense_companySelect | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: expense_companyInclude | null
+    /**
+     * The filter to search for the expense_company to update in case it exists.
+     */
+    where: expense_companyWhereUniqueInput
+    /**
+     * In case the expense_company found by the `where` argument doesn't exist, create a new expense_company with this data.
+     */
+    create: XOR<expense_companyCreateInput, expense_companyUncheckedCreateInput>
+    /**
+     * In case the expense_company was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<expense_companyUpdateInput, expense_companyUncheckedUpdateInput>
+  }
+
+
+  /**
+   * expense_company delete
+   */
+  export type expense_companyDeleteArgs = {
+    /**
+     * Select specific fields to fetch from the expense_company
+     */
+    select?: expense_companySelect | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: expense_companyInclude | null
+    /**
+     * Filter which expense_company to delete.
+     */
+    where: expense_companyWhereUniqueInput
+  }
+
+
+  /**
+   * expense_company deleteMany
+   */
+  export type expense_companyDeleteManyArgs = {
+    /**
+     * Filter which expense_companies to delete
+     */
+    where?: expense_companyWhereInput
+  }
+
+
+  /**
+   * expense_company without action
+   */
+  export type expense_companyArgs = {
+    /**
+     * Select specific fields to fetch from the expense_company
+     */
+    select?: expense_companySelect | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: expense_companyInclude | null
+  }
+
+
+
+  /**
+   * Model salary
+   */
+
+
+  export type AggregateSalary = {
+    _count: SalaryCountAggregateOutputType | null
+    _avg: SalaryAvgAggregateOutputType | null
+    _sum: SalarySumAggregateOutputType | null
+    _min: SalaryMinAggregateOutputType | null
+    _max: SalaryMaxAggregateOutputType | null
+  }
+
+  export type SalaryAvgAggregateOutputType = {
+    base_salary: number | null
+    commission: number | null
+    position_income: number | null
+    ot: number | null
+    bonus: number | null
+    special_income: number | null
+    other_income: number | null
+    travel_income: number | null
+    bursary: number | null
+    welfare_money: number | null
+    vat: number | null
+    social_security: number | null
+    miss: number | null
+    ra: number | null
+    late: number | null
+    other: number | null
+    provident_employee: number | null
+    provident_company: number | null
+    total_income: number | null
+    total_expense: number | null
+    net: number | null
+  }
+
+  export type SalarySumAggregateOutputType = {
+    base_salary: number | null
+    commission: number | null
+    position_income: number | null
+    ot: number | null
+    bonus: number | null
+    special_income: number | null
+    other_income: number | null
+    travel_income: number | null
+    bursary: number | null
+    welfare_money: number | null
+    vat: number | null
+    social_security: number | null
+    miss: number | null
+    ra: number | null
+    late: number | null
+    other: number | null
+    provident_employee: number | null
+    provident_company: number | null
+    total_income: number | null
+    total_expense: number | null
+    net: number | null
+  }
+
+  export type SalaryMinAggregateOutputType = {
+    id: string | null
+    base_salary: number | null
+    commission: number | null
+    position_income: number | null
+    ot: number | null
+    bonus: number | null
+    special_income: number | null
+    other_income: number | null
+    travel_income: number | null
+    bursary: number | null
+    welfare_money: number | null
+    vat: number | null
+    social_security: number | null
+    miss: number | null
+    ra: number | null
+    late: number | null
+    other: number | null
+    provident_employee: number | null
+    provident_company: number | null
+    total_income: number | null
+    total_expense: number | null
+    net: number | null
+    date: Date | null
+    userId: string | null
+  }
+
+  export type SalaryMaxAggregateOutputType = {
+    id: string | null
+    base_salary: number | null
+    commission: number | null
+    position_income: number | null
+    ot: number | null
+    bonus: number | null
+    special_income: number | null
+    other_income: number | null
+    travel_income: number | null
+    bursary: number | null
+    welfare_money: number | null
+    vat: number | null
+    social_security: number | null
+    miss: number | null
+    ra: number | null
+    late: number | null
+    other: number | null
+    provident_employee: number | null
+    provident_company: number | null
+    total_income: number | null
+    total_expense: number | null
+    net: number | null
+    date: Date | null
+    userId: string | null
+  }
+
+  export type SalaryCountAggregateOutputType = {
+    id: number
+    base_salary: number
+    commission: number
+    position_income: number
+    ot: number
+    bonus: number
+    special_income: number
+    other_income: number
+    travel_income: number
+    bursary: number
+    welfare_money: number
+    vat: number
+    social_security: number
+    miss: number
+    ra: number
+    late: number
+    other: number
+    provident_employee: number
+    provident_company: number
+    total_income: number
+    total_expense: number
+    net: number
+    date: number
+    userId: number
+    _all: number
+  }
+
+
+  export type SalaryAvgAggregateInputType = {
+    base_salary?: true
+    commission?: true
+    position_income?: true
+    ot?: true
+    bonus?: true
+    special_income?: true
+    other_income?: true
+    travel_income?: true
+    bursary?: true
+    welfare_money?: true
+    vat?: true
+    social_security?: true
+    miss?: true
+    ra?: true
+    late?: true
+    other?: true
+    provident_employee?: true
+    provident_company?: true
+    total_income?: true
+    total_expense?: true
+    net?: true
+  }
+
+  export type SalarySumAggregateInputType = {
+    base_salary?: true
+    commission?: true
+    position_income?: true
+    ot?: true
+    bonus?: true
+    special_income?: true
+    other_income?: true
+    travel_income?: true
+    bursary?: true
+    welfare_money?: true
+    vat?: true
+    social_security?: true
+    miss?: true
+    ra?: true
+    late?: true
+    other?: true
+    provident_employee?: true
+    provident_company?: true
+    total_income?: true
+    total_expense?: true
+    net?: true
+  }
+
+  export type SalaryMinAggregateInputType = {
+    id?: true
+    base_salary?: true
+    commission?: true
+    position_income?: true
+    ot?: true
+    bonus?: true
+    special_income?: true
+    other_income?: true
+    travel_income?: true
+    bursary?: true
+    welfare_money?: true
+    vat?: true
+    social_security?: true
+    miss?: true
+    ra?: true
+    late?: true
+    other?: true
+    provident_employee?: true
+    provident_company?: true
+    total_income?: true
+    total_expense?: true
+    net?: true
+    date?: true
+    userId?: true
+  }
+
+  export type SalaryMaxAggregateInputType = {
+    id?: true
+    base_salary?: true
+    commission?: true
+    position_income?: true
+    ot?: true
+    bonus?: true
+    special_income?: true
+    other_income?: true
+    travel_income?: true
+    bursary?: true
+    welfare_money?: true
+    vat?: true
+    social_security?: true
+    miss?: true
+    ra?: true
+    late?: true
+    other?: true
+    provident_employee?: true
+    provident_company?: true
+    total_income?: true
+    total_expense?: true
+    net?: true
+    date?: true
+    userId?: true
+  }
+
+  export type SalaryCountAggregateInputType = {
+    id?: true
+    base_salary?: true
+    commission?: true
+    position_income?: true
+    ot?: true
+    bonus?: true
+    special_income?: true
+    other_income?: true
+    travel_income?: true
+    bursary?: true
+    welfare_money?: true
+    vat?: true
+    social_security?: true
+    miss?: true
+    ra?: true
+    late?: true
+    other?: true
+    provident_employee?: true
+    provident_company?: true
+    total_income?: true
+    total_expense?: true
+    net?: true
+    date?: true
+    userId?: true
+    _all?: true
+  }
+
+  export type SalaryAggregateArgs = {
+    /**
+     * Filter which salary to aggregate.
+     */
+    where?: salaryWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of salaries to fetch.
+     */
+    orderBy?: Enumerable<salaryOrderByWithRelationInput>
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: salaryWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` salaries from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` salaries.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned salaries
+    **/
+    _count?: true | SalaryCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: SalaryAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: SalarySumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: SalaryMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: SalaryMaxAggregateInputType
+  }
+
+  export type GetSalaryAggregateType<T extends SalaryAggregateArgs> = {
+        [P in keyof T & keyof AggregateSalary]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateSalary[P]>
+      : GetScalarType<T[P], AggregateSalary[P]>
+  }
+
+
+
+
+  export type SalaryGroupByArgs = {
+    where?: salaryWhereInput
+    orderBy?: Enumerable<salaryOrderByWithAggregationInput>
+    by: SalaryScalarFieldEnum[]
+    having?: salaryScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: SalaryCountAggregateInputType | true
+    _avg?: SalaryAvgAggregateInputType
+    _sum?: SalarySumAggregateInputType
+    _min?: SalaryMinAggregateInputType
+    _max?: SalaryMaxAggregateInputType
+  }
+
+
+  export type SalaryGroupByOutputType = {
+    id: string
+    base_salary: number
+    commission: number
+    position_income: number
+    ot: number
+    bonus: number
+    special_income: number
+    other_income: number
+    travel_income: number
+    bursary: number
+    welfare_money: number
+    vat: number
+    social_security: number
+    miss: number
+    ra: number
+    late: number
+    other: number
+    provident_employee: number
+    provident_company: number
+    total_income: number
+    total_expense: number
+    net: number
+    date: Date
+    userId: string | null
+    _count: SalaryCountAggregateOutputType | null
+    _avg: SalaryAvgAggregateOutputType | null
+    _sum: SalarySumAggregateOutputType | null
+    _min: SalaryMinAggregateOutputType | null
+    _max: SalaryMaxAggregateOutputType | null
+  }
+
+  type GetSalaryGroupByPayload<T extends SalaryGroupByArgs> = PrismaPromise<
+    Array<
+      PickArray<SalaryGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof SalaryGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], SalaryGroupByOutputType[P]>
+            : GetScalarType<T[P], SalaryGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type salarySelect = {
+    id?: boolean
+    base_salary?: boolean
+    commission?: boolean
+    position_income?: boolean
+    ot?: boolean
+    bonus?: boolean
+    special_income?: boolean
+    other_income?: boolean
+    travel_income?: boolean
+    bursary?: boolean
+    welfare_money?: boolean
+    vat?: boolean
+    social_security?: boolean
+    miss?: boolean
+    ra?: boolean
+    late?: boolean
+    other?: boolean
+    provident_employee?: boolean
+    provident_company?: boolean
+    total_income?: boolean
+    total_expense?: boolean
+    net?: boolean
+    date?: boolean
+    User?: boolean | UserArgs
+    userId?: boolean
+  }
+
+
+  export type salaryInclude = {
+    User?: boolean | UserArgs
+  }
+
+  export type salaryGetPayload<S extends boolean | null | undefined | salaryArgs> =
+    S extends { select: any, include: any } ? 'Please either choose `select` or `include`' :
+    S extends true ? salary :
+    S extends undefined ? never :
+    S extends { include: any } & (salaryArgs | salaryFindManyArgs)
+    ? salary  & {
+    [P in TruthyKeys<S['include']>]:
+        P extends 'User' ? UserGetPayload<S['include'][P]> | null :  never
+  } 
+    : S extends { select: any } & (salaryArgs | salaryFindManyArgs)
+      ? {
+    [P in TruthyKeys<S['select']>]:
+        P extends 'User' ? UserGetPayload<S['select'][P]> | null :  P extends keyof salary ? salary[P] : never
+  } 
+      : salary
+
+
+  type salaryCountArgs = 
+    Omit<salaryFindManyArgs, 'select' | 'include'> & {
+      select?: SalaryCountAggregateInputType | true
+    }
+
+  export interface salaryDelegate<GlobalRejectSettings extends Prisma.RejectOnNotFound | Prisma.RejectPerOperation | false | undefined> {
+
+    /**
+     * Find zero or one Salary that matches the filter.
+     * @param {salaryFindUniqueArgs} args - Arguments to find a Salary
+     * @example
+     * // Get one Salary
+     * const salary = await prisma.salary.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+    **/
+    findUnique<T extends salaryFindUniqueArgs,  LocalRejectSettings = T["rejectOnNotFound"] extends RejectOnNotFound ? T['rejectOnNotFound'] : undefined>(
+      args: SelectSubset<T, salaryFindUniqueArgs>
+    ): HasReject<GlobalRejectSettings, LocalRejectSettings, 'findUnique', 'salary'> extends True ? Prisma__salaryClient<salaryGetPayload<T>> : Prisma__salaryClient<salaryGetPayload<T> | null, null>
+
+    /**
+     * Find one Salary that matches the filter or throw an error  with `error.code='P2025'` 
+     *     if no matches were found.
+     * @param {salaryFindUniqueOrThrowArgs} args - Arguments to find a Salary
+     * @example
+     * // Get one Salary
+     * const salary = await prisma.salary.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+    **/
+    findUniqueOrThrow<T extends salaryFindUniqueOrThrowArgs>(
+      args?: SelectSubset<T, salaryFindUniqueOrThrowArgs>
+    ): Prisma__salaryClient<salaryGetPayload<T>>
+
+    /**
+     * Find the first Salary that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {salaryFindFirstArgs} args - Arguments to find a Salary
+     * @example
+     * // Get one Salary
+     * const salary = await prisma.salary.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+    **/
+    findFirst<T extends salaryFindFirstArgs,  LocalRejectSettings = T["rejectOnNotFound"] extends RejectOnNotFound ? T['rejectOnNotFound'] : undefined>(
+      args?: SelectSubset<T, salaryFindFirstArgs>
+    ): HasReject<GlobalRejectSettings, LocalRejectSettings, 'findFirst', 'salary'> extends True ? Prisma__salaryClient<salaryGetPayload<T>> : Prisma__salaryClient<salaryGetPayload<T> | null, null>
+
+    /**
+     * Find the first Salary that matches the filter or
+     * throw `NotFoundError` if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {salaryFindFirstOrThrowArgs} args - Arguments to find a Salary
+     * @example
+     * // Get one Salary
+     * const salary = await prisma.salary.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+    **/
+    findFirstOrThrow<T extends salaryFindFirstOrThrowArgs>(
+      args?: SelectSubset<T, salaryFindFirstOrThrowArgs>
+    ): Prisma__salaryClient<salaryGetPayload<T>>
+
+    /**
+     * Find zero or more Salaries that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {salaryFindManyArgs=} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all Salaries
+     * const salaries = await prisma.salary.findMany()
+     * 
+     * // Get first 10 Salaries
+     * const salaries = await prisma.salary.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const salaryWithIdOnly = await prisma.salary.findMany({ select: { id: true } })
+     * 
+    **/
+    findMany<T extends salaryFindManyArgs>(
+      args?: SelectSubset<T, salaryFindManyArgs>
+    ): PrismaPromise<Array<salaryGetPayload<T>>>
+
+    /**
+     * Create a Salary.
+     * @param {salaryCreateArgs} args - Arguments to create a Salary.
+     * @example
+     * // Create one Salary
+     * const Salary = await prisma.salary.create({
+     *   data: {
+     *     // ... data to create a Salary
+     *   }
+     * })
+     * 
+    **/
+    create<T extends salaryCreateArgs>(
+      args: SelectSubset<T, salaryCreateArgs>
+    ): Prisma__salaryClient<salaryGetPayload<T>>
+
+    /**
+     * Create many Salaries.
+     *     @param {salaryCreateManyArgs} args - Arguments to create many Salaries.
+     *     @example
+     *     // Create many Salaries
+     *     const salary = await prisma.salary.createMany({
+     *       data: {
+     *         // ... provide data here
+     *       }
+     *     })
+     *     
+    **/
+    createMany<T extends salaryCreateManyArgs>(
+      args?: SelectSubset<T, salaryCreateManyArgs>
+    ): PrismaPromise<BatchPayload>
+
+    /**
+     * Delete a Salary.
+     * @param {salaryDeleteArgs} args - Arguments to delete one Salary.
+     * @example
+     * // Delete one Salary
+     * const Salary = await prisma.salary.delete({
+     *   where: {
+     *     // ... filter to delete one Salary
+     *   }
+     * })
+     * 
+    **/
+    delete<T extends salaryDeleteArgs>(
+      args: SelectSubset<T, salaryDeleteArgs>
+    ): Prisma__salaryClient<salaryGetPayload<T>>
+
+    /**
+     * Update one Salary.
+     * @param {salaryUpdateArgs} args - Arguments to update one Salary.
+     * @example
+     * // Update one Salary
+     * const salary = await prisma.salary.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+    **/
+    update<T extends salaryUpdateArgs>(
+      args: SelectSubset<T, salaryUpdateArgs>
+    ): Prisma__salaryClient<salaryGetPayload<T>>
+
+    /**
+     * Delete zero or more Salaries.
+     * @param {salaryDeleteManyArgs} args - Arguments to filter Salaries to delete.
+     * @example
+     * // Delete a few Salaries
+     * const { count } = await prisma.salary.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+    **/
+    deleteMany<T extends salaryDeleteManyArgs>(
+      args?: SelectSubset<T, salaryDeleteManyArgs>
+    ): PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Salaries.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {salaryUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many Salaries
+     * const salary = await prisma.salary.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+    **/
+    updateMany<T extends salaryUpdateManyArgs>(
+      args: SelectSubset<T, salaryUpdateManyArgs>
+    ): PrismaPromise<BatchPayload>
+
+    /**
+     * Create or update one Salary.
+     * @param {salaryUpsertArgs} args - Arguments to update or create a Salary.
+     * @example
+     * // Update or create a Salary
+     * const salary = await prisma.salary.upsert({
+     *   create: {
+     *     // ... data to create a Salary
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the Salary we want to update
+     *   }
+     * })
+    **/
+    upsert<T extends salaryUpsertArgs>(
+      args: SelectSubset<T, salaryUpsertArgs>
+    ): Prisma__salaryClient<salaryGetPayload<T>>
+
+    /**
+     * Count the number of Salaries.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {salaryCountArgs} args - Arguments to filter Salaries to count.
+     * @example
+     * // Count the number of Salaries
+     * const count = await prisma.salary.count({
+     *   where: {
+     *     // ... the filter for the Salaries we want to count
+     *   }
+     * })
+    **/
+    count<T extends salaryCountArgs>(
+      args?: Subset<T, salaryCountArgs>,
+    ): PrismaPromise<
+      T extends _Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], SalaryCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a Salary.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {SalaryAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends SalaryAggregateArgs>(args: Subset<T, SalaryAggregateArgs>): PrismaPromise<GetSalaryAggregateType<T>>
+
+    /**
+     * Group by Salary.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {SalaryGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends SalaryGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: SalaryGroupByArgs['orderBy'] }
+        : { orderBy?: SalaryGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends TupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, SalaryGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetSalaryGroupByPayload<T> : PrismaPromise<InputErrors>
+
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for salary.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export class Prisma__salaryClient<T, Null = never> implements PrismaPromise<T> {
+    [prisma]: true;
+    private readonly _dmmf;
+    private readonly _fetcher;
+    private readonly _queryType;
+    private readonly _rootField;
+    private readonly _clientMethod;
+    private readonly _args;
+    private readonly _dataPath;
+    private readonly _errorFormat;
+    private readonly _measurePerformance?;
+    private _isList;
+    private _callsite;
+    private _requestPromise?;
+    constructor(_dmmf: runtime.DMMFClass, _fetcher: PrismaClientFetcher, _queryType: 'query' | 'mutation', _rootField: string, _clientMethod: string, _args: any, _dataPath: string[], _errorFormat: ErrorFormat, _measurePerformance?: boolean | undefined, _isList?: boolean);
+    readonly [Symbol.toStringTag]: 'PrismaClientPromise';
+
+    User<T extends UserArgs= {}>(args?: Subset<T, UserArgs>): Prisma__UserClient<UserGetPayload<T> | Null>;
+
+    private get _document();
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): Promise<TResult1 | TResult2>;
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): Promise<T | TResult>;
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): Promise<T>;
+  }
+
+
+
+  // Custom InputTypes
+
+  /**
+   * salary base type for findUnique actions
+   */
+  export type salaryFindUniqueArgsBase = {
+    /**
+     * Select specific fields to fetch from the salary
+     */
+    select?: salarySelect | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: salaryInclude | null
+    /**
+     * Filter, which salary to fetch.
+     */
+    where: salaryWhereUniqueInput
+  }
+
+  /**
+   * salary findUnique
+   */
+  export interface salaryFindUniqueArgs extends salaryFindUniqueArgsBase {
+   /**
+    * Throw an Error if query returns no results
+    * @deprecated since 4.0.0: use `findUniqueOrThrow` method instead
+    */
+    rejectOnNotFound?: RejectOnNotFound
+  }
+      
+
+  /**
+   * salary findUniqueOrThrow
+   */
+  export type salaryFindUniqueOrThrowArgs = {
+    /**
+     * Select specific fields to fetch from the salary
+     */
+    select?: salarySelect | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: salaryInclude | null
+    /**
+     * Filter, which salary to fetch.
+     */
+    where: salaryWhereUniqueInput
+  }
+
+
+  /**
+   * salary base type for findFirst actions
+   */
+  export type salaryFindFirstArgsBase = {
+    /**
+     * Select specific fields to fetch from the salary
+     */
+    select?: salarySelect | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: salaryInclude | null
+    /**
+     * Filter, which salary to fetch.
+     */
+    where?: salaryWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of salaries to fetch.
+     */
+    orderBy?: Enumerable<salaryOrderByWithRelationInput>
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for salaries.
+     */
+    cursor?: salaryWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` salaries from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` salaries.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of salaries.
+     */
+    distinct?: Enumerable<SalaryScalarFieldEnum>
+  }
+
+  /**
+   * salary findFirst
+   */
+  export interface salaryFindFirstArgs extends salaryFindFirstArgsBase {
+   /**
+    * Throw an Error if query returns no results
+    * @deprecated since 4.0.0: use `findFirstOrThrow` method instead
+    */
+    rejectOnNotFound?: RejectOnNotFound
+  }
+      
+
+  /**
+   * salary findFirstOrThrow
+   */
+  export type salaryFindFirstOrThrowArgs = {
+    /**
+     * Select specific fields to fetch from the salary
+     */
+    select?: salarySelect | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: salaryInclude | null
+    /**
+     * Filter, which salary to fetch.
+     */
+    where?: salaryWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of salaries to fetch.
+     */
+    orderBy?: Enumerable<salaryOrderByWithRelationInput>
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for salaries.
+     */
+    cursor?: salaryWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` salaries from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` salaries.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of salaries.
+     */
+    distinct?: Enumerable<SalaryScalarFieldEnum>
+  }
+
+
+  /**
+   * salary findMany
+   */
+  export type salaryFindManyArgs = {
+    /**
+     * Select specific fields to fetch from the salary
+     */
+    select?: salarySelect | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: salaryInclude | null
+    /**
+     * Filter, which salaries to fetch.
+     */
+    where?: salaryWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of salaries to fetch.
+     */
+    orderBy?: Enumerable<salaryOrderByWithRelationInput>
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing salaries.
+     */
+    cursor?: salaryWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` salaries from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` salaries.
+     */
+    skip?: number
+    distinct?: Enumerable<SalaryScalarFieldEnum>
+  }
+
+
+  /**
+   * salary create
+   */
+  export type salaryCreateArgs = {
+    /**
+     * Select specific fields to fetch from the salary
+     */
+    select?: salarySelect | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: salaryInclude | null
+    /**
+     * The data needed to create a salary.
+     */
+    data: XOR<salaryCreateInput, salaryUncheckedCreateInput>
+  }
+
+
+  /**
+   * salary createMany
+   */
+  export type salaryCreateManyArgs = {
+    /**
+     * The data used to create many salaries.
+     */
+    data: Enumerable<salaryCreateManyInput>
+    skipDuplicates?: boolean
+  }
+
+
+  /**
+   * salary update
+   */
+  export type salaryUpdateArgs = {
+    /**
+     * Select specific fields to fetch from the salary
+     */
+    select?: salarySelect | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: salaryInclude | null
+    /**
+     * The data needed to update a salary.
+     */
+    data: XOR<salaryUpdateInput, salaryUncheckedUpdateInput>
+    /**
+     * Choose, which salary to update.
+     */
+    where: salaryWhereUniqueInput
+  }
+
+
+  /**
+   * salary updateMany
+   */
+  export type salaryUpdateManyArgs = {
+    /**
+     * The data used to update salaries.
+     */
+    data: XOR<salaryUpdateManyMutationInput, salaryUncheckedUpdateManyInput>
+    /**
+     * Filter which salaries to update
+     */
+    where?: salaryWhereInput
+  }
+
+
+  /**
+   * salary upsert
+   */
+  export type salaryUpsertArgs = {
+    /**
+     * Select specific fields to fetch from the salary
+     */
+    select?: salarySelect | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: salaryInclude | null
+    /**
+     * The filter to search for the salary to update in case it exists.
+     */
+    where: salaryWhereUniqueInput
+    /**
+     * In case the salary found by the `where` argument doesn't exist, create a new salary with this data.
+     */
+    create: XOR<salaryCreateInput, salaryUncheckedCreateInput>
+    /**
+     * In case the salary was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<salaryUpdateInput, salaryUncheckedUpdateInput>
+  }
+
+
+  /**
+   * salary delete
+   */
+  export type salaryDeleteArgs = {
+    /**
+     * Select specific fields to fetch from the salary
+     */
+    select?: salarySelect | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: salaryInclude | null
+    /**
+     * Filter which salary to delete.
+     */
+    where: salaryWhereUniqueInput
+  }
+
+
+  /**
+   * salary deleteMany
+   */
+  export type salaryDeleteManyArgs = {
+    /**
+     * Filter which salaries to delete
+     */
+    where?: salaryWhereInput
+  }
+
+
+  /**
+   * salary without action
+   */
+  export type salaryArgs = {
+    /**
+     * Select specific fields to fetch from the salary
+     */
+    select?: salarySelect | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: salaryInclude | null
+  }
+
+
+
+  /**
+   * Model all_collect
+   */
+
+
+  export type AggregateAll_collect = {
+    _count: All_collectCountAggregateOutputType | null
+    _avg: All_collectAvgAggregateOutputType | null
+    _sum: All_collectSumAggregateOutputType | null
+    _min: All_collectMinAggregateOutputType | null
+    _max: All_collectMaxAggregateOutputType | null
+  }
+
+  export type All_collectAvgAggregateOutputType = {
+    income_collect: number | null
+    vat_collect: number | null
+    social_secu_collect: number | null
+    provident_collect_employee: number | null
+    provident_collect_company: number | null
+  }
+
+  export type All_collectSumAggregateOutputType = {
+    income_collect: number | null
+    vat_collect: number | null
+    social_secu_collect: number | null
+    provident_collect_employee: number | null
+    provident_collect_company: number | null
+  }
+
+  export type All_collectMinAggregateOutputType = {
+    id: string | null
+    userId: string | null
+    income_collect: number | null
+    vat_collect: number | null
+    social_secu_collect: number | null
+    provident_collect_employee: number | null
+    provident_collect_company: number | null
+  }
+
+  export type All_collectMaxAggregateOutputType = {
+    id: string | null
+    userId: string | null
+    income_collect: number | null
+    vat_collect: number | null
+    social_secu_collect: number | null
+    provident_collect_employee: number | null
+    provident_collect_company: number | null
+  }
+
+  export type All_collectCountAggregateOutputType = {
+    id: number
+    userId: number
+    income_collect: number
+    vat_collect: number
+    social_secu_collect: number
+    provident_collect_employee: number
+    provident_collect_company: number
+    _all: number
+  }
+
+
+  export type All_collectAvgAggregateInputType = {
+    income_collect?: true
+    vat_collect?: true
+    social_secu_collect?: true
+    provident_collect_employee?: true
+    provident_collect_company?: true
+  }
+
+  export type All_collectSumAggregateInputType = {
+    income_collect?: true
+    vat_collect?: true
+    social_secu_collect?: true
+    provident_collect_employee?: true
+    provident_collect_company?: true
+  }
+
+  export type All_collectMinAggregateInputType = {
+    id?: true
+    userId?: true
+    income_collect?: true
+    vat_collect?: true
+    social_secu_collect?: true
+    provident_collect_employee?: true
+    provident_collect_company?: true
+  }
+
+  export type All_collectMaxAggregateInputType = {
+    id?: true
+    userId?: true
+    income_collect?: true
+    vat_collect?: true
+    social_secu_collect?: true
+    provident_collect_employee?: true
+    provident_collect_company?: true
+  }
+
+  export type All_collectCountAggregateInputType = {
+    id?: true
+    userId?: true
+    income_collect?: true
+    vat_collect?: true
+    social_secu_collect?: true
+    provident_collect_employee?: true
+    provident_collect_company?: true
+    _all?: true
+  }
+
+  export type All_collectAggregateArgs = {
+    /**
+     * Filter which all_collect to aggregate.
+     */
+    where?: all_collectWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of all_collects to fetch.
+     */
+    orderBy?: Enumerable<all_collectOrderByWithRelationInput>
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: all_collectWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` all_collects from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` all_collects.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned all_collects
+    **/
+    _count?: true | All_collectCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: All_collectAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: All_collectSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: All_collectMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: All_collectMaxAggregateInputType
+  }
+
+  export type GetAll_collectAggregateType<T extends All_collectAggregateArgs> = {
+        [P in keyof T & keyof AggregateAll_collect]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateAll_collect[P]>
+      : GetScalarType<T[P], AggregateAll_collect[P]>
+  }
+
+
+
+
+  export type All_collectGroupByArgs = {
+    where?: all_collectWhereInput
+    orderBy?: Enumerable<all_collectOrderByWithAggregationInput>
+    by: All_collectScalarFieldEnum[]
+    having?: all_collectScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: All_collectCountAggregateInputType | true
+    _avg?: All_collectAvgAggregateInputType
+    _sum?: All_collectSumAggregateInputType
+    _min?: All_collectMinAggregateInputType
+    _max?: All_collectMaxAggregateInputType
+  }
+
+
+  export type All_collectGroupByOutputType = {
+    id: string
+    userId: string | null
+    income_collect: number
+    vat_collect: number
+    social_secu_collect: number
+    provident_collect_employee: number
+    provident_collect_company: number
+    _count: All_collectCountAggregateOutputType | null
+    _avg: All_collectAvgAggregateOutputType | null
+    _sum: All_collectSumAggregateOutputType | null
+    _min: All_collectMinAggregateOutputType | null
+    _max: All_collectMaxAggregateOutputType | null
+  }
+
+  type GetAll_collectGroupByPayload<T extends All_collectGroupByArgs> = PrismaPromise<
+    Array<
+      PickArray<All_collectGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof All_collectGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], All_collectGroupByOutputType[P]>
+            : GetScalarType<T[P], All_collectGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type all_collectSelect = {
+    id?: boolean
+    User?: boolean | UserArgs
+    userId?: boolean
+    income_collect?: boolean
+    vat_collect?: boolean
+    social_secu_collect?: boolean
+    provident_collect_employee?: boolean
+    provident_collect_company?: boolean
+    bookbank_log?: boolean | all_collect$bookbank_logArgs
+    _count?: boolean | All_collectCountOutputTypeArgs
+  }
+
+
+  export type all_collectInclude = {
+    User?: boolean | UserArgs
+    bookbank_log?: boolean | all_collect$bookbank_logArgs
+    _count?: boolean | All_collectCountOutputTypeArgs
+  }
+
+  export type all_collectGetPayload<S extends boolean | null | undefined | all_collectArgs> =
+    S extends { select: any, include: any } ? 'Please either choose `select` or `include`' :
+    S extends true ? all_collect :
+    S extends undefined ? never :
+    S extends { include: any } & (all_collectArgs | all_collectFindManyArgs)
+    ? all_collect  & {
+    [P in TruthyKeys<S['include']>]:
+        P extends 'User' ? UserGetPayload<S['include'][P]> | null :
+        P extends 'bookbank_log' ? Array < bookbank_logGetPayload<S['include'][P]>>  :
+        P extends '_count' ? All_collectCountOutputTypeGetPayload<S['include'][P]> :  never
+  } 
+    : S extends { select: any } & (all_collectArgs | all_collectFindManyArgs)
+      ? {
+    [P in TruthyKeys<S['select']>]:
+        P extends 'User' ? UserGetPayload<S['select'][P]> | null :
+        P extends 'bookbank_log' ? Array < bookbank_logGetPayload<S['select'][P]>>  :
+        P extends '_count' ? All_collectCountOutputTypeGetPayload<S['select'][P]> :  P extends keyof all_collect ? all_collect[P] : never
+  } 
+      : all_collect
+
+
+  type all_collectCountArgs = 
+    Omit<all_collectFindManyArgs, 'select' | 'include'> & {
+      select?: All_collectCountAggregateInputType | true
+    }
+
+  export interface all_collectDelegate<GlobalRejectSettings extends Prisma.RejectOnNotFound | Prisma.RejectPerOperation | false | undefined> {
+
+    /**
+     * Find zero or one All_collect that matches the filter.
+     * @param {all_collectFindUniqueArgs} args - Arguments to find a All_collect
+     * @example
+     * // Get one All_collect
+     * const all_collect = await prisma.all_collect.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+    **/
+    findUnique<T extends all_collectFindUniqueArgs,  LocalRejectSettings = T["rejectOnNotFound"] extends RejectOnNotFound ? T['rejectOnNotFound'] : undefined>(
+      args: SelectSubset<T, all_collectFindUniqueArgs>
+    ): HasReject<GlobalRejectSettings, LocalRejectSettings, 'findUnique', 'all_collect'> extends True ? Prisma__all_collectClient<all_collectGetPayload<T>> : Prisma__all_collectClient<all_collectGetPayload<T> | null, null>
+
+    /**
+     * Find one All_collect that matches the filter or throw an error  with `error.code='P2025'` 
+     *     if no matches were found.
+     * @param {all_collectFindUniqueOrThrowArgs} args - Arguments to find a All_collect
+     * @example
+     * // Get one All_collect
+     * const all_collect = await prisma.all_collect.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+    **/
+    findUniqueOrThrow<T extends all_collectFindUniqueOrThrowArgs>(
+      args?: SelectSubset<T, all_collectFindUniqueOrThrowArgs>
+    ): Prisma__all_collectClient<all_collectGetPayload<T>>
+
+    /**
+     * Find the first All_collect that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {all_collectFindFirstArgs} args - Arguments to find a All_collect
+     * @example
+     * // Get one All_collect
+     * const all_collect = await prisma.all_collect.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+    **/
+    findFirst<T extends all_collectFindFirstArgs,  LocalRejectSettings = T["rejectOnNotFound"] extends RejectOnNotFound ? T['rejectOnNotFound'] : undefined>(
+      args?: SelectSubset<T, all_collectFindFirstArgs>
+    ): HasReject<GlobalRejectSettings, LocalRejectSettings, 'findFirst', 'all_collect'> extends True ? Prisma__all_collectClient<all_collectGetPayload<T>> : Prisma__all_collectClient<all_collectGetPayload<T> | null, null>
+
+    /**
+     * Find the first All_collect that matches the filter or
+     * throw `NotFoundError` if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {all_collectFindFirstOrThrowArgs} args - Arguments to find a All_collect
+     * @example
+     * // Get one All_collect
+     * const all_collect = await prisma.all_collect.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+    **/
+    findFirstOrThrow<T extends all_collectFindFirstOrThrowArgs>(
+      args?: SelectSubset<T, all_collectFindFirstOrThrowArgs>
+    ): Prisma__all_collectClient<all_collectGetPayload<T>>
+
+    /**
+     * Find zero or more All_collects that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {all_collectFindManyArgs=} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all All_collects
+     * const all_collects = await prisma.all_collect.findMany()
+     * 
+     * // Get first 10 All_collects
+     * const all_collects = await prisma.all_collect.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const all_collectWithIdOnly = await prisma.all_collect.findMany({ select: { id: true } })
+     * 
+    **/
+    findMany<T extends all_collectFindManyArgs>(
+      args?: SelectSubset<T, all_collectFindManyArgs>
+    ): PrismaPromise<Array<all_collectGetPayload<T>>>
+
+    /**
+     * Create a All_collect.
+     * @param {all_collectCreateArgs} args - Arguments to create a All_collect.
+     * @example
+     * // Create one All_collect
+     * const All_collect = await prisma.all_collect.create({
+     *   data: {
+     *     // ... data to create a All_collect
+     *   }
+     * })
+     * 
+    **/
+    create<T extends all_collectCreateArgs>(
+      args: SelectSubset<T, all_collectCreateArgs>
+    ): Prisma__all_collectClient<all_collectGetPayload<T>>
+
+    /**
+     * Create many All_collects.
+     *     @param {all_collectCreateManyArgs} args - Arguments to create many All_collects.
+     *     @example
+     *     // Create many All_collects
+     *     const all_collect = await prisma.all_collect.createMany({
+     *       data: {
+     *         // ... provide data here
+     *       }
+     *     })
+     *     
+    **/
+    createMany<T extends all_collectCreateManyArgs>(
+      args?: SelectSubset<T, all_collectCreateManyArgs>
+    ): PrismaPromise<BatchPayload>
+
+    /**
+     * Delete a All_collect.
+     * @param {all_collectDeleteArgs} args - Arguments to delete one All_collect.
+     * @example
+     * // Delete one All_collect
+     * const All_collect = await prisma.all_collect.delete({
+     *   where: {
+     *     // ... filter to delete one All_collect
+     *   }
+     * })
+     * 
+    **/
+    delete<T extends all_collectDeleteArgs>(
+      args: SelectSubset<T, all_collectDeleteArgs>
+    ): Prisma__all_collectClient<all_collectGetPayload<T>>
+
+    /**
+     * Update one All_collect.
+     * @param {all_collectUpdateArgs} args - Arguments to update one All_collect.
+     * @example
+     * // Update one All_collect
+     * const all_collect = await prisma.all_collect.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+    **/
+    update<T extends all_collectUpdateArgs>(
+      args: SelectSubset<T, all_collectUpdateArgs>
+    ): Prisma__all_collectClient<all_collectGetPayload<T>>
+
+    /**
+     * Delete zero or more All_collects.
+     * @param {all_collectDeleteManyArgs} args - Arguments to filter All_collects to delete.
+     * @example
+     * // Delete a few All_collects
+     * const { count } = await prisma.all_collect.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+    **/
+    deleteMany<T extends all_collectDeleteManyArgs>(
+      args?: SelectSubset<T, all_collectDeleteManyArgs>
+    ): PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more All_collects.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {all_collectUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many All_collects
+     * const all_collect = await prisma.all_collect.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+    **/
+    updateMany<T extends all_collectUpdateManyArgs>(
+      args: SelectSubset<T, all_collectUpdateManyArgs>
+    ): PrismaPromise<BatchPayload>
+
+    /**
+     * Create or update one All_collect.
+     * @param {all_collectUpsertArgs} args - Arguments to update or create a All_collect.
+     * @example
+     * // Update or create a All_collect
+     * const all_collect = await prisma.all_collect.upsert({
+     *   create: {
+     *     // ... data to create a All_collect
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the All_collect we want to update
+     *   }
+     * })
+    **/
+    upsert<T extends all_collectUpsertArgs>(
+      args: SelectSubset<T, all_collectUpsertArgs>
+    ): Prisma__all_collectClient<all_collectGetPayload<T>>
+
+    /**
+     * Count the number of All_collects.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {all_collectCountArgs} args - Arguments to filter All_collects to count.
+     * @example
+     * // Count the number of All_collects
+     * const count = await prisma.all_collect.count({
+     *   where: {
+     *     // ... the filter for the All_collects we want to count
+     *   }
+     * })
+    **/
+    count<T extends all_collectCountArgs>(
+      args?: Subset<T, all_collectCountArgs>,
+    ): PrismaPromise<
+      T extends _Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], All_collectCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a All_collect.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {All_collectAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends All_collectAggregateArgs>(args: Subset<T, All_collectAggregateArgs>): PrismaPromise<GetAll_collectAggregateType<T>>
+
+    /**
+     * Group by All_collect.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {All_collectGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends All_collectGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: All_collectGroupByArgs['orderBy'] }
+        : { orderBy?: All_collectGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends TupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, All_collectGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetAll_collectGroupByPayload<T> : PrismaPromise<InputErrors>
+
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for all_collect.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export class Prisma__all_collectClient<T, Null = never> implements PrismaPromise<T> {
+    [prisma]: true;
+    private readonly _dmmf;
+    private readonly _fetcher;
+    private readonly _queryType;
+    private readonly _rootField;
+    private readonly _clientMethod;
+    private readonly _args;
+    private readonly _dataPath;
+    private readonly _errorFormat;
+    private readonly _measurePerformance?;
+    private _isList;
+    private _callsite;
+    private _requestPromise?;
+    constructor(_dmmf: runtime.DMMFClass, _fetcher: PrismaClientFetcher, _queryType: 'query' | 'mutation', _rootField: string, _clientMethod: string, _args: any, _dataPath: string[], _errorFormat: ErrorFormat, _measurePerformance?: boolean | undefined, _isList?: boolean);
+    readonly [Symbol.toStringTag]: 'PrismaClientPromise';
+
+    User<T extends UserArgs= {}>(args?: Subset<T, UserArgs>): Prisma__UserClient<UserGetPayload<T> | Null>;
+
+    bookbank_log<T extends all_collect$bookbank_logArgs= {}>(args?: Subset<T, all_collect$bookbank_logArgs>): PrismaPromise<Array<bookbank_logGetPayload<T>>| Null>;
+
+    private get _document();
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): Promise<TResult1 | TResult2>;
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): Promise<T | TResult>;
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): Promise<T>;
+  }
+
+
+
+  // Custom InputTypes
+
+  /**
+   * all_collect base type for findUnique actions
+   */
+  export type all_collectFindUniqueArgsBase = {
+    /**
+     * Select specific fields to fetch from the all_collect
+     */
+    select?: all_collectSelect | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: all_collectInclude | null
+    /**
+     * Filter, which all_collect to fetch.
+     */
+    where: all_collectWhereUniqueInput
+  }
+
+  /**
+   * all_collect findUnique
+   */
+  export interface all_collectFindUniqueArgs extends all_collectFindUniqueArgsBase {
+   /**
+    * Throw an Error if query returns no results
+    * @deprecated since 4.0.0: use `findUniqueOrThrow` method instead
+    */
+    rejectOnNotFound?: RejectOnNotFound
+  }
+      
+
+  /**
+   * all_collect findUniqueOrThrow
+   */
+  export type all_collectFindUniqueOrThrowArgs = {
+    /**
+     * Select specific fields to fetch from the all_collect
+     */
+    select?: all_collectSelect | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: all_collectInclude | null
+    /**
+     * Filter, which all_collect to fetch.
+     */
+    where: all_collectWhereUniqueInput
+  }
+
+
+  /**
+   * all_collect base type for findFirst actions
+   */
+  export type all_collectFindFirstArgsBase = {
+    /**
+     * Select specific fields to fetch from the all_collect
+     */
+    select?: all_collectSelect | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: all_collectInclude | null
+    /**
+     * Filter, which all_collect to fetch.
+     */
+    where?: all_collectWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of all_collects to fetch.
+     */
+    orderBy?: Enumerable<all_collectOrderByWithRelationInput>
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for all_collects.
+     */
+    cursor?: all_collectWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` all_collects from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` all_collects.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of all_collects.
+     */
+    distinct?: Enumerable<All_collectScalarFieldEnum>
+  }
+
+  /**
+   * all_collect findFirst
+   */
+  export interface all_collectFindFirstArgs extends all_collectFindFirstArgsBase {
+   /**
+    * Throw an Error if query returns no results
+    * @deprecated since 4.0.0: use `findFirstOrThrow` method instead
+    */
+    rejectOnNotFound?: RejectOnNotFound
+  }
+      
+
+  /**
+   * all_collect findFirstOrThrow
+   */
+  export type all_collectFindFirstOrThrowArgs = {
+    /**
+     * Select specific fields to fetch from the all_collect
+     */
+    select?: all_collectSelect | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: all_collectInclude | null
+    /**
+     * Filter, which all_collect to fetch.
+     */
+    where?: all_collectWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of all_collects to fetch.
+     */
+    orderBy?: Enumerable<all_collectOrderByWithRelationInput>
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for all_collects.
+     */
+    cursor?: all_collectWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` all_collects from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` all_collects.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of all_collects.
+     */
+    distinct?: Enumerable<All_collectScalarFieldEnum>
+  }
+
+
+  /**
+   * all_collect findMany
+   */
+  export type all_collectFindManyArgs = {
+    /**
+     * Select specific fields to fetch from the all_collect
+     */
+    select?: all_collectSelect | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: all_collectInclude | null
+    /**
+     * Filter, which all_collects to fetch.
+     */
+    where?: all_collectWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of all_collects to fetch.
+     */
+    orderBy?: Enumerable<all_collectOrderByWithRelationInput>
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing all_collects.
+     */
+    cursor?: all_collectWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` all_collects from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` all_collects.
+     */
+    skip?: number
+    distinct?: Enumerable<All_collectScalarFieldEnum>
+  }
+
+
+  /**
+   * all_collect create
+   */
+  export type all_collectCreateArgs = {
+    /**
+     * Select specific fields to fetch from the all_collect
+     */
+    select?: all_collectSelect | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: all_collectInclude | null
+    /**
+     * The data needed to create a all_collect.
+     */
+    data: XOR<all_collectCreateInput, all_collectUncheckedCreateInput>
+  }
+
+
+  /**
+   * all_collect createMany
+   */
+  export type all_collectCreateManyArgs = {
+    /**
+     * The data used to create many all_collects.
+     */
+    data: Enumerable<all_collectCreateManyInput>
+    skipDuplicates?: boolean
+  }
+
+
+  /**
+   * all_collect update
+   */
+  export type all_collectUpdateArgs = {
+    /**
+     * Select specific fields to fetch from the all_collect
+     */
+    select?: all_collectSelect | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: all_collectInclude | null
+    /**
+     * The data needed to update a all_collect.
+     */
+    data: XOR<all_collectUpdateInput, all_collectUncheckedUpdateInput>
+    /**
+     * Choose, which all_collect to update.
+     */
+    where: all_collectWhereUniqueInput
+  }
+
+
+  /**
+   * all_collect updateMany
+   */
+  export type all_collectUpdateManyArgs = {
+    /**
+     * The data used to update all_collects.
+     */
+    data: XOR<all_collectUpdateManyMutationInput, all_collectUncheckedUpdateManyInput>
+    /**
+     * Filter which all_collects to update
+     */
+    where?: all_collectWhereInput
+  }
+
+
+  /**
+   * all_collect upsert
+   */
+  export type all_collectUpsertArgs = {
+    /**
+     * Select specific fields to fetch from the all_collect
+     */
+    select?: all_collectSelect | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: all_collectInclude | null
+    /**
+     * The filter to search for the all_collect to update in case it exists.
+     */
+    where: all_collectWhereUniqueInput
+    /**
+     * In case the all_collect found by the `where` argument doesn't exist, create a new all_collect with this data.
+     */
+    create: XOR<all_collectCreateInput, all_collectUncheckedCreateInput>
+    /**
+     * In case the all_collect was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<all_collectUpdateInput, all_collectUncheckedUpdateInput>
+  }
+
+
+  /**
+   * all_collect delete
+   */
+  export type all_collectDeleteArgs = {
+    /**
+     * Select specific fields to fetch from the all_collect
+     */
+    select?: all_collectSelect | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: all_collectInclude | null
+    /**
+     * Filter which all_collect to delete.
+     */
+    where: all_collectWhereUniqueInput
+  }
+
+
+  /**
+   * all_collect deleteMany
+   */
+  export type all_collectDeleteManyArgs = {
+    /**
+     * Filter which all_collects to delete
+     */
+    where?: all_collectWhereInput
+  }
+
+
+  /**
+   * all_collect.bookbank_log
+   */
+  export type all_collect$bookbank_logArgs = {
+    /**
+     * Select specific fields to fetch from the bookbank_log
+     */
+    select?: bookbank_logSelect | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: bookbank_logInclude | null
+    where?: bookbank_logWhereInput
+    orderBy?: Enumerable<bookbank_logOrderByWithRelationInput>
+    cursor?: bookbank_logWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: Enumerable<Bookbank_logScalarFieldEnum>
+  }
+
+
+  /**
+   * all_collect without action
+   */
+  export type all_collectArgs = {
+    /**
+     * Select specific fields to fetch from the all_collect
+     */
+    select?: all_collectSelect | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: all_collectInclude | null
+  }
+
+
+
+  /**
+   * Model bookbank_log
+   */
+
+
+  export type AggregateBookbank_log = {
+    _count: Bookbank_logCountAggregateOutputType | null
+    _min: Bookbank_logMinAggregateOutputType | null
+    _max: Bookbank_logMaxAggregateOutputType | null
+  }
+
+  export type Bookbank_logMinAggregateOutputType = {
+    id: string | null
+    date: Date | null
+    mas_bankId: string | null
+    bank_number: string | null
+    all_collectId: string | null
+  }
+
+  export type Bookbank_logMaxAggregateOutputType = {
+    id: string | null
+    date: Date | null
+    mas_bankId: string | null
+    bank_number: string | null
+    all_collectId: string | null
+  }
+
+  export type Bookbank_logCountAggregateOutputType = {
+    id: number
+    date: number
+    mas_bankId: number
+    bank_number: number
+    all_collectId: number
+    _all: number
+  }
+
+
+  export type Bookbank_logMinAggregateInputType = {
+    id?: true
+    date?: true
+    mas_bankId?: true
+    bank_number?: true
+    all_collectId?: true
+  }
+
+  export type Bookbank_logMaxAggregateInputType = {
+    id?: true
+    date?: true
+    mas_bankId?: true
+    bank_number?: true
+    all_collectId?: true
+  }
+
+  export type Bookbank_logCountAggregateInputType = {
+    id?: true
+    date?: true
+    mas_bankId?: true
+    bank_number?: true
+    all_collectId?: true
+    _all?: true
+  }
+
+  export type Bookbank_logAggregateArgs = {
+    /**
+     * Filter which bookbank_log to aggregate.
+     */
+    where?: bookbank_logWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of bookbank_logs to fetch.
+     */
+    orderBy?: Enumerable<bookbank_logOrderByWithRelationInput>
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: bookbank_logWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` bookbank_logs from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` bookbank_logs.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned bookbank_logs
+    **/
+    _count?: true | Bookbank_logCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: Bookbank_logMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: Bookbank_logMaxAggregateInputType
+  }
+
+  export type GetBookbank_logAggregateType<T extends Bookbank_logAggregateArgs> = {
+        [P in keyof T & keyof AggregateBookbank_log]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateBookbank_log[P]>
+      : GetScalarType<T[P], AggregateBookbank_log[P]>
+  }
+
+
+
+
+  export type Bookbank_logGroupByArgs = {
+    where?: bookbank_logWhereInput
+    orderBy?: Enumerable<bookbank_logOrderByWithAggregationInput>
+    by: Bookbank_logScalarFieldEnum[]
+    having?: bookbank_logScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: Bookbank_logCountAggregateInputType | true
+    _min?: Bookbank_logMinAggregateInputType
+    _max?: Bookbank_logMaxAggregateInputType
+  }
+
+
+  export type Bookbank_logGroupByOutputType = {
+    id: string
+    date: Date
+    mas_bankId: string | null
+    bank_number: string
+    all_collectId: string | null
+    _count: Bookbank_logCountAggregateOutputType | null
+    _min: Bookbank_logMinAggregateOutputType | null
+    _max: Bookbank_logMaxAggregateOutputType | null
+  }
+
+  type GetBookbank_logGroupByPayload<T extends Bookbank_logGroupByArgs> = PrismaPromise<
+    Array<
+      PickArray<Bookbank_logGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof Bookbank_logGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], Bookbank_logGroupByOutputType[P]>
+            : GetScalarType<T[P], Bookbank_logGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type bookbank_logSelect = {
+    id?: boolean
+    date?: boolean
+    mas_bankId?: boolean
+    bank_number?: boolean
+    all_collectId?: boolean
+    all_collect?: boolean | all_collectArgs
+    mas_bank?: boolean | mas_bankArgs
+  }
+
+
+  export type bookbank_logInclude = {
+    all_collect?: boolean | all_collectArgs
+    mas_bank?: boolean | mas_bankArgs
+  }
+
+  export type bookbank_logGetPayload<S extends boolean | null | undefined | bookbank_logArgs> =
+    S extends { select: any, include: any } ? 'Please either choose `select` or `include`' :
+    S extends true ? bookbank_log :
+    S extends undefined ? never :
+    S extends { include: any } & (bookbank_logArgs | bookbank_logFindManyArgs)
+    ? bookbank_log  & {
+    [P in TruthyKeys<S['include']>]:
+        P extends 'all_collect' ? all_collectGetPayload<S['include'][P]> | null :
+        P extends 'mas_bank' ? mas_bankGetPayload<S['include'][P]> | null :  never
+  } 
+    : S extends { select: any } & (bookbank_logArgs | bookbank_logFindManyArgs)
+      ? {
+    [P in TruthyKeys<S['select']>]:
+        P extends 'all_collect' ? all_collectGetPayload<S['select'][P]> | null :
+        P extends 'mas_bank' ? mas_bankGetPayload<S['select'][P]> | null :  P extends keyof bookbank_log ? bookbank_log[P] : never
+  } 
+      : bookbank_log
+
+
+  type bookbank_logCountArgs = 
+    Omit<bookbank_logFindManyArgs, 'select' | 'include'> & {
+      select?: Bookbank_logCountAggregateInputType | true
+    }
+
+  export interface bookbank_logDelegate<GlobalRejectSettings extends Prisma.RejectOnNotFound | Prisma.RejectPerOperation | false | undefined> {
+
+    /**
+     * Find zero or one Bookbank_log that matches the filter.
+     * @param {bookbank_logFindUniqueArgs} args - Arguments to find a Bookbank_log
+     * @example
+     * // Get one Bookbank_log
+     * const bookbank_log = await prisma.bookbank_log.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+    **/
+    findUnique<T extends bookbank_logFindUniqueArgs,  LocalRejectSettings = T["rejectOnNotFound"] extends RejectOnNotFound ? T['rejectOnNotFound'] : undefined>(
+      args: SelectSubset<T, bookbank_logFindUniqueArgs>
+    ): HasReject<GlobalRejectSettings, LocalRejectSettings, 'findUnique', 'bookbank_log'> extends True ? Prisma__bookbank_logClient<bookbank_logGetPayload<T>> : Prisma__bookbank_logClient<bookbank_logGetPayload<T> | null, null>
+
+    /**
+     * Find one Bookbank_log that matches the filter or throw an error  with `error.code='P2025'` 
+     *     if no matches were found.
+     * @param {bookbank_logFindUniqueOrThrowArgs} args - Arguments to find a Bookbank_log
+     * @example
+     * // Get one Bookbank_log
+     * const bookbank_log = await prisma.bookbank_log.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+    **/
+    findUniqueOrThrow<T extends bookbank_logFindUniqueOrThrowArgs>(
+      args?: SelectSubset<T, bookbank_logFindUniqueOrThrowArgs>
+    ): Prisma__bookbank_logClient<bookbank_logGetPayload<T>>
+
+    /**
+     * Find the first Bookbank_log that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {bookbank_logFindFirstArgs} args - Arguments to find a Bookbank_log
+     * @example
+     * // Get one Bookbank_log
+     * const bookbank_log = await prisma.bookbank_log.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+    **/
+    findFirst<T extends bookbank_logFindFirstArgs,  LocalRejectSettings = T["rejectOnNotFound"] extends RejectOnNotFound ? T['rejectOnNotFound'] : undefined>(
+      args?: SelectSubset<T, bookbank_logFindFirstArgs>
+    ): HasReject<GlobalRejectSettings, LocalRejectSettings, 'findFirst', 'bookbank_log'> extends True ? Prisma__bookbank_logClient<bookbank_logGetPayload<T>> : Prisma__bookbank_logClient<bookbank_logGetPayload<T> | null, null>
+
+    /**
+     * Find the first Bookbank_log that matches the filter or
+     * throw `NotFoundError` if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {bookbank_logFindFirstOrThrowArgs} args - Arguments to find a Bookbank_log
+     * @example
+     * // Get one Bookbank_log
+     * const bookbank_log = await prisma.bookbank_log.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+    **/
+    findFirstOrThrow<T extends bookbank_logFindFirstOrThrowArgs>(
+      args?: SelectSubset<T, bookbank_logFindFirstOrThrowArgs>
+    ): Prisma__bookbank_logClient<bookbank_logGetPayload<T>>
+
+    /**
+     * Find zero or more Bookbank_logs that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {bookbank_logFindManyArgs=} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all Bookbank_logs
+     * const bookbank_logs = await prisma.bookbank_log.findMany()
+     * 
+     * // Get first 10 Bookbank_logs
+     * const bookbank_logs = await prisma.bookbank_log.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const bookbank_logWithIdOnly = await prisma.bookbank_log.findMany({ select: { id: true } })
+     * 
+    **/
+    findMany<T extends bookbank_logFindManyArgs>(
+      args?: SelectSubset<T, bookbank_logFindManyArgs>
+    ): PrismaPromise<Array<bookbank_logGetPayload<T>>>
+
+    /**
+     * Create a Bookbank_log.
+     * @param {bookbank_logCreateArgs} args - Arguments to create a Bookbank_log.
+     * @example
+     * // Create one Bookbank_log
+     * const Bookbank_log = await prisma.bookbank_log.create({
+     *   data: {
+     *     // ... data to create a Bookbank_log
+     *   }
+     * })
+     * 
+    **/
+    create<T extends bookbank_logCreateArgs>(
+      args: SelectSubset<T, bookbank_logCreateArgs>
+    ): Prisma__bookbank_logClient<bookbank_logGetPayload<T>>
+
+    /**
+     * Create many Bookbank_logs.
+     *     @param {bookbank_logCreateManyArgs} args - Arguments to create many Bookbank_logs.
+     *     @example
+     *     // Create many Bookbank_logs
+     *     const bookbank_log = await prisma.bookbank_log.createMany({
+     *       data: {
+     *         // ... provide data here
+     *       }
+     *     })
+     *     
+    **/
+    createMany<T extends bookbank_logCreateManyArgs>(
+      args?: SelectSubset<T, bookbank_logCreateManyArgs>
+    ): PrismaPromise<BatchPayload>
+
+    /**
+     * Delete a Bookbank_log.
+     * @param {bookbank_logDeleteArgs} args - Arguments to delete one Bookbank_log.
+     * @example
+     * // Delete one Bookbank_log
+     * const Bookbank_log = await prisma.bookbank_log.delete({
+     *   where: {
+     *     // ... filter to delete one Bookbank_log
+     *   }
+     * })
+     * 
+    **/
+    delete<T extends bookbank_logDeleteArgs>(
+      args: SelectSubset<T, bookbank_logDeleteArgs>
+    ): Prisma__bookbank_logClient<bookbank_logGetPayload<T>>
+
+    /**
+     * Update one Bookbank_log.
+     * @param {bookbank_logUpdateArgs} args - Arguments to update one Bookbank_log.
+     * @example
+     * // Update one Bookbank_log
+     * const bookbank_log = await prisma.bookbank_log.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+    **/
+    update<T extends bookbank_logUpdateArgs>(
+      args: SelectSubset<T, bookbank_logUpdateArgs>
+    ): Prisma__bookbank_logClient<bookbank_logGetPayload<T>>
+
+    /**
+     * Delete zero or more Bookbank_logs.
+     * @param {bookbank_logDeleteManyArgs} args - Arguments to filter Bookbank_logs to delete.
+     * @example
+     * // Delete a few Bookbank_logs
+     * const { count } = await prisma.bookbank_log.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+    **/
+    deleteMany<T extends bookbank_logDeleteManyArgs>(
+      args?: SelectSubset<T, bookbank_logDeleteManyArgs>
+    ): PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Bookbank_logs.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {bookbank_logUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many Bookbank_logs
+     * const bookbank_log = await prisma.bookbank_log.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+    **/
+    updateMany<T extends bookbank_logUpdateManyArgs>(
+      args: SelectSubset<T, bookbank_logUpdateManyArgs>
+    ): PrismaPromise<BatchPayload>
+
+    /**
+     * Create or update one Bookbank_log.
+     * @param {bookbank_logUpsertArgs} args - Arguments to update or create a Bookbank_log.
+     * @example
+     * // Update or create a Bookbank_log
+     * const bookbank_log = await prisma.bookbank_log.upsert({
+     *   create: {
+     *     // ... data to create a Bookbank_log
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the Bookbank_log we want to update
+     *   }
+     * })
+    **/
+    upsert<T extends bookbank_logUpsertArgs>(
+      args: SelectSubset<T, bookbank_logUpsertArgs>
+    ): Prisma__bookbank_logClient<bookbank_logGetPayload<T>>
+
+    /**
+     * Count the number of Bookbank_logs.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {bookbank_logCountArgs} args - Arguments to filter Bookbank_logs to count.
+     * @example
+     * // Count the number of Bookbank_logs
+     * const count = await prisma.bookbank_log.count({
+     *   where: {
+     *     // ... the filter for the Bookbank_logs we want to count
+     *   }
+     * })
+    **/
+    count<T extends bookbank_logCountArgs>(
+      args?: Subset<T, bookbank_logCountArgs>,
+    ): PrismaPromise<
+      T extends _Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], Bookbank_logCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a Bookbank_log.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {Bookbank_logAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends Bookbank_logAggregateArgs>(args: Subset<T, Bookbank_logAggregateArgs>): PrismaPromise<GetBookbank_logAggregateType<T>>
+
+    /**
+     * Group by Bookbank_log.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {Bookbank_logGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends Bookbank_logGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: Bookbank_logGroupByArgs['orderBy'] }
+        : { orderBy?: Bookbank_logGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends TupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, Bookbank_logGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetBookbank_logGroupByPayload<T> : PrismaPromise<InputErrors>
+
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for bookbank_log.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export class Prisma__bookbank_logClient<T, Null = never> implements PrismaPromise<T> {
+    [prisma]: true;
+    private readonly _dmmf;
+    private readonly _fetcher;
+    private readonly _queryType;
+    private readonly _rootField;
+    private readonly _clientMethod;
+    private readonly _args;
+    private readonly _dataPath;
+    private readonly _errorFormat;
+    private readonly _measurePerformance?;
+    private _isList;
+    private _callsite;
+    private _requestPromise?;
+    constructor(_dmmf: runtime.DMMFClass, _fetcher: PrismaClientFetcher, _queryType: 'query' | 'mutation', _rootField: string, _clientMethod: string, _args: any, _dataPath: string[], _errorFormat: ErrorFormat, _measurePerformance?: boolean | undefined, _isList?: boolean);
+    readonly [Symbol.toStringTag]: 'PrismaClientPromise';
+
+    all_collect<T extends all_collectArgs= {}>(args?: Subset<T, all_collectArgs>): Prisma__all_collectClient<all_collectGetPayload<T> | Null>;
+
+    mas_bank<T extends mas_bankArgs= {}>(args?: Subset<T, mas_bankArgs>): Prisma__mas_bankClient<mas_bankGetPayload<T> | Null>;
+
+    private get _document();
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): Promise<TResult1 | TResult2>;
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): Promise<T | TResult>;
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): Promise<T>;
+  }
+
+
+
+  // Custom InputTypes
+
+  /**
+   * bookbank_log base type for findUnique actions
+   */
+  export type bookbank_logFindUniqueArgsBase = {
+    /**
+     * Select specific fields to fetch from the bookbank_log
+     */
+    select?: bookbank_logSelect | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: bookbank_logInclude | null
+    /**
+     * Filter, which bookbank_log to fetch.
+     */
+    where: bookbank_logWhereUniqueInput
+  }
+
+  /**
+   * bookbank_log findUnique
+   */
+  export interface bookbank_logFindUniqueArgs extends bookbank_logFindUniqueArgsBase {
+   /**
+    * Throw an Error if query returns no results
+    * @deprecated since 4.0.0: use `findUniqueOrThrow` method instead
+    */
+    rejectOnNotFound?: RejectOnNotFound
+  }
+      
+
+  /**
+   * bookbank_log findUniqueOrThrow
+   */
+  export type bookbank_logFindUniqueOrThrowArgs = {
+    /**
+     * Select specific fields to fetch from the bookbank_log
+     */
+    select?: bookbank_logSelect | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: bookbank_logInclude | null
+    /**
+     * Filter, which bookbank_log to fetch.
+     */
+    where: bookbank_logWhereUniqueInput
+  }
+
+
+  /**
+   * bookbank_log base type for findFirst actions
+   */
+  export type bookbank_logFindFirstArgsBase = {
+    /**
+     * Select specific fields to fetch from the bookbank_log
+     */
+    select?: bookbank_logSelect | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: bookbank_logInclude | null
+    /**
+     * Filter, which bookbank_log to fetch.
+     */
+    where?: bookbank_logWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of bookbank_logs to fetch.
+     */
+    orderBy?: Enumerable<bookbank_logOrderByWithRelationInput>
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for bookbank_logs.
+     */
+    cursor?: bookbank_logWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` bookbank_logs from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` bookbank_logs.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of bookbank_logs.
+     */
+    distinct?: Enumerable<Bookbank_logScalarFieldEnum>
+  }
+
+  /**
+   * bookbank_log findFirst
+   */
+  export interface bookbank_logFindFirstArgs extends bookbank_logFindFirstArgsBase {
+   /**
+    * Throw an Error if query returns no results
+    * @deprecated since 4.0.0: use `findFirstOrThrow` method instead
+    */
+    rejectOnNotFound?: RejectOnNotFound
+  }
+      
+
+  /**
+   * bookbank_log findFirstOrThrow
+   */
+  export type bookbank_logFindFirstOrThrowArgs = {
+    /**
+     * Select specific fields to fetch from the bookbank_log
+     */
+    select?: bookbank_logSelect | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: bookbank_logInclude | null
+    /**
+     * Filter, which bookbank_log to fetch.
+     */
+    where?: bookbank_logWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of bookbank_logs to fetch.
+     */
+    orderBy?: Enumerable<bookbank_logOrderByWithRelationInput>
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for bookbank_logs.
+     */
+    cursor?: bookbank_logWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` bookbank_logs from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` bookbank_logs.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of bookbank_logs.
+     */
+    distinct?: Enumerable<Bookbank_logScalarFieldEnum>
+  }
+
+
+  /**
+   * bookbank_log findMany
+   */
+  export type bookbank_logFindManyArgs = {
+    /**
+     * Select specific fields to fetch from the bookbank_log
+     */
+    select?: bookbank_logSelect | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: bookbank_logInclude | null
+    /**
+     * Filter, which bookbank_logs to fetch.
+     */
+    where?: bookbank_logWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of bookbank_logs to fetch.
+     */
+    orderBy?: Enumerable<bookbank_logOrderByWithRelationInput>
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing bookbank_logs.
+     */
+    cursor?: bookbank_logWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` bookbank_logs from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` bookbank_logs.
+     */
+    skip?: number
+    distinct?: Enumerable<Bookbank_logScalarFieldEnum>
+  }
+
+
+  /**
+   * bookbank_log create
+   */
+  export type bookbank_logCreateArgs = {
+    /**
+     * Select specific fields to fetch from the bookbank_log
+     */
+    select?: bookbank_logSelect | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: bookbank_logInclude | null
+    /**
+     * The data needed to create a bookbank_log.
+     */
+    data: XOR<bookbank_logCreateInput, bookbank_logUncheckedCreateInput>
+  }
+
+
+  /**
+   * bookbank_log createMany
+   */
+  export type bookbank_logCreateManyArgs = {
+    /**
+     * The data used to create many bookbank_logs.
+     */
+    data: Enumerable<bookbank_logCreateManyInput>
+    skipDuplicates?: boolean
+  }
+
+
+  /**
+   * bookbank_log update
+   */
+  export type bookbank_logUpdateArgs = {
+    /**
+     * Select specific fields to fetch from the bookbank_log
+     */
+    select?: bookbank_logSelect | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: bookbank_logInclude | null
+    /**
+     * The data needed to update a bookbank_log.
+     */
+    data: XOR<bookbank_logUpdateInput, bookbank_logUncheckedUpdateInput>
+    /**
+     * Choose, which bookbank_log to update.
+     */
+    where: bookbank_logWhereUniqueInput
+  }
+
+
+  /**
+   * bookbank_log updateMany
+   */
+  export type bookbank_logUpdateManyArgs = {
+    /**
+     * The data used to update bookbank_logs.
+     */
+    data: XOR<bookbank_logUpdateManyMutationInput, bookbank_logUncheckedUpdateManyInput>
+    /**
+     * Filter which bookbank_logs to update
+     */
+    where?: bookbank_logWhereInput
+  }
+
+
+  /**
+   * bookbank_log upsert
+   */
+  export type bookbank_logUpsertArgs = {
+    /**
+     * Select specific fields to fetch from the bookbank_log
+     */
+    select?: bookbank_logSelect | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: bookbank_logInclude | null
+    /**
+     * The filter to search for the bookbank_log to update in case it exists.
+     */
+    where: bookbank_logWhereUniqueInput
+    /**
+     * In case the bookbank_log found by the `where` argument doesn't exist, create a new bookbank_log with this data.
+     */
+    create: XOR<bookbank_logCreateInput, bookbank_logUncheckedCreateInput>
+    /**
+     * In case the bookbank_log was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<bookbank_logUpdateInput, bookbank_logUncheckedUpdateInput>
+  }
+
+
+  /**
+   * bookbank_log delete
+   */
+  export type bookbank_logDeleteArgs = {
+    /**
+     * Select specific fields to fetch from the bookbank_log
+     */
+    select?: bookbank_logSelect | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: bookbank_logInclude | null
+    /**
+     * Filter which bookbank_log to delete.
+     */
+    where: bookbank_logWhereUniqueInput
+  }
+
+
+  /**
+   * bookbank_log deleteMany
+   */
+  export type bookbank_logDeleteManyArgs = {
+    /**
+     * Filter which bookbank_logs to delete
+     */
+    where?: bookbank_logWhereInput
+  }
+
+
+  /**
+   * bookbank_log without action
+   */
+  export type bookbank_logArgs = {
+    /**
+     * Select specific fields to fetch from the bookbank_log
+     */
+    select?: bookbank_logSelect | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: bookbank_logInclude | null
+  }
+
+
+
+  /**
    * Enums
    */
 
   // Based on
   // https://github.com/microsoft/TypeScript/issues/3192#issuecomment-261720275
+
+  export const All_collectScalarFieldEnum: {
+    id: 'id',
+    userId: 'userId',
+    income_collect: 'income_collect',
+    vat_collect: 'vat_collect',
+    social_secu_collect: 'social_secu_collect',
+    provident_collect_employee: 'provident_collect_employee',
+    provident_collect_company: 'provident_collect_company'
+  };
+
+  export type All_collectScalarFieldEnum = (typeof All_collectScalarFieldEnum)[keyof typeof All_collectScalarFieldEnum]
+
 
   export const AmphoeScalarFieldEnum: {
     id: 'id',
@@ -18034,6 +27156,17 @@ export namespace Prisma {
   };
 
   export type AmphoeScalarFieldEnum = (typeof AmphoeScalarFieldEnum)[keyof typeof AmphoeScalarFieldEnum]
+
+
+  export const Bookbank_logScalarFieldEnum: {
+    id: 'id',
+    date: 'date',
+    mas_bankId: 'mas_bankId',
+    bank_number: 'bank_number',
+    all_collectId: 'all_collectId'
+  };
+
+  export type Bookbank_logScalarFieldEnum = (typeof Bookbank_logScalarFieldEnum)[keyof typeof Bookbank_logScalarFieldEnum]
 
 
   export const CompanyBranchScalarFieldEnum: {
@@ -18093,6 +27226,18 @@ export namespace Prisma {
   export type DistrictScalarFieldEnum = (typeof DistrictScalarFieldEnum)[keyof typeof DistrictScalarFieldEnum]
 
 
+  export const Expense_companyScalarFieldEnum: {
+    id: 'id',
+    monthId: 'monthId',
+    bankId: 'bankId',
+    vat_per: 'vat_per',
+    social_security: 'social_security',
+    companyBranchId: 'companyBranchId'
+  };
+
+  export type Expense_companyScalarFieldEnum = (typeof Expense_companyScalarFieldEnum)[keyof typeof Expense_companyScalarFieldEnum]
+
+
   export const Holiday_dateScalarFieldEnum: {
     id: 'id',
     holiday_name: 'holiday_name',
@@ -18130,6 +27275,30 @@ export namespace Prisma {
   };
 
   export type JsonNullValueInput = (typeof JsonNullValueInput)[keyof typeof JsonNullValueInput]
+
+
+  export const Mas_bankScalarFieldEnum: {
+    id: 'id',
+    name: 'name'
+  };
+
+  export type Mas_bankScalarFieldEnum = (typeof Mas_bankScalarFieldEnum)[keyof typeof Mas_bankScalarFieldEnum]
+
+
+  export const Mas_income_typeScalarFieldEnum: {
+    id: 'id',
+    name: 'name'
+  };
+
+  export type Mas_income_typeScalarFieldEnum = (typeof Mas_income_typeScalarFieldEnum)[keyof typeof Mas_income_typeScalarFieldEnum]
+
+
+  export const Mas_monthScalarFieldEnum: {
+    id: 'id',
+    name: 'name'
+  };
+
+  export type Mas_monthScalarFieldEnum = (typeof Mas_monthScalarFieldEnum)[keyof typeof Mas_monthScalarFieldEnum]
 
 
   export const Mas_positionScalarFieldEnum: {
@@ -18178,6 +27347,23 @@ export namespace Prisma {
   };
 
   export type Mas_positionlevel3ScalarFieldEnum = (typeof Mas_positionlevel3ScalarFieldEnum)[keyof typeof Mas_positionlevel3ScalarFieldEnum]
+
+
+  export const Mas_salary_statusScalarFieldEnum: {
+    id: 'id',
+    no: 'no',
+    name: 'name'
+  };
+
+  export type Mas_salary_statusScalarFieldEnum = (typeof Mas_salary_statusScalarFieldEnum)[keyof typeof Mas_salary_statusScalarFieldEnum]
+
+
+  export const Mas_yearsScalarFieldEnum: {
+    id: 'id',
+    name: 'name'
+  };
+
+  export type Mas_yearsScalarFieldEnum = (typeof Mas_yearsScalarFieldEnum)[keyof typeof Mas_yearsScalarFieldEnum]
 
 
   export const Position_userScalarFieldEnum: {
@@ -18281,6 +27467,36 @@ export namespace Prisma {
   };
 
   export type Role_CompanyScalarFieldEnum = (typeof Role_CompanyScalarFieldEnum)[keyof typeof Role_CompanyScalarFieldEnum]
+
+
+  export const SalaryScalarFieldEnum: {
+    id: 'id',
+    base_salary: 'base_salary',
+    commission: 'commission',
+    position_income: 'position_income',
+    ot: 'ot',
+    bonus: 'bonus',
+    special_income: 'special_income',
+    other_income: 'other_income',
+    travel_income: 'travel_income',
+    bursary: 'bursary',
+    welfare_money: 'welfare_money',
+    vat: 'vat',
+    social_security: 'social_security',
+    miss: 'miss',
+    ra: 'ra',
+    late: 'late',
+    other: 'other',
+    provident_employee: 'provident_employee',
+    provident_company: 'provident_company',
+    total_income: 'total_income',
+    total_expense: 'total_expense',
+    net: 'net',
+    date: 'date',
+    userId: 'userId'
+  };
+
+  export type SalaryScalarFieldEnum = (typeof SalaryScalarFieldEnum)[keyof typeof SalaryScalarFieldEnum]
 
 
   export const SortOrder: {
@@ -18438,6 +27654,7 @@ export namespace Prisma {
     companyId?: UuidNullableFilter | string | null
     users?: UserListRelationFilter
     Role_Company?: Role_CompanyListRelationFilter
+    expense_company?: Expense_companyListRelationFilter
   }
 
   export type CompanyBranchOrderByWithRelationInput = {
@@ -18470,6 +27687,7 @@ export namespace Prisma {
     companyId?: SortOrder
     users?: UserOrderByRelationAggregateInput
     Role_Company?: Role_CompanyOrderByRelationAggregateInput
+    expense_company?: expense_companyOrderByRelationAggregateInput
   }
 
   export type CompanyBranchWhereUniqueInput = {
@@ -18783,6 +28001,8 @@ export namespace Prisma {
     Role_Company?: XOR<Role_CompanyRelationFilter, Role_CompanyWhereInput> | null
     Position_user?: XOR<Position_userRelationFilter, Position_userWhereInput> | null
     henchman?: Position_userListRelationFilter
+    all_collect?: All_collectListRelationFilter
+    salary?: SalaryListRelationFilter
   }
 
   export type UserOrderByWithRelationInput = {
@@ -18804,6 +28024,8 @@ export namespace Prisma {
     Role_Company?: Role_CompanyOrderByWithRelationInput
     Position_user?: Position_userOrderByWithRelationInput
     henchman?: Position_userOrderByRelationAggregateInput
+    all_collect?: all_collectOrderByRelationAggregateInput
+    salary?: salaryOrderByRelationAggregateInput
   }
 
   export type UserWhereUniqueInput = {
@@ -19444,6 +28666,473 @@ export namespace Prisma {
     holiday_name?: StringNullableWithAggregatesFilter | string | null
   }
 
+  export type mas_bankWhereInput = {
+    AND?: Enumerable<mas_bankWhereInput>
+    OR?: Enumerable<mas_bankWhereInput>
+    NOT?: Enumerable<mas_bankWhereInput>
+    id?: UuidFilter | string
+    name?: StringFilter | string
+    expense_company?: Expense_companyListRelationFilter
+    bookbank_log?: Bookbank_logListRelationFilter
+  }
+
+  export type mas_bankOrderByWithRelationInput = {
+    id?: SortOrder
+    name?: SortOrder
+    expense_company?: expense_companyOrderByRelationAggregateInput
+    bookbank_log?: bookbank_logOrderByRelationAggregateInput
+  }
+
+  export type mas_bankWhereUniqueInput = {
+    id?: string
+  }
+
+  export type mas_bankOrderByWithAggregationInput = {
+    id?: SortOrder
+    name?: SortOrder
+    _count?: mas_bankCountOrderByAggregateInput
+    _max?: mas_bankMaxOrderByAggregateInput
+    _min?: mas_bankMinOrderByAggregateInput
+  }
+
+  export type mas_bankScalarWhereWithAggregatesInput = {
+    AND?: Enumerable<mas_bankScalarWhereWithAggregatesInput>
+    OR?: Enumerable<mas_bankScalarWhereWithAggregatesInput>
+    NOT?: Enumerable<mas_bankScalarWhereWithAggregatesInput>
+    id?: UuidWithAggregatesFilter | string
+    name?: StringWithAggregatesFilter | string
+  }
+
+  export type mas_monthWhereInput = {
+    AND?: Enumerable<mas_monthWhereInput>
+    OR?: Enumerable<mas_monthWhereInput>
+    NOT?: Enumerable<mas_monthWhereInput>
+    id?: UuidFilter | string
+    name?: StringFilter | string
+    expense_company?: Expense_companyListRelationFilter
+  }
+
+  export type mas_monthOrderByWithRelationInput = {
+    id?: SortOrder
+    name?: SortOrder
+    expense_company?: expense_companyOrderByRelationAggregateInput
+  }
+
+  export type mas_monthWhereUniqueInput = {
+    id?: string
+  }
+
+  export type mas_monthOrderByWithAggregationInput = {
+    id?: SortOrder
+    name?: SortOrder
+    _count?: mas_monthCountOrderByAggregateInput
+    _max?: mas_monthMaxOrderByAggregateInput
+    _min?: mas_monthMinOrderByAggregateInput
+  }
+
+  export type mas_monthScalarWhereWithAggregatesInput = {
+    AND?: Enumerable<mas_monthScalarWhereWithAggregatesInput>
+    OR?: Enumerable<mas_monthScalarWhereWithAggregatesInput>
+    NOT?: Enumerable<mas_monthScalarWhereWithAggregatesInput>
+    id?: UuidWithAggregatesFilter | string
+    name?: StringWithAggregatesFilter | string
+  }
+
+  export type mas_yearsWhereInput = {
+    AND?: Enumerable<mas_yearsWhereInput>
+    OR?: Enumerable<mas_yearsWhereInput>
+    NOT?: Enumerable<mas_yearsWhereInput>
+    id?: UuidFilter | string
+    name?: StringFilter | string
+  }
+
+  export type mas_yearsOrderByWithRelationInput = {
+    id?: SortOrder
+    name?: SortOrder
+  }
+
+  export type mas_yearsWhereUniqueInput = {
+    id?: string
+  }
+
+  export type mas_yearsOrderByWithAggregationInput = {
+    id?: SortOrder
+    name?: SortOrder
+    _count?: mas_yearsCountOrderByAggregateInput
+    _max?: mas_yearsMaxOrderByAggregateInput
+    _min?: mas_yearsMinOrderByAggregateInput
+  }
+
+  export type mas_yearsScalarWhereWithAggregatesInput = {
+    AND?: Enumerable<mas_yearsScalarWhereWithAggregatesInput>
+    OR?: Enumerable<mas_yearsScalarWhereWithAggregatesInput>
+    NOT?: Enumerable<mas_yearsScalarWhereWithAggregatesInput>
+    id?: UuidWithAggregatesFilter | string
+    name?: StringWithAggregatesFilter | string
+  }
+
+  export type mas_salary_statusWhereInput = {
+    AND?: Enumerable<mas_salary_statusWhereInput>
+    OR?: Enumerable<mas_salary_statusWhereInput>
+    NOT?: Enumerable<mas_salary_statusWhereInput>
+    id?: UuidFilter | string
+    no?: IntFilter | number
+    name?: StringFilter | string
+  }
+
+  export type mas_salary_statusOrderByWithRelationInput = {
+    id?: SortOrder
+    no?: SortOrder
+    name?: SortOrder
+  }
+
+  export type mas_salary_statusWhereUniqueInput = {
+    id?: string
+  }
+
+  export type mas_salary_statusOrderByWithAggregationInput = {
+    id?: SortOrder
+    no?: SortOrder
+    name?: SortOrder
+    _count?: mas_salary_statusCountOrderByAggregateInput
+    _avg?: mas_salary_statusAvgOrderByAggregateInput
+    _max?: mas_salary_statusMaxOrderByAggregateInput
+    _min?: mas_salary_statusMinOrderByAggregateInput
+    _sum?: mas_salary_statusSumOrderByAggregateInput
+  }
+
+  export type mas_salary_statusScalarWhereWithAggregatesInput = {
+    AND?: Enumerable<mas_salary_statusScalarWhereWithAggregatesInput>
+    OR?: Enumerable<mas_salary_statusScalarWhereWithAggregatesInput>
+    NOT?: Enumerable<mas_salary_statusScalarWhereWithAggregatesInput>
+    id?: UuidWithAggregatesFilter | string
+    no?: IntWithAggregatesFilter | number
+    name?: StringWithAggregatesFilter | string
+  }
+
+  export type mas_income_typeWhereInput = {
+    AND?: Enumerable<mas_income_typeWhereInput>
+    OR?: Enumerable<mas_income_typeWhereInput>
+    NOT?: Enumerable<mas_income_typeWhereInput>
+    id?: UuidFilter | string
+    name?: StringFilter | string
+  }
+
+  export type mas_income_typeOrderByWithRelationInput = {
+    id?: SortOrder
+    name?: SortOrder
+  }
+
+  export type mas_income_typeWhereUniqueInput = {
+    id?: string
+  }
+
+  export type mas_income_typeOrderByWithAggregationInput = {
+    id?: SortOrder
+    name?: SortOrder
+    _count?: mas_income_typeCountOrderByAggregateInput
+    _max?: mas_income_typeMaxOrderByAggregateInput
+    _min?: mas_income_typeMinOrderByAggregateInput
+  }
+
+  export type mas_income_typeScalarWhereWithAggregatesInput = {
+    AND?: Enumerable<mas_income_typeScalarWhereWithAggregatesInput>
+    OR?: Enumerable<mas_income_typeScalarWhereWithAggregatesInput>
+    NOT?: Enumerable<mas_income_typeScalarWhereWithAggregatesInput>
+    id?: UuidWithAggregatesFilter | string
+    name?: StringWithAggregatesFilter | string
+  }
+
+  export type expense_companyWhereInput = {
+    AND?: Enumerable<expense_companyWhereInput>
+    OR?: Enumerable<expense_companyWhereInput>
+    NOT?: Enumerable<expense_companyWhereInput>
+    id?: UuidFilter | string
+    monthId?: UuidFilter | string
+    bankId?: UuidFilter | string
+    vat_per?: IntNullableFilter | number | null
+    social_security?: IntNullableFilter | number | null
+    companyBranchId?: UuidNullableFilter | string | null
+    Mas_month?: XOR<Mas_monthRelationFilter, mas_monthWhereInput> | null
+    mas_bank?: XOR<Mas_bankRelationFilter, mas_bankWhereInput> | null
+    CompanyBranch?: XOR<CompanyBranchRelationFilter, CompanyBranchWhereInput> | null
+  }
+
+  export type expense_companyOrderByWithRelationInput = {
+    id?: SortOrder
+    monthId?: SortOrder
+    bankId?: SortOrder
+    vat_per?: SortOrder
+    social_security?: SortOrder
+    companyBranchId?: SortOrder
+    Mas_month?: mas_monthOrderByWithRelationInput
+    mas_bank?: mas_bankOrderByWithRelationInput
+    CompanyBranch?: CompanyBranchOrderByWithRelationInput
+  }
+
+  export type expense_companyWhereUniqueInput = {
+    id?: string
+  }
+
+  export type expense_companyOrderByWithAggregationInput = {
+    id?: SortOrder
+    monthId?: SortOrder
+    bankId?: SortOrder
+    vat_per?: SortOrder
+    social_security?: SortOrder
+    companyBranchId?: SortOrder
+    _count?: expense_companyCountOrderByAggregateInput
+    _avg?: expense_companyAvgOrderByAggregateInput
+    _max?: expense_companyMaxOrderByAggregateInput
+    _min?: expense_companyMinOrderByAggregateInput
+    _sum?: expense_companySumOrderByAggregateInput
+  }
+
+  export type expense_companyScalarWhereWithAggregatesInput = {
+    AND?: Enumerable<expense_companyScalarWhereWithAggregatesInput>
+    OR?: Enumerable<expense_companyScalarWhereWithAggregatesInput>
+    NOT?: Enumerable<expense_companyScalarWhereWithAggregatesInput>
+    id?: UuidWithAggregatesFilter | string
+    monthId?: UuidWithAggregatesFilter | string
+    bankId?: UuidWithAggregatesFilter | string
+    vat_per?: IntNullableWithAggregatesFilter | number | null
+    social_security?: IntNullableWithAggregatesFilter | number | null
+    companyBranchId?: UuidNullableWithAggregatesFilter | string | null
+  }
+
+  export type salaryWhereInput = {
+    AND?: Enumerable<salaryWhereInput>
+    OR?: Enumerable<salaryWhereInput>
+    NOT?: Enumerable<salaryWhereInput>
+    id?: UuidFilter | string
+    base_salary?: IntFilter | number
+    commission?: IntFilter | number
+    position_income?: IntFilter | number
+    ot?: IntFilter | number
+    bonus?: IntFilter | number
+    special_income?: IntFilter | number
+    other_income?: IntFilter | number
+    travel_income?: IntFilter | number
+    bursary?: IntFilter | number
+    welfare_money?: IntFilter | number
+    vat?: IntFilter | number
+    social_security?: IntFilter | number
+    miss?: IntFilter | number
+    ra?: IntFilter | number
+    late?: IntFilter | number
+    other?: IntFilter | number
+    provident_employee?: IntFilter | number
+    provident_company?: IntFilter | number
+    total_income?: IntFilter | number
+    total_expense?: IntFilter | number
+    net?: IntFilter | number
+    date?: DateTimeFilter | Date | string
+    User?: XOR<UserRelationFilter, UserWhereInput> | null
+    userId?: UuidNullableFilter | string | null
+  }
+
+  export type salaryOrderByWithRelationInput = {
+    id?: SortOrder
+    base_salary?: SortOrder
+    commission?: SortOrder
+    position_income?: SortOrder
+    ot?: SortOrder
+    bonus?: SortOrder
+    special_income?: SortOrder
+    other_income?: SortOrder
+    travel_income?: SortOrder
+    bursary?: SortOrder
+    welfare_money?: SortOrder
+    vat?: SortOrder
+    social_security?: SortOrder
+    miss?: SortOrder
+    ra?: SortOrder
+    late?: SortOrder
+    other?: SortOrder
+    provident_employee?: SortOrder
+    provident_company?: SortOrder
+    total_income?: SortOrder
+    total_expense?: SortOrder
+    net?: SortOrder
+    date?: SortOrder
+    User?: UserOrderByWithRelationInput
+    userId?: SortOrder
+  }
+
+  export type salaryWhereUniqueInput = {
+    id?: string
+  }
+
+  export type salaryOrderByWithAggregationInput = {
+    id?: SortOrder
+    base_salary?: SortOrder
+    commission?: SortOrder
+    position_income?: SortOrder
+    ot?: SortOrder
+    bonus?: SortOrder
+    special_income?: SortOrder
+    other_income?: SortOrder
+    travel_income?: SortOrder
+    bursary?: SortOrder
+    welfare_money?: SortOrder
+    vat?: SortOrder
+    social_security?: SortOrder
+    miss?: SortOrder
+    ra?: SortOrder
+    late?: SortOrder
+    other?: SortOrder
+    provident_employee?: SortOrder
+    provident_company?: SortOrder
+    total_income?: SortOrder
+    total_expense?: SortOrder
+    net?: SortOrder
+    date?: SortOrder
+    userId?: SortOrder
+    _count?: salaryCountOrderByAggregateInput
+    _avg?: salaryAvgOrderByAggregateInput
+    _max?: salaryMaxOrderByAggregateInput
+    _min?: salaryMinOrderByAggregateInput
+    _sum?: salarySumOrderByAggregateInput
+  }
+
+  export type salaryScalarWhereWithAggregatesInput = {
+    AND?: Enumerable<salaryScalarWhereWithAggregatesInput>
+    OR?: Enumerable<salaryScalarWhereWithAggregatesInput>
+    NOT?: Enumerable<salaryScalarWhereWithAggregatesInput>
+    id?: UuidWithAggregatesFilter | string
+    base_salary?: IntWithAggregatesFilter | number
+    commission?: IntWithAggregatesFilter | number
+    position_income?: IntWithAggregatesFilter | number
+    ot?: IntWithAggregatesFilter | number
+    bonus?: IntWithAggregatesFilter | number
+    special_income?: IntWithAggregatesFilter | number
+    other_income?: IntWithAggregatesFilter | number
+    travel_income?: IntWithAggregatesFilter | number
+    bursary?: IntWithAggregatesFilter | number
+    welfare_money?: IntWithAggregatesFilter | number
+    vat?: IntWithAggregatesFilter | number
+    social_security?: IntWithAggregatesFilter | number
+    miss?: IntWithAggregatesFilter | number
+    ra?: IntWithAggregatesFilter | number
+    late?: IntWithAggregatesFilter | number
+    other?: IntWithAggregatesFilter | number
+    provident_employee?: IntWithAggregatesFilter | number
+    provident_company?: IntWithAggregatesFilter | number
+    total_income?: IntWithAggregatesFilter | number
+    total_expense?: IntWithAggregatesFilter | number
+    net?: IntWithAggregatesFilter | number
+    date?: DateTimeWithAggregatesFilter | Date | string
+    userId?: UuidNullableWithAggregatesFilter | string | null
+  }
+
+  export type all_collectWhereInput = {
+    AND?: Enumerable<all_collectWhereInput>
+    OR?: Enumerable<all_collectWhereInput>
+    NOT?: Enumerable<all_collectWhereInput>
+    id?: UuidFilter | string
+    User?: XOR<UserRelationFilter, UserWhereInput> | null
+    userId?: UuidNullableFilter | string | null
+    income_collect?: IntFilter | number
+    vat_collect?: IntFilter | number
+    social_secu_collect?: IntFilter | number
+    provident_collect_employee?: IntFilter | number
+    provident_collect_company?: IntFilter | number
+    bookbank_log?: Bookbank_logListRelationFilter
+  }
+
+  export type all_collectOrderByWithRelationInput = {
+    id?: SortOrder
+    User?: UserOrderByWithRelationInput
+    userId?: SortOrder
+    income_collect?: SortOrder
+    vat_collect?: SortOrder
+    social_secu_collect?: SortOrder
+    provident_collect_employee?: SortOrder
+    provident_collect_company?: SortOrder
+    bookbank_log?: bookbank_logOrderByRelationAggregateInput
+  }
+
+  export type all_collectWhereUniqueInput = {
+    id?: string
+  }
+
+  export type all_collectOrderByWithAggregationInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    income_collect?: SortOrder
+    vat_collect?: SortOrder
+    social_secu_collect?: SortOrder
+    provident_collect_employee?: SortOrder
+    provident_collect_company?: SortOrder
+    _count?: all_collectCountOrderByAggregateInput
+    _avg?: all_collectAvgOrderByAggregateInput
+    _max?: all_collectMaxOrderByAggregateInput
+    _min?: all_collectMinOrderByAggregateInput
+    _sum?: all_collectSumOrderByAggregateInput
+  }
+
+  export type all_collectScalarWhereWithAggregatesInput = {
+    AND?: Enumerable<all_collectScalarWhereWithAggregatesInput>
+    OR?: Enumerable<all_collectScalarWhereWithAggregatesInput>
+    NOT?: Enumerable<all_collectScalarWhereWithAggregatesInput>
+    id?: UuidWithAggregatesFilter | string
+    userId?: UuidNullableWithAggregatesFilter | string | null
+    income_collect?: IntWithAggregatesFilter | number
+    vat_collect?: IntWithAggregatesFilter | number
+    social_secu_collect?: IntWithAggregatesFilter | number
+    provident_collect_employee?: IntWithAggregatesFilter | number
+    provident_collect_company?: IntWithAggregatesFilter | number
+  }
+
+  export type bookbank_logWhereInput = {
+    AND?: Enumerable<bookbank_logWhereInput>
+    OR?: Enumerable<bookbank_logWhereInput>
+    NOT?: Enumerable<bookbank_logWhereInput>
+    id?: UuidFilter | string
+    date?: DateTimeFilter | Date | string
+    mas_bankId?: UuidNullableFilter | string | null
+    bank_number?: StringFilter | string
+    all_collectId?: UuidNullableFilter | string | null
+    all_collect?: XOR<All_collectRelationFilter, all_collectWhereInput> | null
+    mas_bank?: XOR<Mas_bankRelationFilter, mas_bankWhereInput> | null
+  }
+
+  export type bookbank_logOrderByWithRelationInput = {
+    id?: SortOrder
+    date?: SortOrder
+    mas_bankId?: SortOrder
+    bank_number?: SortOrder
+    all_collectId?: SortOrder
+    all_collect?: all_collectOrderByWithRelationInput
+    mas_bank?: mas_bankOrderByWithRelationInput
+  }
+
+  export type bookbank_logWhereUniqueInput = {
+    id?: string
+  }
+
+  export type bookbank_logOrderByWithAggregationInput = {
+    id?: SortOrder
+    date?: SortOrder
+    mas_bankId?: SortOrder
+    bank_number?: SortOrder
+    all_collectId?: SortOrder
+    _count?: bookbank_logCountOrderByAggregateInput
+    _max?: bookbank_logMaxOrderByAggregateInput
+    _min?: bookbank_logMinOrderByAggregateInput
+  }
+
+  export type bookbank_logScalarWhereWithAggregatesInput = {
+    AND?: Enumerable<bookbank_logScalarWhereWithAggregatesInput>
+    OR?: Enumerable<bookbank_logScalarWhereWithAggregatesInput>
+    NOT?: Enumerable<bookbank_logScalarWhereWithAggregatesInput>
+    id?: UuidWithAggregatesFilter | string
+    date?: DateTimeWithAggregatesFilter | Date | string
+    mas_bankId?: UuidNullableWithAggregatesFilter | string | null
+    bank_number?: StringWithAggregatesFilter | string
+    all_collectId?: UuidNullableWithAggregatesFilter | string | null
+  }
+
   export type CompanyCreateInput = {
     id: string
     name: string
@@ -19587,6 +29276,7 @@ export namespace Prisma {
     company?: CompanyCreateNestedOneWithoutBranchInput
     users?: UserCreateNestedManyWithoutCompanyBranchInput
     Role_Company?: Role_CompanyCreateNestedManyWithoutCompanyBranchInput
+    expense_company?: expense_companyCreateNestedManyWithoutCompanyBranchInput
   }
 
   export type CompanyBranchUncheckedCreateInput = {
@@ -19618,6 +29308,7 @@ export namespace Prisma {
     companyId?: string | null
     users?: UserUncheckedCreateNestedManyWithoutCompanyBranchInput
     Role_Company?: Role_CompanyUncheckedCreateNestedManyWithoutCompanyBranchInput
+    expense_company?: expense_companyUncheckedCreateNestedManyWithoutCompanyBranchInput
   }
 
   export type CompanyBranchUpdateInput = {
@@ -19649,6 +29340,7 @@ export namespace Prisma {
     company?: CompanyUpdateOneWithoutBranchNestedInput
     users?: UserUpdateManyWithoutCompanyBranchNestedInput
     Role_Company?: Role_CompanyUpdateManyWithoutCompanyBranchNestedInput
+    expense_company?: expense_companyUpdateManyWithoutCompanyBranchNestedInput
   }
 
   export type CompanyBranchUncheckedUpdateInput = {
@@ -19680,6 +29372,7 @@ export namespace Prisma {
     companyId?: NullableStringFieldUpdateOperationsInput | string | null
     users?: UserUncheckedUpdateManyWithoutCompanyBranchNestedInput
     Role_Company?: Role_CompanyUncheckedUpdateManyWithoutCompanyBranchNestedInput
+    expense_company?: expense_companyUncheckedUpdateManyWithoutCompanyBranchNestedInput
   }
 
   export type CompanyBranchCreateManyInput = {
@@ -20140,6 +29833,8 @@ export namespace Prisma {
     Role_Company?: Role_CompanyCreateNestedOneWithoutUsersInput
     Position_user?: Position_userCreateNestedOneWithoutUserInput
     henchman?: Position_userCreateNestedManyWithoutHeaderInput
+    all_collect?: all_collectCreateNestedManyWithoutUserInput
+    salary?: salaryCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateInput = {
@@ -20158,6 +29853,8 @@ export namespace Prisma {
     companyBranchId?: string | null
     Position_user?: Position_userUncheckedCreateNestedOneWithoutUserInput
     henchman?: Position_userUncheckedCreateNestedManyWithoutHeaderInput
+    all_collect?: all_collectUncheckedCreateNestedManyWithoutUserInput
+    salary?: salaryUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserUpdateInput = {
@@ -20176,6 +29873,8 @@ export namespace Prisma {
     Role_Company?: Role_CompanyUpdateOneWithoutUsersNestedInput
     Position_user?: Position_userUpdateOneWithoutUserNestedInput
     henchman?: Position_userUpdateManyWithoutHeaderNestedInput
+    all_collect?: all_collectUpdateManyWithoutUserNestedInput
+    salary?: salaryUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateInput = {
@@ -20194,6 +29893,8 @@ export namespace Prisma {
     companyBranchId?: NullableStringFieldUpdateOperationsInput | string | null
     Position_user?: Position_userUncheckedUpdateOneWithoutUserNestedInput
     henchman?: Position_userUncheckedUpdateManyWithoutHeaderNestedInput
+    all_collect?: all_collectUncheckedUpdateManyWithoutUserNestedInput
+    salary?: salaryUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type UserCreateManyInput = {
@@ -20921,6 +30622,575 @@ export namespace Prisma {
     holiday_name?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
+  export type mas_bankCreateInput = {
+    id: string
+    name: string
+    expense_company?: expense_companyCreateNestedManyWithoutMas_bankInput
+    bookbank_log?: bookbank_logCreateNestedManyWithoutMas_bankInput
+  }
+
+  export type mas_bankUncheckedCreateInput = {
+    id: string
+    name: string
+    expense_company?: expense_companyUncheckedCreateNestedManyWithoutMas_bankInput
+    bookbank_log?: bookbank_logUncheckedCreateNestedManyWithoutMas_bankInput
+  }
+
+  export type mas_bankUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    expense_company?: expense_companyUpdateManyWithoutMas_bankNestedInput
+    bookbank_log?: bookbank_logUpdateManyWithoutMas_bankNestedInput
+  }
+
+  export type mas_bankUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    expense_company?: expense_companyUncheckedUpdateManyWithoutMas_bankNestedInput
+    bookbank_log?: bookbank_logUncheckedUpdateManyWithoutMas_bankNestedInput
+  }
+
+  export type mas_bankCreateManyInput = {
+    id: string
+    name: string
+  }
+
+  export type mas_bankUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type mas_bankUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type mas_monthCreateInput = {
+    id: string
+    name: string
+    expense_company?: expense_companyCreateNestedManyWithoutMas_monthInput
+  }
+
+  export type mas_monthUncheckedCreateInput = {
+    id: string
+    name: string
+    expense_company?: expense_companyUncheckedCreateNestedManyWithoutMas_monthInput
+  }
+
+  export type mas_monthUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    expense_company?: expense_companyUpdateManyWithoutMas_monthNestedInput
+  }
+
+  export type mas_monthUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    expense_company?: expense_companyUncheckedUpdateManyWithoutMas_monthNestedInput
+  }
+
+  export type mas_monthCreateManyInput = {
+    id: string
+    name: string
+  }
+
+  export type mas_monthUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type mas_monthUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type mas_yearsCreateInput = {
+    id: string
+    name: string
+  }
+
+  export type mas_yearsUncheckedCreateInput = {
+    id: string
+    name: string
+  }
+
+  export type mas_yearsUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type mas_yearsUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type mas_yearsCreateManyInput = {
+    id: string
+    name: string
+  }
+
+  export type mas_yearsUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type mas_yearsUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type mas_salary_statusCreateInput = {
+    id: string
+    no: number
+    name: string
+  }
+
+  export type mas_salary_statusUncheckedCreateInput = {
+    id: string
+    no: number
+    name: string
+  }
+
+  export type mas_salary_statusUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    no?: IntFieldUpdateOperationsInput | number
+    name?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type mas_salary_statusUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    no?: IntFieldUpdateOperationsInput | number
+    name?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type mas_salary_statusCreateManyInput = {
+    id: string
+    no: number
+    name: string
+  }
+
+  export type mas_salary_statusUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    no?: IntFieldUpdateOperationsInput | number
+    name?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type mas_salary_statusUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    no?: IntFieldUpdateOperationsInput | number
+    name?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type mas_income_typeCreateInput = {
+    id: string
+    name: string
+  }
+
+  export type mas_income_typeUncheckedCreateInput = {
+    id: string
+    name: string
+  }
+
+  export type mas_income_typeUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type mas_income_typeUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type mas_income_typeCreateManyInput = {
+    id: string
+    name: string
+  }
+
+  export type mas_income_typeUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type mas_income_typeUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type expense_companyCreateInput = {
+    id: string
+    vat_per?: number | null
+    social_security?: number | null
+    Mas_month?: mas_monthCreateNestedOneWithoutExpense_companyInput
+    mas_bank?: mas_bankCreateNestedOneWithoutExpense_companyInput
+    CompanyBranch?: CompanyBranchCreateNestedOneWithoutExpense_companyInput
+  }
+
+  export type expense_companyUncheckedCreateInput = {
+    id: string
+    monthId: string
+    bankId: string
+    vat_per?: number | null
+    social_security?: number | null
+    companyBranchId?: string | null
+  }
+
+  export type expense_companyUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    vat_per?: NullableIntFieldUpdateOperationsInput | number | null
+    social_security?: NullableIntFieldUpdateOperationsInput | number | null
+    Mas_month?: mas_monthUpdateOneWithoutExpense_companyNestedInput
+    mas_bank?: mas_bankUpdateOneWithoutExpense_companyNestedInput
+    CompanyBranch?: CompanyBranchUpdateOneWithoutExpense_companyNestedInput
+  }
+
+  export type expense_companyUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    monthId?: StringFieldUpdateOperationsInput | string
+    bankId?: StringFieldUpdateOperationsInput | string
+    vat_per?: NullableIntFieldUpdateOperationsInput | number | null
+    social_security?: NullableIntFieldUpdateOperationsInput | number | null
+    companyBranchId?: NullableStringFieldUpdateOperationsInput | string | null
+  }
+
+  export type expense_companyCreateManyInput = {
+    id: string
+    monthId: string
+    bankId: string
+    vat_per?: number | null
+    social_security?: number | null
+    companyBranchId?: string | null
+  }
+
+  export type expense_companyUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    vat_per?: NullableIntFieldUpdateOperationsInput | number | null
+    social_security?: NullableIntFieldUpdateOperationsInput | number | null
+  }
+
+  export type expense_companyUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    monthId?: StringFieldUpdateOperationsInput | string
+    bankId?: StringFieldUpdateOperationsInput | string
+    vat_per?: NullableIntFieldUpdateOperationsInput | number | null
+    social_security?: NullableIntFieldUpdateOperationsInput | number | null
+    companyBranchId?: NullableStringFieldUpdateOperationsInput | string | null
+  }
+
+  export type salaryCreateInput = {
+    id: string
+    base_salary: number
+    commission: number
+    position_income: number
+    ot: number
+    bonus: number
+    special_income: number
+    other_income: number
+    travel_income: number
+    bursary: number
+    welfare_money: number
+    vat: number
+    social_security: number
+    miss: number
+    ra: number
+    late: number
+    other: number
+    provident_employee: number
+    provident_company: number
+    total_income: number
+    total_expense: number
+    net: number
+    date: Date | string
+    User?: UserCreateNestedOneWithoutSalaryInput
+  }
+
+  export type salaryUncheckedCreateInput = {
+    id: string
+    base_salary: number
+    commission: number
+    position_income: number
+    ot: number
+    bonus: number
+    special_income: number
+    other_income: number
+    travel_income: number
+    bursary: number
+    welfare_money: number
+    vat: number
+    social_security: number
+    miss: number
+    ra: number
+    late: number
+    other: number
+    provident_employee: number
+    provident_company: number
+    total_income: number
+    total_expense: number
+    net: number
+    date: Date | string
+    userId?: string | null
+  }
+
+  export type salaryUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    base_salary?: IntFieldUpdateOperationsInput | number
+    commission?: IntFieldUpdateOperationsInput | number
+    position_income?: IntFieldUpdateOperationsInput | number
+    ot?: IntFieldUpdateOperationsInput | number
+    bonus?: IntFieldUpdateOperationsInput | number
+    special_income?: IntFieldUpdateOperationsInput | number
+    other_income?: IntFieldUpdateOperationsInput | number
+    travel_income?: IntFieldUpdateOperationsInput | number
+    bursary?: IntFieldUpdateOperationsInput | number
+    welfare_money?: IntFieldUpdateOperationsInput | number
+    vat?: IntFieldUpdateOperationsInput | number
+    social_security?: IntFieldUpdateOperationsInput | number
+    miss?: IntFieldUpdateOperationsInput | number
+    ra?: IntFieldUpdateOperationsInput | number
+    late?: IntFieldUpdateOperationsInput | number
+    other?: IntFieldUpdateOperationsInput | number
+    provident_employee?: IntFieldUpdateOperationsInput | number
+    provident_company?: IntFieldUpdateOperationsInput | number
+    total_income?: IntFieldUpdateOperationsInput | number
+    total_expense?: IntFieldUpdateOperationsInput | number
+    net?: IntFieldUpdateOperationsInput | number
+    date?: DateTimeFieldUpdateOperationsInput | Date | string
+    User?: UserUpdateOneWithoutSalaryNestedInput
+  }
+
+  export type salaryUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    base_salary?: IntFieldUpdateOperationsInput | number
+    commission?: IntFieldUpdateOperationsInput | number
+    position_income?: IntFieldUpdateOperationsInput | number
+    ot?: IntFieldUpdateOperationsInput | number
+    bonus?: IntFieldUpdateOperationsInput | number
+    special_income?: IntFieldUpdateOperationsInput | number
+    other_income?: IntFieldUpdateOperationsInput | number
+    travel_income?: IntFieldUpdateOperationsInput | number
+    bursary?: IntFieldUpdateOperationsInput | number
+    welfare_money?: IntFieldUpdateOperationsInput | number
+    vat?: IntFieldUpdateOperationsInput | number
+    social_security?: IntFieldUpdateOperationsInput | number
+    miss?: IntFieldUpdateOperationsInput | number
+    ra?: IntFieldUpdateOperationsInput | number
+    late?: IntFieldUpdateOperationsInput | number
+    other?: IntFieldUpdateOperationsInput | number
+    provident_employee?: IntFieldUpdateOperationsInput | number
+    provident_company?: IntFieldUpdateOperationsInput | number
+    total_income?: IntFieldUpdateOperationsInput | number
+    total_expense?: IntFieldUpdateOperationsInput | number
+    net?: IntFieldUpdateOperationsInput | number
+    date?: DateTimeFieldUpdateOperationsInput | Date | string
+    userId?: NullableStringFieldUpdateOperationsInput | string | null
+  }
+
+  export type salaryCreateManyInput = {
+    id: string
+    base_salary: number
+    commission: number
+    position_income: number
+    ot: number
+    bonus: number
+    special_income: number
+    other_income: number
+    travel_income: number
+    bursary: number
+    welfare_money: number
+    vat: number
+    social_security: number
+    miss: number
+    ra: number
+    late: number
+    other: number
+    provident_employee: number
+    provident_company: number
+    total_income: number
+    total_expense: number
+    net: number
+    date: Date | string
+    userId?: string | null
+  }
+
+  export type salaryUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    base_salary?: IntFieldUpdateOperationsInput | number
+    commission?: IntFieldUpdateOperationsInput | number
+    position_income?: IntFieldUpdateOperationsInput | number
+    ot?: IntFieldUpdateOperationsInput | number
+    bonus?: IntFieldUpdateOperationsInput | number
+    special_income?: IntFieldUpdateOperationsInput | number
+    other_income?: IntFieldUpdateOperationsInput | number
+    travel_income?: IntFieldUpdateOperationsInput | number
+    bursary?: IntFieldUpdateOperationsInput | number
+    welfare_money?: IntFieldUpdateOperationsInput | number
+    vat?: IntFieldUpdateOperationsInput | number
+    social_security?: IntFieldUpdateOperationsInput | number
+    miss?: IntFieldUpdateOperationsInput | number
+    ra?: IntFieldUpdateOperationsInput | number
+    late?: IntFieldUpdateOperationsInput | number
+    other?: IntFieldUpdateOperationsInput | number
+    provident_employee?: IntFieldUpdateOperationsInput | number
+    provident_company?: IntFieldUpdateOperationsInput | number
+    total_income?: IntFieldUpdateOperationsInput | number
+    total_expense?: IntFieldUpdateOperationsInput | number
+    net?: IntFieldUpdateOperationsInput | number
+    date?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type salaryUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    base_salary?: IntFieldUpdateOperationsInput | number
+    commission?: IntFieldUpdateOperationsInput | number
+    position_income?: IntFieldUpdateOperationsInput | number
+    ot?: IntFieldUpdateOperationsInput | number
+    bonus?: IntFieldUpdateOperationsInput | number
+    special_income?: IntFieldUpdateOperationsInput | number
+    other_income?: IntFieldUpdateOperationsInput | number
+    travel_income?: IntFieldUpdateOperationsInput | number
+    bursary?: IntFieldUpdateOperationsInput | number
+    welfare_money?: IntFieldUpdateOperationsInput | number
+    vat?: IntFieldUpdateOperationsInput | number
+    social_security?: IntFieldUpdateOperationsInput | number
+    miss?: IntFieldUpdateOperationsInput | number
+    ra?: IntFieldUpdateOperationsInput | number
+    late?: IntFieldUpdateOperationsInput | number
+    other?: IntFieldUpdateOperationsInput | number
+    provident_employee?: IntFieldUpdateOperationsInput | number
+    provident_company?: IntFieldUpdateOperationsInput | number
+    total_income?: IntFieldUpdateOperationsInput | number
+    total_expense?: IntFieldUpdateOperationsInput | number
+    net?: IntFieldUpdateOperationsInput | number
+    date?: DateTimeFieldUpdateOperationsInput | Date | string
+    userId?: NullableStringFieldUpdateOperationsInput | string | null
+  }
+
+  export type all_collectCreateInput = {
+    id: string
+    User?: UserCreateNestedOneWithoutAll_collectInput
+    income_collect: number
+    vat_collect: number
+    social_secu_collect: number
+    provident_collect_employee: number
+    provident_collect_company: number
+    bookbank_log?: bookbank_logCreateNestedManyWithoutAll_collectInput
+  }
+
+  export type all_collectUncheckedCreateInput = {
+    id: string
+    userId?: string | null
+    income_collect: number
+    vat_collect: number
+    social_secu_collect: number
+    provident_collect_employee: number
+    provident_collect_company: number
+    bookbank_log?: bookbank_logUncheckedCreateNestedManyWithoutAll_collectInput
+  }
+
+  export type all_collectUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    User?: UserUpdateOneWithoutAll_collectNestedInput
+    income_collect?: IntFieldUpdateOperationsInput | number
+    vat_collect?: IntFieldUpdateOperationsInput | number
+    social_secu_collect?: IntFieldUpdateOperationsInput | number
+    provident_collect_employee?: IntFieldUpdateOperationsInput | number
+    provident_collect_company?: IntFieldUpdateOperationsInput | number
+    bookbank_log?: bookbank_logUpdateManyWithoutAll_collectNestedInput
+  }
+
+  export type all_collectUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    userId?: NullableStringFieldUpdateOperationsInput | string | null
+    income_collect?: IntFieldUpdateOperationsInput | number
+    vat_collect?: IntFieldUpdateOperationsInput | number
+    social_secu_collect?: IntFieldUpdateOperationsInput | number
+    provident_collect_employee?: IntFieldUpdateOperationsInput | number
+    provident_collect_company?: IntFieldUpdateOperationsInput | number
+    bookbank_log?: bookbank_logUncheckedUpdateManyWithoutAll_collectNestedInput
+  }
+
+  export type all_collectCreateManyInput = {
+    id: string
+    userId?: string | null
+    income_collect: number
+    vat_collect: number
+    social_secu_collect: number
+    provident_collect_employee: number
+    provident_collect_company: number
+  }
+
+  export type all_collectUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    income_collect?: IntFieldUpdateOperationsInput | number
+    vat_collect?: IntFieldUpdateOperationsInput | number
+    social_secu_collect?: IntFieldUpdateOperationsInput | number
+    provident_collect_employee?: IntFieldUpdateOperationsInput | number
+    provident_collect_company?: IntFieldUpdateOperationsInput | number
+  }
+
+  export type all_collectUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    userId?: NullableStringFieldUpdateOperationsInput | string | null
+    income_collect?: IntFieldUpdateOperationsInput | number
+    vat_collect?: IntFieldUpdateOperationsInput | number
+    social_secu_collect?: IntFieldUpdateOperationsInput | number
+    provident_collect_employee?: IntFieldUpdateOperationsInput | number
+    provident_collect_company?: IntFieldUpdateOperationsInput | number
+  }
+
+  export type bookbank_logCreateInput = {
+    id: string
+    date: Date | string
+    bank_number: string
+    all_collect?: all_collectCreateNestedOneWithoutBookbank_logInput
+    mas_bank?: mas_bankCreateNestedOneWithoutBookbank_logInput
+  }
+
+  export type bookbank_logUncheckedCreateInput = {
+    id: string
+    date: Date | string
+    mas_bankId?: string | null
+    bank_number: string
+    all_collectId?: string | null
+  }
+
+  export type bookbank_logUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    date?: DateTimeFieldUpdateOperationsInput | Date | string
+    bank_number?: StringFieldUpdateOperationsInput | string
+    all_collect?: all_collectUpdateOneWithoutBookbank_logNestedInput
+    mas_bank?: mas_bankUpdateOneWithoutBookbank_logNestedInput
+  }
+
+  export type bookbank_logUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    date?: DateTimeFieldUpdateOperationsInput | Date | string
+    mas_bankId?: NullableStringFieldUpdateOperationsInput | string | null
+    bank_number?: StringFieldUpdateOperationsInput | string
+    all_collectId?: NullableStringFieldUpdateOperationsInput | string | null
+  }
+
+  export type bookbank_logCreateManyInput = {
+    id: string
+    date: Date | string
+    mas_bankId?: string | null
+    bank_number: string
+    all_collectId?: string | null
+  }
+
+  export type bookbank_logUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    date?: DateTimeFieldUpdateOperationsInput | Date | string
+    bank_number?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type bookbank_logUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    date?: DateTimeFieldUpdateOperationsInput | Date | string
+    mas_bankId?: NullableStringFieldUpdateOperationsInput | string | null
+    bank_number?: StringFieldUpdateOperationsInput | string
+    all_collectId?: NullableStringFieldUpdateOperationsInput | string | null
+  }
+
   export type UuidFilter = {
     equals?: string
     in?: Enumerable<string>
@@ -21212,11 +31482,21 @@ export namespace Prisma {
     none?: Role_CompanyWhereInput
   }
 
+  export type Expense_companyListRelationFilter = {
+    every?: expense_companyWhereInput
+    some?: expense_companyWhereInput
+    none?: expense_companyWhereInput
+  }
+
   export type UserOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
   export type Role_CompanyOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type expense_companyOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
@@ -21545,11 +31825,31 @@ export namespace Prisma {
     none?: Position_userWhereInput
   }
 
+  export type All_collectListRelationFilter = {
+    every?: all_collectWhereInput
+    some?: all_collectWhereInput
+    none?: all_collectWhereInput
+  }
+
+  export type SalaryListRelationFilter = {
+    every?: salaryWhereInput
+    some?: salaryWhereInput
+    none?: salaryWhereInput
+  }
+
   export type CompanyOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
   export type Position_userOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type all_collectOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type salaryOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
@@ -22034,6 +32334,380 @@ export namespace Prisma {
     year?: SortOrder
   }
 
+  export type Bookbank_logListRelationFilter = {
+    every?: bookbank_logWhereInput
+    some?: bookbank_logWhereInput
+    none?: bookbank_logWhereInput
+  }
+
+  export type bookbank_logOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type mas_bankCountOrderByAggregateInput = {
+    id?: SortOrder
+    name?: SortOrder
+  }
+
+  export type mas_bankMaxOrderByAggregateInput = {
+    id?: SortOrder
+    name?: SortOrder
+  }
+
+  export type mas_bankMinOrderByAggregateInput = {
+    id?: SortOrder
+    name?: SortOrder
+  }
+
+  export type mas_monthCountOrderByAggregateInput = {
+    id?: SortOrder
+    name?: SortOrder
+  }
+
+  export type mas_monthMaxOrderByAggregateInput = {
+    id?: SortOrder
+    name?: SortOrder
+  }
+
+  export type mas_monthMinOrderByAggregateInput = {
+    id?: SortOrder
+    name?: SortOrder
+  }
+
+  export type mas_yearsCountOrderByAggregateInput = {
+    id?: SortOrder
+    name?: SortOrder
+  }
+
+  export type mas_yearsMaxOrderByAggregateInput = {
+    id?: SortOrder
+    name?: SortOrder
+  }
+
+  export type mas_yearsMinOrderByAggregateInput = {
+    id?: SortOrder
+    name?: SortOrder
+  }
+
+  export type mas_salary_statusCountOrderByAggregateInput = {
+    id?: SortOrder
+    no?: SortOrder
+    name?: SortOrder
+  }
+
+  export type mas_salary_statusAvgOrderByAggregateInput = {
+    no?: SortOrder
+  }
+
+  export type mas_salary_statusMaxOrderByAggregateInput = {
+    id?: SortOrder
+    no?: SortOrder
+    name?: SortOrder
+  }
+
+  export type mas_salary_statusMinOrderByAggregateInput = {
+    id?: SortOrder
+    no?: SortOrder
+    name?: SortOrder
+  }
+
+  export type mas_salary_statusSumOrderByAggregateInput = {
+    no?: SortOrder
+  }
+
+  export type mas_income_typeCountOrderByAggregateInput = {
+    id?: SortOrder
+    name?: SortOrder
+  }
+
+  export type mas_income_typeMaxOrderByAggregateInput = {
+    id?: SortOrder
+    name?: SortOrder
+  }
+
+  export type mas_income_typeMinOrderByAggregateInput = {
+    id?: SortOrder
+    name?: SortOrder
+  }
+
+  export type IntNullableFilter = {
+    equals?: number | null
+    in?: Enumerable<number> | null
+    notIn?: Enumerable<number> | null
+    lt?: number
+    lte?: number
+    gt?: number
+    gte?: number
+    not?: NestedIntNullableFilter | number | null
+  }
+
+  export type Mas_monthRelationFilter = {
+    is?: mas_monthWhereInput | null
+    isNot?: mas_monthWhereInput | null
+  }
+
+  export type Mas_bankRelationFilter = {
+    is?: mas_bankWhereInput | null
+    isNot?: mas_bankWhereInput | null
+  }
+
+  export type expense_companyCountOrderByAggregateInput = {
+    id?: SortOrder
+    monthId?: SortOrder
+    bankId?: SortOrder
+    vat_per?: SortOrder
+    social_security?: SortOrder
+    companyBranchId?: SortOrder
+  }
+
+  export type expense_companyAvgOrderByAggregateInput = {
+    vat_per?: SortOrder
+    social_security?: SortOrder
+  }
+
+  export type expense_companyMaxOrderByAggregateInput = {
+    id?: SortOrder
+    monthId?: SortOrder
+    bankId?: SortOrder
+    vat_per?: SortOrder
+    social_security?: SortOrder
+    companyBranchId?: SortOrder
+  }
+
+  export type expense_companyMinOrderByAggregateInput = {
+    id?: SortOrder
+    monthId?: SortOrder
+    bankId?: SortOrder
+    vat_per?: SortOrder
+    social_security?: SortOrder
+    companyBranchId?: SortOrder
+  }
+
+  export type expense_companySumOrderByAggregateInput = {
+    vat_per?: SortOrder
+    social_security?: SortOrder
+  }
+
+  export type IntNullableWithAggregatesFilter = {
+    equals?: number | null
+    in?: Enumerable<number> | null
+    notIn?: Enumerable<number> | null
+    lt?: number
+    lte?: number
+    gt?: number
+    gte?: number
+    not?: NestedIntNullableWithAggregatesFilter | number | null
+    _count?: NestedIntNullableFilter
+    _avg?: NestedFloatNullableFilter
+    _sum?: NestedIntNullableFilter
+    _min?: NestedIntNullableFilter
+    _max?: NestedIntNullableFilter
+  }
+
+  export type salaryCountOrderByAggregateInput = {
+    id?: SortOrder
+    base_salary?: SortOrder
+    commission?: SortOrder
+    position_income?: SortOrder
+    ot?: SortOrder
+    bonus?: SortOrder
+    special_income?: SortOrder
+    other_income?: SortOrder
+    travel_income?: SortOrder
+    bursary?: SortOrder
+    welfare_money?: SortOrder
+    vat?: SortOrder
+    social_security?: SortOrder
+    miss?: SortOrder
+    ra?: SortOrder
+    late?: SortOrder
+    other?: SortOrder
+    provident_employee?: SortOrder
+    provident_company?: SortOrder
+    total_income?: SortOrder
+    total_expense?: SortOrder
+    net?: SortOrder
+    date?: SortOrder
+    userId?: SortOrder
+  }
+
+  export type salaryAvgOrderByAggregateInput = {
+    base_salary?: SortOrder
+    commission?: SortOrder
+    position_income?: SortOrder
+    ot?: SortOrder
+    bonus?: SortOrder
+    special_income?: SortOrder
+    other_income?: SortOrder
+    travel_income?: SortOrder
+    bursary?: SortOrder
+    welfare_money?: SortOrder
+    vat?: SortOrder
+    social_security?: SortOrder
+    miss?: SortOrder
+    ra?: SortOrder
+    late?: SortOrder
+    other?: SortOrder
+    provident_employee?: SortOrder
+    provident_company?: SortOrder
+    total_income?: SortOrder
+    total_expense?: SortOrder
+    net?: SortOrder
+  }
+
+  export type salaryMaxOrderByAggregateInput = {
+    id?: SortOrder
+    base_salary?: SortOrder
+    commission?: SortOrder
+    position_income?: SortOrder
+    ot?: SortOrder
+    bonus?: SortOrder
+    special_income?: SortOrder
+    other_income?: SortOrder
+    travel_income?: SortOrder
+    bursary?: SortOrder
+    welfare_money?: SortOrder
+    vat?: SortOrder
+    social_security?: SortOrder
+    miss?: SortOrder
+    ra?: SortOrder
+    late?: SortOrder
+    other?: SortOrder
+    provident_employee?: SortOrder
+    provident_company?: SortOrder
+    total_income?: SortOrder
+    total_expense?: SortOrder
+    net?: SortOrder
+    date?: SortOrder
+    userId?: SortOrder
+  }
+
+  export type salaryMinOrderByAggregateInput = {
+    id?: SortOrder
+    base_salary?: SortOrder
+    commission?: SortOrder
+    position_income?: SortOrder
+    ot?: SortOrder
+    bonus?: SortOrder
+    special_income?: SortOrder
+    other_income?: SortOrder
+    travel_income?: SortOrder
+    bursary?: SortOrder
+    welfare_money?: SortOrder
+    vat?: SortOrder
+    social_security?: SortOrder
+    miss?: SortOrder
+    ra?: SortOrder
+    late?: SortOrder
+    other?: SortOrder
+    provident_employee?: SortOrder
+    provident_company?: SortOrder
+    total_income?: SortOrder
+    total_expense?: SortOrder
+    net?: SortOrder
+    date?: SortOrder
+    userId?: SortOrder
+  }
+
+  export type salarySumOrderByAggregateInput = {
+    base_salary?: SortOrder
+    commission?: SortOrder
+    position_income?: SortOrder
+    ot?: SortOrder
+    bonus?: SortOrder
+    special_income?: SortOrder
+    other_income?: SortOrder
+    travel_income?: SortOrder
+    bursary?: SortOrder
+    welfare_money?: SortOrder
+    vat?: SortOrder
+    social_security?: SortOrder
+    miss?: SortOrder
+    ra?: SortOrder
+    late?: SortOrder
+    other?: SortOrder
+    provident_employee?: SortOrder
+    provident_company?: SortOrder
+    total_income?: SortOrder
+    total_expense?: SortOrder
+    net?: SortOrder
+  }
+
+  export type all_collectCountOrderByAggregateInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    income_collect?: SortOrder
+    vat_collect?: SortOrder
+    social_secu_collect?: SortOrder
+    provident_collect_employee?: SortOrder
+    provident_collect_company?: SortOrder
+  }
+
+  export type all_collectAvgOrderByAggregateInput = {
+    income_collect?: SortOrder
+    vat_collect?: SortOrder
+    social_secu_collect?: SortOrder
+    provident_collect_employee?: SortOrder
+    provident_collect_company?: SortOrder
+  }
+
+  export type all_collectMaxOrderByAggregateInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    income_collect?: SortOrder
+    vat_collect?: SortOrder
+    social_secu_collect?: SortOrder
+    provident_collect_employee?: SortOrder
+    provident_collect_company?: SortOrder
+  }
+
+  export type all_collectMinOrderByAggregateInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    income_collect?: SortOrder
+    vat_collect?: SortOrder
+    social_secu_collect?: SortOrder
+    provident_collect_employee?: SortOrder
+    provident_collect_company?: SortOrder
+  }
+
+  export type all_collectSumOrderByAggregateInput = {
+    income_collect?: SortOrder
+    vat_collect?: SortOrder
+    social_secu_collect?: SortOrder
+    provident_collect_employee?: SortOrder
+    provident_collect_company?: SortOrder
+  }
+
+  export type All_collectRelationFilter = {
+    is?: all_collectWhereInput | null
+    isNot?: all_collectWhereInput | null
+  }
+
+  export type bookbank_logCountOrderByAggregateInput = {
+    id?: SortOrder
+    date?: SortOrder
+    mas_bankId?: SortOrder
+    bank_number?: SortOrder
+    all_collectId?: SortOrder
+  }
+
+  export type bookbank_logMaxOrderByAggregateInput = {
+    id?: SortOrder
+    date?: SortOrder
+    mas_bankId?: SortOrder
+    bank_number?: SortOrder
+    all_collectId?: SortOrder
+  }
+
+  export type bookbank_logMinOrderByAggregateInput = {
+    id?: SortOrder
+    date?: SortOrder
+    mas_bankId?: SortOrder
+    bank_number?: SortOrder
+    all_collectId?: SortOrder
+  }
+
   export type UserCreateNestedOneWithoutCompanyInput = {
     create?: XOR<UserCreateWithoutCompanyInput, UserUncheckedCreateWithoutCompanyInput>
     connectOrCreate?: UserCreateOrConnectWithoutCompanyInput
@@ -22340,6 +33014,13 @@ export namespace Prisma {
     connect?: Enumerable<Role_CompanyWhereUniqueInput>
   }
 
+  export type expense_companyCreateNestedManyWithoutCompanyBranchInput = {
+    create?: XOR<Enumerable<expense_companyCreateWithoutCompanyBranchInput>, Enumerable<expense_companyUncheckedCreateWithoutCompanyBranchInput>>
+    connectOrCreate?: Enumerable<expense_companyCreateOrConnectWithoutCompanyBranchInput>
+    createMany?: expense_companyCreateManyCompanyBranchInputEnvelope
+    connect?: Enumerable<expense_companyWhereUniqueInput>
+  }
+
   export type UserUncheckedCreateNestedManyWithoutCompanyBranchInput = {
     create?: XOR<Enumerable<UserCreateWithoutCompanyBranchInput>, Enumerable<UserUncheckedCreateWithoutCompanyBranchInput>>
     connectOrCreate?: Enumerable<UserCreateOrConnectWithoutCompanyBranchInput>
@@ -22352,6 +33033,13 @@ export namespace Prisma {
     connectOrCreate?: Enumerable<Role_CompanyCreateOrConnectWithoutCompanyBranchInput>
     createMany?: Role_CompanyCreateManyCompanyBranchInputEnvelope
     connect?: Enumerable<Role_CompanyWhereUniqueInput>
+  }
+
+  export type expense_companyUncheckedCreateNestedManyWithoutCompanyBranchInput = {
+    create?: XOR<Enumerable<expense_companyCreateWithoutCompanyBranchInput>, Enumerable<expense_companyUncheckedCreateWithoutCompanyBranchInput>>
+    connectOrCreate?: Enumerable<expense_companyCreateOrConnectWithoutCompanyBranchInput>
+    createMany?: expense_companyCreateManyCompanyBranchInputEnvelope
+    connect?: Enumerable<expense_companyWhereUniqueInput>
   }
 
   export type BoolFieldUpdateOperationsInput = {
@@ -22396,6 +33084,20 @@ export namespace Prisma {
     deleteMany?: Enumerable<Role_CompanyScalarWhereInput>
   }
 
+  export type expense_companyUpdateManyWithoutCompanyBranchNestedInput = {
+    create?: XOR<Enumerable<expense_companyCreateWithoutCompanyBranchInput>, Enumerable<expense_companyUncheckedCreateWithoutCompanyBranchInput>>
+    connectOrCreate?: Enumerable<expense_companyCreateOrConnectWithoutCompanyBranchInput>
+    upsert?: Enumerable<expense_companyUpsertWithWhereUniqueWithoutCompanyBranchInput>
+    createMany?: expense_companyCreateManyCompanyBranchInputEnvelope
+    set?: Enumerable<expense_companyWhereUniqueInput>
+    disconnect?: Enumerable<expense_companyWhereUniqueInput>
+    delete?: Enumerable<expense_companyWhereUniqueInput>
+    connect?: Enumerable<expense_companyWhereUniqueInput>
+    update?: Enumerable<expense_companyUpdateWithWhereUniqueWithoutCompanyBranchInput>
+    updateMany?: Enumerable<expense_companyUpdateManyWithWhereWithoutCompanyBranchInput>
+    deleteMany?: Enumerable<expense_companyScalarWhereInput>
+  }
+
   export type UserUncheckedUpdateManyWithoutCompanyBranchNestedInput = {
     create?: XOR<Enumerable<UserCreateWithoutCompanyBranchInput>, Enumerable<UserUncheckedCreateWithoutCompanyBranchInput>>
     connectOrCreate?: Enumerable<UserCreateOrConnectWithoutCompanyBranchInput>
@@ -22422,6 +33124,20 @@ export namespace Prisma {
     update?: Enumerable<Role_CompanyUpdateWithWhereUniqueWithoutCompanyBranchInput>
     updateMany?: Enumerable<Role_CompanyUpdateManyWithWhereWithoutCompanyBranchInput>
     deleteMany?: Enumerable<Role_CompanyScalarWhereInput>
+  }
+
+  export type expense_companyUncheckedUpdateManyWithoutCompanyBranchNestedInput = {
+    create?: XOR<Enumerable<expense_companyCreateWithoutCompanyBranchInput>, Enumerable<expense_companyUncheckedCreateWithoutCompanyBranchInput>>
+    connectOrCreate?: Enumerable<expense_companyCreateOrConnectWithoutCompanyBranchInput>
+    upsert?: Enumerable<expense_companyUpsertWithWhereUniqueWithoutCompanyBranchInput>
+    createMany?: expense_companyCreateManyCompanyBranchInputEnvelope
+    set?: Enumerable<expense_companyWhereUniqueInput>
+    disconnect?: Enumerable<expense_companyWhereUniqueInput>
+    delete?: Enumerable<expense_companyWhereUniqueInput>
+    connect?: Enumerable<expense_companyWhereUniqueInput>
+    update?: Enumerable<expense_companyUpdateWithWhereUniqueWithoutCompanyBranchInput>
+    updateMany?: Enumerable<expense_companyUpdateManyWithWhereWithoutCompanyBranchInput>
+    deleteMany?: Enumerable<expense_companyScalarWhereInput>
   }
 
   export type UserCreateNestedOneWithoutProfileInput = {
@@ -22486,6 +33202,20 @@ export namespace Prisma {
     connect?: Enumerable<Position_userWhereUniqueInput>
   }
 
+  export type all_collectCreateNestedManyWithoutUserInput = {
+    create?: XOR<Enumerable<all_collectCreateWithoutUserInput>, Enumerable<all_collectUncheckedCreateWithoutUserInput>>
+    connectOrCreate?: Enumerable<all_collectCreateOrConnectWithoutUserInput>
+    createMany?: all_collectCreateManyUserInputEnvelope
+    connect?: Enumerable<all_collectWhereUniqueInput>
+  }
+
+  export type salaryCreateNestedManyWithoutUserInput = {
+    create?: XOR<Enumerable<salaryCreateWithoutUserInput>, Enumerable<salaryUncheckedCreateWithoutUserInput>>
+    connectOrCreate?: Enumerable<salaryCreateOrConnectWithoutUserInput>
+    createMany?: salaryCreateManyUserInputEnvelope
+    connect?: Enumerable<salaryWhereUniqueInput>
+  }
+
   export type ProfileUncheckedCreateNestedOneWithoutUserInput = {
     create?: XOR<ProfileCreateWithoutUserInput, ProfileUncheckedCreateWithoutUserInput>
     connectOrCreate?: ProfileCreateOrConnectWithoutUserInput
@@ -22510,6 +33240,20 @@ export namespace Prisma {
     connectOrCreate?: Enumerable<Position_userCreateOrConnectWithoutHeaderInput>
     createMany?: Position_userCreateManyHeaderInputEnvelope
     connect?: Enumerable<Position_userWhereUniqueInput>
+  }
+
+  export type all_collectUncheckedCreateNestedManyWithoutUserInput = {
+    create?: XOR<Enumerable<all_collectCreateWithoutUserInput>, Enumerable<all_collectUncheckedCreateWithoutUserInput>>
+    connectOrCreate?: Enumerable<all_collectCreateOrConnectWithoutUserInput>
+    createMany?: all_collectCreateManyUserInputEnvelope
+    connect?: Enumerable<all_collectWhereUniqueInput>
+  }
+
+  export type salaryUncheckedCreateNestedManyWithoutUserInput = {
+    create?: XOR<Enumerable<salaryCreateWithoutUserInput>, Enumerable<salaryUncheckedCreateWithoutUserInput>>
+    connectOrCreate?: Enumerable<salaryCreateOrConnectWithoutUserInput>
+    createMany?: salaryCreateManyUserInputEnvelope
+    connect?: Enumerable<salaryWhereUniqueInput>
   }
 
   export type ProfileUpdateOneWithoutUserNestedInput = {
@@ -22590,6 +33334,34 @@ export namespace Prisma {
     deleteMany?: Enumerable<Position_userScalarWhereInput>
   }
 
+  export type all_collectUpdateManyWithoutUserNestedInput = {
+    create?: XOR<Enumerable<all_collectCreateWithoutUserInput>, Enumerable<all_collectUncheckedCreateWithoutUserInput>>
+    connectOrCreate?: Enumerable<all_collectCreateOrConnectWithoutUserInput>
+    upsert?: Enumerable<all_collectUpsertWithWhereUniqueWithoutUserInput>
+    createMany?: all_collectCreateManyUserInputEnvelope
+    set?: Enumerable<all_collectWhereUniqueInput>
+    disconnect?: Enumerable<all_collectWhereUniqueInput>
+    delete?: Enumerable<all_collectWhereUniqueInput>
+    connect?: Enumerable<all_collectWhereUniqueInput>
+    update?: Enumerable<all_collectUpdateWithWhereUniqueWithoutUserInput>
+    updateMany?: Enumerable<all_collectUpdateManyWithWhereWithoutUserInput>
+    deleteMany?: Enumerable<all_collectScalarWhereInput>
+  }
+
+  export type salaryUpdateManyWithoutUserNestedInput = {
+    create?: XOR<Enumerable<salaryCreateWithoutUserInput>, Enumerable<salaryUncheckedCreateWithoutUserInput>>
+    connectOrCreate?: Enumerable<salaryCreateOrConnectWithoutUserInput>
+    upsert?: Enumerable<salaryUpsertWithWhereUniqueWithoutUserInput>
+    createMany?: salaryCreateManyUserInputEnvelope
+    set?: Enumerable<salaryWhereUniqueInput>
+    disconnect?: Enumerable<salaryWhereUniqueInput>
+    delete?: Enumerable<salaryWhereUniqueInput>
+    connect?: Enumerable<salaryWhereUniqueInput>
+    update?: Enumerable<salaryUpdateWithWhereUniqueWithoutUserInput>
+    updateMany?: Enumerable<salaryUpdateManyWithWhereWithoutUserInput>
+    deleteMany?: Enumerable<salaryScalarWhereInput>
+  }
+
   export type ProfileUncheckedUpdateOneWithoutUserNestedInput = {
     create?: XOR<ProfileCreateWithoutUserInput, ProfileUncheckedCreateWithoutUserInput>
     connectOrCreate?: ProfileCreateOrConnectWithoutUserInput
@@ -22636,6 +33408,34 @@ export namespace Prisma {
     update?: Enumerable<Position_userUpdateWithWhereUniqueWithoutHeaderInput>
     updateMany?: Enumerable<Position_userUpdateManyWithWhereWithoutHeaderInput>
     deleteMany?: Enumerable<Position_userScalarWhereInput>
+  }
+
+  export type all_collectUncheckedUpdateManyWithoutUserNestedInput = {
+    create?: XOR<Enumerable<all_collectCreateWithoutUserInput>, Enumerable<all_collectUncheckedCreateWithoutUserInput>>
+    connectOrCreate?: Enumerable<all_collectCreateOrConnectWithoutUserInput>
+    upsert?: Enumerable<all_collectUpsertWithWhereUniqueWithoutUserInput>
+    createMany?: all_collectCreateManyUserInputEnvelope
+    set?: Enumerable<all_collectWhereUniqueInput>
+    disconnect?: Enumerable<all_collectWhereUniqueInput>
+    delete?: Enumerable<all_collectWhereUniqueInput>
+    connect?: Enumerable<all_collectWhereUniqueInput>
+    update?: Enumerable<all_collectUpdateWithWhereUniqueWithoutUserInput>
+    updateMany?: Enumerable<all_collectUpdateManyWithWhereWithoutUserInput>
+    deleteMany?: Enumerable<all_collectScalarWhereInput>
+  }
+
+  export type salaryUncheckedUpdateManyWithoutUserNestedInput = {
+    create?: XOR<Enumerable<salaryCreateWithoutUserInput>, Enumerable<salaryUncheckedCreateWithoutUserInput>>
+    connectOrCreate?: Enumerable<salaryCreateOrConnectWithoutUserInput>
+    upsert?: Enumerable<salaryUpsertWithWhereUniqueWithoutUserInput>
+    createMany?: salaryCreateManyUserInputEnvelope
+    set?: Enumerable<salaryWhereUniqueInput>
+    disconnect?: Enumerable<salaryWhereUniqueInput>
+    delete?: Enumerable<salaryWhereUniqueInput>
+    connect?: Enumerable<salaryWhereUniqueInput>
+    update?: Enumerable<salaryUpdateWithWhereUniqueWithoutUserInput>
+    updateMany?: Enumerable<salaryUpdateManyWithWhereWithoutUserInput>
+    deleteMany?: Enumerable<salaryScalarWhereInput>
   }
 
   export type UserCreateNestedManyWithoutRoleInput = {
@@ -23252,6 +34052,294 @@ export namespace Prisma {
     update?: XOR<CompanyUpdateWithoutHoliday_dateInput, CompanyUncheckedUpdateWithoutHoliday_dateInput>
   }
 
+  export type expense_companyCreateNestedManyWithoutMas_bankInput = {
+    create?: XOR<Enumerable<expense_companyCreateWithoutMas_bankInput>, Enumerable<expense_companyUncheckedCreateWithoutMas_bankInput>>
+    connectOrCreate?: Enumerable<expense_companyCreateOrConnectWithoutMas_bankInput>
+    createMany?: expense_companyCreateManyMas_bankInputEnvelope
+    connect?: Enumerable<expense_companyWhereUniqueInput>
+  }
+
+  export type bookbank_logCreateNestedManyWithoutMas_bankInput = {
+    create?: XOR<Enumerable<bookbank_logCreateWithoutMas_bankInput>, Enumerable<bookbank_logUncheckedCreateWithoutMas_bankInput>>
+    connectOrCreate?: Enumerable<bookbank_logCreateOrConnectWithoutMas_bankInput>
+    createMany?: bookbank_logCreateManyMas_bankInputEnvelope
+    connect?: Enumerable<bookbank_logWhereUniqueInput>
+  }
+
+  export type expense_companyUncheckedCreateNestedManyWithoutMas_bankInput = {
+    create?: XOR<Enumerable<expense_companyCreateWithoutMas_bankInput>, Enumerable<expense_companyUncheckedCreateWithoutMas_bankInput>>
+    connectOrCreate?: Enumerable<expense_companyCreateOrConnectWithoutMas_bankInput>
+    createMany?: expense_companyCreateManyMas_bankInputEnvelope
+    connect?: Enumerable<expense_companyWhereUniqueInput>
+  }
+
+  export type bookbank_logUncheckedCreateNestedManyWithoutMas_bankInput = {
+    create?: XOR<Enumerable<bookbank_logCreateWithoutMas_bankInput>, Enumerable<bookbank_logUncheckedCreateWithoutMas_bankInput>>
+    connectOrCreate?: Enumerable<bookbank_logCreateOrConnectWithoutMas_bankInput>
+    createMany?: bookbank_logCreateManyMas_bankInputEnvelope
+    connect?: Enumerable<bookbank_logWhereUniqueInput>
+  }
+
+  export type expense_companyUpdateManyWithoutMas_bankNestedInput = {
+    create?: XOR<Enumerable<expense_companyCreateWithoutMas_bankInput>, Enumerable<expense_companyUncheckedCreateWithoutMas_bankInput>>
+    connectOrCreate?: Enumerable<expense_companyCreateOrConnectWithoutMas_bankInput>
+    upsert?: Enumerable<expense_companyUpsertWithWhereUniqueWithoutMas_bankInput>
+    createMany?: expense_companyCreateManyMas_bankInputEnvelope
+    set?: Enumerable<expense_companyWhereUniqueInput>
+    disconnect?: Enumerable<expense_companyWhereUniqueInput>
+    delete?: Enumerable<expense_companyWhereUniqueInput>
+    connect?: Enumerable<expense_companyWhereUniqueInput>
+    update?: Enumerable<expense_companyUpdateWithWhereUniqueWithoutMas_bankInput>
+    updateMany?: Enumerable<expense_companyUpdateManyWithWhereWithoutMas_bankInput>
+    deleteMany?: Enumerable<expense_companyScalarWhereInput>
+  }
+
+  export type bookbank_logUpdateManyWithoutMas_bankNestedInput = {
+    create?: XOR<Enumerable<bookbank_logCreateWithoutMas_bankInput>, Enumerable<bookbank_logUncheckedCreateWithoutMas_bankInput>>
+    connectOrCreate?: Enumerable<bookbank_logCreateOrConnectWithoutMas_bankInput>
+    upsert?: Enumerable<bookbank_logUpsertWithWhereUniqueWithoutMas_bankInput>
+    createMany?: bookbank_logCreateManyMas_bankInputEnvelope
+    set?: Enumerable<bookbank_logWhereUniqueInput>
+    disconnect?: Enumerable<bookbank_logWhereUniqueInput>
+    delete?: Enumerable<bookbank_logWhereUniqueInput>
+    connect?: Enumerable<bookbank_logWhereUniqueInput>
+    update?: Enumerable<bookbank_logUpdateWithWhereUniqueWithoutMas_bankInput>
+    updateMany?: Enumerable<bookbank_logUpdateManyWithWhereWithoutMas_bankInput>
+    deleteMany?: Enumerable<bookbank_logScalarWhereInput>
+  }
+
+  export type expense_companyUncheckedUpdateManyWithoutMas_bankNestedInput = {
+    create?: XOR<Enumerable<expense_companyCreateWithoutMas_bankInput>, Enumerable<expense_companyUncheckedCreateWithoutMas_bankInput>>
+    connectOrCreate?: Enumerable<expense_companyCreateOrConnectWithoutMas_bankInput>
+    upsert?: Enumerable<expense_companyUpsertWithWhereUniqueWithoutMas_bankInput>
+    createMany?: expense_companyCreateManyMas_bankInputEnvelope
+    set?: Enumerable<expense_companyWhereUniqueInput>
+    disconnect?: Enumerable<expense_companyWhereUniqueInput>
+    delete?: Enumerable<expense_companyWhereUniqueInput>
+    connect?: Enumerable<expense_companyWhereUniqueInput>
+    update?: Enumerable<expense_companyUpdateWithWhereUniqueWithoutMas_bankInput>
+    updateMany?: Enumerable<expense_companyUpdateManyWithWhereWithoutMas_bankInput>
+    deleteMany?: Enumerable<expense_companyScalarWhereInput>
+  }
+
+  export type bookbank_logUncheckedUpdateManyWithoutMas_bankNestedInput = {
+    create?: XOR<Enumerable<bookbank_logCreateWithoutMas_bankInput>, Enumerable<bookbank_logUncheckedCreateWithoutMas_bankInput>>
+    connectOrCreate?: Enumerable<bookbank_logCreateOrConnectWithoutMas_bankInput>
+    upsert?: Enumerable<bookbank_logUpsertWithWhereUniqueWithoutMas_bankInput>
+    createMany?: bookbank_logCreateManyMas_bankInputEnvelope
+    set?: Enumerable<bookbank_logWhereUniqueInput>
+    disconnect?: Enumerable<bookbank_logWhereUniqueInput>
+    delete?: Enumerable<bookbank_logWhereUniqueInput>
+    connect?: Enumerable<bookbank_logWhereUniqueInput>
+    update?: Enumerable<bookbank_logUpdateWithWhereUniqueWithoutMas_bankInput>
+    updateMany?: Enumerable<bookbank_logUpdateManyWithWhereWithoutMas_bankInput>
+    deleteMany?: Enumerable<bookbank_logScalarWhereInput>
+  }
+
+  export type expense_companyCreateNestedManyWithoutMas_monthInput = {
+    create?: XOR<Enumerable<expense_companyCreateWithoutMas_monthInput>, Enumerable<expense_companyUncheckedCreateWithoutMas_monthInput>>
+    connectOrCreate?: Enumerable<expense_companyCreateOrConnectWithoutMas_monthInput>
+    createMany?: expense_companyCreateManyMas_monthInputEnvelope
+    connect?: Enumerable<expense_companyWhereUniqueInput>
+  }
+
+  export type expense_companyUncheckedCreateNestedManyWithoutMas_monthInput = {
+    create?: XOR<Enumerable<expense_companyCreateWithoutMas_monthInput>, Enumerable<expense_companyUncheckedCreateWithoutMas_monthInput>>
+    connectOrCreate?: Enumerable<expense_companyCreateOrConnectWithoutMas_monthInput>
+    createMany?: expense_companyCreateManyMas_monthInputEnvelope
+    connect?: Enumerable<expense_companyWhereUniqueInput>
+  }
+
+  export type expense_companyUpdateManyWithoutMas_monthNestedInput = {
+    create?: XOR<Enumerable<expense_companyCreateWithoutMas_monthInput>, Enumerable<expense_companyUncheckedCreateWithoutMas_monthInput>>
+    connectOrCreate?: Enumerable<expense_companyCreateOrConnectWithoutMas_monthInput>
+    upsert?: Enumerable<expense_companyUpsertWithWhereUniqueWithoutMas_monthInput>
+    createMany?: expense_companyCreateManyMas_monthInputEnvelope
+    set?: Enumerable<expense_companyWhereUniqueInput>
+    disconnect?: Enumerable<expense_companyWhereUniqueInput>
+    delete?: Enumerable<expense_companyWhereUniqueInput>
+    connect?: Enumerable<expense_companyWhereUniqueInput>
+    update?: Enumerable<expense_companyUpdateWithWhereUniqueWithoutMas_monthInput>
+    updateMany?: Enumerable<expense_companyUpdateManyWithWhereWithoutMas_monthInput>
+    deleteMany?: Enumerable<expense_companyScalarWhereInput>
+  }
+
+  export type expense_companyUncheckedUpdateManyWithoutMas_monthNestedInput = {
+    create?: XOR<Enumerable<expense_companyCreateWithoutMas_monthInput>, Enumerable<expense_companyUncheckedCreateWithoutMas_monthInput>>
+    connectOrCreate?: Enumerable<expense_companyCreateOrConnectWithoutMas_monthInput>
+    upsert?: Enumerable<expense_companyUpsertWithWhereUniqueWithoutMas_monthInput>
+    createMany?: expense_companyCreateManyMas_monthInputEnvelope
+    set?: Enumerable<expense_companyWhereUniqueInput>
+    disconnect?: Enumerable<expense_companyWhereUniqueInput>
+    delete?: Enumerable<expense_companyWhereUniqueInput>
+    connect?: Enumerable<expense_companyWhereUniqueInput>
+    update?: Enumerable<expense_companyUpdateWithWhereUniqueWithoutMas_monthInput>
+    updateMany?: Enumerable<expense_companyUpdateManyWithWhereWithoutMas_monthInput>
+    deleteMany?: Enumerable<expense_companyScalarWhereInput>
+  }
+
+  export type mas_monthCreateNestedOneWithoutExpense_companyInput = {
+    create?: XOR<mas_monthCreateWithoutExpense_companyInput, mas_monthUncheckedCreateWithoutExpense_companyInput>
+    connectOrCreate?: mas_monthCreateOrConnectWithoutExpense_companyInput
+    connect?: mas_monthWhereUniqueInput
+  }
+
+  export type mas_bankCreateNestedOneWithoutExpense_companyInput = {
+    create?: XOR<mas_bankCreateWithoutExpense_companyInput, mas_bankUncheckedCreateWithoutExpense_companyInput>
+    connectOrCreate?: mas_bankCreateOrConnectWithoutExpense_companyInput
+    connect?: mas_bankWhereUniqueInput
+  }
+
+  export type CompanyBranchCreateNestedOneWithoutExpense_companyInput = {
+    create?: XOR<CompanyBranchCreateWithoutExpense_companyInput, CompanyBranchUncheckedCreateWithoutExpense_companyInput>
+    connectOrCreate?: CompanyBranchCreateOrConnectWithoutExpense_companyInput
+    connect?: CompanyBranchWhereUniqueInput
+  }
+
+  export type NullableIntFieldUpdateOperationsInput = {
+    set?: number | null
+    increment?: number
+    decrement?: number
+    multiply?: number
+    divide?: number
+  }
+
+  export type mas_monthUpdateOneWithoutExpense_companyNestedInput = {
+    create?: XOR<mas_monthCreateWithoutExpense_companyInput, mas_monthUncheckedCreateWithoutExpense_companyInput>
+    connectOrCreate?: mas_monthCreateOrConnectWithoutExpense_companyInput
+    upsert?: mas_monthUpsertWithoutExpense_companyInput
+    disconnect?: boolean
+    delete?: boolean
+    connect?: mas_monthWhereUniqueInput
+    update?: XOR<mas_monthUpdateWithoutExpense_companyInput, mas_monthUncheckedUpdateWithoutExpense_companyInput>
+  }
+
+  export type mas_bankUpdateOneWithoutExpense_companyNestedInput = {
+    create?: XOR<mas_bankCreateWithoutExpense_companyInput, mas_bankUncheckedCreateWithoutExpense_companyInput>
+    connectOrCreate?: mas_bankCreateOrConnectWithoutExpense_companyInput
+    upsert?: mas_bankUpsertWithoutExpense_companyInput
+    disconnect?: boolean
+    delete?: boolean
+    connect?: mas_bankWhereUniqueInput
+    update?: XOR<mas_bankUpdateWithoutExpense_companyInput, mas_bankUncheckedUpdateWithoutExpense_companyInput>
+  }
+
+  export type CompanyBranchUpdateOneWithoutExpense_companyNestedInput = {
+    create?: XOR<CompanyBranchCreateWithoutExpense_companyInput, CompanyBranchUncheckedCreateWithoutExpense_companyInput>
+    connectOrCreate?: CompanyBranchCreateOrConnectWithoutExpense_companyInput
+    upsert?: CompanyBranchUpsertWithoutExpense_companyInput
+    disconnect?: boolean
+    delete?: boolean
+    connect?: CompanyBranchWhereUniqueInput
+    update?: XOR<CompanyBranchUpdateWithoutExpense_companyInput, CompanyBranchUncheckedUpdateWithoutExpense_companyInput>
+  }
+
+  export type UserCreateNestedOneWithoutSalaryInput = {
+    create?: XOR<UserCreateWithoutSalaryInput, UserUncheckedCreateWithoutSalaryInput>
+    connectOrCreate?: UserCreateOrConnectWithoutSalaryInput
+    connect?: UserWhereUniqueInput
+  }
+
+  export type UserUpdateOneWithoutSalaryNestedInput = {
+    create?: XOR<UserCreateWithoutSalaryInput, UserUncheckedCreateWithoutSalaryInput>
+    connectOrCreate?: UserCreateOrConnectWithoutSalaryInput
+    upsert?: UserUpsertWithoutSalaryInput
+    disconnect?: boolean
+    delete?: boolean
+    connect?: UserWhereUniqueInput
+    update?: XOR<UserUpdateWithoutSalaryInput, UserUncheckedUpdateWithoutSalaryInput>
+  }
+
+  export type UserCreateNestedOneWithoutAll_collectInput = {
+    create?: XOR<UserCreateWithoutAll_collectInput, UserUncheckedCreateWithoutAll_collectInput>
+    connectOrCreate?: UserCreateOrConnectWithoutAll_collectInput
+    connect?: UserWhereUniqueInput
+  }
+
+  export type bookbank_logCreateNestedManyWithoutAll_collectInput = {
+    create?: XOR<Enumerable<bookbank_logCreateWithoutAll_collectInput>, Enumerable<bookbank_logUncheckedCreateWithoutAll_collectInput>>
+    connectOrCreate?: Enumerable<bookbank_logCreateOrConnectWithoutAll_collectInput>
+    createMany?: bookbank_logCreateManyAll_collectInputEnvelope
+    connect?: Enumerable<bookbank_logWhereUniqueInput>
+  }
+
+  export type bookbank_logUncheckedCreateNestedManyWithoutAll_collectInput = {
+    create?: XOR<Enumerable<bookbank_logCreateWithoutAll_collectInput>, Enumerable<bookbank_logUncheckedCreateWithoutAll_collectInput>>
+    connectOrCreate?: Enumerable<bookbank_logCreateOrConnectWithoutAll_collectInput>
+    createMany?: bookbank_logCreateManyAll_collectInputEnvelope
+    connect?: Enumerable<bookbank_logWhereUniqueInput>
+  }
+
+  export type UserUpdateOneWithoutAll_collectNestedInput = {
+    create?: XOR<UserCreateWithoutAll_collectInput, UserUncheckedCreateWithoutAll_collectInput>
+    connectOrCreate?: UserCreateOrConnectWithoutAll_collectInput
+    upsert?: UserUpsertWithoutAll_collectInput
+    disconnect?: boolean
+    delete?: boolean
+    connect?: UserWhereUniqueInput
+    update?: XOR<UserUpdateWithoutAll_collectInput, UserUncheckedUpdateWithoutAll_collectInput>
+  }
+
+  export type bookbank_logUpdateManyWithoutAll_collectNestedInput = {
+    create?: XOR<Enumerable<bookbank_logCreateWithoutAll_collectInput>, Enumerable<bookbank_logUncheckedCreateWithoutAll_collectInput>>
+    connectOrCreate?: Enumerable<bookbank_logCreateOrConnectWithoutAll_collectInput>
+    upsert?: Enumerable<bookbank_logUpsertWithWhereUniqueWithoutAll_collectInput>
+    createMany?: bookbank_logCreateManyAll_collectInputEnvelope
+    set?: Enumerable<bookbank_logWhereUniqueInput>
+    disconnect?: Enumerable<bookbank_logWhereUniqueInput>
+    delete?: Enumerable<bookbank_logWhereUniqueInput>
+    connect?: Enumerable<bookbank_logWhereUniqueInput>
+    update?: Enumerable<bookbank_logUpdateWithWhereUniqueWithoutAll_collectInput>
+    updateMany?: Enumerable<bookbank_logUpdateManyWithWhereWithoutAll_collectInput>
+    deleteMany?: Enumerable<bookbank_logScalarWhereInput>
+  }
+
+  export type bookbank_logUncheckedUpdateManyWithoutAll_collectNestedInput = {
+    create?: XOR<Enumerable<bookbank_logCreateWithoutAll_collectInput>, Enumerable<bookbank_logUncheckedCreateWithoutAll_collectInput>>
+    connectOrCreate?: Enumerable<bookbank_logCreateOrConnectWithoutAll_collectInput>
+    upsert?: Enumerable<bookbank_logUpsertWithWhereUniqueWithoutAll_collectInput>
+    createMany?: bookbank_logCreateManyAll_collectInputEnvelope
+    set?: Enumerable<bookbank_logWhereUniqueInput>
+    disconnect?: Enumerable<bookbank_logWhereUniqueInput>
+    delete?: Enumerable<bookbank_logWhereUniqueInput>
+    connect?: Enumerable<bookbank_logWhereUniqueInput>
+    update?: Enumerable<bookbank_logUpdateWithWhereUniqueWithoutAll_collectInput>
+    updateMany?: Enumerable<bookbank_logUpdateManyWithWhereWithoutAll_collectInput>
+    deleteMany?: Enumerable<bookbank_logScalarWhereInput>
+  }
+
+  export type all_collectCreateNestedOneWithoutBookbank_logInput = {
+    create?: XOR<all_collectCreateWithoutBookbank_logInput, all_collectUncheckedCreateWithoutBookbank_logInput>
+    connectOrCreate?: all_collectCreateOrConnectWithoutBookbank_logInput
+    connect?: all_collectWhereUniqueInput
+  }
+
+  export type mas_bankCreateNestedOneWithoutBookbank_logInput = {
+    create?: XOR<mas_bankCreateWithoutBookbank_logInput, mas_bankUncheckedCreateWithoutBookbank_logInput>
+    connectOrCreate?: mas_bankCreateOrConnectWithoutBookbank_logInput
+    connect?: mas_bankWhereUniqueInput
+  }
+
+  export type all_collectUpdateOneWithoutBookbank_logNestedInput = {
+    create?: XOR<all_collectCreateWithoutBookbank_logInput, all_collectUncheckedCreateWithoutBookbank_logInput>
+    connectOrCreate?: all_collectCreateOrConnectWithoutBookbank_logInput
+    upsert?: all_collectUpsertWithoutBookbank_logInput
+    disconnect?: boolean
+    delete?: boolean
+    connect?: all_collectWhereUniqueInput
+    update?: XOR<all_collectUpdateWithoutBookbank_logInput, all_collectUncheckedUpdateWithoutBookbank_logInput>
+  }
+
+  export type mas_bankUpdateOneWithoutBookbank_logNestedInput = {
+    create?: XOR<mas_bankCreateWithoutBookbank_logInput, mas_bankUncheckedCreateWithoutBookbank_logInput>
+    connectOrCreate?: mas_bankCreateOrConnectWithoutBookbank_logInput
+    upsert?: mas_bankUpsertWithoutBookbank_logInput
+    disconnect?: boolean
+    delete?: boolean
+    connect?: mas_bankWhereUniqueInput
+    update?: XOR<mas_bankUpdateWithoutBookbank_logInput, mas_bankUncheckedUpdateWithoutBookbank_logInput>
+  }
+
   export type NestedUuidFilter = {
     equals?: string
     in?: Enumerable<string>
@@ -23498,6 +34586,33 @@ export namespace Prisma {
     not?: InputJsonValue | JsonNullValueFilter
   }
 
+  export type NestedIntNullableWithAggregatesFilter = {
+    equals?: number | null
+    in?: Enumerable<number> | null
+    notIn?: Enumerable<number> | null
+    lt?: number
+    lte?: number
+    gt?: number
+    gte?: number
+    not?: NestedIntNullableWithAggregatesFilter | number | null
+    _count?: NestedIntNullableFilter
+    _avg?: NestedFloatNullableFilter
+    _sum?: NestedIntNullableFilter
+    _min?: NestedIntNullableFilter
+    _max?: NestedIntNullableFilter
+  }
+
+  export type NestedFloatNullableFilter = {
+    equals?: number | null
+    in?: Enumerable<number> | null
+    notIn?: Enumerable<number> | null
+    lt?: number
+    lte?: number
+    gt?: number
+    gte?: number
+    not?: NestedFloatNullableFilter | number | null
+  }
+
   export type UserCreateWithoutCompanyInput = {
     id: string
     email: string
@@ -23513,6 +34628,8 @@ export namespace Prisma {
     Role_Company?: Role_CompanyCreateNestedOneWithoutUsersInput
     Position_user?: Position_userCreateNestedOneWithoutUserInput
     henchman?: Position_userCreateNestedManyWithoutHeaderInput
+    all_collect?: all_collectCreateNestedManyWithoutUserInput
+    salary?: salaryCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutCompanyInput = {
@@ -23530,6 +34647,8 @@ export namespace Prisma {
     companyBranchId?: string | null
     Position_user?: Position_userUncheckedCreateNestedOneWithoutUserInput
     henchman?: Position_userUncheckedCreateNestedManyWithoutHeaderInput
+    all_collect?: all_collectUncheckedCreateNestedManyWithoutUserInput
+    salary?: salaryUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutCompanyInput = {
@@ -23565,6 +34684,7 @@ export namespace Prisma {
     updatedAt?: Date | string
     users?: UserCreateNestedManyWithoutCompanyBranchInput
     Role_Company?: Role_CompanyCreateNestedManyWithoutCompanyBranchInput
+    expense_company?: expense_companyCreateNestedManyWithoutCompanyBranchInput
   }
 
   export type CompanyBranchUncheckedCreateWithoutCompanyInput = {
@@ -23595,6 +34715,7 @@ export namespace Prisma {
     updatedAt?: Date | string
     users?: UserUncheckedCreateNestedManyWithoutCompanyBranchInput
     Role_Company?: Role_CompanyUncheckedCreateNestedManyWithoutCompanyBranchInput
+    expense_company?: expense_companyUncheckedCreateNestedManyWithoutCompanyBranchInput
   }
 
   export type CompanyBranchCreateOrConnectWithoutCompanyInput = {
@@ -23767,6 +34888,8 @@ export namespace Prisma {
     Role_Company?: Role_CompanyUpdateOneWithoutUsersNestedInput
     Position_user?: Position_userUpdateOneWithoutUserNestedInput
     henchman?: Position_userUpdateManyWithoutHeaderNestedInput
+    all_collect?: all_collectUpdateManyWithoutUserNestedInput
+    salary?: salaryUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutCompanyInput = {
@@ -23784,6 +34907,8 @@ export namespace Prisma {
     companyBranchId?: NullableStringFieldUpdateOperationsInput | string | null
     Position_user?: Position_userUncheckedUpdateOneWithoutUserNestedInput
     henchman?: Position_userUncheckedUpdateManyWithoutHeaderNestedInput
+    all_collect?: all_collectUncheckedUpdateManyWithoutUserNestedInput
+    salary?: salaryUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type CompanyBranchUpsertWithWhereUniqueWithoutCompanyInput = {
@@ -24030,6 +35155,8 @@ export namespace Prisma {
     Role_Company?: Role_CompanyCreateNestedOneWithoutUsersInput
     Position_user?: Position_userCreateNestedOneWithoutUserInput
     henchman?: Position_userCreateNestedManyWithoutHeaderInput
+    all_collect?: all_collectCreateNestedManyWithoutUserInput
+    salary?: salaryCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutCompanyBranchInput = {
@@ -24047,6 +35174,8 @@ export namespace Prisma {
     company?: CompanyUncheckedCreateNestedManyWithoutOwnerInput
     Position_user?: Position_userUncheckedCreateNestedOneWithoutUserInput
     henchman?: Position_userUncheckedCreateNestedManyWithoutHeaderInput
+    all_collect?: all_collectUncheckedCreateNestedManyWithoutUserInput
+    salary?: salaryUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutCompanyBranchInput = {
@@ -24082,6 +35211,32 @@ export namespace Prisma {
 
   export type Role_CompanyCreateManyCompanyBranchInputEnvelope = {
     data: Enumerable<Role_CompanyCreateManyCompanyBranchInput>
+    skipDuplicates?: boolean
+  }
+
+  export type expense_companyCreateWithoutCompanyBranchInput = {
+    id: string
+    vat_per?: number | null
+    social_security?: number | null
+    Mas_month?: mas_monthCreateNestedOneWithoutExpense_companyInput
+    mas_bank?: mas_bankCreateNestedOneWithoutExpense_companyInput
+  }
+
+  export type expense_companyUncheckedCreateWithoutCompanyBranchInput = {
+    id: string
+    monthId: string
+    bankId: string
+    vat_per?: number | null
+    social_security?: number | null
+  }
+
+  export type expense_companyCreateOrConnectWithoutCompanyBranchInput = {
+    where: expense_companyWhereUniqueInput
+    create: XOR<expense_companyCreateWithoutCompanyBranchInput, expense_companyUncheckedCreateWithoutCompanyBranchInput>
+  }
+
+  export type expense_companyCreateManyCompanyBranchInputEnvelope = {
+    data: Enumerable<expense_companyCreateManyCompanyBranchInput>
     skipDuplicates?: boolean
   }
 
@@ -24186,6 +35341,34 @@ export namespace Prisma {
     companyBranchId?: UuidNullableFilter | string | null
   }
 
+  export type expense_companyUpsertWithWhereUniqueWithoutCompanyBranchInput = {
+    where: expense_companyWhereUniqueInput
+    update: XOR<expense_companyUpdateWithoutCompanyBranchInput, expense_companyUncheckedUpdateWithoutCompanyBranchInput>
+    create: XOR<expense_companyCreateWithoutCompanyBranchInput, expense_companyUncheckedCreateWithoutCompanyBranchInput>
+  }
+
+  export type expense_companyUpdateWithWhereUniqueWithoutCompanyBranchInput = {
+    where: expense_companyWhereUniqueInput
+    data: XOR<expense_companyUpdateWithoutCompanyBranchInput, expense_companyUncheckedUpdateWithoutCompanyBranchInput>
+  }
+
+  export type expense_companyUpdateManyWithWhereWithoutCompanyBranchInput = {
+    where: expense_companyScalarWhereInput
+    data: XOR<expense_companyUpdateManyMutationInput, expense_companyUncheckedUpdateManyWithoutExpense_companyInput>
+  }
+
+  export type expense_companyScalarWhereInput = {
+    AND?: Enumerable<expense_companyScalarWhereInput>
+    OR?: Enumerable<expense_companyScalarWhereInput>
+    NOT?: Enumerable<expense_companyScalarWhereInput>
+    id?: UuidFilter | string
+    monthId?: UuidFilter | string
+    bankId?: UuidFilter | string
+    vat_per?: IntNullableFilter | number | null
+    social_security?: IntNullableFilter | number | null
+    companyBranchId?: UuidNullableFilter | string | null
+  }
+
   export type UserCreateWithoutProfileInput = {
     id: string
     email: string
@@ -24201,6 +35384,8 @@ export namespace Prisma {
     Role_Company?: Role_CompanyCreateNestedOneWithoutUsersInput
     Position_user?: Position_userCreateNestedOneWithoutUserInput
     henchman?: Position_userCreateNestedManyWithoutHeaderInput
+    all_collect?: all_collectCreateNestedManyWithoutUserInput
+    salary?: salaryCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutProfileInput = {
@@ -24218,6 +35403,8 @@ export namespace Prisma {
     companyBranchId?: string | null
     Position_user?: Position_userUncheckedCreateNestedOneWithoutUserInput
     henchman?: Position_userUncheckedCreateNestedManyWithoutHeaderInput
+    all_collect?: all_collectUncheckedCreateNestedManyWithoutUserInput
+    salary?: salaryUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutProfileInput = {
@@ -24245,6 +35432,8 @@ export namespace Prisma {
     Role_Company?: Role_CompanyUpdateOneWithoutUsersNestedInput
     Position_user?: Position_userUpdateOneWithoutUserNestedInput
     henchman?: Position_userUpdateManyWithoutHeaderNestedInput
+    all_collect?: all_collectUpdateManyWithoutUserNestedInput
+    salary?: salaryUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutProfileInput = {
@@ -24262,6 +35451,8 @@ export namespace Prisma {
     companyBranchId?: NullableStringFieldUpdateOperationsInput | string | null
     Position_user?: Position_userUncheckedUpdateOneWithoutUserNestedInput
     henchman?: Position_userUncheckedUpdateManyWithoutHeaderNestedInput
+    all_collect?: all_collectUncheckedUpdateManyWithoutUserNestedInput
+    salary?: salaryUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type ProfileCreateWithoutUserInput = {
@@ -24458,6 +35649,7 @@ export namespace Prisma {
     updatedAt?: Date | string
     company?: CompanyCreateNestedOneWithoutBranchInput
     Role_Company?: Role_CompanyCreateNestedManyWithoutCompanyBranchInput
+    expense_company?: expense_companyCreateNestedManyWithoutCompanyBranchInput
   }
 
   export type CompanyBranchUncheckedCreateWithoutUsersInput = {
@@ -24488,6 +35680,7 @@ export namespace Prisma {
     updatedAt?: Date | string
     companyId?: string | null
     Role_Company?: Role_CompanyUncheckedCreateNestedManyWithoutCompanyBranchInput
+    expense_company?: expense_companyUncheckedCreateNestedManyWithoutCompanyBranchInput
   }
 
   export type CompanyBranchCreateOrConnectWithoutUsersInput = {
@@ -24568,6 +35761,98 @@ export namespace Prisma {
 
   export type Position_userCreateManyHeaderInputEnvelope = {
     data: Enumerable<Position_userCreateManyHeaderInput>
+    skipDuplicates?: boolean
+  }
+
+  export type all_collectCreateWithoutUserInput = {
+    id: string
+    income_collect: number
+    vat_collect: number
+    social_secu_collect: number
+    provident_collect_employee: number
+    provident_collect_company: number
+    bookbank_log?: bookbank_logCreateNestedManyWithoutAll_collectInput
+  }
+
+  export type all_collectUncheckedCreateWithoutUserInput = {
+    id: string
+    income_collect: number
+    vat_collect: number
+    social_secu_collect: number
+    provident_collect_employee: number
+    provident_collect_company: number
+    bookbank_log?: bookbank_logUncheckedCreateNestedManyWithoutAll_collectInput
+  }
+
+  export type all_collectCreateOrConnectWithoutUserInput = {
+    where: all_collectWhereUniqueInput
+    create: XOR<all_collectCreateWithoutUserInput, all_collectUncheckedCreateWithoutUserInput>
+  }
+
+  export type all_collectCreateManyUserInputEnvelope = {
+    data: Enumerable<all_collectCreateManyUserInput>
+    skipDuplicates?: boolean
+  }
+
+  export type salaryCreateWithoutUserInput = {
+    id: string
+    base_salary: number
+    commission: number
+    position_income: number
+    ot: number
+    bonus: number
+    special_income: number
+    other_income: number
+    travel_income: number
+    bursary: number
+    welfare_money: number
+    vat: number
+    social_security: number
+    miss: number
+    ra: number
+    late: number
+    other: number
+    provident_employee: number
+    provident_company: number
+    total_income: number
+    total_expense: number
+    net: number
+    date: Date | string
+  }
+
+  export type salaryUncheckedCreateWithoutUserInput = {
+    id: string
+    base_salary: number
+    commission: number
+    position_income: number
+    ot: number
+    bonus: number
+    special_income: number
+    other_income: number
+    travel_income: number
+    bursary: number
+    welfare_money: number
+    vat: number
+    social_security: number
+    miss: number
+    ra: number
+    late: number
+    other: number
+    provident_employee: number
+    provident_company: number
+    total_income: number
+    total_expense: number
+    net: number
+    date: Date | string
+  }
+
+  export type salaryCreateOrConnectWithoutUserInput = {
+    where: salaryWhereUniqueInput
+    create: XOR<salaryCreateWithoutUserInput, salaryUncheckedCreateWithoutUserInput>
+  }
+
+  export type salaryCreateManyUserInputEnvelope = {
+    data: Enumerable<salaryCreateManyUserInput>
     skipDuplicates?: boolean
   }
 
@@ -24756,6 +36041,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     company?: CompanyUpdateOneWithoutBranchNestedInput
     Role_Company?: Role_CompanyUpdateManyWithoutCompanyBranchNestedInput
+    expense_company?: expense_companyUpdateManyWithoutCompanyBranchNestedInput
   }
 
   export type CompanyBranchUncheckedUpdateWithoutUsersInput = {
@@ -24786,6 +36072,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     companyId?: NullableStringFieldUpdateOperationsInput | string | null
     Role_Company?: Role_CompanyUncheckedUpdateManyWithoutCompanyBranchNestedInput
+    expense_company?: expense_companyUncheckedUpdateManyWithoutCompanyBranchNestedInput
   }
 
   export type Role_CompanyUpsertWithoutUsersInput = {
@@ -24864,6 +36151,81 @@ export namespace Prisma {
     headderId?: UuidNullableFilter | string | null
   }
 
+  export type all_collectUpsertWithWhereUniqueWithoutUserInput = {
+    where: all_collectWhereUniqueInput
+    update: XOR<all_collectUpdateWithoutUserInput, all_collectUncheckedUpdateWithoutUserInput>
+    create: XOR<all_collectCreateWithoutUserInput, all_collectUncheckedCreateWithoutUserInput>
+  }
+
+  export type all_collectUpdateWithWhereUniqueWithoutUserInput = {
+    where: all_collectWhereUniqueInput
+    data: XOR<all_collectUpdateWithoutUserInput, all_collectUncheckedUpdateWithoutUserInput>
+  }
+
+  export type all_collectUpdateManyWithWhereWithoutUserInput = {
+    where: all_collectScalarWhereInput
+    data: XOR<all_collectUpdateManyMutationInput, all_collectUncheckedUpdateManyWithoutAll_collectInput>
+  }
+
+  export type all_collectScalarWhereInput = {
+    AND?: Enumerable<all_collectScalarWhereInput>
+    OR?: Enumerable<all_collectScalarWhereInput>
+    NOT?: Enumerable<all_collectScalarWhereInput>
+    id?: UuidFilter | string
+    userId?: UuidNullableFilter | string | null
+    income_collect?: IntFilter | number
+    vat_collect?: IntFilter | number
+    social_secu_collect?: IntFilter | number
+    provident_collect_employee?: IntFilter | number
+    provident_collect_company?: IntFilter | number
+  }
+
+  export type salaryUpsertWithWhereUniqueWithoutUserInput = {
+    where: salaryWhereUniqueInput
+    update: XOR<salaryUpdateWithoutUserInput, salaryUncheckedUpdateWithoutUserInput>
+    create: XOR<salaryCreateWithoutUserInput, salaryUncheckedCreateWithoutUserInput>
+  }
+
+  export type salaryUpdateWithWhereUniqueWithoutUserInput = {
+    where: salaryWhereUniqueInput
+    data: XOR<salaryUpdateWithoutUserInput, salaryUncheckedUpdateWithoutUserInput>
+  }
+
+  export type salaryUpdateManyWithWhereWithoutUserInput = {
+    where: salaryScalarWhereInput
+    data: XOR<salaryUpdateManyMutationInput, salaryUncheckedUpdateManyWithoutSalaryInput>
+  }
+
+  export type salaryScalarWhereInput = {
+    AND?: Enumerable<salaryScalarWhereInput>
+    OR?: Enumerable<salaryScalarWhereInput>
+    NOT?: Enumerable<salaryScalarWhereInput>
+    id?: UuidFilter | string
+    base_salary?: IntFilter | number
+    commission?: IntFilter | number
+    position_income?: IntFilter | number
+    ot?: IntFilter | number
+    bonus?: IntFilter | number
+    special_income?: IntFilter | number
+    other_income?: IntFilter | number
+    travel_income?: IntFilter | number
+    bursary?: IntFilter | number
+    welfare_money?: IntFilter | number
+    vat?: IntFilter | number
+    social_security?: IntFilter | number
+    miss?: IntFilter | number
+    ra?: IntFilter | number
+    late?: IntFilter | number
+    other?: IntFilter | number
+    provident_employee?: IntFilter | number
+    provident_company?: IntFilter | number
+    total_income?: IntFilter | number
+    total_expense?: IntFilter | number
+    net?: IntFilter | number
+    date?: DateTimeFilter | Date | string
+    userId?: UuidNullableFilter | string | null
+  }
+
   export type UserCreateWithoutRoleInput = {
     id: string
     email: string
@@ -24879,6 +36241,8 @@ export namespace Prisma {
     Role_Company?: Role_CompanyCreateNestedOneWithoutUsersInput
     Position_user?: Position_userCreateNestedOneWithoutUserInput
     henchman?: Position_userCreateNestedManyWithoutHeaderInput
+    all_collect?: all_collectCreateNestedManyWithoutUserInput
+    salary?: salaryCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutRoleInput = {
@@ -24896,6 +36260,8 @@ export namespace Prisma {
     companyBranchId?: string | null
     Position_user?: Position_userUncheckedCreateNestedOneWithoutUserInput
     henchman?: Position_userUncheckedCreateNestedManyWithoutHeaderInput
+    all_collect?: all_collectUncheckedCreateNestedManyWithoutUserInput
+    salary?: salaryUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutRoleInput = {
@@ -24939,6 +36305,8 @@ export namespace Prisma {
     companyBranch?: CompanyBranchCreateNestedOneWithoutUsersInput
     Position_user?: Position_userCreateNestedOneWithoutUserInput
     henchman?: Position_userCreateNestedManyWithoutHeaderInput
+    all_collect?: all_collectCreateNestedManyWithoutUserInput
+    salary?: salaryCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutRole_CompanyInput = {
@@ -24956,6 +36324,8 @@ export namespace Prisma {
     companyBranchId?: string | null
     Position_user?: Position_userUncheckedCreateNestedOneWithoutUserInput
     henchman?: Position_userUncheckedCreateNestedManyWithoutHeaderInput
+    all_collect?: all_collectUncheckedCreateNestedManyWithoutUserInput
+    salary?: salaryUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutRole_CompanyInput = {
@@ -24996,6 +36366,7 @@ export namespace Prisma {
     updatedAt?: Date | string
     company?: CompanyCreateNestedOneWithoutBranchInput
     users?: UserCreateNestedManyWithoutCompanyBranchInput
+    expense_company?: expense_companyCreateNestedManyWithoutCompanyBranchInput
   }
 
   export type CompanyBranchUncheckedCreateWithoutRole_CompanyInput = {
@@ -25026,6 +36397,7 @@ export namespace Prisma {
     updatedAt?: Date | string
     companyId?: string | null
     users?: UserUncheckedCreateNestedManyWithoutCompanyBranchInput
+    expense_company?: expense_companyUncheckedCreateNestedManyWithoutCompanyBranchInput
   }
 
   export type CompanyBranchCreateOrConnectWithoutRole_CompanyInput = {
@@ -25082,6 +36454,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     company?: CompanyUpdateOneWithoutBranchNestedInput
     users?: UserUpdateManyWithoutCompanyBranchNestedInput
+    expense_company?: expense_companyUpdateManyWithoutCompanyBranchNestedInput
   }
 
   export type CompanyBranchUncheckedUpdateWithoutRole_CompanyInput = {
@@ -25112,6 +36485,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     companyId?: NullableStringFieldUpdateOperationsInput | string | null
     users?: UserUncheckedUpdateManyWithoutCompanyBranchNestedInput
+    expense_company?: expense_companyUncheckedUpdateManyWithoutCompanyBranchNestedInput
   }
 
   export type DistrictCreateWithoutProvinceInput = {
@@ -25952,6 +37326,8 @@ export namespace Prisma {
     companyBranch?: CompanyBranchCreateNestedOneWithoutUsersInput
     Role_Company?: Role_CompanyCreateNestedOneWithoutUsersInput
     Position_user?: Position_userCreateNestedOneWithoutUserInput
+    all_collect?: all_collectCreateNestedManyWithoutUserInput
+    salary?: salaryCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutHenchmanInput = {
@@ -25969,6 +37345,8 @@ export namespace Prisma {
     company?: CompanyUncheckedCreateNestedManyWithoutOwnerInput
     companyBranchId?: string | null
     Position_user?: Position_userUncheckedCreateNestedOneWithoutUserInput
+    all_collect?: all_collectUncheckedCreateNestedManyWithoutUserInput
+    salary?: salaryUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutHenchmanInput = {
@@ -25991,6 +37369,8 @@ export namespace Prisma {
     companyBranch?: CompanyBranchCreateNestedOneWithoutUsersInput
     Role_Company?: Role_CompanyCreateNestedOneWithoutUsersInput
     henchman?: Position_userCreateNestedManyWithoutHeaderInput
+    all_collect?: all_collectCreateNestedManyWithoutUserInput
+    salary?: salaryCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutPosition_userInput = {
@@ -26008,6 +37388,8 @@ export namespace Prisma {
     company?: CompanyUncheckedCreateNestedManyWithoutOwnerInput
     companyBranchId?: string | null
     henchman?: Position_userUncheckedCreateNestedManyWithoutHeaderInput
+    all_collect?: all_collectUncheckedCreateNestedManyWithoutUserInput
+    salary?: salaryUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutPosition_userInput = {
@@ -26112,6 +37494,8 @@ export namespace Prisma {
     companyBranch?: CompanyBranchUpdateOneWithoutUsersNestedInput
     Role_Company?: Role_CompanyUpdateOneWithoutUsersNestedInput
     Position_user?: Position_userUpdateOneWithoutUserNestedInput
+    all_collect?: all_collectUpdateManyWithoutUserNestedInput
+    salary?: salaryUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutHenchmanInput = {
@@ -26129,6 +37513,8 @@ export namespace Prisma {
     company?: CompanyUncheckedUpdateManyWithoutOwnerNestedInput
     companyBranchId?: NullableStringFieldUpdateOperationsInput | string | null
     Position_user?: Position_userUncheckedUpdateOneWithoutUserNestedInput
+    all_collect?: all_collectUncheckedUpdateManyWithoutUserNestedInput
+    salary?: salaryUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type UserUpsertWithoutPosition_userInput = {
@@ -26151,6 +37537,8 @@ export namespace Prisma {
     companyBranch?: CompanyBranchUpdateOneWithoutUsersNestedInput
     Role_Company?: Role_CompanyUpdateOneWithoutUsersNestedInput
     henchman?: Position_userUpdateManyWithoutHeaderNestedInput
+    all_collect?: all_collectUpdateManyWithoutUserNestedInput
+    salary?: salaryUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutPosition_userInput = {
@@ -26168,6 +37556,8 @@ export namespace Prisma {
     company?: CompanyUncheckedUpdateManyWithoutOwnerNestedInput
     companyBranchId?: NullableStringFieldUpdateOperationsInput | string | null
     henchman?: Position_userUncheckedUpdateManyWithoutHeaderNestedInput
+    all_collect?: all_collectUncheckedUpdateManyWithoutUserNestedInput
+    salary?: salaryUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type mas_positionlevel1UpsertWithoutPosition_userInput = {
@@ -26329,6 +37719,635 @@ export namespace Prisma {
     mas_position?: mas_positionUncheckedUpdateManyWithoutCompanyNestedInput
   }
 
+  export type expense_companyCreateWithoutMas_bankInput = {
+    id: string
+    vat_per?: number | null
+    social_security?: number | null
+    Mas_month?: mas_monthCreateNestedOneWithoutExpense_companyInput
+    CompanyBranch?: CompanyBranchCreateNestedOneWithoutExpense_companyInput
+  }
+
+  export type expense_companyUncheckedCreateWithoutMas_bankInput = {
+    id: string
+    monthId: string
+    vat_per?: number | null
+    social_security?: number | null
+    companyBranchId?: string | null
+  }
+
+  export type expense_companyCreateOrConnectWithoutMas_bankInput = {
+    where: expense_companyWhereUniqueInput
+    create: XOR<expense_companyCreateWithoutMas_bankInput, expense_companyUncheckedCreateWithoutMas_bankInput>
+  }
+
+  export type expense_companyCreateManyMas_bankInputEnvelope = {
+    data: Enumerable<expense_companyCreateManyMas_bankInput>
+    skipDuplicates?: boolean
+  }
+
+  export type bookbank_logCreateWithoutMas_bankInput = {
+    id: string
+    date: Date | string
+    bank_number: string
+    all_collect?: all_collectCreateNestedOneWithoutBookbank_logInput
+  }
+
+  export type bookbank_logUncheckedCreateWithoutMas_bankInput = {
+    id: string
+    date: Date | string
+    bank_number: string
+    all_collectId?: string | null
+  }
+
+  export type bookbank_logCreateOrConnectWithoutMas_bankInput = {
+    where: bookbank_logWhereUniqueInput
+    create: XOR<bookbank_logCreateWithoutMas_bankInput, bookbank_logUncheckedCreateWithoutMas_bankInput>
+  }
+
+  export type bookbank_logCreateManyMas_bankInputEnvelope = {
+    data: Enumerable<bookbank_logCreateManyMas_bankInput>
+    skipDuplicates?: boolean
+  }
+
+  export type expense_companyUpsertWithWhereUniqueWithoutMas_bankInput = {
+    where: expense_companyWhereUniqueInput
+    update: XOR<expense_companyUpdateWithoutMas_bankInput, expense_companyUncheckedUpdateWithoutMas_bankInput>
+    create: XOR<expense_companyCreateWithoutMas_bankInput, expense_companyUncheckedCreateWithoutMas_bankInput>
+  }
+
+  export type expense_companyUpdateWithWhereUniqueWithoutMas_bankInput = {
+    where: expense_companyWhereUniqueInput
+    data: XOR<expense_companyUpdateWithoutMas_bankInput, expense_companyUncheckedUpdateWithoutMas_bankInput>
+  }
+
+  export type expense_companyUpdateManyWithWhereWithoutMas_bankInput = {
+    where: expense_companyScalarWhereInput
+    data: XOR<expense_companyUpdateManyMutationInput, expense_companyUncheckedUpdateManyWithoutExpense_companyInput>
+  }
+
+  export type bookbank_logUpsertWithWhereUniqueWithoutMas_bankInput = {
+    where: bookbank_logWhereUniqueInput
+    update: XOR<bookbank_logUpdateWithoutMas_bankInput, bookbank_logUncheckedUpdateWithoutMas_bankInput>
+    create: XOR<bookbank_logCreateWithoutMas_bankInput, bookbank_logUncheckedCreateWithoutMas_bankInput>
+  }
+
+  export type bookbank_logUpdateWithWhereUniqueWithoutMas_bankInput = {
+    where: bookbank_logWhereUniqueInput
+    data: XOR<bookbank_logUpdateWithoutMas_bankInput, bookbank_logUncheckedUpdateWithoutMas_bankInput>
+  }
+
+  export type bookbank_logUpdateManyWithWhereWithoutMas_bankInput = {
+    where: bookbank_logScalarWhereInput
+    data: XOR<bookbank_logUpdateManyMutationInput, bookbank_logUncheckedUpdateManyWithoutBookbank_logInput>
+  }
+
+  export type bookbank_logScalarWhereInput = {
+    AND?: Enumerable<bookbank_logScalarWhereInput>
+    OR?: Enumerable<bookbank_logScalarWhereInput>
+    NOT?: Enumerable<bookbank_logScalarWhereInput>
+    id?: UuidFilter | string
+    date?: DateTimeFilter | Date | string
+    mas_bankId?: UuidNullableFilter | string | null
+    bank_number?: StringFilter | string
+    all_collectId?: UuidNullableFilter | string | null
+  }
+
+  export type expense_companyCreateWithoutMas_monthInput = {
+    id: string
+    vat_per?: number | null
+    social_security?: number | null
+    mas_bank?: mas_bankCreateNestedOneWithoutExpense_companyInput
+    CompanyBranch?: CompanyBranchCreateNestedOneWithoutExpense_companyInput
+  }
+
+  export type expense_companyUncheckedCreateWithoutMas_monthInput = {
+    id: string
+    bankId: string
+    vat_per?: number | null
+    social_security?: number | null
+    companyBranchId?: string | null
+  }
+
+  export type expense_companyCreateOrConnectWithoutMas_monthInput = {
+    where: expense_companyWhereUniqueInput
+    create: XOR<expense_companyCreateWithoutMas_monthInput, expense_companyUncheckedCreateWithoutMas_monthInput>
+  }
+
+  export type expense_companyCreateManyMas_monthInputEnvelope = {
+    data: Enumerable<expense_companyCreateManyMas_monthInput>
+    skipDuplicates?: boolean
+  }
+
+  export type expense_companyUpsertWithWhereUniqueWithoutMas_monthInput = {
+    where: expense_companyWhereUniqueInput
+    update: XOR<expense_companyUpdateWithoutMas_monthInput, expense_companyUncheckedUpdateWithoutMas_monthInput>
+    create: XOR<expense_companyCreateWithoutMas_monthInput, expense_companyUncheckedCreateWithoutMas_monthInput>
+  }
+
+  export type expense_companyUpdateWithWhereUniqueWithoutMas_monthInput = {
+    where: expense_companyWhereUniqueInput
+    data: XOR<expense_companyUpdateWithoutMas_monthInput, expense_companyUncheckedUpdateWithoutMas_monthInput>
+  }
+
+  export type expense_companyUpdateManyWithWhereWithoutMas_monthInput = {
+    where: expense_companyScalarWhereInput
+    data: XOR<expense_companyUpdateManyMutationInput, expense_companyUncheckedUpdateManyWithoutExpense_companyInput>
+  }
+
+  export type mas_monthCreateWithoutExpense_companyInput = {
+    id: string
+    name: string
+  }
+
+  export type mas_monthUncheckedCreateWithoutExpense_companyInput = {
+    id: string
+    name: string
+  }
+
+  export type mas_monthCreateOrConnectWithoutExpense_companyInput = {
+    where: mas_monthWhereUniqueInput
+    create: XOR<mas_monthCreateWithoutExpense_companyInput, mas_monthUncheckedCreateWithoutExpense_companyInput>
+  }
+
+  export type mas_bankCreateWithoutExpense_companyInput = {
+    id: string
+    name: string
+    bookbank_log?: bookbank_logCreateNestedManyWithoutMas_bankInput
+  }
+
+  export type mas_bankUncheckedCreateWithoutExpense_companyInput = {
+    id: string
+    name: string
+    bookbank_log?: bookbank_logUncheckedCreateNestedManyWithoutMas_bankInput
+  }
+
+  export type mas_bankCreateOrConnectWithoutExpense_companyInput = {
+    where: mas_bankWhereUniqueInput
+    create: XOR<mas_bankCreateWithoutExpense_companyInput, mas_bankUncheckedCreateWithoutExpense_companyInput>
+  }
+
+  export type CompanyBranchCreateWithoutExpense_companyInput = {
+    id: string
+    isMainbranch?: boolean
+    name: string
+    address: string
+    address_2?: string | null
+    city: string
+    state: string
+    zip: string
+    country?: string | null
+    tel?: string | null
+    fax?: string | null
+    website?: string | null
+    lat?: string | null
+    lng?: string | null
+    email?: string | null
+    email_2?: string | null
+    company_type?: string | null
+    sub_company_type?: string | null
+    registeredamount?: string | null
+    social_facebook?: string | null
+    social_likedin?: string | null
+    social_instragram?: string | null
+    social_line?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    company?: CompanyCreateNestedOneWithoutBranchInput
+    users?: UserCreateNestedManyWithoutCompanyBranchInput
+    Role_Company?: Role_CompanyCreateNestedManyWithoutCompanyBranchInput
+  }
+
+  export type CompanyBranchUncheckedCreateWithoutExpense_companyInput = {
+    id: string
+    isMainbranch?: boolean
+    name: string
+    address: string
+    address_2?: string | null
+    city: string
+    state: string
+    zip: string
+    country?: string | null
+    tel?: string | null
+    fax?: string | null
+    website?: string | null
+    lat?: string | null
+    lng?: string | null
+    email?: string | null
+    email_2?: string | null
+    company_type?: string | null
+    sub_company_type?: string | null
+    registeredamount?: string | null
+    social_facebook?: string | null
+    social_likedin?: string | null
+    social_instragram?: string | null
+    social_line?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    companyId?: string | null
+    users?: UserUncheckedCreateNestedManyWithoutCompanyBranchInput
+    Role_Company?: Role_CompanyUncheckedCreateNestedManyWithoutCompanyBranchInput
+  }
+
+  export type CompanyBranchCreateOrConnectWithoutExpense_companyInput = {
+    where: CompanyBranchWhereUniqueInput
+    create: XOR<CompanyBranchCreateWithoutExpense_companyInput, CompanyBranchUncheckedCreateWithoutExpense_companyInput>
+  }
+
+  export type mas_monthUpsertWithoutExpense_companyInput = {
+    update: XOR<mas_monthUpdateWithoutExpense_companyInput, mas_monthUncheckedUpdateWithoutExpense_companyInput>
+    create: XOR<mas_monthCreateWithoutExpense_companyInput, mas_monthUncheckedCreateWithoutExpense_companyInput>
+  }
+
+  export type mas_monthUpdateWithoutExpense_companyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type mas_monthUncheckedUpdateWithoutExpense_companyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type mas_bankUpsertWithoutExpense_companyInput = {
+    update: XOR<mas_bankUpdateWithoutExpense_companyInput, mas_bankUncheckedUpdateWithoutExpense_companyInput>
+    create: XOR<mas_bankCreateWithoutExpense_companyInput, mas_bankUncheckedCreateWithoutExpense_companyInput>
+  }
+
+  export type mas_bankUpdateWithoutExpense_companyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    bookbank_log?: bookbank_logUpdateManyWithoutMas_bankNestedInput
+  }
+
+  export type mas_bankUncheckedUpdateWithoutExpense_companyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    bookbank_log?: bookbank_logUncheckedUpdateManyWithoutMas_bankNestedInput
+  }
+
+  export type CompanyBranchUpsertWithoutExpense_companyInput = {
+    update: XOR<CompanyBranchUpdateWithoutExpense_companyInput, CompanyBranchUncheckedUpdateWithoutExpense_companyInput>
+    create: XOR<CompanyBranchCreateWithoutExpense_companyInput, CompanyBranchUncheckedCreateWithoutExpense_companyInput>
+  }
+
+  export type CompanyBranchUpdateWithoutExpense_companyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    isMainbranch?: BoolFieldUpdateOperationsInput | boolean
+    name?: StringFieldUpdateOperationsInput | string
+    address?: StringFieldUpdateOperationsInput | string
+    address_2?: NullableStringFieldUpdateOperationsInput | string | null
+    city?: StringFieldUpdateOperationsInput | string
+    state?: StringFieldUpdateOperationsInput | string
+    zip?: StringFieldUpdateOperationsInput | string
+    country?: NullableStringFieldUpdateOperationsInput | string | null
+    tel?: NullableStringFieldUpdateOperationsInput | string | null
+    fax?: NullableStringFieldUpdateOperationsInput | string | null
+    website?: NullableStringFieldUpdateOperationsInput | string | null
+    lat?: NullableStringFieldUpdateOperationsInput | string | null
+    lng?: NullableStringFieldUpdateOperationsInput | string | null
+    email?: NullableStringFieldUpdateOperationsInput | string | null
+    email_2?: NullableStringFieldUpdateOperationsInput | string | null
+    company_type?: NullableStringFieldUpdateOperationsInput | string | null
+    sub_company_type?: NullableStringFieldUpdateOperationsInput | string | null
+    registeredamount?: NullableStringFieldUpdateOperationsInput | string | null
+    social_facebook?: NullableStringFieldUpdateOperationsInput | string | null
+    social_likedin?: NullableStringFieldUpdateOperationsInput | string | null
+    social_instragram?: NullableStringFieldUpdateOperationsInput | string | null
+    social_line?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    company?: CompanyUpdateOneWithoutBranchNestedInput
+    users?: UserUpdateManyWithoutCompanyBranchNestedInput
+    Role_Company?: Role_CompanyUpdateManyWithoutCompanyBranchNestedInput
+  }
+
+  export type CompanyBranchUncheckedUpdateWithoutExpense_companyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    isMainbranch?: BoolFieldUpdateOperationsInput | boolean
+    name?: StringFieldUpdateOperationsInput | string
+    address?: StringFieldUpdateOperationsInput | string
+    address_2?: NullableStringFieldUpdateOperationsInput | string | null
+    city?: StringFieldUpdateOperationsInput | string
+    state?: StringFieldUpdateOperationsInput | string
+    zip?: StringFieldUpdateOperationsInput | string
+    country?: NullableStringFieldUpdateOperationsInput | string | null
+    tel?: NullableStringFieldUpdateOperationsInput | string | null
+    fax?: NullableStringFieldUpdateOperationsInput | string | null
+    website?: NullableStringFieldUpdateOperationsInput | string | null
+    lat?: NullableStringFieldUpdateOperationsInput | string | null
+    lng?: NullableStringFieldUpdateOperationsInput | string | null
+    email?: NullableStringFieldUpdateOperationsInput | string | null
+    email_2?: NullableStringFieldUpdateOperationsInput | string | null
+    company_type?: NullableStringFieldUpdateOperationsInput | string | null
+    sub_company_type?: NullableStringFieldUpdateOperationsInput | string | null
+    registeredamount?: NullableStringFieldUpdateOperationsInput | string | null
+    social_facebook?: NullableStringFieldUpdateOperationsInput | string | null
+    social_likedin?: NullableStringFieldUpdateOperationsInput | string | null
+    social_instragram?: NullableStringFieldUpdateOperationsInput | string | null
+    social_line?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    companyId?: NullableStringFieldUpdateOperationsInput | string | null
+    users?: UserUncheckedUpdateManyWithoutCompanyBranchNestedInput
+    Role_Company?: Role_CompanyUncheckedUpdateManyWithoutCompanyBranchNestedInput
+  }
+
+  export type UserCreateWithoutSalaryInput = {
+    id: string
+    email: string
+    password: string
+    profile?: ProfileCreateNestedOneWithoutUserInput
+    islogin?: boolean
+    isActive?: boolean
+    isOwner?: boolean
+    lastlogin?: Date | string | null
+    createdAt?: Date | string
+    role?: RoleCreateNestedOneWithoutUsersInput
+    company?: CompanyCreateNestedManyWithoutOwnerInput
+    companyBranch?: CompanyBranchCreateNestedOneWithoutUsersInput
+    Role_Company?: Role_CompanyCreateNestedOneWithoutUsersInput
+    Position_user?: Position_userCreateNestedOneWithoutUserInput
+    henchman?: Position_userCreateNestedManyWithoutHeaderInput
+    all_collect?: all_collectCreateNestedManyWithoutUserInput
+  }
+
+  export type UserUncheckedCreateWithoutSalaryInput = {
+    id: string
+    email: string
+    password: string
+    profile?: ProfileUncheckedCreateNestedOneWithoutUserInput
+    islogin?: boolean
+    isActive?: boolean
+    isOwner?: boolean
+    lastlogin?: Date | string | null
+    createdAt?: Date | string
+    roleId?: string | null
+    RoleCompanyID?: string | null
+    company?: CompanyUncheckedCreateNestedManyWithoutOwnerInput
+    companyBranchId?: string | null
+    Position_user?: Position_userUncheckedCreateNestedOneWithoutUserInput
+    henchman?: Position_userUncheckedCreateNestedManyWithoutHeaderInput
+    all_collect?: all_collectUncheckedCreateNestedManyWithoutUserInput
+  }
+
+  export type UserCreateOrConnectWithoutSalaryInput = {
+    where: UserWhereUniqueInput
+    create: XOR<UserCreateWithoutSalaryInput, UserUncheckedCreateWithoutSalaryInput>
+  }
+
+  export type UserUpsertWithoutSalaryInput = {
+    update: XOR<UserUpdateWithoutSalaryInput, UserUncheckedUpdateWithoutSalaryInput>
+    create: XOR<UserCreateWithoutSalaryInput, UserUncheckedCreateWithoutSalaryInput>
+  }
+
+  export type UserUpdateWithoutSalaryInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    password?: StringFieldUpdateOperationsInput | string
+    profile?: ProfileUpdateOneWithoutUserNestedInput
+    islogin?: BoolFieldUpdateOperationsInput | boolean
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    isOwner?: BoolFieldUpdateOperationsInput | boolean
+    lastlogin?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    role?: RoleUpdateOneWithoutUsersNestedInput
+    company?: CompanyUpdateManyWithoutOwnerNestedInput
+    companyBranch?: CompanyBranchUpdateOneWithoutUsersNestedInput
+    Role_Company?: Role_CompanyUpdateOneWithoutUsersNestedInput
+    Position_user?: Position_userUpdateOneWithoutUserNestedInput
+    henchman?: Position_userUpdateManyWithoutHeaderNestedInput
+    all_collect?: all_collectUpdateManyWithoutUserNestedInput
+  }
+
+  export type UserUncheckedUpdateWithoutSalaryInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    password?: StringFieldUpdateOperationsInput | string
+    profile?: ProfileUncheckedUpdateOneWithoutUserNestedInput
+    islogin?: BoolFieldUpdateOperationsInput | boolean
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    isOwner?: BoolFieldUpdateOperationsInput | boolean
+    lastlogin?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    roleId?: NullableStringFieldUpdateOperationsInput | string | null
+    RoleCompanyID?: NullableStringFieldUpdateOperationsInput | string | null
+    company?: CompanyUncheckedUpdateManyWithoutOwnerNestedInput
+    companyBranchId?: NullableStringFieldUpdateOperationsInput | string | null
+    Position_user?: Position_userUncheckedUpdateOneWithoutUserNestedInput
+    henchman?: Position_userUncheckedUpdateManyWithoutHeaderNestedInput
+    all_collect?: all_collectUncheckedUpdateManyWithoutUserNestedInput
+  }
+
+  export type UserCreateWithoutAll_collectInput = {
+    id: string
+    email: string
+    password: string
+    profile?: ProfileCreateNestedOneWithoutUserInput
+    islogin?: boolean
+    isActive?: boolean
+    isOwner?: boolean
+    lastlogin?: Date | string | null
+    createdAt?: Date | string
+    role?: RoleCreateNestedOneWithoutUsersInput
+    company?: CompanyCreateNestedManyWithoutOwnerInput
+    companyBranch?: CompanyBranchCreateNestedOneWithoutUsersInput
+    Role_Company?: Role_CompanyCreateNestedOneWithoutUsersInput
+    Position_user?: Position_userCreateNestedOneWithoutUserInput
+    henchman?: Position_userCreateNestedManyWithoutHeaderInput
+    salary?: salaryCreateNestedManyWithoutUserInput
+  }
+
+  export type UserUncheckedCreateWithoutAll_collectInput = {
+    id: string
+    email: string
+    password: string
+    profile?: ProfileUncheckedCreateNestedOneWithoutUserInput
+    islogin?: boolean
+    isActive?: boolean
+    isOwner?: boolean
+    lastlogin?: Date | string | null
+    createdAt?: Date | string
+    roleId?: string | null
+    RoleCompanyID?: string | null
+    company?: CompanyUncheckedCreateNestedManyWithoutOwnerInput
+    companyBranchId?: string | null
+    Position_user?: Position_userUncheckedCreateNestedOneWithoutUserInput
+    henchman?: Position_userUncheckedCreateNestedManyWithoutHeaderInput
+    salary?: salaryUncheckedCreateNestedManyWithoutUserInput
+  }
+
+  export type UserCreateOrConnectWithoutAll_collectInput = {
+    where: UserWhereUniqueInput
+    create: XOR<UserCreateWithoutAll_collectInput, UserUncheckedCreateWithoutAll_collectInput>
+  }
+
+  export type bookbank_logCreateWithoutAll_collectInput = {
+    id: string
+    date: Date | string
+    bank_number: string
+    mas_bank?: mas_bankCreateNestedOneWithoutBookbank_logInput
+  }
+
+  export type bookbank_logUncheckedCreateWithoutAll_collectInput = {
+    id: string
+    date: Date | string
+    mas_bankId?: string | null
+    bank_number: string
+  }
+
+  export type bookbank_logCreateOrConnectWithoutAll_collectInput = {
+    where: bookbank_logWhereUniqueInput
+    create: XOR<bookbank_logCreateWithoutAll_collectInput, bookbank_logUncheckedCreateWithoutAll_collectInput>
+  }
+
+  export type bookbank_logCreateManyAll_collectInputEnvelope = {
+    data: Enumerable<bookbank_logCreateManyAll_collectInput>
+    skipDuplicates?: boolean
+  }
+
+  export type UserUpsertWithoutAll_collectInput = {
+    update: XOR<UserUpdateWithoutAll_collectInput, UserUncheckedUpdateWithoutAll_collectInput>
+    create: XOR<UserCreateWithoutAll_collectInput, UserUncheckedCreateWithoutAll_collectInput>
+  }
+
+  export type UserUpdateWithoutAll_collectInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    password?: StringFieldUpdateOperationsInput | string
+    profile?: ProfileUpdateOneWithoutUserNestedInput
+    islogin?: BoolFieldUpdateOperationsInput | boolean
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    isOwner?: BoolFieldUpdateOperationsInput | boolean
+    lastlogin?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    role?: RoleUpdateOneWithoutUsersNestedInput
+    company?: CompanyUpdateManyWithoutOwnerNestedInput
+    companyBranch?: CompanyBranchUpdateOneWithoutUsersNestedInput
+    Role_Company?: Role_CompanyUpdateOneWithoutUsersNestedInput
+    Position_user?: Position_userUpdateOneWithoutUserNestedInput
+    henchman?: Position_userUpdateManyWithoutHeaderNestedInput
+    salary?: salaryUpdateManyWithoutUserNestedInput
+  }
+
+  export type UserUncheckedUpdateWithoutAll_collectInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    password?: StringFieldUpdateOperationsInput | string
+    profile?: ProfileUncheckedUpdateOneWithoutUserNestedInput
+    islogin?: BoolFieldUpdateOperationsInput | boolean
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    isOwner?: BoolFieldUpdateOperationsInput | boolean
+    lastlogin?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    roleId?: NullableStringFieldUpdateOperationsInput | string | null
+    RoleCompanyID?: NullableStringFieldUpdateOperationsInput | string | null
+    company?: CompanyUncheckedUpdateManyWithoutOwnerNestedInput
+    companyBranchId?: NullableStringFieldUpdateOperationsInput | string | null
+    Position_user?: Position_userUncheckedUpdateOneWithoutUserNestedInput
+    henchman?: Position_userUncheckedUpdateManyWithoutHeaderNestedInput
+    salary?: salaryUncheckedUpdateManyWithoutUserNestedInput
+  }
+
+  export type bookbank_logUpsertWithWhereUniqueWithoutAll_collectInput = {
+    where: bookbank_logWhereUniqueInput
+    update: XOR<bookbank_logUpdateWithoutAll_collectInput, bookbank_logUncheckedUpdateWithoutAll_collectInput>
+    create: XOR<bookbank_logCreateWithoutAll_collectInput, bookbank_logUncheckedCreateWithoutAll_collectInput>
+  }
+
+  export type bookbank_logUpdateWithWhereUniqueWithoutAll_collectInput = {
+    where: bookbank_logWhereUniqueInput
+    data: XOR<bookbank_logUpdateWithoutAll_collectInput, bookbank_logUncheckedUpdateWithoutAll_collectInput>
+  }
+
+  export type bookbank_logUpdateManyWithWhereWithoutAll_collectInput = {
+    where: bookbank_logScalarWhereInput
+    data: XOR<bookbank_logUpdateManyMutationInput, bookbank_logUncheckedUpdateManyWithoutBookbank_logInput>
+  }
+
+  export type all_collectCreateWithoutBookbank_logInput = {
+    id: string
+    User?: UserCreateNestedOneWithoutAll_collectInput
+    income_collect: number
+    vat_collect: number
+    social_secu_collect: number
+    provident_collect_employee: number
+    provident_collect_company: number
+  }
+
+  export type all_collectUncheckedCreateWithoutBookbank_logInput = {
+    id: string
+    userId?: string | null
+    income_collect: number
+    vat_collect: number
+    social_secu_collect: number
+    provident_collect_employee: number
+    provident_collect_company: number
+  }
+
+  export type all_collectCreateOrConnectWithoutBookbank_logInput = {
+    where: all_collectWhereUniqueInput
+    create: XOR<all_collectCreateWithoutBookbank_logInput, all_collectUncheckedCreateWithoutBookbank_logInput>
+  }
+
+  export type mas_bankCreateWithoutBookbank_logInput = {
+    id: string
+    name: string
+    expense_company?: expense_companyCreateNestedManyWithoutMas_bankInput
+  }
+
+  export type mas_bankUncheckedCreateWithoutBookbank_logInput = {
+    id: string
+    name: string
+    expense_company?: expense_companyUncheckedCreateNestedManyWithoutMas_bankInput
+  }
+
+  export type mas_bankCreateOrConnectWithoutBookbank_logInput = {
+    where: mas_bankWhereUniqueInput
+    create: XOR<mas_bankCreateWithoutBookbank_logInput, mas_bankUncheckedCreateWithoutBookbank_logInput>
+  }
+
+  export type all_collectUpsertWithoutBookbank_logInput = {
+    update: XOR<all_collectUpdateWithoutBookbank_logInput, all_collectUncheckedUpdateWithoutBookbank_logInput>
+    create: XOR<all_collectCreateWithoutBookbank_logInput, all_collectUncheckedCreateWithoutBookbank_logInput>
+  }
+
+  export type all_collectUpdateWithoutBookbank_logInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    User?: UserUpdateOneWithoutAll_collectNestedInput
+    income_collect?: IntFieldUpdateOperationsInput | number
+    vat_collect?: IntFieldUpdateOperationsInput | number
+    social_secu_collect?: IntFieldUpdateOperationsInput | number
+    provident_collect_employee?: IntFieldUpdateOperationsInput | number
+    provident_collect_company?: IntFieldUpdateOperationsInput | number
+  }
+
+  export type all_collectUncheckedUpdateWithoutBookbank_logInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    userId?: NullableStringFieldUpdateOperationsInput | string | null
+    income_collect?: IntFieldUpdateOperationsInput | number
+    vat_collect?: IntFieldUpdateOperationsInput | number
+    social_secu_collect?: IntFieldUpdateOperationsInput | number
+    provident_collect_employee?: IntFieldUpdateOperationsInput | number
+    provident_collect_company?: IntFieldUpdateOperationsInput | number
+  }
+
+  export type mas_bankUpsertWithoutBookbank_logInput = {
+    update: XOR<mas_bankUpdateWithoutBookbank_logInput, mas_bankUncheckedUpdateWithoutBookbank_logInput>
+    create: XOR<mas_bankCreateWithoutBookbank_logInput, mas_bankUncheckedCreateWithoutBookbank_logInput>
+  }
+
+  export type mas_bankUpdateWithoutBookbank_logInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    expense_company?: expense_companyUpdateManyWithoutMas_bankNestedInput
+  }
+
+  export type mas_bankUncheckedUpdateWithoutBookbank_logInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    expense_company?: expense_companyUncheckedUpdateManyWithoutMas_bankNestedInput
+  }
+
   export type CompanyBranchCreateManyCompanyInput = {
     id: string
     isMainbranch?: boolean
@@ -26425,6 +38444,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     users?: UserUpdateManyWithoutCompanyBranchNestedInput
     Role_Company?: Role_CompanyUpdateManyWithoutCompanyBranchNestedInput
+    expense_company?: expense_companyUpdateManyWithoutCompanyBranchNestedInput
   }
 
   export type CompanyBranchUncheckedUpdateWithoutCompanyInput = {
@@ -26455,6 +38475,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     users?: UserUncheckedUpdateManyWithoutCompanyBranchNestedInput
     Role_Company?: Role_CompanyUncheckedUpdateManyWithoutCompanyBranchNestedInput
+    expense_company?: expense_companyUncheckedUpdateManyWithoutCompanyBranchNestedInput
   }
 
   export type CompanyBranchUncheckedUpdateManyWithoutBranchInput = {
@@ -26635,6 +38656,14 @@ export namespace Prisma {
     status: number
   }
 
+  export type expense_companyCreateManyCompanyBranchInput = {
+    id: string
+    monthId: string
+    bankId: string
+    vat_per?: number | null
+    social_security?: number | null
+  }
+
   export type UserUpdateWithoutCompanyBranchInput = {
     id?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
@@ -26650,6 +38679,8 @@ export namespace Prisma {
     Role_Company?: Role_CompanyUpdateOneWithoutUsersNestedInput
     Position_user?: Position_userUpdateOneWithoutUserNestedInput
     henchman?: Position_userUpdateManyWithoutHeaderNestedInput
+    all_collect?: all_collectUpdateManyWithoutUserNestedInput
+    salary?: salaryUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutCompanyBranchInput = {
@@ -26667,6 +38698,8 @@ export namespace Prisma {
     company?: CompanyUncheckedUpdateManyWithoutOwnerNestedInput
     Position_user?: Position_userUncheckedUpdateOneWithoutUserNestedInput
     henchman?: Position_userUncheckedUpdateManyWithoutHeaderNestedInput
+    all_collect?: all_collectUncheckedUpdateManyWithoutUserNestedInput
+    salary?: salaryUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateManyWithoutUsersInput = {
@@ -26705,6 +38738,30 @@ export namespace Prisma {
     status?: IntFieldUpdateOperationsInput | number
   }
 
+  export type expense_companyUpdateWithoutCompanyBranchInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    vat_per?: NullableIntFieldUpdateOperationsInput | number | null
+    social_security?: NullableIntFieldUpdateOperationsInput | number | null
+    Mas_month?: mas_monthUpdateOneWithoutExpense_companyNestedInput
+    mas_bank?: mas_bankUpdateOneWithoutExpense_companyNestedInput
+  }
+
+  export type expense_companyUncheckedUpdateWithoutCompanyBranchInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    monthId?: StringFieldUpdateOperationsInput | string
+    bankId?: StringFieldUpdateOperationsInput | string
+    vat_per?: NullableIntFieldUpdateOperationsInput | number | null
+    social_security?: NullableIntFieldUpdateOperationsInput | number | null
+  }
+
+  export type expense_companyUncheckedUpdateManyWithoutExpense_companyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    monthId?: StringFieldUpdateOperationsInput | string
+    bankId?: StringFieldUpdateOperationsInput | string
+    vat_per?: NullableIntFieldUpdateOperationsInput | number | null
+    social_security?: NullableIntFieldUpdateOperationsInput | number | null
+  }
+
   export type CompanyCreateManyOwnerInput = {
     id: string
     name: string
@@ -26725,6 +38782,41 @@ export namespace Prisma {
     position2_id?: string | null
     position3_id?: string | null
     role?: string | null
+  }
+
+  export type all_collectCreateManyUserInput = {
+    id: string
+    income_collect: number
+    vat_collect: number
+    social_secu_collect: number
+    provident_collect_employee: number
+    provident_collect_company: number
+  }
+
+  export type salaryCreateManyUserInput = {
+    id: string
+    base_salary: number
+    commission: number
+    position_income: number
+    ot: number
+    bonus: number
+    special_income: number
+    other_income: number
+    travel_income: number
+    bursary: number
+    welfare_money: number
+    vat: number
+    social_security: number
+    miss: number
+    ra: number
+    late: number
+    other: number
+    provident_employee: number
+    provident_company: number
+    total_income: number
+    total_expense: number
+    net: number
+    date: Date | string
   }
 
   export type CompanyUpdateWithoutOwnerInput = {
@@ -26805,6 +38897,113 @@ export namespace Prisma {
     role?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
+  export type all_collectUpdateWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    income_collect?: IntFieldUpdateOperationsInput | number
+    vat_collect?: IntFieldUpdateOperationsInput | number
+    social_secu_collect?: IntFieldUpdateOperationsInput | number
+    provident_collect_employee?: IntFieldUpdateOperationsInput | number
+    provident_collect_company?: IntFieldUpdateOperationsInput | number
+    bookbank_log?: bookbank_logUpdateManyWithoutAll_collectNestedInput
+  }
+
+  export type all_collectUncheckedUpdateWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    income_collect?: IntFieldUpdateOperationsInput | number
+    vat_collect?: IntFieldUpdateOperationsInput | number
+    social_secu_collect?: IntFieldUpdateOperationsInput | number
+    provident_collect_employee?: IntFieldUpdateOperationsInput | number
+    provident_collect_company?: IntFieldUpdateOperationsInput | number
+    bookbank_log?: bookbank_logUncheckedUpdateManyWithoutAll_collectNestedInput
+  }
+
+  export type all_collectUncheckedUpdateManyWithoutAll_collectInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    income_collect?: IntFieldUpdateOperationsInput | number
+    vat_collect?: IntFieldUpdateOperationsInput | number
+    social_secu_collect?: IntFieldUpdateOperationsInput | number
+    provident_collect_employee?: IntFieldUpdateOperationsInput | number
+    provident_collect_company?: IntFieldUpdateOperationsInput | number
+  }
+
+  export type salaryUpdateWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    base_salary?: IntFieldUpdateOperationsInput | number
+    commission?: IntFieldUpdateOperationsInput | number
+    position_income?: IntFieldUpdateOperationsInput | number
+    ot?: IntFieldUpdateOperationsInput | number
+    bonus?: IntFieldUpdateOperationsInput | number
+    special_income?: IntFieldUpdateOperationsInput | number
+    other_income?: IntFieldUpdateOperationsInput | number
+    travel_income?: IntFieldUpdateOperationsInput | number
+    bursary?: IntFieldUpdateOperationsInput | number
+    welfare_money?: IntFieldUpdateOperationsInput | number
+    vat?: IntFieldUpdateOperationsInput | number
+    social_security?: IntFieldUpdateOperationsInput | number
+    miss?: IntFieldUpdateOperationsInput | number
+    ra?: IntFieldUpdateOperationsInput | number
+    late?: IntFieldUpdateOperationsInput | number
+    other?: IntFieldUpdateOperationsInput | number
+    provident_employee?: IntFieldUpdateOperationsInput | number
+    provident_company?: IntFieldUpdateOperationsInput | number
+    total_income?: IntFieldUpdateOperationsInput | number
+    total_expense?: IntFieldUpdateOperationsInput | number
+    net?: IntFieldUpdateOperationsInput | number
+    date?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type salaryUncheckedUpdateWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    base_salary?: IntFieldUpdateOperationsInput | number
+    commission?: IntFieldUpdateOperationsInput | number
+    position_income?: IntFieldUpdateOperationsInput | number
+    ot?: IntFieldUpdateOperationsInput | number
+    bonus?: IntFieldUpdateOperationsInput | number
+    special_income?: IntFieldUpdateOperationsInput | number
+    other_income?: IntFieldUpdateOperationsInput | number
+    travel_income?: IntFieldUpdateOperationsInput | number
+    bursary?: IntFieldUpdateOperationsInput | number
+    welfare_money?: IntFieldUpdateOperationsInput | number
+    vat?: IntFieldUpdateOperationsInput | number
+    social_security?: IntFieldUpdateOperationsInput | number
+    miss?: IntFieldUpdateOperationsInput | number
+    ra?: IntFieldUpdateOperationsInput | number
+    late?: IntFieldUpdateOperationsInput | number
+    other?: IntFieldUpdateOperationsInput | number
+    provident_employee?: IntFieldUpdateOperationsInput | number
+    provident_company?: IntFieldUpdateOperationsInput | number
+    total_income?: IntFieldUpdateOperationsInput | number
+    total_expense?: IntFieldUpdateOperationsInput | number
+    net?: IntFieldUpdateOperationsInput | number
+    date?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type salaryUncheckedUpdateManyWithoutSalaryInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    base_salary?: IntFieldUpdateOperationsInput | number
+    commission?: IntFieldUpdateOperationsInput | number
+    position_income?: IntFieldUpdateOperationsInput | number
+    ot?: IntFieldUpdateOperationsInput | number
+    bonus?: IntFieldUpdateOperationsInput | number
+    special_income?: IntFieldUpdateOperationsInput | number
+    other_income?: IntFieldUpdateOperationsInput | number
+    travel_income?: IntFieldUpdateOperationsInput | number
+    bursary?: IntFieldUpdateOperationsInput | number
+    welfare_money?: IntFieldUpdateOperationsInput | number
+    vat?: IntFieldUpdateOperationsInput | number
+    social_security?: IntFieldUpdateOperationsInput | number
+    miss?: IntFieldUpdateOperationsInput | number
+    ra?: IntFieldUpdateOperationsInput | number
+    late?: IntFieldUpdateOperationsInput | number
+    other?: IntFieldUpdateOperationsInput | number
+    provident_employee?: IntFieldUpdateOperationsInput | number
+    provident_company?: IntFieldUpdateOperationsInput | number
+    total_income?: IntFieldUpdateOperationsInput | number
+    total_expense?: IntFieldUpdateOperationsInput | number
+    net?: IntFieldUpdateOperationsInput | number
+    date?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
   export type UserCreateManyRoleInput = {
     id: string
     email: string
@@ -26833,6 +39032,8 @@ export namespace Prisma {
     Role_Company?: Role_CompanyUpdateOneWithoutUsersNestedInput
     Position_user?: Position_userUpdateOneWithoutUserNestedInput
     henchman?: Position_userUpdateManyWithoutHeaderNestedInput
+    all_collect?: all_collectUpdateManyWithoutUserNestedInput
+    salary?: salaryUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutRoleInput = {
@@ -26850,6 +39051,8 @@ export namespace Prisma {
     companyBranchId?: NullableStringFieldUpdateOperationsInput | string | null
     Position_user?: Position_userUncheckedUpdateOneWithoutUserNestedInput
     henchman?: Position_userUncheckedUpdateManyWithoutHeaderNestedInput
+    all_collect?: all_collectUncheckedUpdateManyWithoutUserNestedInput
+    salary?: salaryUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type UserCreateManyRole_CompanyInput = {
@@ -26880,6 +39083,8 @@ export namespace Prisma {
     companyBranch?: CompanyBranchUpdateOneWithoutUsersNestedInput
     Position_user?: Position_userUpdateOneWithoutUserNestedInput
     henchman?: Position_userUpdateManyWithoutHeaderNestedInput
+    all_collect?: all_collectUpdateManyWithoutUserNestedInput
+    salary?: salaryUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutRole_CompanyInput = {
@@ -26897,6 +39102,8 @@ export namespace Prisma {
     companyBranchId?: NullableStringFieldUpdateOperationsInput | string | null
     Position_user?: Position_userUncheckedUpdateOneWithoutUserNestedInput
     henchman?: Position_userUncheckedUpdateManyWithoutHeaderNestedInput
+    all_collect?: all_collectUncheckedUpdateManyWithoutUserNestedInput
+    salary?: salaryUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type DistrictCreateManyProvinceInput = {
@@ -27103,6 +39310,103 @@ export namespace Prisma {
     position2_id?: NullableStringFieldUpdateOperationsInput | string | null
     role?: NullableStringFieldUpdateOperationsInput | string | null
     headderId?: NullableStringFieldUpdateOperationsInput | string | null
+  }
+
+  export type expense_companyCreateManyMas_bankInput = {
+    id: string
+    monthId: string
+    vat_per?: number | null
+    social_security?: number | null
+    companyBranchId?: string | null
+  }
+
+  export type bookbank_logCreateManyMas_bankInput = {
+    id: string
+    date: Date | string
+    bank_number: string
+    all_collectId?: string | null
+  }
+
+  export type expense_companyUpdateWithoutMas_bankInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    vat_per?: NullableIntFieldUpdateOperationsInput | number | null
+    social_security?: NullableIntFieldUpdateOperationsInput | number | null
+    Mas_month?: mas_monthUpdateOneWithoutExpense_companyNestedInput
+    CompanyBranch?: CompanyBranchUpdateOneWithoutExpense_companyNestedInput
+  }
+
+  export type expense_companyUncheckedUpdateWithoutMas_bankInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    monthId?: StringFieldUpdateOperationsInput | string
+    vat_per?: NullableIntFieldUpdateOperationsInput | number | null
+    social_security?: NullableIntFieldUpdateOperationsInput | number | null
+    companyBranchId?: NullableStringFieldUpdateOperationsInput | string | null
+  }
+
+  export type bookbank_logUpdateWithoutMas_bankInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    date?: DateTimeFieldUpdateOperationsInput | Date | string
+    bank_number?: StringFieldUpdateOperationsInput | string
+    all_collect?: all_collectUpdateOneWithoutBookbank_logNestedInput
+  }
+
+  export type bookbank_logUncheckedUpdateWithoutMas_bankInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    date?: DateTimeFieldUpdateOperationsInput | Date | string
+    bank_number?: StringFieldUpdateOperationsInput | string
+    all_collectId?: NullableStringFieldUpdateOperationsInput | string | null
+  }
+
+  export type bookbank_logUncheckedUpdateManyWithoutBookbank_logInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    date?: DateTimeFieldUpdateOperationsInput | Date | string
+    bank_number?: StringFieldUpdateOperationsInput | string
+    all_collectId?: NullableStringFieldUpdateOperationsInput | string | null
+  }
+
+  export type expense_companyCreateManyMas_monthInput = {
+    id: string
+    bankId: string
+    vat_per?: number | null
+    social_security?: number | null
+    companyBranchId?: string | null
+  }
+
+  export type expense_companyUpdateWithoutMas_monthInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    vat_per?: NullableIntFieldUpdateOperationsInput | number | null
+    social_security?: NullableIntFieldUpdateOperationsInput | number | null
+    mas_bank?: mas_bankUpdateOneWithoutExpense_companyNestedInput
+    CompanyBranch?: CompanyBranchUpdateOneWithoutExpense_companyNestedInput
+  }
+
+  export type expense_companyUncheckedUpdateWithoutMas_monthInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    bankId?: StringFieldUpdateOperationsInput | string
+    vat_per?: NullableIntFieldUpdateOperationsInput | number | null
+    social_security?: NullableIntFieldUpdateOperationsInput | number | null
+    companyBranchId?: NullableStringFieldUpdateOperationsInput | string | null
+  }
+
+  export type bookbank_logCreateManyAll_collectInput = {
+    id: string
+    date: Date | string
+    mas_bankId?: string | null
+    bank_number: string
+  }
+
+  export type bookbank_logUpdateWithoutAll_collectInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    date?: DateTimeFieldUpdateOperationsInput | Date | string
+    bank_number?: StringFieldUpdateOperationsInput | string
+    mas_bank?: mas_bankUpdateOneWithoutBookbank_logNestedInput
+  }
+
+  export type bookbank_logUncheckedUpdateWithoutAll_collectInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    date?: DateTimeFieldUpdateOperationsInput | Date | string
+    mas_bankId?: NullableStringFieldUpdateOperationsInput | string | null
+    bank_number?: StringFieldUpdateOperationsInput | string
   }
 
 
