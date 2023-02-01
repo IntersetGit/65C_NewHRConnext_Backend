@@ -278,6 +278,43 @@ export type holiday_year = {
   holiday_name: string | null
 }
 
+/**
+ * Model mas_bank
+ * 
+ */
+export type mas_bank = {
+  id: string
+  name: string
+}
+
+/**
+ * Model mas_month
+ * 
+ */
+export type mas_month = {
+  id: string
+  name: string
+}
+
+/**
+ * Model mas_years
+ * 
+ */
+export type mas_years = {
+  id: string
+  name: string
+}
+
+/**
+ * Model mas_salary_status
+ * 
+ */
+export type mas_salary_status = {
+  id: string
+  no: number
+  name: string
+}
+
 
 /**
  * ##  Prisma Client ʲˢ
@@ -555,6 +592,46 @@ export class PrismaClient<
     * ```
     */
   get holiday_year(): Prisma.holiday_yearDelegate<GlobalReject>;
+
+  /**
+   * `prisma.mas_bank`: Exposes CRUD operations for the **mas_bank** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more Mas_banks
+    * const mas_banks = await prisma.mas_bank.findMany()
+    * ```
+    */
+  get mas_bank(): Prisma.mas_bankDelegate<GlobalReject>;
+
+  /**
+   * `prisma.mas_month`: Exposes CRUD operations for the **mas_month** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more Mas_months
+    * const mas_months = await prisma.mas_month.findMany()
+    * ```
+    */
+  get mas_month(): Prisma.mas_monthDelegate<GlobalReject>;
+
+  /**
+   * `prisma.mas_years`: Exposes CRUD operations for the **mas_years** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more Mas_years
+    * const mas_years = await prisma.mas_years.findMany()
+    * ```
+    */
+  get mas_years(): Prisma.mas_yearsDelegate<GlobalReject>;
+
+  /**
+   * `prisma.mas_salary_status`: Exposes CRUD operations for the **mas_salary_status** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more Mas_salary_statuses
+    * const mas_salary_statuses = await prisma.mas_salary_status.findMany()
+    * ```
+    */
+  get mas_salary_status(): Prisma.mas_salary_statusDelegate<GlobalReject>;
 }
 
 export namespace Prisma {
@@ -1046,7 +1123,11 @@ export namespace Prisma {
     mas_positionlevel3: 'mas_positionlevel3',
     Position_user: 'Position_user',
     holiday_date: 'holiday_date',
-    holiday_year: 'holiday_year'
+    holiday_year: 'holiday_year',
+    mas_bank: 'mas_bank',
+    mas_month: 'mas_month',
+    mas_years: 'mas_years',
+    mas_salary_status: 'mas_salary_status'
   };
 
   export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -18020,6 +18101,3488 @@ export namespace Prisma {
 
 
   /**
+   * Model mas_bank
+   */
+
+
+  export type AggregateMas_bank = {
+    _count: Mas_bankCountAggregateOutputType | null
+    _min: Mas_bankMinAggregateOutputType | null
+    _max: Mas_bankMaxAggregateOutputType | null
+  }
+
+  export type Mas_bankMinAggregateOutputType = {
+    id: string | null
+    name: string | null
+  }
+
+  export type Mas_bankMaxAggregateOutputType = {
+    id: string | null
+    name: string | null
+  }
+
+  export type Mas_bankCountAggregateOutputType = {
+    id: number
+    name: number
+    _all: number
+  }
+
+
+  export type Mas_bankMinAggregateInputType = {
+    id?: true
+    name?: true
+  }
+
+  export type Mas_bankMaxAggregateInputType = {
+    id?: true
+    name?: true
+  }
+
+  export type Mas_bankCountAggregateInputType = {
+    id?: true
+    name?: true
+    _all?: true
+  }
+
+  export type Mas_bankAggregateArgs = {
+    /**
+     * Filter which mas_bank to aggregate.
+     */
+    where?: mas_bankWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of mas_banks to fetch.
+     */
+    orderBy?: Enumerable<mas_bankOrderByWithRelationInput>
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: mas_bankWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` mas_banks from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` mas_banks.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned mas_banks
+    **/
+    _count?: true | Mas_bankCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: Mas_bankMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: Mas_bankMaxAggregateInputType
+  }
+
+  export type GetMas_bankAggregateType<T extends Mas_bankAggregateArgs> = {
+        [P in keyof T & keyof AggregateMas_bank]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateMas_bank[P]>
+      : GetScalarType<T[P], AggregateMas_bank[P]>
+  }
+
+
+
+
+  export type Mas_bankGroupByArgs = {
+    where?: mas_bankWhereInput
+    orderBy?: Enumerable<mas_bankOrderByWithAggregationInput>
+    by: Mas_bankScalarFieldEnum[]
+    having?: mas_bankScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: Mas_bankCountAggregateInputType | true
+    _min?: Mas_bankMinAggregateInputType
+    _max?: Mas_bankMaxAggregateInputType
+  }
+
+
+  export type Mas_bankGroupByOutputType = {
+    id: string
+    name: string
+    _count: Mas_bankCountAggregateOutputType | null
+    _min: Mas_bankMinAggregateOutputType | null
+    _max: Mas_bankMaxAggregateOutputType | null
+  }
+
+  type GetMas_bankGroupByPayload<T extends Mas_bankGroupByArgs> = PrismaPromise<
+    Array<
+      PickArray<Mas_bankGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof Mas_bankGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], Mas_bankGroupByOutputType[P]>
+            : GetScalarType<T[P], Mas_bankGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type mas_bankSelect = {
+    id?: boolean
+    name?: boolean
+  }
+
+
+  export type mas_bankGetPayload<S extends boolean | null | undefined | mas_bankArgs> =
+    S extends { select: any, include: any } ? 'Please either choose `select` or `include`' :
+    S extends true ? mas_bank :
+    S extends undefined ? never :
+    S extends { include: any } & (mas_bankArgs | mas_bankFindManyArgs)
+    ? mas_bank 
+    : S extends { select: any } & (mas_bankArgs | mas_bankFindManyArgs)
+      ? {
+    [P in TruthyKeys<S['select']>]:
+    P extends keyof mas_bank ? mas_bank[P] : never
+  } 
+      : mas_bank
+
+
+  type mas_bankCountArgs = 
+    Omit<mas_bankFindManyArgs, 'select' | 'include'> & {
+      select?: Mas_bankCountAggregateInputType | true
+    }
+
+  export interface mas_bankDelegate<GlobalRejectSettings extends Prisma.RejectOnNotFound | Prisma.RejectPerOperation | false | undefined> {
+
+    /**
+     * Find zero or one Mas_bank that matches the filter.
+     * @param {mas_bankFindUniqueArgs} args - Arguments to find a Mas_bank
+     * @example
+     * // Get one Mas_bank
+     * const mas_bank = await prisma.mas_bank.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+    **/
+    findUnique<T extends mas_bankFindUniqueArgs,  LocalRejectSettings = T["rejectOnNotFound"] extends RejectOnNotFound ? T['rejectOnNotFound'] : undefined>(
+      args: SelectSubset<T, mas_bankFindUniqueArgs>
+    ): HasReject<GlobalRejectSettings, LocalRejectSettings, 'findUnique', 'mas_bank'> extends True ? Prisma__mas_bankClient<mas_bankGetPayload<T>> : Prisma__mas_bankClient<mas_bankGetPayload<T> | null, null>
+
+    /**
+     * Find one Mas_bank that matches the filter or throw an error  with `error.code='P2025'` 
+     *     if no matches were found.
+     * @param {mas_bankFindUniqueOrThrowArgs} args - Arguments to find a Mas_bank
+     * @example
+     * // Get one Mas_bank
+     * const mas_bank = await prisma.mas_bank.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+    **/
+    findUniqueOrThrow<T extends mas_bankFindUniqueOrThrowArgs>(
+      args?: SelectSubset<T, mas_bankFindUniqueOrThrowArgs>
+    ): Prisma__mas_bankClient<mas_bankGetPayload<T>>
+
+    /**
+     * Find the first Mas_bank that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {mas_bankFindFirstArgs} args - Arguments to find a Mas_bank
+     * @example
+     * // Get one Mas_bank
+     * const mas_bank = await prisma.mas_bank.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+    **/
+    findFirst<T extends mas_bankFindFirstArgs,  LocalRejectSettings = T["rejectOnNotFound"] extends RejectOnNotFound ? T['rejectOnNotFound'] : undefined>(
+      args?: SelectSubset<T, mas_bankFindFirstArgs>
+    ): HasReject<GlobalRejectSettings, LocalRejectSettings, 'findFirst', 'mas_bank'> extends True ? Prisma__mas_bankClient<mas_bankGetPayload<T>> : Prisma__mas_bankClient<mas_bankGetPayload<T> | null, null>
+
+    /**
+     * Find the first Mas_bank that matches the filter or
+     * throw `NotFoundError` if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {mas_bankFindFirstOrThrowArgs} args - Arguments to find a Mas_bank
+     * @example
+     * // Get one Mas_bank
+     * const mas_bank = await prisma.mas_bank.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+    **/
+    findFirstOrThrow<T extends mas_bankFindFirstOrThrowArgs>(
+      args?: SelectSubset<T, mas_bankFindFirstOrThrowArgs>
+    ): Prisma__mas_bankClient<mas_bankGetPayload<T>>
+
+    /**
+     * Find zero or more Mas_banks that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {mas_bankFindManyArgs=} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all Mas_banks
+     * const mas_banks = await prisma.mas_bank.findMany()
+     * 
+     * // Get first 10 Mas_banks
+     * const mas_banks = await prisma.mas_bank.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const mas_bankWithIdOnly = await prisma.mas_bank.findMany({ select: { id: true } })
+     * 
+    **/
+    findMany<T extends mas_bankFindManyArgs>(
+      args?: SelectSubset<T, mas_bankFindManyArgs>
+    ): PrismaPromise<Array<mas_bankGetPayload<T>>>
+
+    /**
+     * Create a Mas_bank.
+     * @param {mas_bankCreateArgs} args - Arguments to create a Mas_bank.
+     * @example
+     * // Create one Mas_bank
+     * const Mas_bank = await prisma.mas_bank.create({
+     *   data: {
+     *     // ... data to create a Mas_bank
+     *   }
+     * })
+     * 
+    **/
+    create<T extends mas_bankCreateArgs>(
+      args: SelectSubset<T, mas_bankCreateArgs>
+    ): Prisma__mas_bankClient<mas_bankGetPayload<T>>
+
+    /**
+     * Create many Mas_banks.
+     *     @param {mas_bankCreateManyArgs} args - Arguments to create many Mas_banks.
+     *     @example
+     *     // Create many Mas_banks
+     *     const mas_bank = await prisma.mas_bank.createMany({
+     *       data: {
+     *         // ... provide data here
+     *       }
+     *     })
+     *     
+    **/
+    createMany<T extends mas_bankCreateManyArgs>(
+      args?: SelectSubset<T, mas_bankCreateManyArgs>
+    ): PrismaPromise<BatchPayload>
+
+    /**
+     * Delete a Mas_bank.
+     * @param {mas_bankDeleteArgs} args - Arguments to delete one Mas_bank.
+     * @example
+     * // Delete one Mas_bank
+     * const Mas_bank = await prisma.mas_bank.delete({
+     *   where: {
+     *     // ... filter to delete one Mas_bank
+     *   }
+     * })
+     * 
+    **/
+    delete<T extends mas_bankDeleteArgs>(
+      args: SelectSubset<T, mas_bankDeleteArgs>
+    ): Prisma__mas_bankClient<mas_bankGetPayload<T>>
+
+    /**
+     * Update one Mas_bank.
+     * @param {mas_bankUpdateArgs} args - Arguments to update one Mas_bank.
+     * @example
+     * // Update one Mas_bank
+     * const mas_bank = await prisma.mas_bank.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+    **/
+    update<T extends mas_bankUpdateArgs>(
+      args: SelectSubset<T, mas_bankUpdateArgs>
+    ): Prisma__mas_bankClient<mas_bankGetPayload<T>>
+
+    /**
+     * Delete zero or more Mas_banks.
+     * @param {mas_bankDeleteManyArgs} args - Arguments to filter Mas_banks to delete.
+     * @example
+     * // Delete a few Mas_banks
+     * const { count } = await prisma.mas_bank.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+    **/
+    deleteMany<T extends mas_bankDeleteManyArgs>(
+      args?: SelectSubset<T, mas_bankDeleteManyArgs>
+    ): PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Mas_banks.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {mas_bankUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many Mas_banks
+     * const mas_bank = await prisma.mas_bank.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+    **/
+    updateMany<T extends mas_bankUpdateManyArgs>(
+      args: SelectSubset<T, mas_bankUpdateManyArgs>
+    ): PrismaPromise<BatchPayload>
+
+    /**
+     * Create or update one Mas_bank.
+     * @param {mas_bankUpsertArgs} args - Arguments to update or create a Mas_bank.
+     * @example
+     * // Update or create a Mas_bank
+     * const mas_bank = await prisma.mas_bank.upsert({
+     *   create: {
+     *     // ... data to create a Mas_bank
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the Mas_bank we want to update
+     *   }
+     * })
+    **/
+    upsert<T extends mas_bankUpsertArgs>(
+      args: SelectSubset<T, mas_bankUpsertArgs>
+    ): Prisma__mas_bankClient<mas_bankGetPayload<T>>
+
+    /**
+     * Count the number of Mas_banks.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {mas_bankCountArgs} args - Arguments to filter Mas_banks to count.
+     * @example
+     * // Count the number of Mas_banks
+     * const count = await prisma.mas_bank.count({
+     *   where: {
+     *     // ... the filter for the Mas_banks we want to count
+     *   }
+     * })
+    **/
+    count<T extends mas_bankCountArgs>(
+      args?: Subset<T, mas_bankCountArgs>,
+    ): PrismaPromise<
+      T extends _Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], Mas_bankCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a Mas_bank.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {Mas_bankAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends Mas_bankAggregateArgs>(args: Subset<T, Mas_bankAggregateArgs>): PrismaPromise<GetMas_bankAggregateType<T>>
+
+    /**
+     * Group by Mas_bank.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {Mas_bankGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends Mas_bankGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: Mas_bankGroupByArgs['orderBy'] }
+        : { orderBy?: Mas_bankGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends TupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, Mas_bankGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetMas_bankGroupByPayload<T> : PrismaPromise<InputErrors>
+
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for mas_bank.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export class Prisma__mas_bankClient<T, Null = never> implements PrismaPromise<T> {
+    [prisma]: true;
+    private readonly _dmmf;
+    private readonly _fetcher;
+    private readonly _queryType;
+    private readonly _rootField;
+    private readonly _clientMethod;
+    private readonly _args;
+    private readonly _dataPath;
+    private readonly _errorFormat;
+    private readonly _measurePerformance?;
+    private _isList;
+    private _callsite;
+    private _requestPromise?;
+    constructor(_dmmf: runtime.DMMFClass, _fetcher: PrismaClientFetcher, _queryType: 'query' | 'mutation', _rootField: string, _clientMethod: string, _args: any, _dataPath: string[], _errorFormat: ErrorFormat, _measurePerformance?: boolean | undefined, _isList?: boolean);
+    readonly [Symbol.toStringTag]: 'PrismaClientPromise';
+
+
+    private get _document();
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): Promise<TResult1 | TResult2>;
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): Promise<T | TResult>;
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): Promise<T>;
+  }
+
+
+
+  // Custom InputTypes
+
+  /**
+   * mas_bank base type for findUnique actions
+   */
+  export type mas_bankFindUniqueArgsBase = {
+    /**
+     * Select specific fields to fetch from the mas_bank
+     */
+    select?: mas_bankSelect | null
+    /**
+     * Filter, which mas_bank to fetch.
+     */
+    where: mas_bankWhereUniqueInput
+  }
+
+  /**
+   * mas_bank findUnique
+   */
+  export interface mas_bankFindUniqueArgs extends mas_bankFindUniqueArgsBase {
+   /**
+    * Throw an Error if query returns no results
+    * @deprecated since 4.0.0: use `findUniqueOrThrow` method instead
+    */
+    rejectOnNotFound?: RejectOnNotFound
+  }
+      
+
+  /**
+   * mas_bank findUniqueOrThrow
+   */
+  export type mas_bankFindUniqueOrThrowArgs = {
+    /**
+     * Select specific fields to fetch from the mas_bank
+     */
+    select?: mas_bankSelect | null
+    /**
+     * Filter, which mas_bank to fetch.
+     */
+    where: mas_bankWhereUniqueInput
+  }
+
+
+  /**
+   * mas_bank base type for findFirst actions
+   */
+  export type mas_bankFindFirstArgsBase = {
+    /**
+     * Select specific fields to fetch from the mas_bank
+     */
+    select?: mas_bankSelect | null
+    /**
+     * Filter, which mas_bank to fetch.
+     */
+    where?: mas_bankWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of mas_banks to fetch.
+     */
+    orderBy?: Enumerable<mas_bankOrderByWithRelationInput>
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for mas_banks.
+     */
+    cursor?: mas_bankWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` mas_banks from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` mas_banks.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of mas_banks.
+     */
+    distinct?: Enumerable<Mas_bankScalarFieldEnum>
+  }
+
+  /**
+   * mas_bank findFirst
+   */
+  export interface mas_bankFindFirstArgs extends mas_bankFindFirstArgsBase {
+   /**
+    * Throw an Error if query returns no results
+    * @deprecated since 4.0.0: use `findFirstOrThrow` method instead
+    */
+    rejectOnNotFound?: RejectOnNotFound
+  }
+      
+
+  /**
+   * mas_bank findFirstOrThrow
+   */
+  export type mas_bankFindFirstOrThrowArgs = {
+    /**
+     * Select specific fields to fetch from the mas_bank
+     */
+    select?: mas_bankSelect | null
+    /**
+     * Filter, which mas_bank to fetch.
+     */
+    where?: mas_bankWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of mas_banks to fetch.
+     */
+    orderBy?: Enumerable<mas_bankOrderByWithRelationInput>
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for mas_banks.
+     */
+    cursor?: mas_bankWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` mas_banks from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` mas_banks.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of mas_banks.
+     */
+    distinct?: Enumerable<Mas_bankScalarFieldEnum>
+  }
+
+
+  /**
+   * mas_bank findMany
+   */
+  export type mas_bankFindManyArgs = {
+    /**
+     * Select specific fields to fetch from the mas_bank
+     */
+    select?: mas_bankSelect | null
+    /**
+     * Filter, which mas_banks to fetch.
+     */
+    where?: mas_bankWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of mas_banks to fetch.
+     */
+    orderBy?: Enumerable<mas_bankOrderByWithRelationInput>
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing mas_banks.
+     */
+    cursor?: mas_bankWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` mas_banks from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` mas_banks.
+     */
+    skip?: number
+    distinct?: Enumerable<Mas_bankScalarFieldEnum>
+  }
+
+
+  /**
+   * mas_bank create
+   */
+  export type mas_bankCreateArgs = {
+    /**
+     * Select specific fields to fetch from the mas_bank
+     */
+    select?: mas_bankSelect | null
+    /**
+     * The data needed to create a mas_bank.
+     */
+    data: XOR<mas_bankCreateInput, mas_bankUncheckedCreateInput>
+  }
+
+
+  /**
+   * mas_bank createMany
+   */
+  export type mas_bankCreateManyArgs = {
+    /**
+     * The data used to create many mas_banks.
+     */
+    data: Enumerable<mas_bankCreateManyInput>
+    skipDuplicates?: boolean
+  }
+
+
+  /**
+   * mas_bank update
+   */
+  export type mas_bankUpdateArgs = {
+    /**
+     * Select specific fields to fetch from the mas_bank
+     */
+    select?: mas_bankSelect | null
+    /**
+     * The data needed to update a mas_bank.
+     */
+    data: XOR<mas_bankUpdateInput, mas_bankUncheckedUpdateInput>
+    /**
+     * Choose, which mas_bank to update.
+     */
+    where: mas_bankWhereUniqueInput
+  }
+
+
+  /**
+   * mas_bank updateMany
+   */
+  export type mas_bankUpdateManyArgs = {
+    /**
+     * The data used to update mas_banks.
+     */
+    data: XOR<mas_bankUpdateManyMutationInput, mas_bankUncheckedUpdateManyInput>
+    /**
+     * Filter which mas_banks to update
+     */
+    where?: mas_bankWhereInput
+  }
+
+
+  /**
+   * mas_bank upsert
+   */
+  export type mas_bankUpsertArgs = {
+    /**
+     * Select specific fields to fetch from the mas_bank
+     */
+    select?: mas_bankSelect | null
+    /**
+     * The filter to search for the mas_bank to update in case it exists.
+     */
+    where: mas_bankWhereUniqueInput
+    /**
+     * In case the mas_bank found by the `where` argument doesn't exist, create a new mas_bank with this data.
+     */
+    create: XOR<mas_bankCreateInput, mas_bankUncheckedCreateInput>
+    /**
+     * In case the mas_bank was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<mas_bankUpdateInput, mas_bankUncheckedUpdateInput>
+  }
+
+
+  /**
+   * mas_bank delete
+   */
+  export type mas_bankDeleteArgs = {
+    /**
+     * Select specific fields to fetch from the mas_bank
+     */
+    select?: mas_bankSelect | null
+    /**
+     * Filter which mas_bank to delete.
+     */
+    where: mas_bankWhereUniqueInput
+  }
+
+
+  /**
+   * mas_bank deleteMany
+   */
+  export type mas_bankDeleteManyArgs = {
+    /**
+     * Filter which mas_banks to delete
+     */
+    where?: mas_bankWhereInput
+  }
+
+
+  /**
+   * mas_bank without action
+   */
+  export type mas_bankArgs = {
+    /**
+     * Select specific fields to fetch from the mas_bank
+     */
+    select?: mas_bankSelect | null
+  }
+
+
+
+  /**
+   * Model mas_month
+   */
+
+
+  export type AggregateMas_month = {
+    _count: Mas_monthCountAggregateOutputType | null
+    _min: Mas_monthMinAggregateOutputType | null
+    _max: Mas_monthMaxAggregateOutputType | null
+  }
+
+  export type Mas_monthMinAggregateOutputType = {
+    id: string | null
+    name: string | null
+  }
+
+  export type Mas_monthMaxAggregateOutputType = {
+    id: string | null
+    name: string | null
+  }
+
+  export type Mas_monthCountAggregateOutputType = {
+    id: number
+    name: number
+    _all: number
+  }
+
+
+  export type Mas_monthMinAggregateInputType = {
+    id?: true
+    name?: true
+  }
+
+  export type Mas_monthMaxAggregateInputType = {
+    id?: true
+    name?: true
+  }
+
+  export type Mas_monthCountAggregateInputType = {
+    id?: true
+    name?: true
+    _all?: true
+  }
+
+  export type Mas_monthAggregateArgs = {
+    /**
+     * Filter which mas_month to aggregate.
+     */
+    where?: mas_monthWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of mas_months to fetch.
+     */
+    orderBy?: Enumerable<mas_monthOrderByWithRelationInput>
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: mas_monthWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` mas_months from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` mas_months.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned mas_months
+    **/
+    _count?: true | Mas_monthCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: Mas_monthMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: Mas_monthMaxAggregateInputType
+  }
+
+  export type GetMas_monthAggregateType<T extends Mas_monthAggregateArgs> = {
+        [P in keyof T & keyof AggregateMas_month]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateMas_month[P]>
+      : GetScalarType<T[P], AggregateMas_month[P]>
+  }
+
+
+
+
+  export type Mas_monthGroupByArgs = {
+    where?: mas_monthWhereInput
+    orderBy?: Enumerable<mas_monthOrderByWithAggregationInput>
+    by: Mas_monthScalarFieldEnum[]
+    having?: mas_monthScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: Mas_monthCountAggregateInputType | true
+    _min?: Mas_monthMinAggregateInputType
+    _max?: Mas_monthMaxAggregateInputType
+  }
+
+
+  export type Mas_monthGroupByOutputType = {
+    id: string
+    name: string
+    _count: Mas_monthCountAggregateOutputType | null
+    _min: Mas_monthMinAggregateOutputType | null
+    _max: Mas_monthMaxAggregateOutputType | null
+  }
+
+  type GetMas_monthGroupByPayload<T extends Mas_monthGroupByArgs> = PrismaPromise<
+    Array<
+      PickArray<Mas_monthGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof Mas_monthGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], Mas_monthGroupByOutputType[P]>
+            : GetScalarType<T[P], Mas_monthGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type mas_monthSelect = {
+    id?: boolean
+    name?: boolean
+  }
+
+
+  export type mas_monthGetPayload<S extends boolean | null | undefined | mas_monthArgs> =
+    S extends { select: any, include: any } ? 'Please either choose `select` or `include`' :
+    S extends true ? mas_month :
+    S extends undefined ? never :
+    S extends { include: any } & (mas_monthArgs | mas_monthFindManyArgs)
+    ? mas_month 
+    : S extends { select: any } & (mas_monthArgs | mas_monthFindManyArgs)
+      ? {
+    [P in TruthyKeys<S['select']>]:
+    P extends keyof mas_month ? mas_month[P] : never
+  } 
+      : mas_month
+
+
+  type mas_monthCountArgs = 
+    Omit<mas_monthFindManyArgs, 'select' | 'include'> & {
+      select?: Mas_monthCountAggregateInputType | true
+    }
+
+  export interface mas_monthDelegate<GlobalRejectSettings extends Prisma.RejectOnNotFound | Prisma.RejectPerOperation | false | undefined> {
+
+    /**
+     * Find zero or one Mas_month that matches the filter.
+     * @param {mas_monthFindUniqueArgs} args - Arguments to find a Mas_month
+     * @example
+     * // Get one Mas_month
+     * const mas_month = await prisma.mas_month.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+    **/
+    findUnique<T extends mas_monthFindUniqueArgs,  LocalRejectSettings = T["rejectOnNotFound"] extends RejectOnNotFound ? T['rejectOnNotFound'] : undefined>(
+      args: SelectSubset<T, mas_monthFindUniqueArgs>
+    ): HasReject<GlobalRejectSettings, LocalRejectSettings, 'findUnique', 'mas_month'> extends True ? Prisma__mas_monthClient<mas_monthGetPayload<T>> : Prisma__mas_monthClient<mas_monthGetPayload<T> | null, null>
+
+    /**
+     * Find one Mas_month that matches the filter or throw an error  with `error.code='P2025'` 
+     *     if no matches were found.
+     * @param {mas_monthFindUniqueOrThrowArgs} args - Arguments to find a Mas_month
+     * @example
+     * // Get one Mas_month
+     * const mas_month = await prisma.mas_month.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+    **/
+    findUniqueOrThrow<T extends mas_monthFindUniqueOrThrowArgs>(
+      args?: SelectSubset<T, mas_monthFindUniqueOrThrowArgs>
+    ): Prisma__mas_monthClient<mas_monthGetPayload<T>>
+
+    /**
+     * Find the first Mas_month that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {mas_monthFindFirstArgs} args - Arguments to find a Mas_month
+     * @example
+     * // Get one Mas_month
+     * const mas_month = await prisma.mas_month.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+    **/
+    findFirst<T extends mas_monthFindFirstArgs,  LocalRejectSettings = T["rejectOnNotFound"] extends RejectOnNotFound ? T['rejectOnNotFound'] : undefined>(
+      args?: SelectSubset<T, mas_monthFindFirstArgs>
+    ): HasReject<GlobalRejectSettings, LocalRejectSettings, 'findFirst', 'mas_month'> extends True ? Prisma__mas_monthClient<mas_monthGetPayload<T>> : Prisma__mas_monthClient<mas_monthGetPayload<T> | null, null>
+
+    /**
+     * Find the first Mas_month that matches the filter or
+     * throw `NotFoundError` if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {mas_monthFindFirstOrThrowArgs} args - Arguments to find a Mas_month
+     * @example
+     * // Get one Mas_month
+     * const mas_month = await prisma.mas_month.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+    **/
+    findFirstOrThrow<T extends mas_monthFindFirstOrThrowArgs>(
+      args?: SelectSubset<T, mas_monthFindFirstOrThrowArgs>
+    ): Prisma__mas_monthClient<mas_monthGetPayload<T>>
+
+    /**
+     * Find zero or more Mas_months that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {mas_monthFindManyArgs=} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all Mas_months
+     * const mas_months = await prisma.mas_month.findMany()
+     * 
+     * // Get first 10 Mas_months
+     * const mas_months = await prisma.mas_month.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const mas_monthWithIdOnly = await prisma.mas_month.findMany({ select: { id: true } })
+     * 
+    **/
+    findMany<T extends mas_monthFindManyArgs>(
+      args?: SelectSubset<T, mas_monthFindManyArgs>
+    ): PrismaPromise<Array<mas_monthGetPayload<T>>>
+
+    /**
+     * Create a Mas_month.
+     * @param {mas_monthCreateArgs} args - Arguments to create a Mas_month.
+     * @example
+     * // Create one Mas_month
+     * const Mas_month = await prisma.mas_month.create({
+     *   data: {
+     *     // ... data to create a Mas_month
+     *   }
+     * })
+     * 
+    **/
+    create<T extends mas_monthCreateArgs>(
+      args: SelectSubset<T, mas_monthCreateArgs>
+    ): Prisma__mas_monthClient<mas_monthGetPayload<T>>
+
+    /**
+     * Create many Mas_months.
+     *     @param {mas_monthCreateManyArgs} args - Arguments to create many Mas_months.
+     *     @example
+     *     // Create many Mas_months
+     *     const mas_month = await prisma.mas_month.createMany({
+     *       data: {
+     *         // ... provide data here
+     *       }
+     *     })
+     *     
+    **/
+    createMany<T extends mas_monthCreateManyArgs>(
+      args?: SelectSubset<T, mas_monthCreateManyArgs>
+    ): PrismaPromise<BatchPayload>
+
+    /**
+     * Delete a Mas_month.
+     * @param {mas_monthDeleteArgs} args - Arguments to delete one Mas_month.
+     * @example
+     * // Delete one Mas_month
+     * const Mas_month = await prisma.mas_month.delete({
+     *   where: {
+     *     // ... filter to delete one Mas_month
+     *   }
+     * })
+     * 
+    **/
+    delete<T extends mas_monthDeleteArgs>(
+      args: SelectSubset<T, mas_monthDeleteArgs>
+    ): Prisma__mas_monthClient<mas_monthGetPayload<T>>
+
+    /**
+     * Update one Mas_month.
+     * @param {mas_monthUpdateArgs} args - Arguments to update one Mas_month.
+     * @example
+     * // Update one Mas_month
+     * const mas_month = await prisma.mas_month.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+    **/
+    update<T extends mas_monthUpdateArgs>(
+      args: SelectSubset<T, mas_monthUpdateArgs>
+    ): Prisma__mas_monthClient<mas_monthGetPayload<T>>
+
+    /**
+     * Delete zero or more Mas_months.
+     * @param {mas_monthDeleteManyArgs} args - Arguments to filter Mas_months to delete.
+     * @example
+     * // Delete a few Mas_months
+     * const { count } = await prisma.mas_month.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+    **/
+    deleteMany<T extends mas_monthDeleteManyArgs>(
+      args?: SelectSubset<T, mas_monthDeleteManyArgs>
+    ): PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Mas_months.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {mas_monthUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many Mas_months
+     * const mas_month = await prisma.mas_month.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+    **/
+    updateMany<T extends mas_monthUpdateManyArgs>(
+      args: SelectSubset<T, mas_monthUpdateManyArgs>
+    ): PrismaPromise<BatchPayload>
+
+    /**
+     * Create or update one Mas_month.
+     * @param {mas_monthUpsertArgs} args - Arguments to update or create a Mas_month.
+     * @example
+     * // Update or create a Mas_month
+     * const mas_month = await prisma.mas_month.upsert({
+     *   create: {
+     *     // ... data to create a Mas_month
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the Mas_month we want to update
+     *   }
+     * })
+    **/
+    upsert<T extends mas_monthUpsertArgs>(
+      args: SelectSubset<T, mas_monthUpsertArgs>
+    ): Prisma__mas_monthClient<mas_monthGetPayload<T>>
+
+    /**
+     * Count the number of Mas_months.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {mas_monthCountArgs} args - Arguments to filter Mas_months to count.
+     * @example
+     * // Count the number of Mas_months
+     * const count = await prisma.mas_month.count({
+     *   where: {
+     *     // ... the filter for the Mas_months we want to count
+     *   }
+     * })
+    **/
+    count<T extends mas_monthCountArgs>(
+      args?: Subset<T, mas_monthCountArgs>,
+    ): PrismaPromise<
+      T extends _Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], Mas_monthCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a Mas_month.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {Mas_monthAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends Mas_monthAggregateArgs>(args: Subset<T, Mas_monthAggregateArgs>): PrismaPromise<GetMas_monthAggregateType<T>>
+
+    /**
+     * Group by Mas_month.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {Mas_monthGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends Mas_monthGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: Mas_monthGroupByArgs['orderBy'] }
+        : { orderBy?: Mas_monthGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends TupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, Mas_monthGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetMas_monthGroupByPayload<T> : PrismaPromise<InputErrors>
+
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for mas_month.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export class Prisma__mas_monthClient<T, Null = never> implements PrismaPromise<T> {
+    [prisma]: true;
+    private readonly _dmmf;
+    private readonly _fetcher;
+    private readonly _queryType;
+    private readonly _rootField;
+    private readonly _clientMethod;
+    private readonly _args;
+    private readonly _dataPath;
+    private readonly _errorFormat;
+    private readonly _measurePerformance?;
+    private _isList;
+    private _callsite;
+    private _requestPromise?;
+    constructor(_dmmf: runtime.DMMFClass, _fetcher: PrismaClientFetcher, _queryType: 'query' | 'mutation', _rootField: string, _clientMethod: string, _args: any, _dataPath: string[], _errorFormat: ErrorFormat, _measurePerformance?: boolean | undefined, _isList?: boolean);
+    readonly [Symbol.toStringTag]: 'PrismaClientPromise';
+
+
+    private get _document();
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): Promise<TResult1 | TResult2>;
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): Promise<T | TResult>;
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): Promise<T>;
+  }
+
+
+
+  // Custom InputTypes
+
+  /**
+   * mas_month base type for findUnique actions
+   */
+  export type mas_monthFindUniqueArgsBase = {
+    /**
+     * Select specific fields to fetch from the mas_month
+     */
+    select?: mas_monthSelect | null
+    /**
+     * Filter, which mas_month to fetch.
+     */
+    where: mas_monthWhereUniqueInput
+  }
+
+  /**
+   * mas_month findUnique
+   */
+  export interface mas_monthFindUniqueArgs extends mas_monthFindUniqueArgsBase {
+   /**
+    * Throw an Error if query returns no results
+    * @deprecated since 4.0.0: use `findUniqueOrThrow` method instead
+    */
+    rejectOnNotFound?: RejectOnNotFound
+  }
+      
+
+  /**
+   * mas_month findUniqueOrThrow
+   */
+  export type mas_monthFindUniqueOrThrowArgs = {
+    /**
+     * Select specific fields to fetch from the mas_month
+     */
+    select?: mas_monthSelect | null
+    /**
+     * Filter, which mas_month to fetch.
+     */
+    where: mas_monthWhereUniqueInput
+  }
+
+
+  /**
+   * mas_month base type for findFirst actions
+   */
+  export type mas_monthFindFirstArgsBase = {
+    /**
+     * Select specific fields to fetch from the mas_month
+     */
+    select?: mas_monthSelect | null
+    /**
+     * Filter, which mas_month to fetch.
+     */
+    where?: mas_monthWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of mas_months to fetch.
+     */
+    orderBy?: Enumerable<mas_monthOrderByWithRelationInput>
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for mas_months.
+     */
+    cursor?: mas_monthWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` mas_months from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` mas_months.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of mas_months.
+     */
+    distinct?: Enumerable<Mas_monthScalarFieldEnum>
+  }
+
+  /**
+   * mas_month findFirst
+   */
+  export interface mas_monthFindFirstArgs extends mas_monthFindFirstArgsBase {
+   /**
+    * Throw an Error if query returns no results
+    * @deprecated since 4.0.0: use `findFirstOrThrow` method instead
+    */
+    rejectOnNotFound?: RejectOnNotFound
+  }
+      
+
+  /**
+   * mas_month findFirstOrThrow
+   */
+  export type mas_monthFindFirstOrThrowArgs = {
+    /**
+     * Select specific fields to fetch from the mas_month
+     */
+    select?: mas_monthSelect | null
+    /**
+     * Filter, which mas_month to fetch.
+     */
+    where?: mas_monthWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of mas_months to fetch.
+     */
+    orderBy?: Enumerable<mas_monthOrderByWithRelationInput>
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for mas_months.
+     */
+    cursor?: mas_monthWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` mas_months from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` mas_months.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of mas_months.
+     */
+    distinct?: Enumerable<Mas_monthScalarFieldEnum>
+  }
+
+
+  /**
+   * mas_month findMany
+   */
+  export type mas_monthFindManyArgs = {
+    /**
+     * Select specific fields to fetch from the mas_month
+     */
+    select?: mas_monthSelect | null
+    /**
+     * Filter, which mas_months to fetch.
+     */
+    where?: mas_monthWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of mas_months to fetch.
+     */
+    orderBy?: Enumerable<mas_monthOrderByWithRelationInput>
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing mas_months.
+     */
+    cursor?: mas_monthWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` mas_months from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` mas_months.
+     */
+    skip?: number
+    distinct?: Enumerable<Mas_monthScalarFieldEnum>
+  }
+
+
+  /**
+   * mas_month create
+   */
+  export type mas_monthCreateArgs = {
+    /**
+     * Select specific fields to fetch from the mas_month
+     */
+    select?: mas_monthSelect | null
+    /**
+     * The data needed to create a mas_month.
+     */
+    data: XOR<mas_monthCreateInput, mas_monthUncheckedCreateInput>
+  }
+
+
+  /**
+   * mas_month createMany
+   */
+  export type mas_monthCreateManyArgs = {
+    /**
+     * The data used to create many mas_months.
+     */
+    data: Enumerable<mas_monthCreateManyInput>
+    skipDuplicates?: boolean
+  }
+
+
+  /**
+   * mas_month update
+   */
+  export type mas_monthUpdateArgs = {
+    /**
+     * Select specific fields to fetch from the mas_month
+     */
+    select?: mas_monthSelect | null
+    /**
+     * The data needed to update a mas_month.
+     */
+    data: XOR<mas_monthUpdateInput, mas_monthUncheckedUpdateInput>
+    /**
+     * Choose, which mas_month to update.
+     */
+    where: mas_monthWhereUniqueInput
+  }
+
+
+  /**
+   * mas_month updateMany
+   */
+  export type mas_monthUpdateManyArgs = {
+    /**
+     * The data used to update mas_months.
+     */
+    data: XOR<mas_monthUpdateManyMutationInput, mas_monthUncheckedUpdateManyInput>
+    /**
+     * Filter which mas_months to update
+     */
+    where?: mas_monthWhereInput
+  }
+
+
+  /**
+   * mas_month upsert
+   */
+  export type mas_monthUpsertArgs = {
+    /**
+     * Select specific fields to fetch from the mas_month
+     */
+    select?: mas_monthSelect | null
+    /**
+     * The filter to search for the mas_month to update in case it exists.
+     */
+    where: mas_monthWhereUniqueInput
+    /**
+     * In case the mas_month found by the `where` argument doesn't exist, create a new mas_month with this data.
+     */
+    create: XOR<mas_monthCreateInput, mas_monthUncheckedCreateInput>
+    /**
+     * In case the mas_month was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<mas_monthUpdateInput, mas_monthUncheckedUpdateInput>
+  }
+
+
+  /**
+   * mas_month delete
+   */
+  export type mas_monthDeleteArgs = {
+    /**
+     * Select specific fields to fetch from the mas_month
+     */
+    select?: mas_monthSelect | null
+    /**
+     * Filter which mas_month to delete.
+     */
+    where: mas_monthWhereUniqueInput
+  }
+
+
+  /**
+   * mas_month deleteMany
+   */
+  export type mas_monthDeleteManyArgs = {
+    /**
+     * Filter which mas_months to delete
+     */
+    where?: mas_monthWhereInput
+  }
+
+
+  /**
+   * mas_month without action
+   */
+  export type mas_monthArgs = {
+    /**
+     * Select specific fields to fetch from the mas_month
+     */
+    select?: mas_monthSelect | null
+  }
+
+
+
+  /**
+   * Model mas_years
+   */
+
+
+  export type AggregateMas_years = {
+    _count: Mas_yearsCountAggregateOutputType | null
+    _min: Mas_yearsMinAggregateOutputType | null
+    _max: Mas_yearsMaxAggregateOutputType | null
+  }
+
+  export type Mas_yearsMinAggregateOutputType = {
+    id: string | null
+    name: string | null
+  }
+
+  export type Mas_yearsMaxAggregateOutputType = {
+    id: string | null
+    name: string | null
+  }
+
+  export type Mas_yearsCountAggregateOutputType = {
+    id: number
+    name: number
+    _all: number
+  }
+
+
+  export type Mas_yearsMinAggregateInputType = {
+    id?: true
+    name?: true
+  }
+
+  export type Mas_yearsMaxAggregateInputType = {
+    id?: true
+    name?: true
+  }
+
+  export type Mas_yearsCountAggregateInputType = {
+    id?: true
+    name?: true
+    _all?: true
+  }
+
+  export type Mas_yearsAggregateArgs = {
+    /**
+     * Filter which mas_years to aggregate.
+     */
+    where?: mas_yearsWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of mas_years to fetch.
+     */
+    orderBy?: Enumerable<mas_yearsOrderByWithRelationInput>
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: mas_yearsWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` mas_years from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` mas_years.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned mas_years
+    **/
+    _count?: true | Mas_yearsCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: Mas_yearsMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: Mas_yearsMaxAggregateInputType
+  }
+
+  export type GetMas_yearsAggregateType<T extends Mas_yearsAggregateArgs> = {
+        [P in keyof T & keyof AggregateMas_years]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateMas_years[P]>
+      : GetScalarType<T[P], AggregateMas_years[P]>
+  }
+
+
+
+
+  export type Mas_yearsGroupByArgs = {
+    where?: mas_yearsWhereInput
+    orderBy?: Enumerable<mas_yearsOrderByWithAggregationInput>
+    by: Mas_yearsScalarFieldEnum[]
+    having?: mas_yearsScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: Mas_yearsCountAggregateInputType | true
+    _min?: Mas_yearsMinAggregateInputType
+    _max?: Mas_yearsMaxAggregateInputType
+  }
+
+
+  export type Mas_yearsGroupByOutputType = {
+    id: string
+    name: string
+    _count: Mas_yearsCountAggregateOutputType | null
+    _min: Mas_yearsMinAggregateOutputType | null
+    _max: Mas_yearsMaxAggregateOutputType | null
+  }
+
+  type GetMas_yearsGroupByPayload<T extends Mas_yearsGroupByArgs> = PrismaPromise<
+    Array<
+      PickArray<Mas_yearsGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof Mas_yearsGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], Mas_yearsGroupByOutputType[P]>
+            : GetScalarType<T[P], Mas_yearsGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type mas_yearsSelect = {
+    id?: boolean
+    name?: boolean
+  }
+
+
+  export type mas_yearsGetPayload<S extends boolean | null | undefined | mas_yearsArgs> =
+    S extends { select: any, include: any } ? 'Please either choose `select` or `include`' :
+    S extends true ? mas_years :
+    S extends undefined ? never :
+    S extends { include: any } & (mas_yearsArgs | mas_yearsFindManyArgs)
+    ? mas_years 
+    : S extends { select: any } & (mas_yearsArgs | mas_yearsFindManyArgs)
+      ? {
+    [P in TruthyKeys<S['select']>]:
+    P extends keyof mas_years ? mas_years[P] : never
+  } 
+      : mas_years
+
+
+  type mas_yearsCountArgs = 
+    Omit<mas_yearsFindManyArgs, 'select' | 'include'> & {
+      select?: Mas_yearsCountAggregateInputType | true
+    }
+
+  export interface mas_yearsDelegate<GlobalRejectSettings extends Prisma.RejectOnNotFound | Prisma.RejectPerOperation | false | undefined> {
+
+    /**
+     * Find zero or one Mas_years that matches the filter.
+     * @param {mas_yearsFindUniqueArgs} args - Arguments to find a Mas_years
+     * @example
+     * // Get one Mas_years
+     * const mas_years = await prisma.mas_years.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+    **/
+    findUnique<T extends mas_yearsFindUniqueArgs,  LocalRejectSettings = T["rejectOnNotFound"] extends RejectOnNotFound ? T['rejectOnNotFound'] : undefined>(
+      args: SelectSubset<T, mas_yearsFindUniqueArgs>
+    ): HasReject<GlobalRejectSettings, LocalRejectSettings, 'findUnique', 'mas_years'> extends True ? Prisma__mas_yearsClient<mas_yearsGetPayload<T>> : Prisma__mas_yearsClient<mas_yearsGetPayload<T> | null, null>
+
+    /**
+     * Find one Mas_years that matches the filter or throw an error  with `error.code='P2025'` 
+     *     if no matches were found.
+     * @param {mas_yearsFindUniqueOrThrowArgs} args - Arguments to find a Mas_years
+     * @example
+     * // Get one Mas_years
+     * const mas_years = await prisma.mas_years.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+    **/
+    findUniqueOrThrow<T extends mas_yearsFindUniqueOrThrowArgs>(
+      args?: SelectSubset<T, mas_yearsFindUniqueOrThrowArgs>
+    ): Prisma__mas_yearsClient<mas_yearsGetPayload<T>>
+
+    /**
+     * Find the first Mas_years that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {mas_yearsFindFirstArgs} args - Arguments to find a Mas_years
+     * @example
+     * // Get one Mas_years
+     * const mas_years = await prisma.mas_years.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+    **/
+    findFirst<T extends mas_yearsFindFirstArgs,  LocalRejectSettings = T["rejectOnNotFound"] extends RejectOnNotFound ? T['rejectOnNotFound'] : undefined>(
+      args?: SelectSubset<T, mas_yearsFindFirstArgs>
+    ): HasReject<GlobalRejectSettings, LocalRejectSettings, 'findFirst', 'mas_years'> extends True ? Prisma__mas_yearsClient<mas_yearsGetPayload<T>> : Prisma__mas_yearsClient<mas_yearsGetPayload<T> | null, null>
+
+    /**
+     * Find the first Mas_years that matches the filter or
+     * throw `NotFoundError` if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {mas_yearsFindFirstOrThrowArgs} args - Arguments to find a Mas_years
+     * @example
+     * // Get one Mas_years
+     * const mas_years = await prisma.mas_years.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+    **/
+    findFirstOrThrow<T extends mas_yearsFindFirstOrThrowArgs>(
+      args?: SelectSubset<T, mas_yearsFindFirstOrThrowArgs>
+    ): Prisma__mas_yearsClient<mas_yearsGetPayload<T>>
+
+    /**
+     * Find zero or more Mas_years that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {mas_yearsFindManyArgs=} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all Mas_years
+     * const mas_years = await prisma.mas_years.findMany()
+     * 
+     * // Get first 10 Mas_years
+     * const mas_years = await prisma.mas_years.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const mas_yearsWithIdOnly = await prisma.mas_years.findMany({ select: { id: true } })
+     * 
+    **/
+    findMany<T extends mas_yearsFindManyArgs>(
+      args?: SelectSubset<T, mas_yearsFindManyArgs>
+    ): PrismaPromise<Array<mas_yearsGetPayload<T>>>
+
+    /**
+     * Create a Mas_years.
+     * @param {mas_yearsCreateArgs} args - Arguments to create a Mas_years.
+     * @example
+     * // Create one Mas_years
+     * const Mas_years = await prisma.mas_years.create({
+     *   data: {
+     *     // ... data to create a Mas_years
+     *   }
+     * })
+     * 
+    **/
+    create<T extends mas_yearsCreateArgs>(
+      args: SelectSubset<T, mas_yearsCreateArgs>
+    ): Prisma__mas_yearsClient<mas_yearsGetPayload<T>>
+
+    /**
+     * Create many Mas_years.
+     *     @param {mas_yearsCreateManyArgs} args - Arguments to create many Mas_years.
+     *     @example
+     *     // Create many Mas_years
+     *     const mas_years = await prisma.mas_years.createMany({
+     *       data: {
+     *         // ... provide data here
+     *       }
+     *     })
+     *     
+    **/
+    createMany<T extends mas_yearsCreateManyArgs>(
+      args?: SelectSubset<T, mas_yearsCreateManyArgs>
+    ): PrismaPromise<BatchPayload>
+
+    /**
+     * Delete a Mas_years.
+     * @param {mas_yearsDeleteArgs} args - Arguments to delete one Mas_years.
+     * @example
+     * // Delete one Mas_years
+     * const Mas_years = await prisma.mas_years.delete({
+     *   where: {
+     *     // ... filter to delete one Mas_years
+     *   }
+     * })
+     * 
+    **/
+    delete<T extends mas_yearsDeleteArgs>(
+      args: SelectSubset<T, mas_yearsDeleteArgs>
+    ): Prisma__mas_yearsClient<mas_yearsGetPayload<T>>
+
+    /**
+     * Update one Mas_years.
+     * @param {mas_yearsUpdateArgs} args - Arguments to update one Mas_years.
+     * @example
+     * // Update one Mas_years
+     * const mas_years = await prisma.mas_years.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+    **/
+    update<T extends mas_yearsUpdateArgs>(
+      args: SelectSubset<T, mas_yearsUpdateArgs>
+    ): Prisma__mas_yearsClient<mas_yearsGetPayload<T>>
+
+    /**
+     * Delete zero or more Mas_years.
+     * @param {mas_yearsDeleteManyArgs} args - Arguments to filter Mas_years to delete.
+     * @example
+     * // Delete a few Mas_years
+     * const { count } = await prisma.mas_years.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+    **/
+    deleteMany<T extends mas_yearsDeleteManyArgs>(
+      args?: SelectSubset<T, mas_yearsDeleteManyArgs>
+    ): PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Mas_years.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {mas_yearsUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many Mas_years
+     * const mas_years = await prisma.mas_years.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+    **/
+    updateMany<T extends mas_yearsUpdateManyArgs>(
+      args: SelectSubset<T, mas_yearsUpdateManyArgs>
+    ): PrismaPromise<BatchPayload>
+
+    /**
+     * Create or update one Mas_years.
+     * @param {mas_yearsUpsertArgs} args - Arguments to update or create a Mas_years.
+     * @example
+     * // Update or create a Mas_years
+     * const mas_years = await prisma.mas_years.upsert({
+     *   create: {
+     *     // ... data to create a Mas_years
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the Mas_years we want to update
+     *   }
+     * })
+    **/
+    upsert<T extends mas_yearsUpsertArgs>(
+      args: SelectSubset<T, mas_yearsUpsertArgs>
+    ): Prisma__mas_yearsClient<mas_yearsGetPayload<T>>
+
+    /**
+     * Count the number of Mas_years.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {mas_yearsCountArgs} args - Arguments to filter Mas_years to count.
+     * @example
+     * // Count the number of Mas_years
+     * const count = await prisma.mas_years.count({
+     *   where: {
+     *     // ... the filter for the Mas_years we want to count
+     *   }
+     * })
+    **/
+    count<T extends mas_yearsCountArgs>(
+      args?: Subset<T, mas_yearsCountArgs>,
+    ): PrismaPromise<
+      T extends _Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], Mas_yearsCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a Mas_years.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {Mas_yearsAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends Mas_yearsAggregateArgs>(args: Subset<T, Mas_yearsAggregateArgs>): PrismaPromise<GetMas_yearsAggregateType<T>>
+
+    /**
+     * Group by Mas_years.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {Mas_yearsGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends Mas_yearsGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: Mas_yearsGroupByArgs['orderBy'] }
+        : { orderBy?: Mas_yearsGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends TupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, Mas_yearsGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetMas_yearsGroupByPayload<T> : PrismaPromise<InputErrors>
+
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for mas_years.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export class Prisma__mas_yearsClient<T, Null = never> implements PrismaPromise<T> {
+    [prisma]: true;
+    private readonly _dmmf;
+    private readonly _fetcher;
+    private readonly _queryType;
+    private readonly _rootField;
+    private readonly _clientMethod;
+    private readonly _args;
+    private readonly _dataPath;
+    private readonly _errorFormat;
+    private readonly _measurePerformance?;
+    private _isList;
+    private _callsite;
+    private _requestPromise?;
+    constructor(_dmmf: runtime.DMMFClass, _fetcher: PrismaClientFetcher, _queryType: 'query' | 'mutation', _rootField: string, _clientMethod: string, _args: any, _dataPath: string[], _errorFormat: ErrorFormat, _measurePerformance?: boolean | undefined, _isList?: boolean);
+    readonly [Symbol.toStringTag]: 'PrismaClientPromise';
+
+
+    private get _document();
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): Promise<TResult1 | TResult2>;
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): Promise<T | TResult>;
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): Promise<T>;
+  }
+
+
+
+  // Custom InputTypes
+
+  /**
+   * mas_years base type for findUnique actions
+   */
+  export type mas_yearsFindUniqueArgsBase = {
+    /**
+     * Select specific fields to fetch from the mas_years
+     */
+    select?: mas_yearsSelect | null
+    /**
+     * Filter, which mas_years to fetch.
+     */
+    where: mas_yearsWhereUniqueInput
+  }
+
+  /**
+   * mas_years findUnique
+   */
+  export interface mas_yearsFindUniqueArgs extends mas_yearsFindUniqueArgsBase {
+   /**
+    * Throw an Error if query returns no results
+    * @deprecated since 4.0.0: use `findUniqueOrThrow` method instead
+    */
+    rejectOnNotFound?: RejectOnNotFound
+  }
+      
+
+  /**
+   * mas_years findUniqueOrThrow
+   */
+  export type mas_yearsFindUniqueOrThrowArgs = {
+    /**
+     * Select specific fields to fetch from the mas_years
+     */
+    select?: mas_yearsSelect | null
+    /**
+     * Filter, which mas_years to fetch.
+     */
+    where: mas_yearsWhereUniqueInput
+  }
+
+
+  /**
+   * mas_years base type for findFirst actions
+   */
+  export type mas_yearsFindFirstArgsBase = {
+    /**
+     * Select specific fields to fetch from the mas_years
+     */
+    select?: mas_yearsSelect | null
+    /**
+     * Filter, which mas_years to fetch.
+     */
+    where?: mas_yearsWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of mas_years to fetch.
+     */
+    orderBy?: Enumerable<mas_yearsOrderByWithRelationInput>
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for mas_years.
+     */
+    cursor?: mas_yearsWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` mas_years from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` mas_years.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of mas_years.
+     */
+    distinct?: Enumerable<Mas_yearsScalarFieldEnum>
+  }
+
+  /**
+   * mas_years findFirst
+   */
+  export interface mas_yearsFindFirstArgs extends mas_yearsFindFirstArgsBase {
+   /**
+    * Throw an Error if query returns no results
+    * @deprecated since 4.0.0: use `findFirstOrThrow` method instead
+    */
+    rejectOnNotFound?: RejectOnNotFound
+  }
+      
+
+  /**
+   * mas_years findFirstOrThrow
+   */
+  export type mas_yearsFindFirstOrThrowArgs = {
+    /**
+     * Select specific fields to fetch from the mas_years
+     */
+    select?: mas_yearsSelect | null
+    /**
+     * Filter, which mas_years to fetch.
+     */
+    where?: mas_yearsWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of mas_years to fetch.
+     */
+    orderBy?: Enumerable<mas_yearsOrderByWithRelationInput>
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for mas_years.
+     */
+    cursor?: mas_yearsWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` mas_years from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` mas_years.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of mas_years.
+     */
+    distinct?: Enumerable<Mas_yearsScalarFieldEnum>
+  }
+
+
+  /**
+   * mas_years findMany
+   */
+  export type mas_yearsFindManyArgs = {
+    /**
+     * Select specific fields to fetch from the mas_years
+     */
+    select?: mas_yearsSelect | null
+    /**
+     * Filter, which mas_years to fetch.
+     */
+    where?: mas_yearsWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of mas_years to fetch.
+     */
+    orderBy?: Enumerable<mas_yearsOrderByWithRelationInput>
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing mas_years.
+     */
+    cursor?: mas_yearsWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` mas_years from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` mas_years.
+     */
+    skip?: number
+    distinct?: Enumerable<Mas_yearsScalarFieldEnum>
+  }
+
+
+  /**
+   * mas_years create
+   */
+  export type mas_yearsCreateArgs = {
+    /**
+     * Select specific fields to fetch from the mas_years
+     */
+    select?: mas_yearsSelect | null
+    /**
+     * The data needed to create a mas_years.
+     */
+    data: XOR<mas_yearsCreateInput, mas_yearsUncheckedCreateInput>
+  }
+
+
+  /**
+   * mas_years createMany
+   */
+  export type mas_yearsCreateManyArgs = {
+    /**
+     * The data used to create many mas_years.
+     */
+    data: Enumerable<mas_yearsCreateManyInput>
+    skipDuplicates?: boolean
+  }
+
+
+  /**
+   * mas_years update
+   */
+  export type mas_yearsUpdateArgs = {
+    /**
+     * Select specific fields to fetch from the mas_years
+     */
+    select?: mas_yearsSelect | null
+    /**
+     * The data needed to update a mas_years.
+     */
+    data: XOR<mas_yearsUpdateInput, mas_yearsUncheckedUpdateInput>
+    /**
+     * Choose, which mas_years to update.
+     */
+    where: mas_yearsWhereUniqueInput
+  }
+
+
+  /**
+   * mas_years updateMany
+   */
+  export type mas_yearsUpdateManyArgs = {
+    /**
+     * The data used to update mas_years.
+     */
+    data: XOR<mas_yearsUpdateManyMutationInput, mas_yearsUncheckedUpdateManyInput>
+    /**
+     * Filter which mas_years to update
+     */
+    where?: mas_yearsWhereInput
+  }
+
+
+  /**
+   * mas_years upsert
+   */
+  export type mas_yearsUpsertArgs = {
+    /**
+     * Select specific fields to fetch from the mas_years
+     */
+    select?: mas_yearsSelect | null
+    /**
+     * The filter to search for the mas_years to update in case it exists.
+     */
+    where: mas_yearsWhereUniqueInput
+    /**
+     * In case the mas_years found by the `where` argument doesn't exist, create a new mas_years with this data.
+     */
+    create: XOR<mas_yearsCreateInput, mas_yearsUncheckedCreateInput>
+    /**
+     * In case the mas_years was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<mas_yearsUpdateInput, mas_yearsUncheckedUpdateInput>
+  }
+
+
+  /**
+   * mas_years delete
+   */
+  export type mas_yearsDeleteArgs = {
+    /**
+     * Select specific fields to fetch from the mas_years
+     */
+    select?: mas_yearsSelect | null
+    /**
+     * Filter which mas_years to delete.
+     */
+    where: mas_yearsWhereUniqueInput
+  }
+
+
+  /**
+   * mas_years deleteMany
+   */
+  export type mas_yearsDeleteManyArgs = {
+    /**
+     * Filter which mas_years to delete
+     */
+    where?: mas_yearsWhereInput
+  }
+
+
+  /**
+   * mas_years without action
+   */
+  export type mas_yearsArgs = {
+    /**
+     * Select specific fields to fetch from the mas_years
+     */
+    select?: mas_yearsSelect | null
+  }
+
+
+
+  /**
+   * Model mas_salary_status
+   */
+
+
+  export type AggregateMas_salary_status = {
+    _count: Mas_salary_statusCountAggregateOutputType | null
+    _avg: Mas_salary_statusAvgAggregateOutputType | null
+    _sum: Mas_salary_statusSumAggregateOutputType | null
+    _min: Mas_salary_statusMinAggregateOutputType | null
+    _max: Mas_salary_statusMaxAggregateOutputType | null
+  }
+
+  export type Mas_salary_statusAvgAggregateOutputType = {
+    no: number | null
+  }
+
+  export type Mas_salary_statusSumAggregateOutputType = {
+    no: number | null
+  }
+
+  export type Mas_salary_statusMinAggregateOutputType = {
+    id: string | null
+    no: number | null
+    name: string | null
+  }
+
+  export type Mas_salary_statusMaxAggregateOutputType = {
+    id: string | null
+    no: number | null
+    name: string | null
+  }
+
+  export type Mas_salary_statusCountAggregateOutputType = {
+    id: number
+    no: number
+    name: number
+    _all: number
+  }
+
+
+  export type Mas_salary_statusAvgAggregateInputType = {
+    no?: true
+  }
+
+  export type Mas_salary_statusSumAggregateInputType = {
+    no?: true
+  }
+
+  export type Mas_salary_statusMinAggregateInputType = {
+    id?: true
+    no?: true
+    name?: true
+  }
+
+  export type Mas_salary_statusMaxAggregateInputType = {
+    id?: true
+    no?: true
+    name?: true
+  }
+
+  export type Mas_salary_statusCountAggregateInputType = {
+    id?: true
+    no?: true
+    name?: true
+    _all?: true
+  }
+
+  export type Mas_salary_statusAggregateArgs = {
+    /**
+     * Filter which mas_salary_status to aggregate.
+     */
+    where?: mas_salary_statusWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of mas_salary_statuses to fetch.
+     */
+    orderBy?: Enumerable<mas_salary_statusOrderByWithRelationInput>
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: mas_salary_statusWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` mas_salary_statuses from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` mas_salary_statuses.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned mas_salary_statuses
+    **/
+    _count?: true | Mas_salary_statusCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: Mas_salary_statusAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: Mas_salary_statusSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: Mas_salary_statusMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: Mas_salary_statusMaxAggregateInputType
+  }
+
+  export type GetMas_salary_statusAggregateType<T extends Mas_salary_statusAggregateArgs> = {
+        [P in keyof T & keyof AggregateMas_salary_status]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateMas_salary_status[P]>
+      : GetScalarType<T[P], AggregateMas_salary_status[P]>
+  }
+
+
+
+
+  export type Mas_salary_statusGroupByArgs = {
+    where?: mas_salary_statusWhereInput
+    orderBy?: Enumerable<mas_salary_statusOrderByWithAggregationInput>
+    by: Mas_salary_statusScalarFieldEnum[]
+    having?: mas_salary_statusScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: Mas_salary_statusCountAggregateInputType | true
+    _avg?: Mas_salary_statusAvgAggregateInputType
+    _sum?: Mas_salary_statusSumAggregateInputType
+    _min?: Mas_salary_statusMinAggregateInputType
+    _max?: Mas_salary_statusMaxAggregateInputType
+  }
+
+
+  export type Mas_salary_statusGroupByOutputType = {
+    id: string
+    no: number
+    name: string
+    _count: Mas_salary_statusCountAggregateOutputType | null
+    _avg: Mas_salary_statusAvgAggregateOutputType | null
+    _sum: Mas_salary_statusSumAggregateOutputType | null
+    _min: Mas_salary_statusMinAggregateOutputType | null
+    _max: Mas_salary_statusMaxAggregateOutputType | null
+  }
+
+  type GetMas_salary_statusGroupByPayload<T extends Mas_salary_statusGroupByArgs> = PrismaPromise<
+    Array<
+      PickArray<Mas_salary_statusGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof Mas_salary_statusGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], Mas_salary_statusGroupByOutputType[P]>
+            : GetScalarType<T[P], Mas_salary_statusGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type mas_salary_statusSelect = {
+    id?: boolean
+    no?: boolean
+    name?: boolean
+  }
+
+
+  export type mas_salary_statusGetPayload<S extends boolean | null | undefined | mas_salary_statusArgs> =
+    S extends { select: any, include: any } ? 'Please either choose `select` or `include`' :
+    S extends true ? mas_salary_status :
+    S extends undefined ? never :
+    S extends { include: any } & (mas_salary_statusArgs | mas_salary_statusFindManyArgs)
+    ? mas_salary_status 
+    : S extends { select: any } & (mas_salary_statusArgs | mas_salary_statusFindManyArgs)
+      ? {
+    [P in TruthyKeys<S['select']>]:
+    P extends keyof mas_salary_status ? mas_salary_status[P] : never
+  } 
+      : mas_salary_status
+
+
+  type mas_salary_statusCountArgs = 
+    Omit<mas_salary_statusFindManyArgs, 'select' | 'include'> & {
+      select?: Mas_salary_statusCountAggregateInputType | true
+    }
+
+  export interface mas_salary_statusDelegate<GlobalRejectSettings extends Prisma.RejectOnNotFound | Prisma.RejectPerOperation | false | undefined> {
+
+    /**
+     * Find zero or one Mas_salary_status that matches the filter.
+     * @param {mas_salary_statusFindUniqueArgs} args - Arguments to find a Mas_salary_status
+     * @example
+     * // Get one Mas_salary_status
+     * const mas_salary_status = await prisma.mas_salary_status.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+    **/
+    findUnique<T extends mas_salary_statusFindUniqueArgs,  LocalRejectSettings = T["rejectOnNotFound"] extends RejectOnNotFound ? T['rejectOnNotFound'] : undefined>(
+      args: SelectSubset<T, mas_salary_statusFindUniqueArgs>
+    ): HasReject<GlobalRejectSettings, LocalRejectSettings, 'findUnique', 'mas_salary_status'> extends True ? Prisma__mas_salary_statusClient<mas_salary_statusGetPayload<T>> : Prisma__mas_salary_statusClient<mas_salary_statusGetPayload<T> | null, null>
+
+    /**
+     * Find one Mas_salary_status that matches the filter or throw an error  with `error.code='P2025'` 
+     *     if no matches were found.
+     * @param {mas_salary_statusFindUniqueOrThrowArgs} args - Arguments to find a Mas_salary_status
+     * @example
+     * // Get one Mas_salary_status
+     * const mas_salary_status = await prisma.mas_salary_status.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+    **/
+    findUniqueOrThrow<T extends mas_salary_statusFindUniqueOrThrowArgs>(
+      args?: SelectSubset<T, mas_salary_statusFindUniqueOrThrowArgs>
+    ): Prisma__mas_salary_statusClient<mas_salary_statusGetPayload<T>>
+
+    /**
+     * Find the first Mas_salary_status that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {mas_salary_statusFindFirstArgs} args - Arguments to find a Mas_salary_status
+     * @example
+     * // Get one Mas_salary_status
+     * const mas_salary_status = await prisma.mas_salary_status.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+    **/
+    findFirst<T extends mas_salary_statusFindFirstArgs,  LocalRejectSettings = T["rejectOnNotFound"] extends RejectOnNotFound ? T['rejectOnNotFound'] : undefined>(
+      args?: SelectSubset<T, mas_salary_statusFindFirstArgs>
+    ): HasReject<GlobalRejectSettings, LocalRejectSettings, 'findFirst', 'mas_salary_status'> extends True ? Prisma__mas_salary_statusClient<mas_salary_statusGetPayload<T>> : Prisma__mas_salary_statusClient<mas_salary_statusGetPayload<T> | null, null>
+
+    /**
+     * Find the first Mas_salary_status that matches the filter or
+     * throw `NotFoundError` if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {mas_salary_statusFindFirstOrThrowArgs} args - Arguments to find a Mas_salary_status
+     * @example
+     * // Get one Mas_salary_status
+     * const mas_salary_status = await prisma.mas_salary_status.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+    **/
+    findFirstOrThrow<T extends mas_salary_statusFindFirstOrThrowArgs>(
+      args?: SelectSubset<T, mas_salary_statusFindFirstOrThrowArgs>
+    ): Prisma__mas_salary_statusClient<mas_salary_statusGetPayload<T>>
+
+    /**
+     * Find zero or more Mas_salary_statuses that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {mas_salary_statusFindManyArgs=} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all Mas_salary_statuses
+     * const mas_salary_statuses = await prisma.mas_salary_status.findMany()
+     * 
+     * // Get first 10 Mas_salary_statuses
+     * const mas_salary_statuses = await prisma.mas_salary_status.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const mas_salary_statusWithIdOnly = await prisma.mas_salary_status.findMany({ select: { id: true } })
+     * 
+    **/
+    findMany<T extends mas_salary_statusFindManyArgs>(
+      args?: SelectSubset<T, mas_salary_statusFindManyArgs>
+    ): PrismaPromise<Array<mas_salary_statusGetPayload<T>>>
+
+    /**
+     * Create a Mas_salary_status.
+     * @param {mas_salary_statusCreateArgs} args - Arguments to create a Mas_salary_status.
+     * @example
+     * // Create one Mas_salary_status
+     * const Mas_salary_status = await prisma.mas_salary_status.create({
+     *   data: {
+     *     // ... data to create a Mas_salary_status
+     *   }
+     * })
+     * 
+    **/
+    create<T extends mas_salary_statusCreateArgs>(
+      args: SelectSubset<T, mas_salary_statusCreateArgs>
+    ): Prisma__mas_salary_statusClient<mas_salary_statusGetPayload<T>>
+
+    /**
+     * Create many Mas_salary_statuses.
+     *     @param {mas_salary_statusCreateManyArgs} args - Arguments to create many Mas_salary_statuses.
+     *     @example
+     *     // Create many Mas_salary_statuses
+     *     const mas_salary_status = await prisma.mas_salary_status.createMany({
+     *       data: {
+     *         // ... provide data here
+     *       }
+     *     })
+     *     
+    **/
+    createMany<T extends mas_salary_statusCreateManyArgs>(
+      args?: SelectSubset<T, mas_salary_statusCreateManyArgs>
+    ): PrismaPromise<BatchPayload>
+
+    /**
+     * Delete a Mas_salary_status.
+     * @param {mas_salary_statusDeleteArgs} args - Arguments to delete one Mas_salary_status.
+     * @example
+     * // Delete one Mas_salary_status
+     * const Mas_salary_status = await prisma.mas_salary_status.delete({
+     *   where: {
+     *     // ... filter to delete one Mas_salary_status
+     *   }
+     * })
+     * 
+    **/
+    delete<T extends mas_salary_statusDeleteArgs>(
+      args: SelectSubset<T, mas_salary_statusDeleteArgs>
+    ): Prisma__mas_salary_statusClient<mas_salary_statusGetPayload<T>>
+
+    /**
+     * Update one Mas_salary_status.
+     * @param {mas_salary_statusUpdateArgs} args - Arguments to update one Mas_salary_status.
+     * @example
+     * // Update one Mas_salary_status
+     * const mas_salary_status = await prisma.mas_salary_status.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+    **/
+    update<T extends mas_salary_statusUpdateArgs>(
+      args: SelectSubset<T, mas_salary_statusUpdateArgs>
+    ): Prisma__mas_salary_statusClient<mas_salary_statusGetPayload<T>>
+
+    /**
+     * Delete zero or more Mas_salary_statuses.
+     * @param {mas_salary_statusDeleteManyArgs} args - Arguments to filter Mas_salary_statuses to delete.
+     * @example
+     * // Delete a few Mas_salary_statuses
+     * const { count } = await prisma.mas_salary_status.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+    **/
+    deleteMany<T extends mas_salary_statusDeleteManyArgs>(
+      args?: SelectSubset<T, mas_salary_statusDeleteManyArgs>
+    ): PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Mas_salary_statuses.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {mas_salary_statusUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many Mas_salary_statuses
+     * const mas_salary_status = await prisma.mas_salary_status.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+    **/
+    updateMany<T extends mas_salary_statusUpdateManyArgs>(
+      args: SelectSubset<T, mas_salary_statusUpdateManyArgs>
+    ): PrismaPromise<BatchPayload>
+
+    /**
+     * Create or update one Mas_salary_status.
+     * @param {mas_salary_statusUpsertArgs} args - Arguments to update or create a Mas_salary_status.
+     * @example
+     * // Update or create a Mas_salary_status
+     * const mas_salary_status = await prisma.mas_salary_status.upsert({
+     *   create: {
+     *     // ... data to create a Mas_salary_status
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the Mas_salary_status we want to update
+     *   }
+     * })
+    **/
+    upsert<T extends mas_salary_statusUpsertArgs>(
+      args: SelectSubset<T, mas_salary_statusUpsertArgs>
+    ): Prisma__mas_salary_statusClient<mas_salary_statusGetPayload<T>>
+
+    /**
+     * Count the number of Mas_salary_statuses.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {mas_salary_statusCountArgs} args - Arguments to filter Mas_salary_statuses to count.
+     * @example
+     * // Count the number of Mas_salary_statuses
+     * const count = await prisma.mas_salary_status.count({
+     *   where: {
+     *     // ... the filter for the Mas_salary_statuses we want to count
+     *   }
+     * })
+    **/
+    count<T extends mas_salary_statusCountArgs>(
+      args?: Subset<T, mas_salary_statusCountArgs>,
+    ): PrismaPromise<
+      T extends _Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], Mas_salary_statusCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a Mas_salary_status.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {Mas_salary_statusAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends Mas_salary_statusAggregateArgs>(args: Subset<T, Mas_salary_statusAggregateArgs>): PrismaPromise<GetMas_salary_statusAggregateType<T>>
+
+    /**
+     * Group by Mas_salary_status.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {Mas_salary_statusGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends Mas_salary_statusGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: Mas_salary_statusGroupByArgs['orderBy'] }
+        : { orderBy?: Mas_salary_statusGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends TupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, Mas_salary_statusGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetMas_salary_statusGroupByPayload<T> : PrismaPromise<InputErrors>
+
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for mas_salary_status.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export class Prisma__mas_salary_statusClient<T, Null = never> implements PrismaPromise<T> {
+    [prisma]: true;
+    private readonly _dmmf;
+    private readonly _fetcher;
+    private readonly _queryType;
+    private readonly _rootField;
+    private readonly _clientMethod;
+    private readonly _args;
+    private readonly _dataPath;
+    private readonly _errorFormat;
+    private readonly _measurePerformance?;
+    private _isList;
+    private _callsite;
+    private _requestPromise?;
+    constructor(_dmmf: runtime.DMMFClass, _fetcher: PrismaClientFetcher, _queryType: 'query' | 'mutation', _rootField: string, _clientMethod: string, _args: any, _dataPath: string[], _errorFormat: ErrorFormat, _measurePerformance?: boolean | undefined, _isList?: boolean);
+    readonly [Symbol.toStringTag]: 'PrismaClientPromise';
+
+
+    private get _document();
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): Promise<TResult1 | TResult2>;
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): Promise<T | TResult>;
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): Promise<T>;
+  }
+
+
+
+  // Custom InputTypes
+
+  /**
+   * mas_salary_status base type for findUnique actions
+   */
+  export type mas_salary_statusFindUniqueArgsBase = {
+    /**
+     * Select specific fields to fetch from the mas_salary_status
+     */
+    select?: mas_salary_statusSelect | null
+    /**
+     * Filter, which mas_salary_status to fetch.
+     */
+    where: mas_salary_statusWhereUniqueInput
+  }
+
+  /**
+   * mas_salary_status findUnique
+   */
+  export interface mas_salary_statusFindUniqueArgs extends mas_salary_statusFindUniqueArgsBase {
+   /**
+    * Throw an Error if query returns no results
+    * @deprecated since 4.0.0: use `findUniqueOrThrow` method instead
+    */
+    rejectOnNotFound?: RejectOnNotFound
+  }
+      
+
+  /**
+   * mas_salary_status findUniqueOrThrow
+   */
+  export type mas_salary_statusFindUniqueOrThrowArgs = {
+    /**
+     * Select specific fields to fetch from the mas_salary_status
+     */
+    select?: mas_salary_statusSelect | null
+    /**
+     * Filter, which mas_salary_status to fetch.
+     */
+    where: mas_salary_statusWhereUniqueInput
+  }
+
+
+  /**
+   * mas_salary_status base type for findFirst actions
+   */
+  export type mas_salary_statusFindFirstArgsBase = {
+    /**
+     * Select specific fields to fetch from the mas_salary_status
+     */
+    select?: mas_salary_statusSelect | null
+    /**
+     * Filter, which mas_salary_status to fetch.
+     */
+    where?: mas_salary_statusWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of mas_salary_statuses to fetch.
+     */
+    orderBy?: Enumerable<mas_salary_statusOrderByWithRelationInput>
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for mas_salary_statuses.
+     */
+    cursor?: mas_salary_statusWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` mas_salary_statuses from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` mas_salary_statuses.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of mas_salary_statuses.
+     */
+    distinct?: Enumerable<Mas_salary_statusScalarFieldEnum>
+  }
+
+  /**
+   * mas_salary_status findFirst
+   */
+  export interface mas_salary_statusFindFirstArgs extends mas_salary_statusFindFirstArgsBase {
+   /**
+    * Throw an Error if query returns no results
+    * @deprecated since 4.0.0: use `findFirstOrThrow` method instead
+    */
+    rejectOnNotFound?: RejectOnNotFound
+  }
+      
+
+  /**
+   * mas_salary_status findFirstOrThrow
+   */
+  export type mas_salary_statusFindFirstOrThrowArgs = {
+    /**
+     * Select specific fields to fetch from the mas_salary_status
+     */
+    select?: mas_salary_statusSelect | null
+    /**
+     * Filter, which mas_salary_status to fetch.
+     */
+    where?: mas_salary_statusWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of mas_salary_statuses to fetch.
+     */
+    orderBy?: Enumerable<mas_salary_statusOrderByWithRelationInput>
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for mas_salary_statuses.
+     */
+    cursor?: mas_salary_statusWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` mas_salary_statuses from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` mas_salary_statuses.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of mas_salary_statuses.
+     */
+    distinct?: Enumerable<Mas_salary_statusScalarFieldEnum>
+  }
+
+
+  /**
+   * mas_salary_status findMany
+   */
+  export type mas_salary_statusFindManyArgs = {
+    /**
+     * Select specific fields to fetch from the mas_salary_status
+     */
+    select?: mas_salary_statusSelect | null
+    /**
+     * Filter, which mas_salary_statuses to fetch.
+     */
+    where?: mas_salary_statusWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of mas_salary_statuses to fetch.
+     */
+    orderBy?: Enumerable<mas_salary_statusOrderByWithRelationInput>
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing mas_salary_statuses.
+     */
+    cursor?: mas_salary_statusWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` mas_salary_statuses from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` mas_salary_statuses.
+     */
+    skip?: number
+    distinct?: Enumerable<Mas_salary_statusScalarFieldEnum>
+  }
+
+
+  /**
+   * mas_salary_status create
+   */
+  export type mas_salary_statusCreateArgs = {
+    /**
+     * Select specific fields to fetch from the mas_salary_status
+     */
+    select?: mas_salary_statusSelect | null
+    /**
+     * The data needed to create a mas_salary_status.
+     */
+    data: XOR<mas_salary_statusCreateInput, mas_salary_statusUncheckedCreateInput>
+  }
+
+
+  /**
+   * mas_salary_status createMany
+   */
+  export type mas_salary_statusCreateManyArgs = {
+    /**
+     * The data used to create many mas_salary_statuses.
+     */
+    data: Enumerable<mas_salary_statusCreateManyInput>
+    skipDuplicates?: boolean
+  }
+
+
+  /**
+   * mas_salary_status update
+   */
+  export type mas_salary_statusUpdateArgs = {
+    /**
+     * Select specific fields to fetch from the mas_salary_status
+     */
+    select?: mas_salary_statusSelect | null
+    /**
+     * The data needed to update a mas_salary_status.
+     */
+    data: XOR<mas_salary_statusUpdateInput, mas_salary_statusUncheckedUpdateInput>
+    /**
+     * Choose, which mas_salary_status to update.
+     */
+    where: mas_salary_statusWhereUniqueInput
+  }
+
+
+  /**
+   * mas_salary_status updateMany
+   */
+  export type mas_salary_statusUpdateManyArgs = {
+    /**
+     * The data used to update mas_salary_statuses.
+     */
+    data: XOR<mas_salary_statusUpdateManyMutationInput, mas_salary_statusUncheckedUpdateManyInput>
+    /**
+     * Filter which mas_salary_statuses to update
+     */
+    where?: mas_salary_statusWhereInput
+  }
+
+
+  /**
+   * mas_salary_status upsert
+   */
+  export type mas_salary_statusUpsertArgs = {
+    /**
+     * Select specific fields to fetch from the mas_salary_status
+     */
+    select?: mas_salary_statusSelect | null
+    /**
+     * The filter to search for the mas_salary_status to update in case it exists.
+     */
+    where: mas_salary_statusWhereUniqueInput
+    /**
+     * In case the mas_salary_status found by the `where` argument doesn't exist, create a new mas_salary_status with this data.
+     */
+    create: XOR<mas_salary_statusCreateInput, mas_salary_statusUncheckedCreateInput>
+    /**
+     * In case the mas_salary_status was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<mas_salary_statusUpdateInput, mas_salary_statusUncheckedUpdateInput>
+  }
+
+
+  /**
+   * mas_salary_status delete
+   */
+  export type mas_salary_statusDeleteArgs = {
+    /**
+     * Select specific fields to fetch from the mas_salary_status
+     */
+    select?: mas_salary_statusSelect | null
+    /**
+     * Filter which mas_salary_status to delete.
+     */
+    where: mas_salary_statusWhereUniqueInput
+  }
+
+
+  /**
+   * mas_salary_status deleteMany
+   */
+  export type mas_salary_statusDeleteManyArgs = {
+    /**
+     * Filter which mas_salary_statuses to delete
+     */
+    where?: mas_salary_statusWhereInput
+  }
+
+
+  /**
+   * mas_salary_status without action
+   */
+  export type mas_salary_statusArgs = {
+    /**
+     * Select specific fields to fetch from the mas_salary_status
+     */
+    select?: mas_salary_statusSelect | null
+  }
+
+
+
+  /**
    * Enums
    */
 
@@ -18132,6 +21695,22 @@ export namespace Prisma {
   export type JsonNullValueInput = (typeof JsonNullValueInput)[keyof typeof JsonNullValueInput]
 
 
+  export const Mas_bankScalarFieldEnum: {
+    id: 'id',
+    name: 'name'
+  };
+
+  export type Mas_bankScalarFieldEnum = (typeof Mas_bankScalarFieldEnum)[keyof typeof Mas_bankScalarFieldEnum]
+
+
+  export const Mas_monthScalarFieldEnum: {
+    id: 'id',
+    name: 'name'
+  };
+
+  export type Mas_monthScalarFieldEnum = (typeof Mas_monthScalarFieldEnum)[keyof typeof Mas_monthScalarFieldEnum]
+
+
   export const Mas_positionScalarFieldEnum: {
     id: 'id',
     name: 'name',
@@ -18178,6 +21757,23 @@ export namespace Prisma {
   };
 
   export type Mas_positionlevel3ScalarFieldEnum = (typeof Mas_positionlevel3ScalarFieldEnum)[keyof typeof Mas_positionlevel3ScalarFieldEnum]
+
+
+  export const Mas_salary_statusScalarFieldEnum: {
+    id: 'id',
+    no: 'no',
+    name: 'name'
+  };
+
+  export type Mas_salary_statusScalarFieldEnum = (typeof Mas_salary_statusScalarFieldEnum)[keyof typeof Mas_salary_statusScalarFieldEnum]
+
+
+  export const Mas_yearsScalarFieldEnum: {
+    id: 'id',
+    name: 'name'
+  };
+
+  export type Mas_yearsScalarFieldEnum = (typeof Mas_yearsScalarFieldEnum)[keyof typeof Mas_yearsScalarFieldEnum]
 
 
   export const Position_userScalarFieldEnum: {
@@ -19442,6 +23038,144 @@ export namespace Prisma {
     month?: IntWithAggregatesFilter | number
     year?: IntWithAggregatesFilter | number
     holiday_name?: StringNullableWithAggregatesFilter | string | null
+  }
+
+  export type mas_bankWhereInput = {
+    AND?: Enumerable<mas_bankWhereInput>
+    OR?: Enumerable<mas_bankWhereInput>
+    NOT?: Enumerable<mas_bankWhereInput>
+    id?: UuidFilter | string
+    name?: StringFilter | string
+  }
+
+  export type mas_bankOrderByWithRelationInput = {
+    id?: SortOrder
+    name?: SortOrder
+  }
+
+  export type mas_bankWhereUniqueInput = {
+    id?: string
+  }
+
+  export type mas_bankOrderByWithAggregationInput = {
+    id?: SortOrder
+    name?: SortOrder
+    _count?: mas_bankCountOrderByAggregateInput
+    _max?: mas_bankMaxOrderByAggregateInput
+    _min?: mas_bankMinOrderByAggregateInput
+  }
+
+  export type mas_bankScalarWhereWithAggregatesInput = {
+    AND?: Enumerable<mas_bankScalarWhereWithAggregatesInput>
+    OR?: Enumerable<mas_bankScalarWhereWithAggregatesInput>
+    NOT?: Enumerable<mas_bankScalarWhereWithAggregatesInput>
+    id?: UuidWithAggregatesFilter | string
+    name?: StringWithAggregatesFilter | string
+  }
+
+  export type mas_monthWhereInput = {
+    AND?: Enumerable<mas_monthWhereInput>
+    OR?: Enumerable<mas_monthWhereInput>
+    NOT?: Enumerable<mas_monthWhereInput>
+    id?: UuidFilter | string
+    name?: StringFilter | string
+  }
+
+  export type mas_monthOrderByWithRelationInput = {
+    id?: SortOrder
+    name?: SortOrder
+  }
+
+  export type mas_monthWhereUniqueInput = {
+    id?: string
+  }
+
+  export type mas_monthOrderByWithAggregationInput = {
+    id?: SortOrder
+    name?: SortOrder
+    _count?: mas_monthCountOrderByAggregateInput
+    _max?: mas_monthMaxOrderByAggregateInput
+    _min?: mas_monthMinOrderByAggregateInput
+  }
+
+  export type mas_monthScalarWhereWithAggregatesInput = {
+    AND?: Enumerable<mas_monthScalarWhereWithAggregatesInput>
+    OR?: Enumerable<mas_monthScalarWhereWithAggregatesInput>
+    NOT?: Enumerable<mas_monthScalarWhereWithAggregatesInput>
+    id?: UuidWithAggregatesFilter | string
+    name?: StringWithAggregatesFilter | string
+  }
+
+  export type mas_yearsWhereInput = {
+    AND?: Enumerable<mas_yearsWhereInput>
+    OR?: Enumerable<mas_yearsWhereInput>
+    NOT?: Enumerable<mas_yearsWhereInput>
+    id?: UuidFilter | string
+    name?: StringFilter | string
+  }
+
+  export type mas_yearsOrderByWithRelationInput = {
+    id?: SortOrder
+    name?: SortOrder
+  }
+
+  export type mas_yearsWhereUniqueInput = {
+    id?: string
+  }
+
+  export type mas_yearsOrderByWithAggregationInput = {
+    id?: SortOrder
+    name?: SortOrder
+    _count?: mas_yearsCountOrderByAggregateInput
+    _max?: mas_yearsMaxOrderByAggregateInput
+    _min?: mas_yearsMinOrderByAggregateInput
+  }
+
+  export type mas_yearsScalarWhereWithAggregatesInput = {
+    AND?: Enumerable<mas_yearsScalarWhereWithAggregatesInput>
+    OR?: Enumerable<mas_yearsScalarWhereWithAggregatesInput>
+    NOT?: Enumerable<mas_yearsScalarWhereWithAggregatesInput>
+    id?: UuidWithAggregatesFilter | string
+    name?: StringWithAggregatesFilter | string
+  }
+
+  export type mas_salary_statusWhereInput = {
+    AND?: Enumerable<mas_salary_statusWhereInput>
+    OR?: Enumerable<mas_salary_statusWhereInput>
+    NOT?: Enumerable<mas_salary_statusWhereInput>
+    id?: UuidFilter | string
+    no?: IntFilter | number
+    name?: StringFilter | string
+  }
+
+  export type mas_salary_statusOrderByWithRelationInput = {
+    id?: SortOrder
+    no?: SortOrder
+    name?: SortOrder
+  }
+
+  export type mas_salary_statusWhereUniqueInput = {
+    id?: string
+  }
+
+  export type mas_salary_statusOrderByWithAggregationInput = {
+    id?: SortOrder
+    no?: SortOrder
+    name?: SortOrder
+    _count?: mas_salary_statusCountOrderByAggregateInput
+    _avg?: mas_salary_statusAvgOrderByAggregateInput
+    _max?: mas_salary_statusMaxOrderByAggregateInput
+    _min?: mas_salary_statusMinOrderByAggregateInput
+    _sum?: mas_salary_statusSumOrderByAggregateInput
+  }
+
+  export type mas_salary_statusScalarWhereWithAggregatesInput = {
+    AND?: Enumerable<mas_salary_statusScalarWhereWithAggregatesInput>
+    OR?: Enumerable<mas_salary_statusScalarWhereWithAggregatesInput>
+    NOT?: Enumerable<mas_salary_statusScalarWhereWithAggregatesInput>
+    id?: UuidWithAggregatesFilter | string
+    no?: IntWithAggregatesFilter | number
+    name?: StringWithAggregatesFilter | string
   }
 
   export type CompanyCreateInput = {
@@ -20921,6 +24655,153 @@ export namespace Prisma {
     holiday_name?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
+  export type mas_bankCreateInput = {
+    id: string
+    name: string
+  }
+
+  export type mas_bankUncheckedCreateInput = {
+    id: string
+    name: string
+  }
+
+  export type mas_bankUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type mas_bankUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type mas_bankCreateManyInput = {
+    id: string
+    name: string
+  }
+
+  export type mas_bankUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type mas_bankUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type mas_monthCreateInput = {
+    id: string
+    name: string
+  }
+
+  export type mas_monthUncheckedCreateInput = {
+    id: string
+    name: string
+  }
+
+  export type mas_monthUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type mas_monthUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type mas_monthCreateManyInput = {
+    id: string
+    name: string
+  }
+
+  export type mas_monthUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type mas_monthUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type mas_yearsCreateInput = {
+    id: string
+    name: string
+  }
+
+  export type mas_yearsUncheckedCreateInput = {
+    id: string
+    name: string
+  }
+
+  export type mas_yearsUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type mas_yearsUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type mas_yearsCreateManyInput = {
+    id: string
+    name: string
+  }
+
+  export type mas_yearsUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type mas_yearsUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type mas_salary_statusCreateInput = {
+    id: string
+    no: number
+    name: string
+  }
+
+  export type mas_salary_statusUncheckedCreateInput = {
+    id: string
+    no: number
+    name: string
+  }
+
+  export type mas_salary_statusUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    no?: IntFieldUpdateOperationsInput | number
+    name?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type mas_salary_statusUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    no?: IntFieldUpdateOperationsInput | number
+    name?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type mas_salary_statusCreateManyInput = {
+    id: string
+    no: number
+    name: string
+  }
+
+  export type mas_salary_statusUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    no?: IntFieldUpdateOperationsInput | number
+    name?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type mas_salary_statusUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    no?: IntFieldUpdateOperationsInput | number
+    name?: StringFieldUpdateOperationsInput | string
+  }
+
   export type UuidFilter = {
     equals?: string
     in?: Enumerable<string>
@@ -22032,6 +25913,77 @@ export namespace Prisma {
     day?: SortOrder
     month?: SortOrder
     year?: SortOrder
+  }
+
+  export type mas_bankCountOrderByAggregateInput = {
+    id?: SortOrder
+    name?: SortOrder
+  }
+
+  export type mas_bankMaxOrderByAggregateInput = {
+    id?: SortOrder
+    name?: SortOrder
+  }
+
+  export type mas_bankMinOrderByAggregateInput = {
+    id?: SortOrder
+    name?: SortOrder
+  }
+
+  export type mas_monthCountOrderByAggregateInput = {
+    id?: SortOrder
+    name?: SortOrder
+  }
+
+  export type mas_monthMaxOrderByAggregateInput = {
+    id?: SortOrder
+    name?: SortOrder
+  }
+
+  export type mas_monthMinOrderByAggregateInput = {
+    id?: SortOrder
+    name?: SortOrder
+  }
+
+  export type mas_yearsCountOrderByAggregateInput = {
+    id?: SortOrder
+    name?: SortOrder
+  }
+
+  export type mas_yearsMaxOrderByAggregateInput = {
+    id?: SortOrder
+    name?: SortOrder
+  }
+
+  export type mas_yearsMinOrderByAggregateInput = {
+    id?: SortOrder
+    name?: SortOrder
+  }
+
+  export type mas_salary_statusCountOrderByAggregateInput = {
+    id?: SortOrder
+    no?: SortOrder
+    name?: SortOrder
+  }
+
+  export type mas_salary_statusAvgOrderByAggregateInput = {
+    no?: SortOrder
+  }
+
+  export type mas_salary_statusMaxOrderByAggregateInput = {
+    id?: SortOrder
+    no?: SortOrder
+    name?: SortOrder
+  }
+
+  export type mas_salary_statusMinOrderByAggregateInput = {
+    id?: SortOrder
+    no?: SortOrder
+    name?: SortOrder
+  }
+
+  export type mas_salary_statusSumOrderByAggregateInput = {
+    no?: SortOrder
   }
 
   export type UserCreateNestedOneWithoutCompanyInput = {

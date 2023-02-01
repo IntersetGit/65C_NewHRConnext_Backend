@@ -143,7 +143,7 @@ model User {
   companyBranchId String?         @db.Uuid
   Role_Company    Role_Company?   @relation(fields: [RoleCompanyID], references: [id])
   Position_user   Position_user?  @relation("user")
-  henchman        Position_user[] 
+  henchman        Position_user[]
 }
 
 model Role {
@@ -185,11 +185,11 @@ model Amphoe {
 }
 
 model mas_position {
-  id                 String               @unique @db.Uuid
-  name               String
-  level              Int                  @db.SmallInt
-  Company            Company?             @relation(fields: [CompanyId], references: [id])
-  CompanyId          String?              @db.Uuid
+  id        String   @unique @db.Uuid
+  name      String
+  level     Int      @db.SmallInt
+  Company   Company? @relation(fields: [CompanyId], references: [id])
+  CompanyId String?  @db.Uuid
 }
 
 model mas_positionlevel1 {
@@ -233,15 +233,15 @@ model mas_positionlevel3 {
 
 model Position_user {
   id                 String              @unique @db.Uuid
-  user_id            String?             @db.Uuid @unique
+  user_id            String?             @unique @db.Uuid
   date               DateTime?
   position1_id       String?             @db.Uuid
   position2_id       String?             @db.Uuid
   position3_id       String?             @db.Uuid
   role               String?
   headderId          String?             @db.Uuid
-  header             User?                @relation(fields: [headderId] , references: [id])
-  user               User?               @relation("user",fields: [user_id], references: [id])
+  header             User?               @relation(fields: [headderId], references: [id])
+  user               User?               @relation("user", fields: [user_id], references: [id])
   mas_positionlevel1 mas_positionlevel1? @relation(fields: [position1_id], references: [id])
   mas_positionlevel2 mas_positionlevel2? @relation(fields: [position2_id], references: [id])
   mas_positionlevel3 mas_positionlevel3? @relation(fields: [position3_id], references: [id])
@@ -258,9 +258,30 @@ model holiday_date {
 }
 
 model holiday_year {
-  id                String    @unique @db.Uuid
-  day               Int
-  month             Int
-  year              Int
-  holiday_name      String?    
+  id           String  @unique @db.Uuid
+  day          Int
+  month        Int
+  year         Int
+  holiday_name String?
+}
+
+model mas_bank {
+  id   String @unique @db.Uuid
+  name String
+}
+
+model mas_month {
+  id   String @unique @db.Uuid
+  name String
+}
+
+model mas_years {
+  id   String @unique @db.Uuid
+  name String
+}
+
+model mas_salary_status {
+  id   String @unique @db.Uuid
+  no   Int
+  name String
 }

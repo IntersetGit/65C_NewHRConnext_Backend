@@ -171,6 +171,16 @@ exports.Prisma.JsonNullValueInput = makeEnum({
   JsonNull: Prisma.JsonNull
 });
 
+exports.Prisma.Mas_bankScalarFieldEnum = makeEnum({
+  id: 'id',
+  name: 'name'
+});
+
+exports.Prisma.Mas_monthScalarFieldEnum = makeEnum({
+  id: 'id',
+  name: 'name'
+});
+
 exports.Prisma.Mas_positionScalarFieldEnum = makeEnum({
   id: 'id',
   name: 'name',
@@ -205,6 +215,17 @@ exports.Prisma.Mas_positionlevel3ScalarFieldEnum = makeEnum({
   type: 'type',
   positionlevel2_id: 'positionlevel2_id',
   CompanyId: 'CompanyId'
+});
+
+exports.Prisma.Mas_salary_statusScalarFieldEnum = makeEnum({
+  id: 'id',
+  no: 'no',
+  name: 'name'
+});
+
+exports.Prisma.Mas_yearsScalarFieldEnum = makeEnum({
+  id: 'id',
+  name: 'name'
 });
 
 exports.Prisma.Position_userScalarFieldEnum = makeEnum({
@@ -335,7 +356,11 @@ exports.Prisma.ModelName = makeEnum({
   mas_positionlevel3: 'mas_positionlevel3',
   Position_user: 'Position_user',
   holiday_date: 'holiday_date',
-  holiday_year: 'holiday_year'
+  holiday_year: 'holiday_year',
+  mas_bank: 'mas_bank',
+  mas_month: 'mas_month',
+  mas_years: 'mas_years',
+  mas_salary_status: 'mas_salary_status'
 });
 
 /**
