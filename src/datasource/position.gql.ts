@@ -68,16 +68,7 @@ type Position_user {
   headderId: String 
   date: Date
 }
-
-type mas_positionlevel3{
-  id: ID!  
-  name: String
-  level: Int  
-  code: String
-  type: String
-  positionlevel2_id:  String
-  Position_user: [Position_user]
-}
+ 
 
 
 type mas_positionlevel2 {
