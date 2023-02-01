@@ -243,21 +243,24 @@ model Position_user {
   position3_id       String?             @db.Uuid
   role               String?
   headderId          String?             @db.Uuid
-  header             User?               @relation(fields: [headderId], references: [id])
-  user               User?               @relation("user", fields: [user_id], references: [id])
+  header             User?               @relation(fields: [headderId] , references: [id])
+  user               User?               @relation("user",fields: [user_id], references: [id])
   mas_positionlevel1 mas_positionlevel1? @relation(fields: [position1_id], references: [id])
   mas_positionlevel2 mas_positionlevel2? @relation(fields: [position2_id], references: [id])
   mas_positionlevel3 mas_positionlevel3? @relation(fields: [position3_id], references: [id])
 }
 
 model holiday_date {
-  id           String   @unique @db.Uuid
-  holiday_name String?
-  day          Int
-  month        Int
-  yaer         Int
-  Company      Company? @relation(fields: [CompanyId], references: [id])
-  CompanyId    String?  @db.Uuid
+  id               String        @unique @db.Uuid
+  holiday_name     String?
+  day              Int
+  month            Int
+  yaer             Int
+  Company          Company?      @relation(fields: [CompanyId], references: [id])
+  CompanyId        String?       @db.Uuid
+  holiday_yearID   String?       @db.Uuid
+  status           Int           @db.SmallInt
+  holiday_year    holiday_year?  @relation(fields: [holiday_yearID], references: [id])
 }
 
 model holiday_year {
@@ -266,6 +269,7 @@ model holiday_year {
   month        Int
   year         Int
   holiday_name String?
+  holiday_date holiday_date[]
 }
 
 model mas_bank {
