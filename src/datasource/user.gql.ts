@@ -1,5 +1,4 @@
-import { date } from 'zod';
-import { Profile, User } from './../generated/graphql';
+
 import { Resolvers } from '../generated/graphql';
 import { createPassword } from '../utils/passwords';
 import gql from 'graphql-tag';
@@ -8,8 +7,7 @@ import { v4 } from 'uuid';
 import { composeResolvers } from '@graphql-tools/resolvers-composition';
 import { authenticate } from '../middleware/authenticatetoken';
 import { GraphQLError } from 'graphql';
-import { createContext } from 'vm';
-import { argsToArgsConfig } from 'graphql/type/definition';
+
 
 
 export const userTypedef = gql`
@@ -151,6 +149,7 @@ type MeCompanyBranch {
     tel: String
     address: String
     gender: String
+    role_company: String
     staff_code: String
     religion: String
     citizen_addressnumber: String
@@ -253,7 +252,7 @@ const resolvers: Resolvers = {
           },
           profile: true,
           role: true,
-          companyBranch:true
+          companyBranch: true
         },
         where: { id: ctx.currentUser?.id },
       });
@@ -451,6 +450,7 @@ const resolvers: Resolvers = {
             islogin: false,
             createdAt: new Date(),
             companyBranchId: ctx.currentUser?.branchId,
+            RoleCompanyID: args.data.role_company,
             profile: {
               create: {
                 id: genProfileid,
@@ -513,7 +513,7 @@ const resolvers: Resolvers = {
     async deleteAccountUser(p, args, ctx) {
       const deleteProfile = await ctx.prisma.profile.delete({
         where: {
-          userId : args.id,
+          userId: args.id,
         }
       }
       );
