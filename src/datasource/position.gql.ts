@@ -1,5 +1,6 @@
 
 
+
 import { composeResolvers } from '@graphql-tools/resolvers-composition';
 import { authenticate } from '../middleware/authenticatetoken';
 import { Resolvers } from '../generated/graphql';
@@ -45,14 +46,27 @@ type mas_position{
   CompanyId: String
 }
 
-type Position_user {
-  id: ID!  
-  user_id: String  
+
+input position {
+  id: ID  
+  user_id: String
   position1_id: String
   position2_id: String  
   position3_id: String  
   role: String 
-  leader: String 
+  headderId: String 
+  date: Date
+}
+
+type Position_user {
+  id: ID  
+  user_id: String
+  position1_id: String
+  position2_id: String  
+  position3_id: String  
+  role: String 
+  headderId: String 
+  date: Date
 }
 
 type mas_positionlevel3{
@@ -98,12 +112,14 @@ type CreatepositionResponseType {
 
 type Query {
     getMasPositon: [mas_positionlevel1]
+    getposition_user(id: ID!): [Position_user]
   }
 
 
   type Mutation {
     CreatedPosition(data:[CreatedAndUpdatePosition!]): CreatepositionResponseType
     EditPosition(data:[CreatedAndUpdatePosition!]): CreatepositionResponseType
+    createdposition_user(data:position!) :CreatepositionResponseType
   }
 `;
 
@@ -137,6 +153,42 @@ export const positionResolvers: Resolvers = {
       });
       return result;
     },
+    async getposition_user(p, args, ctx) {
+      const result = await ctx.prisma.position_user.findMany({
+         include:{
+          mas_positionlevel1: {
+            select: {
+              id: true,
+              name: true,
+            }
+          },
+          mas_positionlevel2: {
+            select: {
+              id: true,
+              name: true,
+            }
+          },
+          mas_positionlevel3: {
+            select: {
+              id: true,
+              name: true,
+            }
+          },
+          user: {
+            include:{
+              profile:{
+                select:{
+                  firstname_th: true,
+                  lastname_th : true
+                },
+              }
+            }
+          },
+        }
+      });
+      return result;
+    }
+
   },
 
 
@@ -160,7 +212,7 @@ export const positionResolvers: Resolvers = {
             level: e.level_Position1 as number,
             code: e.code_position1 as string,
           },
-          where:{
+          where: {
             id: e.id_Position1 as string
           }
         })
@@ -172,7 +224,7 @@ export const positionResolvers: Resolvers = {
               level: a?.level_Position2 as number,
               code: a?.code_position2 as string,
             },
-            where:{
+            where: {
               id: a?.id_Position2 as string
             }
           })
@@ -184,7 +236,7 @@ export const positionResolvers: Resolvers = {
                 level: b?.level_Position3 as number,
                 code: b?.code_position3 as string,
               },
-              where:{
+              where: {
                 id: b?.id_Position3 as string
               }
             })
@@ -249,6 +301,47 @@ export const positionResolvers: Resolvers = {
       };
 
     },
+
+    async createdposition_user(p, args, ctx) {
+      if (args.data.id) {
+        const updated = await ctx.prisma.position_user.update({
+          data: {
+            user_id: args.data.user_id as string,
+            position1_id: args.data.position1_id as string,
+            position2_id: args.data.position2_id as string,
+            position3_id: args.data.position3_id as string,
+            role: args.data.role as string,
+            headderId: args.data.headderId as string,
+            date: args.data.date as string
+          },
+          where: {
+            id: args.data.id
+          }
+        })
+        return {
+          message: 'success',
+          status: true,
+        };
+
+      } else {
+        const created = await ctx.prisma.position_user.create({
+          data: {
+            id: v4(),
+            user_id: args.data.user_id as string,
+            position1_id: args.data.position1_id as string,
+            position2_id: args.data.position2_id as string,
+            position3_id: args.data.position3_id as string,
+            role: args.data.role as string,
+            headderId: args.data.headderId as string,
+            date: args.data.date as string
+          }
+        })
+        return {
+          message: 'success',
+          status: true,
+        };
+      }
+    }
   }
 }
 
@@ -258,6 +351,7 @@ export const positionResolvers: Resolvers = {
 const resolversPosition = {
   'Query.getMasPositon': [authenticate()],
   'Mutation.CreatedPosition': [authenticate()],
+  'Mutation.createdposition_user': [authenticate()],
   'Mutation.EditPosition': [authenticate()],
 };
 

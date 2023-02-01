@@ -234,6 +234,7 @@ model mas_positionlevel3 {
 model Position_user {
   id                 String              @unique @db.Uuid
   user_id            String?             @db.Uuid @unique
+  date               DateTime?
   position1_id       String?             @db.Uuid
   position2_id       String?             @db.Uuid
   position3_id       String?             @db.Uuid

@@ -362,6 +362,7 @@ export type Mutation = {
   createHolidayDate?: Maybe<CreateHolidayDateResponseType>;
   createHolidayYear?: Maybe<CreateHolidayYearResponseType>;
   createRoleCompany?: Maybe<CreateRoleCompanyResponseType>;
+  createdposition_user?: Maybe<CreatepositionResponseType>;
   deleteAccountUser?: Maybe<DeleteAccountUserResponseType>;
   deleteComBarance?: Maybe<DeleteComapnyBranchResponseType>;
   deleteHolidayYear?: Maybe<DeleteHolidayYearResponseType>;
@@ -413,6 +414,11 @@ export type MutationCreateRoleCompanyArgs = {
 };
 
 
+export type MutationCreatedposition_UserArgs = {
+  data: Position;
+};
+
+
 export type MutationDeleteAccountUserArgs = {
   id: Scalars['ID'];
 };
@@ -458,8 +464,9 @@ export type OwnCompanyType = {
 
 export type Position_User = {
   __typename?: 'Position_user';
-  id: Scalars['ID'];
-  leader?: Maybe<Scalars['String']>;
+  date?: Maybe<Scalars['Date']>;
+  headderId?: Maybe<Scalars['String']>;
+  id?: Maybe<Scalars['ID']>;
   position1_id?: Maybe<Scalars['String']>;
   position2_id?: Maybe<Scalars['String']>;
   position3_id?: Maybe<Scalars['String']>;
@@ -536,6 +543,7 @@ export type Query = {
   getProvince?: Maybe<Array<Maybe<Province>>>;
   getcompanyRole?: Maybe<Array<Maybe<Role_Company>>>;
   getownCompany?: Maybe<GetOwncompanytype>;
+  getposition_user?: Maybe<Array<Maybe<Position_User>>>;
   me?: Maybe<Me>;
   users?: Maybe<Array<Maybe<User>>>;
   verifyCompanycode?: Maybe<Scalars['Boolean']>;
@@ -554,6 +562,11 @@ export type QueryGetAllcompanyArgs = {
 
 export type QueryGetcompanyRoleArgs = {
   role_name?: InputMaybe<Scalars['String']>;
+};
+
+
+export type QueryGetposition_UserArgs = {
+  id: Scalars['ID'];
 };
 
 
@@ -776,6 +789,17 @@ export type Mas_Positionlevel3 = {
   type?: Maybe<Scalars['String']>;
 };
 
+export type Position = {
+  date?: InputMaybe<Scalars['Date']>;
+  headderId?: InputMaybe<Scalars['String']>;
+  id?: InputMaybe<Scalars['ID']>;
+  position1_id?: InputMaybe<Scalars['String']>;
+  position2_id?: InputMaybe<Scalars['String']>;
+  position3_id?: InputMaybe<Scalars['String']>;
+  role?: InputMaybe<Scalars['String']>;
+  user_id?: InputMaybe<Scalars['String']>;
+};
+
 export type WithIndex<TObject> = TObject & Record<string, any>;
 export type ResolversObject<TObject> = WithIndex<TObject>;
 
@@ -908,6 +932,7 @@ export type ResolversTypes = ResolversObject<{
   mas_positionlevel1: ResolverTypeWrapper<Mas_Positionlevel1>;
   mas_positionlevel2: ResolverTypeWrapper<Mas_Positionlevel2>;
   mas_positionlevel3: ResolverTypeWrapper<Mas_Positionlevel3>;
+  position: Position;
 }>;
 
 /** Mapping between all available schema types and the resolvers parents */
@@ -974,6 +999,7 @@ export type ResolversParentTypes = ResolversObject<{
   mas_positionlevel1: Mas_Positionlevel1;
   mas_positionlevel2: Mas_Positionlevel2;
   mas_positionlevel3: Mas_Positionlevel3;
+  position: Position;
 }>;
 
 export type AmphoeResolvers<ContextType = ApolloContext, ParentType extends ResolversParentTypes['Amphoe'] = ResolversParentTypes['Amphoe']> = ResolversObject<{
@@ -1210,6 +1236,7 @@ export type MutationResolvers<ContextType = ApolloContext, ParentType extends Re
   createHolidayDate?: Resolver<Maybe<ResolversTypes['CreateHolidayDateResponseType']>, ParentType, ContextType, Partial<MutationCreateHolidayDateArgs>>;
   createHolidayYear?: Resolver<Maybe<ResolversTypes['CreateHolidayYearResponseType']>, ParentType, ContextType, Partial<MutationCreateHolidayYearArgs>>;
   createRoleCompany?: Resolver<Maybe<ResolversTypes['CreateRoleCompanyResponseType']>, ParentType, ContextType, RequireFields<MutationCreateRoleCompanyArgs, 'data'>>;
+  createdposition_user?: Resolver<Maybe<ResolversTypes['CreatepositionResponseType']>, ParentType, ContextType, RequireFields<MutationCreatedposition_UserArgs, 'data'>>;
   deleteAccountUser?: Resolver<Maybe<ResolversTypes['DeleteAccountUserResponseType']>, ParentType, ContextType, RequireFields<MutationDeleteAccountUserArgs, 'id'>>;
   deleteComBarance?: Resolver<Maybe<ResolversTypes['DeleteComapnyBranchResponseType']>, ParentType, ContextType, RequireFields<MutationDeleteComBaranceArgs, 'id'>>;
   deleteHolidayYear?: Resolver<Maybe<ResolversTypes['DeleteHolidayYearResponseType']>, ParentType, ContextType, RequireFields<MutationDeleteHolidayYearArgs, 'id'>>;
@@ -1229,8 +1256,9 @@ export type OwnCompanyTypeResolvers<ContextType = ApolloContext, ParentType exte
 }>;
 
 export type Position_UserResolvers<ContextType = ApolloContext, ParentType extends ResolversParentTypes['Position_user'] = ResolversParentTypes['Position_user']> = ResolversObject<{
-  id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
-  leader?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  date?: Resolver<Maybe<ResolversTypes['Date']>, ParentType, ContextType>;
+  headderId?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  id?: Resolver<Maybe<ResolversTypes['ID']>, ParentType, ContextType>;
   position1_id?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   position2_id?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   position3_id?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
@@ -1307,6 +1335,7 @@ export type QueryResolvers<ContextType = ApolloContext, ParentType extends Resol
   getProvince?: Resolver<Maybe<Array<Maybe<ResolversTypes['Province']>>>, ParentType, ContextType>;
   getcompanyRole?: Resolver<Maybe<Array<Maybe<ResolversTypes['Role_Company']>>>, ParentType, ContextType, Partial<QueryGetcompanyRoleArgs>>;
   getownCompany?: Resolver<Maybe<ResolversTypes['GetOwncompanytype']>, ParentType, ContextType>;
+  getposition_user?: Resolver<Maybe<Array<Maybe<ResolversTypes['Position_user']>>>, ParentType, ContextType, RequireFields<QueryGetposition_UserArgs, 'id'>>;
   me?: Resolver<Maybe<ResolversTypes['Me']>, ParentType, ContextType>;
   users?: Resolver<Maybe<Array<Maybe<ResolversTypes['User']>>>, ParentType, ContextType, Partial<QueryUsersArgs>>;
   verifyCompanycode?: Resolver<Maybe<ResolversTypes['Boolean']>, ParentType, ContextType, RequireFields<QueryVerifyCompanycodeArgs, 'companyname'>>;
