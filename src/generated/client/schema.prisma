@@ -146,6 +146,7 @@ model User {
   Position_user   Position_user?  @relation("user")
   henchman        Position_user[]
   all_collect     all_collect[]
+  salary          salary[]
 }
 
 model Role {
@@ -337,6 +338,8 @@ model salary {
   //รายได้สุทธิ
   net                Int
   date               DateTime
+  User               User?    @relation(fields: [userId], references: [id])
+  userId             String?  @db.Uuid
 }
 
 model all_collect {
@@ -360,3 +363,4 @@ model bookbank_log {
   all_collect   all_collect? @relation(fields: [all_collectId], references: [id])
   mas_bank      mas_bank?    @relation(fields: [mas_bankId], references: [id])
 }
+

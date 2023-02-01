@@ -365,6 +365,7 @@ export type salary = {
   total_expense: number
   net: number
   date: Date
+  userId: string | null
 }
 
 /**
@@ -1534,12 +1535,14 @@ export namespace Prisma {
     company: number
     henchman: number
     all_collect: number
+    salary: number
   }
 
   export type UserCountOutputTypeSelect = {
     company?: boolean
     henchman?: boolean
     all_collect?: boolean
+    salary?: boolean
   }
 
   export type UserCountOutputTypeGetPayload<S extends boolean | null | undefined | UserCountOutputTypeArgs> =
@@ -5870,6 +5873,7 @@ export namespace Prisma {
     Position_user?: boolean | Position_userArgs
     henchman?: boolean | User$henchmanArgs
     all_collect?: boolean | User$all_collectArgs
+    salary?: boolean | User$salaryArgs
     _count?: boolean | UserCountOutputTypeArgs
   }
 
@@ -5883,6 +5887,7 @@ export namespace Prisma {
     Position_user?: boolean | Position_userArgs
     henchman?: boolean | User$henchmanArgs
     all_collect?: boolean | User$all_collectArgs
+    salary?: boolean | User$salaryArgs
     _count?: boolean | UserCountOutputTypeArgs
   }
 
@@ -5901,6 +5906,7 @@ export namespace Prisma {
         P extends 'Position_user' ? Position_userGetPayload<S['include'][P]> | null :
         P extends 'henchman' ? Array < Position_userGetPayload<S['include'][P]>>  :
         P extends 'all_collect' ? Array < all_collectGetPayload<S['include'][P]>>  :
+        P extends 'salary' ? Array < salaryGetPayload<S['include'][P]>>  :
         P extends '_count' ? UserCountOutputTypeGetPayload<S['include'][P]> :  never
   } 
     : S extends { select: any } & (UserArgs | UserFindManyArgs)
@@ -5914,6 +5920,7 @@ export namespace Prisma {
         P extends 'Position_user' ? Position_userGetPayload<S['select'][P]> | null :
         P extends 'henchman' ? Array < Position_userGetPayload<S['select'][P]>>  :
         P extends 'all_collect' ? Array < all_collectGetPayload<S['select'][P]>>  :
+        P extends 'salary' ? Array < salaryGetPayload<S['select'][P]>>  :
         P extends '_count' ? UserCountOutputTypeGetPayload<S['select'][P]> :  P extends keyof User ? User[P] : never
   } 
       : User
@@ -6303,6 +6310,8 @@ export namespace Prisma {
     henchman<T extends User$henchmanArgs= {}>(args?: Subset<T, User$henchmanArgs>): PrismaPromise<Array<Position_userGetPayload<T>>| Null>;
 
     all_collect<T extends User$all_collectArgs= {}>(args?: Subset<T, User$all_collectArgs>): PrismaPromise<Array<all_collectGetPayload<T>>| Null>;
+
+    salary<T extends User$salaryArgs= {}>(args?: Subset<T, User$salaryArgs>): PrismaPromise<Array<salaryGetPayload<T>>| Null>;
 
     private get _document();
     /**
@@ -6719,6 +6728,27 @@ export namespace Prisma {
     take?: number
     skip?: number
     distinct?: Enumerable<All_collectScalarFieldEnum>
+  }
+
+
+  /**
+   * User.salary
+   */
+  export type User$salaryArgs = {
+    /**
+     * Select specific fields to fetch from the salary
+     */
+    select?: salarySelect | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: salaryInclude | null
+    where?: salaryWhereInput
+    orderBy?: Enumerable<salaryOrderByWithRelationInput>
+    cursor?: salaryWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: Enumerable<SalaryScalarFieldEnum>
   }
 
 
@@ -24015,6 +24045,7 @@ export namespace Prisma {
     total_expense: number | null
     net: number | null
     date: Date | null
+    userId: string | null
   }
 
   export type SalaryMaxAggregateOutputType = {
@@ -24041,6 +24072,7 @@ export namespace Prisma {
     total_expense: number | null
     net: number | null
     date: Date | null
+    userId: string | null
   }
 
   export type SalaryCountAggregateOutputType = {
@@ -24067,6 +24099,7 @@ export namespace Prisma {
     total_expense: number
     net: number
     date: number
+    userId: number
     _all: number
   }
 
@@ -24143,6 +24176,7 @@ export namespace Prisma {
     total_expense?: true
     net?: true
     date?: true
+    userId?: true
   }
 
   export type SalaryMaxAggregateInputType = {
@@ -24169,6 +24203,7 @@ export namespace Prisma {
     total_expense?: true
     net?: true
     date?: true
+    userId?: true
   }
 
   export type SalaryCountAggregateInputType = {
@@ -24195,6 +24230,7 @@ export namespace Prisma {
     total_expense?: true
     net?: true
     date?: true
+    userId?: true
     _all?: true
   }
 
@@ -24309,6 +24345,7 @@ export namespace Prisma {
     total_expense: number
     net: number
     date: Date
+    userId: string | null
     _count: SalaryCountAggregateOutputType | null
     _avg: SalaryAvgAggregateOutputType | null
     _sum: SalarySumAggregateOutputType | null
@@ -24354,19 +24391,28 @@ export namespace Prisma {
     total_expense?: boolean
     net?: boolean
     date?: boolean
+    User?: boolean | UserArgs
+    userId?: boolean
   }
 
+
+  export type salaryInclude = {
+    User?: boolean | UserArgs
+  }
 
   export type salaryGetPayload<S extends boolean | null | undefined | salaryArgs> =
     S extends { select: any, include: any } ? 'Please either choose `select` or `include`' :
     S extends true ? salary :
     S extends undefined ? never :
     S extends { include: any } & (salaryArgs | salaryFindManyArgs)
-    ? salary 
+    ? salary  & {
+    [P in TruthyKeys<S['include']>]:
+        P extends 'User' ? UserGetPayload<S['include'][P]> | null :  never
+  } 
     : S extends { select: any } & (salaryArgs | salaryFindManyArgs)
       ? {
     [P in TruthyKeys<S['select']>]:
-    P extends keyof salary ? salary[P] : never
+        P extends 'User' ? UserGetPayload<S['select'][P]> | null :  P extends keyof salary ? salary[P] : never
   } 
       : salary
 
@@ -24740,6 +24786,7 @@ export namespace Prisma {
     constructor(_dmmf: runtime.DMMFClass, _fetcher: PrismaClientFetcher, _queryType: 'query' | 'mutation', _rootField: string, _clientMethod: string, _args: any, _dataPath: string[], _errorFormat: ErrorFormat, _measurePerformance?: boolean | undefined, _isList?: boolean);
     readonly [Symbol.toStringTag]: 'PrismaClientPromise';
 
+    User<T extends UserArgs= {}>(args?: Subset<T, UserArgs>): Prisma__UserClient<UserGetPayload<T> | Null>;
 
     private get _document();
     /**
@@ -24777,6 +24824,10 @@ export namespace Prisma {
      */
     select?: salarySelect | null
     /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: salaryInclude | null
+    /**
      * Filter, which salary to fetch.
      */
     where: salaryWhereUniqueInput
@@ -24803,6 +24854,10 @@ export namespace Prisma {
      */
     select?: salarySelect | null
     /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: salaryInclude | null
+    /**
      * Filter, which salary to fetch.
      */
     where: salaryWhereUniqueInput
@@ -24817,6 +24872,10 @@ export namespace Prisma {
      * Select specific fields to fetch from the salary
      */
     select?: salarySelect | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: salaryInclude | null
     /**
      * Filter, which salary to fetch.
      */
@@ -24874,6 +24933,10 @@ export namespace Prisma {
      */
     select?: salarySelect | null
     /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: salaryInclude | null
+    /**
      * Filter, which salary to fetch.
      */
     where?: salaryWhereInput
@@ -24919,6 +24982,10 @@ export namespace Prisma {
      */
     select?: salarySelect | null
     /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: salaryInclude | null
+    /**
      * Filter, which salaries to fetch.
      */
     where?: salaryWhereInput
@@ -24959,6 +25026,10 @@ export namespace Prisma {
      */
     select?: salarySelect | null
     /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: salaryInclude | null
+    /**
      * The data needed to create a salary.
      */
     data: XOR<salaryCreateInput, salaryUncheckedCreateInput>
@@ -24985,6 +25056,10 @@ export namespace Prisma {
      * Select specific fields to fetch from the salary
      */
     select?: salarySelect | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: salaryInclude | null
     /**
      * The data needed to update a salary.
      */
@@ -25020,6 +25095,10 @@ export namespace Prisma {
      */
     select?: salarySelect | null
     /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: salaryInclude | null
+    /**
      * The filter to search for the salary to update in case it exists.
      */
     where: salaryWhereUniqueInput
@@ -25042,6 +25121,10 @@ export namespace Prisma {
      * Select specific fields to fetch from the salary
      */
     select?: salarySelect | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: salaryInclude | null
     /**
      * Filter which salary to delete.
      */
@@ -25068,6 +25151,10 @@ export namespace Prisma {
      * Select specific fields to fetch from the salary
      */
     select?: salarySelect | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: salaryInclude | null
   }
 
 
@@ -27405,7 +27492,8 @@ export namespace Prisma {
     total_income: 'total_income',
     total_expense: 'total_expense',
     net: 'net',
-    date: 'date'
+    date: 'date',
+    userId: 'userId'
   };
 
   export type SalaryScalarFieldEnum = (typeof SalaryScalarFieldEnum)[keyof typeof SalaryScalarFieldEnum]
@@ -27914,6 +28002,7 @@ export namespace Prisma {
     Position_user?: XOR<Position_userRelationFilter, Position_userWhereInput> | null
     henchman?: Position_userListRelationFilter
     all_collect?: All_collectListRelationFilter
+    salary?: SalaryListRelationFilter
   }
 
   export type UserOrderByWithRelationInput = {
@@ -27936,6 +28025,7 @@ export namespace Prisma {
     Position_user?: Position_userOrderByWithRelationInput
     henchman?: Position_userOrderByRelationAggregateInput
     all_collect?: all_collectOrderByRelationAggregateInput
+    salary?: salaryOrderByRelationAggregateInput
   }
 
   export type UserWhereUniqueInput = {
@@ -28837,6 +28927,8 @@ export namespace Prisma {
     total_expense?: IntFilter | number
     net?: IntFilter | number
     date?: DateTimeFilter | Date | string
+    User?: XOR<UserRelationFilter, UserWhereInput> | null
+    userId?: UuidNullableFilter | string | null
   }
 
   export type salaryOrderByWithRelationInput = {
@@ -28863,6 +28955,8 @@ export namespace Prisma {
     total_expense?: SortOrder
     net?: SortOrder
     date?: SortOrder
+    User?: UserOrderByWithRelationInput
+    userId?: SortOrder
   }
 
   export type salaryWhereUniqueInput = {
@@ -28893,6 +28987,7 @@ export namespace Prisma {
     total_expense?: SortOrder
     net?: SortOrder
     date?: SortOrder
+    userId?: SortOrder
     _count?: salaryCountOrderByAggregateInput
     _avg?: salaryAvgOrderByAggregateInput
     _max?: salaryMaxOrderByAggregateInput
@@ -28927,6 +29022,7 @@ export namespace Prisma {
     total_expense?: IntWithAggregatesFilter | number
     net?: IntWithAggregatesFilter | number
     date?: DateTimeWithAggregatesFilter | Date | string
+    userId?: UuidNullableWithAggregatesFilter | string | null
   }
 
   export type all_collectWhereInput = {
@@ -29738,6 +29834,7 @@ export namespace Prisma {
     Position_user?: Position_userCreateNestedOneWithoutUserInput
     henchman?: Position_userCreateNestedManyWithoutHeaderInput
     all_collect?: all_collectCreateNestedManyWithoutUserInput
+    salary?: salaryCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateInput = {
@@ -29757,6 +29854,7 @@ export namespace Prisma {
     Position_user?: Position_userUncheckedCreateNestedOneWithoutUserInput
     henchman?: Position_userUncheckedCreateNestedManyWithoutHeaderInput
     all_collect?: all_collectUncheckedCreateNestedManyWithoutUserInput
+    salary?: salaryUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserUpdateInput = {
@@ -29776,6 +29874,7 @@ export namespace Prisma {
     Position_user?: Position_userUpdateOneWithoutUserNestedInput
     henchman?: Position_userUpdateManyWithoutHeaderNestedInput
     all_collect?: all_collectUpdateManyWithoutUserNestedInput
+    salary?: salaryUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateInput = {
@@ -29795,6 +29894,7 @@ export namespace Prisma {
     Position_user?: Position_userUncheckedUpdateOneWithoutUserNestedInput
     henchman?: Position_userUncheckedUpdateManyWithoutHeaderNestedInput
     all_collect?: all_collectUncheckedUpdateManyWithoutUserNestedInput
+    salary?: salaryUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type UserCreateManyInput = {
@@ -30800,6 +30900,7 @@ export namespace Prisma {
     total_expense: number
     net: number
     date: Date | string
+    User?: UserCreateNestedOneWithoutSalaryInput
   }
 
   export type salaryUncheckedCreateInput = {
@@ -30826,6 +30927,7 @@ export namespace Prisma {
     total_expense: number
     net: number
     date: Date | string
+    userId?: string | null
   }
 
   export type salaryUpdateInput = {
@@ -30852,6 +30954,7 @@ export namespace Prisma {
     total_expense?: IntFieldUpdateOperationsInput | number
     net?: IntFieldUpdateOperationsInput | number
     date?: DateTimeFieldUpdateOperationsInput | Date | string
+    User?: UserUpdateOneWithoutSalaryNestedInput
   }
 
   export type salaryUncheckedUpdateInput = {
@@ -30878,6 +30981,7 @@ export namespace Prisma {
     total_expense?: IntFieldUpdateOperationsInput | number
     net?: IntFieldUpdateOperationsInput | number
     date?: DateTimeFieldUpdateOperationsInput | Date | string
+    userId?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type salaryCreateManyInput = {
@@ -30904,6 +31008,7 @@ export namespace Prisma {
     total_expense: number
     net: number
     date: Date | string
+    userId?: string | null
   }
 
   export type salaryUpdateManyMutationInput = {
@@ -30956,6 +31061,7 @@ export namespace Prisma {
     total_expense?: IntFieldUpdateOperationsInput | number
     net?: IntFieldUpdateOperationsInput | number
     date?: DateTimeFieldUpdateOperationsInput | Date | string
+    userId?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type all_collectCreateInput = {
@@ -31725,6 +31831,12 @@ export namespace Prisma {
     none?: all_collectWhereInput
   }
 
+  export type SalaryListRelationFilter = {
+    every?: salaryWhereInput
+    some?: salaryWhereInput
+    none?: salaryWhereInput
+  }
+
   export type CompanyOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
@@ -31734,6 +31846,10 @@ export namespace Prisma {
   }
 
   export type all_collectOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type salaryOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
@@ -32412,6 +32528,7 @@ export namespace Prisma {
     total_expense?: SortOrder
     net?: SortOrder
     date?: SortOrder
+    userId?: SortOrder
   }
 
   export type salaryAvgOrderByAggregateInput = {
@@ -32462,6 +32579,7 @@ export namespace Prisma {
     total_expense?: SortOrder
     net?: SortOrder
     date?: SortOrder
+    userId?: SortOrder
   }
 
   export type salaryMinOrderByAggregateInput = {
@@ -32488,6 +32606,7 @@ export namespace Prisma {
     total_expense?: SortOrder
     net?: SortOrder
     date?: SortOrder
+    userId?: SortOrder
   }
 
   export type salarySumOrderByAggregateInput = {
@@ -33090,6 +33209,13 @@ export namespace Prisma {
     connect?: Enumerable<all_collectWhereUniqueInput>
   }
 
+  export type salaryCreateNestedManyWithoutUserInput = {
+    create?: XOR<Enumerable<salaryCreateWithoutUserInput>, Enumerable<salaryUncheckedCreateWithoutUserInput>>
+    connectOrCreate?: Enumerable<salaryCreateOrConnectWithoutUserInput>
+    createMany?: salaryCreateManyUserInputEnvelope
+    connect?: Enumerable<salaryWhereUniqueInput>
+  }
+
   export type ProfileUncheckedCreateNestedOneWithoutUserInput = {
     create?: XOR<ProfileCreateWithoutUserInput, ProfileUncheckedCreateWithoutUserInput>
     connectOrCreate?: ProfileCreateOrConnectWithoutUserInput
@@ -33121,6 +33247,13 @@ export namespace Prisma {
     connectOrCreate?: Enumerable<all_collectCreateOrConnectWithoutUserInput>
     createMany?: all_collectCreateManyUserInputEnvelope
     connect?: Enumerable<all_collectWhereUniqueInput>
+  }
+
+  export type salaryUncheckedCreateNestedManyWithoutUserInput = {
+    create?: XOR<Enumerable<salaryCreateWithoutUserInput>, Enumerable<salaryUncheckedCreateWithoutUserInput>>
+    connectOrCreate?: Enumerable<salaryCreateOrConnectWithoutUserInput>
+    createMany?: salaryCreateManyUserInputEnvelope
+    connect?: Enumerable<salaryWhereUniqueInput>
   }
 
   export type ProfileUpdateOneWithoutUserNestedInput = {
@@ -33215,6 +33348,20 @@ export namespace Prisma {
     deleteMany?: Enumerable<all_collectScalarWhereInput>
   }
 
+  export type salaryUpdateManyWithoutUserNestedInput = {
+    create?: XOR<Enumerable<salaryCreateWithoutUserInput>, Enumerable<salaryUncheckedCreateWithoutUserInput>>
+    connectOrCreate?: Enumerable<salaryCreateOrConnectWithoutUserInput>
+    upsert?: Enumerable<salaryUpsertWithWhereUniqueWithoutUserInput>
+    createMany?: salaryCreateManyUserInputEnvelope
+    set?: Enumerable<salaryWhereUniqueInput>
+    disconnect?: Enumerable<salaryWhereUniqueInput>
+    delete?: Enumerable<salaryWhereUniqueInput>
+    connect?: Enumerable<salaryWhereUniqueInput>
+    update?: Enumerable<salaryUpdateWithWhereUniqueWithoutUserInput>
+    updateMany?: Enumerable<salaryUpdateManyWithWhereWithoutUserInput>
+    deleteMany?: Enumerable<salaryScalarWhereInput>
+  }
+
   export type ProfileUncheckedUpdateOneWithoutUserNestedInput = {
     create?: XOR<ProfileCreateWithoutUserInput, ProfileUncheckedCreateWithoutUserInput>
     connectOrCreate?: ProfileCreateOrConnectWithoutUserInput
@@ -33275,6 +33422,20 @@ export namespace Prisma {
     update?: Enumerable<all_collectUpdateWithWhereUniqueWithoutUserInput>
     updateMany?: Enumerable<all_collectUpdateManyWithWhereWithoutUserInput>
     deleteMany?: Enumerable<all_collectScalarWhereInput>
+  }
+
+  export type salaryUncheckedUpdateManyWithoutUserNestedInput = {
+    create?: XOR<Enumerable<salaryCreateWithoutUserInput>, Enumerable<salaryUncheckedCreateWithoutUserInput>>
+    connectOrCreate?: Enumerable<salaryCreateOrConnectWithoutUserInput>
+    upsert?: Enumerable<salaryUpsertWithWhereUniqueWithoutUserInput>
+    createMany?: salaryCreateManyUserInputEnvelope
+    set?: Enumerable<salaryWhereUniqueInput>
+    disconnect?: Enumerable<salaryWhereUniqueInput>
+    delete?: Enumerable<salaryWhereUniqueInput>
+    connect?: Enumerable<salaryWhereUniqueInput>
+    update?: Enumerable<salaryUpdateWithWhereUniqueWithoutUserInput>
+    updateMany?: Enumerable<salaryUpdateManyWithWhereWithoutUserInput>
+    deleteMany?: Enumerable<salaryScalarWhereInput>
   }
 
   export type UserCreateNestedManyWithoutRoleInput = {
@@ -34073,6 +34234,22 @@ export namespace Prisma {
     update?: XOR<CompanyBranchUpdateWithoutExpense_companyInput, CompanyBranchUncheckedUpdateWithoutExpense_companyInput>
   }
 
+  export type UserCreateNestedOneWithoutSalaryInput = {
+    create?: XOR<UserCreateWithoutSalaryInput, UserUncheckedCreateWithoutSalaryInput>
+    connectOrCreate?: UserCreateOrConnectWithoutSalaryInput
+    connect?: UserWhereUniqueInput
+  }
+
+  export type UserUpdateOneWithoutSalaryNestedInput = {
+    create?: XOR<UserCreateWithoutSalaryInput, UserUncheckedCreateWithoutSalaryInput>
+    connectOrCreate?: UserCreateOrConnectWithoutSalaryInput
+    upsert?: UserUpsertWithoutSalaryInput
+    disconnect?: boolean
+    delete?: boolean
+    connect?: UserWhereUniqueInput
+    update?: XOR<UserUpdateWithoutSalaryInput, UserUncheckedUpdateWithoutSalaryInput>
+  }
+
   export type UserCreateNestedOneWithoutAll_collectInput = {
     create?: XOR<UserCreateWithoutAll_collectInput, UserUncheckedCreateWithoutAll_collectInput>
     connectOrCreate?: UserCreateOrConnectWithoutAll_collectInput
@@ -34452,6 +34629,7 @@ export namespace Prisma {
     Position_user?: Position_userCreateNestedOneWithoutUserInput
     henchman?: Position_userCreateNestedManyWithoutHeaderInput
     all_collect?: all_collectCreateNestedManyWithoutUserInput
+    salary?: salaryCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutCompanyInput = {
@@ -34470,6 +34648,7 @@ export namespace Prisma {
     Position_user?: Position_userUncheckedCreateNestedOneWithoutUserInput
     henchman?: Position_userUncheckedCreateNestedManyWithoutHeaderInput
     all_collect?: all_collectUncheckedCreateNestedManyWithoutUserInput
+    salary?: salaryUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutCompanyInput = {
@@ -34710,6 +34889,7 @@ export namespace Prisma {
     Position_user?: Position_userUpdateOneWithoutUserNestedInput
     henchman?: Position_userUpdateManyWithoutHeaderNestedInput
     all_collect?: all_collectUpdateManyWithoutUserNestedInput
+    salary?: salaryUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutCompanyInput = {
@@ -34728,6 +34908,7 @@ export namespace Prisma {
     Position_user?: Position_userUncheckedUpdateOneWithoutUserNestedInput
     henchman?: Position_userUncheckedUpdateManyWithoutHeaderNestedInput
     all_collect?: all_collectUncheckedUpdateManyWithoutUserNestedInput
+    salary?: salaryUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type CompanyBranchUpsertWithWhereUniqueWithoutCompanyInput = {
@@ -34975,6 +35156,7 @@ export namespace Prisma {
     Position_user?: Position_userCreateNestedOneWithoutUserInput
     henchman?: Position_userCreateNestedManyWithoutHeaderInput
     all_collect?: all_collectCreateNestedManyWithoutUserInput
+    salary?: salaryCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutCompanyBranchInput = {
@@ -34993,6 +35175,7 @@ export namespace Prisma {
     Position_user?: Position_userUncheckedCreateNestedOneWithoutUserInput
     henchman?: Position_userUncheckedCreateNestedManyWithoutHeaderInput
     all_collect?: all_collectUncheckedCreateNestedManyWithoutUserInput
+    salary?: salaryUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutCompanyBranchInput = {
@@ -35202,6 +35385,7 @@ export namespace Prisma {
     Position_user?: Position_userCreateNestedOneWithoutUserInput
     henchman?: Position_userCreateNestedManyWithoutHeaderInput
     all_collect?: all_collectCreateNestedManyWithoutUserInput
+    salary?: salaryCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutProfileInput = {
@@ -35220,6 +35404,7 @@ export namespace Prisma {
     Position_user?: Position_userUncheckedCreateNestedOneWithoutUserInput
     henchman?: Position_userUncheckedCreateNestedManyWithoutHeaderInput
     all_collect?: all_collectUncheckedCreateNestedManyWithoutUserInput
+    salary?: salaryUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutProfileInput = {
@@ -35248,6 +35433,7 @@ export namespace Prisma {
     Position_user?: Position_userUpdateOneWithoutUserNestedInput
     henchman?: Position_userUpdateManyWithoutHeaderNestedInput
     all_collect?: all_collectUpdateManyWithoutUserNestedInput
+    salary?: salaryUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutProfileInput = {
@@ -35266,6 +35452,7 @@ export namespace Prisma {
     Position_user?: Position_userUncheckedUpdateOneWithoutUserNestedInput
     henchman?: Position_userUncheckedUpdateManyWithoutHeaderNestedInput
     all_collect?: all_collectUncheckedUpdateManyWithoutUserNestedInput
+    salary?: salaryUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type ProfileCreateWithoutUserInput = {
@@ -35607,6 +35794,68 @@ export namespace Prisma {
     skipDuplicates?: boolean
   }
 
+  export type salaryCreateWithoutUserInput = {
+    id: string
+    base_salary: number
+    commission: number
+    position_income: number
+    ot: number
+    bonus: number
+    special_income: number
+    other_income: number
+    travel_income: number
+    bursary: number
+    welfare_money: number
+    vat: number
+    social_security: number
+    miss: number
+    ra: number
+    late: number
+    other: number
+    provident_employee: number
+    provident_company: number
+    total_income: number
+    total_expense: number
+    net: number
+    date: Date | string
+  }
+
+  export type salaryUncheckedCreateWithoutUserInput = {
+    id: string
+    base_salary: number
+    commission: number
+    position_income: number
+    ot: number
+    bonus: number
+    special_income: number
+    other_income: number
+    travel_income: number
+    bursary: number
+    welfare_money: number
+    vat: number
+    social_security: number
+    miss: number
+    ra: number
+    late: number
+    other: number
+    provident_employee: number
+    provident_company: number
+    total_income: number
+    total_expense: number
+    net: number
+    date: Date | string
+  }
+
+  export type salaryCreateOrConnectWithoutUserInput = {
+    where: salaryWhereUniqueInput
+    create: XOR<salaryCreateWithoutUserInput, salaryUncheckedCreateWithoutUserInput>
+  }
+
+  export type salaryCreateManyUserInputEnvelope = {
+    data: Enumerable<salaryCreateManyUserInput>
+    skipDuplicates?: boolean
+  }
+
   export type ProfileUpsertWithoutUserInput = {
     update: XOR<ProfileUpdateWithoutUserInput, ProfileUncheckedUpdateWithoutUserInput>
     create: XOR<ProfileCreateWithoutUserInput, ProfileUncheckedCreateWithoutUserInput>
@@ -35931,6 +36180,52 @@ export namespace Prisma {
     provident_collect_company?: IntFilter | number
   }
 
+  export type salaryUpsertWithWhereUniqueWithoutUserInput = {
+    where: salaryWhereUniqueInput
+    update: XOR<salaryUpdateWithoutUserInput, salaryUncheckedUpdateWithoutUserInput>
+    create: XOR<salaryCreateWithoutUserInput, salaryUncheckedCreateWithoutUserInput>
+  }
+
+  export type salaryUpdateWithWhereUniqueWithoutUserInput = {
+    where: salaryWhereUniqueInput
+    data: XOR<salaryUpdateWithoutUserInput, salaryUncheckedUpdateWithoutUserInput>
+  }
+
+  export type salaryUpdateManyWithWhereWithoutUserInput = {
+    where: salaryScalarWhereInput
+    data: XOR<salaryUpdateManyMutationInput, salaryUncheckedUpdateManyWithoutSalaryInput>
+  }
+
+  export type salaryScalarWhereInput = {
+    AND?: Enumerable<salaryScalarWhereInput>
+    OR?: Enumerable<salaryScalarWhereInput>
+    NOT?: Enumerable<salaryScalarWhereInput>
+    id?: UuidFilter | string
+    base_salary?: IntFilter | number
+    commission?: IntFilter | number
+    position_income?: IntFilter | number
+    ot?: IntFilter | number
+    bonus?: IntFilter | number
+    special_income?: IntFilter | number
+    other_income?: IntFilter | number
+    travel_income?: IntFilter | number
+    bursary?: IntFilter | number
+    welfare_money?: IntFilter | number
+    vat?: IntFilter | number
+    social_security?: IntFilter | number
+    miss?: IntFilter | number
+    ra?: IntFilter | number
+    late?: IntFilter | number
+    other?: IntFilter | number
+    provident_employee?: IntFilter | number
+    provident_company?: IntFilter | number
+    total_income?: IntFilter | number
+    total_expense?: IntFilter | number
+    net?: IntFilter | number
+    date?: DateTimeFilter | Date | string
+    userId?: UuidNullableFilter | string | null
+  }
+
   export type UserCreateWithoutRoleInput = {
     id: string
     email: string
@@ -35947,6 +36242,7 @@ export namespace Prisma {
     Position_user?: Position_userCreateNestedOneWithoutUserInput
     henchman?: Position_userCreateNestedManyWithoutHeaderInput
     all_collect?: all_collectCreateNestedManyWithoutUserInput
+    salary?: salaryCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutRoleInput = {
@@ -35965,6 +36261,7 @@ export namespace Prisma {
     Position_user?: Position_userUncheckedCreateNestedOneWithoutUserInput
     henchman?: Position_userUncheckedCreateNestedManyWithoutHeaderInput
     all_collect?: all_collectUncheckedCreateNestedManyWithoutUserInput
+    salary?: salaryUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutRoleInput = {
@@ -36009,6 +36306,7 @@ export namespace Prisma {
     Position_user?: Position_userCreateNestedOneWithoutUserInput
     henchman?: Position_userCreateNestedManyWithoutHeaderInput
     all_collect?: all_collectCreateNestedManyWithoutUserInput
+    salary?: salaryCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutRole_CompanyInput = {
@@ -36027,6 +36325,7 @@ export namespace Prisma {
     Position_user?: Position_userUncheckedCreateNestedOneWithoutUserInput
     henchman?: Position_userUncheckedCreateNestedManyWithoutHeaderInput
     all_collect?: all_collectUncheckedCreateNestedManyWithoutUserInput
+    salary?: salaryUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutRole_CompanyInput = {
@@ -37028,6 +37327,7 @@ export namespace Prisma {
     Role_Company?: Role_CompanyCreateNestedOneWithoutUsersInput
     Position_user?: Position_userCreateNestedOneWithoutUserInput
     all_collect?: all_collectCreateNestedManyWithoutUserInput
+    salary?: salaryCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutHenchmanInput = {
@@ -37046,6 +37346,7 @@ export namespace Prisma {
     companyBranchId?: string | null
     Position_user?: Position_userUncheckedCreateNestedOneWithoutUserInput
     all_collect?: all_collectUncheckedCreateNestedManyWithoutUserInput
+    salary?: salaryUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutHenchmanInput = {
@@ -37069,6 +37370,7 @@ export namespace Prisma {
     Role_Company?: Role_CompanyCreateNestedOneWithoutUsersInput
     henchman?: Position_userCreateNestedManyWithoutHeaderInput
     all_collect?: all_collectCreateNestedManyWithoutUserInput
+    salary?: salaryCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutPosition_userInput = {
@@ -37087,6 +37389,7 @@ export namespace Prisma {
     companyBranchId?: string | null
     henchman?: Position_userUncheckedCreateNestedManyWithoutHeaderInput
     all_collect?: all_collectUncheckedCreateNestedManyWithoutUserInput
+    salary?: salaryUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutPosition_userInput = {
@@ -37192,6 +37495,7 @@ export namespace Prisma {
     Role_Company?: Role_CompanyUpdateOneWithoutUsersNestedInput
     Position_user?: Position_userUpdateOneWithoutUserNestedInput
     all_collect?: all_collectUpdateManyWithoutUserNestedInput
+    salary?: salaryUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutHenchmanInput = {
@@ -37210,6 +37514,7 @@ export namespace Prisma {
     companyBranchId?: NullableStringFieldUpdateOperationsInput | string | null
     Position_user?: Position_userUncheckedUpdateOneWithoutUserNestedInput
     all_collect?: all_collectUncheckedUpdateManyWithoutUserNestedInput
+    salary?: salaryUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type UserUpsertWithoutPosition_userInput = {
@@ -37233,6 +37538,7 @@ export namespace Prisma {
     Role_Company?: Role_CompanyUpdateOneWithoutUsersNestedInput
     henchman?: Position_userUpdateManyWithoutHeaderNestedInput
     all_collect?: all_collectUpdateManyWithoutUserNestedInput
+    salary?: salaryUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutPosition_userInput = {
@@ -37251,6 +37557,7 @@ export namespace Prisma {
     companyBranchId?: NullableStringFieldUpdateOperationsInput | string | null
     henchman?: Position_userUncheckedUpdateManyWithoutHeaderNestedInput
     all_collect?: all_collectUncheckedUpdateManyWithoutUserNestedInput
+    salary?: salaryUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type mas_positionlevel1UpsertWithoutPosition_userInput = {
@@ -37745,6 +38052,92 @@ export namespace Prisma {
     Role_Company?: Role_CompanyUncheckedUpdateManyWithoutCompanyBranchNestedInput
   }
 
+  export type UserCreateWithoutSalaryInput = {
+    id: string
+    email: string
+    password: string
+    profile?: ProfileCreateNestedOneWithoutUserInput
+    islogin?: boolean
+    isActive?: boolean
+    isOwner?: boolean
+    lastlogin?: Date | string | null
+    createdAt?: Date | string
+    role?: RoleCreateNestedOneWithoutUsersInput
+    company?: CompanyCreateNestedManyWithoutOwnerInput
+    companyBranch?: CompanyBranchCreateNestedOneWithoutUsersInput
+    Role_Company?: Role_CompanyCreateNestedOneWithoutUsersInput
+    Position_user?: Position_userCreateNestedOneWithoutUserInput
+    henchman?: Position_userCreateNestedManyWithoutHeaderInput
+    all_collect?: all_collectCreateNestedManyWithoutUserInput
+  }
+
+  export type UserUncheckedCreateWithoutSalaryInput = {
+    id: string
+    email: string
+    password: string
+    profile?: ProfileUncheckedCreateNestedOneWithoutUserInput
+    islogin?: boolean
+    isActive?: boolean
+    isOwner?: boolean
+    lastlogin?: Date | string | null
+    createdAt?: Date | string
+    roleId?: string | null
+    RoleCompanyID?: string | null
+    company?: CompanyUncheckedCreateNestedManyWithoutOwnerInput
+    companyBranchId?: string | null
+    Position_user?: Position_userUncheckedCreateNestedOneWithoutUserInput
+    henchman?: Position_userUncheckedCreateNestedManyWithoutHeaderInput
+    all_collect?: all_collectUncheckedCreateNestedManyWithoutUserInput
+  }
+
+  export type UserCreateOrConnectWithoutSalaryInput = {
+    where: UserWhereUniqueInput
+    create: XOR<UserCreateWithoutSalaryInput, UserUncheckedCreateWithoutSalaryInput>
+  }
+
+  export type UserUpsertWithoutSalaryInput = {
+    update: XOR<UserUpdateWithoutSalaryInput, UserUncheckedUpdateWithoutSalaryInput>
+    create: XOR<UserCreateWithoutSalaryInput, UserUncheckedCreateWithoutSalaryInput>
+  }
+
+  export type UserUpdateWithoutSalaryInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    password?: StringFieldUpdateOperationsInput | string
+    profile?: ProfileUpdateOneWithoutUserNestedInput
+    islogin?: BoolFieldUpdateOperationsInput | boolean
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    isOwner?: BoolFieldUpdateOperationsInput | boolean
+    lastlogin?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    role?: RoleUpdateOneWithoutUsersNestedInput
+    company?: CompanyUpdateManyWithoutOwnerNestedInput
+    companyBranch?: CompanyBranchUpdateOneWithoutUsersNestedInput
+    Role_Company?: Role_CompanyUpdateOneWithoutUsersNestedInput
+    Position_user?: Position_userUpdateOneWithoutUserNestedInput
+    henchman?: Position_userUpdateManyWithoutHeaderNestedInput
+    all_collect?: all_collectUpdateManyWithoutUserNestedInput
+  }
+
+  export type UserUncheckedUpdateWithoutSalaryInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    password?: StringFieldUpdateOperationsInput | string
+    profile?: ProfileUncheckedUpdateOneWithoutUserNestedInput
+    islogin?: BoolFieldUpdateOperationsInput | boolean
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    isOwner?: BoolFieldUpdateOperationsInput | boolean
+    lastlogin?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    roleId?: NullableStringFieldUpdateOperationsInput | string | null
+    RoleCompanyID?: NullableStringFieldUpdateOperationsInput | string | null
+    company?: CompanyUncheckedUpdateManyWithoutOwnerNestedInput
+    companyBranchId?: NullableStringFieldUpdateOperationsInput | string | null
+    Position_user?: Position_userUncheckedUpdateOneWithoutUserNestedInput
+    henchman?: Position_userUncheckedUpdateManyWithoutHeaderNestedInput
+    all_collect?: all_collectUncheckedUpdateManyWithoutUserNestedInput
+  }
+
   export type UserCreateWithoutAll_collectInput = {
     id: string
     email: string
@@ -37761,6 +38154,7 @@ export namespace Prisma {
     Role_Company?: Role_CompanyCreateNestedOneWithoutUsersInput
     Position_user?: Position_userCreateNestedOneWithoutUserInput
     henchman?: Position_userCreateNestedManyWithoutHeaderInput
+    salary?: salaryCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutAll_collectInput = {
@@ -37779,6 +38173,7 @@ export namespace Prisma {
     companyBranchId?: string | null
     Position_user?: Position_userUncheckedCreateNestedOneWithoutUserInput
     henchman?: Position_userUncheckedCreateNestedManyWithoutHeaderInput
+    salary?: salaryUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutAll_collectInput = {
@@ -37831,6 +38226,7 @@ export namespace Prisma {
     Role_Company?: Role_CompanyUpdateOneWithoutUsersNestedInput
     Position_user?: Position_userUpdateOneWithoutUserNestedInput
     henchman?: Position_userUpdateManyWithoutHeaderNestedInput
+    salary?: salaryUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutAll_collectInput = {
@@ -37849,6 +38245,7 @@ export namespace Prisma {
     companyBranchId?: NullableStringFieldUpdateOperationsInput | string | null
     Position_user?: Position_userUncheckedUpdateOneWithoutUserNestedInput
     henchman?: Position_userUncheckedUpdateManyWithoutHeaderNestedInput
+    salary?: salaryUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type bookbank_logUpsertWithWhereUniqueWithoutAll_collectInput = {
@@ -38283,6 +38680,7 @@ export namespace Prisma {
     Position_user?: Position_userUpdateOneWithoutUserNestedInput
     henchman?: Position_userUpdateManyWithoutHeaderNestedInput
     all_collect?: all_collectUpdateManyWithoutUserNestedInput
+    salary?: salaryUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutCompanyBranchInput = {
@@ -38301,6 +38699,7 @@ export namespace Prisma {
     Position_user?: Position_userUncheckedUpdateOneWithoutUserNestedInput
     henchman?: Position_userUncheckedUpdateManyWithoutHeaderNestedInput
     all_collect?: all_collectUncheckedUpdateManyWithoutUserNestedInput
+    salary?: salaryUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateManyWithoutUsersInput = {
@@ -38392,6 +38791,32 @@ export namespace Prisma {
     social_secu_collect: number
     provident_collect_employee: number
     provident_collect_company: number
+  }
+
+  export type salaryCreateManyUserInput = {
+    id: string
+    base_salary: number
+    commission: number
+    position_income: number
+    ot: number
+    bonus: number
+    special_income: number
+    other_income: number
+    travel_income: number
+    bursary: number
+    welfare_money: number
+    vat: number
+    social_security: number
+    miss: number
+    ra: number
+    late: number
+    other: number
+    provident_employee: number
+    provident_company: number
+    total_income: number
+    total_expense: number
+    net: number
+    date: Date | string
   }
 
   export type CompanyUpdateWithoutOwnerInput = {
@@ -38501,6 +38926,84 @@ export namespace Prisma {
     provident_collect_company?: IntFieldUpdateOperationsInput | number
   }
 
+  export type salaryUpdateWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    base_salary?: IntFieldUpdateOperationsInput | number
+    commission?: IntFieldUpdateOperationsInput | number
+    position_income?: IntFieldUpdateOperationsInput | number
+    ot?: IntFieldUpdateOperationsInput | number
+    bonus?: IntFieldUpdateOperationsInput | number
+    special_income?: IntFieldUpdateOperationsInput | number
+    other_income?: IntFieldUpdateOperationsInput | number
+    travel_income?: IntFieldUpdateOperationsInput | number
+    bursary?: IntFieldUpdateOperationsInput | number
+    welfare_money?: IntFieldUpdateOperationsInput | number
+    vat?: IntFieldUpdateOperationsInput | number
+    social_security?: IntFieldUpdateOperationsInput | number
+    miss?: IntFieldUpdateOperationsInput | number
+    ra?: IntFieldUpdateOperationsInput | number
+    late?: IntFieldUpdateOperationsInput | number
+    other?: IntFieldUpdateOperationsInput | number
+    provident_employee?: IntFieldUpdateOperationsInput | number
+    provident_company?: IntFieldUpdateOperationsInput | number
+    total_income?: IntFieldUpdateOperationsInput | number
+    total_expense?: IntFieldUpdateOperationsInput | number
+    net?: IntFieldUpdateOperationsInput | number
+    date?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type salaryUncheckedUpdateWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    base_salary?: IntFieldUpdateOperationsInput | number
+    commission?: IntFieldUpdateOperationsInput | number
+    position_income?: IntFieldUpdateOperationsInput | number
+    ot?: IntFieldUpdateOperationsInput | number
+    bonus?: IntFieldUpdateOperationsInput | number
+    special_income?: IntFieldUpdateOperationsInput | number
+    other_income?: IntFieldUpdateOperationsInput | number
+    travel_income?: IntFieldUpdateOperationsInput | number
+    bursary?: IntFieldUpdateOperationsInput | number
+    welfare_money?: IntFieldUpdateOperationsInput | number
+    vat?: IntFieldUpdateOperationsInput | number
+    social_security?: IntFieldUpdateOperationsInput | number
+    miss?: IntFieldUpdateOperationsInput | number
+    ra?: IntFieldUpdateOperationsInput | number
+    late?: IntFieldUpdateOperationsInput | number
+    other?: IntFieldUpdateOperationsInput | number
+    provident_employee?: IntFieldUpdateOperationsInput | number
+    provident_company?: IntFieldUpdateOperationsInput | number
+    total_income?: IntFieldUpdateOperationsInput | number
+    total_expense?: IntFieldUpdateOperationsInput | number
+    net?: IntFieldUpdateOperationsInput | number
+    date?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type salaryUncheckedUpdateManyWithoutSalaryInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    base_salary?: IntFieldUpdateOperationsInput | number
+    commission?: IntFieldUpdateOperationsInput | number
+    position_income?: IntFieldUpdateOperationsInput | number
+    ot?: IntFieldUpdateOperationsInput | number
+    bonus?: IntFieldUpdateOperationsInput | number
+    special_income?: IntFieldUpdateOperationsInput | number
+    other_income?: IntFieldUpdateOperationsInput | number
+    travel_income?: IntFieldUpdateOperationsInput | number
+    bursary?: IntFieldUpdateOperationsInput | number
+    welfare_money?: IntFieldUpdateOperationsInput | number
+    vat?: IntFieldUpdateOperationsInput | number
+    social_security?: IntFieldUpdateOperationsInput | number
+    miss?: IntFieldUpdateOperationsInput | number
+    ra?: IntFieldUpdateOperationsInput | number
+    late?: IntFieldUpdateOperationsInput | number
+    other?: IntFieldUpdateOperationsInput | number
+    provident_employee?: IntFieldUpdateOperationsInput | number
+    provident_company?: IntFieldUpdateOperationsInput | number
+    total_income?: IntFieldUpdateOperationsInput | number
+    total_expense?: IntFieldUpdateOperationsInput | number
+    net?: IntFieldUpdateOperationsInput | number
+    date?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
   export type UserCreateManyRoleInput = {
     id: string
     email: string
@@ -38530,6 +39033,7 @@ export namespace Prisma {
     Position_user?: Position_userUpdateOneWithoutUserNestedInput
     henchman?: Position_userUpdateManyWithoutHeaderNestedInput
     all_collect?: all_collectUpdateManyWithoutUserNestedInput
+    salary?: salaryUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutRoleInput = {
@@ -38548,6 +39052,7 @@ export namespace Prisma {
     Position_user?: Position_userUncheckedUpdateOneWithoutUserNestedInput
     henchman?: Position_userUncheckedUpdateManyWithoutHeaderNestedInput
     all_collect?: all_collectUncheckedUpdateManyWithoutUserNestedInput
+    salary?: salaryUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type UserCreateManyRole_CompanyInput = {
@@ -38579,6 +39084,7 @@ export namespace Prisma {
     Position_user?: Position_userUpdateOneWithoutUserNestedInput
     henchman?: Position_userUpdateManyWithoutHeaderNestedInput
     all_collect?: all_collectUpdateManyWithoutUserNestedInput
+    salary?: salaryUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutRole_CompanyInput = {
@@ -38597,6 +39103,7 @@ export namespace Prisma {
     Position_user?: Position_userUncheckedUpdateOneWithoutUserNestedInput
     henchman?: Position_userUncheckedUpdateManyWithoutHeaderNestedInput
     all_collect?: all_collectUncheckedUpdateManyWithoutUserNestedInput
+    salary?: salaryUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type DistrictCreateManyProvinceInput = {

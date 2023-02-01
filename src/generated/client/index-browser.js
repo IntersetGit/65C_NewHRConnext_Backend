@@ -368,7 +368,8 @@ exports.Prisma.SalaryScalarFieldEnum = makeEnum({
   total_income: 'total_income',
   total_expense: 'total_expense',
   net: 'net',
-  date: 'date'
+  date: 'date',
+  userId: 'userId'
 });
 
 exports.Prisma.SortOrder = makeEnum({
