@@ -42,18 +42,18 @@ model Company {
 }
 
 model CompanyBranch {
-  id                String         @unique @db.Uuid
-  isMainbranch      Boolean        @default(false)
-  name              String         @db.VarChar(255)
-  address           String         @db.VarChar(255)
-  address_2         String?        @db.VarChar(255)
-  city              String         @db.VarChar(255)
-  state             String         @db.VarChar(255)
-  zip               String         @db.VarChar(255)
-  country           String?        @db.VarChar(255)
-  tel               String?        @db.VarChar(255)
-  fax               String?        @db.VarChar(255)
-  website           String?        @db.VarChar(255)
+  id                String            @unique @db.Uuid
+  isMainbranch      Boolean           @default(false)
+  name              String            @db.VarChar(255)
+  address           String            @db.VarChar(255)
+  address_2         String?           @db.VarChar(255)
+  city              String            @db.VarChar(255)
+  state             String            @db.VarChar(255)
+  zip               String            @db.VarChar(255)
+  country           String?           @db.VarChar(255)
+  tel               String?           @db.VarChar(255)
+  fax               String?           @db.VarChar(255)
+  website           String?           @db.VarChar(255)
   lat               String?
   lng               String?
   email             String?
@@ -65,12 +65,13 @@ model CompanyBranch {
   social_likedin    String?
   social_instragram String?
   social_line       String?
-  createdAt         DateTime       @default(now())
-  updatedAt         DateTime       @updatedAt
-  company           Company?       @relation(fields: [companyId], references: [id])
-  companyId         String?        @db.Uuid
+  createdAt         DateTime          @default(now())
+  updatedAt         DateTime          @updatedAt
+  company           Company?          @relation(fields: [companyId], references: [id])
+  companyId         String?           @db.Uuid
   users             User[]
   Role_Company      Role_Company[]
+  expense_company   expense_company[]
 }
 
 model Profile {
@@ -143,7 +144,9 @@ model User {
   companyBranchId String?         @db.Uuid
   Role_Company    Role_Company?   @relation(fields: [RoleCompanyID], references: [id])
   Position_user   Position_user?  @relation("user")
-  henchman        Position_user[] 
+  henchman        Position_user[]
+  all_collect     all_collect[]
+  salary          salary[]
 }
 
 model Role {
@@ -185,11 +188,11 @@ model Amphoe {
 }
 
 model mas_position {
-  id                 String               @unique @db.Uuid
-  name               String
-  level              Int                  @db.SmallInt
-  Company            Company?             @relation(fields: [CompanyId], references: [id])
-  CompanyId          String?              @db.Uuid
+  id        String   @unique @db.Uuid
+  name      String
+  level     Int      @db.SmallInt
+  Company   Company? @relation(fields: [CompanyId], references: [id])
+  CompanyId String?  @db.Uuid
 }
 
 model mas_positionlevel1 {
@@ -233,15 +236,15 @@ model mas_positionlevel3 {
 
 model Position_user {
   id                 String              @unique @db.Uuid
-  user_id            String?             @db.Uuid @unique
+  user_id            String?             @unique @db.Uuid
   date               DateTime?
   position1_id       String?             @db.Uuid
   position2_id       String?             @db.Uuid
   position3_id       String?             @db.Uuid
   role               String?
   headderId          String?             @db.Uuid
-  header             User?                @relation(fields: [headderId] , references: [id])
-  user               User?               @relation("user",fields: [user_id], references: [id])
+  header             User?               @relation(fields: [headderId], references: [id])
+  user               User?               @relation("user", fields: [user_id], references: [id])
   mas_positionlevel1 mas_positionlevel1? @relation(fields: [position1_id], references: [id])
   mas_positionlevel2 mas_positionlevel2? @relation(fields: [position2_id], references: [id])
   mas_positionlevel3 mas_positionlevel3? @relation(fields: [position3_id], references: [id])
@@ -258,9 +261,106 @@ model holiday_date {
 }
 
 model holiday_year {
-  id                String    @unique @db.Uuid
-  day               Int
-  month             Int
-  year              Int
-  holiday_name      String?    
+  id           String  @unique @db.Uuid
+  day          Int
+  month        Int
+  year         Int
+  holiday_name String?
 }
+
+model mas_bank {
+  id              String            @unique @db.Uuid
+  name            String
+  expense_company expense_company[]
+  bookbank_log    bookbank_log[]
+}
+
+model mas_month {
+  id              String            @unique @db.Uuid
+  name            String
+  expense_company expense_company[]
+}
+
+model mas_years {
+  id   String @unique @db.Uuid
+  name String
+}
+
+model mas_salary_status {
+  id   String @unique @db.Uuid
+  no   Int
+  name String
+}
+
+model mas_income_type {
+  id   String @unique @db.Uuid
+  name String
+}
+
+model expense_company {
+  id              String         @unique @db.Uuid
+  monthId         String         @db.Uuid
+  bankId          String         @db.Uuid
+  vat_per         Int?
+  social_security Int?
+  companyBranchId String?        @db.Uuid
+  Mas_month       mas_month?     @relation(fields: [monthId], references: [id])
+  mas_bank        mas_bank?      @relation(fields: [bankId], references: [id])
+  CompanyBranch   CompanyBranch? @relation(fields: [companyBranchId], references: [id])
+}
+
+model salary {
+  //รายรับ
+  id                 String   @unique @db.Uuid
+  base_salary        Int
+  commission         Int
+  position_income    Int
+  ot                 Int
+  bonus              Int
+  special_income     Int
+  other_income       Int
+  travel_income      Int
+  bursary            Int //เงินอุดหนุน
+  welfare_money      Int //เงินสวัสดิการ
+  //รายการหัก
+  vat                Int
+  social_security    Int
+  miss               Int
+  ra                 Int
+  late               Int
+  other              Int
+  provident_employee Int
+  provident_company  Int
+  //รายรับรวม
+  total_income       Int
+  //รายจ่ายรวม
+  total_expense      Int
+  //รายได้สุทธิ
+  net                Int
+  date               DateTime
+  User               User?    @relation(fields: [userId], references: [id])
+  userId             String?  @db.Uuid
+}
+
+model all_collect {
+  id                         String         @unique @db.Uuid
+  User                       User?          @relation(fields: [userId], references: [id])
+  userId                     String?        @db.Uuid
+  income_collect             Int
+  vat_collect                Int
+  social_secu_collect        Int
+  provident_collect_employee Int
+  provident_collect_company  Int
+  bookbank_log               bookbank_log[]
+}
+
+model bookbank_log {
+  id            String       @unique @db.Uuid
+  date          DateTime
+  mas_bankId    String?      @db.Uuid
+  bank_number   String       @db.VarChar(50)
+  all_collectId String?      @db.Uuid
+  all_collect   all_collect? @relation(fields: [all_collectId], references: [id])
+  mas_bank      mas_bank?    @relation(fields: [mas_bankId], references: [id])
+}
+
