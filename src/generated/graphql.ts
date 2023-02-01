@@ -230,7 +230,7 @@ export type CreatedmasPosition3 = {
   id_Position3?: InputMaybe<Scalars['ID']>;
   level_Position3?: InputMaybe<Scalars['Int']>;
   name_Position3?: InputMaybe<Scalars['String']>;
-  positionlevel2_id?: InputMaybe<Scalars['ID']>;
+  positionlevel2_id?: InputMaybe<Scalars['String']>;
 };
 
 export type CreatepositionResponseType = {

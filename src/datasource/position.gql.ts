@@ -31,12 +31,23 @@ input CreatedmasPosition2{
 }
 
 
+type mas_positionlevel3{
+  id: ID!  
+  name: String
+  level: Int  
+  code: String
+  type: String
+  positionlevel2_id:  String
+  Position_user: [Position_user]
+}
+
+
 input CreatedmasPosition3{
   id_Position3: ID
   name_Position3: String
   level_Position3: Int 
   code_position3: String
-  positionlevel2_id: ID
+  positionlevel2_id: String
 }
 
 type mas_position{
@@ -175,7 +186,8 @@ export const positionResolvers: Resolvers = {
               }
             }
           },
-        }
+        },
+
       });
       return result;
     }
