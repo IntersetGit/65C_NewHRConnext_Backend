@@ -51,12 +51,8 @@ export const roleCompanyTypedef = gql`
   }
 
   type Mutation {
-    createRoleCompany(
-      data: createRoleCompanyGroup!
-    ): CreateRoleCompanyResponseType
-    updateRoleCompanyMangement(
-      data: [UpdateRoleCompanyMangementType!]!
-    ): CreateRoleCompanyResponseType
+    createRoleCompany(data: createRoleCompanyGroup!): CreateRoleCompanyResponseType
+    updateRoleCompanyMangement(data: [UpdateRoleCompanyMangementType!]!): CreateRoleCompanyResponseType
     deleteRoleCompany(id: ID!): DeleteRoleCompanyRespnsetType
   }
 `;

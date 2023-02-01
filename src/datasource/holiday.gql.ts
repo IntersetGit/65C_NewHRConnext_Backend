@@ -71,13 +71,13 @@ export const holidayResolvers: Resolvers = {
           year: true,
           holiday_name: true,
         },
-        orderBy: [{
-          day: "asc"
+        orderBy: [{ 
+          year: "asc" 
         },{
-            month: "asc",
-          },{
-          year: "asc"
-        }]
+          month: "asc"
+        },{
+          day: "asc"
+        } ]
       });
       return result;
     },
