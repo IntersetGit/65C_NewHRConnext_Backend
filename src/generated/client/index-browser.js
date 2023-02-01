@@ -89,11 +89,29 @@ Prisma.NullTypes = {
 // https://github.com/microsoft/TypeScript/issues/3192#issuecomment-261720275
 function makeEnum(x) { return x; }
 
+exports.Prisma.All_collectScalarFieldEnum = makeEnum({
+  id: 'id',
+  userId: 'userId',
+  income_collect: 'income_collect',
+  vat_collect: 'vat_collect',
+  social_secu_collect: 'social_secu_collect',
+  provident_collect_employee: 'provident_collect_employee',
+  provident_collect_company: 'provident_collect_company'
+});
+
 exports.Prisma.AmphoeScalarFieldEnum = makeEnum({
   id: 'id',
   name: 'name',
   districtId: 'districtId',
   zipcode: 'zipcode'
+});
+
+exports.Prisma.Bookbank_logScalarFieldEnum = makeEnum({
+  id: 'id',
+  date: 'date',
+  mas_bankId: 'mas_bankId',
+  bank_number: 'bank_number',
+  all_collectId: 'all_collectId'
 });
 
 exports.Prisma.CompanyBranchScalarFieldEnum = makeEnum({
@@ -144,6 +162,15 @@ exports.Prisma.DistrictScalarFieldEnum = makeEnum({
   provinceId: 'provinceId'
 });
 
+exports.Prisma.Expense_companyScalarFieldEnum = makeEnum({
+  id: 'id',
+  monthId: 'monthId',
+  bankId: 'bankId',
+  vat_per: 'vat_per',
+  social_security: 'social_security',
+  companyBranchId: 'companyBranchId'
+});
+
 exports.Prisma.Holiday_dateScalarFieldEnum = makeEnum({
   id: 'id',
   holiday_name: 'holiday_name',
@@ -172,6 +199,11 @@ exports.Prisma.JsonNullValueInput = makeEnum({
 });
 
 exports.Prisma.Mas_bankScalarFieldEnum = makeEnum({
+  id: 'id',
+  name: 'name'
+});
+
+exports.Prisma.Mas_income_typeScalarFieldEnum = makeEnum({
   id: 'id',
   name: 'name'
 });
@@ -313,6 +345,32 @@ exports.Prisma.Role_CompanyScalarFieldEnum = makeEnum({
   companyBranchId: 'companyBranchId'
 });
 
+exports.Prisma.SalaryScalarFieldEnum = makeEnum({
+  id: 'id',
+  base_salary: 'base_salary',
+  commission: 'commission',
+  position_income: 'position_income',
+  ot: 'ot',
+  bonus: 'bonus',
+  special_income: 'special_income',
+  other_income: 'other_income',
+  travel_income: 'travel_income',
+  bursary: 'bursary',
+  welfare_money: 'welfare_money',
+  vat: 'vat',
+  social_security: 'social_security',
+  miss: 'miss',
+  ra: 'ra',
+  late: 'late',
+  other: 'other',
+  provident_employee: 'provident_employee',
+  provident_company: 'provident_company',
+  total_income: 'total_income',
+  total_expense: 'total_expense',
+  net: 'net',
+  date: 'date'
+});
+
 exports.Prisma.SortOrder = makeEnum({
   asc: 'asc',
   desc: 'desc'
@@ -360,7 +418,12 @@ exports.Prisma.ModelName = makeEnum({
   mas_bank: 'mas_bank',
   mas_month: 'mas_month',
   mas_years: 'mas_years',
-  mas_salary_status: 'mas_salary_status'
+  mas_salary_status: 'mas_salary_status',
+  mas_income_type: 'mas_income_type',
+  expense_company: 'expense_company',
+  salary: 'salary',
+  all_collect: 'all_collect',
+  bookbank_log: 'bookbank_log'
 });
 
 /**
