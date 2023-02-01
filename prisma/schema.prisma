@@ -243,8 +243,8 @@ model Position_user {
   position3_id       String?             @db.Uuid
   role               String?
   headderId          String?             @db.Uuid
-  header             User?               @relation(fields: [headderId], references: [id])
-  user               User?               @relation("user", fields: [user_id], references: [id])
+  header             User?               @relation(fields: [headderId] , references: [id])
+  user               User?               @relation("user",fields: [user_id], references: [id])
   mas_positionlevel1 mas_positionlevel1? @relation(fields: [position1_id], references: [id])
   mas_positionlevel2 mas_positionlevel2? @relation(fields: [position2_id], references: [id])
   mas_positionlevel3 mas_positionlevel3? @relation(fields: [position3_id], references: [id])

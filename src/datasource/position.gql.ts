@@ -1,6 +1,5 @@
-
-
-
+import { User } from './../generated/graphql';
+import { mas_positionlevel1 } from './../generated/client/index.d';
 import { composeResolvers } from '@graphql-tools/resolvers-composition';
 import { authenticate } from '../middleware/authenticatetoken';
 import { Resolvers } from '../generated/graphql';
@@ -79,6 +78,25 @@ type Position_user {
   headderId: String 
   date: Date
 }
+
+type headderdata{
+  headderId: String
+  headder_data: Profile
+}
+
+type getPositionUser {
+  id: ID  
+  user: User
+  header: User
+  position1_id: String
+  mas_positionlevel1: mas_positionlevel1
+  position2_id: String  
+  mas_positionlevel2: mas_positionlevel2
+  position3_id: String 
+  mas_positionlevel3: mas_positionlevel3 
+  role: String 
+  date: Date
+}
  
 
 
@@ -114,7 +132,8 @@ type CreatepositionResponseType {
 
 type Query {
     getMasPositon: [mas_positionlevel1]
-    getposition_user(id: ID!): [Position_user]
+    getposition_user(id: ID): [getPositionUser]
+    getpositionMe: [getPositionUser]
   }
 
 
@@ -155,43 +174,36 @@ export const positionResolvers: Resolvers = {
       });
       return result;
     },
-    async getposition_user(p, args, ctx) {
-      const result = await ctx.prisma.position_user.findMany({
-         include:{
-          mas_positionlevel1: {
-            select: {
-              id: true,
-              name: true,
-            }
-          },
-          mas_positionlevel2: {
-            select: {
-              id: true,
-              name: true,
-            }
-          },
-          mas_positionlevel3: {
-            select: {
-              id: true,
-              name: true,
-            }
-          },
-          user: {
-            include:{
-              profile:{
-                select:{
-                  firstname_th: true,
-                  lastname_th : true
-                },
-              }
-            }
-          },
-        },
 
+    //---------- ดูตำแหน่งของตัวเอง
+    async getpositionMe(p, args, ctx) {
+      const resultMebyID = await ctx.prisma.position_user.findMany({
+        include: { mas_positionlevel1: true, mas_positionlevel2: true, mas_positionlevel3: true, user: { include: { profile: true } }, header: { include: { profile: true } } },
+        where:{user_id: ctx.currentUser?.branchId}
       });
-      return result;
-    }
+      return resultMebyID;
+    },
 
+    //------------- ดูตำแหน่ง companyadmin
+    async getposition_user(p, args, ctx) {
+      if (args.id) {
+        const resultbyID = await ctx.prisma.position_user.findMany({
+          include: { mas_positionlevel1: true, mas_positionlevel2: true, mas_positionlevel3: true, user: { include: { profile: true } }, header: { include: { profile: true } } },
+          where: { user_id: args.id }
+        });
+        return resultbyID;
+      } else {
+        const result = await ctx.prisma.position_user.findMany({
+          include: { mas_positionlevel1: true, mas_positionlevel2: true, mas_positionlevel3: true, user: { include: { profile: true } }, header: { include: { profile: true } } },
+          where: {
+            user: {
+              companyBranchId: ctx.currentUser?.branchId
+            }
+          }
+        });
+        return result;
+      }
+    }
   },
 
 
@@ -204,9 +216,6 @@ export const positionResolvers: Resolvers = {
      * @returns
      */
     async EditPosition(p, args, ctx) {
-      // const genPo_1id = v4();
-      // const genPo_2id = v4();
-      // const genPo_3id = v4();
       args.data?.forEach(async (e) => {
         const createdPo_1 = await ctx.prisma.mas_positionlevel1.update({
           // include: { mas_positionlevel2: { include: { mas_positionlevel3: true } } },
@@ -353,6 +362,8 @@ export const positionResolvers: Resolvers = {
 
 const resolversPosition = {
   'Query.getMasPositon': [authenticate()],
+  'Query.getposition_user': [authenticate()],
+  'Query.getpositionMe': [authenticate()],
   'Mutation.CreatedPosition': [authenticate()],
   'Mutation.createdposition_user': [authenticate()],
   'Mutation.EditPosition': [authenticate()],
