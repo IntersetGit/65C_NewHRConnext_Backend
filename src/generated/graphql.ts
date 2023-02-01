@@ -143,6 +143,7 @@ export type CreateAccountUserInput = {
   prefix_th?: InputMaybe<Scalars['String']>;
   relationship?: InputMaybe<Scalars['String']>;
   religion?: InputMaybe<Scalars['String']>;
+  role_company?: InputMaybe<Scalars['String']>;
   shirt_size?: InputMaybe<Scalars['String']>;
   social_facebook?: InputMaybe<Scalars['String']>;
   social_id?: InputMaybe<Scalars['String']>;
