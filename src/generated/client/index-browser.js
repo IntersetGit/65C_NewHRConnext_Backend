@@ -210,6 +210,7 @@ exports.Prisma.Mas_positionlevel3ScalarFieldEnum = makeEnum({
 exports.Prisma.Position_userScalarFieldEnum = makeEnum({
   id: 'id',
   user_id: 'user_id',
+  date: 'date',
   position1_id: 'position1_id',
   position2_id: 'position2_id',
   position3_id: 'position3_id',
