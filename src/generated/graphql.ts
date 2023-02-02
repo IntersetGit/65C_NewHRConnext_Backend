@@ -586,6 +586,7 @@ export type Query = {
   getpositionMe?: Maybe<Array<Maybe<GetPositionUser>>>;
   getposition_user?: Maybe<Array<Maybe<GetPositionUser>>>;
   me?: Maybe<Me>;
+  provident_log?: Maybe<Array<Maybe<Provident_Log>>>;
   salary?: Maybe<Array<Maybe<Salary>>>;
   users?: Maybe<Array<Maybe<User>>>;
   verifyCompanycode?: Maybe<Scalars['Boolean']>;
@@ -614,6 +615,11 @@ export type QueryGetcompanyRoleArgs = {
 
 export type QueryGetposition_UserArgs = {
   id?: InputMaybe<Scalars['ID']>;
+};
+
+
+export type QueryProvident_LogArgs = {
+  userId?: InputMaybe<Scalars['String']>;
 };
 
 
@@ -934,6 +940,16 @@ export type Position = {
   user_id?: InputMaybe<Scalars['String']>;
 };
 
+export type Provident_Log = {
+  __typename?: 'provident_log';
+  date?: Maybe<Scalars['Date']>;
+  id: Scalars['ID'];
+  mas_all_collectId?: Maybe<Scalars['String']>;
+  pro_company?: Maybe<Scalars['Int']>;
+  pro_employee?: Maybe<Scalars['Int']>;
+  userId?: Maybe<Scalars['String']>;
+};
+
 export type Salary = {
   __typename?: 'salary';
   bonus?: Maybe<Scalars['Float']>;
@@ -1148,6 +1164,7 @@ export type ResolversTypes = ResolversObject<{
   monthInput: MonthInput;
   monthResponseType: ResolverTypeWrapper<MonthResponseType>;
   position: Position;
+  provident_log: ResolverTypeWrapper<Provident_Log>;
   salary: ResolverTypeWrapper<Salary>;
   salaryInput: SalaryInput;
   yearsInput: YearsInput;
@@ -1230,6 +1247,7 @@ export type ResolversParentTypes = ResolversObject<{
   monthInput: MonthInput;
   monthResponseType: MonthResponseType;
   position: Position;
+  provident_log: Provident_Log;
   salary: Salary;
   salaryInput: SalaryInput;
   yearsInput: YearsInput;
@@ -1585,6 +1603,7 @@ export type QueryResolvers<ContextType = ApolloContext, ParentType extends Resol
   getpositionMe?: Resolver<Maybe<Array<Maybe<ResolversTypes['getPositionUser']>>>, ParentType, ContextType>;
   getposition_user?: Resolver<Maybe<Array<Maybe<ResolversTypes['getPositionUser']>>>, ParentType, ContextType, Partial<QueryGetposition_UserArgs>>;
   me?: Resolver<Maybe<ResolversTypes['Me']>, ParentType, ContextType>;
+  provident_log?: Resolver<Maybe<Array<Maybe<ResolversTypes['provident_log']>>>, ParentType, ContextType, Partial<QueryProvident_LogArgs>>;
   salary?: Resolver<Maybe<Array<Maybe<ResolversTypes['salary']>>>, ParentType, ContextType, Partial<QuerySalaryArgs>>;
   users?: Resolver<Maybe<Array<Maybe<ResolversTypes['User']>>>, ParentType, ContextType, Partial<QueryUsersArgs>>;
   verifyCompanycode?: Resolver<Maybe<ResolversTypes['Boolean']>, ParentType, ContextType, RequireFields<QueryVerifyCompanycodeArgs, 'companyname'>>;
@@ -1819,6 +1838,16 @@ export type MonthResponseTypeResolvers<ContextType = ApolloContext, ParentType e
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 }>;
 
+export type Provident_LogResolvers<ContextType = ApolloContext, ParentType extends ResolversParentTypes['provident_log'] = ResolversParentTypes['provident_log']> = ResolversObject<{
+  date?: Resolver<Maybe<ResolversTypes['Date']>, ParentType, ContextType>;
+  id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
+  mas_all_collectId?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  pro_company?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
+  pro_employee?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
+  userId?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+}>;
+
 export type SalaryResolvers<ContextType = ApolloContext, ParentType extends ResolversParentTypes['salary'] = ResolversParentTypes['salary']> = ResolversObject<{
   bonus?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
   bookbank_logId?: Resolver<Maybe<ResolversTypes['bookbank_log']>, ParentType, ContextType>;
@@ -1911,6 +1940,7 @@ export type Resolvers<ContextType = ApolloContext> = ResolversObject<{
   mas_positionlevel2?: Mas_Positionlevel2Resolvers<ContextType>;
   mas_positionlevel3?: Mas_Positionlevel3Resolvers<ContextType>;
   monthResponseType?: MonthResponseTypeResolvers<ContextType>;
+  provident_log?: Provident_LogResolvers<ContextType>;
   salary?: SalaryResolvers<ContextType>;
   yearsResponseType?: YearsResponseTypeResolvers<ContextType>;
 }>;
