@@ -1,4 +1,3 @@
-
 import { Resolvers } from '../generated/graphql';
 import { createPassword } from '../utils/passwords';
 import gql from 'graphql-tag';
@@ -8,10 +7,8 @@ import { composeResolvers } from '@graphql-tools/resolvers-composition';
 import { authenticate } from '../middleware/authenticatetoken';
 import { GraphQLError } from 'graphql';
 
-
-
 export const userTypedef = gql`
-type MeCompanyBranch {
+  type MeCompanyBranch {
     id: ID!
     name: String
     address: String
@@ -23,7 +20,7 @@ type MeCompanyBranch {
     updatedAt: Date
     company: MecompanyType
     companyId: String
-}
+  }
 
   type User {
     email: String!
@@ -209,7 +206,7 @@ type MeCompanyBranch {
   type Mutation {
     createAccount(data: CreateAccountInput!): CreateCompanyResponseType
     createAccountUser(data: CreateAccountUserInput!): CreateUserResponseType
-    deleteAccountUser(id: ID!) : DeleteAccountUserResponseType
+    deleteAccountUser(id: ID!): DeleteAccountUserResponseType
   }
 `;
 
@@ -230,13 +227,11 @@ const resolvers: Resolvers = {
       });
       return result;
     },
+
     /**
-     * ?ดึงข้อมูลส่วนตัวของผู้ใช้
-     * @param parant
-     * @param args
-     * @param ctx
-     * @returns
+     * ?Me ข้อมูลส่วนตัวผู้ใช้
      */
+
     async me(parant, args, ctx) {
       const result = await ctx.prisma.user.findUnique({
         select: {
@@ -252,7 +247,7 @@ const resolvers: Resolvers = {
           },
           profile: true,
           role: true,
-          companyBranch: true
+          companyBranch: true,
         },
         where: { id: ctx.currentUser?.id },
       });
@@ -283,6 +278,7 @@ const resolvers: Resolvers = {
 
       return result;
     },
+
     /**
      * ?เช็คข้อมูลซ้ำของรหัสหรือชื่อย่อบริษัท
      * @param p
@@ -514,14 +510,13 @@ const resolvers: Resolvers = {
       const deleteProfile = await ctx.prisma.profile.delete({
         where: {
           userId: args.id,
-        }
-      }
-      );
+        },
+      });
       const deleteuser = await ctx.prisma.user.delete({
         where: {
           id: args.id,
-        }
-      })
+        },
+      });
       return {
         message: 'success',
         status: true,
