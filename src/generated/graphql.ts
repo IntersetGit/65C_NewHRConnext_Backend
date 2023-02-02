@@ -174,6 +174,7 @@ export type CreateHolidayDate = {
   holiday_name?: InputMaybe<Scalars['String']>;
   id?: InputMaybe<Scalars['ID']>;
   month?: InputMaybe<Scalars['Int']>;
+  status?: InputMaybe<Scalars['Int']>;
   year?: InputMaybe<Scalars['Int']>;
 };
 

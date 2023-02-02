@@ -42,6 +42,7 @@ export const holidayTypedef = gql`
     day: Int
     month: Int
     year: Int
+    status: Int
     CompanyId: ID
   }
 
@@ -102,7 +103,7 @@ export const holidayResolvers: Resolvers = {
 
     // async GetHolidayDate (p, args, ctx) {
     //   const result = await ctx.prisma.holiday_date.findUnique({
-        
+
     //     select: {
     //         id: true,
     //         holiday_name: true,
@@ -116,7 +117,7 @@ export const holidayResolvers: Resolvers = {
     //   return result;
     // }
 
-    
+
   },
 
   Mutation: {
@@ -177,6 +178,7 @@ export const holidayResolvers: Resolvers = {
             day: args.data.day as number,
             month: args.data.month as number,
             yaer: args.data.year as number,
+            status: args.data.status as number,
             CompanyId: ctx.currentUser?.compayId
           }
         });
