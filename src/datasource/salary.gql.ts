@@ -14,6 +14,7 @@ export const salaryTypedef = gql`
   }
   input monthInput {
     id: ID
+    month_number: Int
     name: String
   }
   type User {
@@ -93,6 +94,8 @@ export const salaryTypedef = gql`
     travel_income: Float
     bursary: Float
     welfare_money: Float
+    vatper: Float
+    ss_per: Float
     vat: Float
     social_security: Float
     miss: Float
