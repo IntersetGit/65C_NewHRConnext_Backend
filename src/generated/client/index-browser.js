@@ -102,7 +102,8 @@ exports.Prisma.Bookbank_logScalarFieldEnum = makeEnum({
   mas_bankId: 'mas_bankId',
   bank_number: 'bank_number',
   all_collectId: 'all_collectId',
-  base_salary: 'base_salary'
+  base_salary: 'base_salary',
+  userId: 'userId'
 });
 
 exports.Prisma.CompanyBranchScalarFieldEnum = makeEnum({
