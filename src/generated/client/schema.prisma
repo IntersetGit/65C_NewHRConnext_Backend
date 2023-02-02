@@ -283,6 +283,7 @@ model mas_bank {
 
 model mas_month {
   id              String            @unique @db.Uuid
+  month_number    Int               @db.SmallInt @default(0)
   name            String
   expense_company expense_company[]
   salary          salary[]
@@ -333,6 +334,8 @@ model salary {
   bursary            Float //เงินอุดหนุน
   welfare_money      Float //เงินสวัสดิการ
   //รายการหัก
+  vatper             Float
+  ss_per             Float
   vat                Float
   social_security    Float
   miss               Float

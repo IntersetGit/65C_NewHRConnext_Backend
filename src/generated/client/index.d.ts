@@ -295,6 +295,7 @@ export type mas_bank = {
  */
 export type mas_month = {
   id: string
+  month_number: number
   name: string
 }
 
@@ -356,6 +357,8 @@ export type salary = {
   travel_income: number
   bursary: number
   welfare_money: number
+  vatper: number
+  ss_per: number
   vat: number
   social_security: number
   miss: number
@@ -19738,39 +19741,63 @@ export namespace Prisma {
 
   export type AggregateMas_month = {
     _count: Mas_monthCountAggregateOutputType | null
+    _avg: Mas_monthAvgAggregateOutputType | null
+    _sum: Mas_monthSumAggregateOutputType | null
     _min: Mas_monthMinAggregateOutputType | null
     _max: Mas_monthMaxAggregateOutputType | null
   }
 
+  export type Mas_monthAvgAggregateOutputType = {
+    month_number: number | null
+  }
+
+  export type Mas_monthSumAggregateOutputType = {
+    month_number: number | null
+  }
+
   export type Mas_monthMinAggregateOutputType = {
     id: string | null
+    month_number: number | null
     name: string | null
   }
 
   export type Mas_monthMaxAggregateOutputType = {
     id: string | null
+    month_number: number | null
     name: string | null
   }
 
   export type Mas_monthCountAggregateOutputType = {
     id: number
+    month_number: number
     name: number
     _all: number
   }
 
 
+  export type Mas_monthAvgAggregateInputType = {
+    month_number?: true
+  }
+
+  export type Mas_monthSumAggregateInputType = {
+    month_number?: true
+  }
+
   export type Mas_monthMinAggregateInputType = {
     id?: true
+    month_number?: true
     name?: true
   }
 
   export type Mas_monthMaxAggregateInputType = {
     id?: true
+    month_number?: true
     name?: true
   }
 
   export type Mas_monthCountAggregateInputType = {
     id?: true
+    month_number?: true
     name?: true
     _all?: true
   }
@@ -19813,6 +19840,18 @@ export namespace Prisma {
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
+     * Select which fields to average
+    **/
+    _avg?: Mas_monthAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: Mas_monthSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
      * Select which fields to find the minimum value
     **/
     _min?: Mas_monthMinAggregateInputType
@@ -19843,6 +19882,8 @@ export namespace Prisma {
     take?: number
     skip?: number
     _count?: Mas_monthCountAggregateInputType | true
+    _avg?: Mas_monthAvgAggregateInputType
+    _sum?: Mas_monthSumAggregateInputType
     _min?: Mas_monthMinAggregateInputType
     _max?: Mas_monthMaxAggregateInputType
   }
@@ -19850,8 +19891,11 @@ export namespace Prisma {
 
   export type Mas_monthGroupByOutputType = {
     id: string
+    month_number: number
     name: string
     _count: Mas_monthCountAggregateOutputType | null
+    _avg: Mas_monthAvgAggregateOutputType | null
+    _sum: Mas_monthSumAggregateOutputType | null
     _min: Mas_monthMinAggregateOutputType | null
     _max: Mas_monthMaxAggregateOutputType | null
   }
@@ -19872,6 +19916,7 @@ export namespace Prisma {
 
   export type mas_monthSelect = {
     id?: boolean
+    month_number?: boolean
     name?: boolean
     expense_company?: boolean | mas_month$expense_companyArgs
     salary?: boolean | mas_month$salaryArgs
@@ -24402,6 +24447,8 @@ export namespace Prisma {
     travel_income: number | null
     bursary: number | null
     welfare_money: number | null
+    vatper: number | null
+    ss_per: number | null
     vat: number | null
     social_security: number | null
     miss: number | null
@@ -24425,6 +24472,8 @@ export namespace Prisma {
     travel_income: number | null
     bursary: number | null
     welfare_money: number | null
+    vatper: number | null
+    ss_per: number | null
     vat: number | null
     social_security: number | null
     miss: number | null
@@ -24451,6 +24500,8 @@ export namespace Prisma {
     travel_income: number | null
     bursary: number | null
     welfare_money: number | null
+    vatper: number | null
+    ss_per: number | null
     vat: number | null
     social_security: number | null
     miss: number | null
@@ -24479,6 +24530,8 @@ export namespace Prisma {
     travel_income: number | null
     bursary: number | null
     welfare_money: number | null
+    vatper: number | null
+    ss_per: number | null
     vat: number | null
     social_security: number | null
     miss: number | null
@@ -24507,6 +24560,8 @@ export namespace Prisma {
     travel_income: number
     bursary: number
     welfare_money: number
+    vatper: number
+    ss_per: number
     vat: number
     social_security: number
     miss: number
@@ -24534,6 +24589,8 @@ export namespace Prisma {
     travel_income?: true
     bursary?: true
     welfare_money?: true
+    vatper?: true
+    ss_per?: true
     vat?: true
     social_security?: true
     miss?: true
@@ -24557,6 +24614,8 @@ export namespace Prisma {
     travel_income?: true
     bursary?: true
     welfare_money?: true
+    vatper?: true
+    ss_per?: true
     vat?: true
     social_security?: true
     miss?: true
@@ -24583,6 +24642,8 @@ export namespace Prisma {
     travel_income?: true
     bursary?: true
     welfare_money?: true
+    vatper?: true
+    ss_per?: true
     vat?: true
     social_security?: true
     miss?: true
@@ -24611,6 +24672,8 @@ export namespace Prisma {
     travel_income?: true
     bursary?: true
     welfare_money?: true
+    vatper?: true
+    ss_per?: true
     vat?: true
     social_security?: true
     miss?: true
@@ -24639,6 +24702,8 @@ export namespace Prisma {
     travel_income?: true
     bursary?: true
     welfare_money?: true
+    vatper?: true
+    ss_per?: true
     vat?: true
     social_security?: true
     miss?: true
@@ -24755,6 +24820,8 @@ export namespace Prisma {
     travel_income: number
     bursary: number
     welfare_money: number
+    vatper: number
+    ss_per: number
     vat: number
     social_security: number
     miss: number
@@ -24802,6 +24869,8 @@ export namespace Prisma {
     travel_income?: boolean
     bursary?: boolean
     welfare_money?: boolean
+    vatper?: boolean
+    ss_per?: boolean
     vat?: boolean
     social_security?: boolean
     miss?: boolean
@@ -28806,6 +28875,7 @@ export namespace Prisma {
 
   export const Mas_monthScalarFieldEnum: {
     id: 'id',
+    month_number: 'month_number',
     name: 'name'
   };
 
@@ -29005,6 +29075,8 @@ export namespace Prisma {
     travel_income: 'travel_income',
     bursary: 'bursary',
     welfare_money: 'welfare_money',
+    vatper: 'vatper',
+    ss_per: 'ss_per',
     vat: 'vat',
     social_security: 'social_security',
     miss: 'miss',
@@ -30248,6 +30320,7 @@ export namespace Prisma {
     OR?: Enumerable<mas_monthWhereInput>
     NOT?: Enumerable<mas_monthWhereInput>
     id?: UuidFilter | string
+    month_number?: IntFilter | number
     name?: StringFilter | string
     expense_company?: Expense_companyListRelationFilter
     salary?: SalaryListRelationFilter
@@ -30255,6 +30328,7 @@ export namespace Prisma {
 
   export type mas_monthOrderByWithRelationInput = {
     id?: SortOrder
+    month_number?: SortOrder
     name?: SortOrder
     expense_company?: expense_companyOrderByRelationAggregateInput
     salary?: salaryOrderByRelationAggregateInput
@@ -30266,10 +30340,13 @@ export namespace Prisma {
 
   export type mas_monthOrderByWithAggregationInput = {
     id?: SortOrder
+    month_number?: SortOrder
     name?: SortOrder
     _count?: mas_monthCountOrderByAggregateInput
+    _avg?: mas_monthAvgOrderByAggregateInput
     _max?: mas_monthMaxOrderByAggregateInput
     _min?: mas_monthMinOrderByAggregateInput
+    _sum?: mas_monthSumOrderByAggregateInput
   }
 
   export type mas_monthScalarWhereWithAggregatesInput = {
@@ -30277,6 +30354,7 @@ export namespace Prisma {
     OR?: Enumerable<mas_monthScalarWhereWithAggregatesInput>
     NOT?: Enumerable<mas_monthScalarWhereWithAggregatesInput>
     id?: UuidWithAggregatesFilter | string
+    month_number?: IntWithAggregatesFilter | number
     name?: StringWithAggregatesFilter | string
   }
 
@@ -30460,6 +30538,8 @@ export namespace Prisma {
     travel_income?: FloatFilter | number
     bursary?: FloatFilter | number
     welfare_money?: FloatFilter | number
+    vatper?: FloatFilter | number
+    ss_per?: FloatFilter | number
     vat?: FloatFilter | number
     social_security?: FloatFilter | number
     miss?: FloatFilter | number
@@ -30492,6 +30572,8 @@ export namespace Prisma {
     travel_income?: SortOrder
     bursary?: SortOrder
     welfare_money?: SortOrder
+    vatper?: SortOrder
+    ss_per?: SortOrder
     vat?: SortOrder
     social_security?: SortOrder
     miss?: SortOrder
@@ -30528,6 +30610,8 @@ export namespace Prisma {
     travel_income?: SortOrder
     bursary?: SortOrder
     welfare_money?: SortOrder
+    vatper?: SortOrder
+    ss_per?: SortOrder
     vat?: SortOrder
     social_security?: SortOrder
     miss?: SortOrder
@@ -30564,6 +30648,8 @@ export namespace Prisma {
     travel_income?: FloatWithAggregatesFilter | number
     bursary?: FloatWithAggregatesFilter | number
     welfare_money?: FloatWithAggregatesFilter | number
+    vatper?: FloatWithAggregatesFilter | number
+    ss_per?: FloatWithAggregatesFilter | number
     vat?: FloatWithAggregatesFilter | number
     social_security?: FloatWithAggregatesFilter | number
     miss?: FloatWithAggregatesFilter | number
@@ -32313,6 +32399,7 @@ export namespace Prisma {
 
   export type mas_monthCreateInput = {
     id: string
+    month_number?: number
     name: string
     expense_company?: expense_companyCreateNestedManyWithoutMas_monthInput
     salary?: salaryCreateNestedManyWithoutMas_monthInput
@@ -32320,6 +32407,7 @@ export namespace Prisma {
 
   export type mas_monthUncheckedCreateInput = {
     id: string
+    month_number?: number
     name: string
     expense_company?: expense_companyUncheckedCreateNestedManyWithoutMas_monthInput
     salary?: salaryUncheckedCreateNestedManyWithoutMas_monthInput
@@ -32327,6 +32415,7 @@ export namespace Prisma {
 
   export type mas_monthUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
+    month_number?: IntFieldUpdateOperationsInput | number
     name?: StringFieldUpdateOperationsInput | string
     expense_company?: expense_companyUpdateManyWithoutMas_monthNestedInput
     salary?: salaryUpdateManyWithoutMas_monthNestedInput
@@ -32334,6 +32423,7 @@ export namespace Prisma {
 
   export type mas_monthUncheckedUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
+    month_number?: IntFieldUpdateOperationsInput | number
     name?: StringFieldUpdateOperationsInput | string
     expense_company?: expense_companyUncheckedUpdateManyWithoutMas_monthNestedInput
     salary?: salaryUncheckedUpdateManyWithoutMas_monthNestedInput
@@ -32341,16 +32431,19 @@ export namespace Prisma {
 
   export type mas_monthCreateManyInput = {
     id: string
+    month_number?: number
     name: string
   }
 
   export type mas_monthUpdateManyMutationInput = {
     id?: StringFieldUpdateOperationsInput | string
+    month_number?: IntFieldUpdateOperationsInput | number
     name?: StringFieldUpdateOperationsInput | string
   }
 
   export type mas_monthUncheckedUpdateManyInput = {
     id?: StringFieldUpdateOperationsInput | string
+    month_number?: IntFieldUpdateOperationsInput | number
     name?: StringFieldUpdateOperationsInput | string
   }
 
@@ -32541,6 +32634,8 @@ export namespace Prisma {
     travel_income: number
     bursary: number
     welfare_money: number
+    vatper: number
+    ss_per: number
     vat: number
     social_security: number
     miss: number
@@ -32571,6 +32666,8 @@ export namespace Prisma {
     travel_income: number
     bursary: number
     welfare_money: number
+    vatper: number
+    ss_per: number
     vat: number
     social_security: number
     miss: number
@@ -32597,6 +32694,8 @@ export namespace Prisma {
     travel_income?: FloatFieldUpdateOperationsInput | number
     bursary?: FloatFieldUpdateOperationsInput | number
     welfare_money?: FloatFieldUpdateOperationsInput | number
+    vatper?: FloatFieldUpdateOperationsInput | number
+    ss_per?: FloatFieldUpdateOperationsInput | number
     vat?: FloatFieldUpdateOperationsInput | number
     social_security?: FloatFieldUpdateOperationsInput | number
     miss?: FloatFieldUpdateOperationsInput | number
@@ -32627,6 +32726,8 @@ export namespace Prisma {
     travel_income?: FloatFieldUpdateOperationsInput | number
     bursary?: FloatFieldUpdateOperationsInput | number
     welfare_money?: FloatFieldUpdateOperationsInput | number
+    vatper?: FloatFieldUpdateOperationsInput | number
+    ss_per?: FloatFieldUpdateOperationsInput | number
     vat?: FloatFieldUpdateOperationsInput | number
     social_security?: FloatFieldUpdateOperationsInput | number
     miss?: FloatFieldUpdateOperationsInput | number
@@ -32655,6 +32756,8 @@ export namespace Prisma {
     travel_income: number
     bursary: number
     welfare_money: number
+    vatper: number
+    ss_per: number
     vat: number
     social_security: number
     miss: number
@@ -32681,6 +32784,8 @@ export namespace Prisma {
     travel_income?: FloatFieldUpdateOperationsInput | number
     bursary?: FloatFieldUpdateOperationsInput | number
     welfare_money?: FloatFieldUpdateOperationsInput | number
+    vatper?: FloatFieldUpdateOperationsInput | number
+    ss_per?: FloatFieldUpdateOperationsInput | number
     vat?: FloatFieldUpdateOperationsInput | number
     social_security?: FloatFieldUpdateOperationsInput | number
     miss?: FloatFieldUpdateOperationsInput | number
@@ -32707,6 +32812,8 @@ export namespace Prisma {
     travel_income?: FloatFieldUpdateOperationsInput | number
     bursary?: FloatFieldUpdateOperationsInput | number
     welfare_money?: FloatFieldUpdateOperationsInput | number
+    vatper?: FloatFieldUpdateOperationsInput | number
+    ss_per?: FloatFieldUpdateOperationsInput | number
     vat?: FloatFieldUpdateOperationsInput | number
     social_security?: FloatFieldUpdateOperationsInput | number
     miss?: FloatFieldUpdateOperationsInput | number
@@ -34121,17 +34228,28 @@ export namespace Prisma {
 
   export type mas_monthCountOrderByAggregateInput = {
     id?: SortOrder
+    month_number?: SortOrder
     name?: SortOrder
+  }
+
+  export type mas_monthAvgOrderByAggregateInput = {
+    month_number?: SortOrder
   }
 
   export type mas_monthMaxOrderByAggregateInput = {
     id?: SortOrder
+    month_number?: SortOrder
     name?: SortOrder
   }
 
   export type mas_monthMinOrderByAggregateInput = {
     id?: SortOrder
+    month_number?: SortOrder
     name?: SortOrder
+  }
+
+  export type mas_monthSumOrderByAggregateInput = {
+    month_number?: SortOrder
   }
 
   export type mas_yearsCountOrderByAggregateInput = {
@@ -34298,6 +34416,8 @@ export namespace Prisma {
     travel_income?: SortOrder
     bursary?: SortOrder
     welfare_money?: SortOrder
+    vatper?: SortOrder
+    ss_per?: SortOrder
     vat?: SortOrder
     social_security?: SortOrder
     miss?: SortOrder
@@ -34323,6 +34443,8 @@ export namespace Prisma {
     travel_income?: SortOrder
     bursary?: SortOrder
     welfare_money?: SortOrder
+    vatper?: SortOrder
+    ss_per?: SortOrder
     vat?: SortOrder
     social_security?: SortOrder
     miss?: SortOrder
@@ -34349,6 +34471,8 @@ export namespace Prisma {
     travel_income?: SortOrder
     bursary?: SortOrder
     welfare_money?: SortOrder
+    vatper?: SortOrder
+    ss_per?: SortOrder
     vat?: SortOrder
     social_security?: SortOrder
     miss?: SortOrder
@@ -34377,6 +34501,8 @@ export namespace Prisma {
     travel_income?: SortOrder
     bursary?: SortOrder
     welfare_money?: SortOrder
+    vatper?: SortOrder
+    ss_per?: SortOrder
     vat?: SortOrder
     social_security?: SortOrder
     miss?: SortOrder
@@ -34402,6 +34528,8 @@ export namespace Prisma {
     travel_income?: SortOrder
     bursary?: SortOrder
     welfare_money?: SortOrder
+    vatper?: SortOrder
+    ss_per?: SortOrder
     vat?: SortOrder
     social_security?: SortOrder
     miss?: SortOrder
@@ -38052,6 +38180,8 @@ export namespace Prisma {
     travel_income: number
     bursary: number
     welfare_money: number
+    vatper: number
+    ss_per: number
     vat: number
     social_security: number
     miss: number
@@ -38081,6 +38211,8 @@ export namespace Prisma {
     travel_income: number
     bursary: number
     welfare_money: number
+    vatper: number
+    ss_per: number
     vat: number
     social_security: number
     miss: number
@@ -38517,6 +38649,8 @@ export namespace Prisma {
     travel_income?: FloatFilter | number
     bursary?: FloatFilter | number
     welfare_money?: FloatFilter | number
+    vatper?: FloatFilter | number
+    ss_per?: FloatFilter | number
     vat?: FloatFilter | number
     social_security?: FloatFilter | number
     miss?: FloatFilter | number
@@ -40319,6 +40453,8 @@ export namespace Prisma {
     travel_income: number
     bursary: number
     welfare_money: number
+    vatper: number
+    ss_per: number
     vat: number
     social_security: number
     miss: number
@@ -40347,6 +40483,8 @@ export namespace Prisma {
     travel_income: number
     bursary: number
     welfare_money: number
+    vatper: number
+    ss_per: number
     vat: number
     social_security: number
     miss: number
@@ -40415,6 +40553,8 @@ export namespace Prisma {
     travel_income: number
     bursary: number
     welfare_money: number
+    vatper: number
+    ss_per: number
     vat: number
     social_security: number
     miss: number
@@ -40443,6 +40583,8 @@ export namespace Prisma {
     travel_income: number
     bursary: number
     welfare_money: number
+    vatper: number
+    ss_per: number
     vat: number
     social_security: number
     miss: number
@@ -40486,12 +40628,14 @@ export namespace Prisma {
 
   export type mas_monthCreateWithoutExpense_companyInput = {
     id: string
+    month_number?: number
     name: string
     salary?: salaryCreateNestedManyWithoutMas_monthInput
   }
 
   export type mas_monthUncheckedCreateWithoutExpense_companyInput = {
     id: string
+    month_number?: number
     name: string
     salary?: salaryUncheckedCreateNestedManyWithoutMas_monthInput
   }
@@ -40592,12 +40736,14 @@ export namespace Prisma {
 
   export type mas_monthUpdateWithoutExpense_companyInput = {
     id?: StringFieldUpdateOperationsInput | string
+    month_number?: IntFieldUpdateOperationsInput | number
     name?: StringFieldUpdateOperationsInput | string
     salary?: salaryUpdateManyWithoutMas_monthNestedInput
   }
 
   export type mas_monthUncheckedUpdateWithoutExpense_companyInput = {
     id?: StringFieldUpdateOperationsInput | string
+    month_number?: IntFieldUpdateOperationsInput | number
     name?: StringFieldUpdateOperationsInput | string
     salary?: salaryUncheckedUpdateManyWithoutMas_monthNestedInput
   }
@@ -40760,12 +40906,14 @@ export namespace Prisma {
 
   export type mas_monthCreateWithoutSalaryInput = {
     id: string
+    month_number?: number
     name: string
     expense_company?: expense_companyCreateNestedManyWithoutMas_monthInput
   }
 
   export type mas_monthUncheckedCreateWithoutSalaryInput = {
     id: string
+    month_number?: number
     name: string
     expense_company?: expense_companyUncheckedCreateNestedManyWithoutMas_monthInput
   }
@@ -40869,12 +41017,14 @@ export namespace Prisma {
 
   export type mas_monthUpdateWithoutSalaryInput = {
     id?: StringFieldUpdateOperationsInput | string
+    month_number?: IntFieldUpdateOperationsInput | number
     name?: StringFieldUpdateOperationsInput | string
     expense_company?: expense_companyUpdateManyWithoutMas_monthNestedInput
   }
 
   export type mas_monthUncheckedUpdateWithoutSalaryInput = {
     id?: StringFieldUpdateOperationsInput | string
+    month_number?: IntFieldUpdateOperationsInput | number
     name?: StringFieldUpdateOperationsInput | string
     expense_company?: expense_companyUncheckedUpdateManyWithoutMas_monthNestedInput
   }
@@ -41041,6 +41191,8 @@ export namespace Prisma {
     travel_income: number
     bursary: number
     welfare_money: number
+    vatper: number
+    ss_per: number
     vat: number
     social_security: number
     miss: number
@@ -41070,6 +41222,8 @@ export namespace Prisma {
     travel_income: number
     bursary: number
     welfare_money: number
+    vatper: number
+    ss_per: number
     vat: number
     social_security: number
     miss: number
@@ -41852,6 +42006,8 @@ export namespace Prisma {
     travel_income: number
     bursary: number
     welfare_money: number
+    vatper: number
+    ss_per: number
     vat: number
     social_security: number
     miss: number
@@ -42001,6 +42157,8 @@ export namespace Prisma {
     travel_income?: FloatFieldUpdateOperationsInput | number
     bursary?: FloatFieldUpdateOperationsInput | number
     welfare_money?: FloatFieldUpdateOperationsInput | number
+    vatper?: FloatFieldUpdateOperationsInput | number
+    ss_per?: FloatFieldUpdateOperationsInput | number
     vat?: FloatFieldUpdateOperationsInput | number
     social_security?: FloatFieldUpdateOperationsInput | number
     miss?: FloatFieldUpdateOperationsInput | number
@@ -42030,6 +42188,8 @@ export namespace Prisma {
     travel_income?: FloatFieldUpdateOperationsInput | number
     bursary?: FloatFieldUpdateOperationsInput | number
     welfare_money?: FloatFieldUpdateOperationsInput | number
+    vatper?: FloatFieldUpdateOperationsInput | number
+    ss_per?: FloatFieldUpdateOperationsInput | number
     vat?: FloatFieldUpdateOperationsInput | number
     social_security?: FloatFieldUpdateOperationsInput | number
     miss?: FloatFieldUpdateOperationsInput | number
@@ -42057,6 +42217,8 @@ export namespace Prisma {
     travel_income?: FloatFieldUpdateOperationsInput | number
     bursary?: FloatFieldUpdateOperationsInput | number
     welfare_money?: FloatFieldUpdateOperationsInput | number
+    vatper?: FloatFieldUpdateOperationsInput | number
+    ss_per?: FloatFieldUpdateOperationsInput | number
     vat?: FloatFieldUpdateOperationsInput | number
     social_security?: FloatFieldUpdateOperationsInput | number
     miss?: FloatFieldUpdateOperationsInput | number
@@ -42543,6 +42705,8 @@ export namespace Prisma {
     travel_income: number
     bursary: number
     welfare_money: number
+    vatper: number
+    ss_per: number
     vat: number
     social_security: number
     miss: number
@@ -42585,6 +42749,8 @@ export namespace Prisma {
     travel_income?: FloatFieldUpdateOperationsInput | number
     bursary?: FloatFieldUpdateOperationsInput | number
     welfare_money?: FloatFieldUpdateOperationsInput | number
+    vatper?: FloatFieldUpdateOperationsInput | number
+    ss_per?: FloatFieldUpdateOperationsInput | number
     vat?: FloatFieldUpdateOperationsInput | number
     social_security?: FloatFieldUpdateOperationsInput | number
     miss?: FloatFieldUpdateOperationsInput | number
@@ -42613,6 +42779,8 @@ export namespace Prisma {
     travel_income?: FloatFieldUpdateOperationsInput | number
     bursary?: FloatFieldUpdateOperationsInput | number
     welfare_money?: FloatFieldUpdateOperationsInput | number
+    vatper?: FloatFieldUpdateOperationsInput | number
+    ss_per?: FloatFieldUpdateOperationsInput | number
     vat?: FloatFieldUpdateOperationsInput | number
     social_security?: FloatFieldUpdateOperationsInput | number
     miss?: FloatFieldUpdateOperationsInput | number
@@ -42640,6 +42808,8 @@ export namespace Prisma {
     travel_income: number
     bursary: number
     welfare_money: number
+    vatper: number
+    ss_per: number
     vat: number
     social_security: number
     miss: number
@@ -42666,6 +42836,8 @@ export namespace Prisma {
     travel_income?: FloatFieldUpdateOperationsInput | number
     bursary?: FloatFieldUpdateOperationsInput | number
     welfare_money?: FloatFieldUpdateOperationsInput | number
+    vatper?: FloatFieldUpdateOperationsInput | number
+    ss_per?: FloatFieldUpdateOperationsInput | number
     vat?: FloatFieldUpdateOperationsInput | number
     social_security?: FloatFieldUpdateOperationsInput | number
     miss?: FloatFieldUpdateOperationsInput | number
@@ -42694,6 +42866,8 @@ export namespace Prisma {
     travel_income?: FloatFieldUpdateOperationsInput | number
     bursary?: FloatFieldUpdateOperationsInput | number
     welfare_money?: FloatFieldUpdateOperationsInput | number
+    vatper?: FloatFieldUpdateOperationsInput | number
+    ss_per?: FloatFieldUpdateOperationsInput | number
     vat?: FloatFieldUpdateOperationsInput | number
     social_security?: FloatFieldUpdateOperationsInput | number
     miss?: FloatFieldUpdateOperationsInput | number
@@ -42746,6 +42920,8 @@ export namespace Prisma {
     travel_income: number
     bursary: number
     welfare_money: number
+    vatper: number
+    ss_per: number
     vat: number
     social_security: number
     miss: number
@@ -42771,6 +42947,8 @@ export namespace Prisma {
     travel_income?: FloatFieldUpdateOperationsInput | number
     bursary?: FloatFieldUpdateOperationsInput | number
     welfare_money?: FloatFieldUpdateOperationsInput | number
+    vatper?: FloatFieldUpdateOperationsInput | number
+    ss_per?: FloatFieldUpdateOperationsInput | number
     vat?: FloatFieldUpdateOperationsInput | number
     social_security?: FloatFieldUpdateOperationsInput | number
     miss?: FloatFieldUpdateOperationsInput | number
@@ -42800,6 +42978,8 @@ export namespace Prisma {
     travel_income?: FloatFieldUpdateOperationsInput | number
     bursary?: FloatFieldUpdateOperationsInput | number
     welfare_money?: FloatFieldUpdateOperationsInput | number
+    vatper?: FloatFieldUpdateOperationsInput | number
+    ss_per?: FloatFieldUpdateOperationsInput | number
     vat?: FloatFieldUpdateOperationsInput | number
     social_security?: FloatFieldUpdateOperationsInput | number
     miss?: FloatFieldUpdateOperationsInput | number

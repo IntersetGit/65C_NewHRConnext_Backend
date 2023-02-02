@@ -214,6 +214,7 @@ exports.Prisma.Mas_income_typeScalarFieldEnum = makeEnum({
 
 exports.Prisma.Mas_monthScalarFieldEnum = makeEnum({
   id: 'id',
+  month_number: 'month_number',
   name: 'name'
 });
 
@@ -371,6 +372,8 @@ exports.Prisma.SalaryScalarFieldEnum = makeEnum({
   travel_income: 'travel_income',
   bursary: 'bursary',
   welfare_money: 'welfare_money',
+  vatper: 'vatper',
+  ss_per: 'ss_per',
   vat: 'vat',
   social_security: 'social_security',
   miss: 'miss',
