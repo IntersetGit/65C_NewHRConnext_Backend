@@ -62,7 +62,7 @@ export const salaryTypedef = gql`
     base_salary: Float
   }
   input salaryInput {
-    id: ID!
+    id: ID
     mas_monthId: String
     mas_yearsId: String
     commission: Float
@@ -203,28 +203,69 @@ const resolvers: Resolvers = {
             };
         },
 
-        async Createyears(p: any, args: any, ctx: any) {
-            const genyearsID = v4();
-            const createyears = await ctx.prisma.mas_years.create({
-                data: {
-                    id: genyearsID,
-                    name: args.data?.name as string,
-                },
-            });
-            return {
-                message: 'success',
-                status: true,
-            };
+    async Createyears(p: any, args: any, ctx: any) {
+      const genyearsID = v4();
+      const createyears = await ctx.prisma.mas_years.create({
+        data: {
+          id: genyearsID,
+          month_number: args.data?.month_number as number ,
+          name: args.data?.name as string,
         },
+      });
+      return {
+        message: 'success',
+        status: true,
+      };
     },
+
+    async Createsalary (p: any, args: any, ctx: any) {
+      const gensalaryID = v4()
+      const createsalary = await ctx.prisma.salary.create({
+        data: {
+          id: gensalaryID,
+          mas_monthId: args.data?.mas_monthId as string,
+          mas_yearsId: args.data?.mas_yearsId as string,
+          commission: args.data?.commission as number,
+          position_income: args.data?.position_income as number,
+          ot: args.data?.ot as number,
+          bonus: args.data?.bonus as number,
+          special_income: args.data?.special_income as number,
+          other_income: args.data?.other_income as number,
+          travel_income: args.data?.travel_income as number,
+          bursary: args.data?.bursary as number,
+          welfare_money: args.data?.welfare_money as number,
+          vatper: args.data?.vatper as number,
+          ss_per: args.data?.ss_per as number,
+          vat: args.data?.vat as number,
+          social_security: args.data?.social_security as number,
+          miss: args.data?.miss as number,
+          ra: args.data?.ra as number,
+          late: args.data?.late as number,
+          other: args.data?.other as number,
+          provident_employee: args.data?.provident_employee as number,
+          provident_company: args.data?.provident_company as number,
+          total_income: args.data?.total_income as number,
+          total_expense: args.data?.total_expense as number,
+          net: args.data?.net as number,
+          userId: args.data?.userId,
+          bookbank_logId: args.data?.bookbank_logId,
+
+        }
+      });
+      return {
+        message: 'success',
+        status: true,
+      };
+    },
+
+  },
 };
 const resolversComposition = {
-    'Query.provident_log': [authenticate()],
-    'Query.salary': [authenticate()],
-    'Query.bookbank_log': [authenticate()],
-    'Mutation.Createmonth': [authenticate()],
-    'Mutation.Createyears': [authenticate()]
-    // 'Mutation.deleteAccountUser': [authenticate()],
+  'Query.salary': [authenticate()],
+  'Query.bookbank_log': [authenticate()],
+  'Mutation.Createmonth': [authenticate()],
+  'Mutation.Createyears': [authenticate()],
+  // 'Mutation.deleteAccountUser': [authenticate()],
 };
 
 export const salaryResolvers = composeResolvers(
