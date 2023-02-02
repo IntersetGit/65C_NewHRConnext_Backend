@@ -38,7 +38,7 @@ type User {
   }
   type bookbank_log {
   id:ID!
-  date:DateTime
+  date:Date
   mas_bankId:String  
   bank_number:String   
   all_collectId:String 
@@ -47,7 +47,7 @@ type User {
   }
 input bookbank_logInput {
   id:ID!
-  date:DateTime
+  date:Date
   mas_bankId:String  
   bank_number:String   
   all_collectId:String 
@@ -82,8 +82,8 @@ input salaryInput{
     }
 type salary {
     id:ID!
-    mas_monthId:month
-    mas_yearsId:years
+    mas_monthId:String
+    mas_yearsId:String
     commission:Float
     position_income:Float
     ot:Float
@@ -139,7 +139,7 @@ const resolvers:Resolvers ={
     Query: {
         async salary(parant:any, args:any, ctx:any){
             const filter=args?.userId?args.userId:undefined;
-            const result=await ctx.prisma.salary.findMany({
+            const result= await ctx.prisma.salary.findMany({
                 include:{User:true,mas_month:true,mas_years:true},
                 where:{
                     userId:ctx.currentUser?.userId,
@@ -172,6 +172,14 @@ const resolvers:Resolvers ={
 },
     },
 Mutation:{
-    
+
 }
 }
+const resolversComposition = {
+    'Query.salary': [authenticate()],
+    'Query.bookbank_log': [authenticate()],
+    // 'Mutation.createAccountUser': [authenticate()],
+    // 'Mutation.deleteAccountUser': [authenticate()],
+  };
+  
+  export const salaryResolvers = composeResolvers(resolvers, resolversComposition);
