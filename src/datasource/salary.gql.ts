@@ -1,11 +1,27 @@
 import { Resolvers } from '../generated/graphql';
+import { Salary } from './../generated/graphql';
 import gql from 'graphql-tag';
 import _ from 'lodash';
 import { v4 } from 'uuid';
 import { composeResolvers } from '@graphql-tools/resolvers-composition';
 import { authenticate } from '../middleware/authenticatetoken';
 import { GraphQLError } from 'graphql';
+import dayjs = require('dayjs')
+import updateLocale = require('dayjs/plugin/updateLocale')
+dayjs.extend(updateLocale)
 
+dayjs.updateLocale('th', {
+    months: [
+      "มกราคม", "กุมภาพันธ์", "กุมภาพันธ์", "กุมภาพันธ์", "กุมภาพันธ์", "กุมภาพันธ์", "กุมภาพันธ์",
+      "กุมภาพันธ์", "กุมภาพันธ์", "กุมภาพันธ์", "กุมภาพันธ์", "กุมภาพันธ์"
+    ]
+  })
+let date:string="2023/02"
+require('dayjs/locale/th')
+
+let thaidatemonth=dayjs(date).format('MMMM/YYYY')
+
+console.log(thaidatemonth);
 
 export const salaryTypedef = gql`
 input yearsInput{
@@ -124,7 +140,7 @@ type createsalaryResponseType {
     status: Boolean
   }
 type Query {
-    salary(userId: String): [salary]
+    salary(userId: String,mas_monthId: String,mas_yearsId: String): [salary]
     bookbank_log(id:String):[bookbank_log]
 }
 type Mutation{
@@ -137,17 +153,17 @@ type Mutation{
 
 const resolvers:Resolvers ={
     Query: {
-        async salary(parant:any, args:any, ctx:any){
+        async salary(parant, args, ctx:any){
             const filter=args?.userId?args.userId:undefined;
             const result= await ctx.prisma.salary.findMany({
                 include:{User:true,mas_month:true,mas_years:true},
                 where:{
-                    userId:ctx.currentUser?.userId,
-                    AND:{
-                        years:{contains:filter},
-                        month:{contains:filter}
+                    salary:ctx.currentUser?.userId,
+                    mas_monthId:{contains:filter},
+                    mas_yearsId:{contains:filter},
+                    
                     },
-                },
+                
             });
             return result;
         },
