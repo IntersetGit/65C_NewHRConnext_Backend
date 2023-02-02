@@ -27,6 +27,8 @@ export const holidayTypedef = gql`
     Company: [Company]
     CompanyId: String
     status: Int
+    holiday_year: [holiday_years]
+    holiday_yearID: String
   }
 
   input CreateHolidayYears{
@@ -84,13 +86,6 @@ export const holidayResolvers: Resolvers = {
   Query: {
     async GetHoliDayYear(p, args, ctx) {
       const result = await ctx.prisma.holiday_year.findMany({
-        select: {
-          id: true,
-          day: true,
-          month: true,
-          year: true,
-          holiday_name: true,
-        },
         orderBy: [{
           year: "asc"
         }, {
@@ -161,6 +156,7 @@ export const holidayResolvers: Resolvers = {
             day: args.data.day as number,
             month: args.data.month as number,
             yaer: args.data.year as number,
+            status: args.data.status as number,
             CompanyId: ctx.currentUser?.compayId
           },
           where: {

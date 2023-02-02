@@ -195,7 +195,6 @@ export type CreateHolidayYears = {
   holiday_name?: InputMaybe<Scalars['String']>;
   id?: InputMaybe<Scalars['ID']>;
   month?: InputMaybe<Scalars['Int']>;
-  status?: InputMaybe<Scalars['Int']>;
   year?: InputMaybe<Scalars['Int']>;
 };
 
@@ -850,6 +849,8 @@ export type Holiday_Date = {
   CompanyId?: Maybe<Scalars['String']>;
   day?: Maybe<Scalars['Int']>;
   holiday_name?: Maybe<Scalars['String']>;
+  holiday_year?: Maybe<Array<Maybe<Holiday_Years>>>;
+  holiday_yearID?: Maybe<Scalars['String']>;
   id: Scalars['ID'];
   month?: Maybe<Scalars['Int']>;
   status?: Maybe<Scalars['Int']>;
@@ -1746,6 +1747,8 @@ export type Holiday_DateResolvers<ContextType = ApolloContext, ParentType extend
   CompanyId?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   day?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
   holiday_name?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  holiday_year?: Resolver<Maybe<Array<Maybe<ResolversTypes['holiday_years']>>>, ParentType, ContextType>;
+  holiday_yearID?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
   month?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
   status?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
