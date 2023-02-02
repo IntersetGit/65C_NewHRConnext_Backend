@@ -278,7 +278,6 @@ export type holiday_year = {
   month: number
   year: number
   holiday_name: string | null
-  status: number
 }
 
 /**
@@ -18132,14 +18131,12 @@ export namespace Prisma {
     day: number | null
     month: number | null
     year: number | null
-    status: number | null
   }
 
   export type Holiday_yearSumAggregateOutputType = {
     day: number | null
     month: number | null
     year: number | null
-    status: number | null
   }
 
   export type Holiday_yearMinAggregateOutputType = {
@@ -18148,7 +18145,6 @@ export namespace Prisma {
     month: number | null
     year: number | null
     holiday_name: string | null
-    status: number | null
   }
 
   export type Holiday_yearMaxAggregateOutputType = {
@@ -18157,7 +18153,6 @@ export namespace Prisma {
     month: number | null
     year: number | null
     holiday_name: string | null
-    status: number | null
   }
 
   export type Holiday_yearCountAggregateOutputType = {
@@ -18166,7 +18161,6 @@ export namespace Prisma {
     month: number
     year: number
     holiday_name: number
-    status: number
     _all: number
   }
 
@@ -18175,14 +18169,12 @@ export namespace Prisma {
     day?: true
     month?: true
     year?: true
-    status?: true
   }
 
   export type Holiday_yearSumAggregateInputType = {
     day?: true
     month?: true
     year?: true
-    status?: true
   }
 
   export type Holiday_yearMinAggregateInputType = {
@@ -18191,7 +18183,6 @@ export namespace Prisma {
     month?: true
     year?: true
     holiday_name?: true
-    status?: true
   }
 
   export type Holiday_yearMaxAggregateInputType = {
@@ -18200,7 +18191,6 @@ export namespace Prisma {
     month?: true
     year?: true
     holiday_name?: true
-    status?: true
   }
 
   export type Holiday_yearCountAggregateInputType = {
@@ -18209,7 +18199,6 @@ export namespace Prisma {
     month?: true
     year?: true
     holiday_name?: true
-    status?: true
     _all?: true
   }
 
@@ -18311,7 +18300,6 @@ export namespace Prisma {
     month: number
     year: number
     holiday_name: string | null
-    status: number
     _count: Holiday_yearCountAggregateOutputType | null
     _avg: Holiday_yearAvgAggregateOutputType | null
     _sum: Holiday_yearSumAggregateOutputType | null
@@ -18339,7 +18327,6 @@ export namespace Prisma {
     month?: boolean
     year?: boolean
     holiday_name?: boolean
-    status?: boolean
     holiday_date?: boolean | holiday_dateFindManyArgs
     _count?: boolean | Holiday_yearCountOutputTypeArgs
   }
@@ -29527,8 +29514,7 @@ export namespace Prisma {
     day: 'day',
     month: 'month',
     year: 'year',
-    holiday_name: 'holiday_name',
-    status: 'status'
+    holiday_name: 'holiday_name'
   };
 
   export type Holiday_yearScalarFieldEnum = (typeof Holiday_yearScalarFieldEnum)[keyof typeof Holiday_yearScalarFieldEnum]
@@ -30941,7 +30927,6 @@ export namespace Prisma {
     month?: IntFilter | number
     year?: IntFilter | number
     holiday_name?: StringNullableFilter | string | null
-    status?: IntFilter | number
     holiday_date?: Holiday_dateListRelationFilter
   }
 
@@ -30951,7 +30936,6 @@ export namespace Prisma {
     month?: SortOrder
     year?: SortOrder
     holiday_name?: SortOrder
-    status?: SortOrder
     holiday_date?: holiday_dateOrderByRelationAggregateInput
   }
 
@@ -30965,7 +30949,6 @@ export namespace Prisma {
     month?: SortOrder
     year?: SortOrder
     holiday_name?: SortOrder
-    status?: SortOrder
     _count?: holiday_yearCountOrderByAggregateInput
     _avg?: holiday_yearAvgOrderByAggregateInput
     _max?: holiday_yearMaxOrderByAggregateInput
@@ -30982,7 +30965,6 @@ export namespace Prisma {
     month?: IntWithAggregatesFilter | number
     year?: IntWithAggregatesFilter | number
     holiday_name?: StringNullableWithAggregatesFilter | string | null
-    status?: IntWithAggregatesFilter | number
   }
 
   export type mas_bankWhereInput = {
@@ -32993,7 +32975,6 @@ export namespace Prisma {
     month: number
     year: number
     holiday_name?: string | null
-    status: number
     holiday_date?: holiday_dateCreateNestedManyWithoutHoliday_yearInput
   }
 
@@ -33003,7 +32984,6 @@ export namespace Prisma {
     month: number
     year: number
     holiday_name?: string | null
-    status: number
     holiday_date?: holiday_dateUncheckedCreateNestedManyWithoutHoliday_yearInput
   }
 
@@ -33013,7 +32993,6 @@ export namespace Prisma {
     month?: IntFieldUpdateOperationsInput | number
     year?: IntFieldUpdateOperationsInput | number
     holiday_name?: NullableStringFieldUpdateOperationsInput | string | null
-    status?: IntFieldUpdateOperationsInput | number
     holiday_date?: holiday_dateUpdateManyWithoutHoliday_yearNestedInput
   }
 
@@ -33023,7 +33002,6 @@ export namespace Prisma {
     month?: IntFieldUpdateOperationsInput | number
     year?: IntFieldUpdateOperationsInput | number
     holiday_name?: NullableStringFieldUpdateOperationsInput | string | null
-    status?: IntFieldUpdateOperationsInput | number
     holiday_date?: holiday_dateUncheckedUpdateManyWithoutHoliday_yearNestedInput
   }
 
@@ -33033,7 +33011,6 @@ export namespace Prisma {
     month: number
     year: number
     holiday_name?: string | null
-    status: number
   }
 
   export type holiday_yearUpdateManyMutationInput = {
@@ -33042,7 +33019,6 @@ export namespace Prisma {
     month?: IntFieldUpdateOperationsInput | number
     year?: IntFieldUpdateOperationsInput | number
     holiday_name?: NullableStringFieldUpdateOperationsInput | string | null
-    status?: IntFieldUpdateOperationsInput | number
   }
 
   export type holiday_yearUncheckedUpdateManyInput = {
@@ -33051,7 +33027,6 @@ export namespace Prisma {
     month?: IntFieldUpdateOperationsInput | number
     year?: IntFieldUpdateOperationsInput | number
     holiday_name?: NullableStringFieldUpdateOperationsInput | string | null
-    status?: IntFieldUpdateOperationsInput | number
   }
 
   export type mas_bankCreateInput = {
@@ -34860,14 +34835,12 @@ export namespace Prisma {
     month?: SortOrder
     year?: SortOrder
     holiday_name?: SortOrder
-    status?: SortOrder
   }
 
   export type holiday_yearAvgOrderByAggregateInput = {
     day?: SortOrder
     month?: SortOrder
     year?: SortOrder
-    status?: SortOrder
   }
 
   export type holiday_yearMaxOrderByAggregateInput = {
@@ -34876,7 +34849,6 @@ export namespace Prisma {
     month?: SortOrder
     year?: SortOrder
     holiday_name?: SortOrder
-    status?: SortOrder
   }
 
   export type holiday_yearMinOrderByAggregateInput = {
@@ -34885,14 +34857,12 @@ export namespace Prisma {
     month?: SortOrder
     year?: SortOrder
     holiday_name?: SortOrder
-    status?: SortOrder
   }
 
   export type holiday_yearSumOrderByAggregateInput = {
     day?: SortOrder
     month?: SortOrder
     year?: SortOrder
-    status?: SortOrder
   }
 
   export type mas_bankCountOrderByAggregateInput = {
@@ -40862,7 +40832,6 @@ export namespace Prisma {
     month: number
     year: number
     holiday_name?: string | null
-    status: number
   }
 
   export type holiday_yearUncheckedCreateWithoutHoliday_dateInput = {
@@ -40871,7 +40840,6 @@ export namespace Prisma {
     month: number
     year: number
     holiday_name?: string | null
-    status: number
   }
 
   export type holiday_yearCreateOrConnectWithoutHoliday_dateInput = {
@@ -40931,7 +40899,6 @@ export namespace Prisma {
     month?: IntFieldUpdateOperationsInput | number
     year?: IntFieldUpdateOperationsInput | number
     holiday_name?: NullableStringFieldUpdateOperationsInput | string | null
-    status?: IntFieldUpdateOperationsInput | number
   }
 
   export type holiday_yearUncheckedUpdateWithoutHoliday_dateInput = {
@@ -40940,7 +40907,6 @@ export namespace Prisma {
     month?: IntFieldUpdateOperationsInput | number
     year?: IntFieldUpdateOperationsInput | number
     holiday_name?: NullableStringFieldUpdateOperationsInput | string | null
-    status?: IntFieldUpdateOperationsInput | number
   }
 
   export type holiday_dateCreateWithoutHoliday_yearInput = {

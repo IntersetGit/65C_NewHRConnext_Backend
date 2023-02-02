@@ -179,8 +179,7 @@ exports.Prisma.Holiday_yearScalarFieldEnum = makeEnum({
   day: 'day',
   month: 'month',
   year: 'year',
-  holiday_name: 'holiday_name',
-  status: 'status'
+  holiday_name: 'holiday_name'
 });
 
 exports.Prisma.JsonNullValueFilter = makeEnum({
