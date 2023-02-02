@@ -308,8 +308,8 @@ model expense_company {
   id              String         @unique @db.Uuid
   monthId         String         @db.Uuid
   bankId          String         @db.Uuid
-  vat_per         Int?
-  social_security Int?
+  vat_per         Float?
+  social_security Float?
   companyBranchId String?        @db.Uuid
   Mas_month       mas_month?     @relation(fields: [monthId], references: [id])
   mas_bank        mas_bank?      @relation(fields: [bankId], references: [id])
@@ -322,30 +322,30 @@ model salary {
   mas_monthId        String?       @db.Uuid
   mas_yearsId        String?       @db.Uuid
   // date               DateTime
-  commission         Int
-  position_income    Int
-  ot                 Int
-  bonus              Int
-  special_income     Int
-  other_income       Int
-  travel_income      Int
-  bursary            Int //เงินอุดหนุน
-  welfare_money      Int //เงินสวัสดิการ
+  commission         Float
+  position_income    Float
+  ot                 Float
+  bonus              Float
+  special_income     Float
+  other_income       Float
+  travel_income      Float
+  bursary            Float //เงินอุดหนุน
+  welfare_money      Float //เงินสวัสดิการ
   //รายการหัก
-  vat                Int
-  social_security    Int
-  miss               Int
-  ra                 Int
-  late               Int
-  other              Int
-  provident_employee Int
-  provident_company  Int
+  vat                Float
+  social_security    Float
+  miss               Float
+  ra                 Float
+  late               Float
+  other              Float
+  provident_employee Float
+  provident_company  Float
   //รายรับรวม
-  total_income       Int
+  total_income       Float
   //รายหักรวม
-  total_expense      Int
+  total_expense      Float
   //รายได้สุทธิ
-  net                Int
+  net                Float
   User               User?         @relation(fields: [userId], references: [id])
   userId             String?       @db.Uuid
   // bookbank_log       bookbank_log[]
@@ -374,7 +374,7 @@ model bookbank_log {
   mas_bankId    String?   @db.Uuid
   bank_number   String    @db.VarChar(50)
   all_collectId String?   @db.Uuid
-  base_salary   Int
+  base_salary   Float
   salary        salary[] //เรียกดู base salary
   // salaryId      String?      @db.Uuid
   // all_collect   all_collect? @relation(fields: [all_collectId], references: [id])

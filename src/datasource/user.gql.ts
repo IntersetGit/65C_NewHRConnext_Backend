@@ -236,7 +236,7 @@ const resolvers: Resolvers = {
      * @param args
      * @param ctx
      * @returns
-     */
+     
     async me(parant, args, ctx) {
       const result = await ctx.prisma.user.findUnique({
         select: {
