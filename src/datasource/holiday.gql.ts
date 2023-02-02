@@ -35,7 +35,6 @@ export const holidayTypedef = gql`
     month: Int
     year: Int
     holiday_name: String
-    status: Int
   }
 
   input CreateHolidayDate{
