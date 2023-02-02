@@ -1,6 +1,6 @@
 import { Resolvers } from '../generated/graphql';
-import { Salary } from './../generated/graphql';
 import gql from 'graphql-tag';
+import { Salary } from './../generated/graphql';
 import _ from 'lodash';
 import { v4 } from 'uuid';
 import { composeResolvers } from '@graphql-tools/resolvers-composition';
@@ -25,11 +25,11 @@ console.log(thaidatemonth);
 
 export const salaryTypedef = gql`
 input yearsInput{
-    id:ID!
+    id:ID
     name:String
 }
 input monthInput{
-    id:ID!
+    id:ID
     name:String
 }
 type User {
@@ -144,14 +144,14 @@ type Query {
     bookbank_log(id:String):[bookbank_log]
 }
 type Mutation{
-    createsalary(data:salaryInput!):createsalaryResponseType
-    createbookbank(data:bookbank_logInput):createbookbanklogResponseType
-    createyears(data:yearsInput):yearsResponseType
-    createmonth(data:monthInput):monthResponseType
+    Createsalary(data:salaryInput!):createsalaryResponseType
+    Createbookbank(data:bookbank_logInput):createbookbanklogResponseType
+    Createyears(data:yearsInput):yearsResponseType
+    Createmonth(data:monthInput):monthResponseType
 }
 `;
 
-const resolvers:Resolvers ={
+const resolvers: Resolvers = {
     Query: {
         async salary(parant, args, ctx:any){
             const filter=args?.userId?args.userId:undefined;
@@ -170,32 +170,59 @@ const resolvers:Resolvers ={
 
 
 
-     async bookbank_log(parant:any,args:any,ctx:any) {
-        const filter=args?.userId?args.userId:undefined;
-        const result=await ctx.prisma.bookbank_log.findMany({
-            include:{User:true,mas_bank:true},
-            where:{
-                userId:ctx.currentUser?.userId,
-                AND:{
-                    AND:{
-                        years:{contains:filter},
-                        month:{contains:filter}
+        async bookbank_log(parant: any, args: any, ctx: any) {
+            const filter = args?.userId ? args.userId : undefined;
+            const result = await ctx.prisma.bookbank_log.findMany({
+                include: { User: true, mas_bank: true },
+                where: {
+                    userId: ctx.currentUser?.userId,
+                    AND: {
+                        AND: {
+                            years: { contains: filter },
+                            month: { contains: filter }
+                        },
+                    },
                 },
-            },
+            });
+            return result;
         },
-    });
-    return result;
-},
     },
-Mutation:{
+    Mutation: {
+        async Createmonth(p: any, args: any, ctx: any) {
+            const genmonthID = v4();
+            const createmonth = await ctx.prisma.mas_month.create({
+                data: {
+                    id: genmonthID,
+                    name: args.data?.name as string
+                }
+            });
+            return {
+                message: 'success',
+                status: true,
+            }
+        },
 
-}
+        async Createyears(p: any, args: any, ctx: any){
+            const genyearsID = v4();
+            const createyears = await ctx.prisma.mas_years.create({
+                data: {
+                    id: genyearsID,
+                    name: args.data?.name as string
+                }
+            });
+            return {
+                message: 'success',
+                status: true,
+            }
+        }
+    }
 }
 const resolversComposition = {
     'Query.salary': [authenticate()],
     'Query.bookbank_log': [authenticate()],
-    // 'Mutation.createAccountUser': [authenticate()],
+    'Mutation.Createmonth': [authenticate()],
+    'Mutation.Createyears': [authenticate()],
     // 'Mutation.deleteAccountUser': [authenticate()],
-  };
-  
-  export const salaryResolvers = composeResolvers(resolvers, resolversComposition);
+};
+
+export const salaryResolvers = composeResolvers(resolvers, resolversComposition);

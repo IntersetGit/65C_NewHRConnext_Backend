@@ -148,6 +148,7 @@ model User {
   mas_all_collect mas_all_collect[]
   salary          salary[]
   provident_log   provident_log[]
+  bookbank_log    bookbank_log[]
 }
 
 model Role {
@@ -380,6 +381,8 @@ model bookbank_log {
   // all_collect   all_collect? @relation(fields: [all_collectId], references: [id])
   mas_bank      mas_bank? @relation(fields: [mas_bankId], references: [id])
   // salary        salary?      @relation(fields: [salaryId], references: [id])
+  User          User?     @relation(fields: [userId], references: [id])
+  userId        String?   @db.Uuid
 }
 
 model provident_log {
