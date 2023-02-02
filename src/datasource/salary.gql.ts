@@ -7,21 +7,14 @@ import { composeResolvers } from '@graphql-tools/resolvers-composition';
 import { authenticate } from '../middleware/authenticatetoken';
 import { GraphQLError } from 'graphql';
 import dayjs = require('dayjs')
-import updateLocale = require('dayjs/plugin/updateLocale')
-dayjs.extend(updateLocale)
-
-dayjs.updateLocale('th', {
-    months: [
-      "มกราคม", "กุมภาพันธ์", "กุมภาพันธ์", "กุมภาพันธ์", "กุมภาพันธ์", "กุมภาพันธ์", "กุมภาพันธ์",
-      "กุมภาพันธ์", "กุมภาพันธ์", "กุมภาพันธ์", "กุมภาพันธ์", "กุมภาพันธ์"
-    ]
-  })
-let date:string="2023/02"
 require('dayjs/locale/th')
+dayjs.locale('th') // use loaded locale globally
 
-let thaidatemonth=dayjs(date).format('MMMM/YYYY')
+// let date:string="2023/02"
 
-console.log(thaidatemonth);
+// let thaidatemonth=dayjs(date).format('MMMM YYYY') exp
+
+// console.log(thaidatemonth);
 
 export const salaryTypedef = gql`
 input yearsInput{
