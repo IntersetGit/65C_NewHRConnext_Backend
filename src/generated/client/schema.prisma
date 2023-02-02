@@ -283,7 +283,7 @@ model mas_bank {
 
 model mas_month {
   id              String            @unique @db.Uuid
-  month_number    Int               @db.SmallInt @default(0)
+  month_number    Int               @default(0) @db.SmallInt
   name            String
   expense_company expense_company[]
   salary          salary[]
@@ -302,8 +302,9 @@ model mas_salary_status {
 }
 
 model mas_income_type {
-  id   String @unique @db.Uuid
-  name String
+  id     String   @unique @db.Uuid
+  name   String
+  salary salary[]
 }
 
 model expense_company {
@@ -320,10 +321,10 @@ model expense_company {
 
 model salary {
   //รายรับ
-  id                 String        @unique @db.Uuid
-  mas_monthId        String?       @db.Uuid
-  mas_yearsId        String?       @db.Uuid
-  // date               DateTime
+  id                 String           @unique @db.Uuid
+  mas_monthId        String?          @db.Uuid
+  mas_yearsId        String?          @db.Uuid
+  date               DateTime?         @default(now())
   commission         Float?
   position_income    Float?
   ot                 Float?
@@ -331,7 +332,7 @@ model salary {
   special_income     Float?
   other_income       Float?
   travel_income      Float?
-  bursary            Float?//เงินอุดหนุน
+  bursary            Float? //เงินอุดหนุน
   welfare_money      Float? //เงินสวัสดิการ
   //รายการหัก
   vatper             Float?
@@ -350,13 +351,15 @@ model salary {
   total_expense      Float?
   //รายได้สุทธิ
   net                Float?
-  User               User?         @relation(fields: [userId], references: [id])
-  userId             String?       @db.Uuid
+  User               User?            @relation(fields: [userId], references: [id])
+  userId             String?          @db.Uuid
   // bookbank_log       bookbank_log[]
-  bookbank_log       bookbank_log? @relation(fields: [bookbank_logId], references: [id])
-  bookbank_logId     String?       @db.Uuid //เรียกดู 
-  mas_month          mas_month?    @relation(fields: [mas_monthId], references: [id])
-  mas_years          mas_years?    @relation(fields: [mas_yearsId], references: [id])
+  mas_income_typeId  String?          @db.Uuid
+  bookbank_log       bookbank_log?    @relation(fields: [bookbank_logId], references: [id])
+  bookbank_logId     String?          @db.Uuid //เรียกดู 
+  mas_month          mas_month?       @relation(fields: [mas_monthId], references: [id])
+  mas_years          mas_years?       @relation(fields: [mas_yearsId], references: [id])
+  mas_income_type    mas_income_type? @relation(fields: [mas_income_typeId], references: [id])
 }
 
 model mas_all_collect {

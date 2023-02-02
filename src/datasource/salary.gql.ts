@@ -115,7 +115,9 @@ export const salaryTypedef = gql`
     total_expense: Float
     net: Float
     userId: String
-    bookbank_logId: bookbank_log
+    bookbank_logId: bookbank_log,
+    mas_income_typeId: String,
+    date: Date 
   }
   type createsalaryResponseType {
     message: String
@@ -147,68 +149,53 @@ export const salaryTypedef = gql`
 `;
 
 const resolvers: Resolvers = {
-    Query: {
-        async salary(parant, args, ctx: any) {
-            const filter = args?.userId ? args.userId : undefined;
-            const result = await ctx.prisma.salary.findMany({
-                include: { User: true, mas_month: true, mas_years: true },
-                where: {
-                    salary: ctx.currentUser?.userId,
-                    mas_monthId: { contains: filter },
-                    mas_yearsId: { contains: filter },
-                },
-            });
-            return result;
+  Query: {
+    async salary(parant, args, ctx: any) {
+      const filter = args?.userId ? args.userId : undefined;
+      const result = await ctx.prisma.salary.findMany({
+        include: { User: true, mas_month: true, mas_years: true },
+        where: {
+          salary: ctx.currentUser?.userId,
+          mas_monthId: { contains: filter },
+          mas_yearsId: { contains: filter },
         },
-
-        async bookbank_log(parant: any, args: any, ctx: any) {
-            const filter = args?.userId ? args.userId : undefined;
-            const result = await ctx.prisma.bookbank_log.findMany({
-                include: { User: true, mas_bank: true },
-                where: {
-                    userId: ctx.currentUser?.userId,
-                    AND: {
-                        AND: {
-                            years: { contains: filter },
-                            month: { contains: filter },
-                        },
-                    },
-                },
-            });
-            return result;
-        },
-        async provident_log(parant: any, args: any, ctx: any){
-            const filter = args?.userId ? args.userId : undefined;
-            const result = await ctx.prisma.provident_log.findMany({
-                include: { User: true, mas_all_collect: true },
-                where:{
-                    userId: ctx.currentUser?.userId,
-                }
-        })
-        return result;
+      });
+      return result;
     },
- }, //
-    Mutation: {
-        async Createmonth(p: any, args: any, ctx: any) {
-            const genmonthID = v4();
-            const createmonth = await ctx.prisma.mas_month.create({
-                data: {
-                    id: genmonthID,
-                    name: args.data?.name as string,
-                },
-            });
-            return {
-                message: 'success',
-                status: true,
-            };
-        },
 
-    async Createyears(p: any, args: any, ctx: any) {
-      const genyearsID = v4();
-      const createyears = await ctx.prisma.mas_years.create({
+    async bookbank_log(parant: any, args: any, ctx: any) {
+      const filter = args?.userId ? args.userId : undefined;
+      const result = await ctx.prisma.bookbank_log.findMany({
+        include: { User: true, mas_bank: true },
+        where: {
+          userId: ctx.currentUser?.userId,
+          AND: {
+            AND: {
+              years: { contains: filter },
+              month: { contains: filter },
+            },
+          },
+        },
+      });
+      return result;
+    },
+    async provident_log(parant: any, args: any, ctx: any) {
+      const filter = args?.userId ? args.userId : undefined;
+      const result = await ctx.prisma.provident_log.findMany({
+        include: { User: true, mas_all_collect: true },
+        where: {
+          userId: ctx.currentUser?.userId,
+        }
+      })
+      return result;
+    },
+  }, //
+  Mutation: {
+    async Createmonth(p: any, args: any, ctx: any) {
+      const genmonthID = v4();
+      const createmonth = await ctx.prisma.mas_month.create({
         data: {
-          id: genyearsID,
-          month_number: args.data?.month_number as number ,
+          id: genmonthID,
           name: args.data?.name as string,
         },
       });
@@ -218,7 +205,22 @@ const resolvers: Resolvers = {
       };
     },
 
-    async Createsalary (p: any, args: any, ctx: any) {
+    async Createyears(p: any, args: any, ctx: any) {
+      const genyearsID = v4();
+      const createyears = await ctx.prisma.mas_years.create({
+        data: {
+          id: genyearsID,
+          month_number: args.data?.month_number as number,
+          name: args.data?.name as string,
+        },
+      });
+      return {
+        message: 'success',
+        status: true,
+      };
+    },
+
+    async Createsalary(p: any, args: any, ctx: any) {
       const gensalaryID = v4()
       const createsalary = await ctx.prisma.salary.create({
         data: {
@@ -249,6 +251,8 @@ const resolvers: Resolvers = {
           net: args.data?.net as number,
           userId: args.data?.userId,
           bookbank_logId: args.data?.bookbank_logId,
+          mas_income_typeId: args.data?.mas_income_typeId,
+          date: new Date(args.data?.date)
 
         }
       });
@@ -269,6 +273,6 @@ const resolversComposition = {
 };
 
 export const salaryResolvers = composeResolvers(
-    resolvers,
-    resolversComposition,
+  resolvers,
+  resolversComposition,
 );

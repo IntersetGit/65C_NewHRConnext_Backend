@@ -363,6 +363,7 @@ exports.Prisma.SalaryScalarFieldEnum = makeEnum({
   id: 'id',
   mas_monthId: 'mas_monthId',
   mas_yearsId: 'mas_yearsId',
+  date: 'date',
   commission: 'commission',
   position_income: 'position_income',
   ot: 'ot',
@@ -386,6 +387,7 @@ exports.Prisma.SalaryScalarFieldEnum = makeEnum({
   total_expense: 'total_expense',
   net: 'net',
   userId: 'userId',
+  mas_income_typeId: 'mas_income_typeId',
   bookbank_logId: 'bookbank_logId'
 });
 

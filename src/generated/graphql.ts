@@ -956,8 +956,10 @@ export type Salary = {
   bookbank_logId?: Maybe<Bookbank_Log>;
   bursary?: Maybe<Scalars['Float']>;
   commission?: Maybe<Scalars['Float']>;
+  date?: Maybe<Scalars['Date']>;
   id: Scalars['ID'];
   late?: Maybe<Scalars['Float']>;
+  mas_income_typeId?: Maybe<Scalars['String']>;
   mas_monthId?: Maybe<Scalars['String']>;
   mas_yearsId?: Maybe<Scalars['String']>;
   miss?: Maybe<Scalars['Float']>;
@@ -1853,8 +1855,10 @@ export type SalaryResolvers<ContextType = ApolloContext, ParentType extends Reso
   bookbank_logId?: Resolver<Maybe<ResolversTypes['bookbank_log']>, ParentType, ContextType>;
   bursary?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
   commission?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
+  date?: Resolver<Maybe<ResolversTypes['Date']>, ParentType, ContextType>;
   id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
   late?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
+  mas_income_typeId?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   mas_monthId?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   mas_yearsId?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   miss?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
