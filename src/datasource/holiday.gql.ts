@@ -26,6 +26,7 @@ export const holidayTypedef = gql`
     yaer: Int
     Company: [Company]
     CompanyId: String
+    status: Int
   }
 
   input CreateHolidayYears{
