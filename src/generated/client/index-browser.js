@@ -89,16 +89,6 @@ Prisma.NullTypes = {
 // https://github.com/microsoft/TypeScript/issues/3192#issuecomment-261720275
 function makeEnum(x) { return x; }
 
-exports.Prisma.All_collectScalarFieldEnum = makeEnum({
-  id: 'id',
-  userId: 'userId',
-  income_collect: 'income_collect',
-  vat_collect: 'vat_collect',
-  social_secu_collect: 'social_secu_collect',
-  provident_collect_employee: 'provident_collect_employee',
-  provident_collect_company: 'provident_collect_company'
-});
-
 exports.Prisma.AmphoeScalarFieldEnum = makeEnum({
   id: 'id',
   name: 'name',
@@ -111,7 +101,8 @@ exports.Prisma.Bookbank_logScalarFieldEnum = makeEnum({
   date: 'date',
   mas_bankId: 'mas_bankId',
   bank_number: 'bank_number',
-  all_collectId: 'all_collectId'
+  all_collectId: 'all_collectId',
+  base_salary: 'base_salary'
 });
 
 exports.Prisma.CompanyBranchScalarFieldEnum = makeEnum({
@@ -198,6 +189,16 @@ exports.Prisma.JsonNullValueFilter = makeEnum({
 
 exports.Prisma.JsonNullValueInput = makeEnum({
   JsonNull: Prisma.JsonNull
+});
+
+exports.Prisma.Mas_all_collectScalarFieldEnum = makeEnum({
+  id: 'id',
+  userId: 'userId',
+  income_collect: 'income_collect',
+  vat_collect: 'vat_collect',
+  social_secu_collect: 'social_secu_collect',
+  provident_collect_employee: 'provident_collect_employee',
+  provident_collect_company: 'provident_collect_company'
 });
 
 exports.Prisma.Mas_bankScalarFieldEnum = makeEnum({
@@ -324,6 +325,15 @@ exports.Prisma.ProfileScalarFieldEnum = makeEnum({
   social_telegram: 'social_telegram'
 });
 
+exports.Prisma.Provident_logScalarFieldEnum = makeEnum({
+  id: 'id',
+  userId: 'userId',
+  date: 'date',
+  pro_employee: 'pro_employee',
+  pro_company: 'pro_company',
+  mas_all_collectId: 'mas_all_collectId'
+});
+
 exports.Prisma.ProvinceScalarFieldEnum = makeEnum({
   id: 'id',
   name: 'name'
@@ -349,7 +359,8 @@ exports.Prisma.Role_CompanyScalarFieldEnum = makeEnum({
 
 exports.Prisma.SalaryScalarFieldEnum = makeEnum({
   id: 'id',
-  base_salary: 'base_salary',
+  mas_monthId: 'mas_monthId',
+  mas_yearsId: 'mas_yearsId',
   commission: 'commission',
   position_income: 'position_income',
   ot: 'ot',
@@ -370,8 +381,8 @@ exports.Prisma.SalaryScalarFieldEnum = makeEnum({
   total_income: 'total_income',
   total_expense: 'total_expense',
   net: 'net',
-  date: 'date',
-  userId: 'userId'
+  userId: 'userId',
+  bookbank_logId: 'bookbank_logId'
 });
 
 exports.Prisma.SortOrder = makeEnum({
@@ -425,8 +436,9 @@ exports.Prisma.ModelName = makeEnum({
   mas_income_type: 'mas_income_type',
   expense_company: 'expense_company',
   salary: 'salary',
-  all_collect: 'all_collect',
-  bookbank_log: 'bookbank_log'
+  mas_all_collect: 'mas_all_collect',
+  bookbank_log: 'bookbank_log',
+  provident_log: 'provident_log'
 });
 
 /**
