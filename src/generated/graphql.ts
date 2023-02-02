@@ -970,7 +970,7 @@ export type SalaryInput = {
   bookbank_logId?: InputMaybe<Scalars['String']>;
   bursary?: InputMaybe<Scalars['Float']>;
   commission?: InputMaybe<Scalars['Float']>;
-  id: Scalars['ID'];
+  id?: InputMaybe<Scalars['ID']>;
   late?: InputMaybe<Scalars['Float']>;
   mas_monthId?: InputMaybe<Scalars['String']>;
   mas_yearsId?: InputMaybe<Scalars['String']>;
