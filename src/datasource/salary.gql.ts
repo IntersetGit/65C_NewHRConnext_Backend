@@ -139,7 +139,7 @@ export const salaryTypedef = gql`
     provident_log(userId:String):[provident_log]
   }
   type Mutation {
-    Createsalary(data: salaryInput!): createsalaryResponseType
+    Createsalary(data: salaryInput): createsalaryResponseType
     Createbookbank(data: bookbank_logInput): createbookbanklogResponseType
     Createyears(data: yearsInput): yearsResponseType
     Createmonth(data: monthInput): monthResponseType

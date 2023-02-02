@@ -324,32 +324,32 @@ model salary {
   mas_monthId        String?       @db.Uuid
   mas_yearsId        String?       @db.Uuid
   // date               DateTime
-  commission         Float
-  position_income    Float
-  ot                 Float
-  bonus              Float
-  special_income     Float
-  other_income       Float
-  travel_income      Float
-  bursary            Float //เงินอุดหนุน
-  welfare_money      Float //เงินสวัสดิการ
+  commission         Float?
+  position_income    Float?
+  ot                 Float?
+  bonus              Float?
+  special_income     Float?
+  other_income       Float?
+  travel_income      Float?
+  bursary            Float?//เงินอุดหนุน
+  welfare_money      Float? //เงินสวัสดิการ
   //รายการหัก
-  vatper             Float
-  ss_per             Float
-  vat                Float
-  social_security    Float
-  miss               Float
-  ra                 Float
-  late               Float
-  other              Float
-  provident_employee Float
-  provident_company  Float
+  vatper             Float?
+  ss_per             Float?
+  vat                Float?
+  social_security    Float?
+  miss               Float?
+  ra                 Float?
+  late               Float?
+  other              Float?
+  provident_employee Float?
+  provident_company  Float?
   //รายรับรวม
-  total_income       Float
+  total_income       Float?
   //รายหักรวม
-  total_expense      Float
+  total_expense      Float?
   //รายได้สุทธิ
-  net                Float
+  net                Float?
   User               User?         @relation(fields: [userId], references: [id])
   userId             String?       @db.Uuid
   // bookbank_log       bookbank_log[]

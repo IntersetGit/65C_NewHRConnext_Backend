@@ -348,28 +348,28 @@ export type salary = {
   id: string
   mas_monthId: string | null
   mas_yearsId: string | null
-  commission: number
-  position_income: number
-  ot: number
-  bonus: number
-  special_income: number
-  other_income: number
-  travel_income: number
-  bursary: number
-  welfare_money: number
-  vatper: number
-  ss_per: number
-  vat: number
-  social_security: number
-  miss: number
-  ra: number
-  late: number
-  other: number
-  provident_employee: number
-  provident_company: number
-  total_income: number
-  total_expense: number
-  net: number
+  commission: number | null
+  position_income: number | null
+  ot: number | null
+  bonus: number | null
+  special_income: number | null
+  other_income: number | null
+  travel_income: number | null
+  bursary: number | null
+  welfare_money: number | null
+  vatper: number | null
+  ss_per: number | null
+  vat: number | null
+  social_security: number | null
+  miss: number | null
+  ra: number | null
+  late: number | null
+  other: number | null
+  provident_employee: number | null
+  provident_company: number | null
+  total_income: number | null
+  total_expense: number | null
+  net: number | null
   userId: string | null
   bookbank_logId: string | null
 }
@@ -24811,28 +24811,28 @@ export namespace Prisma {
     id: string
     mas_monthId: string | null
     mas_yearsId: string | null
-    commission: number
-    position_income: number
-    ot: number
-    bonus: number
-    special_income: number
-    other_income: number
-    travel_income: number
-    bursary: number
-    welfare_money: number
-    vatper: number
-    ss_per: number
-    vat: number
-    social_security: number
-    miss: number
-    ra: number
-    late: number
-    other: number
-    provident_employee: number
-    provident_company: number
-    total_income: number
-    total_expense: number
-    net: number
+    commission: number | null
+    position_income: number | null
+    ot: number | null
+    bonus: number | null
+    special_income: number | null
+    other_income: number | null
+    travel_income: number | null
+    bursary: number | null
+    welfare_money: number | null
+    vatper: number | null
+    ss_per: number | null
+    vat: number | null
+    social_security: number | null
+    miss: number | null
+    ra: number | null
+    late: number | null
+    other: number | null
+    provident_employee: number | null
+    provident_company: number | null
+    total_income: number | null
+    total_expense: number | null
+    net: number | null
     userId: string | null
     bookbank_logId: string | null
     _count: SalaryCountAggregateOutputType | null
@@ -30529,28 +30529,28 @@ export namespace Prisma {
     id?: UuidFilter | string
     mas_monthId?: UuidNullableFilter | string | null
     mas_yearsId?: UuidNullableFilter | string | null
-    commission?: FloatFilter | number
-    position_income?: FloatFilter | number
-    ot?: FloatFilter | number
-    bonus?: FloatFilter | number
-    special_income?: FloatFilter | number
-    other_income?: FloatFilter | number
-    travel_income?: FloatFilter | number
-    bursary?: FloatFilter | number
-    welfare_money?: FloatFilter | number
-    vatper?: FloatFilter | number
-    ss_per?: FloatFilter | number
-    vat?: FloatFilter | number
-    social_security?: FloatFilter | number
-    miss?: FloatFilter | number
-    ra?: FloatFilter | number
-    late?: FloatFilter | number
-    other?: FloatFilter | number
-    provident_employee?: FloatFilter | number
-    provident_company?: FloatFilter | number
-    total_income?: FloatFilter | number
-    total_expense?: FloatFilter | number
-    net?: FloatFilter | number
+    commission?: FloatNullableFilter | number | null
+    position_income?: FloatNullableFilter | number | null
+    ot?: FloatNullableFilter | number | null
+    bonus?: FloatNullableFilter | number | null
+    special_income?: FloatNullableFilter | number | null
+    other_income?: FloatNullableFilter | number | null
+    travel_income?: FloatNullableFilter | number | null
+    bursary?: FloatNullableFilter | number | null
+    welfare_money?: FloatNullableFilter | number | null
+    vatper?: FloatNullableFilter | number | null
+    ss_per?: FloatNullableFilter | number | null
+    vat?: FloatNullableFilter | number | null
+    social_security?: FloatNullableFilter | number | null
+    miss?: FloatNullableFilter | number | null
+    ra?: FloatNullableFilter | number | null
+    late?: FloatNullableFilter | number | null
+    other?: FloatNullableFilter | number | null
+    provident_employee?: FloatNullableFilter | number | null
+    provident_company?: FloatNullableFilter | number | null
+    total_income?: FloatNullableFilter | number | null
+    total_expense?: FloatNullableFilter | number | null
+    net?: FloatNullableFilter | number | null
     User?: XOR<UserRelationFilter, UserWhereInput> | null
     userId?: UuidNullableFilter | string | null
     bookbank_log?: XOR<Bookbank_logRelationFilter, bookbank_logWhereInput> | null
@@ -30639,28 +30639,28 @@ export namespace Prisma {
     id?: UuidWithAggregatesFilter | string
     mas_monthId?: UuidNullableWithAggregatesFilter | string | null
     mas_yearsId?: UuidNullableWithAggregatesFilter | string | null
-    commission?: FloatWithAggregatesFilter | number
-    position_income?: FloatWithAggregatesFilter | number
-    ot?: FloatWithAggregatesFilter | number
-    bonus?: FloatWithAggregatesFilter | number
-    special_income?: FloatWithAggregatesFilter | number
-    other_income?: FloatWithAggregatesFilter | number
-    travel_income?: FloatWithAggregatesFilter | number
-    bursary?: FloatWithAggregatesFilter | number
-    welfare_money?: FloatWithAggregatesFilter | number
-    vatper?: FloatWithAggregatesFilter | number
-    ss_per?: FloatWithAggregatesFilter | number
-    vat?: FloatWithAggregatesFilter | number
-    social_security?: FloatWithAggregatesFilter | number
-    miss?: FloatWithAggregatesFilter | number
-    ra?: FloatWithAggregatesFilter | number
-    late?: FloatWithAggregatesFilter | number
-    other?: FloatWithAggregatesFilter | number
-    provident_employee?: FloatWithAggregatesFilter | number
-    provident_company?: FloatWithAggregatesFilter | number
-    total_income?: FloatWithAggregatesFilter | number
-    total_expense?: FloatWithAggregatesFilter | number
-    net?: FloatWithAggregatesFilter | number
+    commission?: FloatNullableWithAggregatesFilter | number | null
+    position_income?: FloatNullableWithAggregatesFilter | number | null
+    ot?: FloatNullableWithAggregatesFilter | number | null
+    bonus?: FloatNullableWithAggregatesFilter | number | null
+    special_income?: FloatNullableWithAggregatesFilter | number | null
+    other_income?: FloatNullableWithAggregatesFilter | number | null
+    travel_income?: FloatNullableWithAggregatesFilter | number | null
+    bursary?: FloatNullableWithAggregatesFilter | number | null
+    welfare_money?: FloatNullableWithAggregatesFilter | number | null
+    vatper?: FloatNullableWithAggregatesFilter | number | null
+    ss_per?: FloatNullableWithAggregatesFilter | number | null
+    vat?: FloatNullableWithAggregatesFilter | number | null
+    social_security?: FloatNullableWithAggregatesFilter | number | null
+    miss?: FloatNullableWithAggregatesFilter | number | null
+    ra?: FloatNullableWithAggregatesFilter | number | null
+    late?: FloatNullableWithAggregatesFilter | number | null
+    other?: FloatNullableWithAggregatesFilter | number | null
+    provident_employee?: FloatNullableWithAggregatesFilter | number | null
+    provident_company?: FloatNullableWithAggregatesFilter | number | null
+    total_income?: FloatNullableWithAggregatesFilter | number | null
+    total_expense?: FloatNullableWithAggregatesFilter | number | null
+    net?: FloatNullableWithAggregatesFilter | number | null
     userId?: UuidNullableWithAggregatesFilter | string | null
     bookbank_logId?: UuidNullableWithAggregatesFilter | string | null
   }
@@ -32625,28 +32625,28 @@ export namespace Prisma {
 
   export type salaryCreateInput = {
     id: string
-    commission: number
-    position_income: number
-    ot: number
-    bonus: number
-    special_income: number
-    other_income: number
-    travel_income: number
-    bursary: number
-    welfare_money: number
-    vatper: number
-    ss_per: number
-    vat: number
-    social_security: number
-    miss: number
-    ra: number
-    late: number
-    other: number
-    provident_employee: number
-    provident_company: number
-    total_income: number
-    total_expense: number
-    net: number
+    commission?: number | null
+    position_income?: number | null
+    ot?: number | null
+    bonus?: number | null
+    special_income?: number | null
+    other_income?: number | null
+    travel_income?: number | null
+    bursary?: number | null
+    welfare_money?: number | null
+    vatper?: number | null
+    ss_per?: number | null
+    vat?: number | null
+    social_security?: number | null
+    miss?: number | null
+    ra?: number | null
+    late?: number | null
+    other?: number | null
+    provident_employee?: number | null
+    provident_company?: number | null
+    total_income?: number | null
+    total_expense?: number | null
+    net?: number | null
     User?: UserCreateNestedOneWithoutSalaryInput
     bookbank_log?: bookbank_logCreateNestedOneWithoutSalaryInput
     mas_month?: mas_monthCreateNestedOneWithoutSalaryInput
@@ -32657,56 +32657,56 @@ export namespace Prisma {
     id: string
     mas_monthId?: string | null
     mas_yearsId?: string | null
-    commission: number
-    position_income: number
-    ot: number
-    bonus: number
-    special_income: number
-    other_income: number
-    travel_income: number
-    bursary: number
-    welfare_money: number
-    vatper: number
-    ss_per: number
-    vat: number
-    social_security: number
-    miss: number
-    ra: number
-    late: number
-    other: number
-    provident_employee: number
-    provident_company: number
-    total_income: number
-    total_expense: number
-    net: number
+    commission?: number | null
+    position_income?: number | null
+    ot?: number | null
+    bonus?: number | null
+    special_income?: number | null
+    other_income?: number | null
+    travel_income?: number | null
+    bursary?: number | null
+    welfare_money?: number | null
+    vatper?: number | null
+    ss_per?: number | null
+    vat?: number | null
+    social_security?: number | null
+    miss?: number | null
+    ra?: number | null
+    late?: number | null
+    other?: number | null
+    provident_employee?: number | null
+    provident_company?: number | null
+    total_income?: number | null
+    total_expense?: number | null
+    net?: number | null
     userId?: string | null
     bookbank_logId?: string | null
   }
 
   export type salaryUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
-    commission?: FloatFieldUpdateOperationsInput | number
-    position_income?: FloatFieldUpdateOperationsInput | number
-    ot?: FloatFieldUpdateOperationsInput | number
-    bonus?: FloatFieldUpdateOperationsInput | number
-    special_income?: FloatFieldUpdateOperationsInput | number
-    other_income?: FloatFieldUpdateOperationsInput | number
-    travel_income?: FloatFieldUpdateOperationsInput | number
-    bursary?: FloatFieldUpdateOperationsInput | number
-    welfare_money?: FloatFieldUpdateOperationsInput | number
-    vatper?: FloatFieldUpdateOperationsInput | number
-    ss_per?: FloatFieldUpdateOperationsInput | number
-    vat?: FloatFieldUpdateOperationsInput | number
-    social_security?: FloatFieldUpdateOperationsInput | number
-    miss?: FloatFieldUpdateOperationsInput | number
-    ra?: FloatFieldUpdateOperationsInput | number
-    late?: FloatFieldUpdateOperationsInput | number
-    other?: FloatFieldUpdateOperationsInput | number
-    provident_employee?: FloatFieldUpdateOperationsInput | number
-    provident_company?: FloatFieldUpdateOperationsInput | number
-    total_income?: FloatFieldUpdateOperationsInput | number
-    total_expense?: FloatFieldUpdateOperationsInput | number
-    net?: FloatFieldUpdateOperationsInput | number
+    commission?: NullableFloatFieldUpdateOperationsInput | number | null
+    position_income?: NullableFloatFieldUpdateOperationsInput | number | null
+    ot?: NullableFloatFieldUpdateOperationsInput | number | null
+    bonus?: NullableFloatFieldUpdateOperationsInput | number | null
+    special_income?: NullableFloatFieldUpdateOperationsInput | number | null
+    other_income?: NullableFloatFieldUpdateOperationsInput | number | null
+    travel_income?: NullableFloatFieldUpdateOperationsInput | number | null
+    bursary?: NullableFloatFieldUpdateOperationsInput | number | null
+    welfare_money?: NullableFloatFieldUpdateOperationsInput | number | null
+    vatper?: NullableFloatFieldUpdateOperationsInput | number | null
+    ss_per?: NullableFloatFieldUpdateOperationsInput | number | null
+    vat?: NullableFloatFieldUpdateOperationsInput | number | null
+    social_security?: NullableFloatFieldUpdateOperationsInput | number | null
+    miss?: NullableFloatFieldUpdateOperationsInput | number | null
+    ra?: NullableFloatFieldUpdateOperationsInput | number | null
+    late?: NullableFloatFieldUpdateOperationsInput | number | null
+    other?: NullableFloatFieldUpdateOperationsInput | number | null
+    provident_employee?: NullableFloatFieldUpdateOperationsInput | number | null
+    provident_company?: NullableFloatFieldUpdateOperationsInput | number | null
+    total_income?: NullableFloatFieldUpdateOperationsInput | number | null
+    total_expense?: NullableFloatFieldUpdateOperationsInput | number | null
+    net?: NullableFloatFieldUpdateOperationsInput | number | null
     User?: UserUpdateOneWithoutSalaryNestedInput
     bookbank_log?: bookbank_logUpdateOneWithoutSalaryNestedInput
     mas_month?: mas_monthUpdateOneWithoutSalaryNestedInput
@@ -32717,28 +32717,28 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     mas_monthId?: NullableStringFieldUpdateOperationsInput | string | null
     mas_yearsId?: NullableStringFieldUpdateOperationsInput | string | null
-    commission?: FloatFieldUpdateOperationsInput | number
-    position_income?: FloatFieldUpdateOperationsInput | number
-    ot?: FloatFieldUpdateOperationsInput | number
-    bonus?: FloatFieldUpdateOperationsInput | number
-    special_income?: FloatFieldUpdateOperationsInput | number
-    other_income?: FloatFieldUpdateOperationsInput | number
-    travel_income?: FloatFieldUpdateOperationsInput | number
-    bursary?: FloatFieldUpdateOperationsInput | number
-    welfare_money?: FloatFieldUpdateOperationsInput | number
-    vatper?: FloatFieldUpdateOperationsInput | number
-    ss_per?: FloatFieldUpdateOperationsInput | number
-    vat?: FloatFieldUpdateOperationsInput | number
-    social_security?: FloatFieldUpdateOperationsInput | number
-    miss?: FloatFieldUpdateOperationsInput | number
-    ra?: FloatFieldUpdateOperationsInput | number
-    late?: FloatFieldUpdateOperationsInput | number
-    other?: FloatFieldUpdateOperationsInput | number
-    provident_employee?: FloatFieldUpdateOperationsInput | number
-    provident_company?: FloatFieldUpdateOperationsInput | number
-    total_income?: FloatFieldUpdateOperationsInput | number
-    total_expense?: FloatFieldUpdateOperationsInput | number
-    net?: FloatFieldUpdateOperationsInput | number
+    commission?: NullableFloatFieldUpdateOperationsInput | number | null
+    position_income?: NullableFloatFieldUpdateOperationsInput | number | null
+    ot?: NullableFloatFieldUpdateOperationsInput | number | null
+    bonus?: NullableFloatFieldUpdateOperationsInput | number | null
+    special_income?: NullableFloatFieldUpdateOperationsInput | number | null
+    other_income?: NullableFloatFieldUpdateOperationsInput | number | null
+    travel_income?: NullableFloatFieldUpdateOperationsInput | number | null
+    bursary?: NullableFloatFieldUpdateOperationsInput | number | null
+    welfare_money?: NullableFloatFieldUpdateOperationsInput | number | null
+    vatper?: NullableFloatFieldUpdateOperationsInput | number | null
+    ss_per?: NullableFloatFieldUpdateOperationsInput | number | null
+    vat?: NullableFloatFieldUpdateOperationsInput | number | null
+    social_security?: NullableFloatFieldUpdateOperationsInput | number | null
+    miss?: NullableFloatFieldUpdateOperationsInput | number | null
+    ra?: NullableFloatFieldUpdateOperationsInput | number | null
+    late?: NullableFloatFieldUpdateOperationsInput | number | null
+    other?: NullableFloatFieldUpdateOperationsInput | number | null
+    provident_employee?: NullableFloatFieldUpdateOperationsInput | number | null
+    provident_company?: NullableFloatFieldUpdateOperationsInput | number | null
+    total_income?: NullableFloatFieldUpdateOperationsInput | number | null
+    total_expense?: NullableFloatFieldUpdateOperationsInput | number | null
+    net?: NullableFloatFieldUpdateOperationsInput | number | null
     userId?: NullableStringFieldUpdateOperationsInput | string | null
     bookbank_logId?: NullableStringFieldUpdateOperationsInput | string | null
   }
@@ -32747,84 +32747,84 @@ export namespace Prisma {
     id: string
     mas_monthId?: string | null
     mas_yearsId?: string | null
-    commission: number
-    position_income: number
-    ot: number
-    bonus: number
-    special_income: number
-    other_income: number
-    travel_income: number
-    bursary: number
-    welfare_money: number
-    vatper: number
-    ss_per: number
-    vat: number
-    social_security: number
-    miss: number
-    ra: number
-    late: number
-    other: number
-    provident_employee: number
-    provident_company: number
-    total_income: number
-    total_expense: number
-    net: number
+    commission?: number | null
+    position_income?: number | null
+    ot?: number | null
+    bonus?: number | null
+    special_income?: number | null
+    other_income?: number | null
+    travel_income?: number | null
+    bursary?: number | null
+    welfare_money?: number | null
+    vatper?: number | null
+    ss_per?: number | null
+    vat?: number | null
+    social_security?: number | null
+    miss?: number | null
+    ra?: number | null
+    late?: number | null
+    other?: number | null
+    provident_employee?: number | null
+    provident_company?: number | null
+    total_income?: number | null
+    total_expense?: number | null
+    net?: number | null
     userId?: string | null
     bookbank_logId?: string | null
   }
 
   export type salaryUpdateManyMutationInput = {
     id?: StringFieldUpdateOperationsInput | string
-    commission?: FloatFieldUpdateOperationsInput | number
-    position_income?: FloatFieldUpdateOperationsInput | number
-    ot?: FloatFieldUpdateOperationsInput | number
-    bonus?: FloatFieldUpdateOperationsInput | number
-    special_income?: FloatFieldUpdateOperationsInput | number
-    other_income?: FloatFieldUpdateOperationsInput | number
-    travel_income?: FloatFieldUpdateOperationsInput | number
-    bursary?: FloatFieldUpdateOperationsInput | number
-    welfare_money?: FloatFieldUpdateOperationsInput | number
-    vatper?: FloatFieldUpdateOperationsInput | number
-    ss_per?: FloatFieldUpdateOperationsInput | number
-    vat?: FloatFieldUpdateOperationsInput | number
-    social_security?: FloatFieldUpdateOperationsInput | number
-    miss?: FloatFieldUpdateOperationsInput | number
-    ra?: FloatFieldUpdateOperationsInput | number
-    late?: FloatFieldUpdateOperationsInput | number
-    other?: FloatFieldUpdateOperationsInput | number
-    provident_employee?: FloatFieldUpdateOperationsInput | number
-    provident_company?: FloatFieldUpdateOperationsInput | number
-    total_income?: FloatFieldUpdateOperationsInput | number
-    total_expense?: FloatFieldUpdateOperationsInput | number
-    net?: FloatFieldUpdateOperationsInput | number
+    commission?: NullableFloatFieldUpdateOperationsInput | number | null
+    position_income?: NullableFloatFieldUpdateOperationsInput | number | null
+    ot?: NullableFloatFieldUpdateOperationsInput | number | null
+    bonus?: NullableFloatFieldUpdateOperationsInput | number | null
+    special_income?: NullableFloatFieldUpdateOperationsInput | number | null
+    other_income?: NullableFloatFieldUpdateOperationsInput | number | null
+    travel_income?: NullableFloatFieldUpdateOperationsInput | number | null
+    bursary?: NullableFloatFieldUpdateOperationsInput | number | null
+    welfare_money?: NullableFloatFieldUpdateOperationsInput | number | null
+    vatper?: NullableFloatFieldUpdateOperationsInput | number | null
+    ss_per?: NullableFloatFieldUpdateOperationsInput | number | null
+    vat?: NullableFloatFieldUpdateOperationsInput | number | null
+    social_security?: NullableFloatFieldUpdateOperationsInput | number | null
+    miss?: NullableFloatFieldUpdateOperationsInput | number | null
+    ra?: NullableFloatFieldUpdateOperationsInput | number | null
+    late?: NullableFloatFieldUpdateOperationsInput | number | null
+    other?: NullableFloatFieldUpdateOperationsInput | number | null
+    provident_employee?: NullableFloatFieldUpdateOperationsInput | number | null
+    provident_company?: NullableFloatFieldUpdateOperationsInput | number | null
+    total_income?: NullableFloatFieldUpdateOperationsInput | number | null
+    total_expense?: NullableFloatFieldUpdateOperationsInput | number | null
+    net?: NullableFloatFieldUpdateOperationsInput | number | null
   }
 
   export type salaryUncheckedUpdateManyInput = {
     id?: StringFieldUpdateOperationsInput | string
     mas_monthId?: NullableStringFieldUpdateOperationsInput | string | null
     mas_yearsId?: NullableStringFieldUpdateOperationsInput | string | null
-    commission?: FloatFieldUpdateOperationsInput | number
-    position_income?: FloatFieldUpdateOperationsInput | number
-    ot?: FloatFieldUpdateOperationsInput | number
-    bonus?: FloatFieldUpdateOperationsInput | number
-    special_income?: FloatFieldUpdateOperationsInput | number
-    other_income?: FloatFieldUpdateOperationsInput | number
-    travel_income?: FloatFieldUpdateOperationsInput | number
-    bursary?: FloatFieldUpdateOperationsInput | number
-    welfare_money?: FloatFieldUpdateOperationsInput | number
-    vatper?: FloatFieldUpdateOperationsInput | number
-    ss_per?: FloatFieldUpdateOperationsInput | number
-    vat?: FloatFieldUpdateOperationsInput | number
-    social_security?: FloatFieldUpdateOperationsInput | number
-    miss?: FloatFieldUpdateOperationsInput | number
-    ra?: FloatFieldUpdateOperationsInput | number
-    late?: FloatFieldUpdateOperationsInput | number
-    other?: FloatFieldUpdateOperationsInput | number
-    provident_employee?: FloatFieldUpdateOperationsInput | number
-    provident_company?: FloatFieldUpdateOperationsInput | number
-    total_income?: FloatFieldUpdateOperationsInput | number
-    total_expense?: FloatFieldUpdateOperationsInput | number
-    net?: FloatFieldUpdateOperationsInput | number
+    commission?: NullableFloatFieldUpdateOperationsInput | number | null
+    position_income?: NullableFloatFieldUpdateOperationsInput | number | null
+    ot?: NullableFloatFieldUpdateOperationsInput | number | null
+    bonus?: NullableFloatFieldUpdateOperationsInput | number | null
+    special_income?: NullableFloatFieldUpdateOperationsInput | number | null
+    other_income?: NullableFloatFieldUpdateOperationsInput | number | null
+    travel_income?: NullableFloatFieldUpdateOperationsInput | number | null
+    bursary?: NullableFloatFieldUpdateOperationsInput | number | null
+    welfare_money?: NullableFloatFieldUpdateOperationsInput | number | null
+    vatper?: NullableFloatFieldUpdateOperationsInput | number | null
+    ss_per?: NullableFloatFieldUpdateOperationsInput | number | null
+    vat?: NullableFloatFieldUpdateOperationsInput | number | null
+    social_security?: NullableFloatFieldUpdateOperationsInput | number | null
+    miss?: NullableFloatFieldUpdateOperationsInput | number | null
+    ra?: NullableFloatFieldUpdateOperationsInput | number | null
+    late?: NullableFloatFieldUpdateOperationsInput | number | null
+    other?: NullableFloatFieldUpdateOperationsInput | number | null
+    provident_employee?: NullableFloatFieldUpdateOperationsInput | number | null
+    provident_company?: NullableFloatFieldUpdateOperationsInput | number | null
+    total_income?: NullableFloatFieldUpdateOperationsInput | number | null
+    total_expense?: NullableFloatFieldUpdateOperationsInput | number | null
+    net?: NullableFloatFieldUpdateOperationsInput | number | null
     userId?: NullableStringFieldUpdateOperationsInput | string | null
     bookbank_logId?: NullableStringFieldUpdateOperationsInput | string | null
   }
@@ -34382,17 +34382,6 @@ export namespace Prisma {
     _max?: NestedFloatNullableFilter
   }
 
-  export type FloatFilter = {
-    equals?: number
-    in?: Enumerable<number>
-    notIn?: Enumerable<number>
-    lt?: number
-    lte?: number
-    gt?: number
-    gte?: number
-    not?: NestedFloatFilter | number
-  }
-
   export type Bookbank_logRelationFilter = {
     is?: bookbank_logWhereInput | null
     isNot?: bookbank_logWhereInput | null
@@ -34543,22 +34532,6 @@ export namespace Prisma {
     net?: SortOrder
   }
 
-  export type FloatWithAggregatesFilter = {
-    equals?: number
-    in?: Enumerable<number>
-    notIn?: Enumerable<number>
-    lt?: number
-    lte?: number
-    gt?: number
-    gte?: number
-    not?: NestedFloatWithAggregatesFilter | number
-    _count?: NestedIntFilter
-    _avg?: NestedFloatFilter
-    _sum?: NestedFloatFilter
-    _min?: NestedFloatFilter
-    _max?: NestedFloatFilter
-  }
-
   export type mas_all_collectCountOrderByAggregateInput = {
     id?: SortOrder
     userId?: SortOrder
@@ -34605,6 +34578,17 @@ export namespace Prisma {
     provident_collect_company?: SortOrder
   }
 
+  export type FloatFilter = {
+    equals?: number
+    in?: Enumerable<number>
+    notIn?: Enumerable<number>
+    lt?: number
+    lte?: number
+    gt?: number
+    gte?: number
+    not?: NestedFloatFilter | number
+  }
+
   export type bookbank_logCountOrderByAggregateInput = {
     id?: SortOrder
     date?: SortOrder
@@ -34641,6 +34625,22 @@ export namespace Prisma {
 
   export type bookbank_logSumOrderByAggregateInput = {
     base_salary?: SortOrder
+  }
+
+  export type FloatWithAggregatesFilter = {
+    equals?: number
+    in?: Enumerable<number>
+    notIn?: Enumerable<number>
+    lt?: number
+    lte?: number
+    gt?: number
+    gte?: number
+    not?: NestedFloatWithAggregatesFilter | number
+    _count?: NestedIntFilter
+    _avg?: NestedFloatFilter
+    _sum?: NestedFloatFilter
+    _min?: NestedFloatFilter
+    _max?: NestedFloatFilter
   }
 
   export type Mas_all_collectRelationFilter = {
@@ -36461,14 +36461,6 @@ export namespace Prisma {
     connect?: mas_yearsWhereUniqueInput
   }
 
-  export type FloatFieldUpdateOperationsInput = {
-    set?: number
-    increment?: number
-    decrement?: number
-    multiply?: number
-    divide?: number
-  }
-
   export type UserUpdateOneWithoutSalaryNestedInput = {
     create?: XOR<UserCreateWithoutSalaryInput, UserUncheckedCreateWithoutSalaryInput>
     connectOrCreate?: UserCreateOrConnectWithoutSalaryInput
@@ -36591,6 +36583,14 @@ export namespace Prisma {
     connectOrCreate?: Enumerable<salaryCreateOrConnectWithoutBookbank_logInput>
     createMany?: salaryCreateManyBookbank_logInputEnvelope
     connect?: Enumerable<salaryWhereUniqueInput>
+  }
+
+  export type FloatFieldUpdateOperationsInput = {
+    set?: number
+    increment?: number
+    decrement?: number
+    multiply?: number
+    divide?: number
   }
 
   export type salaryUpdateManyWithoutBookbank_logNestedInput = {
@@ -38171,28 +38171,28 @@ export namespace Prisma {
 
   export type salaryCreateWithoutUserInput = {
     id: string
-    commission: number
-    position_income: number
-    ot: number
-    bonus: number
-    special_income: number
-    other_income: number
-    travel_income: number
-    bursary: number
-    welfare_money: number
-    vatper: number
-    ss_per: number
-    vat: number
-    social_security: number
-    miss: number
-    ra: number
-    late: number
-    other: number
-    provident_employee: number
-    provident_company: number
-    total_income: number
-    total_expense: number
-    net: number
+    commission?: number | null
+    position_income?: number | null
+    ot?: number | null
+    bonus?: number | null
+    special_income?: number | null
+    other_income?: number | null
+    travel_income?: number | null
+    bursary?: number | null
+    welfare_money?: number | null
+    vatper?: number | null
+    ss_per?: number | null
+    vat?: number | null
+    social_security?: number | null
+    miss?: number | null
+    ra?: number | null
+    late?: number | null
+    other?: number | null
+    provident_employee?: number | null
+    provident_company?: number | null
+    total_income?: number | null
+    total_expense?: number | null
+    net?: number | null
     bookbank_log?: bookbank_logCreateNestedOneWithoutSalaryInput
     mas_month?: mas_monthCreateNestedOneWithoutSalaryInput
     mas_years?: mas_yearsCreateNestedOneWithoutSalaryInput
@@ -38202,28 +38202,28 @@ export namespace Prisma {
     id: string
     mas_monthId?: string | null
     mas_yearsId?: string | null
-    commission: number
-    position_income: number
-    ot: number
-    bonus: number
-    special_income: number
-    other_income: number
-    travel_income: number
-    bursary: number
-    welfare_money: number
-    vatper: number
-    ss_per: number
-    vat: number
-    social_security: number
-    miss: number
-    ra: number
-    late: number
-    other: number
-    provident_employee: number
-    provident_company: number
-    total_income: number
-    total_expense: number
-    net: number
+    commission?: number | null
+    position_income?: number | null
+    ot?: number | null
+    bonus?: number | null
+    special_income?: number | null
+    other_income?: number | null
+    travel_income?: number | null
+    bursary?: number | null
+    welfare_money?: number | null
+    vatper?: number | null
+    ss_per?: number | null
+    vat?: number | null
+    social_security?: number | null
+    miss?: number | null
+    ra?: number | null
+    late?: number | null
+    other?: number | null
+    provident_employee?: number | null
+    provident_company?: number | null
+    total_income?: number | null
+    total_expense?: number | null
+    net?: number | null
     bookbank_logId?: string | null
   }
 
@@ -38640,28 +38640,28 @@ export namespace Prisma {
     id?: UuidFilter | string
     mas_monthId?: UuidNullableFilter | string | null
     mas_yearsId?: UuidNullableFilter | string | null
-    commission?: FloatFilter | number
-    position_income?: FloatFilter | number
-    ot?: FloatFilter | number
-    bonus?: FloatFilter | number
-    special_income?: FloatFilter | number
-    other_income?: FloatFilter | number
-    travel_income?: FloatFilter | number
-    bursary?: FloatFilter | number
-    welfare_money?: FloatFilter | number
-    vatper?: FloatFilter | number
-    ss_per?: FloatFilter | number
-    vat?: FloatFilter | number
-    social_security?: FloatFilter | number
-    miss?: FloatFilter | number
-    ra?: FloatFilter | number
-    late?: FloatFilter | number
-    other?: FloatFilter | number
-    provident_employee?: FloatFilter | number
-    provident_company?: FloatFilter | number
-    total_income?: FloatFilter | number
-    total_expense?: FloatFilter | number
-    net?: FloatFilter | number
+    commission?: FloatNullableFilter | number | null
+    position_income?: FloatNullableFilter | number | null
+    ot?: FloatNullableFilter | number | null
+    bonus?: FloatNullableFilter | number | null
+    special_income?: FloatNullableFilter | number | null
+    other_income?: FloatNullableFilter | number | null
+    travel_income?: FloatNullableFilter | number | null
+    bursary?: FloatNullableFilter | number | null
+    welfare_money?: FloatNullableFilter | number | null
+    vatper?: FloatNullableFilter | number | null
+    ss_per?: FloatNullableFilter | number | null
+    vat?: FloatNullableFilter | number | null
+    social_security?: FloatNullableFilter | number | null
+    miss?: FloatNullableFilter | number | null
+    ra?: FloatNullableFilter | number | null
+    late?: FloatNullableFilter | number | null
+    other?: FloatNullableFilter | number | null
+    provident_employee?: FloatNullableFilter | number | null
+    provident_company?: FloatNullableFilter | number | null
+    total_income?: FloatNullableFilter | number | null
+    total_expense?: FloatNullableFilter | number | null
+    net?: FloatNullableFilter | number | null
     userId?: UuidNullableFilter | string | null
     bookbank_logId?: UuidNullableFilter | string | null
   }
@@ -40444,28 +40444,28 @@ export namespace Prisma {
 
   export type salaryCreateWithoutMas_monthInput = {
     id: string
-    commission: number
-    position_income: number
-    ot: number
-    bonus: number
-    special_income: number
-    other_income: number
-    travel_income: number
-    bursary: number
-    welfare_money: number
-    vatper: number
-    ss_per: number
-    vat: number
-    social_security: number
-    miss: number
-    ra: number
-    late: number
-    other: number
-    provident_employee: number
-    provident_company: number
-    total_income: number
-    total_expense: number
-    net: number
+    commission?: number | null
+    position_income?: number | null
+    ot?: number | null
+    bonus?: number | null
+    special_income?: number | null
+    other_income?: number | null
+    travel_income?: number | null
+    bursary?: number | null
+    welfare_money?: number | null
+    vatper?: number | null
+    ss_per?: number | null
+    vat?: number | null
+    social_security?: number | null
+    miss?: number | null
+    ra?: number | null
+    late?: number | null
+    other?: number | null
+    provident_employee?: number | null
+    provident_company?: number | null
+    total_income?: number | null
+    total_expense?: number | null
+    net?: number | null
     User?: UserCreateNestedOneWithoutSalaryInput
     bookbank_log?: bookbank_logCreateNestedOneWithoutSalaryInput
     mas_years?: mas_yearsCreateNestedOneWithoutSalaryInput
@@ -40474,28 +40474,28 @@ export namespace Prisma {
   export type salaryUncheckedCreateWithoutMas_monthInput = {
     id: string
     mas_yearsId?: string | null
-    commission: number
-    position_income: number
-    ot: number
-    bonus: number
-    special_income: number
-    other_income: number
-    travel_income: number
-    bursary: number
-    welfare_money: number
-    vatper: number
-    ss_per: number
-    vat: number
-    social_security: number
-    miss: number
-    ra: number
-    late: number
-    other: number
-    provident_employee: number
-    provident_company: number
-    total_income: number
-    total_expense: number
-    net: number
+    commission?: number | null
+    position_income?: number | null
+    ot?: number | null
+    bonus?: number | null
+    special_income?: number | null
+    other_income?: number | null
+    travel_income?: number | null
+    bursary?: number | null
+    welfare_money?: number | null
+    vatper?: number | null
+    ss_per?: number | null
+    vat?: number | null
+    social_security?: number | null
+    miss?: number | null
+    ra?: number | null
+    late?: number | null
+    other?: number | null
+    provident_employee?: number | null
+    provident_company?: number | null
+    total_income?: number | null
+    total_expense?: number | null
+    net?: number | null
     userId?: string | null
     bookbank_logId?: string | null
   }
@@ -40544,28 +40544,28 @@ export namespace Prisma {
 
   export type salaryCreateWithoutMas_yearsInput = {
     id: string
-    commission: number
-    position_income: number
-    ot: number
-    bonus: number
-    special_income: number
-    other_income: number
-    travel_income: number
-    bursary: number
-    welfare_money: number
-    vatper: number
-    ss_per: number
-    vat: number
-    social_security: number
-    miss: number
-    ra: number
-    late: number
-    other: number
-    provident_employee: number
-    provident_company: number
-    total_income: number
-    total_expense: number
-    net: number
+    commission?: number | null
+    position_income?: number | null
+    ot?: number | null
+    bonus?: number | null
+    special_income?: number | null
+    other_income?: number | null
+    travel_income?: number | null
+    bursary?: number | null
+    welfare_money?: number | null
+    vatper?: number | null
+    ss_per?: number | null
+    vat?: number | null
+    social_security?: number | null
+    miss?: number | null
+    ra?: number | null
+    late?: number | null
+    other?: number | null
+    provident_employee?: number | null
+    provident_company?: number | null
+    total_income?: number | null
+    total_expense?: number | null
+    net?: number | null
     User?: UserCreateNestedOneWithoutSalaryInput
     bookbank_log?: bookbank_logCreateNestedOneWithoutSalaryInput
     mas_month?: mas_monthCreateNestedOneWithoutSalaryInput
@@ -40574,28 +40574,28 @@ export namespace Prisma {
   export type salaryUncheckedCreateWithoutMas_yearsInput = {
     id: string
     mas_monthId?: string | null
-    commission: number
-    position_income: number
-    ot: number
-    bonus: number
-    special_income: number
-    other_income: number
-    travel_income: number
-    bursary: number
-    welfare_money: number
-    vatper: number
-    ss_per: number
-    vat: number
-    social_security: number
-    miss: number
-    ra: number
-    late: number
-    other: number
-    provident_employee: number
-    provident_company: number
-    total_income: number
-    total_expense: number
-    net: number
+    commission?: number | null
+    position_income?: number | null
+    ot?: number | null
+    bonus?: number | null
+    special_income?: number | null
+    other_income?: number | null
+    travel_income?: number | null
+    bursary?: number | null
+    welfare_money?: number | null
+    vatper?: number | null
+    ss_per?: number | null
+    vat?: number | null
+    social_security?: number | null
+    miss?: number | null
+    ra?: number | null
+    late?: number | null
+    other?: number | null
+    provident_employee?: number | null
+    provident_company?: number | null
+    total_income?: number | null
+    total_expense?: number | null
+    net?: number | null
     userId?: string | null
     bookbank_logId?: string | null
   }
@@ -41182,28 +41182,28 @@ export namespace Prisma {
 
   export type salaryCreateWithoutBookbank_logInput = {
     id: string
-    commission: number
-    position_income: number
-    ot: number
-    bonus: number
-    special_income: number
-    other_income: number
-    travel_income: number
-    bursary: number
-    welfare_money: number
-    vatper: number
-    ss_per: number
-    vat: number
-    social_security: number
-    miss: number
-    ra: number
-    late: number
-    other: number
-    provident_employee: number
-    provident_company: number
-    total_income: number
-    total_expense: number
-    net: number
+    commission?: number | null
+    position_income?: number | null
+    ot?: number | null
+    bonus?: number | null
+    special_income?: number | null
+    other_income?: number | null
+    travel_income?: number | null
+    bursary?: number | null
+    welfare_money?: number | null
+    vatper?: number | null
+    ss_per?: number | null
+    vat?: number | null
+    social_security?: number | null
+    miss?: number | null
+    ra?: number | null
+    late?: number | null
+    other?: number | null
+    provident_employee?: number | null
+    provident_company?: number | null
+    total_income?: number | null
+    total_expense?: number | null
+    net?: number | null
     User?: UserCreateNestedOneWithoutSalaryInput
     mas_month?: mas_monthCreateNestedOneWithoutSalaryInput
     mas_years?: mas_yearsCreateNestedOneWithoutSalaryInput
@@ -41213,28 +41213,28 @@ export namespace Prisma {
     id: string
     mas_monthId?: string | null
     mas_yearsId?: string | null
-    commission: number
-    position_income: number
-    ot: number
-    bonus: number
-    special_income: number
-    other_income: number
-    travel_income: number
-    bursary: number
-    welfare_money: number
-    vatper: number
-    ss_per: number
-    vat: number
-    social_security: number
-    miss: number
-    ra: number
-    late: number
-    other: number
-    provident_employee: number
-    provident_company: number
-    total_income: number
-    total_expense: number
-    net: number
+    commission?: number | null
+    position_income?: number | null
+    ot?: number | null
+    bonus?: number | null
+    special_income?: number | null
+    other_income?: number | null
+    travel_income?: number | null
+    bursary?: number | null
+    welfare_money?: number | null
+    vatper?: number | null
+    ss_per?: number | null
+    vat?: number | null
+    social_security?: number | null
+    miss?: number | null
+    ra?: number | null
+    late?: number | null
+    other?: number | null
+    provident_employee?: number | null
+    provident_company?: number | null
+    total_income?: number | null
+    total_expense?: number | null
+    net?: number | null
     userId?: string | null
   }
 
@@ -41997,28 +41997,28 @@ export namespace Prisma {
     id: string
     mas_monthId?: string | null
     mas_yearsId?: string | null
-    commission: number
-    position_income: number
-    ot: number
-    bonus: number
-    special_income: number
-    other_income: number
-    travel_income: number
-    bursary: number
-    welfare_money: number
-    vatper: number
-    ss_per: number
-    vat: number
-    social_security: number
-    miss: number
-    ra: number
-    late: number
-    other: number
-    provident_employee: number
-    provident_company: number
-    total_income: number
-    total_expense: number
-    net: number
+    commission?: number | null
+    position_income?: number | null
+    ot?: number | null
+    bonus?: number | null
+    special_income?: number | null
+    other_income?: number | null
+    travel_income?: number | null
+    bursary?: number | null
+    welfare_money?: number | null
+    vatper?: number | null
+    ss_per?: number | null
+    vat?: number | null
+    social_security?: number | null
+    miss?: number | null
+    ra?: number | null
+    late?: number | null
+    other?: number | null
+    provident_employee?: number | null
+    provident_company?: number | null
+    total_income?: number | null
+    total_expense?: number | null
+    net?: number | null
     bookbank_logId?: string | null
   }
 
@@ -42148,28 +42148,28 @@ export namespace Prisma {
 
   export type salaryUpdateWithoutUserInput = {
     id?: StringFieldUpdateOperationsInput | string
-    commission?: FloatFieldUpdateOperationsInput | number
-    position_income?: FloatFieldUpdateOperationsInput | number
-    ot?: FloatFieldUpdateOperationsInput | number
-    bonus?: FloatFieldUpdateOperationsInput | number
-    special_income?: FloatFieldUpdateOperationsInput | number
-    other_income?: FloatFieldUpdateOperationsInput | number
-    travel_income?: FloatFieldUpdateOperationsInput | number
-    bursary?: FloatFieldUpdateOperationsInput | number
-    welfare_money?: FloatFieldUpdateOperationsInput | number
-    vatper?: FloatFieldUpdateOperationsInput | number
-    ss_per?: FloatFieldUpdateOperationsInput | number
-    vat?: FloatFieldUpdateOperationsInput | number
-    social_security?: FloatFieldUpdateOperationsInput | number
-    miss?: FloatFieldUpdateOperationsInput | number
-    ra?: FloatFieldUpdateOperationsInput | number
-    late?: FloatFieldUpdateOperationsInput | number
-    other?: FloatFieldUpdateOperationsInput | number
-    provident_employee?: FloatFieldUpdateOperationsInput | number
-    provident_company?: FloatFieldUpdateOperationsInput | number
-    total_income?: FloatFieldUpdateOperationsInput | number
-    total_expense?: FloatFieldUpdateOperationsInput | number
-    net?: FloatFieldUpdateOperationsInput | number
+    commission?: NullableFloatFieldUpdateOperationsInput | number | null
+    position_income?: NullableFloatFieldUpdateOperationsInput | number | null
+    ot?: NullableFloatFieldUpdateOperationsInput | number | null
+    bonus?: NullableFloatFieldUpdateOperationsInput | number | null
+    special_income?: NullableFloatFieldUpdateOperationsInput | number | null
+    other_income?: NullableFloatFieldUpdateOperationsInput | number | null
+    travel_income?: NullableFloatFieldUpdateOperationsInput | number | null
+    bursary?: NullableFloatFieldUpdateOperationsInput | number | null
+    welfare_money?: NullableFloatFieldUpdateOperationsInput | number | null
+    vatper?: NullableFloatFieldUpdateOperationsInput | number | null
+    ss_per?: NullableFloatFieldUpdateOperationsInput | number | null
+    vat?: NullableFloatFieldUpdateOperationsInput | number | null
+    social_security?: NullableFloatFieldUpdateOperationsInput | number | null
+    miss?: NullableFloatFieldUpdateOperationsInput | number | null
+    ra?: NullableFloatFieldUpdateOperationsInput | number | null
+    late?: NullableFloatFieldUpdateOperationsInput | number | null
+    other?: NullableFloatFieldUpdateOperationsInput | number | null
+    provident_employee?: NullableFloatFieldUpdateOperationsInput | number | null
+    provident_company?: NullableFloatFieldUpdateOperationsInput | number | null
+    total_income?: NullableFloatFieldUpdateOperationsInput | number | null
+    total_expense?: NullableFloatFieldUpdateOperationsInput | number | null
+    net?: NullableFloatFieldUpdateOperationsInput | number | null
     bookbank_log?: bookbank_logUpdateOneWithoutSalaryNestedInput
     mas_month?: mas_monthUpdateOneWithoutSalaryNestedInput
     mas_years?: mas_yearsUpdateOneWithoutSalaryNestedInput
@@ -42179,28 +42179,28 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     mas_monthId?: NullableStringFieldUpdateOperationsInput | string | null
     mas_yearsId?: NullableStringFieldUpdateOperationsInput | string | null
-    commission?: FloatFieldUpdateOperationsInput | number
-    position_income?: FloatFieldUpdateOperationsInput | number
-    ot?: FloatFieldUpdateOperationsInput | number
-    bonus?: FloatFieldUpdateOperationsInput | number
-    special_income?: FloatFieldUpdateOperationsInput | number
-    other_income?: FloatFieldUpdateOperationsInput | number
-    travel_income?: FloatFieldUpdateOperationsInput | number
-    bursary?: FloatFieldUpdateOperationsInput | number
-    welfare_money?: FloatFieldUpdateOperationsInput | number
-    vatper?: FloatFieldUpdateOperationsInput | number
-    ss_per?: FloatFieldUpdateOperationsInput | number
-    vat?: FloatFieldUpdateOperationsInput | number
-    social_security?: FloatFieldUpdateOperationsInput | number
-    miss?: FloatFieldUpdateOperationsInput | number
-    ra?: FloatFieldUpdateOperationsInput | number
-    late?: FloatFieldUpdateOperationsInput | number
-    other?: FloatFieldUpdateOperationsInput | number
-    provident_employee?: FloatFieldUpdateOperationsInput | number
-    provident_company?: FloatFieldUpdateOperationsInput | number
-    total_income?: FloatFieldUpdateOperationsInput | number
-    total_expense?: FloatFieldUpdateOperationsInput | number
-    net?: FloatFieldUpdateOperationsInput | number
+    commission?: NullableFloatFieldUpdateOperationsInput | number | null
+    position_income?: NullableFloatFieldUpdateOperationsInput | number | null
+    ot?: NullableFloatFieldUpdateOperationsInput | number | null
+    bonus?: NullableFloatFieldUpdateOperationsInput | number | null
+    special_income?: NullableFloatFieldUpdateOperationsInput | number | null
+    other_income?: NullableFloatFieldUpdateOperationsInput | number | null
+    travel_income?: NullableFloatFieldUpdateOperationsInput | number | null
+    bursary?: NullableFloatFieldUpdateOperationsInput | number | null
+    welfare_money?: NullableFloatFieldUpdateOperationsInput | number | null
+    vatper?: NullableFloatFieldUpdateOperationsInput | number | null
+    ss_per?: NullableFloatFieldUpdateOperationsInput | number | null
+    vat?: NullableFloatFieldUpdateOperationsInput | number | null
+    social_security?: NullableFloatFieldUpdateOperationsInput | number | null
+    miss?: NullableFloatFieldUpdateOperationsInput | number | null
+    ra?: NullableFloatFieldUpdateOperationsInput | number | null
+    late?: NullableFloatFieldUpdateOperationsInput | number | null
+    other?: NullableFloatFieldUpdateOperationsInput | number | null
+    provident_employee?: NullableFloatFieldUpdateOperationsInput | number | null
+    provident_company?: NullableFloatFieldUpdateOperationsInput | number | null
+    total_income?: NullableFloatFieldUpdateOperationsInput | number | null
+    total_expense?: NullableFloatFieldUpdateOperationsInput | number | null
+    net?: NullableFloatFieldUpdateOperationsInput | number | null
     bookbank_logId?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
@@ -42208,28 +42208,28 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     mas_monthId?: NullableStringFieldUpdateOperationsInput | string | null
     mas_yearsId?: NullableStringFieldUpdateOperationsInput | string | null
-    commission?: FloatFieldUpdateOperationsInput | number
-    position_income?: FloatFieldUpdateOperationsInput | number
-    ot?: FloatFieldUpdateOperationsInput | number
-    bonus?: FloatFieldUpdateOperationsInput | number
-    special_income?: FloatFieldUpdateOperationsInput | number
-    other_income?: FloatFieldUpdateOperationsInput | number
-    travel_income?: FloatFieldUpdateOperationsInput | number
-    bursary?: FloatFieldUpdateOperationsInput | number
-    welfare_money?: FloatFieldUpdateOperationsInput | number
-    vatper?: FloatFieldUpdateOperationsInput | number
-    ss_per?: FloatFieldUpdateOperationsInput | number
-    vat?: FloatFieldUpdateOperationsInput | number
-    social_security?: FloatFieldUpdateOperationsInput | number
-    miss?: FloatFieldUpdateOperationsInput | number
-    ra?: FloatFieldUpdateOperationsInput | number
-    late?: FloatFieldUpdateOperationsInput | number
-    other?: FloatFieldUpdateOperationsInput | number
-    provident_employee?: FloatFieldUpdateOperationsInput | number
-    provident_company?: FloatFieldUpdateOperationsInput | number
-    total_income?: FloatFieldUpdateOperationsInput | number
-    total_expense?: FloatFieldUpdateOperationsInput | number
-    net?: FloatFieldUpdateOperationsInput | number
+    commission?: NullableFloatFieldUpdateOperationsInput | number | null
+    position_income?: NullableFloatFieldUpdateOperationsInput | number | null
+    ot?: NullableFloatFieldUpdateOperationsInput | number | null
+    bonus?: NullableFloatFieldUpdateOperationsInput | number | null
+    special_income?: NullableFloatFieldUpdateOperationsInput | number | null
+    other_income?: NullableFloatFieldUpdateOperationsInput | number | null
+    travel_income?: NullableFloatFieldUpdateOperationsInput | number | null
+    bursary?: NullableFloatFieldUpdateOperationsInput | number | null
+    welfare_money?: NullableFloatFieldUpdateOperationsInput | number | null
+    vatper?: NullableFloatFieldUpdateOperationsInput | number | null
+    ss_per?: NullableFloatFieldUpdateOperationsInput | number | null
+    vat?: NullableFloatFieldUpdateOperationsInput | number | null
+    social_security?: NullableFloatFieldUpdateOperationsInput | number | null
+    miss?: NullableFloatFieldUpdateOperationsInput | number | null
+    ra?: NullableFloatFieldUpdateOperationsInput | number | null
+    late?: NullableFloatFieldUpdateOperationsInput | number | null
+    other?: NullableFloatFieldUpdateOperationsInput | number | null
+    provident_employee?: NullableFloatFieldUpdateOperationsInput | number | null
+    provident_company?: NullableFloatFieldUpdateOperationsInput | number | null
+    total_income?: NullableFloatFieldUpdateOperationsInput | number | null
+    total_expense?: NullableFloatFieldUpdateOperationsInput | number | null
+    net?: NullableFloatFieldUpdateOperationsInput | number | null
     bookbank_logId?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
@@ -42696,28 +42696,28 @@ export namespace Prisma {
   export type salaryCreateManyMas_monthInput = {
     id: string
     mas_yearsId?: string | null
-    commission: number
-    position_income: number
-    ot: number
-    bonus: number
-    special_income: number
-    other_income: number
-    travel_income: number
-    bursary: number
-    welfare_money: number
-    vatper: number
-    ss_per: number
-    vat: number
-    social_security: number
-    miss: number
-    ra: number
-    late: number
-    other: number
-    provident_employee: number
-    provident_company: number
-    total_income: number
-    total_expense: number
-    net: number
+    commission?: number | null
+    position_income?: number | null
+    ot?: number | null
+    bonus?: number | null
+    special_income?: number | null
+    other_income?: number | null
+    travel_income?: number | null
+    bursary?: number | null
+    welfare_money?: number | null
+    vatper?: number | null
+    ss_per?: number | null
+    vat?: number | null
+    social_security?: number | null
+    miss?: number | null
+    ra?: number | null
+    late?: number | null
+    other?: number | null
+    provident_employee?: number | null
+    provident_company?: number | null
+    total_income?: number | null
+    total_expense?: number | null
+    net?: number | null
     userId?: string | null
     bookbank_logId?: string | null
   }
@@ -42740,28 +42740,28 @@ export namespace Prisma {
 
   export type salaryUpdateWithoutMas_monthInput = {
     id?: StringFieldUpdateOperationsInput | string
-    commission?: FloatFieldUpdateOperationsInput | number
-    position_income?: FloatFieldUpdateOperationsInput | number
-    ot?: FloatFieldUpdateOperationsInput | number
-    bonus?: FloatFieldUpdateOperationsInput | number
-    special_income?: FloatFieldUpdateOperationsInput | number
-    other_income?: FloatFieldUpdateOperationsInput | number
-    travel_income?: FloatFieldUpdateOperationsInput | number
-    bursary?: FloatFieldUpdateOperationsInput | number
-    welfare_money?: FloatFieldUpdateOperationsInput | number
-    vatper?: FloatFieldUpdateOperationsInput | number
-    ss_per?: FloatFieldUpdateOperationsInput | number
-    vat?: FloatFieldUpdateOperationsInput | number
-    social_security?: FloatFieldUpdateOperationsInput | number
-    miss?: FloatFieldUpdateOperationsInput | number
-    ra?: FloatFieldUpdateOperationsInput | number
-    late?: FloatFieldUpdateOperationsInput | number
-    other?: FloatFieldUpdateOperationsInput | number
-    provident_employee?: FloatFieldUpdateOperationsInput | number
-    provident_company?: FloatFieldUpdateOperationsInput | number
-    total_income?: FloatFieldUpdateOperationsInput | number
-    total_expense?: FloatFieldUpdateOperationsInput | number
-    net?: FloatFieldUpdateOperationsInput | number
+    commission?: NullableFloatFieldUpdateOperationsInput | number | null
+    position_income?: NullableFloatFieldUpdateOperationsInput | number | null
+    ot?: NullableFloatFieldUpdateOperationsInput | number | null
+    bonus?: NullableFloatFieldUpdateOperationsInput | number | null
+    special_income?: NullableFloatFieldUpdateOperationsInput | number | null
+    other_income?: NullableFloatFieldUpdateOperationsInput | number | null
+    travel_income?: NullableFloatFieldUpdateOperationsInput | number | null
+    bursary?: NullableFloatFieldUpdateOperationsInput | number | null
+    welfare_money?: NullableFloatFieldUpdateOperationsInput | number | null
+    vatper?: NullableFloatFieldUpdateOperationsInput | number | null
+    ss_per?: NullableFloatFieldUpdateOperationsInput | number | null
+    vat?: NullableFloatFieldUpdateOperationsInput | number | null
+    social_security?: NullableFloatFieldUpdateOperationsInput | number | null
+    miss?: NullableFloatFieldUpdateOperationsInput | number | null
+    ra?: NullableFloatFieldUpdateOperationsInput | number | null
+    late?: NullableFloatFieldUpdateOperationsInput | number | null
+    other?: NullableFloatFieldUpdateOperationsInput | number | null
+    provident_employee?: NullableFloatFieldUpdateOperationsInput | number | null
+    provident_company?: NullableFloatFieldUpdateOperationsInput | number | null
+    total_income?: NullableFloatFieldUpdateOperationsInput | number | null
+    total_expense?: NullableFloatFieldUpdateOperationsInput | number | null
+    net?: NullableFloatFieldUpdateOperationsInput | number | null
     User?: UserUpdateOneWithoutSalaryNestedInput
     bookbank_log?: bookbank_logUpdateOneWithoutSalaryNestedInput
     mas_years?: mas_yearsUpdateOneWithoutSalaryNestedInput
@@ -42770,28 +42770,28 @@ export namespace Prisma {
   export type salaryUncheckedUpdateWithoutMas_monthInput = {
     id?: StringFieldUpdateOperationsInput | string
     mas_yearsId?: NullableStringFieldUpdateOperationsInput | string | null
-    commission?: FloatFieldUpdateOperationsInput | number
-    position_income?: FloatFieldUpdateOperationsInput | number
-    ot?: FloatFieldUpdateOperationsInput | number
-    bonus?: FloatFieldUpdateOperationsInput | number
-    special_income?: FloatFieldUpdateOperationsInput | number
-    other_income?: FloatFieldUpdateOperationsInput | number
-    travel_income?: FloatFieldUpdateOperationsInput | number
-    bursary?: FloatFieldUpdateOperationsInput | number
-    welfare_money?: FloatFieldUpdateOperationsInput | number
-    vatper?: FloatFieldUpdateOperationsInput | number
-    ss_per?: FloatFieldUpdateOperationsInput | number
-    vat?: FloatFieldUpdateOperationsInput | number
-    social_security?: FloatFieldUpdateOperationsInput | number
-    miss?: FloatFieldUpdateOperationsInput | number
-    ra?: FloatFieldUpdateOperationsInput | number
-    late?: FloatFieldUpdateOperationsInput | number
-    other?: FloatFieldUpdateOperationsInput | number
-    provident_employee?: FloatFieldUpdateOperationsInput | number
-    provident_company?: FloatFieldUpdateOperationsInput | number
-    total_income?: FloatFieldUpdateOperationsInput | number
-    total_expense?: FloatFieldUpdateOperationsInput | number
-    net?: FloatFieldUpdateOperationsInput | number
+    commission?: NullableFloatFieldUpdateOperationsInput | number | null
+    position_income?: NullableFloatFieldUpdateOperationsInput | number | null
+    ot?: NullableFloatFieldUpdateOperationsInput | number | null
+    bonus?: NullableFloatFieldUpdateOperationsInput | number | null
+    special_income?: NullableFloatFieldUpdateOperationsInput | number | null
+    other_income?: NullableFloatFieldUpdateOperationsInput | number | null
+    travel_income?: NullableFloatFieldUpdateOperationsInput | number | null
+    bursary?: NullableFloatFieldUpdateOperationsInput | number | null
+    welfare_money?: NullableFloatFieldUpdateOperationsInput | number | null
+    vatper?: NullableFloatFieldUpdateOperationsInput | number | null
+    ss_per?: NullableFloatFieldUpdateOperationsInput | number | null
+    vat?: NullableFloatFieldUpdateOperationsInput | number | null
+    social_security?: NullableFloatFieldUpdateOperationsInput | number | null
+    miss?: NullableFloatFieldUpdateOperationsInput | number | null
+    ra?: NullableFloatFieldUpdateOperationsInput | number | null
+    late?: NullableFloatFieldUpdateOperationsInput | number | null
+    other?: NullableFloatFieldUpdateOperationsInput | number | null
+    provident_employee?: NullableFloatFieldUpdateOperationsInput | number | null
+    provident_company?: NullableFloatFieldUpdateOperationsInput | number | null
+    total_income?: NullableFloatFieldUpdateOperationsInput | number | null
+    total_expense?: NullableFloatFieldUpdateOperationsInput | number | null
+    net?: NullableFloatFieldUpdateOperationsInput | number | null
     userId?: NullableStringFieldUpdateOperationsInput | string | null
     bookbank_logId?: NullableStringFieldUpdateOperationsInput | string | null
   }
@@ -42799,56 +42799,56 @@ export namespace Prisma {
   export type salaryCreateManyMas_yearsInput = {
     id: string
     mas_monthId?: string | null
-    commission: number
-    position_income: number
-    ot: number
-    bonus: number
-    special_income: number
-    other_income: number
-    travel_income: number
-    bursary: number
-    welfare_money: number
-    vatper: number
-    ss_per: number
-    vat: number
-    social_security: number
-    miss: number
-    ra: number
-    late: number
-    other: number
-    provident_employee: number
-    provident_company: number
-    total_income: number
-    total_expense: number
-    net: number
+    commission?: number | null
+    position_income?: number | null
+    ot?: number | null
+    bonus?: number | null
+    special_income?: number | null
+    other_income?: number | null
+    travel_income?: number | null
+    bursary?: number | null
+    welfare_money?: number | null
+    vatper?: number | null
+    ss_per?: number | null
+    vat?: number | null
+    social_security?: number | null
+    miss?: number | null
+    ra?: number | null
+    late?: number | null
+    other?: number | null
+    provident_employee?: number | null
+    provident_company?: number | null
+    total_income?: number | null
+    total_expense?: number | null
+    net?: number | null
     userId?: string | null
     bookbank_logId?: string | null
   }
 
   export type salaryUpdateWithoutMas_yearsInput = {
     id?: StringFieldUpdateOperationsInput | string
-    commission?: FloatFieldUpdateOperationsInput | number
-    position_income?: FloatFieldUpdateOperationsInput | number
-    ot?: FloatFieldUpdateOperationsInput | number
-    bonus?: FloatFieldUpdateOperationsInput | number
-    special_income?: FloatFieldUpdateOperationsInput | number
-    other_income?: FloatFieldUpdateOperationsInput | number
-    travel_income?: FloatFieldUpdateOperationsInput | number
-    bursary?: FloatFieldUpdateOperationsInput | number
-    welfare_money?: FloatFieldUpdateOperationsInput | number
-    vatper?: FloatFieldUpdateOperationsInput | number
-    ss_per?: FloatFieldUpdateOperationsInput | number
-    vat?: FloatFieldUpdateOperationsInput | number
-    social_security?: FloatFieldUpdateOperationsInput | number
-    miss?: FloatFieldUpdateOperationsInput | number
-    ra?: FloatFieldUpdateOperationsInput | number
-    late?: FloatFieldUpdateOperationsInput | number
-    other?: FloatFieldUpdateOperationsInput | number
-    provident_employee?: FloatFieldUpdateOperationsInput | number
-    provident_company?: FloatFieldUpdateOperationsInput | number
-    total_income?: FloatFieldUpdateOperationsInput | number
-    total_expense?: FloatFieldUpdateOperationsInput | number
-    net?: FloatFieldUpdateOperationsInput | number
+    commission?: NullableFloatFieldUpdateOperationsInput | number | null
+    position_income?: NullableFloatFieldUpdateOperationsInput | number | null
+    ot?: NullableFloatFieldUpdateOperationsInput | number | null
+    bonus?: NullableFloatFieldUpdateOperationsInput | number | null
+    special_income?: NullableFloatFieldUpdateOperationsInput | number | null
+    other_income?: NullableFloatFieldUpdateOperationsInput | number | null
+    travel_income?: NullableFloatFieldUpdateOperationsInput | number | null
+    bursary?: NullableFloatFieldUpdateOperationsInput | number | null
+    welfare_money?: NullableFloatFieldUpdateOperationsInput | number | null
+    vatper?: NullableFloatFieldUpdateOperationsInput | number | null
+    ss_per?: NullableFloatFieldUpdateOperationsInput | number | null
+    vat?: NullableFloatFieldUpdateOperationsInput | number | null
+    social_security?: NullableFloatFieldUpdateOperationsInput | number | null
+    miss?: NullableFloatFieldUpdateOperationsInput | number | null
+    ra?: NullableFloatFieldUpdateOperationsInput | number | null
+    late?: NullableFloatFieldUpdateOperationsInput | number | null
+    other?: NullableFloatFieldUpdateOperationsInput | number | null
+    provident_employee?: NullableFloatFieldUpdateOperationsInput | number | null
+    provident_company?: NullableFloatFieldUpdateOperationsInput | number | null
+    total_income?: NullableFloatFieldUpdateOperationsInput | number | null
+    total_expense?: NullableFloatFieldUpdateOperationsInput | number | null
+    net?: NullableFloatFieldUpdateOperationsInput | number | null
     User?: UserUpdateOneWithoutSalaryNestedInput
     bookbank_log?: bookbank_logUpdateOneWithoutSalaryNestedInput
     mas_month?: mas_monthUpdateOneWithoutSalaryNestedInput
@@ -42857,28 +42857,28 @@ export namespace Prisma {
   export type salaryUncheckedUpdateWithoutMas_yearsInput = {
     id?: StringFieldUpdateOperationsInput | string
     mas_monthId?: NullableStringFieldUpdateOperationsInput | string | null
-    commission?: FloatFieldUpdateOperationsInput | number
-    position_income?: FloatFieldUpdateOperationsInput | number
-    ot?: FloatFieldUpdateOperationsInput | number
-    bonus?: FloatFieldUpdateOperationsInput | number
-    special_income?: FloatFieldUpdateOperationsInput | number
-    other_income?: FloatFieldUpdateOperationsInput | number
-    travel_income?: FloatFieldUpdateOperationsInput | number
-    bursary?: FloatFieldUpdateOperationsInput | number
-    welfare_money?: FloatFieldUpdateOperationsInput | number
-    vatper?: FloatFieldUpdateOperationsInput | number
-    ss_per?: FloatFieldUpdateOperationsInput | number
-    vat?: FloatFieldUpdateOperationsInput | number
-    social_security?: FloatFieldUpdateOperationsInput | number
-    miss?: FloatFieldUpdateOperationsInput | number
-    ra?: FloatFieldUpdateOperationsInput | number
-    late?: FloatFieldUpdateOperationsInput | number
-    other?: FloatFieldUpdateOperationsInput | number
-    provident_employee?: FloatFieldUpdateOperationsInput | number
-    provident_company?: FloatFieldUpdateOperationsInput | number
-    total_income?: FloatFieldUpdateOperationsInput | number
-    total_expense?: FloatFieldUpdateOperationsInput | number
-    net?: FloatFieldUpdateOperationsInput | number
+    commission?: NullableFloatFieldUpdateOperationsInput | number | null
+    position_income?: NullableFloatFieldUpdateOperationsInput | number | null
+    ot?: NullableFloatFieldUpdateOperationsInput | number | null
+    bonus?: NullableFloatFieldUpdateOperationsInput | number | null
+    special_income?: NullableFloatFieldUpdateOperationsInput | number | null
+    other_income?: NullableFloatFieldUpdateOperationsInput | number | null
+    travel_income?: NullableFloatFieldUpdateOperationsInput | number | null
+    bursary?: NullableFloatFieldUpdateOperationsInput | number | null
+    welfare_money?: NullableFloatFieldUpdateOperationsInput | number | null
+    vatper?: NullableFloatFieldUpdateOperationsInput | number | null
+    ss_per?: NullableFloatFieldUpdateOperationsInput | number | null
+    vat?: NullableFloatFieldUpdateOperationsInput | number | null
+    social_security?: NullableFloatFieldUpdateOperationsInput | number | null
+    miss?: NullableFloatFieldUpdateOperationsInput | number | null
+    ra?: NullableFloatFieldUpdateOperationsInput | number | null
+    late?: NullableFloatFieldUpdateOperationsInput | number | null
+    other?: NullableFloatFieldUpdateOperationsInput | number | null
+    provident_employee?: NullableFloatFieldUpdateOperationsInput | number | null
+    provident_company?: NullableFloatFieldUpdateOperationsInput | number | null
+    total_income?: NullableFloatFieldUpdateOperationsInput | number | null
+    total_expense?: NullableFloatFieldUpdateOperationsInput | number | null
+    net?: NullableFloatFieldUpdateOperationsInput | number | null
     userId?: NullableStringFieldUpdateOperationsInput | string | null
     bookbank_logId?: NullableStringFieldUpdateOperationsInput | string | null
   }
@@ -42911,55 +42911,55 @@ export namespace Prisma {
     id: string
     mas_monthId?: string | null
     mas_yearsId?: string | null
-    commission: number
-    position_income: number
-    ot: number
-    bonus: number
-    special_income: number
-    other_income: number
-    travel_income: number
-    bursary: number
-    welfare_money: number
-    vatper: number
-    ss_per: number
-    vat: number
-    social_security: number
-    miss: number
-    ra: number
-    late: number
-    other: number
-    provident_employee: number
-    provident_company: number
-    total_income: number
-    total_expense: number
-    net: number
+    commission?: number | null
+    position_income?: number | null
+    ot?: number | null
+    bonus?: number | null
+    special_income?: number | null
+    other_income?: number | null
+    travel_income?: number | null
+    bursary?: number | null
+    welfare_money?: number | null
+    vatper?: number | null
+    ss_per?: number | null
+    vat?: number | null
+    social_security?: number | null
+    miss?: number | null
+    ra?: number | null
+    late?: number | null
+    other?: number | null
+    provident_employee?: number | null
+    provident_company?: number | null
+    total_income?: number | null
+    total_expense?: number | null
+    net?: number | null
     userId?: string | null
   }
 
   export type salaryUpdateWithoutBookbank_logInput = {
     id?: StringFieldUpdateOperationsInput | string
-    commission?: FloatFieldUpdateOperationsInput | number
-    position_income?: FloatFieldUpdateOperationsInput | number
-    ot?: FloatFieldUpdateOperationsInput | number
-    bonus?: FloatFieldUpdateOperationsInput | number
-    special_income?: FloatFieldUpdateOperationsInput | number
-    other_income?: FloatFieldUpdateOperationsInput | number
-    travel_income?: FloatFieldUpdateOperationsInput | number
-    bursary?: FloatFieldUpdateOperationsInput | number
-    welfare_money?: FloatFieldUpdateOperationsInput | number
-    vatper?: FloatFieldUpdateOperationsInput | number
-    ss_per?: FloatFieldUpdateOperationsInput | number
-    vat?: FloatFieldUpdateOperationsInput | number
-    social_security?: FloatFieldUpdateOperationsInput | number
-    miss?: FloatFieldUpdateOperationsInput | number
-    ra?: FloatFieldUpdateOperationsInput | number
-    late?: FloatFieldUpdateOperationsInput | number
-    other?: FloatFieldUpdateOperationsInput | number
-    provident_employee?: FloatFieldUpdateOperationsInput | number
-    provident_company?: FloatFieldUpdateOperationsInput | number
-    total_income?: FloatFieldUpdateOperationsInput | number
-    total_expense?: FloatFieldUpdateOperationsInput | number
-    net?: FloatFieldUpdateOperationsInput | number
+    commission?: NullableFloatFieldUpdateOperationsInput | number | null
+    position_income?: NullableFloatFieldUpdateOperationsInput | number | null
+    ot?: NullableFloatFieldUpdateOperationsInput | number | null
+    bonus?: NullableFloatFieldUpdateOperationsInput | number | null
+    special_income?: NullableFloatFieldUpdateOperationsInput | number | null
+    other_income?: NullableFloatFieldUpdateOperationsInput | number | null
+    travel_income?: NullableFloatFieldUpdateOperationsInput | number | null
+    bursary?: NullableFloatFieldUpdateOperationsInput | number | null
+    welfare_money?: NullableFloatFieldUpdateOperationsInput | number | null
+    vatper?: NullableFloatFieldUpdateOperationsInput | number | null
+    ss_per?: NullableFloatFieldUpdateOperationsInput | number | null
+    vat?: NullableFloatFieldUpdateOperationsInput | number | null
+    social_security?: NullableFloatFieldUpdateOperationsInput | number | null
+    miss?: NullableFloatFieldUpdateOperationsInput | number | null
+    ra?: NullableFloatFieldUpdateOperationsInput | number | null
+    late?: NullableFloatFieldUpdateOperationsInput | number | null
+    other?: NullableFloatFieldUpdateOperationsInput | number | null
+    provident_employee?: NullableFloatFieldUpdateOperationsInput | number | null
+    provident_company?: NullableFloatFieldUpdateOperationsInput | number | null
+    total_income?: NullableFloatFieldUpdateOperationsInput | number | null
+    total_expense?: NullableFloatFieldUpdateOperationsInput | number | null
+    net?: NullableFloatFieldUpdateOperationsInput | number | null
     User?: UserUpdateOneWithoutSalaryNestedInput
     mas_month?: mas_monthUpdateOneWithoutSalaryNestedInput
     mas_years?: mas_yearsUpdateOneWithoutSalaryNestedInput
@@ -42969,28 +42969,28 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     mas_monthId?: NullableStringFieldUpdateOperationsInput | string | null
     mas_yearsId?: NullableStringFieldUpdateOperationsInput | string | null
-    commission?: FloatFieldUpdateOperationsInput | number
-    position_income?: FloatFieldUpdateOperationsInput | number
-    ot?: FloatFieldUpdateOperationsInput | number
-    bonus?: FloatFieldUpdateOperationsInput | number
-    special_income?: FloatFieldUpdateOperationsInput | number
-    other_income?: FloatFieldUpdateOperationsInput | number
-    travel_income?: FloatFieldUpdateOperationsInput | number
-    bursary?: FloatFieldUpdateOperationsInput | number
-    welfare_money?: FloatFieldUpdateOperationsInput | number
-    vatper?: FloatFieldUpdateOperationsInput | number
-    ss_per?: FloatFieldUpdateOperationsInput | number
-    vat?: FloatFieldUpdateOperationsInput | number
-    social_security?: FloatFieldUpdateOperationsInput | number
-    miss?: FloatFieldUpdateOperationsInput | number
-    ra?: FloatFieldUpdateOperationsInput | number
-    late?: FloatFieldUpdateOperationsInput | number
-    other?: FloatFieldUpdateOperationsInput | number
-    provident_employee?: FloatFieldUpdateOperationsInput | number
-    provident_company?: FloatFieldUpdateOperationsInput | number
-    total_income?: FloatFieldUpdateOperationsInput | number
-    total_expense?: FloatFieldUpdateOperationsInput | number
-    net?: FloatFieldUpdateOperationsInput | number
+    commission?: NullableFloatFieldUpdateOperationsInput | number | null
+    position_income?: NullableFloatFieldUpdateOperationsInput | number | null
+    ot?: NullableFloatFieldUpdateOperationsInput | number | null
+    bonus?: NullableFloatFieldUpdateOperationsInput | number | null
+    special_income?: NullableFloatFieldUpdateOperationsInput | number | null
+    other_income?: NullableFloatFieldUpdateOperationsInput | number | null
+    travel_income?: NullableFloatFieldUpdateOperationsInput | number | null
+    bursary?: NullableFloatFieldUpdateOperationsInput | number | null
+    welfare_money?: NullableFloatFieldUpdateOperationsInput | number | null
+    vatper?: NullableFloatFieldUpdateOperationsInput | number | null
+    ss_per?: NullableFloatFieldUpdateOperationsInput | number | null
+    vat?: NullableFloatFieldUpdateOperationsInput | number | null
+    social_security?: NullableFloatFieldUpdateOperationsInput | number | null
+    miss?: NullableFloatFieldUpdateOperationsInput | number | null
+    ra?: NullableFloatFieldUpdateOperationsInput | number | null
+    late?: NullableFloatFieldUpdateOperationsInput | number | null
+    other?: NullableFloatFieldUpdateOperationsInput | number | null
+    provident_employee?: NullableFloatFieldUpdateOperationsInput | number | null
+    provident_company?: NullableFloatFieldUpdateOperationsInput | number | null
+    total_income?: NullableFloatFieldUpdateOperationsInput | number | null
+    total_expense?: NullableFloatFieldUpdateOperationsInput | number | null
+    net?: NullableFloatFieldUpdateOperationsInput | number | null
     userId?: NullableStringFieldUpdateOperationsInput | string | null
   }
 

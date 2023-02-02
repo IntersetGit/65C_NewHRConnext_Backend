@@ -3246,13 +3246,9 @@
                 "name": "data",
                 "description": null,
                 "type": {
-                  "kind": "NON_NULL",
-                  "name": null,
-                  "ofType": {
-                    "kind": "INPUT_OBJECT",
-                    "name": "salaryInput",
-                    "ofType": null
-                  }
+                  "kind": "INPUT_OBJECT",
+                  "name": "salaryInput",
+                  "ofType": null
                 },
                 "defaultValue": null,
                 "isDeprecated": false,
