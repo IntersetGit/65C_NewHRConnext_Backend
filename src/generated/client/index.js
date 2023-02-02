@@ -27,12 +27,12 @@ const Prisma = {}
 exports.Prisma = Prisma
 
 /**
- * Prisma Client JS version: 4.7.1
- * Query Engine version: 272861e07ab64f234d3ffc4094e32bd61775599c
+ * Prisma Client JS version: 4.9.0
+ * Query Engine version: ceb5c99003b99c9ee2c1d2e618e359c14aef2ea5
  */
 Prisma.prismaVersion = {
-  client: "4.7.1",
-  engine: "272861e07ab64f234d3ffc4094e32bd61775599c"
+  client: "4.9.0",
+  engine: "ceb5c99003b99c9ee2c1d2e618e359c14aef2ea5"
 }
 
 Prisma.PrismaClientKnownRequestError = PrismaClientKnownRequestError;
@@ -461,7 +461,7 @@ const config = {
       "value": "prisma-client-js"
     },
     "output": {
-      "value": "C:\\Khaimook\\ProjectCode\\65C_NewHRConnext_Backend\\src\\generated\\client",
+      "value": "C:\\Users\\MNatc\\OneDrive\\เดสก์ท็อป\\65C_NewHRConnext_Backend\\src\\generated\\client",
       "fromEnvVar": null
     },
     "config": {
@@ -476,8 +476,8 @@ const config = {
     "schemaEnvPath": "..\\..\\..\\.env"
   },
   "relativePath": "..\\..\\..\\prisma",
-  "clientVersion": "4.7.1",
-  "engineVersion": "272861e07ab64f234d3ffc4094e32bd61775599c",
+  "clientVersion": "4.9.0",
+  "engineVersion": "ceb5c99003b99c9ee2c1d2e618e359c14aef2ea5",
   "datasourceNames": [
     "db"
   ],
