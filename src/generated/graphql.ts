@@ -125,11 +125,11 @@ export type CreateAccountUserInput = {
   contract_country?: InputMaybe<Scalars['String']>;
   contract_district?: InputMaybe<Scalars['String']>;
   contract_province?: InputMaybe<Scalars['String']>;
-  contract_sameCitizen: Scalars['Boolean'];
+  contract_sameCitizen?: InputMaybe<Scalars['Boolean']>;
   contract_state?: InputMaybe<Scalars['String']>;
   contract_zipcode?: InputMaybe<Scalars['String']>;
   dob?: InputMaybe<Scalars['Date']>;
-  email: Scalars['String'];
+  email?: InputMaybe<Scalars['String']>;
   employee_status?: InputMaybe<Scalars['String']>;
   firstname_en?: InputMaybe<Scalars['String']>;
   firstname_th?: InputMaybe<Scalars['String']>;
@@ -138,12 +138,12 @@ export type CreateAccountUserInput = {
   lastname_en?: InputMaybe<Scalars['String']>;
   lastname_th?: InputMaybe<Scalars['String']>;
   nickname?: InputMaybe<Scalars['String']>;
-  password: Scalars['String'];
+  password?: InputMaybe<Scalars['String']>;
   prefix_en?: InputMaybe<Scalars['String']>;
   prefix_th?: InputMaybe<Scalars['String']>;
   relationship?: InputMaybe<Scalars['String']>;
   religion?: InputMaybe<Scalars['String']>;
-  role_company?: InputMaybe<Scalars['String']>;
+  role_company?: InputMaybe<Scalars['ID']>;
   shirt_size?: InputMaybe<Scalars['String']>;
   social_facebook?: InputMaybe<Scalars['String']>;
   social_id?: InputMaybe<Scalars['String']>;
