@@ -362,7 +362,11 @@ export type MeprofileType = {
 
 export type Mutation = {
   __typename?: 'Mutation';
+  Createbookbank?: Maybe<CreatebookbanklogResponseType>;
   CreatedPosition?: Maybe<CreatepositionResponseType>;
+  Createmonth?: Maybe<MonthResponseType>;
+  Createsalary?: Maybe<CreatesalaryResponseType>;
+  Createyears?: Maybe<YearsResponseType>;
   EditPosition?: Maybe<CreatepositionResponseType>;
   createAccount?: Maybe<CreateCompanyResponseType>;
   createAccountUser?: Maybe<CreateUserResponseType>;
@@ -370,11 +374,7 @@ export type Mutation = {
   createAndUpdateHolidayDate?: Maybe<CreateHolidayDateResponseType>;
   createHolidayYear?: Maybe<CreateHolidayYearResponseType>;
   createRoleCompany?: Maybe<CreateRoleCompanyResponseType>;
-  createbookbank?: Maybe<CreatebookbanklogResponseType>;
   createdposition_user?: Maybe<CreatepositionResponseType>;
-  createmonth?: Maybe<MonthResponseType>;
-  createsalary?: Maybe<CreatesalaryResponseType>;
-  createyears?: Maybe<YearsResponseType>;
   deleteAccountUser?: Maybe<DeleteAccountUserResponseType>;
   deleteComBarance?: Maybe<DeleteComapnyBranchResponseType>;
   deleteHolidayDate?: Maybe<DeleteHolidayDateResponseType>;
@@ -387,8 +387,28 @@ export type Mutation = {
 };
 
 
+export type MutationCreatebookbankArgs = {
+  data?: InputMaybe<Bookbank_LogInput>;
+};
+
+
 export type MutationCreatedPositionArgs = {
   data?: InputMaybe<Array<CreatedAndUpdatePosition>>;
+};
+
+
+export type MutationCreatemonthArgs = {
+  data?: InputMaybe<MonthInput>;
+};
+
+
+export type MutationCreatesalaryArgs = {
+  data: SalaryInput;
+};
+
+
+export type MutationCreateyearsArgs = {
+  data?: InputMaybe<YearsInput>;
 };
 
 
@@ -427,28 +447,8 @@ export type MutationCreateRoleCompanyArgs = {
 };
 
 
-export type MutationCreatebookbankArgs = {
-  data?: InputMaybe<Bookbank_LogInput>;
-};
-
-
 export type MutationCreatedposition_UserArgs = {
   data: Position;
-};
-
-
-export type MutationCreatemonthArgs = {
-  data?: InputMaybe<MonthInput>;
-};
-
-
-export type MutationCreatesalaryArgs = {
-  data: SalaryInput;
-};
-
-
-export type MutationCreateyearsArgs = {
-  data?: InputMaybe<YearsInput>;
 };
 
 
@@ -910,7 +910,7 @@ export type Mas_Positionlevel3 = {
 };
 
 export type MonthInput = {
-  id: Scalars['ID'];
+  id?: InputMaybe<Scalars['ID']>;
   name?: InputMaybe<Scalars['String']>;
 };
 
@@ -989,7 +989,7 @@ export type SalaryInput = {
 };
 
 export type YearsInput = {
-  id: Scalars['ID'];
+  id?: InputMaybe<Scalars['ID']>;
   name?: InputMaybe<Scalars['String']>;
 };
 
@@ -1463,7 +1463,11 @@ export type MeprofileTypeResolvers<ContextType = ApolloContext, ParentType exten
 }>;
 
 export type MutationResolvers<ContextType = ApolloContext, ParentType extends ResolversParentTypes['Mutation'] = ResolversParentTypes['Mutation']> = ResolversObject<{
+  Createbookbank?: Resolver<Maybe<ResolversTypes['createbookbanklogResponseType']>, ParentType, ContextType, Partial<MutationCreatebookbankArgs>>;
   CreatedPosition?: Resolver<Maybe<ResolversTypes['CreatepositionResponseType']>, ParentType, ContextType, Partial<MutationCreatedPositionArgs>>;
+  Createmonth?: Resolver<Maybe<ResolversTypes['monthResponseType']>, ParentType, ContextType, Partial<MutationCreatemonthArgs>>;
+  Createsalary?: Resolver<Maybe<ResolversTypes['createsalaryResponseType']>, ParentType, ContextType, RequireFields<MutationCreatesalaryArgs, 'data'>>;
+  Createyears?: Resolver<Maybe<ResolversTypes['yearsResponseType']>, ParentType, ContextType, Partial<MutationCreateyearsArgs>>;
   EditPosition?: Resolver<Maybe<ResolversTypes['CreatepositionResponseType']>, ParentType, ContextType, Partial<MutationEditPositionArgs>>;
   createAccount?: Resolver<Maybe<ResolversTypes['CreateCompanyResponseType']>, ParentType, ContextType, RequireFields<MutationCreateAccountArgs, 'data'>>;
   createAccountUser?: Resolver<Maybe<ResolversTypes['CreateUserResponseType']>, ParentType, ContextType, RequireFields<MutationCreateAccountUserArgs, 'data'>>;
@@ -1471,11 +1475,7 @@ export type MutationResolvers<ContextType = ApolloContext, ParentType extends Re
   createAndUpdateHolidayDate?: Resolver<Maybe<ResolversTypes['CreateHolidayDateResponseType']>, ParentType, ContextType, RequireFields<MutationCreateAndUpdateHolidayDateArgs, 'data'>>;
   createHolidayYear?: Resolver<Maybe<ResolversTypes['CreateHolidayYearResponseType']>, ParentType, ContextType, Partial<MutationCreateHolidayYearArgs>>;
   createRoleCompany?: Resolver<Maybe<ResolversTypes['CreateRoleCompanyResponseType']>, ParentType, ContextType, RequireFields<MutationCreateRoleCompanyArgs, 'data'>>;
-  createbookbank?: Resolver<Maybe<ResolversTypes['createbookbanklogResponseType']>, ParentType, ContextType, Partial<MutationCreatebookbankArgs>>;
   createdposition_user?: Resolver<Maybe<ResolversTypes['CreatepositionResponseType']>, ParentType, ContextType, RequireFields<MutationCreatedposition_UserArgs, 'data'>>;
-  createmonth?: Resolver<Maybe<ResolversTypes['monthResponseType']>, ParentType, ContextType, Partial<MutationCreatemonthArgs>>;
-  createsalary?: Resolver<Maybe<ResolversTypes['createsalaryResponseType']>, ParentType, ContextType, RequireFields<MutationCreatesalaryArgs, 'data'>>;
-  createyears?: Resolver<Maybe<ResolversTypes['yearsResponseType']>, ParentType, ContextType, Partial<MutationCreateyearsArgs>>;
   deleteAccountUser?: Resolver<Maybe<ResolversTypes['DeleteAccountUserResponseType']>, ParentType, ContextType, RequireFields<MutationDeleteAccountUserArgs, 'id'>>;
   deleteComBarance?: Resolver<Maybe<ResolversTypes['DeleteComapnyBranchResponseType']>, ParentType, ContextType, RequireFields<MutationDeleteComBaranceArgs, 'id'>>;
   deleteHolidayDate?: Resolver<Maybe<ResolversTypes['DeleteHolidayDateResponseType']>, ParentType, ContextType, RequireFields<MutationDeleteHolidayDateArgs, 'id'>>;
