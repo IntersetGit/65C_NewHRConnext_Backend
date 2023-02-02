@@ -271,6 +271,7 @@ model holiday_year {
   month        Int
   year         Int
   holiday_name String?
+  status       Int            @db.SmallInt
   holiday_date holiday_date[]
 }
 
