@@ -38,14 +38,39 @@ export const salaryTypedef = gql`
     companyBranchId: String
     userId: User
   }
-  type provident_log {
-    id: ID!
+
+  input provident_logInput {
+    id: ID
     userId: String
-    date: Date
-    pro_employee: Int
-    pro_company:  Int
+    provident_date: Date
+    pro_employee: Float
+    pro_company:  Float
     mas_all_collectId: String
   }
+
+  type provident_log {
+    id: ID
+    userId: String
+    provident_date: Date
+    pro_employee: Float
+    pro_company:  Float
+    mas_all_collectId: String
+  }
+
+  input bookbank_logInput {
+    id: ID
+    date: Date
+    mas_bankId: String
+    bank_number: String
+    all_collectId: String
+    base_salary: Float
+    userId: String
+    provident_date: Date
+    pro_employee: Float
+    pro_company:  Float
+    mas_all_collectId: String
+  }
+
   type bookbank_log {
     id: ID!
     date: Date
@@ -54,15 +79,9 @@ export const salaryTypedef = gql`
     all_collectId: String
     base_salary: Float
     userId: User
+    Salary: salary
   }
-  input bookbank_logInput {
-    id: ID!
-    date: Date
-    mas_bankId: String
-    bank_number: String
-    all_collectId: String
-    base_salary: Float
-  }
+
   input salaryInput {
     id: ID
     mas_monthId: String
@@ -89,6 +108,8 @@ export const salaryTypedef = gql`
     net: Float
     userId: String
     bookbank_logId: String
+    mas_income_typeId: String
+    date: Date 
   }
   input salaryfilter {
     id: ID
@@ -148,8 +169,8 @@ export const salaryTypedef = gql`
     total_expense: Float
     net: Float
     userId: String
-    bookbank_logId: bookbank_log,
-    mas_income_typeId: String,
+    bookbank_logId: bookbank_log
+    mas_income_typeId: String
     date: Date 
   }
   type createsalaryResponseType {
@@ -170,6 +191,10 @@ export const salaryTypedef = gql`
   }
   type SalaryResponseType{
     userId:String
+  }
+  type book_bank_logResponseType {
+    message: String
+    status: Boolean
   }
   type Query {
     salary(userId: String, mas_monthId: String, mas_yearsId: String): [salary]
@@ -309,6 +334,37 @@ const resolvers: Resolvers = {
       };
     },
 
+    async Createbookbank(p: any, args: any, ctx: any) {
+      const bookbankID = v4();
+      const providentID = v4()
+      const createbook_bank = await ctx.prisma.bookbank_log.create({
+        data: {
+          id: bookbankID,
+          date: new Date(args.data?.date),
+          mas_bankId: args.data?.mas_bankId,
+          bank_number: args.data?.bank_number as number,
+          all_collectId: args.data?.all_collectId,
+          base_salary: args.data?.base_salary as number,
+          userId: args.data?.userId,
+          provident_log: {
+            create: {
+              id : providentID,
+              userId: args.data?.userId,
+              provident_date: new Date(args.data?.date),
+              pro_employee: args.data?.pro_employee as number,
+              pro_company: args.data?.pro_company as number,
+              mas_all_collectId: args.data?.mas_all_collectId,
+              // bookbank_logId : bookbankID
+            }
+          }
+        }
+      });
+      return {
+        message: 'success',
+        status: true,
+      }
+    }
+
   },
 };
 const resolversComposition = {
@@ -317,6 +373,7 @@ const resolversComposition = {
   'Mutation.Createmonth': [authenticate()],
   'Mutation.Createyears': [authenticate()],
   'Mutation.Salaryfilter': [authenticate()],
+  'Mutation.Createsalary': [authenticate()],
   // 'Mutation.deleteAccountUser': [authenticate()],
 };
 

@@ -324,7 +324,7 @@ model salary {
   id                 String           @unique @db.Uuid
   mas_monthId        String?          @db.Uuid
   mas_yearsId        String?          @db.Uuid
-  date               DateTime?         @default(now())
+  date               DateTime?        @default(now())
   commission         Float?
   position_income    Float?
   ot                 Float?
@@ -376,19 +376,20 @@ model mas_all_collect {
 }
 
 model bookbank_log {
-  id            String    @unique @db.Uuid
+  id            String          @unique @db.Uuid
   date          DateTime
-  mas_bankId    String?   @db.Uuid
-  bank_number   String    @db.VarChar(50)
-  all_collectId String?   @db.Uuid
+  mas_bankId    String?         @db.Uuid
+  bank_number   String          @db.VarChar(50)
+  all_collectId String?         @db.Uuid
   base_salary   Float
   salary        salary[] //เรียกดู base salary
   // salaryId      String?      @db.Uuid
   // all_collect   all_collect? @relation(fields: [all_collectId], references: [id])
-  mas_bank      mas_bank? @relation(fields: [mas_bankId], references: [id])
+  mas_bank      mas_bank?       @relation(fields: [mas_bankId], references: [id])
   // salary        salary?      @relation(fields: [salaryId], references: [id])
-  User          User?     @relation(fields: [userId], references: [id])
-  userId        String?   @db.Uuid
+  User          User?           @relation(fields: [userId], references: [id])
+  userId        String?         @db.Uuid
+  provident_log provident_log[]
 }
 
 model provident_log {
@@ -396,9 +397,11 @@ model provident_log {
 
   User              User?            @relation(fields: [userId], references: [id])
   userId            String?          @db.Uuid
-  date              DateTime
-  pro_employee      Int
-  pro_company       Int
+  provident_date    DateTime?
+  pro_employee      Float?
+  pro_company       Float?
   mas_all_collect   mas_all_collect? @relation(fields: [mas_all_collectId], references: [id])
   mas_all_collectId String?          @db.Uuid
+  bookbank_log      bookbank_log?    @relation(fields: [bookbank_logId], references: [id])
+  bookbank_logId    String?          @db.Uuid
 }
