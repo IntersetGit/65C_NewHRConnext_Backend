@@ -330,10 +330,11 @@ exports.Prisma.ProfileScalarFieldEnum = makeEnum({
 exports.Prisma.Provident_logScalarFieldEnum = makeEnum({
   id: 'id',
   userId: 'userId',
-  date: 'date',
+  provident_date: 'provident_date',
   pro_employee: 'pro_employee',
   pro_company: 'pro_company',
-  mas_all_collectId: 'mas_all_collectId'
+  mas_all_collectId: 'mas_all_collectId',
+  bookbank_logId: 'bookbank_logId'
 });
 
 exports.Prisma.ProvinceScalarFieldEnum = makeEnum({

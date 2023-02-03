@@ -1,0 +1,6 @@
+-- AlterTable
+ALTER TABLE "provident_log" ALTER COLUMN "pro_employee" DROP NOT NULL,
+ALTER COLUMN "pro_employee" SET DATA TYPE DOUBLE PRECISION,
+ALTER COLUMN "pro_company" DROP NOT NULL,
+ALTER COLUMN "pro_company" SET DATA TYPE DOUBLE PRECISION,
+ALTER COLUMN "provident_date" DROP NOT NULL;
