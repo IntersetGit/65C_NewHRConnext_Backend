@@ -219,9 +219,7 @@ const resolvers: Resolvers = {
       const result = await ctx.prisma.salary.findMany({
         include: { User: true, mas_month: true, mas_years: true },
         where: {
-          salary: ctx.currentUser?.userId,
-          mas_monthId: { contains: filter },
-          mas_yearsId: { contains: filter },
+          userId: args.userId,
         },
       });
       return result;
