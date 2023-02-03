@@ -5,6 +5,8 @@ import { v4 } from 'uuid';
 import { composeResolvers } from '@graphql-tools/resolvers-composition';
 import { authenticate } from '../middleware/authenticatetoken';
 import { GraphQLError } from 'graphql';
+// import { PrismaClient } from '@prisma/client';
+// const prisma = new PrismaClient();
 
 export const salaryTypedef = gql`
   input yearsInput {
@@ -88,6 +90,37 @@ export const salaryTypedef = gql`
     userId: String
     bookbank_logId: String
   }
+  input salaryfilter {
+    id: ID
+    mas_monthId: String
+    mas_yearsId: String
+    commission: Float
+    position_income: Float
+    ot: Float
+    bonus: Float
+    special_income: Float
+    other_income: Float
+    travel_income: Float
+    bursary: Float
+    welfare_money: Float
+    vatper: Float
+    ss_per: Float
+    vat: Float
+    social_security: Float
+    miss: Float
+    ra: Float
+    late: Float
+    other: Float
+    provident_employee: Float
+    provident_company: Float
+    total_income: Float
+    total_expense: Float
+    net: Float
+    userId: String
+    bookbank_logId: String,
+    mas_income_typeId: String,
+    date: Date 
+  }
   type salary {
     id: ID!
     mas_monthId: String
@@ -135,22 +168,28 @@ export const salaryTypedef = gql`
     message: String
     status: Boolean
   }
+  type SalaryResponseType{
+    userId:String
+  }
   type Query {
     salary(userId: String, mas_monthId: String, mas_yearsId: String): [salary]
     bookbank_log(id: String): [bookbank_log]
     provident_log(userId:String):[provident_log]
+
   }
   type Mutation {
     Createsalary(data: salaryInput): createsalaryResponseType
     Createbookbank(data: bookbank_logInput): createbookbanklogResponseType
     Createyears(data: yearsInput): yearsResponseType
     Createmonth(data: monthInput): monthResponseType
+    Salaryfilter(userId: String):SalaryResponseType
+
   }
 `;
 
 const resolvers: Resolvers = {
   Query: {
-    async salary(parant, args, ctx: any) {
+    async salary(parant:any, args:any, ctx: any) {
       const filter = args?.userId ? args.userId : undefined;
       const result = await ctx.prisma.salary.findMany({
         include: { User: true, mas_month: true, mas_years: true },
@@ -162,6 +201,7 @@ const resolvers: Resolvers = {
       });
       return result;
     },
+
 
     async bookbank_log(parant: any, args: any, ctx: any) {
       const filter = args?.userId ? args.userId : undefined;
@@ -203,6 +243,13 @@ const resolvers: Resolvers = {
         message: 'success',
         status: true,
       };
+    },
+
+    async Salaryfilter(parant:any, args:any, ctx:any) {
+      const finduser = await ctx.prisma.salary.findUnique({
+        where: { userId: args.userId },
+      });
+      return args.userId
     },
 
     async Createyears(p: any, args: any, ctx: any) {
@@ -269,6 +316,7 @@ const resolversComposition = {
   'Query.bookbank_log': [authenticate()],
   'Mutation.Createmonth': [authenticate()],
   'Mutation.Createyears': [authenticate()],
+  'Mutation.Salaryfilter': [authenticate()],
   // 'Mutation.deleteAccountUser': [authenticate()],
 };
 

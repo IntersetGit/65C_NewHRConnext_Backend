@@ -368,6 +368,7 @@ export type Mutation = {
   Createsalary?: Maybe<CreatesalaryResponseType>;
   Createyears?: Maybe<YearsResponseType>;
   EditPosition?: Maybe<CreatepositionResponseType>;
+  Salaryfilter?: Maybe<SalaryResponseType>;
   createAccount?: Maybe<CreateCompanyResponseType>;
   createAccountUser?: Maybe<CreateUserResponseType>;
   createAndUpdateComBarance?: Maybe<CreateComapnyBranchResponseType>;
@@ -414,6 +415,11 @@ export type MutationCreateyearsArgs = {
 
 export type MutationEditPositionArgs = {
   data?: InputMaybe<Array<CreatedAndUpdatePosition>>;
+};
+
+
+export type MutationSalaryfilterArgs = {
+  userId?: InputMaybe<Scalars['String']>;
 };
 
 
@@ -727,6 +733,11 @@ export type Role_Company = {
   users?: Maybe<Array<Maybe<User>>>;
 };
 
+export type SalaryResponseType = {
+  __typename?: 'SalaryResponseType';
+  userId?: Maybe<Scalars['String']>;
+};
+
 export type UpdateRoleCompanyMangementType = {
   access: Array<Scalars['JSON']>;
   id: Scalars['ID'];
@@ -1011,6 +1022,38 @@ export type SalaryInput = {
   welfare_money?: InputMaybe<Scalars['Float']>;
 };
 
+export type Salaryfilter = {
+  bonus?: InputMaybe<Scalars['Float']>;
+  bookbank_logId?: InputMaybe<Scalars['String']>;
+  bursary?: InputMaybe<Scalars['Float']>;
+  commission?: InputMaybe<Scalars['Float']>;
+  date?: InputMaybe<Scalars['Date']>;
+  id?: InputMaybe<Scalars['ID']>;
+  late?: InputMaybe<Scalars['Float']>;
+  mas_income_typeId?: InputMaybe<Scalars['String']>;
+  mas_monthId?: InputMaybe<Scalars['String']>;
+  mas_yearsId?: InputMaybe<Scalars['String']>;
+  miss?: InputMaybe<Scalars['Float']>;
+  net?: InputMaybe<Scalars['Float']>;
+  ot?: InputMaybe<Scalars['Float']>;
+  other?: InputMaybe<Scalars['Float']>;
+  other_income?: InputMaybe<Scalars['Float']>;
+  position_income?: InputMaybe<Scalars['Float']>;
+  provident_company?: InputMaybe<Scalars['Float']>;
+  provident_employee?: InputMaybe<Scalars['Float']>;
+  ra?: InputMaybe<Scalars['Float']>;
+  social_security?: InputMaybe<Scalars['Float']>;
+  special_income?: InputMaybe<Scalars['Float']>;
+  ss_per?: InputMaybe<Scalars['Float']>;
+  total_expense?: InputMaybe<Scalars['Float']>;
+  total_income?: InputMaybe<Scalars['Float']>;
+  travel_income?: InputMaybe<Scalars['Float']>;
+  userId?: InputMaybe<Scalars['String']>;
+  vat?: InputMaybe<Scalars['Float']>;
+  vatper?: InputMaybe<Scalars['Float']>;
+  welfare_money?: InputMaybe<Scalars['Float']>;
+};
+
 export type YearsInput = {
   id?: InputMaybe<Scalars['ID']>;
   name?: InputMaybe<Scalars['String']>;
@@ -1145,6 +1188,7 @@ export type ResolversTypes = ResolversObject<{
   ResponseCompany_Branch: ResolverTypeWrapper<ResponseCompany_Branch>;
   Role: ResolverTypeWrapper<Role>;
   Role_Company: ResolverTypeWrapper<Role_Company>;
+  SalaryResponseType: ResolverTypeWrapper<SalaryResponseType>;
   String: ResolverTypeWrapper<Scalars['String']>;
   UpdateRoleCompanyMangementType: UpdateRoleCompanyMangementType;
   User: ResolverTypeWrapper<User>;
@@ -1169,6 +1213,7 @@ export type ResolversTypes = ResolversObject<{
   provident_log: ResolverTypeWrapper<Provident_Log>;
   salary: ResolverTypeWrapper<Salary>;
   salaryInput: SalaryInput;
+  salaryfilter: Salaryfilter;
   yearsInput: YearsInput;
   yearsResponseType: ResolverTypeWrapper<YearsResponseType>;
 }>;
@@ -1228,6 +1273,7 @@ export type ResolversParentTypes = ResolversObject<{
   ResponseCompany_Branch: ResponseCompany_Branch;
   Role: Role;
   Role_Company: Role_Company;
+  SalaryResponseType: SalaryResponseType;
   String: Scalars['String'];
   UpdateRoleCompanyMangementType: UpdateRoleCompanyMangementType;
   User: User;
@@ -1252,6 +1298,7 @@ export type ResolversParentTypes = ResolversObject<{
   provident_log: Provident_Log;
   salary: Salary;
   salaryInput: SalaryInput;
+  salaryfilter: Salaryfilter;
   yearsInput: YearsInput;
   yearsResponseType: YearsResponseType;
 }>;
@@ -1494,6 +1541,7 @@ export type MutationResolvers<ContextType = ApolloContext, ParentType extends Re
   Createsalary?: Resolver<Maybe<ResolversTypes['createsalaryResponseType']>, ParentType, ContextType, Partial<MutationCreatesalaryArgs>>;
   Createyears?: Resolver<Maybe<ResolversTypes['yearsResponseType']>, ParentType, ContextType, Partial<MutationCreateyearsArgs>>;
   EditPosition?: Resolver<Maybe<ResolversTypes['CreatepositionResponseType']>, ParentType, ContextType, Partial<MutationEditPositionArgs>>;
+  Salaryfilter?: Resolver<Maybe<ResolversTypes['SalaryResponseType']>, ParentType, ContextType, Partial<MutationSalaryfilterArgs>>;
   createAccount?: Resolver<Maybe<ResolversTypes['CreateCompanyResponseType']>, ParentType, ContextType, RequireFields<MutationCreateAccountArgs, 'data'>>;
   createAccountUser?: Resolver<Maybe<ResolversTypes['CreateUserResponseType']>, ParentType, ContextType, RequireFields<MutationCreateAccountUserArgs, 'data'>>;
   createAndUpdateComBarance?: Resolver<Maybe<ResolversTypes['CreateComapnyBranchResponseType']>, ParentType, ContextType, RequireFields<MutationCreateAndUpdateComBaranceArgs, 'data'>>;
@@ -1690,6 +1738,11 @@ export type Role_CompanyResolvers<ContextType = ApolloContext, ParentType extend
   name?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   status?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
   users?: Resolver<Maybe<Array<Maybe<ResolversTypes['User']>>>, ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+}>;
+
+export type SalaryResponseTypeResolvers<ContextType = ApolloContext, ParentType extends ResolversParentTypes['SalaryResponseType'] = ResolversParentTypes['SalaryResponseType']> = ResolversObject<{
+  userId?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 }>;
 
@@ -1930,6 +1983,7 @@ export type Resolvers<ContextType = ApolloContext> = ResolversObject<{
   ResponseCompany_Branch?: ResponseCompany_BranchResolvers<ContextType>;
   Role?: RoleResolvers<ContextType>;
   Role_Company?: Role_CompanyResolvers<ContextType>;
+  SalaryResponseType?: SalaryResponseTypeResolvers<ContextType>;
   User?: UserResolvers<ContextType>;
   ValidateRoute?: ValidateRouteResolvers<ContextType>;
   bookbank_log?: Bookbank_LogResolvers<ContextType>;
