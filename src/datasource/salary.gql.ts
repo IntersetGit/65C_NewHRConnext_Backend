@@ -1,11 +1,9 @@
 import { Resolvers } from '../generated/graphql';
 import gql from 'graphql-tag';
-import _ from 'lodash';
 import { v4 } from 'uuid';
 import { composeResolvers } from '@graphql-tools/resolvers-composition';
 import { authenticate } from '../middleware/authenticatetoken';
-import { ApolloContext } from '../index'
-import { GraphQLError } from 'graphql';
+
 // import { PrismaClient } from '@prisma/client';
 // const prisma = new PrismaClient();
 
@@ -19,26 +17,7 @@ export const salaryTypedef = gql`
     month_number: Int
     name: String
   }
-  type User {
-    email: String!
-    password: String!
-    id: ID!
-    profile: Profile
-    islogin: Boolean!
-    isActive: Boolean!
-    isOwner: Boolean!
-    lastlogin: Date
-    createdAt: Date
-    roleId: String
-    companyId: String
-    role: Role
-    RoleCompanyID: String
-    Role_Company: Role_Company
-    company: [Company]
-    companyBranch: CompanyBranch
-    companyBranchId: String
-    userId: User
-  }
+
   input BankInput {
     id:       ID          
   name:     String
@@ -129,7 +108,7 @@ export const salaryTypedef = gql`
  
   }
   type salary {
-    id: ID!
+    id: ID
     mas_monthId: String
     mas_yearsId: String
     commission: Float
@@ -222,12 +201,42 @@ type Profile {
     user: User
     userId: String
   }
-  type selfsalary{
+  # type selfsalary{
+  #   id: ID!
+  #   profile: Profile
+  #   base_salary:bookbank_log
+  #   salary : salary
+  # }
+
+  # type selfsalary{
+  #   data_user: User
+  #   data_salary: [salary]
+  #   base_salary:bookbank_log
+  # }
+
+
+  type data_salary_me{
+    email: String!
+    password: String!
     id: ID!
     profile: Profile
+    islogin: Boolean!
+    isActive: Boolean!
+    isOwner: Boolean!
+    lastlogin: Date
+    createdAt: Date
+    roleId: String
+    companyId: String
+    role: Role
+    RoleCompanyID: String
+    Role_Company: Role_Company
+    company: [Company]
+    companyBranch: CompanyBranch
+    companyBranchId: String
+    salary: [salary]
     base_salary:bookbank_log
-    salary : salary
   }
+
   type createsalaryResponseType {
     message: String
     status: Boolean
@@ -270,6 +279,8 @@ type Profile {
     salary: salary
     bookbank_log(id: String): [bookbank_log]
     provident_log(userId:String):[provident_log]
+    datasalary_mee: data_salary_me
+    # Selfdatasalary: selfsalary
     Selfdatasalary: selfsalary
     mas_all_collect:mas_all_collect
   }
@@ -297,6 +308,19 @@ const resolvers: Resolvers = {
       return result;
     },
 
+
+    async datasalary_mee(parant, args, ctx){
+      const getdata = await ctx.prisma.user.findUnique({
+        // include: {salary:true},
+        where:{
+          id: ctx.currentUser?.id
+        }
+      })
+      return getdata
+    },
+   
+
+
     async mas_all_collect(parant: any,args: any,ctx: any){
       console.log(ctx.currentUser?.id);
       const result = await ctx.prisma.mas_all_collect.findMany({
@@ -311,13 +335,14 @@ const resolvers: Resolvers = {
 
     // async Selfdatasalary(parant, args, ctx) {
     //   const result = await ctx.prisma.user.findUnique({
-    //     include: { bookbank_log: true, profile: true, salary: true },
+    //     include: { bookbank_log: true, profile : true, salary:true },
     //     where: {
     //       id: ctx.currentUser?.id
     //     },
     //   });
     //   return result;
     // },
+
     async bookbank_log(parant: any, args: any, ctx: any) {
       const filter = args?.userId ? args.userId : undefined;
       const result = await ctx.prisma.bookbank_log.findMany({
@@ -378,7 +403,7 @@ const resolvers: Resolvers = {
 
     async Createsalary(p: any, args: any, ctx: any) { //สร้าง log สำหรับเงินเดือนจากนั้นเก็บกองทุนไว้ใน provident log จากนั้นเก็บค่าไว้ใน collect
       const gensalaryID = v4()
-      const providentID = v4()
+     
       const pro_emp = args.data?.provident_employee
       const pro_com = args.data?.provident_company
       const createsalary = await ctx.prisma.salary.create({
@@ -415,9 +440,9 @@ const resolvers: Resolvers = {
           mas_salary_statusId: args.data?.mas_salary_statusId,
           provident_log: {
             create : {
-              id: providentID,
+              id: v4(),
               userId: args.data?.userId,
-              provident_date: new Date(args.data?.date),
+              provident_date: new Date(),
               pro_employee: pro_emp,
               pro_company: pro_com,
               mas_all_collectId: args.data?.mas_all_collectId,
@@ -427,6 +452,28 @@ const resolvers: Resolvers = {
 
         }
       });
+      const chk_collectLog = await ctx.prisma.mas_all_collect.findMany({
+        include: { provident_log: true },
+        where: {
+          userId: args.data?.userId
+        }
+      });
+      if (chk_collectLog.length > 0) {
+        console.log("มีค่าใน base")
+      } else {
+        
+        const createAllCollect = await ctx.prisma.salary.create({
+          id: v4(),
+          userId: args.data?.userId,
+          income_collect: args.data?.income_collect,
+          vat_collect: args.data?.vat_collect,
+          social_secu_collect: args.data?.social_secu_collect,
+          provident_collect_employee: args.data?.provident_collect_employee,
+          provident_collect_company: args.data?.provident_collect_company,
+
+        })
+      }
+
       return {
         message: 'success',
         status: true,

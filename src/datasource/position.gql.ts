@@ -179,7 +179,7 @@ export const positionResolvers: Resolvers = {
     async getpositionMe(p, args, ctx) {
       const resultMebyID = await ctx.prisma.position_user.findMany({
         include: { mas_positionlevel1: true, mas_positionlevel2: true, mas_positionlevel3: true, user: { include: { profile: true } }, header: { include: { profile: true } } },
-        where: { user_id: ctx.currentUser?.branchId }
+        where: { user_id: ctx.currentUser?.id }
       });
       return resultMebyID;
     },
