@@ -1,11 +1,9 @@
 import { Resolvers } from '../generated/graphql';
 import gql from 'graphql-tag';
-import _ from 'lodash';
 import { v4 } from 'uuid';
 import { composeResolvers } from '@graphql-tools/resolvers-composition';
 import { authenticate } from '../middleware/authenticatetoken';
-import { ApolloContext } from '../index'
-import { GraphQLError } from 'graphql';
+
 // import { PrismaClient } from '@prisma/client';
 // const prisma = new PrismaClient();
 
@@ -19,26 +17,7 @@ export const salaryTypedef = gql`
     month_number: Int
     name: String
   }
-  type User {
-    email: String!
-    password: String!
-    id: ID!
-    profile: Profile
-    islogin: Boolean!
-    isActive: Boolean!
-    isOwner: Boolean!
-    lastlogin: Date
-    createdAt: Date
-    roleId: String
-    companyId: String
-    role: Role
-    RoleCompanyID: String
-    Role_Company: Role_Company
-    company: [Company]
-    companyBranch: CompanyBranch
-    companyBranchId: String
-    userId: User
-  }
+
   input BankInput {
     id:       ID          
   name:     String
@@ -130,7 +109,7 @@ export const salaryTypedef = gql`
  
   }
   type salary {
-    id: ID!
+    id: ID
     mas_monthId: String
     mas_yearsId: String
     commission: Float
@@ -163,9 +142,17 @@ export const salaryTypedef = gql`
   provident_date:    Date
   pro_employee:      Float
   pro_company:       Float
-  mas_all_collectId: String                 
+  mas_all_collectId: mas_all_collect                 
   }
-
+  type mas_all_collect{
+  id:ID!
+  userId:ID
+  social_secu_collect:Float
+  vat_collect:Float
+  income_collect:Float
+  provident_collect_employee:Float
+  provident_collect_company:Float
+  }
 input ExpenseComInput{
   id: ID           
   bankId:          String         
@@ -215,36 +202,42 @@ type Profile {
     user: User
     userId: String
   }
-  
-  type all_collect {
-    id:        ID                 
-  userId:                     String         
-  income_collect:             Float
-  vat_collect:                Float
-  social_secu_collect:        Float
-  provident_collect_employee: Float
-  provident_collect_company:  Float
-  date: Date
-  provident_log: provident_log           
-  }
+  # type selfsalary{
+  #   id: ID!
+  #   profile: Profile
+  #   base_salary:bookbank_log
+  #   salary : salary
+  # }
 
-  input all_collectInput {
-    id:        ID                 
-  userId:                     String         
-  income_collect:             Float
-  vat_collect:                Float
-  social_secu_collect:        Float
-  provident_collect_employee: Float
-  provident_collect_company:  Float  
-  date: Date      
-  }
+  # type selfsalary{
+  #   data_user: User
+  #   data_salary: [salary]
+  #   base_salary:bookbank_log
+  # }
 
-  type selfsalary{
+
+  type data_salary_me{
+    email: String!
+    password: String!
     id: ID!
     profile: Profile
+    islogin: Boolean!
+    isActive: Boolean!
+    isOwner: Boolean!
+    lastlogin: Date
+    createdAt: Date
+    roleId: String
+    companyId: String
+    role: Role
+    RoleCompanyID: String
+    Role_Company: Role_Company
+    company: [Company]
+    companyBranch: CompanyBranch
+    companyBranchId: String
+    salary: [salary]
     base_salary:bookbank_log
-    salary: salary
   }
+
   type createsalaryResponseType {
     message: String
     status: Boolean
@@ -284,10 +277,13 @@ type Profile {
   }
   
   type Query {
-    salary(userId: String, mas_monthId: String, mas_yearsId: String): [salary]
+    salary: salary
     bookbank_log(id: String): [bookbank_log]
     provident_log(userId:String):[provident_log]
+    datasalary_mee: data_salary_me
+    # Selfdatasalary: selfsalary
     Selfdatasalary: selfsalary
+    mas_all_collect:mas_all_collect
   }
   type Mutation {
     Createsalary(data: salaryInput): createsalaryResponseType
@@ -303,25 +299,51 @@ type Profile {
 
 const resolvers: Resolvers = {
   Query: {
-    async salary(parant: any, args: any, ctx: any) {
-      const filter = args?.userId ? args.userId : undefined;
+    async salary(parant: any, args: any, ctx: any) {      
       const result = await ctx.prisma.salary.findMany({
         include: { User: true, mas_month: true, mas_years: true, bookbank_log: true },
         where: {
-          userId: args.userId,
+          userId: ctx.currentUser?.id,
         },
       });
       return result;
     },
+
+
+    async datasalary_mee(parant, args, ctx){
+      const getdata = await ctx.prisma.user.findUnique({
+        // include: {salary:true},
+        where:{
+          id: ctx.currentUser?.id
+        }
+      })
+      return getdata
+    },
+   
+
+
+    async mas_all_collect(parant: any,args: any,ctx: any){
+      console.log(ctx.currentUser?.id);
+      const result = await ctx.prisma.mas_all_collect.findMany({
+        where:{
+          userId: ctx.currentUser?.id,
+        },
+      });
+      console.log(result);
+      
+      return result;
+    },
+
     // async Selfdatasalary(parant, args, ctx) {
     //   const result = await ctx.prisma.user.findUnique({
-    //     include: { bookbank_log: true, profile: true, salary: true },
+    //     include: { bookbank_log: true, profile : true, salary:true },
     //     where: {
     //       id: ctx.currentUser?.id
     //     },
     //   });
     //   return result;
     // },
+
     async bookbank_log(parant: any, args: any, ctx: any) {
       const filter = args?.userId ? args.userId : undefined;
       const result = await ctx.prisma.bookbank_log.findMany({
@@ -582,6 +604,7 @@ const resolvers: Resolvers = {
 const resolversComposition = {
   'Query.salary': [authenticate()],
   'Query.bookbank_log': [authenticate()],
+  'Query.mas_all_collect': [authenticate()],
   'Query.Selfdatasalary': [authenticate()],
   'Mutation.Createmonth': [authenticate()],
   'Mutation.Createyears': [authenticate()],
