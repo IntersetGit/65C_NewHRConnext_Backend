@@ -288,15 +288,15 @@ const resolvers: Resolvers = {
       });
       return result;
     },
-    async Selfdatasalary(parant, args, ctx) {
-      const result = await ctx.prisma.user.findUnique({
-        include: { bookbank_log: true, profile: true, salary: true },
-        where: {
-          id: ctx.currentUser?.id
-        },
-      });
-      return result;
-    },
+    // async Selfdatasalary(parant, args, ctx) {
+    //   const result = await ctx.prisma.user.findUnique({
+    //     include: { bookbank_log: true, profile: true, salary: true },
+    //     where: {
+    //       id: ctx.currentUser?.id
+    //     },
+    //   });
+    //   return result;
+    // },
     async bookbank_log(parant: any, args: any, ctx: any) {
       const filter = args?.userId ? args.userId : undefined;
       const result = await ctx.prisma.bookbank_log.findMany({
