@@ -1,11 +1,10 @@
+import { salary, User } from './../generated/client/index.d';
 import { Resolvers } from '../generated/graphql';
 import gql from 'graphql-tag';
-import _ from 'lodash';
 import { v4 } from 'uuid';
 import { composeResolvers } from '@graphql-tools/resolvers-composition';
 import { authenticate } from '../middleware/authenticatetoken';
-import { ApolloContext } from '../index'
-import { GraphQLError } from 'graphql';
+
 // import { PrismaClient } from '@prisma/client';
 // const prisma = new PrismaClient();
 
@@ -19,26 +18,7 @@ export const salaryTypedef = gql`
     month_number: Int
     name: String
   }
-  type User {
-    email: String!
-    password: String!
-    id: ID!
-    profile: Profile
-    islogin: Boolean!
-    isActive: Boolean!
-    isOwner: Boolean!
-    lastlogin: Date
-    createdAt: Date
-    roleId: String
-    companyId: String
-    role: Role
-    RoleCompanyID: String
-    Role_Company: Role_Company
-    company: [Company]
-    companyBranch: CompanyBranch
-    companyBranchId: String
-    userId: User
-  }
+
   input BankInput {
     id:       ID          
   name:     String
@@ -129,7 +109,7 @@ export const salaryTypedef = gql`
  
   }
   type salary {
-    id: ID!
+    id: ID
     mas_monthId: String
     mas_yearsId: String
     commission: Float
@@ -214,11 +194,36 @@ type Profile {
     user: User
     userId: String
   }
-  type selfsalary{
+
+  type data_salary_me {
+    email: String!
+    password: String!
     id: ID!
     profile: Profile
-    base_salary:bookbank_log
+    islogin: Boolean!
+    isActive: Boolean!
+    isOwner: Boolean!
+    lastlogin: Date
+    createdAt: Date
+    roleId: String
+    companyId: String
+    role: Role
+    RoleCompanyID: String
+    Role_Company: Role_Company
+    company: [Company]
+    companyBranch: CompanyBranch
+    companyBranchId: String
+    salary: [salary]
+    base_salary: bookbank_log
   }
+
+  # type selfsalary{
+  #   data_user: User
+  #   data_salary: [salary]
+  #   base_salary:bookbank_log
+  # }
+
+
   type createsalaryResponseType {
     message: String
     status: Boolean
@@ -261,7 +266,8 @@ type Profile {
     salary(userId: String, mas_monthId: String, mas_yearsId: String): [salary]
     bookbank_log(id: String): [bookbank_log]
     provident_log(userId:String):[provident_log]
-    Selfdatasalary: selfsalary
+    datasalary_mee: [data_salary_me]
+    # Selfdatasalary: selfsalary
   }
   type Mutation {
     Createsalary(data: salaryInput): createsalaryResponseType
@@ -287,15 +293,29 @@ const resolvers: Resolvers = {
       });
       return result;
     },
+
+
+    async datasalary_mee(parant, args, ctx){
+      const getdata = await ctx.prisma.user.findMany({
+        // include: {salary:true},
+        where:{
+          id: ctx.currentUser?.id
+        }
+      })
+      return getdata
+    },
+   
+
     // async Selfdatasalary(parant, args, ctx) {
     //   const result = await ctx.prisma.user.findUnique({
-    //     include: { bookbank_log: true, profile: true, salary: true },
+    //     include: { bookbank_log: true, profile : true, salary:true },
     //     where: {
     //       id: ctx.currentUser?.id
     //     },
     //   });
     //   return result;
     // },
+
     async bookbank_log(parant: any, args: any, ctx: any) {
       const filter = args?.userId ? args.userId : undefined;
       const result = await ctx.prisma.bookbank_log.findMany({
@@ -356,7 +376,7 @@ const resolvers: Resolvers = {
 
     async Createsalary(p: any, args: any, ctx: any) { //สร้าง log สำหรับเงินเดือนจากนั้นเก็บกองทุนไว้ใน provident log จากนั้นเก็บค่าไว้ใน collect
       const gensalaryID = v4()
-     
+
       const pro_emp = args.data?.provident_employee
       const pro_com = args.data?.provident_company
       const createsalary = await ctx.prisma.salary.create({
@@ -392,7 +412,7 @@ const resolvers: Resolvers = {
           date: new Date(args.data?.date),
           mas_salary_statusId: args.data?.mas_salary_statusId,
           provident_log: {
-            create : {
+            create: {
               id: v4(),
               userId: args.data?.userId,
               provident_date: new Date(),
