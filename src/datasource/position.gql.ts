@@ -259,7 +259,6 @@ export const positionResolvers: Resolvers = {
         message: 'success',
         status: true,
       };
-
     },
 
 
