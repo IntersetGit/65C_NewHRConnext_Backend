@@ -368,7 +368,6 @@ export type Mutation = {
   Createsalary?: Maybe<CreatesalaryResponseType>;
   Createyears?: Maybe<YearsResponseType>;
   EditPosition?: Maybe<CreatepositionResponseType>;
-  Salaryfilter?: Maybe<SalaryResponseType>;
   createAccount?: Maybe<CreateCompanyResponseType>;
   createAccountUser?: Maybe<CreateUserResponseType>;
   createAndUpdateComBarance?: Maybe<CreateComapnyBranchResponseType>;
@@ -415,11 +414,6 @@ export type MutationCreateyearsArgs = {
 
 export type MutationEditPositionArgs = {
   data?: InputMaybe<Array<CreatedAndUpdatePosition>>;
-};
-
-
-export type MutationSalaryfilterArgs = {
-  userId?: InputMaybe<Scalars['String']>;
 };
 
 
@@ -1045,38 +1039,6 @@ export type SalaryInput = {
   welfare_money?: InputMaybe<Scalars['Float']>;
 };
 
-export type Salaryfilter = {
-  bonus?: InputMaybe<Scalars['Float']>;
-  bookbank_logId?: InputMaybe<Scalars['String']>;
-  bursary?: InputMaybe<Scalars['Float']>;
-  commission?: InputMaybe<Scalars['Float']>;
-  date?: InputMaybe<Scalars['Date']>;
-  id?: InputMaybe<Scalars['ID']>;
-  late?: InputMaybe<Scalars['Float']>;
-  mas_income_typeId?: InputMaybe<Scalars['String']>;
-  mas_monthId?: InputMaybe<Scalars['String']>;
-  mas_yearsId?: InputMaybe<Scalars['String']>;
-  miss?: InputMaybe<Scalars['Float']>;
-  net?: InputMaybe<Scalars['Float']>;
-  ot?: InputMaybe<Scalars['Float']>;
-  other?: InputMaybe<Scalars['Float']>;
-  other_income?: InputMaybe<Scalars['Float']>;
-  position_income?: InputMaybe<Scalars['Float']>;
-  provident_company?: InputMaybe<Scalars['Float']>;
-  provident_employee?: InputMaybe<Scalars['Float']>;
-  ra?: InputMaybe<Scalars['Float']>;
-  social_security?: InputMaybe<Scalars['Float']>;
-  special_income?: InputMaybe<Scalars['Float']>;
-  ss_per?: InputMaybe<Scalars['Float']>;
-  total_expense?: InputMaybe<Scalars['Float']>;
-  total_income?: InputMaybe<Scalars['Float']>;
-  travel_income?: InputMaybe<Scalars['Float']>;
-  userId?: InputMaybe<Scalars['String']>;
-  vat?: InputMaybe<Scalars['Float']>;
-  vatper?: InputMaybe<Scalars['Float']>;
-  welfare_money?: InputMaybe<Scalars['Float']>;
-};
-
 export type YearsInput = {
   id?: InputMaybe<Scalars['ID']>;
   name?: InputMaybe<Scalars['String']>;
@@ -1238,7 +1200,6 @@ export type ResolversTypes = ResolversObject<{
   provident_logInput: Provident_LogInput;
   salary: ResolverTypeWrapper<Salary>;
   salaryInput: SalaryInput;
-  salaryfilter: Salaryfilter;
   yearsInput: YearsInput;
   yearsResponseType: ResolverTypeWrapper<YearsResponseType>;
 }>;
@@ -1325,7 +1286,6 @@ export type ResolversParentTypes = ResolversObject<{
   provident_logInput: Provident_LogInput;
   salary: Salary;
   salaryInput: SalaryInput;
-  salaryfilter: Salaryfilter;
   yearsInput: YearsInput;
   yearsResponseType: YearsResponseType;
 }>;
@@ -1568,7 +1528,6 @@ export type MutationResolvers<ContextType = ApolloContext, ParentType extends Re
   Createsalary?: Resolver<Maybe<ResolversTypes['createsalaryResponseType']>, ParentType, ContextType, Partial<MutationCreatesalaryArgs>>;
   Createyears?: Resolver<Maybe<ResolversTypes['yearsResponseType']>, ParentType, ContextType, Partial<MutationCreateyearsArgs>>;
   EditPosition?: Resolver<Maybe<ResolversTypes['CreatepositionResponseType']>, ParentType, ContextType, Partial<MutationEditPositionArgs>>;
-  Salaryfilter?: Resolver<Maybe<ResolversTypes['SalaryResponseType']>, ParentType, ContextType, Partial<MutationSalaryfilterArgs>>;
   createAccount?: Resolver<Maybe<ResolversTypes['CreateCompanyResponseType']>, ParentType, ContextType, RequireFields<MutationCreateAccountArgs, 'data'>>;
   createAccountUser?: Resolver<Maybe<ResolversTypes['CreateUserResponseType']>, ParentType, ContextType, RequireFields<MutationCreateAccountUserArgs, 'data'>>;
   createAndUpdateComBarance?: Resolver<Maybe<ResolversTypes['CreateComapnyBranchResponseType']>, ParentType, ContextType, RequireFields<MutationCreateAndUpdateComBaranceArgs, 'data'>>;
