@@ -145,7 +145,7 @@ model User {
   Role_Company    Role_Company?     @relation(fields: [RoleCompanyID], references: [id])
   Position_user   Position_user?    @relation("user")
   henchman        Position_user[]
-  mas_all_collect mas_all_collect[]
+  mas_all_collect mas_all_collect[] 
   salary          salary[]
   provident_log   provident_log[]
   bookbank_log    bookbank_log[]
@@ -371,6 +371,7 @@ model salary {
   mas_vat_socialsId   String?            @db.Uuid
   expense_companyId   String?            @db.Uuid
   provident_logId     String?            @db.Uuid
+  provident_log       provident_log[]
   User                User?              @relation(fields: [userId], references: [id])
   bookbank_log        bookbank_log?      @relation(fields: [bookbank_logId], references: [id])
   mas_month           mas_month?         @relation(fields: [mas_monthId], references: [id])
@@ -380,20 +381,21 @@ model salary {
   mas_bank            mas_bank?          @relation(fields: [mas_bankId], references: [id])
   mas_vat_socials     mas_vat_socials?   @relation(fields: [mas_vat_socialsId], references: [id])
   expense_company     expense_company?   @relation(fields: [expense_companyId], references: [id])
-  provident_log       provident_log?     @relation(fields: [provident_logId], references: [id])
 }
 
 model mas_all_collect {
   id                         String          @unique @db.Uuid
   User                       User?           @relation(fields: [userId], references: [id])
-  userId                     String?         @db.Uuid
+  userId                     String          @db.Uuid
+  date                       DateTime
   income_collect             Float
-  vat_collect                Float
+  vat_collect                Float?
   social_secu_collect        Float
   provident_collect_employee Float
   provident_collect_company  Float
   // bookbank_log               bookbank_log[]
   provident_log              provident_log[]
+  // @@unique([id , userId])
 }
 
 model bookbank_log {
@@ -427,5 +429,7 @@ model provident_log {
   mas_all_collectId String?          @db.Uuid
   bookbank_log      bookbank_log?    @relation(fields: [bookbank_logId], references: [id])
   bookbank_logId    String?          @db.Uuid
-  salary            salary[]
+
+  salary   salary? @relation(fields: [salaryId], references: [id])
+  salaryId String? @db.Uuid
 }
