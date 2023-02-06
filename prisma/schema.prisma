@@ -381,18 +381,18 @@ model salary {
   mas_bank            mas_bank?          @relation(fields: [mas_bankId], references: [id])
   mas_vat_socials     mas_vat_socials?   @relation(fields: [mas_vat_socialsId], references: [id])
   expense_company     expense_company?   @relation(fields: [expense_companyId], references: [id])
-  
 }
 
 model mas_all_collect {
   id                         String          @unique @db.Uuid
   User                       User?           @relation(fields: [userId], references: [id])
   userId                     String?         @db.Uuid
-  income_collect             Float
-  vat_collect                Float
-  social_secu_collect        Float
-  provident_collect_employee Float
-  provident_collect_company  Float
+  date                       DateTime
+  income_collect             Float?
+  vat_collect                Float?
+  social_secu_collect        Float?
+  provident_collect_employee Float?
+  provident_collect_company  Float?
   // bookbank_log               bookbank_log[]
   provident_log              provident_log[]
 }

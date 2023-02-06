@@ -194,27 +194,11 @@ type Profile {
     user: User
     userId: String
   }
-
-  type data_salary_me {
-    email: String!
-    password: String!
+  type selfsalary{
     id: ID!
     profile: Profile
-    islogin: Boolean!
-    isActive: Boolean!
-    isOwner: Boolean!
-    lastlogin: Date
-    createdAt: Date
-    roleId: String
-    companyId: String
-    role: Role
-    RoleCompanyID: String
-    Role_Company: Role_Company
-    company: [Company]
-    companyBranch: CompanyBranch
-    companyBranchId: String
-    salary: [salary]
-    base_salary: bookbank_log
+    base_salary:bookbank_log
+    salary : salary
   }
 
   # type selfsalary{
@@ -376,7 +360,7 @@ const resolvers: Resolvers = {
 
     async Createsalary(p: any, args: any, ctx: any) { //สร้าง log สำหรับเงินเดือนจากนั้นเก็บกองทุนไว้ใน provident log จากนั้นเก็บค่าไว้ใน collect
       const gensalaryID = v4()
-
+     
       const pro_emp = args.data?.provident_employee
       const pro_com = args.data?.provident_company
       const createsalary = await ctx.prisma.salary.create({
@@ -412,7 +396,7 @@ const resolvers: Resolvers = {
           date: new Date(args.data?.date),
           mas_salary_statusId: args.data?.mas_salary_statusId,
           provident_log: {
-            create: {
+            create : {
               id: v4(),
               userId: args.data?.userId,
               provident_date: new Date(),
@@ -423,8 +407,30 @@ const resolvers: Resolvers = {
             }
           }
 
+      //   }
+      // });
+      const chk_collectLog = await ctx.prisma.mas_all_collect.findMany({
+        include: { provident_log: true },
+        where: {
+          userId: args.data?.userId
         }
       });
+      if (chk_collectLog.length > 0) {
+        console.log("มีค่าใน base")
+      } else {
+        
+        const createAllCollect = await ctx.prisma.salary.create({
+          id: v4(),
+          userId: args.data?.userId,
+          income_collect: args.data?.income_collect,
+          vat_collect: args.data?.vat_collect,
+          social_secu_collect: args.data?.social_secu_collect,
+          provident_collect_employee: args.data?.provident_collect_employee,
+          provident_collect_company: args.data?.provident_collect_company,
+
+        })
+      }
+
       return {
         message: 'success',
         status: true,
