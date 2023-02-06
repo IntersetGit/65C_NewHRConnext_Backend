@@ -396,6 +396,7 @@ export type Mutation = {
   Createsalary?: Maybe<CreatesalaryResponseType>;
   Createyears?: Maybe<YearsResponseType>;
   EditPosition?: Maybe<CreatepositionResponseType>;
+  Salaryfilter?: Maybe<SalaryResponseType>;
   createAccount?: Maybe<CreateCompanyResponseType>;
   createAccountUser?: Maybe<CreateUserResponseType>;
   createAndUpdateComBarance?: Maybe<CreateComapnyBranchResponseType>;
@@ -453,6 +454,11 @@ export type MutationCreateyearsArgs = {
 
 export type MutationEditPositionArgs = {
   data?: InputMaybe<Array<CreatedAndUpdatePosition>>;
+};
+
+
+export type MutationSalaryfilterArgs = {
+  userId?: InputMaybe<Scalars['String']>;
 };
 
 
@@ -620,8 +626,6 @@ export type Query = {
   __typename?: 'Query';
   GetHoliDayYear?: Maybe<Array<Maybe<Holiday_Years>>>;
   GetHolidayDate?: Maybe<Array<Maybe<Holiday_Date>>>;
-  Selfdatasalary?: Maybe<Selfsalary>;
-  bookbank_log?: Maybe<Array<Maybe<Bookbank_Log>>>;
   company?: Maybe<ResponseCompany>;
   getAllcompany?: Maybe<Array<Maybe<CompanyBranch>>>;
   getMasPositon?: Maybe<Array<Maybe<Mas_Positionlevel1>>>;
@@ -1027,109 +1031,6 @@ export type Position = {
   position3_id?: InputMaybe<Scalars['String']>;
   role?: InputMaybe<Scalars['String']>;
   user_id?: InputMaybe<Scalars['String']>;
-};
-
-export type Provident_Log = {
-  __typename?: 'provident_log';
-  id?: Maybe<Scalars['ID']>;
-  mas_all_collectId?: Maybe<Scalars['String']>;
-  pro_company?: Maybe<Scalars['Float']>;
-  pro_employee?: Maybe<Scalars['Float']>;
-  provident_date?: Maybe<Scalars['Date']>;
-  userId?: Maybe<Scalars['String']>;
-};
-
-export type Provident_LogInput = {
-  id?: InputMaybe<Scalars['ID']>;
-  mas_all_collectId?: InputMaybe<Scalars['String']>;
-  pro_company?: InputMaybe<Scalars['Float']>;
-  pro_employee?: InputMaybe<Scalars['Float']>;
-  provident_date?: InputMaybe<Scalars['Date']>;
-  userId?: InputMaybe<Scalars['String']>;
-};
-
-export type Salary = {
-  __typename?: 'salary';
-  bonus?: Maybe<Scalars['Float']>;
-  bookbank_logId?: Maybe<Bookbank_Log>;
-  bursary?: Maybe<Scalars['Float']>;
-  commission?: Maybe<Scalars['Float']>;
-  date?: Maybe<Scalars['Date']>;
-  id: Scalars['ID'];
-  late?: Maybe<Scalars['Float']>;
-  mas_income_typeId?: Maybe<Scalars['String']>;
-  mas_monthId?: Maybe<Scalars['String']>;
-  mas_salary_statusId?: Maybe<Scalars['String']>;
-  mas_yearsId?: Maybe<Scalars['String']>;
-  miss?: Maybe<Scalars['Float']>;
-  net?: Maybe<Scalars['Float']>;
-  ot?: Maybe<Scalars['Float']>;
-  other?: Maybe<Scalars['Float']>;
-  other_income?: Maybe<Scalars['Float']>;
-  position_income?: Maybe<Scalars['Float']>;
-  provident_company?: Maybe<Scalars['Float']>;
-  provident_employee?: Maybe<Scalars['Float']>;
-  ra?: Maybe<Scalars['Float']>;
-  social_security?: Maybe<Scalars['Float']>;
-  special_income?: Maybe<Scalars['Float']>;
-  ss_per?: Maybe<Scalars['Float']>;
-  total_expense?: Maybe<Scalars['Float']>;
-  total_income?: Maybe<Scalars['Float']>;
-  travel_income?: Maybe<Scalars['Float']>;
-  userId?: Maybe<Scalars['String']>;
-  vat?: Maybe<Scalars['Float']>;
-  vatper?: Maybe<Scalars['Float']>;
-  welfare_money?: Maybe<Scalars['Float']>;
-};
-
-export type SalaryInput = {
-  bonus?: InputMaybe<Scalars['Float']>;
-  bookbank_logId?: InputMaybe<Scalars['String']>;
-  bursary?: InputMaybe<Scalars['Float']>;
-  commission?: InputMaybe<Scalars['Float']>;
-  date?: InputMaybe<Scalars['Date']>;
-  id?: InputMaybe<Scalars['ID']>;
-  late?: InputMaybe<Scalars['Float']>;
-  mas_income_typeId?: InputMaybe<Scalars['String']>;
-  mas_monthId?: InputMaybe<Scalars['String']>;
-  mas_salary_statusId?: InputMaybe<Scalars['String']>;
-  mas_yearsId?: InputMaybe<Scalars['String']>;
-  miss?: InputMaybe<Scalars['Float']>;
-  net?: InputMaybe<Scalars['Float']>;
-  ot?: InputMaybe<Scalars['Float']>;
-  other?: InputMaybe<Scalars['Float']>;
-  other_income?: InputMaybe<Scalars['Float']>;
-  position_income?: InputMaybe<Scalars['Float']>;
-  provident_company?: InputMaybe<Scalars['Float']>;
-  provident_employee?: InputMaybe<Scalars['Float']>;
-  ra?: InputMaybe<Scalars['Float']>;
-  social_security?: InputMaybe<Scalars['Float']>;
-  special_income?: InputMaybe<Scalars['Float']>;
-  total_expense?: InputMaybe<Scalars['Float']>;
-  total_income?: InputMaybe<Scalars['Float']>;
-  travel_income?: InputMaybe<Scalars['Float']>;
-  userId?: InputMaybe<Scalars['String']>;
-  vat?: InputMaybe<Scalars['Float']>;
-  welfare_money?: InputMaybe<Scalars['Float']>;
-};
-
-export type Selfsalary = {
-  __typename?: 'selfsalary';
-  base_salary?: Maybe<Bookbank_Log>;
-  id: Scalars['ID'];
-  net?: Maybe<Salary>;
-  profile?: Maybe<Profile>;
-};
-
-export type YearsInput = {
-  id?: InputMaybe<Scalars['ID']>;
-  name?: InputMaybe<Scalars['String']>;
-};
-
-export type YearsResponseType = {
-  __typename?: 'yearsResponseType';
-  message?: Maybe<Scalars['String']>;
-  status?: Maybe<Scalars['Boolean']>;
 };
 
 export type WithIndex<TObject> = TObject & Record<string, any>;
@@ -1640,6 +1541,7 @@ export type MutationResolvers<ContextType = ApolloContext, ParentType extends Re
   Createsalary?: Resolver<Maybe<ResolversTypes['createsalaryResponseType']>, ParentType, ContextType, Partial<MutationCreatesalaryArgs>>;
   Createyears?: Resolver<Maybe<ResolversTypes['yearsResponseType']>, ParentType, ContextType, Partial<MutationCreateyearsArgs>>;
   EditPosition?: Resolver<Maybe<ResolversTypes['CreatepositionResponseType']>, ParentType, ContextType, Partial<MutationEditPositionArgs>>;
+  Salaryfilter?: Resolver<Maybe<ResolversTypes['SalaryResponseType']>, ParentType, ContextType, Partial<MutationSalaryfilterArgs>>;
   createAccount?: Resolver<Maybe<ResolversTypes['CreateCompanyResponseType']>, ParentType, ContextType, RequireFields<MutationCreateAccountArgs, 'data'>>;
   createAccountUser?: Resolver<Maybe<ResolversTypes['CreateUserResponseType']>, ParentType, ContextType, RequireFields<MutationCreateAccountUserArgs, 'data'>>;
   createAndUpdateComBarance?: Resolver<Maybe<ResolversTypes['CreateComapnyBranchResponseType']>, ParentType, ContextType, RequireFields<MutationCreateAndUpdateComBaranceArgs, 'data'>>;
@@ -1742,8 +1644,6 @@ export type ProvinceResolvers<ContextType = ApolloContext, ParentType extends Re
 export type QueryResolvers<ContextType = ApolloContext, ParentType extends ResolversParentTypes['Query'] = ResolversParentTypes['Query']> = ResolversObject<{
   GetHoliDayYear?: Resolver<Maybe<Array<Maybe<ResolversTypes['holiday_years']>>>, ParentType, ContextType>;
   GetHolidayDate?: Resolver<Maybe<Array<Maybe<ResolversTypes['holiday_date']>>>, ParentType, ContextType>;
-  Selfdatasalary?: Resolver<Maybe<ResolversTypes['selfsalary']>, ParentType, ContextType>;
-  bookbank_log?: Resolver<Maybe<Array<Maybe<ResolversTypes['bookbank_log']>>>, ParentType, ContextType, Partial<QueryBookbank_LogArgs>>;
   company?: Resolver<Maybe<ResolversTypes['ResponseCompany']>, ParentType, ContextType, Partial<QueryCompanyArgs>>;
   getAllcompany?: Resolver<Maybe<Array<Maybe<ResolversTypes['CompanyBranch']>>>, ParentType, ContextType, Partial<QueryGetAllcompanyArgs>>;
   getMasPositon?: Resolver<Maybe<Array<Maybe<ResolversTypes['mas_positionlevel1']>>>, ParentType, ContextType>;
@@ -2011,70 +1911,6 @@ export type Mas_Positionlevel3Resolvers<ContextType = ApolloContext, ParentType 
   name?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   positionlevel2_id?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   type?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
-  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
-}>;
-
-export type MonthResponseTypeResolvers<ContextType = ApolloContext, ParentType extends ResolversParentTypes['monthResponseType'] = ResolversParentTypes['monthResponseType']> = ResolversObject<{
-  message?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
-  status?: Resolver<Maybe<ResolversTypes['Boolean']>, ParentType, ContextType>;
-  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
-}>;
-
-export type Provident_LogResolvers<ContextType = ApolloContext, ParentType extends ResolversParentTypes['provident_log'] = ResolversParentTypes['provident_log']> = ResolversObject<{
-  id?: Resolver<Maybe<ResolversTypes['ID']>, ParentType, ContextType>;
-  mas_all_collectId?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
-  pro_company?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
-  pro_employee?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
-  provident_date?: Resolver<Maybe<ResolversTypes['Date']>, ParentType, ContextType>;
-  userId?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
-  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
-}>;
-
-export type SalaryResolvers<ContextType = ApolloContext, ParentType extends ResolversParentTypes['salary'] = ResolversParentTypes['salary']> = ResolversObject<{
-  bonus?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
-  bookbank_logId?: Resolver<Maybe<ResolversTypes['bookbank_log']>, ParentType, ContextType>;
-  bursary?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
-  commission?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
-  date?: Resolver<Maybe<ResolversTypes['Date']>, ParentType, ContextType>;
-  id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
-  late?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
-  mas_income_typeId?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
-  mas_monthId?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
-  mas_salary_statusId?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
-  mas_yearsId?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
-  miss?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
-  net?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
-  ot?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
-  other?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
-  other_income?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
-  position_income?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
-  provident_company?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
-  provident_employee?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
-  ra?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
-  social_security?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
-  special_income?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
-  ss_per?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
-  total_expense?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
-  total_income?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
-  travel_income?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
-  userId?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
-  vat?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
-  vatper?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
-  welfare_money?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
-  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
-}>;
-
-export type SelfsalaryResolvers<ContextType = ApolloContext, ParentType extends ResolversParentTypes['selfsalary'] = ResolversParentTypes['selfsalary']> = ResolversObject<{
-  base_salary?: Resolver<Maybe<ResolversTypes['bookbank_log']>, ParentType, ContextType>;
-  id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
-  net?: Resolver<Maybe<ResolversTypes['salary']>, ParentType, ContextType>;
-  profile?: Resolver<Maybe<ResolversTypes['Profile']>, ParentType, ContextType>;
-  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
-}>;
-
-export type YearsResponseTypeResolvers<ContextType = ApolloContext, ParentType extends ResolversParentTypes['yearsResponseType'] = ResolversParentTypes['yearsResponseType']> = ResolversObject<{
-  message?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
-  status?: Resolver<Maybe<ResolversTypes['Boolean']>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 }>;
 
