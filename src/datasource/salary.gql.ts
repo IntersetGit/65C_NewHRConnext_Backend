@@ -1,10 +1,10 @@
-import { User } from './../generated/graphql';
-import { salary } from './../generated/client/index.d';
+
 import { Resolvers } from '../generated/graphql';
 import gql from 'graphql-tag';
 import { v4 } from 'uuid';
 import { composeResolvers } from '@graphql-tools/resolvers-composition';
 import { authenticate } from '../middleware/authenticatetoken';
+
 
 // import { PrismaClient } from '@prisma/client';
 // const prisma = new PrismaClient();
@@ -110,6 +110,8 @@ export const salaryTypedef = gql`
             
  
   }
+
+
   type salary {
     id: ID
     mas_monthId: String
@@ -469,7 +471,7 @@ const resolvers: Resolvers = {
       };
     },
 
-    async Createsalary(p: any, args: any, ctx: any) { //สร้าง log สำหรับเงินเดือนจากนั้นเก็บกองทุนไว้ใน provident log จากนั้นเก็บค่าไว้ใน collect
+    async Createsalary(p, args, ctx) { //สร้าง log สำหรับเงินเดือนจากนั้นเก็บกองทุนไว้ใน provident log จากนั้นเก็บค่าไว้ใน collect
       const gensalaryID = v4()
       const genAllCollectID = v4()
 
@@ -527,23 +529,24 @@ const resolvers: Resolvers = {
           userId: args.data?.userId
         },
       });
+      
       if (chk_collectLog.length > 0) {
         console.log(args.data?.userId);
         console.log(args.data)
         
         const UpdateAllCollect = await ctx.prisma.mas_all_collect.update({
-          // include: { provident_log: true , User:true },
           data: {
             date: new Date(args.data?.date),
-            income_collect: args.data?.net,
+            income_collect: args.data?.net as number,
             vat_collect: args.data?.vat,
-            social_secu_collect: args.data?.social_security,
-            provident_collect_employee: args.data?.provident_employee,
-            provident_collect_company: args.data?.provident_company,
+            social_secu_collect: args.data?.social_security as number,
+            provident_collect_employee: args.data?.provident_employee as number ,
+            provident_collect_company: args.data?.provident_company as number ,
           },
-          where : {
-            userId: args.data?.userId
-          },
+         where:{
+          
+         }
+          
         });
         return {
           message: 'update success',
@@ -556,11 +559,11 @@ const resolvers: Resolvers = {
             id: genAllCollectID,
             userId: args.data?.userId,
             date: new Date(args.data?.date),
-            income_collect: args.data?.net,
+            income_collect: args.data?.net as number,
             vat_collect: args.data?.vat,
-            social_secu_collect: args.data?.social_security,
-            provident_collect_employee: args.data?.provident_employee,
-            provident_collect_company: args.data?.provident_company,
+            social_secu_collect: args.data?.social_security as number,
+            provident_collect_employee: args.data?.provident_employee as number ,
+            provident_collect_company: args.data?.provident_company as number ,
           }
         })
       }

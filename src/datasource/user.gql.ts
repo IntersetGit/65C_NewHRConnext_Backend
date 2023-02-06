@@ -216,7 +216,7 @@ const resolvers: Resolvers = {
     async users(parent, args, ctx) {
       const filter = args?.userid ? args?.userid : undefined;
       const result = await ctx.prisma.user.findMany({
-        include: { profile: true, company: true, Role_Company: true, companyBranch:true },
+        include: { profile: true, company: true, Role_Company: true, companyBranch:true , Position_user: true},
         where: {
           companyBranchId: ctx.currentUser?.branchId,
           AND: {

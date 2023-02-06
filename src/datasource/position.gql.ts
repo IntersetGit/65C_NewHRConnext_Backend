@@ -189,7 +189,8 @@ export const positionResolvers: Resolvers = {
       if (args.id) {
         const resultbyID = await ctx.prisma.position_user.findMany({
           include: { mas_positionlevel1: true, mas_positionlevel2: true, mas_positionlevel3: true, user: { include: { profile: true } }, header: { include: { profile: true } } },
-          where: { user_id: args.id }
+          where: { user_id: args.id },
+          orderBy: { date: 'asc' }
         });
         return resultbyID;
       } else {
@@ -199,7 +200,8 @@ export const positionResolvers: Resolvers = {
             user: {
               companyBranchId: ctx.currentUser?.branchId
             }
-          }
+          },
+          orderBy: { date: 'asc' }
         });
         return result;
       }
