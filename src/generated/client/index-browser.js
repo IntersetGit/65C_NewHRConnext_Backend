@@ -198,6 +198,7 @@ exports.Prisma.JsonNullValueInput = makeEnum({
 exports.Prisma.Mas_all_collectScalarFieldEnum = makeEnum({
   id: 'id',
   userId: 'userId',
+  date: 'date',
   income_collect: 'income_collect',
   vat_collect: 'vat_collect',
   social_secu_collect: 'social_secu_collect',
@@ -343,7 +344,8 @@ exports.Prisma.Provident_logScalarFieldEnum = makeEnum({
   pro_employee: 'pro_employee',
   pro_company: 'pro_company',
   mas_all_collectId: 'mas_all_collectId',
-  bookbank_logId: 'bookbank_logId'
+  bookbank_logId: 'bookbank_logId',
+  salaryId: 'salaryId'
 });
 
 exports.Prisma.ProvinceScalarFieldEnum = makeEnum({
@@ -402,7 +404,8 @@ exports.Prisma.SalaryScalarFieldEnum = makeEnum({
   mas_salary_statusId: 'mas_salary_statusId',
   mas_bankId: 'mas_bankId',
   mas_vat_socialsId: 'mas_vat_socialsId',
-  expense_companyId: 'expense_companyId'
+  expense_companyId: 'expense_companyId',
+  provident_logId: 'provident_logId'
 });
 
 exports.Prisma.SortOrder = makeEnum({
