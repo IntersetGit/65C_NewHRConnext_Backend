@@ -179,7 +179,7 @@ export const positionResolvers: Resolvers = {
     async getpositionMe(p, args, ctx) {
       const resultMebyID = await ctx.prisma.position_user.findMany({
         include: { mas_positionlevel1: true, mas_positionlevel2: true, mas_positionlevel3: true, user: { include: { profile: true } }, header: { include: { profile: true } } },
-        where:{user_id: ctx.currentUser?.branchId}
+        where: { user_id: ctx.currentUser?.branchId }
       });
       return resultMebyID;
     },
@@ -217,49 +217,94 @@ export const positionResolvers: Resolvers = {
      */
     async EditPosition(p, args, ctx) {
       args.data?.forEach(async (e) => {
-        const createdPo_1 = await ctx.prisma.mas_positionlevel1.update({
-          // include: { mas_positionlevel2: { include: { mas_positionlevel3: true } } },
-          data: {
-            name: e.name_Position1 as string,
-            level: e.level_Position1 as number,
-            code: e.code_position1 as string,
-          },
-          where: {
-            id: e.id_Position1 as string
-          }
-        })
-        e.masPosition2?.forEach(async (a) => {
-          const CretePo_2 = await ctx.prisma.mas_positionlevel2.update({
+        if (e.id_Position1) {
+          const createdPo_1 = await ctx.prisma.mas_positionlevel1.update({
+            // include: { mas_positionlevel2: { include: { mas_positionlevel3: true } } },
             data: {
-              positionlevel1_id: a?.positionlevel1_id,
-              name: a?.name_Position2 as string,
-              level: a?.level_Position2 as number,
-              code: a?.code_position2 as string,
+              name: e.name_Position1 as string,
+              level: e.level_Position1 as number,
+              code: e.code_position1 as string,
             },
             where: {
-              id: a?.id_Position2 as string
+              id: e.id_Position1 as string
             }
           })
-          a?.masPosition3?.forEach(async (b) => {
-            const CretePo_3 = await ctx.prisma.mas_positionlevel3.update({
-              data: {
-                positionlevel2_id: b?.positionlevel2_id,
-                name: b?.name_Position3 as string,
-                level: b?.level_Position3 as number,
-                code: b?.code_position3 as string,
-              },
-              where: {
-                id: b?.id_Position3 as string
-              }
-            })
+        } else {
+          const createdPo_1 = await ctx.prisma.mas_positionlevel1.create({
+            // include: { mas_positionlevel2: { include: { mas_positionlevel3: true } } },
+            data: {
+              id: v4(),
+              CompanyId: ctx.currentUser?.compayId,
+              name: e.name_Position1 as string,
+              level: e.level_Position1 as number,
+              code: e.code_position1 as string,
+              type: 'ฝ่าย',
+            },
           })
-        })
+        }
+        if (e.masPosition2) {
+          e.masPosition2?.forEach(async (a) => {
+            if (a?.id_Position2) {
+              const CretePo_2 = await ctx.prisma.mas_positionlevel2.update({
+                data: {
+                  positionlevel1_id: a?.positionlevel1_id,
+                  name: a?.name_Position2 as string,
+                  level: a?.level_Position2 as number,
+                  code: a?.code_position2 as string,
+                },
+                where: {
+                  id: a?.id_Position2 as string
+                }
+              })
+            } else {
+              const CretePo_2 = await ctx.prisma.mas_positionlevel2.create({
+                data: {
+                  id: v4(),
+                  positionlevel1_id: a?.positionlevel1_id,
+                  CompanyId: ctx.currentUser?.compayId,
+                  name: a?.name_Position2 as string,
+                  level: a?.level_Position2 as number,
+                  code: a?.code_position2 as string,
+                  type: 'แผนก',
+                }
+              })
+            }
+            if (a?.masPosition3) {
+              a?.masPosition3?.forEach(async (b) => {
+                if (b?.id_Position3) {
+                  const CretePo_3 = await ctx.prisma.mas_positionlevel3.update({
+                    data: {
+                      positionlevel2_id: b?.positionlevel2_id,
+                      name: b?.name_Position3 as string,
+                      level: b?.level_Position3 as number,
+                      code: b?.code_position3 as string,
+                    },
+                    where: {
+                      id: b?.id_Position3 as string
+                    }
+                  })
+                } else {
+                  const CretePo_3 = await ctx.prisma.mas_positionlevel3.create({
+                    data: {
+                      id: v4(),
+                      positionlevel2_id: b?.id_Position3,
+                      CompanyId: ctx.currentUser?.compayId,
+                      name: b?.name_Position3 as string,
+                      level: b?.level_Position3 as number,
+                      code: b?.code_position3 as string,
+                      type: 'ตำแหน่ง',
+                    }
+                  })
+                }
+              })
+            }
+          })
+        }
       })
       return {
         message: 'success',
         status: true,
       };
-
     },
 
 
