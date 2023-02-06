@@ -120,7 +120,12 @@ export const salaryTypedef = gql`
     bookbank_logId: String
     mas_income_typeId: String
     date: Date 
-    mas_salary_statusId: String
+    mas_salary_statusId: String      
+  provident_date:    Date
+  pro_employee:      Float
+  pro_company:       Float
+  mas_all_collectId: String          
+ 
   }
   type salary {
     id: ID!
@@ -153,6 +158,10 @@ export const salaryTypedef = gql`
     mas_income_typeId: String
     date: Date 
     mas_salary_statusId: String
+  provident_date:    Date
+  pro_employee:      Float
+  pro_company:       Float
+  mas_all_collectId: String                 
   }
 
 input ExpenseComInput{
@@ -324,6 +333,9 @@ const resolvers: Resolvers = {
 
     async Createsalary(p: any, args: any, ctx: any) { //สร้าง log สำหรับเงินเดือนจากนั้นเก็บกองทุนไว้ใน provident log จากนั้นเก็บค่าไว้ใน collect
       const gensalaryID = v4()
+      const providentID = v4()
+      const pro_emp = args.data?.provident_employee
+      const pro_com = args.data?.provident_company
       const createsalary = await ctx.prisma.salary.create({
         data: {
           id: gensalaryID,
@@ -346,8 +358,8 @@ const resolvers: Resolvers = {
           ra: args.data?.ra as number,
           late: args.data?.late as number,
           other: args.data?.other as number,
-          provident_employee: args.data?.provident_employee as number,
-          provident_company: args.data?.provident_company as number,
+          provident_employee: pro_emp as number,
+          provident_company: pro_com as number,
           total_income: args.data?.total_income as number,
           total_expense: args.data?.total_expense as number,
           net: args.data?.net as number,
@@ -355,7 +367,18 @@ const resolvers: Resolvers = {
           bookbank_logId: args.data?.bookbank_logId,
           mas_income_typeId: args.data?.mas_income_typeId,
           date: new Date(args.data?.date),
-          mas_salary_statusId: args.data?.mas_salary_statusId
+          mas_salary_statusId: args.data?.mas_salary_statusId,
+          provident_log: {
+            create : {
+              id: providentID,
+              userId: args.data?.userId,
+              provident_date: new Date(args.data?.date),
+              pro_employee: pro_emp,
+              pro_company: pro_com,
+              mas_all_collectId: args.data?.mas_all_collectId,
+              // bookbank_logId : bookbankID
+            }
+          }
 
         }
       });
@@ -367,7 +390,7 @@ const resolvers: Resolvers = {
 
     async Createbookbank(p: any, args: any, ctx: any) { //สร้าง bookbank 
       const bookbankID = v4();
-      const providentID = v4()
+      // const providentID = v4()
       const createbook_bank = await ctx.prisma.bookbank_log.create({
         data: {
           id: bookbankID,
