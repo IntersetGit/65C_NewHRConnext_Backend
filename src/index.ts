@@ -9,6 +9,7 @@ import bodyParser from 'body-parser';
 import { typeDefs, resolvers } from './datasource/index';
 import multer from 'multer';
 import { PrismaClient } from './generated/client';
+import routes from './uploadFiles';
 
 const prisma = new PrismaClient();
 
@@ -40,22 +41,9 @@ const server = new ApolloServer<ApolloContext>({
 (async () => {
   await server.start();
 
-  const storageAvatar = multer.diskStorage({
-    destination: function (req, file, callback) {
-      callback(null, 'uploads/avatar');
-    },
-    filename: function (req, file, callback) {
-      const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1e9);
-      callback(null, file.fieldname + '-' + uniqueSuffix + '.png');
-    },
-  });
-
-  const uploads = multer({ storage: storageAvatar });
-  app.post('/api/upload/avatar', uploads.single('avatar'), (req, res) => {
-    res.send(req.file);
-  });
-
-  app.use('/api/static', express.static('uploads'));
+  app.use(cors());
+  app.use('/api/upload', routes);
+  app.use('/api/uploads', express.static('uploads'));
 
   app.use(
     '/gql',
