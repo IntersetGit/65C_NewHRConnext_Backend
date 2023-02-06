@@ -333,7 +333,7 @@ const resolvers: Resolvers = {
 
     async Createsalary(p: any, args: any, ctx: any) { //สร้าง log สำหรับเงินเดือนจากนั้นเก็บกองทุนไว้ใน provident log จากนั้นเก็บค่าไว้ใน collect
       const gensalaryID = v4()
-      const providentID = v4()
+     
       const pro_emp = args.data?.provident_employee
       const pro_com = args.data?.provident_company
       const createsalary = await ctx.prisma.salary.create({
@@ -370,9 +370,9 @@ const resolvers: Resolvers = {
           mas_salary_statusId: args.data?.mas_salary_statusId,
           provident_log: {
             create : {
-              id: providentID,
+              id: v4(),
               userId: args.data?.userId,
-              provident_date: new Date(args.data?.date),
+              provident_date: new Date(),
               pro_employee: pro_emp,
               pro_company: pro_com,
               mas_all_collectId: args.data?.mas_all_collectId,

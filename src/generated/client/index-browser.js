@@ -343,7 +343,8 @@ exports.Prisma.Provident_logScalarFieldEnum = makeEnum({
   pro_employee: 'pro_employee',
   pro_company: 'pro_company',
   mas_all_collectId: 'mas_all_collectId',
-  bookbank_logId: 'bookbank_logId'
+  bookbank_logId: 'bookbank_logId',
+  salaryId: 'salaryId'
 });
 
 exports.Prisma.ProvinceScalarFieldEnum = makeEnum({
