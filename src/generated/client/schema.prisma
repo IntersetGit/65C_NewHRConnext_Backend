@@ -412,7 +412,6 @@ model bookbank_log {
   userId        String?         @db.Uuid
   provident_log provident_log[]
 }
-
 model provident_log {
   id String @unique @db.Uuid
 
@@ -426,3 +425,4 @@ model provident_log {
   bookbank_log      bookbank_log?    @relation(fields: [bookbank_logId], references: [id])
   bookbank_logId    String?          @db.Uuid
 }
+
