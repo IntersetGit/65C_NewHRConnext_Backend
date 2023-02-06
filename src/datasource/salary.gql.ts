@@ -125,7 +125,8 @@ export const salaryTypedef = gql`
   provident_date:    Date
   pro_employee:      Float
   pro_company:       Float
-  mas_all_collectId: String          
+  mas_all_collectId: String
+            
  
   }
   type salary {
@@ -381,6 +382,7 @@ const resolvers: Resolvers = {
 
     async Createsalary(p: any, args: any, ctx: any) { //สร้าง log สำหรับเงินเดือนจากนั้นเก็บกองทุนไว้ใน provident log จากนั้นเก็บค่าไว้ใน collect
       const gensalaryID = v4()
+      const genAllCollectID = v4()
 
       // const pro_emp = args.data?.provident_employee
       // const pro_com = args.data?.provident_company
@@ -434,21 +436,43 @@ const resolvers: Resolvers = {
         include: { provident_log: true },
         where: {
           userId: args.data?.userId
-        }
+        },
       });
       if (chk_collectLog.length > 0) {
-        console.log("มีค่าใน base")
-      } else {
+        console.log(args.data?.userId);
+        console.log(args.data)
         
-        const createAllCollect = await ctx.prisma.salary.create({
-          id: v4(),
-          userId: args.data?.userId,
-          income_collect: args.data?.income_collect,
-          vat_collect: args.data?.vat_collect,
-          social_secu_collect: args.data?.social_secu_collect,
-          provident_collect_employee: args.data?.provident_collect_employee,
-          provident_collect_company: args.data?.provident_collect_company,
-
+        const UpdateAllCollect = await ctx.prisma.mas_all_collect.update({
+          // include: { provident_log: true , User:true },
+          data: {
+            date: new Date(args.data?.date),
+            income_collect: args.data?.net,
+            vat_collect: args.data?.vat,
+            social_secu_collect: args.data?.social_security,
+            provident_collect_employee: args.data?.provident_employee,
+            provident_collect_company: args.data?.provident_company,
+          },
+          where : {
+            userId: args.data?.userId
+          },
+        });
+        return {
+          message: 'update success',
+          status: true,
+        };
+      } else {
+        // let providentC_emp = args.data?.provident_collect_employee
+        const createAllCollect = await ctx.prisma.mas_all_collect.create({
+          data: {
+            id: genAllCollectID,
+            userId: args.data?.userId,
+            date: new Date(args.data?.date),
+            income_collect: args.data?.net,
+            vat_collect: args.data?.vat,
+            social_secu_collect: args.data?.social_security,
+            provident_collect_employee: args.data?.provident_employee,
+            provident_collect_company: args.data?.provident_company,
+          }
         })
       }
 
