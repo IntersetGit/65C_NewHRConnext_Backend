@@ -1,3 +1,5 @@
+import { User } from './../generated/graphql';
+import { salary } from './../generated/client/index.d';
 import { Resolvers } from '../generated/graphql';
 import gql from 'graphql-tag';
 import { v4 } from 'uuid';
@@ -134,14 +136,89 @@ export const salaryTypedef = gql`
     total_expense: Float
     net: Float
     userId: String
-    bookbank_logId: bookbank_log
+    bookbank_logId: String
+    bookbank_log: Bookbank_log_type
     mas_income_typeId: String
     date: Date 
     mas_salary_statusId: String
-  provident_date:    Date
-  pro_employee:      Float
-  pro_company:       Float
-  mas_all_collectId: String                 
+    provident_date:    Date
+    pro_employee:      Float
+    pro_company:       Float
+    mas_all_collectId: String                 
+  }
+
+  type Bookbank_log_type { 
+  id: ID           
+  date:          Date
+  mas_bankId:    String
+  bank_number:   String         
+  all_collectId: String      
+  base_salary:   Float
+  provident_com: Float           
+  provident_emp: Float           
+  salary:        [salary] 
+  mas_bank:      mas_bank      
+  User:          User           
+  userId:        String       
+  provident_log: [provident_log]
+  }
+
+  type mas_month {
+    id: ID
+    name: String 
+    expense_company:[expense_company]
+    bookbank_log:[Bookbank_log_type]
+    salary:[salary]
+  }
+
+  type mas_bank {
+    id: ID
+    name: String
+    expense_company:expense_company
+    bookbank_log: Bookbank_log_type
+    salary: [salary]
+  }
+
+  type expense_company {
+    id: ID
+    monthId: String
+    bankId: String
+    date: Date
+    vat_per: Float
+    social_security:Float
+    companyBranchId:String
+    salary:[salary]
+    Mas_month:mas_month
+    mas_bank:mas_bank
+    CompanyBranch:CompanyBranch
+  }
+
+  type provident_log {
+    id: ID
+    User: User
+    userId: String
+    provident_date: Date
+    pro_employee: Float
+    pro_company:Float
+    mas_all_collect:mas_all_collect
+    mas_all_collectId:String
+    bookbank_log:Bookbank_log_type
+    bookbank_logId:String
+    salary:salary
+    salaryId:String
+  }
+
+  type mas_all_collect {
+    id: ID
+    User: User
+    userId: String
+    date:Date
+    income_collect:Float
+    vat_collect:Float
+    social_secu_collect:Float
+    provident_collect_employee:Float
+    provident_collect_company:Float
+    provident_log:[provident_log]
   }
 
 input ExpenseComInput{
@@ -208,13 +285,12 @@ type Profile {
 
 
   type data_salary_me{
-    email: String!
-    password: String!
+    email: String
     id: ID!
     profile: Profile
-    islogin: Boolean!
-    isActive: Boolean!
-    isOwner: Boolean!
+    islogin: Boolean
+    isActive: Boolean
+    isOwner: Boolean
     lastlogin: Date
     createdAt: Date
     roleId: String
@@ -271,7 +347,7 @@ type Profile {
     salary(userId: String, mas_monthId: String, mas_yearsId: String): [salary]
     bookbank_log(id: String): [bookbank_log]
     provident_log(userId:String):[provident_log]
-    datasalary_mee: data_salary_me
+    datasalary_mee: [data_salary_me]
     # Selfdatasalary: selfsalary
   }
   type Mutation {
@@ -300,16 +376,16 @@ const resolvers: Resolvers = {
     },
 
 
-    async datasalary_mee(parant, args, ctx){
-      const getdata = await ctx.prisma.user.findUnique({
-        // include: {salary:true},
-        where:{
+    async datasalary_mee(parant, args, ctx) {
+      const getdata = await ctx.prisma.user.findMany({
+        include: { profile: true, salary: true },
+        where: {
           id: ctx.currentUser?.id
         }
       })
       return getdata
     },
-   
+
 
     // async Selfdatasalary(parant, args, ctx) {
     //   const result = await ctx.prisma.user.findUnique({
@@ -381,7 +457,7 @@ const resolvers: Resolvers = {
 
     async Createsalary(p: any, args: any, ctx: any) { //สร้าง log สำหรับเงินเดือนจากนั้นเก็บกองทุนไว้ใน provident log จากนั้นเก็บค่าไว้ใน collect
       const gensalaryID = v4()
-     
+
       const pro_emp = args.data?.provident_employee
       const pro_com = args.data?.provident_company
       const createsalary = await ctx.prisma.salary.create({
@@ -417,7 +493,7 @@ const resolvers: Resolvers = {
           date: new Date(args.data?.date),
           mas_salary_statusId: args.data?.mas_salary_statusId,
           provident_log: {
-            create : {
+            create: {
               id: v4(),
               userId: args.data?.userId,
               provident_date: new Date(),
@@ -439,7 +515,7 @@ const resolvers: Resolvers = {
       if (chk_collectLog.length > 0) {
         console.log("มีค่าใน base")
       } else {
-        
+
         const createAllCollect = await ctx.prisma.salary.create({
           id: v4(),
           userId: args.data?.userId,
@@ -558,7 +634,7 @@ const resolvers: Resolvers = {
 const resolversComposition = {
   'Query.salary': [authenticate()],
   'Query.bookbank_log': [authenticate()],
-  'Query.Selfdatasalary': [authenticate()],
+  'Query.datasalary_mee': [authenticate()],
   'Mutation.Createmonth': [authenticate()],
   'Mutation.Createyears': [authenticate()],
   'Mutation.Createsalary': [authenticate()],
