@@ -1062,6 +1062,7 @@ export type Salary = {
   date?: Maybe<Scalars['Date']>;
   id: Scalars['ID'];
   late?: Maybe<Scalars['Float']>;
+  mas_all_collectId?: Maybe<Scalars['String']>;
   mas_income_typeId?: Maybe<Scalars['String']>;
   mas_monthId?: Maybe<Scalars['String']>;
   mas_salary_statusId?: Maybe<Scalars['String']>;
@@ -1072,7 +1073,10 @@ export type Salary = {
   other?: Maybe<Scalars['Float']>;
   other_income?: Maybe<Scalars['Float']>;
   position_income?: Maybe<Scalars['Float']>;
+  pro_company?: Maybe<Scalars['Float']>;
+  pro_employee?: Maybe<Scalars['Float']>;
   provident_company?: Maybe<Scalars['Float']>;
+  provident_date?: Maybe<Scalars['Date']>;
   provident_employee?: Maybe<Scalars['Float']>;
   ra?: Maybe<Scalars['Float']>;
   social_security?: Maybe<Scalars['Float']>;
@@ -1095,6 +1099,7 @@ export type SalaryInput = {
   date?: InputMaybe<Scalars['Date']>;
   id?: InputMaybe<Scalars['ID']>;
   late?: InputMaybe<Scalars['Float']>;
+  mas_all_collectId?: InputMaybe<Scalars['String']>;
   mas_income_typeId?: InputMaybe<Scalars['String']>;
   mas_monthId?: InputMaybe<Scalars['String']>;
   mas_salary_statusId?: InputMaybe<Scalars['String']>;
@@ -1105,7 +1110,10 @@ export type SalaryInput = {
   other?: InputMaybe<Scalars['Float']>;
   other_income?: InputMaybe<Scalars['Float']>;
   position_income?: InputMaybe<Scalars['Float']>;
+  pro_company?: InputMaybe<Scalars['Float']>;
+  pro_employee?: InputMaybe<Scalars['Float']>;
   provident_company?: InputMaybe<Scalars['Float']>;
+  provident_date?: InputMaybe<Scalars['Date']>;
   provident_employee?: InputMaybe<Scalars['Float']>;
   ra?: InputMaybe<Scalars['Float']>;
   social_security?: InputMaybe<Scalars['Float']>;
@@ -2043,6 +2051,7 @@ export type SalaryResolvers<ContextType = ApolloContext, ParentType extends Reso
   date?: Resolver<Maybe<ResolversTypes['Date']>, ParentType, ContextType>;
   id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
   late?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
+  mas_all_collectId?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   mas_income_typeId?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   mas_monthId?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   mas_salary_statusId?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
@@ -2053,7 +2062,10 @@ export type SalaryResolvers<ContextType = ApolloContext, ParentType extends Reso
   other?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
   other_income?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
   position_income?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
+  pro_company?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
+  pro_employee?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
   provident_company?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
+  provident_date?: Resolver<Maybe<ResolversTypes['Date']>, ParentType, ContextType>;
   provident_employee?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
   ra?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
   social_security?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;

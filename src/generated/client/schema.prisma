@@ -310,7 +310,7 @@ model mas_salary_status {
   salary salary[]
 }
 
-model mas_income_type { //หักภาษีจากรายรับประเภทต่าง ๆ 
+model mas_income_type {
   id     String   @unique @db.Uuid
   name   String
   salary salary[]
@@ -318,8 +318,8 @@ model mas_income_type { //หักภาษีจากรายรับปร
 
 model expense_company {
   id              String         @unique @db.Uuid
-  monthId         String?         @db.Uuid
-  bankId          String?         @db.Uuid
+  monthId         String?        @db.Uuid
+  bankId          String?        @db.Uuid
   date            DateTime
   vat_per         Float?
   social_security Float?
@@ -370,6 +370,7 @@ model salary {
   mas_bankId          String?            @db.Uuid
   mas_vat_socialsId   String?            @db.Uuid
   expense_companyId   String?            @db.Uuid
+  provident_logId     String?            @db.Uuid
   User                User?              @relation(fields: [userId], references: [id])
   bookbank_log        bookbank_log?      @relation(fields: [bookbank_logId], references: [id])
   mas_month           mas_month?         @relation(fields: [mas_monthId], references: [id])
@@ -379,6 +380,7 @@ model salary {
   mas_bank            mas_bank?          @relation(fields: [mas_bankId], references: [id])
   mas_vat_socials     mas_vat_socials?   @relation(fields: [mas_vat_socialsId], references: [id])
   expense_company     expense_company?   @relation(fields: [expense_companyId], references: [id])
+  provident_log       provident_log?     @relation(fields: [provident_logId], references: [id])
 }
 
 model mas_all_collect {
@@ -412,6 +414,7 @@ model bookbank_log {
   userId        String?         @db.Uuid
   provident_log provident_log[]
 }
+
 model provident_log {
   id String @unique @db.Uuid
 
@@ -424,5 +427,5 @@ model provident_log {
   mas_all_collectId String?          @db.Uuid
   bookbank_log      bookbank_log?    @relation(fields: [bookbank_logId], references: [id])
   bookbank_logId    String?          @db.Uuid
+  salary            salary[]
 }
-
