@@ -194,12 +194,12 @@ type Profile {
     user: User
     userId: String
   }
-  type selfsalary{
-    id: ID!
-    profile: Profile
-    base_salary:bookbank_log
-    salary : salary
-  }
+  # type selfsalary{
+  #   id: ID!
+  #   profile: Profile
+  #   base_salary:bookbank_log
+  #   salary : salary
+  # }
 
   # type selfsalary{
   #   data_user: User
@@ -207,6 +207,28 @@ type Profile {
   #   base_salary:bookbank_log
   # }
 
+
+  type data_salary_me{
+    email: String!
+    password: String!
+    id: ID!
+    profile: Profile
+    islogin: Boolean!
+    isActive: Boolean!
+    isOwner: Boolean!
+    lastlogin: Date
+    createdAt: Date
+    roleId: String
+    companyId: String
+    role: Role
+    RoleCompanyID: String
+    Role_Company: Role_Company
+    company: [Company]
+    companyBranch: CompanyBranch
+    companyBranchId: String
+    salary: [salary]
+    base_salary:bookbank_log
+  }
 
   type createsalaryResponseType {
     message: String
@@ -407,8 +429,8 @@ const resolvers: Resolvers = {
             }
           }
 
-      //   }
-      // });
+        }
+      });
       const chk_collectLog = await ctx.prisma.mas_all_collect.findMany({
         include: { provident_log: true },
         where: {
