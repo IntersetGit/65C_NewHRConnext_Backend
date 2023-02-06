@@ -97,23 +97,19 @@ export const holidayResolvers: Resolvers = {
       return result;
     },
 
-    // async GetHolidayDate (p, args, ctx) {
+    // async GetHolidayDate(p, args, ctx) {
     //   const result = await ctx.prisma.holiday_date.findUnique({
-
-    //     select: {
-    //         id: true,
-    //         holiday_name: true,
-    //         day: true,
-    //         month: true,
-    //         yaer: true,
-    //         CompanyId: true
+    //     where: { 
+    //       id: ctx.currentUser?.compayId
     //     },
-    //     where: { id: ctx.currentUser?.compayId },
+    //     select: {
+    //       holiday_name: true
+
+    //     }
+        
     //   });
     //   return result;
     // }
-
-
   },
 
   Mutation: {
