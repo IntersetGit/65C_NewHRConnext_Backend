@@ -1,4 +1,3 @@
-import { salary, User } from './../generated/client/index.d';
 import { Resolvers } from '../generated/graphql';
 import gql from 'graphql-tag';
 import { v4 } from 'uuid';
@@ -272,7 +271,7 @@ type Profile {
     salary(userId: String, mas_monthId: String, mas_yearsId: String): [salary]
     bookbank_log(id: String): [bookbank_log]
     provident_log(userId:String):[provident_log]
-    datasalary_mee: [data_salary_me]
+    datasalary_mee: data_salary_me
     # Selfdatasalary: selfsalary
   }
   type Mutation {
@@ -302,7 +301,7 @@ const resolvers: Resolvers = {
 
 
     async datasalary_mee(parant, args, ctx){
-      const getdata = await ctx.prisma.user.findMany({
+      const getdata = await ctx.prisma.user.findUnique({
         // include: {salary:true},
         where:{
           id: ctx.currentUser?.id
