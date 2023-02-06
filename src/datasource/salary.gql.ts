@@ -534,6 +534,7 @@ const resolvers: Resolvers = {
         const UpdateAllCollect = await ctx.prisma.mas_all_collect.update({
           // include: { provident_log: true , User:true },
           data: {
+            userId: args.data?.userId,
             date: new Date(args.data?.date),
             income_collect: args.data?.net,
             vat_collect: args.data?.vat,
@@ -542,7 +543,7 @@ const resolvers: Resolvers = {
             provident_collect_company: args.data?.provident_company,
           },
           where : {
-            userId: args.data?.userId
+            id: chk_collectLog[0].id
           },
         });
         return {

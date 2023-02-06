@@ -398,7 +398,7 @@ export type salary = {
  */
 export type mas_all_collect = {
   id: string
-  userId: string | null
+  userId: string
   date: Date
   income_collect: number
   vat_collect: number | null
@@ -27436,7 +27436,7 @@ export namespace Prisma {
 
   export type Mas_all_collectGroupByOutputType = {
     id: string
-    userId: string | null
+    userId: string
     date: Date
     income_collect: number
     vat_collect: number | null
@@ -32437,7 +32437,7 @@ export namespace Prisma {
     NOT?: Enumerable<mas_all_collectWhereInput>
     id?: UuidFilter | string
     User?: XOR<UserRelationFilter, UserWhereInput> | null
-    userId?: UuidNullableFilter | string | null
+    userId?: UuidFilter | string
     date?: DateTimeFilter | Date | string
     income_collect?: FloatFilter | number
     vat_collect?: FloatNullableFilter | number | null
@@ -32485,7 +32485,7 @@ export namespace Prisma {
     OR?: Enumerable<mas_all_collectScalarWhereWithAggregatesInput>
     NOT?: Enumerable<mas_all_collectScalarWhereWithAggregatesInput>
     id?: UuidWithAggregatesFilter | string
-    userId?: UuidNullableWithAggregatesFilter | string | null
+    userId?: UuidWithAggregatesFilter | string
     date?: DateTimeWithAggregatesFilter | Date | string
     income_collect?: FloatWithAggregatesFilter | number
     vat_collect?: FloatNullableWithAggregatesFilter | number | null
@@ -34752,7 +34752,7 @@ export namespace Prisma {
 
   export type mas_all_collectUncheckedCreateInput = {
     id: string
-    userId?: string | null
+    userId: string
     date: Date | string
     income_collect: number
     vat_collect?: number | null
@@ -34776,7 +34776,7 @@ export namespace Prisma {
 
   export type mas_all_collectUncheckedUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
-    userId?: NullableStringFieldUpdateOperationsInput | string | null
+    userId?: StringFieldUpdateOperationsInput | string
     date?: DateTimeFieldUpdateOperationsInput | Date | string
     income_collect?: FloatFieldUpdateOperationsInput | number
     vat_collect?: NullableFloatFieldUpdateOperationsInput | number | null
@@ -34788,7 +34788,7 @@ export namespace Prisma {
 
   export type mas_all_collectCreateManyInput = {
     id: string
-    userId?: string | null
+    userId: string
     date: Date | string
     income_collect: number
     vat_collect?: number | null
@@ -34809,7 +34809,7 @@ export namespace Prisma {
 
   export type mas_all_collectUncheckedUpdateManyInput = {
     id?: StringFieldUpdateOperationsInput | string
-    userId?: NullableStringFieldUpdateOperationsInput | string | null
+    userId?: StringFieldUpdateOperationsInput | string
     date?: DateTimeFieldUpdateOperationsInput | Date | string
     income_collect?: FloatFieldUpdateOperationsInput | number
     vat_collect?: NullableFloatFieldUpdateOperationsInput | number | null
@@ -41090,7 +41090,7 @@ export namespace Prisma {
     OR?: Enumerable<mas_all_collectScalarWhereInput>
     NOT?: Enumerable<mas_all_collectScalarWhereInput>
     id?: UuidFilter | string
-    userId?: UuidNullableFilter | string | null
+    userId?: UuidFilter | string
     date?: DateTimeFilter | Date | string
     income_collect?: FloatFilter | number
     vat_collect?: FloatNullableFilter | number | null
@@ -44809,7 +44809,7 @@ export namespace Prisma {
 
   export type mas_all_collectUncheckedCreateWithoutProvident_logInput = {
     id: string
-    userId?: string | null
+    userId: string
     date: Date | string
     income_collect: number
     vat_collect?: number | null
@@ -44998,7 +44998,7 @@ export namespace Prisma {
 
   export type mas_all_collectUncheckedUpdateWithoutProvident_logInput = {
     id?: StringFieldUpdateOperationsInput | string
-    userId?: NullableStringFieldUpdateOperationsInput | string | null
+    userId?: StringFieldUpdateOperationsInput | string
     date?: DateTimeFieldUpdateOperationsInput | Date | string
     income_collect?: FloatFieldUpdateOperationsInput | number
     vat_collect?: NullableFloatFieldUpdateOperationsInput | number | null
