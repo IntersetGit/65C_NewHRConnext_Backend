@@ -4,6 +4,7 @@ import _ from 'lodash';
 import { v4 } from 'uuid';
 import { composeResolvers } from '@graphql-tools/resolvers-composition';
 import { authenticate } from '../middleware/authenticatetoken';
+import { ApolloContext } from '../index'
 import { GraphQLError } from 'graphql';
 // import { PrismaClient } from '@prisma/client';
 // const prisma = new PrismaClient();
@@ -179,12 +180,36 @@ type expense_company {
   companyBranchId: String     
   Salary:          salary
 }
-  type selfsalary{
-    id: ID!
+type Profile {
+    bio: String
     firstname_th: String
     lastname_th: String
-    base_salary:Float
-
+    firstname_en: String
+    lastname_en: String
+    nickname: String
+    blood_type: String
+    employee_status: String
+    start_date_work: Date
+    avatar: String
+    dob: Date
+    age: String
+    relationship: String
+    shirt_size: String
+    prefix_th: String
+    prefix_en: String
+    citizen_id: String
+    social_id: String
+    staff_status: String
+    tel: String
+    address: String
+    user: User
+    userId: String
+  }
+  type selfsalary{
+    id: ID!
+    profile: Profile
+    base_salary:bookbank_log
+    salary : salary
   }
   type createsalaryResponseType {
     message: String
@@ -223,18 +248,18 @@ type expense_company {
     message: String
     status: Boolean
   }
+  
   type Query {
     salary(userId: String, mas_monthId: String, mas_yearsId: String): [salary]
     bookbank_log(id: String): [bookbank_log]
     provident_log(userId:String):[provident_log]
-
+    Selfdatasalary: selfsalary
   }
   type Mutation {
     Createsalary(data: salaryInput): createsalaryResponseType
     Createbookbank(data: bookbank_logInput): createbookbanklogResponseType
     Createyears(data: yearsInput): yearsResponseType
     Createmonth(data: monthInput): monthResponseType
-    Salaryfilter(userId: String):SalaryResponseType
     createBank (data: BankInput) : BankResponseType
     Createincometype(data: incometype) : incometypeResponseType
     CreateAndUpdateExpenseCom(data: ExpenseComInput):CreateAndUpdateExpenseComResponseType
@@ -247,23 +272,22 @@ const resolvers: Resolvers = {
     async salary(parant: any, args: any, ctx: any) {
       const filter = args?.userId ? args.userId : undefined;
       const result = await ctx.prisma.salary.findMany({
-        include: { User: true, mas_month: true, mas_years: true },
+        include: { User: true, mas_month: true, mas_years: true, bookbank_log: true },
         where: {
           userId: args.userId,
         },
       });
       return result;
     },
-    // async selfsalary(parant: any, args: any, ctx: any) {
-    //   const result = await ctx.prisma.salary.findUnique({
-    //     select: {
-    //       id: true,
-    //       role: true
-    //     },
-    //     where: { userId: ctx.currentUser?.id },
-    //   });
-    // },
-
+    async Selfdatasalary(parant, args, ctx) {
+      const result = await ctx.prisma.user.findUnique({
+        include: { bookbank_log: true, profile: true, salary: true },
+        where: {
+          id: ctx.currentUser?.id
+        },
+      });
+      return result;
+    },
     async bookbank_log(parant: any, args: any, ctx: any) {
       const filter = args?.userId ? args.userId : undefined;
       const result = await ctx.prisma.bookbank_log.findMany({
@@ -443,7 +467,7 @@ const resolvers: Resolvers = {
       return {
         message: 'success',
         status: true,
-      }
+      };
     },
 
     async Createincometype(p: any, args: any, ctx: any) {
@@ -457,14 +481,15 @@ const resolvers: Resolvers = {
       return {
         message: 'success',
         status: true,
-      }
-    }
+      };
+    },
 
   },
 };
 const resolversComposition = {
   'Query.salary': [authenticate()],
   'Query.bookbank_log': [authenticate()],
+  'Query.Selfdatasalary': [authenticate()],
   'Mutation.Createmonth': [authenticate()],
   'Mutation.Createyears': [authenticate()],
   'Mutation.Createsalary': [authenticate()],
