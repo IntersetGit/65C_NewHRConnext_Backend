@@ -322,7 +322,7 @@ const resolvers: Resolvers = {
       };
     },
 
-    async Createsalary(p: any, args: any, ctx: any) {
+    async Createsalary(p: any, args: any, ctx: any) { //สร้าง log สำหรับเงินเดือนจากนั้นเก็บกองทุนไว้ใน provident log จากนั้นเก็บค่าไว้ใน collect
       const gensalaryID = v4()
       const createsalary = await ctx.prisma.salary.create({
         data: {
@@ -365,7 +365,7 @@ const resolvers: Resolvers = {
       };
     },
 
-    async Createbookbank(p: any, args: any, ctx: any) {
+    async Createbookbank(p: any, args: any, ctx: any) { //สร้าง bookbank 
       const bookbankID = v4();
       const providentID = v4()
       const createbook_bank = await ctx.prisma.bookbank_log.create({
@@ -398,7 +398,7 @@ const resolvers: Resolvers = {
       }
     },
 
-    async createBank(p: any, args: any, ctx: any) {
+    async createBank(p: any, args: any, ctx: any) { //สร้างธนาคาร
       const genBankID = v4()
       const create_bank = await ctx.prisma.mas_bank.create({
         data: {
@@ -412,7 +412,7 @@ const resolvers: Resolvers = {
       }
     },
 
-    async CreateAndUpdateExpenseCom(p: any, args: any, ctx: any) {
+    async CreateAndUpdateExpenseCom(p: any, args: any, ctx: any) { //สร้างและอัปเดท expensecom
       const genExpenseID = v4()
       if (args.data?.id) {
         const updateExpenseCom = await ctx.prisma.expense_company.update({
@@ -446,7 +446,7 @@ const resolvers: Resolvers = {
       }
     },
 
-    async Createincometype(p: any, args: any, ctx: any) {
+    async Createincometype(p: any, args: any, ctx: any) { //สร้างประเภทของรายรับ
       const genIncomeTypeID = v4()
       const createIncomeype = await ctx.prisma.mas_income_type.create({
         data: {
