@@ -218,7 +218,6 @@ type Profile {
     id: ID!
     profile: Profile
     base_salary:bookbank_log
-    salary : salary
   }
   type createsalaryResponseType {
     message: String
