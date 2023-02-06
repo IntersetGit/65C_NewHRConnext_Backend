@@ -349,7 +349,7 @@ type Profile {
     provident_log(userId:String):[provident_log]
     datasalary_mee: [data_salary_me]
     # Selfdatasalary: selfsalary
-    Selfdatasalary: selfsalary
+    #Selfdatasalary: selfsalary
     mas_all_collect:mas_all_collect
   }
   type Mutation {
@@ -393,12 +393,12 @@ const resolvers: Resolvers = {
       console.log(ctx.currentUser?.id);
       const result = await ctx.prisma.mas_all_collect.findMany({
         where:{
-          userId: ctx.currentUser?.id,
-        },
+          userId: ctx.currentUser?.id        },
       });
-      console.log(result);
-      
-      return result;
+      for (let i = 0; i < result.length; i++) {
+        return result[i]
+      }
+
     },
 
     // async Selfdatasalary(parant, args, ctx) {
