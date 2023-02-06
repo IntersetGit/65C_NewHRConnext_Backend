@@ -343,8 +343,8 @@ export type mas_income_type = {
  */
 export type expense_company = {
   id: string
-  monthId: string
-  bankId: string
+  monthId: string | null
+  bankId: string | null
   date: Date
   vat_per: number | null
   social_security: number | null
@@ -24980,8 +24980,8 @@ export namespace Prisma {
 
   export type Expense_companyGroupByOutputType = {
     id: string
-    monthId: string
-    bankId: string
+    monthId: string | null
+    bankId: string | null
     date: Date
     vat_per: number | null
     social_security: number | null
@@ -32080,8 +32080,8 @@ export namespace Prisma {
     OR?: Enumerable<expense_companyWhereInput>
     NOT?: Enumerable<expense_companyWhereInput>
     id?: UuidFilter | string
-    monthId?: UuidFilter | string
-    bankId?: UuidFilter | string
+    monthId?: UuidNullableFilter | string | null
+    bankId?: UuidNullableFilter | string | null
     date?: DateTimeFilter | Date | string
     vat_per?: FloatNullableFilter | number | null
     social_security?: FloatNullableFilter | number | null
@@ -32130,8 +32130,8 @@ export namespace Prisma {
     OR?: Enumerable<expense_companyScalarWhereWithAggregatesInput>
     NOT?: Enumerable<expense_companyScalarWhereWithAggregatesInput>
     id?: UuidWithAggregatesFilter | string
-    monthId?: UuidWithAggregatesFilter | string
-    bankId?: UuidWithAggregatesFilter | string
+    monthId?: UuidNullableWithAggregatesFilter | string | null
+    bankId?: UuidNullableWithAggregatesFilter | string | null
     date?: DateTimeWithAggregatesFilter | Date | string
     vat_per?: FloatNullableWithAggregatesFilter | number | null
     social_security?: FloatNullableWithAggregatesFilter | number | null
@@ -34300,8 +34300,8 @@ export namespace Prisma {
 
   export type expense_companyUncheckedCreateInput = {
     id: string
-    monthId: string
-    bankId: string
+    monthId?: string | null
+    bankId?: string | null
     date: Date | string
     vat_per?: number | null
     social_security?: number | null
@@ -34322,8 +34322,8 @@ export namespace Prisma {
 
   export type expense_companyUncheckedUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
-    monthId?: StringFieldUpdateOperationsInput | string
-    bankId?: StringFieldUpdateOperationsInput | string
+    monthId?: NullableStringFieldUpdateOperationsInput | string | null
+    bankId?: NullableStringFieldUpdateOperationsInput | string | null
     date?: DateTimeFieldUpdateOperationsInput | Date | string
     vat_per?: NullableFloatFieldUpdateOperationsInput | number | null
     social_security?: NullableFloatFieldUpdateOperationsInput | number | null
@@ -34333,8 +34333,8 @@ export namespace Prisma {
 
   export type expense_companyCreateManyInput = {
     id: string
-    monthId: string
-    bankId: string
+    monthId?: string | null
+    bankId?: string | null
     date: Date | string
     vat_per?: number | null
     social_security?: number | null
@@ -34350,8 +34350,8 @@ export namespace Prisma {
 
   export type expense_companyUncheckedUpdateManyInput = {
     id?: StringFieldUpdateOperationsInput | string
-    monthId?: StringFieldUpdateOperationsInput | string
-    bankId?: StringFieldUpdateOperationsInput | string
+    monthId?: NullableStringFieldUpdateOperationsInput | string | null
+    bankId?: NullableStringFieldUpdateOperationsInput | string | null
     date?: DateTimeFieldUpdateOperationsInput | Date | string
     vat_per?: NullableFloatFieldUpdateOperationsInput | number | null
     social_security?: NullableFloatFieldUpdateOperationsInput | number | null
@@ -39819,8 +39819,8 @@ export namespace Prisma {
 
   export type expense_companyUncheckedCreateWithoutCompanyBranchInput = {
     id: string
-    monthId: string
-    bankId: string
+    monthId?: string | null
+    bankId?: string | null
     date: Date | string
     vat_per?: number | null
     social_security?: number | null
@@ -39959,8 +39959,8 @@ export namespace Prisma {
     OR?: Enumerable<expense_companyScalarWhereInput>
     NOT?: Enumerable<expense_companyScalarWhereInput>
     id?: UuidFilter | string
-    monthId?: UuidFilter | string
-    bankId?: UuidFilter | string
+    monthId?: UuidNullableFilter | string | null
+    bankId?: UuidNullableFilter | string | null
     date?: DateTimeFilter | Date | string
     vat_per?: FloatNullableFilter | number | null
     social_security?: FloatNullableFilter | number | null
@@ -42600,7 +42600,7 @@ export namespace Prisma {
 
   export type expense_companyUncheckedCreateWithoutMas_bankInput = {
     id: string
-    monthId: string
+    monthId?: string | null
     date: Date | string
     vat_per?: number | null
     social_security?: number | null
@@ -42794,7 +42794,7 @@ export namespace Prisma {
 
   export type expense_companyUncheckedCreateWithoutMas_monthInput = {
     id: string
-    bankId: string
+    bankId?: string | null
     date: Date | string
     vat_per?: number | null
     social_security?: number | null
@@ -43806,8 +43806,8 @@ export namespace Prisma {
 
   export type expense_companyUncheckedCreateWithoutSalaryInput = {
     id: string
-    monthId: string
-    bankId: string
+    monthId?: string | null
+    bankId?: string | null
     date: Date | string
     vat_per?: number | null
     social_security?: number | null
@@ -44016,8 +44016,8 @@ export namespace Prisma {
 
   export type expense_companyUncheckedUpdateWithoutSalaryInput = {
     id?: StringFieldUpdateOperationsInput | string
-    monthId?: StringFieldUpdateOperationsInput | string
-    bankId?: StringFieldUpdateOperationsInput | string
+    monthId?: NullableStringFieldUpdateOperationsInput | string | null
+    bankId?: NullableStringFieldUpdateOperationsInput | string | null
     date?: DateTimeFieldUpdateOperationsInput | Date | string
     vat_per?: NullableFloatFieldUpdateOperationsInput | number | null
     social_security?: NullableFloatFieldUpdateOperationsInput | number | null
@@ -44958,8 +44958,8 @@ export namespace Prisma {
 
   export type expense_companyCreateManyCompanyBranchInput = {
     id: string
-    monthId: string
-    bankId: string
+    monthId?: string | null
+    bankId?: string | null
     date: Date | string
     vat_per?: number | null
     social_security?: number | null
@@ -45055,8 +45055,8 @@ export namespace Prisma {
 
   export type expense_companyUncheckedUpdateWithoutCompanyBranchInput = {
     id?: StringFieldUpdateOperationsInput | string
-    monthId?: StringFieldUpdateOperationsInput | string
-    bankId?: StringFieldUpdateOperationsInput | string
+    monthId?: NullableStringFieldUpdateOperationsInput | string | null
+    bankId?: NullableStringFieldUpdateOperationsInput | string | null
     date?: DateTimeFieldUpdateOperationsInput | Date | string
     vat_per?: NullableFloatFieldUpdateOperationsInput | number | null
     social_security?: NullableFloatFieldUpdateOperationsInput | number | null
@@ -45065,8 +45065,8 @@ export namespace Prisma {
 
   export type expense_companyUncheckedUpdateManyWithoutExpense_companyInput = {
     id?: StringFieldUpdateOperationsInput | string
-    monthId?: StringFieldUpdateOperationsInput | string
-    bankId?: StringFieldUpdateOperationsInput | string
+    monthId?: NullableStringFieldUpdateOperationsInput | string | null
+    bankId?: NullableStringFieldUpdateOperationsInput | string | null
     date?: DateTimeFieldUpdateOperationsInput | Date | string
     vat_per?: NullableFloatFieldUpdateOperationsInput | number | null
     social_security?: NullableFloatFieldUpdateOperationsInput | number | null
@@ -45782,7 +45782,7 @@ export namespace Prisma {
 
   export type expense_companyCreateManyMas_bankInput = {
     id: string
-    monthId: string
+    monthId?: string | null
     date: Date | string
     vat_per?: number | null
     social_security?: number | null
@@ -45847,7 +45847,7 @@ export namespace Prisma {
 
   export type expense_companyUncheckedUpdateWithoutMas_bankInput = {
     id?: StringFieldUpdateOperationsInput | string
-    monthId?: StringFieldUpdateOperationsInput | string
+    monthId?: NullableStringFieldUpdateOperationsInput | string | null
     date?: DateTimeFieldUpdateOperationsInput | Date | string
     vat_per?: NullableFloatFieldUpdateOperationsInput | number | null
     social_security?: NullableFloatFieldUpdateOperationsInput | number | null
@@ -45953,7 +45953,7 @@ export namespace Prisma {
 
   export type expense_companyCreateManyMas_monthInput = {
     id: string
-    bankId: string
+    bankId?: string | null
     date: Date | string
     vat_per?: number | null
     social_security?: number | null
@@ -46007,7 +46007,7 @@ export namespace Prisma {
 
   export type expense_companyUncheckedUpdateWithoutMas_monthInput = {
     id?: StringFieldUpdateOperationsInput | string
-    bankId?: StringFieldUpdateOperationsInput | string
+    bankId?: NullableStringFieldUpdateOperationsInput | string | null
     date?: DateTimeFieldUpdateOperationsInput | Date | string
     vat_per?: NullableFloatFieldUpdateOperationsInput | number | null
     social_security?: NullableFloatFieldUpdateOperationsInput | number | null

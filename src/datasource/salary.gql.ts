@@ -154,6 +154,21 @@ export const salaryTypedef = gql`
     date: Date 
     mas_salary_statusId: String
   }
+
+input ExpenseComInput{
+  id: ID           
+  bankId:          String         
+  date:            Date
+  vat_per:         Float
+  social_security: Float
+  companyBranchId: String     
+}
+
+input incometype{
+  id:     ID
+  name:   String
+}
+
 type expense_company {
   id: ID!     
   monthId:         String        
@@ -199,7 +214,15 @@ type expense_company {
     message: String
     status: Boolean
   }
+  type CreateAndUpdateExpenseComResponseType{
+    message: String
+    status: Boolean
+  }
 
+  type incometypeResponseType{
+    message: String
+    status: Boolean
+  }
   type Query {
     salary(userId: String, mas_monthId: String, mas_yearsId: String): [salary]
     bookbank_log(id: String): [bookbank_log]
@@ -212,7 +235,9 @@ type expense_company {
     Createyears(data: yearsInput): yearsResponseType
     Createmonth(data: monthInput): monthResponseType
     Salaryfilter(userId: String):SalaryResponseType
-    createBank (data : BankInput) : BankResponseType
+    createBank (data: BankInput) : BankResponseType
+    Createincometype(data: incometype) : incometypeResponseType
+    CreateAndUpdateExpenseCom(data: ExpenseComInput):CreateAndUpdateExpenseComResponseType
 
   }
 `;
@@ -385,6 +410,54 @@ const resolvers: Resolvers = {
         message: 'success',
         status: true,
       }
+    },
+
+    async CreateAndUpdateExpenseCom(p: any, args: any, ctx: any) {
+      const genExpenseID = v4()
+      if (args.data?.id) {
+        const updateExpenseCom = await ctx.prisma.expense_company.update({
+          data: {
+            bankId: args.data?.bankId,
+            date: new Date(args.data?.date),
+            vat_per: args.data?.vat_per as number,
+            social_security: args.data?.social_security as number,
+            companyBranchId: args.data?.companyBranchId,
+          },
+          where: { id: args.data.id },
+        })
+        return {
+          message: 'update success',
+          status: true,
+        }
+      }
+      const createExpenseCom = await ctx.prisma.expense_company.create({
+        data: {
+          id: genExpenseID,
+          bankId: args.data?.bankId,
+          date: new Date(args.data?.date),
+          vat_per: args.data?.vat_per as number,
+          social_security: args.data?.social_security as number,
+          companyBranchId: args.data?.companyBranchId,
+        }
+      });
+      return {
+        message: 'success',
+        status: true,
+      }
+    },
+
+    async Createincometype(p: any, args: any, ctx: any) {
+      const genIncomeTypeID = v4()
+      const createIncomeype = await ctx.prisma.mas_income_type.create({
+        data: {
+          id: genIncomeTypeID,
+          name: args.data?.name
+        }
+      });
+      return {
+        message: 'success',
+        status: true,
+      }
     }
 
   },
@@ -396,6 +469,9 @@ const resolversComposition = {
   'Mutation.Createyears': [authenticate()],
   'Mutation.Createsalary': [authenticate()],
   'Mutation.Createbookbank': [authenticate()],
+  'Mutation.createBank': [authenticate()],
+  'Mutation.CreateAndUpdateExpenseCom': [authenticate()],
+  'Mutation.Createincometype': [authenticate()],
   // 'Mutation.deleteAccountUser': [authenticate()],
 };
 

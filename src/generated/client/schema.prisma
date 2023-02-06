@@ -310,7 +310,7 @@ model mas_salary_status {
   salary salary[]
 }
 
-model mas_income_type {
+model mas_income_type { //หักภาษีจากรายรับประเภทต่าง ๆ 
   id     String   @unique @db.Uuid
   name   String
   salary salary[]
@@ -318,8 +318,8 @@ model mas_income_type {
 
 model expense_company {
   id              String         @unique @db.Uuid
-  monthId         String         @db.Uuid
-  bankId          String         @db.Uuid
+  monthId         String?         @db.Uuid
+  bankId          String?         @db.Uuid
   date            DateTime
   vat_per         Float?
   social_security Float?
