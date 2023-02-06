@@ -38,6 +38,11 @@ export const salaryTypedef = gql`
     companyBranchId: String
     userId: User
   }
+  input BankInput {
+    id       :       ID          
+  name        :     String
+
+  }
 
   input provident_logInput {
     id: ID
@@ -69,6 +74,8 @@ export const salaryTypedef = gql`
     pro_employee: Float
     pro_company:  Float
     mas_all_collectId: String
+    provident_com : Float
+    provident_emp : Float
   }
 
   type bookbank_log {
@@ -80,6 +87,8 @@ export const salaryTypedef = gql`
     base_salary: Float
     userId: User
     Salary: salary
+    provident_com : Float
+    provident_emp : Float
   }
 
   input salaryInput {
@@ -110,6 +119,7 @@ export const salaryTypedef = gql`
     bookbank_logId: String
     mas_income_typeId: String
     date: Date 
+    mas_salary_statusId : String
   }
   type salary {
     id: ID!
@@ -141,6 +151,7 @@ export const salaryTypedef = gql`
     bookbank_logId: bookbank_log
     mas_income_typeId: String
     date: Date 
+    mas_salary_statusId : String
   }
   type selfsalary{
     id: ID!
@@ -172,6 +183,12 @@ export const salaryTypedef = gql`
     message: String
     status: Boolean
   }
+  
+  type BankResponseType {
+    message: String
+    status: Boolean
+  }
+
   type Query {
     salary(userId: String, mas_monthId: String, mas_yearsId: String): [salary]
     bookbank_log(id: String): [bookbank_log]
@@ -183,6 +200,9 @@ export const salaryTypedef = gql`
     Createbookbank(data: bookbank_logInput): createbookbanklogResponseType
     Createyears(data: yearsInput): yearsResponseType
     Createmonth(data: monthInput): monthResponseType
+    Salaryfilter(userId: String):SalaryResponseType
+    createBank (data : BankInput) : BankResponseType
+
   }
 `;
 
@@ -298,7 +318,8 @@ const resolvers: Resolvers = {
           userId: args.data?.userId,
           bookbank_logId: args.data?.bookbank_logId,
           mas_income_typeId: args.data?.mas_income_typeId,
-          date: new Date(args.data?.date)
+          date: new Date(args.data?.date),
+          mas_salary_statusId: args.data?.mas_salary_statusId
 
         }
       });
@@ -320,6 +341,8 @@ const resolvers: Resolvers = {
           all_collectId: args.data?.all_collectId,
           base_salary: args.data?.base_salary as number,
           userId: args.data?.userId,
+          provident_com: args.data?.provident_com, // กองทุนของพนักงาน ตัวเลขเป็น %
+          provident_emp: args.data?.provident_emp,// กองทุนของบริษัท ตัวเลขเป็น %
           provident_log: {
             create: {
               id: providentID,
@@ -337,6 +360,16 @@ const resolvers: Resolvers = {
         message: 'success',
         status: true,
       }
+    },
+
+    async createBank (p: any, args: any, ctx: any){
+      const genBankID = v4()
+      const create_bank = await ctx.prisma.bookbank_log.create({
+        data: {
+          id : genBankID,
+          name : args.data?.name as string
+        }
+      })
     }
 
   },
@@ -347,6 +380,7 @@ const resolversComposition = {
   'Mutation.Createmonth': [authenticate()],
   'Mutation.Createyears': [authenticate()],
   'Mutation.Createsalary': [authenticate()],
+  'Mutation.Createbookbank': [authenticate()],
   // 'Mutation.deleteAccountUser': [authenticate()],
 };
 

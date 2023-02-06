@@ -335,6 +335,7 @@ export type expense_company = {
   id: string
   monthId: string
   bankId: string
+  date: Date
   vat_per: number | null
   social_security: number | null
   companyBranchId: string | null
@@ -374,6 +375,8 @@ export type salary = {
   userId: string | null
   mas_income_typeId: string | null
   bookbank_logId: string | null
+  mas_salary_statusId: string | null
+  mas_bankId: string | null
 }
 
 /**
@@ -401,6 +404,8 @@ export type bookbank_log = {
   bank_number: string
   all_collectId: string | null
   base_salary: number
+  provident_com: number
+  provident_emp: number
   userId: string | null
 }
 
@@ -1970,11 +1975,13 @@ export namespace Prisma {
   export type Mas_bankCountOutputType = {
     expense_company: number
     bookbank_log: number
+    salary: number
   }
 
   export type Mas_bankCountOutputTypeSelect = {
     expense_company?: boolean
     bookbank_log?: boolean
+    salary?: boolean
   }
 
   export type Mas_bankCountOutputTypeGetPayload<S extends boolean | null | undefined | Mas_bankCountOutputTypeArgs> =
@@ -2091,6 +2098,49 @@ export namespace Prisma {
      * Select specific fields to fetch from the Mas_yearsCountOutputType
      */
     select?: Mas_yearsCountOutputTypeSelect | null
+  }
+
+
+
+  /**
+   * Count Type Mas_salary_statusCountOutputType
+   */
+
+
+  export type Mas_salary_statusCountOutputType = {
+    salary: number
+  }
+
+  export type Mas_salary_statusCountOutputTypeSelect = {
+    salary?: boolean
+  }
+
+  export type Mas_salary_statusCountOutputTypeGetPayload<S extends boolean | null | undefined | Mas_salary_statusCountOutputTypeArgs> =
+    S extends { select: any, include: any } ? 'Please either choose `select` or `include`' :
+    S extends true ? Mas_salary_statusCountOutputType :
+    S extends undefined ? never :
+    S extends { include: any } & (Mas_salary_statusCountOutputTypeArgs)
+    ? Mas_salary_statusCountOutputType 
+    : S extends { select: any } & (Mas_salary_statusCountOutputTypeArgs)
+      ? {
+    [P in TruthyKeys<S['select']>]:
+    P extends keyof Mas_salary_statusCountOutputType ? Mas_salary_statusCountOutputType[P] : never
+  } 
+      : Mas_salary_statusCountOutputType
+
+
+
+
+  // Custom InputTypes
+
+  /**
+   * Mas_salary_statusCountOutputType without action
+   */
+  export type Mas_salary_statusCountOutputTypeArgs = {
+    /**
+     * Select specific fields to fetch from the Mas_salary_statusCountOutputType
+     */
+    select?: Mas_salary_statusCountOutputTypeSelect | null
   }
 
 
@@ -18965,6 +19015,7 @@ export namespace Prisma {
     name?: boolean
     expense_company?: boolean | mas_bank$expense_companyArgs
     bookbank_log?: boolean | mas_bank$bookbank_logArgs
+    salary?: boolean | mas_bank$salaryArgs
     _count?: boolean | Mas_bankCountOutputTypeArgs
   }
 
@@ -18972,6 +19023,7 @@ export namespace Prisma {
   export type mas_bankInclude = {
     expense_company?: boolean | mas_bank$expense_companyArgs
     bookbank_log?: boolean | mas_bank$bookbank_logArgs
+    salary?: boolean | mas_bank$salaryArgs
     _count?: boolean | Mas_bankCountOutputTypeArgs
   }
 
@@ -18984,6 +19036,7 @@ export namespace Prisma {
     [P in TruthyKeys<S['include']>]:
         P extends 'expense_company' ? Array < expense_companyGetPayload<S['include'][P]>>  :
         P extends 'bookbank_log' ? Array < bookbank_logGetPayload<S['include'][P]>>  :
+        P extends 'salary' ? Array < salaryGetPayload<S['include'][P]>>  :
         P extends '_count' ? Mas_bankCountOutputTypeGetPayload<S['include'][P]> :  never
   } 
     : S extends { select: any } & (mas_bankArgs | mas_bankFindManyArgs)
@@ -18991,6 +19044,7 @@ export namespace Prisma {
     [P in TruthyKeys<S['select']>]:
         P extends 'expense_company' ? Array < expense_companyGetPayload<S['select'][P]>>  :
         P extends 'bookbank_log' ? Array < bookbank_logGetPayload<S['select'][P]>>  :
+        P extends 'salary' ? Array < salaryGetPayload<S['select'][P]>>  :
         P extends '_count' ? Mas_bankCountOutputTypeGetPayload<S['select'][P]> :  P extends keyof mas_bank ? mas_bank[P] : never
   } 
       : mas_bank
@@ -19368,6 +19422,8 @@ export namespace Prisma {
     expense_company<T extends mas_bank$expense_companyArgs= {}>(args?: Subset<T, mas_bank$expense_companyArgs>): PrismaPromise<Array<expense_companyGetPayload<T>>| Null>;
 
     bookbank_log<T extends mas_bank$bookbank_logArgs= {}>(args?: Subset<T, mas_bank$bookbank_logArgs>): PrismaPromise<Array<bookbank_logGetPayload<T>>| Null>;
+
+    salary<T extends mas_bank$salaryArgs= {}>(args?: Subset<T, mas_bank$salaryArgs>): PrismaPromise<Array<salaryGetPayload<T>>| Null>;
 
     private get _document();
     /**
@@ -19763,6 +19819,27 @@ export namespace Prisma {
     take?: number
     skip?: number
     distinct?: Enumerable<Bookbank_logScalarFieldEnum>
+  }
+
+
+  /**
+   * mas_bank.salary
+   */
+  export type mas_bank$salaryArgs = {
+    /**
+     * Select specific fields to fetch from the salary
+     */
+    select?: salarySelect | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: salaryInclude | null
+    where?: salaryWhereInput
+    orderBy?: Enumerable<salaryOrderByWithRelationInput>
+    cursor?: salaryWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: Enumerable<SalaryScalarFieldEnum>
   }
 
 
@@ -21903,19 +21980,31 @@ export namespace Prisma {
     id?: boolean
     no?: boolean
     name?: boolean
+    salary?: boolean | mas_salary_status$salaryArgs
+    _count?: boolean | Mas_salary_statusCountOutputTypeArgs
   }
 
+
+  export type mas_salary_statusInclude = {
+    salary?: boolean | mas_salary_status$salaryArgs
+    _count?: boolean | Mas_salary_statusCountOutputTypeArgs
+  }
 
   export type mas_salary_statusGetPayload<S extends boolean | null | undefined | mas_salary_statusArgs> =
     S extends { select: any, include: any } ? 'Please either choose `select` or `include`' :
     S extends true ? mas_salary_status :
     S extends undefined ? never :
     S extends { include: any } & (mas_salary_statusArgs | mas_salary_statusFindManyArgs)
-    ? mas_salary_status 
+    ? mas_salary_status  & {
+    [P in TruthyKeys<S['include']>]:
+        P extends 'salary' ? Array < salaryGetPayload<S['include'][P]>>  :
+        P extends '_count' ? Mas_salary_statusCountOutputTypeGetPayload<S['include'][P]> :  never
+  } 
     : S extends { select: any } & (mas_salary_statusArgs | mas_salary_statusFindManyArgs)
       ? {
     [P in TruthyKeys<S['select']>]:
-    P extends keyof mas_salary_status ? mas_salary_status[P] : never
+        P extends 'salary' ? Array < salaryGetPayload<S['select'][P]>>  :
+        P extends '_count' ? Mas_salary_statusCountOutputTypeGetPayload<S['select'][P]> :  P extends keyof mas_salary_status ? mas_salary_status[P] : never
   } 
       : mas_salary_status
 
@@ -22289,6 +22378,7 @@ export namespace Prisma {
     constructor(_dmmf: runtime.DMMFClass, _fetcher: PrismaClientFetcher, _queryType: 'query' | 'mutation', _rootField: string, _clientMethod: string, _args: any, _dataPath: string[], _errorFormat: ErrorFormat, _measurePerformance?: boolean | undefined, _isList?: boolean);
     readonly [Symbol.toStringTag]: 'PrismaClientPromise';
 
+    salary<T extends mas_salary_status$salaryArgs= {}>(args?: Subset<T, mas_salary_status$salaryArgs>): PrismaPromise<Array<salaryGetPayload<T>>| Null>;
 
     private get _document();
     /**
@@ -22326,6 +22416,10 @@ export namespace Prisma {
      */
     select?: mas_salary_statusSelect | null
     /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: mas_salary_statusInclude | null
+    /**
      * Filter, which mas_salary_status to fetch.
      */
     where: mas_salary_statusWhereUniqueInput
@@ -22352,6 +22446,10 @@ export namespace Prisma {
      */
     select?: mas_salary_statusSelect | null
     /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: mas_salary_statusInclude | null
+    /**
      * Filter, which mas_salary_status to fetch.
      */
     where: mas_salary_statusWhereUniqueInput
@@ -22366,6 +22464,10 @@ export namespace Prisma {
      * Select specific fields to fetch from the mas_salary_status
      */
     select?: mas_salary_statusSelect | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: mas_salary_statusInclude | null
     /**
      * Filter, which mas_salary_status to fetch.
      */
@@ -22423,6 +22525,10 @@ export namespace Prisma {
      */
     select?: mas_salary_statusSelect | null
     /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: mas_salary_statusInclude | null
+    /**
      * Filter, which mas_salary_status to fetch.
      */
     where?: mas_salary_statusWhereInput
@@ -22468,6 +22574,10 @@ export namespace Prisma {
      */
     select?: mas_salary_statusSelect | null
     /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: mas_salary_statusInclude | null
+    /**
      * Filter, which mas_salary_statuses to fetch.
      */
     where?: mas_salary_statusWhereInput
@@ -22508,6 +22618,10 @@ export namespace Prisma {
      */
     select?: mas_salary_statusSelect | null
     /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: mas_salary_statusInclude | null
+    /**
      * The data needed to create a mas_salary_status.
      */
     data: XOR<mas_salary_statusCreateInput, mas_salary_statusUncheckedCreateInput>
@@ -22534,6 +22648,10 @@ export namespace Prisma {
      * Select specific fields to fetch from the mas_salary_status
      */
     select?: mas_salary_statusSelect | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: mas_salary_statusInclude | null
     /**
      * The data needed to update a mas_salary_status.
      */
@@ -22569,6 +22687,10 @@ export namespace Prisma {
      */
     select?: mas_salary_statusSelect | null
     /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: mas_salary_statusInclude | null
+    /**
      * The filter to search for the mas_salary_status to update in case it exists.
      */
     where: mas_salary_statusWhereUniqueInput
@@ -22592,6 +22714,10 @@ export namespace Prisma {
      */
     select?: mas_salary_statusSelect | null
     /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: mas_salary_statusInclude | null
+    /**
      * Filter which mas_salary_status to delete.
      */
     where: mas_salary_statusWhereUniqueInput
@@ -22610,6 +22736,27 @@ export namespace Prisma {
 
 
   /**
+   * mas_salary_status.salary
+   */
+  export type mas_salary_status$salaryArgs = {
+    /**
+     * Select specific fields to fetch from the salary
+     */
+    select?: salarySelect | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: salaryInclude | null
+    where?: salaryWhereInput
+    orderBy?: Enumerable<salaryOrderByWithRelationInput>
+    cursor?: salaryWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: Enumerable<SalaryScalarFieldEnum>
+  }
+
+
+  /**
    * mas_salary_status without action
    */
   export type mas_salary_statusArgs = {
@@ -22617,6 +22764,10 @@ export namespace Prisma {
      * Select specific fields to fetch from the mas_salary_status
      */
     select?: mas_salary_statusSelect | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: mas_salary_statusInclude | null
   }
 
 
@@ -23582,6 +23733,7 @@ export namespace Prisma {
     id: string | null
     monthId: string | null
     bankId: string | null
+    date: Date | null
     vat_per: number | null
     social_security: number | null
     companyBranchId: string | null
@@ -23591,6 +23743,7 @@ export namespace Prisma {
     id: string | null
     monthId: string | null
     bankId: string | null
+    date: Date | null
     vat_per: number | null
     social_security: number | null
     companyBranchId: string | null
@@ -23600,6 +23753,7 @@ export namespace Prisma {
     id: number
     monthId: number
     bankId: number
+    date: number
     vat_per: number
     social_security: number
     companyBranchId: number
@@ -23621,6 +23775,7 @@ export namespace Prisma {
     id?: true
     monthId?: true
     bankId?: true
+    date?: true
     vat_per?: true
     social_security?: true
     companyBranchId?: true
@@ -23630,6 +23785,7 @@ export namespace Prisma {
     id?: true
     monthId?: true
     bankId?: true
+    date?: true
     vat_per?: true
     social_security?: true
     companyBranchId?: true
@@ -23639,6 +23795,7 @@ export namespace Prisma {
     id?: true
     monthId?: true
     bankId?: true
+    date?: true
     vat_per?: true
     social_security?: true
     companyBranchId?: true
@@ -23736,6 +23893,7 @@ export namespace Prisma {
     id: string
     monthId: string
     bankId: string
+    date: Date
     vat_per: number | null
     social_security: number | null
     companyBranchId: string | null
@@ -23764,6 +23922,7 @@ export namespace Prisma {
     id?: boolean
     monthId?: boolean
     bankId?: boolean
+    date?: boolean
     vat_per?: boolean
     social_security?: boolean
     companyBranchId?: boolean
@@ -24639,6 +24798,8 @@ export namespace Prisma {
     userId: string | null
     mas_income_typeId: string | null
     bookbank_logId: string | null
+    mas_salary_statusId: string | null
+    mas_bankId: string | null
   }
 
   export type SalaryMaxAggregateOutputType = {
@@ -24671,6 +24832,8 @@ export namespace Prisma {
     userId: string | null
     mas_income_typeId: string | null
     bookbank_logId: string | null
+    mas_salary_statusId: string | null
+    mas_bankId: string | null
   }
 
   export type SalaryCountAggregateOutputType = {
@@ -24703,6 +24866,8 @@ export namespace Prisma {
     userId: number
     mas_income_typeId: number
     bookbank_logId: number
+    mas_salary_statusId: number
+    mas_bankId: number
     _all: number
   }
 
@@ -24787,6 +24952,8 @@ export namespace Prisma {
     userId?: true
     mas_income_typeId?: true
     bookbank_logId?: true
+    mas_salary_statusId?: true
+    mas_bankId?: true
   }
 
   export type SalaryMaxAggregateInputType = {
@@ -24819,6 +24986,8 @@ export namespace Prisma {
     userId?: true
     mas_income_typeId?: true
     bookbank_logId?: true
+    mas_salary_statusId?: true
+    mas_bankId?: true
   }
 
   export type SalaryCountAggregateInputType = {
@@ -24851,6 +25020,8 @@ export namespace Prisma {
     userId?: true
     mas_income_typeId?: true
     bookbank_logId?: true
+    mas_salary_statusId?: true
+    mas_bankId?: true
     _all?: true
   }
 
@@ -24971,6 +25142,8 @@ export namespace Prisma {
     userId: string | null
     mas_income_typeId: string | null
     bookbank_logId: string | null
+    mas_salary_statusId: string | null
+    mas_bankId: string | null
     _count: SalaryCountAggregateOutputType | null
     _avg: SalaryAvgAggregateOutputType | null
     _sum: SalarySumAggregateOutputType | null
@@ -25019,14 +25192,18 @@ export namespace Prisma {
     total_income?: boolean
     total_expense?: boolean
     net?: boolean
-    User?: boolean | UserArgs
     userId?: boolean
     mas_income_typeId?: boolean
-    bookbank_log?: boolean | bookbank_logArgs
     bookbank_logId?: boolean
+    mas_salary_statusId?: boolean
+    mas_bankId?: boolean
+    User?: boolean | UserArgs
+    bookbank_log?: boolean | bookbank_logArgs
     mas_month?: boolean | mas_monthArgs
     mas_years?: boolean | mas_yearsArgs
     mas_income_type?: boolean | mas_income_typeArgs
+    mas_salary_status?: boolean | mas_salary_statusArgs
+    mas_bank?: boolean | mas_bankArgs
   }
 
 
@@ -25036,6 +25213,8 @@ export namespace Prisma {
     mas_month?: boolean | mas_monthArgs
     mas_years?: boolean | mas_yearsArgs
     mas_income_type?: boolean | mas_income_typeArgs
+    mas_salary_status?: boolean | mas_salary_statusArgs
+    mas_bank?: boolean | mas_bankArgs
   }
 
   export type salaryGetPayload<S extends boolean | null | undefined | salaryArgs> =
@@ -25049,7 +25228,9 @@ export namespace Prisma {
         P extends 'bookbank_log' ? bookbank_logGetPayload<S['include'][P]> | null :
         P extends 'mas_month' ? mas_monthGetPayload<S['include'][P]> | null :
         P extends 'mas_years' ? mas_yearsGetPayload<S['include'][P]> | null :
-        P extends 'mas_income_type' ? mas_income_typeGetPayload<S['include'][P]> | null :  never
+        P extends 'mas_income_type' ? mas_income_typeGetPayload<S['include'][P]> | null :
+        P extends 'mas_salary_status' ? mas_salary_statusGetPayload<S['include'][P]> | null :
+        P extends 'mas_bank' ? mas_bankGetPayload<S['include'][P]> | null :  never
   } 
     : S extends { select: any } & (salaryArgs | salaryFindManyArgs)
       ? {
@@ -25058,7 +25239,9 @@ export namespace Prisma {
         P extends 'bookbank_log' ? bookbank_logGetPayload<S['select'][P]> | null :
         P extends 'mas_month' ? mas_monthGetPayload<S['select'][P]> | null :
         P extends 'mas_years' ? mas_yearsGetPayload<S['select'][P]> | null :
-        P extends 'mas_income_type' ? mas_income_typeGetPayload<S['select'][P]> | null :  P extends keyof salary ? salary[P] : never
+        P extends 'mas_income_type' ? mas_income_typeGetPayload<S['select'][P]> | null :
+        P extends 'mas_salary_status' ? mas_salary_statusGetPayload<S['select'][P]> | null :
+        P extends 'mas_bank' ? mas_bankGetPayload<S['select'][P]> | null :  P extends keyof salary ? salary[P] : never
   } 
       : salary
 
@@ -25441,6 +25624,10 @@ export namespace Prisma {
     mas_years<T extends mas_yearsArgs= {}>(args?: Subset<T, mas_yearsArgs>): Prisma__mas_yearsClient<mas_yearsGetPayload<T> | Null>;
 
     mas_income_type<T extends mas_income_typeArgs= {}>(args?: Subset<T, mas_income_typeArgs>): Prisma__mas_income_typeClient<mas_income_typeGetPayload<T> | Null>;
+
+    mas_salary_status<T extends mas_salary_statusArgs= {}>(args?: Subset<T, mas_salary_statusArgs>): Prisma__mas_salary_statusClient<mas_salary_statusGetPayload<T> | Null>;
+
+    mas_bank<T extends mas_bankArgs= {}>(args?: Subset<T, mas_bankArgs>): Prisma__mas_bankClient<mas_bankGetPayload<T> | Null>;
 
     private get _document();
     /**
@@ -26858,10 +27045,14 @@ export namespace Prisma {
 
   export type Bookbank_logAvgAggregateOutputType = {
     base_salary: number | null
+    provident_com: number | null
+    provident_emp: number | null
   }
 
   export type Bookbank_logSumAggregateOutputType = {
     base_salary: number | null
+    provident_com: number | null
+    provident_emp: number | null
   }
 
   export type Bookbank_logMinAggregateOutputType = {
@@ -26871,6 +27062,8 @@ export namespace Prisma {
     bank_number: string | null
     all_collectId: string | null
     base_salary: number | null
+    provident_com: number | null
+    provident_emp: number | null
     userId: string | null
   }
 
@@ -26881,6 +27074,8 @@ export namespace Prisma {
     bank_number: string | null
     all_collectId: string | null
     base_salary: number | null
+    provident_com: number | null
+    provident_emp: number | null
     userId: string | null
   }
 
@@ -26891,6 +27086,8 @@ export namespace Prisma {
     bank_number: number
     all_collectId: number
     base_salary: number
+    provident_com: number
+    provident_emp: number
     userId: number
     _all: number
   }
@@ -26898,10 +27095,14 @@ export namespace Prisma {
 
   export type Bookbank_logAvgAggregateInputType = {
     base_salary?: true
+    provident_com?: true
+    provident_emp?: true
   }
 
   export type Bookbank_logSumAggregateInputType = {
     base_salary?: true
+    provident_com?: true
+    provident_emp?: true
   }
 
   export type Bookbank_logMinAggregateInputType = {
@@ -26911,6 +27112,8 @@ export namespace Prisma {
     bank_number?: true
     all_collectId?: true
     base_salary?: true
+    provident_com?: true
+    provident_emp?: true
     userId?: true
   }
 
@@ -26921,6 +27124,8 @@ export namespace Prisma {
     bank_number?: true
     all_collectId?: true
     base_salary?: true
+    provident_com?: true
+    provident_emp?: true
     userId?: true
   }
 
@@ -26931,6 +27136,8 @@ export namespace Prisma {
     bank_number?: true
     all_collectId?: true
     base_salary?: true
+    provident_com?: true
+    provident_emp?: true
     userId?: true
     _all?: true
   }
@@ -27029,6 +27236,8 @@ export namespace Prisma {
     bank_number: string
     all_collectId: string | null
     base_salary: number
+    provident_com: number
+    provident_emp: number
     userId: string | null
     _count: Bookbank_logCountAggregateOutputType | null
     _avg: Bookbank_logAvgAggregateOutputType | null
@@ -27058,6 +27267,8 @@ export namespace Prisma {
     bank_number?: boolean
     all_collectId?: boolean
     base_salary?: boolean
+    provident_com?: boolean
+    provident_emp?: boolean
     salary?: boolean | bookbank_log$salaryArgs
     mas_bank?: boolean | mas_bankArgs
     User?: boolean | UserArgs
@@ -28913,6 +29124,8 @@ export namespace Prisma {
     bank_number: 'bank_number',
     all_collectId: 'all_collectId',
     base_salary: 'base_salary',
+    provident_com: 'provident_com',
+    provident_emp: 'provident_emp',
     userId: 'userId'
   };
 
@@ -28980,6 +29193,7 @@ export namespace Prisma {
     id: 'id',
     monthId: 'monthId',
     bankId: 'bankId',
+    date: 'date',
     vat_per: 'vat_per',
     social_security: 'social_security',
     companyBranchId: 'companyBranchId'
@@ -29277,7 +29491,9 @@ export namespace Prisma {
     net: 'net',
     userId: 'userId',
     mas_income_typeId: 'mas_income_typeId',
-    bookbank_logId: 'bookbank_logId'
+    bookbank_logId: 'bookbank_logId',
+    mas_salary_statusId: 'mas_salary_statusId',
+    mas_bankId: 'mas_bankId'
   };
 
   export type SalaryScalarFieldEnum = (typeof SalaryScalarFieldEnum)[keyof typeof SalaryScalarFieldEnum]
@@ -30474,6 +30690,7 @@ export namespace Prisma {
     name?: StringFilter | string
     expense_company?: Expense_companyListRelationFilter
     bookbank_log?: Bookbank_logListRelationFilter
+    salary?: SalaryListRelationFilter
   }
 
   export type mas_bankOrderByWithRelationInput = {
@@ -30481,6 +30698,7 @@ export namespace Prisma {
     name?: SortOrder
     expense_company?: expense_companyOrderByRelationAggregateInput
     bookbank_log?: bookbank_logOrderByRelationAggregateInput
+    salary?: salaryOrderByRelationAggregateInput
   }
 
   export type mas_bankWhereUniqueInput = {
@@ -30588,12 +30806,14 @@ export namespace Prisma {
     id?: UuidFilter | string
     no?: IntFilter | number
     name?: StringFilter | string
+    salary?: SalaryListRelationFilter
   }
 
   export type mas_salary_statusOrderByWithRelationInput = {
     id?: SortOrder
     no?: SortOrder
     name?: SortOrder
+    salary?: salaryOrderByRelationAggregateInput
   }
 
   export type mas_salary_statusWhereUniqueInput = {
@@ -30662,6 +30882,7 @@ export namespace Prisma {
     id?: UuidFilter | string
     monthId?: UuidFilter | string
     bankId?: UuidFilter | string
+    date?: DateTimeFilter | Date | string
     vat_per?: FloatNullableFilter | number | null
     social_security?: FloatNullableFilter | number | null
     companyBranchId?: UuidNullableFilter | string | null
@@ -30674,6 +30895,7 @@ export namespace Prisma {
     id?: SortOrder
     monthId?: SortOrder
     bankId?: SortOrder
+    date?: SortOrder
     vat_per?: SortOrder
     social_security?: SortOrder
     companyBranchId?: SortOrder
@@ -30690,6 +30912,7 @@ export namespace Prisma {
     id?: SortOrder
     monthId?: SortOrder
     bankId?: SortOrder
+    date?: SortOrder
     vat_per?: SortOrder
     social_security?: SortOrder
     companyBranchId?: SortOrder
@@ -30707,6 +30930,7 @@ export namespace Prisma {
     id?: UuidWithAggregatesFilter | string
     monthId?: UuidWithAggregatesFilter | string
     bankId?: UuidWithAggregatesFilter | string
+    date?: DateTimeWithAggregatesFilter | Date | string
     vat_per?: FloatNullableWithAggregatesFilter | number | null
     social_security?: FloatNullableWithAggregatesFilter | number | null
     companyBranchId?: UuidNullableWithAggregatesFilter | string | null
@@ -30742,14 +30966,18 @@ export namespace Prisma {
     total_income?: FloatNullableFilter | number | null
     total_expense?: FloatNullableFilter | number | null
     net?: FloatNullableFilter | number | null
-    User?: XOR<UserRelationFilter, UserWhereInput> | null
     userId?: UuidNullableFilter | string | null
     mas_income_typeId?: UuidNullableFilter | string | null
-    bookbank_log?: XOR<Bookbank_logRelationFilter, bookbank_logWhereInput> | null
     bookbank_logId?: UuidNullableFilter | string | null
+    mas_salary_statusId?: UuidNullableFilter | string | null
+    mas_bankId?: UuidNullableFilter | string | null
+    User?: XOR<UserRelationFilter, UserWhereInput> | null
+    bookbank_log?: XOR<Bookbank_logRelationFilter, bookbank_logWhereInput> | null
     mas_month?: XOR<Mas_monthRelationFilter, mas_monthWhereInput> | null
     mas_years?: XOR<Mas_yearsRelationFilter, mas_yearsWhereInput> | null
     mas_income_type?: XOR<Mas_income_typeRelationFilter, mas_income_typeWhereInput> | null
+    mas_salary_status?: XOR<Mas_salary_statusRelationFilter, mas_salary_statusWhereInput> | null
+    mas_bank?: XOR<Mas_bankRelationFilter, mas_bankWhereInput> | null
   }
 
   export type salaryOrderByWithRelationInput = {
@@ -30779,14 +31007,18 @@ export namespace Prisma {
     total_income?: SortOrder
     total_expense?: SortOrder
     net?: SortOrder
-    User?: UserOrderByWithRelationInput
     userId?: SortOrder
     mas_income_typeId?: SortOrder
-    bookbank_log?: bookbank_logOrderByWithRelationInput
     bookbank_logId?: SortOrder
+    mas_salary_statusId?: SortOrder
+    mas_bankId?: SortOrder
+    User?: UserOrderByWithRelationInput
+    bookbank_log?: bookbank_logOrderByWithRelationInput
     mas_month?: mas_monthOrderByWithRelationInput
     mas_years?: mas_yearsOrderByWithRelationInput
     mas_income_type?: mas_income_typeOrderByWithRelationInput
+    mas_salary_status?: mas_salary_statusOrderByWithRelationInput
+    mas_bank?: mas_bankOrderByWithRelationInput
   }
 
   export type salaryWhereUniqueInput = {
@@ -30823,6 +31055,8 @@ export namespace Prisma {
     userId?: SortOrder
     mas_income_typeId?: SortOrder
     bookbank_logId?: SortOrder
+    mas_salary_statusId?: SortOrder
+    mas_bankId?: SortOrder
     _count?: salaryCountOrderByAggregateInput
     _avg?: salaryAvgOrderByAggregateInput
     _max?: salaryMaxOrderByAggregateInput
@@ -30863,6 +31097,8 @@ export namespace Prisma {
     userId?: UuidNullableWithAggregatesFilter | string | null
     mas_income_typeId?: UuidNullableWithAggregatesFilter | string | null
     bookbank_logId?: UuidNullableWithAggregatesFilter | string | null
+    mas_salary_statusId?: UuidNullableWithAggregatesFilter | string | null
+    mas_bankId?: UuidNullableWithAggregatesFilter | string | null
   }
 
   export type mas_all_collectWhereInput = {
@@ -30872,11 +31108,11 @@ export namespace Prisma {
     id?: UuidFilter | string
     User?: XOR<UserRelationFilter, UserWhereInput> | null
     userId?: UuidNullableFilter | string | null
-    income_collect?: IntFilter | number
-    vat_collect?: IntFilter | number
-    social_secu_collect?: IntFilter | number
-    provident_collect_employee?: IntFilter | number
-    provident_collect_company?: IntFilter | number
+    income_collect?: FloatFilter | number
+    vat_collect?: FloatFilter | number
+    social_secu_collect?: FloatFilter | number
+    provident_collect_employee?: FloatFilter | number
+    provident_collect_company?: FloatFilter | number
     provident_log?: Provident_logListRelationFilter
   }
 
@@ -30917,11 +31153,11 @@ export namespace Prisma {
     NOT?: Enumerable<mas_all_collectScalarWhereWithAggregatesInput>
     id?: UuidWithAggregatesFilter | string
     userId?: UuidNullableWithAggregatesFilter | string | null
-    income_collect?: IntWithAggregatesFilter | number
-    vat_collect?: IntWithAggregatesFilter | number
-    social_secu_collect?: IntWithAggregatesFilter | number
-    provident_collect_employee?: IntWithAggregatesFilter | number
-    provident_collect_company?: IntWithAggregatesFilter | number
+    income_collect?: FloatWithAggregatesFilter | number
+    vat_collect?: FloatWithAggregatesFilter | number
+    social_secu_collect?: FloatWithAggregatesFilter | number
+    provident_collect_employee?: FloatWithAggregatesFilter | number
+    provident_collect_company?: FloatWithAggregatesFilter | number
   }
 
   export type bookbank_logWhereInput = {
@@ -30934,6 +31170,8 @@ export namespace Prisma {
     bank_number?: StringFilter | string
     all_collectId?: UuidNullableFilter | string | null
     base_salary?: FloatFilter | number
+    provident_com?: FloatFilter | number
+    provident_emp?: FloatFilter | number
     salary?: SalaryListRelationFilter
     mas_bank?: XOR<Mas_bankRelationFilter, mas_bankWhereInput> | null
     User?: XOR<UserRelationFilter, UserWhereInput> | null
@@ -30948,6 +31186,8 @@ export namespace Prisma {
     bank_number?: SortOrder
     all_collectId?: SortOrder
     base_salary?: SortOrder
+    provident_com?: SortOrder
+    provident_emp?: SortOrder
     salary?: salaryOrderByRelationAggregateInput
     mas_bank?: mas_bankOrderByWithRelationInput
     User?: UserOrderByWithRelationInput
@@ -30966,6 +31206,8 @@ export namespace Prisma {
     bank_number?: SortOrder
     all_collectId?: SortOrder
     base_salary?: SortOrder
+    provident_com?: SortOrder
+    provident_emp?: SortOrder
     userId?: SortOrder
     _count?: bookbank_logCountOrderByAggregateInput
     _avg?: bookbank_logAvgOrderByAggregateInput
@@ -30984,6 +31226,8 @@ export namespace Prisma {
     bank_number?: StringWithAggregatesFilter | string
     all_collectId?: UuidNullableWithAggregatesFilter | string | null
     base_salary?: FloatWithAggregatesFilter | number
+    provident_com?: FloatWithAggregatesFilter | number
+    provident_emp?: FloatWithAggregatesFilter | number
     userId?: UuidNullableWithAggregatesFilter | string | null
   }
 
@@ -32567,6 +32811,7 @@ export namespace Prisma {
     name: string
     expense_company?: expense_companyCreateNestedManyWithoutMas_bankInput
     bookbank_log?: bookbank_logCreateNestedManyWithoutMas_bankInput
+    salary?: salaryCreateNestedManyWithoutMas_bankInput
   }
 
   export type mas_bankUncheckedCreateInput = {
@@ -32574,6 +32819,7 @@ export namespace Prisma {
     name: string
     expense_company?: expense_companyUncheckedCreateNestedManyWithoutMas_bankInput
     bookbank_log?: bookbank_logUncheckedCreateNestedManyWithoutMas_bankInput
+    salary?: salaryUncheckedCreateNestedManyWithoutMas_bankInput
   }
 
   export type mas_bankUpdateInput = {
@@ -32581,6 +32827,7 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     expense_company?: expense_companyUpdateManyWithoutMas_bankNestedInput
     bookbank_log?: bookbank_logUpdateManyWithoutMas_bankNestedInput
+    salary?: salaryUpdateManyWithoutMas_bankNestedInput
   }
 
   export type mas_bankUncheckedUpdateInput = {
@@ -32588,6 +32835,7 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     expense_company?: expense_companyUncheckedUpdateManyWithoutMas_bankNestedInput
     bookbank_log?: bookbank_logUncheckedUpdateManyWithoutMas_bankNestedInput
+    salary?: salaryUncheckedUpdateManyWithoutMas_bankNestedInput
   }
 
   export type mas_bankCreateManyInput = {
@@ -32698,24 +32946,28 @@ export namespace Prisma {
     id: string
     no: number
     name: string
+    salary?: salaryCreateNestedManyWithoutMas_salary_statusInput
   }
 
   export type mas_salary_statusUncheckedCreateInput = {
     id: string
     no: number
     name: string
+    salary?: salaryUncheckedCreateNestedManyWithoutMas_salary_statusInput
   }
 
   export type mas_salary_statusUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
     no?: IntFieldUpdateOperationsInput | number
     name?: StringFieldUpdateOperationsInput | string
+    salary?: salaryUpdateManyWithoutMas_salary_statusNestedInput
   }
 
   export type mas_salary_statusUncheckedUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
     no?: IntFieldUpdateOperationsInput | number
     name?: StringFieldUpdateOperationsInput | string
+    salary?: salaryUncheckedUpdateManyWithoutMas_salary_statusNestedInput
   }
 
   export type mas_salary_statusCreateManyInput = {
@@ -32777,6 +33029,7 @@ export namespace Prisma {
 
   export type expense_companyCreateInput = {
     id: string
+    date: Date | string
     vat_per?: number | null
     social_security?: number | null
     Mas_month?: mas_monthCreateNestedOneWithoutExpense_companyInput
@@ -32788,6 +33041,7 @@ export namespace Prisma {
     id: string
     monthId: string
     bankId: string
+    date: Date | string
     vat_per?: number | null
     social_security?: number | null
     companyBranchId?: string | null
@@ -32795,6 +33049,7 @@ export namespace Prisma {
 
   export type expense_companyUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
+    date?: DateTimeFieldUpdateOperationsInput | Date | string
     vat_per?: NullableFloatFieldUpdateOperationsInput | number | null
     social_security?: NullableFloatFieldUpdateOperationsInput | number | null
     Mas_month?: mas_monthUpdateOneWithoutExpense_companyNestedInput
@@ -32806,6 +33061,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     monthId?: StringFieldUpdateOperationsInput | string
     bankId?: StringFieldUpdateOperationsInput | string
+    date?: DateTimeFieldUpdateOperationsInput | Date | string
     vat_per?: NullableFloatFieldUpdateOperationsInput | number | null
     social_security?: NullableFloatFieldUpdateOperationsInput | number | null
     companyBranchId?: NullableStringFieldUpdateOperationsInput | string | null
@@ -32815,6 +33071,7 @@ export namespace Prisma {
     id: string
     monthId: string
     bankId: string
+    date: Date | string
     vat_per?: number | null
     social_security?: number | null
     companyBranchId?: string | null
@@ -32822,6 +33079,7 @@ export namespace Prisma {
 
   export type expense_companyUpdateManyMutationInput = {
     id?: StringFieldUpdateOperationsInput | string
+    date?: DateTimeFieldUpdateOperationsInput | Date | string
     vat_per?: NullableFloatFieldUpdateOperationsInput | number | null
     social_security?: NullableFloatFieldUpdateOperationsInput | number | null
   }
@@ -32830,6 +33088,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     monthId?: StringFieldUpdateOperationsInput | string
     bankId?: StringFieldUpdateOperationsInput | string
+    date?: DateTimeFieldUpdateOperationsInput | Date | string
     vat_per?: NullableFloatFieldUpdateOperationsInput | number | null
     social_security?: NullableFloatFieldUpdateOperationsInput | number | null
     companyBranchId?: NullableStringFieldUpdateOperationsInput | string | null
@@ -32865,6 +33124,8 @@ export namespace Prisma {
     mas_month?: mas_monthCreateNestedOneWithoutSalaryInput
     mas_years?: mas_yearsCreateNestedOneWithoutSalaryInput
     mas_income_type?: mas_income_typeCreateNestedOneWithoutSalaryInput
+    mas_salary_status?: mas_salary_statusCreateNestedOneWithoutSalaryInput
+    mas_bank?: mas_bankCreateNestedOneWithoutSalaryInput
   }
 
   export type salaryUncheckedCreateInput = {
@@ -32897,6 +33158,8 @@ export namespace Prisma {
     userId?: string | null
     mas_income_typeId?: string | null
     bookbank_logId?: string | null
+    mas_salary_statusId?: string | null
+    mas_bankId?: string | null
   }
 
   export type salaryUpdateInput = {
@@ -32929,6 +33192,8 @@ export namespace Prisma {
     mas_month?: mas_monthUpdateOneWithoutSalaryNestedInput
     mas_years?: mas_yearsUpdateOneWithoutSalaryNestedInput
     mas_income_type?: mas_income_typeUpdateOneWithoutSalaryNestedInput
+    mas_salary_status?: mas_salary_statusUpdateOneWithoutSalaryNestedInput
+    mas_bank?: mas_bankUpdateOneWithoutSalaryNestedInput
   }
 
   export type salaryUncheckedUpdateInput = {
@@ -32961,6 +33226,8 @@ export namespace Prisma {
     userId?: NullableStringFieldUpdateOperationsInput | string | null
     mas_income_typeId?: NullableStringFieldUpdateOperationsInput | string | null
     bookbank_logId?: NullableStringFieldUpdateOperationsInput | string | null
+    mas_salary_statusId?: NullableStringFieldUpdateOperationsInput | string | null
+    mas_bankId?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type salaryCreateManyInput = {
@@ -32993,6 +33260,8 @@ export namespace Prisma {
     userId?: string | null
     mas_income_typeId?: string | null
     bookbank_logId?: string | null
+    mas_salary_statusId?: string | null
+    mas_bankId?: string | null
   }
 
   export type salaryUpdateManyMutationInput = {
@@ -33052,6 +33321,8 @@ export namespace Prisma {
     userId?: NullableStringFieldUpdateOperationsInput | string | null
     mas_income_typeId?: NullableStringFieldUpdateOperationsInput | string | null
     bookbank_logId?: NullableStringFieldUpdateOperationsInput | string | null
+    mas_salary_statusId?: NullableStringFieldUpdateOperationsInput | string | null
+    mas_bankId?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type mas_all_collectCreateInput = {
@@ -33079,22 +33350,22 @@ export namespace Prisma {
   export type mas_all_collectUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
     User?: UserUpdateOneWithoutMas_all_collectNestedInput
-    income_collect?: IntFieldUpdateOperationsInput | number
-    vat_collect?: IntFieldUpdateOperationsInput | number
-    social_secu_collect?: IntFieldUpdateOperationsInput | number
-    provident_collect_employee?: IntFieldUpdateOperationsInput | number
-    provident_collect_company?: IntFieldUpdateOperationsInput | number
+    income_collect?: FloatFieldUpdateOperationsInput | number
+    vat_collect?: FloatFieldUpdateOperationsInput | number
+    social_secu_collect?: FloatFieldUpdateOperationsInput | number
+    provident_collect_employee?: FloatFieldUpdateOperationsInput | number
+    provident_collect_company?: FloatFieldUpdateOperationsInput | number
     provident_log?: provident_logUpdateManyWithoutMas_all_collectNestedInput
   }
 
   export type mas_all_collectUncheckedUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
     userId?: NullableStringFieldUpdateOperationsInput | string | null
-    income_collect?: IntFieldUpdateOperationsInput | number
-    vat_collect?: IntFieldUpdateOperationsInput | number
-    social_secu_collect?: IntFieldUpdateOperationsInput | number
-    provident_collect_employee?: IntFieldUpdateOperationsInput | number
-    provident_collect_company?: IntFieldUpdateOperationsInput | number
+    income_collect?: FloatFieldUpdateOperationsInput | number
+    vat_collect?: FloatFieldUpdateOperationsInput | number
+    social_secu_collect?: FloatFieldUpdateOperationsInput | number
+    provident_collect_employee?: FloatFieldUpdateOperationsInput | number
+    provident_collect_company?: FloatFieldUpdateOperationsInput | number
     provident_log?: provident_logUncheckedUpdateManyWithoutMas_all_collectNestedInput
   }
 
@@ -33110,21 +33381,21 @@ export namespace Prisma {
 
   export type mas_all_collectUpdateManyMutationInput = {
     id?: StringFieldUpdateOperationsInput | string
-    income_collect?: IntFieldUpdateOperationsInput | number
-    vat_collect?: IntFieldUpdateOperationsInput | number
-    social_secu_collect?: IntFieldUpdateOperationsInput | number
-    provident_collect_employee?: IntFieldUpdateOperationsInput | number
-    provident_collect_company?: IntFieldUpdateOperationsInput | number
+    income_collect?: FloatFieldUpdateOperationsInput | number
+    vat_collect?: FloatFieldUpdateOperationsInput | number
+    social_secu_collect?: FloatFieldUpdateOperationsInput | number
+    provident_collect_employee?: FloatFieldUpdateOperationsInput | number
+    provident_collect_company?: FloatFieldUpdateOperationsInput | number
   }
 
   export type mas_all_collectUncheckedUpdateManyInput = {
     id?: StringFieldUpdateOperationsInput | string
     userId?: NullableStringFieldUpdateOperationsInput | string | null
-    income_collect?: IntFieldUpdateOperationsInput | number
-    vat_collect?: IntFieldUpdateOperationsInput | number
-    social_secu_collect?: IntFieldUpdateOperationsInput | number
-    provident_collect_employee?: IntFieldUpdateOperationsInput | number
-    provident_collect_company?: IntFieldUpdateOperationsInput | number
+    income_collect?: FloatFieldUpdateOperationsInput | number
+    vat_collect?: FloatFieldUpdateOperationsInput | number
+    social_secu_collect?: FloatFieldUpdateOperationsInput | number
+    provident_collect_employee?: FloatFieldUpdateOperationsInput | number
+    provident_collect_company?: FloatFieldUpdateOperationsInput | number
   }
 
   export type bookbank_logCreateInput = {
@@ -33133,6 +33404,8 @@ export namespace Prisma {
     bank_number: string
     all_collectId?: string | null
     base_salary: number
+    provident_com?: number
+    provident_emp?: number
     salary?: salaryCreateNestedManyWithoutBookbank_logInput
     mas_bank?: mas_bankCreateNestedOneWithoutBookbank_logInput
     User?: UserCreateNestedOneWithoutBookbank_logInput
@@ -33146,6 +33419,8 @@ export namespace Prisma {
     bank_number: string
     all_collectId?: string | null
     base_salary: number
+    provident_com?: number
+    provident_emp?: number
     salary?: salaryUncheckedCreateNestedManyWithoutBookbank_logInput
     userId?: string | null
     provident_log?: provident_logUncheckedCreateNestedManyWithoutBookbank_logInput
@@ -33157,6 +33432,8 @@ export namespace Prisma {
     bank_number?: StringFieldUpdateOperationsInput | string
     all_collectId?: NullableStringFieldUpdateOperationsInput | string | null
     base_salary?: FloatFieldUpdateOperationsInput | number
+    provident_com?: FloatFieldUpdateOperationsInput | number
+    provident_emp?: FloatFieldUpdateOperationsInput | number
     salary?: salaryUpdateManyWithoutBookbank_logNestedInput
     mas_bank?: mas_bankUpdateOneWithoutBookbank_logNestedInput
     User?: UserUpdateOneWithoutBookbank_logNestedInput
@@ -33170,6 +33447,8 @@ export namespace Prisma {
     bank_number?: StringFieldUpdateOperationsInput | string
     all_collectId?: NullableStringFieldUpdateOperationsInput | string | null
     base_salary?: FloatFieldUpdateOperationsInput | number
+    provident_com?: FloatFieldUpdateOperationsInput | number
+    provident_emp?: FloatFieldUpdateOperationsInput | number
     salary?: salaryUncheckedUpdateManyWithoutBookbank_logNestedInput
     userId?: NullableStringFieldUpdateOperationsInput | string | null
     provident_log?: provident_logUncheckedUpdateManyWithoutBookbank_logNestedInput
@@ -33182,6 +33461,8 @@ export namespace Prisma {
     bank_number: string
     all_collectId?: string | null
     base_salary: number
+    provident_com?: number
+    provident_emp?: number
     userId?: string | null
   }
 
@@ -33191,6 +33472,8 @@ export namespace Prisma {
     bank_number?: StringFieldUpdateOperationsInput | string
     all_collectId?: NullableStringFieldUpdateOperationsInput | string | null
     base_salary?: FloatFieldUpdateOperationsInput | number
+    provident_com?: FloatFieldUpdateOperationsInput | number
+    provident_emp?: FloatFieldUpdateOperationsInput | number
   }
 
   export type bookbank_logUncheckedUpdateManyInput = {
@@ -33200,6 +33483,8 @@ export namespace Prisma {
     bank_number?: StringFieldUpdateOperationsInput | string
     all_collectId?: NullableStringFieldUpdateOperationsInput | string | null
     base_salary?: FloatFieldUpdateOperationsInput | number
+    provident_com?: FloatFieldUpdateOperationsInput | number
+    provident_emp?: FloatFieldUpdateOperationsInput | number
     userId?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
@@ -34568,6 +34853,7 @@ export namespace Prisma {
     id?: SortOrder
     monthId?: SortOrder
     bankId?: SortOrder
+    date?: SortOrder
     vat_per?: SortOrder
     social_security?: SortOrder
     companyBranchId?: SortOrder
@@ -34582,6 +34868,7 @@ export namespace Prisma {
     id?: SortOrder
     monthId?: SortOrder
     bankId?: SortOrder
+    date?: SortOrder
     vat_per?: SortOrder
     social_security?: SortOrder
     companyBranchId?: SortOrder
@@ -34591,6 +34878,7 @@ export namespace Prisma {
     id?: SortOrder
     monthId?: SortOrder
     bankId?: SortOrder
+    date?: SortOrder
     vat_per?: SortOrder
     social_security?: SortOrder
     companyBranchId?: SortOrder
@@ -34632,6 +34920,11 @@ export namespace Prisma {
     isNot?: mas_income_typeWhereInput | null
   }
 
+  export type Mas_salary_statusRelationFilter = {
+    is?: mas_salary_statusWhereInput | null
+    isNot?: mas_salary_statusWhereInput | null
+  }
+
   export type salaryCountOrderByAggregateInput = {
     id?: SortOrder
     mas_monthId?: SortOrder
@@ -34662,6 +34955,8 @@ export namespace Prisma {
     userId?: SortOrder
     mas_income_typeId?: SortOrder
     bookbank_logId?: SortOrder
+    mas_salary_statusId?: SortOrder
+    mas_bankId?: SortOrder
   }
 
   export type salaryAvgOrderByAggregateInput = {
@@ -34719,6 +35014,8 @@ export namespace Prisma {
     userId?: SortOrder
     mas_income_typeId?: SortOrder
     bookbank_logId?: SortOrder
+    mas_salary_statusId?: SortOrder
+    mas_bankId?: SortOrder
   }
 
   export type salaryMinOrderByAggregateInput = {
@@ -34751,6 +35048,8 @@ export namespace Prisma {
     userId?: SortOrder
     mas_income_typeId?: SortOrder
     bookbank_logId?: SortOrder
+    mas_salary_statusId?: SortOrder
+    mas_bankId?: SortOrder
   }
 
   export type salarySumOrderByAggregateInput = {
@@ -34776,6 +35075,17 @@ export namespace Prisma {
     total_income?: SortOrder
     total_expense?: SortOrder
     net?: SortOrder
+  }
+
+  export type FloatFilter = {
+    equals?: number
+    in?: Enumerable<number>
+    notIn?: Enumerable<number>
+    lt?: number
+    lte?: number
+    gt?: number
+    gte?: number
+    not?: NestedFloatFilter | number
   }
 
   export type mas_all_collectCountOrderByAggregateInput = {
@@ -34824,55 +35134,6 @@ export namespace Prisma {
     provident_collect_company?: SortOrder
   }
 
-  export type FloatFilter = {
-    equals?: number
-    in?: Enumerable<number>
-    notIn?: Enumerable<number>
-    lt?: number
-    lte?: number
-    gt?: number
-    gte?: number
-    not?: NestedFloatFilter | number
-  }
-
-  export type bookbank_logCountOrderByAggregateInput = {
-    id?: SortOrder
-    date?: SortOrder
-    mas_bankId?: SortOrder
-    bank_number?: SortOrder
-    all_collectId?: SortOrder
-    base_salary?: SortOrder
-    userId?: SortOrder
-  }
-
-  export type bookbank_logAvgOrderByAggregateInput = {
-    base_salary?: SortOrder
-  }
-
-  export type bookbank_logMaxOrderByAggregateInput = {
-    id?: SortOrder
-    date?: SortOrder
-    mas_bankId?: SortOrder
-    bank_number?: SortOrder
-    all_collectId?: SortOrder
-    base_salary?: SortOrder
-    userId?: SortOrder
-  }
-
-  export type bookbank_logMinOrderByAggregateInput = {
-    id?: SortOrder
-    date?: SortOrder
-    mas_bankId?: SortOrder
-    bank_number?: SortOrder
-    all_collectId?: SortOrder
-    base_salary?: SortOrder
-    userId?: SortOrder
-  }
-
-  export type bookbank_logSumOrderByAggregateInput = {
-    base_salary?: SortOrder
-  }
-
   export type FloatWithAggregatesFilter = {
     equals?: number
     in?: Enumerable<number>
@@ -34887,6 +35148,54 @@ export namespace Prisma {
     _sum?: NestedFloatFilter
     _min?: NestedFloatFilter
     _max?: NestedFloatFilter
+  }
+
+  export type bookbank_logCountOrderByAggregateInput = {
+    id?: SortOrder
+    date?: SortOrder
+    mas_bankId?: SortOrder
+    bank_number?: SortOrder
+    all_collectId?: SortOrder
+    base_salary?: SortOrder
+    provident_com?: SortOrder
+    provident_emp?: SortOrder
+    userId?: SortOrder
+  }
+
+  export type bookbank_logAvgOrderByAggregateInput = {
+    base_salary?: SortOrder
+    provident_com?: SortOrder
+    provident_emp?: SortOrder
+  }
+
+  export type bookbank_logMaxOrderByAggregateInput = {
+    id?: SortOrder
+    date?: SortOrder
+    mas_bankId?: SortOrder
+    bank_number?: SortOrder
+    all_collectId?: SortOrder
+    base_salary?: SortOrder
+    provident_com?: SortOrder
+    provident_emp?: SortOrder
+    userId?: SortOrder
+  }
+
+  export type bookbank_logMinOrderByAggregateInput = {
+    id?: SortOrder
+    date?: SortOrder
+    mas_bankId?: SortOrder
+    bank_number?: SortOrder
+    all_collectId?: SortOrder
+    base_salary?: SortOrder
+    provident_com?: SortOrder
+    provident_emp?: SortOrder
+    userId?: SortOrder
+  }
+
+  export type bookbank_logSumOrderByAggregateInput = {
+    base_salary?: SortOrder
+    provident_com?: SortOrder
+    provident_emp?: SortOrder
   }
 
   export type Mas_all_collectRelationFilter = {
@@ -36434,6 +36743,13 @@ export namespace Prisma {
     connect?: Enumerable<bookbank_logWhereUniqueInput>
   }
 
+  export type salaryCreateNestedManyWithoutMas_bankInput = {
+    create?: XOR<Enumerable<salaryCreateWithoutMas_bankInput>, Enumerable<salaryUncheckedCreateWithoutMas_bankInput>>
+    connectOrCreate?: Enumerable<salaryCreateOrConnectWithoutMas_bankInput>
+    createMany?: salaryCreateManyMas_bankInputEnvelope
+    connect?: Enumerable<salaryWhereUniqueInput>
+  }
+
   export type expense_companyUncheckedCreateNestedManyWithoutMas_bankInput = {
     create?: XOR<Enumerable<expense_companyCreateWithoutMas_bankInput>, Enumerable<expense_companyUncheckedCreateWithoutMas_bankInput>>
     connectOrCreate?: Enumerable<expense_companyCreateOrConnectWithoutMas_bankInput>
@@ -36446,6 +36762,13 @@ export namespace Prisma {
     connectOrCreate?: Enumerable<bookbank_logCreateOrConnectWithoutMas_bankInput>
     createMany?: bookbank_logCreateManyMas_bankInputEnvelope
     connect?: Enumerable<bookbank_logWhereUniqueInput>
+  }
+
+  export type salaryUncheckedCreateNestedManyWithoutMas_bankInput = {
+    create?: XOR<Enumerable<salaryCreateWithoutMas_bankInput>, Enumerable<salaryUncheckedCreateWithoutMas_bankInput>>
+    connectOrCreate?: Enumerable<salaryCreateOrConnectWithoutMas_bankInput>
+    createMany?: salaryCreateManyMas_bankInputEnvelope
+    connect?: Enumerable<salaryWhereUniqueInput>
   }
 
   export type expense_companyUpdateManyWithoutMas_bankNestedInput = {
@@ -36476,6 +36799,20 @@ export namespace Prisma {
     deleteMany?: Enumerable<bookbank_logScalarWhereInput>
   }
 
+  export type salaryUpdateManyWithoutMas_bankNestedInput = {
+    create?: XOR<Enumerable<salaryCreateWithoutMas_bankInput>, Enumerable<salaryUncheckedCreateWithoutMas_bankInput>>
+    connectOrCreate?: Enumerable<salaryCreateOrConnectWithoutMas_bankInput>
+    upsert?: Enumerable<salaryUpsertWithWhereUniqueWithoutMas_bankInput>
+    createMany?: salaryCreateManyMas_bankInputEnvelope
+    set?: Enumerable<salaryWhereUniqueInput>
+    disconnect?: Enumerable<salaryWhereUniqueInput>
+    delete?: Enumerable<salaryWhereUniqueInput>
+    connect?: Enumerable<salaryWhereUniqueInput>
+    update?: Enumerable<salaryUpdateWithWhereUniqueWithoutMas_bankInput>
+    updateMany?: Enumerable<salaryUpdateManyWithWhereWithoutMas_bankInput>
+    deleteMany?: Enumerable<salaryScalarWhereInput>
+  }
+
   export type expense_companyUncheckedUpdateManyWithoutMas_bankNestedInput = {
     create?: XOR<Enumerable<expense_companyCreateWithoutMas_bankInput>, Enumerable<expense_companyUncheckedCreateWithoutMas_bankInput>>
     connectOrCreate?: Enumerable<expense_companyCreateOrConnectWithoutMas_bankInput>
@@ -36502,6 +36839,20 @@ export namespace Prisma {
     update?: Enumerable<bookbank_logUpdateWithWhereUniqueWithoutMas_bankInput>
     updateMany?: Enumerable<bookbank_logUpdateManyWithWhereWithoutMas_bankInput>
     deleteMany?: Enumerable<bookbank_logScalarWhereInput>
+  }
+
+  export type salaryUncheckedUpdateManyWithoutMas_bankNestedInput = {
+    create?: XOR<Enumerable<salaryCreateWithoutMas_bankInput>, Enumerable<salaryUncheckedCreateWithoutMas_bankInput>>
+    connectOrCreate?: Enumerable<salaryCreateOrConnectWithoutMas_bankInput>
+    upsert?: Enumerable<salaryUpsertWithWhereUniqueWithoutMas_bankInput>
+    createMany?: salaryCreateManyMas_bankInputEnvelope
+    set?: Enumerable<salaryWhereUniqueInput>
+    disconnect?: Enumerable<salaryWhereUniqueInput>
+    delete?: Enumerable<salaryWhereUniqueInput>
+    connect?: Enumerable<salaryWhereUniqueInput>
+    update?: Enumerable<salaryUpdateWithWhereUniqueWithoutMas_bankInput>
+    updateMany?: Enumerable<salaryUpdateManyWithWhereWithoutMas_bankInput>
+    deleteMany?: Enumerable<salaryScalarWhereInput>
   }
 
   export type expense_companyCreateNestedManyWithoutMas_monthInput = {
@@ -36627,6 +36978,48 @@ export namespace Prisma {
     connect?: Enumerable<salaryWhereUniqueInput>
     update?: Enumerable<salaryUpdateWithWhereUniqueWithoutMas_yearsInput>
     updateMany?: Enumerable<salaryUpdateManyWithWhereWithoutMas_yearsInput>
+    deleteMany?: Enumerable<salaryScalarWhereInput>
+  }
+
+  export type salaryCreateNestedManyWithoutMas_salary_statusInput = {
+    create?: XOR<Enumerable<salaryCreateWithoutMas_salary_statusInput>, Enumerable<salaryUncheckedCreateWithoutMas_salary_statusInput>>
+    connectOrCreate?: Enumerable<salaryCreateOrConnectWithoutMas_salary_statusInput>
+    createMany?: salaryCreateManyMas_salary_statusInputEnvelope
+    connect?: Enumerable<salaryWhereUniqueInput>
+  }
+
+  export type salaryUncheckedCreateNestedManyWithoutMas_salary_statusInput = {
+    create?: XOR<Enumerable<salaryCreateWithoutMas_salary_statusInput>, Enumerable<salaryUncheckedCreateWithoutMas_salary_statusInput>>
+    connectOrCreate?: Enumerable<salaryCreateOrConnectWithoutMas_salary_statusInput>
+    createMany?: salaryCreateManyMas_salary_statusInputEnvelope
+    connect?: Enumerable<salaryWhereUniqueInput>
+  }
+
+  export type salaryUpdateManyWithoutMas_salary_statusNestedInput = {
+    create?: XOR<Enumerable<salaryCreateWithoutMas_salary_statusInput>, Enumerable<salaryUncheckedCreateWithoutMas_salary_statusInput>>
+    connectOrCreate?: Enumerable<salaryCreateOrConnectWithoutMas_salary_statusInput>
+    upsert?: Enumerable<salaryUpsertWithWhereUniqueWithoutMas_salary_statusInput>
+    createMany?: salaryCreateManyMas_salary_statusInputEnvelope
+    set?: Enumerable<salaryWhereUniqueInput>
+    disconnect?: Enumerable<salaryWhereUniqueInput>
+    delete?: Enumerable<salaryWhereUniqueInput>
+    connect?: Enumerable<salaryWhereUniqueInput>
+    update?: Enumerable<salaryUpdateWithWhereUniqueWithoutMas_salary_statusInput>
+    updateMany?: Enumerable<salaryUpdateManyWithWhereWithoutMas_salary_statusInput>
+    deleteMany?: Enumerable<salaryScalarWhereInput>
+  }
+
+  export type salaryUncheckedUpdateManyWithoutMas_salary_statusNestedInput = {
+    create?: XOR<Enumerable<salaryCreateWithoutMas_salary_statusInput>, Enumerable<salaryUncheckedCreateWithoutMas_salary_statusInput>>
+    connectOrCreate?: Enumerable<salaryCreateOrConnectWithoutMas_salary_statusInput>
+    upsert?: Enumerable<salaryUpsertWithWhereUniqueWithoutMas_salary_statusInput>
+    createMany?: salaryCreateManyMas_salary_statusInputEnvelope
+    set?: Enumerable<salaryWhereUniqueInput>
+    disconnect?: Enumerable<salaryWhereUniqueInput>
+    delete?: Enumerable<salaryWhereUniqueInput>
+    connect?: Enumerable<salaryWhereUniqueInput>
+    update?: Enumerable<salaryUpdateWithWhereUniqueWithoutMas_salary_statusInput>
+    updateMany?: Enumerable<salaryUpdateManyWithWhereWithoutMas_salary_statusInput>
     deleteMany?: Enumerable<salaryScalarWhereInput>
   }
 
@@ -36758,6 +37151,18 @@ export namespace Prisma {
     connect?: mas_income_typeWhereUniqueInput
   }
 
+  export type mas_salary_statusCreateNestedOneWithoutSalaryInput = {
+    create?: XOR<mas_salary_statusCreateWithoutSalaryInput, mas_salary_statusUncheckedCreateWithoutSalaryInput>
+    connectOrCreate?: mas_salary_statusCreateOrConnectWithoutSalaryInput
+    connect?: mas_salary_statusWhereUniqueInput
+  }
+
+  export type mas_bankCreateNestedOneWithoutSalaryInput = {
+    create?: XOR<mas_bankCreateWithoutSalaryInput, mas_bankUncheckedCreateWithoutSalaryInput>
+    connectOrCreate?: mas_bankCreateOrConnectWithoutSalaryInput
+    connect?: mas_bankWhereUniqueInput
+  }
+
   export type UserUpdateOneWithoutSalaryNestedInput = {
     create?: XOR<UserCreateWithoutSalaryInput, UserUncheckedCreateWithoutSalaryInput>
     connectOrCreate?: UserCreateOrConnectWithoutSalaryInput
@@ -36808,6 +37213,26 @@ export namespace Prisma {
     update?: XOR<mas_income_typeUpdateWithoutSalaryInput, mas_income_typeUncheckedUpdateWithoutSalaryInput>
   }
 
+  export type mas_salary_statusUpdateOneWithoutSalaryNestedInput = {
+    create?: XOR<mas_salary_statusCreateWithoutSalaryInput, mas_salary_statusUncheckedCreateWithoutSalaryInput>
+    connectOrCreate?: mas_salary_statusCreateOrConnectWithoutSalaryInput
+    upsert?: mas_salary_statusUpsertWithoutSalaryInput
+    disconnect?: boolean
+    delete?: boolean
+    connect?: mas_salary_statusWhereUniqueInput
+    update?: XOR<mas_salary_statusUpdateWithoutSalaryInput, mas_salary_statusUncheckedUpdateWithoutSalaryInput>
+  }
+
+  export type mas_bankUpdateOneWithoutSalaryNestedInput = {
+    create?: XOR<mas_bankCreateWithoutSalaryInput, mas_bankUncheckedCreateWithoutSalaryInput>
+    connectOrCreate?: mas_bankCreateOrConnectWithoutSalaryInput
+    upsert?: mas_bankUpsertWithoutSalaryInput
+    disconnect?: boolean
+    delete?: boolean
+    connect?: mas_bankWhereUniqueInput
+    update?: XOR<mas_bankUpdateWithoutSalaryInput, mas_bankUncheckedUpdateWithoutSalaryInput>
+  }
+
   export type UserCreateNestedOneWithoutMas_all_collectInput = {
     create?: XOR<UserCreateWithoutMas_all_collectInput, UserUncheckedCreateWithoutMas_all_collectInput>
     connectOrCreate?: UserCreateOrConnectWithoutMas_all_collectInput
@@ -36836,6 +37261,14 @@ export namespace Prisma {
     delete?: boolean
     connect?: UserWhereUniqueInput
     update?: XOR<UserUpdateWithoutMas_all_collectInput, UserUncheckedUpdateWithoutMas_all_collectInput>
+  }
+
+  export type FloatFieldUpdateOperationsInput = {
+    set?: number
+    increment?: number
+    decrement?: number
+    multiply?: number
+    divide?: number
   }
 
   export type provident_logUpdateManyWithoutMas_all_collectNestedInput = {
@@ -36904,14 +37337,6 @@ export namespace Prisma {
     connectOrCreate?: Enumerable<provident_logCreateOrConnectWithoutBookbank_logInput>
     createMany?: provident_logCreateManyBookbank_logInputEnvelope
     connect?: Enumerable<provident_logWhereUniqueInput>
-  }
-
-  export type FloatFieldUpdateOperationsInput = {
-    set?: number
-    increment?: number
-    decrement?: number
-    multiply?: number
-    divide?: number
   }
 
   export type salaryUpdateManyWithoutBookbank_logNestedInput = {
@@ -37948,6 +38373,7 @@ export namespace Prisma {
 
   export type expense_companyCreateWithoutCompanyBranchInput = {
     id: string
+    date: Date | string
     vat_per?: number | null
     social_security?: number | null
     Mas_month?: mas_monthCreateNestedOneWithoutExpense_companyInput
@@ -37958,6 +38384,7 @@ export namespace Prisma {
     id: string
     monthId: string
     bankId: string
+    date: Date | string
     vat_per?: number | null
     social_security?: number | null
   }
@@ -38096,6 +38523,7 @@ export namespace Prisma {
     id?: UuidFilter | string
     monthId?: UuidFilter | string
     bankId?: UuidFilter | string
+    date?: DateTimeFilter | Date | string
     vat_per?: FloatNullableFilter | number | null
     social_security?: FloatNullableFilter | number | null
     companyBranchId?: UuidNullableFilter | string | null
@@ -38563,6 +38991,8 @@ export namespace Prisma {
     mas_month?: mas_monthCreateNestedOneWithoutSalaryInput
     mas_years?: mas_yearsCreateNestedOneWithoutSalaryInput
     mas_income_type?: mas_income_typeCreateNestedOneWithoutSalaryInput
+    mas_salary_status?: mas_salary_statusCreateNestedOneWithoutSalaryInput
+    mas_bank?: mas_bankCreateNestedOneWithoutSalaryInput
   }
 
   export type salaryUncheckedCreateWithoutUserInput = {
@@ -38594,6 +39024,8 @@ export namespace Prisma {
     net?: number | null
     mas_income_typeId?: string | null
     bookbank_logId?: string | null
+    mas_salary_statusId?: string | null
+    mas_bankId?: string | null
   }
 
   export type salaryCreateOrConnectWithoutUserInput = {
@@ -38640,6 +39072,8 @@ export namespace Prisma {
     bank_number: string
     all_collectId?: string | null
     base_salary: number
+    provident_com?: number
+    provident_emp?: number
     salary?: salaryCreateNestedManyWithoutBookbank_logInput
     mas_bank?: mas_bankCreateNestedOneWithoutBookbank_logInput
     provident_log?: provident_logCreateNestedManyWithoutBookbank_logInput
@@ -38652,6 +39086,8 @@ export namespace Prisma {
     bank_number: string
     all_collectId?: string | null
     base_salary: number
+    provident_com?: number
+    provident_emp?: number
     salary?: salaryUncheckedCreateNestedManyWithoutBookbank_logInput
     provident_log?: provident_logUncheckedCreateNestedManyWithoutBookbank_logInput
   }
@@ -38983,11 +39419,11 @@ export namespace Prisma {
     NOT?: Enumerable<mas_all_collectScalarWhereInput>
     id?: UuidFilter | string
     userId?: UuidNullableFilter | string | null
-    income_collect?: IntFilter | number
-    vat_collect?: IntFilter | number
-    social_secu_collect?: IntFilter | number
-    provident_collect_employee?: IntFilter | number
-    provident_collect_company?: IntFilter | number
+    income_collect?: FloatFilter | number
+    vat_collect?: FloatFilter | number
+    social_secu_collect?: FloatFilter | number
+    provident_collect_employee?: FloatFilter | number
+    provident_collect_company?: FloatFilter | number
   }
 
   export type salaryUpsertWithWhereUniqueWithoutUserInput = {
@@ -39039,6 +39475,8 @@ export namespace Prisma {
     userId?: UuidNullableFilter | string | null
     mas_income_typeId?: UuidNullableFilter | string | null
     bookbank_logId?: UuidNullableFilter | string | null
+    mas_salary_statusId?: UuidNullableFilter | string | null
+    mas_bankId?: UuidNullableFilter | string | null
   }
 
   export type provident_logUpsertWithWhereUniqueWithoutUserInput = {
@@ -39096,6 +39534,8 @@ export namespace Prisma {
     bank_number?: StringFilter | string
     all_collectId?: UuidNullableFilter | string | null
     base_salary?: FloatFilter | number
+    provident_com?: FloatFilter | number
+    provident_emp?: FloatFilter | number
     userId?: UuidNullableFilter | string | null
   }
 
@@ -40706,6 +41146,7 @@ export namespace Prisma {
 
   export type expense_companyCreateWithoutMas_bankInput = {
     id: string
+    date: Date | string
     vat_per?: number | null
     social_security?: number | null
     Mas_month?: mas_monthCreateNestedOneWithoutExpense_companyInput
@@ -40715,6 +41156,7 @@ export namespace Prisma {
   export type expense_companyUncheckedCreateWithoutMas_bankInput = {
     id: string
     monthId: string
+    date: Date | string
     vat_per?: number | null
     social_security?: number | null
     companyBranchId?: string | null
@@ -40736,6 +41178,8 @@ export namespace Prisma {
     bank_number: string
     all_collectId?: string | null
     base_salary: number
+    provident_com?: number
+    provident_emp?: number
     salary?: salaryCreateNestedManyWithoutBookbank_logInput
     User?: UserCreateNestedOneWithoutBookbank_logInput
     provident_log?: provident_logCreateNestedManyWithoutBookbank_logInput
@@ -40747,6 +41191,8 @@ export namespace Prisma {
     bank_number: string
     all_collectId?: string | null
     base_salary: number
+    provident_com?: number
+    provident_emp?: number
     salary?: salaryUncheckedCreateNestedManyWithoutBookbank_logInput
     userId?: string | null
     provident_log?: provident_logUncheckedCreateNestedManyWithoutBookbank_logInput
@@ -40759,6 +41205,82 @@ export namespace Prisma {
 
   export type bookbank_logCreateManyMas_bankInputEnvelope = {
     data: Enumerable<bookbank_logCreateManyMas_bankInput>
+    skipDuplicates?: boolean
+  }
+
+  export type salaryCreateWithoutMas_bankInput = {
+    id: string
+    date?: Date | string | null
+    commission?: number | null
+    position_income?: number | null
+    ot?: number | null
+    bonus?: number | null
+    special_income?: number | null
+    other_income?: number | null
+    travel_income?: number | null
+    bursary?: number | null
+    welfare_money?: number | null
+    vatper?: number | null
+    ss_per?: number | null
+    vat?: number | null
+    social_security?: number | null
+    miss?: number | null
+    ra?: number | null
+    late?: number | null
+    other?: number | null
+    provident_employee?: number | null
+    provident_company?: number | null
+    total_income?: number | null
+    total_expense?: number | null
+    net?: number | null
+    User?: UserCreateNestedOneWithoutSalaryInput
+    bookbank_log?: bookbank_logCreateNestedOneWithoutSalaryInput
+    mas_month?: mas_monthCreateNestedOneWithoutSalaryInput
+    mas_years?: mas_yearsCreateNestedOneWithoutSalaryInput
+    mas_income_type?: mas_income_typeCreateNestedOneWithoutSalaryInput
+    mas_salary_status?: mas_salary_statusCreateNestedOneWithoutSalaryInput
+  }
+
+  export type salaryUncheckedCreateWithoutMas_bankInput = {
+    id: string
+    mas_monthId?: string | null
+    mas_yearsId?: string | null
+    date?: Date | string | null
+    commission?: number | null
+    position_income?: number | null
+    ot?: number | null
+    bonus?: number | null
+    special_income?: number | null
+    other_income?: number | null
+    travel_income?: number | null
+    bursary?: number | null
+    welfare_money?: number | null
+    vatper?: number | null
+    ss_per?: number | null
+    vat?: number | null
+    social_security?: number | null
+    miss?: number | null
+    ra?: number | null
+    late?: number | null
+    other?: number | null
+    provident_employee?: number | null
+    provident_company?: number | null
+    total_income?: number | null
+    total_expense?: number | null
+    net?: number | null
+    userId?: string | null
+    mas_income_typeId?: string | null
+    bookbank_logId?: string | null
+    mas_salary_statusId?: string | null
+  }
+
+  export type salaryCreateOrConnectWithoutMas_bankInput = {
+    where: salaryWhereUniqueInput
+    create: XOR<salaryCreateWithoutMas_bankInput, salaryUncheckedCreateWithoutMas_bankInput>
+  }
+
+  export type salaryCreateManyMas_bankInputEnvelope = {
+    data: Enumerable<salaryCreateManyMas_bankInput>
     skipDuplicates?: boolean
   }
 
@@ -40794,8 +41316,25 @@ export namespace Prisma {
     data: XOR<bookbank_logUpdateManyMutationInput, bookbank_logUncheckedUpdateManyWithoutBookbank_logInput>
   }
 
+  export type salaryUpsertWithWhereUniqueWithoutMas_bankInput = {
+    where: salaryWhereUniqueInput
+    update: XOR<salaryUpdateWithoutMas_bankInput, salaryUncheckedUpdateWithoutMas_bankInput>
+    create: XOR<salaryCreateWithoutMas_bankInput, salaryUncheckedCreateWithoutMas_bankInput>
+  }
+
+  export type salaryUpdateWithWhereUniqueWithoutMas_bankInput = {
+    where: salaryWhereUniqueInput
+    data: XOR<salaryUpdateWithoutMas_bankInput, salaryUncheckedUpdateWithoutMas_bankInput>
+  }
+
+  export type salaryUpdateManyWithWhereWithoutMas_bankInput = {
+    where: salaryScalarWhereInput
+    data: XOR<salaryUpdateManyMutationInput, salaryUncheckedUpdateManyWithoutSalaryInput>
+  }
+
   export type expense_companyCreateWithoutMas_monthInput = {
     id: string
+    date: Date | string
     vat_per?: number | null
     social_security?: number | null
     mas_bank?: mas_bankCreateNestedOneWithoutExpense_companyInput
@@ -40805,6 +41344,7 @@ export namespace Prisma {
   export type expense_companyUncheckedCreateWithoutMas_monthInput = {
     id: string
     bankId: string
+    date: Date | string
     vat_per?: number | null
     social_security?: number | null
     companyBranchId?: string | null
@@ -40849,6 +41389,8 @@ export namespace Prisma {
     bookbank_log?: bookbank_logCreateNestedOneWithoutSalaryInput
     mas_years?: mas_yearsCreateNestedOneWithoutSalaryInput
     mas_income_type?: mas_income_typeCreateNestedOneWithoutSalaryInput
+    mas_salary_status?: mas_salary_statusCreateNestedOneWithoutSalaryInput
+    mas_bank?: mas_bankCreateNestedOneWithoutSalaryInput
   }
 
   export type salaryUncheckedCreateWithoutMas_monthInput = {
@@ -40880,6 +41422,8 @@ export namespace Prisma {
     userId?: string | null
     mas_income_typeId?: string | null
     bookbank_logId?: string | null
+    mas_salary_statusId?: string | null
+    mas_bankId?: string | null
   }
 
   export type salaryCreateOrConnectWithoutMas_monthInput = {
@@ -40953,6 +41497,8 @@ export namespace Prisma {
     bookbank_log?: bookbank_logCreateNestedOneWithoutSalaryInput
     mas_month?: mas_monthCreateNestedOneWithoutSalaryInput
     mas_income_type?: mas_income_typeCreateNestedOneWithoutSalaryInput
+    mas_salary_status?: mas_salary_statusCreateNestedOneWithoutSalaryInput
+    mas_bank?: mas_bankCreateNestedOneWithoutSalaryInput
   }
 
   export type salaryUncheckedCreateWithoutMas_yearsInput = {
@@ -40984,6 +41530,8 @@ export namespace Prisma {
     userId?: string | null
     mas_income_typeId?: string | null
     bookbank_logId?: string | null
+    mas_salary_statusId?: string | null
+    mas_bankId?: string | null
   }
 
   export type salaryCreateOrConnectWithoutMas_yearsInput = {
@@ -41008,6 +41556,98 @@ export namespace Prisma {
   }
 
   export type salaryUpdateManyWithWhereWithoutMas_yearsInput = {
+    where: salaryScalarWhereInput
+    data: XOR<salaryUpdateManyMutationInput, salaryUncheckedUpdateManyWithoutSalaryInput>
+  }
+
+  export type salaryCreateWithoutMas_salary_statusInput = {
+    id: string
+    date?: Date | string | null
+    commission?: number | null
+    position_income?: number | null
+    ot?: number | null
+    bonus?: number | null
+    special_income?: number | null
+    other_income?: number | null
+    travel_income?: number | null
+    bursary?: number | null
+    welfare_money?: number | null
+    vatper?: number | null
+    ss_per?: number | null
+    vat?: number | null
+    social_security?: number | null
+    miss?: number | null
+    ra?: number | null
+    late?: number | null
+    other?: number | null
+    provident_employee?: number | null
+    provident_company?: number | null
+    total_income?: number | null
+    total_expense?: number | null
+    net?: number | null
+    User?: UserCreateNestedOneWithoutSalaryInput
+    bookbank_log?: bookbank_logCreateNestedOneWithoutSalaryInput
+    mas_month?: mas_monthCreateNestedOneWithoutSalaryInput
+    mas_years?: mas_yearsCreateNestedOneWithoutSalaryInput
+    mas_income_type?: mas_income_typeCreateNestedOneWithoutSalaryInput
+    mas_bank?: mas_bankCreateNestedOneWithoutSalaryInput
+  }
+
+  export type salaryUncheckedCreateWithoutMas_salary_statusInput = {
+    id: string
+    mas_monthId?: string | null
+    mas_yearsId?: string | null
+    date?: Date | string | null
+    commission?: number | null
+    position_income?: number | null
+    ot?: number | null
+    bonus?: number | null
+    special_income?: number | null
+    other_income?: number | null
+    travel_income?: number | null
+    bursary?: number | null
+    welfare_money?: number | null
+    vatper?: number | null
+    ss_per?: number | null
+    vat?: number | null
+    social_security?: number | null
+    miss?: number | null
+    ra?: number | null
+    late?: number | null
+    other?: number | null
+    provident_employee?: number | null
+    provident_company?: number | null
+    total_income?: number | null
+    total_expense?: number | null
+    net?: number | null
+    userId?: string | null
+    mas_income_typeId?: string | null
+    bookbank_logId?: string | null
+    mas_bankId?: string | null
+  }
+
+  export type salaryCreateOrConnectWithoutMas_salary_statusInput = {
+    where: salaryWhereUniqueInput
+    create: XOR<salaryCreateWithoutMas_salary_statusInput, salaryUncheckedCreateWithoutMas_salary_statusInput>
+  }
+
+  export type salaryCreateManyMas_salary_statusInputEnvelope = {
+    data: Enumerable<salaryCreateManyMas_salary_statusInput>
+    skipDuplicates?: boolean
+  }
+
+  export type salaryUpsertWithWhereUniqueWithoutMas_salary_statusInput = {
+    where: salaryWhereUniqueInput
+    update: XOR<salaryUpdateWithoutMas_salary_statusInput, salaryUncheckedUpdateWithoutMas_salary_statusInput>
+    create: XOR<salaryCreateWithoutMas_salary_statusInput, salaryUncheckedCreateWithoutMas_salary_statusInput>
+  }
+
+  export type salaryUpdateWithWhereUniqueWithoutMas_salary_statusInput = {
+    where: salaryWhereUniqueInput
+    data: XOR<salaryUpdateWithoutMas_salary_statusInput, salaryUncheckedUpdateWithoutMas_salary_statusInput>
+  }
+
+  export type salaryUpdateManyWithWhereWithoutMas_salary_statusInput = {
     where: salaryScalarWhereInput
     data: XOR<salaryUpdateManyMutationInput, salaryUncheckedUpdateManyWithoutSalaryInput>
   }
@@ -41041,6 +41681,8 @@ export namespace Prisma {
     bookbank_log?: bookbank_logCreateNestedOneWithoutSalaryInput
     mas_month?: mas_monthCreateNestedOneWithoutSalaryInput
     mas_years?: mas_yearsCreateNestedOneWithoutSalaryInput
+    mas_salary_status?: mas_salary_statusCreateNestedOneWithoutSalaryInput
+    mas_bank?: mas_bankCreateNestedOneWithoutSalaryInput
   }
 
   export type salaryUncheckedCreateWithoutMas_income_typeInput = {
@@ -41072,6 +41714,8 @@ export namespace Prisma {
     net?: number | null
     userId?: string | null
     bookbank_logId?: string | null
+    mas_salary_statusId?: string | null
+    mas_bankId?: string | null
   }
 
   export type salaryCreateOrConnectWithoutMas_income_typeInput = {
@@ -41123,12 +41767,14 @@ export namespace Prisma {
     id: string
     name: string
     bookbank_log?: bookbank_logCreateNestedManyWithoutMas_bankInput
+    salary?: salaryCreateNestedManyWithoutMas_bankInput
   }
 
   export type mas_bankUncheckedCreateWithoutExpense_companyInput = {
     id: string
     name: string
     bookbank_log?: bookbank_logUncheckedCreateNestedManyWithoutMas_bankInput
+    salary?: salaryUncheckedCreateNestedManyWithoutMas_bankInput
   }
 
   export type mas_bankCreateOrConnectWithoutExpense_companyInput = {
@@ -41231,12 +41877,14 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     bookbank_log?: bookbank_logUpdateManyWithoutMas_bankNestedInput
+    salary?: salaryUpdateManyWithoutMas_bankNestedInput
   }
 
   export type mas_bankUncheckedUpdateWithoutExpense_companyInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     bookbank_log?: bookbank_logUncheckedUpdateManyWithoutMas_bankNestedInput
+    salary?: salaryUncheckedUpdateManyWithoutMas_bankNestedInput
   }
 
   export type CompanyBranchUpsertWithoutExpense_companyInput = {
@@ -41359,6 +42007,8 @@ export namespace Prisma {
     bank_number: string
     all_collectId?: string | null
     base_salary: number
+    provident_com?: number
+    provident_emp?: number
     mas_bank?: mas_bankCreateNestedOneWithoutBookbank_logInput
     User?: UserCreateNestedOneWithoutBookbank_logInput
     provident_log?: provident_logCreateNestedManyWithoutBookbank_logInput
@@ -41371,6 +42021,8 @@ export namespace Prisma {
     bank_number: string
     all_collectId?: string | null
     base_salary: number
+    provident_com?: number
+    provident_emp?: number
     userId?: string | null
     provident_log?: provident_logUncheckedCreateNestedManyWithoutBookbank_logInput
   }
@@ -41427,6 +42079,42 @@ export namespace Prisma {
   export type mas_income_typeCreateOrConnectWithoutSalaryInput = {
     where: mas_income_typeWhereUniqueInput
     create: XOR<mas_income_typeCreateWithoutSalaryInput, mas_income_typeUncheckedCreateWithoutSalaryInput>
+  }
+
+  export type mas_salary_statusCreateWithoutSalaryInput = {
+    id: string
+    no: number
+    name: string
+  }
+
+  export type mas_salary_statusUncheckedCreateWithoutSalaryInput = {
+    id: string
+    no: number
+    name: string
+  }
+
+  export type mas_salary_statusCreateOrConnectWithoutSalaryInput = {
+    where: mas_salary_statusWhereUniqueInput
+    create: XOR<mas_salary_statusCreateWithoutSalaryInput, mas_salary_statusUncheckedCreateWithoutSalaryInput>
+  }
+
+  export type mas_bankCreateWithoutSalaryInput = {
+    id: string
+    name: string
+    expense_company?: expense_companyCreateNestedManyWithoutMas_bankInput
+    bookbank_log?: bookbank_logCreateNestedManyWithoutMas_bankInput
+  }
+
+  export type mas_bankUncheckedCreateWithoutSalaryInput = {
+    id: string
+    name: string
+    expense_company?: expense_companyUncheckedCreateNestedManyWithoutMas_bankInput
+    bookbank_log?: bookbank_logUncheckedCreateNestedManyWithoutMas_bankInput
+  }
+
+  export type mas_bankCreateOrConnectWithoutSalaryInput = {
+    where: mas_bankWhereUniqueInput
+    create: XOR<mas_bankCreateWithoutSalaryInput, mas_bankUncheckedCreateWithoutSalaryInput>
   }
 
   export type UserUpsertWithoutSalaryInput = {
@@ -41487,6 +42175,8 @@ export namespace Prisma {
     bank_number?: StringFieldUpdateOperationsInput | string
     all_collectId?: NullableStringFieldUpdateOperationsInput | string | null
     base_salary?: FloatFieldUpdateOperationsInput | number
+    provident_com?: FloatFieldUpdateOperationsInput | number
+    provident_emp?: FloatFieldUpdateOperationsInput | number
     mas_bank?: mas_bankUpdateOneWithoutBookbank_logNestedInput
     User?: UserUpdateOneWithoutBookbank_logNestedInput
     provident_log?: provident_logUpdateManyWithoutBookbank_logNestedInput
@@ -41499,6 +42189,8 @@ export namespace Prisma {
     bank_number?: StringFieldUpdateOperationsInput | string
     all_collectId?: NullableStringFieldUpdateOperationsInput | string | null
     base_salary?: FloatFieldUpdateOperationsInput | number
+    provident_com?: FloatFieldUpdateOperationsInput | number
+    provident_emp?: FloatFieldUpdateOperationsInput | number
     userId?: NullableStringFieldUpdateOperationsInput | string | null
     provident_log?: provident_logUncheckedUpdateManyWithoutBookbank_logNestedInput
   }
@@ -41550,6 +42242,42 @@ export namespace Prisma {
   export type mas_income_typeUncheckedUpdateWithoutSalaryInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type mas_salary_statusUpsertWithoutSalaryInput = {
+    update: XOR<mas_salary_statusUpdateWithoutSalaryInput, mas_salary_statusUncheckedUpdateWithoutSalaryInput>
+    create: XOR<mas_salary_statusCreateWithoutSalaryInput, mas_salary_statusUncheckedCreateWithoutSalaryInput>
+  }
+
+  export type mas_salary_statusUpdateWithoutSalaryInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    no?: IntFieldUpdateOperationsInput | number
+    name?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type mas_salary_statusUncheckedUpdateWithoutSalaryInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    no?: IntFieldUpdateOperationsInput | number
+    name?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type mas_bankUpsertWithoutSalaryInput = {
+    update: XOR<mas_bankUpdateWithoutSalaryInput, mas_bankUncheckedUpdateWithoutSalaryInput>
+    create: XOR<mas_bankCreateWithoutSalaryInput, mas_bankUncheckedCreateWithoutSalaryInput>
+  }
+
+  export type mas_bankUpdateWithoutSalaryInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    expense_company?: expense_companyUpdateManyWithoutMas_bankNestedInput
+    bookbank_log?: bookbank_logUpdateManyWithoutMas_bankNestedInput
+  }
+
+  export type mas_bankUncheckedUpdateWithoutSalaryInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    expense_company?: expense_companyUncheckedUpdateManyWithoutMas_bankNestedInput
+    bookbank_log?: bookbank_logUncheckedUpdateManyWithoutMas_bankNestedInput
   }
 
   export type UserCreateWithoutMas_all_collectInput = {
@@ -41719,6 +42447,8 @@ export namespace Prisma {
     mas_month?: mas_monthCreateNestedOneWithoutSalaryInput
     mas_years?: mas_yearsCreateNestedOneWithoutSalaryInput
     mas_income_type?: mas_income_typeCreateNestedOneWithoutSalaryInput
+    mas_salary_status?: mas_salary_statusCreateNestedOneWithoutSalaryInput
+    mas_bank?: mas_bankCreateNestedOneWithoutSalaryInput
   }
 
   export type salaryUncheckedCreateWithoutBookbank_logInput = {
@@ -41750,6 +42480,8 @@ export namespace Prisma {
     net?: number | null
     userId?: string | null
     mas_income_typeId?: string | null
+    mas_salary_statusId?: string | null
+    mas_bankId?: string | null
   }
 
   export type salaryCreateOrConnectWithoutBookbank_logInput = {
@@ -41766,12 +42498,14 @@ export namespace Prisma {
     id: string
     name: string
     expense_company?: expense_companyCreateNestedManyWithoutMas_bankInput
+    salary?: salaryCreateNestedManyWithoutMas_bankInput
   }
 
   export type mas_bankUncheckedCreateWithoutBookbank_logInput = {
     id: string
     name: string
     expense_company?: expense_companyUncheckedCreateNestedManyWithoutMas_bankInput
+    salary?: salaryUncheckedCreateNestedManyWithoutMas_bankInput
   }
 
   export type mas_bankCreateOrConnectWithoutBookbank_logInput = {
@@ -41879,12 +42613,14 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     expense_company?: expense_companyUpdateManyWithoutMas_bankNestedInput
+    salary?: salaryUpdateManyWithoutMas_bankNestedInput
   }
 
   export type mas_bankUncheckedUpdateWithoutBookbank_logInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     expense_company?: expense_companyUncheckedUpdateManyWithoutMas_bankNestedInput
+    salary?: salaryUncheckedUpdateManyWithoutMas_bankNestedInput
   }
 
   export type UserUpsertWithoutBookbank_logInput = {
@@ -42028,6 +42764,8 @@ export namespace Prisma {
     bank_number: string
     all_collectId?: string | null
     base_salary: number
+    provident_com?: number
+    provident_emp?: number
     salary?: salaryCreateNestedManyWithoutBookbank_logInput
     mas_bank?: mas_bankCreateNestedOneWithoutBookbank_logInput
     User?: UserCreateNestedOneWithoutBookbank_logInput
@@ -42040,6 +42778,8 @@ export namespace Prisma {
     bank_number: string
     all_collectId?: string | null
     base_salary: number
+    provident_com?: number
+    provident_emp?: number
     salary?: salaryUncheckedCreateNestedManyWithoutBookbank_logInput
     userId?: string | null
   }
@@ -42104,21 +42844,21 @@ export namespace Prisma {
   export type mas_all_collectUpdateWithoutProvident_logInput = {
     id?: StringFieldUpdateOperationsInput | string
     User?: UserUpdateOneWithoutMas_all_collectNestedInput
-    income_collect?: IntFieldUpdateOperationsInput | number
-    vat_collect?: IntFieldUpdateOperationsInput | number
-    social_secu_collect?: IntFieldUpdateOperationsInput | number
-    provident_collect_employee?: IntFieldUpdateOperationsInput | number
-    provident_collect_company?: IntFieldUpdateOperationsInput | number
+    income_collect?: FloatFieldUpdateOperationsInput | number
+    vat_collect?: FloatFieldUpdateOperationsInput | number
+    social_secu_collect?: FloatFieldUpdateOperationsInput | number
+    provident_collect_employee?: FloatFieldUpdateOperationsInput | number
+    provident_collect_company?: FloatFieldUpdateOperationsInput | number
   }
 
   export type mas_all_collectUncheckedUpdateWithoutProvident_logInput = {
     id?: StringFieldUpdateOperationsInput | string
     userId?: NullableStringFieldUpdateOperationsInput | string | null
-    income_collect?: IntFieldUpdateOperationsInput | number
-    vat_collect?: IntFieldUpdateOperationsInput | number
-    social_secu_collect?: IntFieldUpdateOperationsInput | number
-    provident_collect_employee?: IntFieldUpdateOperationsInput | number
-    provident_collect_company?: IntFieldUpdateOperationsInput | number
+    income_collect?: FloatFieldUpdateOperationsInput | number
+    vat_collect?: FloatFieldUpdateOperationsInput | number
+    social_secu_collect?: FloatFieldUpdateOperationsInput | number
+    provident_collect_employee?: FloatFieldUpdateOperationsInput | number
+    provident_collect_company?: FloatFieldUpdateOperationsInput | number
   }
 
   export type bookbank_logUpsertWithoutProvident_logInput = {
@@ -42132,6 +42872,8 @@ export namespace Prisma {
     bank_number?: StringFieldUpdateOperationsInput | string
     all_collectId?: NullableStringFieldUpdateOperationsInput | string | null
     base_salary?: FloatFieldUpdateOperationsInput | number
+    provident_com?: FloatFieldUpdateOperationsInput | number
+    provident_emp?: FloatFieldUpdateOperationsInput | number
     salary?: salaryUpdateManyWithoutBookbank_logNestedInput
     mas_bank?: mas_bankUpdateOneWithoutBookbank_logNestedInput
     User?: UserUpdateOneWithoutBookbank_logNestedInput
@@ -42144,6 +42886,8 @@ export namespace Prisma {
     bank_number?: StringFieldUpdateOperationsInput | string
     all_collectId?: NullableStringFieldUpdateOperationsInput | string | null
     base_salary?: FloatFieldUpdateOperationsInput | number
+    provident_com?: FloatFieldUpdateOperationsInput | number
+    provident_emp?: FloatFieldUpdateOperationsInput | number
     salary?: salaryUncheckedUpdateManyWithoutBookbank_logNestedInput
     userId?: NullableStringFieldUpdateOperationsInput | string | null
   }
@@ -42468,6 +43212,7 @@ export namespace Prisma {
     id: string
     monthId: string
     bankId: string
+    date: Date | string
     vat_per?: number | null
     social_security?: number | null
   }
@@ -42552,6 +43297,7 @@ export namespace Prisma {
 
   export type expense_companyUpdateWithoutCompanyBranchInput = {
     id?: StringFieldUpdateOperationsInput | string
+    date?: DateTimeFieldUpdateOperationsInput | Date | string
     vat_per?: NullableFloatFieldUpdateOperationsInput | number | null
     social_security?: NullableFloatFieldUpdateOperationsInput | number | null
     Mas_month?: mas_monthUpdateOneWithoutExpense_companyNestedInput
@@ -42562,6 +43308,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     monthId?: StringFieldUpdateOperationsInput | string
     bankId?: StringFieldUpdateOperationsInput | string
+    date?: DateTimeFieldUpdateOperationsInput | Date | string
     vat_per?: NullableFloatFieldUpdateOperationsInput | number | null
     social_security?: NullableFloatFieldUpdateOperationsInput | number | null
   }
@@ -42570,6 +43317,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     monthId?: StringFieldUpdateOperationsInput | string
     bankId?: StringFieldUpdateOperationsInput | string
+    date?: DateTimeFieldUpdateOperationsInput | Date | string
     vat_per?: NullableFloatFieldUpdateOperationsInput | number | null
     social_security?: NullableFloatFieldUpdateOperationsInput | number | null
   }
@@ -42634,6 +43382,8 @@ export namespace Prisma {
     net?: number | null
     mas_income_typeId?: string | null
     bookbank_logId?: string | null
+    mas_salary_statusId?: string | null
+    mas_bankId?: string | null
   }
 
   export type provident_logCreateManyUserInput = {
@@ -42652,6 +43402,8 @@ export namespace Prisma {
     bank_number: string
     all_collectId?: string | null
     base_salary: number
+    provident_com?: number
+    provident_emp?: number
   }
 
   export type CompanyUpdateWithoutOwnerInput = {
@@ -42734,31 +43486,31 @@ export namespace Prisma {
 
   export type mas_all_collectUpdateWithoutUserInput = {
     id?: StringFieldUpdateOperationsInput | string
-    income_collect?: IntFieldUpdateOperationsInput | number
-    vat_collect?: IntFieldUpdateOperationsInput | number
-    social_secu_collect?: IntFieldUpdateOperationsInput | number
-    provident_collect_employee?: IntFieldUpdateOperationsInput | number
-    provident_collect_company?: IntFieldUpdateOperationsInput | number
+    income_collect?: FloatFieldUpdateOperationsInput | number
+    vat_collect?: FloatFieldUpdateOperationsInput | number
+    social_secu_collect?: FloatFieldUpdateOperationsInput | number
+    provident_collect_employee?: FloatFieldUpdateOperationsInput | number
+    provident_collect_company?: FloatFieldUpdateOperationsInput | number
     provident_log?: provident_logUpdateManyWithoutMas_all_collectNestedInput
   }
 
   export type mas_all_collectUncheckedUpdateWithoutUserInput = {
     id?: StringFieldUpdateOperationsInput | string
-    income_collect?: IntFieldUpdateOperationsInput | number
-    vat_collect?: IntFieldUpdateOperationsInput | number
-    social_secu_collect?: IntFieldUpdateOperationsInput | number
-    provident_collect_employee?: IntFieldUpdateOperationsInput | number
-    provident_collect_company?: IntFieldUpdateOperationsInput | number
+    income_collect?: FloatFieldUpdateOperationsInput | number
+    vat_collect?: FloatFieldUpdateOperationsInput | number
+    social_secu_collect?: FloatFieldUpdateOperationsInput | number
+    provident_collect_employee?: FloatFieldUpdateOperationsInput | number
+    provident_collect_company?: FloatFieldUpdateOperationsInput | number
     provident_log?: provident_logUncheckedUpdateManyWithoutMas_all_collectNestedInput
   }
 
   export type mas_all_collectUncheckedUpdateManyWithoutMas_all_collectInput = {
     id?: StringFieldUpdateOperationsInput | string
-    income_collect?: IntFieldUpdateOperationsInput | number
-    vat_collect?: IntFieldUpdateOperationsInput | number
-    social_secu_collect?: IntFieldUpdateOperationsInput | number
-    provident_collect_employee?: IntFieldUpdateOperationsInput | number
-    provident_collect_company?: IntFieldUpdateOperationsInput | number
+    income_collect?: FloatFieldUpdateOperationsInput | number
+    vat_collect?: FloatFieldUpdateOperationsInput | number
+    social_secu_collect?: FloatFieldUpdateOperationsInput | number
+    provident_collect_employee?: FloatFieldUpdateOperationsInput | number
+    provident_collect_company?: FloatFieldUpdateOperationsInput | number
   }
 
   export type salaryUpdateWithoutUserInput = {
@@ -42790,6 +43542,8 @@ export namespace Prisma {
     mas_month?: mas_monthUpdateOneWithoutSalaryNestedInput
     mas_years?: mas_yearsUpdateOneWithoutSalaryNestedInput
     mas_income_type?: mas_income_typeUpdateOneWithoutSalaryNestedInput
+    mas_salary_status?: mas_salary_statusUpdateOneWithoutSalaryNestedInput
+    mas_bank?: mas_bankUpdateOneWithoutSalaryNestedInput
   }
 
   export type salaryUncheckedUpdateWithoutUserInput = {
@@ -42821,6 +43575,8 @@ export namespace Prisma {
     net?: NullableFloatFieldUpdateOperationsInput | number | null
     mas_income_typeId?: NullableStringFieldUpdateOperationsInput | string | null
     bookbank_logId?: NullableStringFieldUpdateOperationsInput | string | null
+    mas_salary_statusId?: NullableStringFieldUpdateOperationsInput | string | null
+    mas_bankId?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type salaryUncheckedUpdateManyWithoutSalaryInput = {
@@ -42852,6 +43608,8 @@ export namespace Prisma {
     net?: NullableFloatFieldUpdateOperationsInput | number | null
     mas_income_typeId?: NullableStringFieldUpdateOperationsInput | string | null
     bookbank_logId?: NullableStringFieldUpdateOperationsInput | string | null
+    mas_salary_statusId?: NullableStringFieldUpdateOperationsInput | string | null
+    mas_bankId?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type provident_logUpdateWithoutUserInput = {
@@ -42887,6 +43645,8 @@ export namespace Prisma {
     bank_number?: StringFieldUpdateOperationsInput | string
     all_collectId?: NullableStringFieldUpdateOperationsInput | string | null
     base_salary?: FloatFieldUpdateOperationsInput | number
+    provident_com?: FloatFieldUpdateOperationsInput | number
+    provident_emp?: FloatFieldUpdateOperationsInput | number
     salary?: salaryUpdateManyWithoutBookbank_logNestedInput
     mas_bank?: mas_bankUpdateOneWithoutBookbank_logNestedInput
     provident_log?: provident_logUpdateManyWithoutBookbank_logNestedInput
@@ -42899,6 +43659,8 @@ export namespace Prisma {
     bank_number?: StringFieldUpdateOperationsInput | string
     all_collectId?: NullableStringFieldUpdateOperationsInput | string | null
     base_salary?: FloatFieldUpdateOperationsInput | number
+    provident_com?: FloatFieldUpdateOperationsInput | number
+    provident_emp?: FloatFieldUpdateOperationsInput | number
     salary?: salaryUncheckedUpdateManyWithoutBookbank_logNestedInput
     provident_log?: provident_logUncheckedUpdateManyWithoutBookbank_logNestedInput
   }
@@ -42910,6 +43672,8 @@ export namespace Prisma {
     bank_number?: StringFieldUpdateOperationsInput | string
     all_collectId?: NullableStringFieldUpdateOperationsInput | string | null
     base_salary?: FloatFieldUpdateOperationsInput | number
+    provident_com?: FloatFieldUpdateOperationsInput | number
+    provident_emp?: FloatFieldUpdateOperationsInput | number
   }
 
   export type UserCreateManyRoleInput = {
@@ -43261,6 +44025,7 @@ export namespace Prisma {
   export type expense_companyCreateManyMas_bankInput = {
     id: string
     monthId: string
+    date: Date | string
     vat_per?: number | null
     social_security?: number | null
     companyBranchId?: string | null
@@ -43272,11 +44037,47 @@ export namespace Prisma {
     bank_number: string
     all_collectId?: string | null
     base_salary: number
+    provident_com?: number
+    provident_emp?: number
     userId?: string | null
+  }
+
+  export type salaryCreateManyMas_bankInput = {
+    id: string
+    mas_monthId?: string | null
+    mas_yearsId?: string | null
+    date?: Date | string | null
+    commission?: number | null
+    position_income?: number | null
+    ot?: number | null
+    bonus?: number | null
+    special_income?: number | null
+    other_income?: number | null
+    travel_income?: number | null
+    bursary?: number | null
+    welfare_money?: number | null
+    vatper?: number | null
+    ss_per?: number | null
+    vat?: number | null
+    social_security?: number | null
+    miss?: number | null
+    ra?: number | null
+    late?: number | null
+    other?: number | null
+    provident_employee?: number | null
+    provident_company?: number | null
+    total_income?: number | null
+    total_expense?: number | null
+    net?: number | null
+    userId?: string | null
+    mas_income_typeId?: string | null
+    bookbank_logId?: string | null
+    mas_salary_statusId?: string | null
   }
 
   export type expense_companyUpdateWithoutMas_bankInput = {
     id?: StringFieldUpdateOperationsInput | string
+    date?: DateTimeFieldUpdateOperationsInput | Date | string
     vat_per?: NullableFloatFieldUpdateOperationsInput | number | null
     social_security?: NullableFloatFieldUpdateOperationsInput | number | null
     Mas_month?: mas_monthUpdateOneWithoutExpense_companyNestedInput
@@ -43286,6 +44087,7 @@ export namespace Prisma {
   export type expense_companyUncheckedUpdateWithoutMas_bankInput = {
     id?: StringFieldUpdateOperationsInput | string
     monthId?: StringFieldUpdateOperationsInput | string
+    date?: DateTimeFieldUpdateOperationsInput | Date | string
     vat_per?: NullableFloatFieldUpdateOperationsInput | number | null
     social_security?: NullableFloatFieldUpdateOperationsInput | number | null
     companyBranchId?: NullableStringFieldUpdateOperationsInput | string | null
@@ -43297,6 +44099,8 @@ export namespace Prisma {
     bank_number?: StringFieldUpdateOperationsInput | string
     all_collectId?: NullableStringFieldUpdateOperationsInput | string | null
     base_salary?: FloatFieldUpdateOperationsInput | number
+    provident_com?: FloatFieldUpdateOperationsInput | number
+    provident_emp?: FloatFieldUpdateOperationsInput | number
     salary?: salaryUpdateManyWithoutBookbank_logNestedInput
     User?: UserUpdateOneWithoutBookbank_logNestedInput
     provident_log?: provident_logUpdateManyWithoutBookbank_logNestedInput
@@ -43308,14 +44112,83 @@ export namespace Prisma {
     bank_number?: StringFieldUpdateOperationsInput | string
     all_collectId?: NullableStringFieldUpdateOperationsInput | string | null
     base_salary?: FloatFieldUpdateOperationsInput | number
+    provident_com?: FloatFieldUpdateOperationsInput | number
+    provident_emp?: FloatFieldUpdateOperationsInput | number
     salary?: salaryUncheckedUpdateManyWithoutBookbank_logNestedInput
     userId?: NullableStringFieldUpdateOperationsInput | string | null
     provident_log?: provident_logUncheckedUpdateManyWithoutBookbank_logNestedInput
   }
 
+  export type salaryUpdateWithoutMas_bankInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    date?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    commission?: NullableFloatFieldUpdateOperationsInput | number | null
+    position_income?: NullableFloatFieldUpdateOperationsInput | number | null
+    ot?: NullableFloatFieldUpdateOperationsInput | number | null
+    bonus?: NullableFloatFieldUpdateOperationsInput | number | null
+    special_income?: NullableFloatFieldUpdateOperationsInput | number | null
+    other_income?: NullableFloatFieldUpdateOperationsInput | number | null
+    travel_income?: NullableFloatFieldUpdateOperationsInput | number | null
+    bursary?: NullableFloatFieldUpdateOperationsInput | number | null
+    welfare_money?: NullableFloatFieldUpdateOperationsInput | number | null
+    vatper?: NullableFloatFieldUpdateOperationsInput | number | null
+    ss_per?: NullableFloatFieldUpdateOperationsInput | number | null
+    vat?: NullableFloatFieldUpdateOperationsInput | number | null
+    social_security?: NullableFloatFieldUpdateOperationsInput | number | null
+    miss?: NullableFloatFieldUpdateOperationsInput | number | null
+    ra?: NullableFloatFieldUpdateOperationsInput | number | null
+    late?: NullableFloatFieldUpdateOperationsInput | number | null
+    other?: NullableFloatFieldUpdateOperationsInput | number | null
+    provident_employee?: NullableFloatFieldUpdateOperationsInput | number | null
+    provident_company?: NullableFloatFieldUpdateOperationsInput | number | null
+    total_income?: NullableFloatFieldUpdateOperationsInput | number | null
+    total_expense?: NullableFloatFieldUpdateOperationsInput | number | null
+    net?: NullableFloatFieldUpdateOperationsInput | number | null
+    User?: UserUpdateOneWithoutSalaryNestedInput
+    bookbank_log?: bookbank_logUpdateOneWithoutSalaryNestedInput
+    mas_month?: mas_monthUpdateOneWithoutSalaryNestedInput
+    mas_years?: mas_yearsUpdateOneWithoutSalaryNestedInput
+    mas_income_type?: mas_income_typeUpdateOneWithoutSalaryNestedInput
+    mas_salary_status?: mas_salary_statusUpdateOneWithoutSalaryNestedInput
+  }
+
+  export type salaryUncheckedUpdateWithoutMas_bankInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    mas_monthId?: NullableStringFieldUpdateOperationsInput | string | null
+    mas_yearsId?: NullableStringFieldUpdateOperationsInput | string | null
+    date?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    commission?: NullableFloatFieldUpdateOperationsInput | number | null
+    position_income?: NullableFloatFieldUpdateOperationsInput | number | null
+    ot?: NullableFloatFieldUpdateOperationsInput | number | null
+    bonus?: NullableFloatFieldUpdateOperationsInput | number | null
+    special_income?: NullableFloatFieldUpdateOperationsInput | number | null
+    other_income?: NullableFloatFieldUpdateOperationsInput | number | null
+    travel_income?: NullableFloatFieldUpdateOperationsInput | number | null
+    bursary?: NullableFloatFieldUpdateOperationsInput | number | null
+    welfare_money?: NullableFloatFieldUpdateOperationsInput | number | null
+    vatper?: NullableFloatFieldUpdateOperationsInput | number | null
+    ss_per?: NullableFloatFieldUpdateOperationsInput | number | null
+    vat?: NullableFloatFieldUpdateOperationsInput | number | null
+    social_security?: NullableFloatFieldUpdateOperationsInput | number | null
+    miss?: NullableFloatFieldUpdateOperationsInput | number | null
+    ra?: NullableFloatFieldUpdateOperationsInput | number | null
+    late?: NullableFloatFieldUpdateOperationsInput | number | null
+    other?: NullableFloatFieldUpdateOperationsInput | number | null
+    provident_employee?: NullableFloatFieldUpdateOperationsInput | number | null
+    provident_company?: NullableFloatFieldUpdateOperationsInput | number | null
+    total_income?: NullableFloatFieldUpdateOperationsInput | number | null
+    total_expense?: NullableFloatFieldUpdateOperationsInput | number | null
+    net?: NullableFloatFieldUpdateOperationsInput | number | null
+    userId?: NullableStringFieldUpdateOperationsInput | string | null
+    mas_income_typeId?: NullableStringFieldUpdateOperationsInput | string | null
+    bookbank_logId?: NullableStringFieldUpdateOperationsInput | string | null
+    mas_salary_statusId?: NullableStringFieldUpdateOperationsInput | string | null
+  }
+
   export type expense_companyCreateManyMas_monthInput = {
     id: string
     bankId: string
+    date: Date | string
     vat_per?: number | null
     social_security?: number | null
     companyBranchId?: string | null
@@ -43350,10 +44223,13 @@ export namespace Prisma {
     userId?: string | null
     mas_income_typeId?: string | null
     bookbank_logId?: string | null
+    mas_salary_statusId?: string | null
+    mas_bankId?: string | null
   }
 
   export type expense_companyUpdateWithoutMas_monthInput = {
     id?: StringFieldUpdateOperationsInput | string
+    date?: DateTimeFieldUpdateOperationsInput | Date | string
     vat_per?: NullableFloatFieldUpdateOperationsInput | number | null
     social_security?: NullableFloatFieldUpdateOperationsInput | number | null
     mas_bank?: mas_bankUpdateOneWithoutExpense_companyNestedInput
@@ -43363,6 +44239,7 @@ export namespace Prisma {
   export type expense_companyUncheckedUpdateWithoutMas_monthInput = {
     id?: StringFieldUpdateOperationsInput | string
     bankId?: StringFieldUpdateOperationsInput | string
+    date?: DateTimeFieldUpdateOperationsInput | Date | string
     vat_per?: NullableFloatFieldUpdateOperationsInput | number | null
     social_security?: NullableFloatFieldUpdateOperationsInput | number | null
     companyBranchId?: NullableStringFieldUpdateOperationsInput | string | null
@@ -43397,6 +44274,8 @@ export namespace Prisma {
     bookbank_log?: bookbank_logUpdateOneWithoutSalaryNestedInput
     mas_years?: mas_yearsUpdateOneWithoutSalaryNestedInput
     mas_income_type?: mas_income_typeUpdateOneWithoutSalaryNestedInput
+    mas_salary_status?: mas_salary_statusUpdateOneWithoutSalaryNestedInput
+    mas_bank?: mas_bankUpdateOneWithoutSalaryNestedInput
   }
 
   export type salaryUncheckedUpdateWithoutMas_monthInput = {
@@ -43428,6 +44307,8 @@ export namespace Prisma {
     userId?: NullableStringFieldUpdateOperationsInput | string | null
     mas_income_typeId?: NullableStringFieldUpdateOperationsInput | string | null
     bookbank_logId?: NullableStringFieldUpdateOperationsInput | string | null
+    mas_salary_statusId?: NullableStringFieldUpdateOperationsInput | string | null
+    mas_bankId?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type salaryCreateManyMas_yearsInput = {
@@ -43459,6 +44340,8 @@ export namespace Prisma {
     userId?: string | null
     mas_income_typeId?: string | null
     bookbank_logId?: string | null
+    mas_salary_statusId?: string | null
+    mas_bankId?: string | null
   }
 
   export type salaryUpdateWithoutMas_yearsInput = {
@@ -43490,6 +44373,8 @@ export namespace Prisma {
     bookbank_log?: bookbank_logUpdateOneWithoutSalaryNestedInput
     mas_month?: mas_monthUpdateOneWithoutSalaryNestedInput
     mas_income_type?: mas_income_typeUpdateOneWithoutSalaryNestedInput
+    mas_salary_status?: mas_salary_statusUpdateOneWithoutSalaryNestedInput
+    mas_bank?: mas_bankUpdateOneWithoutSalaryNestedInput
   }
 
   export type salaryUncheckedUpdateWithoutMas_yearsInput = {
@@ -43521,6 +44406,107 @@ export namespace Prisma {
     userId?: NullableStringFieldUpdateOperationsInput | string | null
     mas_income_typeId?: NullableStringFieldUpdateOperationsInput | string | null
     bookbank_logId?: NullableStringFieldUpdateOperationsInput | string | null
+    mas_salary_statusId?: NullableStringFieldUpdateOperationsInput | string | null
+    mas_bankId?: NullableStringFieldUpdateOperationsInput | string | null
+  }
+
+  export type salaryCreateManyMas_salary_statusInput = {
+    id: string
+    mas_monthId?: string | null
+    mas_yearsId?: string | null
+    date?: Date | string | null
+    commission?: number | null
+    position_income?: number | null
+    ot?: number | null
+    bonus?: number | null
+    special_income?: number | null
+    other_income?: number | null
+    travel_income?: number | null
+    bursary?: number | null
+    welfare_money?: number | null
+    vatper?: number | null
+    ss_per?: number | null
+    vat?: number | null
+    social_security?: number | null
+    miss?: number | null
+    ra?: number | null
+    late?: number | null
+    other?: number | null
+    provident_employee?: number | null
+    provident_company?: number | null
+    total_income?: number | null
+    total_expense?: number | null
+    net?: number | null
+    userId?: string | null
+    mas_income_typeId?: string | null
+    bookbank_logId?: string | null
+    mas_bankId?: string | null
+  }
+
+  export type salaryUpdateWithoutMas_salary_statusInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    date?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    commission?: NullableFloatFieldUpdateOperationsInput | number | null
+    position_income?: NullableFloatFieldUpdateOperationsInput | number | null
+    ot?: NullableFloatFieldUpdateOperationsInput | number | null
+    bonus?: NullableFloatFieldUpdateOperationsInput | number | null
+    special_income?: NullableFloatFieldUpdateOperationsInput | number | null
+    other_income?: NullableFloatFieldUpdateOperationsInput | number | null
+    travel_income?: NullableFloatFieldUpdateOperationsInput | number | null
+    bursary?: NullableFloatFieldUpdateOperationsInput | number | null
+    welfare_money?: NullableFloatFieldUpdateOperationsInput | number | null
+    vatper?: NullableFloatFieldUpdateOperationsInput | number | null
+    ss_per?: NullableFloatFieldUpdateOperationsInput | number | null
+    vat?: NullableFloatFieldUpdateOperationsInput | number | null
+    social_security?: NullableFloatFieldUpdateOperationsInput | number | null
+    miss?: NullableFloatFieldUpdateOperationsInput | number | null
+    ra?: NullableFloatFieldUpdateOperationsInput | number | null
+    late?: NullableFloatFieldUpdateOperationsInput | number | null
+    other?: NullableFloatFieldUpdateOperationsInput | number | null
+    provident_employee?: NullableFloatFieldUpdateOperationsInput | number | null
+    provident_company?: NullableFloatFieldUpdateOperationsInput | number | null
+    total_income?: NullableFloatFieldUpdateOperationsInput | number | null
+    total_expense?: NullableFloatFieldUpdateOperationsInput | number | null
+    net?: NullableFloatFieldUpdateOperationsInput | number | null
+    User?: UserUpdateOneWithoutSalaryNestedInput
+    bookbank_log?: bookbank_logUpdateOneWithoutSalaryNestedInput
+    mas_month?: mas_monthUpdateOneWithoutSalaryNestedInput
+    mas_years?: mas_yearsUpdateOneWithoutSalaryNestedInput
+    mas_income_type?: mas_income_typeUpdateOneWithoutSalaryNestedInput
+    mas_bank?: mas_bankUpdateOneWithoutSalaryNestedInput
+  }
+
+  export type salaryUncheckedUpdateWithoutMas_salary_statusInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    mas_monthId?: NullableStringFieldUpdateOperationsInput | string | null
+    mas_yearsId?: NullableStringFieldUpdateOperationsInput | string | null
+    date?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    commission?: NullableFloatFieldUpdateOperationsInput | number | null
+    position_income?: NullableFloatFieldUpdateOperationsInput | number | null
+    ot?: NullableFloatFieldUpdateOperationsInput | number | null
+    bonus?: NullableFloatFieldUpdateOperationsInput | number | null
+    special_income?: NullableFloatFieldUpdateOperationsInput | number | null
+    other_income?: NullableFloatFieldUpdateOperationsInput | number | null
+    travel_income?: NullableFloatFieldUpdateOperationsInput | number | null
+    bursary?: NullableFloatFieldUpdateOperationsInput | number | null
+    welfare_money?: NullableFloatFieldUpdateOperationsInput | number | null
+    vatper?: NullableFloatFieldUpdateOperationsInput | number | null
+    ss_per?: NullableFloatFieldUpdateOperationsInput | number | null
+    vat?: NullableFloatFieldUpdateOperationsInput | number | null
+    social_security?: NullableFloatFieldUpdateOperationsInput | number | null
+    miss?: NullableFloatFieldUpdateOperationsInput | number | null
+    ra?: NullableFloatFieldUpdateOperationsInput | number | null
+    late?: NullableFloatFieldUpdateOperationsInput | number | null
+    other?: NullableFloatFieldUpdateOperationsInput | number | null
+    provident_employee?: NullableFloatFieldUpdateOperationsInput | number | null
+    provident_company?: NullableFloatFieldUpdateOperationsInput | number | null
+    total_income?: NullableFloatFieldUpdateOperationsInput | number | null
+    total_expense?: NullableFloatFieldUpdateOperationsInput | number | null
+    net?: NullableFloatFieldUpdateOperationsInput | number | null
+    userId?: NullableStringFieldUpdateOperationsInput | string | null
+    mas_income_typeId?: NullableStringFieldUpdateOperationsInput | string | null
+    bookbank_logId?: NullableStringFieldUpdateOperationsInput | string | null
+    mas_bankId?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type salaryCreateManyMas_income_typeInput = {
@@ -43552,6 +44538,8 @@ export namespace Prisma {
     net?: number | null
     userId?: string | null
     bookbank_logId?: string | null
+    mas_salary_statusId?: string | null
+    mas_bankId?: string | null
   }
 
   export type salaryUpdateWithoutMas_income_typeInput = {
@@ -43583,6 +44571,8 @@ export namespace Prisma {
     bookbank_log?: bookbank_logUpdateOneWithoutSalaryNestedInput
     mas_month?: mas_monthUpdateOneWithoutSalaryNestedInput
     mas_years?: mas_yearsUpdateOneWithoutSalaryNestedInput
+    mas_salary_status?: mas_salary_statusUpdateOneWithoutSalaryNestedInput
+    mas_bank?: mas_bankUpdateOneWithoutSalaryNestedInput
   }
 
   export type salaryUncheckedUpdateWithoutMas_income_typeInput = {
@@ -43614,6 +44604,8 @@ export namespace Prisma {
     net?: NullableFloatFieldUpdateOperationsInput | number | null
     userId?: NullableStringFieldUpdateOperationsInput | string | null
     bookbank_logId?: NullableStringFieldUpdateOperationsInput | string | null
+    mas_salary_statusId?: NullableStringFieldUpdateOperationsInput | string | null
+    mas_bankId?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type provident_logCreateManyMas_all_collectInput = {
@@ -43672,6 +44664,8 @@ export namespace Prisma {
     net?: number | null
     userId?: string | null
     mas_income_typeId?: string | null
+    mas_salary_statusId?: string | null
+    mas_bankId?: string | null
   }
 
   export type provident_logCreateManyBookbank_logInput = {
@@ -43712,6 +44706,8 @@ export namespace Prisma {
     mas_month?: mas_monthUpdateOneWithoutSalaryNestedInput
     mas_years?: mas_yearsUpdateOneWithoutSalaryNestedInput
     mas_income_type?: mas_income_typeUpdateOneWithoutSalaryNestedInput
+    mas_salary_status?: mas_salary_statusUpdateOneWithoutSalaryNestedInput
+    mas_bank?: mas_bankUpdateOneWithoutSalaryNestedInput
   }
 
   export type salaryUncheckedUpdateWithoutBookbank_logInput = {
@@ -43743,6 +44739,8 @@ export namespace Prisma {
     net?: NullableFloatFieldUpdateOperationsInput | number | null
     userId?: NullableStringFieldUpdateOperationsInput | string | null
     mas_income_typeId?: NullableStringFieldUpdateOperationsInput | string | null
+    mas_salary_statusId?: NullableStringFieldUpdateOperationsInput | string | null
+    mas_bankId?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type provident_logUpdateWithoutBookbank_logInput = {
