@@ -39,8 +39,8 @@ export const salaryTypedef = gql`
     userId: User
   }
   input BankInput {
-    id       :       ID          
-  name        :     String
+    id:       ID          
+  name:     String
 
   }
 
@@ -74,8 +74,8 @@ export const salaryTypedef = gql`
     pro_employee: Float
     pro_company:  Float
     mas_all_collectId: String
-    provident_com : Float
-    provident_emp : Float
+    provident_com: Float
+    provident_emp: Float
   }
 
   type bookbank_log {
@@ -87,9 +87,10 @@ export const salaryTypedef = gql`
     base_salary: Float
     userId: User
     Salary: salary
-    provident_com : Float
-    provident_emp : Float
+    provident_com: Float
+    provident_emp: Float
   }
+
 
   input salaryInput {
     id: ID
@@ -119,7 +120,7 @@ export const salaryTypedef = gql`
     bookbank_logId: String
     mas_income_typeId: String
     date: Date 
-    mas_salary_statusId : String
+    mas_salary_statusId: String
   }
   type salary {
     id: ID!
@@ -151,8 +152,18 @@ export const salaryTypedef = gql`
     bookbank_logId: bookbank_log
     mas_income_typeId: String
     date: Date 
-    mas_salary_statusId : String
+    mas_salary_statusId: String
   }
+type expense_company {
+  id: ID!     
+  monthId:         String        
+  bankId:          String         
+  date:            Date
+  vat_per:         Float
+  social_security: Float
+  companyBranchId: String     
+  Salary:          salary
+}
   type selfsalary{
     id: ID!
     firstname_th: String
@@ -343,17 +354,17 @@ const resolvers: Resolvers = {
           userId: args.data?.userId,
           provident_com: args.data?.provident_com, // กองทุนของพนักงาน ตัวเลขเป็น %
           provident_emp: args.data?.provident_emp,// กองทุนของบริษัท ตัวเลขเป็น %
-          provident_log: {
-            create: {
-              id: providentID,
-              userId: args.data?.userId,
-              provident_date: new Date(args.data?.date),
-              pro_employee: args.data?.pro_employee as number,
-              pro_company: args.data?.pro_company as number,
-              mas_all_collectId: args.data?.mas_all_collectId,
-              // bookbank_logId : bookbankID
-            }
-          }
+          // provident_log: {
+          //   create: {
+          //     id: providentID,
+          //     userId: args.data?.userId,
+          //     provident_date: new Date(args.data?.date),
+          //     pro_employee: args.data?.pro_employee as number,
+          //     pro_company: args.data?.pro_company as number,
+          //     mas_all_collectId: args.data?.mas_all_collectId,
+          //     // bookbank_logId : bookbankID
+          //   }
+          // }
         }
       });
       return {
@@ -362,14 +373,18 @@ const resolvers: Resolvers = {
       }
     },
 
-    async createBank (p: any, args: any, ctx: any){
+    async createBank(p: any, args: any, ctx: any) {
       const genBankID = v4()
-      const create_bank = await ctx.prisma.bookbank_log.create({
+      const create_bank = await ctx.prisma.mas_bank.create({
         data: {
-          id : genBankID,
-          name : args.data?.name as string
+          id: genBankID,
+          name: args.data?.name as string
         }
-      })
+      });
+      return {
+        message: 'success',
+        status: true,
+      }
     }
 
   },

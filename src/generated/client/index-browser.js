@@ -263,6 +263,12 @@ exports.Prisma.Mas_salary_statusScalarFieldEnum = makeEnum({
   name: 'name'
 });
 
+exports.Prisma.Mas_vat_socialsScalarFieldEnum = makeEnum({
+  id: 'id',
+  current_vat: 'current_vat',
+  current_social: 'current_social'
+});
+
 exports.Prisma.Mas_yearsScalarFieldEnum = makeEnum({
   id: 'id',
   name: 'name'
@@ -394,7 +400,9 @@ exports.Prisma.SalaryScalarFieldEnum = makeEnum({
   mas_income_typeId: 'mas_income_typeId',
   bookbank_logId: 'bookbank_logId',
   mas_salary_statusId: 'mas_salary_statusId',
-  mas_bankId: 'mas_bankId'
+  mas_bankId: 'mas_bankId',
+  mas_vat_socialsId: 'mas_vat_socialsId',
+  expense_companyId: 'expense_companyId'
 });
 
 exports.Prisma.SortOrder = makeEnum({
@@ -444,6 +452,7 @@ exports.Prisma.ModelName = makeEnum({
   mas_bank: 'mas_bank',
   mas_month: 'mas_month',
   mas_years: 'mas_years',
+  mas_vat_socials: 'mas_vat_socials',
   mas_salary_status: 'mas_salary_status',
   mas_income_type: 'mas_income_type',
   expense_company: 'expense_company',
