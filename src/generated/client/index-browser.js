@@ -198,6 +198,7 @@ exports.Prisma.JsonNullValueInput = makeEnum({
 exports.Prisma.Mas_all_collectScalarFieldEnum = makeEnum({
   id: 'id',
   userId: 'userId',
+  date: 'date',
   income_collect: 'income_collect',
   vat_collect: 'vat_collect',
   social_secu_collect: 'social_secu_collect',
