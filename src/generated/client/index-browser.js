@@ -103,6 +103,8 @@ exports.Prisma.Bookbank_logScalarFieldEnum = makeEnum({
   bank_number: 'bank_number',
   all_collectId: 'all_collectId',
   base_salary: 'base_salary',
+  provident_com: 'provident_com',
+  provident_emp: 'provident_emp',
   userId: 'userId'
 });
 
@@ -158,6 +160,7 @@ exports.Prisma.Expense_companyScalarFieldEnum = makeEnum({
   id: 'id',
   monthId: 'monthId',
   bankId: 'bankId',
+  date: 'date',
   vat_per: 'vat_per',
   social_security: 'social_security',
   companyBranchId: 'companyBranchId'
@@ -389,7 +392,9 @@ exports.Prisma.SalaryScalarFieldEnum = makeEnum({
   net: 'net',
   userId: 'userId',
   mas_income_typeId: 'mas_income_typeId',
-  bookbank_logId: 'bookbank_logId'
+  bookbank_logId: 'bookbank_logId',
+  mas_salary_statusId: 'mas_salary_statusId',
+  mas_bankId: 'mas_bankId'
 });
 
 exports.Prisma.SortOrder = makeEnum({
