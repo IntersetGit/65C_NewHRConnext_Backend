@@ -5218,7 +5218,20 @@
           {
             "name": "datasalary_mee",
             "description": null,
-            "args": [],
+            "args": [
+              {
+                "name": "date",
+                "description": null,
+                "type": {
+                  "kind": "SCALAR",
+                  "name": "String",
+                  "ofType": null
+                },
+                "defaultValue": null,
+                "isDeprecated": false,
+                "deprecationReason": null
+              }
+            ],
             "type": {
               "kind": "LIST",
               "name": null,
@@ -10561,6 +10574,18 @@
             "deprecationReason": null
           },
           {
+            "name": "incomeYears",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "Float",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
             "name": "late",
             "description": null,
             "args": [],
@@ -10777,6 +10802,18 @@
             "deprecationReason": null
           },
           {
+            "name": "salaryYears",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "Float",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
             "name": "social_security",
             "description": null,
             "args": [],
@@ -10862,6 +10899,18 @@
           },
           {
             "name": "vat",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "Float",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "vatYears",
             "description": null,
             "args": [],
             "type": {
@@ -10981,6 +11030,18 @@
             "deprecationReason": null
           },
           {
+            "name": "incomeYears",
+            "description": null,
+            "type": {
+              "kind": "SCALAR",
+              "name": "Float",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
             "name": "late",
             "description": null,
             "type": {
@@ -11197,6 +11258,18 @@
             "deprecationReason": null
           },
           {
+            "name": "salaryYears",
+            "description": null,
+            "type": {
+              "kind": "SCALAR",
+              "name": "Float",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
             "name": "social_security",
             "description": null,
             "type": {
@@ -11270,6 +11343,18 @@
           },
           {
             "name": "vat",
+            "description": null,
+            "type": {
+              "kind": "SCALAR",
+              "name": "Float",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "vatYears",
             "description": null,
             "type": {
               "kind": "SCALAR",

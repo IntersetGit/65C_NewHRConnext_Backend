@@ -105,6 +105,9 @@ export const salaryTypedef = gql`
     pro_employee: Float
     pro_company: Float
     mas_all_collectId: String
+    salaryYears:         Float
+    vatYears:            Float
+    incomeYears:         Float
   }
   type salary {
     id: ID
@@ -142,6 +145,9 @@ export const salaryTypedef = gql`
     pro_employee: Float
     pro_company: Float
     mas_all_collectId: String
+    salaryYears:         Float
+    vatYears:            Float
+    incomeYears:         Float
   }
 
   type Bookbank_log_type {
@@ -392,12 +398,12 @@ const resolvers: Resolvers = {
       return result;
     },
 
-    async datasalary_mee(parant, args:any, ctx) {
-      const date=args?.date ? args?.date : undefined;
-      let dateyear=dayjs(date).format('YYYY') 
+    async datasalary_mee(parant, args: any, ctx) {
+      const date = args?.date ? args?.date : undefined;
+      let dateyear = dayjs(date).format('YYYY')
       console.log(dateyear);
       const getdata = await ctx.prisma.user.findMany({
-        include: { profile: true, salary: {where : {date : dateyear} , include : {bookbank_log : true}} },
+        include: { profile: true, salary: { where: { date: dateyear }, include: { bookbank_log: true } } },
         where: {
           id: ctx.currentUser?.id,
         },
@@ -496,7 +502,87 @@ const resolvers: Resolvers = {
       //สร้าง log สำหรับเงินเดือนจากนั้นเก็บกองทุนไว้ใน provident log จากนั้นเก็บค่าไว้ใน collect
       const gensalaryID = v4();
       const genAllCollectID = v4();
+      // let now = dayjs()
+      // console.log(now.format("MM-DD"));
+      const chk_salaryYears = await ctx.prisma.salary.findMany({
+        include: { provident_log: true },
+        where: {
+          userId: args.data?.userId,
+        },
+        orderBy:
+        {
+          date: "desc",
+        },
+      });
+      let time
+      let result_incomeYears = 0;
+      let result_vatYears = 0;
+      let result_sosialYears = 0;
 
+      for (let i = 0; i < chk_salaryYears.length; i++) {
+        time = dayjs(chk_salaryYears[i].date).format("MM")
+        result_incomeYears += chk_salaryYears[i].net
+        result_vatYears += chk_salaryYears[i].vat
+        result_sosialYears += chk_salaryYears[i].social_security
+      }
+      console.log(time)
+      console.log(result_incomeYears) // เงินได้สะสม
+      console.log(result_vatYears) //ภาษีสะสม
+      console.log(result_sosialYears) //ประกันสังคมสะสม
+      let currentYear = dayjs(chk_salaryYears[0].date).format("MM")
+      if (currentYear != "12") {
+        const pro_emp = args.data?.provident_employee
+        const pro_com = args.data?.provident_company
+        const createsalary = await ctx.prisma.salary.create({
+          data: {
+            id: gensalaryID,
+            mas_monthId: args.data?.mas_monthId as string,
+            mas_yearsId: args.data?.mas_yearsId as string,
+            commission: args.data?.commission as number,
+            position_income: args.data?.position_income as number,
+            ot: args.data?.ot as number,
+            bonus: args.data?.bonus as number,
+            special_income: args.data?.special_income as number,
+            other_income: args.data?.other_income as number,
+            travel_income: args.data?.travel_income as number,
+            bursary: args.data?.bursary as number,
+            welfare_money: args.data?.welfare_money as number,
+            vatper: args.data?.vatper as number,
+            ss_per: args.data?.ss_per as number,
+            vat: args.data?.vat as number,
+            social_security: args.data?.social_security as number,
+            miss: args.data?.miss as number,
+            ra: args.data?.ra as number,
+            late: args.data?.late as number,
+            other: args.data?.other as number,
+            provident_employee: pro_emp as number,
+            provident_company: pro_com as number,
+            total_income: args.data?.total_income as number,
+            total_expense: args.data?.total_expense as number,
+            net: args.data?.net as number,
+            userId: args.data?.userId,
+            bookbank_logId: args.data?.bookbank_logId,
+            mas_income_typeId: args.data?.mas_income_typeId,
+            date: new Date(args.data?.date),
+            mas_salary_statusId: args.data?.mas_salary_statusId,
+            socialYears: result_incomeYears + args.data?.net,
+            vatYears: result_vatYears + args.data?.vat,
+            incomeYears: result_sosialYears + args.data?.net,
+            provident_log: {
+              create: {
+                id: v4(),
+                userId: args.data?.userId,
+                provident_date: new Date(),
+                pro_employee: pro_emp,
+                pro_company: pro_com,
+                mas_all_collectId: args.data?.mas_all_collectId,
+                // bookbank_logId : bookbankID
+              }
+            }
+
+          }
+        })
+      }
       // const pro_emp = args.data?.provident_employee
       // const pro_com = args.data?.provident_company
       // const createsalary = await ctx.prisma.salary.create({
@@ -544,7 +630,7 @@ const resolvers: Resolvers = {
       //     }
 
       //   }
-      // });//
+      // });
       const chk_collectLog = await ctx.prisma.mas_all_collect.findMany({
         include: { provident_log: true },
         where: {
@@ -552,32 +638,34 @@ const resolvers: Resolvers = {
         },
       });
 
-      const chk_salaryYears = await ctx.prisma.salary.findMany({
-        include: { provident_log: true },
-        where: {
-          userId: args.data?.userId,
-        },
-      });
-      console.log(chk_salaryYears);
+      // const chk_salaryYears = await ctx.prisma.salary.findMany({
+      //   include: { provident_log: true },
+      //   where: {
+      //     userId: args.data?.userId,
+      //   },
+      // });
+
       if (chk_collectLog.length > 0) {
         console.log(args.data?.userId);
         console.log(args.data);
-        let result_incomeYears = 0;
-        let result_vatYears = 0;
-        let result_sosialYears = 0;
+        // let result_incomeYears = 0;
+        // let result_vatYears = 0;
+        // let result_sosialYears = 0;
 
-        // for(let i = 0 ; i < )
+        // for (let i = 0; i < chk_salaryYears.length; i++) {
+        //   result_incomeYears += chk_salaryYears[i].net
+        //   result_vatYears += chk_salaryYears[i].vat
+        //   result_sosialYears += chk_salaryYears[i].social_security
+        // }
+        // console.log(result_incomeYears) // เงินได้สะสม
+        // console.log(result_vatYears) //ภาษีสะสม
+        // console.log(result_sosialYears) //ประกันสังคมสะสม
 
         let total_income = chk_collectLog[0].income_collect + args.data?.net;
         let total_vat = chk_collectLog[0].vat_collect + args.data?.vat;
-        let total_socialS =
-          chk_collectLog[0].social_secu_collect + args.data?.social_security;
-        let total_pro_emp =
-          chk_collectLog[0].provident_collect_employee +
-          args.data?.provident_employee;
-        let total_pro_com =
-          chk_collectLog[0].provident_collect_company +
-          args.data?.provident_company;
+        let total_socialS = chk_collectLog[0].social_secu_collect + args.data?.social_security;
+        let total_pro_emp = chk_collectLog[0].provident_collect_employee + args.data?.provident_employee;
+        let total_pro_com = chk_collectLog[0].provident_collect_company + args.data?.provident_company;
         console.log(
           total_income,
           total_vat,
