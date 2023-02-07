@@ -541,7 +541,7 @@ const resolvers: Resolvers = {
       //     }
 
       //   }
-      // });
+      // });//
       const chk_collectLog = await ctx.prisma.mas_all_collect.findMany({
         include: { provident_log: true },
         where: {
