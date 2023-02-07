@@ -10610,6 +10610,18 @@
             "deprecationReason": null
           },
           {
+            "name": "mas_bankId",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
             "name": "mas_income_typeId",
             "description": null,
             "args": [],
@@ -10790,7 +10802,7 @@
             "deprecationReason": null
           },
           {
-            "name": "salaryYears",
+            "name": "socialYears",
             "description": null,
             "args": [],
             "type": {
@@ -11066,6 +11078,18 @@
             "deprecationReason": null
           },
           {
+            "name": "mas_bankId",
+            "description": null,
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
             "name": "mas_income_typeId",
             "description": null,
             "type": {
@@ -11246,7 +11270,7 @@
             "deprecationReason": null
           },
           {
-            "name": "salaryYears",
+            "name": "socialYears",
             "description": null,
             "type": {
               "kind": "SCALAR",
