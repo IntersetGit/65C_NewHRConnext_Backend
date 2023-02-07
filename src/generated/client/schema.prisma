@@ -149,6 +149,7 @@ model User {
   salary          salary[]
   provident_log   provident_log[]
   bookbank_log    bookbank_log[]
+  data_leave      data_leave[]
 }
 
 model Role {
@@ -429,7 +430,28 @@ model provident_log {
   mas_all_collectId String?          @db.Uuid
   bookbank_log      bookbank_log?    @relation(fields: [bookbank_logId], references: [id])
   bookbank_logId    String?          @db.Uuid
-
   salary   salary? @relation(fields: [salaryId], references: [id])
   salaryId String? @db.Uuid
+}
+
+//-------- ตาราง master ประเภทวันหยุด -----------//
+model master_leave_type {
+  id          String @unique @db.Uuid
+  name        String
+  orderby     Int @db.SmallInt
+  data_leave  data_leave[]
+}
+
+//-------- ข้อมูลการลาของพนักงาน -------------//
+model data_leave {
+ id               String             @unique @db.Uuid
+ leavetype_id     String             @db.Uuid
+ leave_type       master_leave_type  @relation(fields: [leavetype_id], references: [id])
+ start_date       DateTime
+ end_date         DateTime
+ quantity_day     String
+ detail_leave     String 
+ Status           Int                @db.SmallInt
+ user_id          String             @db.Uuid
+ user             User               @relation(fields: [user_id], references: [id])
 }
