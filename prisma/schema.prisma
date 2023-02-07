@@ -257,7 +257,7 @@ model holiday_date {
   holiday_name   String?
   day            Int
   month          Int
-  yaer           Int
+  
   Company        Company?      @relation(fields: [CompanyId], references: [id])
   CompanyId      String?       @db.Uuid
   holiday_yearID String?       @db.Uuid
