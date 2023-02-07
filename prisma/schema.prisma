@@ -429,7 +429,8 @@ model provident_log {
   mas_all_collectId String?          @db.Uuid
   bookbank_log      bookbank_log?    @relation(fields: [bookbank_logId], references: [id])
   bookbank_logId    String?          @db.Uuid
-
   salary   salary? @relation(fields: [salaryId], references: [id])
   salaryId String? @db.Uuid
 }
+
+
