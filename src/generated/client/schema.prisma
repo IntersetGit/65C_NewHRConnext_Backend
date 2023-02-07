@@ -385,8 +385,8 @@ model salary {
 
 model mas_all_collect {
   id                         String          @unique @db.Uuid
-  User                       User?           @relation(fields: [userId], references: [id])
-  userId                     String          @db.Uuid
+  user                       User            @relation(fields: [userId], references: [id])
+  userId                     String          @unique @db.Uuid
   date                       DateTime
   income_collect             Float
   vat_collect                Float?

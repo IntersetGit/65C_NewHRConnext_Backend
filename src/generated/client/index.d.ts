@@ -27466,7 +27466,7 @@ export namespace Prisma {
 
   export type mas_all_collectSelect = {
     id?: boolean
-    User?: boolean | UserArgs
+    user?: boolean | UserArgs
     userId?: boolean
     date?: boolean
     income_collect?: boolean
@@ -27480,7 +27480,7 @@ export namespace Prisma {
 
 
   export type mas_all_collectInclude = {
-    User?: boolean | UserArgs
+    user?: boolean | UserArgs
     provident_log?: boolean | mas_all_collect$provident_logArgs
     _count?: boolean | Mas_all_collectCountOutputTypeArgs
   }
@@ -27492,14 +27492,14 @@ export namespace Prisma {
     S extends { include: any } & (mas_all_collectArgs | mas_all_collectFindManyArgs)
     ? mas_all_collect  & {
     [P in TruthyKeys<S['include']>]:
-        P extends 'User' ? UserGetPayload<S['include'][P]> | null :
+        P extends 'user' ? UserGetPayload<S['include'][P]> :
         P extends 'provident_log' ? Array < provident_logGetPayload<S['include'][P]>>  :
         P extends '_count' ? Mas_all_collectCountOutputTypeGetPayload<S['include'][P]> :  never
   } 
     : S extends { select: any } & (mas_all_collectArgs | mas_all_collectFindManyArgs)
       ? {
     [P in TruthyKeys<S['select']>]:
-        P extends 'User' ? UserGetPayload<S['select'][P]> | null :
+        P extends 'user' ? UserGetPayload<S['select'][P]> :
         P extends 'provident_log' ? Array < provident_logGetPayload<S['select'][P]>>  :
         P extends '_count' ? Mas_all_collectCountOutputTypeGetPayload<S['select'][P]> :  P extends keyof mas_all_collect ? mas_all_collect[P] : never
   } 
@@ -27875,7 +27875,7 @@ export namespace Prisma {
     constructor(_dmmf: runtime.DMMFClass, _fetcher: PrismaClientFetcher, _queryType: 'query' | 'mutation', _rootField: string, _clientMethod: string, _args: any, _dataPath: string[], _errorFormat: ErrorFormat, _measurePerformance?: boolean | undefined, _isList?: boolean);
     readonly [Symbol.toStringTag]: 'PrismaClientPromise';
 
-    User<T extends UserArgs= {}>(args?: Subset<T, UserArgs>): Prisma__UserClient<UserGetPayload<T> | Null>;
+    user<T extends UserArgs= {}>(args?: Subset<T, UserArgs>): Prisma__UserClient<UserGetPayload<T> | Null>;
 
     provident_log<T extends mas_all_collect$provident_logArgs= {}>(args?: Subset<T, mas_all_collect$provident_logArgs>): PrismaPromise<Array<provident_logGetPayload<T>>| Null>;
 
@@ -32436,7 +32436,7 @@ export namespace Prisma {
     OR?: Enumerable<mas_all_collectWhereInput>
     NOT?: Enumerable<mas_all_collectWhereInput>
     id?: UuidFilter | string
-    User?: XOR<UserRelationFilter, UserWhereInput> | null
+    user?: XOR<UserRelationFilter, UserWhereInput>
     userId?: UuidFilter | string
     date?: DateTimeFilter | Date | string
     income_collect?: FloatFilter | number
@@ -32449,7 +32449,7 @@ export namespace Prisma {
 
   export type mas_all_collectOrderByWithRelationInput = {
     id?: SortOrder
-    User?: UserOrderByWithRelationInput
+    user?: UserOrderByWithRelationInput
     userId?: SortOrder
     date?: SortOrder
     income_collect?: SortOrder
@@ -32462,6 +32462,7 @@ export namespace Prisma {
 
   export type mas_all_collectWhereUniqueInput = {
     id?: string
+    userId?: string
   }
 
   export type mas_all_collectOrderByWithAggregationInput = {
@@ -34740,7 +34741,7 @@ export namespace Prisma {
 
   export type mas_all_collectCreateInput = {
     id: string
-    User?: UserCreateNestedOneWithoutMas_all_collectInput
+    user: UserCreateNestedOneWithoutMas_all_collectInput
     date: Date | string
     income_collect: number
     vat_collect?: number | null
@@ -34764,7 +34765,7 @@ export namespace Prisma {
 
   export type mas_all_collectUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
-    User?: UserUpdateOneWithoutMas_all_collectNestedInput
+    user?: UserUpdateOneRequiredWithoutMas_all_collectNestedInput
     date?: DateTimeFieldUpdateOperationsInput | Date | string
     income_collect?: FloatFieldUpdateOperationsInput | number
     vat_collect?: NullableFloatFieldUpdateOperationsInput | number | null
@@ -38903,12 +38904,10 @@ export namespace Prisma {
     connect?: Enumerable<provident_logWhereUniqueInput>
   }
 
-  export type UserUpdateOneWithoutMas_all_collectNestedInput = {
+  export type UserUpdateOneRequiredWithoutMas_all_collectNestedInput = {
     create?: XOR<UserCreateWithoutMas_all_collectInput, UserUncheckedCreateWithoutMas_all_collectInput>
     connectOrCreate?: UserCreateOrConnectWithoutMas_all_collectInput
     upsert?: UserUpsertWithoutMas_all_collectInput
-    disconnect?: boolean
-    delete?: boolean
     connect?: UserWhereUniqueInput
     update?: XOR<UserUpdateWithoutMas_all_collectInput, UserUncheckedUpdateWithoutMas_all_collectInput>
   }
@@ -44798,7 +44797,7 @@ export namespace Prisma {
 
   export type mas_all_collectCreateWithoutProvident_logInput = {
     id: string
-    User?: UserCreateNestedOneWithoutMas_all_collectInput
+    user: UserCreateNestedOneWithoutMas_all_collectInput
     date: Date | string
     income_collect: number
     vat_collect?: number | null
@@ -44987,7 +44986,7 @@ export namespace Prisma {
 
   export type mas_all_collectUpdateWithoutProvident_logInput = {
     id?: StringFieldUpdateOperationsInput | string
-    User?: UserUpdateOneWithoutMas_all_collectNestedInput
+    user?: UserUpdateOneRequiredWithoutMas_all_collectNestedInput
     date?: DateTimeFieldUpdateOperationsInput | Date | string
     income_collect?: FloatFieldUpdateOperationsInput | number
     vat_collect?: NullableFloatFieldUpdateOperationsInput | number | null
