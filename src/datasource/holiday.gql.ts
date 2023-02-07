@@ -23,7 +23,7 @@ export const holidayTypedef = gql`
     holiday_name: String
     day: Int
     month: Int
-    yaer: Int
+    year: Int
     Company: Company
     CompanyId: String
     status: Int
