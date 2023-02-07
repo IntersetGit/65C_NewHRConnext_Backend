@@ -1,5 +1,3 @@
-import { User } from './../generated/graphql';
-import { mas_positionlevel1 } from './../generated/client/index.d';
 import { composeResolvers } from '@graphql-tools/resolvers-composition';
 import { authenticate } from '../middleware/authenticatetoken';
 import { Resolvers } from '../generated/graphql';
@@ -231,7 +229,8 @@ export const positionResolvers: Resolvers = {
               id: e.id_Position1 as string
             }
           })
-        } else {
+        } 
+        if(!e.id_Position1 && e.name_Position1 ||  e.level_Position1 || e.code_position1 ){
           const createdPo_1 = await ctx.prisma.mas_positionlevel1.create({
             // include: { mas_positionlevel2: { include: { mas_positionlevel3: true } } },
             data: {
@@ -258,7 +257,7 @@ export const positionResolvers: Resolvers = {
                   id: a?.id_Position2 as string
                 }
               })
-            } else {
+            } if(!a?.id_Position2 && a?.positionlevel1_id ||  a?.name_Position2 || a?.level_Position2 || a?.code_position2){
               const CretePo_2 = await ctx.prisma.mas_positionlevel2.create({
                 data: {
                   id: v4(),
@@ -289,7 +288,7 @@ export const positionResolvers: Resolvers = {
                   const CretePo_3 = await ctx.prisma.mas_positionlevel3.create({
                     data: {
                       id: v4(),
-                      positionlevel2_id: b?.id_Position3,
+                      positionlevel2_id: b?.positionlevel2_id,
                       CompanyId: ctx.currentUser?.compayId,
                       name: b?.name_Position3 as string,
                       level: b?.level_Position3 as number,
