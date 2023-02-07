@@ -578,6 +578,9 @@ export type Position_User = {
   date?: Maybe<Scalars['Date']>;
   headderId?: Maybe<Scalars['String']>;
   id?: Maybe<Scalars['ID']>;
+  mas_positionlevel1?: Maybe<Mas_Positionlevel1>;
+  mas_positionlevel2?: Maybe<Mas_Positionlevel2>;
+  mas_positionlevel3?: Maybe<Mas_Positionlevel3>;
   position1_id?: Maybe<Scalars['String']>;
   position2_id?: Maybe<Scalars['String']>;
   position3_id?: Maybe<Scalars['String']>;
@@ -648,7 +651,7 @@ export type Province = {
 export type Query = {
   __typename?: 'Query';
   GetHoliDayYear?: Maybe<Array<Maybe<Holiday_Years>>>;
-  GetHolidayDate?: Maybe<Array<Maybe<Holiday_Date>>>;
+  GetHolidayDate?: Maybe<Holiday_Date>;
   bookbank_log?: Maybe<Array<Maybe<Bookbank_Log>>>;
   company?: Maybe<ResponseCompany>;
   data_salary?: Maybe<Array<Maybe<Data_Salary>>>;
@@ -826,6 +829,7 @@ export type UpdateRoleCompanyMangementType = {
 
 export type User = {
   __typename?: 'User';
+  Position_user?: Maybe<Array<Maybe<Position_User>>>;
   RoleCompanyID?: Maybe<Scalars['String']>;
   Role_Company?: Maybe<Role_Company>;
   company?: Maybe<Array<Maybe<Company>>>;
@@ -1007,16 +1011,14 @@ export type Headderdata = {
 
 export type Holiday_Date = {
   __typename?: 'holiday_date';
-  Company?: Maybe<Array<Maybe<Company>>>;
+  Company?: Maybe<Company>;
   CompanyId?: Maybe<Scalars['String']>;
   day?: Maybe<Scalars['Int']>;
   holiday_name?: Maybe<Scalars['String']>;
-  holiday_year?: Maybe<Array<Maybe<Holiday_Years>>>;
-  holiday_yearID?: Maybe<Scalars['String']>;
-  id: Scalars['ID'];
+  id?: Maybe<Scalars['ID']>;
   month?: Maybe<Scalars['Int']>;
   status?: Maybe<Scalars['Int']>;
-  yaer?: Maybe<Scalars['Int']>;
+  year?: Maybe<Scalars['Int']>;
 };
 
 export type Holiday_Years = {
@@ -1844,6 +1846,9 @@ export type Position_UserResolvers<ContextType = ApolloContext, ParentType exten
   date?: Resolver<Maybe<ResolversTypes['Date']>, ParentType, ContextType>;
   headderId?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   id?: Resolver<Maybe<ResolversTypes['ID']>, ParentType, ContextType>;
+  mas_positionlevel1?: Resolver<Maybe<ResolversTypes['mas_positionlevel1']>, ParentType, ContextType>;
+  mas_positionlevel2?: Resolver<Maybe<ResolversTypes['mas_positionlevel2']>, ParentType, ContextType>;
+  mas_positionlevel3?: Resolver<Maybe<ResolversTypes['mas_positionlevel3']>, ParentType, ContextType>;
   position1_id?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   position2_id?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   position3_id?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
@@ -1914,7 +1919,7 @@ export type ProvinceResolvers<ContextType = ApolloContext, ParentType extends Re
 
 export type QueryResolvers<ContextType = ApolloContext, ParentType extends ResolversParentTypes['Query'] = ResolversParentTypes['Query']> = ResolversObject<{
   GetHoliDayYear?: Resolver<Maybe<Array<Maybe<ResolversTypes['holiday_years']>>>, ParentType, ContextType>;
-  GetHolidayDate?: Resolver<Maybe<Array<Maybe<ResolversTypes['holiday_date']>>>, ParentType, ContextType>;
+  GetHolidayDate?: Resolver<Maybe<ResolversTypes['holiday_date']>, ParentType, ContextType>;
   bookbank_log?: Resolver<Maybe<Array<Maybe<ResolversTypes['bookbank_log']>>>, ParentType, ContextType, Partial<QueryBookbank_LogArgs>>;
   company?: Resolver<Maybe<ResolversTypes['ResponseCompany']>, ParentType, ContextType, Partial<QueryCompanyArgs>>;
   data_salary?: Resolver<Maybe<Array<Maybe<ResolversTypes['data_salary']>>>, ParentType, ContextType, Partial<QueryData_SalaryArgs>>;
@@ -2023,6 +2028,7 @@ export type SalaryResponseTypeResolvers<ContextType = ApolloContext, ParentType 
 }>;
 
 export type UserResolvers<ContextType = ApolloContext, ParentType extends ResolversParentTypes['User'] = ResolversParentTypes['User']> = ResolversObject<{
+  Position_user?: Resolver<Maybe<Array<Maybe<ResolversTypes['Position_user']>>>, ParentType, ContextType>;
   RoleCompanyID?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   Role_Company?: Resolver<Maybe<ResolversTypes['Role_Company']>, ParentType, ContextType>;
   company?: Resolver<Maybe<Array<Maybe<ResolversTypes['Company']>>>, ParentType, ContextType>;
@@ -2153,16 +2159,14 @@ export type HeadderdataResolvers<ContextType = ApolloContext, ParentType extends
 }>;
 
 export type Holiday_DateResolvers<ContextType = ApolloContext, ParentType extends ResolversParentTypes['holiday_date'] = ResolversParentTypes['holiday_date']> = ResolversObject<{
-  Company?: Resolver<Maybe<Array<Maybe<ResolversTypes['Company']>>>, ParentType, ContextType>;
+  Company?: Resolver<Maybe<ResolversTypes['Company']>, ParentType, ContextType>;
   CompanyId?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   day?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
   holiday_name?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
-  holiday_year?: Resolver<Maybe<Array<Maybe<ResolversTypes['holiday_years']>>>, ParentType, ContextType>;
-  holiday_yearID?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
-  id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
+  id?: Resolver<Maybe<ResolversTypes['ID']>, ParentType, ContextType>;
   month?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
   status?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
-  yaer?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
+  year?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 }>;
 

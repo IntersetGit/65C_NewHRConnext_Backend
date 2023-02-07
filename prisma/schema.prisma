@@ -143,7 +143,7 @@ model User {
   companyBranch   CompanyBranch?    @relation(fields: [companyBranchId], references: [id])
   companyBranchId String?           @db.Uuid
   Role_Company    Role_Company?     @relation(fields: [RoleCompanyID], references: [id])
-  Position_user   Position_user?    @relation("user")
+  Position_user   Position_user[]    @relation("user")
   henchman        Position_user[]
   mas_all_collect mas_all_collect[]
   salary          salary[]
@@ -239,7 +239,7 @@ model mas_positionlevel3 {
 
 model Position_user {
   id                 String              @unique @db.Uuid
-  user_id            String?             @unique @db.Uuid
+  user_id            String?             @db.Uuid
   date               DateTime?
   position1_id       String?             @db.Uuid
   position2_id       String?             @db.Uuid
@@ -258,7 +258,7 @@ model holiday_date {
   holiday_name   String?
   day            Int
   month          Int
-  yaer           Int
+  year           Int
   Company        Company?      @relation(fields: [CompanyId], references: [id])
   CompanyId      String?       @db.Uuid
   holiday_yearID String?       @db.Uuid
@@ -446,7 +446,7 @@ model mas_leave_type {
 model data_leave {
  id               String             @unique @db.Uuid
  leavetype_id     String             @db.Uuid
- leave_type       mas_leave_type  @relation(fields: [leavetype_id], references: [id])
+ leave_type       mas_leave_type     @relation(fields: [leavetype_id], references: [id])
  start_date       DateTime
  end_date         DateTime
  quantity_day     String

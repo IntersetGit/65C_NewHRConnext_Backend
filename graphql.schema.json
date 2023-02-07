@@ -4401,6 +4401,42 @@
             "deprecationReason": null
           },
           {
+            "name": "mas_positionlevel1",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "OBJECT",
+              "name": "mas_positionlevel1",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "mas_positionlevel2",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "OBJECT",
+              "name": "mas_positionlevel2",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "mas_positionlevel3",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "OBJECT",
+              "name": "mas_positionlevel3",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
             "name": "position1_id",
             "description": null,
             "args": [],
@@ -5150,13 +5186,9 @@
             "description": null,
             "args": [],
             "type": {
-              "kind": "LIST",
-              "name": null,
-              "ofType": {
-                "kind": "OBJECT",
-                "name": "holiday_date",
-                "ofType": null
-              }
+              "kind": "OBJECT",
+              "name": "holiday_date",
+              "ofType": null
             },
             "isDeprecated": false,
             "deprecationReason": null
@@ -6552,6 +6584,22 @@
         "name": "User",
         "description": null,
         "fields": [
+          {
+            "name": "Position_user",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "LIST",
+              "name": null,
+              "ofType": {
+                "kind": "OBJECT",
+                "name": "Position_user",
+                "ofType": null
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
           {
             "name": "RoleCompanyID",
             "description": null,
@@ -9218,13 +9266,9 @@
             "description": null,
             "args": [],
             "type": {
-              "kind": "LIST",
-              "name": null,
-              "ofType": {
-                "kind": "OBJECT",
-                "name": "Company",
-                "ofType": null
-              }
+              "kind": "OBJECT",
+              "name": "Company",
+              "ofType": null
             },
             "isDeprecated": false,
             "deprecationReason": null
@@ -9266,45 +9310,13 @@
             "deprecationReason": null
           },
           {
-            "name": "holiday_year",
-            "description": null,
-            "args": [],
-            "type": {
-              "kind": "LIST",
-              "name": null,
-              "ofType": {
-                "kind": "OBJECT",
-                "name": "holiday_years",
-                "ofType": null
-              }
-            },
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "holiday_yearID",
-            "description": null,
-            "args": [],
-            "type": {
-              "kind": "SCALAR",
-              "name": "String",
-              "ofType": null
-            },
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
             "name": "id",
             "description": null,
             "args": [],
             "type": {
-              "kind": "NON_NULL",
-              "name": null,
-              "ofType": {
-                "kind": "SCALAR",
-                "name": "ID",
-                "ofType": null
-              }
+              "kind": "SCALAR",
+              "name": "ID",
+              "ofType": null
             },
             "isDeprecated": false,
             "deprecationReason": null
@@ -9334,7 +9346,7 @@
             "deprecationReason": null
           },
           {
-            "name": "yaer",
+            "name": "year",
             "description": null,
             "args": [],
             "type": {

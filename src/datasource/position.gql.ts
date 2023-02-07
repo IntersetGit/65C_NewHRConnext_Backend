@@ -75,6 +75,9 @@ type Position_user {
   role: String 
   headderId: String 
   date: Date
+  mas_positionlevel1: mas_positionlevel1
+  mas_positionlevel2: mas_positionlevel2
+  mas_positionlevel3: mas_positionlevel3
 }
 
 type headderdata{
@@ -207,7 +210,7 @@ export const positionResolvers: Resolvers = {
   },
 
 
-  
+
   Mutation: {
     /**
      * ?สร้าง role comapny
