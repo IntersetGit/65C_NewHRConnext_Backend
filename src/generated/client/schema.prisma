@@ -287,13 +287,11 @@ model mas_month {
   month_number    Int               @default(0) @db.SmallInt
   name            String
   expense_company expense_company[]
-  salary          salary[]
 }
 
 model mas_years {
-  id     String   @unique @db.Uuid
-  name   String
-  salary salary[]
+  id   String @unique @db.Uuid
+  name String
 }
 
 model mas_vat_socials {
@@ -333,8 +331,8 @@ model expense_company {
 model salary {
   //รายรับ
   id                  String             @unique @db.Uuid
-  mas_monthId         String?            @db.Uuid
-  mas_yearsId         String?            @db.Uuid
+  month               String?
+  years               String?
   date                DateTime?          @default(now())
   commission          Float?
   position_income     Float?
@@ -363,7 +361,7 @@ model salary {
   //รายได้สุทธิ
   net                 Float?
   //ยอดรวมทั้งปีของสลิปเงินเดือน
-  salaryYears         Float?
+  socialYears         Float?
   vatYears            Float?
   incomeYears         Float?
   userId              String?            @db.Uuid
@@ -378,8 +376,6 @@ model salary {
   provident_log       provident_log[]
   User                User?              @relation(fields: [userId], references: [id])
   bookbank_log        bookbank_log?      @relation(fields: [bookbank_logId], references: [id])
-  mas_month           mas_month?         @relation(fields: [mas_monthId], references: [id])
-  mas_years           mas_years?         @relation(fields: [mas_yearsId], references: [id])
   mas_income_type     mas_income_type?   @relation(fields: [mas_income_typeId], references: [id])
   mas_salary_status   mas_salary_status? @relation(fields: [mas_salary_statusId], references: [id])
   mas_bank            mas_bank?          @relation(fields: [mas_bankId], references: [id])
