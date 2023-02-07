@@ -19,16 +19,14 @@ export const holidayTypedef = gql`
   }
 
   type holiday_date{
-    id: ID!
+    id: ID
     holiday_name: String
     day: Int
     month: Int
     yaer: Int
-    Company: [Company]
+    Company: Company
     CompanyId: String
     status: Int
-    holiday_year: [holiday_years]
-    holiday_yearID: String
   }
 
   input CreateHolidayYears{
@@ -71,7 +69,7 @@ export const holidayTypedef = gql`
 
   type Query{
     GetHoliDayYear: [holiday_years]
-    GetHolidayDate: [holiday_date]
+    GetHolidayDate: holiday_date
   }
 
   type Mutation{
@@ -97,19 +95,18 @@ export const holidayResolvers: Resolvers = {
       return result;
     },
 
-    // async GetHolidayDate(p, args, ctx) {
-    //   const result = await ctx.prisma.holiday_date.findUnique({
-    //     where: { 
-    //       id: ctx.currentUser?.compayId
-    //     },
-    //     select: {
-    //       holiday_name: true
+    async GetHolidayDate(p, args, ctx) {
+      const result = await ctx.prisma.holiday_date.findUnique({
+        where: { 
+          id: ctx.currentUser?.compayId
+        },
+        include : {
+          Company : true
+        }    
+      });
 
-    //     }
-        
-    //   });
-    //   return result;
-    // }
+      return result;
+    }
   },
 
   Mutation: {
