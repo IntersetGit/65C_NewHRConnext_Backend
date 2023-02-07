@@ -435,7 +435,7 @@ model provident_log {
 }
 
 //-------- ตาราง master ประเภทวันหยุด -----------//
-model master_leave_type {
+model mas_leave_type {
   id          String @unique @db.Uuid
   name        String
   orderby     Int @db.SmallInt
@@ -446,7 +446,7 @@ model master_leave_type {
 model data_leave {
  id               String             @unique @db.Uuid
  leavetype_id     String             @db.Uuid
- leave_type       master_leave_type  @relation(fields: [leavetype_id], references: [id])
+ leave_type       mas_leave_type  @relation(fields: [leavetype_id], references: [id])
  start_date       DateTime
  end_date         DateTime
  quantity_day     String
