@@ -403,7 +403,7 @@ const resolvers: Resolvers = {
     async datasalary_mee(parant, args:any, ctx) {
       const date=args?.date ? args?.date : undefined;
       const getdata = await ctx.prisma.user.findMany({
-        include: { profile: true, salary: {where : {date : dateyear} , include : {bookbank_log : true}} },
+        include: { profile: true, salary: {where : {date : date} , include : {bookbank_log : true}} },
         where: {
           id: ctx.currentUser?.id,
         },
