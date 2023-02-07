@@ -394,10 +394,8 @@ const resolvers: Resolvers = {
 
     async datasalary_mee(parant, args:any, ctx) {
       const date=args?.date ? args?.date : undefined;
-      let dateyear=dayjs(date).format('YYYY') 
-      console.log(dateyear);
       const getdata = await ctx.prisma.user.findMany({
-        include: { profile: true, salary: {where : {date : dateyear} , include : {bookbank_log : true}} },
+        include: { profile: true, salary: {where : {years : date} , include : {bookbank_log : true}} },
         where: {
           id: ctx.currentUser?.id,
         },
