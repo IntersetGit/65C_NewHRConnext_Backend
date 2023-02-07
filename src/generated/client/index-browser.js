@@ -227,6 +227,12 @@ exports.Prisma.Mas_income_typeScalarFieldEnum = makeEnum({
   name: 'name'
 });
 
+exports.Prisma.Mas_leave_typeScalarFieldEnum = makeEnum({
+  id: 'id',
+  name: 'name',
+  orderby: 'orderby'
+});
+
 exports.Prisma.Mas_monthScalarFieldEnum = makeEnum({
   id: 'id',
   month_number: 'month_number',
@@ -284,12 +290,6 @@ exports.Prisma.Mas_vat_socialsScalarFieldEnum = makeEnum({
 exports.Prisma.Mas_yearsScalarFieldEnum = makeEnum({
   id: 'id',
   name: 'name'
-});
-
-exports.Prisma.Master_leave_typeScalarFieldEnum = makeEnum({
-  id: 'id',
-  name: 'name',
-  orderby: 'orderby'
 });
 
 exports.Prisma.Position_userScalarFieldEnum = makeEnum({
@@ -483,7 +483,7 @@ exports.Prisma.ModelName = makeEnum({
   mas_all_collect: 'mas_all_collect',
   bookbank_log: 'bookbank_log',
   provident_log: 'provident_log',
-  master_leave_type: 'master_leave_type',
+  mas_leave_type: 'mas_leave_type',
   data_leave: 'data_leave'
 });
 
