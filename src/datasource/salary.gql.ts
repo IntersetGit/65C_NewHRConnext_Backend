@@ -5,7 +5,7 @@ import gql from 'graphql-tag';
 import { v4 } from 'uuid';
 import { composeResolvers } from '@graphql-tools/resolvers-composition';
 import { authenticate } from '../middleware/authenticatetoken';
-
+import dayjs from 'dayjs';
 // import { PrismaClient } from '@prisma/client';
 // const prisma = new PrismaClient();
 
@@ -346,8 +346,8 @@ export const salaryTypedef = gql`
   type Query {
     salary: salary
     bookbank_log(id: String): [bookbank_log]
-    provident_log(userId: String): [provident_log]
-    datasalary_mee: [data_salary_me]
+    provident_log(userId:String):[provident_log]
+    datasalary_mee(date:String): [data_salary_me]
     # Selfdatasalary: selfsalary
     #Selfdatasalary: selfsalary
     mas_all_collect: mas_all_collect
@@ -392,9 +392,12 @@ const resolvers: Resolvers = {
       return result;
     },
 
-    async datasalary_mee(parant, args, ctx) {
+    async datasalary_mee(parant, args:any, ctx) {
+      const date=args?.date ? args?.date : undefined;
+      let dateyear=dayjs(date).format('YYYY') 
+      console.log(dateyear);
       const getdata = await ctx.prisma.user.findMany({
-        include: { profile: true, salary: true },
+        include: { profile: true, salary: {where : {date : dateyear} , include : {bookbank_log : true}} },
         where: {
           id: ctx.currentUser?.id,
         },
