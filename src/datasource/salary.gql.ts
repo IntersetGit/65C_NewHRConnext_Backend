@@ -150,6 +150,7 @@ export const salaryTypedef = gql`
     vatYears:            Float
     incomeYears:         Float
     mas_bankId: String
+    mas_bank:mas_bank
   }
 
   type Bookbank_log_type {
@@ -305,6 +306,7 @@ export const salaryTypedef = gql`
     companyBranch: CompanyBranch
     companyBranchId: String
     salary: [salary]
+    mas_bank: mas_bank
     base_salary: bookbank_log
   }
 
@@ -403,7 +405,7 @@ const resolvers: Resolvers = {
     async datasalary_mee(parant, args: any, ctx) {
       const date = args?.date ? args?.date : undefined;
       const getdata = await ctx.prisma.user.findMany({
-        include: { profile: true, salary: { where: { date: date }, include: { bookbank_log: true } } },
+        include: { profile: true , salary: {where : {date : date} , include : {bookbank_log : true,mas_bank: true,}} },
         where: {
           id: ctx.currentUser?.id,
         },

@@ -945,6 +945,7 @@ export type Data_Salary_Me = {
   isOwner?: Maybe<Scalars['Boolean']>;
   islogin?: Maybe<Scalars['Boolean']>;
   lastlogin?: Maybe<Scalars['Date']>;
+  mas_bank?: Maybe<Mas_Bank>;
   profile?: Maybe<Profile>;
   role?: Maybe<Role>;
   roleId?: Maybe<Scalars['String']>;
@@ -1157,6 +1158,7 @@ export type Salary = {
   incomeYears?: Maybe<Scalars['Float']>;
   late?: Maybe<Scalars['Float']>;
   mas_all_collectId?: Maybe<Scalars['String']>;
+  mas_bank?: Maybe<Mas_Bank>;
   mas_bankId?: Maybe<Scalars['String']>;
   mas_income_typeId?: Maybe<Scalars['String']>;
   mas_salary_statusId?: Maybe<Scalars['String']>;
@@ -2065,6 +2067,7 @@ export type Data_Salary_MeResolvers<ContextType = ApolloContext, ParentType exte
   isOwner?: Resolver<Maybe<ResolversTypes['Boolean']>, ParentType, ContextType>;
   islogin?: Resolver<Maybe<ResolversTypes['Boolean']>, ParentType, ContextType>;
   lastlogin?: Resolver<Maybe<ResolversTypes['Date']>, ParentType, ContextType>;
+  mas_bank?: Resolver<Maybe<ResolversTypes['mas_bank']>, ParentType, ContextType>;
   profile?: Resolver<Maybe<ResolversTypes['Profile']>, ParentType, ContextType>;
   role?: Resolver<Maybe<ResolversTypes['Role']>, ParentType, ContextType>;
   roleId?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
@@ -2246,6 +2249,7 @@ export type SalaryResolvers<ContextType = ApolloContext, ParentType extends Reso
   incomeYears?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
   late?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
   mas_all_collectId?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  mas_bank?: Resolver<Maybe<ResolversTypes['mas_bank']>, ParentType, ContextType>;
   mas_bankId?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   mas_income_typeId?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   mas_salary_statusId?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
