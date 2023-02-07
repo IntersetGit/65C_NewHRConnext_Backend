@@ -10574,6 +10574,18 @@
             "deprecationReason": null
           },
           {
+            "name": "incomeYears",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "Float",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
             "name": "late",
             "description": null,
             "args": [],
@@ -10587,6 +10599,18 @@
           },
           {
             "name": "mas_all_collectId",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "mas_bankId",
             "description": null,
             "args": [],
             "type": {
@@ -10778,6 +10802,18 @@
             "deprecationReason": null
           },
           {
+            "name": "socialYears",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "Float",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
             "name": "social_security",
             "description": null,
             "args": [],
@@ -10863,6 +10899,18 @@
           },
           {
             "name": "vat",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "Float",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "vatYears",
             "description": null,
             "args": [],
             "type": {
@@ -10994,6 +11042,18 @@
             "deprecationReason": null
           },
           {
+            "name": "incomeYears",
+            "description": null,
+            "type": {
+              "kind": "SCALAR",
+              "name": "Float",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
             "name": "late",
             "description": null,
             "type": {
@@ -11007,6 +11067,18 @@
           },
           {
             "name": "mas_all_collectId",
+            "description": null,
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "mas_bankId",
             "description": null,
             "type": {
               "kind": "SCALAR",
@@ -11198,6 +11270,18 @@
             "deprecationReason": null
           },
           {
+            "name": "socialYears",
+            "description": null,
+            "type": {
+              "kind": "SCALAR",
+              "name": "Float",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
             "name": "social_security",
             "description": null,
             "type": {
@@ -11271,6 +11355,18 @@
           },
           {
             "name": "vat",
+            "description": null,
+            "type": {
+              "kind": "SCALAR",
+              "name": "Float",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "vatYears",
             "description": null,
             "type": {
               "kind": "SCALAR",
