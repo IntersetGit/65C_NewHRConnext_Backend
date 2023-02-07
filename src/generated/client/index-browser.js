@@ -373,8 +373,8 @@ exports.Prisma.Role_CompanyScalarFieldEnum = makeEnum({
 
 exports.Prisma.SalaryScalarFieldEnum = makeEnum({
   id: 'id',
-  mas_monthId: 'mas_monthId',
-  mas_yearsId: 'mas_yearsId',
+  month: 'month',
+  years: 'years',
   date: 'date',
   commission: 'commission',
   position_income: 'position_income',
@@ -398,7 +398,7 @@ exports.Prisma.SalaryScalarFieldEnum = makeEnum({
   total_income: 'total_income',
   total_expense: 'total_expense',
   net: 'net',
-  salaryYears: 'salaryYears',
+  socialYears: 'socialYears',
   vatYears: 'vatYears',
   incomeYears: 'incomeYears',
   userId: 'userId',
