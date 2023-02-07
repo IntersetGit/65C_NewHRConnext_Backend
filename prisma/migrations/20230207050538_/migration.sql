@@ -1,0 +1,4 @@
+-- AlterTable
+ALTER TABLE "salary" ADD COLUMN     "incomeYears" DOUBLE PRECISION,
+ADD COLUMN     "salaryYears" DOUBLE PRECISION,
+ADD COLUMN     "vatYears" DOUBLE PRECISION;
