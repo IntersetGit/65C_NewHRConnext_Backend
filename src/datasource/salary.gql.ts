@@ -309,7 +309,21 @@ export const salaryTypedef = gql`
     mas_bank: mas_bank
     base_salary: bookbank_log
   }
-
+type data_salary{
+  id: ID!
+  profile: Profile
+  salary: [salary]
+  position_user:position_user
+}
+type position_user{
+id:ID!
+name:String
+position1_id:String
+position2_id:String
+position3_id:String
+role:String
+user_id:String
+  }
   type createsalaryResponseType {
     message: String
     status: Boolean
@@ -362,6 +376,7 @@ export const salaryTypedef = gql`
     #Selfdatasalary: selfsalary
     mas_all_collect: mas_all_collect
     mas_bank(id: String): [mas_bank]
+    data_salary(f_name:String,Position2:String,Position3:String):[data_salary]
   }
   type Mutation {
     Createsalary(data: salaryInput): createsalaryResponseType
@@ -393,7 +408,7 @@ const resolvers: Resolvers = {
       });
       return result;
     },
-    async mas_bank(parant, args: any, ctx) {
+    async mas_bank(parant: any, args: any, ctx: any) {
       const result = await ctx.prisma.mas_bank.findMany({
         where: {
           id: args.id,
@@ -402,10 +417,10 @@ const resolvers: Resolvers = {
       return result;
     },
 
-    async datasalary_mee(parant, args:any, ctx) {
-      const date=args?.date ? args?.date : undefined;
+    async datasalary_mee(parant: any, args: any, ctx: any) {
+      const date = args?.date ? args?.date : undefined;
       const getdata = await ctx.prisma.user.findMany({
-        include: { profile: true , salary: {where : {date : date} , include : {bookbank_log : true,mas_bank: true,}} },
+        include: { profile: true, salary: { where: { years: date }, include: { bookbank_log: true, mas_bank: true, } } },
         where: {
           id: ctx.currentUser?.id,
         },
@@ -461,6 +476,19 @@ const resolvers: Resolvers = {
       });
       return result;
     },
+    async data_salary(parant: any, args: any, ctx:any) {
+      const name = args?.f_name ? args?.f_name : undefined;
+      // { Position_user: { where: { mas_positionlevel2: args?.Position2, mas_positionlevel3: args?.Position3 }, include: { mas_positionlevel1: true, mas_positionlevel3: true } }
+      //   ,
+      const getdata = await ctx.prisma.user.findMany({
+        include: {role:true,Position_user:{include: { mas_positionlevel1: true, mas_positionlevel3: true }}, profile:true,salary: { include: { bookbank_log: true, mas_bank: true, } } }
+        ,
+        where: {
+          userId: ctx.currentUser?.userId,
+        },
+      });
+      return getdata;
+    },
   }, //
   Mutation: {
     /**
@@ -513,8 +541,8 @@ const resolvers: Resolvers = {
         include: { provident_log: true },
         where: {
           userId: args.data?.userId,
-          AND : {
-            years : ThisYear
+          AND: {
+            years: ThisYear
           }
         },
         orderBy:
@@ -522,7 +550,7 @@ const resolvers: Resolvers = {
           years: "desc",
         },
       });
-      
+
       let time
       let result_incomeYears = 0;
       let result_vatYears = 0;
@@ -970,6 +998,7 @@ const resolversComposition = {
   'Query.salary': [authenticate()],
   'Query.bookbank_log': [authenticate()],
   'Query.mas_all_collect': [authenticate()],
+  'Query.data_salary': [authenticate()],
   'Query.datasalary_mee': [authenticate()],
   'Mutation.Createmonth': [authenticate()],
   'Mutation.Createyears': [authenticate()],
