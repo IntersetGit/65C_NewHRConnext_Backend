@@ -145,7 +145,7 @@ model User {
   Role_Company    Role_Company?     @relation(fields: [RoleCompanyID], references: [id])
   Position_user   Position_user?    @relation("user")
   henchman        Position_user[]
-  mas_all_collect mas_all_collect[] 
+  mas_all_collect mas_all_collect[]
   salary          salary[]
   provident_log   provident_log[]
   bookbank_log    bookbank_log[]
@@ -362,6 +362,10 @@ model salary {
   total_expense       Float?
   //รายได้สุทธิ
   net                 Float?
+  //ยอดรวมทั้งปีของสลิปเงินเดือน
+  // salaryYears         Float?
+  // vatYears            Float?
+  // incomeYears         Float?
   userId              String?            @db.Uuid
   // bookbank_log       bookbank_log[]
   mas_income_typeId   String?            @db.Uuid
