@@ -441,6 +441,31 @@ export type provident_log = {
   salaryId: string | null
 }
 
+/**
+ * Model mas_leave_type
+ * 
+ */
+export type mas_leave_type = {
+  id: string
+  name: string
+  orderby: number
+}
+
+/**
+ * Model data_leave
+ * 
+ */
+export type data_leave = {
+  id: string
+  leavetype_id: string
+  start_date: Date
+  end_date: Date
+  quantity_day: string
+  detail_leave: string
+  Status: number
+  user_id: string
+}
+
 
 /**
  * ##  Prisma Client ʲˢ
@@ -828,6 +853,26 @@ export class PrismaClient<
     * ```
     */
   get provident_log(): Prisma.provident_logDelegate<GlobalReject>;
+
+  /**
+   * `prisma.mas_leave_type`: Exposes CRUD operations for the **mas_leave_type** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more Mas_leave_types
+    * const mas_leave_types = await prisma.mas_leave_type.findMany()
+    * ```
+    */
+  get mas_leave_type(): Prisma.mas_leave_typeDelegate<GlobalReject>;
+
+  /**
+   * `prisma.data_leave`: Exposes CRUD operations for the **data_leave** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more Data_leaves
+    * const data_leaves = await prisma.data_leave.findMany()
+    * ```
+    */
+  get data_leave(): Prisma.data_leaveDelegate<GlobalReject>;
 }
 
 export namespace Prisma {
@@ -1330,7 +1375,9 @@ export namespace Prisma {
     salary: 'salary',
     mas_all_collect: 'mas_all_collect',
     bookbank_log: 'bookbank_log',
-    provident_log: 'provident_log'
+    provident_log: 'provident_log',
+    mas_leave_type: 'mas_leave_type',
+    data_leave: 'data_leave'
   };
 
   export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -1607,6 +1654,7 @@ export namespace Prisma {
     salary: number
     provident_log: number
     bookbank_log: number
+    data_leave: number
   }
 
   export type UserCountOutputTypeSelect = {
@@ -1616,6 +1664,7 @@ export namespace Prisma {
     salary?: boolean
     provident_log?: boolean
     bookbank_log?: boolean
+    data_leave?: boolean
   }
 
   export type UserCountOutputTypeGetPayload<S extends boolean | null | undefined | UserCountOutputTypeArgs> =
@@ -2385,6 +2434,49 @@ export namespace Prisma {
      * Select specific fields to fetch from the Bookbank_logCountOutputType
      */
     select?: Bookbank_logCountOutputTypeSelect | null
+  }
+
+
+
+  /**
+   * Count Type Mas_leave_typeCountOutputType
+   */
+
+
+  export type Mas_leave_typeCountOutputType = {
+    data_leave: number
+  }
+
+  export type Mas_leave_typeCountOutputTypeSelect = {
+    data_leave?: boolean
+  }
+
+  export type Mas_leave_typeCountOutputTypeGetPayload<S extends boolean | null | undefined | Mas_leave_typeCountOutputTypeArgs> =
+    S extends { select: any, include: any } ? 'Please either choose `select` or `include`' :
+    S extends true ? Mas_leave_typeCountOutputType :
+    S extends undefined ? never :
+    S extends { include: any } & (Mas_leave_typeCountOutputTypeArgs)
+    ? Mas_leave_typeCountOutputType 
+    : S extends { select: any } & (Mas_leave_typeCountOutputTypeArgs)
+      ? {
+    [P in TruthyKeys<S['select']>]:
+    P extends keyof Mas_leave_typeCountOutputType ? Mas_leave_typeCountOutputType[P] : never
+  } 
+      : Mas_leave_typeCountOutputType
+
+
+
+
+  // Custom InputTypes
+
+  /**
+   * Mas_leave_typeCountOutputType without action
+   */
+  export type Mas_leave_typeCountOutputTypeArgs = {
+    /**
+     * Select specific fields to fetch from the Mas_leave_typeCountOutputType
+     */
+    select?: Mas_leave_typeCountOutputTypeSelect | null
   }
 
 
@@ -6254,6 +6346,7 @@ export namespace Prisma {
     salary?: boolean | User$salaryArgs
     provident_log?: boolean | User$provident_logArgs
     bookbank_log?: boolean | User$bookbank_logArgs
+    data_leave?: boolean | User$data_leaveArgs
     _count?: boolean | UserCountOutputTypeArgs
   }
 
@@ -6270,6 +6363,7 @@ export namespace Prisma {
     salary?: boolean | User$salaryArgs
     provident_log?: boolean | User$provident_logArgs
     bookbank_log?: boolean | User$bookbank_logArgs
+    data_leave?: boolean | User$data_leaveArgs
     _count?: boolean | UserCountOutputTypeArgs
   }
 
@@ -6291,6 +6385,7 @@ export namespace Prisma {
         P extends 'salary' ? Array < salaryGetPayload<S['include'][P]>>  :
         P extends 'provident_log' ? Array < provident_logGetPayload<S['include'][P]>>  :
         P extends 'bookbank_log' ? Array < bookbank_logGetPayload<S['include'][P]>>  :
+        P extends 'data_leave' ? Array < data_leaveGetPayload<S['include'][P]>>  :
         P extends '_count' ? UserCountOutputTypeGetPayload<S['include'][P]> :  never
   } 
     : S extends { select: any } & (UserArgs | UserFindManyArgs)
@@ -6307,6 +6402,7 @@ export namespace Prisma {
         P extends 'salary' ? Array < salaryGetPayload<S['select'][P]>>  :
         P extends 'provident_log' ? Array < provident_logGetPayload<S['select'][P]>>  :
         P extends 'bookbank_log' ? Array < bookbank_logGetPayload<S['select'][P]>>  :
+        P extends 'data_leave' ? Array < data_leaveGetPayload<S['select'][P]>>  :
         P extends '_count' ? UserCountOutputTypeGetPayload<S['select'][P]> :  P extends keyof User ? User[P] : never
   } 
       : User
@@ -6702,6 +6798,8 @@ export namespace Prisma {
     provident_log<T extends User$provident_logArgs= {}>(args?: Subset<T, User$provident_logArgs>): PrismaPromise<Array<provident_logGetPayload<T>>| Null>;
 
     bookbank_log<T extends User$bookbank_logArgs= {}>(args?: Subset<T, User$bookbank_logArgs>): PrismaPromise<Array<bookbank_logGetPayload<T>>| Null>;
+
+    data_leave<T extends User$data_leaveArgs= {}>(args?: Subset<T, User$data_leaveArgs>): PrismaPromise<Array<data_leaveGetPayload<T>>| Null>;
 
     private get _document();
     /**
@@ -7181,6 +7279,27 @@ export namespace Prisma {
     take?: number
     skip?: number
     distinct?: Enumerable<Bookbank_logScalarFieldEnum>
+  }
+
+
+  /**
+   * User.data_leave
+   */
+  export type User$data_leaveArgs = {
+    /**
+     * Select specific fields to fetch from the data_leave
+     */
+    select?: data_leaveSelect | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: data_leaveInclude | null
+    where?: data_leaveWhereInput
+    orderBy?: Enumerable<data_leaveOrderByWithRelationInput>
+    cursor?: data_leaveWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: Enumerable<Data_leaveScalarFieldEnum>
   }
 
 
@@ -30237,6 +30356,1979 @@ export namespace Prisma {
 
 
   /**
+   * Model mas_leave_type
+   */
+
+
+  export type AggregateMas_leave_type = {
+    _count: Mas_leave_typeCountAggregateOutputType | null
+    _avg: Mas_leave_typeAvgAggregateOutputType | null
+    _sum: Mas_leave_typeSumAggregateOutputType | null
+    _min: Mas_leave_typeMinAggregateOutputType | null
+    _max: Mas_leave_typeMaxAggregateOutputType | null
+  }
+
+  export type Mas_leave_typeAvgAggregateOutputType = {
+    orderby: number | null
+  }
+
+  export type Mas_leave_typeSumAggregateOutputType = {
+    orderby: number | null
+  }
+
+  export type Mas_leave_typeMinAggregateOutputType = {
+    id: string | null
+    name: string | null
+    orderby: number | null
+  }
+
+  export type Mas_leave_typeMaxAggregateOutputType = {
+    id: string | null
+    name: string | null
+    orderby: number | null
+  }
+
+  export type Mas_leave_typeCountAggregateOutputType = {
+    id: number
+    name: number
+    orderby: number
+    _all: number
+  }
+
+
+  export type Mas_leave_typeAvgAggregateInputType = {
+    orderby?: true
+  }
+
+  export type Mas_leave_typeSumAggregateInputType = {
+    orderby?: true
+  }
+
+  export type Mas_leave_typeMinAggregateInputType = {
+    id?: true
+    name?: true
+    orderby?: true
+  }
+
+  export type Mas_leave_typeMaxAggregateInputType = {
+    id?: true
+    name?: true
+    orderby?: true
+  }
+
+  export type Mas_leave_typeCountAggregateInputType = {
+    id?: true
+    name?: true
+    orderby?: true
+    _all?: true
+  }
+
+  export type Mas_leave_typeAggregateArgs = {
+    /**
+     * Filter which mas_leave_type to aggregate.
+     */
+    where?: mas_leave_typeWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of mas_leave_types to fetch.
+     */
+    orderBy?: Enumerable<mas_leave_typeOrderByWithRelationInput>
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: mas_leave_typeWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` mas_leave_types from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` mas_leave_types.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned mas_leave_types
+    **/
+    _count?: true | Mas_leave_typeCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: Mas_leave_typeAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: Mas_leave_typeSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: Mas_leave_typeMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: Mas_leave_typeMaxAggregateInputType
+  }
+
+  export type GetMas_leave_typeAggregateType<T extends Mas_leave_typeAggregateArgs> = {
+        [P in keyof T & keyof AggregateMas_leave_type]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateMas_leave_type[P]>
+      : GetScalarType<T[P], AggregateMas_leave_type[P]>
+  }
+
+
+
+
+  export type Mas_leave_typeGroupByArgs = {
+    where?: mas_leave_typeWhereInput
+    orderBy?: Enumerable<mas_leave_typeOrderByWithAggregationInput>
+    by: Mas_leave_typeScalarFieldEnum[]
+    having?: mas_leave_typeScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: Mas_leave_typeCountAggregateInputType | true
+    _avg?: Mas_leave_typeAvgAggregateInputType
+    _sum?: Mas_leave_typeSumAggregateInputType
+    _min?: Mas_leave_typeMinAggregateInputType
+    _max?: Mas_leave_typeMaxAggregateInputType
+  }
+
+
+  export type Mas_leave_typeGroupByOutputType = {
+    id: string
+    name: string
+    orderby: number
+    _count: Mas_leave_typeCountAggregateOutputType | null
+    _avg: Mas_leave_typeAvgAggregateOutputType | null
+    _sum: Mas_leave_typeSumAggregateOutputType | null
+    _min: Mas_leave_typeMinAggregateOutputType | null
+    _max: Mas_leave_typeMaxAggregateOutputType | null
+  }
+
+  type GetMas_leave_typeGroupByPayload<T extends Mas_leave_typeGroupByArgs> = PrismaPromise<
+    Array<
+      PickArray<Mas_leave_typeGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof Mas_leave_typeGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], Mas_leave_typeGroupByOutputType[P]>
+            : GetScalarType<T[P], Mas_leave_typeGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type mas_leave_typeSelect = {
+    id?: boolean
+    name?: boolean
+    orderby?: boolean
+    data_leave?: boolean | mas_leave_type$data_leaveArgs
+    _count?: boolean | Mas_leave_typeCountOutputTypeArgs
+  }
+
+
+  export type mas_leave_typeInclude = {
+    data_leave?: boolean | mas_leave_type$data_leaveArgs
+    _count?: boolean | Mas_leave_typeCountOutputTypeArgs
+  }
+
+  export type mas_leave_typeGetPayload<S extends boolean | null | undefined | mas_leave_typeArgs> =
+    S extends { select: any, include: any } ? 'Please either choose `select` or `include`' :
+    S extends true ? mas_leave_type :
+    S extends undefined ? never :
+    S extends { include: any } & (mas_leave_typeArgs | mas_leave_typeFindManyArgs)
+    ? mas_leave_type  & {
+    [P in TruthyKeys<S['include']>]:
+        P extends 'data_leave' ? Array < data_leaveGetPayload<S['include'][P]>>  :
+        P extends '_count' ? Mas_leave_typeCountOutputTypeGetPayload<S['include'][P]> :  never
+  } 
+    : S extends { select: any } & (mas_leave_typeArgs | mas_leave_typeFindManyArgs)
+      ? {
+    [P in TruthyKeys<S['select']>]:
+        P extends 'data_leave' ? Array < data_leaveGetPayload<S['select'][P]>>  :
+        P extends '_count' ? Mas_leave_typeCountOutputTypeGetPayload<S['select'][P]> :  P extends keyof mas_leave_type ? mas_leave_type[P] : never
+  } 
+      : mas_leave_type
+
+
+  type mas_leave_typeCountArgs = 
+    Omit<mas_leave_typeFindManyArgs, 'select' | 'include'> & {
+      select?: Mas_leave_typeCountAggregateInputType | true
+    }
+
+  export interface mas_leave_typeDelegate<GlobalRejectSettings extends Prisma.RejectOnNotFound | Prisma.RejectPerOperation | false | undefined> {
+
+    /**
+     * Find zero or one Mas_leave_type that matches the filter.
+     * @param {mas_leave_typeFindUniqueArgs} args - Arguments to find a Mas_leave_type
+     * @example
+     * // Get one Mas_leave_type
+     * const mas_leave_type = await prisma.mas_leave_type.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+    **/
+    findUnique<T extends mas_leave_typeFindUniqueArgs,  LocalRejectSettings = T["rejectOnNotFound"] extends RejectOnNotFound ? T['rejectOnNotFound'] : undefined>(
+      args: SelectSubset<T, mas_leave_typeFindUniqueArgs>
+    ): HasReject<GlobalRejectSettings, LocalRejectSettings, 'findUnique', 'mas_leave_type'> extends True ? Prisma__mas_leave_typeClient<mas_leave_typeGetPayload<T>> : Prisma__mas_leave_typeClient<mas_leave_typeGetPayload<T> | null, null>
+
+    /**
+     * Find one Mas_leave_type that matches the filter or throw an error  with `error.code='P2025'` 
+     *     if no matches were found.
+     * @param {mas_leave_typeFindUniqueOrThrowArgs} args - Arguments to find a Mas_leave_type
+     * @example
+     * // Get one Mas_leave_type
+     * const mas_leave_type = await prisma.mas_leave_type.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+    **/
+    findUniqueOrThrow<T extends mas_leave_typeFindUniqueOrThrowArgs>(
+      args?: SelectSubset<T, mas_leave_typeFindUniqueOrThrowArgs>
+    ): Prisma__mas_leave_typeClient<mas_leave_typeGetPayload<T>>
+
+    /**
+     * Find the first Mas_leave_type that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {mas_leave_typeFindFirstArgs} args - Arguments to find a Mas_leave_type
+     * @example
+     * // Get one Mas_leave_type
+     * const mas_leave_type = await prisma.mas_leave_type.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+    **/
+    findFirst<T extends mas_leave_typeFindFirstArgs,  LocalRejectSettings = T["rejectOnNotFound"] extends RejectOnNotFound ? T['rejectOnNotFound'] : undefined>(
+      args?: SelectSubset<T, mas_leave_typeFindFirstArgs>
+    ): HasReject<GlobalRejectSettings, LocalRejectSettings, 'findFirst', 'mas_leave_type'> extends True ? Prisma__mas_leave_typeClient<mas_leave_typeGetPayload<T>> : Prisma__mas_leave_typeClient<mas_leave_typeGetPayload<T> | null, null>
+
+    /**
+     * Find the first Mas_leave_type that matches the filter or
+     * throw `NotFoundError` if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {mas_leave_typeFindFirstOrThrowArgs} args - Arguments to find a Mas_leave_type
+     * @example
+     * // Get one Mas_leave_type
+     * const mas_leave_type = await prisma.mas_leave_type.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+    **/
+    findFirstOrThrow<T extends mas_leave_typeFindFirstOrThrowArgs>(
+      args?: SelectSubset<T, mas_leave_typeFindFirstOrThrowArgs>
+    ): Prisma__mas_leave_typeClient<mas_leave_typeGetPayload<T>>
+
+    /**
+     * Find zero or more Mas_leave_types that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {mas_leave_typeFindManyArgs=} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all Mas_leave_types
+     * const mas_leave_types = await prisma.mas_leave_type.findMany()
+     * 
+     * // Get first 10 Mas_leave_types
+     * const mas_leave_types = await prisma.mas_leave_type.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const mas_leave_typeWithIdOnly = await prisma.mas_leave_type.findMany({ select: { id: true } })
+     * 
+    **/
+    findMany<T extends mas_leave_typeFindManyArgs>(
+      args?: SelectSubset<T, mas_leave_typeFindManyArgs>
+    ): PrismaPromise<Array<mas_leave_typeGetPayload<T>>>
+
+    /**
+     * Create a Mas_leave_type.
+     * @param {mas_leave_typeCreateArgs} args - Arguments to create a Mas_leave_type.
+     * @example
+     * // Create one Mas_leave_type
+     * const Mas_leave_type = await prisma.mas_leave_type.create({
+     *   data: {
+     *     // ... data to create a Mas_leave_type
+     *   }
+     * })
+     * 
+    **/
+    create<T extends mas_leave_typeCreateArgs>(
+      args: SelectSubset<T, mas_leave_typeCreateArgs>
+    ): Prisma__mas_leave_typeClient<mas_leave_typeGetPayload<T>>
+
+    /**
+     * Create many Mas_leave_types.
+     *     @param {mas_leave_typeCreateManyArgs} args - Arguments to create many Mas_leave_types.
+     *     @example
+     *     // Create many Mas_leave_types
+     *     const mas_leave_type = await prisma.mas_leave_type.createMany({
+     *       data: {
+     *         // ... provide data here
+     *       }
+     *     })
+     *     
+    **/
+    createMany<T extends mas_leave_typeCreateManyArgs>(
+      args?: SelectSubset<T, mas_leave_typeCreateManyArgs>
+    ): PrismaPromise<BatchPayload>
+
+    /**
+     * Delete a Mas_leave_type.
+     * @param {mas_leave_typeDeleteArgs} args - Arguments to delete one Mas_leave_type.
+     * @example
+     * // Delete one Mas_leave_type
+     * const Mas_leave_type = await prisma.mas_leave_type.delete({
+     *   where: {
+     *     // ... filter to delete one Mas_leave_type
+     *   }
+     * })
+     * 
+    **/
+    delete<T extends mas_leave_typeDeleteArgs>(
+      args: SelectSubset<T, mas_leave_typeDeleteArgs>
+    ): Prisma__mas_leave_typeClient<mas_leave_typeGetPayload<T>>
+
+    /**
+     * Update one Mas_leave_type.
+     * @param {mas_leave_typeUpdateArgs} args - Arguments to update one Mas_leave_type.
+     * @example
+     * // Update one Mas_leave_type
+     * const mas_leave_type = await prisma.mas_leave_type.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+    **/
+    update<T extends mas_leave_typeUpdateArgs>(
+      args: SelectSubset<T, mas_leave_typeUpdateArgs>
+    ): Prisma__mas_leave_typeClient<mas_leave_typeGetPayload<T>>
+
+    /**
+     * Delete zero or more Mas_leave_types.
+     * @param {mas_leave_typeDeleteManyArgs} args - Arguments to filter Mas_leave_types to delete.
+     * @example
+     * // Delete a few Mas_leave_types
+     * const { count } = await prisma.mas_leave_type.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+    **/
+    deleteMany<T extends mas_leave_typeDeleteManyArgs>(
+      args?: SelectSubset<T, mas_leave_typeDeleteManyArgs>
+    ): PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Mas_leave_types.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {mas_leave_typeUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many Mas_leave_types
+     * const mas_leave_type = await prisma.mas_leave_type.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+    **/
+    updateMany<T extends mas_leave_typeUpdateManyArgs>(
+      args: SelectSubset<T, mas_leave_typeUpdateManyArgs>
+    ): PrismaPromise<BatchPayload>
+
+    /**
+     * Create or update one Mas_leave_type.
+     * @param {mas_leave_typeUpsertArgs} args - Arguments to update or create a Mas_leave_type.
+     * @example
+     * // Update or create a Mas_leave_type
+     * const mas_leave_type = await prisma.mas_leave_type.upsert({
+     *   create: {
+     *     // ... data to create a Mas_leave_type
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the Mas_leave_type we want to update
+     *   }
+     * })
+    **/
+    upsert<T extends mas_leave_typeUpsertArgs>(
+      args: SelectSubset<T, mas_leave_typeUpsertArgs>
+    ): Prisma__mas_leave_typeClient<mas_leave_typeGetPayload<T>>
+
+    /**
+     * Count the number of Mas_leave_types.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {mas_leave_typeCountArgs} args - Arguments to filter Mas_leave_types to count.
+     * @example
+     * // Count the number of Mas_leave_types
+     * const count = await prisma.mas_leave_type.count({
+     *   where: {
+     *     // ... the filter for the Mas_leave_types we want to count
+     *   }
+     * })
+    **/
+    count<T extends mas_leave_typeCountArgs>(
+      args?: Subset<T, mas_leave_typeCountArgs>,
+    ): PrismaPromise<
+      T extends _Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], Mas_leave_typeCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a Mas_leave_type.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {Mas_leave_typeAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends Mas_leave_typeAggregateArgs>(args: Subset<T, Mas_leave_typeAggregateArgs>): PrismaPromise<GetMas_leave_typeAggregateType<T>>
+
+    /**
+     * Group by Mas_leave_type.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {Mas_leave_typeGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends Mas_leave_typeGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: Mas_leave_typeGroupByArgs['orderBy'] }
+        : { orderBy?: Mas_leave_typeGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends TupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, Mas_leave_typeGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetMas_leave_typeGroupByPayload<T> : PrismaPromise<InputErrors>
+
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for mas_leave_type.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export class Prisma__mas_leave_typeClient<T, Null = never> implements PrismaPromise<T> {
+    [prisma]: true;
+    private readonly _dmmf;
+    private readonly _fetcher;
+    private readonly _queryType;
+    private readonly _rootField;
+    private readonly _clientMethod;
+    private readonly _args;
+    private readonly _dataPath;
+    private readonly _errorFormat;
+    private readonly _measurePerformance?;
+    private _isList;
+    private _callsite;
+    private _requestPromise?;
+    constructor(_dmmf: runtime.DMMFClass, _fetcher: PrismaClientFetcher, _queryType: 'query' | 'mutation', _rootField: string, _clientMethod: string, _args: any, _dataPath: string[], _errorFormat: ErrorFormat, _measurePerformance?: boolean | undefined, _isList?: boolean);
+    readonly [Symbol.toStringTag]: 'PrismaClientPromise';
+
+    data_leave<T extends mas_leave_type$data_leaveArgs= {}>(args?: Subset<T, mas_leave_type$data_leaveArgs>): PrismaPromise<Array<data_leaveGetPayload<T>>| Null>;
+
+    private get _document();
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): Promise<TResult1 | TResult2>;
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): Promise<T | TResult>;
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): Promise<T>;
+  }
+
+
+
+  // Custom InputTypes
+
+  /**
+   * mas_leave_type base type for findUnique actions
+   */
+  export type mas_leave_typeFindUniqueArgsBase = {
+    /**
+     * Select specific fields to fetch from the mas_leave_type
+     */
+    select?: mas_leave_typeSelect | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: mas_leave_typeInclude | null
+    /**
+     * Filter, which mas_leave_type to fetch.
+     */
+    where: mas_leave_typeWhereUniqueInput
+  }
+
+  /**
+   * mas_leave_type findUnique
+   */
+  export interface mas_leave_typeFindUniqueArgs extends mas_leave_typeFindUniqueArgsBase {
+   /**
+    * Throw an Error if query returns no results
+    * @deprecated since 4.0.0: use `findUniqueOrThrow` method instead
+    */
+    rejectOnNotFound?: RejectOnNotFound
+  }
+      
+
+  /**
+   * mas_leave_type findUniqueOrThrow
+   */
+  export type mas_leave_typeFindUniqueOrThrowArgs = {
+    /**
+     * Select specific fields to fetch from the mas_leave_type
+     */
+    select?: mas_leave_typeSelect | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: mas_leave_typeInclude | null
+    /**
+     * Filter, which mas_leave_type to fetch.
+     */
+    where: mas_leave_typeWhereUniqueInput
+  }
+
+
+  /**
+   * mas_leave_type base type for findFirst actions
+   */
+  export type mas_leave_typeFindFirstArgsBase = {
+    /**
+     * Select specific fields to fetch from the mas_leave_type
+     */
+    select?: mas_leave_typeSelect | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: mas_leave_typeInclude | null
+    /**
+     * Filter, which mas_leave_type to fetch.
+     */
+    where?: mas_leave_typeWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of mas_leave_types to fetch.
+     */
+    orderBy?: Enumerable<mas_leave_typeOrderByWithRelationInput>
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for mas_leave_types.
+     */
+    cursor?: mas_leave_typeWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` mas_leave_types from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` mas_leave_types.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of mas_leave_types.
+     */
+    distinct?: Enumerable<Mas_leave_typeScalarFieldEnum>
+  }
+
+  /**
+   * mas_leave_type findFirst
+   */
+  export interface mas_leave_typeFindFirstArgs extends mas_leave_typeFindFirstArgsBase {
+   /**
+    * Throw an Error if query returns no results
+    * @deprecated since 4.0.0: use `findFirstOrThrow` method instead
+    */
+    rejectOnNotFound?: RejectOnNotFound
+  }
+      
+
+  /**
+   * mas_leave_type findFirstOrThrow
+   */
+  export type mas_leave_typeFindFirstOrThrowArgs = {
+    /**
+     * Select specific fields to fetch from the mas_leave_type
+     */
+    select?: mas_leave_typeSelect | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: mas_leave_typeInclude | null
+    /**
+     * Filter, which mas_leave_type to fetch.
+     */
+    where?: mas_leave_typeWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of mas_leave_types to fetch.
+     */
+    orderBy?: Enumerable<mas_leave_typeOrderByWithRelationInput>
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for mas_leave_types.
+     */
+    cursor?: mas_leave_typeWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` mas_leave_types from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` mas_leave_types.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of mas_leave_types.
+     */
+    distinct?: Enumerable<Mas_leave_typeScalarFieldEnum>
+  }
+
+
+  /**
+   * mas_leave_type findMany
+   */
+  export type mas_leave_typeFindManyArgs = {
+    /**
+     * Select specific fields to fetch from the mas_leave_type
+     */
+    select?: mas_leave_typeSelect | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: mas_leave_typeInclude | null
+    /**
+     * Filter, which mas_leave_types to fetch.
+     */
+    where?: mas_leave_typeWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of mas_leave_types to fetch.
+     */
+    orderBy?: Enumerable<mas_leave_typeOrderByWithRelationInput>
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing mas_leave_types.
+     */
+    cursor?: mas_leave_typeWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` mas_leave_types from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` mas_leave_types.
+     */
+    skip?: number
+    distinct?: Enumerable<Mas_leave_typeScalarFieldEnum>
+  }
+
+
+  /**
+   * mas_leave_type create
+   */
+  export type mas_leave_typeCreateArgs = {
+    /**
+     * Select specific fields to fetch from the mas_leave_type
+     */
+    select?: mas_leave_typeSelect | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: mas_leave_typeInclude | null
+    /**
+     * The data needed to create a mas_leave_type.
+     */
+    data: XOR<mas_leave_typeCreateInput, mas_leave_typeUncheckedCreateInput>
+  }
+
+
+  /**
+   * mas_leave_type createMany
+   */
+  export type mas_leave_typeCreateManyArgs = {
+    /**
+     * The data used to create many mas_leave_types.
+     */
+    data: Enumerable<mas_leave_typeCreateManyInput>
+    skipDuplicates?: boolean
+  }
+
+
+  /**
+   * mas_leave_type update
+   */
+  export type mas_leave_typeUpdateArgs = {
+    /**
+     * Select specific fields to fetch from the mas_leave_type
+     */
+    select?: mas_leave_typeSelect | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: mas_leave_typeInclude | null
+    /**
+     * The data needed to update a mas_leave_type.
+     */
+    data: XOR<mas_leave_typeUpdateInput, mas_leave_typeUncheckedUpdateInput>
+    /**
+     * Choose, which mas_leave_type to update.
+     */
+    where: mas_leave_typeWhereUniqueInput
+  }
+
+
+  /**
+   * mas_leave_type updateMany
+   */
+  export type mas_leave_typeUpdateManyArgs = {
+    /**
+     * The data used to update mas_leave_types.
+     */
+    data: XOR<mas_leave_typeUpdateManyMutationInput, mas_leave_typeUncheckedUpdateManyInput>
+    /**
+     * Filter which mas_leave_types to update
+     */
+    where?: mas_leave_typeWhereInput
+  }
+
+
+  /**
+   * mas_leave_type upsert
+   */
+  export type mas_leave_typeUpsertArgs = {
+    /**
+     * Select specific fields to fetch from the mas_leave_type
+     */
+    select?: mas_leave_typeSelect | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: mas_leave_typeInclude | null
+    /**
+     * The filter to search for the mas_leave_type to update in case it exists.
+     */
+    where: mas_leave_typeWhereUniqueInput
+    /**
+     * In case the mas_leave_type found by the `where` argument doesn't exist, create a new mas_leave_type with this data.
+     */
+    create: XOR<mas_leave_typeCreateInput, mas_leave_typeUncheckedCreateInput>
+    /**
+     * In case the mas_leave_type was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<mas_leave_typeUpdateInput, mas_leave_typeUncheckedUpdateInput>
+  }
+
+
+  /**
+   * mas_leave_type delete
+   */
+  export type mas_leave_typeDeleteArgs = {
+    /**
+     * Select specific fields to fetch from the mas_leave_type
+     */
+    select?: mas_leave_typeSelect | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: mas_leave_typeInclude | null
+    /**
+     * Filter which mas_leave_type to delete.
+     */
+    where: mas_leave_typeWhereUniqueInput
+  }
+
+
+  /**
+   * mas_leave_type deleteMany
+   */
+  export type mas_leave_typeDeleteManyArgs = {
+    /**
+     * Filter which mas_leave_types to delete
+     */
+    where?: mas_leave_typeWhereInput
+  }
+
+
+  /**
+   * mas_leave_type.data_leave
+   */
+  export type mas_leave_type$data_leaveArgs = {
+    /**
+     * Select specific fields to fetch from the data_leave
+     */
+    select?: data_leaveSelect | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: data_leaveInclude | null
+    where?: data_leaveWhereInput
+    orderBy?: Enumerable<data_leaveOrderByWithRelationInput>
+    cursor?: data_leaveWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: Enumerable<Data_leaveScalarFieldEnum>
+  }
+
+
+  /**
+   * mas_leave_type without action
+   */
+  export type mas_leave_typeArgs = {
+    /**
+     * Select specific fields to fetch from the mas_leave_type
+     */
+    select?: mas_leave_typeSelect | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: mas_leave_typeInclude | null
+  }
+
+
+
+  /**
+   * Model data_leave
+   */
+
+
+  export type AggregateData_leave = {
+    _count: Data_leaveCountAggregateOutputType | null
+    _avg: Data_leaveAvgAggregateOutputType | null
+    _sum: Data_leaveSumAggregateOutputType | null
+    _min: Data_leaveMinAggregateOutputType | null
+    _max: Data_leaveMaxAggregateOutputType | null
+  }
+
+  export type Data_leaveAvgAggregateOutputType = {
+    Status: number | null
+  }
+
+  export type Data_leaveSumAggregateOutputType = {
+    Status: number | null
+  }
+
+  export type Data_leaveMinAggregateOutputType = {
+    id: string | null
+    leavetype_id: string | null
+    start_date: Date | null
+    end_date: Date | null
+    quantity_day: string | null
+    detail_leave: string | null
+    Status: number | null
+    user_id: string | null
+  }
+
+  export type Data_leaveMaxAggregateOutputType = {
+    id: string | null
+    leavetype_id: string | null
+    start_date: Date | null
+    end_date: Date | null
+    quantity_day: string | null
+    detail_leave: string | null
+    Status: number | null
+    user_id: string | null
+  }
+
+  export type Data_leaveCountAggregateOutputType = {
+    id: number
+    leavetype_id: number
+    start_date: number
+    end_date: number
+    quantity_day: number
+    detail_leave: number
+    Status: number
+    user_id: number
+    _all: number
+  }
+
+
+  export type Data_leaveAvgAggregateInputType = {
+    Status?: true
+  }
+
+  export type Data_leaveSumAggregateInputType = {
+    Status?: true
+  }
+
+  export type Data_leaveMinAggregateInputType = {
+    id?: true
+    leavetype_id?: true
+    start_date?: true
+    end_date?: true
+    quantity_day?: true
+    detail_leave?: true
+    Status?: true
+    user_id?: true
+  }
+
+  export type Data_leaveMaxAggregateInputType = {
+    id?: true
+    leavetype_id?: true
+    start_date?: true
+    end_date?: true
+    quantity_day?: true
+    detail_leave?: true
+    Status?: true
+    user_id?: true
+  }
+
+  export type Data_leaveCountAggregateInputType = {
+    id?: true
+    leavetype_id?: true
+    start_date?: true
+    end_date?: true
+    quantity_day?: true
+    detail_leave?: true
+    Status?: true
+    user_id?: true
+    _all?: true
+  }
+
+  export type Data_leaveAggregateArgs = {
+    /**
+     * Filter which data_leave to aggregate.
+     */
+    where?: data_leaveWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of data_leaves to fetch.
+     */
+    orderBy?: Enumerable<data_leaveOrderByWithRelationInput>
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: data_leaveWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` data_leaves from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` data_leaves.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned data_leaves
+    **/
+    _count?: true | Data_leaveCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: Data_leaveAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: Data_leaveSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: Data_leaveMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: Data_leaveMaxAggregateInputType
+  }
+
+  export type GetData_leaveAggregateType<T extends Data_leaveAggregateArgs> = {
+        [P in keyof T & keyof AggregateData_leave]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateData_leave[P]>
+      : GetScalarType<T[P], AggregateData_leave[P]>
+  }
+
+
+
+
+  export type Data_leaveGroupByArgs = {
+    where?: data_leaveWhereInput
+    orderBy?: Enumerable<data_leaveOrderByWithAggregationInput>
+    by: Data_leaveScalarFieldEnum[]
+    having?: data_leaveScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: Data_leaveCountAggregateInputType | true
+    _avg?: Data_leaveAvgAggregateInputType
+    _sum?: Data_leaveSumAggregateInputType
+    _min?: Data_leaveMinAggregateInputType
+    _max?: Data_leaveMaxAggregateInputType
+  }
+
+
+  export type Data_leaveGroupByOutputType = {
+    id: string
+    leavetype_id: string
+    start_date: Date
+    end_date: Date
+    quantity_day: string
+    detail_leave: string
+    Status: number
+    user_id: string
+    _count: Data_leaveCountAggregateOutputType | null
+    _avg: Data_leaveAvgAggregateOutputType | null
+    _sum: Data_leaveSumAggregateOutputType | null
+    _min: Data_leaveMinAggregateOutputType | null
+    _max: Data_leaveMaxAggregateOutputType | null
+  }
+
+  type GetData_leaveGroupByPayload<T extends Data_leaveGroupByArgs> = PrismaPromise<
+    Array<
+      PickArray<Data_leaveGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof Data_leaveGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], Data_leaveGroupByOutputType[P]>
+            : GetScalarType<T[P], Data_leaveGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type data_leaveSelect = {
+    id?: boolean
+    leavetype_id?: boolean
+    leave_type?: boolean | mas_leave_typeArgs
+    start_date?: boolean
+    end_date?: boolean
+    quantity_day?: boolean
+    detail_leave?: boolean
+    Status?: boolean
+    user_id?: boolean
+    user?: boolean | UserArgs
+  }
+
+
+  export type data_leaveInclude = {
+    leave_type?: boolean | mas_leave_typeArgs
+    user?: boolean | UserArgs
+  }
+
+  export type data_leaveGetPayload<S extends boolean | null | undefined | data_leaveArgs> =
+    S extends { select: any, include: any } ? 'Please either choose `select` or `include`' :
+    S extends true ? data_leave :
+    S extends undefined ? never :
+    S extends { include: any } & (data_leaveArgs | data_leaveFindManyArgs)
+    ? data_leave  & {
+    [P in TruthyKeys<S['include']>]:
+        P extends 'leave_type' ? mas_leave_typeGetPayload<S['include'][P]> :
+        P extends 'user' ? UserGetPayload<S['include'][P]> :  never
+  } 
+    : S extends { select: any } & (data_leaveArgs | data_leaveFindManyArgs)
+      ? {
+    [P in TruthyKeys<S['select']>]:
+        P extends 'leave_type' ? mas_leave_typeGetPayload<S['select'][P]> :
+        P extends 'user' ? UserGetPayload<S['select'][P]> :  P extends keyof data_leave ? data_leave[P] : never
+  } 
+      : data_leave
+
+
+  type data_leaveCountArgs = 
+    Omit<data_leaveFindManyArgs, 'select' | 'include'> & {
+      select?: Data_leaveCountAggregateInputType | true
+    }
+
+  export interface data_leaveDelegate<GlobalRejectSettings extends Prisma.RejectOnNotFound | Prisma.RejectPerOperation | false | undefined> {
+
+    /**
+     * Find zero or one Data_leave that matches the filter.
+     * @param {data_leaveFindUniqueArgs} args - Arguments to find a Data_leave
+     * @example
+     * // Get one Data_leave
+     * const data_leave = await prisma.data_leave.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+    **/
+    findUnique<T extends data_leaveFindUniqueArgs,  LocalRejectSettings = T["rejectOnNotFound"] extends RejectOnNotFound ? T['rejectOnNotFound'] : undefined>(
+      args: SelectSubset<T, data_leaveFindUniqueArgs>
+    ): HasReject<GlobalRejectSettings, LocalRejectSettings, 'findUnique', 'data_leave'> extends True ? Prisma__data_leaveClient<data_leaveGetPayload<T>> : Prisma__data_leaveClient<data_leaveGetPayload<T> | null, null>
+
+    /**
+     * Find one Data_leave that matches the filter or throw an error  with `error.code='P2025'` 
+     *     if no matches were found.
+     * @param {data_leaveFindUniqueOrThrowArgs} args - Arguments to find a Data_leave
+     * @example
+     * // Get one Data_leave
+     * const data_leave = await prisma.data_leave.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+    **/
+    findUniqueOrThrow<T extends data_leaveFindUniqueOrThrowArgs>(
+      args?: SelectSubset<T, data_leaveFindUniqueOrThrowArgs>
+    ): Prisma__data_leaveClient<data_leaveGetPayload<T>>
+
+    /**
+     * Find the first Data_leave that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {data_leaveFindFirstArgs} args - Arguments to find a Data_leave
+     * @example
+     * // Get one Data_leave
+     * const data_leave = await prisma.data_leave.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+    **/
+    findFirst<T extends data_leaveFindFirstArgs,  LocalRejectSettings = T["rejectOnNotFound"] extends RejectOnNotFound ? T['rejectOnNotFound'] : undefined>(
+      args?: SelectSubset<T, data_leaveFindFirstArgs>
+    ): HasReject<GlobalRejectSettings, LocalRejectSettings, 'findFirst', 'data_leave'> extends True ? Prisma__data_leaveClient<data_leaveGetPayload<T>> : Prisma__data_leaveClient<data_leaveGetPayload<T> | null, null>
+
+    /**
+     * Find the first Data_leave that matches the filter or
+     * throw `NotFoundError` if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {data_leaveFindFirstOrThrowArgs} args - Arguments to find a Data_leave
+     * @example
+     * // Get one Data_leave
+     * const data_leave = await prisma.data_leave.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+    **/
+    findFirstOrThrow<T extends data_leaveFindFirstOrThrowArgs>(
+      args?: SelectSubset<T, data_leaveFindFirstOrThrowArgs>
+    ): Prisma__data_leaveClient<data_leaveGetPayload<T>>
+
+    /**
+     * Find zero or more Data_leaves that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {data_leaveFindManyArgs=} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all Data_leaves
+     * const data_leaves = await prisma.data_leave.findMany()
+     * 
+     * // Get first 10 Data_leaves
+     * const data_leaves = await prisma.data_leave.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const data_leaveWithIdOnly = await prisma.data_leave.findMany({ select: { id: true } })
+     * 
+    **/
+    findMany<T extends data_leaveFindManyArgs>(
+      args?: SelectSubset<T, data_leaveFindManyArgs>
+    ): PrismaPromise<Array<data_leaveGetPayload<T>>>
+
+    /**
+     * Create a Data_leave.
+     * @param {data_leaveCreateArgs} args - Arguments to create a Data_leave.
+     * @example
+     * // Create one Data_leave
+     * const Data_leave = await prisma.data_leave.create({
+     *   data: {
+     *     // ... data to create a Data_leave
+     *   }
+     * })
+     * 
+    **/
+    create<T extends data_leaveCreateArgs>(
+      args: SelectSubset<T, data_leaveCreateArgs>
+    ): Prisma__data_leaveClient<data_leaveGetPayload<T>>
+
+    /**
+     * Create many Data_leaves.
+     *     @param {data_leaveCreateManyArgs} args - Arguments to create many Data_leaves.
+     *     @example
+     *     // Create many Data_leaves
+     *     const data_leave = await prisma.data_leave.createMany({
+     *       data: {
+     *         // ... provide data here
+     *       }
+     *     })
+     *     
+    **/
+    createMany<T extends data_leaveCreateManyArgs>(
+      args?: SelectSubset<T, data_leaveCreateManyArgs>
+    ): PrismaPromise<BatchPayload>
+
+    /**
+     * Delete a Data_leave.
+     * @param {data_leaveDeleteArgs} args - Arguments to delete one Data_leave.
+     * @example
+     * // Delete one Data_leave
+     * const Data_leave = await prisma.data_leave.delete({
+     *   where: {
+     *     // ... filter to delete one Data_leave
+     *   }
+     * })
+     * 
+    **/
+    delete<T extends data_leaveDeleteArgs>(
+      args: SelectSubset<T, data_leaveDeleteArgs>
+    ): Prisma__data_leaveClient<data_leaveGetPayload<T>>
+
+    /**
+     * Update one Data_leave.
+     * @param {data_leaveUpdateArgs} args - Arguments to update one Data_leave.
+     * @example
+     * // Update one Data_leave
+     * const data_leave = await prisma.data_leave.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+    **/
+    update<T extends data_leaveUpdateArgs>(
+      args: SelectSubset<T, data_leaveUpdateArgs>
+    ): Prisma__data_leaveClient<data_leaveGetPayload<T>>
+
+    /**
+     * Delete zero or more Data_leaves.
+     * @param {data_leaveDeleteManyArgs} args - Arguments to filter Data_leaves to delete.
+     * @example
+     * // Delete a few Data_leaves
+     * const { count } = await prisma.data_leave.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+    **/
+    deleteMany<T extends data_leaveDeleteManyArgs>(
+      args?: SelectSubset<T, data_leaveDeleteManyArgs>
+    ): PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Data_leaves.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {data_leaveUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many Data_leaves
+     * const data_leave = await prisma.data_leave.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+    **/
+    updateMany<T extends data_leaveUpdateManyArgs>(
+      args: SelectSubset<T, data_leaveUpdateManyArgs>
+    ): PrismaPromise<BatchPayload>
+
+    /**
+     * Create or update one Data_leave.
+     * @param {data_leaveUpsertArgs} args - Arguments to update or create a Data_leave.
+     * @example
+     * // Update or create a Data_leave
+     * const data_leave = await prisma.data_leave.upsert({
+     *   create: {
+     *     // ... data to create a Data_leave
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the Data_leave we want to update
+     *   }
+     * })
+    **/
+    upsert<T extends data_leaveUpsertArgs>(
+      args: SelectSubset<T, data_leaveUpsertArgs>
+    ): Prisma__data_leaveClient<data_leaveGetPayload<T>>
+
+    /**
+     * Count the number of Data_leaves.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {data_leaveCountArgs} args - Arguments to filter Data_leaves to count.
+     * @example
+     * // Count the number of Data_leaves
+     * const count = await prisma.data_leave.count({
+     *   where: {
+     *     // ... the filter for the Data_leaves we want to count
+     *   }
+     * })
+    **/
+    count<T extends data_leaveCountArgs>(
+      args?: Subset<T, data_leaveCountArgs>,
+    ): PrismaPromise<
+      T extends _Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], Data_leaveCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a Data_leave.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {Data_leaveAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends Data_leaveAggregateArgs>(args: Subset<T, Data_leaveAggregateArgs>): PrismaPromise<GetData_leaveAggregateType<T>>
+
+    /**
+     * Group by Data_leave.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {Data_leaveGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends Data_leaveGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: Data_leaveGroupByArgs['orderBy'] }
+        : { orderBy?: Data_leaveGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends TupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, Data_leaveGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetData_leaveGroupByPayload<T> : PrismaPromise<InputErrors>
+
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for data_leave.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export class Prisma__data_leaveClient<T, Null = never> implements PrismaPromise<T> {
+    [prisma]: true;
+    private readonly _dmmf;
+    private readonly _fetcher;
+    private readonly _queryType;
+    private readonly _rootField;
+    private readonly _clientMethod;
+    private readonly _args;
+    private readonly _dataPath;
+    private readonly _errorFormat;
+    private readonly _measurePerformance?;
+    private _isList;
+    private _callsite;
+    private _requestPromise?;
+    constructor(_dmmf: runtime.DMMFClass, _fetcher: PrismaClientFetcher, _queryType: 'query' | 'mutation', _rootField: string, _clientMethod: string, _args: any, _dataPath: string[], _errorFormat: ErrorFormat, _measurePerformance?: boolean | undefined, _isList?: boolean);
+    readonly [Symbol.toStringTag]: 'PrismaClientPromise';
+
+    leave_type<T extends mas_leave_typeArgs= {}>(args?: Subset<T, mas_leave_typeArgs>): Prisma__mas_leave_typeClient<mas_leave_typeGetPayload<T> | Null>;
+
+    user<T extends UserArgs= {}>(args?: Subset<T, UserArgs>): Prisma__UserClient<UserGetPayload<T> | Null>;
+
+    private get _document();
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): Promise<TResult1 | TResult2>;
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): Promise<T | TResult>;
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): Promise<T>;
+  }
+
+
+
+  // Custom InputTypes
+
+  /**
+   * data_leave base type for findUnique actions
+   */
+  export type data_leaveFindUniqueArgsBase = {
+    /**
+     * Select specific fields to fetch from the data_leave
+     */
+    select?: data_leaveSelect | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: data_leaveInclude | null
+    /**
+     * Filter, which data_leave to fetch.
+     */
+    where: data_leaveWhereUniqueInput
+  }
+
+  /**
+   * data_leave findUnique
+   */
+  export interface data_leaveFindUniqueArgs extends data_leaveFindUniqueArgsBase {
+   /**
+    * Throw an Error if query returns no results
+    * @deprecated since 4.0.0: use `findUniqueOrThrow` method instead
+    */
+    rejectOnNotFound?: RejectOnNotFound
+  }
+      
+
+  /**
+   * data_leave findUniqueOrThrow
+   */
+  export type data_leaveFindUniqueOrThrowArgs = {
+    /**
+     * Select specific fields to fetch from the data_leave
+     */
+    select?: data_leaveSelect | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: data_leaveInclude | null
+    /**
+     * Filter, which data_leave to fetch.
+     */
+    where: data_leaveWhereUniqueInput
+  }
+
+
+  /**
+   * data_leave base type for findFirst actions
+   */
+  export type data_leaveFindFirstArgsBase = {
+    /**
+     * Select specific fields to fetch from the data_leave
+     */
+    select?: data_leaveSelect | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: data_leaveInclude | null
+    /**
+     * Filter, which data_leave to fetch.
+     */
+    where?: data_leaveWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of data_leaves to fetch.
+     */
+    orderBy?: Enumerable<data_leaveOrderByWithRelationInput>
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for data_leaves.
+     */
+    cursor?: data_leaveWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` data_leaves from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` data_leaves.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of data_leaves.
+     */
+    distinct?: Enumerable<Data_leaveScalarFieldEnum>
+  }
+
+  /**
+   * data_leave findFirst
+   */
+  export interface data_leaveFindFirstArgs extends data_leaveFindFirstArgsBase {
+   /**
+    * Throw an Error if query returns no results
+    * @deprecated since 4.0.0: use `findFirstOrThrow` method instead
+    */
+    rejectOnNotFound?: RejectOnNotFound
+  }
+      
+
+  /**
+   * data_leave findFirstOrThrow
+   */
+  export type data_leaveFindFirstOrThrowArgs = {
+    /**
+     * Select specific fields to fetch from the data_leave
+     */
+    select?: data_leaveSelect | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: data_leaveInclude | null
+    /**
+     * Filter, which data_leave to fetch.
+     */
+    where?: data_leaveWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of data_leaves to fetch.
+     */
+    orderBy?: Enumerable<data_leaveOrderByWithRelationInput>
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for data_leaves.
+     */
+    cursor?: data_leaveWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` data_leaves from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` data_leaves.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of data_leaves.
+     */
+    distinct?: Enumerable<Data_leaveScalarFieldEnum>
+  }
+
+
+  /**
+   * data_leave findMany
+   */
+  export type data_leaveFindManyArgs = {
+    /**
+     * Select specific fields to fetch from the data_leave
+     */
+    select?: data_leaveSelect | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: data_leaveInclude | null
+    /**
+     * Filter, which data_leaves to fetch.
+     */
+    where?: data_leaveWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of data_leaves to fetch.
+     */
+    orderBy?: Enumerable<data_leaveOrderByWithRelationInput>
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing data_leaves.
+     */
+    cursor?: data_leaveWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` data_leaves from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` data_leaves.
+     */
+    skip?: number
+    distinct?: Enumerable<Data_leaveScalarFieldEnum>
+  }
+
+
+  /**
+   * data_leave create
+   */
+  export type data_leaveCreateArgs = {
+    /**
+     * Select specific fields to fetch from the data_leave
+     */
+    select?: data_leaveSelect | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: data_leaveInclude | null
+    /**
+     * The data needed to create a data_leave.
+     */
+    data: XOR<data_leaveCreateInput, data_leaveUncheckedCreateInput>
+  }
+
+
+  /**
+   * data_leave createMany
+   */
+  export type data_leaveCreateManyArgs = {
+    /**
+     * The data used to create many data_leaves.
+     */
+    data: Enumerable<data_leaveCreateManyInput>
+    skipDuplicates?: boolean
+  }
+
+
+  /**
+   * data_leave update
+   */
+  export type data_leaveUpdateArgs = {
+    /**
+     * Select specific fields to fetch from the data_leave
+     */
+    select?: data_leaveSelect | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: data_leaveInclude | null
+    /**
+     * The data needed to update a data_leave.
+     */
+    data: XOR<data_leaveUpdateInput, data_leaveUncheckedUpdateInput>
+    /**
+     * Choose, which data_leave to update.
+     */
+    where: data_leaveWhereUniqueInput
+  }
+
+
+  /**
+   * data_leave updateMany
+   */
+  export type data_leaveUpdateManyArgs = {
+    /**
+     * The data used to update data_leaves.
+     */
+    data: XOR<data_leaveUpdateManyMutationInput, data_leaveUncheckedUpdateManyInput>
+    /**
+     * Filter which data_leaves to update
+     */
+    where?: data_leaveWhereInput
+  }
+
+
+  /**
+   * data_leave upsert
+   */
+  export type data_leaveUpsertArgs = {
+    /**
+     * Select specific fields to fetch from the data_leave
+     */
+    select?: data_leaveSelect | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: data_leaveInclude | null
+    /**
+     * The filter to search for the data_leave to update in case it exists.
+     */
+    where: data_leaveWhereUniqueInput
+    /**
+     * In case the data_leave found by the `where` argument doesn't exist, create a new data_leave with this data.
+     */
+    create: XOR<data_leaveCreateInput, data_leaveUncheckedCreateInput>
+    /**
+     * In case the data_leave was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<data_leaveUpdateInput, data_leaveUncheckedUpdateInput>
+  }
+
+
+  /**
+   * data_leave delete
+   */
+  export type data_leaveDeleteArgs = {
+    /**
+     * Select specific fields to fetch from the data_leave
+     */
+    select?: data_leaveSelect | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: data_leaveInclude | null
+    /**
+     * Filter which data_leave to delete.
+     */
+    where: data_leaveWhereUniqueInput
+  }
+
+
+  /**
+   * data_leave deleteMany
+   */
+  export type data_leaveDeleteManyArgs = {
+    /**
+     * Filter which data_leaves to delete
+     */
+    where?: data_leaveWhereInput
+  }
+
+
+  /**
+   * data_leave without action
+   */
+  export type data_leaveArgs = {
+    /**
+     * Select specific fields to fetch from the data_leave
+     */
+    select?: data_leaveSelect | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: data_leaveInclude | null
+  }
+
+
+
+  /**
    * Enums
    */
 
@@ -30314,6 +32406,20 @@ export namespace Prisma {
   };
 
   export type CompanyScalarFieldEnum = (typeof CompanyScalarFieldEnum)[keyof typeof CompanyScalarFieldEnum]
+
+
+  export const Data_leaveScalarFieldEnum: {
+    id: 'id',
+    leavetype_id: 'leavetype_id',
+    start_date: 'start_date',
+    end_date: 'end_date',
+    quantity_day: 'quantity_day',
+    detail_leave: 'detail_leave',
+    Status: 'Status',
+    user_id: 'user_id'
+  };
+
+  export type Data_leaveScalarFieldEnum = (typeof Data_leaveScalarFieldEnum)[keyof typeof Data_leaveScalarFieldEnum]
 
 
   export const DistrictScalarFieldEnum: {
@@ -30407,6 +32513,15 @@ export namespace Prisma {
   };
 
   export type Mas_income_typeScalarFieldEnum = (typeof Mas_income_typeScalarFieldEnum)[keyof typeof Mas_income_typeScalarFieldEnum]
+
+
+  export const Mas_leave_typeScalarFieldEnum: {
+    id: 'id',
+    name: 'name',
+    orderby: 'orderby'
+  };
+
+  export type Mas_leave_typeScalarFieldEnum = (typeof Mas_leave_typeScalarFieldEnum)[keyof typeof Mas_leave_typeScalarFieldEnum]
 
 
   export const Mas_monthScalarFieldEnum: {
@@ -31158,6 +33273,7 @@ export namespace Prisma {
     salary?: SalaryListRelationFilter
     provident_log?: Provident_logListRelationFilter
     bookbank_log?: Bookbank_logListRelationFilter
+    data_leave?: Data_leaveListRelationFilter
   }
 
   export type UserOrderByWithRelationInput = {
@@ -31183,6 +33299,7 @@ export namespace Prisma {
     salary?: salaryOrderByRelationAggregateInput
     provident_log?: provident_logOrderByRelationAggregateInput
     bookbank_log?: bookbank_logOrderByRelationAggregateInput
+    data_leave?: data_leaveOrderByRelationAggregateInput
   }
 
   export type UserWhereUniqueInput = {
@@ -32521,6 +34638,110 @@ export namespace Prisma {
     salaryId?: UuidNullableWithAggregatesFilter | string | null
   }
 
+  export type mas_leave_typeWhereInput = {
+    AND?: Enumerable<mas_leave_typeWhereInput>
+    OR?: Enumerable<mas_leave_typeWhereInput>
+    NOT?: Enumerable<mas_leave_typeWhereInput>
+    id?: UuidFilter | string
+    name?: StringFilter | string
+    orderby?: IntFilter | number
+    data_leave?: Data_leaveListRelationFilter
+  }
+
+  export type mas_leave_typeOrderByWithRelationInput = {
+    id?: SortOrder
+    name?: SortOrder
+    orderby?: SortOrder
+    data_leave?: data_leaveOrderByRelationAggregateInput
+  }
+
+  export type mas_leave_typeWhereUniqueInput = {
+    id?: string
+  }
+
+  export type mas_leave_typeOrderByWithAggregationInput = {
+    id?: SortOrder
+    name?: SortOrder
+    orderby?: SortOrder
+    _count?: mas_leave_typeCountOrderByAggregateInput
+    _avg?: mas_leave_typeAvgOrderByAggregateInput
+    _max?: mas_leave_typeMaxOrderByAggregateInput
+    _min?: mas_leave_typeMinOrderByAggregateInput
+    _sum?: mas_leave_typeSumOrderByAggregateInput
+  }
+
+  export type mas_leave_typeScalarWhereWithAggregatesInput = {
+    AND?: Enumerable<mas_leave_typeScalarWhereWithAggregatesInput>
+    OR?: Enumerable<mas_leave_typeScalarWhereWithAggregatesInput>
+    NOT?: Enumerable<mas_leave_typeScalarWhereWithAggregatesInput>
+    id?: UuidWithAggregatesFilter | string
+    name?: StringWithAggregatesFilter | string
+    orderby?: IntWithAggregatesFilter | number
+  }
+
+  export type data_leaveWhereInput = {
+    AND?: Enumerable<data_leaveWhereInput>
+    OR?: Enumerable<data_leaveWhereInput>
+    NOT?: Enumerable<data_leaveWhereInput>
+    id?: UuidFilter | string
+    leavetype_id?: UuidFilter | string
+    leave_type?: XOR<Mas_leave_typeRelationFilter, mas_leave_typeWhereInput>
+    start_date?: DateTimeFilter | Date | string
+    end_date?: DateTimeFilter | Date | string
+    quantity_day?: StringFilter | string
+    detail_leave?: StringFilter | string
+    Status?: IntFilter | number
+    user_id?: UuidFilter | string
+    user?: XOR<UserRelationFilter, UserWhereInput>
+  }
+
+  export type data_leaveOrderByWithRelationInput = {
+    id?: SortOrder
+    leavetype_id?: SortOrder
+    leave_type?: mas_leave_typeOrderByWithRelationInput
+    start_date?: SortOrder
+    end_date?: SortOrder
+    quantity_day?: SortOrder
+    detail_leave?: SortOrder
+    Status?: SortOrder
+    user_id?: SortOrder
+    user?: UserOrderByWithRelationInput
+  }
+
+  export type data_leaveWhereUniqueInput = {
+    id?: string
+  }
+
+  export type data_leaveOrderByWithAggregationInput = {
+    id?: SortOrder
+    leavetype_id?: SortOrder
+    start_date?: SortOrder
+    end_date?: SortOrder
+    quantity_day?: SortOrder
+    detail_leave?: SortOrder
+    Status?: SortOrder
+    user_id?: SortOrder
+    _count?: data_leaveCountOrderByAggregateInput
+    _avg?: data_leaveAvgOrderByAggregateInput
+    _max?: data_leaveMaxOrderByAggregateInput
+    _min?: data_leaveMinOrderByAggregateInput
+    _sum?: data_leaveSumOrderByAggregateInput
+  }
+
+  export type data_leaveScalarWhereWithAggregatesInput = {
+    AND?: Enumerable<data_leaveScalarWhereWithAggregatesInput>
+    OR?: Enumerable<data_leaveScalarWhereWithAggregatesInput>
+    NOT?: Enumerable<data_leaveScalarWhereWithAggregatesInput>
+    id?: UuidWithAggregatesFilter | string
+    leavetype_id?: UuidWithAggregatesFilter | string
+    start_date?: DateTimeWithAggregatesFilter | Date | string
+    end_date?: DateTimeWithAggregatesFilter | Date | string
+    quantity_day?: StringWithAggregatesFilter | string
+    detail_leave?: StringWithAggregatesFilter | string
+    Status?: IntWithAggregatesFilter | number
+    user_id?: UuidWithAggregatesFilter | string
+  }
+
   export type CompanyCreateInput = {
     id: string
     name: string
@@ -33225,6 +35446,7 @@ export namespace Prisma {
     salary?: salaryCreateNestedManyWithoutUserInput
     provident_log?: provident_logCreateNestedManyWithoutUserInput
     bookbank_log?: bookbank_logCreateNestedManyWithoutUserInput
+    data_leave?: data_leaveCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateInput = {
@@ -33247,6 +35469,7 @@ export namespace Prisma {
     salary?: salaryUncheckedCreateNestedManyWithoutUserInput
     provident_log?: provident_logUncheckedCreateNestedManyWithoutUserInput
     bookbank_log?: bookbank_logUncheckedCreateNestedManyWithoutUserInput
+    data_leave?: data_leaveUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserUpdateInput = {
@@ -33269,6 +35492,7 @@ export namespace Prisma {
     salary?: salaryUpdateManyWithoutUserNestedInput
     provident_log?: provident_logUpdateManyWithoutUserNestedInput
     bookbank_log?: bookbank_logUpdateManyWithoutUserNestedInput
+    data_leave?: data_leaveUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateInput = {
@@ -33291,6 +35515,7 @@ export namespace Prisma {
     salary?: salaryUncheckedUpdateManyWithoutUserNestedInput
     provident_log?: provident_logUncheckedUpdateManyWithoutUserNestedInput
     bookbank_log?: bookbank_logUncheckedUpdateManyWithoutUserNestedInput
+    data_leave?: data_leaveUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type UserCreateManyInput = {
@@ -34885,6 +37110,127 @@ export namespace Prisma {
     salaryId?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
+  export type mas_leave_typeCreateInput = {
+    id: string
+    name: string
+    orderby: number
+    data_leave?: data_leaveCreateNestedManyWithoutLeave_typeInput
+  }
+
+  export type mas_leave_typeUncheckedCreateInput = {
+    id: string
+    name: string
+    orderby: number
+    data_leave?: data_leaveUncheckedCreateNestedManyWithoutLeave_typeInput
+  }
+
+  export type mas_leave_typeUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    orderby?: IntFieldUpdateOperationsInput | number
+    data_leave?: data_leaveUpdateManyWithoutLeave_typeNestedInput
+  }
+
+  export type mas_leave_typeUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    orderby?: IntFieldUpdateOperationsInput | number
+    data_leave?: data_leaveUncheckedUpdateManyWithoutLeave_typeNestedInput
+  }
+
+  export type mas_leave_typeCreateManyInput = {
+    id: string
+    name: string
+    orderby: number
+  }
+
+  export type mas_leave_typeUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    orderby?: IntFieldUpdateOperationsInput | number
+  }
+
+  export type mas_leave_typeUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    orderby?: IntFieldUpdateOperationsInput | number
+  }
+
+  export type data_leaveCreateInput = {
+    id: string
+    leave_type: mas_leave_typeCreateNestedOneWithoutData_leaveInput
+    start_date: Date | string
+    end_date: Date | string
+    quantity_day: string
+    detail_leave: string
+    Status: number
+    user: UserCreateNestedOneWithoutData_leaveInput
+  }
+
+  export type data_leaveUncheckedCreateInput = {
+    id: string
+    leavetype_id: string
+    start_date: Date | string
+    end_date: Date | string
+    quantity_day: string
+    detail_leave: string
+    Status: number
+    user_id: string
+  }
+
+  export type data_leaveUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    leave_type?: mas_leave_typeUpdateOneRequiredWithoutData_leaveNestedInput
+    start_date?: DateTimeFieldUpdateOperationsInput | Date | string
+    end_date?: DateTimeFieldUpdateOperationsInput | Date | string
+    quantity_day?: StringFieldUpdateOperationsInput | string
+    detail_leave?: StringFieldUpdateOperationsInput | string
+    Status?: IntFieldUpdateOperationsInput | number
+    user?: UserUpdateOneRequiredWithoutData_leaveNestedInput
+  }
+
+  export type data_leaveUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    leavetype_id?: StringFieldUpdateOperationsInput | string
+    start_date?: DateTimeFieldUpdateOperationsInput | Date | string
+    end_date?: DateTimeFieldUpdateOperationsInput | Date | string
+    quantity_day?: StringFieldUpdateOperationsInput | string
+    detail_leave?: StringFieldUpdateOperationsInput | string
+    Status?: IntFieldUpdateOperationsInput | number
+    user_id?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type data_leaveCreateManyInput = {
+    id: string
+    leavetype_id: string
+    start_date: Date | string
+    end_date: Date | string
+    quantity_day: string
+    detail_leave: string
+    Status: number
+    user_id: string
+  }
+
+  export type data_leaveUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    start_date?: DateTimeFieldUpdateOperationsInput | Date | string
+    end_date?: DateTimeFieldUpdateOperationsInput | Date | string
+    quantity_day?: StringFieldUpdateOperationsInput | string
+    detail_leave?: StringFieldUpdateOperationsInput | string
+    Status?: IntFieldUpdateOperationsInput | number
+  }
+
+  export type data_leaveUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    leavetype_id?: StringFieldUpdateOperationsInput | string
+    start_date?: DateTimeFieldUpdateOperationsInput | Date | string
+    end_date?: DateTimeFieldUpdateOperationsInput | Date | string
+    quantity_day?: StringFieldUpdateOperationsInput | string
+    detail_leave?: StringFieldUpdateOperationsInput | string
+    Status?: IntFieldUpdateOperationsInput | number
+    user_id?: StringFieldUpdateOperationsInput | string
+  }
+
   export type UuidFilter = {
     equals?: string
     in?: Enumerable<string>
@@ -35543,6 +37889,12 @@ export namespace Prisma {
     none?: bookbank_logWhereInput
   }
 
+  export type Data_leaveListRelationFilter = {
+    every?: data_leaveWhereInput
+    some?: data_leaveWhereInput
+    none?: data_leaveWhereInput
+  }
+
   export type CompanyOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
@@ -35564,6 +37916,10 @@ export namespace Prisma {
   }
 
   export type bookbank_logOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type data_leaveOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
@@ -36641,6 +38997,78 @@ export namespace Prisma {
     pro_company?: SortOrder
   }
 
+  export type mas_leave_typeCountOrderByAggregateInput = {
+    id?: SortOrder
+    name?: SortOrder
+    orderby?: SortOrder
+  }
+
+  export type mas_leave_typeAvgOrderByAggregateInput = {
+    orderby?: SortOrder
+  }
+
+  export type mas_leave_typeMaxOrderByAggregateInput = {
+    id?: SortOrder
+    name?: SortOrder
+    orderby?: SortOrder
+  }
+
+  export type mas_leave_typeMinOrderByAggregateInput = {
+    id?: SortOrder
+    name?: SortOrder
+    orderby?: SortOrder
+  }
+
+  export type mas_leave_typeSumOrderByAggregateInput = {
+    orderby?: SortOrder
+  }
+
+  export type Mas_leave_typeRelationFilter = {
+    is?: mas_leave_typeWhereInput
+    isNot?: mas_leave_typeWhereInput
+  }
+
+  export type data_leaveCountOrderByAggregateInput = {
+    id?: SortOrder
+    leavetype_id?: SortOrder
+    start_date?: SortOrder
+    end_date?: SortOrder
+    quantity_day?: SortOrder
+    detail_leave?: SortOrder
+    Status?: SortOrder
+    user_id?: SortOrder
+  }
+
+  export type data_leaveAvgOrderByAggregateInput = {
+    Status?: SortOrder
+  }
+
+  export type data_leaveMaxOrderByAggregateInput = {
+    id?: SortOrder
+    leavetype_id?: SortOrder
+    start_date?: SortOrder
+    end_date?: SortOrder
+    quantity_day?: SortOrder
+    detail_leave?: SortOrder
+    Status?: SortOrder
+    user_id?: SortOrder
+  }
+
+  export type data_leaveMinOrderByAggregateInput = {
+    id?: SortOrder
+    leavetype_id?: SortOrder
+    start_date?: SortOrder
+    end_date?: SortOrder
+    quantity_day?: SortOrder
+    detail_leave?: SortOrder
+    Status?: SortOrder
+    user_id?: SortOrder
+  }
+
+  export type data_leaveSumOrderByAggregateInput = {
+    Status?: SortOrder
+  }
+
   export type UserCreateNestedOneWithoutCompanyInput = {
     create?: XOR<UserCreateWithoutCompanyInput, UserUncheckedCreateWithoutCompanyInput>
     connectOrCreate?: UserCreateOrConnectWithoutCompanyInput
@@ -37163,6 +39591,13 @@ export namespace Prisma {
     connect?: Enumerable<bookbank_logWhereUniqueInput>
   }
 
+  export type data_leaveCreateNestedManyWithoutUserInput = {
+    create?: XOR<Enumerable<data_leaveCreateWithoutUserInput>, Enumerable<data_leaveUncheckedCreateWithoutUserInput>>
+    connectOrCreate?: Enumerable<data_leaveCreateOrConnectWithoutUserInput>
+    createMany?: data_leaveCreateManyUserInputEnvelope
+    connect?: Enumerable<data_leaveWhereUniqueInput>
+  }
+
   export type ProfileUncheckedCreateNestedOneWithoutUserInput = {
     create?: XOR<ProfileCreateWithoutUserInput, ProfileUncheckedCreateWithoutUserInput>
     connectOrCreate?: ProfileCreateOrConnectWithoutUserInput
@@ -37215,6 +39650,13 @@ export namespace Prisma {
     connectOrCreate?: Enumerable<bookbank_logCreateOrConnectWithoutUserInput>
     createMany?: bookbank_logCreateManyUserInputEnvelope
     connect?: Enumerable<bookbank_logWhereUniqueInput>
+  }
+
+  export type data_leaveUncheckedCreateNestedManyWithoutUserInput = {
+    create?: XOR<Enumerable<data_leaveCreateWithoutUserInput>, Enumerable<data_leaveUncheckedCreateWithoutUserInput>>
+    connectOrCreate?: Enumerable<data_leaveCreateOrConnectWithoutUserInput>
+    createMany?: data_leaveCreateManyUserInputEnvelope
+    connect?: Enumerable<data_leaveWhereUniqueInput>
   }
 
   export type ProfileUpdateOneWithoutUserNestedInput = {
@@ -37351,6 +39793,20 @@ export namespace Prisma {
     deleteMany?: Enumerable<bookbank_logScalarWhereInput>
   }
 
+  export type data_leaveUpdateManyWithoutUserNestedInput = {
+    create?: XOR<Enumerable<data_leaveCreateWithoutUserInput>, Enumerable<data_leaveUncheckedCreateWithoutUserInput>>
+    connectOrCreate?: Enumerable<data_leaveCreateOrConnectWithoutUserInput>
+    upsert?: Enumerable<data_leaveUpsertWithWhereUniqueWithoutUserInput>
+    createMany?: data_leaveCreateManyUserInputEnvelope
+    set?: Enumerable<data_leaveWhereUniqueInput>
+    disconnect?: Enumerable<data_leaveWhereUniqueInput>
+    delete?: Enumerable<data_leaveWhereUniqueInput>
+    connect?: Enumerable<data_leaveWhereUniqueInput>
+    update?: Enumerable<data_leaveUpdateWithWhereUniqueWithoutUserInput>
+    updateMany?: Enumerable<data_leaveUpdateManyWithWhereWithoutUserInput>
+    deleteMany?: Enumerable<data_leaveScalarWhereInput>
+  }
+
   export type ProfileUncheckedUpdateOneWithoutUserNestedInput = {
     create?: XOR<ProfileCreateWithoutUserInput, ProfileUncheckedCreateWithoutUserInput>
     connectOrCreate?: ProfileCreateOrConnectWithoutUserInput
@@ -37453,6 +39909,20 @@ export namespace Prisma {
     update?: Enumerable<bookbank_logUpdateWithWhereUniqueWithoutUserInput>
     updateMany?: Enumerable<bookbank_logUpdateManyWithWhereWithoutUserInput>
     deleteMany?: Enumerable<bookbank_logScalarWhereInput>
+  }
+
+  export type data_leaveUncheckedUpdateManyWithoutUserNestedInput = {
+    create?: XOR<Enumerable<data_leaveCreateWithoutUserInput>, Enumerable<data_leaveUncheckedCreateWithoutUserInput>>
+    connectOrCreate?: Enumerable<data_leaveCreateOrConnectWithoutUserInput>
+    upsert?: Enumerable<data_leaveUpsertWithWhereUniqueWithoutUserInput>
+    createMany?: data_leaveCreateManyUserInputEnvelope
+    set?: Enumerable<data_leaveWhereUniqueInput>
+    disconnect?: Enumerable<data_leaveWhereUniqueInput>
+    delete?: Enumerable<data_leaveWhereUniqueInput>
+    connect?: Enumerable<data_leaveWhereUniqueInput>
+    update?: Enumerable<data_leaveUpdateWithWhereUniqueWithoutUserInput>
+    updateMany?: Enumerable<data_leaveUpdateManyWithWhereWithoutUserInput>
+    deleteMany?: Enumerable<data_leaveScalarWhereInput>
   }
 
   export type UserCreateNestedManyWithoutRoleInput = {
@@ -38917,6 +41387,76 @@ export namespace Prisma {
     update?: XOR<salaryUpdateWithoutProvident_logInput, salaryUncheckedUpdateWithoutProvident_logInput>
   }
 
+  export type data_leaveCreateNestedManyWithoutLeave_typeInput = {
+    create?: XOR<Enumerable<data_leaveCreateWithoutLeave_typeInput>, Enumerable<data_leaveUncheckedCreateWithoutLeave_typeInput>>
+    connectOrCreate?: Enumerable<data_leaveCreateOrConnectWithoutLeave_typeInput>
+    createMany?: data_leaveCreateManyLeave_typeInputEnvelope
+    connect?: Enumerable<data_leaveWhereUniqueInput>
+  }
+
+  export type data_leaveUncheckedCreateNestedManyWithoutLeave_typeInput = {
+    create?: XOR<Enumerable<data_leaveCreateWithoutLeave_typeInput>, Enumerable<data_leaveUncheckedCreateWithoutLeave_typeInput>>
+    connectOrCreate?: Enumerable<data_leaveCreateOrConnectWithoutLeave_typeInput>
+    createMany?: data_leaveCreateManyLeave_typeInputEnvelope
+    connect?: Enumerable<data_leaveWhereUniqueInput>
+  }
+
+  export type data_leaveUpdateManyWithoutLeave_typeNestedInput = {
+    create?: XOR<Enumerable<data_leaveCreateWithoutLeave_typeInput>, Enumerable<data_leaveUncheckedCreateWithoutLeave_typeInput>>
+    connectOrCreate?: Enumerable<data_leaveCreateOrConnectWithoutLeave_typeInput>
+    upsert?: Enumerable<data_leaveUpsertWithWhereUniqueWithoutLeave_typeInput>
+    createMany?: data_leaveCreateManyLeave_typeInputEnvelope
+    set?: Enumerable<data_leaveWhereUniqueInput>
+    disconnect?: Enumerable<data_leaveWhereUniqueInput>
+    delete?: Enumerable<data_leaveWhereUniqueInput>
+    connect?: Enumerable<data_leaveWhereUniqueInput>
+    update?: Enumerable<data_leaveUpdateWithWhereUniqueWithoutLeave_typeInput>
+    updateMany?: Enumerable<data_leaveUpdateManyWithWhereWithoutLeave_typeInput>
+    deleteMany?: Enumerable<data_leaveScalarWhereInput>
+  }
+
+  export type data_leaveUncheckedUpdateManyWithoutLeave_typeNestedInput = {
+    create?: XOR<Enumerable<data_leaveCreateWithoutLeave_typeInput>, Enumerable<data_leaveUncheckedCreateWithoutLeave_typeInput>>
+    connectOrCreate?: Enumerable<data_leaveCreateOrConnectWithoutLeave_typeInput>
+    upsert?: Enumerable<data_leaveUpsertWithWhereUniqueWithoutLeave_typeInput>
+    createMany?: data_leaveCreateManyLeave_typeInputEnvelope
+    set?: Enumerable<data_leaveWhereUniqueInput>
+    disconnect?: Enumerable<data_leaveWhereUniqueInput>
+    delete?: Enumerable<data_leaveWhereUniqueInput>
+    connect?: Enumerable<data_leaveWhereUniqueInput>
+    update?: Enumerable<data_leaveUpdateWithWhereUniqueWithoutLeave_typeInput>
+    updateMany?: Enumerable<data_leaveUpdateManyWithWhereWithoutLeave_typeInput>
+    deleteMany?: Enumerable<data_leaveScalarWhereInput>
+  }
+
+  export type mas_leave_typeCreateNestedOneWithoutData_leaveInput = {
+    create?: XOR<mas_leave_typeCreateWithoutData_leaveInput, mas_leave_typeUncheckedCreateWithoutData_leaveInput>
+    connectOrCreate?: mas_leave_typeCreateOrConnectWithoutData_leaveInput
+    connect?: mas_leave_typeWhereUniqueInput
+  }
+
+  export type UserCreateNestedOneWithoutData_leaveInput = {
+    create?: XOR<UserCreateWithoutData_leaveInput, UserUncheckedCreateWithoutData_leaveInput>
+    connectOrCreate?: UserCreateOrConnectWithoutData_leaveInput
+    connect?: UserWhereUniqueInput
+  }
+
+  export type mas_leave_typeUpdateOneRequiredWithoutData_leaveNestedInput = {
+    create?: XOR<mas_leave_typeCreateWithoutData_leaveInput, mas_leave_typeUncheckedCreateWithoutData_leaveInput>
+    connectOrCreate?: mas_leave_typeCreateOrConnectWithoutData_leaveInput
+    upsert?: mas_leave_typeUpsertWithoutData_leaveInput
+    connect?: mas_leave_typeWhereUniqueInput
+    update?: XOR<mas_leave_typeUpdateWithoutData_leaveInput, mas_leave_typeUncheckedUpdateWithoutData_leaveInput>
+  }
+
+  export type UserUpdateOneRequiredWithoutData_leaveNestedInput = {
+    create?: XOR<UserCreateWithoutData_leaveInput, UserUncheckedCreateWithoutData_leaveInput>
+    connectOrCreate?: UserCreateOrConnectWithoutData_leaveInput
+    upsert?: UserUpsertWithoutData_leaveInput
+    connect?: UserWhereUniqueInput
+    update?: XOR<UserUpdateWithoutData_leaveInput, UserUncheckedUpdateWithoutData_leaveInput>
+  }
+
   export type NestedUuidFilter = {
     equals?: string
     in?: Enumerable<string>
@@ -39225,6 +41765,7 @@ export namespace Prisma {
     salary?: salaryCreateNestedManyWithoutUserInput
     provident_log?: provident_logCreateNestedManyWithoutUserInput
     bookbank_log?: bookbank_logCreateNestedManyWithoutUserInput
+    data_leave?: data_leaveCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutCompanyInput = {
@@ -39246,6 +41787,7 @@ export namespace Prisma {
     salary?: salaryUncheckedCreateNestedManyWithoutUserInput
     provident_log?: provident_logUncheckedCreateNestedManyWithoutUserInput
     bookbank_log?: bookbank_logUncheckedCreateNestedManyWithoutUserInput
+    data_leave?: data_leaveUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutCompanyInput = {
@@ -39493,6 +42035,7 @@ export namespace Prisma {
     salary?: salaryUpdateManyWithoutUserNestedInput
     provident_log?: provident_logUpdateManyWithoutUserNestedInput
     bookbank_log?: bookbank_logUpdateManyWithoutUserNestedInput
+    data_leave?: data_leaveUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutCompanyInput = {
@@ -39514,6 +42057,7 @@ export namespace Prisma {
     salary?: salaryUncheckedUpdateManyWithoutUserNestedInput
     provident_log?: provident_logUncheckedUpdateManyWithoutUserNestedInput
     bookbank_log?: bookbank_logUncheckedUpdateManyWithoutUserNestedInput
+    data_leave?: data_leaveUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type CompanyBranchUpsertWithWhereUniqueWithoutCompanyInput = {
@@ -39766,6 +42310,7 @@ export namespace Prisma {
     salary?: salaryCreateNestedManyWithoutUserInput
     provident_log?: provident_logCreateNestedManyWithoutUserInput
     bookbank_log?: bookbank_logCreateNestedManyWithoutUserInput
+    data_leave?: data_leaveCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutCompanyBranchInput = {
@@ -39787,6 +42332,7 @@ export namespace Prisma {
     salary?: salaryUncheckedCreateNestedManyWithoutUserInput
     provident_log?: provident_logUncheckedCreateNestedManyWithoutUserInput
     bookbank_log?: bookbank_logUncheckedCreateNestedManyWithoutUserInput
+    data_leave?: data_leaveUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutCompanyBranchInput = {
@@ -40004,6 +42550,7 @@ export namespace Prisma {
     salary?: salaryCreateNestedManyWithoutUserInput
     provident_log?: provident_logCreateNestedManyWithoutUserInput
     bookbank_log?: bookbank_logCreateNestedManyWithoutUserInput
+    data_leave?: data_leaveCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutProfileInput = {
@@ -40025,6 +42572,7 @@ export namespace Prisma {
     salary?: salaryUncheckedCreateNestedManyWithoutUserInput
     provident_log?: provident_logUncheckedCreateNestedManyWithoutUserInput
     bookbank_log?: bookbank_logUncheckedCreateNestedManyWithoutUserInput
+    data_leave?: data_leaveUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutProfileInput = {
@@ -40056,6 +42604,7 @@ export namespace Prisma {
     salary?: salaryUpdateManyWithoutUserNestedInput
     provident_log?: provident_logUpdateManyWithoutUserNestedInput
     bookbank_log?: bookbank_logUpdateManyWithoutUserNestedInput
+    data_leave?: data_leaveUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutProfileInput = {
@@ -40077,6 +42626,7 @@ export namespace Prisma {
     salary?: salaryUncheckedUpdateManyWithoutUserNestedInput
     provident_log?: provident_logUncheckedUpdateManyWithoutUserNestedInput
     bookbank_log?: bookbank_logUncheckedUpdateManyWithoutUserNestedInput
+    data_leave?: data_leaveUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type ProfileCreateWithoutUserInput = {
@@ -40576,6 +43126,36 @@ export namespace Prisma {
     skipDuplicates?: boolean
   }
 
+  export type data_leaveCreateWithoutUserInput = {
+    id: string
+    leave_type: mas_leave_typeCreateNestedOneWithoutData_leaveInput
+    start_date: Date | string
+    end_date: Date | string
+    quantity_day: string
+    detail_leave: string
+    Status: number
+  }
+
+  export type data_leaveUncheckedCreateWithoutUserInput = {
+    id: string
+    leavetype_id: string
+    start_date: Date | string
+    end_date: Date | string
+    quantity_day: string
+    detail_leave: string
+    Status: number
+  }
+
+  export type data_leaveCreateOrConnectWithoutUserInput = {
+    where: data_leaveWhereUniqueInput
+    create: XOR<data_leaveCreateWithoutUserInput, data_leaveUncheckedCreateWithoutUserInput>
+  }
+
+  export type data_leaveCreateManyUserInputEnvelope = {
+    data: Enumerable<data_leaveCreateManyUserInput>
+    skipDuplicates?: boolean
+  }
+
   export type ProfileUpsertWithoutUserInput = {
     update: XOR<ProfileUpdateWithoutUserInput, ProfileUncheckedUpdateWithoutUserInput>
     create: XOR<ProfileCreateWithoutUserInput, ProfileUncheckedCreateWithoutUserInput>
@@ -41021,6 +43601,36 @@ export namespace Prisma {
     userId?: UuidNullableFilter | string | null
   }
 
+  export type data_leaveUpsertWithWhereUniqueWithoutUserInput = {
+    where: data_leaveWhereUniqueInput
+    update: XOR<data_leaveUpdateWithoutUserInput, data_leaveUncheckedUpdateWithoutUserInput>
+    create: XOR<data_leaveCreateWithoutUserInput, data_leaveUncheckedCreateWithoutUserInput>
+  }
+
+  export type data_leaveUpdateWithWhereUniqueWithoutUserInput = {
+    where: data_leaveWhereUniqueInput
+    data: XOR<data_leaveUpdateWithoutUserInput, data_leaveUncheckedUpdateWithoutUserInput>
+  }
+
+  export type data_leaveUpdateManyWithWhereWithoutUserInput = {
+    where: data_leaveScalarWhereInput
+    data: XOR<data_leaveUpdateManyMutationInput, data_leaveUncheckedUpdateManyWithoutData_leaveInput>
+  }
+
+  export type data_leaveScalarWhereInput = {
+    AND?: Enumerable<data_leaveScalarWhereInput>
+    OR?: Enumerable<data_leaveScalarWhereInput>
+    NOT?: Enumerable<data_leaveScalarWhereInput>
+    id?: UuidFilter | string
+    leavetype_id?: UuidFilter | string
+    start_date?: DateTimeFilter | Date | string
+    end_date?: DateTimeFilter | Date | string
+    quantity_day?: StringFilter | string
+    detail_leave?: StringFilter | string
+    Status?: IntFilter | number
+    user_id?: UuidFilter | string
+  }
+
   export type UserCreateWithoutRoleInput = {
     id: string
     email: string
@@ -41040,6 +43650,7 @@ export namespace Prisma {
     salary?: salaryCreateNestedManyWithoutUserInput
     provident_log?: provident_logCreateNestedManyWithoutUserInput
     bookbank_log?: bookbank_logCreateNestedManyWithoutUserInput
+    data_leave?: data_leaveCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutRoleInput = {
@@ -41061,6 +43672,7 @@ export namespace Prisma {
     salary?: salaryUncheckedCreateNestedManyWithoutUserInput
     provident_log?: provident_logUncheckedCreateNestedManyWithoutUserInput
     bookbank_log?: bookbank_logUncheckedCreateNestedManyWithoutUserInput
+    data_leave?: data_leaveUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutRoleInput = {
@@ -41108,6 +43720,7 @@ export namespace Prisma {
     salary?: salaryCreateNestedManyWithoutUserInput
     provident_log?: provident_logCreateNestedManyWithoutUserInput
     bookbank_log?: bookbank_logCreateNestedManyWithoutUserInput
+    data_leave?: data_leaveCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutRole_CompanyInput = {
@@ -41129,6 +43742,7 @@ export namespace Prisma {
     salary?: salaryUncheckedCreateNestedManyWithoutUserInput
     provident_log?: provident_logUncheckedCreateNestedManyWithoutUserInput
     bookbank_log?: bookbank_logUncheckedCreateNestedManyWithoutUserInput
+    data_leave?: data_leaveUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutRole_CompanyInput = {
@@ -42133,6 +44747,7 @@ export namespace Prisma {
     salary?: salaryCreateNestedManyWithoutUserInput
     provident_log?: provident_logCreateNestedManyWithoutUserInput
     bookbank_log?: bookbank_logCreateNestedManyWithoutUserInput
+    data_leave?: data_leaveCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutHenchmanInput = {
@@ -42154,6 +44769,7 @@ export namespace Prisma {
     salary?: salaryUncheckedCreateNestedManyWithoutUserInput
     provident_log?: provident_logUncheckedCreateNestedManyWithoutUserInput
     bookbank_log?: bookbank_logUncheckedCreateNestedManyWithoutUserInput
+    data_leave?: data_leaveUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutHenchmanInput = {
@@ -42180,6 +44796,7 @@ export namespace Prisma {
     salary?: salaryCreateNestedManyWithoutUserInput
     provident_log?: provident_logCreateNestedManyWithoutUserInput
     bookbank_log?: bookbank_logCreateNestedManyWithoutUserInput
+    data_leave?: data_leaveCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutPosition_userInput = {
@@ -42201,6 +44818,7 @@ export namespace Prisma {
     salary?: salaryUncheckedCreateNestedManyWithoutUserInput
     provident_log?: provident_logUncheckedCreateNestedManyWithoutUserInput
     bookbank_log?: bookbank_logUncheckedCreateNestedManyWithoutUserInput
+    data_leave?: data_leaveUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutPosition_userInput = {
@@ -42309,6 +44927,7 @@ export namespace Prisma {
     salary?: salaryUpdateManyWithoutUserNestedInput
     provident_log?: provident_logUpdateManyWithoutUserNestedInput
     bookbank_log?: bookbank_logUpdateManyWithoutUserNestedInput
+    data_leave?: data_leaveUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutHenchmanInput = {
@@ -42330,6 +44949,7 @@ export namespace Prisma {
     salary?: salaryUncheckedUpdateManyWithoutUserNestedInput
     provident_log?: provident_logUncheckedUpdateManyWithoutUserNestedInput
     bookbank_log?: bookbank_logUncheckedUpdateManyWithoutUserNestedInput
+    data_leave?: data_leaveUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type UserUpsertWithoutPosition_userInput = {
@@ -42356,6 +44976,7 @@ export namespace Prisma {
     salary?: salaryUpdateManyWithoutUserNestedInput
     provident_log?: provident_logUpdateManyWithoutUserNestedInput
     bookbank_log?: bookbank_logUpdateManyWithoutUserNestedInput
+    data_leave?: data_leaveUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutPosition_userInput = {
@@ -42377,6 +44998,7 @@ export namespace Prisma {
     salary?: salaryUncheckedUpdateManyWithoutUserNestedInput
     provident_log?: provident_logUncheckedUpdateManyWithoutUserNestedInput
     bookbank_log?: bookbank_logUncheckedUpdateManyWithoutUserNestedInput
+    data_leave?: data_leaveUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type mas_positionlevel1UpsertWithoutPosition_userInput = {
@@ -43555,6 +46177,7 @@ export namespace Prisma {
     mas_all_collect?: mas_all_collectCreateNestedManyWithoutUserInput
     provident_log?: provident_logCreateNestedManyWithoutUserInput
     bookbank_log?: bookbank_logCreateNestedManyWithoutUserInput
+    data_leave?: data_leaveCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutSalaryInput = {
@@ -43576,6 +46199,7 @@ export namespace Prisma {
     mas_all_collect?: mas_all_collectUncheckedCreateNestedManyWithoutUserInput
     provident_log?: provident_logUncheckedCreateNestedManyWithoutUserInput
     bookbank_log?: bookbank_logUncheckedCreateNestedManyWithoutUserInput
+    data_leave?: data_leaveUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutSalaryInput = {
@@ -43747,6 +46371,7 @@ export namespace Prisma {
     mas_all_collect?: mas_all_collectUpdateManyWithoutUserNestedInput
     provident_log?: provident_logUpdateManyWithoutUserNestedInput
     bookbank_log?: bookbank_logUpdateManyWithoutUserNestedInput
+    data_leave?: data_leaveUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutSalaryInput = {
@@ -43768,6 +46393,7 @@ export namespace Prisma {
     mas_all_collect?: mas_all_collectUncheckedUpdateManyWithoutUserNestedInput
     provident_log?: provident_logUncheckedUpdateManyWithoutUserNestedInput
     bookbank_log?: bookbank_logUncheckedUpdateManyWithoutUserNestedInput
+    data_leave?: data_leaveUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type bookbank_logUpsertWithoutSalaryInput = {
@@ -43913,6 +46539,7 @@ export namespace Prisma {
     salary?: salaryCreateNestedManyWithoutUserInput
     provident_log?: provident_logCreateNestedManyWithoutUserInput
     bookbank_log?: bookbank_logCreateNestedManyWithoutUserInput
+    data_leave?: data_leaveCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutMas_all_collectInput = {
@@ -43934,6 +46561,7 @@ export namespace Prisma {
     salary?: salaryUncheckedCreateNestedManyWithoutUserInput
     provident_log?: provident_logUncheckedCreateNestedManyWithoutUserInput
     bookbank_log?: bookbank_logUncheckedCreateNestedManyWithoutUserInput
+    data_leave?: data_leaveUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutMas_all_collectInput = {
@@ -43995,6 +46623,7 @@ export namespace Prisma {
     salary?: salaryUpdateManyWithoutUserNestedInput
     provident_log?: provident_logUpdateManyWithoutUserNestedInput
     bookbank_log?: bookbank_logUpdateManyWithoutUserNestedInput
+    data_leave?: data_leaveUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutMas_all_collectInput = {
@@ -44016,6 +46645,7 @@ export namespace Prisma {
     salary?: salaryUncheckedUpdateManyWithoutUserNestedInput
     provident_log?: provident_logUncheckedUpdateManyWithoutUserNestedInput
     bookbank_log?: bookbank_logUncheckedUpdateManyWithoutUserNestedInput
+    data_leave?: data_leaveUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type provident_logUpsertWithWhereUniqueWithoutMas_all_collectInput = {
@@ -44162,6 +46792,7 @@ export namespace Prisma {
     mas_all_collect?: mas_all_collectCreateNestedManyWithoutUserInput
     salary?: salaryCreateNestedManyWithoutUserInput
     provident_log?: provident_logCreateNestedManyWithoutUserInput
+    data_leave?: data_leaveCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutBookbank_logInput = {
@@ -44183,6 +46814,7 @@ export namespace Prisma {
     mas_all_collect?: mas_all_collectUncheckedCreateNestedManyWithoutUserInput
     salary?: salaryUncheckedCreateNestedManyWithoutUserInput
     provident_log?: provident_logUncheckedCreateNestedManyWithoutUserInput
+    data_leave?: data_leaveUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutBookbank_logInput = {
@@ -44279,6 +46911,7 @@ export namespace Prisma {
     mas_all_collect?: mas_all_collectUpdateManyWithoutUserNestedInput
     salary?: salaryUpdateManyWithoutUserNestedInput
     provident_log?: provident_logUpdateManyWithoutUserNestedInput
+    data_leave?: data_leaveUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutBookbank_logInput = {
@@ -44300,6 +46933,7 @@ export namespace Prisma {
     mas_all_collect?: mas_all_collectUncheckedUpdateManyWithoutUserNestedInput
     salary?: salaryUncheckedUpdateManyWithoutUserNestedInput
     provident_log?: provident_logUncheckedUpdateManyWithoutUserNestedInput
+    data_leave?: data_leaveUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type provident_logUpsertWithWhereUniqueWithoutBookbank_logInput = {
@@ -44337,6 +46971,7 @@ export namespace Prisma {
     mas_all_collect?: mas_all_collectCreateNestedManyWithoutUserInput
     salary?: salaryCreateNestedManyWithoutUserInput
     bookbank_log?: bookbank_logCreateNestedManyWithoutUserInput
+    data_leave?: data_leaveCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutProvident_logInput = {
@@ -44358,6 +46993,7 @@ export namespace Prisma {
     mas_all_collect?: mas_all_collectUncheckedCreateNestedManyWithoutUserInput
     salary?: salaryUncheckedCreateNestedManyWithoutUserInput
     bookbank_log?: bookbank_logUncheckedCreateNestedManyWithoutUserInput
+    data_leave?: data_leaveUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutProvident_logInput = {
@@ -44532,6 +47168,7 @@ export namespace Prisma {
     mas_all_collect?: mas_all_collectUpdateManyWithoutUserNestedInput
     salary?: salaryUpdateManyWithoutUserNestedInput
     bookbank_log?: bookbank_logUpdateManyWithoutUserNestedInput
+    data_leave?: data_leaveUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutProvident_logInput = {
@@ -44553,6 +47190,7 @@ export namespace Prisma {
     mas_all_collect?: mas_all_collectUncheckedUpdateManyWithoutUserNestedInput
     salary?: salaryUncheckedUpdateManyWithoutUserNestedInput
     bookbank_log?: bookbank_logUncheckedUpdateManyWithoutUserNestedInput
+    data_leave?: data_leaveUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type mas_all_collectUpsertWithoutProvident_logInput = {
@@ -44696,6 +47334,184 @@ export namespace Prisma {
     mas_vat_socialsId?: NullableStringFieldUpdateOperationsInput | string | null
     expense_companyId?: NullableStringFieldUpdateOperationsInput | string | null
     provident_logId?: NullableStringFieldUpdateOperationsInput | string | null
+  }
+
+  export type data_leaveCreateWithoutLeave_typeInput = {
+    id: string
+    start_date: Date | string
+    end_date: Date | string
+    quantity_day: string
+    detail_leave: string
+    Status: number
+    user: UserCreateNestedOneWithoutData_leaveInput
+  }
+
+  export type data_leaveUncheckedCreateWithoutLeave_typeInput = {
+    id: string
+    start_date: Date | string
+    end_date: Date | string
+    quantity_day: string
+    detail_leave: string
+    Status: number
+    user_id: string
+  }
+
+  export type data_leaveCreateOrConnectWithoutLeave_typeInput = {
+    where: data_leaveWhereUniqueInput
+    create: XOR<data_leaveCreateWithoutLeave_typeInput, data_leaveUncheckedCreateWithoutLeave_typeInput>
+  }
+
+  export type data_leaveCreateManyLeave_typeInputEnvelope = {
+    data: Enumerable<data_leaveCreateManyLeave_typeInput>
+    skipDuplicates?: boolean
+  }
+
+  export type data_leaveUpsertWithWhereUniqueWithoutLeave_typeInput = {
+    where: data_leaveWhereUniqueInput
+    update: XOR<data_leaveUpdateWithoutLeave_typeInput, data_leaveUncheckedUpdateWithoutLeave_typeInput>
+    create: XOR<data_leaveCreateWithoutLeave_typeInput, data_leaveUncheckedCreateWithoutLeave_typeInput>
+  }
+
+  export type data_leaveUpdateWithWhereUniqueWithoutLeave_typeInput = {
+    where: data_leaveWhereUniqueInput
+    data: XOR<data_leaveUpdateWithoutLeave_typeInput, data_leaveUncheckedUpdateWithoutLeave_typeInput>
+  }
+
+  export type data_leaveUpdateManyWithWhereWithoutLeave_typeInput = {
+    where: data_leaveScalarWhereInput
+    data: XOR<data_leaveUpdateManyMutationInput, data_leaveUncheckedUpdateManyWithoutData_leaveInput>
+  }
+
+  export type mas_leave_typeCreateWithoutData_leaveInput = {
+    id: string
+    name: string
+    orderby: number
+  }
+
+  export type mas_leave_typeUncheckedCreateWithoutData_leaveInput = {
+    id: string
+    name: string
+    orderby: number
+  }
+
+  export type mas_leave_typeCreateOrConnectWithoutData_leaveInput = {
+    where: mas_leave_typeWhereUniqueInput
+    create: XOR<mas_leave_typeCreateWithoutData_leaveInput, mas_leave_typeUncheckedCreateWithoutData_leaveInput>
+  }
+
+  export type UserCreateWithoutData_leaveInput = {
+    id: string
+    email: string
+    password: string
+    profile?: ProfileCreateNestedOneWithoutUserInput
+    islogin?: boolean
+    isActive?: boolean
+    isOwner?: boolean
+    lastlogin?: Date | string | null
+    createdAt?: Date | string
+    role?: RoleCreateNestedOneWithoutUsersInput
+    company?: CompanyCreateNestedManyWithoutOwnerInput
+    companyBranch?: CompanyBranchCreateNestedOneWithoutUsersInput
+    Role_Company?: Role_CompanyCreateNestedOneWithoutUsersInput
+    Position_user?: Position_userCreateNestedOneWithoutUserInput
+    henchman?: Position_userCreateNestedManyWithoutHeaderInput
+    mas_all_collect?: mas_all_collectCreateNestedManyWithoutUserInput
+    salary?: salaryCreateNestedManyWithoutUserInput
+    provident_log?: provident_logCreateNestedManyWithoutUserInput
+    bookbank_log?: bookbank_logCreateNestedManyWithoutUserInput
+  }
+
+  export type UserUncheckedCreateWithoutData_leaveInput = {
+    id: string
+    email: string
+    password: string
+    profile?: ProfileUncheckedCreateNestedOneWithoutUserInput
+    islogin?: boolean
+    isActive?: boolean
+    isOwner?: boolean
+    lastlogin?: Date | string | null
+    createdAt?: Date | string
+    roleId?: string | null
+    RoleCompanyID?: string | null
+    company?: CompanyUncheckedCreateNestedManyWithoutOwnerInput
+    companyBranchId?: string | null
+    Position_user?: Position_userUncheckedCreateNestedOneWithoutUserInput
+    henchman?: Position_userUncheckedCreateNestedManyWithoutHeaderInput
+    mas_all_collect?: mas_all_collectUncheckedCreateNestedManyWithoutUserInput
+    salary?: salaryUncheckedCreateNestedManyWithoutUserInput
+    provident_log?: provident_logUncheckedCreateNestedManyWithoutUserInput
+    bookbank_log?: bookbank_logUncheckedCreateNestedManyWithoutUserInput
+  }
+
+  export type UserCreateOrConnectWithoutData_leaveInput = {
+    where: UserWhereUniqueInput
+    create: XOR<UserCreateWithoutData_leaveInput, UserUncheckedCreateWithoutData_leaveInput>
+  }
+
+  export type mas_leave_typeUpsertWithoutData_leaveInput = {
+    update: XOR<mas_leave_typeUpdateWithoutData_leaveInput, mas_leave_typeUncheckedUpdateWithoutData_leaveInput>
+    create: XOR<mas_leave_typeCreateWithoutData_leaveInput, mas_leave_typeUncheckedCreateWithoutData_leaveInput>
+  }
+
+  export type mas_leave_typeUpdateWithoutData_leaveInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    orderby?: IntFieldUpdateOperationsInput | number
+  }
+
+  export type mas_leave_typeUncheckedUpdateWithoutData_leaveInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    orderby?: IntFieldUpdateOperationsInput | number
+  }
+
+  export type UserUpsertWithoutData_leaveInput = {
+    update: XOR<UserUpdateWithoutData_leaveInput, UserUncheckedUpdateWithoutData_leaveInput>
+    create: XOR<UserCreateWithoutData_leaveInput, UserUncheckedCreateWithoutData_leaveInput>
+  }
+
+  export type UserUpdateWithoutData_leaveInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    password?: StringFieldUpdateOperationsInput | string
+    profile?: ProfileUpdateOneWithoutUserNestedInput
+    islogin?: BoolFieldUpdateOperationsInput | boolean
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    isOwner?: BoolFieldUpdateOperationsInput | boolean
+    lastlogin?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    role?: RoleUpdateOneWithoutUsersNestedInput
+    company?: CompanyUpdateManyWithoutOwnerNestedInput
+    companyBranch?: CompanyBranchUpdateOneWithoutUsersNestedInput
+    Role_Company?: Role_CompanyUpdateOneWithoutUsersNestedInput
+    Position_user?: Position_userUpdateOneWithoutUserNestedInput
+    henchman?: Position_userUpdateManyWithoutHeaderNestedInput
+    mas_all_collect?: mas_all_collectUpdateManyWithoutUserNestedInput
+    salary?: salaryUpdateManyWithoutUserNestedInput
+    provident_log?: provident_logUpdateManyWithoutUserNestedInput
+    bookbank_log?: bookbank_logUpdateManyWithoutUserNestedInput
+  }
+
+  export type UserUncheckedUpdateWithoutData_leaveInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    password?: StringFieldUpdateOperationsInput | string
+    profile?: ProfileUncheckedUpdateOneWithoutUserNestedInput
+    islogin?: BoolFieldUpdateOperationsInput | boolean
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    isOwner?: BoolFieldUpdateOperationsInput | boolean
+    lastlogin?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    roleId?: NullableStringFieldUpdateOperationsInput | string | null
+    RoleCompanyID?: NullableStringFieldUpdateOperationsInput | string | null
+    company?: CompanyUncheckedUpdateManyWithoutOwnerNestedInput
+    companyBranchId?: NullableStringFieldUpdateOperationsInput | string | null
+    Position_user?: Position_userUncheckedUpdateOneWithoutUserNestedInput
+    henchman?: Position_userUncheckedUpdateManyWithoutHeaderNestedInput
+    mas_all_collect?: mas_all_collectUncheckedUpdateManyWithoutUserNestedInput
+    salary?: salaryUncheckedUpdateManyWithoutUserNestedInput
+    provident_log?: provident_logUncheckedUpdateManyWithoutUserNestedInput
+    bookbank_log?: bookbank_logUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type CompanyBranchCreateManyCompanyInput = {
@@ -45042,6 +47858,7 @@ export namespace Prisma {
     salary?: salaryUpdateManyWithoutUserNestedInput
     provident_log?: provident_logUpdateManyWithoutUserNestedInput
     bookbank_log?: bookbank_logUpdateManyWithoutUserNestedInput
+    data_leave?: data_leaveUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutCompanyBranchInput = {
@@ -45063,6 +47880,7 @@ export namespace Prisma {
     salary?: salaryUncheckedUpdateManyWithoutUserNestedInput
     provident_log?: provident_logUncheckedUpdateManyWithoutUserNestedInput
     bookbank_log?: bookbank_logUncheckedUpdateManyWithoutUserNestedInput
+    data_leave?: data_leaveUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateManyWithoutUsersInput = {
@@ -45220,6 +48038,16 @@ export namespace Prisma {
     base_salary: number
     provident_com?: number
     provident_emp?: number
+  }
+
+  export type data_leaveCreateManyUserInput = {
+    id: string
+    leavetype_id: string
+    start_date: Date | string
+    end_date: Date | string
+    quantity_day: string
+    detail_leave: string
+    Status: number
   }
 
   export type CompanyUpdateWithoutOwnerInput = {
@@ -45518,6 +48346,36 @@ export namespace Prisma {
     provident_emp?: FloatFieldUpdateOperationsInput | number
   }
 
+  export type data_leaveUpdateWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    leave_type?: mas_leave_typeUpdateOneRequiredWithoutData_leaveNestedInput
+    start_date?: DateTimeFieldUpdateOperationsInput | Date | string
+    end_date?: DateTimeFieldUpdateOperationsInput | Date | string
+    quantity_day?: StringFieldUpdateOperationsInput | string
+    detail_leave?: StringFieldUpdateOperationsInput | string
+    Status?: IntFieldUpdateOperationsInput | number
+  }
+
+  export type data_leaveUncheckedUpdateWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    leavetype_id?: StringFieldUpdateOperationsInput | string
+    start_date?: DateTimeFieldUpdateOperationsInput | Date | string
+    end_date?: DateTimeFieldUpdateOperationsInput | Date | string
+    quantity_day?: StringFieldUpdateOperationsInput | string
+    detail_leave?: StringFieldUpdateOperationsInput | string
+    Status?: IntFieldUpdateOperationsInput | number
+  }
+
+  export type data_leaveUncheckedUpdateManyWithoutData_leaveInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    leavetype_id?: StringFieldUpdateOperationsInput | string
+    start_date?: DateTimeFieldUpdateOperationsInput | Date | string
+    end_date?: DateTimeFieldUpdateOperationsInput | Date | string
+    quantity_day?: StringFieldUpdateOperationsInput | string
+    detail_leave?: StringFieldUpdateOperationsInput | string
+    Status?: IntFieldUpdateOperationsInput | number
+  }
+
   export type UserCreateManyRoleInput = {
     id: string
     email: string
@@ -45550,6 +48408,7 @@ export namespace Prisma {
     salary?: salaryUpdateManyWithoutUserNestedInput
     provident_log?: provident_logUpdateManyWithoutUserNestedInput
     bookbank_log?: bookbank_logUpdateManyWithoutUserNestedInput
+    data_leave?: data_leaveUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutRoleInput = {
@@ -45571,6 +48430,7 @@ export namespace Prisma {
     salary?: salaryUncheckedUpdateManyWithoutUserNestedInput
     provident_log?: provident_logUncheckedUpdateManyWithoutUserNestedInput
     bookbank_log?: bookbank_logUncheckedUpdateManyWithoutUserNestedInput
+    data_leave?: data_leaveUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type UserCreateManyRole_CompanyInput = {
@@ -45605,6 +48465,7 @@ export namespace Prisma {
     salary?: salaryUpdateManyWithoutUserNestedInput
     provident_log?: provident_logUpdateManyWithoutUserNestedInput
     bookbank_log?: bookbank_logUpdateManyWithoutUserNestedInput
+    data_leave?: data_leaveUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutRole_CompanyInput = {
@@ -45626,6 +48487,7 @@ export namespace Prisma {
     salary?: salaryUncheckedUpdateManyWithoutUserNestedInput
     provident_log?: provident_logUncheckedUpdateManyWithoutUserNestedInput
     bookbank_log?: bookbank_logUncheckedUpdateManyWithoutUserNestedInput
+    data_leave?: data_leaveUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type DistrictCreateManyProvinceInput = {
@@ -46761,6 +49623,36 @@ export namespace Prisma {
     pro_company?: NullableFloatFieldUpdateOperationsInput | number | null
     mas_all_collectId?: NullableStringFieldUpdateOperationsInput | string | null
     salaryId?: NullableStringFieldUpdateOperationsInput | string | null
+  }
+
+  export type data_leaveCreateManyLeave_typeInput = {
+    id: string
+    start_date: Date | string
+    end_date: Date | string
+    quantity_day: string
+    detail_leave: string
+    Status: number
+    user_id: string
+  }
+
+  export type data_leaveUpdateWithoutLeave_typeInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    start_date?: DateTimeFieldUpdateOperationsInput | Date | string
+    end_date?: DateTimeFieldUpdateOperationsInput | Date | string
+    quantity_day?: StringFieldUpdateOperationsInput | string
+    detail_leave?: StringFieldUpdateOperationsInput | string
+    Status?: IntFieldUpdateOperationsInput | number
+    user?: UserUpdateOneRequiredWithoutData_leaveNestedInput
+  }
+
+  export type data_leaveUncheckedUpdateWithoutLeave_typeInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    start_date?: DateTimeFieldUpdateOperationsInput | Date | string
+    end_date?: DateTimeFieldUpdateOperationsInput | Date | string
+    quantity_day?: StringFieldUpdateOperationsInput | string
+    detail_leave?: StringFieldUpdateOperationsInput | string
+    Status?: IntFieldUpdateOperationsInput | number
+    user_id?: StringFieldUpdateOperationsInput | string
   }
 
 

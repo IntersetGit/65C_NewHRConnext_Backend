@@ -579,6 +579,7 @@ const resolvers: Resolvers = {
             incomeYears: 0 + args.data?.net,
             month: Thismonth,
             years: ThisYear,
+            mas_bankId: args.data?.mas_bankId,
             provident_log: {
               create: {
                 id: v4(),
@@ -650,6 +651,7 @@ const resolvers: Resolvers = {
             incomeYears: result_incomeYears + args.data?.net,
             month: Thismonth,
             years: ThisYear,
+            mas_bankId: args.data?.mas_bankId,
             provident_log: {
               create: {
                 id: v4(),
@@ -704,6 +706,7 @@ const resolvers: Resolvers = {
             incomeYears: 0 + args.data?.net,
             month: Thismonth,
             years: ThisYear,
+            mas_bankId: args.data?.mas_bankId,
             provident_log: {
               create: {
                 id: v4(),
