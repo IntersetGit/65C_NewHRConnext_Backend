@@ -74,8 +74,8 @@ export const salaryTypedef = gql`
 
   input salaryInput {
     id: ID
-    mas_monthId: String
-    mas_yearsId: String
+    month: String
+    year: String
     commission: Float
     position_income: Float
     ot: Float
@@ -108,8 +108,8 @@ export const salaryTypedef = gql`
   }
   type salary {
     id: ID
-    mas_monthId: String
-    mas_yearsId: String
+    month: String
+    years: String
     commission: Float
     position_income: Float
     ot: Float
