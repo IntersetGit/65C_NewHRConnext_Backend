@@ -1649,6 +1649,7 @@ export namespace Prisma {
 
   export type UserCountOutputType = {
     company: number
+    Position_user: number
     henchman: number
     mas_all_collect: number
     salary: number
@@ -1659,6 +1660,7 @@ export namespace Prisma {
 
   export type UserCountOutputTypeSelect = {
     company?: boolean
+    Position_user?: boolean
     henchman?: boolean
     mas_all_collect?: boolean
     salary?: boolean
@@ -6340,7 +6342,7 @@ export namespace Prisma {
     companyBranch?: boolean | CompanyBranchArgs
     companyBranchId?: boolean
     Role_Company?: boolean | Role_CompanyArgs
-    Position_user?: boolean | Position_userArgs
+    Position_user?: boolean | User$Position_userArgs
     henchman?: boolean | User$henchmanArgs
     mas_all_collect?: boolean | User$mas_all_collectArgs
     salary?: boolean | User$salaryArgs
@@ -6357,7 +6359,7 @@ export namespace Prisma {
     company?: boolean | User$companyArgs
     companyBranch?: boolean | CompanyBranchArgs
     Role_Company?: boolean | Role_CompanyArgs
-    Position_user?: boolean | Position_userArgs
+    Position_user?: boolean | User$Position_userArgs
     henchman?: boolean | User$henchmanArgs
     mas_all_collect?: boolean | User$mas_all_collectArgs
     salary?: boolean | User$salaryArgs
@@ -6379,7 +6381,7 @@ export namespace Prisma {
         P extends 'company' ? Array < CompanyGetPayload<S['include'][P]>>  :
         P extends 'companyBranch' ? CompanyBranchGetPayload<S['include'][P]> | null :
         P extends 'Role_Company' ? Role_CompanyGetPayload<S['include'][P]> | null :
-        P extends 'Position_user' ? Position_userGetPayload<S['include'][P]> | null :
+        P extends 'Position_user' ? Array < Position_userGetPayload<S['include'][P]>>  :
         P extends 'henchman' ? Array < Position_userGetPayload<S['include'][P]>>  :
         P extends 'mas_all_collect' ? Array < mas_all_collectGetPayload<S['include'][P]>>  :
         P extends 'salary' ? Array < salaryGetPayload<S['include'][P]>>  :
@@ -6396,7 +6398,7 @@ export namespace Prisma {
         P extends 'company' ? Array < CompanyGetPayload<S['select'][P]>>  :
         P extends 'companyBranch' ? CompanyBranchGetPayload<S['select'][P]> | null :
         P extends 'Role_Company' ? Role_CompanyGetPayload<S['select'][P]> | null :
-        P extends 'Position_user' ? Position_userGetPayload<S['select'][P]> | null :
+        P extends 'Position_user' ? Array < Position_userGetPayload<S['select'][P]>>  :
         P extends 'henchman' ? Array < Position_userGetPayload<S['select'][P]>>  :
         P extends 'mas_all_collect' ? Array < mas_all_collectGetPayload<S['select'][P]>>  :
         P extends 'salary' ? Array < salaryGetPayload<S['select'][P]>>  :
@@ -6787,7 +6789,7 @@ export namespace Prisma {
 
     Role_Company<T extends Role_CompanyArgs= {}>(args?: Subset<T, Role_CompanyArgs>): Prisma__Role_CompanyClient<Role_CompanyGetPayload<T> | Null>;
 
-    Position_user<T extends Position_userArgs= {}>(args?: Subset<T, Position_userArgs>): Prisma__Position_userClient<Position_userGetPayload<T> | Null>;
+    Position_user<T extends User$Position_userArgs= {}>(args?: Subset<T, User$Position_userArgs>): PrismaPromise<Array<Position_userGetPayload<T>>| Null>;
 
     henchman<T extends User$henchmanArgs= {}>(args?: Subset<T, User$henchmanArgs>): PrismaPromise<Array<Position_userGetPayload<T>>| Null>;
 
@@ -7174,6 +7176,27 @@ export namespace Prisma {
     take?: number
     skip?: number
     distinct?: Enumerable<CompanyScalarFieldEnum>
+  }
+
+
+  /**
+   * User.Position_user
+   */
+  export type User$Position_userArgs = {
+    /**
+     * Select specific fields to fetch from the Position_user
+     */
+    select?: Position_userSelect | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: Position_userInclude | null
+    where?: Position_userWhereInput
+    orderBy?: Enumerable<Position_userOrderByWithRelationInput>
+    cursor?: Position_userWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: Enumerable<Position_userScalarFieldEnum>
   }
 
 
@@ -33267,7 +33290,7 @@ export namespace Prisma {
     companyBranch?: XOR<CompanyBranchRelationFilter, CompanyBranchWhereInput> | null
     companyBranchId?: UuidNullableFilter | string | null
     Role_Company?: XOR<Role_CompanyRelationFilter, Role_CompanyWhereInput> | null
-    Position_user?: XOR<Position_userRelationFilter, Position_userWhereInput> | null
+    Position_user?: Position_userListRelationFilter
     henchman?: Position_userListRelationFilter
     mas_all_collect?: Mas_all_collectListRelationFilter
     salary?: SalaryListRelationFilter
@@ -33293,7 +33316,7 @@ export namespace Prisma {
     companyBranch?: CompanyBranchOrderByWithRelationInput
     companyBranchId?: SortOrder
     Role_Company?: Role_CompanyOrderByWithRelationInput
-    Position_user?: Position_userOrderByWithRelationInput
+    Position_user?: Position_userOrderByRelationAggregateInput
     henchman?: Position_userOrderByRelationAggregateInput
     mas_all_collect?: mas_all_collectOrderByRelationAggregateInput
     salary?: salaryOrderByRelationAggregateInput
@@ -33809,7 +33832,6 @@ export namespace Prisma {
 
   export type Position_userWhereUniqueInput = {
     id?: string
-    user_id?: string
   }
 
   export type Position_userOrderByWithAggregationInput = {
@@ -35440,7 +35462,7 @@ export namespace Prisma {
     company?: CompanyCreateNestedManyWithoutOwnerInput
     companyBranch?: CompanyBranchCreateNestedOneWithoutUsersInput
     Role_Company?: Role_CompanyCreateNestedOneWithoutUsersInput
-    Position_user?: Position_userCreateNestedOneWithoutUserInput
+    Position_user?: Position_userCreateNestedManyWithoutUserInput
     henchman?: Position_userCreateNestedManyWithoutHeaderInput
     mas_all_collect?: mas_all_collectCreateNestedManyWithoutUserInput
     salary?: salaryCreateNestedManyWithoutUserInput
@@ -35463,7 +35485,7 @@ export namespace Prisma {
     RoleCompanyID?: string | null
     company?: CompanyUncheckedCreateNestedManyWithoutOwnerInput
     companyBranchId?: string | null
-    Position_user?: Position_userUncheckedCreateNestedOneWithoutUserInput
+    Position_user?: Position_userUncheckedCreateNestedManyWithoutUserInput
     henchman?: Position_userUncheckedCreateNestedManyWithoutHeaderInput
     mas_all_collect?: mas_all_collectUncheckedCreateNestedManyWithoutUserInput
     salary?: salaryUncheckedCreateNestedManyWithoutUserInput
@@ -35486,7 +35508,7 @@ export namespace Prisma {
     company?: CompanyUpdateManyWithoutOwnerNestedInput
     companyBranch?: CompanyBranchUpdateOneWithoutUsersNestedInput
     Role_Company?: Role_CompanyUpdateOneWithoutUsersNestedInput
-    Position_user?: Position_userUpdateOneWithoutUserNestedInput
+    Position_user?: Position_userUpdateManyWithoutUserNestedInput
     henchman?: Position_userUpdateManyWithoutHeaderNestedInput
     mas_all_collect?: mas_all_collectUpdateManyWithoutUserNestedInput
     salary?: salaryUpdateManyWithoutUserNestedInput
@@ -35509,7 +35531,7 @@ export namespace Prisma {
     RoleCompanyID?: NullableStringFieldUpdateOperationsInput | string | null
     company?: CompanyUncheckedUpdateManyWithoutOwnerNestedInput
     companyBranchId?: NullableStringFieldUpdateOperationsInput | string | null
-    Position_user?: Position_userUncheckedUpdateOneWithoutUserNestedInput
+    Position_user?: Position_userUncheckedUpdateManyWithoutUserNestedInput
     henchman?: Position_userUncheckedUpdateManyWithoutHeaderNestedInput
     mas_all_collect?: mas_all_collectUncheckedUpdateManyWithoutUserNestedInput
     salary?: salaryUncheckedUpdateManyWithoutUserNestedInput
@@ -37854,11 +37876,6 @@ export namespace Prisma {
     isNot?: Role_CompanyWhereInput | null
   }
 
-  export type Position_userRelationFilter = {
-    is?: Position_userWhereInput | null
-    isNot?: Position_userWhereInput | null
-  }
-
   export type Position_userListRelationFilter = {
     every?: Position_userWhereInput
     some?: Position_userWhereInput
@@ -39550,10 +39567,11 @@ export namespace Prisma {
     connect?: Role_CompanyWhereUniqueInput
   }
 
-  export type Position_userCreateNestedOneWithoutUserInput = {
-    create?: XOR<Position_userCreateWithoutUserInput, Position_userUncheckedCreateWithoutUserInput>
-    connectOrCreate?: Position_userCreateOrConnectWithoutUserInput
-    connect?: Position_userWhereUniqueInput
+  export type Position_userCreateNestedManyWithoutUserInput = {
+    create?: XOR<Enumerable<Position_userCreateWithoutUserInput>, Enumerable<Position_userUncheckedCreateWithoutUserInput>>
+    connectOrCreate?: Enumerable<Position_userCreateOrConnectWithoutUserInput>
+    createMany?: Position_userCreateManyUserInputEnvelope
+    connect?: Enumerable<Position_userWhereUniqueInput>
   }
 
   export type Position_userCreateNestedManyWithoutHeaderInput = {
@@ -39611,10 +39629,11 @@ export namespace Prisma {
     connect?: Enumerable<CompanyWhereUniqueInput>
   }
 
-  export type Position_userUncheckedCreateNestedOneWithoutUserInput = {
-    create?: XOR<Position_userCreateWithoutUserInput, Position_userUncheckedCreateWithoutUserInput>
-    connectOrCreate?: Position_userCreateOrConnectWithoutUserInput
-    connect?: Position_userWhereUniqueInput
+  export type Position_userUncheckedCreateNestedManyWithoutUserInput = {
+    create?: XOR<Enumerable<Position_userCreateWithoutUserInput>, Enumerable<Position_userUncheckedCreateWithoutUserInput>>
+    connectOrCreate?: Enumerable<Position_userCreateOrConnectWithoutUserInput>
+    createMany?: Position_userCreateManyUserInputEnvelope
+    connect?: Enumerable<Position_userWhereUniqueInput>
   }
 
   export type Position_userUncheckedCreateNestedManyWithoutHeaderInput = {
@@ -39713,14 +39732,18 @@ export namespace Prisma {
     update?: XOR<Role_CompanyUpdateWithoutUsersInput, Role_CompanyUncheckedUpdateWithoutUsersInput>
   }
 
-  export type Position_userUpdateOneWithoutUserNestedInput = {
-    create?: XOR<Position_userCreateWithoutUserInput, Position_userUncheckedCreateWithoutUserInput>
-    connectOrCreate?: Position_userCreateOrConnectWithoutUserInput
-    upsert?: Position_userUpsertWithoutUserInput
-    disconnect?: boolean
-    delete?: boolean
-    connect?: Position_userWhereUniqueInput
-    update?: XOR<Position_userUpdateWithoutUserInput, Position_userUncheckedUpdateWithoutUserInput>
+  export type Position_userUpdateManyWithoutUserNestedInput = {
+    create?: XOR<Enumerable<Position_userCreateWithoutUserInput>, Enumerable<Position_userUncheckedCreateWithoutUserInput>>
+    connectOrCreate?: Enumerable<Position_userCreateOrConnectWithoutUserInput>
+    upsert?: Enumerable<Position_userUpsertWithWhereUniqueWithoutUserInput>
+    createMany?: Position_userCreateManyUserInputEnvelope
+    set?: Enumerable<Position_userWhereUniqueInput>
+    disconnect?: Enumerable<Position_userWhereUniqueInput>
+    delete?: Enumerable<Position_userWhereUniqueInput>
+    connect?: Enumerable<Position_userWhereUniqueInput>
+    update?: Enumerable<Position_userUpdateWithWhereUniqueWithoutUserInput>
+    updateMany?: Enumerable<Position_userUpdateManyWithWhereWithoutUserInput>
+    deleteMany?: Enumerable<Position_userScalarWhereInput>
   }
 
   export type Position_userUpdateManyWithoutHeaderNestedInput = {
@@ -39831,14 +39854,18 @@ export namespace Prisma {
     deleteMany?: Enumerable<CompanyScalarWhereInput>
   }
 
-  export type Position_userUncheckedUpdateOneWithoutUserNestedInput = {
-    create?: XOR<Position_userCreateWithoutUserInput, Position_userUncheckedCreateWithoutUserInput>
-    connectOrCreate?: Position_userCreateOrConnectWithoutUserInput
-    upsert?: Position_userUpsertWithoutUserInput
-    disconnect?: boolean
-    delete?: boolean
-    connect?: Position_userWhereUniqueInput
-    update?: XOR<Position_userUpdateWithoutUserInput, Position_userUncheckedUpdateWithoutUserInput>
+  export type Position_userUncheckedUpdateManyWithoutUserNestedInput = {
+    create?: XOR<Enumerable<Position_userCreateWithoutUserInput>, Enumerable<Position_userUncheckedCreateWithoutUserInput>>
+    connectOrCreate?: Enumerable<Position_userCreateOrConnectWithoutUserInput>
+    upsert?: Enumerable<Position_userUpsertWithWhereUniqueWithoutUserInput>
+    createMany?: Position_userCreateManyUserInputEnvelope
+    set?: Enumerable<Position_userWhereUniqueInput>
+    disconnect?: Enumerable<Position_userWhereUniqueInput>
+    delete?: Enumerable<Position_userWhereUniqueInput>
+    connect?: Enumerable<Position_userWhereUniqueInput>
+    update?: Enumerable<Position_userUpdateWithWhereUniqueWithoutUserInput>
+    updateMany?: Enumerable<Position_userUpdateManyWithWhereWithoutUserInput>
+    deleteMany?: Enumerable<Position_userScalarWhereInput>
   }
 
   export type Position_userUncheckedUpdateManyWithoutHeaderNestedInput = {
@@ -41759,7 +41786,7 @@ export namespace Prisma {
     role?: RoleCreateNestedOneWithoutUsersInput
     companyBranch?: CompanyBranchCreateNestedOneWithoutUsersInput
     Role_Company?: Role_CompanyCreateNestedOneWithoutUsersInput
-    Position_user?: Position_userCreateNestedOneWithoutUserInput
+    Position_user?: Position_userCreateNestedManyWithoutUserInput
     henchman?: Position_userCreateNestedManyWithoutHeaderInput
     mas_all_collect?: mas_all_collectCreateNestedManyWithoutUserInput
     salary?: salaryCreateNestedManyWithoutUserInput
@@ -41781,7 +41808,7 @@ export namespace Prisma {
     roleId?: string | null
     RoleCompanyID?: string | null
     companyBranchId?: string | null
-    Position_user?: Position_userUncheckedCreateNestedOneWithoutUserInput
+    Position_user?: Position_userUncheckedCreateNestedManyWithoutUserInput
     henchman?: Position_userUncheckedCreateNestedManyWithoutHeaderInput
     mas_all_collect?: mas_all_collectUncheckedCreateNestedManyWithoutUserInput
     salary?: salaryUncheckedCreateNestedManyWithoutUserInput
@@ -42029,7 +42056,7 @@ export namespace Prisma {
     role?: RoleUpdateOneWithoutUsersNestedInput
     companyBranch?: CompanyBranchUpdateOneWithoutUsersNestedInput
     Role_Company?: Role_CompanyUpdateOneWithoutUsersNestedInput
-    Position_user?: Position_userUpdateOneWithoutUserNestedInput
+    Position_user?: Position_userUpdateManyWithoutUserNestedInput
     henchman?: Position_userUpdateManyWithoutHeaderNestedInput
     mas_all_collect?: mas_all_collectUpdateManyWithoutUserNestedInput
     salary?: salaryUpdateManyWithoutUserNestedInput
@@ -42051,7 +42078,7 @@ export namespace Prisma {
     roleId?: NullableStringFieldUpdateOperationsInput | string | null
     RoleCompanyID?: NullableStringFieldUpdateOperationsInput | string | null
     companyBranchId?: NullableStringFieldUpdateOperationsInput | string | null
-    Position_user?: Position_userUncheckedUpdateOneWithoutUserNestedInput
+    Position_user?: Position_userUncheckedUpdateManyWithoutUserNestedInput
     henchman?: Position_userUncheckedUpdateManyWithoutHeaderNestedInput
     mas_all_collect?: mas_all_collectUncheckedUpdateManyWithoutUserNestedInput
     salary?: salaryUncheckedUpdateManyWithoutUserNestedInput
@@ -42304,7 +42331,7 @@ export namespace Prisma {
     role?: RoleCreateNestedOneWithoutUsersInput
     company?: CompanyCreateNestedManyWithoutOwnerInput
     Role_Company?: Role_CompanyCreateNestedOneWithoutUsersInput
-    Position_user?: Position_userCreateNestedOneWithoutUserInput
+    Position_user?: Position_userCreateNestedManyWithoutUserInput
     henchman?: Position_userCreateNestedManyWithoutHeaderInput
     mas_all_collect?: mas_all_collectCreateNestedManyWithoutUserInput
     salary?: salaryCreateNestedManyWithoutUserInput
@@ -42326,7 +42353,7 @@ export namespace Prisma {
     roleId?: string | null
     RoleCompanyID?: string | null
     company?: CompanyUncheckedCreateNestedManyWithoutOwnerInput
-    Position_user?: Position_userUncheckedCreateNestedOneWithoutUserInput
+    Position_user?: Position_userUncheckedCreateNestedManyWithoutUserInput
     henchman?: Position_userUncheckedCreateNestedManyWithoutHeaderInput
     mas_all_collect?: mas_all_collectUncheckedCreateNestedManyWithoutUserInput
     salary?: salaryUncheckedCreateNestedManyWithoutUserInput
@@ -42544,7 +42571,7 @@ export namespace Prisma {
     company?: CompanyCreateNestedManyWithoutOwnerInput
     companyBranch?: CompanyBranchCreateNestedOneWithoutUsersInput
     Role_Company?: Role_CompanyCreateNestedOneWithoutUsersInput
-    Position_user?: Position_userCreateNestedOneWithoutUserInput
+    Position_user?: Position_userCreateNestedManyWithoutUserInput
     henchman?: Position_userCreateNestedManyWithoutHeaderInput
     mas_all_collect?: mas_all_collectCreateNestedManyWithoutUserInput
     salary?: salaryCreateNestedManyWithoutUserInput
@@ -42566,7 +42593,7 @@ export namespace Prisma {
     RoleCompanyID?: string | null
     company?: CompanyUncheckedCreateNestedManyWithoutOwnerInput
     companyBranchId?: string | null
-    Position_user?: Position_userUncheckedCreateNestedOneWithoutUserInput
+    Position_user?: Position_userUncheckedCreateNestedManyWithoutUserInput
     henchman?: Position_userUncheckedCreateNestedManyWithoutHeaderInput
     mas_all_collect?: mas_all_collectUncheckedCreateNestedManyWithoutUserInput
     salary?: salaryUncheckedCreateNestedManyWithoutUserInput
@@ -42598,7 +42625,7 @@ export namespace Prisma {
     company?: CompanyUpdateManyWithoutOwnerNestedInput
     companyBranch?: CompanyBranchUpdateOneWithoutUsersNestedInput
     Role_Company?: Role_CompanyUpdateOneWithoutUsersNestedInput
-    Position_user?: Position_userUpdateOneWithoutUserNestedInput
+    Position_user?: Position_userUpdateManyWithoutUserNestedInput
     henchman?: Position_userUpdateManyWithoutHeaderNestedInput
     mas_all_collect?: mas_all_collectUpdateManyWithoutUserNestedInput
     salary?: salaryUpdateManyWithoutUserNestedInput
@@ -42620,7 +42647,7 @@ export namespace Prisma {
     RoleCompanyID?: NullableStringFieldUpdateOperationsInput | string | null
     company?: CompanyUncheckedUpdateManyWithoutOwnerNestedInput
     companyBranchId?: NullableStringFieldUpdateOperationsInput | string | null
-    Position_user?: Position_userUncheckedUpdateOneWithoutUserNestedInput
+    Position_user?: Position_userUncheckedUpdateManyWithoutUserNestedInput
     henchman?: Position_userUncheckedUpdateManyWithoutHeaderNestedInput
     mas_all_collect?: mas_all_collectUncheckedUpdateManyWithoutUserNestedInput
     salary?: salaryUncheckedUpdateManyWithoutUserNestedInput
@@ -42906,6 +42933,11 @@ export namespace Prisma {
   export type Position_userCreateOrConnectWithoutUserInput = {
     where: Position_userWhereUniqueInput
     create: XOR<Position_userCreateWithoutUserInput, Position_userUncheckedCreateWithoutUserInput>
+  }
+
+  export type Position_userCreateManyUserInputEnvelope = {
+    data: Enumerable<Position_userCreateManyUserInput>
+    skipDuplicates?: boolean
   }
 
   export type Position_userCreateWithoutHeaderInput = {
@@ -43396,29 +43428,34 @@ export namespace Prisma {
     companyBranchId?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
-  export type Position_userUpsertWithoutUserInput = {
+  export type Position_userUpsertWithWhereUniqueWithoutUserInput = {
+    where: Position_userWhereUniqueInput
     update: XOR<Position_userUpdateWithoutUserInput, Position_userUncheckedUpdateWithoutUserInput>
     create: XOR<Position_userCreateWithoutUserInput, Position_userUncheckedCreateWithoutUserInput>
   }
 
-  export type Position_userUpdateWithoutUserInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    date?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    role?: NullableStringFieldUpdateOperationsInput | string | null
-    header?: UserUpdateOneWithoutHenchmanNestedInput
-    mas_positionlevel1?: mas_positionlevel1UpdateOneWithoutPosition_userNestedInput
-    mas_positionlevel2?: mas_positionlevel2UpdateOneWithoutPosition_userNestedInput
-    mas_positionlevel3?: mas_positionlevel3UpdateOneWithoutPosition_userNestedInput
+  export type Position_userUpdateWithWhereUniqueWithoutUserInput = {
+    where: Position_userWhereUniqueInput
+    data: XOR<Position_userUpdateWithoutUserInput, Position_userUncheckedUpdateWithoutUserInput>
   }
 
-  export type Position_userUncheckedUpdateWithoutUserInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    date?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    position1_id?: NullableStringFieldUpdateOperationsInput | string | null
-    position2_id?: NullableStringFieldUpdateOperationsInput | string | null
-    position3_id?: NullableStringFieldUpdateOperationsInput | string | null
-    role?: NullableStringFieldUpdateOperationsInput | string | null
-    headderId?: NullableStringFieldUpdateOperationsInput | string | null
+  export type Position_userUpdateManyWithWhereWithoutUserInput = {
+    where: Position_userScalarWhereInput
+    data: XOR<Position_userUpdateManyMutationInput, Position_userUncheckedUpdateManyWithoutPosition_userInput>
+  }
+
+  export type Position_userScalarWhereInput = {
+    AND?: Enumerable<Position_userScalarWhereInput>
+    OR?: Enumerable<Position_userScalarWhereInput>
+    NOT?: Enumerable<Position_userScalarWhereInput>
+    id?: UuidFilter | string
+    user_id?: UuidNullableFilter | string | null
+    date?: DateTimeNullableFilter | Date | string | null
+    position1_id?: UuidNullableFilter | string | null
+    position2_id?: UuidNullableFilter | string | null
+    position3_id?: UuidNullableFilter | string | null
+    role?: StringNullableFilter | string | null
+    headderId?: UuidNullableFilter | string | null
   }
 
   export type Position_userUpsertWithWhereUniqueWithoutHeaderInput = {
@@ -43435,20 +43472,6 @@ export namespace Prisma {
   export type Position_userUpdateManyWithWhereWithoutHeaderInput = {
     where: Position_userScalarWhereInput
     data: XOR<Position_userUpdateManyMutationInput, Position_userUncheckedUpdateManyWithoutHenchmanInput>
-  }
-
-  export type Position_userScalarWhereInput = {
-    AND?: Enumerable<Position_userScalarWhereInput>
-    OR?: Enumerable<Position_userScalarWhereInput>
-    NOT?: Enumerable<Position_userScalarWhereInput>
-    id?: UuidFilter | string
-    user_id?: UuidNullableFilter | string | null
-    date?: DateTimeNullableFilter | Date | string | null
-    position1_id?: UuidNullableFilter | string | null
-    position2_id?: UuidNullableFilter | string | null
-    position3_id?: UuidNullableFilter | string | null
-    role?: StringNullableFilter | string | null
-    headderId?: UuidNullableFilter | string | null
   }
 
   export type mas_all_collectUpsertWithWhereUniqueWithoutUserInput = {
@@ -43644,7 +43667,7 @@ export namespace Prisma {
     company?: CompanyCreateNestedManyWithoutOwnerInput
     companyBranch?: CompanyBranchCreateNestedOneWithoutUsersInput
     Role_Company?: Role_CompanyCreateNestedOneWithoutUsersInput
-    Position_user?: Position_userCreateNestedOneWithoutUserInput
+    Position_user?: Position_userCreateNestedManyWithoutUserInput
     henchman?: Position_userCreateNestedManyWithoutHeaderInput
     mas_all_collect?: mas_all_collectCreateNestedManyWithoutUserInput
     salary?: salaryCreateNestedManyWithoutUserInput
@@ -43666,7 +43689,7 @@ export namespace Prisma {
     RoleCompanyID?: string | null
     company?: CompanyUncheckedCreateNestedManyWithoutOwnerInput
     companyBranchId?: string | null
-    Position_user?: Position_userUncheckedCreateNestedOneWithoutUserInput
+    Position_user?: Position_userUncheckedCreateNestedManyWithoutUserInput
     henchman?: Position_userUncheckedCreateNestedManyWithoutHeaderInput
     mas_all_collect?: mas_all_collectUncheckedCreateNestedManyWithoutUserInput
     salary?: salaryUncheckedCreateNestedManyWithoutUserInput
@@ -43714,7 +43737,7 @@ export namespace Prisma {
     role?: RoleCreateNestedOneWithoutUsersInput
     company?: CompanyCreateNestedManyWithoutOwnerInput
     companyBranch?: CompanyBranchCreateNestedOneWithoutUsersInput
-    Position_user?: Position_userCreateNestedOneWithoutUserInput
+    Position_user?: Position_userCreateNestedManyWithoutUserInput
     henchman?: Position_userCreateNestedManyWithoutHeaderInput
     mas_all_collect?: mas_all_collectCreateNestedManyWithoutUserInput
     salary?: salaryCreateNestedManyWithoutUserInput
@@ -43736,7 +43759,7 @@ export namespace Prisma {
     roleId?: string | null
     company?: CompanyUncheckedCreateNestedManyWithoutOwnerInput
     companyBranchId?: string | null
-    Position_user?: Position_userUncheckedCreateNestedOneWithoutUserInput
+    Position_user?: Position_userUncheckedCreateNestedManyWithoutUserInput
     henchman?: Position_userUncheckedCreateNestedManyWithoutHeaderInput
     mas_all_collect?: mas_all_collectUncheckedCreateNestedManyWithoutUserInput
     salary?: salaryUncheckedCreateNestedManyWithoutUserInput
@@ -44742,7 +44765,7 @@ export namespace Prisma {
     company?: CompanyCreateNestedManyWithoutOwnerInput
     companyBranch?: CompanyBranchCreateNestedOneWithoutUsersInput
     Role_Company?: Role_CompanyCreateNestedOneWithoutUsersInput
-    Position_user?: Position_userCreateNestedOneWithoutUserInput
+    Position_user?: Position_userCreateNestedManyWithoutUserInput
     mas_all_collect?: mas_all_collectCreateNestedManyWithoutUserInput
     salary?: salaryCreateNestedManyWithoutUserInput
     provident_log?: provident_logCreateNestedManyWithoutUserInput
@@ -44764,7 +44787,7 @@ export namespace Prisma {
     RoleCompanyID?: string | null
     company?: CompanyUncheckedCreateNestedManyWithoutOwnerInput
     companyBranchId?: string | null
-    Position_user?: Position_userUncheckedCreateNestedOneWithoutUserInput
+    Position_user?: Position_userUncheckedCreateNestedManyWithoutUserInput
     mas_all_collect?: mas_all_collectUncheckedCreateNestedManyWithoutUserInput
     salary?: salaryUncheckedCreateNestedManyWithoutUserInput
     provident_log?: provident_logUncheckedCreateNestedManyWithoutUserInput
@@ -44922,7 +44945,7 @@ export namespace Prisma {
     company?: CompanyUpdateManyWithoutOwnerNestedInput
     companyBranch?: CompanyBranchUpdateOneWithoutUsersNestedInput
     Role_Company?: Role_CompanyUpdateOneWithoutUsersNestedInput
-    Position_user?: Position_userUpdateOneWithoutUserNestedInput
+    Position_user?: Position_userUpdateManyWithoutUserNestedInput
     mas_all_collect?: mas_all_collectUpdateManyWithoutUserNestedInput
     salary?: salaryUpdateManyWithoutUserNestedInput
     provident_log?: provident_logUpdateManyWithoutUserNestedInput
@@ -44944,7 +44967,7 @@ export namespace Prisma {
     RoleCompanyID?: NullableStringFieldUpdateOperationsInput | string | null
     company?: CompanyUncheckedUpdateManyWithoutOwnerNestedInput
     companyBranchId?: NullableStringFieldUpdateOperationsInput | string | null
-    Position_user?: Position_userUncheckedUpdateOneWithoutUserNestedInput
+    Position_user?: Position_userUncheckedUpdateManyWithoutUserNestedInput
     mas_all_collect?: mas_all_collectUncheckedUpdateManyWithoutUserNestedInput
     salary?: salaryUncheckedUpdateManyWithoutUserNestedInput
     provident_log?: provident_logUncheckedUpdateManyWithoutUserNestedInput
@@ -46172,7 +46195,7 @@ export namespace Prisma {
     company?: CompanyCreateNestedManyWithoutOwnerInput
     companyBranch?: CompanyBranchCreateNestedOneWithoutUsersInput
     Role_Company?: Role_CompanyCreateNestedOneWithoutUsersInput
-    Position_user?: Position_userCreateNestedOneWithoutUserInput
+    Position_user?: Position_userCreateNestedManyWithoutUserInput
     henchman?: Position_userCreateNestedManyWithoutHeaderInput
     mas_all_collect?: mas_all_collectCreateNestedManyWithoutUserInput
     provident_log?: provident_logCreateNestedManyWithoutUserInput
@@ -46194,7 +46217,7 @@ export namespace Prisma {
     RoleCompanyID?: string | null
     company?: CompanyUncheckedCreateNestedManyWithoutOwnerInput
     companyBranchId?: string | null
-    Position_user?: Position_userUncheckedCreateNestedOneWithoutUserInput
+    Position_user?: Position_userUncheckedCreateNestedManyWithoutUserInput
     henchman?: Position_userUncheckedCreateNestedManyWithoutHeaderInput
     mas_all_collect?: mas_all_collectUncheckedCreateNestedManyWithoutUserInput
     provident_log?: provident_logUncheckedCreateNestedManyWithoutUserInput
@@ -46366,7 +46389,7 @@ export namespace Prisma {
     company?: CompanyUpdateManyWithoutOwnerNestedInput
     companyBranch?: CompanyBranchUpdateOneWithoutUsersNestedInput
     Role_Company?: Role_CompanyUpdateOneWithoutUsersNestedInput
-    Position_user?: Position_userUpdateOneWithoutUserNestedInput
+    Position_user?: Position_userUpdateManyWithoutUserNestedInput
     henchman?: Position_userUpdateManyWithoutHeaderNestedInput
     mas_all_collect?: mas_all_collectUpdateManyWithoutUserNestedInput
     provident_log?: provident_logUpdateManyWithoutUserNestedInput
@@ -46388,7 +46411,7 @@ export namespace Prisma {
     RoleCompanyID?: NullableStringFieldUpdateOperationsInput | string | null
     company?: CompanyUncheckedUpdateManyWithoutOwnerNestedInput
     companyBranchId?: NullableStringFieldUpdateOperationsInput | string | null
-    Position_user?: Position_userUncheckedUpdateOneWithoutUserNestedInput
+    Position_user?: Position_userUncheckedUpdateManyWithoutUserNestedInput
     henchman?: Position_userUncheckedUpdateManyWithoutHeaderNestedInput
     mas_all_collect?: mas_all_collectUncheckedUpdateManyWithoutUserNestedInput
     provident_log?: provident_logUncheckedUpdateManyWithoutUserNestedInput
@@ -46534,7 +46557,7 @@ export namespace Prisma {
     company?: CompanyCreateNestedManyWithoutOwnerInput
     companyBranch?: CompanyBranchCreateNestedOneWithoutUsersInput
     Role_Company?: Role_CompanyCreateNestedOneWithoutUsersInput
-    Position_user?: Position_userCreateNestedOneWithoutUserInput
+    Position_user?: Position_userCreateNestedManyWithoutUserInput
     henchman?: Position_userCreateNestedManyWithoutHeaderInput
     salary?: salaryCreateNestedManyWithoutUserInput
     provident_log?: provident_logCreateNestedManyWithoutUserInput
@@ -46556,7 +46579,7 @@ export namespace Prisma {
     RoleCompanyID?: string | null
     company?: CompanyUncheckedCreateNestedManyWithoutOwnerInput
     companyBranchId?: string | null
-    Position_user?: Position_userUncheckedCreateNestedOneWithoutUserInput
+    Position_user?: Position_userUncheckedCreateNestedManyWithoutUserInput
     henchman?: Position_userUncheckedCreateNestedManyWithoutHeaderInput
     salary?: salaryUncheckedCreateNestedManyWithoutUserInput
     provident_log?: provident_logUncheckedCreateNestedManyWithoutUserInput
@@ -46618,7 +46641,7 @@ export namespace Prisma {
     company?: CompanyUpdateManyWithoutOwnerNestedInput
     companyBranch?: CompanyBranchUpdateOneWithoutUsersNestedInput
     Role_Company?: Role_CompanyUpdateOneWithoutUsersNestedInput
-    Position_user?: Position_userUpdateOneWithoutUserNestedInput
+    Position_user?: Position_userUpdateManyWithoutUserNestedInput
     henchman?: Position_userUpdateManyWithoutHeaderNestedInput
     salary?: salaryUpdateManyWithoutUserNestedInput
     provident_log?: provident_logUpdateManyWithoutUserNestedInput
@@ -46640,7 +46663,7 @@ export namespace Prisma {
     RoleCompanyID?: NullableStringFieldUpdateOperationsInput | string | null
     company?: CompanyUncheckedUpdateManyWithoutOwnerNestedInput
     companyBranchId?: NullableStringFieldUpdateOperationsInput | string | null
-    Position_user?: Position_userUncheckedUpdateOneWithoutUserNestedInput
+    Position_user?: Position_userUncheckedUpdateManyWithoutUserNestedInput
     henchman?: Position_userUncheckedUpdateManyWithoutHeaderNestedInput
     salary?: salaryUncheckedUpdateManyWithoutUserNestedInput
     provident_log?: provident_logUncheckedUpdateManyWithoutUserNestedInput
@@ -46787,7 +46810,7 @@ export namespace Prisma {
     company?: CompanyCreateNestedManyWithoutOwnerInput
     companyBranch?: CompanyBranchCreateNestedOneWithoutUsersInput
     Role_Company?: Role_CompanyCreateNestedOneWithoutUsersInput
-    Position_user?: Position_userCreateNestedOneWithoutUserInput
+    Position_user?: Position_userCreateNestedManyWithoutUserInput
     henchman?: Position_userCreateNestedManyWithoutHeaderInput
     mas_all_collect?: mas_all_collectCreateNestedManyWithoutUserInput
     salary?: salaryCreateNestedManyWithoutUserInput
@@ -46809,7 +46832,7 @@ export namespace Prisma {
     RoleCompanyID?: string | null
     company?: CompanyUncheckedCreateNestedManyWithoutOwnerInput
     companyBranchId?: string | null
-    Position_user?: Position_userUncheckedCreateNestedOneWithoutUserInput
+    Position_user?: Position_userUncheckedCreateNestedManyWithoutUserInput
     henchman?: Position_userUncheckedCreateNestedManyWithoutHeaderInput
     mas_all_collect?: mas_all_collectUncheckedCreateNestedManyWithoutUserInput
     salary?: salaryUncheckedCreateNestedManyWithoutUserInput
@@ -46906,7 +46929,7 @@ export namespace Prisma {
     company?: CompanyUpdateManyWithoutOwnerNestedInput
     companyBranch?: CompanyBranchUpdateOneWithoutUsersNestedInput
     Role_Company?: Role_CompanyUpdateOneWithoutUsersNestedInput
-    Position_user?: Position_userUpdateOneWithoutUserNestedInput
+    Position_user?: Position_userUpdateManyWithoutUserNestedInput
     henchman?: Position_userUpdateManyWithoutHeaderNestedInput
     mas_all_collect?: mas_all_collectUpdateManyWithoutUserNestedInput
     salary?: salaryUpdateManyWithoutUserNestedInput
@@ -46928,7 +46951,7 @@ export namespace Prisma {
     RoleCompanyID?: NullableStringFieldUpdateOperationsInput | string | null
     company?: CompanyUncheckedUpdateManyWithoutOwnerNestedInput
     companyBranchId?: NullableStringFieldUpdateOperationsInput | string | null
-    Position_user?: Position_userUncheckedUpdateOneWithoutUserNestedInput
+    Position_user?: Position_userUncheckedUpdateManyWithoutUserNestedInput
     henchman?: Position_userUncheckedUpdateManyWithoutHeaderNestedInput
     mas_all_collect?: mas_all_collectUncheckedUpdateManyWithoutUserNestedInput
     salary?: salaryUncheckedUpdateManyWithoutUserNestedInput
@@ -46966,7 +46989,7 @@ export namespace Prisma {
     company?: CompanyCreateNestedManyWithoutOwnerInput
     companyBranch?: CompanyBranchCreateNestedOneWithoutUsersInput
     Role_Company?: Role_CompanyCreateNestedOneWithoutUsersInput
-    Position_user?: Position_userCreateNestedOneWithoutUserInput
+    Position_user?: Position_userCreateNestedManyWithoutUserInput
     henchman?: Position_userCreateNestedManyWithoutHeaderInput
     mas_all_collect?: mas_all_collectCreateNestedManyWithoutUserInput
     salary?: salaryCreateNestedManyWithoutUserInput
@@ -46988,7 +47011,7 @@ export namespace Prisma {
     RoleCompanyID?: string | null
     company?: CompanyUncheckedCreateNestedManyWithoutOwnerInput
     companyBranchId?: string | null
-    Position_user?: Position_userUncheckedCreateNestedOneWithoutUserInput
+    Position_user?: Position_userUncheckedCreateNestedManyWithoutUserInput
     henchman?: Position_userUncheckedCreateNestedManyWithoutHeaderInput
     mas_all_collect?: mas_all_collectUncheckedCreateNestedManyWithoutUserInput
     salary?: salaryUncheckedCreateNestedManyWithoutUserInput
@@ -47163,7 +47186,7 @@ export namespace Prisma {
     company?: CompanyUpdateManyWithoutOwnerNestedInput
     companyBranch?: CompanyBranchUpdateOneWithoutUsersNestedInput
     Role_Company?: Role_CompanyUpdateOneWithoutUsersNestedInput
-    Position_user?: Position_userUpdateOneWithoutUserNestedInput
+    Position_user?: Position_userUpdateManyWithoutUserNestedInput
     henchman?: Position_userUpdateManyWithoutHeaderNestedInput
     mas_all_collect?: mas_all_collectUpdateManyWithoutUserNestedInput
     salary?: salaryUpdateManyWithoutUserNestedInput
@@ -47185,7 +47208,7 @@ export namespace Prisma {
     RoleCompanyID?: NullableStringFieldUpdateOperationsInput | string | null
     company?: CompanyUncheckedUpdateManyWithoutOwnerNestedInput
     companyBranchId?: NullableStringFieldUpdateOperationsInput | string | null
-    Position_user?: Position_userUncheckedUpdateOneWithoutUserNestedInput
+    Position_user?: Position_userUncheckedUpdateManyWithoutUserNestedInput
     henchman?: Position_userUncheckedUpdateManyWithoutHeaderNestedInput
     mas_all_collect?: mas_all_collectUncheckedUpdateManyWithoutUserNestedInput
     salary?: salaryUncheckedUpdateManyWithoutUserNestedInput
@@ -47413,7 +47436,7 @@ export namespace Prisma {
     company?: CompanyCreateNestedManyWithoutOwnerInput
     companyBranch?: CompanyBranchCreateNestedOneWithoutUsersInput
     Role_Company?: Role_CompanyCreateNestedOneWithoutUsersInput
-    Position_user?: Position_userCreateNestedOneWithoutUserInput
+    Position_user?: Position_userCreateNestedManyWithoutUserInput
     henchman?: Position_userCreateNestedManyWithoutHeaderInput
     mas_all_collect?: mas_all_collectCreateNestedManyWithoutUserInput
     salary?: salaryCreateNestedManyWithoutUserInput
@@ -47435,7 +47458,7 @@ export namespace Prisma {
     RoleCompanyID?: string | null
     company?: CompanyUncheckedCreateNestedManyWithoutOwnerInput
     companyBranchId?: string | null
-    Position_user?: Position_userUncheckedCreateNestedOneWithoutUserInput
+    Position_user?: Position_userUncheckedCreateNestedManyWithoutUserInput
     henchman?: Position_userUncheckedCreateNestedManyWithoutHeaderInput
     mas_all_collect?: mas_all_collectUncheckedCreateNestedManyWithoutUserInput
     salary?: salaryUncheckedCreateNestedManyWithoutUserInput
@@ -47484,7 +47507,7 @@ export namespace Prisma {
     company?: CompanyUpdateManyWithoutOwnerNestedInput
     companyBranch?: CompanyBranchUpdateOneWithoutUsersNestedInput
     Role_Company?: Role_CompanyUpdateOneWithoutUsersNestedInput
-    Position_user?: Position_userUpdateOneWithoutUserNestedInput
+    Position_user?: Position_userUpdateManyWithoutUserNestedInput
     henchman?: Position_userUpdateManyWithoutHeaderNestedInput
     mas_all_collect?: mas_all_collectUpdateManyWithoutUserNestedInput
     salary?: salaryUpdateManyWithoutUserNestedInput
@@ -47506,7 +47529,7 @@ export namespace Prisma {
     RoleCompanyID?: NullableStringFieldUpdateOperationsInput | string | null
     company?: CompanyUncheckedUpdateManyWithoutOwnerNestedInput
     companyBranchId?: NullableStringFieldUpdateOperationsInput | string | null
-    Position_user?: Position_userUncheckedUpdateOneWithoutUserNestedInput
+    Position_user?: Position_userUncheckedUpdateManyWithoutUserNestedInput
     henchman?: Position_userUncheckedUpdateManyWithoutHeaderNestedInput
     mas_all_collect?: mas_all_collectUncheckedUpdateManyWithoutUserNestedInput
     salary?: salaryUncheckedUpdateManyWithoutUserNestedInput
@@ -47852,7 +47875,7 @@ export namespace Prisma {
     role?: RoleUpdateOneWithoutUsersNestedInput
     company?: CompanyUpdateManyWithoutOwnerNestedInput
     Role_Company?: Role_CompanyUpdateOneWithoutUsersNestedInput
-    Position_user?: Position_userUpdateOneWithoutUserNestedInput
+    Position_user?: Position_userUpdateManyWithoutUserNestedInput
     henchman?: Position_userUpdateManyWithoutHeaderNestedInput
     mas_all_collect?: mas_all_collectUpdateManyWithoutUserNestedInput
     salary?: salaryUpdateManyWithoutUserNestedInput
@@ -47874,7 +47897,7 @@ export namespace Prisma {
     roleId?: NullableStringFieldUpdateOperationsInput | string | null
     RoleCompanyID?: NullableStringFieldUpdateOperationsInput | string | null
     company?: CompanyUncheckedUpdateManyWithoutOwnerNestedInput
-    Position_user?: Position_userUncheckedUpdateOneWithoutUserNestedInput
+    Position_user?: Position_userUncheckedUpdateManyWithoutUserNestedInput
     henchman?: Position_userUncheckedUpdateManyWithoutHeaderNestedInput
     mas_all_collect?: mas_all_collectUncheckedUpdateManyWithoutUserNestedInput
     salary?: salaryUncheckedUpdateManyWithoutUserNestedInput
@@ -47958,6 +47981,16 @@ export namespace Prisma {
     icon?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
+  }
+
+  export type Position_userCreateManyUserInput = {
+    id: string
+    date?: Date | string | null
+    position1_id?: string | null
+    position2_id?: string | null
+    position3_id?: string | null
+    role?: string | null
+    headderId?: string | null
   }
 
   export type Position_userCreateManyHeaderInput = {
@@ -48096,6 +48129,36 @@ export namespace Prisma {
     icon?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type Position_userUpdateWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    date?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    role?: NullableStringFieldUpdateOperationsInput | string | null
+    header?: UserUpdateOneWithoutHenchmanNestedInput
+    mas_positionlevel1?: mas_positionlevel1UpdateOneWithoutPosition_userNestedInput
+    mas_positionlevel2?: mas_positionlevel2UpdateOneWithoutPosition_userNestedInput
+    mas_positionlevel3?: mas_positionlevel3UpdateOneWithoutPosition_userNestedInput
+  }
+
+  export type Position_userUncheckedUpdateWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    date?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    position1_id?: NullableStringFieldUpdateOperationsInput | string | null
+    position2_id?: NullableStringFieldUpdateOperationsInput | string | null
+    position3_id?: NullableStringFieldUpdateOperationsInput | string | null
+    role?: NullableStringFieldUpdateOperationsInput | string | null
+    headderId?: NullableStringFieldUpdateOperationsInput | string | null
+  }
+
+  export type Position_userUncheckedUpdateManyWithoutPosition_userInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    date?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    position1_id?: NullableStringFieldUpdateOperationsInput | string | null
+    position2_id?: NullableStringFieldUpdateOperationsInput | string | null
+    position3_id?: NullableStringFieldUpdateOperationsInput | string | null
+    role?: NullableStringFieldUpdateOperationsInput | string | null
+    headderId?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type Position_userUpdateWithoutHeaderInput = {
@@ -48402,7 +48465,7 @@ export namespace Prisma {
     company?: CompanyUpdateManyWithoutOwnerNestedInput
     companyBranch?: CompanyBranchUpdateOneWithoutUsersNestedInput
     Role_Company?: Role_CompanyUpdateOneWithoutUsersNestedInput
-    Position_user?: Position_userUpdateOneWithoutUserNestedInput
+    Position_user?: Position_userUpdateManyWithoutUserNestedInput
     henchman?: Position_userUpdateManyWithoutHeaderNestedInput
     mas_all_collect?: mas_all_collectUpdateManyWithoutUserNestedInput
     salary?: salaryUpdateManyWithoutUserNestedInput
@@ -48424,7 +48487,7 @@ export namespace Prisma {
     RoleCompanyID?: NullableStringFieldUpdateOperationsInput | string | null
     company?: CompanyUncheckedUpdateManyWithoutOwnerNestedInput
     companyBranchId?: NullableStringFieldUpdateOperationsInput | string | null
-    Position_user?: Position_userUncheckedUpdateOneWithoutUserNestedInput
+    Position_user?: Position_userUncheckedUpdateManyWithoutUserNestedInput
     henchman?: Position_userUncheckedUpdateManyWithoutHeaderNestedInput
     mas_all_collect?: mas_all_collectUncheckedUpdateManyWithoutUserNestedInput
     salary?: salaryUncheckedUpdateManyWithoutUserNestedInput
@@ -48459,7 +48522,7 @@ export namespace Prisma {
     role?: RoleUpdateOneWithoutUsersNestedInput
     company?: CompanyUpdateManyWithoutOwnerNestedInput
     companyBranch?: CompanyBranchUpdateOneWithoutUsersNestedInput
-    Position_user?: Position_userUpdateOneWithoutUserNestedInput
+    Position_user?: Position_userUpdateManyWithoutUserNestedInput
     henchman?: Position_userUpdateManyWithoutHeaderNestedInput
     mas_all_collect?: mas_all_collectUpdateManyWithoutUserNestedInput
     salary?: salaryUpdateManyWithoutUserNestedInput
@@ -48481,7 +48544,7 @@ export namespace Prisma {
     roleId?: NullableStringFieldUpdateOperationsInput | string | null
     company?: CompanyUncheckedUpdateManyWithoutOwnerNestedInput
     companyBranchId?: NullableStringFieldUpdateOperationsInput | string | null
-    Position_user?: Position_userUncheckedUpdateOneWithoutUserNestedInput
+    Position_user?: Position_userUncheckedUpdateManyWithoutUserNestedInput
     henchman?: Position_userUncheckedUpdateManyWithoutHeaderNestedInput
     mas_all_collect?: mas_all_collectUncheckedUpdateManyWithoutUserNestedInput
     salary?: salaryUncheckedUpdateManyWithoutUserNestedInput
@@ -48588,16 +48651,6 @@ export namespace Prisma {
   }
 
   export type Position_userUncheckedUpdateWithoutMas_positionlevel1Input = {
-    id?: StringFieldUpdateOperationsInput | string
-    user_id?: NullableStringFieldUpdateOperationsInput | string | null
-    date?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    position2_id?: NullableStringFieldUpdateOperationsInput | string | null
-    position3_id?: NullableStringFieldUpdateOperationsInput | string | null
-    role?: NullableStringFieldUpdateOperationsInput | string | null
-    headderId?: NullableStringFieldUpdateOperationsInput | string | null
-  }
-
-  export type Position_userUncheckedUpdateManyWithoutPosition_userInput = {
     id?: StringFieldUpdateOperationsInput | string
     user_id?: NullableStringFieldUpdateOperationsInput | string | null
     date?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
