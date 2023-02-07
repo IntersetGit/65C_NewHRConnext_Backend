@@ -351,6 +351,7 @@ type Profile {
     # Selfdatasalary: selfsalary
     #Selfdatasalary: selfsalary
     mas_all_collect:mas_all_collect
+    mas_bank(id:String):[mas_bank]
   }
   type Mutation {
     Createsalary(data: salaryInput): createsalaryResponseType
@@ -375,7 +376,14 @@ const resolvers: Resolvers = {
       });
       return result;
     },
-
+    async mas_bank(parant,args:any,ctx){
+      const result = await ctx.prisma.mas_bank.findMany({
+        where:{
+          id:args.id
+        },
+      });
+      return result
+    },
 
     async datasalary_mee(parant, args, ctx) {
       const getdata = await ctx.prisma.user.findMany({
