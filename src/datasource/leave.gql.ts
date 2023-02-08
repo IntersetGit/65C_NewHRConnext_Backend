@@ -16,7 +16,6 @@ input leave{
  detail_leave: String 
  Status: Int                
  user_id: String
-
 }
 
 
@@ -38,7 +37,5 @@ type leave_type{
   name: String
   orderby: Int       
 }
-
-
 
 `
