@@ -946,7 +946,7 @@ export type Data_Salary = {
   id: Scalars['ID'];
   position_user?: Maybe<Position_User>;
   profile?: Maybe<Profile>;
-  salary?: Maybe<Array<Maybe<Salary>>>;
+  salary?: Maybe<Salary>;
 };
 
 export type Data_Salary_Me = {
@@ -2094,7 +2094,7 @@ export type Data_SalaryResolvers<ContextType = ApolloContext, ParentType extends
   id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
   position_user?: Resolver<Maybe<ResolversTypes['position_user']>, ParentType, ContextType>;
   profile?: Resolver<Maybe<ResolversTypes['Profile']>, ParentType, ContextType>;
-  salary?: Resolver<Maybe<Array<Maybe<ResolversTypes['salary']>>>, ParentType, ContextType>;
+  salary?: Resolver<Maybe<ResolversTypes['salary']>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 }>;
 
