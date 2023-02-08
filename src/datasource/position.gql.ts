@@ -75,6 +75,9 @@ type Position_user {
   role: String 
   headderId: String 
   date: Date
+  mas_positionlevel1: mas_positionlevel1
+  mas_positionlevel2: mas_positionlevel2
+  mas_positionlevel3: mas_positionlevel3
 }
 
 type headderdata{
@@ -207,7 +210,7 @@ export const positionResolvers: Resolvers = {
   },
 
 
-  
+
   Mutation: {
     /**
      * ?สร้าง role comapny
@@ -364,6 +367,7 @@ export const positionResolvers: Resolvers = {
     async createdposition_user(p, args, ctx) {
       if (args.data.id) {
         const updated = await ctx.prisma.position_user.update({
+          
           data: {
             user_id: args.data.user_id as string,
             position1_id: args.data.position1_id as string,
