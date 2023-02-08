@@ -1,6 +1,4 @@
-import { holiday_date } from './../generated/client/index.d';
-import { Company } from './../generated/graphql';
-import { date, string } from 'zod';
+
 import gql from 'graphql-tag';
 import { Resolvers } from '../generated/graphql';
 import { v4 } from 'uuid';
@@ -68,7 +66,7 @@ export const holidayTypedef = gql`
 
   type Query{
     GetHoliDayYear: [holiday_years]
-    GetHolidayDate: holiday_date
+    GetHolidayDate: [holiday_date!]
   }
 
   type Mutation{
@@ -95,15 +93,13 @@ export const holidayResolvers: Resolvers = {
     },
 
     async GetHolidayDate(p, args, ctx) {
-      const result = await ctx.prisma.holiday_date.findUnique({
-        where: { 
-          id: ctx.currentUser?.compayId
-        },
-        include : {
-          Company : true
-        }    
+      const result = await ctx.prisma.holiday_date.findMany({
+        include:{ Company: true},
+        where:{
+          CompanyId : ctx.currentUser?.compayId
+        }
+      
       });
-
       return result;
     }
   },
@@ -193,7 +189,7 @@ export const holidayResolvers: Resolvers = {
 
 const HolidayComposition = {
   'Query.GetHoliDayYear': [authenticate()],
-  'Query.GetHoliDayDate': [authenticate()],
+  'Query.GetHolidayDate': [authenticate()],
   'Mutation.createHolidayYear': [authenticate()],
   'Mutation.deleteHolidayYear': [authenticate()],
   'Mutation.createAndUpdateHolidayDate': [authenticate()],
