@@ -148,7 +148,7 @@ export const holidayResolvers: Resolvers = {
             holiday_name: args.data.holiday_name as string,
             day: args.data.day as number,
             month: args.data.month as number,
-            yaer: args.data.year as number,
+            year: args.data.year as number,
             status: args.data.status as number,
             CompanyId: ctx.currentUser?.compayId
           },
@@ -167,7 +167,7 @@ export const holidayResolvers: Resolvers = {
             holiday_name: args.data.holiday_name as string,
             day: args.data.day as number,
             month: args.data.month as number,
-            yaer: args.data.year as number,
+            year: args.data.year as number,
             status: args.data.status as number,
             CompanyId: ctx.currentUser?.compayId
           }
