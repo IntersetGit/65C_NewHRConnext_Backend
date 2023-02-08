@@ -498,7 +498,7 @@ const resolvers: Resolvers = {
       const search1 = args.fristname ? args.fristname : undefined
       const search2 = args.Position2 ? args.Position2 : undefined
       const search3 = args.Position3 ? args.Position3 : undefined
-      
+
       const getdata = await ctx.prisma.user.findMany({
         include: {
           profile: true,

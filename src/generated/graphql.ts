@@ -203,7 +203,6 @@ export type CreateCompanyResponseType = {
 };
 
 export type CreateHolidayDate = {
-  CompanyId?: InputMaybe<Scalars['ID']>;
   day?: InputMaybe<Scalars['Int']>;
   holiday_name?: InputMaybe<Scalars['String']>;
   id?: InputMaybe<Scalars['ID']>;
@@ -1057,6 +1056,17 @@ export type IncometypeResponseType = {
   status?: Maybe<Scalars['Boolean']>;
 };
 
+export type Leave = {
+  Status?: InputMaybe<Scalars['Int']>;
+  detail_leave?: InputMaybe<Scalars['String']>;
+  end_date?: InputMaybe<Scalars['Date']>;
+  id?: InputMaybe<Scalars['String']>;
+  leavetype_id?: InputMaybe<Scalars['String']>;
+  quantity_day?: InputMaybe<Scalars['String']>;
+  start_date?: InputMaybe<Scalars['Date']>;
+  user_id?: InputMaybe<Scalars['String']>;
+};
+
 export type Leave_Data = {
   __typename?: 'leave_data';
   Status?: Maybe<Scalars['Int']>;
@@ -1456,6 +1466,7 @@ export type ResolversTypes = ResolversObject<{
   holiday_years: ResolverTypeWrapper<Holiday_Years>;
   incometype: Incometype;
   incometypeResponseType: ResolverTypeWrapper<IncometypeResponseType>;
+  leave: Leave;
   leave_data: ResolverTypeWrapper<Leave_Data>;
   leave_type: ResolverTypeWrapper<Leave_Type>;
   mas_all_collect: ResolverTypeWrapper<Mas_All_Collect>;
@@ -1559,6 +1570,7 @@ export type ResolversParentTypes = ResolversObject<{
   holiday_years: Holiday_Years;
   incometype: Incometype;
   incometypeResponseType: IncometypeResponseType;
+  leave: Leave;
   leave_data: Leave_Data;
   leave_type: Leave_Type;
   mas_all_collect: Mas_All_Collect;

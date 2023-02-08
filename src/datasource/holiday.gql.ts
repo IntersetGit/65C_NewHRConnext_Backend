@@ -44,7 +44,6 @@ export const holidayTypedef = gql`
     month: Int
     year: Int
     status: Int
-    CompanyId: ID
   }
 
   type CreateHolidayYearResponseType{
@@ -150,7 +149,6 @@ export const holidayResolvers: Resolvers = {
             month: args.data.month as number,
             year: args.data.year as number,
             status: args.data.status as number,
-            CompanyId: ctx.currentUser?.compayId
           },
           where: {
             id: args.data.id

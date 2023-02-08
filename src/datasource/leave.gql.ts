@@ -8,8 +8,7 @@ import { v4 } from 'uuid';
 export const leaveTypedef = gql`
 input leave{
  id: String            
- leavetype_id: String            
- leave_type: leave_type    
+ leavetype_id: String             
  start_date: Date
  end_date: Date
  quantity_day: String
