@@ -10,6 +10,7 @@ import { typeDefs, resolvers } from './datasource/index';
 import multer from 'multer';
 import { PrismaClient } from './generated/client';
 import routes from './uploadFiles';
+import path from 'path'
 
 const prisma = new PrismaClient();
 
@@ -40,7 +41,12 @@ const server = new ApolloServer<ApolloContext>({
 
 (async () => {
   await server.start();
-
+  app.use(express.json())
+  app.use(express.urlencoded({extended : true}))
+  app.use(express.static(path.join(__dirname, 'public/index.html')));
+  app.get('/', (req,res)=>{
+    res.sendFile(path.join(__dirname ,'../public/index.html'))
+  })
   app.use(cors());
   app.use('/api/upload', routes);
   app.use('/api/uploads', express.static('uploads'));
