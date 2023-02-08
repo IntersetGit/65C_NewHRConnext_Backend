@@ -15,8 +15,7 @@ type leave_data{
  quantity_day: String
  detail_leave: String 
  Status: Int                
- user_id: String   
- .         
+ user_id: String            
  user:  User              
 }
 
@@ -25,5 +24,7 @@ type leave_type{
   name: String
   orderby: Int       
 }
+
+
 
 `
