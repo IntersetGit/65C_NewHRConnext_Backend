@@ -1,3 +1,4 @@
+import { salary } from './../generated/client/index.d';
 
 import { Resolvers } from '../generated/graphql';
 import { createPassword } from '../utils/passwords';
@@ -42,6 +43,7 @@ export const userTypedef = gql`
     companyBranch: CompanyBranch
     companyBranchId: String
     Position_user: [Position_user]
+    salary: [salary]
   }
 
   input RegisterProfileInput {
@@ -217,7 +219,8 @@ const resolvers: Resolvers = {
     async users(parent, args, ctx) {
       const filter = args?.userid ? args?.userid : undefined;
       const result = await ctx.prisma.user.findMany({
-        include: { profile: true, company: true, Role_Company: true, companyBranch: true, Position_user: { include: { mas_positionlevel1: true,mas_positionlevel2:true,mas_positionlevel3:true } } },
+        include: { profile: true, company: true, Role_Company: true, companyBranch: true,
+           Position_user: { include: { mas_positionlevel1: true ,mas_positionlevel2:true,mas_positionlevel3:true }, orderBy: {date: 'desc'} } },
         where: {
           companyBranchId: ctx.currentUser?.branchId,
           AND: {

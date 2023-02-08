@@ -146,11 +146,11 @@ export const salaryTypedef = gql`
     pro_employee: Float
     pro_company: Float
     mas_all_collectId: String
-    socialYears:         Float
-    vatYears:            Float
-    incomeYears:         Float
+    socialYears:Float
+    vatYears:Float
+    incomeYears: Float
     mas_bankId: String
-    mas_bank:mas_bank
+    mas_bank: mas_bank
   }
 
   type Bookbank_log_type {
@@ -307,14 +307,31 @@ export const salaryTypedef = gql`
     companyBranchId: String
     salary: [salary]
     mas_bank: mas_bank
-    base_salary: bookbank_log
+    bookbank_log: [Bookbank_log_type]
   }
-type data_salary{
-  id: ID!
-  profile: Profile
-  salary: [salary]
-  position_user:position_user
-}
+
+
+  type data_salary{
+    email: String
+    id: ID!
+    profile: Profile
+    islogin: Boolean
+    isActive: Boolean
+    isOwner: Boolean
+    lastlogin: Date
+    createdAt: Date
+    roleId: String
+    companyId: String
+    role: Role
+    RoleCompanyID: String
+    Role_Company: Role_Company
+    company: [Company]
+    companyBranch: CompanyBranch
+    companyBranchId: String
+    salary: [salary]
+    bookbank_log: [Bookbank_log_type]
+    Position_user: [Position_user]
+  }
 type position_user{
 id:ID!
 name:String
@@ -376,7 +393,7 @@ user_id:String
     #Selfdatasalary: selfsalary
     mas_all_collect: mas_all_collect
     mas_bank(id: String): [mas_bank]
-    data_salary(f_name:String,Position2:String,Position3:String):[data_salary]
+    data_salary(fristname: String ,Position2: String ,Position3: String):[data_salary]
   }
   type Mutation {
     Createsalary(data: salaryInput): createsalaryResponseType
@@ -420,7 +437,7 @@ const resolvers: Resolvers = {
     async datasalary_mee(parant, args: any, ctx) {
       const date = args?.date ? args?.date : undefined;
       const getdata = await ctx.prisma.user.findMany({
-        include: { profile: true, salary: { where: { years: date }, include: { bookbank_log: true, mas_bank: true, } } },
+        include: { salary: { where: { years: date }, include: { bookbank_log: true, mas_bank: true, } }, profile: true },
         where: {
           id: ctx.currentUser?.id,
         },
@@ -476,17 +493,50 @@ const resolvers: Resolvers = {
       });
       return result;
     },
-    async data_salary(parant: any, args: any, ctx:any) {
-      const name = args?.f_name ? args?.f_name : undefined;
-      // { Position_user: { where: { mas_positionlevel2: args?.Position2, mas_positionlevel3: args?.Position3 }, include: { mas_positionlevel1: true, mas_positionlevel3: true } }
-      //   ,
+
+    async data_salary(p, args, ctx) {
+      const search1 = args.fristname ? args.fristname : undefined
+      const search2 = args.Position2 ? args.Position2 : undefined
+      const search3 = args.Position3 ? args.Position3 : undefined
+      
       const getdata = await ctx.prisma.user.findMany({
-        include: {role:true,Position_user:{include: { mas_positionlevel1: true, mas_positionlevel3: true }}, profile:true,salary: { include: { bookbank_log: true, mas_bank: true, } } }
-        ,
-        where: {
-          userId: ctx.currentUser?.userId,
+        include: {
+          profile: true,
+          role: true,
+          Position_user: {
+            include: { mas_positionlevel1: true, mas_positionlevel2: true, mas_positionlevel3: true },
+            where: {
+              mas_positionlevel2: {
+                name: { contains: search2 }
+              }, AND: {
+                mas_positionlevel3: {
+                  name: { contains: search3 }
+                }
+              }
+            },
+            orderBy: { date: 'desc' }
+          },
+          salary: true,
+          bookbank_log: { include: { mas_bank: true } }
         },
-      });
+        where: {
+          companyBranchId: ctx.currentUser?.branchId,
+          AND: {
+            profile: {
+              firstname_th: { contains: search1 }
+            },
+            AND: {
+              Position_user: {
+                some: {
+                  mas_positionlevel2: { name: { contains: search2 } },
+                  AND: { mas_positionlevel3: { name: { contains: search3 } } }
+                },
+              },
+            },
+          },
+        }
+      })
+
       return getdata;
     },
   }, //

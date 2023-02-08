@@ -180,7 +180,9 @@ export const positionResolvers: Resolvers = {
     async getpositionMe(p, args, ctx) {
       const resultMebyID = await ctx.prisma.position_user.findMany({
         include: { mas_positionlevel1: true, mas_positionlevel2: true, mas_positionlevel3: true, user: { include: { profile: true } }, header: { include: { profile: true } } },
-        where: { user_id: ctx.currentUser?.id }
+        where: { user_id: ctx.currentUser?.id },
+        orderBy: {date: 'desc'}
+        
       });
       return resultMebyID;
     },
@@ -191,7 +193,7 @@ export const positionResolvers: Resolvers = {
         const resultbyID = await ctx.prisma.position_user.findMany({
           include: { mas_positionlevel1: true, mas_positionlevel2: true, mas_positionlevel3: true, user: { include: { profile: true } }, header: { include: { profile: true } } },
           where: { user_id: args.id },
-          orderBy: { date: 'asc' }
+          orderBy: { date: 'desc' }
         });
         return resultbyID;
       } else {
@@ -202,7 +204,7 @@ export const positionResolvers: Resolvers = {
               companyBranchId: ctx.currentUser?.branchId
             }
           },
-          orderBy: { date: 'asc' }
+          orderBy: { date: 'desc' }
         });
         return result;
       }
@@ -234,7 +236,7 @@ export const positionResolvers: Resolvers = {
             }
           })
         } 
-        if(!e.id_Position1 && e.name_Position1 ||  e.level_Position1 || e.code_position1 ){
+        if(e.id_Position1 == "" || e.id_Position1 == undefined  ){
           const createdPo_1 = await ctx.prisma.mas_positionlevel1.create({
             // include: { mas_positionlevel2: { include: { mas_positionlevel3: true } } },
             data: {
@@ -261,7 +263,7 @@ export const positionResolvers: Resolvers = {
                   id: a?.id_Position2 as string
                 }
               })
-            } if(!a?.id_Position2 && a?.positionlevel1_id ||  a?.name_Position2 || a?.level_Position2 || a?.code_position2){
+            } if(a?.id_Position2 == "" || a?.id_Position2 == undefined){
               const CretePo_2 = await ctx.prisma.mas_positionlevel2.create({
                 data: {
                   id: v4(),
