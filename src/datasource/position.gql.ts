@@ -180,7 +180,9 @@ export const positionResolvers: Resolvers = {
     async getpositionMe(p, args, ctx) {
       const resultMebyID = await ctx.prisma.position_user.findMany({
         include: { mas_positionlevel1: true, mas_positionlevel2: true, mas_positionlevel3: true, user: { include: { profile: true } }, header: { include: { profile: true } } },
-        where: { user_id: ctx.currentUser?.id }
+        where: { user_id: ctx.currentUser?.id },
+        orderBy: {date: 'desc'}
+        
       });
       return resultMebyID;
     },
@@ -191,7 +193,7 @@ export const positionResolvers: Resolvers = {
         const resultbyID = await ctx.prisma.position_user.findMany({
           include: { mas_positionlevel1: true, mas_positionlevel2: true, mas_positionlevel3: true, user: { include: { profile: true } }, header: { include: { profile: true } } },
           where: { user_id: args.id },
-          orderBy: { date: 'asc' }
+          orderBy: { date: 'desc' }
         });
         return resultbyID;
       } else {
@@ -202,7 +204,7 @@ export const positionResolvers: Resolvers = {
               companyBranchId: ctx.currentUser?.branchId
             }
           },
-          orderBy: { date: 'asc' }
+          orderBy: { date: 'desc' }
         });
         return result;
       }
