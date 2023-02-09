@@ -12,6 +12,7 @@ import {Role_CompanyResolvers,roleCompanyTypedef} from './rolecompany.gql'
 import {holidayTypedef, holidayResolvers} from './holiday.gql'
 import {salaryTypedef, salaryResolvers} from './salary.gql'
 import { salarySlipTypedef, salarySlipResolvers } from './createsalaryslip'
+import {leaveTypedef, leavedataResolvers } from './leave.gql'
 
 /**
  * ? Add Typedef Here
@@ -30,7 +31,8 @@ export const typeDefs = [
   jsonTypedef,
   holidayTypedef,
   salaryTypedef,
-  salarySlipTypedef
+  salarySlipTypedef,
+  leaveTypedef
 ];
 
 /**
@@ -48,7 +50,8 @@ export const resolvers = merge(
   josnResolvers,
   holidayResolvers,
   salaryResolvers,
-  salarySlipResolvers
+  salarySlipResolvers,
+  leavedataResolvers
 );
 
 // console.log(resolvers);
