@@ -1,13 +1,12 @@
-import { User } from './../generated/graphql';
-import { salary } from './../generated/client/index.d';
+
 import { Resolvers } from '../generated/graphql';
 import gql from 'graphql-tag';
 import { v4 } from 'uuid';
 import { composeResolvers } from '@graphql-tools/resolvers-composition';
 import { authenticate } from '../middleware/authenticatetoken';
 import dayjs from 'dayjs';
-// import { PrismaClient } from '@prisma/client';
-// const prisma = new PrismaClient();
+
+
 
 export const salaryTypedef = gql`
   input yearsInput {
@@ -385,7 +384,7 @@ user_id:String
   }
 
   type Query {
-    salary: salary
+    salary(userId:String): [data_salary]
     bookbank_log(id: String): [bookbank_log]
     provident_log(userId:String):[provident_log]
     datasalary_mee(date:String): [data_salary_me]
@@ -412,19 +411,39 @@ user_id:String
 const resolvers: Resolvers = {
   Query: {
     async salary(parant: any, args: any, ctx: any) {
-      const result = await ctx.prisma.salary.findMany({
-        include: {
-          User: true,
-          mas_month: true,
-          mas_years: true,
-          bookbank_log: true,
+      // const result = await ctx.prisma.salary.findMany({
+      //   include: {
+      //     User: true,
+      //     // mas_month: true,
+      //     // mas_years: true,
+      //     bookbank_log: true,
+      //   },
+      //   where: {
+      //     userId: args.userId,
+      //   },
+      // });
+      // return result;
+      // const date = args?.date ? args?.date : undefined;
+      const getdata = await ctx.prisma.user.findMany({
+        include:{
+          profile:true,
+          salary:true,
+          Position_user: { include: {mas_positionlevel3: true} , orderBy: {date: 'desc'} } , 
+          bookbank_log: { include: {mas_bank: true}}
         },
-        where: {
-          userId: ctx.currentUser?.id,
+        where :{
+          id : args.userId
         },
+        
+        
+        // where: {
+        //   id: args.userId,
+        // },
       });
-      return result;
+      return getdata;
     },
+
+    
     async mas_bank(parant: any, args: any, ctx: any) {
       const result = await ctx.prisma.mas_bank.findMany({
         where: {
