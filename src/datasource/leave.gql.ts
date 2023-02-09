@@ -1,5 +1,6 @@
 
 
+
 import { composeResolvers } from '@graphql-tools/resolvers-composition';
 import { authenticate } from '../middleware/authenticatetoken';
 import { Resolvers } from '../generated/graphql';
@@ -63,9 +64,27 @@ type CreateleaveResponseType{
   status: Boolean
 }
 
+
+
+type getleaveResponseType{
+  data_all: [getdataaboutleave]
+  data_count: getcount
+}
+
+type getcount{
+   name_1: String,
+   count1: Int,
+   name_2: String,
+   count2: Int,
+   name_3: String,
+   count3: Int,
+   name_4: String,
+   count4: Int
+}
+
 type Query{
   getleavetypedata: [mas_leave_type]
-  getleava_data: [getdataaboutleave]
+  getleava_datame: getleaveResponseType
 }
 
 type Mutation{
@@ -78,59 +97,113 @@ export const leaveResolvers: Resolvers = {
   Query: {
     async getleavetypedata(p, args, ctx) {
       const gettypeleave = await ctx.prisma.mas_leave_type.findMany({
-        orderBy:{orderby: 'asc'}
+        orderBy: { orderby: 'asc' }
       })
       return gettypeleave
     },
 
-    async getleava_data(p, args, ctx) {
+    async getleava_datame(p, args, ctx) {
+      let count = 0
+      let count2 = 0
+      let count3 = 0
+      let count4 = 0
+      let countleave1 = 0
+      let countleave2 = 0
+      let countleave3 = 0
+      let countleave4 = 0
       const getdataleave = await ctx.prisma.user.findMany({
         include: {
           profile: true,
           Position_user: { include: { mas_positionlevel1: true, mas_positionlevel2: true, mas_positionlevel3: true } },
-          data_leave: {include: {mas_leave_type: true}}
-        }
+          data_leave: { include: { mas_leave_type: true } }
+        },
+        where: {
+          id: ctx.currentUser?.id
+        },
       })
-      return getdataleave
+      if (getdataleave) {
+        getdataleave.forEach((a) => {
+          if (a.data_leave) {
+            a.data_leave.forEach((e) => {
+              if (e.leavetype_id == "ba164e03-6687-490d-be0e-e43fec052d76") {
+                countleave1 = countleave1 + e.quantity_day
+              }
+              if (e.leavetype_id == "3030bfe1-f06a-41f8-b7ad-125c1d4f6fe9") {
+                countleave2 = countleave2 + e.quantity_day
+              }
+              if (e.leavetype_id == "e7b755b8-c395-4bcd-85f9-d6b7e667f47f") {
+                countleave3 = countleave3 + e.quantity_day
+              }
+              if (e.leavetype_id == "84fe2c17-1a61-4940-bbf7-8fb15a90a263") {
+                countleave4 = countleave4 + e.quantity_day
+              }
+            })
+          }
+        })
+      }
+
+      let dataCount = {
+        name_1: 'ลาพักร้อน' +' '+ countleave1,
+        count1: countleave1,
+        name_2: 'ลาป่วย' + ' ' + countleave2,
+        count2: countleave2,
+        name_3: 'ลากิจ' + ' '+ countleave3,
+        count3: countleave3,
+        name_4: 'ลาอื่นๆ' + ' '+  countleave4,
+        count4: countleave4
+      }
+      // return getdataleave
+      return {
+        data_all: getdataleave,
+        data_count: dataCount
+      }
+      // return {
+      //   // data_all: getdataleave ,
+      //   data_count: dataCount
+      // };
     }
+    // const countQuantityDay = 
+
+
   },
+
   Mutation: {
 
-    async createddata_leave(p, args, ctx){
-      if(args.data?.id){
+    async createddata_leave(p, args, ctx) {
+      if (args.data?.id) {
         const updatedLeavdData = await ctx.prisma.data_leave.update({
-          data:{
-            leavetype_id: args.data?.leavetype_id as string,             
+          data: {
+            leavetype_id: args.data?.leavetype_id as string,
             start_date: args.data?.start_date,
             end_date: args.data?.end_date,
             quantity_day: args.data?.quantity_day as number,
-            detail_leave: args.data?.detail_leave as string ,
-            Status: args.data.Status as number,               
+            detail_leave: args.data?.detail_leave as string,
+            Status: args.data.Status as number,
             user_id: args.data?.user_id as string
           },
-          where :{
-            id : args.data.id
+          where: {
+            id: args.data.id
           }
         })
-        return{
+        return {
           message: 'success',
           status: true,
         }
 
-      }else{
+      } else {
         const addLeavdData = await ctx.prisma.data_leave.create({
-          data:{
+          data: {
             id: v4(),
-            leavetype_id: args.data?.leavetype_id as string,             
+            leavetype_id: args.data?.leavetype_id as string,
             start_date: args.data?.start_date,
             end_date: args.data?.end_date,
             quantity_day: args.data?.quantity_day as number,
-            detail_leave: args.data?.detail_leave as string ,
-            Status: 1,                
+            detail_leave: args.data?.detail_leave as string,
+            Status: 1,
             user_id: args.data?.user_id as string
           }
         })
-        return{
+        return {
           message: 'success',
           status: true,
         }
@@ -143,7 +216,7 @@ export const leaveResolvers: Resolvers = {
 
 const resolversleave = {
   'Query.getleavetypedata': [authenticate()],
-  'Query.getleava_data': [authenticate()],
+  'Query.getleava_datame': [authenticate()],
 
 };
 
