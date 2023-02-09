@@ -239,6 +239,11 @@ export const salaryTypedef = gql`
     name: String
   }
 
+  type slipresolvers{
+    message: String
+    status: Boolean!
+}
+
   type expense_company {
     id: ID!
     monthId: String
@@ -968,6 +973,8 @@ const resolvers: Resolvers = {
       };
     },
 
+
+
     async createBank(p: any, args: any, ctx: any) {
       //สร้างธนาคาร
       const genBankID = v4();
@@ -1046,6 +1053,8 @@ const resolvers: Resolvers = {
     },
   },
 };
+
+
 const resolversComposition = {
   'Query.salary': [authenticate()],
   'Query.bookbank_log': [authenticate()],

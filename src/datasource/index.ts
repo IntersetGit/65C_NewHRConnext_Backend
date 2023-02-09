@@ -11,7 +11,7 @@ import { userTypedef, userResolvers } from './user.gql';
 import {Role_CompanyResolvers,roleCompanyTypedef} from './rolecompany.gql'
 import {holidayTypedef, holidayResolvers} from './holiday.gql'
 import {salaryTypedef, salaryResolvers} from './salary.gql'
-import { salarySlipTypedef, salarySlipResolvers } from './createsalaryslip'
+import {salarySlipTypedef, salarySlipResolvers } from './createsalaryslip.gql'
 import {leaveTypedef, leavedataResolvers } from './leave.gql'
 
 /**
