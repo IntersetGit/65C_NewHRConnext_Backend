@@ -162,7 +162,7 @@ export const holidayResolvers: Resolvers = {
             day: args.data.day as number,
             month: args.data.month as number,
             year: args.data.year as number,
-            status: args.data.status as number,
+            status: 1,
             CompanyId: ctx.currentUser?.compayId
           }
         });

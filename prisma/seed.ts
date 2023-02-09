@@ -1,3 +1,4 @@
+import { holiday_date, holiday_year } from './../src/generated/client/index.d';
 import { CompanyBranch } from './../src/generated/graphql';
 /**
  * Adds seed data to your db
@@ -10,7 +11,9 @@ import rolesEnum from '../enum/roles.enum';
 import provinceEnum from '../enum/province.enum';
 import districtEnum from '../enum/district.enum';
 import amphoeEnum from '../enum/amphoe.enum';
+import holidayEnum from '../enum/holiday.enum';
 import { createPassword } from '../src/utils/passwords';
+import { update } from 'lodash';
 
 const prisma = new PrismaClient();
 
@@ -65,6 +68,22 @@ const main = async () => {
         districtId: e.parent,
         zipcode: e.zip.toString(),
         name: e.name,
+      },
+      update: {},
+    });
+  });
+
+  const holiday = await holidayEnum.forEach(async (h) => {
+    await prisma.holiday_year.upsert({
+      where: {
+        id: h.id,
+      },
+      create:{
+        id: h.id,
+        day: h.day,
+        month: h.month,
+        year: h.year,
+        holiday_name: h.holiday_name,
       },
       update: {},
     });
