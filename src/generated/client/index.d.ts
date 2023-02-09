@@ -280,6 +280,17 @@ export type holiday_year = {
 }
 
 /**
+ * Model holidayCompany
+ * 
+ */
+export type holidayCompany = {
+  id: string
+  CompanyId: string | null
+  holiday_dateId: string | null
+  holiday_yearId: string | null
+}
+
+/**
  * Model mas_bank
  * 
  */
@@ -742,6 +753,16 @@ export class PrismaClient<
     * ```
     */
   get holiday_year(): Prisma.holiday_yearDelegate<GlobalReject>;
+
+  /**
+   * `prisma.holidayCompany`: Exposes CRUD operations for the **holidayCompany** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more HolidayCompanies
+    * const holidayCompanies = await prisma.holidayCompany.findMany()
+    * ```
+    */
+  get holidayCompany(): Prisma.holidayCompanyDelegate<GlobalReject>;
 
   /**
    * `prisma.mas_bank`: Exposes CRUD operations for the **mas_bank** model.
@@ -1364,6 +1385,7 @@ export namespace Prisma {
     Position_user: 'Position_user',
     holiday_date: 'holiday_date',
     holiday_year: 'holiday_year',
+    holidayCompany: 'holidayCompany',
     mas_bank: 'mas_bank',
     mas_month: 'mas_month',
     mas_years: 'mas_years',
@@ -1553,6 +1575,7 @@ export namespace Prisma {
     mas_positionlevel1: number
     holiday_date: number
     mas_position: number
+    holidayCompany: number
   }
 
   export type CompanyCountOutputTypeSelect = {
@@ -1562,6 +1585,7 @@ export namespace Prisma {
     mas_positionlevel1?: boolean
     holiday_date?: boolean
     mas_position?: boolean
+    holidayCompany?: boolean
   }
 
   export type CompanyCountOutputTypeGetPayload<S extends boolean | null | undefined | CompanyCountOutputTypeArgs> =
@@ -1999,6 +2023,92 @@ export namespace Prisma {
      * Select specific fields to fetch from the Mas_positionlevel3CountOutputType
      */
     select?: Mas_positionlevel3CountOutputTypeSelect | null
+  }
+
+
+
+  /**
+   * Count Type Holiday_dateCountOutputType
+   */
+
+
+  export type Holiday_dateCountOutputType = {
+    holidayCompany: number
+  }
+
+  export type Holiday_dateCountOutputTypeSelect = {
+    holidayCompany?: boolean
+  }
+
+  export type Holiday_dateCountOutputTypeGetPayload<S extends boolean | null | undefined | Holiday_dateCountOutputTypeArgs> =
+    S extends { select: any, include: any } ? 'Please either choose `select` or `include`' :
+    S extends true ? Holiday_dateCountOutputType :
+    S extends undefined ? never :
+    S extends { include: any } & (Holiday_dateCountOutputTypeArgs)
+    ? Holiday_dateCountOutputType 
+    : S extends { select: any } & (Holiday_dateCountOutputTypeArgs)
+      ? {
+    [P in TruthyKeys<S['select']>]:
+    P extends keyof Holiday_dateCountOutputType ? Holiday_dateCountOutputType[P] : never
+  } 
+      : Holiday_dateCountOutputType
+
+
+
+
+  // Custom InputTypes
+
+  /**
+   * Holiday_dateCountOutputType without action
+   */
+  export type Holiday_dateCountOutputTypeArgs = {
+    /**
+     * Select specific fields to fetch from the Holiday_dateCountOutputType
+     */
+    select?: Holiday_dateCountOutputTypeSelect | null
+  }
+
+
+
+  /**
+   * Count Type Holiday_yearCountOutputType
+   */
+
+
+  export type Holiday_yearCountOutputType = {
+    holidayCompany: number
+  }
+
+  export type Holiday_yearCountOutputTypeSelect = {
+    holidayCompany?: boolean
+  }
+
+  export type Holiday_yearCountOutputTypeGetPayload<S extends boolean | null | undefined | Holiday_yearCountOutputTypeArgs> =
+    S extends { select: any, include: any } ? 'Please either choose `select` or `include`' :
+    S extends true ? Holiday_yearCountOutputType :
+    S extends undefined ? never :
+    S extends { include: any } & (Holiday_yearCountOutputTypeArgs)
+    ? Holiday_yearCountOutputType 
+    : S extends { select: any } & (Holiday_yearCountOutputTypeArgs)
+      ? {
+    [P in TruthyKeys<S['select']>]:
+    P extends keyof Holiday_yearCountOutputType ? Holiday_yearCountOutputType[P] : never
+  } 
+      : Holiday_yearCountOutputType
+
+
+
+
+  // Custom InputTypes
+
+  /**
+   * Holiday_yearCountOutputType without action
+   */
+  export type Holiday_yearCountOutputTypeArgs = {
+    /**
+     * Select specific fields to fetch from the Holiday_yearCountOutputType
+     */
+    select?: Holiday_yearCountOutputTypeSelect | null
   }
 
 
@@ -2690,6 +2800,7 @@ export namespace Prisma {
     mas_positionlevel1?: boolean | Company$mas_positionlevel1Args
     holiday_date?: boolean | Company$holiday_dateArgs
     mas_position?: boolean | Company$mas_positionArgs
+    holidayCompany?: boolean | Company$holidayCompanyArgs
     _count?: boolean | CompanyCountOutputTypeArgs
   }
 
@@ -2702,6 +2813,7 @@ export namespace Prisma {
     mas_positionlevel1?: boolean | Company$mas_positionlevel1Args
     holiday_date?: boolean | Company$holiday_dateArgs
     mas_position?: boolean | Company$mas_positionArgs
+    holidayCompany?: boolean | Company$holidayCompanyArgs
     _count?: boolean | CompanyCountOutputTypeArgs
   }
 
@@ -2719,6 +2831,7 @@ export namespace Prisma {
         P extends 'mas_positionlevel1' ? Array < mas_positionlevel1GetPayload<S['include'][P]>>  :
         P extends 'holiday_date' ? Array < holiday_dateGetPayload<S['include'][P]>>  :
         P extends 'mas_position' ? Array < mas_positionGetPayload<S['include'][P]>>  :
+        P extends 'holidayCompany' ? Array < holidayCompanyGetPayload<S['include'][P]>>  :
         P extends '_count' ? CompanyCountOutputTypeGetPayload<S['include'][P]> :  never
   } 
     : S extends { select: any } & (CompanyArgs | CompanyFindManyArgs)
@@ -2731,6 +2844,7 @@ export namespace Prisma {
         P extends 'mas_positionlevel1' ? Array < mas_positionlevel1GetPayload<S['select'][P]>>  :
         P extends 'holiday_date' ? Array < holiday_dateGetPayload<S['select'][P]>>  :
         P extends 'mas_position' ? Array < mas_positionGetPayload<S['select'][P]>>  :
+        P extends 'holidayCompany' ? Array < holidayCompanyGetPayload<S['select'][P]>>  :
         P extends '_count' ? CompanyCountOutputTypeGetPayload<S['select'][P]> :  P extends keyof Company ? Company[P] : never
   } 
       : Company
@@ -3118,6 +3232,8 @@ export namespace Prisma {
     holiday_date<T extends Company$holiday_dateArgs= {}>(args?: Subset<T, Company$holiday_dateArgs>): PrismaPromise<Array<holiday_dateGetPayload<T>>| Null>;
 
     mas_position<T extends Company$mas_positionArgs= {}>(args?: Subset<T, Company$mas_positionArgs>): PrismaPromise<Array<mas_positionGetPayload<T>>| Null>;
+
+    holidayCompany<T extends Company$holidayCompanyArgs= {}>(args?: Subset<T, Company$holidayCompanyArgs>): PrismaPromise<Array<holidayCompanyGetPayload<T>>| Null>;
 
     private get _document();
     /**
@@ -3597,6 +3713,27 @@ export namespace Prisma {
     take?: number
     skip?: number
     distinct?: Enumerable<Mas_positionScalarFieldEnum>
+  }
+
+
+  /**
+   * Company.holidayCompany
+   */
+  export type Company$holidayCompanyArgs = {
+    /**
+     * Select specific fields to fetch from the holidayCompany
+     */
+    select?: holidayCompanySelect | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: holidayCompanyInclude | null
+    where?: holidayCompanyWhereInput
+    orderBy?: Enumerable<holidayCompanyOrderByWithRelationInput>
+    cursor?: holidayCompanyWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: Enumerable<HolidayCompanyScalarFieldEnum>
   }
 
 
@@ -17302,11 +17439,15 @@ export namespace Prisma {
     Company?: boolean | CompanyArgs
     CompanyId?: boolean
     status?: boolean
+    holidayCompany?: boolean | holiday_date$holidayCompanyArgs
+    _count?: boolean | Holiday_dateCountOutputTypeArgs
   }
 
 
   export type holiday_dateInclude = {
     Company?: boolean | CompanyArgs
+    holidayCompany?: boolean | holiday_date$holidayCompanyArgs
+    _count?: boolean | Holiday_dateCountOutputTypeArgs
   }
 
   export type holiday_dateGetPayload<S extends boolean | null | undefined | holiday_dateArgs> =
@@ -17316,12 +17457,16 @@ export namespace Prisma {
     S extends { include: any } & (holiday_dateArgs | holiday_dateFindManyArgs)
     ? holiday_date  & {
     [P in TruthyKeys<S['include']>]:
-        P extends 'Company' ? CompanyGetPayload<S['include'][P]> | null :  never
+        P extends 'Company' ? CompanyGetPayload<S['include'][P]> | null :
+        P extends 'holidayCompany' ? Array < holidayCompanyGetPayload<S['include'][P]>>  :
+        P extends '_count' ? Holiday_dateCountOutputTypeGetPayload<S['include'][P]> :  never
   } 
     : S extends { select: any } & (holiday_dateArgs | holiday_dateFindManyArgs)
       ? {
     [P in TruthyKeys<S['select']>]:
-        P extends 'Company' ? CompanyGetPayload<S['select'][P]> | null :  P extends keyof holiday_date ? holiday_date[P] : never
+        P extends 'Company' ? CompanyGetPayload<S['select'][P]> | null :
+        P extends 'holidayCompany' ? Array < holidayCompanyGetPayload<S['select'][P]>>  :
+        P extends '_count' ? Holiday_dateCountOutputTypeGetPayload<S['select'][P]> :  P extends keyof holiday_date ? holiday_date[P] : never
   } 
       : holiday_date
 
@@ -17697,6 +17842,8 @@ export namespace Prisma {
 
     Company<T extends CompanyArgs= {}>(args?: Subset<T, CompanyArgs>): Prisma__CompanyClient<CompanyGetPayload<T> | Null>;
 
+    holidayCompany<T extends holiday_date$holidayCompanyArgs= {}>(args?: Subset<T, holiday_date$holidayCompanyArgs>): PrismaPromise<Array<holidayCompanyGetPayload<T>>| Null>;
+
     private get _document();
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
@@ -18053,6 +18200,27 @@ export namespace Prisma {
 
 
   /**
+   * holiday_date.holidayCompany
+   */
+  export type holiday_date$holidayCompanyArgs = {
+    /**
+     * Select specific fields to fetch from the holidayCompany
+     */
+    select?: holidayCompanySelect | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: holidayCompanyInclude | null
+    where?: holidayCompanyWhereInput
+    orderBy?: Enumerable<holidayCompanyOrderByWithRelationInput>
+    cursor?: holidayCompanyWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: Enumerable<HolidayCompanyScalarFieldEnum>
+  }
+
+
+  /**
    * holiday_date without action
    */
   export type holiday_dateArgs = {
@@ -18276,19 +18444,31 @@ export namespace Prisma {
     month?: boolean
     year?: boolean
     holiday_name?: boolean
+    holidayCompany?: boolean | holiday_year$holidayCompanyArgs
+    _count?: boolean | Holiday_yearCountOutputTypeArgs
   }
 
+
+  export type holiday_yearInclude = {
+    holidayCompany?: boolean | holiday_year$holidayCompanyArgs
+    _count?: boolean | Holiday_yearCountOutputTypeArgs
+  }
 
   export type holiday_yearGetPayload<S extends boolean | null | undefined | holiday_yearArgs> =
     S extends { select: any, include: any } ? 'Please either choose `select` or `include`' :
     S extends true ? holiday_year :
     S extends undefined ? never :
     S extends { include: any } & (holiday_yearArgs | holiday_yearFindManyArgs)
-    ? holiday_year 
+    ? holiday_year  & {
+    [P in TruthyKeys<S['include']>]:
+        P extends 'holidayCompany' ? Array < holidayCompanyGetPayload<S['include'][P]>>  :
+        P extends '_count' ? Holiday_yearCountOutputTypeGetPayload<S['include'][P]> :  never
+  } 
     : S extends { select: any } & (holiday_yearArgs | holiday_yearFindManyArgs)
       ? {
     [P in TruthyKeys<S['select']>]:
-    P extends keyof holiday_year ? holiday_year[P] : never
+        P extends 'holidayCompany' ? Array < holidayCompanyGetPayload<S['select'][P]>>  :
+        P extends '_count' ? Holiday_yearCountOutputTypeGetPayload<S['select'][P]> :  P extends keyof holiday_year ? holiday_year[P] : never
   } 
       : holiday_year
 
@@ -18662,6 +18842,7 @@ export namespace Prisma {
     constructor(_dmmf: runtime.DMMFClass, _fetcher: PrismaClientFetcher, _queryType: 'query' | 'mutation', _rootField: string, _clientMethod: string, _args: any, _dataPath: string[], _errorFormat: ErrorFormat, _measurePerformance?: boolean | undefined, _isList?: boolean);
     readonly [Symbol.toStringTag]: 'PrismaClientPromise';
 
+    holidayCompany<T extends holiday_year$holidayCompanyArgs= {}>(args?: Subset<T, holiday_year$holidayCompanyArgs>): PrismaPromise<Array<holidayCompanyGetPayload<T>>| Null>;
 
     private get _document();
     /**
@@ -18699,6 +18880,10 @@ export namespace Prisma {
      */
     select?: holiday_yearSelect | null
     /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: holiday_yearInclude | null
+    /**
      * Filter, which holiday_year to fetch.
      */
     where: holiday_yearWhereUniqueInput
@@ -18725,6 +18910,10 @@ export namespace Prisma {
      */
     select?: holiday_yearSelect | null
     /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: holiday_yearInclude | null
+    /**
      * Filter, which holiday_year to fetch.
      */
     where: holiday_yearWhereUniqueInput
@@ -18739,6 +18928,10 @@ export namespace Prisma {
      * Select specific fields to fetch from the holiday_year
      */
     select?: holiday_yearSelect | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: holiday_yearInclude | null
     /**
      * Filter, which holiday_year to fetch.
      */
@@ -18796,6 +18989,10 @@ export namespace Prisma {
      */
     select?: holiday_yearSelect | null
     /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: holiday_yearInclude | null
+    /**
      * Filter, which holiday_year to fetch.
      */
     where?: holiday_yearWhereInput
@@ -18841,6 +19038,10 @@ export namespace Prisma {
      */
     select?: holiday_yearSelect | null
     /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: holiday_yearInclude | null
+    /**
      * Filter, which holiday_years to fetch.
      */
     where?: holiday_yearWhereInput
@@ -18881,6 +19082,10 @@ export namespace Prisma {
      */
     select?: holiday_yearSelect | null
     /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: holiday_yearInclude | null
+    /**
      * The data needed to create a holiday_year.
      */
     data: XOR<holiday_yearCreateInput, holiday_yearUncheckedCreateInput>
@@ -18907,6 +19112,10 @@ export namespace Prisma {
      * Select specific fields to fetch from the holiday_year
      */
     select?: holiday_yearSelect | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: holiday_yearInclude | null
     /**
      * The data needed to update a holiday_year.
      */
@@ -18942,6 +19151,10 @@ export namespace Prisma {
      */
     select?: holiday_yearSelect | null
     /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: holiday_yearInclude | null
+    /**
      * The filter to search for the holiday_year to update in case it exists.
      */
     where: holiday_yearWhereUniqueInput
@@ -18965,6 +19178,10 @@ export namespace Prisma {
      */
     select?: holiday_yearSelect | null
     /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: holiday_yearInclude | null
+    /**
      * Filter which holiday_year to delete.
      */
     where: holiday_yearWhereUniqueInput
@@ -18983,6 +19200,27 @@ export namespace Prisma {
 
 
   /**
+   * holiday_year.holidayCompany
+   */
+  export type holiday_year$holidayCompanyArgs = {
+    /**
+     * Select specific fields to fetch from the holidayCompany
+     */
+    select?: holidayCompanySelect | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: holidayCompanyInclude | null
+    where?: holidayCompanyWhereInput
+    orderBy?: Enumerable<holidayCompanyOrderByWithRelationInput>
+    cursor?: holidayCompanyWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: Enumerable<HolidayCompanyScalarFieldEnum>
+  }
+
+
+  /**
    * holiday_year without action
    */
   export type holiday_yearArgs = {
@@ -18990,6 +19228,947 @@ export namespace Prisma {
      * Select specific fields to fetch from the holiday_year
      */
     select?: holiday_yearSelect | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: holiday_yearInclude | null
+  }
+
+
+
+  /**
+   * Model holidayCompany
+   */
+
+
+  export type AggregateHolidayCompany = {
+    _count: HolidayCompanyCountAggregateOutputType | null
+    _min: HolidayCompanyMinAggregateOutputType | null
+    _max: HolidayCompanyMaxAggregateOutputType | null
+  }
+
+  export type HolidayCompanyMinAggregateOutputType = {
+    id: string | null
+    CompanyId: string | null
+    holiday_dateId: string | null
+    holiday_yearId: string | null
+  }
+
+  export type HolidayCompanyMaxAggregateOutputType = {
+    id: string | null
+    CompanyId: string | null
+    holiday_dateId: string | null
+    holiday_yearId: string | null
+  }
+
+  export type HolidayCompanyCountAggregateOutputType = {
+    id: number
+    CompanyId: number
+    holiday_dateId: number
+    holiday_yearId: number
+    _all: number
+  }
+
+
+  export type HolidayCompanyMinAggregateInputType = {
+    id?: true
+    CompanyId?: true
+    holiday_dateId?: true
+    holiday_yearId?: true
+  }
+
+  export type HolidayCompanyMaxAggregateInputType = {
+    id?: true
+    CompanyId?: true
+    holiday_dateId?: true
+    holiday_yearId?: true
+  }
+
+  export type HolidayCompanyCountAggregateInputType = {
+    id?: true
+    CompanyId?: true
+    holiday_dateId?: true
+    holiday_yearId?: true
+    _all?: true
+  }
+
+  export type HolidayCompanyAggregateArgs = {
+    /**
+     * Filter which holidayCompany to aggregate.
+     */
+    where?: holidayCompanyWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of holidayCompanies to fetch.
+     */
+    orderBy?: Enumerable<holidayCompanyOrderByWithRelationInput>
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: holidayCompanyWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` holidayCompanies from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` holidayCompanies.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned holidayCompanies
+    **/
+    _count?: true | HolidayCompanyCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: HolidayCompanyMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: HolidayCompanyMaxAggregateInputType
+  }
+
+  export type GetHolidayCompanyAggregateType<T extends HolidayCompanyAggregateArgs> = {
+        [P in keyof T & keyof AggregateHolidayCompany]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateHolidayCompany[P]>
+      : GetScalarType<T[P], AggregateHolidayCompany[P]>
+  }
+
+
+
+
+  export type HolidayCompanyGroupByArgs = {
+    where?: holidayCompanyWhereInput
+    orderBy?: Enumerable<holidayCompanyOrderByWithAggregationInput>
+    by: HolidayCompanyScalarFieldEnum[]
+    having?: holidayCompanyScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: HolidayCompanyCountAggregateInputType | true
+    _min?: HolidayCompanyMinAggregateInputType
+    _max?: HolidayCompanyMaxAggregateInputType
+  }
+
+
+  export type HolidayCompanyGroupByOutputType = {
+    id: string
+    CompanyId: string | null
+    holiday_dateId: string | null
+    holiday_yearId: string | null
+    _count: HolidayCompanyCountAggregateOutputType | null
+    _min: HolidayCompanyMinAggregateOutputType | null
+    _max: HolidayCompanyMaxAggregateOutputType | null
+  }
+
+  type GetHolidayCompanyGroupByPayload<T extends HolidayCompanyGroupByArgs> = PrismaPromise<
+    Array<
+      PickArray<HolidayCompanyGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof HolidayCompanyGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], HolidayCompanyGroupByOutputType[P]>
+            : GetScalarType<T[P], HolidayCompanyGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type holidayCompanySelect = {
+    id?: boolean
+    CompanyId?: boolean
+    holiday_dateId?: boolean
+    holiday_yearId?: boolean
+    Company?: boolean | CompanyArgs
+    holiday_date?: boolean | holiday_dateArgs
+    holiday_year?: boolean | holiday_yearArgs
+  }
+
+
+  export type holidayCompanyInclude = {
+    Company?: boolean | CompanyArgs
+    holiday_date?: boolean | holiday_dateArgs
+    holiday_year?: boolean | holiday_yearArgs
+  }
+
+  export type holidayCompanyGetPayload<S extends boolean | null | undefined | holidayCompanyArgs> =
+    S extends { select: any, include: any } ? 'Please either choose `select` or `include`' :
+    S extends true ? holidayCompany :
+    S extends undefined ? never :
+    S extends { include: any } & (holidayCompanyArgs | holidayCompanyFindManyArgs)
+    ? holidayCompany  & {
+    [P in TruthyKeys<S['include']>]:
+        P extends 'Company' ? CompanyGetPayload<S['include'][P]> | null :
+        P extends 'holiday_date' ? holiday_dateGetPayload<S['include'][P]> | null :
+        P extends 'holiday_year' ? holiday_yearGetPayload<S['include'][P]> | null :  never
+  } 
+    : S extends { select: any } & (holidayCompanyArgs | holidayCompanyFindManyArgs)
+      ? {
+    [P in TruthyKeys<S['select']>]:
+        P extends 'Company' ? CompanyGetPayload<S['select'][P]> | null :
+        P extends 'holiday_date' ? holiday_dateGetPayload<S['select'][P]> | null :
+        P extends 'holiday_year' ? holiday_yearGetPayload<S['select'][P]> | null :  P extends keyof holidayCompany ? holidayCompany[P] : never
+  } 
+      : holidayCompany
+
+
+  type holidayCompanyCountArgs = 
+    Omit<holidayCompanyFindManyArgs, 'select' | 'include'> & {
+      select?: HolidayCompanyCountAggregateInputType | true
+    }
+
+  export interface holidayCompanyDelegate<GlobalRejectSettings extends Prisma.RejectOnNotFound | Prisma.RejectPerOperation | false | undefined> {
+
+    /**
+     * Find zero or one HolidayCompany that matches the filter.
+     * @param {holidayCompanyFindUniqueArgs} args - Arguments to find a HolidayCompany
+     * @example
+     * // Get one HolidayCompany
+     * const holidayCompany = await prisma.holidayCompany.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+    **/
+    findUnique<T extends holidayCompanyFindUniqueArgs,  LocalRejectSettings = T["rejectOnNotFound"] extends RejectOnNotFound ? T['rejectOnNotFound'] : undefined>(
+      args: SelectSubset<T, holidayCompanyFindUniqueArgs>
+    ): HasReject<GlobalRejectSettings, LocalRejectSettings, 'findUnique', 'holidayCompany'> extends True ? Prisma__holidayCompanyClient<holidayCompanyGetPayload<T>> : Prisma__holidayCompanyClient<holidayCompanyGetPayload<T> | null, null>
+
+    /**
+     * Find one HolidayCompany that matches the filter or throw an error  with `error.code='P2025'` 
+     *     if no matches were found.
+     * @param {holidayCompanyFindUniqueOrThrowArgs} args - Arguments to find a HolidayCompany
+     * @example
+     * // Get one HolidayCompany
+     * const holidayCompany = await prisma.holidayCompany.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+    **/
+    findUniqueOrThrow<T extends holidayCompanyFindUniqueOrThrowArgs>(
+      args?: SelectSubset<T, holidayCompanyFindUniqueOrThrowArgs>
+    ): Prisma__holidayCompanyClient<holidayCompanyGetPayload<T>>
+
+    /**
+     * Find the first HolidayCompany that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {holidayCompanyFindFirstArgs} args - Arguments to find a HolidayCompany
+     * @example
+     * // Get one HolidayCompany
+     * const holidayCompany = await prisma.holidayCompany.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+    **/
+    findFirst<T extends holidayCompanyFindFirstArgs,  LocalRejectSettings = T["rejectOnNotFound"] extends RejectOnNotFound ? T['rejectOnNotFound'] : undefined>(
+      args?: SelectSubset<T, holidayCompanyFindFirstArgs>
+    ): HasReject<GlobalRejectSettings, LocalRejectSettings, 'findFirst', 'holidayCompany'> extends True ? Prisma__holidayCompanyClient<holidayCompanyGetPayload<T>> : Prisma__holidayCompanyClient<holidayCompanyGetPayload<T> | null, null>
+
+    /**
+     * Find the first HolidayCompany that matches the filter or
+     * throw `NotFoundError` if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {holidayCompanyFindFirstOrThrowArgs} args - Arguments to find a HolidayCompany
+     * @example
+     * // Get one HolidayCompany
+     * const holidayCompany = await prisma.holidayCompany.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+    **/
+    findFirstOrThrow<T extends holidayCompanyFindFirstOrThrowArgs>(
+      args?: SelectSubset<T, holidayCompanyFindFirstOrThrowArgs>
+    ): Prisma__holidayCompanyClient<holidayCompanyGetPayload<T>>
+
+    /**
+     * Find zero or more HolidayCompanies that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {holidayCompanyFindManyArgs=} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all HolidayCompanies
+     * const holidayCompanies = await prisma.holidayCompany.findMany()
+     * 
+     * // Get first 10 HolidayCompanies
+     * const holidayCompanies = await prisma.holidayCompany.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const holidayCompanyWithIdOnly = await prisma.holidayCompany.findMany({ select: { id: true } })
+     * 
+    **/
+    findMany<T extends holidayCompanyFindManyArgs>(
+      args?: SelectSubset<T, holidayCompanyFindManyArgs>
+    ): PrismaPromise<Array<holidayCompanyGetPayload<T>>>
+
+    /**
+     * Create a HolidayCompany.
+     * @param {holidayCompanyCreateArgs} args - Arguments to create a HolidayCompany.
+     * @example
+     * // Create one HolidayCompany
+     * const HolidayCompany = await prisma.holidayCompany.create({
+     *   data: {
+     *     // ... data to create a HolidayCompany
+     *   }
+     * })
+     * 
+    **/
+    create<T extends holidayCompanyCreateArgs>(
+      args: SelectSubset<T, holidayCompanyCreateArgs>
+    ): Prisma__holidayCompanyClient<holidayCompanyGetPayload<T>>
+
+    /**
+     * Create many HolidayCompanies.
+     *     @param {holidayCompanyCreateManyArgs} args - Arguments to create many HolidayCompanies.
+     *     @example
+     *     // Create many HolidayCompanies
+     *     const holidayCompany = await prisma.holidayCompany.createMany({
+     *       data: {
+     *         // ... provide data here
+     *       }
+     *     })
+     *     
+    **/
+    createMany<T extends holidayCompanyCreateManyArgs>(
+      args?: SelectSubset<T, holidayCompanyCreateManyArgs>
+    ): PrismaPromise<BatchPayload>
+
+    /**
+     * Delete a HolidayCompany.
+     * @param {holidayCompanyDeleteArgs} args - Arguments to delete one HolidayCompany.
+     * @example
+     * // Delete one HolidayCompany
+     * const HolidayCompany = await prisma.holidayCompany.delete({
+     *   where: {
+     *     // ... filter to delete one HolidayCompany
+     *   }
+     * })
+     * 
+    **/
+    delete<T extends holidayCompanyDeleteArgs>(
+      args: SelectSubset<T, holidayCompanyDeleteArgs>
+    ): Prisma__holidayCompanyClient<holidayCompanyGetPayload<T>>
+
+    /**
+     * Update one HolidayCompany.
+     * @param {holidayCompanyUpdateArgs} args - Arguments to update one HolidayCompany.
+     * @example
+     * // Update one HolidayCompany
+     * const holidayCompany = await prisma.holidayCompany.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+    **/
+    update<T extends holidayCompanyUpdateArgs>(
+      args: SelectSubset<T, holidayCompanyUpdateArgs>
+    ): Prisma__holidayCompanyClient<holidayCompanyGetPayload<T>>
+
+    /**
+     * Delete zero or more HolidayCompanies.
+     * @param {holidayCompanyDeleteManyArgs} args - Arguments to filter HolidayCompanies to delete.
+     * @example
+     * // Delete a few HolidayCompanies
+     * const { count } = await prisma.holidayCompany.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+    **/
+    deleteMany<T extends holidayCompanyDeleteManyArgs>(
+      args?: SelectSubset<T, holidayCompanyDeleteManyArgs>
+    ): PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more HolidayCompanies.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {holidayCompanyUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many HolidayCompanies
+     * const holidayCompany = await prisma.holidayCompany.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+    **/
+    updateMany<T extends holidayCompanyUpdateManyArgs>(
+      args: SelectSubset<T, holidayCompanyUpdateManyArgs>
+    ): PrismaPromise<BatchPayload>
+
+    /**
+     * Create or update one HolidayCompany.
+     * @param {holidayCompanyUpsertArgs} args - Arguments to update or create a HolidayCompany.
+     * @example
+     * // Update or create a HolidayCompany
+     * const holidayCompany = await prisma.holidayCompany.upsert({
+     *   create: {
+     *     // ... data to create a HolidayCompany
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the HolidayCompany we want to update
+     *   }
+     * })
+    **/
+    upsert<T extends holidayCompanyUpsertArgs>(
+      args: SelectSubset<T, holidayCompanyUpsertArgs>
+    ): Prisma__holidayCompanyClient<holidayCompanyGetPayload<T>>
+
+    /**
+     * Count the number of HolidayCompanies.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {holidayCompanyCountArgs} args - Arguments to filter HolidayCompanies to count.
+     * @example
+     * // Count the number of HolidayCompanies
+     * const count = await prisma.holidayCompany.count({
+     *   where: {
+     *     // ... the filter for the HolidayCompanies we want to count
+     *   }
+     * })
+    **/
+    count<T extends holidayCompanyCountArgs>(
+      args?: Subset<T, holidayCompanyCountArgs>,
+    ): PrismaPromise<
+      T extends _Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], HolidayCompanyCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a HolidayCompany.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {HolidayCompanyAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends HolidayCompanyAggregateArgs>(args: Subset<T, HolidayCompanyAggregateArgs>): PrismaPromise<GetHolidayCompanyAggregateType<T>>
+
+    /**
+     * Group by HolidayCompany.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {HolidayCompanyGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends HolidayCompanyGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: HolidayCompanyGroupByArgs['orderBy'] }
+        : { orderBy?: HolidayCompanyGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends TupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, HolidayCompanyGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetHolidayCompanyGroupByPayload<T> : PrismaPromise<InputErrors>
+
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for holidayCompany.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export class Prisma__holidayCompanyClient<T, Null = never> implements PrismaPromise<T> {
+    [prisma]: true;
+    private readonly _dmmf;
+    private readonly _fetcher;
+    private readonly _queryType;
+    private readonly _rootField;
+    private readonly _clientMethod;
+    private readonly _args;
+    private readonly _dataPath;
+    private readonly _errorFormat;
+    private readonly _measurePerformance?;
+    private _isList;
+    private _callsite;
+    private _requestPromise?;
+    constructor(_dmmf: runtime.DMMFClass, _fetcher: PrismaClientFetcher, _queryType: 'query' | 'mutation', _rootField: string, _clientMethod: string, _args: any, _dataPath: string[], _errorFormat: ErrorFormat, _measurePerformance?: boolean | undefined, _isList?: boolean);
+    readonly [Symbol.toStringTag]: 'PrismaClientPromise';
+
+    Company<T extends CompanyArgs= {}>(args?: Subset<T, CompanyArgs>): Prisma__CompanyClient<CompanyGetPayload<T> | Null>;
+
+    holiday_date<T extends holiday_dateArgs= {}>(args?: Subset<T, holiday_dateArgs>): Prisma__holiday_dateClient<holiday_dateGetPayload<T> | Null>;
+
+    holiday_year<T extends holiday_yearArgs= {}>(args?: Subset<T, holiday_yearArgs>): Prisma__holiday_yearClient<holiday_yearGetPayload<T> | Null>;
+
+    private get _document();
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): Promise<TResult1 | TResult2>;
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): Promise<T | TResult>;
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): Promise<T>;
+  }
+
+
+
+  // Custom InputTypes
+
+  /**
+   * holidayCompany base type for findUnique actions
+   */
+  export type holidayCompanyFindUniqueArgsBase = {
+    /**
+     * Select specific fields to fetch from the holidayCompany
+     */
+    select?: holidayCompanySelect | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: holidayCompanyInclude | null
+    /**
+     * Filter, which holidayCompany to fetch.
+     */
+    where: holidayCompanyWhereUniqueInput
+  }
+
+  /**
+   * holidayCompany findUnique
+   */
+  export interface holidayCompanyFindUniqueArgs extends holidayCompanyFindUniqueArgsBase {
+   /**
+    * Throw an Error if query returns no results
+    * @deprecated since 4.0.0: use `findUniqueOrThrow` method instead
+    */
+    rejectOnNotFound?: RejectOnNotFound
+  }
+      
+
+  /**
+   * holidayCompany findUniqueOrThrow
+   */
+  export type holidayCompanyFindUniqueOrThrowArgs = {
+    /**
+     * Select specific fields to fetch from the holidayCompany
+     */
+    select?: holidayCompanySelect | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: holidayCompanyInclude | null
+    /**
+     * Filter, which holidayCompany to fetch.
+     */
+    where: holidayCompanyWhereUniqueInput
+  }
+
+
+  /**
+   * holidayCompany base type for findFirst actions
+   */
+  export type holidayCompanyFindFirstArgsBase = {
+    /**
+     * Select specific fields to fetch from the holidayCompany
+     */
+    select?: holidayCompanySelect | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: holidayCompanyInclude | null
+    /**
+     * Filter, which holidayCompany to fetch.
+     */
+    where?: holidayCompanyWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of holidayCompanies to fetch.
+     */
+    orderBy?: Enumerable<holidayCompanyOrderByWithRelationInput>
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for holidayCompanies.
+     */
+    cursor?: holidayCompanyWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` holidayCompanies from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` holidayCompanies.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of holidayCompanies.
+     */
+    distinct?: Enumerable<HolidayCompanyScalarFieldEnum>
+  }
+
+  /**
+   * holidayCompany findFirst
+   */
+  export interface holidayCompanyFindFirstArgs extends holidayCompanyFindFirstArgsBase {
+   /**
+    * Throw an Error if query returns no results
+    * @deprecated since 4.0.0: use `findFirstOrThrow` method instead
+    */
+    rejectOnNotFound?: RejectOnNotFound
+  }
+      
+
+  /**
+   * holidayCompany findFirstOrThrow
+   */
+  export type holidayCompanyFindFirstOrThrowArgs = {
+    /**
+     * Select specific fields to fetch from the holidayCompany
+     */
+    select?: holidayCompanySelect | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: holidayCompanyInclude | null
+    /**
+     * Filter, which holidayCompany to fetch.
+     */
+    where?: holidayCompanyWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of holidayCompanies to fetch.
+     */
+    orderBy?: Enumerable<holidayCompanyOrderByWithRelationInput>
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for holidayCompanies.
+     */
+    cursor?: holidayCompanyWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` holidayCompanies from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` holidayCompanies.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of holidayCompanies.
+     */
+    distinct?: Enumerable<HolidayCompanyScalarFieldEnum>
+  }
+
+
+  /**
+   * holidayCompany findMany
+   */
+  export type holidayCompanyFindManyArgs = {
+    /**
+     * Select specific fields to fetch from the holidayCompany
+     */
+    select?: holidayCompanySelect | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: holidayCompanyInclude | null
+    /**
+     * Filter, which holidayCompanies to fetch.
+     */
+    where?: holidayCompanyWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of holidayCompanies to fetch.
+     */
+    orderBy?: Enumerable<holidayCompanyOrderByWithRelationInput>
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing holidayCompanies.
+     */
+    cursor?: holidayCompanyWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` holidayCompanies from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` holidayCompanies.
+     */
+    skip?: number
+    distinct?: Enumerable<HolidayCompanyScalarFieldEnum>
+  }
+
+
+  /**
+   * holidayCompany create
+   */
+  export type holidayCompanyCreateArgs = {
+    /**
+     * Select specific fields to fetch from the holidayCompany
+     */
+    select?: holidayCompanySelect | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: holidayCompanyInclude | null
+    /**
+     * The data needed to create a holidayCompany.
+     */
+    data: XOR<holidayCompanyCreateInput, holidayCompanyUncheckedCreateInput>
+  }
+
+
+  /**
+   * holidayCompany createMany
+   */
+  export type holidayCompanyCreateManyArgs = {
+    /**
+     * The data used to create many holidayCompanies.
+     */
+    data: Enumerable<holidayCompanyCreateManyInput>
+    skipDuplicates?: boolean
+  }
+
+
+  /**
+   * holidayCompany update
+   */
+  export type holidayCompanyUpdateArgs = {
+    /**
+     * Select specific fields to fetch from the holidayCompany
+     */
+    select?: holidayCompanySelect | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: holidayCompanyInclude | null
+    /**
+     * The data needed to update a holidayCompany.
+     */
+    data: XOR<holidayCompanyUpdateInput, holidayCompanyUncheckedUpdateInput>
+    /**
+     * Choose, which holidayCompany to update.
+     */
+    where: holidayCompanyWhereUniqueInput
+  }
+
+
+  /**
+   * holidayCompany updateMany
+   */
+  export type holidayCompanyUpdateManyArgs = {
+    /**
+     * The data used to update holidayCompanies.
+     */
+    data: XOR<holidayCompanyUpdateManyMutationInput, holidayCompanyUncheckedUpdateManyInput>
+    /**
+     * Filter which holidayCompanies to update
+     */
+    where?: holidayCompanyWhereInput
+  }
+
+
+  /**
+   * holidayCompany upsert
+   */
+  export type holidayCompanyUpsertArgs = {
+    /**
+     * Select specific fields to fetch from the holidayCompany
+     */
+    select?: holidayCompanySelect | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: holidayCompanyInclude | null
+    /**
+     * The filter to search for the holidayCompany to update in case it exists.
+     */
+    where: holidayCompanyWhereUniqueInput
+    /**
+     * In case the holidayCompany found by the `where` argument doesn't exist, create a new holidayCompany with this data.
+     */
+    create: XOR<holidayCompanyCreateInput, holidayCompanyUncheckedCreateInput>
+    /**
+     * In case the holidayCompany was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<holidayCompanyUpdateInput, holidayCompanyUncheckedUpdateInput>
+  }
+
+
+  /**
+   * holidayCompany delete
+   */
+  export type holidayCompanyDeleteArgs = {
+    /**
+     * Select specific fields to fetch from the holidayCompany
+     */
+    select?: holidayCompanySelect | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: holidayCompanyInclude | null
+    /**
+     * Filter which holidayCompany to delete.
+     */
+    where: holidayCompanyWhereUniqueInput
+  }
+
+
+  /**
+   * holidayCompany deleteMany
+   */
+  export type holidayCompanyDeleteManyArgs = {
+    /**
+     * Filter which holidayCompanies to delete
+     */
+    where?: holidayCompanyWhereInput
+  }
+
+
+  /**
+   * holidayCompany without action
+   */
+  export type holidayCompanyArgs = {
+    /**
+     * Select specific fields to fetch from the holidayCompany
+     */
+    select?: holidayCompanySelect | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: holidayCompanyInclude | null
   }
 
 
@@ -32339,6 +33518,16 @@ export namespace Prisma {
   export type Expense_companyScalarFieldEnum = (typeof Expense_companyScalarFieldEnum)[keyof typeof Expense_companyScalarFieldEnum]
 
 
+  export const HolidayCompanyScalarFieldEnum: {
+    id: 'id',
+    CompanyId: 'CompanyId',
+    holiday_dateId: 'holiday_dateId',
+    holiday_yearId: 'holiday_yearId'
+  };
+
+  export type HolidayCompanyScalarFieldEnum = (typeof HolidayCompanyScalarFieldEnum)[keyof typeof HolidayCompanyScalarFieldEnum]
+
+
   export const Holiday_dateScalarFieldEnum: {
     id: 'id',
     holiday_name: 'holiday_name',
@@ -32722,6 +33911,7 @@ export namespace Prisma {
     mas_positionlevel1?: Mas_positionlevel1ListRelationFilter
     holiday_date?: Holiday_dateListRelationFilter
     mas_position?: Mas_positionListRelationFilter
+    holidayCompany?: HolidayCompanyListRelationFilter
   }
 
   export type CompanyOrderByWithRelationInput = {
@@ -32742,6 +33932,7 @@ export namespace Prisma {
     mas_positionlevel1?: mas_positionlevel1OrderByRelationAggregateInput
     holiday_date?: holiday_dateOrderByRelationAggregateInput
     mas_position?: mas_positionOrderByRelationAggregateInput
+    holidayCompany?: holidayCompanyOrderByRelationAggregateInput
   }
 
   export type CompanyWhereUniqueInput = {
@@ -33745,6 +34936,7 @@ export namespace Prisma {
     Company?: XOR<CompanyRelationFilter, CompanyWhereInput> | null
     CompanyId?: UuidNullableFilter | string | null
     status?: IntFilter | number
+    holidayCompany?: HolidayCompanyListRelationFilter
   }
 
   export type holiday_dateOrderByWithRelationInput = {
@@ -33756,6 +34948,7 @@ export namespace Prisma {
     Company?: CompanyOrderByWithRelationInput
     CompanyId?: SortOrder
     status?: SortOrder
+    holidayCompany?: holidayCompanyOrderByRelationAggregateInput
   }
 
   export type holiday_dateWhereUniqueInput = {
@@ -33799,6 +34992,7 @@ export namespace Prisma {
     month?: IntFilter | number
     year?: IntFilter | number
     holiday_name?: StringNullableFilter | string | null
+    holidayCompany?: HolidayCompanyListRelationFilter
   }
 
   export type holiday_yearOrderByWithRelationInput = {
@@ -33807,6 +35001,7 @@ export namespace Prisma {
     month?: SortOrder
     year?: SortOrder
     holiday_name?: SortOrder
+    holidayCompany?: holidayCompanyOrderByRelationAggregateInput
   }
 
   export type holiday_yearWhereUniqueInput = {
@@ -33835,6 +35030,53 @@ export namespace Prisma {
     month?: IntWithAggregatesFilter | number
     year?: IntWithAggregatesFilter | number
     holiday_name?: StringNullableWithAggregatesFilter | string | null
+  }
+
+  export type holidayCompanyWhereInput = {
+    AND?: Enumerable<holidayCompanyWhereInput>
+    OR?: Enumerable<holidayCompanyWhereInput>
+    NOT?: Enumerable<holidayCompanyWhereInput>
+    id?: UuidFilter | string
+    CompanyId?: UuidNullableFilter | string | null
+    holiday_dateId?: UuidNullableFilter | string | null
+    holiday_yearId?: UuidNullableFilter | string | null
+    Company?: XOR<CompanyRelationFilter, CompanyWhereInput> | null
+    holiday_date?: XOR<Holiday_dateRelationFilter, holiday_dateWhereInput> | null
+    holiday_year?: XOR<Holiday_yearRelationFilter, holiday_yearWhereInput> | null
+  }
+
+  export type holidayCompanyOrderByWithRelationInput = {
+    id?: SortOrder
+    CompanyId?: SortOrder
+    holiday_dateId?: SortOrder
+    holiday_yearId?: SortOrder
+    Company?: CompanyOrderByWithRelationInput
+    holiday_date?: holiday_dateOrderByWithRelationInput
+    holiday_year?: holiday_yearOrderByWithRelationInput
+  }
+
+  export type holidayCompanyWhereUniqueInput = {
+    id?: string
+  }
+
+  export type holidayCompanyOrderByWithAggregationInput = {
+    id?: SortOrder
+    CompanyId?: SortOrder
+    holiday_dateId?: SortOrder
+    holiday_yearId?: SortOrder
+    _count?: holidayCompanyCountOrderByAggregateInput
+    _max?: holidayCompanyMaxOrderByAggregateInput
+    _min?: holidayCompanyMinOrderByAggregateInput
+  }
+
+  export type holidayCompanyScalarWhereWithAggregatesInput = {
+    AND?: Enumerable<holidayCompanyScalarWhereWithAggregatesInput>
+    OR?: Enumerable<holidayCompanyScalarWhereWithAggregatesInput>
+    NOT?: Enumerable<holidayCompanyScalarWhereWithAggregatesInput>
+    id?: UuidWithAggregatesFilter | string
+    CompanyId?: UuidNullableWithAggregatesFilter | string | null
+    holiday_dateId?: UuidNullableWithAggregatesFilter | string | null
+    holiday_yearId?: UuidNullableWithAggregatesFilter | string | null
   }
 
   export type mas_bankWhereInput = {
@@ -34644,6 +35886,7 @@ export namespace Prisma {
     mas_positionlevel1?: mas_positionlevel1CreateNestedManyWithoutCompanyInput
     holiday_date?: holiday_dateCreateNestedManyWithoutCompanyInput
     mas_position?: mas_positionCreateNestedManyWithoutCompanyInput
+    holidayCompany?: holidayCompanyCreateNestedManyWithoutCompanyInput
   }
 
   export type CompanyUncheckedCreateInput = {
@@ -34663,6 +35906,7 @@ export namespace Prisma {
     mas_positionlevel1?: mas_positionlevel1UncheckedCreateNestedManyWithoutCompanyInput
     holiday_date?: holiday_dateUncheckedCreateNestedManyWithoutCompanyInput
     mas_position?: mas_positionUncheckedCreateNestedManyWithoutCompanyInput
+    holidayCompany?: holidayCompanyUncheckedCreateNestedManyWithoutCompanyInput
   }
 
   export type CompanyUpdateInput = {
@@ -34682,6 +35926,7 @@ export namespace Prisma {
     mas_positionlevel1?: mas_positionlevel1UpdateManyWithoutCompanyNestedInput
     holiday_date?: holiday_dateUpdateManyWithoutCompanyNestedInput
     mas_position?: mas_positionUpdateManyWithoutCompanyNestedInput
+    holidayCompany?: holidayCompanyUpdateManyWithoutCompanyNestedInput
   }
 
   export type CompanyUncheckedUpdateInput = {
@@ -34701,6 +35946,7 @@ export namespace Prisma {
     mas_positionlevel1?: mas_positionlevel1UncheckedUpdateManyWithoutCompanyNestedInput
     holiday_date?: holiday_dateUncheckedUpdateManyWithoutCompanyNestedInput
     mas_position?: mas_positionUncheckedUpdateManyWithoutCompanyNestedInput
+    holidayCompany?: holidayCompanyUncheckedUpdateManyWithoutCompanyNestedInput
   }
 
   export type CompanyCreateManyInput = {
@@ -36018,6 +37264,7 @@ export namespace Prisma {
     year: number
     Company?: CompanyCreateNestedOneWithoutHoliday_dateInput
     status: number
+    holidayCompany?: holidayCompanyCreateNestedManyWithoutHoliday_dateInput
   }
 
   export type holiday_dateUncheckedCreateInput = {
@@ -36028,6 +37275,7 @@ export namespace Prisma {
     year: number
     CompanyId?: string | null
     status: number
+    holidayCompany?: holidayCompanyUncheckedCreateNestedManyWithoutHoliday_dateInput
   }
 
   export type holiday_dateUpdateInput = {
@@ -36038,6 +37286,7 @@ export namespace Prisma {
     year?: IntFieldUpdateOperationsInput | number
     Company?: CompanyUpdateOneWithoutHoliday_dateNestedInput
     status?: IntFieldUpdateOperationsInput | number
+    holidayCompany?: holidayCompanyUpdateManyWithoutHoliday_dateNestedInput
   }
 
   export type holiday_dateUncheckedUpdateInput = {
@@ -36048,6 +37297,7 @@ export namespace Prisma {
     year?: IntFieldUpdateOperationsInput | number
     CompanyId?: NullableStringFieldUpdateOperationsInput | string | null
     status?: IntFieldUpdateOperationsInput | number
+    holidayCompany?: holidayCompanyUncheckedUpdateManyWithoutHoliday_dateNestedInput
   }
 
   export type holiday_dateCreateManyInput = {
@@ -36085,6 +37335,7 @@ export namespace Prisma {
     month: number
     year: number
     holiday_name?: string | null
+    holidayCompany?: holidayCompanyCreateNestedManyWithoutHoliday_yearInput
   }
 
   export type holiday_yearUncheckedCreateInput = {
@@ -36093,6 +37344,7 @@ export namespace Prisma {
     month: number
     year: number
     holiday_name?: string | null
+    holidayCompany?: holidayCompanyUncheckedCreateNestedManyWithoutHoliday_yearInput
   }
 
   export type holiday_yearUpdateInput = {
@@ -36101,6 +37353,7 @@ export namespace Prisma {
     month?: IntFieldUpdateOperationsInput | number
     year?: IntFieldUpdateOperationsInput | number
     holiday_name?: NullableStringFieldUpdateOperationsInput | string | null
+    holidayCompany?: holidayCompanyUpdateManyWithoutHoliday_yearNestedInput
   }
 
   export type holiday_yearUncheckedUpdateInput = {
@@ -36109,6 +37362,7 @@ export namespace Prisma {
     month?: IntFieldUpdateOperationsInput | number
     year?: IntFieldUpdateOperationsInput | number
     holiday_name?: NullableStringFieldUpdateOperationsInput | string | null
+    holidayCompany?: holidayCompanyUncheckedUpdateManyWithoutHoliday_yearNestedInput
   }
 
   export type holiday_yearCreateManyInput = {
@@ -36133,6 +37387,52 @@ export namespace Prisma {
     month?: IntFieldUpdateOperationsInput | number
     year?: IntFieldUpdateOperationsInput | number
     holiday_name?: NullableStringFieldUpdateOperationsInput | string | null
+  }
+
+  export type holidayCompanyCreateInput = {
+    id: string
+    Company?: CompanyCreateNestedOneWithoutHolidayCompanyInput
+    holiday_date?: holiday_dateCreateNestedOneWithoutHolidayCompanyInput
+    holiday_year?: holiday_yearCreateNestedOneWithoutHolidayCompanyInput
+  }
+
+  export type holidayCompanyUncheckedCreateInput = {
+    id: string
+    CompanyId?: string | null
+    holiday_dateId?: string | null
+    holiday_yearId?: string | null
+  }
+
+  export type holidayCompanyUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    Company?: CompanyUpdateOneWithoutHolidayCompanyNestedInput
+    holiday_date?: holiday_dateUpdateOneWithoutHolidayCompanyNestedInput
+    holiday_year?: holiday_yearUpdateOneWithoutHolidayCompanyNestedInput
+  }
+
+  export type holidayCompanyUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    CompanyId?: NullableStringFieldUpdateOperationsInput | string | null
+    holiday_dateId?: NullableStringFieldUpdateOperationsInput | string | null
+    holiday_yearId?: NullableStringFieldUpdateOperationsInput | string | null
+  }
+
+  export type holidayCompanyCreateManyInput = {
+    id: string
+    CompanyId?: string | null
+    holiday_dateId?: string | null
+    holiday_yearId?: string | null
+  }
+
+  export type holidayCompanyUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type holidayCompanyUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    CompanyId?: NullableStringFieldUpdateOperationsInput | string | null
+    holiday_dateId?: NullableStringFieldUpdateOperationsInput | string | null
+    holiday_yearId?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type mas_bankCreateInput = {
@@ -37211,6 +38511,12 @@ export namespace Prisma {
     none?: mas_positionWhereInput
   }
 
+  export type HolidayCompanyListRelationFilter = {
+    every?: holidayCompanyWhereInput
+    some?: holidayCompanyWhereInput
+    none?: holidayCompanyWhereInput
+  }
+
   export type CompanyBranchOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
@@ -37232,6 +38538,10 @@ export namespace Prisma {
   }
 
   export type mas_positionOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type holidayCompanyOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
@@ -38279,6 +39589,37 @@ export namespace Prisma {
     year?: SortOrder
   }
 
+  export type Holiday_dateRelationFilter = {
+    is?: holiday_dateWhereInput | null
+    isNot?: holiday_dateWhereInput | null
+  }
+
+  export type Holiday_yearRelationFilter = {
+    is?: holiday_yearWhereInput | null
+    isNot?: holiday_yearWhereInput | null
+  }
+
+  export type holidayCompanyCountOrderByAggregateInput = {
+    id?: SortOrder
+    CompanyId?: SortOrder
+    holiday_dateId?: SortOrder
+    holiday_yearId?: SortOrder
+  }
+
+  export type holidayCompanyMaxOrderByAggregateInput = {
+    id?: SortOrder
+    CompanyId?: SortOrder
+    holiday_dateId?: SortOrder
+    holiday_yearId?: SortOrder
+  }
+
+  export type holidayCompanyMinOrderByAggregateInput = {
+    id?: SortOrder
+    CompanyId?: SortOrder
+    holiday_dateId?: SortOrder
+    holiday_yearId?: SortOrder
+  }
+
   export type mas_bankCountOrderByAggregateInput = {
     id?: SortOrder
     name?: SortOrder
@@ -38981,6 +40322,13 @@ export namespace Prisma {
     connect?: Enumerable<mas_positionWhereUniqueInput>
   }
 
+  export type holidayCompanyCreateNestedManyWithoutCompanyInput = {
+    create?: XOR<Enumerable<holidayCompanyCreateWithoutCompanyInput>, Enumerable<holidayCompanyUncheckedCreateWithoutCompanyInput>>
+    connectOrCreate?: Enumerable<holidayCompanyCreateOrConnectWithoutCompanyInput>
+    createMany?: holidayCompanyCreateManyCompanyInputEnvelope
+    connect?: Enumerable<holidayCompanyWhereUniqueInput>
+  }
+
   export type CompanyBranchUncheckedCreateNestedManyWithoutCompanyInput = {
     create?: XOR<Enumerable<CompanyBranchCreateWithoutCompanyInput>, Enumerable<CompanyBranchUncheckedCreateWithoutCompanyInput>>
     connectOrCreate?: Enumerable<CompanyBranchCreateOrConnectWithoutCompanyInput>
@@ -39021,6 +40369,13 @@ export namespace Prisma {
     connectOrCreate?: Enumerable<mas_positionCreateOrConnectWithoutCompanyInput>
     createMany?: mas_positionCreateManyCompanyInputEnvelope
     connect?: Enumerable<mas_positionWhereUniqueInput>
+  }
+
+  export type holidayCompanyUncheckedCreateNestedManyWithoutCompanyInput = {
+    create?: XOR<Enumerable<holidayCompanyCreateWithoutCompanyInput>, Enumerable<holidayCompanyUncheckedCreateWithoutCompanyInput>>
+    connectOrCreate?: Enumerable<holidayCompanyCreateOrConnectWithoutCompanyInput>
+    createMany?: holidayCompanyCreateManyCompanyInputEnvelope
+    connect?: Enumerable<holidayCompanyWhereUniqueInput>
   }
 
   export type StringFieldUpdateOperationsInput = {
@@ -39135,6 +40490,20 @@ export namespace Prisma {
     deleteMany?: Enumerable<mas_positionScalarWhereInput>
   }
 
+  export type holidayCompanyUpdateManyWithoutCompanyNestedInput = {
+    create?: XOR<Enumerable<holidayCompanyCreateWithoutCompanyInput>, Enumerable<holidayCompanyUncheckedCreateWithoutCompanyInput>>
+    connectOrCreate?: Enumerable<holidayCompanyCreateOrConnectWithoutCompanyInput>
+    upsert?: Enumerable<holidayCompanyUpsertWithWhereUniqueWithoutCompanyInput>
+    createMany?: holidayCompanyCreateManyCompanyInputEnvelope
+    set?: Enumerable<holidayCompanyWhereUniqueInput>
+    disconnect?: Enumerable<holidayCompanyWhereUniqueInput>
+    delete?: Enumerable<holidayCompanyWhereUniqueInput>
+    connect?: Enumerable<holidayCompanyWhereUniqueInput>
+    update?: Enumerable<holidayCompanyUpdateWithWhereUniqueWithoutCompanyInput>
+    updateMany?: Enumerable<holidayCompanyUpdateManyWithWhereWithoutCompanyInput>
+    deleteMany?: Enumerable<holidayCompanyScalarWhereInput>
+  }
+
   export type CompanyBranchUncheckedUpdateManyWithoutCompanyNestedInput = {
     create?: XOR<Enumerable<CompanyBranchCreateWithoutCompanyInput>, Enumerable<CompanyBranchUncheckedCreateWithoutCompanyInput>>
     connectOrCreate?: Enumerable<CompanyBranchCreateOrConnectWithoutCompanyInput>
@@ -39217,6 +40586,20 @@ export namespace Prisma {
     update?: Enumerable<mas_positionUpdateWithWhereUniqueWithoutCompanyInput>
     updateMany?: Enumerable<mas_positionUpdateManyWithWhereWithoutCompanyInput>
     deleteMany?: Enumerable<mas_positionScalarWhereInput>
+  }
+
+  export type holidayCompanyUncheckedUpdateManyWithoutCompanyNestedInput = {
+    create?: XOR<Enumerable<holidayCompanyCreateWithoutCompanyInput>, Enumerable<holidayCompanyUncheckedCreateWithoutCompanyInput>>
+    connectOrCreate?: Enumerable<holidayCompanyCreateOrConnectWithoutCompanyInput>
+    upsert?: Enumerable<holidayCompanyUpsertWithWhereUniqueWithoutCompanyInput>
+    createMany?: holidayCompanyCreateManyCompanyInputEnvelope
+    set?: Enumerable<holidayCompanyWhereUniqueInput>
+    disconnect?: Enumerable<holidayCompanyWhereUniqueInput>
+    delete?: Enumerable<holidayCompanyWhereUniqueInput>
+    connect?: Enumerable<holidayCompanyWhereUniqueInput>
+    update?: Enumerable<holidayCompanyUpdateWithWhereUniqueWithoutCompanyInput>
+    updateMany?: Enumerable<holidayCompanyUpdateManyWithWhereWithoutCompanyInput>
+    deleteMany?: Enumerable<holidayCompanyScalarWhereInput>
   }
 
   export type CompanyCreateNestedOneWithoutBranchInput = {
@@ -40403,6 +41786,20 @@ export namespace Prisma {
     connect?: CompanyWhereUniqueInput
   }
 
+  export type holidayCompanyCreateNestedManyWithoutHoliday_dateInput = {
+    create?: XOR<Enumerable<holidayCompanyCreateWithoutHoliday_dateInput>, Enumerable<holidayCompanyUncheckedCreateWithoutHoliday_dateInput>>
+    connectOrCreate?: Enumerable<holidayCompanyCreateOrConnectWithoutHoliday_dateInput>
+    createMany?: holidayCompanyCreateManyHoliday_dateInputEnvelope
+    connect?: Enumerable<holidayCompanyWhereUniqueInput>
+  }
+
+  export type holidayCompanyUncheckedCreateNestedManyWithoutHoliday_dateInput = {
+    create?: XOR<Enumerable<holidayCompanyCreateWithoutHoliday_dateInput>, Enumerable<holidayCompanyUncheckedCreateWithoutHoliday_dateInput>>
+    connectOrCreate?: Enumerable<holidayCompanyCreateOrConnectWithoutHoliday_dateInput>
+    createMany?: holidayCompanyCreateManyHoliday_dateInputEnvelope
+    connect?: Enumerable<holidayCompanyWhereUniqueInput>
+  }
+
   export type CompanyUpdateOneWithoutHoliday_dateNestedInput = {
     create?: XOR<CompanyCreateWithoutHoliday_dateInput, CompanyUncheckedCreateWithoutHoliday_dateInput>
     connectOrCreate?: CompanyCreateOrConnectWithoutHoliday_dateInput
@@ -40411,6 +41808,124 @@ export namespace Prisma {
     delete?: boolean
     connect?: CompanyWhereUniqueInput
     update?: XOR<CompanyUpdateWithoutHoliday_dateInput, CompanyUncheckedUpdateWithoutHoliday_dateInput>
+  }
+
+  export type holidayCompanyUpdateManyWithoutHoliday_dateNestedInput = {
+    create?: XOR<Enumerable<holidayCompanyCreateWithoutHoliday_dateInput>, Enumerable<holidayCompanyUncheckedCreateWithoutHoliday_dateInput>>
+    connectOrCreate?: Enumerable<holidayCompanyCreateOrConnectWithoutHoliday_dateInput>
+    upsert?: Enumerable<holidayCompanyUpsertWithWhereUniqueWithoutHoliday_dateInput>
+    createMany?: holidayCompanyCreateManyHoliday_dateInputEnvelope
+    set?: Enumerable<holidayCompanyWhereUniqueInput>
+    disconnect?: Enumerable<holidayCompanyWhereUniqueInput>
+    delete?: Enumerable<holidayCompanyWhereUniqueInput>
+    connect?: Enumerable<holidayCompanyWhereUniqueInput>
+    update?: Enumerable<holidayCompanyUpdateWithWhereUniqueWithoutHoliday_dateInput>
+    updateMany?: Enumerable<holidayCompanyUpdateManyWithWhereWithoutHoliday_dateInput>
+    deleteMany?: Enumerable<holidayCompanyScalarWhereInput>
+  }
+
+  export type holidayCompanyUncheckedUpdateManyWithoutHoliday_dateNestedInput = {
+    create?: XOR<Enumerable<holidayCompanyCreateWithoutHoliday_dateInput>, Enumerable<holidayCompanyUncheckedCreateWithoutHoliday_dateInput>>
+    connectOrCreate?: Enumerable<holidayCompanyCreateOrConnectWithoutHoliday_dateInput>
+    upsert?: Enumerable<holidayCompanyUpsertWithWhereUniqueWithoutHoliday_dateInput>
+    createMany?: holidayCompanyCreateManyHoliday_dateInputEnvelope
+    set?: Enumerable<holidayCompanyWhereUniqueInput>
+    disconnect?: Enumerable<holidayCompanyWhereUniqueInput>
+    delete?: Enumerable<holidayCompanyWhereUniqueInput>
+    connect?: Enumerable<holidayCompanyWhereUniqueInput>
+    update?: Enumerable<holidayCompanyUpdateWithWhereUniqueWithoutHoliday_dateInput>
+    updateMany?: Enumerable<holidayCompanyUpdateManyWithWhereWithoutHoliday_dateInput>
+    deleteMany?: Enumerable<holidayCompanyScalarWhereInput>
+  }
+
+  export type holidayCompanyCreateNestedManyWithoutHoliday_yearInput = {
+    create?: XOR<Enumerable<holidayCompanyCreateWithoutHoliday_yearInput>, Enumerable<holidayCompanyUncheckedCreateWithoutHoliday_yearInput>>
+    connectOrCreate?: Enumerable<holidayCompanyCreateOrConnectWithoutHoliday_yearInput>
+    createMany?: holidayCompanyCreateManyHoliday_yearInputEnvelope
+    connect?: Enumerable<holidayCompanyWhereUniqueInput>
+  }
+
+  export type holidayCompanyUncheckedCreateNestedManyWithoutHoliday_yearInput = {
+    create?: XOR<Enumerable<holidayCompanyCreateWithoutHoliday_yearInput>, Enumerable<holidayCompanyUncheckedCreateWithoutHoliday_yearInput>>
+    connectOrCreate?: Enumerable<holidayCompanyCreateOrConnectWithoutHoliday_yearInput>
+    createMany?: holidayCompanyCreateManyHoliday_yearInputEnvelope
+    connect?: Enumerable<holidayCompanyWhereUniqueInput>
+  }
+
+  export type holidayCompanyUpdateManyWithoutHoliday_yearNestedInput = {
+    create?: XOR<Enumerable<holidayCompanyCreateWithoutHoliday_yearInput>, Enumerable<holidayCompanyUncheckedCreateWithoutHoliday_yearInput>>
+    connectOrCreate?: Enumerable<holidayCompanyCreateOrConnectWithoutHoliday_yearInput>
+    upsert?: Enumerable<holidayCompanyUpsertWithWhereUniqueWithoutHoliday_yearInput>
+    createMany?: holidayCompanyCreateManyHoliday_yearInputEnvelope
+    set?: Enumerable<holidayCompanyWhereUniqueInput>
+    disconnect?: Enumerable<holidayCompanyWhereUniqueInput>
+    delete?: Enumerable<holidayCompanyWhereUniqueInput>
+    connect?: Enumerable<holidayCompanyWhereUniqueInput>
+    update?: Enumerable<holidayCompanyUpdateWithWhereUniqueWithoutHoliday_yearInput>
+    updateMany?: Enumerable<holidayCompanyUpdateManyWithWhereWithoutHoliday_yearInput>
+    deleteMany?: Enumerable<holidayCompanyScalarWhereInput>
+  }
+
+  export type holidayCompanyUncheckedUpdateManyWithoutHoliday_yearNestedInput = {
+    create?: XOR<Enumerable<holidayCompanyCreateWithoutHoliday_yearInput>, Enumerable<holidayCompanyUncheckedCreateWithoutHoliday_yearInput>>
+    connectOrCreate?: Enumerable<holidayCompanyCreateOrConnectWithoutHoliday_yearInput>
+    upsert?: Enumerable<holidayCompanyUpsertWithWhereUniqueWithoutHoliday_yearInput>
+    createMany?: holidayCompanyCreateManyHoliday_yearInputEnvelope
+    set?: Enumerable<holidayCompanyWhereUniqueInput>
+    disconnect?: Enumerable<holidayCompanyWhereUniqueInput>
+    delete?: Enumerable<holidayCompanyWhereUniqueInput>
+    connect?: Enumerable<holidayCompanyWhereUniqueInput>
+    update?: Enumerable<holidayCompanyUpdateWithWhereUniqueWithoutHoliday_yearInput>
+    updateMany?: Enumerable<holidayCompanyUpdateManyWithWhereWithoutHoliday_yearInput>
+    deleteMany?: Enumerable<holidayCompanyScalarWhereInput>
+  }
+
+  export type CompanyCreateNestedOneWithoutHolidayCompanyInput = {
+    create?: XOR<CompanyCreateWithoutHolidayCompanyInput, CompanyUncheckedCreateWithoutHolidayCompanyInput>
+    connectOrCreate?: CompanyCreateOrConnectWithoutHolidayCompanyInput
+    connect?: CompanyWhereUniqueInput
+  }
+
+  export type holiday_dateCreateNestedOneWithoutHolidayCompanyInput = {
+    create?: XOR<holiday_dateCreateWithoutHolidayCompanyInput, holiday_dateUncheckedCreateWithoutHolidayCompanyInput>
+    connectOrCreate?: holiday_dateCreateOrConnectWithoutHolidayCompanyInput
+    connect?: holiday_dateWhereUniqueInput
+  }
+
+  export type holiday_yearCreateNestedOneWithoutHolidayCompanyInput = {
+    create?: XOR<holiday_yearCreateWithoutHolidayCompanyInput, holiday_yearUncheckedCreateWithoutHolidayCompanyInput>
+    connectOrCreate?: holiday_yearCreateOrConnectWithoutHolidayCompanyInput
+    connect?: holiday_yearWhereUniqueInput
+  }
+
+  export type CompanyUpdateOneWithoutHolidayCompanyNestedInput = {
+    create?: XOR<CompanyCreateWithoutHolidayCompanyInput, CompanyUncheckedCreateWithoutHolidayCompanyInput>
+    connectOrCreate?: CompanyCreateOrConnectWithoutHolidayCompanyInput
+    upsert?: CompanyUpsertWithoutHolidayCompanyInput
+    disconnect?: boolean
+    delete?: boolean
+    connect?: CompanyWhereUniqueInput
+    update?: XOR<CompanyUpdateWithoutHolidayCompanyInput, CompanyUncheckedUpdateWithoutHolidayCompanyInput>
+  }
+
+  export type holiday_dateUpdateOneWithoutHolidayCompanyNestedInput = {
+    create?: XOR<holiday_dateCreateWithoutHolidayCompanyInput, holiday_dateUncheckedCreateWithoutHolidayCompanyInput>
+    connectOrCreate?: holiday_dateCreateOrConnectWithoutHolidayCompanyInput
+    upsert?: holiday_dateUpsertWithoutHolidayCompanyInput
+    disconnect?: boolean
+    delete?: boolean
+    connect?: holiday_dateWhereUniqueInput
+    update?: XOR<holiday_dateUpdateWithoutHolidayCompanyInput, holiday_dateUncheckedUpdateWithoutHolidayCompanyInput>
+  }
+
+  export type holiday_yearUpdateOneWithoutHolidayCompanyNestedInput = {
+    create?: XOR<holiday_yearCreateWithoutHolidayCompanyInput, holiday_yearUncheckedCreateWithoutHolidayCompanyInput>
+    connectOrCreate?: holiday_yearCreateOrConnectWithoutHolidayCompanyInput
+    upsert?: holiday_yearUpsertWithoutHolidayCompanyInput
+    disconnect?: boolean
+    delete?: boolean
+    connect?: holiday_yearWhereUniqueInput
+    update?: XOR<holiday_yearUpdateWithoutHolidayCompanyInput, holiday_yearUncheckedUpdateWithoutHolidayCompanyInput>
   }
 
   export type expense_companyCreateNestedManyWithoutMas_bankInput = {
@@ -41782,6 +43297,7 @@ export namespace Prisma {
     month: number
     year: number
     status: number
+    holidayCompany?: holidayCompanyCreateNestedManyWithoutHoliday_dateInput
   }
 
   export type holiday_dateUncheckedCreateWithoutCompanyInput = {
@@ -41791,6 +43307,7 @@ export namespace Prisma {
     month: number
     year: number
     status: number
+    holidayCompany?: holidayCompanyUncheckedCreateNestedManyWithoutHoliday_dateInput
   }
 
   export type holiday_dateCreateOrConnectWithoutCompanyInput = {
@@ -41822,6 +43339,28 @@ export namespace Prisma {
 
   export type mas_positionCreateManyCompanyInputEnvelope = {
     data: Enumerable<mas_positionCreateManyCompanyInput>
+    skipDuplicates?: boolean
+  }
+
+  export type holidayCompanyCreateWithoutCompanyInput = {
+    id: string
+    holiday_date?: holiday_dateCreateNestedOneWithoutHolidayCompanyInput
+    holiday_year?: holiday_yearCreateNestedOneWithoutHolidayCompanyInput
+  }
+
+  export type holidayCompanyUncheckedCreateWithoutCompanyInput = {
+    id: string
+    holiday_dateId?: string | null
+    holiday_yearId?: string | null
+  }
+
+  export type holidayCompanyCreateOrConnectWithoutCompanyInput = {
+    where: holidayCompanyWhereUniqueInput
+    create: XOR<holidayCompanyCreateWithoutCompanyInput, holidayCompanyUncheckedCreateWithoutCompanyInput>
+  }
+
+  export type holidayCompanyCreateManyCompanyInputEnvelope = {
+    data: Enumerable<holidayCompanyCreateManyCompanyInput>
     skipDuplicates?: boolean
   }
 
@@ -42063,6 +43602,32 @@ export namespace Prisma {
     CompanyId?: UuidNullableFilter | string | null
   }
 
+  export type holidayCompanyUpsertWithWhereUniqueWithoutCompanyInput = {
+    where: holidayCompanyWhereUniqueInput
+    update: XOR<holidayCompanyUpdateWithoutCompanyInput, holidayCompanyUncheckedUpdateWithoutCompanyInput>
+    create: XOR<holidayCompanyCreateWithoutCompanyInput, holidayCompanyUncheckedCreateWithoutCompanyInput>
+  }
+
+  export type holidayCompanyUpdateWithWhereUniqueWithoutCompanyInput = {
+    where: holidayCompanyWhereUniqueInput
+    data: XOR<holidayCompanyUpdateWithoutCompanyInput, holidayCompanyUncheckedUpdateWithoutCompanyInput>
+  }
+
+  export type holidayCompanyUpdateManyWithWhereWithoutCompanyInput = {
+    where: holidayCompanyScalarWhereInput
+    data: XOR<holidayCompanyUpdateManyMutationInput, holidayCompanyUncheckedUpdateManyWithoutHolidayCompanyInput>
+  }
+
+  export type holidayCompanyScalarWhereInput = {
+    AND?: Enumerable<holidayCompanyScalarWhereInput>
+    OR?: Enumerable<holidayCompanyScalarWhereInput>
+    NOT?: Enumerable<holidayCompanyScalarWhereInput>
+    id?: UuidFilter | string
+    CompanyId?: UuidNullableFilter | string | null
+    holiday_dateId?: UuidNullableFilter | string | null
+    holiday_yearId?: UuidNullableFilter | string | null
+  }
+
   export type CompanyCreateWithoutBranchInput = {
     id: string
     name: string
@@ -42079,6 +43644,7 @@ export namespace Prisma {
     mas_positionlevel1?: mas_positionlevel1CreateNestedManyWithoutCompanyInput
     holiday_date?: holiday_dateCreateNestedManyWithoutCompanyInput
     mas_position?: mas_positionCreateNestedManyWithoutCompanyInput
+    holidayCompany?: holidayCompanyCreateNestedManyWithoutCompanyInput
   }
 
   export type CompanyUncheckedCreateWithoutBranchInput = {
@@ -42097,6 +43663,7 @@ export namespace Prisma {
     mas_positionlevel1?: mas_positionlevel1UncheckedCreateNestedManyWithoutCompanyInput
     holiday_date?: holiday_dateUncheckedCreateNestedManyWithoutCompanyInput
     mas_position?: mas_positionUncheckedCreateNestedManyWithoutCompanyInput
+    holidayCompany?: holidayCompanyUncheckedCreateNestedManyWithoutCompanyInput
   }
 
   export type CompanyCreateOrConnectWithoutBranchInput = {
@@ -42235,6 +43802,7 @@ export namespace Prisma {
     mas_positionlevel1?: mas_positionlevel1UpdateManyWithoutCompanyNestedInput
     holiday_date?: holiday_dateUpdateManyWithoutCompanyNestedInput
     mas_position?: mas_positionUpdateManyWithoutCompanyNestedInput
+    holidayCompany?: holidayCompanyUpdateManyWithoutCompanyNestedInput
   }
 
   export type CompanyUncheckedUpdateWithoutBranchInput = {
@@ -42253,6 +43821,7 @@ export namespace Prisma {
     mas_positionlevel1?: mas_positionlevel1UncheckedUpdateManyWithoutCompanyNestedInput
     holiday_date?: holiday_dateUncheckedUpdateManyWithoutCompanyNestedInput
     mas_position?: mas_positionUncheckedUpdateManyWithoutCompanyNestedInput
+    holidayCompany?: holidayCompanyUncheckedUpdateManyWithoutCompanyNestedInput
   }
 
   export type UserUpsertWithWhereUniqueWithoutCompanyBranchInput = {
@@ -42578,6 +44147,7 @@ export namespace Prisma {
     mas_positionlevel1?: mas_positionlevel1CreateNestedManyWithoutCompanyInput
     holiday_date?: holiday_dateCreateNestedManyWithoutCompanyInput
     mas_position?: mas_positionCreateNestedManyWithoutCompanyInput
+    holidayCompany?: holidayCompanyCreateNestedManyWithoutCompanyInput
   }
 
   export type CompanyUncheckedCreateWithoutOwnerInput = {
@@ -42596,6 +44166,7 @@ export namespace Prisma {
     mas_positionlevel1?: mas_positionlevel1UncheckedCreateNestedManyWithoutCompanyInput
     holiday_date?: holiday_dateUncheckedCreateNestedManyWithoutCompanyInput
     mas_position?: mas_positionUncheckedCreateNestedManyWithoutCompanyInput
+    holidayCompany?: holidayCompanyUncheckedCreateNestedManyWithoutCompanyInput
   }
 
   export type CompanyCreateOrConnectWithoutOwnerInput = {
@@ -43889,6 +45460,7 @@ export namespace Prisma {
     mas_positionlevel2?: mas_positionlevel2CreateNestedManyWithoutCompanyInput
     mas_positionlevel1?: mas_positionlevel1CreateNestedManyWithoutCompanyInput
     holiday_date?: holiday_dateCreateNestedManyWithoutCompanyInput
+    holidayCompany?: holidayCompanyCreateNestedManyWithoutCompanyInput
   }
 
   export type CompanyUncheckedCreateWithoutMas_positionInput = {
@@ -43907,6 +45479,7 @@ export namespace Prisma {
     mas_positionlevel2?: mas_positionlevel2UncheckedCreateNestedManyWithoutCompanyInput
     mas_positionlevel1?: mas_positionlevel1UncheckedCreateNestedManyWithoutCompanyInput
     holiday_date?: holiday_dateUncheckedCreateNestedManyWithoutCompanyInput
+    holidayCompany?: holidayCompanyUncheckedCreateNestedManyWithoutCompanyInput
   }
 
   export type CompanyCreateOrConnectWithoutMas_positionInput = {
@@ -43935,6 +45508,7 @@ export namespace Prisma {
     mas_positionlevel2?: mas_positionlevel2UpdateManyWithoutCompanyNestedInput
     mas_positionlevel1?: mas_positionlevel1UpdateManyWithoutCompanyNestedInput
     holiday_date?: holiday_dateUpdateManyWithoutCompanyNestedInput
+    holidayCompany?: holidayCompanyUpdateManyWithoutCompanyNestedInput
   }
 
   export type CompanyUncheckedUpdateWithoutMas_positionInput = {
@@ -43953,6 +45527,7 @@ export namespace Prisma {
     mas_positionlevel2?: mas_positionlevel2UncheckedUpdateManyWithoutCompanyNestedInput
     mas_positionlevel1?: mas_positionlevel1UncheckedUpdateManyWithoutCompanyNestedInput
     holiday_date?: holiday_dateUncheckedUpdateManyWithoutCompanyNestedInput
+    holidayCompany?: holidayCompanyUncheckedUpdateManyWithoutCompanyNestedInput
   }
 
   export type mas_positionlevel2CreateWithoutMas_positionlevel1Input = {
@@ -44003,6 +45578,7 @@ export namespace Prisma {
     mas_positionlevel2?: mas_positionlevel2CreateNestedManyWithoutCompanyInput
     holiday_date?: holiday_dateCreateNestedManyWithoutCompanyInput
     mas_position?: mas_positionCreateNestedManyWithoutCompanyInput
+    holidayCompany?: holidayCompanyCreateNestedManyWithoutCompanyInput
   }
 
   export type CompanyUncheckedCreateWithoutMas_positionlevel1Input = {
@@ -44021,6 +45597,7 @@ export namespace Prisma {
     mas_positionlevel2?: mas_positionlevel2UncheckedCreateNestedManyWithoutCompanyInput
     holiday_date?: holiday_dateUncheckedCreateNestedManyWithoutCompanyInput
     mas_position?: mas_positionUncheckedCreateNestedManyWithoutCompanyInput
+    holidayCompany?: holidayCompanyUncheckedCreateNestedManyWithoutCompanyInput
   }
 
   export type CompanyCreateOrConnectWithoutMas_positionlevel1Input = {
@@ -44095,6 +45672,7 @@ export namespace Prisma {
     mas_positionlevel2?: mas_positionlevel2UpdateManyWithoutCompanyNestedInput
     holiday_date?: holiday_dateUpdateManyWithoutCompanyNestedInput
     mas_position?: mas_positionUpdateManyWithoutCompanyNestedInput
+    holidayCompany?: holidayCompanyUpdateManyWithoutCompanyNestedInput
   }
 
   export type CompanyUncheckedUpdateWithoutMas_positionlevel1Input = {
@@ -44113,6 +45691,7 @@ export namespace Prisma {
     mas_positionlevel2?: mas_positionlevel2UncheckedUpdateManyWithoutCompanyNestedInput
     holiday_date?: holiday_dateUncheckedUpdateManyWithoutCompanyNestedInput
     mas_position?: mas_positionUncheckedUpdateManyWithoutCompanyNestedInput
+    holidayCompany?: holidayCompanyUncheckedUpdateManyWithoutCompanyNestedInput
   }
 
   export type Position_userUpsertWithWhereUniqueWithoutMas_positionlevel1Input = {
@@ -44202,6 +45781,7 @@ export namespace Prisma {
     mas_positionlevel1?: mas_positionlevel1CreateNestedManyWithoutCompanyInput
     holiday_date?: holiday_dateCreateNestedManyWithoutCompanyInput
     mas_position?: mas_positionCreateNestedManyWithoutCompanyInput
+    holidayCompany?: holidayCompanyCreateNestedManyWithoutCompanyInput
   }
 
   export type CompanyUncheckedCreateWithoutMas_positionlevel2Input = {
@@ -44220,6 +45800,7 @@ export namespace Prisma {
     mas_positionlevel1?: mas_positionlevel1UncheckedCreateNestedManyWithoutCompanyInput
     holiday_date?: holiday_dateUncheckedCreateNestedManyWithoutCompanyInput
     mas_position?: mas_positionUncheckedCreateNestedManyWithoutCompanyInput
+    holidayCompany?: holidayCompanyUncheckedCreateNestedManyWithoutCompanyInput
   }
 
   export type CompanyCreateOrConnectWithoutMas_positionlevel2Input = {
@@ -44319,6 +45900,7 @@ export namespace Prisma {
     mas_positionlevel1?: mas_positionlevel1UpdateManyWithoutCompanyNestedInput
     holiday_date?: holiday_dateUpdateManyWithoutCompanyNestedInput
     mas_position?: mas_positionUpdateManyWithoutCompanyNestedInput
+    holidayCompany?: holidayCompanyUpdateManyWithoutCompanyNestedInput
   }
 
   export type CompanyUncheckedUpdateWithoutMas_positionlevel2Input = {
@@ -44337,6 +45919,7 @@ export namespace Prisma {
     mas_positionlevel1?: mas_positionlevel1UncheckedUpdateManyWithoutCompanyNestedInput
     holiday_date?: holiday_dateUncheckedUpdateManyWithoutCompanyNestedInput
     mas_position?: mas_positionUncheckedUpdateManyWithoutCompanyNestedInput
+    holidayCompany?: holidayCompanyUncheckedUpdateManyWithoutCompanyNestedInput
   }
 
   export type Position_userUpsertWithWhereUniqueWithoutMas_positionlevel2Input = {
@@ -44398,6 +45981,7 @@ export namespace Prisma {
     mas_positionlevel1?: mas_positionlevel1CreateNestedManyWithoutCompanyInput
     holiday_date?: holiday_dateCreateNestedManyWithoutCompanyInput
     mas_position?: mas_positionCreateNestedManyWithoutCompanyInput
+    holidayCompany?: holidayCompanyCreateNestedManyWithoutCompanyInput
   }
 
   export type CompanyUncheckedCreateWithoutMas_positionlevel3Input = {
@@ -44416,6 +46000,7 @@ export namespace Prisma {
     mas_positionlevel1?: mas_positionlevel1UncheckedCreateNestedManyWithoutCompanyInput
     holiday_date?: holiday_dateUncheckedCreateNestedManyWithoutCompanyInput
     mas_position?: mas_positionUncheckedCreateNestedManyWithoutCompanyInput
+    holidayCompany?: holidayCompanyUncheckedCreateNestedManyWithoutCompanyInput
   }
 
   export type CompanyCreateOrConnectWithoutMas_positionlevel3Input = {
@@ -44501,6 +46086,7 @@ export namespace Prisma {
     mas_positionlevel1?: mas_positionlevel1UpdateManyWithoutCompanyNestedInput
     holiday_date?: holiday_dateUpdateManyWithoutCompanyNestedInput
     mas_position?: mas_positionUpdateManyWithoutCompanyNestedInput
+    holidayCompany?: holidayCompanyUpdateManyWithoutCompanyNestedInput
   }
 
   export type CompanyUncheckedUpdateWithoutMas_positionlevel3Input = {
@@ -44519,6 +46105,7 @@ export namespace Prisma {
     mas_positionlevel1?: mas_positionlevel1UncheckedUpdateManyWithoutCompanyNestedInput
     holiday_date?: holiday_dateUncheckedUpdateManyWithoutCompanyNestedInput
     mas_position?: mas_positionUncheckedUpdateManyWithoutCompanyNestedInput
+    holidayCompany?: holidayCompanyUncheckedUpdateManyWithoutCompanyNestedInput
   }
 
   export type Position_userUpsertWithWhereUniqueWithoutMas_positionlevel3Input = {
@@ -44903,6 +46490,7 @@ export namespace Prisma {
     mas_positionlevel2?: mas_positionlevel2CreateNestedManyWithoutCompanyInput
     mas_positionlevel1?: mas_positionlevel1CreateNestedManyWithoutCompanyInput
     mas_position?: mas_positionCreateNestedManyWithoutCompanyInput
+    holidayCompany?: holidayCompanyCreateNestedManyWithoutCompanyInput
   }
 
   export type CompanyUncheckedCreateWithoutHoliday_dateInput = {
@@ -44921,11 +46509,34 @@ export namespace Prisma {
     mas_positionlevel2?: mas_positionlevel2UncheckedCreateNestedManyWithoutCompanyInput
     mas_positionlevel1?: mas_positionlevel1UncheckedCreateNestedManyWithoutCompanyInput
     mas_position?: mas_positionUncheckedCreateNestedManyWithoutCompanyInput
+    holidayCompany?: holidayCompanyUncheckedCreateNestedManyWithoutCompanyInput
   }
 
   export type CompanyCreateOrConnectWithoutHoliday_dateInput = {
     where: CompanyWhereUniqueInput
     create: XOR<CompanyCreateWithoutHoliday_dateInput, CompanyUncheckedCreateWithoutHoliday_dateInput>
+  }
+
+  export type holidayCompanyCreateWithoutHoliday_dateInput = {
+    id: string
+    Company?: CompanyCreateNestedOneWithoutHolidayCompanyInput
+    holiday_year?: holiday_yearCreateNestedOneWithoutHolidayCompanyInput
+  }
+
+  export type holidayCompanyUncheckedCreateWithoutHoliday_dateInput = {
+    id: string
+    CompanyId?: string | null
+    holiday_yearId?: string | null
+  }
+
+  export type holidayCompanyCreateOrConnectWithoutHoliday_dateInput = {
+    where: holidayCompanyWhereUniqueInput
+    create: XOR<holidayCompanyCreateWithoutHoliday_dateInput, holidayCompanyUncheckedCreateWithoutHoliday_dateInput>
+  }
+
+  export type holidayCompanyCreateManyHoliday_dateInputEnvelope = {
+    data: Enumerable<holidayCompanyCreateManyHoliday_dateInput>
+    skipDuplicates?: boolean
   }
 
   export type CompanyUpsertWithoutHoliday_dateInput = {
@@ -44949,6 +46560,7 @@ export namespace Prisma {
     mas_positionlevel2?: mas_positionlevel2UpdateManyWithoutCompanyNestedInput
     mas_positionlevel1?: mas_positionlevel1UpdateManyWithoutCompanyNestedInput
     mas_position?: mas_positionUpdateManyWithoutCompanyNestedInput
+    holidayCompany?: holidayCompanyUpdateManyWithoutCompanyNestedInput
   }
 
   export type CompanyUncheckedUpdateWithoutHoliday_dateInput = {
@@ -44967,6 +46579,239 @@ export namespace Prisma {
     mas_positionlevel2?: mas_positionlevel2UncheckedUpdateManyWithoutCompanyNestedInput
     mas_positionlevel1?: mas_positionlevel1UncheckedUpdateManyWithoutCompanyNestedInput
     mas_position?: mas_positionUncheckedUpdateManyWithoutCompanyNestedInput
+    holidayCompany?: holidayCompanyUncheckedUpdateManyWithoutCompanyNestedInput
+  }
+
+  export type holidayCompanyUpsertWithWhereUniqueWithoutHoliday_dateInput = {
+    where: holidayCompanyWhereUniqueInput
+    update: XOR<holidayCompanyUpdateWithoutHoliday_dateInput, holidayCompanyUncheckedUpdateWithoutHoliday_dateInput>
+    create: XOR<holidayCompanyCreateWithoutHoliday_dateInput, holidayCompanyUncheckedCreateWithoutHoliday_dateInput>
+  }
+
+  export type holidayCompanyUpdateWithWhereUniqueWithoutHoliday_dateInput = {
+    where: holidayCompanyWhereUniqueInput
+    data: XOR<holidayCompanyUpdateWithoutHoliday_dateInput, holidayCompanyUncheckedUpdateWithoutHoliday_dateInput>
+  }
+
+  export type holidayCompanyUpdateManyWithWhereWithoutHoliday_dateInput = {
+    where: holidayCompanyScalarWhereInput
+    data: XOR<holidayCompanyUpdateManyMutationInput, holidayCompanyUncheckedUpdateManyWithoutHolidayCompanyInput>
+  }
+
+  export type holidayCompanyCreateWithoutHoliday_yearInput = {
+    id: string
+    Company?: CompanyCreateNestedOneWithoutHolidayCompanyInput
+    holiday_date?: holiday_dateCreateNestedOneWithoutHolidayCompanyInput
+  }
+
+  export type holidayCompanyUncheckedCreateWithoutHoliday_yearInput = {
+    id: string
+    CompanyId?: string | null
+    holiday_dateId?: string | null
+  }
+
+  export type holidayCompanyCreateOrConnectWithoutHoliday_yearInput = {
+    where: holidayCompanyWhereUniqueInput
+    create: XOR<holidayCompanyCreateWithoutHoliday_yearInput, holidayCompanyUncheckedCreateWithoutHoliday_yearInput>
+  }
+
+  export type holidayCompanyCreateManyHoliday_yearInputEnvelope = {
+    data: Enumerable<holidayCompanyCreateManyHoliday_yearInput>
+    skipDuplicates?: boolean
+  }
+
+  export type holidayCompanyUpsertWithWhereUniqueWithoutHoliday_yearInput = {
+    where: holidayCompanyWhereUniqueInput
+    update: XOR<holidayCompanyUpdateWithoutHoliday_yearInput, holidayCompanyUncheckedUpdateWithoutHoliday_yearInput>
+    create: XOR<holidayCompanyCreateWithoutHoliday_yearInput, holidayCompanyUncheckedCreateWithoutHoliday_yearInput>
+  }
+
+  export type holidayCompanyUpdateWithWhereUniqueWithoutHoliday_yearInput = {
+    where: holidayCompanyWhereUniqueInput
+    data: XOR<holidayCompanyUpdateWithoutHoliday_yearInput, holidayCompanyUncheckedUpdateWithoutHoliday_yearInput>
+  }
+
+  export type holidayCompanyUpdateManyWithWhereWithoutHoliday_yearInput = {
+    where: holidayCompanyScalarWhereInput
+    data: XOR<holidayCompanyUpdateManyMutationInput, holidayCompanyUncheckedUpdateManyWithoutHolidayCompanyInput>
+  }
+
+  export type CompanyCreateWithoutHolidayCompanyInput = {
+    id: string
+    name: string
+    companyCode: string
+    userlimit?: number
+    company_registration_id?: string | null
+    company_vat_id?: string | null
+    icon?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    owner: UserCreateNestedOneWithoutCompanyInput
+    branch?: CompanyBranchCreateNestedManyWithoutCompanyInput
+    mas_positionlevel3?: mas_positionlevel3CreateNestedManyWithoutCompanyInput
+    mas_positionlevel2?: mas_positionlevel2CreateNestedManyWithoutCompanyInput
+    mas_positionlevel1?: mas_positionlevel1CreateNestedManyWithoutCompanyInput
+    holiday_date?: holiday_dateCreateNestedManyWithoutCompanyInput
+    mas_position?: mas_positionCreateNestedManyWithoutCompanyInput
+  }
+
+  export type CompanyUncheckedCreateWithoutHolidayCompanyInput = {
+    id: string
+    name: string
+    companyCode: string
+    userlimit?: number
+    company_registration_id?: string | null
+    company_vat_id?: string | null
+    icon?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    ownerId: string
+    branch?: CompanyBranchUncheckedCreateNestedManyWithoutCompanyInput
+    mas_positionlevel3?: mas_positionlevel3UncheckedCreateNestedManyWithoutCompanyInput
+    mas_positionlevel2?: mas_positionlevel2UncheckedCreateNestedManyWithoutCompanyInput
+    mas_positionlevel1?: mas_positionlevel1UncheckedCreateNestedManyWithoutCompanyInput
+    holiday_date?: holiday_dateUncheckedCreateNestedManyWithoutCompanyInput
+    mas_position?: mas_positionUncheckedCreateNestedManyWithoutCompanyInput
+  }
+
+  export type CompanyCreateOrConnectWithoutHolidayCompanyInput = {
+    where: CompanyWhereUniqueInput
+    create: XOR<CompanyCreateWithoutHolidayCompanyInput, CompanyUncheckedCreateWithoutHolidayCompanyInput>
+  }
+
+  export type holiday_dateCreateWithoutHolidayCompanyInput = {
+    id: string
+    holiday_name?: string | null
+    day: number
+    month: number
+    year: number
+    Company?: CompanyCreateNestedOneWithoutHoliday_dateInput
+    status: number
+  }
+
+  export type holiday_dateUncheckedCreateWithoutHolidayCompanyInput = {
+    id: string
+    holiday_name?: string | null
+    day: number
+    month: number
+    year: number
+    CompanyId?: string | null
+    status: number
+  }
+
+  export type holiday_dateCreateOrConnectWithoutHolidayCompanyInput = {
+    where: holiday_dateWhereUniqueInput
+    create: XOR<holiday_dateCreateWithoutHolidayCompanyInput, holiday_dateUncheckedCreateWithoutHolidayCompanyInput>
+  }
+
+  export type holiday_yearCreateWithoutHolidayCompanyInput = {
+    id: string
+    day: number
+    month: number
+    year: number
+    holiday_name?: string | null
+  }
+
+  export type holiday_yearUncheckedCreateWithoutHolidayCompanyInput = {
+    id: string
+    day: number
+    month: number
+    year: number
+    holiday_name?: string | null
+  }
+
+  export type holiday_yearCreateOrConnectWithoutHolidayCompanyInput = {
+    where: holiday_yearWhereUniqueInput
+    create: XOR<holiday_yearCreateWithoutHolidayCompanyInput, holiday_yearUncheckedCreateWithoutHolidayCompanyInput>
+  }
+
+  export type CompanyUpsertWithoutHolidayCompanyInput = {
+    update: XOR<CompanyUpdateWithoutHolidayCompanyInput, CompanyUncheckedUpdateWithoutHolidayCompanyInput>
+    create: XOR<CompanyCreateWithoutHolidayCompanyInput, CompanyUncheckedCreateWithoutHolidayCompanyInput>
+  }
+
+  export type CompanyUpdateWithoutHolidayCompanyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    companyCode?: StringFieldUpdateOperationsInput | string
+    userlimit?: IntFieldUpdateOperationsInput | number
+    company_registration_id?: NullableStringFieldUpdateOperationsInput | string | null
+    company_vat_id?: NullableStringFieldUpdateOperationsInput | string | null
+    icon?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    owner?: UserUpdateOneRequiredWithoutCompanyNestedInput
+    branch?: CompanyBranchUpdateManyWithoutCompanyNestedInput
+    mas_positionlevel3?: mas_positionlevel3UpdateManyWithoutCompanyNestedInput
+    mas_positionlevel2?: mas_positionlevel2UpdateManyWithoutCompanyNestedInput
+    mas_positionlevel1?: mas_positionlevel1UpdateManyWithoutCompanyNestedInput
+    holiday_date?: holiday_dateUpdateManyWithoutCompanyNestedInput
+    mas_position?: mas_positionUpdateManyWithoutCompanyNestedInput
+  }
+
+  export type CompanyUncheckedUpdateWithoutHolidayCompanyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    companyCode?: StringFieldUpdateOperationsInput | string
+    userlimit?: IntFieldUpdateOperationsInput | number
+    company_registration_id?: NullableStringFieldUpdateOperationsInput | string | null
+    company_vat_id?: NullableStringFieldUpdateOperationsInput | string | null
+    icon?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    ownerId?: StringFieldUpdateOperationsInput | string
+    branch?: CompanyBranchUncheckedUpdateManyWithoutCompanyNestedInput
+    mas_positionlevel3?: mas_positionlevel3UncheckedUpdateManyWithoutCompanyNestedInput
+    mas_positionlevel2?: mas_positionlevel2UncheckedUpdateManyWithoutCompanyNestedInput
+    mas_positionlevel1?: mas_positionlevel1UncheckedUpdateManyWithoutCompanyNestedInput
+    holiday_date?: holiday_dateUncheckedUpdateManyWithoutCompanyNestedInput
+    mas_position?: mas_positionUncheckedUpdateManyWithoutCompanyNestedInput
+  }
+
+  export type holiday_dateUpsertWithoutHolidayCompanyInput = {
+    update: XOR<holiday_dateUpdateWithoutHolidayCompanyInput, holiday_dateUncheckedUpdateWithoutHolidayCompanyInput>
+    create: XOR<holiday_dateCreateWithoutHolidayCompanyInput, holiday_dateUncheckedCreateWithoutHolidayCompanyInput>
+  }
+
+  export type holiday_dateUpdateWithoutHolidayCompanyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    holiday_name?: NullableStringFieldUpdateOperationsInput | string | null
+    day?: IntFieldUpdateOperationsInput | number
+    month?: IntFieldUpdateOperationsInput | number
+    year?: IntFieldUpdateOperationsInput | number
+    Company?: CompanyUpdateOneWithoutHoliday_dateNestedInput
+    status?: IntFieldUpdateOperationsInput | number
+  }
+
+  export type holiday_dateUncheckedUpdateWithoutHolidayCompanyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    holiday_name?: NullableStringFieldUpdateOperationsInput | string | null
+    day?: IntFieldUpdateOperationsInput | number
+    month?: IntFieldUpdateOperationsInput | number
+    year?: IntFieldUpdateOperationsInput | number
+    CompanyId?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: IntFieldUpdateOperationsInput | number
+  }
+
+  export type holiday_yearUpsertWithoutHolidayCompanyInput = {
+    update: XOR<holiday_yearUpdateWithoutHolidayCompanyInput, holiday_yearUncheckedUpdateWithoutHolidayCompanyInput>
+    create: XOR<holiday_yearCreateWithoutHolidayCompanyInput, holiday_yearUncheckedCreateWithoutHolidayCompanyInput>
+  }
+
+  export type holiday_yearUpdateWithoutHolidayCompanyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    day?: IntFieldUpdateOperationsInput | number
+    month?: IntFieldUpdateOperationsInput | number
+    year?: IntFieldUpdateOperationsInput | number
+    holiday_name?: NullableStringFieldUpdateOperationsInput | string | null
+  }
+
+  export type holiday_yearUncheckedUpdateWithoutHolidayCompanyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    day?: IntFieldUpdateOperationsInput | number
+    month?: IntFieldUpdateOperationsInput | number
+    year?: IntFieldUpdateOperationsInput | number
+    holiday_name?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type expense_companyCreateWithoutMas_bankInput = {
@@ -47304,6 +49149,12 @@ export namespace Prisma {
     level: number
   }
 
+  export type holidayCompanyCreateManyCompanyInput = {
+    id: string
+    holiday_dateId?: string | null
+    holiday_yearId?: string | null
+  }
+
   export type CompanyBranchUpdateWithoutCompanyInput = {
     id?: StringFieldUpdateOperationsInput | string
     isMainbranch?: BoolFieldUpdateOperationsInput | boolean
@@ -47489,6 +49340,7 @@ export namespace Prisma {
     month?: IntFieldUpdateOperationsInput | number
     year?: IntFieldUpdateOperationsInput | number
     status?: IntFieldUpdateOperationsInput | number
+    holidayCompany?: holidayCompanyUpdateManyWithoutHoliday_dateNestedInput
   }
 
   export type holiday_dateUncheckedUpdateWithoutCompanyInput = {
@@ -47498,6 +49350,7 @@ export namespace Prisma {
     month?: IntFieldUpdateOperationsInput | number
     year?: IntFieldUpdateOperationsInput | number
     status?: IntFieldUpdateOperationsInput | number
+    holidayCompany?: holidayCompanyUncheckedUpdateManyWithoutHoliday_dateNestedInput
   }
 
   export type holiday_dateUncheckedUpdateManyWithoutHoliday_dateInput = {
@@ -47525,6 +49378,24 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     level?: IntFieldUpdateOperationsInput | number
+  }
+
+  export type holidayCompanyUpdateWithoutCompanyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    holiday_date?: holiday_dateUpdateOneWithoutHolidayCompanyNestedInput
+    holiday_year?: holiday_yearUpdateOneWithoutHolidayCompanyNestedInput
+  }
+
+  export type holidayCompanyUncheckedUpdateWithoutCompanyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    holiday_dateId?: NullableStringFieldUpdateOperationsInput | string | null
+    holiday_yearId?: NullableStringFieldUpdateOperationsInput | string | null
+  }
+
+  export type holidayCompanyUncheckedUpdateManyWithoutHolidayCompanyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    holiday_dateId?: NullableStringFieldUpdateOperationsInput | string | null
+    holiday_yearId?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type UserCreateManyCompanyBranchInput = {
@@ -47793,6 +49664,7 @@ export namespace Prisma {
     mas_positionlevel1?: mas_positionlevel1UpdateManyWithoutCompanyNestedInput
     holiday_date?: holiday_dateUpdateManyWithoutCompanyNestedInput
     mas_position?: mas_positionUpdateManyWithoutCompanyNestedInput
+    holidayCompany?: holidayCompanyUpdateManyWithoutCompanyNestedInput
   }
 
   export type CompanyUncheckedUpdateWithoutOwnerInput = {
@@ -47811,6 +49683,7 @@ export namespace Prisma {
     mas_positionlevel1?: mas_positionlevel1UncheckedUpdateManyWithoutCompanyNestedInput
     holiday_date?: holiday_dateUncheckedUpdateManyWithoutCompanyNestedInput
     mas_position?: mas_positionUncheckedUpdateManyWithoutCompanyNestedInput
+    holidayCompany?: holidayCompanyUncheckedUpdateManyWithoutCompanyNestedInput
   }
 
   export type CompanyUncheckedUpdateManyWithoutCompanyInput = {
@@ -48441,6 +50314,42 @@ export namespace Prisma {
     position2_id?: NullableStringFieldUpdateOperationsInput | string | null
     role?: NullableStringFieldUpdateOperationsInput | string | null
     headderId?: NullableStringFieldUpdateOperationsInput | string | null
+  }
+
+  export type holidayCompanyCreateManyHoliday_dateInput = {
+    id: string
+    CompanyId?: string | null
+    holiday_yearId?: string | null
+  }
+
+  export type holidayCompanyUpdateWithoutHoliday_dateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    Company?: CompanyUpdateOneWithoutHolidayCompanyNestedInput
+    holiday_year?: holiday_yearUpdateOneWithoutHolidayCompanyNestedInput
+  }
+
+  export type holidayCompanyUncheckedUpdateWithoutHoliday_dateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    CompanyId?: NullableStringFieldUpdateOperationsInput | string | null
+    holiday_yearId?: NullableStringFieldUpdateOperationsInput | string | null
+  }
+
+  export type holidayCompanyCreateManyHoliday_yearInput = {
+    id: string
+    CompanyId?: string | null
+    holiday_dateId?: string | null
+  }
+
+  export type holidayCompanyUpdateWithoutHoliday_yearInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    Company?: CompanyUpdateOneWithoutHolidayCompanyNestedInput
+    holiday_date?: holiday_dateUpdateOneWithoutHolidayCompanyNestedInput
+  }
+
+  export type holidayCompanyUncheckedUpdateWithoutHoliday_yearInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    CompanyId?: NullableStringFieldUpdateOperationsInput | string | null
+    holiday_dateId?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type expense_companyCreateManyMas_bankInput = {

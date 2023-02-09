@@ -227,7 +227,7 @@ const main = async () => {
     update: {},
   });
 
-  const userBHMember = await prisma.user.upsert({
+  const userBhNj = await prisma.user.upsert({
     where: {
       id: '74340599-654c-412e-bf9c-0241de96785b',
     },
@@ -249,9 +249,46 @@ const main = async () => {
           firstname_en: 'Numjoon',
           lastname_en: 'Kim',
           lastname_th: 'คิม',
+          nickname: 'RM',
           dob: '2023-01-19T04:48:06.846Z',
           blood_type: 'A',
           relationship: 'โสด',
+          contract_email: 'kim.nj@bighit.co.th',
+          staff_code: 'BH001'
+        },
+      },
+    },
+    update: {},
+  });
+
+  const userBhSj = await prisma.user.upsert({
+    where: {
+      id: 'bae00d65-3dab-4887-b80c-ae04bb835dd8',
+    },
+    create: {
+      id: 'bae00d65-3dab-4887-b80c-ae04bb835dd8',
+      email: 'kim.sj@bighit.co.kr',
+      password: await createPassword('@Sj130613'),
+      islogin: false,
+      isActive: true,
+      isOwner: false,
+      roleId: 'd515bf21-a90e-41e9-b202-8a4d2cdea391',
+      createdAt: '2023-02-25T04:48:57.188Z',
+      companyBranchId: '9eb62067-8cb5-4555-81b3-45bdaf070b49',
+      profile: {
+        create: {
+          id: '93f58d72-6fe5-44a6-95a7-330ecc1801a1',
+          bio: 'Astro',
+          firstname_th: 'ซอกจิน',
+          firstname_en: 'Seokjin',
+          lastname_en: 'Kim',
+          lastname_th: 'คิม',
+          nickname: 'Jin',
+          dob: '2023-01-19T04:48:06.846Z',
+          blood_type: 'O',
+          relationship: 'โสด',
+          contract_email: 'kim.sj@bighit.co.kr',
+          staff_code: 'BH004'
         },
       },
     },
