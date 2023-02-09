@@ -208,7 +208,7 @@ const main = async () => {
     update: {},
   });
 
-  const userBH001 = await prisma.user.upsert({
+  const userBHMember = await prisma.user.upsert({
     where: {
       id: '74340599-654c-412e-bf9c-0241de96785b',
     },
