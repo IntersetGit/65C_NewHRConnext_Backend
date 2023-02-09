@@ -31444,7 +31444,7 @@ export namespace Prisma {
   export type data_leaveSelect = {
     id?: boolean
     leavetype_id?: boolean
-    leave_type?: boolean | mas_leave_typeArgs
+    mas_leave_type?: boolean | mas_leave_typeArgs
     start_date?: boolean
     end_date?: boolean
     quantity_day?: boolean
@@ -31456,7 +31456,7 @@ export namespace Prisma {
 
 
   export type data_leaveInclude = {
-    leave_type?: boolean | mas_leave_typeArgs
+    mas_leave_type?: boolean | mas_leave_typeArgs
     user?: boolean | UserArgs
   }
 
@@ -31467,13 +31467,13 @@ export namespace Prisma {
     S extends { include: any } & (data_leaveArgs | data_leaveFindManyArgs)
     ? data_leave  & {
     [P in TruthyKeys<S['include']>]:
-        P extends 'leave_type' ? mas_leave_typeGetPayload<S['include'][P]> :
+        P extends 'mas_leave_type' ? mas_leave_typeGetPayload<S['include'][P]> :
         P extends 'user' ? UserGetPayload<S['include'][P]> :  never
   } 
     : S extends { select: any } & (data_leaveArgs | data_leaveFindManyArgs)
       ? {
     [P in TruthyKeys<S['select']>]:
-        P extends 'leave_type' ? mas_leave_typeGetPayload<S['select'][P]> :
+        P extends 'mas_leave_type' ? mas_leave_typeGetPayload<S['select'][P]> :
         P extends 'user' ? UserGetPayload<S['select'][P]> :  P extends keyof data_leave ? data_leave[P] : never
   } 
       : data_leave
@@ -31848,7 +31848,7 @@ export namespace Prisma {
     constructor(_dmmf: runtime.DMMFClass, _fetcher: PrismaClientFetcher, _queryType: 'query' | 'mutation', _rootField: string, _clientMethod: string, _args: any, _dataPath: string[], _errorFormat: ErrorFormat, _measurePerformance?: boolean | undefined, _isList?: boolean);
     readonly [Symbol.toStringTag]: 'PrismaClientPromise';
 
-    leave_type<T extends mas_leave_typeArgs= {}>(args?: Subset<T, mas_leave_typeArgs>): Prisma__mas_leave_typeClient<mas_leave_typeGetPayload<T> | Null>;
+    mas_leave_type<T extends mas_leave_typeArgs= {}>(args?: Subset<T, mas_leave_typeArgs>): Prisma__mas_leave_typeClient<mas_leave_typeGetPayload<T> | Null>;
 
     user<T extends UserArgs= {}>(args?: Subset<T, UserArgs>): Prisma__UserClient<UserGetPayload<T> | Null>;
 
@@ -34570,7 +34570,7 @@ export namespace Prisma {
     NOT?: Enumerable<data_leaveWhereInput>
     id?: UuidFilter | string
     leavetype_id?: UuidFilter | string
-    leave_type?: XOR<Mas_leave_typeRelationFilter, mas_leave_typeWhereInput>
+    mas_leave_type?: XOR<Mas_leave_typeRelationFilter, mas_leave_typeWhereInput>
     start_date?: DateTimeFilter | Date | string
     end_date?: DateTimeFilter | Date | string
     quantity_day?: IntFilter | number
@@ -34583,7 +34583,7 @@ export namespace Prisma {
   export type data_leaveOrderByWithRelationInput = {
     id?: SortOrder
     leavetype_id?: SortOrder
-    leave_type?: mas_leave_typeOrderByWithRelationInput
+    mas_leave_type?: mas_leave_typeOrderByWithRelationInput
     start_date?: SortOrder
     end_date?: SortOrder
     quantity_day?: SortOrder
@@ -36989,28 +36989,28 @@ export namespace Prisma {
     id: string
     name: string
     orderby: number
-    data_leave?: data_leaveCreateNestedManyWithoutLeave_typeInput
+    data_leave?: data_leaveCreateNestedManyWithoutMas_leave_typeInput
   }
 
   export type mas_leave_typeUncheckedCreateInput = {
     id: string
     name: string
     orderby: number
-    data_leave?: data_leaveUncheckedCreateNestedManyWithoutLeave_typeInput
+    data_leave?: data_leaveUncheckedCreateNestedManyWithoutMas_leave_typeInput
   }
 
   export type mas_leave_typeUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     orderby?: IntFieldUpdateOperationsInput | number
-    data_leave?: data_leaveUpdateManyWithoutLeave_typeNestedInput
+    data_leave?: data_leaveUpdateManyWithoutMas_leave_typeNestedInput
   }
 
   export type mas_leave_typeUncheckedUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     orderby?: IntFieldUpdateOperationsInput | number
-    data_leave?: data_leaveUncheckedUpdateManyWithoutLeave_typeNestedInput
+    data_leave?: data_leaveUncheckedUpdateManyWithoutMas_leave_typeNestedInput
   }
 
   export type mas_leave_typeCreateManyInput = {
@@ -37033,7 +37033,7 @@ export namespace Prisma {
 
   export type data_leaveCreateInput = {
     id: string
-    leave_type: mas_leave_typeCreateNestedOneWithoutData_leaveInput
+    mas_leave_type: mas_leave_typeCreateNestedOneWithoutData_leaveInput
     start_date: Date | string
     end_date: Date | string
     quantity_day: number
@@ -37055,7 +37055,7 @@ export namespace Prisma {
 
   export type data_leaveUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
-    leave_type?: mas_leave_typeUpdateOneRequiredWithoutData_leaveNestedInput
+    mas_leave_type?: mas_leave_typeUpdateOneRequiredWithoutData_leaveNestedInput
     start_date?: DateTimeFieldUpdateOperationsInput | Date | string
     end_date?: DateTimeFieldUpdateOperationsInput | Date | string
     quantity_day?: IntFieldUpdateOperationsInput | number
@@ -41203,45 +41203,45 @@ export namespace Prisma {
     update?: XOR<salaryUpdateWithoutProvident_logInput, salaryUncheckedUpdateWithoutProvident_logInput>
   }
 
-  export type data_leaveCreateNestedManyWithoutLeave_typeInput = {
-    create?: XOR<Enumerable<data_leaveCreateWithoutLeave_typeInput>, Enumerable<data_leaveUncheckedCreateWithoutLeave_typeInput>>
-    connectOrCreate?: Enumerable<data_leaveCreateOrConnectWithoutLeave_typeInput>
-    createMany?: data_leaveCreateManyLeave_typeInputEnvelope
+  export type data_leaveCreateNestedManyWithoutMas_leave_typeInput = {
+    create?: XOR<Enumerable<data_leaveCreateWithoutMas_leave_typeInput>, Enumerable<data_leaveUncheckedCreateWithoutMas_leave_typeInput>>
+    connectOrCreate?: Enumerable<data_leaveCreateOrConnectWithoutMas_leave_typeInput>
+    createMany?: data_leaveCreateManyMas_leave_typeInputEnvelope
     connect?: Enumerable<data_leaveWhereUniqueInput>
   }
 
-  export type data_leaveUncheckedCreateNestedManyWithoutLeave_typeInput = {
-    create?: XOR<Enumerable<data_leaveCreateWithoutLeave_typeInput>, Enumerable<data_leaveUncheckedCreateWithoutLeave_typeInput>>
-    connectOrCreate?: Enumerable<data_leaveCreateOrConnectWithoutLeave_typeInput>
-    createMany?: data_leaveCreateManyLeave_typeInputEnvelope
+  export type data_leaveUncheckedCreateNestedManyWithoutMas_leave_typeInput = {
+    create?: XOR<Enumerable<data_leaveCreateWithoutMas_leave_typeInput>, Enumerable<data_leaveUncheckedCreateWithoutMas_leave_typeInput>>
+    connectOrCreate?: Enumerable<data_leaveCreateOrConnectWithoutMas_leave_typeInput>
+    createMany?: data_leaveCreateManyMas_leave_typeInputEnvelope
     connect?: Enumerable<data_leaveWhereUniqueInput>
   }
 
-  export type data_leaveUpdateManyWithoutLeave_typeNestedInput = {
-    create?: XOR<Enumerable<data_leaveCreateWithoutLeave_typeInput>, Enumerable<data_leaveUncheckedCreateWithoutLeave_typeInput>>
-    connectOrCreate?: Enumerable<data_leaveCreateOrConnectWithoutLeave_typeInput>
-    upsert?: Enumerable<data_leaveUpsertWithWhereUniqueWithoutLeave_typeInput>
-    createMany?: data_leaveCreateManyLeave_typeInputEnvelope
+  export type data_leaveUpdateManyWithoutMas_leave_typeNestedInput = {
+    create?: XOR<Enumerable<data_leaveCreateWithoutMas_leave_typeInput>, Enumerable<data_leaveUncheckedCreateWithoutMas_leave_typeInput>>
+    connectOrCreate?: Enumerable<data_leaveCreateOrConnectWithoutMas_leave_typeInput>
+    upsert?: Enumerable<data_leaveUpsertWithWhereUniqueWithoutMas_leave_typeInput>
+    createMany?: data_leaveCreateManyMas_leave_typeInputEnvelope
     set?: Enumerable<data_leaveWhereUniqueInput>
     disconnect?: Enumerable<data_leaveWhereUniqueInput>
     delete?: Enumerable<data_leaveWhereUniqueInput>
     connect?: Enumerable<data_leaveWhereUniqueInput>
-    update?: Enumerable<data_leaveUpdateWithWhereUniqueWithoutLeave_typeInput>
-    updateMany?: Enumerable<data_leaveUpdateManyWithWhereWithoutLeave_typeInput>
+    update?: Enumerable<data_leaveUpdateWithWhereUniqueWithoutMas_leave_typeInput>
+    updateMany?: Enumerable<data_leaveUpdateManyWithWhereWithoutMas_leave_typeInput>
     deleteMany?: Enumerable<data_leaveScalarWhereInput>
   }
 
-  export type data_leaveUncheckedUpdateManyWithoutLeave_typeNestedInput = {
-    create?: XOR<Enumerable<data_leaveCreateWithoutLeave_typeInput>, Enumerable<data_leaveUncheckedCreateWithoutLeave_typeInput>>
-    connectOrCreate?: Enumerable<data_leaveCreateOrConnectWithoutLeave_typeInput>
-    upsert?: Enumerable<data_leaveUpsertWithWhereUniqueWithoutLeave_typeInput>
-    createMany?: data_leaveCreateManyLeave_typeInputEnvelope
+  export type data_leaveUncheckedUpdateManyWithoutMas_leave_typeNestedInput = {
+    create?: XOR<Enumerable<data_leaveCreateWithoutMas_leave_typeInput>, Enumerable<data_leaveUncheckedCreateWithoutMas_leave_typeInput>>
+    connectOrCreate?: Enumerable<data_leaveCreateOrConnectWithoutMas_leave_typeInput>
+    upsert?: Enumerable<data_leaveUpsertWithWhereUniqueWithoutMas_leave_typeInput>
+    createMany?: data_leaveCreateManyMas_leave_typeInputEnvelope
     set?: Enumerable<data_leaveWhereUniqueInput>
     disconnect?: Enumerable<data_leaveWhereUniqueInput>
     delete?: Enumerable<data_leaveWhereUniqueInput>
     connect?: Enumerable<data_leaveWhereUniqueInput>
-    update?: Enumerable<data_leaveUpdateWithWhereUniqueWithoutLeave_typeInput>
-    updateMany?: Enumerable<data_leaveUpdateManyWithWhereWithoutLeave_typeInput>
+    update?: Enumerable<data_leaveUpdateWithWhereUniqueWithoutMas_leave_typeInput>
+    updateMany?: Enumerable<data_leaveUpdateManyWithWhereWithoutMas_leave_typeInput>
     deleteMany?: Enumerable<data_leaveScalarWhereInput>
   }
 
@@ -42946,7 +42946,7 @@ export namespace Prisma {
 
   export type data_leaveCreateWithoutUserInput = {
     id: string
-    leave_type: mas_leave_typeCreateNestedOneWithoutData_leaveInput
+    mas_leave_type: mas_leave_typeCreateNestedOneWithoutData_leaveInput
     start_date: Date | string
     end_date: Date | string
     quantity_day: number
@@ -47057,7 +47057,7 @@ export namespace Prisma {
     provident_logId?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
-  export type data_leaveCreateWithoutLeave_typeInput = {
+  export type data_leaveCreateWithoutMas_leave_typeInput = {
     id: string
     start_date: Date | string
     end_date: Date | string
@@ -47067,7 +47067,7 @@ export namespace Prisma {
     user: UserCreateNestedOneWithoutData_leaveInput
   }
 
-  export type data_leaveUncheckedCreateWithoutLeave_typeInput = {
+  export type data_leaveUncheckedCreateWithoutMas_leave_typeInput = {
     id: string
     start_date: Date | string
     end_date: Date | string
@@ -47077,28 +47077,28 @@ export namespace Prisma {
     user_id: string
   }
 
-  export type data_leaveCreateOrConnectWithoutLeave_typeInput = {
+  export type data_leaveCreateOrConnectWithoutMas_leave_typeInput = {
     where: data_leaveWhereUniqueInput
-    create: XOR<data_leaveCreateWithoutLeave_typeInput, data_leaveUncheckedCreateWithoutLeave_typeInput>
+    create: XOR<data_leaveCreateWithoutMas_leave_typeInput, data_leaveUncheckedCreateWithoutMas_leave_typeInput>
   }
 
-  export type data_leaveCreateManyLeave_typeInputEnvelope = {
-    data: Enumerable<data_leaveCreateManyLeave_typeInput>
+  export type data_leaveCreateManyMas_leave_typeInputEnvelope = {
+    data: Enumerable<data_leaveCreateManyMas_leave_typeInput>
     skipDuplicates?: boolean
   }
 
-  export type data_leaveUpsertWithWhereUniqueWithoutLeave_typeInput = {
+  export type data_leaveUpsertWithWhereUniqueWithoutMas_leave_typeInput = {
     where: data_leaveWhereUniqueInput
-    update: XOR<data_leaveUpdateWithoutLeave_typeInput, data_leaveUncheckedUpdateWithoutLeave_typeInput>
-    create: XOR<data_leaveCreateWithoutLeave_typeInput, data_leaveUncheckedCreateWithoutLeave_typeInput>
+    update: XOR<data_leaveUpdateWithoutMas_leave_typeInput, data_leaveUncheckedUpdateWithoutMas_leave_typeInput>
+    create: XOR<data_leaveCreateWithoutMas_leave_typeInput, data_leaveUncheckedCreateWithoutMas_leave_typeInput>
   }
 
-  export type data_leaveUpdateWithWhereUniqueWithoutLeave_typeInput = {
+  export type data_leaveUpdateWithWhereUniqueWithoutMas_leave_typeInput = {
     where: data_leaveWhereUniqueInput
-    data: XOR<data_leaveUpdateWithoutLeave_typeInput, data_leaveUncheckedUpdateWithoutLeave_typeInput>
+    data: XOR<data_leaveUpdateWithoutMas_leave_typeInput, data_leaveUncheckedUpdateWithoutMas_leave_typeInput>
   }
 
-  export type data_leaveUpdateManyWithWhereWithoutLeave_typeInput = {
+  export type data_leaveUpdateManyWithWhereWithoutMas_leave_typeInput = {
     where: data_leaveScalarWhereInput
     data: XOR<data_leaveUpdateManyMutationInput, data_leaveUncheckedUpdateManyWithoutData_leaveInput>
   }
@@ -48105,7 +48105,7 @@ export namespace Prisma {
 
   export type data_leaveUpdateWithoutUserInput = {
     id?: StringFieldUpdateOperationsInput | string
-    leave_type?: mas_leave_typeUpdateOneRequiredWithoutData_leaveNestedInput
+    mas_leave_type?: mas_leave_typeUpdateOneRequiredWithoutData_leaveNestedInput
     start_date?: DateTimeFieldUpdateOperationsInput | Date | string
     end_date?: DateTimeFieldUpdateOperationsInput | Date | string
     quantity_day?: IntFieldUpdateOperationsInput | number
@@ -49342,7 +49342,7 @@ export namespace Prisma {
     salaryId?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
-  export type data_leaveCreateManyLeave_typeInput = {
+  export type data_leaveCreateManyMas_leave_typeInput = {
     id: string
     start_date: Date | string
     end_date: Date | string
@@ -49352,7 +49352,7 @@ export namespace Prisma {
     user_id: string
   }
 
-  export type data_leaveUpdateWithoutLeave_typeInput = {
+  export type data_leaveUpdateWithoutMas_leave_typeInput = {
     id?: StringFieldUpdateOperationsInput | string
     start_date?: DateTimeFieldUpdateOperationsInput | Date | string
     end_date?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -49362,7 +49362,7 @@ export namespace Prisma {
     user?: UserUpdateOneRequiredWithoutData_leaveNestedInput
   }
 
-  export type data_leaveUncheckedUpdateWithoutLeave_typeInput = {
+  export type data_leaveUncheckedUpdateWithoutMas_leave_typeInput = {
     id?: StringFieldUpdateOperationsInput | string
     start_date?: DateTimeFieldUpdateOperationsInput | Date | string
     end_date?: DateTimeFieldUpdateOperationsInput | Date | string
