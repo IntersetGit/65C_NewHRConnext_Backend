@@ -204,7 +204,6 @@ const resolvers: Resolvers = {
             // };
         }
     }
-
 }
 
 const resolversComposition = {
