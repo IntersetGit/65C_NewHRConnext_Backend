@@ -672,7 +672,7 @@ export type Query = {
   getProvince?: Maybe<Array<Maybe<Province>>>;
   getcompanyRole?: Maybe<Array<Maybe<Role_Company>>>;
   getleava_data?: Maybe<Array<Maybe<Getdataaboutleave>>>;
-  getleavetypedata?: Maybe<Array<Maybe<Leave_Type>>>;
+  getleavetypedata?: Maybe<Array<Maybe<Mas_Leave_Type>>>;
   getownCompany?: Maybe<GetOwncompanytype>;
   getpositionMe?: Maybe<Array<Maybe<GetPositionUser>>>;
   getposition_user?: Maybe<Array<Maybe<GetPositionUser>>>;
@@ -1115,18 +1115,11 @@ export type Leave_Data = {
   detail_leave?: Maybe<Scalars['String']>;
   end_date?: Maybe<Scalars['Date']>;
   id?: Maybe<Scalars['String']>;
-  leave_type?: Maybe<Array<Maybe<Leave_Type>>>;
   leavetype_id?: Maybe<Scalars['String']>;
+  mas_leave_type?: Maybe<Mas_Leave_Type>;
   quantity_day?: Maybe<Scalars['Int']>;
   start_date?: Maybe<Scalars['Date']>;
   user_id?: Maybe<Scalars['String']>;
-};
-
-export type Leave_Type = {
-  __typename?: 'leave_type';
-  id?: Maybe<Scalars['String']>;
-  name?: Maybe<Scalars['String']>;
-  orderby?: Maybe<Scalars['Int']>;
 };
 
 export type Mas_All_Collect = {
@@ -1150,6 +1143,13 @@ export type Mas_Bank = {
   id?: Maybe<Scalars['ID']>;
   name?: Maybe<Scalars['String']>;
   salary?: Maybe<Array<Maybe<Salary>>>;
+};
+
+export type Mas_Leave_Type = {
+  __typename?: 'mas_leave_type';
+  id?: Maybe<Scalars['String']>;
+  name?: Maybe<Scalars['String']>;
+  orderby?: Maybe<Scalars['Int']>;
 };
 
 export type Mas_Month = {
@@ -1511,9 +1511,9 @@ export type ResolversTypes = ResolversObject<{
   incometypeResponseType: ResolverTypeWrapper<IncometypeResponseType>;
   leave: Leave;
   leave_data: ResolverTypeWrapper<Leave_Data>;
-  leave_type: ResolverTypeWrapper<Leave_Type>;
   mas_all_collect: ResolverTypeWrapper<Mas_All_Collect>;
   mas_bank: ResolverTypeWrapper<Mas_Bank>;
+  mas_leave_type: ResolverTypeWrapper<Mas_Leave_Type>;
   mas_month: ResolverTypeWrapper<Mas_Month>;
   mas_position: ResolverTypeWrapper<Mas_Position>;
   mas_positionlevel1: ResolverTypeWrapper<Mas_Positionlevel1>;
@@ -1617,9 +1617,9 @@ export type ResolversParentTypes = ResolversObject<{
   incometypeResponseType: IncometypeResponseType;
   leave: Leave;
   leave_data: Leave_Data;
-  leave_type: Leave_Type;
   mas_all_collect: Mas_All_Collect;
   mas_bank: Mas_Bank;
+  mas_leave_type: Mas_Leave_Type;
   mas_month: Mas_Month;
   mas_position: Mas_Position;
   mas_positionlevel1: Mas_Positionlevel1;
@@ -2034,7 +2034,7 @@ export type QueryResolvers<ContextType = ApolloContext, ParentType extends Resol
   getProvince?: Resolver<Maybe<Array<Maybe<ResolversTypes['Province']>>>, ParentType, ContextType>;
   getcompanyRole?: Resolver<Maybe<Array<Maybe<ResolversTypes['Role_Company']>>>, ParentType, ContextType, Partial<QueryGetcompanyRoleArgs>>;
   getleava_data?: Resolver<Maybe<Array<Maybe<ResolversTypes['getdataaboutleave']>>>, ParentType, ContextType>;
-  getleavetypedata?: Resolver<Maybe<Array<Maybe<ResolversTypes['leave_type']>>>, ParentType, ContextType>;
+  getleavetypedata?: Resolver<Maybe<Array<Maybe<ResolversTypes['mas_leave_type']>>>, ParentType, ContextType>;
   getownCompany?: Resolver<Maybe<ResolversTypes['GetOwncompanytype']>, ParentType, ContextType>;
   getpositionMe?: Resolver<Maybe<Array<Maybe<ResolversTypes['getPositionUser']>>>, ParentType, ContextType>;
   getposition_user?: Resolver<Maybe<Array<Maybe<ResolversTypes['getPositionUser']>>>, ParentType, ContextType, Partial<QueryGetposition_UserArgs>>;
@@ -2336,18 +2336,11 @@ export type Leave_DataResolvers<ContextType = ApolloContext, ParentType extends 
   detail_leave?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   end_date?: Resolver<Maybe<ResolversTypes['Date']>, ParentType, ContextType>;
   id?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
-  leave_type?: Resolver<Maybe<Array<Maybe<ResolversTypes['leave_type']>>>, ParentType, ContextType>;
   leavetype_id?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  mas_leave_type?: Resolver<Maybe<ResolversTypes['mas_leave_type']>, ParentType, ContextType>;
   quantity_day?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
   start_date?: Resolver<Maybe<ResolversTypes['Date']>, ParentType, ContextType>;
   user_id?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
-  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
-}>;
-
-export type Leave_TypeResolvers<ContextType = ApolloContext, ParentType extends ResolversParentTypes['leave_type'] = ResolversParentTypes['leave_type']> = ResolversObject<{
-  id?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
-  name?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
-  orderby?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 }>;
 
@@ -2371,6 +2364,13 @@ export type Mas_BankResolvers<ContextType = ApolloContext, ParentType extends Re
   id?: Resolver<Maybe<ResolversTypes['ID']>, ParentType, ContextType>;
   name?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   salary?: Resolver<Maybe<Array<Maybe<ResolversTypes['salary']>>>, ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+}>;
+
+export type Mas_Leave_TypeResolvers<ContextType = ApolloContext, ParentType extends ResolversParentTypes['mas_leave_type'] = ResolversParentTypes['mas_leave_type']> = ResolversObject<{
+  id?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  name?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  orderby?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 }>;
 
@@ -2572,9 +2572,9 @@ export type Resolvers<ContextType = ApolloContext> = ResolversObject<{
   holiday_years?: Holiday_YearsResolvers<ContextType>;
   incometypeResponseType?: IncometypeResponseTypeResolvers<ContextType>;
   leave_data?: Leave_DataResolvers<ContextType>;
-  leave_type?: Leave_TypeResolvers<ContextType>;
   mas_all_collect?: Mas_All_CollectResolvers<ContextType>;
   mas_bank?: Mas_BankResolvers<ContextType>;
+  mas_leave_type?: Mas_Leave_TypeResolvers<ContextType>;
   mas_month?: Mas_MonthResolvers<ContextType>;
   mas_position?: Mas_PositionResolvers<ContextType>;
   mas_positionlevel1?: Mas_Positionlevel1Resolvers<ContextType>;

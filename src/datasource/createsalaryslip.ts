@@ -63,34 +63,34 @@ const resolvers: Resolvers = {
             pdfDoc.fontSize(12).text("รายได้ (Income)", 85, 243, { align: 'left' }) // หัวตาราง
 
             pdfDoc.fontSize(12).text("เงินเดือนค่าจ้าง", 25, 265, { align: 'left' })
-            pdfDoc.fontSize(12).text("xxxxx.00", 170, 265, { align: 'left' })
+            pdfDoc.fontSize(12).text("xxxxx.00", 170, 265, { align: 'justify' })
 
             pdfDoc.fontSize(12).text("ค่าคอมมิชชั่น", 25, 285, { align: 'left' })
-            pdfDoc.fontSize(12).text("-", 110, 265, { align: 'left' })
+            pdfDoc.fontSize(12).text("-", 170, 285, { align: 'justify' })
 
             pdfDoc.fontSize(12).text("ค่าตำแหน่ง", 25, 305, { align: 'left' })
-            pdfDoc.fontSize(12).text("-", 110, 265, { align: 'left' })
+            pdfDoc.fontSize(12).text("-", 170, 305, { align: 'justify' })
 
             pdfDoc.fontSize(12).text("เงินพิเศษ", 25, 325, { align: 'left' })
-            pdfDoc.fontSize(12).text("-", 110, 265, { align: 'left' })
+            pdfDoc.fontSize(12).text("-", 170, 325, { align: 'justify' })
 
             pdfDoc.fontSize(12).text("ค่าล่วงเวลา", 25, 345, { align: 'left' })
-            pdfDoc.fontSize(12).text("xxxxx.00", 110, 265, { align: 'left' })
+            pdfDoc.fontSize(12).text("-", 170, 345, { align: 'justify' })
 
             pdfDoc.fontSize(12).text("รายได้อื่น", 25, 365, { align: 'left' })
-            pdfDoc.fontSize(12).text("xxxxx.00", 110, 265, { align: 'left' })
+            pdfDoc.fontSize(12).text("-", 170, 365, { align: 'justify' })
 
             pdfDoc.fontSize(12).text("ค่าเดินทาง", 25, 385, { align: 'left' })
-            pdfDoc.fontSize(12).text("xxxxx.00", 110, 265, { align: 'left' })
+            pdfDoc.fontSize(12).text("-", 170, 385, { align: 'justify' })
 
             pdfDoc.fontSize(12).text("เงินอุดหนุน", 25, 405, { align: 'left' })
-            pdfDoc.fontSize(12).text("xxxxx.00", 110, 265, { align: 'left' })
+            pdfDoc.fontSize(12).text("-", 170, 405, { align: 'justify' })
 
             pdfDoc.fontSize(12).text("เงินสวัสดิการ", 25, 425, { align: 'left' })
-            pdfDoc.fontSize(12).text("xxxxx.00", 110, 265, { align: 'left' })
+            pdfDoc.fontSize(12).text("-", 170, 425, { align: 'justify' })
 
             pdfDoc.fontSize(12).text("เงินโบนัส", 25, 445, { align: 'left' })
-            pdfDoc.fontSize(12).text("xxxxx.00", 110, 265, { align: 'left' })
+            pdfDoc.fontSize(12).text("-", 170, 445, { align: 'justify' })
 
             // เงินได้สะสม ภาษีสะสม
             pdfDoc.lineJoin('miter') //กรอบกลางล่าง ประกันสังคมสะสม
@@ -110,15 +110,28 @@ const resolvers: Resolvers = {
                 .lineTo(390, 260)
                 .stroke()
 
-            pdfDoc.fontSize(12).text("รายการหัก (Deduction)", 255, 243, { align: 'left' })
+            pdfDoc.fontSize(12).text("รายการหัก (Deduction)", 255, 243, { align: 'right' })
 
-            pdfDoc.fontSize(12).text("ภาษีหัก ณ ที่จ่าย", 210, 265, { align: 'left' })
-            pdfDoc.fontSize(12).text("ประกันสังคม", 210, 285, { align: 'left' })
+            pdfDoc.fontSize(12).text("ภาษีหัก ณ ที่จ่าย (5%)", 210, 265, { align: 'left' })
+            pdfDoc.fontSize(12).text("XXXX.00", 355, 265, { align: 'justify' })
+
+            pdfDoc.fontSize(12).text("ประกันสังคม (5%)", 210, 285, { align: 'left' })
+            pdfDoc.fontSize(12).text("XXX.00", 355, 285, { align: 'justify' })
+
             pdfDoc.fontSize(12).text("หักมาทำงานสาย", 210, 305, { align: 'left' })
+            pdfDoc.fontSize(12).text("-", 355, 305, { align: 'justify' })
+
             pdfDoc.fontSize(12).text("หักขาดงาน", 210, 325, { align: 'left' })
+            pdfDoc.fontSize(12).text("-", 355, 325, { align: 'justify' })
+
             pdfDoc.fontSize(12).text("หักลากิจ / ลาป่วย", 210, 345, { align: 'left' })
+            pdfDoc.fontSize(12).text("-", 355, 345, { align: 'justify' })
+
             pdfDoc.fontSize(12).text("หักอื่น ๆ ", 210, 365, { align: 'left' })
-            pdfDoc.fontSize(12).text("กองทุนสำรองเลี้ยงชีพ ", 210, 385, { align: 'left' })
+            pdfDoc.fontSize(12).text("-", 355, 365, { align: 'justify' })
+
+            pdfDoc.fontSize(12).text("กองทุนสำรองเลี้ยงชีพ (3%)", 210, 385, { align: 'left' })
+            pdfDoc.fontSize(12).text("-", 355, 265, { align: 'justify' })
 
             pdfDoc.lineJoin('miter') //กรอบกลางล่าง ประกันสังคมสะสม
                 .rect(205, 480, 185, 20)
