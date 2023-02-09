@@ -103,10 +103,7 @@ export const leaveResolvers: Resolvers = {
     },
 
     async getleava_datame(p, args, ctx) {
-      let count = 0
-      let count2 = 0
-      let count3 = 0
-      let count4 = 0
+  
       let countleave1 = 0
       let countleave2 = 0
       let countleave3 = 0
@@ -143,13 +140,13 @@ export const leaveResolvers: Resolvers = {
       }
 
       let dataCount = {
-        name_1: 'ลาพักร้อน' +' '+ countleave1,
+        name_1: 'ลาพักร้อน ' + countleave1,
         count1: countleave1,
-        name_2: 'ลาป่วย' + ' ' + countleave2,
+        name_2: 'ลาป่วย ' + countleave2,
         count2: countleave2,
-        name_3: 'ลากิจ' + ' '+ countleave3,
+        name_3: 'ลากิจ ' + countleave3,
         count3: countleave3,
-        name_4: 'ลาอื่นๆ' + ' '+  countleave4,
+        name_4: 'ลาอื่นๆ ' +  countleave4,
         count4: countleave4
       }
       // return getdataleave
