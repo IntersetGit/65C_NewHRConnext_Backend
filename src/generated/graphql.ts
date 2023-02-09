@@ -268,6 +268,12 @@ export type CreatedmasPosition3 = {
   positionlevel2_id?: InputMaybe<Scalars['String']>;
 };
 
+export type CreateleaveResponseType = {
+  __typename?: 'CreateleaveResponseType';
+  message?: Maybe<Scalars['String']>;
+  status?: Maybe<Scalars['Boolean']>;
+};
+
 export type CreatepositionResponseType = {
   __typename?: 'CreatepositionResponseType';
   message?: Maybe<Scalars['String']>;
@@ -426,6 +432,7 @@ export type Mutation = {
   createBank?: Maybe<BankResponseType>;
   createHolidayYear?: Maybe<CreateHolidayYearResponseType>;
   createRoleCompany?: Maybe<CreateRoleCompanyResponseType>;
+  createddata_leave?: Maybe<CreateleaveResponseType>;
   createdposition_user?: Maybe<CreatepositionResponseType>;
   deleteAccountUser?: Maybe<DeleteAccountUserResponseType>;
   deleteComBarance?: Maybe<DeleteComapnyBranchResponseType>;
@@ -516,6 +523,11 @@ export type MutationCreateHolidayYearArgs = {
 
 export type MutationCreateRoleCompanyArgs = {
   data: CreateRoleCompanyGroup;
+};
+
+
+export type MutationCreateddata_LeaveArgs = {
+  data?: InputMaybe<Leave>;
 };
 
 
@@ -659,6 +671,8 @@ export type Query = {
   getMasPositon?: Maybe<Array<Maybe<Mas_Positionlevel1>>>;
   getProvince?: Maybe<Array<Maybe<Province>>>;
   getcompanyRole?: Maybe<Array<Maybe<Role_Company>>>;
+  getleava_data?: Maybe<Array<Maybe<Getdataaboutleave>>>;
+  getleavetypedata?: Maybe<Array<Maybe<Leave_Type>>>;
   getownCompany?: Maybe<GetOwncompanytype>;
   getpositionMe?: Maybe<Array<Maybe<GetPositionUser>>>;
   getposition_user?: Maybe<Array<Maybe<GetPositionUser>>>;
@@ -1018,6 +1032,29 @@ export type GetPositionUser = {
   user?: Maybe<User>;
 };
 
+export type Getdataaboutleave = {
+  __typename?: 'getdataaboutleave';
+  Position_user?: Maybe<Array<Maybe<Position_User>>>;
+  RoleCompanyID?: Maybe<Scalars['String']>;
+  Role_Company?: Maybe<Role_Company>;
+  company?: Maybe<Array<Maybe<Company>>>;
+  companyBranch?: Maybe<CompanyBranch>;
+  companyBranchId?: Maybe<Scalars['String']>;
+  companyId?: Maybe<Scalars['String']>;
+  createdAt?: Maybe<Scalars['Date']>;
+  data_leave?: Maybe<Array<Maybe<Leave_Data>>>;
+  email: Scalars['String'];
+  id: Scalars['ID'];
+  isActive: Scalars['Boolean'];
+  isOwner: Scalars['Boolean'];
+  islogin: Scalars['Boolean'];
+  lastlogin?: Maybe<Scalars['Date']>;
+  password: Scalars['String'];
+  profile?: Maybe<Profile>;
+  role?: Maybe<Role>;
+  roleId?: Maybe<Scalars['String']>;
+};
+
 export type Headderdata = {
   __typename?: 'headderdata';
   headderId?: Maybe<Scalars['String']>;
@@ -1054,6 +1091,37 @@ export type IncometypeResponseType = {
   __typename?: 'incometypeResponseType';
   message?: Maybe<Scalars['String']>;
   status?: Maybe<Scalars['Boolean']>;
+};
+
+export type Leave = {
+  Status?: InputMaybe<Scalars['Int']>;
+  detail_leave?: InputMaybe<Scalars['String']>;
+  end_date?: InputMaybe<Scalars['Date']>;
+  id?: InputMaybe<Scalars['String']>;
+  leavetype_id?: InputMaybe<Scalars['String']>;
+  quantity_day?: InputMaybe<Scalars['Int']>;
+  start_date?: InputMaybe<Scalars['Date']>;
+  user_id?: InputMaybe<Scalars['String']>;
+};
+
+export type Leave_Data = {
+  __typename?: 'leave_data';
+  Status?: Maybe<Scalars['Int']>;
+  detail_leave?: Maybe<Scalars['String']>;
+  end_date?: Maybe<Scalars['Date']>;
+  id?: Maybe<Scalars['String']>;
+  leave_type?: Maybe<Array<Maybe<Leave_Type>>>;
+  leavetype_id?: Maybe<Scalars['String']>;
+  quantity_day?: Maybe<Scalars['Int']>;
+  start_date?: Maybe<Scalars['Date']>;
+  user_id?: Maybe<Scalars['String']>;
+};
+
+export type Leave_Type = {
+  __typename?: 'leave_type';
+  id?: Maybe<Scalars['String']>;
+  name?: Maybe<Scalars['String']>;
+  orderby?: Maybe<Scalars['Int']>;
 };
 
 export type Mas_All_Collect = {
@@ -1377,6 +1445,7 @@ export type ResolversTypes = ResolversObject<{
   CreatedAndUpdatePosition: CreatedAndUpdatePosition;
   CreatedmasPosition2: CreatedmasPosition2;
   CreatedmasPosition3: CreatedmasPosition3;
+  CreateleaveResponseType: ResolverTypeWrapper<CreateleaveResponseType>;
   CreatepositionResponseType: ResolverTypeWrapper<CreatepositionResponseType>;
   Date: ResolverTypeWrapper<Scalars['Date']>;
   DeleteAccountUserResponseType: ResolverTypeWrapper<DeleteAccountUserResponseType>;
@@ -1429,11 +1498,15 @@ export type ResolversTypes = ResolversObject<{
   data_salary_me: ResolverTypeWrapper<Data_Salary_Me>;
   expense_company: ResolverTypeWrapper<Expense_Company>;
   getPositionUser: ResolverTypeWrapper<GetPositionUser>;
+  getdataaboutleave: ResolverTypeWrapper<Getdataaboutleave>;
   headderdata: ResolverTypeWrapper<Headderdata>;
   holiday_date: ResolverTypeWrapper<Holiday_Date>;
   holiday_years: ResolverTypeWrapper<Holiday_Years>;
   incometype: Incometype;
   incometypeResponseType: ResolverTypeWrapper<IncometypeResponseType>;
+  leave: Leave;
+  leave_data: ResolverTypeWrapper<Leave_Data>;
+  leave_type: ResolverTypeWrapper<Leave_Type>;
   mas_all_collect: ResolverTypeWrapper<Mas_All_Collect>;
   mas_bank: ResolverTypeWrapper<Mas_Bank>;
   mas_month: ResolverTypeWrapper<Mas_Month>;
@@ -1478,6 +1551,7 @@ export type ResolversParentTypes = ResolversObject<{
   CreatedAndUpdatePosition: CreatedAndUpdatePosition;
   CreatedmasPosition2: CreatedmasPosition2;
   CreatedmasPosition3: CreatedmasPosition3;
+  CreateleaveResponseType: CreateleaveResponseType;
   CreatepositionResponseType: CreatepositionResponseType;
   Date: Scalars['Date'];
   DeleteAccountUserResponseType: DeleteAccountUserResponseType;
@@ -1530,11 +1604,15 @@ export type ResolversParentTypes = ResolversObject<{
   data_salary_me: Data_Salary_Me;
   expense_company: Expense_Company;
   getPositionUser: GetPositionUser;
+  getdataaboutleave: Getdataaboutleave;
   headderdata: Headderdata;
   holiday_date: Holiday_Date;
   holiday_years: Holiday_Years;
   incometype: Incometype;
   incometypeResponseType: IncometypeResponseType;
+  leave: Leave;
+  leave_data: Leave_Data;
+  leave_type: Leave_Type;
   mas_all_collect: Mas_All_Collect;
   mas_bank: Mas_Bank;
   mas_month: Mas_Month;
@@ -1681,6 +1759,12 @@ export type CreateRoleCompanyResponseTypeResolvers<ContextType = ApolloContext, 
 }>;
 
 export type CreateUserResponseTypeResolvers<ContextType = ApolloContext, ParentType extends ResolversParentTypes['CreateUserResponseType'] = ResolversParentTypes['CreateUserResponseType']> = ResolversObject<{
+  message?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  status?: Resolver<Maybe<ResolversTypes['Boolean']>, ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+}>;
+
+export type CreateleaveResponseTypeResolvers<ContextType = ApolloContext, ParentType extends ResolversParentTypes['CreateleaveResponseType'] = ResolversParentTypes['CreateleaveResponseType']> = ResolversObject<{
   message?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   status?: Resolver<Maybe<ResolversTypes['Boolean']>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
@@ -1837,6 +1921,7 @@ export type MutationResolvers<ContextType = ApolloContext, ParentType extends Re
   createBank?: Resolver<Maybe<ResolversTypes['BankResponseType']>, ParentType, ContextType, Partial<MutationCreateBankArgs>>;
   createHolidayYear?: Resolver<Maybe<ResolversTypes['CreateHolidayYearResponseType']>, ParentType, ContextType, Partial<MutationCreateHolidayYearArgs>>;
   createRoleCompany?: Resolver<Maybe<ResolversTypes['CreateRoleCompanyResponseType']>, ParentType, ContextType, RequireFields<MutationCreateRoleCompanyArgs, 'data'>>;
+  createddata_leave?: Resolver<Maybe<ResolversTypes['CreateleaveResponseType']>, ParentType, ContextType, Partial<MutationCreateddata_LeaveArgs>>;
   createdposition_user?: Resolver<Maybe<ResolversTypes['CreatepositionResponseType']>, ParentType, ContextType, RequireFields<MutationCreatedposition_UserArgs, 'data'>>;
   deleteAccountUser?: Resolver<Maybe<ResolversTypes['DeleteAccountUserResponseType']>, ParentType, ContextType, RequireFields<MutationDeleteAccountUserArgs, 'id'>>;
   deleteComBarance?: Resolver<Maybe<ResolversTypes['DeleteComapnyBranchResponseType']>, ParentType, ContextType, RequireFields<MutationDeleteComBaranceArgs, 'id'>>;
@@ -1943,6 +2028,8 @@ export type QueryResolvers<ContextType = ApolloContext, ParentType extends Resol
   getMasPositon?: Resolver<Maybe<Array<Maybe<ResolversTypes['mas_positionlevel1']>>>, ParentType, ContextType>;
   getProvince?: Resolver<Maybe<Array<Maybe<ResolversTypes['Province']>>>, ParentType, ContextType>;
   getcompanyRole?: Resolver<Maybe<Array<Maybe<ResolversTypes['Role_Company']>>>, ParentType, ContextType, Partial<QueryGetcompanyRoleArgs>>;
+  getleava_data?: Resolver<Maybe<Array<Maybe<ResolversTypes['getdataaboutleave']>>>, ParentType, ContextType>;
+  getleavetypedata?: Resolver<Maybe<Array<Maybe<ResolversTypes['leave_type']>>>, ParentType, ContextType>;
   getownCompany?: Resolver<Maybe<ResolversTypes['GetOwncompanytype']>, ParentType, ContextType>;
   getpositionMe?: Resolver<Maybe<Array<Maybe<ResolversTypes['getPositionUser']>>>, ParentType, ContextType>;
   getposition_user?: Resolver<Maybe<Array<Maybe<ResolversTypes['getPositionUser']>>>, ParentType, ContextType, Partial<QueryGetposition_UserArgs>>;
@@ -2183,6 +2270,29 @@ export type GetPositionUserResolvers<ContextType = ApolloContext, ParentType ext
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 }>;
 
+export type GetdataaboutleaveResolvers<ContextType = ApolloContext, ParentType extends ResolversParentTypes['getdataaboutleave'] = ResolversParentTypes['getdataaboutleave']> = ResolversObject<{
+  Position_user?: Resolver<Maybe<Array<Maybe<ResolversTypes['Position_user']>>>, ParentType, ContextType>;
+  RoleCompanyID?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  Role_Company?: Resolver<Maybe<ResolversTypes['Role_Company']>, ParentType, ContextType>;
+  company?: Resolver<Maybe<Array<Maybe<ResolversTypes['Company']>>>, ParentType, ContextType>;
+  companyBranch?: Resolver<Maybe<ResolversTypes['CompanyBranch']>, ParentType, ContextType>;
+  companyBranchId?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  companyId?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  createdAt?: Resolver<Maybe<ResolversTypes['Date']>, ParentType, ContextType>;
+  data_leave?: Resolver<Maybe<Array<Maybe<ResolversTypes['leave_data']>>>, ParentType, ContextType>;
+  email?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
+  isActive?: Resolver<ResolversTypes['Boolean'], ParentType, ContextType>;
+  isOwner?: Resolver<ResolversTypes['Boolean'], ParentType, ContextType>;
+  islogin?: Resolver<ResolversTypes['Boolean'], ParentType, ContextType>;
+  lastlogin?: Resolver<Maybe<ResolversTypes['Date']>, ParentType, ContextType>;
+  password?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  profile?: Resolver<Maybe<ResolversTypes['Profile']>, ParentType, ContextType>;
+  role?: Resolver<Maybe<ResolversTypes['Role']>, ParentType, ContextType>;
+  roleId?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+}>;
+
 export type HeadderdataResolvers<ContextType = ApolloContext, ParentType extends ResolversParentTypes['headderdata'] = ResolversParentTypes['headderdata']> = ResolversObject<{
   headderId?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   headder_data?: Resolver<Maybe<ResolversTypes['Profile']>, ParentType, ContextType>;
@@ -2213,6 +2323,26 @@ export type Holiday_YearsResolvers<ContextType = ApolloContext, ParentType exten
 export type IncometypeResponseTypeResolvers<ContextType = ApolloContext, ParentType extends ResolversParentTypes['incometypeResponseType'] = ResolversParentTypes['incometypeResponseType']> = ResolversObject<{
   message?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   status?: Resolver<Maybe<ResolversTypes['Boolean']>, ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+}>;
+
+export type Leave_DataResolvers<ContextType = ApolloContext, ParentType extends ResolversParentTypes['leave_data'] = ResolversParentTypes['leave_data']> = ResolversObject<{
+  Status?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
+  detail_leave?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  end_date?: Resolver<Maybe<ResolversTypes['Date']>, ParentType, ContextType>;
+  id?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  leave_type?: Resolver<Maybe<Array<Maybe<ResolversTypes['leave_type']>>>, ParentType, ContextType>;
+  leavetype_id?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  quantity_day?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
+  start_date?: Resolver<Maybe<ResolversTypes['Date']>, ParentType, ContextType>;
+  user_id?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+}>;
+
+export type Leave_TypeResolvers<ContextType = ApolloContext, ParentType extends ResolversParentTypes['leave_type'] = ResolversParentTypes['leave_type']> = ResolversObject<{
+  id?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  name?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  orderby?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 }>;
 
@@ -2389,6 +2519,7 @@ export type Resolvers<ContextType = ApolloContext> = ResolversObject<{
   CreateHolidayYearResponseType?: CreateHolidayYearResponseTypeResolvers<ContextType>;
   CreateRoleCompanyResponseType?: CreateRoleCompanyResponseTypeResolvers<ContextType>;
   CreateUserResponseType?: CreateUserResponseTypeResolvers<ContextType>;
+  CreateleaveResponseType?: CreateleaveResponseTypeResolvers<ContextType>;
   CreatepositionResponseType?: CreatepositionResponseTypeResolvers<ContextType>;
   Date?: GraphQLScalarType;
   DeleteAccountUserResponseType?: DeleteAccountUserResponseTypeResolvers<ContextType>;
@@ -2430,10 +2561,13 @@ export type Resolvers<ContextType = ApolloContext> = ResolversObject<{
   data_salary_me?: Data_Salary_MeResolvers<ContextType>;
   expense_company?: Expense_CompanyResolvers<ContextType>;
   getPositionUser?: GetPositionUserResolvers<ContextType>;
+  getdataaboutleave?: GetdataaboutleaveResolvers<ContextType>;
   headderdata?: HeadderdataResolvers<ContextType>;
   holiday_date?: Holiday_DateResolvers<ContextType>;
   holiday_years?: Holiday_YearsResolvers<ContextType>;
   incometypeResponseType?: IncometypeResponseTypeResolvers<ContextType>;
+  leave_data?: Leave_DataResolvers<ContextType>;
+  leave_type?: Leave_TypeResolvers<ContextType>;
   mas_all_collect?: Mas_All_CollectResolvers<ContextType>;
   mas_bank?: Mas_BankResolvers<ContextType>;
   mas_month?: Mas_MonthResolvers<ContextType>;

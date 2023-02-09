@@ -76,11 +76,14 @@ type Mutation{
 
 export const leaveResolvers: Resolvers = {
   Query: {
+
     async getleavetypedata(p, args, ctx) {
       const gettypeleave = await ctx.prisma.mas_leave_type.findMany({
+        orderBy:{orderby: 'asc'}
       })
       return gettypeleave
     },
+
     async getleava_data(p, args, ctx) {
       const getdataleave = await ctx.prisma.user.findMany({
         include: {
@@ -93,20 +96,46 @@ export const leaveResolvers: Resolvers = {
     }
   },
   Mutation: {
-    async createddata_leave(p, args, ctx){
-      const addLeavdData = await ctx.prisma.data_leave.create({
-        data:{
-          id: v4(),
-          leavetype_id: args.data?.leavetype_id as string,             
-          start_date: args.data?.start_date,
-          end_date: args.data?.end_date,
-          quantity_day: args.data?.quantity_day,
-          detail_leave: args.data?.detail_leave as string 
-          Status: Int                
-          user_id: String
 
+    async createddata_leave(p, args, ctx){
+      if(args.data?.id){
+        const updatedLeavdData = await ctx.prisma.data_leave.update({
+          data:{
+            leavetype_id: args.data?.leavetype_id as string,             
+            start_date: args.data?.start_date,
+            end_date: args.data?.end_date,
+            quantity_day: args.data?.quantity_day as number,
+            detail_leave: args.data?.detail_leave as string ,
+            Status: args.data.Status as number,               
+            user_id: args.data?.user_id as string
+          },
+          where :{
+            id : args.data.id
+          }
+        })
+        return{
+          message: 'success',
+          status: true,
         }
-      })
+
+      }else{
+        const addLeavdData = await ctx.prisma.data_leave.create({
+          data:{
+            id: v4(),
+            leavetype_id: args.data?.leavetype_id as string,             
+            start_date: args.data?.start_date,
+            end_date: args.data?.end_date,
+            quantity_day: args.data?.quantity_day as number,
+            detail_leave: args.data?.detail_leave as string ,
+            Status: 1,                
+            user_id: args.data?.user_id as string
+          }
+        })
+        return{
+          message: 'success',
+          status: true,
+        }
+      }
     }
 
   }
@@ -123,3 +152,5 @@ export const leavedataResolvers = composeResolvers(
   leaveResolvers,
   resolversleave,
 );
+
+
