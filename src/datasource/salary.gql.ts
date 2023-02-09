@@ -425,17 +425,19 @@ const resolvers: Resolvers = {
       // return result;
       // const date = args?.date ? args?.date : undefined;
       const getdata = await ctx.prisma.user.findMany({
-        include:{
-          profile:true,
-          salary:true,
-          Position_user: { include: {mas_positionlevel3: true} , orderBy: {date: 'desc'} } , 
-          bookbank_log: { include: {mas_bank: true}}
+        include: {
+          profile: true,
+          salary: true,
+          // company: { include: { branch: true } },
+          companyBranch: { include: { company: true } },
+          Position_user: { include: { mas_positionlevel3: true }, orderBy: { date: 'desc' } },
+          bookbank_log: { include: { mas_bank: true }, orderBy: { date: 'desc' } }
         },
-        where :{
-          id : args.userId
+        where: {
+          id: args.userId
         },
-        
-        
+
+
         // where: {
         //   id: args.userId,
         // },
@@ -443,7 +445,7 @@ const resolvers: Resolvers = {
       return getdata;
     },
 
-    
+
     async mas_bank(parant: any, args: any, ctx: any) {
       const result = await ctx.prisma.mas_bank.findMany({
         where: {
