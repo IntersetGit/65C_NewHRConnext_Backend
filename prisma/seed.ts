@@ -236,8 +236,6 @@ const main = async () => {
     },
     update: {},
   });
-
-
 };
 
 main()
