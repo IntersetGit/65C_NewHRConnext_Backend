@@ -43,7 +43,7 @@ type getdataaboutleave{
 type leave_data{
  id: String            
  leavetype_id: String            
- leave_type: [leave_type]    
+ mas_leave_type: mas_leave_type   
  start_date: Date
  end_date: Date
  quantity_day: Int
@@ -52,7 +52,7 @@ type leave_data{
  user_id: String                 
 }
 
-type leave_type{
+type mas_leave_type{
   id: String 
   name: String
   orderby: Int       
@@ -64,7 +64,7 @@ type CreateleaveResponseType{
 }
 
 type Query{
-  getleavetypedata: [leave_type]
+  getleavetypedata: [mas_leave_type]
   getleava_data: [getdataaboutleave]
 }
 
@@ -89,7 +89,7 @@ export const leaveResolvers: Resolvers = {
         include: {
           profile: true,
           Position_user: { include: { mas_positionlevel1: true, mas_positionlevel2: true, mas_positionlevel3: true } },
-          data_leave: {include: {leave_type:true}}
+          data_leave: {include: {mas_leave_type: true}}
         }
       })
       return getdataleave
