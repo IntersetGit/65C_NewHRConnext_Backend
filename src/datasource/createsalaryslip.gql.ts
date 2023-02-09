@@ -12,7 +12,7 @@ import fs from 'fs'
 export const salarySlipTypedef = gql`
 
     
-type slipresolvers{
+type slipresolvers {
     message: String
     status: Boolean
 }

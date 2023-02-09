@@ -315,7 +315,7 @@ export const salaryTypedef = gql`
   }
 
 
-  type data_salary{
+  type data_salary {
     email: String
     id: ID!
     profile: Profile
@@ -336,7 +336,7 @@ export const salaryTypedef = gql`
     bookbank_log: [Bookbank_log_type]
     Position_user: [Position_user]
   }
-type position_user{
+type position_user {
 id:ID!
 name:String
 position1_id:String
