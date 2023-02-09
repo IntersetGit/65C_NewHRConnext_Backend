@@ -76,7 +76,6 @@ type Mutation{
 
 export const leaveResolvers: Resolvers = {
   Query: {
-
     async getleavetypedata(p, args, ctx) {
       const gettypeleave = await ctx.prisma.mas_leave_type.findMany({
         orderBy:{orderby: 'asc'}
