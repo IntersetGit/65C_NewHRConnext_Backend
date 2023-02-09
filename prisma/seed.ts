@@ -1,3 +1,5 @@
+import { holiday_date, holiday_year } from './../src/generated/client/index.d';
+import { CompanyBranch } from './../src/generated/graphql';
 /**
  * Adds seed data to your db
  *
@@ -9,7 +11,9 @@ import rolesEnum from '../enum/roles.enum';
 import provinceEnum from '../enum/province.enum';
 import districtEnum from '../enum/district.enum';
 import amphoeEnum from '../enum/amphoe.enum';
+import holidayEnum from '../enum/holiday.enum';
 import { createPassword } from '../src/utils/passwords';
+import { update } from 'lodash';
 
 const prisma = new PrismaClient();
 
@@ -64,6 +68,22 @@ const main = async () => {
         districtId: e.parent,
         zipcode: e.zip.toString(),
         name: e.name,
+      },
+      update: {},
+    });
+  });
+
+  const holiday = await holidayEnum.forEach(async (h) => {
+    await prisma.holiday_year.upsert({
+      where: {
+        id: h.id,
+      },
+      create:{
+        id: h.id,
+        day: h.day,
+        month: h.month,
+        year: h.year,
+        holiday_name: h.holiday_name,
       },
       update: {},
     });
@@ -138,7 +158,6 @@ const main = async () => {
     update: {},
   });
 
-
   const userBH = await prisma.user.upsert({
     where: {
       id: 'f6875d25-deb8-46cf-be58-fd2668e83ae7',
@@ -208,7 +227,36 @@ const main = async () => {
     update: {},
   });
 
-  
+  const userBHMember = await prisma.user.upsert({
+    where: {
+      id: '74340599-654c-412e-bf9c-0241de96785b',
+    },
+    create: {
+      id: '74340599-654c-412e-bf9c-0241de96785b',
+      email: 'kim.nj@bighit.co.th',
+      password: await createPassword('@Nj130613'),
+      islogin: false,
+      isActive: true,
+      isOwner: false,
+      roleId: 'd515bf21-a90e-41e9-b202-8a4d2cdea391',
+      createdAt: '2023-02-25T04:48:57.188Z',
+      companyBranchId: '9eb62067-8cb5-4555-81b3-45bdaf070b49',
+      profile: {
+        create: {
+          id: 'ca59450e-7fb3-4c0c-8847-b32b6b05b280',
+          bio: 'Indigo',
+          firstname_th: 'นัมจุน',
+          firstname_en: 'Numjoon',
+          lastname_en: 'Kim',
+          lastname_th: 'คิม',
+          dob: '2023-01-19T04:48:06.846Z',
+          blood_type: 'A',
+          relationship: 'โสด',
+        },
+      },
+    },
+    update: {},
+  });
 };
 
 main()
