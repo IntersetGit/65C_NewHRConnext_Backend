@@ -1,3 +1,4 @@
+import { CompanyBranch } from './../src/generated/graphql';
 /**
  * Adds seed data to your db
  *
@@ -219,7 +220,8 @@ const main = async () => {
       isActive: true,
       isOwner: false,
       roleId: 'd515bf21-a90e-41e9-b202-8a4d2cdea391',
-      createdAt: '2023-01-25T04:48:57.188Z',
+      createdAt: '2023-02-25T04:48:57.188Z',
+      companyBranchId: '9eb62067-8cb5-4555-81b3-45bdaf070b49',
       profile: {
         create: {
           id: 'ca59450e-7fb3-4c0c-8847-b32b6b05b280',
