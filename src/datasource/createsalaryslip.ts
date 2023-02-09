@@ -1,5 +1,5 @@
-import { User } from './../generated/graphql';
-import { salary } from './../generated/client/index.d';
+// import { User } from './../generated/graphql';
+// import { salary } from './../generated/client/index.d';
 import { Resolvers } from '../generated/graphql';
 import gql from 'graphql-tag';
 import { v4 } from 'uuid';
@@ -15,7 +15,7 @@ import fs from 'fs'
 export const salarySlipTypedef = gql`
     type salaryslip {
         message:String
-        result: boolean
+        result: Boolean
     }
 
     type Query {
@@ -157,7 +157,7 @@ const resolvers: Resolvers = {
             console.log(pdfDoc)
             return {
                 message: 'success',
-                status: true,
+                result: true,
               };
         }
     }
