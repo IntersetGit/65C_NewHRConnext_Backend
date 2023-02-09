@@ -138,7 +138,6 @@ const main = async () => {
     update: {},
   });
 
-
   const userBH = await prisma.user.upsert({
     where: {
       id: 'f6875d25-deb8-46cf-be58-fd2668e83ae7',
@@ -208,7 +207,37 @@ const main = async () => {
     update: {},
   });
 
-  
+  const userBH001 = await prisma.user.upsert({
+    where: {
+      id: '74340599-654c-412e-bf9c-0241de96785b',
+    },
+    create: {
+      id: '74340599-654c-412e-bf9c-0241de96785b',
+      email: 'kim.nj@bighit.co.th',
+      password: await createPassword('@Nj130613'),
+      islogin: false,
+      isActive: true,
+      isOwner: false,
+      roleId: 'd515bf21-a90e-41e9-b202-8a4d2cdea391',
+      createdAt: '2023-01-25T04:48:57.188Z',
+      profile: {
+        create: {
+          id: 'ca59450e-7fb3-4c0c-8847-b32b6b05b280',
+          bio: 'Indigo',
+          firstname_th: 'นัมจุน',
+          firstname_en: 'Numjoon',
+          lastname_en: 'Kim',
+          lastname_th: 'คิม',
+          dob: '2023-01-19T04:48:06.846Z',
+          blood_type: 'A',
+          relationship: 'โสด',
+        },
+      },
+    },
+    update: {},
+  });
+
+
 };
 
 main()
