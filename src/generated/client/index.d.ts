@@ -459,7 +459,7 @@ export type data_leave = {
   leavetype_id: string
   start_date: Date
   end_date: Date
-  quantity_day: string
+  quantity_day: number
   detail_leave: string
   Status: number
   user_id: string
@@ -31236,10 +31236,12 @@ export namespace Prisma {
   }
 
   export type Data_leaveAvgAggregateOutputType = {
+    quantity_day: number | null
     Status: number | null
   }
 
   export type Data_leaveSumAggregateOutputType = {
+    quantity_day: number | null
     Status: number | null
   }
 
@@ -31248,7 +31250,7 @@ export namespace Prisma {
     leavetype_id: string | null
     start_date: Date | null
     end_date: Date | null
-    quantity_day: string | null
+    quantity_day: number | null
     detail_leave: string | null
     Status: number | null
     user_id: string | null
@@ -31259,7 +31261,7 @@ export namespace Prisma {
     leavetype_id: string | null
     start_date: Date | null
     end_date: Date | null
-    quantity_day: string | null
+    quantity_day: number | null
     detail_leave: string | null
     Status: number | null
     user_id: string | null
@@ -31279,10 +31281,12 @@ export namespace Prisma {
 
 
   export type Data_leaveAvgAggregateInputType = {
+    quantity_day?: true
     Status?: true
   }
 
   export type Data_leaveSumAggregateInputType = {
+    quantity_day?: true
     Status?: true
   }
 
@@ -31412,7 +31416,7 @@ export namespace Prisma {
     leavetype_id: string
     start_date: Date
     end_date: Date
-    quantity_day: string
+    quantity_day: number
     detail_leave: string
     Status: number
     user_id: string
@@ -34569,7 +34573,7 @@ export namespace Prisma {
     leave_type?: XOR<Mas_leave_typeRelationFilter, mas_leave_typeWhereInput>
     start_date?: DateTimeFilter | Date | string
     end_date?: DateTimeFilter | Date | string
-    quantity_day?: StringFilter | string
+    quantity_day?: IntFilter | number
     detail_leave?: StringFilter | string
     Status?: IntFilter | number
     user_id?: UuidFilter | string
@@ -34617,7 +34621,7 @@ export namespace Prisma {
     leavetype_id?: UuidWithAggregatesFilter | string
     start_date?: DateTimeWithAggregatesFilter | Date | string
     end_date?: DateTimeWithAggregatesFilter | Date | string
-    quantity_day?: StringWithAggregatesFilter | string
+    quantity_day?: IntWithAggregatesFilter | number
     detail_leave?: StringWithAggregatesFilter | string
     Status?: IntWithAggregatesFilter | number
     user_id?: UuidWithAggregatesFilter | string
@@ -37032,7 +37036,7 @@ export namespace Prisma {
     leave_type: mas_leave_typeCreateNestedOneWithoutData_leaveInput
     start_date: Date | string
     end_date: Date | string
-    quantity_day: string
+    quantity_day: number
     detail_leave: string
     Status: number
     user: UserCreateNestedOneWithoutData_leaveInput
@@ -37043,7 +37047,7 @@ export namespace Prisma {
     leavetype_id: string
     start_date: Date | string
     end_date: Date | string
-    quantity_day: string
+    quantity_day: number
     detail_leave: string
     Status: number
     user_id: string
@@ -37054,7 +37058,7 @@ export namespace Prisma {
     leave_type?: mas_leave_typeUpdateOneRequiredWithoutData_leaveNestedInput
     start_date?: DateTimeFieldUpdateOperationsInput | Date | string
     end_date?: DateTimeFieldUpdateOperationsInput | Date | string
-    quantity_day?: StringFieldUpdateOperationsInput | string
+    quantity_day?: IntFieldUpdateOperationsInput | number
     detail_leave?: StringFieldUpdateOperationsInput | string
     Status?: IntFieldUpdateOperationsInput | number
     user?: UserUpdateOneRequiredWithoutData_leaveNestedInput
@@ -37065,7 +37069,7 @@ export namespace Prisma {
     leavetype_id?: StringFieldUpdateOperationsInput | string
     start_date?: DateTimeFieldUpdateOperationsInput | Date | string
     end_date?: DateTimeFieldUpdateOperationsInput | Date | string
-    quantity_day?: StringFieldUpdateOperationsInput | string
+    quantity_day?: IntFieldUpdateOperationsInput | number
     detail_leave?: StringFieldUpdateOperationsInput | string
     Status?: IntFieldUpdateOperationsInput | number
     user_id?: StringFieldUpdateOperationsInput | string
@@ -37076,7 +37080,7 @@ export namespace Prisma {
     leavetype_id: string
     start_date: Date | string
     end_date: Date | string
-    quantity_day: string
+    quantity_day: number
     detail_leave: string
     Status: number
     user_id: string
@@ -37086,7 +37090,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     start_date?: DateTimeFieldUpdateOperationsInput | Date | string
     end_date?: DateTimeFieldUpdateOperationsInput | Date | string
-    quantity_day?: StringFieldUpdateOperationsInput | string
+    quantity_day?: IntFieldUpdateOperationsInput | number
     detail_leave?: StringFieldUpdateOperationsInput | string
     Status?: IntFieldUpdateOperationsInput | number
   }
@@ -37096,7 +37100,7 @@ export namespace Prisma {
     leavetype_id?: StringFieldUpdateOperationsInput | string
     start_date?: DateTimeFieldUpdateOperationsInput | Date | string
     end_date?: DateTimeFieldUpdateOperationsInput | Date | string
-    quantity_day?: StringFieldUpdateOperationsInput | string
+    quantity_day?: IntFieldUpdateOperationsInput | number
     detail_leave?: StringFieldUpdateOperationsInput | string
     Status?: IntFieldUpdateOperationsInput | number
     user_id?: StringFieldUpdateOperationsInput | string
@@ -38898,6 +38902,7 @@ export namespace Prisma {
   }
 
   export type data_leaveAvgOrderByAggregateInput = {
+    quantity_day?: SortOrder
     Status?: SortOrder
   }
 
@@ -38924,6 +38929,7 @@ export namespace Prisma {
   }
 
   export type data_leaveSumOrderByAggregateInput = {
+    quantity_day?: SortOrder
     Status?: SortOrder
   }
 
@@ -42943,7 +42949,7 @@ export namespace Prisma {
     leave_type: mas_leave_typeCreateNestedOneWithoutData_leaveInput
     start_date: Date | string
     end_date: Date | string
-    quantity_day: string
+    quantity_day: number
     detail_leave: string
     Status: number
   }
@@ -42953,7 +42959,7 @@ export namespace Prisma {
     leavetype_id: string
     start_date: Date | string
     end_date: Date | string
-    quantity_day: string
+    quantity_day: number
     detail_leave: string
     Status: number
   }
@@ -43428,7 +43434,7 @@ export namespace Prisma {
     leavetype_id?: UuidFilter | string
     start_date?: DateTimeFilter | Date | string
     end_date?: DateTimeFilter | Date | string
-    quantity_day?: StringFilter | string
+    quantity_day?: IntFilter | number
     detail_leave?: StringFilter | string
     Status?: IntFilter | number
     user_id?: UuidFilter | string
@@ -47055,7 +47061,7 @@ export namespace Prisma {
     id: string
     start_date: Date | string
     end_date: Date | string
-    quantity_day: string
+    quantity_day: number
     detail_leave: string
     Status: number
     user: UserCreateNestedOneWithoutData_leaveInput
@@ -47065,7 +47071,7 @@ export namespace Prisma {
     id: string
     start_date: Date | string
     end_date: Date | string
-    quantity_day: string
+    quantity_day: number
     detail_leave: string
     Status: number
     user_id: string
@@ -47766,7 +47772,7 @@ export namespace Prisma {
     leavetype_id: string
     start_date: Date | string
     end_date: Date | string
-    quantity_day: string
+    quantity_day: number
     detail_leave: string
     Status: number
   }
@@ -48102,7 +48108,7 @@ export namespace Prisma {
     leave_type?: mas_leave_typeUpdateOneRequiredWithoutData_leaveNestedInput
     start_date?: DateTimeFieldUpdateOperationsInput | Date | string
     end_date?: DateTimeFieldUpdateOperationsInput | Date | string
-    quantity_day?: StringFieldUpdateOperationsInput | string
+    quantity_day?: IntFieldUpdateOperationsInput | number
     detail_leave?: StringFieldUpdateOperationsInput | string
     Status?: IntFieldUpdateOperationsInput | number
   }
@@ -48112,7 +48118,7 @@ export namespace Prisma {
     leavetype_id?: StringFieldUpdateOperationsInput | string
     start_date?: DateTimeFieldUpdateOperationsInput | Date | string
     end_date?: DateTimeFieldUpdateOperationsInput | Date | string
-    quantity_day?: StringFieldUpdateOperationsInput | string
+    quantity_day?: IntFieldUpdateOperationsInput | number
     detail_leave?: StringFieldUpdateOperationsInput | string
     Status?: IntFieldUpdateOperationsInput | number
   }
@@ -48122,7 +48128,7 @@ export namespace Prisma {
     leavetype_id?: StringFieldUpdateOperationsInput | string
     start_date?: DateTimeFieldUpdateOperationsInput | Date | string
     end_date?: DateTimeFieldUpdateOperationsInput | Date | string
-    quantity_day?: StringFieldUpdateOperationsInput | string
+    quantity_day?: IntFieldUpdateOperationsInput | number
     detail_leave?: StringFieldUpdateOperationsInput | string
     Status?: IntFieldUpdateOperationsInput | number
   }
@@ -49340,7 +49346,7 @@ export namespace Prisma {
     id: string
     start_date: Date | string
     end_date: Date | string
-    quantity_day: string
+    quantity_day: number
     detail_leave: string
     Status: number
     user_id: string
@@ -49350,7 +49356,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     start_date?: DateTimeFieldUpdateOperationsInput | Date | string
     end_date?: DateTimeFieldUpdateOperationsInput | Date | string
-    quantity_day?: StringFieldUpdateOperationsInput | string
+    quantity_day?: IntFieldUpdateOperationsInput | number
     detail_leave?: StringFieldUpdateOperationsInput | string
     Status?: IntFieldUpdateOperationsInput | number
     user?: UserUpdateOneRequiredWithoutData_leaveNestedInput
@@ -49360,7 +49366,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     start_date?: DateTimeFieldUpdateOperationsInput | Date | string
     end_date?: DateTimeFieldUpdateOperationsInput | Date | string
-    quantity_day?: StringFieldUpdateOperationsInput | string
+    quantity_day?: IntFieldUpdateOperationsInput | number
     detail_leave?: StringFieldUpdateOperationsInput | string
     Status?: IntFieldUpdateOperationsInput | number
     user_id?: StringFieldUpdateOperationsInput | string

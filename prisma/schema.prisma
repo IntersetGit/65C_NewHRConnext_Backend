@@ -447,7 +447,7 @@ model data_leave {
  leave_type       mas_leave_type     @relation(fields: [leavetype_id], references: [id])
  start_date       DateTime
  end_date         DateTime
- quantity_day     String
+ quantity_day     Int
  detail_leave     String 
  Status           Int                @db.SmallInt
  user_id          String             @db.Uuid
