@@ -1133,6 +1133,7 @@ export type Leave = {
   id?: InputMaybe<Scalars['String']>;
   leavetype_id?: InputMaybe<Scalars['String']>;
   quantity_day?: InputMaybe<Scalars['Int']>;
+  quantity_hours?: InputMaybe<Scalars['Int']>;
   start_date?: InputMaybe<Scalars['Date']>;
   user_id?: InputMaybe<Scalars['String']>;
 };
@@ -1142,10 +1143,11 @@ export type Leave_Data = {
   Status?: Maybe<Scalars['Int']>;
   detail_leave?: Maybe<Scalars['String']>;
   end_date?: Maybe<Scalars['Date']>;
-  id?: Maybe<Scalars['String']>;
+  id?: Maybe<Scalars['ID']>;
   leavetype_id?: Maybe<Scalars['String']>;
   mas_leave_type?: Maybe<Mas_Leave_Type>;
   quantity_day?: Maybe<Scalars['Int']>;
+  quantity_hours?: Maybe<Scalars['Int']>;
   start_date?: Maybe<Scalars['Date']>;
   user_id?: Maybe<Scalars['String']>;
 };
@@ -2396,10 +2398,11 @@ export type Leave_DataResolvers<ContextType = ApolloContext, ParentType extends 
   Status?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
   detail_leave?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   end_date?: Resolver<Maybe<ResolversTypes['Date']>, ParentType, ContextType>;
-  id?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  id?: Resolver<Maybe<ResolversTypes['ID']>, ParentType, ContextType>;
   leavetype_id?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   mas_leave_type?: Resolver<Maybe<ResolversTypes['mas_leave_type']>, ParentType, ContextType>;
   quantity_day?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
+  quantity_hours?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
   start_date?: Resolver<Maybe<ResolversTypes['Date']>, ParentType, ContextType>;
   user_id?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;

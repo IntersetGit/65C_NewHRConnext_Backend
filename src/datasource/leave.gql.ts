@@ -14,6 +14,7 @@ input leave{
  start_date: Date
  end_date: Date
  quantity_day: Int
+ quantity_hours: Int
  detail_leave: String 
  Status: Int                
  user_id: String
@@ -42,12 +43,13 @@ type getdataaboutleave{
 }
 
 type leave_data{
- id: String            
+ id: ID            
  leavetype_id: String            
  mas_leave_type: mas_leave_type   
  start_date: Date
  end_date: Date
  quantity_day: Int
+ quantity_hours: Int
  detail_leave: String 
  Status: Int                
  user_id: String                 
@@ -103,7 +105,7 @@ export const leaveResolvers: Resolvers = {
     },
 
     async getleava_datame(p, args, ctx) {
-  
+
       let countleave1 = 0
       let countleave2 = 0
       let countleave3 = 0
@@ -122,16 +124,16 @@ export const leaveResolvers: Resolvers = {
         getdataleave.forEach((a) => {
           if (a.data_leave) {
             a.data_leave.forEach((e) => {
-              if (e.leavetype_id == "ba164e03-6687-490d-be0e-e43fec052d76") {
+              if (e.mas_leave_type.name == "ลาพักร้อน") {
                 countleave1 = countleave1 + e.quantity_day
               }
-              if (e.leavetype_id == "3030bfe1-f06a-41f8-b7ad-125c1d4f6fe9") {
+              if (e.mas_leave_type.name == "ลากิจ") {
                 countleave2 = countleave2 + e.quantity_day
               }
-              if (e.leavetype_id == "e7b755b8-c395-4bcd-85f9-d6b7e667f47f") {
+              if (e.mas_leave_type.name == "ลาป่วย") {
                 countleave3 = countleave3 + e.quantity_day
               }
-              if (e.leavetype_id == "84fe2c17-1a61-4940-bbf7-8fb15a90a263") {
+              if (e.mas_leave_type.name == "ลาอื่นๆ") {
                 countleave4 = countleave4 + e.quantity_day
               }
             })
@@ -146,7 +148,7 @@ export const leaveResolvers: Resolvers = {
         count2: countleave2,
         name_3: 'ลากิจ ' + countleave3,
         count3: countleave3,
-        name_4: 'ลาอื่นๆ ' +  countleave4,
+        name_4: 'ลาอื่นๆ ' + countleave4,
         count4: countleave4
       }
       // return getdataleave
@@ -174,6 +176,7 @@ export const leaveResolvers: Resolvers = {
             start_date: args.data?.start_date,
             end_date: args.data?.end_date,
             quantity_day: args.data?.quantity_day as number,
+            quantity_hours: args.data.quantity_hours as number,
             detail_leave: args.data?.detail_leave as string,
             Status: args.data.Status as number,
             user_id: args.data?.user_id as string
@@ -194,6 +197,7 @@ export const leaveResolvers: Resolvers = {
             leavetype_id: args.data?.leavetype_id as string,
             start_date: args.data?.start_date,
             end_date: args.data?.end_date,
+            quantity_hours: args.data?.quantity_hours as number,
             quantity_day: args.data?.quantity_day as number,
             detail_leave: args.data?.detail_leave as string,
             Status: 1,
@@ -214,7 +218,7 @@ export const leaveResolvers: Resolvers = {
 const resolversleave = {
   'Query.getleavetypedata': [authenticate()],
   'Query.getleava_datame': [authenticate()],
-
+  'Mutation.createddata_leave': [authenticate()]
 };
 
 export const leavedataResolvers = composeResolvers(

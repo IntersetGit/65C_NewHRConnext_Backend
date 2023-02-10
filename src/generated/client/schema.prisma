@@ -461,6 +461,7 @@ model data_leave {
   start_date     DateTime
   end_date       DateTime
   quantity_day   Int
+  quantity_hours Int
   detail_leave   String
   Status         Int            @db.SmallInt
   user_id        String         @db.Uuid
