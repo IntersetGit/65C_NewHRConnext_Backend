@@ -7,6 +7,7 @@ import dayjs from 'dayjs';
 const PDFDocument = require('pdfkit-table');
 import path from 'path'
 import fs from 'fs'
+import { late } from 'zod';
 // const font = require('./sarabunbold.ttf')
 
 export const salarySlipTypedef = gql`
@@ -40,6 +41,7 @@ const resolversslip: Resolvers = {
             let bank_name = null
             let bank_code = null
             let base_salary = null
+            let Pro_emp_month = null
             let department = null
             let Position = null
             let pro_emp = null
@@ -54,7 +56,7 @@ const resolversslip: Resolvers = {
             let Welfare_money = null
             let Bonus = null
             //รายหัก
-            let Vatper = null
+            let Vat_per = null
             let Ss_per = null
             let vat = null
             let Social_security = null
@@ -74,7 +76,7 @@ const resolversslip: Resolvers = {
                 include: {
                     profile: true,
                     salary: { where: { month: args.month, AND: { years: args.years } } },
-                    companyBranch: { include: { company: true } },
+                    companyBranch: { include: { company: true, expense_company: true } },
                     Position_user: { include: { mas_positionlevel2: true, mas_positionlevel3: true }, orderBy: { date: 'desc' } },
                     bookbank_log: { include: { mas_bank: true }, orderBy: { date: 'desc' } },
                     mas_all_collect: true
@@ -84,6 +86,8 @@ const resolversslip: Resolvers = {
                 }
 
             })
+            console.log(data);
+
             for (let i = 0; i < data.length; i++) {
 
                 company_name = data[i].companyBranch?.company?.name
@@ -93,6 +97,9 @@ const resolversslip: Resolvers = {
                 staffcode = data[i].profile?.staff_code
                 firstname = data[i].profile?.firstname_th
                 lastname = data[i].profile?.lastname_th
+                
+                Ss_per = data[i].companyBranch?.expense_company[0].ss_per
+                Vat_per = data[i].companyBranch?.expense_company[0].vat_per
 
                 let bookbank_Log = data[i].bookbank_log
                 for (let a = 0; a < bookbank_Log.length; a++) {
@@ -100,6 +107,7 @@ const resolversslip: Resolvers = {
                     bank_name = bookbank_Log[0].mas_bank?.name
                     bank_code = bookbank_Log[0].mas_bank?.bank_code
                     base_salary = bookbank_Log[0].base_salary
+                    Pro_emp_month = bookbank_Log[0].provident_emp
                 }
 
                 let position = data[i].Position_user
@@ -122,8 +130,8 @@ const resolversslip: Resolvers = {
                     Welfare_money = Salary[i].welfare_money
                     Bonus = Salary[i].bonus
                     //รายหัก
-                    Vatper = Salary[i].vatper
-                    Ss_per = Salary[i].ss_per
+                    // Vatper = Salary[i].vatper
+                    // Ss_per = Salary[i].ss_per
                     vat = Salary[i].vat
                     Social_security = Salary[i].social_security
                     Late = Salary[i].late
@@ -158,10 +166,64 @@ const resolversslip: Resolvers = {
 
             console.log(resultmonth)
             console.log(Number(Year) + 543)
+            // check ค่าว่าง
             if (address2 === null) {
                 address2 = ''
             }
-
+            if (Com === null) {
+                Com = 0
+            }
+            if (Position_income === null) {
+                Position_income = 0
+            }
+            if (Special_income === null) {
+                Special_income = 0
+            }
+            if (Ot === null) {
+                Ot = 0
+            }
+            if (Bonus === null) {
+                Bonus = 0
+            }
+            if (Other_in === null) {
+                Other_in = 0
+            }
+            if (Travel_income === null) {
+                Travel_income = 0
+            }
+            if (Bursary === null) {
+                Bursary = 0
+            }
+            if (Welfare_money === null) {
+                Welfare_money = 0
+            }
+            if (vat === null) {
+                vat = 0
+            }
+            if (Social_security === null) {
+                Social_security = 0
+            }
+            if (Late === null) {
+                Late = 0
+            }
+            if (Miss === null) {
+                Miss = 0
+            }
+            if (Ra === null) {
+                Ra = 0
+            }
+            if (Other === null) {
+                Other = 0
+            }
+            if (Provident_employee === null) {
+                Provident_employee = 0
+            }
+            if (Total_income === null) {
+                Total_income = 0
+            }
+            if (Total_expense === null) {
+                Total_expense = 0
+            }
             let pdfDoc = new PDFDocument({ size: 'A4' });
             let pdfpath = path.resolve('./public/assets/payment/test.pdf')
             let convertpath = pdfpath.replace(/\\/g, '/')
@@ -248,7 +310,7 @@ const resolversslip: Resolvers = {
 
             pdfDoc.fontSize(12).text("รายการหัก (Deduction)", 255, 243, { align: 'left' })
 
-            pdfDoc.fontSize(12).text(`ภาษีหัก ณ ที่จ่าย (${Vatper}%)`, 210, 265, { align: 'left' })
+            pdfDoc.fontSize(12).text(`ภาษีหัก ณ ที่จ่าย (${Vat_per}%)`, 210, 265, { align: 'left' })
             pdfDoc.fontSize(12).text(`${vat?.toFixed(2)}`, 285, 265, { width: 100, align: 'right' })
 
             pdfDoc.fontSize(12).text(`ประกันสังคม (${Ss_per}%)`, 210, 285, { align: 'left' })
@@ -266,7 +328,7 @@ const resolversslip: Resolvers = {
             pdfDoc.fontSize(12).text("หักอื่น ๆ ", 210, 365, { align: 'left' })
             pdfDoc.fontSize(12).text(`${Other?.toFixed(2)}`, 285, 365, { width: 100, align: 'right' })
 
-            pdfDoc.fontSize(12).text("กองทุนสำรองเลี้ยงชีพ (3%)", 210, 385, { align: 'left' })
+            pdfDoc.fontSize(12).text(`กองทุนสำรองเลี้ยงชีพ (${Pro_emp_month}%)`, 210, 385, { align: 'left' })
             pdfDoc.fontSize(12).text(`${Provident_employee?.toFixed(2)}`, 285, 385, { width: 100, align: 'right' })
 
             pdfDoc.lineJoin('miter') //กรอบกลางล่าง ประกันสังคมสะสม
@@ -309,7 +371,6 @@ const resolversslip: Resolvers = {
             // pdfDoc.fontSize(12).text("___________________", 470, 505)
             pdfDoc.end();
             console.log(pdfDoc)
-            console.log(Net);
 
             return {
                 message: 'success',
