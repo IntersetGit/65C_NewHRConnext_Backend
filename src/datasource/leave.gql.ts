@@ -14,6 +14,7 @@ input leave{
  start_date: Date
  end_date: Date
  quantity_day: Int
+ quantity_hours: Int
  detail_leave: String 
  Status: Int                
  user_id: String
@@ -42,12 +43,13 @@ type getdataaboutleave{
 }
 
 type leave_data{
- id: String            
+ id: ID            
  leavetype_id: String            
  mas_leave_type: mas_leave_type   
  start_date: Date
  end_date: Date
  quantity_day: Int
+ quantity_hours: Int
  detail_leave: String 
  Status: Int                
  user_id: String                 
@@ -174,6 +176,7 @@ export const leaveResolvers: Resolvers = {
             start_date: args.data?.start_date,
             end_date: args.data?.end_date,
             quantity_day: args.data?.quantity_day as number,
+            quantity_hours: args.data.quantity_hours as number,
             detail_leave: args.data?.detail_leave as string,
             Status: args.data.Status as number,
             user_id: args.data?.user_id as string
@@ -194,6 +197,7 @@ export const leaveResolvers: Resolvers = {
             leavetype_id: args.data?.leavetype_id as string,
             start_date: args.data?.start_date,
             end_date: args.data?.end_date,
+            quantity_hours: args.data?.quantity_hours as number,
             quantity_day: args.data?.quantity_day as number,
             detail_leave: args.data?.detail_leave as string,
             Status: 1,
@@ -214,7 +218,7 @@ export const leaveResolvers: Resolvers = {
 const resolversleave = {
   'Query.getleavetypedata': [authenticate()],
   'Query.getleava_datame': [authenticate()],
-
+  'Mutation.createddata_leave': [authenticate()]
 };
 
 export const leavedataResolvers = composeResolvers(

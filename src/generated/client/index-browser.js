@@ -156,6 +156,7 @@ exports.Prisma.Data_leaveScalarFieldEnum = makeEnum({
   start_date: 'start_date',
   end_date: 'end_date',
   quantity_day: 'quantity_day',
+  quantity_hours: 'quantity_hours',
   detail_leave: 'detail_leave',
   Status: 'Status',
   user_id: 'user_id'
