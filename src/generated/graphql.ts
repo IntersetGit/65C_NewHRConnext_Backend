@@ -328,7 +328,7 @@ export type ExpenseComInput = {
   companyBranchId?: InputMaybe<Scalars['String']>;
   date?: InputMaybe<Scalars['Date']>;
   id?: InputMaybe<Scalars['ID']>;
-  social_security?: InputMaybe<Scalars['Float']>;
+  ss_per?: InputMaybe<Scalars['Float']>;
   vat_per?: InputMaybe<Scalars['Float']>;
 };
 
@@ -1027,6 +1027,7 @@ export type Expense_Company = {
   monthId?: Maybe<Scalars['String']>;
   salary?: Maybe<Array<Maybe<Salary>>>;
   social_security?: Maybe<Scalars['Float']>;
+  ss_per?: Maybe<Scalars['Float']>;
   vat_per?: Maybe<Scalars['Float']>;
 };
 
@@ -2295,6 +2296,7 @@ export type Expense_CompanyResolvers<ContextType = ApolloContext, ParentType ext
   monthId?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   salary?: Resolver<Maybe<Array<Maybe<ResolversTypes['salary']>>>, ParentType, ContextType>;
   social_security?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
+  ss_per?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
   vat_per?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 }>;

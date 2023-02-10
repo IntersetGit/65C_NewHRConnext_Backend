@@ -190,7 +190,7 @@ export const salaryTypedef = gql`
     bankId: String
     date: Date
     vat_per: Float
-    social_security: Float
+    ss_per: Float
     companyBranchId: String
     salary: [salary]
     Mas_month: mas_month
@@ -230,7 +230,7 @@ export const salaryTypedef = gql`
     bankId: String
     date: Date
     vat_per: Float
-    social_security: Float
+    ss_per: Float
     companyBranchId: String
   }
 
@@ -999,7 +999,7 @@ const resolvers: Resolvers = {
             bankId: args.data?.bankId,
             date: new Date(args.data?.date),
             vat_per: args.data?.vat_per as number,
-            social_security: args.data?.social_security as number,
+            ss_per: args.data?.ss_per as number,
             companyBranchId: args.data?.companyBranchId,
           },
           where: { id: args.data.id },
@@ -1015,7 +1015,7 @@ const resolvers: Resolvers = {
           bankId: args.data?.bankId,
           date: new Date(args.data?.date),
           vat_per: args.data?.vat_per as number,
-          social_security: args.data?.social_security as number,
+          ss_per: args.data?.ss_per as number,
           companyBranchId: args.data?.companyBranchId,
         },
       });
