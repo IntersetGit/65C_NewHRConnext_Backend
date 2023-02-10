@@ -27,22 +27,69 @@ type Query{
 const resolversslip: Resolvers = {
     Query: {
         async SalarySlip(p, args, ctx) {
+            let address1 = null
+            let address2 = null
+            let staffcode = null
+            let firstname = null
+            let lastname = null
+            let banknumber = null
+            let bank_name = null
+            let department = null
+            let Position = null
+            let pro_emp = null
+
             const data = await ctx.prisma.user.findMany({
                 include: {
                     profile: true,
                     salary: { where: { month: args.month, AND: { years: args.years } } },
                     companyBranch: { include: { company: true } },
-                    Position_user: { include: { mas_positionlevel3: true }, orderBy: { date: 'desc' } },
-                    bookbank_log: { include: { mas_bank: true } }
+                    Position_user: { include: { mas_positionlevel2:true , mas_positionlevel3: true }, orderBy: { date: 'desc' } },
+                    bookbank_log: { include: { mas_bank: true }, orderBy: { date: 'desc' } },
+                    mas_all_collect: true
                 },
                 where: {
                     id: args.userId as string,
                 }
 
             })
-            console.log(data);
+            for (let i = 0; i < data.length; i++) {
+
+                // ชื่อบริษัท
+
+                address1 = data[i].companyBranch?.address
+                address2 = data[i].companyBranch?.address_2
+                staffcode = data[i].profile?.staff_code
+                firstname = data[i].profile?.firstname_th
+                lastname = data[i].profile?.lastname_th
+
+                let bookbank_Log = data[i].bookbank_log
+                for (let a = 0; a < bookbank_Log.length; a++) {
+                    banknumber = bookbank_Log[0].bank_number
+                    bank_name = bookbank_Log[0].mas_bank?.name
+                }
+
+                let position = data[i].Position_user
+                for (let a = 0; a < position.length; a++) {
+                    department = position[0].mas_positionlevel2?.name
+                    Position = position[0].mas_positionlevel3?.name
+                }
+                
+                //ประจำงวด
+
+                let mas_collect = data[i].mas_all_collect
+                for (let a = 0; a < mas_collect.length; a++) {
+                    pro_emp = mas_collect[a].provident_collect_employee
+                }
+            }
+            // console.log(banknumber);
+            // console.log(bank_name);
+
+            console.log(pro_emp)
+            // let company_name = data[0].companyBranch?.
+            // console.log(data);
 
             return {
+
                 message: 'success',
                 status: true
             }

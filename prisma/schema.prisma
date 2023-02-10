@@ -144,7 +144,7 @@ model User {
   companyBranch   CompanyBranch?    @relation(fields: [companyBranchId], references: [id])
   companyBranchId String?           @db.Uuid
   Role_Company    Role_Company?     @relation(fields: [RoleCompanyID], references: [id])
-  Position_user   Position_user[]    @relation("user")
+  Position_user   Position_user[]   @relation("user")
   henchman        Position_user[]
   mas_all_collect mas_all_collect[]
   salary          salary[]
@@ -255,34 +255,34 @@ model Position_user {
 }
 
 model holiday_date {
-  id              String        @unique @db.Uuid
-  holiday_name    String?
-  day             Int
-  month           Int
-  year            Int
-  Company         Company?      @relation(fields: [CompanyId], references: [id])
-  CompanyId       String?       @db.Uuid
-  status          Int           @db.SmallInt
-  holidayCompany  holidayCompany[]
+  id             String           @unique @db.Uuid
+  holiday_name   String?
+  day            Int
+  month          Int
+  year           Int
+  Company        Company?         @relation(fields: [CompanyId], references: [id])
+  CompanyId      String?          @db.Uuid
+  status         Int              @db.SmallInt
+  holidayCompany holidayCompany[]
 }
 
 model holiday_year {
-  id           String         @unique @db.Uuid
-  day          Int
-  month        Int
-  year         Int
-  holiday_name String?
-  holidayCompany  holidayCompany[]
+  id             String           @unique @db.Uuid
+  day            Int
+  month          Int
+  year           Int
+  holiday_name   String?
+  holidayCompany holidayCompany[]
 }
 
 model holidayCompany {
-  id              String            @unique @db.Uuid
-  CompanyId       String?           @db.Uuid
-  holiday_dateId  String?           @db.Uuid
-  holiday_yearId  String?           @db.Uuid   
-  Company         Company?          @relation(fields: [CompanyId], references: [id])
-  holiday_date    holiday_date?     @relation(fields: [holiday_dateId], references: [id])
-  holiday_year    holiday_year?     @relation(fields: [holiday_yearId], references: [id])
+  id             String        @unique @db.Uuid
+  CompanyId      String?       @db.Uuid
+  holiday_dateId String?       @db.Uuid
+  holiday_yearId String?       @db.Uuid
+  Company        Company?      @relation(fields: [CompanyId], references: [id])
+  holiday_date   holiday_date? @relation(fields: [holiday_dateId], references: [id])
+  holiday_year   holiday_year? @relation(fields: [holiday_yearId], references: [id])
 }
 
 model mas_bank {
@@ -331,7 +331,7 @@ model expense_company {
   bankId          String?        @db.Uuid
   date            DateTime
   vat_per         Float?
-  social_security Float?
+  ss_per          Float?
   companyBranchId String?        @db.Uuid
   salary          salary[]
   Mas_month       mas_month?     @relation(fields: [monthId], references: [id])
@@ -440,28 +440,28 @@ model provident_log {
   mas_all_collectId String?          @db.Uuid
   bookbank_log      bookbank_log?    @relation(fields: [bookbank_logId], references: [id])
   bookbank_logId    String?          @db.Uuid
-  salary   salary? @relation(fields: [salaryId], references: [id])
-  salaryId String? @db.Uuid
+  salary            salary?          @relation(fields: [salaryId], references: [id])
+  salaryId          String?          @db.Uuid
 }
 
 //-------- ตาราง master ประเภทวันหยุด -----------//
 model mas_leave_type {
-  id          String @unique @db.Uuid
-  name        String
-  orderby     Int @db.SmallInt
-  data_leave  data_leave[]
+  id         String       @unique @db.Uuid
+  name       String
+  orderby    Int          @db.SmallInt
+  data_leave data_leave[]
 }
 
 //-------- ข้อมูลการลาของพนักงาน -------------//
 model data_leave {
- id               String             @unique @db.Uuid
- leavetype_id     String             @db.Uuid
- mas_leave_type   mas_leave_type     @relation(fields: [leavetype_id], references: [id])
- start_date       DateTime
- end_date         DateTime
- quantity_day     Int
- detail_leave     String 
- Status           Int                @db.SmallInt
- user_id          String             @db.Uuid
- user             User               @relation(fields: [user_id], references: [id])
+  id             String         @unique @db.Uuid
+  leavetype_id   String         @db.Uuid
+  mas_leave_type mas_leave_type @relation(fields: [leavetype_id], references: [id])
+  start_date     DateTime
+  end_date       DateTime
+  quantity_day   Int
+  detail_leave   String
+  Status         Int            @db.SmallInt
+  user_id        String         @db.Uuid
+  user           User           @relation(fields: [user_id], references: [id])
 }
