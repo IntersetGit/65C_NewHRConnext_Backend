@@ -105,7 +105,7 @@ export const leaveResolvers: Resolvers = {
     },
 
     async getleava_datame(p, args, ctx) {
-  
+
       let countleave1 = 0
       let countleave2 = 0
       let countleave3 = 0
@@ -124,16 +124,16 @@ export const leaveResolvers: Resolvers = {
         getdataleave.forEach((a) => {
           if (a.data_leave) {
             a.data_leave.forEach((e) => {
-              if (e.leavetype_id == "ba164e03-6687-490d-be0e-e43fec052d76") {
+              if (e.mas_leave_type.name == "ลาพักร้อน") {
                 countleave1 = countleave1 + e.quantity_day
               }
-              if (e.leavetype_id == "3030bfe1-f06a-41f8-b7ad-125c1d4f6fe9") {
+              if (e.mas_leave_type.name == "ลากิจ") {
                 countleave2 = countleave2 + e.quantity_day
               }
-              if (e.leavetype_id == "e7b755b8-c395-4bcd-85f9-d6b7e667f47f") {
+              if (e.mas_leave_type.name == "ลาป่วย") {
                 countleave3 = countleave3 + e.quantity_day
               }
-              if (e.leavetype_id == "84fe2c17-1a61-4940-bbf7-8fb15a90a263") {
+              if (e.mas_leave_type.name == "ลาอื่นๆ") {
                 countleave4 = countleave4 + e.quantity_day
               }
             })
@@ -148,7 +148,7 @@ export const leaveResolvers: Resolvers = {
         count2: countleave2,
         name_3: 'ลากิจ ' + countleave3,
         count3: countleave3,
-        name_4: 'ลาอื่นๆ ' +  countleave4,
+        name_4: 'ลาอื่นๆ ' + countleave4,
         count4: countleave4
       }
       // return getdataleave
