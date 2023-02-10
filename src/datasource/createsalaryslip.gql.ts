@@ -225,7 +225,7 @@ const resolversslip: Resolvers = {
                 Total_expense = 0
             }
             let pdfDoc = new PDFDocument({ size: 'A4' });
-            let pdfpath = path.resolve('./public/assets/payment/test.pdf')
+            let pdfpath = path.resolve(`./public/assets/payment/ใบแจ้งเงินเดือน_${staffcode}_${resultmonth}_${Number(Year) + 543}.pdf`)
             let convertpath = pdfpath.replace(/\\/g, '/')
             let paths = pdfDoc.pipe(fs.createWriteStream(convertpath));
             pdfDoc
@@ -371,12 +371,13 @@ const resolversslip: Resolvers = {
             // pdfDoc.fontSize(12).text("___________________", 470, 505)
             pdfDoc.end();
             console.log(pdfDoc)
-
+            
+            
             return {
                 message: 'success',
                 status: true
             }
-
+            
         }
     },
 }
