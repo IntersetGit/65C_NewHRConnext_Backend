@@ -8777,7 +8777,7 @@
               "name": null,
               "ofType": {
                 "kind": "OBJECT",
-                "name": "Position_user",
+                "name": "position_userr",
                 "ofType": null
               }
             },
@@ -11460,7 +11460,7 @@
       },
       {
         "kind": "OBJECT",
-        "name": "position_user",
+        "name": "position_userr",
         "description": null,
         "fields": [
           {

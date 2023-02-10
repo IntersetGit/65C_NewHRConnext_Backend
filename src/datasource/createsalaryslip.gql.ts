@@ -27,6 +27,7 @@ type Query{
 const resolversslip: Resolvers = {
     Query: {
         async SalarySlip(p, args, ctx) {
+            let company_name = null
             let address1 = null
             let address2 = null
             let staffcode = null
@@ -34,6 +35,7 @@ const resolversslip: Resolvers = {
             let lastname = null
             let banknumber = null
             let bank_name = null
+            let base_salary = null
             let department = null
             let Position = null
             let pro_emp = null
@@ -54,7 +56,7 @@ const resolversslip: Resolvers = {
             })
             for (let i = 0; i < data.length; i++) {
 
-                // ชื่อบริษัท
+                company_name = data[i].companyBranch?.company?.name
 
                 address1 = data[i].companyBranch?.address
                 address2 = data[i].companyBranch?.address_2
@@ -66,6 +68,7 @@ const resolversslip: Resolvers = {
                 for (let a = 0; a < bookbank_Log.length; a++) {
                     banknumber = bookbank_Log[0].bank_number
                     bank_name = bookbank_Log[0].mas_bank?.name
+                    base_salary =  bookbank_Log[0].base_salary
                 }
 
                 let position = data[i].Position_user
@@ -74,7 +77,22 @@ const resolversslip: Resolvers = {
                     Position = position[0].mas_positionlevel3?.name
                 }
                 
-                //ประจำงวด
+                let Salary = data[i].salary
+                for (let a = 0; a < Salary.length; a++) {
+                    //รายได้
+                    let Com = Salary[i].commission
+                    let Position_income = Salary[i].position_income
+                    let Ot = Salary[i].ot
+                    let Special_income = Salary[i].special_income
+                    let Other = Salary[i].other
+                    let Travel_income = Salary[i].travel_income
+                    let Bursary = Salary[i].bursary
+                    let Welfare_money = Salary[i].welfare_money
+                    let Bonus = Salary[i].bonus
+                    //รายหัก
+                    
+                    
+                }
 
                 let mas_collect = data[i].mas_all_collect
                 for (let a = 0; a < mas_collect.length; a++) {

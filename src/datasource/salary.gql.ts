@@ -239,7 +239,7 @@ export const salaryTypedef = gql`
     name: String
   }
 
-  type slipresolvers{
+  type slipresolvers {
     message: String
     status: Boolean!
 }
@@ -334,9 +334,9 @@ export const salaryTypedef = gql`
     companyBranchId: String
     salary: [salary]
     bookbank_log: [Bookbank_log_type]
-    Position_user: [Position_user]
+    Position_user: [position_userr]
   }
-type position_user {
+type position_userr {
 id:ID!
 name:String
 position1_id:String
@@ -996,7 +996,7 @@ const resolvers: Resolvers = {
       if (args.data?.id) {
         const updateExpenseCom = await ctx.prisma.expense_company.update({
           data: {
-            bankId: args.data?.bankId,
+            bankId: args.data?.bankId as string,
             date: new Date(args.data?.date),
             vat_per: args.data?.vat_per as number,
             ss_per: args.data?.ss_per as number,
@@ -1012,7 +1012,7 @@ const resolvers: Resolvers = {
       const createExpenseCom = await ctx.prisma.expense_company.create({
         data: {
           id: genExpenseID,
-          bankId: args.data?.bankId,
+          bankId: args.data?.bankId as string,
           date: new Date(args.data?.date),
           vat_per: args.data?.vat_per as number,
           ss_per: args.data?.ss_per as number,
