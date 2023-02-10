@@ -334,7 +334,7 @@ export const salaryTypedef = gql`
     companyBranchId: String
     salary: [salary]
     bookbank_log: [Bookbank_log_type]
-    Position_user: [position_userr]
+    Position_user: [Position_user]
   }
 type position_userr {
 id:ID!

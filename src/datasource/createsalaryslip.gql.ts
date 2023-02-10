@@ -90,6 +90,10 @@ const resolversslip: Resolvers = {
                     let Welfare_money = Salary[i].welfare_money
                     let Bonus = Salary[i].bonus
                     //รายหัก
+                    let Vatper = Salary[i].vatper
+                    let Ss_per = Salary[i].ss_per
+                    let vat = Salary[i].vat
+                    let Social_security = Salary[i].social_security
                     
                     
                 }

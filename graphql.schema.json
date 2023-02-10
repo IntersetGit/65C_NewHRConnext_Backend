@@ -8777,7 +8777,7 @@
               "name": null,
               "ofType": {
                 "kind": "OBJECT",
-                "name": "position_userr",
+                "name": "Position_user",
                 "ofType": null
               }
             },
