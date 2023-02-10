@@ -22,6 +22,7 @@ export const salaryTypedef = gql`
   input BankInput {
     id: ID
     name: String
+    bank_code: String
   }
 
   input provident_logInput {
@@ -179,6 +180,7 @@ export const salaryTypedef = gql`
   type mas_bank {
     id: ID
     name: String
+    bank_code: String
     expense_company: expense_company
     bookbank_log: Bookbank_log_type
     salary: [salary]
@@ -982,6 +984,8 @@ const resolvers: Resolvers = {
         data: {
           id: genBankID,
           name: args.data?.name as string,
+          bank_code: args.data?.bank_code,
+
         },
       });
       return {

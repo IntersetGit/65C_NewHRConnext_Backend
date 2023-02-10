@@ -288,6 +288,7 @@ model holidayCompany {
 model mas_bank {
   id              String            @unique @db.Uuid
   name            String
+  bank_code       String
   expense_company expense_company[]
   bookbank_log    bookbank_log[]
   salary          salary[]

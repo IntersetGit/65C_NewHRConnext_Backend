@@ -297,6 +297,7 @@ export type holidayCompany = {
 export type mas_bank = {
   id: string
   name: string
+  bank_code: string
 }
 
 /**
@@ -20187,16 +20188,19 @@ export namespace Prisma {
   export type Mas_bankMinAggregateOutputType = {
     id: string | null
     name: string | null
+    bank_code: string | null
   }
 
   export type Mas_bankMaxAggregateOutputType = {
     id: string | null
     name: string | null
+    bank_code: string | null
   }
 
   export type Mas_bankCountAggregateOutputType = {
     id: number
     name: number
+    bank_code: number
     _all: number
   }
 
@@ -20204,16 +20208,19 @@ export namespace Prisma {
   export type Mas_bankMinAggregateInputType = {
     id?: true
     name?: true
+    bank_code?: true
   }
 
   export type Mas_bankMaxAggregateInputType = {
     id?: true
     name?: true
+    bank_code?: true
   }
 
   export type Mas_bankCountAggregateInputType = {
     id?: true
     name?: true
+    bank_code?: true
     _all?: true
   }
 
@@ -20293,6 +20300,7 @@ export namespace Prisma {
   export type Mas_bankGroupByOutputType = {
     id: string
     name: string
+    bank_code: string
     _count: Mas_bankCountAggregateOutputType | null
     _min: Mas_bankMinAggregateOutputType | null
     _max: Mas_bankMaxAggregateOutputType | null
@@ -20315,6 +20323,7 @@ export namespace Prisma {
   export type mas_bankSelect = {
     id?: boolean
     name?: boolean
+    bank_code?: boolean
     expense_company?: boolean | mas_bank$expense_companyArgs
     bookbank_log?: boolean | mas_bank$bookbank_logArgs
     salary?: boolean | mas_bank$salaryArgs
@@ -33584,7 +33593,8 @@ export namespace Prisma {
 
   export const Mas_bankScalarFieldEnum: {
     id: 'id',
-    name: 'name'
+    name: 'name',
+    bank_code: 'bank_code'
   };
 
   export type Mas_bankScalarFieldEnum = (typeof Mas_bankScalarFieldEnum)[keyof typeof Mas_bankScalarFieldEnum]
@@ -35085,6 +35095,7 @@ export namespace Prisma {
     NOT?: Enumerable<mas_bankWhereInput>
     id?: UuidFilter | string
     name?: StringFilter | string
+    bank_code?: StringFilter | string
     expense_company?: Expense_companyListRelationFilter
     bookbank_log?: Bookbank_logListRelationFilter
     salary?: SalaryListRelationFilter
@@ -35093,6 +35104,7 @@ export namespace Prisma {
   export type mas_bankOrderByWithRelationInput = {
     id?: SortOrder
     name?: SortOrder
+    bank_code?: SortOrder
     expense_company?: expense_companyOrderByRelationAggregateInput
     bookbank_log?: bookbank_logOrderByRelationAggregateInput
     salary?: salaryOrderByRelationAggregateInput
@@ -35105,6 +35117,7 @@ export namespace Prisma {
   export type mas_bankOrderByWithAggregationInput = {
     id?: SortOrder
     name?: SortOrder
+    bank_code?: SortOrder
     _count?: mas_bankCountOrderByAggregateInput
     _max?: mas_bankMaxOrderByAggregateInput
     _min?: mas_bankMinOrderByAggregateInput
@@ -35116,6 +35129,7 @@ export namespace Prisma {
     NOT?: Enumerable<mas_bankScalarWhereWithAggregatesInput>
     id?: UuidWithAggregatesFilter | string
     name?: StringWithAggregatesFilter | string
+    bank_code?: StringWithAggregatesFilter | string
   }
 
   export type mas_monthWhereInput = {
@@ -37438,6 +37452,7 @@ export namespace Prisma {
   export type mas_bankCreateInput = {
     id: string
     name: string
+    bank_code: string
     expense_company?: expense_companyCreateNestedManyWithoutMas_bankInput
     bookbank_log?: bookbank_logCreateNestedManyWithoutMas_bankInput
     salary?: salaryCreateNestedManyWithoutMas_bankInput
@@ -37446,6 +37461,7 @@ export namespace Prisma {
   export type mas_bankUncheckedCreateInput = {
     id: string
     name: string
+    bank_code: string
     expense_company?: expense_companyUncheckedCreateNestedManyWithoutMas_bankInput
     bookbank_log?: bookbank_logUncheckedCreateNestedManyWithoutMas_bankInput
     salary?: salaryUncheckedCreateNestedManyWithoutMas_bankInput
@@ -37454,6 +37470,7 @@ export namespace Prisma {
   export type mas_bankUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
+    bank_code?: StringFieldUpdateOperationsInput | string
     expense_company?: expense_companyUpdateManyWithoutMas_bankNestedInput
     bookbank_log?: bookbank_logUpdateManyWithoutMas_bankNestedInput
     salary?: salaryUpdateManyWithoutMas_bankNestedInput
@@ -37462,6 +37479,7 @@ export namespace Prisma {
   export type mas_bankUncheckedUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
+    bank_code?: StringFieldUpdateOperationsInput | string
     expense_company?: expense_companyUncheckedUpdateManyWithoutMas_bankNestedInput
     bookbank_log?: bookbank_logUncheckedUpdateManyWithoutMas_bankNestedInput
     salary?: salaryUncheckedUpdateManyWithoutMas_bankNestedInput
@@ -37470,16 +37488,19 @@ export namespace Prisma {
   export type mas_bankCreateManyInput = {
     id: string
     name: string
+    bank_code: string
   }
 
   export type mas_bankUpdateManyMutationInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
+    bank_code?: StringFieldUpdateOperationsInput | string
   }
 
   export type mas_bankUncheckedUpdateManyInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
+    bank_code?: StringFieldUpdateOperationsInput | string
   }
 
   export type mas_monthCreateInput = {
@@ -39623,16 +39644,19 @@ export namespace Prisma {
   export type mas_bankCountOrderByAggregateInput = {
     id?: SortOrder
     name?: SortOrder
+    bank_code?: SortOrder
   }
 
   export type mas_bankMaxOrderByAggregateInput = {
     id?: SortOrder
     name?: SortOrder
+    bank_code?: SortOrder
   }
 
   export type mas_bankMinOrderByAggregateInput = {
     id?: SortOrder
     name?: SortOrder
+    bank_code?: SortOrder
   }
 
   export type mas_monthCountOrderByAggregateInput = {
@@ -47492,6 +47516,7 @@ export namespace Prisma {
   export type mas_bankCreateWithoutExpense_companyInput = {
     id: string
     name: string
+    bank_code: string
     bookbank_log?: bookbank_logCreateNestedManyWithoutMas_bankInput
     salary?: salaryCreateNestedManyWithoutMas_bankInput
   }
@@ -47499,6 +47524,7 @@ export namespace Prisma {
   export type mas_bankUncheckedCreateWithoutExpense_companyInput = {
     id: string
     name: string
+    bank_code: string
     bookbank_log?: bookbank_logUncheckedCreateNestedManyWithoutMas_bankInput
     salary?: salaryUncheckedCreateNestedManyWithoutMas_bankInput
   }
@@ -47616,6 +47642,7 @@ export namespace Prisma {
   export type mas_bankUpdateWithoutExpense_companyInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
+    bank_code?: StringFieldUpdateOperationsInput | string
     bookbank_log?: bookbank_logUpdateManyWithoutMas_bankNestedInput
     salary?: salaryUpdateManyWithoutMas_bankNestedInput
   }
@@ -47623,6 +47650,7 @@ export namespace Prisma {
   export type mas_bankUncheckedUpdateWithoutExpense_companyInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
+    bank_code?: StringFieldUpdateOperationsInput | string
     bookbank_log?: bookbank_logUncheckedUpdateManyWithoutMas_bankNestedInput
     salary?: salaryUncheckedUpdateManyWithoutMas_bankNestedInput
   }
@@ -47839,6 +47867,7 @@ export namespace Prisma {
   export type mas_bankCreateWithoutSalaryInput = {
     id: string
     name: string
+    bank_code: string
     expense_company?: expense_companyCreateNestedManyWithoutMas_bankInput
     bookbank_log?: bookbank_logCreateNestedManyWithoutMas_bankInput
   }
@@ -47846,6 +47875,7 @@ export namespace Prisma {
   export type mas_bankUncheckedCreateWithoutSalaryInput = {
     id: string
     name: string
+    bank_code: string
     expense_company?: expense_companyUncheckedCreateNestedManyWithoutMas_bankInput
     bookbank_log?: bookbank_logUncheckedCreateNestedManyWithoutMas_bankInput
   }
@@ -48033,6 +48063,7 @@ export namespace Prisma {
   export type mas_bankUpdateWithoutSalaryInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
+    bank_code?: StringFieldUpdateOperationsInput | string
     expense_company?: expense_companyUpdateManyWithoutMas_bankNestedInput
     bookbank_log?: bookbank_logUpdateManyWithoutMas_bankNestedInput
   }
@@ -48040,6 +48071,7 @@ export namespace Prisma {
   export type mas_bankUncheckedUpdateWithoutSalaryInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
+    bank_code?: StringFieldUpdateOperationsInput | string
     expense_company?: expense_companyUncheckedUpdateManyWithoutMas_bankNestedInput
     bookbank_log?: bookbank_logUncheckedUpdateManyWithoutMas_bankNestedInput
   }
@@ -48323,6 +48355,7 @@ export namespace Prisma {
   export type mas_bankCreateWithoutBookbank_logInput = {
     id: string
     name: string
+    bank_code: string
     expense_company?: expense_companyCreateNestedManyWithoutMas_bankInput
     salary?: salaryCreateNestedManyWithoutMas_bankInput
   }
@@ -48330,6 +48363,7 @@ export namespace Prisma {
   export type mas_bankUncheckedCreateWithoutBookbank_logInput = {
     id: string
     name: string
+    bank_code: string
     expense_company?: expense_companyUncheckedCreateNestedManyWithoutMas_bankInput
     salary?: salaryUncheckedCreateNestedManyWithoutMas_bankInput
   }
@@ -48442,6 +48476,7 @@ export namespace Prisma {
   export type mas_bankUpdateWithoutBookbank_logInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
+    bank_code?: StringFieldUpdateOperationsInput | string
     expense_company?: expense_companyUpdateManyWithoutMas_bankNestedInput
     salary?: salaryUpdateManyWithoutMas_bankNestedInput
   }
@@ -48449,6 +48484,7 @@ export namespace Prisma {
   export type mas_bankUncheckedUpdateWithoutBookbank_logInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
+    bank_code?: StringFieldUpdateOperationsInput | string
     expense_company?: expense_companyUncheckedUpdateManyWithoutMas_bankNestedInput
     salary?: salaryUncheckedUpdateManyWithoutMas_bankNestedInput
   }

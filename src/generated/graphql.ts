@@ -25,6 +25,7 @@ export type Amphoe = {
 };
 
 export type BankInput = {
+  bank_code?: InputMaybe<Scalars['String']>;
   id?: InputMaybe<Scalars['ID']>;
   name?: InputMaybe<Scalars['String']>;
 };
@@ -1165,6 +1166,7 @@ export type Mas_All_Collect = {
 
 export type Mas_Bank = {
   __typename?: 'mas_bank';
+  bank_code?: Maybe<Scalars['String']>;
   bookbank_log?: Maybe<Bookbank_Log_Type>;
   expense_company?: Maybe<Expense_Company>;
   id?: Maybe<Scalars['ID']>;
@@ -2418,6 +2420,7 @@ export type Mas_All_CollectResolvers<ContextType = ApolloContext, ParentType ext
 }>;
 
 export type Mas_BankResolvers<ContextType = ApolloContext, ParentType extends ResolversParentTypes['mas_bank'] = ResolversParentTypes['mas_bank']> = ResolversObject<{
+  bank_code?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   bookbank_log?: Resolver<Maybe<ResolversTypes['Bookbank_log_type']>, ParentType, ContextType>;
   expense_company?: Resolver<Maybe<ResolversTypes['expense_company']>, ParentType, ContextType>;
   id?: Resolver<Maybe<ResolversTypes['ID']>, ParentType, ContextType>;

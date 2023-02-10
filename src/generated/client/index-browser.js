@@ -225,7 +225,8 @@ exports.Prisma.Mas_all_collectScalarFieldEnum = makeEnum({
 
 exports.Prisma.Mas_bankScalarFieldEnum = makeEnum({
   id: 'id',
-  name: 'name'
+  name: 'name',
+  bank_code: 'bank_code'
 });
 
 exports.Prisma.Mas_income_typeScalarFieldEnum = makeEnum({
