@@ -36,6 +36,7 @@ const resolversslip: Resolvers = {
             let lastname = null
             let banknumber = null
             let bank_name = null
+            let bank_code = null
             let base_salary = null
             let department = null
             let Position = null
@@ -95,6 +96,7 @@ const resolversslip: Resolvers = {
                 for (let a = 0; a < bookbank_Log.length; a++) {
                     banknumber = bookbank_Log[0].bank_number
                     bank_name = bookbank_Log[0].mas_bank?.name
+                    bank_code = bookbank_Log[0].mas_bank?.bank_code
                     base_salary = bookbank_Log[0].base_salary
                 }
 
@@ -161,7 +163,7 @@ const resolversslip: Resolvers = {
 
             pdfDoc.fontSize(12).text(`รหัสพนักงาน  ${staffcode}`, 20, 185, { align: 'left', lineBreak: false }).text("ประจำงวด  ธันวาคม 2565", { align: 'right' });
             // pdfDoc.fontSize(12).text("ประจำงวด  ธันวาคม 2565", { align: 'right' });
-            pdfDoc.fontSize(12).text(`ชื่อพนักงาน/Emp.  ${firstname} ${lastname}`, 20, 200, { align: 'left', lineBreak: false }).text(`เลขที่บัญชี ${bank_name}:${banknumber}`, { align: 'right' });
+            pdfDoc.fontSize(12).text(`ชื่อพนักงาน/Emp.  ${firstname} ${lastname}`, 20, 200, { align: 'left', lineBreak: false }).text(`เลขที่บัญชี ${bank_code} : ${banknumber}`, { align: 'right' });
             // pdfDoc.fontSize(12).text("ชื่อพนักงาน/Emp  นาย ปวเรศ วิศรุต", { align: 'right' , lineBreak : false}).text("เลขที่บัญชีธนาคาร  SCB:XXXXXXXXXX", { align: 'right' });
             pdfDoc.fontSize(12).text(`แผนก/Dep.  ${department}`, 20, 215, { align: 'left', lineBreak: false }).text(`ตำแหน่ง  ${Position}`, { align: 'right' });
 
@@ -288,6 +290,8 @@ const resolversslip: Resolvers = {
             // pdfDoc.fontSize(12).text("___________________", 470, 505)
             pdfDoc.end();
             console.log(pdfDoc)
+            console.log(Net);
+            
             return {
                 message: 'success',
                 status: true

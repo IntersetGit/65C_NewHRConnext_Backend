@@ -5,6 +5,7 @@ import { v4 } from 'uuid';
 import { composeResolvers } from '@graphql-tools/resolvers-composition';
 import { authenticate } from '../middleware/authenticatetoken';
 import dayjs from 'dayjs';
+import { includes } from 'lodash';
 
 
 
@@ -438,16 +439,12 @@ const resolvers: Resolvers = {
           // company: { include: { branch: true } },
           companyBranch: { include: { company: true } },
           Position_user: { include: { mas_positionlevel3: true }, orderBy: { date: 'desc' } },
+          // bookbank_log: true
           bookbank_log: { include: { mas_bank: true }, orderBy: { date: 'desc' } }
         },
         where: {
           id: args.userId
         },
-
-
-        // where: {
-        //   id: args.userId,
-        // },
       });
       return getdata;
     },
