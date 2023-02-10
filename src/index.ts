@@ -31,25 +31,27 @@ export interface ApolloContext {
 }
 //ลบสลิปเงินเดือนอัตโนมัติ
 let pdf_slip = `./public/assets/payment/`
-let read_slip = fs.readdirSync(pdf_slip)
-for (let i = 0; i < read_slip.length; i++) {
-  let stat = fs.stat(path.join(pdf_slip , read_slip[i]) , function(err,stat){
-    let path_name = path.join(pdf_slip , read_slip[i])
-    let now = new Date().getTime()
-    // let endTime1 = new Date(stat.ctime).getTime() + 10000;
-    let endTime = new Date(stat.ctime).getTime() +  (60000 * 60 * 24);
-    console.log(now);
-    console.log(endTime);
-    if(now > endTime){
-      fs.rmSync(path_name, { recursive: true, force: true })
-      console.log('delete successfully');
-    }
-    // console.log(`endtime with 36000` , endTime);
-  })
-  console.log(read_slip[i]);
-}
-
-
+setInterval(() => {
+  let read_slip = fs.readdirSync(pdf_slip)
+  for (let i = 0; i < read_slip.length; i++) {
+    let stat = fs.stat(path.join(pdf_slip, read_slip[i]), function (err, stat) {
+      let path_name = path.join(pdf_slip, read_slip[i])
+      let now = new Date().getTime()
+      // let endTime1 = new Date(stat.ctime).getTime() + 20000;
+      let endTime = new Date(stat.ctime).getTime() + (60000 * 60 * 24);
+      console.log(now);
+      console.log(endTime);
+      if (now > endTime) {
+        fs.rmSync(path_name, { recursive: true, force: true })
+        console.log('delete successfully');
+      } else {
+        console.log('no file to delete ');
+      }
+      // console.log(`endtime with 36000` , endTime);
+    })
+    console.log(read_slip[i]);
+  }
+}, (60000 * 60 * 24))
 
 // The ApolloServer constructor requires two parameters: your schema
 // definition and your set of resolvers.
