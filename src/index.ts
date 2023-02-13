@@ -11,6 +11,7 @@ import multer from 'multer';
 import { PrismaClient } from './generated/client';
 import routes from './uploadFiles';
 import path from 'path'
+import fs, { stat } from 'fs'
 
 const prisma = new PrismaClient();
 
@@ -28,6 +29,29 @@ export interface ApolloContext {
   currentUser?: UsertokenType;
   prisma: typeof prisma;
 }
+//ลบสลิปเงินเดือนอัตโนมัติ
+let pdf_slip = `./public/assets/payment/`
+setInterval(() => {
+  let read_slip = fs.readdirSync(pdf_slip)
+  for (let i = 0; i < read_slip.length; i++) {
+    let stat = fs.stat(path.join(pdf_slip, read_slip[i]), function (err, stat) {
+      let path_name = path.join(pdf_slip, read_slip[i])
+      let now = new Date().getTime()
+      // let endTime1 = new Date(stat.ctime).getTime() + 20000;
+      let endTime = new Date(stat.ctime).getTime() + (60000 * 60 * 24);
+      console.log(now);
+      console.log(endTime);
+      if (now > endTime) {
+        fs.rmSync(path_name, { recursive: true, force: true })
+        console.log('delete successfully');
+      } else {
+        console.log('no file to delete ');
+      }
+      // console.log(`endtime with 36000` , endTime);
+    })
+    console.log(read_slip[i]);
+  }
+}, (60000 * 60 * 24))
 
 // The ApolloServer constructor requires two parameters: your schema
 // definition and your set of resolvers.
@@ -42,10 +66,11 @@ const server = new ApolloServer<ApolloContext>({
 (async () => {
   await server.start();
   app.use(express.json())
-  app.use(express.urlencoded({extended : true}))
-  app.use(express.static(path.join(__dirname, 'public/index.html')));
-  app.get('/', (req,res)=>{
-    res.sendFile(path.join(__dirname ,'../public/index.html'))
+  app.use(express.urlencoded({ extended: true }))
+  // app.use(`/${process.env.SUB_API_PATH}` , express.static(path.join(__dirname, 'public')));
+  app.use( `/${process.env.SUB_API_PATH}` , express.static('public'))
+  app.get('/', (req, res) => {
+    res.sendFile(path.join(__dirname, '../public/index.html'))
   })
   app.use(cors());
   app.use('/api/upload', routes);
