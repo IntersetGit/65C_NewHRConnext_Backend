@@ -277,7 +277,7 @@ export const leaveResolvers: Resolvers = {
       }
     },
 
-    
+
     async editstatusleave(p, args, ctx) {
       const editleave = await ctx.prisma.data_leave.update({
         where: {
@@ -300,7 +300,8 @@ const resolversleave = {
   'Query.getleavetypedata': [authenticate()],
   'Query.getleava_datame': [authenticate()],
   'Query.getleava_alldata': [authenticate()],
-  'Mutation.createddata_leave': [authenticate()]
+  'Mutation.createddata_leave': [authenticate()],
+  'Mutation.editstatusleave': [authenticate()]
 };
 
 export const leavedataResolvers = composeResolvers(
