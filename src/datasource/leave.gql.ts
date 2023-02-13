@@ -199,7 +199,7 @@ export const leaveResolvers: Resolvers = {
           include: {
             profile: true,
             Position_user: { include: { mas_positionlevel1: true, mas_positionlevel2: true, mas_positionlevel3: true } },
-            data_leave: { include: { mas_leave_type: true } }
+            data_leave: { include: { mas_leave_type: true }, where: { id: args.dataleaveId } }
           },
           where: {
             data_leave: {
@@ -220,7 +220,7 @@ export const leaveResolvers: Resolvers = {
           },
           where: {
             Position_user: {
-              some: {
+              some:{
                 headderId: ctx.currentUser?.id
               }
             }
