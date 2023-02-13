@@ -498,7 +498,7 @@ const resolvers: Resolvers = {
       return getdata;
     },
 
-    async salary_inmonthSlip(parant, args, ctx) { // for admin
+    async salary_inmonthSlip(parant, args, ctx) { // for admin slip สำหรับให้ user เห็น
       const data = await ctx.prisma.user.findMany({
         include: {
           profile: true,
@@ -1071,11 +1071,21 @@ const resolvers: Resolvers = {
     },
 
     async DeleteSalary(p: any, args: any, ctx: any) {
-      const deletesalary = await ctx.prisma.salary.delete({
-        where: {
-          id: args.id,
-        },
-      });
+      const find_salary = await ctx.prisma.salary.findMany({
+        where : {
+          id: args.id
+        }
+      })
+      console.log(find_salary)
+
+      // const minus_collect = await ctx.prisma.mas_all_collect.update({
+      // })
+
+      // const deletesalary = await ctx.prisma.salary.delete({
+      //   where: {
+      //     id: args.id,
+      //   },
+      // });
       return {
         message: 'delete salary success',
         status: true,
