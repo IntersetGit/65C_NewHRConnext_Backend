@@ -376,6 +376,10 @@ model salary {
   socialYears         Float?
   vatYears            Float?
   incomeYears         Float?
+  create_by           String?            @db.Uuid
+  create_date         DateTime?
+  update_by           String?            @db.Uuid
+  update_date         DateTime?
   userId              String?            @db.Uuid
   // bookbank_log       bookbank_log[]
   mas_income_typeId   String?            @db.Uuid

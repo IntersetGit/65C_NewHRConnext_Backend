@@ -396,6 +396,10 @@ export type salary = {
   socialYears: number | null
   vatYears: number | null
   incomeYears: number | null
+  create_by: string | null
+  create_date: Date | null
+  update_by: string | null
+  update_date: Date | null
   userId: string | null
   mas_income_typeId: string | null
   bookbank_logId: string | null
@@ -27026,6 +27030,10 @@ export namespace Prisma {
     socialYears: number | null
     vatYears: number | null
     incomeYears: number | null
+    create_by: string | null
+    create_date: Date | null
+    update_by: string | null
+    update_date: Date | null
     userId: string | null
     mas_income_typeId: string | null
     bookbank_logId: string | null
@@ -27066,6 +27074,10 @@ export namespace Prisma {
     socialYears: number | null
     vatYears: number | null
     incomeYears: number | null
+    create_by: string | null
+    create_date: Date | null
+    update_by: string | null
+    update_date: Date | null
     userId: string | null
     mas_income_typeId: string | null
     bookbank_logId: string | null
@@ -27106,6 +27118,10 @@ export namespace Prisma {
     socialYears: number
     vatYears: number
     incomeYears: number
+    create_by: number
+    create_date: number
+    update_by: number
+    update_date: number
     userId: number
     mas_income_typeId: number
     bookbank_logId: number
@@ -27204,6 +27220,10 @@ export namespace Prisma {
     socialYears?: true
     vatYears?: true
     incomeYears?: true
+    create_by?: true
+    create_date?: true
+    update_by?: true
+    update_date?: true
     userId?: true
     mas_income_typeId?: true
     bookbank_logId?: true
@@ -27244,6 +27264,10 @@ export namespace Prisma {
     socialYears?: true
     vatYears?: true
     incomeYears?: true
+    create_by?: true
+    create_date?: true
+    update_by?: true
+    update_date?: true
     userId?: true
     mas_income_typeId?: true
     bookbank_logId?: true
@@ -27284,6 +27308,10 @@ export namespace Prisma {
     socialYears?: true
     vatYears?: true
     incomeYears?: true
+    create_by?: true
+    create_date?: true
+    update_by?: true
+    update_date?: true
     userId?: true
     mas_income_typeId?: true
     bookbank_logId?: true
@@ -27412,6 +27440,10 @@ export namespace Prisma {
     socialYears: number | null
     vatYears: number | null
     incomeYears: number | null
+    create_by: string | null
+    create_date: Date | null
+    update_by: string | null
+    update_date: Date | null
     userId: string | null
     mas_income_typeId: string | null
     bookbank_logId: string | null
@@ -27471,6 +27503,10 @@ export namespace Prisma {
     socialYears?: boolean
     vatYears?: boolean
     incomeYears?: boolean
+    create_by?: boolean
+    create_date?: boolean
+    update_by?: boolean
+    update_date?: boolean
     userId?: boolean
     mas_income_typeId?: boolean
     bookbank_logId?: boolean
@@ -33861,6 +33897,10 @@ export namespace Prisma {
     socialYears: 'socialYears',
     vatYears: 'vatYears',
     incomeYears: 'incomeYears',
+    create_by: 'create_by',
+    create_date: 'create_date',
+    update_by: 'update_by',
+    update_date: 'update_date',
     userId: 'userId',
     mas_income_typeId: 'mas_income_typeId',
     bookbank_logId: 'bookbank_logId',
@@ -35433,6 +35473,10 @@ export namespace Prisma {
     socialYears?: FloatNullableFilter | number | null
     vatYears?: FloatNullableFilter | number | null
     incomeYears?: FloatNullableFilter | number | null
+    create_by?: UuidNullableFilter | string | null
+    create_date?: DateTimeNullableFilter | Date | string | null
+    update_by?: UuidNullableFilter | string | null
+    update_date?: DateTimeNullableFilter | Date | string | null
     userId?: UuidNullableFilter | string | null
     mas_income_typeId?: UuidNullableFilter | string | null
     bookbank_logId?: UuidNullableFilter | string | null
@@ -35481,6 +35525,10 @@ export namespace Prisma {
     socialYears?: SortOrder
     vatYears?: SortOrder
     incomeYears?: SortOrder
+    create_by?: SortOrder
+    create_date?: SortOrder
+    update_by?: SortOrder
+    update_date?: SortOrder
     userId?: SortOrder
     mas_income_typeId?: SortOrder
     bookbank_logId?: SortOrder
@@ -35533,6 +35581,10 @@ export namespace Prisma {
     socialYears?: SortOrder
     vatYears?: SortOrder
     incomeYears?: SortOrder
+    create_by?: SortOrder
+    create_date?: SortOrder
+    update_by?: SortOrder
+    update_date?: SortOrder
     userId?: SortOrder
     mas_income_typeId?: SortOrder
     bookbank_logId?: SortOrder
@@ -35581,6 +35633,10 @@ export namespace Prisma {
     socialYears?: FloatNullableWithAggregatesFilter | number | null
     vatYears?: FloatNullableWithAggregatesFilter | number | null
     incomeYears?: FloatNullableWithAggregatesFilter | number | null
+    create_by?: UuidNullableWithAggregatesFilter | string | null
+    create_date?: DateTimeNullableWithAggregatesFilter | Date | string | null
+    update_by?: UuidNullableWithAggregatesFilter | string | null
+    update_date?: DateTimeNullableWithAggregatesFilter | Date | string | null
     userId?: UuidNullableWithAggregatesFilter | string | null
     mas_income_typeId?: UuidNullableWithAggregatesFilter | string | null
     bookbank_logId?: UuidNullableWithAggregatesFilter | string | null
@@ -37834,6 +37890,10 @@ export namespace Prisma {
     socialYears?: number | null
     vatYears?: number | null
     incomeYears?: number | null
+    create_by?: string | null
+    create_date?: Date | string | null
+    update_by?: string | null
+    update_date?: Date | string | null
     provident_logId?: string | null
     provident_log?: provident_logCreateNestedManyWithoutSalaryInput
     User?: UserCreateNestedOneWithoutSalaryInput
@@ -37875,6 +37935,10 @@ export namespace Prisma {
     socialYears?: number | null
     vatYears?: number | null
     incomeYears?: number | null
+    create_by?: string | null
+    create_date?: Date | string | null
+    update_by?: string | null
+    update_date?: Date | string | null
     userId?: string | null
     mas_income_typeId?: string | null
     bookbank_logId?: string | null
@@ -37916,6 +37980,10 @@ export namespace Prisma {
     socialYears?: NullableFloatFieldUpdateOperationsInput | number | null
     vatYears?: NullableFloatFieldUpdateOperationsInput | number | null
     incomeYears?: NullableFloatFieldUpdateOperationsInput | number | null
+    create_by?: NullableStringFieldUpdateOperationsInput | string | null
+    create_date?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    update_by?: NullableStringFieldUpdateOperationsInput | string | null
+    update_date?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     provident_logId?: NullableStringFieldUpdateOperationsInput | string | null
     provident_log?: provident_logUpdateManyWithoutSalaryNestedInput
     User?: UserUpdateOneWithoutSalaryNestedInput
@@ -37957,6 +38025,10 @@ export namespace Prisma {
     socialYears?: NullableFloatFieldUpdateOperationsInput | number | null
     vatYears?: NullableFloatFieldUpdateOperationsInput | number | null
     incomeYears?: NullableFloatFieldUpdateOperationsInput | number | null
+    create_by?: NullableStringFieldUpdateOperationsInput | string | null
+    create_date?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    update_by?: NullableStringFieldUpdateOperationsInput | string | null
+    update_date?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     userId?: NullableStringFieldUpdateOperationsInput | string | null
     mas_income_typeId?: NullableStringFieldUpdateOperationsInput | string | null
     bookbank_logId?: NullableStringFieldUpdateOperationsInput | string | null
@@ -37998,6 +38070,10 @@ export namespace Prisma {
     socialYears?: number | null
     vatYears?: number | null
     incomeYears?: number | null
+    create_by?: string | null
+    create_date?: Date | string | null
+    update_by?: string | null
+    update_date?: Date | string | null
     userId?: string | null
     mas_income_typeId?: string | null
     bookbank_logId?: string | null
@@ -38038,6 +38114,10 @@ export namespace Prisma {
     socialYears?: NullableFloatFieldUpdateOperationsInput | number | null
     vatYears?: NullableFloatFieldUpdateOperationsInput | number | null
     incomeYears?: NullableFloatFieldUpdateOperationsInput | number | null
+    create_by?: NullableStringFieldUpdateOperationsInput | string | null
+    create_date?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    update_by?: NullableStringFieldUpdateOperationsInput | string | null
+    update_date?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     provident_logId?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
@@ -38071,6 +38151,10 @@ export namespace Prisma {
     socialYears?: NullableFloatFieldUpdateOperationsInput | number | null
     vatYears?: NullableFloatFieldUpdateOperationsInput | number | null
     incomeYears?: NullableFloatFieldUpdateOperationsInput | number | null
+    create_by?: NullableStringFieldUpdateOperationsInput | string | null
+    create_date?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    update_by?: NullableStringFieldUpdateOperationsInput | string | null
+    update_date?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     userId?: NullableStringFieldUpdateOperationsInput | string | null
     mas_income_typeId?: NullableStringFieldUpdateOperationsInput | string | null
     bookbank_logId?: NullableStringFieldUpdateOperationsInput | string | null
@@ -39953,6 +40037,10 @@ export namespace Prisma {
     socialYears?: SortOrder
     vatYears?: SortOrder
     incomeYears?: SortOrder
+    create_by?: SortOrder
+    create_date?: SortOrder
+    update_by?: SortOrder
+    update_date?: SortOrder
     userId?: SortOrder
     mas_income_typeId?: SortOrder
     bookbank_logId?: SortOrder
@@ -40021,6 +40109,10 @@ export namespace Prisma {
     socialYears?: SortOrder
     vatYears?: SortOrder
     incomeYears?: SortOrder
+    create_by?: SortOrder
+    create_date?: SortOrder
+    update_by?: SortOrder
+    update_date?: SortOrder
     userId?: SortOrder
     mas_income_typeId?: SortOrder
     bookbank_logId?: SortOrder
@@ -40061,6 +40153,10 @@ export namespace Prisma {
     socialYears?: SortOrder
     vatYears?: SortOrder
     incomeYears?: SortOrder
+    create_by?: SortOrder
+    create_date?: SortOrder
+    update_by?: SortOrder
+    update_date?: SortOrder
     userId?: SortOrder
     mas_income_typeId?: SortOrder
     bookbank_logId?: SortOrder
@@ -44443,6 +44539,10 @@ export namespace Prisma {
     socialYears?: number | null
     vatYears?: number | null
     incomeYears?: number | null
+    create_by?: string | null
+    create_date?: Date | string | null
+    update_by?: string | null
+    update_date?: Date | string | null
     provident_logId?: string | null
     provident_log?: provident_logCreateNestedManyWithoutSalaryInput
     bookbank_log?: bookbank_logCreateNestedOneWithoutSalaryInput
@@ -44483,6 +44583,10 @@ export namespace Prisma {
     socialYears?: number | null
     vatYears?: number | null
     incomeYears?: number | null
+    create_by?: string | null
+    create_date?: Date | string | null
+    update_by?: string | null
+    update_date?: Date | string | null
     mas_income_typeId?: string | null
     bookbank_logId?: string | null
     mas_salary_statusId?: string | null
@@ -44966,6 +45070,10 @@ export namespace Prisma {
     socialYears?: FloatNullableFilter | number | null
     vatYears?: FloatNullableFilter | number | null
     incomeYears?: FloatNullableFilter | number | null
+    create_by?: UuidNullableFilter | string | null
+    create_date?: DateTimeNullableFilter | Date | string | null
+    update_by?: UuidNullableFilter | string | null
+    update_date?: DateTimeNullableFilter | Date | string | null
     userId?: UuidNullableFilter | string | null
     mas_income_typeId?: UuidNullableFilter | string | null
     bookbank_logId?: UuidNullableFilter | string | null
@@ -46967,6 +47075,10 @@ export namespace Prisma {
     socialYears?: number | null
     vatYears?: number | null
     incomeYears?: number | null
+    create_by?: string | null
+    create_date?: Date | string | null
+    update_by?: string | null
+    update_date?: Date | string | null
     provident_logId?: string | null
     provident_log?: provident_logCreateNestedManyWithoutSalaryInput
     User?: UserCreateNestedOneWithoutSalaryInput
@@ -47007,6 +47119,10 @@ export namespace Prisma {
     socialYears?: number | null
     vatYears?: number | null
     incomeYears?: number | null
+    create_by?: string | null
+    create_date?: Date | string | null
+    update_by?: string | null
+    update_date?: Date | string | null
     userId?: string | null
     mas_income_typeId?: string | null
     bookbank_logId?: string | null
@@ -47151,6 +47267,10 @@ export namespace Prisma {
     socialYears?: number | null
     vatYears?: number | null
     incomeYears?: number | null
+    create_by?: string | null
+    create_date?: Date | string | null
+    update_by?: string | null
+    update_date?: Date | string | null
     provident_logId?: string | null
     provident_log?: provident_logCreateNestedManyWithoutSalaryInput
     User?: UserCreateNestedOneWithoutSalaryInput
@@ -47191,6 +47311,10 @@ export namespace Prisma {
     socialYears?: number | null
     vatYears?: number | null
     incomeYears?: number | null
+    create_by?: string | null
+    create_date?: Date | string | null
+    update_by?: string | null
+    update_date?: Date | string | null
     userId?: string | null
     mas_income_typeId?: string | null
     bookbank_logId?: string | null
@@ -47257,6 +47381,10 @@ export namespace Prisma {
     socialYears?: number | null
     vatYears?: number | null
     incomeYears?: number | null
+    create_by?: string | null
+    create_date?: Date | string | null
+    update_by?: string | null
+    update_date?: Date | string | null
     provident_logId?: string | null
     provident_log?: provident_logCreateNestedManyWithoutSalaryInput
     User?: UserCreateNestedOneWithoutSalaryInput
@@ -47297,6 +47425,10 @@ export namespace Prisma {
     socialYears?: number | null
     vatYears?: number | null
     incomeYears?: number | null
+    create_by?: string | null
+    create_date?: Date | string | null
+    update_by?: string | null
+    update_date?: Date | string | null
     userId?: string | null
     mas_income_typeId?: string | null
     bookbank_logId?: string | null
@@ -47363,6 +47495,10 @@ export namespace Prisma {
     socialYears?: number | null
     vatYears?: number | null
     incomeYears?: number | null
+    create_by?: string | null
+    create_date?: Date | string | null
+    update_by?: string | null
+    update_date?: Date | string | null
     provident_logId?: string | null
     provident_log?: provident_logCreateNestedManyWithoutSalaryInput
     User?: UserCreateNestedOneWithoutSalaryInput
@@ -47403,6 +47539,10 @@ export namespace Prisma {
     socialYears?: number | null
     vatYears?: number | null
     incomeYears?: number | null
+    create_by?: string | null
+    create_date?: Date | string | null
+    update_by?: string | null
+    update_date?: Date | string | null
     userId?: string | null
     bookbank_logId?: string | null
     mas_salary_statusId?: string | null
@@ -47469,6 +47609,10 @@ export namespace Prisma {
     socialYears?: number | null
     vatYears?: number | null
     incomeYears?: number | null
+    create_by?: string | null
+    create_date?: Date | string | null
+    update_by?: string | null
+    update_date?: Date | string | null
     provident_logId?: string | null
     provident_log?: provident_logCreateNestedManyWithoutSalaryInput
     User?: UserCreateNestedOneWithoutSalaryInput
@@ -47509,6 +47653,10 @@ export namespace Prisma {
     socialYears?: number | null
     vatYears?: number | null
     incomeYears?: number | null
+    create_by?: string | null
+    create_date?: Date | string | null
+    update_by?: string | null
+    update_date?: Date | string | null
     userId?: string | null
     mas_income_typeId?: string | null
     bookbank_logId?: string | null
@@ -48325,6 +48473,10 @@ export namespace Prisma {
     socialYears?: number | null
     vatYears?: number | null
     incomeYears?: number | null
+    create_by?: string | null
+    create_date?: Date | string | null
+    update_by?: string | null
+    update_date?: Date | string | null
     provident_logId?: string | null
     provident_log?: provident_logCreateNestedManyWithoutSalaryInput
     User?: UserCreateNestedOneWithoutSalaryInput
@@ -48365,6 +48517,10 @@ export namespace Prisma {
     socialYears?: number | null
     vatYears?: number | null
     incomeYears?: number | null
+    create_by?: string | null
+    create_date?: Date | string | null
+    update_by?: string | null
+    update_date?: Date | string | null
     userId?: string | null
     mas_income_typeId?: string | null
     mas_salary_statusId?: string | null
@@ -48724,6 +48880,10 @@ export namespace Prisma {
     socialYears?: number | null
     vatYears?: number | null
     incomeYears?: number | null
+    create_by?: string | null
+    create_date?: Date | string | null
+    update_by?: string | null
+    update_date?: Date | string | null
     provident_logId?: string | null
     User?: UserCreateNestedOneWithoutSalaryInput
     bookbank_log?: bookbank_logCreateNestedOneWithoutSalaryInput
@@ -48764,6 +48924,10 @@ export namespace Prisma {
     socialYears?: number | null
     vatYears?: number | null
     incomeYears?: number | null
+    create_by?: string | null
+    create_date?: Date | string | null
+    update_by?: string | null
+    update_date?: Date | string | null
     userId?: string | null
     mas_income_typeId?: string | null
     bookbank_logId?: string | null
@@ -48921,6 +49085,10 @@ export namespace Prisma {
     socialYears?: NullableFloatFieldUpdateOperationsInput | number | null
     vatYears?: NullableFloatFieldUpdateOperationsInput | number | null
     incomeYears?: NullableFloatFieldUpdateOperationsInput | number | null
+    create_by?: NullableStringFieldUpdateOperationsInput | string | null
+    create_date?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    update_by?: NullableStringFieldUpdateOperationsInput | string | null
+    update_date?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     provident_logId?: NullableStringFieldUpdateOperationsInput | string | null
     User?: UserUpdateOneWithoutSalaryNestedInput
     bookbank_log?: bookbank_logUpdateOneWithoutSalaryNestedInput
@@ -48961,6 +49129,10 @@ export namespace Prisma {
     socialYears?: NullableFloatFieldUpdateOperationsInput | number | null
     vatYears?: NullableFloatFieldUpdateOperationsInput | number | null
     incomeYears?: NullableFloatFieldUpdateOperationsInput | number | null
+    create_by?: NullableStringFieldUpdateOperationsInput | string | null
+    create_date?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    update_by?: NullableStringFieldUpdateOperationsInput | string | null
+    update_date?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     userId?: NullableStringFieldUpdateOperationsInput | string | null
     mas_income_typeId?: NullableStringFieldUpdateOperationsInput | string | null
     bookbank_logId?: NullableStringFieldUpdateOperationsInput | string | null
@@ -49679,6 +49851,10 @@ export namespace Prisma {
     socialYears?: number | null
     vatYears?: number | null
     incomeYears?: number | null
+    create_by?: string | null
+    create_date?: Date | string | null
+    update_by?: string | null
+    update_date?: Date | string | null
     mas_income_typeId?: string | null
     bookbank_logId?: string | null
     mas_salary_statusId?: string | null
@@ -49892,6 +50068,10 @@ export namespace Prisma {
     socialYears?: NullableFloatFieldUpdateOperationsInput | number | null
     vatYears?: NullableFloatFieldUpdateOperationsInput | number | null
     incomeYears?: NullableFloatFieldUpdateOperationsInput | number | null
+    create_by?: NullableStringFieldUpdateOperationsInput | string | null
+    create_date?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    update_by?: NullableStringFieldUpdateOperationsInput | string | null
+    update_date?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     provident_logId?: NullableStringFieldUpdateOperationsInput | string | null
     provident_log?: provident_logUpdateManyWithoutSalaryNestedInput
     bookbank_log?: bookbank_logUpdateOneWithoutSalaryNestedInput
@@ -49932,6 +50112,10 @@ export namespace Prisma {
     socialYears?: NullableFloatFieldUpdateOperationsInput | number | null
     vatYears?: NullableFloatFieldUpdateOperationsInput | number | null
     incomeYears?: NullableFloatFieldUpdateOperationsInput | number | null
+    create_by?: NullableStringFieldUpdateOperationsInput | string | null
+    create_date?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    update_by?: NullableStringFieldUpdateOperationsInput | string | null
+    update_date?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     mas_income_typeId?: NullableStringFieldUpdateOperationsInput | string | null
     bookbank_logId?: NullableStringFieldUpdateOperationsInput | string | null
     mas_salary_statusId?: NullableStringFieldUpdateOperationsInput | string | null
@@ -49972,6 +50156,10 @@ export namespace Prisma {
     socialYears?: NullableFloatFieldUpdateOperationsInput | number | null
     vatYears?: NullableFloatFieldUpdateOperationsInput | number | null
     incomeYears?: NullableFloatFieldUpdateOperationsInput | number | null
+    create_by?: NullableStringFieldUpdateOperationsInput | string | null
+    create_date?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    update_by?: NullableStringFieldUpdateOperationsInput | string | null
+    update_date?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     mas_income_typeId?: NullableStringFieldUpdateOperationsInput | string | null
     bookbank_logId?: NullableStringFieldUpdateOperationsInput | string | null
     mas_salary_statusId?: NullableStringFieldUpdateOperationsInput | string | null
@@ -50477,6 +50665,10 @@ export namespace Prisma {
     socialYears?: number | null
     vatYears?: number | null
     incomeYears?: number | null
+    create_by?: string | null
+    create_date?: Date | string | null
+    update_by?: string | null
+    update_date?: Date | string | null
     userId?: string | null
     mas_income_typeId?: string | null
     bookbank_logId?: string | null
@@ -50562,6 +50754,10 @@ export namespace Prisma {
     socialYears?: NullableFloatFieldUpdateOperationsInput | number | null
     vatYears?: NullableFloatFieldUpdateOperationsInput | number | null
     incomeYears?: NullableFloatFieldUpdateOperationsInput | number | null
+    create_by?: NullableStringFieldUpdateOperationsInput | string | null
+    create_date?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    update_by?: NullableStringFieldUpdateOperationsInput | string | null
+    update_date?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     provident_logId?: NullableStringFieldUpdateOperationsInput | string | null
     provident_log?: provident_logUpdateManyWithoutSalaryNestedInput
     User?: UserUpdateOneWithoutSalaryNestedInput
@@ -50602,6 +50798,10 @@ export namespace Prisma {
     socialYears?: NullableFloatFieldUpdateOperationsInput | number | null
     vatYears?: NullableFloatFieldUpdateOperationsInput | number | null
     incomeYears?: NullableFloatFieldUpdateOperationsInput | number | null
+    create_by?: NullableStringFieldUpdateOperationsInput | string | null
+    create_date?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    update_by?: NullableStringFieldUpdateOperationsInput | string | null
+    update_date?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     userId?: NullableStringFieldUpdateOperationsInput | string | null
     mas_income_typeId?: NullableStringFieldUpdateOperationsInput | string | null
     bookbank_logId?: NullableStringFieldUpdateOperationsInput | string | null
@@ -50671,6 +50871,10 @@ export namespace Prisma {
     socialYears?: number | null
     vatYears?: number | null
     incomeYears?: number | null
+    create_by?: string | null
+    create_date?: Date | string | null
+    update_by?: string | null
+    update_date?: Date | string | null
     userId?: string | null
     mas_income_typeId?: string | null
     bookbank_logId?: string | null
@@ -50710,6 +50914,10 @@ export namespace Prisma {
     socialYears?: NullableFloatFieldUpdateOperationsInput | number | null
     vatYears?: NullableFloatFieldUpdateOperationsInput | number | null
     incomeYears?: NullableFloatFieldUpdateOperationsInput | number | null
+    create_by?: NullableStringFieldUpdateOperationsInput | string | null
+    create_date?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    update_by?: NullableStringFieldUpdateOperationsInput | string | null
+    update_date?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     provident_logId?: NullableStringFieldUpdateOperationsInput | string | null
     provident_log?: provident_logUpdateManyWithoutSalaryNestedInput
     User?: UserUpdateOneWithoutSalaryNestedInput
@@ -50750,6 +50958,10 @@ export namespace Prisma {
     socialYears?: NullableFloatFieldUpdateOperationsInput | number | null
     vatYears?: NullableFloatFieldUpdateOperationsInput | number | null
     incomeYears?: NullableFloatFieldUpdateOperationsInput | number | null
+    create_by?: NullableStringFieldUpdateOperationsInput | string | null
+    create_date?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    update_by?: NullableStringFieldUpdateOperationsInput | string | null
+    update_date?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     userId?: NullableStringFieldUpdateOperationsInput | string | null
     mas_income_typeId?: NullableStringFieldUpdateOperationsInput | string | null
     bookbank_logId?: NullableStringFieldUpdateOperationsInput | string | null
@@ -50790,6 +51002,10 @@ export namespace Prisma {
     socialYears?: number | null
     vatYears?: number | null
     incomeYears?: number | null
+    create_by?: string | null
+    create_date?: Date | string | null
+    update_by?: string | null
+    update_date?: Date | string | null
     userId?: string | null
     mas_income_typeId?: string | null
     bookbank_logId?: string | null
@@ -50829,6 +51045,10 @@ export namespace Prisma {
     socialYears?: NullableFloatFieldUpdateOperationsInput | number | null
     vatYears?: NullableFloatFieldUpdateOperationsInput | number | null
     incomeYears?: NullableFloatFieldUpdateOperationsInput | number | null
+    create_by?: NullableStringFieldUpdateOperationsInput | string | null
+    create_date?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    update_by?: NullableStringFieldUpdateOperationsInput | string | null
+    update_date?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     provident_logId?: NullableStringFieldUpdateOperationsInput | string | null
     provident_log?: provident_logUpdateManyWithoutSalaryNestedInput
     User?: UserUpdateOneWithoutSalaryNestedInput
@@ -50869,6 +51089,10 @@ export namespace Prisma {
     socialYears?: NullableFloatFieldUpdateOperationsInput | number | null
     vatYears?: NullableFloatFieldUpdateOperationsInput | number | null
     incomeYears?: NullableFloatFieldUpdateOperationsInput | number | null
+    create_by?: NullableStringFieldUpdateOperationsInput | string | null
+    create_date?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    update_by?: NullableStringFieldUpdateOperationsInput | string | null
+    update_date?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     userId?: NullableStringFieldUpdateOperationsInput | string | null
     mas_income_typeId?: NullableStringFieldUpdateOperationsInput | string | null
     bookbank_logId?: NullableStringFieldUpdateOperationsInput | string | null
@@ -50909,6 +51133,10 @@ export namespace Prisma {
     socialYears?: number | null
     vatYears?: number | null
     incomeYears?: number | null
+    create_by?: string | null
+    create_date?: Date | string | null
+    update_by?: string | null
+    update_date?: Date | string | null
     userId?: string | null
     bookbank_logId?: string | null
     mas_salary_statusId?: string | null
@@ -50948,6 +51176,10 @@ export namespace Prisma {
     socialYears?: NullableFloatFieldUpdateOperationsInput | number | null
     vatYears?: NullableFloatFieldUpdateOperationsInput | number | null
     incomeYears?: NullableFloatFieldUpdateOperationsInput | number | null
+    create_by?: NullableStringFieldUpdateOperationsInput | string | null
+    create_date?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    update_by?: NullableStringFieldUpdateOperationsInput | string | null
+    update_date?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     provident_logId?: NullableStringFieldUpdateOperationsInput | string | null
     provident_log?: provident_logUpdateManyWithoutSalaryNestedInput
     User?: UserUpdateOneWithoutSalaryNestedInput
@@ -50988,6 +51220,10 @@ export namespace Prisma {
     socialYears?: NullableFloatFieldUpdateOperationsInput | number | null
     vatYears?: NullableFloatFieldUpdateOperationsInput | number | null
     incomeYears?: NullableFloatFieldUpdateOperationsInput | number | null
+    create_by?: NullableStringFieldUpdateOperationsInput | string | null
+    create_date?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    update_by?: NullableStringFieldUpdateOperationsInput | string | null
+    update_date?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     userId?: NullableStringFieldUpdateOperationsInput | string | null
     bookbank_logId?: NullableStringFieldUpdateOperationsInput | string | null
     mas_salary_statusId?: NullableStringFieldUpdateOperationsInput | string | null
@@ -51028,6 +51264,10 @@ export namespace Prisma {
     socialYears?: number | null
     vatYears?: number | null
     incomeYears?: number | null
+    create_by?: string | null
+    create_date?: Date | string | null
+    update_by?: string | null
+    update_date?: Date | string | null
     userId?: string | null
     mas_income_typeId?: string | null
     bookbank_logId?: string | null
@@ -51067,6 +51307,10 @@ export namespace Prisma {
     socialYears?: NullableFloatFieldUpdateOperationsInput | number | null
     vatYears?: NullableFloatFieldUpdateOperationsInput | number | null
     incomeYears?: NullableFloatFieldUpdateOperationsInput | number | null
+    create_by?: NullableStringFieldUpdateOperationsInput | string | null
+    create_date?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    update_by?: NullableStringFieldUpdateOperationsInput | string | null
+    update_date?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     provident_logId?: NullableStringFieldUpdateOperationsInput | string | null
     provident_log?: provident_logUpdateManyWithoutSalaryNestedInput
     User?: UserUpdateOneWithoutSalaryNestedInput
@@ -51107,6 +51351,10 @@ export namespace Prisma {
     socialYears?: NullableFloatFieldUpdateOperationsInput | number | null
     vatYears?: NullableFloatFieldUpdateOperationsInput | number | null
     incomeYears?: NullableFloatFieldUpdateOperationsInput | number | null
+    create_by?: NullableStringFieldUpdateOperationsInput | string | null
+    create_date?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    update_by?: NullableStringFieldUpdateOperationsInput | string | null
+    update_date?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     userId?: NullableStringFieldUpdateOperationsInput | string | null
     mas_income_typeId?: NullableStringFieldUpdateOperationsInput | string | null
     bookbank_logId?: NullableStringFieldUpdateOperationsInput | string | null
@@ -51207,6 +51455,10 @@ export namespace Prisma {
     socialYears?: number | null
     vatYears?: number | null
     incomeYears?: number | null
+    create_by?: string | null
+    create_date?: Date | string | null
+    update_by?: string | null
+    update_date?: Date | string | null
     userId?: string | null
     mas_income_typeId?: string | null
     mas_salary_statusId?: string | null
@@ -51256,6 +51508,10 @@ export namespace Prisma {
     socialYears?: NullableFloatFieldUpdateOperationsInput | number | null
     vatYears?: NullableFloatFieldUpdateOperationsInput | number | null
     incomeYears?: NullableFloatFieldUpdateOperationsInput | number | null
+    create_by?: NullableStringFieldUpdateOperationsInput | string | null
+    create_date?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    update_by?: NullableStringFieldUpdateOperationsInput | string | null
+    update_date?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     provident_logId?: NullableStringFieldUpdateOperationsInput | string | null
     provident_log?: provident_logUpdateManyWithoutSalaryNestedInput
     User?: UserUpdateOneWithoutSalaryNestedInput
@@ -51296,6 +51552,10 @@ export namespace Prisma {
     socialYears?: NullableFloatFieldUpdateOperationsInput | number | null
     vatYears?: NullableFloatFieldUpdateOperationsInput | number | null
     incomeYears?: NullableFloatFieldUpdateOperationsInput | number | null
+    create_by?: NullableStringFieldUpdateOperationsInput | string | null
+    create_date?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    update_by?: NullableStringFieldUpdateOperationsInput | string | null
+    update_date?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     userId?: NullableStringFieldUpdateOperationsInput | string | null
     mas_income_typeId?: NullableStringFieldUpdateOperationsInput | string | null
     mas_salary_statusId?: NullableStringFieldUpdateOperationsInput | string | null
