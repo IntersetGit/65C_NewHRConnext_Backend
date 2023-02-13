@@ -417,12 +417,12 @@ export type salary = {
 export type mas_all_collect = {
   id: string
   userId: string
-  date: Date
-  income_collect: number
+  date: Date | null
+  income_collect: number | null
   vat_collect: number | null
-  social_secu_collect: number
-  provident_collect_employee: number
-  provident_collect_company: number
+  social_secu_collect: number | null
+  provident_collect_employee: number | null
+  provident_collect_company: number | null
 }
 
 /**
@@ -28553,12 +28553,12 @@ export namespace Prisma {
   export type Mas_all_collectGroupByOutputType = {
     id: string
     userId: string
-    date: Date
-    income_collect: number
+    date: Date | null
+    income_collect: number | null
     vat_collect: number | null
-    social_secu_collect: number
-    provident_collect_employee: number
-    provident_collect_company: number
+    social_secu_collect: number | null
+    provident_collect_employee: number | null
+    provident_collect_company: number | null
     _count: Mas_all_collectCountAggregateOutputType | null
     _avg: Mas_all_collectAvgAggregateOutputType | null
     _sum: Mas_all_collectSumAggregateOutputType | null
@@ -35654,12 +35654,12 @@ export namespace Prisma {
     id?: UuidFilter | string
     user?: XOR<UserRelationFilter, UserWhereInput>
     userId?: UuidFilter | string
-    date?: DateTimeFilter | Date | string
-    income_collect?: FloatFilter | number
+    date?: DateTimeNullableFilter | Date | string | null
+    income_collect?: FloatNullableFilter | number | null
     vat_collect?: FloatNullableFilter | number | null
-    social_secu_collect?: FloatFilter | number
-    provident_collect_employee?: FloatFilter | number
-    provident_collect_company?: FloatFilter | number
+    social_secu_collect?: FloatNullableFilter | number | null
+    provident_collect_employee?: FloatNullableFilter | number | null
+    provident_collect_company?: FloatNullableFilter | number | null
     provident_log?: Provident_logListRelationFilter
   }
 
@@ -35703,12 +35703,12 @@ export namespace Prisma {
     NOT?: Enumerable<mas_all_collectScalarWhereWithAggregatesInput>
     id?: UuidWithAggregatesFilter | string
     userId?: UuidWithAggregatesFilter | string
-    date?: DateTimeWithAggregatesFilter | Date | string
-    income_collect?: FloatWithAggregatesFilter | number
+    date?: DateTimeNullableWithAggregatesFilter | Date | string | null
+    income_collect?: FloatNullableWithAggregatesFilter | number | null
     vat_collect?: FloatNullableWithAggregatesFilter | number | null
-    social_secu_collect?: FloatWithAggregatesFilter | number
-    provident_collect_employee?: FloatWithAggregatesFilter | number
-    provident_collect_company?: FloatWithAggregatesFilter | number
+    social_secu_collect?: FloatNullableWithAggregatesFilter | number | null
+    provident_collect_employee?: FloatNullableWithAggregatesFilter | number | null
+    provident_collect_company?: FloatNullableWithAggregatesFilter | number | null
   }
 
   export type bookbank_logWhereInput = {
@@ -38168,81 +38168,81 @@ export namespace Prisma {
   export type mas_all_collectCreateInput = {
     id: string
     user: UserCreateNestedOneWithoutMas_all_collectInput
-    date: Date | string
-    income_collect: number
+    date?: Date | string | null
+    income_collect?: number | null
     vat_collect?: number | null
-    social_secu_collect: number
-    provident_collect_employee: number
-    provident_collect_company: number
+    social_secu_collect?: number | null
+    provident_collect_employee?: number | null
+    provident_collect_company?: number | null
     provident_log?: provident_logCreateNestedManyWithoutMas_all_collectInput
   }
 
   export type mas_all_collectUncheckedCreateInput = {
     id: string
     userId: string
-    date: Date | string
-    income_collect: number
+    date?: Date | string | null
+    income_collect?: number | null
     vat_collect?: number | null
-    social_secu_collect: number
-    provident_collect_employee: number
-    provident_collect_company: number
+    social_secu_collect?: number | null
+    provident_collect_employee?: number | null
+    provident_collect_company?: number | null
     provident_log?: provident_logUncheckedCreateNestedManyWithoutMas_all_collectInput
   }
 
   export type mas_all_collectUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
     user?: UserUpdateOneRequiredWithoutMas_all_collectNestedInput
-    date?: DateTimeFieldUpdateOperationsInput | Date | string
-    income_collect?: FloatFieldUpdateOperationsInput | number
+    date?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    income_collect?: NullableFloatFieldUpdateOperationsInput | number | null
     vat_collect?: NullableFloatFieldUpdateOperationsInput | number | null
-    social_secu_collect?: FloatFieldUpdateOperationsInput | number
-    provident_collect_employee?: FloatFieldUpdateOperationsInput | number
-    provident_collect_company?: FloatFieldUpdateOperationsInput | number
+    social_secu_collect?: NullableFloatFieldUpdateOperationsInput | number | null
+    provident_collect_employee?: NullableFloatFieldUpdateOperationsInput | number | null
+    provident_collect_company?: NullableFloatFieldUpdateOperationsInput | number | null
     provident_log?: provident_logUpdateManyWithoutMas_all_collectNestedInput
   }
 
   export type mas_all_collectUncheckedUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
     userId?: StringFieldUpdateOperationsInput | string
-    date?: DateTimeFieldUpdateOperationsInput | Date | string
-    income_collect?: FloatFieldUpdateOperationsInput | number
+    date?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    income_collect?: NullableFloatFieldUpdateOperationsInput | number | null
     vat_collect?: NullableFloatFieldUpdateOperationsInput | number | null
-    social_secu_collect?: FloatFieldUpdateOperationsInput | number
-    provident_collect_employee?: FloatFieldUpdateOperationsInput | number
-    provident_collect_company?: FloatFieldUpdateOperationsInput | number
+    social_secu_collect?: NullableFloatFieldUpdateOperationsInput | number | null
+    provident_collect_employee?: NullableFloatFieldUpdateOperationsInput | number | null
+    provident_collect_company?: NullableFloatFieldUpdateOperationsInput | number | null
     provident_log?: provident_logUncheckedUpdateManyWithoutMas_all_collectNestedInput
   }
 
   export type mas_all_collectCreateManyInput = {
     id: string
     userId: string
-    date: Date | string
-    income_collect: number
+    date?: Date | string | null
+    income_collect?: number | null
     vat_collect?: number | null
-    social_secu_collect: number
-    provident_collect_employee: number
-    provident_collect_company: number
+    social_secu_collect?: number | null
+    provident_collect_employee?: number | null
+    provident_collect_company?: number | null
   }
 
   export type mas_all_collectUpdateManyMutationInput = {
     id?: StringFieldUpdateOperationsInput | string
-    date?: DateTimeFieldUpdateOperationsInput | Date | string
-    income_collect?: FloatFieldUpdateOperationsInput | number
+    date?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    income_collect?: NullableFloatFieldUpdateOperationsInput | number | null
     vat_collect?: NullableFloatFieldUpdateOperationsInput | number | null
-    social_secu_collect?: FloatFieldUpdateOperationsInput | number
-    provident_collect_employee?: FloatFieldUpdateOperationsInput | number
-    provident_collect_company?: FloatFieldUpdateOperationsInput | number
+    social_secu_collect?: NullableFloatFieldUpdateOperationsInput | number | null
+    provident_collect_employee?: NullableFloatFieldUpdateOperationsInput | number | null
+    provident_collect_company?: NullableFloatFieldUpdateOperationsInput | number | null
   }
 
   export type mas_all_collectUncheckedUpdateManyInput = {
     id?: StringFieldUpdateOperationsInput | string
     userId?: StringFieldUpdateOperationsInput | string
-    date?: DateTimeFieldUpdateOperationsInput | Date | string
-    income_collect?: FloatFieldUpdateOperationsInput | number
+    date?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    income_collect?: NullableFloatFieldUpdateOperationsInput | number | null
     vat_collect?: NullableFloatFieldUpdateOperationsInput | number | null
-    social_secu_collect?: FloatFieldUpdateOperationsInput | number
-    provident_collect_employee?: FloatFieldUpdateOperationsInput | number
-    provident_collect_company?: FloatFieldUpdateOperationsInput | number
+    social_secu_collect?: NullableFloatFieldUpdateOperationsInput | number | null
+    provident_collect_employee?: NullableFloatFieldUpdateOperationsInput | number | null
+    provident_collect_company?: NullableFloatFieldUpdateOperationsInput | number | null
   }
 
   export type bookbank_logCreateInput = {
@@ -44479,23 +44479,23 @@ export namespace Prisma {
 
   export type mas_all_collectCreateWithoutUserInput = {
     id: string
-    date: Date | string
-    income_collect: number
+    date?: Date | string | null
+    income_collect?: number | null
     vat_collect?: number | null
-    social_secu_collect: number
-    provident_collect_employee: number
-    provident_collect_company: number
+    social_secu_collect?: number | null
+    provident_collect_employee?: number | null
+    provident_collect_company?: number | null
     provident_log?: provident_logCreateNestedManyWithoutMas_all_collectInput
   }
 
   export type mas_all_collectUncheckedCreateWithoutUserInput = {
     id: string
-    date: Date | string
-    income_collect: number
+    date?: Date | string | null
+    income_collect?: number | null
     vat_collect?: number | null
-    social_secu_collect: number
-    provident_collect_employee: number
-    provident_collect_company: number
+    social_secu_collect?: number | null
+    provident_collect_employee?: number | null
+    provident_collect_company?: number | null
     provident_log?: provident_logUncheckedCreateNestedManyWithoutMas_all_collectInput
   }
 
@@ -45013,12 +45013,12 @@ export namespace Prisma {
     NOT?: Enumerable<mas_all_collectScalarWhereInput>
     id?: UuidFilter | string
     userId?: UuidFilter | string
-    date?: DateTimeFilter | Date | string
-    income_collect?: FloatFilter | number
+    date?: DateTimeNullableFilter | Date | string | null
+    income_collect?: FloatNullableFilter | number | null
     vat_collect?: FloatNullableFilter | number | null
-    social_secu_collect?: FloatFilter | number
-    provident_collect_employee?: FloatFilter | number
-    provident_collect_company?: FloatFilter | number
+    social_secu_collect?: FloatNullableFilter | number | null
+    provident_collect_employee?: FloatNullableFilter | number | null
+    provident_collect_company?: FloatNullableFilter | number | null
   }
 
   export type salaryUpsertWithWhereUniqueWithoutUserInput = {
@@ -48795,23 +48795,23 @@ export namespace Prisma {
   export type mas_all_collectCreateWithoutProvident_logInput = {
     id: string
     user: UserCreateNestedOneWithoutMas_all_collectInput
-    date: Date | string
-    income_collect: number
+    date?: Date | string | null
+    income_collect?: number | null
     vat_collect?: number | null
-    social_secu_collect: number
-    provident_collect_employee: number
-    provident_collect_company: number
+    social_secu_collect?: number | null
+    provident_collect_employee?: number | null
+    provident_collect_company?: number | null
   }
 
   export type mas_all_collectUncheckedCreateWithoutProvident_logInput = {
     id: string
     userId: string
-    date: Date | string
-    income_collect: number
+    date?: Date | string | null
+    income_collect?: number | null
     vat_collect?: number | null
-    social_secu_collect: number
-    provident_collect_employee: number
-    provident_collect_company: number
+    social_secu_collect?: number | null
+    provident_collect_employee?: number | null
+    provident_collect_company?: number | null
   }
 
   export type mas_all_collectCreateOrConnectWithoutProvident_logInput = {
@@ -49000,23 +49000,23 @@ export namespace Prisma {
   export type mas_all_collectUpdateWithoutProvident_logInput = {
     id?: StringFieldUpdateOperationsInput | string
     user?: UserUpdateOneRequiredWithoutMas_all_collectNestedInput
-    date?: DateTimeFieldUpdateOperationsInput | Date | string
-    income_collect?: FloatFieldUpdateOperationsInput | number
+    date?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    income_collect?: NullableFloatFieldUpdateOperationsInput | number | null
     vat_collect?: NullableFloatFieldUpdateOperationsInput | number | null
-    social_secu_collect?: FloatFieldUpdateOperationsInput | number
-    provident_collect_employee?: FloatFieldUpdateOperationsInput | number
-    provident_collect_company?: FloatFieldUpdateOperationsInput | number
+    social_secu_collect?: NullableFloatFieldUpdateOperationsInput | number | null
+    provident_collect_employee?: NullableFloatFieldUpdateOperationsInput | number | null
+    provident_collect_company?: NullableFloatFieldUpdateOperationsInput | number | null
   }
 
   export type mas_all_collectUncheckedUpdateWithoutProvident_logInput = {
     id?: StringFieldUpdateOperationsInput | string
     userId?: StringFieldUpdateOperationsInput | string
-    date?: DateTimeFieldUpdateOperationsInput | Date | string
-    income_collect?: FloatFieldUpdateOperationsInput | number
+    date?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    income_collect?: NullableFloatFieldUpdateOperationsInput | number | null
     vat_collect?: NullableFloatFieldUpdateOperationsInput | number | null
-    social_secu_collect?: FloatFieldUpdateOperationsInput | number
-    provident_collect_employee?: FloatFieldUpdateOperationsInput | number
-    provident_collect_company?: FloatFieldUpdateOperationsInput | number
+    social_secu_collect?: NullableFloatFieldUpdateOperationsInput | number | null
+    provident_collect_employee?: NullableFloatFieldUpdateOperationsInput | number | null
+    provident_collect_company?: NullableFloatFieldUpdateOperationsInput | number | null
   }
 
   export type bookbank_logUpsertWithoutProvident_logInput = {
@@ -49813,12 +49813,12 @@ export namespace Prisma {
 
   export type mas_all_collectCreateManyUserInput = {
     id: string
-    date: Date | string
-    income_collect: number
+    date?: Date | string | null
+    income_collect?: number | null
     vat_collect?: number | null
-    social_secu_collect: number
-    provident_collect_employee: number
-    provident_collect_company: number
+    social_secu_collect?: number | null
+    provident_collect_employee?: number | null
+    provident_collect_company?: number | null
   }
 
   export type salaryCreateManyUserInput = {
@@ -50008,34 +50008,34 @@ export namespace Prisma {
 
   export type mas_all_collectUpdateWithoutUserInput = {
     id?: StringFieldUpdateOperationsInput | string
-    date?: DateTimeFieldUpdateOperationsInput | Date | string
-    income_collect?: FloatFieldUpdateOperationsInput | number
+    date?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    income_collect?: NullableFloatFieldUpdateOperationsInput | number | null
     vat_collect?: NullableFloatFieldUpdateOperationsInput | number | null
-    social_secu_collect?: FloatFieldUpdateOperationsInput | number
-    provident_collect_employee?: FloatFieldUpdateOperationsInput | number
-    provident_collect_company?: FloatFieldUpdateOperationsInput | number
+    social_secu_collect?: NullableFloatFieldUpdateOperationsInput | number | null
+    provident_collect_employee?: NullableFloatFieldUpdateOperationsInput | number | null
+    provident_collect_company?: NullableFloatFieldUpdateOperationsInput | number | null
     provident_log?: provident_logUpdateManyWithoutMas_all_collectNestedInput
   }
 
   export type mas_all_collectUncheckedUpdateWithoutUserInput = {
     id?: StringFieldUpdateOperationsInput | string
-    date?: DateTimeFieldUpdateOperationsInput | Date | string
-    income_collect?: FloatFieldUpdateOperationsInput | number
+    date?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    income_collect?: NullableFloatFieldUpdateOperationsInput | number | null
     vat_collect?: NullableFloatFieldUpdateOperationsInput | number | null
-    social_secu_collect?: FloatFieldUpdateOperationsInput | number
-    provident_collect_employee?: FloatFieldUpdateOperationsInput | number
-    provident_collect_company?: FloatFieldUpdateOperationsInput | number
+    social_secu_collect?: NullableFloatFieldUpdateOperationsInput | number | null
+    provident_collect_employee?: NullableFloatFieldUpdateOperationsInput | number | null
+    provident_collect_company?: NullableFloatFieldUpdateOperationsInput | number | null
     provident_log?: provident_logUncheckedUpdateManyWithoutMas_all_collectNestedInput
   }
 
   export type mas_all_collectUncheckedUpdateManyWithoutMas_all_collectInput = {
     id?: StringFieldUpdateOperationsInput | string
-    date?: DateTimeFieldUpdateOperationsInput | Date | string
-    income_collect?: FloatFieldUpdateOperationsInput | number
+    date?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    income_collect?: NullableFloatFieldUpdateOperationsInput | number | null
     vat_collect?: NullableFloatFieldUpdateOperationsInput | number | null
-    social_secu_collect?: FloatFieldUpdateOperationsInput | number
-    provident_collect_employee?: FloatFieldUpdateOperationsInput | number
-    provident_collect_company?: FloatFieldUpdateOperationsInput | number
+    social_secu_collect?: NullableFloatFieldUpdateOperationsInput | number | null
+    provident_collect_employee?: NullableFloatFieldUpdateOperationsInput | number | null
+    provident_collect_company?: NullableFloatFieldUpdateOperationsInput | number | null
   }
 
   export type salaryUpdateWithoutUserInput = {
