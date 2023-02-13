@@ -171,16 +171,16 @@ export const leaveResolvers: Resolvers = {
       }
 
       let dataCount = {
-        name_1: 'ลาพักร้อน ' + countleave1 + ' วัน' + cout_hours + ' ชั่วโมง',
+        name_1: 'ลาพักร้อน ' + countleave1 + ' วัน ' + cout_hours + ' ชั่วโมง',
         count1: countleave1,
         hours1: cout_hours,
-        name_2: 'ลาป่วย ' + countleave2 + ' วัน' + cout_hours2 + ' ชั่วโมง',
+        name_2: 'ลาป่วย ' + countleave2 + ' วัน ' + cout_hours2 + ' ชั่วโมง',
         count2: countleave2,
         hours2: cout_hours2,
-        name_3: 'ลากิจ ' + countleave3 + ' วัน' + cout_hours3  + ' ชั่วโมง',
+        name_3: 'ลากิจ ' + countleave3 + ' วัน ' + cout_hours3  + ' ชั่วโมง',
         count3: countleave3,
         hours: cout_hours3,
-        name_4: 'ลาอื่นๆ ' + countleave4 + ' วัน' + cout_hours4 + ' ชั่วโมง',
+        name_4: 'ลาอื่นๆ ' + countleave4 + ' วัน ' + cout_hours4 + ' ชั่วโมง',
         count4: countleave4,
         hours4: cout_hours4
       }
