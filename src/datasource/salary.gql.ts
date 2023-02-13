@@ -5,7 +5,7 @@ import { v4 } from 'uuid';
 import { composeResolvers } from '@graphql-tools/resolvers-composition';
 import { authenticate } from '../middleware/authenticatetoken';
 import dayjs from 'dayjs';
-import { includes } from 'lodash';
+import { includes, orderBy } from 'lodash';
 import { profile } from 'console';
 
 
@@ -409,8 +409,14 @@ user_id:String
     status: Boolean
   }
 
+  type DeletebookbankResponseType {
+    message: String
+    status: Boolean
+  }
+
   type Query {
     salary(userId:String): [data_salary]
+    salary_inmonthSlip(userId: String, month: String, years: String):[data_salary]
     bookbank_log: [Bookbank_log_type]
     bookbank_log_admin(userId: String): [Bookbank_log_type]
     provident_log(userId:String):[provident_log]
@@ -433,6 +439,7 @@ user_id:String
       data: ExpenseComInput
     ): CreateAndUpdateExpenseComResponseType
     DeleteSalary(id: ID!): DeleteSalaryResponseType
+    Deletebookbank(id: ID!): DeletebookbankResponseType
     CreateSalaryStatus(data: salary_status_input ): SalaryStatusResponseType
   }
 `;
@@ -480,7 +487,7 @@ const resolvers: Resolvers = {
       return result;
     },
 
-    async datasalary_mee(parant, args: any, ctx) {
+    async datasalary_mee(parant, args: any, ctx) {  //เรียกดูตามปี
       const date = args?.date ? args?.date : undefined;
       const getdata = await ctx.prisma.user.findMany({
         include: { salary: { where: { years: date }, include: { bookbank_log: true, mas_bank: true, } }, profile: true },
@@ -489,6 +496,23 @@ const resolvers: Resolvers = {
         },
       });
       return getdata;
+    },
+
+    async salary_inmonthSlip(parant, args, ctx) { // for admin
+      const data = await ctx.prisma.user.findMany({
+        include: {
+          profile: true,
+          salary: { where: { month: args.month, AND: { years: args.years } } },
+          companyBranch: { include: { company: true, expense_company: true } },
+          Position_user: { include: { mas_positionlevel2: true, mas_positionlevel3: true }, orderBy: { date: 'desc' } },
+          bookbank_log: { include: { mas_bank: true }, orderBy: { date: 'desc' } },
+          mas_all_collect: true
+        },
+        where: {
+          id: args.userId as string,
+        }
+      });
+      return data
     },
 
     async mas_all_collect(parant: any, args: any, ctx: any) {
@@ -577,7 +601,7 @@ const resolvers: Resolvers = {
       return result;
     },
 
-    async data_salary(p, args, ctx) {
+    async data_salary(p, args, ctx) { //เงินเดือนของแต่ละคน
       const search1 = args.fristname ? args.fristname : undefined
       const search2 = args.Position2 ? args.Position2 : undefined
       const search3 = args.Position3 ? args.Position3 : undefined
@@ -600,7 +624,7 @@ const resolvers: Resolvers = {
             orderBy: { date: 'desc' }
           },
           salary: true,
-          bookbank_log: { include: { mas_bank: true } }
+          bookbank_log: { include: { mas_bank: true }, orderBy: { date: 'desc' } }
         },
         where: {
           companyBranchId: ctx.currentUser?.branchId,
@@ -613,7 +637,7 @@ const resolvers: Resolvers = {
                 some: {
                   mas_positionlevel2: { name: { contains: search2 } },
                   AND: { mas_positionlevel3: { name: { contains: search3 } } }
-                },
+                }, //
               },
             },
           },
@@ -1001,6 +1025,27 @@ const resolvers: Resolvers = {
       //สร้าง bookbank
       const bookbankID = v4();
       // const providentID = v4()
+      if (args.data?.id) {
+        const createbook_bank = await ctx.prisma.bookbank_log.update({
+          data: {
+            date: new Date(args.data?.date),
+            mas_bankId: args.data?.mas_bankId,
+            bank_number: args.data?.bank_number as number,
+            all_collectId: args.data?.all_collectId,
+            base_salary: args.data?.base_salary as number,
+            userId: args.data?.userId,
+            provident_com: args.data?.provident_com, // กองทุนของพนักงาน ตัวเลขเป็น %
+            provident_emp: args.data?.provident_emp, // กองทุนของบริษัท ตัวเลขเป็น %
+          },
+          where: {
+            id: args.data?.id,
+          },
+        });
+        return {
+          message: 'update success',
+          status: true,
+        };
+      }
       const createbook_bank = await ctx.prisma.bookbank_log.create({
         data: {
           id: bookbankID,
@@ -1012,17 +1057,6 @@ const resolvers: Resolvers = {
           userId: args.data?.userId,
           provident_com: args.data?.provident_com, // กองทุนของพนักงาน ตัวเลขเป็น %
           provident_emp: args.data?.provident_emp, // กองทุนของบริษัท ตัวเลขเป็น %
-          // provident_log: {
-          //   create: {
-          //     id: providentID,
-          //     userId: args.data?.userId,
-          //     provident_date: new Date(args.data?.date),
-          //     pro_employee: args.data?.pro_employee as number,
-          //     pro_company: args.data?.pro_company as number,
-          //     mas_all_collectId: args.data?.mas_all_collectId,
-          //     // bookbank_logId : bookbankID
-          //   }
-          // }
         },
       });
       return {
@@ -1111,8 +1145,22 @@ const resolvers: Resolvers = {
         status: true,
       };
     },
+
+    async Deletebookbank(p: any, args: any, ctx: any){
+      const deletebook_bank = await ctx.prisma.bookbank_log.delete({
+        where: {
+          id: args.id,
+        },
+      });
+      return {
+        message: 'delete bookbank success',
+        status: true,
+      };
+    },
   },
 };
+
+
 
 
 const resolversComposition = {
@@ -1128,7 +1176,8 @@ const resolversComposition = {
   'Mutation.createBank': [authenticate()],
   'Mutation.CreateAndUpdateExpenseCom': [authenticate()],
   'Mutation.Createincometype': [authenticate()],
-  // 'Mutation.deleteAccountUser': [authenticate()],
+  'Mutation.Deletebookbank': [authenticate()],
+  'Mutation.DeleteSalary': [authenticate()],
 };
 
 export const salaryResolvers = composeResolvers(
