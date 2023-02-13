@@ -195,7 +195,7 @@ export const leaveResolvers: Resolvers = {
 
     async getleava_alldata(p, args, ctx) {
       if (args.dataleaveId) {
-        const alldata_hearder = await ctx.prisma.user.findMany({
+        const alldata_hearderbyId = await ctx.prisma.user.findMany({
           include: {
             profile: true,
             Position_user: { include: { mas_positionlevel1: true, mas_positionlevel2: true, mas_positionlevel3: true } },
@@ -209,7 +209,7 @@ export const leaveResolvers: Resolvers = {
             }
           }
         })
-        return alldata_hearder
+        return alldata_hearderbyId
 
       } else {
         const alldata_hearder = await ctx.prisma.user.findMany({
@@ -233,7 +233,6 @@ export const leaveResolvers: Resolvers = {
 
 
   Mutation: {
-
     async createddata_leave(p, args, ctx) {
       if (args.data?.id) {
         const updatedLeavdData = await ctx.prisma.data_leave.update({
