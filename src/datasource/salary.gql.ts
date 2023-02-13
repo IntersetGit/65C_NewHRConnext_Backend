@@ -6,6 +6,7 @@ import { composeResolvers } from '@graphql-tools/resolvers-composition';
 import { authenticate } from '../middleware/authenticatetoken';
 import dayjs from 'dayjs';
 import { includes } from 'lodash';
+import { profile } from 'console';
 
 
 
@@ -317,6 +318,18 @@ export const salaryTypedef = gql`
     bookbank_log: [Bookbank_log_type]
   }
 
+  type mas_salary_status {
+  id: ID
+  no: Int
+  name: String
+  salary: [salary]
+  }
+
+  input salary_status_input {
+  id: ID
+  no: Int
+  name: String
+  }
 
   type data_salary {
     email: String
@@ -391,9 +404,15 @@ user_id:String
     status: Boolean
   }
 
+  type SalaryStatusResponseType {
+    message: String
+    status: Boolean
+  }
+
   type Query {
     salary(userId:String): [data_salary]
-    bookbank_log(id: String): [bookbank_log]
+    bookbank_log: [Bookbank_log_type]
+    bookbank_log_admin(userId: String): [Bookbank_log_type]
     provident_log(userId:String):[provident_log]
     datasalary_mee(date:String): [data_salary_me]
     # Selfdatasalary: selfsalary
@@ -402,6 +421,7 @@ user_id:String
     mas_bank(id: String): [mas_bank]
     data_salary(fristname: String ,Position2: String ,Position3: String):[data_salary]
   }
+
   type Mutation {
     Createsalary(data: salaryInput): createsalaryResponseType
     Createbookbank(data: bookbank_logInput): createbookbanklogResponseType
@@ -413,6 +433,7 @@ user_id:String
       data: ExpenseComInput
     ): CreateAndUpdateExpenseComResponseType
     DeleteSalary(id: ID!): DeleteSalaryResponseType
+    CreateSalaryStatus(data: salary_status_input ): SalaryStatusResponseType
   }
 `;
 
@@ -493,21 +514,58 @@ const resolvers: Resolvers = {
     // },
 
     async bookbank_log(parant: any, args: any, ctx: any) {
-      const filter = args?.userId ? args.userId : undefined;
+      // const filter = args?.userId ? args.userId : undefined;
       const result = await ctx.prisma.bookbank_log.findMany({
-        include: { User: true, mas_bank: true },
+        include: {
+          User: { include: { profile: true, Position_user: { include: { mas_positionlevel3: true } } } },
+          mas_bank: true
+        },
         where: {
-          userId: ctx.currentUser?.userId,
-          AND: {
-            AND: {
-              years: { contains: filter },
-              month: { contains: filter },
-            },
-          },
+          userId: ctx.currentUser?.id,
+        },
+        orderBy:
+        {
+          date: "desc",
         },
       });
-      return result;
+      return result; //แสดงข้อมูลโดยล็อคอินด้วย user
     },
+
+    // async bookbank_log(parant: any, args: any, ctx: any) {
+    //   const filter = args?.userId ? args.userId : undefined;
+    //   const result = await ctx.prisma.bookbank_log.findMany({
+    //     include: { User: true, mas_bank: true },
+    //     where: {
+    //       userId: ctx.currentUser?.userId,
+    //       AND: {
+    //         AND: {
+    //           years: { contains: filter },
+    //           month: { contains: filter },
+    //         },
+    //       },
+    //     },
+    //   });
+    //   return result;
+    // },
+
+    async bookbank_log_admin(parant: any, args: any, ctx: any) {
+      // const filter = args?.userId ? args.userId : undefined;
+      const result = await ctx.prisma.bookbank_log.findMany({
+        include: {
+          User: { include: { profile: true, Position_user: { include: { mas_positionlevel3: true } } } },
+          mas_bank: true
+        },
+        where: {
+          userId: args.userId,
+        },
+        orderBy:
+        {
+          date: "desc",
+        },
+      });
+      return result; //แสดงข้อมูลด้วยการค้นหา user
+    },
+
     async provident_log(parant: any, args: any, ctx: any) {
       const filter = args?.userId ? args.userId : undefined;
       const result = await ctx.prisma.provident_log.findMany({
@@ -573,6 +631,7 @@ const resolvers: Resolvers = {
      * @param ctx
      * @returns
      */
+
 
     async Createmonth(p: any, args: any, ctx: any) {
       const genmonthID = v4();
@@ -673,7 +732,7 @@ const resolvers: Resolvers = {
             bookbank_logId: args.data?.bookbank_logId,
             mas_income_typeId: args.data?.mas_income_typeId,
             date: new Date(args.data?.date),
-            mas_salary_statusId: args.data?.mas_salary_statusId,
+            mas_salary_statusId: "765d31b6-ab63-11ed-afa1-0242ac120002",
             socialYears: 0 + args.data?.social_security,
             vatYears: 0 + args.data?.vat,
             incomeYears: 0 + args.data?.net,
@@ -794,7 +853,7 @@ const resolvers: Resolvers = {
             bookbank_logId: args.data?.bookbank_logId,
             mas_income_typeId: args.data?.mas_income_typeId,
             date: new Date(args.data?.date),
-            mas_salary_statusId: args.data?.mas_salary_statusId,
+            mas_salary_statusId: "765d31b6-ab63-11ed-afa1-0242ac120002",
             socialYears: result_sosialYears + args.data?.social_security,
             vatYears: result_vatYears + args.data?.vat,
             incomeYears: result_incomeYears + args.data?.net,

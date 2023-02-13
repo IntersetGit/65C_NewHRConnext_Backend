@@ -67,7 +67,8 @@ const server = new ApolloServer<ApolloContext>({
   await server.start();
   app.use(express.json())
   app.use(express.urlencoded({ extended: true }))
-  app.use(express.static(path.join(__dirname, 'public/index.html')));
+  // app.use(`/${process.env.SUB_API_PATH}` , express.static(path.join(__dirname, 'public')));
+  app.use( `/${process.env.SUB_API_PATH}` , express.static('public'))
   app.get('/', (req, res) => {
     res.sendFile(path.join(__dirname, '../public/index.html'))
   })

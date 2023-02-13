@@ -14,7 +14,7 @@ export const salarySlipTypedef = gql`
 
     
 type slipresolvers {
-    message: String
+    path: String
     status: Boolean
 }
 
@@ -371,10 +371,12 @@ const resolversslip: Resolvers = {
             // pdfDoc.fontSize(12).text("___________________", 470, 505)
             pdfDoc.end();
             console.log(pdfDoc)
-            
-            
+
+            let name = `ใบแจ้งเงินเดือน_${staffcode}_${resultmonth}_${Number(Year) + 543}.pdf`
+            let url = `http://localhost:4000/${process.env.SUB_API_PATH}/assets/payment/${name}`
+
             return {
-                message: 'success',
+                path: url,
                 status: true
             }
             
