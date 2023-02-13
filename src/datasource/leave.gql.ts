@@ -174,7 +174,7 @@ export const leaveResolvers: Resolvers = {
         name_1: 'ลาพักร้อน ' + countleave1 + ' วัน ' + cout_hours + ' ชั่วโมง',
         count1: countleave1,
         hours1: cout_hours,
-        name_2: 'ลากิจ' + countleave2 + ' วัน ' + cout_hours2 + ' ชั่วโมง',
+        name_2: 'ลากิจ ' + countleave2 + ' วัน ' + cout_hours2 + ' ชั่วโมง',
         count2: countleave2,
         hours2: cout_hours2,
         name_3: 'ลาป่วย ' + countleave3 + ' วัน ' + cout_hours3  + ' ชั่วโมง',
