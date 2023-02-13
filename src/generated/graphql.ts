@@ -317,6 +317,12 @@ export type DeleteSalaryResponseType = {
   status?: Maybe<Scalars['Boolean']>;
 };
 
+export type DeletebookbankResponseType = {
+  __typename?: 'DeletebookbankResponseType';
+  message?: Maybe<Scalars['String']>;
+  status?: Maybe<Scalars['Boolean']>;
+};
+
 export type District = {
   __typename?: 'District';
   amphoe?: Maybe<Array<Maybe<Amphoe>>>;
@@ -426,6 +432,7 @@ export type Mutation = {
   Createsalary?: Maybe<CreatesalaryResponseType>;
   Createyears?: Maybe<YearsResponseType>;
   DeleteSalary?: Maybe<DeleteSalaryResponseType>;
+  Deletebookbank?: Maybe<DeletebookbankResponseType>;
   EditPosition?: Maybe<CreatepositionResponseType>;
   createAccount?: Maybe<CreateCompanyResponseType>;
   createAccountUser?: Maybe<CreateUserResponseType>;
@@ -489,6 +496,11 @@ export type MutationCreateyearsArgs = {
 
 
 export type MutationDeleteSalaryArgs = {
+  id: Scalars['ID'];
+};
+
+
+export type MutationDeletebookbankArgs = {
   id: Scalars['ID'];
 };
 
@@ -1532,6 +1544,7 @@ export type ResolversTypes = ResolversObject<{
   DeleteHolidayYearResponseType: ResolverTypeWrapper<DeleteHolidayYearResponseType>;
   DeleteRoleCompanyRespnsetType: ResolverTypeWrapper<DeleteRoleCompanyRespnsetType>;
   DeleteSalaryResponseType: ResolverTypeWrapper<DeleteSalaryResponseType>;
+  DeletebookbankResponseType: ResolverTypeWrapper<DeletebookbankResponseType>;
   District: ResolverTypeWrapper<District>;
   ExpenseComInput: ExpenseComInput;
   Float: ResolverTypeWrapper<Scalars['Float']>;
@@ -1644,6 +1657,7 @@ export type ResolversParentTypes = ResolversObject<{
   DeleteHolidayYearResponseType: DeleteHolidayYearResponseType;
   DeleteRoleCompanyRespnsetType: DeleteRoleCompanyRespnsetType;
   DeleteSalaryResponseType: DeleteSalaryResponseType;
+  DeletebookbankResponseType: DeletebookbankResponseType;
   District: District;
   ExpenseComInput: ExpenseComInput;
   Float: Scalars['Float'];
@@ -1906,6 +1920,12 @@ export type DeleteSalaryResponseTypeResolvers<ContextType = ApolloContext, Paren
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 }>;
 
+export type DeletebookbankResponseTypeResolvers<ContextType = ApolloContext, ParentType extends ResolversParentTypes['DeletebookbankResponseType'] = ResolversParentTypes['DeletebookbankResponseType']> = ResolversObject<{
+  message?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  status?: Resolver<Maybe<ResolversTypes['Boolean']>, ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+}>;
+
 export type DistrictResolvers<ContextType = ApolloContext, ParentType extends ResolversParentTypes['District'] = ResolversParentTypes['District']> = ResolversObject<{
   amphoe?: Resolver<Maybe<Array<Maybe<ResolversTypes['Amphoe']>>>, ParentType, ContextType>;
   id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
@@ -2004,6 +2024,7 @@ export type MutationResolvers<ContextType = ApolloContext, ParentType extends Re
   Createsalary?: Resolver<Maybe<ResolversTypes['createsalaryResponseType']>, ParentType, ContextType, Partial<MutationCreatesalaryArgs>>;
   Createyears?: Resolver<Maybe<ResolversTypes['yearsResponseType']>, ParentType, ContextType, Partial<MutationCreateyearsArgs>>;
   DeleteSalary?: Resolver<Maybe<ResolversTypes['DeleteSalaryResponseType']>, ParentType, ContextType, RequireFields<MutationDeleteSalaryArgs, 'id'>>;
+  Deletebookbank?: Resolver<Maybe<ResolversTypes['DeletebookbankResponseType']>, ParentType, ContextType, RequireFields<MutationDeletebookbankArgs, 'id'>>;
   EditPosition?: Resolver<Maybe<ResolversTypes['CreatepositionResponseType']>, ParentType, ContextType, Partial<MutationEditPositionArgs>>;
   createAccount?: Resolver<Maybe<ResolversTypes['CreateCompanyResponseType']>, ParentType, ContextType, RequireFields<MutationCreateAccountArgs, 'data'>>;
   createAccountUser?: Resolver<Maybe<ResolversTypes['CreateUserResponseType']>, ParentType, ContextType, RequireFields<MutationCreateAccountUserArgs, 'data'>>;
@@ -2664,6 +2685,7 @@ export type Resolvers<ContextType = ApolloContext> = ResolversObject<{
   DeleteHolidayYearResponseType?: DeleteHolidayYearResponseTypeResolvers<ContextType>;
   DeleteRoleCompanyRespnsetType?: DeleteRoleCompanyRespnsetTypeResolvers<ContextType>;
   DeleteSalaryResponseType?: DeleteSalaryResponseTypeResolvers<ContextType>;
+  DeletebookbankResponseType?: DeletebookbankResponseTypeResolvers<ContextType>;
   District?: DistrictResolvers<ContextType>;
   GetCompanyAccessType?: GetCompanyAccessTypeResolvers<ContextType>;
   GetOwncompanytype?: GetOwncompanytypeResolvers<ContextType>;

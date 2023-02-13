@@ -409,6 +409,11 @@ user_id:String
     status: Boolean
   }
 
+  type DeletebookbankResponseType {
+    message: String
+    status: Boolean
+  }
+
   type Query {
     salary(userId:String): [data_salary]
     salary_inmonthSlip(userId: String, month: String, years: String):[data_salary]
@@ -434,6 +439,7 @@ user_id:String
       data: ExpenseComInput
     ): CreateAndUpdateExpenseComResponseType
     DeleteSalary(id: ID!): DeleteSalaryResponseType
+    Deletebookbank(id: ID!): DeletebookbankResponseType
     CreateSalaryStatus(data: salary_status_input ): SalaryStatusResponseType
   }
 `;
@@ -1139,8 +1145,22 @@ const resolvers: Resolvers = {
         status: true,
       };
     },
+
+    async Deletebookbank(p: any, args: any, ctx: any){
+      const deletebook_bank = await ctx.prisma.bookbank_log.delete({
+        where: {
+          id: args.id,
+        },
+      });
+      return {
+        message: 'delete bookbank success',
+        status: true,
+      };
+    },
   },
 };
+
+
 
 
 const resolversComposition = {
@@ -1156,7 +1176,8 @@ const resolversComposition = {
   'Mutation.createBank': [authenticate()],
   'Mutation.CreateAndUpdateExpenseCom': [authenticate()],
   'Mutation.Createincometype': [authenticate()],
-  // 'Mutation.deleteAccountUser': [authenticate()],
+  'Mutation.Deletebookbank': [authenticate()],
+  'Mutation.DeleteSalary': [authenticate()],
 };
 
 export const salaryResolvers = composeResolvers(
