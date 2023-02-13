@@ -203,15 +203,10 @@ export const leaveResolvers: Resolvers = {
             data_leave: { include: { mas_leave_type: true }, where: { id: args.dataleaveId } }
           },
           where: {
-            data_leave: {
-              some: {
                 id: args.dataleaveId
-              }
-            }
           }
         })
         return alldata_hearderbyId
-
       } else {
         const alldata_hearder = await ctx.prisma.user.findMany({
           include: {
