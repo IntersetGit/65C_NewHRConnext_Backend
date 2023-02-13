@@ -695,6 +695,7 @@ export type Query = {
   data_salary?: Maybe<Array<Maybe<Data_Salary>>>;
   datasalary_mee?: Maybe<Array<Maybe<Data_Salary_Me>>>;
   getAllcompany?: Maybe<Array<Maybe<CompanyBranch>>>;
+  getAllleave?: Maybe<Array<Maybe<Getdataaboutleave>>>;
   getMasPositon?: Maybe<Array<Maybe<Mas_Positionlevel1>>>;
   getProvince?: Maybe<Array<Maybe<Province>>>;
   getcompanyRole?: Maybe<Array<Maybe<Role_Company>>>;
@@ -746,6 +747,11 @@ export type QueryDatasalary_MeeArgs = {
 
 export type QueryGetAllcompanyArgs = {
   name?: InputMaybe<Scalars['String']>;
+};
+
+
+export type QueryGetAllleaveArgs = {
+  dataleaveId?: InputMaybe<Scalars['ID']>;
 };
 
 
@@ -2152,6 +2158,7 @@ export type QueryResolvers<ContextType = ApolloContext, ParentType extends Resol
   data_salary?: Resolver<Maybe<Array<Maybe<ResolversTypes['data_salary']>>>, ParentType, ContextType, Partial<QueryData_SalaryArgs>>;
   datasalary_mee?: Resolver<Maybe<Array<Maybe<ResolversTypes['data_salary_me']>>>, ParentType, ContextType, Partial<QueryDatasalary_MeeArgs>>;
   getAllcompany?: Resolver<Maybe<Array<Maybe<ResolversTypes['CompanyBranch']>>>, ParentType, ContextType, Partial<QueryGetAllcompanyArgs>>;
+  getAllleave?: Resolver<Maybe<Array<Maybe<ResolversTypes['getdataaboutleave']>>>, ParentType, ContextType, Partial<QueryGetAllleaveArgs>>;
   getMasPositon?: Resolver<Maybe<Array<Maybe<ResolversTypes['mas_positionlevel1']>>>, ParentType, ContextType>;
   getProvince?: Resolver<Maybe<Array<Maybe<ResolversTypes['Province']>>>, ParentType, ContextType>;
   getcompanyRole?: Resolver<Maybe<Array<Maybe<ResolversTypes['Role_Company']>>>, ParentType, ContextType, Partial<QueryGetcompanyRoleArgs>>;
