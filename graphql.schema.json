@@ -5627,7 +5627,7 @@
               "name": null,
               "ofType": {
                 "kind": "OBJECT",
-                "name": "getdataaboutleave",
+                "name": "leave_data",
                 "ofType": null
               }
             },
@@ -5717,7 +5717,7 @@
               "name": null,
               "ofType": {
                 "kind": "OBJECT",
-                "name": "getdataaboutleave",
+                "name": "leave_data",
                 "ofType": null
               }
             },
@@ -10818,6 +10818,18 @@
             "type": {
               "kind": "SCALAR",
               "name": "Date",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "user",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "OBJECT",
+              "name": "User",
               "ofType": null
             },
             "isDeprecated": false,

@@ -1,3 +1,4 @@
+import { User } from './../generated/graphql';
 
 
 
@@ -53,7 +54,8 @@ type leave_data{
  quantity_hours: Int
  detail_leave: String 
  Status: Int                
- user_id: String                 
+ user_id: String     
+ user: User            
 }
 
 type mas_leave_type{
@@ -88,8 +90,8 @@ type getcount{
 type Query{
   getleavetypedata: [mas_leave_type]
   getleava_datame: getleaveResponseType
-  getleava_alldata(dataleaveId: ID): [getdataaboutleave]
-  getAllleave(dataleaveId: ID): [getdataaboutleave]
+  getleava_alldata(dataleaveId: ID): [leave_data]
+  getAllleave(dataleaveId: ID): [leave_data]
 }
 
 type Mutation{
@@ -196,28 +198,28 @@ export const leaveResolvers: Resolvers = {
 
     async getleava_alldata(p, args, ctx) {
       if (args.dataleaveId) {
-        const alldata_hearderbyId = await ctx.prisma.user.findMany({
+        const alldata_hearderbyId = await ctx.prisma.data_leave.findMany({
           include: {
-            profile: true,
-            Position_user: { include: { mas_positionlevel1: true, mas_positionlevel2: true, mas_positionlevel3: true } },
-            data_leave: { include: { mas_leave_type: true }, where: { id: args.dataleaveId } }
+            user: { include: { profile: true, Position_user: { include: { mas_positionlevel1: true, mas_positionlevel2: true, mas_positionlevel3: true } }, } },
+            mas_leave_type: true
           },
           where: {
-                id: args.dataleaveId
+            id: args.dataleaveId
           }
         })
         return alldata_hearderbyId
       } else {
-        const alldata_hearder = await ctx.prisma.user.findMany({
+        const alldata_hearder = await ctx.prisma.data_leave.findMany({
           include: {
-            profile: true,
-            Position_user: { include: { mas_positionlevel1: true, mas_positionlevel2: true, mas_positionlevel3: true } },
-            data_leave: { include: { mas_leave_type: true } }
+            user: { include: { profile: true, Position_user: { include: { mas_positionlevel1: true, mas_positionlevel2: true, mas_positionlevel3: true } }, } },
+            mas_leave_type: true
           },
           where: {
-            Position_user: {
-              some:{
-                headderId: ctx.currentUser?.id
+            user:{
+              Position_user:{
+                some:{
+                  headderId: ctx.currentUser?.id
+                }
               }
             }
           }
@@ -228,31 +230,22 @@ export const leaveResolvers: Resolvers = {
 
     async getAllleave(p, args, ctx) {
       if (args.dataleaveId) {
-        const alldata_hearderbyId = await ctx.prisma.user.findMany({
+        const alldata_hearderbyId = await ctx.prisma.data_leave.findMany({
           include: {
-            profile: true,
-            Position_user: { include: { mas_positionlevel1: true, mas_positionlevel2: true, mas_positionlevel3: true } },
-            data_leave: { include: { mas_leave_type: true }, where: { id: args.dataleaveId } }
+            user: { include: { profile: true, Position_user: { include: { mas_positionlevel1: true, mas_positionlevel2: true, mas_positionlevel3: true } }, } },
+            mas_leave_type: true
           },
           where: {
-            data_leave: {
-              some: {
-                id: args.dataleaveId
-              }
-            }
+            id: args.dataleaveId
           }
         })
         return alldata_hearderbyId
 
       } else {
-        const alldata_hearder = await ctx.prisma.user.findMany({
+        const alldata_hearder = await ctx.prisma.data_leave.findMany({
           include: {
-            profile: true,
-            Position_user: { include: { mas_positionlevel1: true, mas_positionlevel2: true, mas_positionlevel3: true } },
-            data_leave: { include: { mas_leave_type: true } }
-          },
-          where: {
-            companyBranchId: ctx.currentUser?.branchId
+            user: { include: { profile: true, Position_user: { include: { mas_positionlevel1: true, mas_positionlevel2: true, mas_positionlevel3: true } }, } },
+            mas_leave_type: true
           }
         })
         return alldata_hearder
