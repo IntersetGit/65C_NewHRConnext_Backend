@@ -111,6 +111,10 @@ export const salaryTypedef = gql`
     vatYears:            Float
     incomeYears:         Float
     mas_bankId: String
+    create_by: String  
+    create_date: Date     
+    update_by: String                  
+    update_date: Date
   }
   type salary {
     id: ID
@@ -438,7 +442,7 @@ user_id:String
     CreateAndUpdateExpenseCom(
       data: ExpenseComInput
     ): CreateAndUpdateExpenseComResponseType
-    DeleteSalary(id: ID!): DeleteSalaryResponseType
+    DeleteSalary( salaryid: ID! , userId: String!): DeleteSalaryResponseType
     Deletebookbank(id: ID!): DeletebookbankResponseType
     CreateSalaryStatus(data: salary_status_input ): SalaryStatusResponseType
   }
@@ -762,6 +766,10 @@ const resolvers: Resolvers = {
             incomeYears: 0 + args.data?.net,
             month: Thismonth,
             years: ThisYear,
+            create_by: ctx.currentUser?.id,
+            create_date: new Date(),
+            // update_by: ctx.currentUser?.userId,
+            // update_date: new Date(),
             mas_bankId: args.data?.mas_bankId,
             provident_log: {
               create: {
@@ -883,6 +891,10 @@ const resolvers: Resolvers = {
             incomeYears: result_incomeYears + args.data?.net,
             month: Thismonth,
             years: ThisYear,
+            create_by: ctx.currentUser?.id,
+            create_date: new Date(),
+            // update_by: ctx.currentUser?.userId,
+            // update_date: new Date(),
             mas_bankId: args.data?.mas_bankId,
             provident_log: {
               create: {
@@ -899,7 +911,7 @@ const resolvers: Resolvers = {
           }
         })
       }
-  
+
       if (chk_collectLog.length > 0) { //ทำการเช็คถ้าหาก all_collect มี ให้ทำการอัปเดท
         console.log(args.data?.userId);
         console.log(args.data);
@@ -1072,27 +1084,49 @@ const resolvers: Resolvers = {
 
     async DeleteSalary(p: any, args: any, ctx: any) {
       const find_salary = await ctx.prisma.salary.findMany({
-        where : {
-          id: args.id
+        where: {
+          id: args.salaryid
         }
       })
       console.log(find_salary)
 
-      // const minus_collect = await ctx.prisma.mas_all_collect.update({
-      // })
+      const check_all_collect = await ctx.prisma.mas_all_collect.findMany({
+        where: {
+          userId: args.userId
+        }
+      })
+      console.log(check_all_collect)
+      let new_income_collet = check_all_collect[0].income_collect - find_salary[0].net
+      console.log(new_income_collet)
+      let new_vat_collect = check_all_collect[0].vat_collect - find_salary[0].vat
+      console.log(new_vat_collect)
+      let new_social_secu = check_all_collect[0].social_secu_collect - find_salary[0].social_security
+      console.log(new_social_secu)
 
-      // const deletesalary = await ctx.prisma.salary.delete({
-      //   where: {
-      //     id: args.id,
-      //   },
-      // });
+      const new_collect = await ctx.prisma.mas_all_collect.update({
+        data: {
+          date: new Date(args.data?.date),
+          income_collect: new_income_collet,
+          vat_collect: new_vat_collect,
+          social_secu_collect: new_social_secu,
+          provident_collect_employee: args.data?.provident_employee,
+          provident_collect_company: args.data?.provident_company,
+        },
+        where: { userId: args.userId },
+      })
+      
+      const deletesalary = await ctx.prisma.salary.delete({
+        where: {
+          id: args.salaryid,
+        },
+      });
       return {
         message: 'delete salary success',
         status: true,
       };
     },
 
-    async Deletebookbank(p: any, args: any, ctx: any){
+    async Deletebookbank(p: any, args: any, ctx: any) {
       const deletebook_bank = await ctx.prisma.bookbank_log.delete({
         where: {
           id: args.id,

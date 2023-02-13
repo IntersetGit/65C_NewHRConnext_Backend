@@ -55,6 +55,9 @@ const resolversslip: Resolvers = {
             let Bursary = null
             let Welfare_money = null
             let Bonus = null
+            let Vatyears = null
+            let Incomeyears = null
+            let Socialyears = null
             //รายหัก
             let Vat_per = null
             let Ss_per = null
@@ -129,6 +132,8 @@ const resolversslip: Resolvers = {
                     Bursary = Salary[i].bursary
                     Welfare_money = Salary[i].welfare_money
                     Bonus = Salary[i].bonus
+                    Incomeyears = Salary[i].incomeYears
+                    Vatyears = Salary[i].vatYears
                     //รายหัก
                     // Vatper = Salary[i].vatper
                     // Ss_per = Salary[i].ss_per
@@ -139,6 +144,7 @@ const resolversslip: Resolvers = {
                     Ra = Salary[i].ra
                     Other = Salary[i].other
                     Provident_employee = Salary[i].provident_employee
+                    Socialyears = Salary[i].socialYears
                     //กรอบขวา
                     Total_income = Salary[i].total_income
                     Total_expense = Salary[i].total_expense
@@ -294,12 +300,12 @@ const resolversslip: Resolvers = {
                 .rect(19, 480, 186, 20)
                 .stroke()
             pdfDoc.fontSize(12).text("เงินได้สะสม", 25, 483, { align: 'left' })
-            pdfDoc.fontSize(12).text(`${Income_collect?.toFixed(2)}`, 100, 483, { width: 100, align: 'right' })
+            pdfDoc.fontSize(12).text(`${Incomeyears?.toFixed(2)}`, 100, 483, { width: 100, align: 'right' })
             pdfDoc.lineJoin('miter') //กรอบกลางล่าง กองทุนสำรองเลี้ยงชีพสะสม
                 .rect(19, 500, 186, 20)
                 .stroke()
             pdfDoc.fontSize(12).text("ภาษีสะสม", 25, 503, { align: 'left' })
-            pdfDoc.fontSize(12).text(`${Vat_collect?.toFixed(2)}`, 100, 503, { width: 100, align: 'right' })
+            pdfDoc.fontSize(12).text(`${Vatyears?.toFixed(2)}`, 100, 503, { width: 100, align: 'right' })
             ///////////////////////////////////////////////////////////////////////
             pdfDoc.lineJoin('miter') //กรอบกลาง
                 .rect(205, 240, 185, 20)
@@ -335,7 +341,7 @@ const resolversslip: Resolvers = {
                 .rect(205, 480, 185, 20)
                 .stroke()
             pdfDoc.fontSize(12).text("ประกันสังคมสะสม", 211, 483, { align: 'left' })
-            pdfDoc.fontSize(12).text(`${Social_secu_collect?.toFixed(2)}`, 285, 483, { width: 100, align: 'right' })
+            pdfDoc.fontSize(12).text(`${Socialyears?.toFixed(2)}`, 285, 483, { width: 100, align: 'right' })
 
             pdfDoc.lineJoin('miter') //กรอบกลางล่าง กองทุนสำรองเลี้ยงชีพสะสม
                 .rect(205, 500, 185, 20)

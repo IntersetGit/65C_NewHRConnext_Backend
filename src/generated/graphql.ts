@@ -497,7 +497,8 @@ export type MutationCreateyearsArgs = {
 
 
 export type MutationDeleteSalaryArgs = {
-  id: Scalars['ID'];
+  salaryid: Scalars['ID'];
+  userId: Scalars['String'];
 };
 
 
@@ -1402,6 +1403,8 @@ export type SalaryInput = {
   bookbank_logId?: InputMaybe<Scalars['String']>;
   bursary?: InputMaybe<Scalars['Float']>;
   commission?: InputMaybe<Scalars['Float']>;
+  create_by?: InputMaybe<Scalars['String']>;
+  create_date?: InputMaybe<Scalars['Date']>;
   date?: InputMaybe<Scalars['Date']>;
   id?: InputMaybe<Scalars['ID']>;
   incomeYears?: InputMaybe<Scalars['Float']>;
@@ -1429,6 +1432,8 @@ export type SalaryInput = {
   total_expense?: InputMaybe<Scalars['Float']>;
   total_income?: InputMaybe<Scalars['Float']>;
   travel_income?: InputMaybe<Scalars['Float']>;
+  update_by?: InputMaybe<Scalars['String']>;
+  update_date?: InputMaybe<Scalars['Date']>;
   userId?: InputMaybe<Scalars['String']>;
   vat?: InputMaybe<Scalars['Float']>;
   vatYears?: InputMaybe<Scalars['Float']>;
@@ -2041,7 +2046,7 @@ export type MutationResolvers<ContextType = ApolloContext, ParentType extends Re
   Createmonth?: Resolver<Maybe<ResolversTypes['monthResponseType']>, ParentType, ContextType, Partial<MutationCreatemonthArgs>>;
   Createsalary?: Resolver<Maybe<ResolversTypes['createsalaryResponseType']>, ParentType, ContextType, Partial<MutationCreatesalaryArgs>>;
   Createyears?: Resolver<Maybe<ResolversTypes['yearsResponseType']>, ParentType, ContextType, Partial<MutationCreateyearsArgs>>;
-  DeleteSalary?: Resolver<Maybe<ResolversTypes['DeleteSalaryResponseType']>, ParentType, ContextType, RequireFields<MutationDeleteSalaryArgs, 'id'>>;
+  DeleteSalary?: Resolver<Maybe<ResolversTypes['DeleteSalaryResponseType']>, ParentType, ContextType, RequireFields<MutationDeleteSalaryArgs, 'salaryid' | 'userId'>>;
   Deletebookbank?: Resolver<Maybe<ResolversTypes['DeletebookbankResponseType']>, ParentType, ContextType, RequireFields<MutationDeletebookbankArgs, 'id'>>;
   EditPosition?: Resolver<Maybe<ResolversTypes['CreatepositionResponseType']>, ParentType, ContextType, Partial<MutationEditPositionArgs>>;
   createAccount?: Resolver<Maybe<ResolversTypes['CreateCompanyResponseType']>, ParentType, ContextType, RequireFields<MutationCreateAccountArgs, 'data'>>;
