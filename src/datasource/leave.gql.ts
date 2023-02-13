@@ -292,7 +292,6 @@ export const leaveResolvers: Resolvers = {
       }
     }
   }
-
 }
 
 const resolversleave = {
