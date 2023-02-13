@@ -631,7 +631,7 @@ const resolvers: Resolvers = {
                 some: {
                   mas_positionlevel2: { name: { contains: search2 } },
                   AND: { mas_positionlevel3: { name: { contains: search3 } } }
-                },
+                }, //
               },
             },
           },
