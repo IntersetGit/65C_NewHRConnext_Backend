@@ -5606,6 +5606,35 @@
             "deprecationReason": null
           },
           {
+            "name": "getAllleave",
+            "description": null,
+            "args": [
+              {
+                "name": "dataleaveId",
+                "description": null,
+                "type": {
+                  "kind": "SCALAR",
+                  "name": "ID",
+                  "ofType": null
+                },
+                "defaultValue": null,
+                "isDeprecated": false,
+                "deprecationReason": null
+              }
+            ],
+            "type": {
+              "kind": "LIST",
+              "name": null,
+              "ofType": {
+                "kind": "OBJECT",
+                "name": "getdataaboutleave",
+                "ofType": null
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
             "name": "getMasPositon",
             "description": null,
             "args": [],

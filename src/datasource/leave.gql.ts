@@ -89,6 +89,7 @@ type Query{
   getleavetypedata: [mas_leave_type]
   getleava_datame: getleaveResponseType
   getleava_alldata(dataleaveId: ID): [getdataaboutleave]
+  getAllleave(dataleaveId: ID): [getdataaboutleave]
 }
 
 type Mutation{
@@ -224,6 +225,39 @@ export const leaveResolvers: Resolvers = {
                 headderId: ctx.currentUser?.id
               }
             }
+          }
+        })
+        return alldata_hearder
+      }
+    },
+
+    async getAllleave(p, args, ctx) {
+      if (args.dataleaveId) {
+        const alldata_hearderbyId = await ctx.prisma.user.findMany({
+          include: {
+            profile: true,
+            Position_user: { include: { mas_positionlevel1: true, mas_positionlevel2: true, mas_positionlevel3: true } },
+            data_leave: { include: { mas_leave_type: true }, where: { id: args.dataleaveId } }
+          },
+          where: {
+            data_leave: {
+              some: {
+                id: args.dataleaveId
+              }
+            }
+          }
+        })
+        return alldata_hearderbyId
+
+      } else {
+        const alldata_hearder = await ctx.prisma.user.findMany({
+          include: {
+            profile: true,
+            Position_user: { include: { mas_positionlevel1: true, mas_positionlevel2: true, mas_positionlevel3: true } },
+            data_leave: { include: { mas_leave_type: true } }
+          },
+          where: {
+            companyBranchId: ctx.currentUser?.branchId
           }
         })
         return alldata_hearder
