@@ -6,7 +6,7 @@ import { authenticate } from '../middleware/authenticatetoken';
 import { Resolvers } from '../generated/graphql';
 import gql from 'graphql-tag';
 import { v4 } from 'uuid';
-import { number } from 'zod';
+
 
 export const leaveTypedef = gql`
 input leave{
@@ -88,10 +88,12 @@ type getcount{
 type Query{
   getleavetypedata: [mas_leave_type]
   getleava_datame: getleaveResponseType
+  getleava_alldata(dataleaveId: ID): [getdataaboutleave]
 }
 
 type Mutation{
  createddata_leave(data: leave) : CreateleaveResponseType
+ editstatusleave(data: leave): CreateleaveResponseType
 }
 
 `
@@ -148,26 +150,26 @@ export const leaveResolvers: Resolvers = {
             })
           }
         })
-        if(cout_hours >= 8 ){
-          let a = Math.trunc(cout_hours/8)
+        if (cout_hours >= 8) {
+          let a = Math.trunc(cout_hours / 8)
           countleave1 = a + countleave1
-          cout_hours = cout_hours - (a*8)
-         }
-         if(cout_hours2 >= 8 ){
-          let a = Math.trunc(cout_hours2/8)
+          cout_hours = cout_hours - (a * 8)
+        }
+        if (cout_hours2 >= 8) {
+          let a = Math.trunc(cout_hours2 / 8)
           countleave2 = a + countleave2
-          cout_hours2 = cout_hours2 - (a*8)
-         }
-         if(cout_hours3 >= 8 ){
-          let a = Math.trunc(cout_hours3/8)
+          cout_hours2 = cout_hours2 - (a * 8)
+        }
+        if (cout_hours3 >= 8) {
+          let a = Math.trunc(cout_hours3 / 8)
           countleave3 = a + countleave3
-          cout_hours3 = cout_hours3 - (a*8) 
-         }
-         if(cout_hours4 >= 8 ){
-          let b = Math.trunc(cout_hours4/8)
+          cout_hours3 = cout_hours3 - (a * 8)
+        }
+        if (cout_hours4 >= 8) {
+          let b = Math.trunc(cout_hours4 / 8)
           countleave4 = b + countleave4
-          cout_hours4 = cout_hours4 - (b*8)
-         }
+          cout_hours4 = cout_hours4 - (b * 8)
+        }
       }
 
       let dataCount = {
@@ -177,7 +179,7 @@ export const leaveResolvers: Resolvers = {
         name_2: 'ลากิจ ' + countleave2 + ' วัน ' + cout_hours2 + ' ชั่วโมง',
         count2: countleave2,
         hours2: cout_hours2,
-        name_3: 'ลาป่วย ' + countleave3 + ' วัน ' + cout_hours3  + ' ชั่วโมง',
+        name_3: 'ลาป่วย ' + countleave3 + ' วัน ' + cout_hours3 + ' ชั่วโมง',
         count3: countleave3,
         hours: cout_hours3,
         name_4: 'ลาอื่นๆ ' + countleave4 + ' วัน ' + cout_hours4 + ' ชั่วโมง',
@@ -189,15 +191,46 @@ export const leaveResolvers: Resolvers = {
         data_all: getdataleave,
         data_count: dataCount
       }
-      // return {
-      //   // data_all: getdataleave ,
-      //   data_count: dataCount
-      // };
+    },
+
+    async getleava_alldata(p, args, ctx) {
+      if (args.dataleaveId) {
+        const alldata_hearder = await ctx.prisma.user.findMany({
+          include: {
+            profile: true,
+            Position_user: { include: { mas_positionlevel1: true, mas_positionlevel2: true, mas_positionlevel3: true } },
+            data_leave: { include: { mas_leave_type: true } }
+          },
+          where: {
+            data_leave: {
+              some: {
+                id: args.dataleaveId
+              }
+            }
+          }
+        })
+        return alldata_hearder
+
+      } else {
+        const alldata_hearder = await ctx.prisma.user.findMany({
+          include: {
+            profile: true,
+            Position_user: { include: { mas_positionlevel1: true, mas_positionlevel2: true, mas_positionlevel3: true } },
+            data_leave: { include: { mas_leave_type: true } }
+          },
+          where: {
+            Position_user: {
+              some: {
+                headderId: ctx.currentUser?.id
+              }
+            }
+          }
+        })
+        return alldata_hearder
+      }
     }
-    // const countQuantityDay = 
-
-
   },
+
 
   Mutation: {
 
@@ -242,8 +275,23 @@ export const leaveResolvers: Resolvers = {
           status: true,
         }
       }
-    }
+    },
 
+    
+    async editstatusleave(p, args, ctx) {
+      const editleave = await ctx.prisma.data_leave.update({
+        where: {
+          id: args.data?.id as string
+        },
+        data: {
+          Status: args.data?.Status as number
+        }
+      })
+      return {
+        message: 'success',
+        status: true
+      }
+    }
   }
 
 }
@@ -251,6 +299,7 @@ export const leaveResolvers: Resolvers = {
 const resolversleave = {
   'Query.getleavetypedata': [authenticate()],
   'Query.getleava_datame': [authenticate()],
+  'Query.getleava_alldata': [authenticate()],
   'Mutation.createddata_leave': [authenticate()]
 };
 
