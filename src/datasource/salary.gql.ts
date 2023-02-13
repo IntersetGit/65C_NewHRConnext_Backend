@@ -492,20 +492,20 @@ const resolvers: Resolvers = {
       return getdata;
     },
 
-    async salary_inmonthSlip(parant, args, ctx){ // for admin
+    async salary_inmonthSlip(parant, args, ctx) { // for admin
       const data = await ctx.prisma.user.findMany({
         include: {
-            profile: true,
-            salary: { where: { month: args.month, AND: { years: args.years } } },
-            companyBranch: { include: { company: true, expense_company: true } },
-            Position_user: { include: { mas_positionlevel2: true, mas_positionlevel3: true }, orderBy: { date: 'desc' } },
-            bookbank_log: { include: { mas_bank: true }, orderBy: { date: 'desc' } },
-            mas_all_collect: true
+          profile: true,
+          salary: { where: { month: args.month, AND: { years: args.years } } },
+          companyBranch: { include: { company: true, expense_company: true } },
+          Position_user: { include: { mas_positionlevel2: true, mas_positionlevel3: true }, orderBy: { date: 'desc' } },
+          bookbank_log: { include: { mas_bank: true }, orderBy: { date: 'desc' } },
+          mas_all_collect: true
         },
         where: {
-            id: args.userId as string,
+          id: args.userId as string,
         }
-    });
+      });
       return data
     },
 
@@ -618,7 +618,7 @@ const resolvers: Resolvers = {
             orderBy: { date: 'desc' }
           },
           salary: true,
-          bookbank_log: { include: { mas_bank: true } , orderBy: { date: 'desc' }}
+          bookbank_log: { include: { mas_bank: true }, orderBy: { date: 'desc' } }
         },
         where: {
           companyBranchId: ctx.currentUser?.branchId,
@@ -1019,6 +1019,27 @@ const resolvers: Resolvers = {
       //สร้าง bookbank
       const bookbankID = v4();
       // const providentID = v4()
+      if (args.data?.id) {
+        const createbook_bank = await ctx.prisma.bookbank_log.update({
+          data: {
+            date: new Date(args.data?.date),
+            mas_bankId: args.data?.mas_bankId,
+            bank_number: args.data?.bank_number as number,
+            all_collectId: args.data?.all_collectId,
+            base_salary: args.data?.base_salary as number,
+            userId: args.data?.userId,
+            provident_com: args.data?.provident_com, // กองทุนของพนักงาน ตัวเลขเป็น %
+            provident_emp: args.data?.provident_emp, // กองทุนของบริษัท ตัวเลขเป็น %
+          },
+          where: {
+            id: args.data?.id,
+          },
+        });
+        return {
+          message: 'update success',
+          status: true,
+        };
+      }
       const createbook_bank = await ctx.prisma.bookbank_log.create({
         data: {
           id: bookbankID,
@@ -1030,17 +1051,6 @@ const resolvers: Resolvers = {
           userId: args.data?.userId,
           provident_com: args.data?.provident_com, // กองทุนของพนักงาน ตัวเลขเป็น %
           provident_emp: args.data?.provident_emp, // กองทุนของบริษัท ตัวเลขเป็น %
-          // provident_log: {
-          //   create: {
-          //     id: providentID,
-          //     userId: args.data?.userId,
-          //     provident_date: new Date(args.data?.date),
-          //     pro_employee: args.data?.pro_employee as number,
-          //     pro_company: args.data?.pro_company as number,
-          //     mas_all_collectId: args.data?.mas_all_collectId,
-          //     // bookbank_logId : bookbankID
-          //   }
-          // }
         },
       });
       return {
