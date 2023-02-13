@@ -690,6 +690,7 @@ export type Query = {
   me?: Maybe<Me>;
   provident_log?: Maybe<Array<Maybe<Provident_Log>>>;
   salary?: Maybe<Array<Maybe<Data_Salary>>>;
+  salary_inmonthSlip?: Maybe<Array<Maybe<Data_Salary>>>;
   users?: Maybe<Array<Maybe<User>>>;
   verifyCompanycode?: Maybe<Scalars['Boolean']>;
 };
@@ -751,6 +752,13 @@ export type QueryProvident_LogArgs = {
 
 export type QuerySalaryArgs = {
   userId?: InputMaybe<Scalars['String']>;
+};
+
+
+export type QuerySalary_InmonthSlipArgs = {
+  month?: InputMaybe<Scalars['String']>;
+  userId?: InputMaybe<Scalars['String']>;
+  years?: InputMaybe<Scalars['String']>;
 };
 
 
@@ -2123,6 +2131,7 @@ export type QueryResolvers<ContextType = ApolloContext, ParentType extends Resol
   me?: Resolver<Maybe<ResolversTypes['Me']>, ParentType, ContextType>;
   provident_log?: Resolver<Maybe<Array<Maybe<ResolversTypes['provident_log']>>>, ParentType, ContextType, Partial<QueryProvident_LogArgs>>;
   salary?: Resolver<Maybe<Array<Maybe<ResolversTypes['data_salary']>>>, ParentType, ContextType, Partial<QuerySalaryArgs>>;
+  salary_inmonthSlip?: Resolver<Maybe<Array<Maybe<ResolversTypes['data_salary']>>>, ParentType, ContextType, Partial<QuerySalary_InmonthSlipArgs>>;
   users?: Resolver<Maybe<Array<Maybe<ResolversTypes['User']>>>, ParentType, ContextType, Partial<QueryUsersArgs>>;
   verifyCompanycode?: Resolver<Maybe<ResolversTypes['Boolean']>, ParentType, ContextType, RequireFields<QueryVerifyCompanycodeArgs, 'companyname'>>;
 }>;
