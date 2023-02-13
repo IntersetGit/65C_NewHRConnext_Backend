@@ -473,8 +473,8 @@ export type data_leave = {
   end_date: Date
   quantity_day: number
   quantity_hours: number
-  detail_leave: string | null
-  Status: number | null
+  detail_leave: string
+  Status: number
   user_id: string
 }
 
@@ -32617,8 +32617,8 @@ export namespace Prisma {
     end_date: Date
     quantity_day: number
     quantity_hours: number
-    detail_leave: string | null
-    Status: number | null
+    detail_leave: string
+    Status: number
     user_id: string
     _count: Data_leaveCountAggregateOutputType | null
     _avg: Data_leaveAvgAggregateOutputType | null
@@ -35845,8 +35845,8 @@ export namespace Prisma {
     end_date?: DateTimeFilter | Date | string
     quantity_day?: IntFilter | number
     quantity_hours?: IntFilter | number
-    detail_leave?: StringNullableFilter | string | null
-    Status?: IntNullableFilter | number | null
+    detail_leave?: StringFilter | string
+    Status?: IntFilter | number
     user_id?: UuidFilter | string
     user?: XOR<UserRelationFilter, UserWhereInput>
   }
@@ -35896,8 +35896,8 @@ export namespace Prisma {
     end_date?: DateTimeWithAggregatesFilter | Date | string
     quantity_day?: IntWithAggregatesFilter | number
     quantity_hours?: IntWithAggregatesFilter | number
-    detail_leave?: StringNullableWithAggregatesFilter | string | null
-    Status?: IntNullableWithAggregatesFilter | number | null
+    detail_leave?: StringWithAggregatesFilter | string
+    Status?: IntWithAggregatesFilter | number
     user_id?: UuidWithAggregatesFilter | string
   }
 
@@ -38377,8 +38377,8 @@ export namespace Prisma {
     end_date: Date | string
     quantity_day: number
     quantity_hours: number
-    detail_leave?: string | null
-    Status?: number | null
+    detail_leave: string
+    Status: number
     user: UserCreateNestedOneWithoutData_leaveInput
   }
 
@@ -38389,8 +38389,8 @@ export namespace Prisma {
     end_date: Date | string
     quantity_day: number
     quantity_hours: number
-    detail_leave?: string | null
-    Status?: number | null
+    detail_leave: string
+    Status: number
     user_id: string
   }
 
@@ -38401,8 +38401,8 @@ export namespace Prisma {
     end_date?: DateTimeFieldUpdateOperationsInput | Date | string
     quantity_day?: IntFieldUpdateOperationsInput | number
     quantity_hours?: IntFieldUpdateOperationsInput | number
-    detail_leave?: NullableStringFieldUpdateOperationsInput | string | null
-    Status?: NullableIntFieldUpdateOperationsInput | number | null
+    detail_leave?: StringFieldUpdateOperationsInput | string
+    Status?: IntFieldUpdateOperationsInput | number
     user?: UserUpdateOneRequiredWithoutData_leaveNestedInput
   }
 
@@ -38413,8 +38413,8 @@ export namespace Prisma {
     end_date?: DateTimeFieldUpdateOperationsInput | Date | string
     quantity_day?: IntFieldUpdateOperationsInput | number
     quantity_hours?: IntFieldUpdateOperationsInput | number
-    detail_leave?: NullableStringFieldUpdateOperationsInput | string | null
-    Status?: NullableIntFieldUpdateOperationsInput | number | null
+    detail_leave?: StringFieldUpdateOperationsInput | string
+    Status?: IntFieldUpdateOperationsInput | number
     user_id?: StringFieldUpdateOperationsInput | string
   }
 
@@ -38425,8 +38425,8 @@ export namespace Prisma {
     end_date: Date | string
     quantity_day: number
     quantity_hours: number
-    detail_leave?: string | null
-    Status?: number | null
+    detail_leave: string
+    Status: number
     user_id: string
   }
 
@@ -38436,8 +38436,8 @@ export namespace Prisma {
     end_date?: DateTimeFieldUpdateOperationsInput | Date | string
     quantity_day?: IntFieldUpdateOperationsInput | number
     quantity_hours?: IntFieldUpdateOperationsInput | number
-    detail_leave?: NullableStringFieldUpdateOperationsInput | string | null
-    Status?: NullableIntFieldUpdateOperationsInput | number | null
+    detail_leave?: StringFieldUpdateOperationsInput | string
+    Status?: IntFieldUpdateOperationsInput | number
   }
 
   export type data_leaveUncheckedUpdateManyInput = {
@@ -38447,8 +38447,8 @@ export namespace Prisma {
     end_date?: DateTimeFieldUpdateOperationsInput | Date | string
     quantity_day?: IntFieldUpdateOperationsInput | number
     quantity_hours?: IntFieldUpdateOperationsInput | number
-    detail_leave?: NullableStringFieldUpdateOperationsInput | string | null
-    Status?: NullableIntFieldUpdateOperationsInput | number | null
+    detail_leave?: StringFieldUpdateOperationsInput | string
+    Status?: IntFieldUpdateOperationsInput | number
     user_id?: StringFieldUpdateOperationsInput | string
   }
 
@@ -40280,17 +40280,6 @@ export namespace Prisma {
     isNot?: mas_leave_typeWhereInput
   }
 
-  export type IntNullableFilter = {
-    equals?: number | null
-    in?: Enumerable<number> | null
-    notIn?: Enumerable<number> | null
-    lt?: number
-    lte?: number
-    gt?: number
-    gte?: number
-    not?: NestedIntNullableFilter | number | null
-  }
-
   export type data_leaveCountOrderByAggregateInput = {
     id?: SortOrder
     leavetype_id?: SortOrder
@@ -40337,22 +40326,6 @@ export namespace Prisma {
     quantity_day?: SortOrder
     quantity_hours?: SortOrder
     Status?: SortOrder
-  }
-
-  export type IntNullableWithAggregatesFilter = {
-    equals?: number | null
-    in?: Enumerable<number> | null
-    notIn?: Enumerable<number> | null
-    lt?: number
-    lte?: number
-    gt?: number
-    gte?: number
-    not?: NestedIntNullableWithAggregatesFilter | number | null
-    _count?: NestedIntNullableFilter
-    _avg?: NestedFloatNullableFilter
-    _sum?: NestedIntNullableFilter
-    _min?: NestedIntNullableFilter
-    _max?: NestedIntNullableFilter
   }
 
   export type UserCreateNestedOneWithoutCompanyInput = {
@@ -42861,14 +42834,6 @@ export namespace Prisma {
     update?: XOR<mas_leave_typeUpdateWithoutData_leaveInput, mas_leave_typeUncheckedUpdateWithoutData_leaveInput>
   }
 
-  export type NullableIntFieldUpdateOperationsInput = {
-    set?: number | null
-    increment?: number
-    decrement?: number
-    multiply?: number
-    divide?: number
-  }
-
   export type UserUpdateOneRequiredWithoutData_leaveNestedInput = {
     create?: XOR<UserCreateWithoutData_leaveInput, UserUncheckedCreateWithoutData_leaveInput>
     connectOrCreate?: UserCreateOrConnectWithoutData_leaveInput
@@ -43164,22 +43129,6 @@ export namespace Prisma {
     _sum?: NestedFloatNullableFilter
     _min?: NestedFloatNullableFilter
     _max?: NestedFloatNullableFilter
-  }
-
-  export type NestedIntNullableWithAggregatesFilter = {
-    equals?: number | null
-    in?: Enumerable<number> | null
-    notIn?: Enumerable<number> | null
-    lt?: number
-    lte?: number
-    gt?: number
-    gte?: number
-    not?: NestedIntNullableWithAggregatesFilter | number | null
-    _count?: NestedIntNullableFilter
-    _avg?: NestedFloatNullableFilter
-    _sum?: NestedIntNullableFilter
-    _min?: NestedIntNullableFilter
-    _max?: NestedIntNullableFilter
   }
 
   export type UserCreateWithoutCompanyInput = {
@@ -44627,8 +44576,8 @@ export namespace Prisma {
     end_date: Date | string
     quantity_day: number
     quantity_hours: number
-    detail_leave?: string | null
-    Status?: number | null
+    detail_leave: string
+    Status: number
   }
 
   export type data_leaveUncheckedCreateWithoutUserInput = {
@@ -44638,8 +44587,8 @@ export namespace Prisma {
     end_date: Date | string
     quantity_day: number
     quantity_hours: number
-    detail_leave?: string | null
-    Status?: number | null
+    detail_leave: string
+    Status: number
   }
 
   export type data_leaveCreateOrConnectWithoutUserInput = {
@@ -45114,8 +45063,8 @@ export namespace Prisma {
     end_date?: DateTimeFilter | Date | string
     quantity_day?: IntFilter | number
     quantity_hours?: IntFilter | number
-    detail_leave?: StringNullableFilter | string | null
-    Status?: IntNullableFilter | number | null
+    detail_leave?: StringFilter | string
+    Status?: IntFilter | number
     user_id?: UuidFilter | string
   }
 
@@ -49028,8 +48977,8 @@ export namespace Prisma {
     end_date: Date | string
     quantity_day: number
     quantity_hours: number
-    detail_leave?: string | null
-    Status?: number | null
+    detail_leave: string
+    Status: number
     user: UserCreateNestedOneWithoutData_leaveInput
   }
 
@@ -49039,8 +48988,8 @@ export namespace Prisma {
     end_date: Date | string
     quantity_day: number
     quantity_hours: number
-    detail_leave?: string | null
-    Status?: number | null
+    detail_leave: string
+    Status: number
     user_id: string
   }
 
@@ -49767,8 +49716,8 @@ export namespace Prisma {
     end_date: Date | string
     quantity_day: number
     quantity_hours: number
-    detail_leave?: string | null
-    Status?: number | null
+    detail_leave: string
+    Status: number
   }
 
   export type CompanyUpdateWithoutOwnerInput = {
@@ -50106,8 +50055,8 @@ export namespace Prisma {
     end_date?: DateTimeFieldUpdateOperationsInput | Date | string
     quantity_day?: IntFieldUpdateOperationsInput | number
     quantity_hours?: IntFieldUpdateOperationsInput | number
-    detail_leave?: NullableStringFieldUpdateOperationsInput | string | null
-    Status?: NullableIntFieldUpdateOperationsInput | number | null
+    detail_leave?: StringFieldUpdateOperationsInput | string
+    Status?: IntFieldUpdateOperationsInput | number
   }
 
   export type data_leaveUncheckedUpdateWithoutUserInput = {
@@ -50117,8 +50066,8 @@ export namespace Prisma {
     end_date?: DateTimeFieldUpdateOperationsInput | Date | string
     quantity_day?: IntFieldUpdateOperationsInput | number
     quantity_hours?: IntFieldUpdateOperationsInput | number
-    detail_leave?: NullableStringFieldUpdateOperationsInput | string | null
-    Status?: NullableIntFieldUpdateOperationsInput | number | null
+    detail_leave?: StringFieldUpdateOperationsInput | string
+    Status?: IntFieldUpdateOperationsInput | number
   }
 
   export type data_leaveUncheckedUpdateManyWithoutData_leaveInput = {
@@ -50128,8 +50077,8 @@ export namespace Prisma {
     end_date?: DateTimeFieldUpdateOperationsInput | Date | string
     quantity_day?: IntFieldUpdateOperationsInput | number
     quantity_hours?: IntFieldUpdateOperationsInput | number
-    detail_leave?: NullableStringFieldUpdateOperationsInput | string | null
-    Status?: NullableIntFieldUpdateOperationsInput | number | null
+    detail_leave?: StringFieldUpdateOperationsInput | string
+    Status?: IntFieldUpdateOperationsInput | number
   }
 
   export type UserCreateManyRoleInput = {
@@ -51383,8 +51332,8 @@ export namespace Prisma {
     end_date: Date | string
     quantity_day: number
     quantity_hours: number
-    detail_leave?: string | null
-    Status?: number | null
+    detail_leave: string
+    Status: number
     user_id: string
   }
 
@@ -51394,8 +51343,8 @@ export namespace Prisma {
     end_date?: DateTimeFieldUpdateOperationsInput | Date | string
     quantity_day?: IntFieldUpdateOperationsInput | number
     quantity_hours?: IntFieldUpdateOperationsInput | number
-    detail_leave?: NullableStringFieldUpdateOperationsInput | string | null
-    Status?: NullableIntFieldUpdateOperationsInput | number | null
+    detail_leave?: StringFieldUpdateOperationsInput | string
+    Status?: IntFieldUpdateOperationsInput | number
     user?: UserUpdateOneRequiredWithoutData_leaveNestedInput
   }
 
@@ -51405,8 +51354,8 @@ export namespace Prisma {
     end_date?: DateTimeFieldUpdateOperationsInput | Date | string
     quantity_day?: IntFieldUpdateOperationsInput | number
     quantity_hours?: IntFieldUpdateOperationsInput | number
-    detail_leave?: NullableStringFieldUpdateOperationsInput | string | null
-    Status?: NullableIntFieldUpdateOperationsInput | number | null
+    detail_leave?: StringFieldUpdateOperationsInput | string
+    Status?: IntFieldUpdateOperationsInput | number
     user_id?: StringFieldUpdateOperationsInput | string
   }
 

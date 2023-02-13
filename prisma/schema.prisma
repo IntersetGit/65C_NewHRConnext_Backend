@@ -454,6 +454,7 @@ model mas_leave_type {
 }
 
 //-------- ข้อมูลการลาของพนักงาน -------------//
+
 model data_leave {
   id             String         @unique @db.Uuid
   leavetype_id   String         @db.Uuid
@@ -462,8 +463,8 @@ model data_leave {
   end_date       DateTime
   quantity_day   Int
   quantity_hours Int
-  detail_leave   String?
-  Status         Int?           @db.SmallInt
+  detail_leave   String
+  Status         Int            @db.SmallInt
   user_id        String         @db.Uuid
   user           User           @relation(fields: [user_id], references: [id])
 }
