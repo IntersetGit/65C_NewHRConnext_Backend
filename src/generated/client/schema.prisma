@@ -55,7 +55,7 @@ model CompanyBranch {
   tel               String?           @db.VarChar(255)
   fax               String?           @db.VarChar(255)
   website           String?           @db.VarChar(255)
-  lat               String?
+  lat               String?   
   lng               String?
   email             String?
   email_2           String?

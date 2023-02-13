@@ -696,11 +696,11 @@ export type Query = {
   data_salary?: Maybe<Array<Maybe<Data_Salary>>>;
   datasalary_mee?: Maybe<Array<Maybe<Data_Salary_Me>>>;
   getAllcompany?: Maybe<Array<Maybe<CompanyBranch>>>;
-  getAllleave?: Maybe<Array<Maybe<Getdataaboutleave>>>;
+  getAllleave?: Maybe<Array<Maybe<Leave_Data>>>;
   getMasPositon?: Maybe<Array<Maybe<Mas_Positionlevel1>>>;
   getProvince?: Maybe<Array<Maybe<Province>>>;
   getcompanyRole?: Maybe<Array<Maybe<Role_Company>>>;
-  getleava_alldata?: Maybe<Array<Maybe<Getdataaboutleave>>>;
+  getleava_alldata?: Maybe<Array<Maybe<Leave_Data>>>;
   getleava_datame?: Maybe<GetleaveResponseType>;
   getleavetypedata?: Maybe<Array<Maybe<Mas_Leave_Type>>>;
   getownCompany?: Maybe<GetOwncompanytype>;
@@ -1201,6 +1201,7 @@ export type Leave_Data = {
   quantity_day?: Maybe<Scalars['Int']>;
   quantity_hours?: Maybe<Scalars['Int']>;
   start_date?: Maybe<Scalars['Date']>;
+  user?: Maybe<User>;
   user_id?: Maybe<Scalars['String']>;
 };
 
@@ -2163,11 +2164,11 @@ export type QueryResolvers<ContextType = ApolloContext, ParentType extends Resol
   data_salary?: Resolver<Maybe<Array<Maybe<ResolversTypes['data_salary']>>>, ParentType, ContextType, Partial<QueryData_SalaryArgs>>;
   datasalary_mee?: Resolver<Maybe<Array<Maybe<ResolversTypes['data_salary_me']>>>, ParentType, ContextType, Partial<QueryDatasalary_MeeArgs>>;
   getAllcompany?: Resolver<Maybe<Array<Maybe<ResolversTypes['CompanyBranch']>>>, ParentType, ContextType, Partial<QueryGetAllcompanyArgs>>;
-  getAllleave?: Resolver<Maybe<Array<Maybe<ResolversTypes['getdataaboutleave']>>>, ParentType, ContextType, Partial<QueryGetAllleaveArgs>>;
+  getAllleave?: Resolver<Maybe<Array<Maybe<ResolversTypes['leave_data']>>>, ParentType, ContextType, Partial<QueryGetAllleaveArgs>>;
   getMasPositon?: Resolver<Maybe<Array<Maybe<ResolversTypes['mas_positionlevel1']>>>, ParentType, ContextType>;
   getProvince?: Resolver<Maybe<Array<Maybe<ResolversTypes['Province']>>>, ParentType, ContextType>;
   getcompanyRole?: Resolver<Maybe<Array<Maybe<ResolversTypes['Role_Company']>>>, ParentType, ContextType, Partial<QueryGetcompanyRoleArgs>>;
-  getleava_alldata?: Resolver<Maybe<Array<Maybe<ResolversTypes['getdataaboutleave']>>>, ParentType, ContextType, Partial<QueryGetleava_AlldataArgs>>;
+  getleava_alldata?: Resolver<Maybe<Array<Maybe<ResolversTypes['leave_data']>>>, ParentType, ContextType, Partial<QueryGetleava_AlldataArgs>>;
   getleava_datame?: Resolver<Maybe<ResolversTypes['getleaveResponseType']>, ParentType, ContextType>;
   getleavetypedata?: Resolver<Maybe<Array<Maybe<ResolversTypes['mas_leave_type']>>>, ParentType, ContextType>;
   getownCompany?: Resolver<Maybe<ResolversTypes['GetOwncompanytype']>, ParentType, ContextType>;
@@ -2502,6 +2503,7 @@ export type Leave_DataResolvers<ContextType = ApolloContext, ParentType extends 
   quantity_day?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
   quantity_hours?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
   start_date?: Resolver<Maybe<ResolversTypes['Date']>, ParentType, ContextType>;
+  user?: Resolver<Maybe<ResolversTypes['User']>, ParentType, ContextType>;
   user_id?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 }>;
