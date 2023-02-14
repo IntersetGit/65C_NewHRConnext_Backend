@@ -83,6 +83,7 @@ export type CompanyBranch = {
   createdAt?: Maybe<Scalars['Date']>;
   email?: Maybe<Scalars['String']>;
   email_2?: Maybe<Scalars['String']>;
+  expense_company?: Maybe<Array<Maybe<Expense_Company>>>;
   fax?: Maybe<Scalars['String']>;
   id: Scalars['ID'];
   lat?: Maybe<Scalars['String']>;
@@ -1057,6 +1058,7 @@ export type Data_Salary = {
   companyId?: Maybe<Scalars['String']>;
   createdAt?: Maybe<Scalars['Date']>;
   email?: Maybe<Scalars['String']>;
+  expense_company?: Maybe<Array<Maybe<Expense_Company>>>;
   id: Scalars['ID'];
   isActive?: Maybe<Scalars['Boolean']>;
   isOwner?: Maybe<Scalars['Boolean']>;
@@ -1862,6 +1864,7 @@ export type CompanyBranchResolvers<ContextType = ApolloContext, ParentType exten
   createdAt?: Resolver<Maybe<ResolversTypes['Date']>, ParentType, ContextType>;
   email?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   email_2?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  expense_company?: Resolver<Maybe<Array<Maybe<ResolversTypes['expense_company']>>>, ParentType, ContextType>;
   fax?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
   lat?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
@@ -2411,6 +2414,7 @@ export type Data_SalaryResolvers<ContextType = ApolloContext, ParentType extends
   companyId?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   createdAt?: Resolver<Maybe<ResolversTypes['Date']>, ParentType, ContextType>;
   email?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  expense_company?: Resolver<Maybe<Array<Maybe<ResolversTypes['expense_company']>>>, ParentType, ContextType>;
   id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
   isActive?: Resolver<Maybe<ResolversTypes['Boolean']>, ParentType, ContextType>;
   isOwner?: Resolver<Maybe<ResolversTypes['Boolean']>, ParentType, ContextType>;
