@@ -39,8 +39,6 @@ model Company {
   mas_positionlevel1      mas_positionlevel1[]
   holiday_date            holiday_date[]
   mas_position            mas_position[]
-  holidayCompany          holidayCompany[]
-  
 }
 
 model CompanyBranch {
@@ -269,7 +267,6 @@ model holiday_date {
   Company        Company?         @relation(fields: [CompanyId], references: [id])
   CompanyId      String?          @db.Uuid
   status         Int              @db.SmallInt
-  holidayCompany holidayCompany[]
 }
 
 model holiday_year {
@@ -278,17 +275,6 @@ model holiday_year {
   month          Int
   year           Int
   holiday_name   String?
-  holidayCompany holidayCompany[]
-}
-
-model holidayCompany {
-  id             String        @unique @db.Uuid
-  CompanyId      String?       @db.Uuid
-  holiday_dateId String?       @db.Uuid
-  holiday_yearId String?       @db.Uuid
-  Company        Company?      @relation(fields: [CompanyId], references: [id])
-  holiday_date   holiday_date? @relation(fields: [holiday_dateId], references: [id])
-  holiday_year   holiday_year? @relation(fields: [holiday_yearId], references: [id])
 }
 
 model mas_bank {

@@ -201,7 +201,7 @@ export default [
   },
   {
     id: '5f85ccfe-3651-4854-be97-fea8d78ee45d',
-    name: 'ที่ี่ปรึกษา',
+    name: 'ที่ปรึกษา',
     MainBId: '1729271e-415e-4662-8538-09303ceff3d0'
   },
   {

@@ -179,13 +179,6 @@ exports.Prisma.Expense_companyScalarFieldEnum = makeEnum({
   companyBranchId: 'companyBranchId'
 });
 
-exports.Prisma.HolidayCompanyScalarFieldEnum = makeEnum({
-  id: 'id',
-  CompanyId: 'CompanyId',
-  holiday_dateId: 'holiday_dateId',
-  holiday_yearId: 'holiday_yearId'
-});
-
 exports.Prisma.Holiday_dateScalarFieldEnum = makeEnum({
   id: 'id',
   holiday_name: 'holiday_name',
@@ -505,7 +498,6 @@ exports.Prisma.ModelName = makeEnum({
   Position_user: 'Position_user',
   holiday_date: 'holiday_date',
   holiday_year: 'holiday_year',
-  holidayCompany: 'holidayCompany',
   mas_bank: 'mas_bank',
   mas_month: 'mas_month',
   mas_years: 'mas_years',

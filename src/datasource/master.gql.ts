@@ -49,9 +49,12 @@ export const masterResolvers: Resolvers = {
       return result;
     },
 
-    async getBusinessType (p, args, ctx) {
+    async getBusinessType(p, args, ctx) {
       const result = await ctx.prisma.mainBusinessType.findMany({
-        include: { SubBusinessType : true },
+        orderBy: [
+          { name: "asc" }
+        ],
+        include: { SubBusinessType: true },
       });
       return result;
     }
