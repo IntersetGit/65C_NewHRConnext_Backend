@@ -419,7 +419,7 @@ user_id:String
   }
 
   type Query {
-    salary(userId:String): [data_salary]
+    salary(userId:String , years: String): [data_salary]
     salary_inmonthSlip(userId: String, month: String, years: String):[data_salary]
     bookbank_log: [Bookbank_log_type]
     bookbank_log_admin(userId: String): [Bookbank_log_type]
@@ -464,10 +464,11 @@ const resolvers: Resolvers = {
       // });
       // return result;
       // const date = args?.date ? args?.date : undefined;
+      let searchyears = args.years ? args.years : undefined
       const getdata = await ctx.prisma.user.findMany({
         include: {
           profile: true,
-          salary: true,
+          salary: { where: { years: searchyears } },
           // company: { include: { branch: true } },
           companyBranch: { include: { company: true } },
           Position_user: { include: { mas_positionlevel3: true }, orderBy: { date: 'desc' } },
@@ -807,6 +808,7 @@ const resolvers: Resolvers = {
       const gensalaryID = v4();
       const genAllCollectID = v4();
       const providentID = v4()
+
       // let now = dayjs()
       // console.log(now.format("MM-DD"));
 
@@ -836,12 +838,13 @@ const resolvers: Resolvers = {
 
       const check_bookbank = await ctx.prisma.bookbank_log.findMany({
         where: {
-          userId : args.data.userId
-        },orderBy:{
+          userId: args.data.userId
+        }, orderBy: {
           date: "desc"
         }
-      })  
-      let bookbank_logId = check_bookbank[0].id
+      })
+      let bookbank_logId = check_bookbank[0].id //หา bookbank log ของ user คนนั้นจากนั้นให้ insert เข้า salary
+
 
       let time
       let result_incomeYears = 0;
@@ -1230,7 +1233,7 @@ const resolvers: Resolvers = {
       console.log(new_social_secu)
       let new_pro_emp = check_all_collect[0].provident_collect_employee - find_salary[0].provident_employee
       console.log(new_pro_emp);
-      let new_pro_com = check_all_collect[0].provident_collect_company - find_salary[0].provident_company 
+      let new_pro_com = check_all_collect[0].provident_collect_company - find_salary[0].provident_company
       console.log(new_pro_com);
 
       const new_collect = await ctx.prisma.mas_all_collect.update({
