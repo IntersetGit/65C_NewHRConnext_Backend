@@ -12,6 +12,7 @@ import provinceEnum from '../enum/province.enum';
 import districtEnum from '../enum/district.enum';
 import amphoeEnum from '../enum/amphoe.enum';
 import holidayEnum from '../enum/holiday.enum';
+import bankEnum from '../enum/bank.enum';
 import { createPassword } from '../src/utils/passwords';
 import { update } from 'lodash';
 
@@ -84,6 +85,20 @@ const main = async () => {
         month: h.month,
         year: h.year,
         holiday_name: h.holiday_name,
+      },
+      update: {},
+    });
+  });
+
+  const bank = await bankEnum.forEach(async (b) => {
+    await prisma.mas_bank.upsert({
+      where: {
+        id: b.id,
+      },
+      create:{
+        id: b.id,
+        name: b.name,
+        bank_code: b.bank_code
       },
       update: {},
     });

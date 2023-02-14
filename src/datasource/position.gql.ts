@@ -307,7 +307,7 @@ export const positionResolvers: Resolvers = {
             }
           })
         }
-      })
+      }) 
       return {
         message: 'success',
         status: true,
