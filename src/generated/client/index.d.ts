@@ -482,6 +482,19 @@ export type data_leave = {
   user_id: string
 }
 
+/**
+ * Model log_positionn
+ * 
+ */
+export type log_positionn = {
+  id: string
+  positionId: string
+  cretedBy: string
+  creteddate: Date
+  updtedBy: string
+  updteddate: Date
+}
+
 
 /**
  * ##  Prisma Client ʲˢ
@@ -899,6 +912,16 @@ export class PrismaClient<
     * ```
     */
   get data_leave(): Prisma.data_leaveDelegate<GlobalReject>;
+
+  /**
+   * `prisma.log_positionn`: Exposes CRUD operations for the **log_positionn** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more Log_positionns
+    * const log_positionns = await prisma.log_positionn.findMany()
+    * ```
+    */
+  get log_positionn(): Prisma.log_positionnDelegate<GlobalReject>;
 }
 
 export namespace Prisma {
@@ -1404,7 +1427,8 @@ export namespace Prisma {
     bookbank_log: 'bookbank_log',
     provident_log: 'provident_log',
     mas_leave_type: 'mas_leave_type',
-    data_leave: 'data_leave'
+    data_leave: 'data_leave',
+    log_positionn: 'log_positionn'
   };
 
   export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -1685,6 +1709,8 @@ export namespace Prisma {
     provident_log: number
     bookbank_log: number
     data_leave: number
+    cretedByfk: number
+    updtedByfk: number
   }
 
   export type UserCountOutputTypeSelect = {
@@ -1696,6 +1722,8 @@ export namespace Prisma {
     provident_log?: boolean
     bookbank_log?: boolean
     data_leave?: boolean
+    cretedByfk?: boolean
+    updtedByfk?: boolean
   }
 
   export type UserCountOutputTypeGetPayload<S extends boolean | null | undefined | UserCountOutputTypeArgs> =
@@ -2029,6 +2057,49 @@ export namespace Prisma {
      * Select specific fields to fetch from the Mas_positionlevel3CountOutputType
      */
     select?: Mas_positionlevel3CountOutputTypeSelect | null
+  }
+
+
+
+  /**
+   * Count Type Position_userCountOutputType
+   */
+
+
+  export type Position_userCountOutputType = {
+    log_position: number
+  }
+
+  export type Position_userCountOutputTypeSelect = {
+    log_position?: boolean
+  }
+
+  export type Position_userCountOutputTypeGetPayload<S extends boolean | null | undefined | Position_userCountOutputTypeArgs> =
+    S extends { select: any, include: any } ? 'Please either choose `select` or `include`' :
+    S extends true ? Position_userCountOutputType :
+    S extends undefined ? never :
+    S extends { include: any } & (Position_userCountOutputTypeArgs)
+    ? Position_userCountOutputType 
+    : S extends { select: any } & (Position_userCountOutputTypeArgs)
+      ? {
+    [P in TruthyKeys<S['select']>]:
+    P extends keyof Position_userCountOutputType ? Position_userCountOutputType[P] : never
+  } 
+      : Position_userCountOutputType
+
+
+
+
+  // Custom InputTypes
+
+  /**
+   * Position_userCountOutputType without action
+   */
+  export type Position_userCountOutputTypeArgs = {
+    /**
+     * Select specific fields to fetch from the Position_userCountOutputType
+     */
+    select?: Position_userCountOutputTypeSelect | null
   }
 
 
@@ -6448,6 +6519,8 @@ export namespace Prisma {
     provident_log?: boolean | User$provident_logArgs
     bookbank_log?: boolean | User$bookbank_logArgs
     data_leave?: boolean | User$data_leaveArgs
+    cretedByfk?: boolean | User$cretedByfkArgs
+    updtedByfk?: boolean | User$updtedByfkArgs
     _count?: boolean | UserCountOutputTypeArgs
   }
 
@@ -6465,6 +6538,8 @@ export namespace Prisma {
     provident_log?: boolean | User$provident_logArgs
     bookbank_log?: boolean | User$bookbank_logArgs
     data_leave?: boolean | User$data_leaveArgs
+    cretedByfk?: boolean | User$cretedByfkArgs
+    updtedByfk?: boolean | User$updtedByfkArgs
     _count?: boolean | UserCountOutputTypeArgs
   }
 
@@ -6487,6 +6562,8 @@ export namespace Prisma {
         P extends 'provident_log' ? Array < provident_logGetPayload<S['include'][P]>>  :
         P extends 'bookbank_log' ? Array < bookbank_logGetPayload<S['include'][P]>>  :
         P extends 'data_leave' ? Array < data_leaveGetPayload<S['include'][P]>>  :
+        P extends 'cretedByfk' ? Array < log_positionnGetPayload<S['include'][P]>>  :
+        P extends 'updtedByfk' ? Array < log_positionnGetPayload<S['include'][P]>>  :
         P extends '_count' ? UserCountOutputTypeGetPayload<S['include'][P]> :  never
   } 
     : S extends { select: any } & (UserArgs | UserFindManyArgs)
@@ -6504,6 +6581,8 @@ export namespace Prisma {
         P extends 'provident_log' ? Array < provident_logGetPayload<S['select'][P]>>  :
         P extends 'bookbank_log' ? Array < bookbank_logGetPayload<S['select'][P]>>  :
         P extends 'data_leave' ? Array < data_leaveGetPayload<S['select'][P]>>  :
+        P extends 'cretedByfk' ? Array < log_positionnGetPayload<S['select'][P]>>  :
+        P extends 'updtedByfk' ? Array < log_positionnGetPayload<S['select'][P]>>  :
         P extends '_count' ? UserCountOutputTypeGetPayload<S['select'][P]> :  P extends keyof User ? User[P] : never
   } 
       : User
@@ -6901,6 +6980,10 @@ export namespace Prisma {
     bookbank_log<T extends User$bookbank_logArgs= {}>(args?: Subset<T, User$bookbank_logArgs>): PrismaPromise<Array<bookbank_logGetPayload<T>>| Null>;
 
     data_leave<T extends User$data_leaveArgs= {}>(args?: Subset<T, User$data_leaveArgs>): PrismaPromise<Array<data_leaveGetPayload<T>>| Null>;
+
+    cretedByfk<T extends User$cretedByfkArgs= {}>(args?: Subset<T, User$cretedByfkArgs>): PrismaPromise<Array<log_positionnGetPayload<T>>| Null>;
+
+    updtedByfk<T extends User$updtedByfkArgs= {}>(args?: Subset<T, User$updtedByfkArgs>): PrismaPromise<Array<log_positionnGetPayload<T>>| Null>;
 
     private get _document();
     /**
@@ -7422,6 +7505,48 @@ export namespace Prisma {
     take?: number
     skip?: number
     distinct?: Enumerable<Data_leaveScalarFieldEnum>
+  }
+
+
+  /**
+   * User.cretedByfk
+   */
+  export type User$cretedByfkArgs = {
+    /**
+     * Select specific fields to fetch from the log_positionn
+     */
+    select?: log_positionnSelect | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: log_positionnInclude | null
+    where?: log_positionnWhereInput
+    orderBy?: Enumerable<log_positionnOrderByWithRelationInput>
+    cursor?: log_positionnWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: Enumerable<Log_positionnScalarFieldEnum>
+  }
+
+
+  /**
+   * User.updtedByfk
+   */
+  export type User$updtedByfkArgs = {
+    /**
+     * Select specific fields to fetch from the log_positionn
+     */
+    select?: log_positionnSelect | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: log_positionnInclude | null
+    where?: log_positionnWhereInput
+    orderBy?: Enumerable<log_positionnOrderByWithRelationInput>
+    cursor?: log_positionnWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: Enumerable<Log_positionnScalarFieldEnum>
   }
 
 
@@ -16430,6 +16555,8 @@ export namespace Prisma {
     mas_positionlevel1?: boolean | mas_positionlevel1Args
     mas_positionlevel2?: boolean | mas_positionlevel2Args
     mas_positionlevel3?: boolean | mas_positionlevel3Args
+    log_position?: boolean | Position_user$log_positionArgs
+    _count?: boolean | Position_userCountOutputTypeArgs
   }
 
 
@@ -16439,6 +16566,8 @@ export namespace Prisma {
     mas_positionlevel1?: boolean | mas_positionlevel1Args
     mas_positionlevel2?: boolean | mas_positionlevel2Args
     mas_positionlevel3?: boolean | mas_positionlevel3Args
+    log_position?: boolean | Position_user$log_positionArgs
+    _count?: boolean | Position_userCountOutputTypeArgs
   }
 
   export type Position_userGetPayload<S extends boolean | null | undefined | Position_userArgs> =
@@ -16452,7 +16581,9 @@ export namespace Prisma {
         P extends 'user' ? UserGetPayload<S['include'][P]> | null :
         P extends 'mas_positionlevel1' ? mas_positionlevel1GetPayload<S['include'][P]> | null :
         P extends 'mas_positionlevel2' ? mas_positionlevel2GetPayload<S['include'][P]> | null :
-        P extends 'mas_positionlevel3' ? mas_positionlevel3GetPayload<S['include'][P]> | null :  never
+        P extends 'mas_positionlevel3' ? mas_positionlevel3GetPayload<S['include'][P]> | null :
+        P extends 'log_position' ? Array < log_positionnGetPayload<S['include'][P]>>  :
+        P extends '_count' ? Position_userCountOutputTypeGetPayload<S['include'][P]> :  never
   } 
     : S extends { select: any } & (Position_userArgs | Position_userFindManyArgs)
       ? {
@@ -16461,7 +16592,9 @@ export namespace Prisma {
         P extends 'user' ? UserGetPayload<S['select'][P]> | null :
         P extends 'mas_positionlevel1' ? mas_positionlevel1GetPayload<S['select'][P]> | null :
         P extends 'mas_positionlevel2' ? mas_positionlevel2GetPayload<S['select'][P]> | null :
-        P extends 'mas_positionlevel3' ? mas_positionlevel3GetPayload<S['select'][P]> | null :  P extends keyof Position_user ? Position_user[P] : never
+        P extends 'mas_positionlevel3' ? mas_positionlevel3GetPayload<S['select'][P]> | null :
+        P extends 'log_position' ? Array < log_positionnGetPayload<S['select'][P]>>  :
+        P extends '_count' ? Position_userCountOutputTypeGetPayload<S['select'][P]> :  P extends keyof Position_user ? Position_user[P] : never
   } 
       : Position_user
 
@@ -16845,6 +16978,8 @@ export namespace Prisma {
 
     mas_positionlevel3<T extends mas_positionlevel3Args= {}>(args?: Subset<T, mas_positionlevel3Args>): Prisma__mas_positionlevel3Client<mas_positionlevel3GetPayload<T> | Null>;
 
+    log_position<T extends Position_user$log_positionArgs= {}>(args?: Subset<T, Position_user$log_positionArgs>): PrismaPromise<Array<log_positionnGetPayload<T>>| Null>;
+
     private get _document();
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
@@ -17197,6 +17332,27 @@ export namespace Prisma {
      * Filter which Position_users to delete
      */
     where?: Position_userWhereInput
+  }
+
+
+  /**
+   * Position_user.log_position
+   */
+  export type Position_user$log_positionArgs = {
+    /**
+     * Select specific fields to fetch from the log_positionn
+     */
+    select?: log_positionnSelect | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: log_positionnInclude | null
+    where?: log_positionnWhereInput
+    orderBy?: Enumerable<log_positionnOrderByWithRelationInput>
+    cursor?: log_positionnWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: Enumerable<Log_positionnScalarFieldEnum>
   }
 
 
@@ -33461,6 +33617,959 @@ export namespace Prisma {
 
 
   /**
+   * Model log_positionn
+   */
+
+
+  export type AggregateLog_positionn = {
+    _count: Log_positionnCountAggregateOutputType | null
+    _min: Log_positionnMinAggregateOutputType | null
+    _max: Log_positionnMaxAggregateOutputType | null
+  }
+
+  export type Log_positionnMinAggregateOutputType = {
+    id: string | null
+    positionId: string | null
+    cretedBy: string | null
+    creteddate: Date | null
+    updtedBy: string | null
+    updteddate: Date | null
+  }
+
+  export type Log_positionnMaxAggregateOutputType = {
+    id: string | null
+    positionId: string | null
+    cretedBy: string | null
+    creteddate: Date | null
+    updtedBy: string | null
+    updteddate: Date | null
+  }
+
+  export type Log_positionnCountAggregateOutputType = {
+    id: number
+    positionId: number
+    cretedBy: number
+    creteddate: number
+    updtedBy: number
+    updteddate: number
+    _all: number
+  }
+
+
+  export type Log_positionnMinAggregateInputType = {
+    id?: true
+    positionId?: true
+    cretedBy?: true
+    creteddate?: true
+    updtedBy?: true
+    updteddate?: true
+  }
+
+  export type Log_positionnMaxAggregateInputType = {
+    id?: true
+    positionId?: true
+    cretedBy?: true
+    creteddate?: true
+    updtedBy?: true
+    updteddate?: true
+  }
+
+  export type Log_positionnCountAggregateInputType = {
+    id?: true
+    positionId?: true
+    cretedBy?: true
+    creteddate?: true
+    updtedBy?: true
+    updteddate?: true
+    _all?: true
+  }
+
+  export type Log_positionnAggregateArgs = {
+    /**
+     * Filter which log_positionn to aggregate.
+     */
+    where?: log_positionnWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of log_positionns to fetch.
+     */
+    orderBy?: Enumerable<log_positionnOrderByWithRelationInput>
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: log_positionnWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` log_positionns from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` log_positionns.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned log_positionns
+    **/
+    _count?: true | Log_positionnCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: Log_positionnMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: Log_positionnMaxAggregateInputType
+  }
+
+  export type GetLog_positionnAggregateType<T extends Log_positionnAggregateArgs> = {
+        [P in keyof T & keyof AggregateLog_positionn]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateLog_positionn[P]>
+      : GetScalarType<T[P], AggregateLog_positionn[P]>
+  }
+
+
+
+
+  export type Log_positionnGroupByArgs = {
+    where?: log_positionnWhereInput
+    orderBy?: Enumerable<log_positionnOrderByWithAggregationInput>
+    by: Log_positionnScalarFieldEnum[]
+    having?: log_positionnScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: Log_positionnCountAggregateInputType | true
+    _min?: Log_positionnMinAggregateInputType
+    _max?: Log_positionnMaxAggregateInputType
+  }
+
+
+  export type Log_positionnGroupByOutputType = {
+    id: string
+    positionId: string
+    cretedBy: string
+    creteddate: Date
+    updtedBy: string
+    updteddate: Date
+    _count: Log_positionnCountAggregateOutputType | null
+    _min: Log_positionnMinAggregateOutputType | null
+    _max: Log_positionnMaxAggregateOutputType | null
+  }
+
+  type GetLog_positionnGroupByPayload<T extends Log_positionnGroupByArgs> = PrismaPromise<
+    Array<
+      PickArray<Log_positionnGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof Log_positionnGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], Log_positionnGroupByOutputType[P]>
+            : GetScalarType<T[P], Log_positionnGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type log_positionnSelect = {
+    id?: boolean
+    positionId?: boolean
+    cretedBy?: boolean
+    creteddate?: boolean
+    updtedBy?: boolean
+    updteddate?: boolean
+    Position_user?: boolean | Position_userArgs
+    cretedByfk?: boolean | UserArgs
+    updtedByfk?: boolean | UserArgs
+  }
+
+
+  export type log_positionnInclude = {
+    Position_user?: boolean | Position_userArgs
+    cretedByfk?: boolean | UserArgs
+    updtedByfk?: boolean | UserArgs
+  }
+
+  export type log_positionnGetPayload<S extends boolean | null | undefined | log_positionnArgs> =
+    S extends { select: any, include: any } ? 'Please either choose `select` or `include`' :
+    S extends true ? log_positionn :
+    S extends undefined ? never :
+    S extends { include: any } & (log_positionnArgs | log_positionnFindManyArgs)
+    ? log_positionn  & {
+    [P in TruthyKeys<S['include']>]:
+        P extends 'Position_user' ? Position_userGetPayload<S['include'][P]> :
+        P extends 'cretedByfk' ? UserGetPayload<S['include'][P]> :
+        P extends 'updtedByfk' ? UserGetPayload<S['include'][P]> :  never
+  } 
+    : S extends { select: any } & (log_positionnArgs | log_positionnFindManyArgs)
+      ? {
+    [P in TruthyKeys<S['select']>]:
+        P extends 'Position_user' ? Position_userGetPayload<S['select'][P]> :
+        P extends 'cretedByfk' ? UserGetPayload<S['select'][P]> :
+        P extends 'updtedByfk' ? UserGetPayload<S['select'][P]> :  P extends keyof log_positionn ? log_positionn[P] : never
+  } 
+      : log_positionn
+
+
+  type log_positionnCountArgs = 
+    Omit<log_positionnFindManyArgs, 'select' | 'include'> & {
+      select?: Log_positionnCountAggregateInputType | true
+    }
+
+  export interface log_positionnDelegate<GlobalRejectSettings extends Prisma.RejectOnNotFound | Prisma.RejectPerOperation | false | undefined> {
+
+    /**
+     * Find zero or one Log_positionn that matches the filter.
+     * @param {log_positionnFindUniqueArgs} args - Arguments to find a Log_positionn
+     * @example
+     * // Get one Log_positionn
+     * const log_positionn = await prisma.log_positionn.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+    **/
+    findUnique<T extends log_positionnFindUniqueArgs,  LocalRejectSettings = T["rejectOnNotFound"] extends RejectOnNotFound ? T['rejectOnNotFound'] : undefined>(
+      args: SelectSubset<T, log_positionnFindUniqueArgs>
+    ): HasReject<GlobalRejectSettings, LocalRejectSettings, 'findUnique', 'log_positionn'> extends True ? Prisma__log_positionnClient<log_positionnGetPayload<T>> : Prisma__log_positionnClient<log_positionnGetPayload<T> | null, null>
+
+    /**
+     * Find one Log_positionn that matches the filter or throw an error  with `error.code='P2025'` 
+     *     if no matches were found.
+     * @param {log_positionnFindUniqueOrThrowArgs} args - Arguments to find a Log_positionn
+     * @example
+     * // Get one Log_positionn
+     * const log_positionn = await prisma.log_positionn.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+    **/
+    findUniqueOrThrow<T extends log_positionnFindUniqueOrThrowArgs>(
+      args?: SelectSubset<T, log_positionnFindUniqueOrThrowArgs>
+    ): Prisma__log_positionnClient<log_positionnGetPayload<T>>
+
+    /**
+     * Find the first Log_positionn that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {log_positionnFindFirstArgs} args - Arguments to find a Log_positionn
+     * @example
+     * // Get one Log_positionn
+     * const log_positionn = await prisma.log_positionn.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+    **/
+    findFirst<T extends log_positionnFindFirstArgs,  LocalRejectSettings = T["rejectOnNotFound"] extends RejectOnNotFound ? T['rejectOnNotFound'] : undefined>(
+      args?: SelectSubset<T, log_positionnFindFirstArgs>
+    ): HasReject<GlobalRejectSettings, LocalRejectSettings, 'findFirst', 'log_positionn'> extends True ? Prisma__log_positionnClient<log_positionnGetPayload<T>> : Prisma__log_positionnClient<log_positionnGetPayload<T> | null, null>
+
+    /**
+     * Find the first Log_positionn that matches the filter or
+     * throw `NotFoundError` if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {log_positionnFindFirstOrThrowArgs} args - Arguments to find a Log_positionn
+     * @example
+     * // Get one Log_positionn
+     * const log_positionn = await prisma.log_positionn.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+    **/
+    findFirstOrThrow<T extends log_positionnFindFirstOrThrowArgs>(
+      args?: SelectSubset<T, log_positionnFindFirstOrThrowArgs>
+    ): Prisma__log_positionnClient<log_positionnGetPayload<T>>
+
+    /**
+     * Find zero or more Log_positionns that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {log_positionnFindManyArgs=} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all Log_positionns
+     * const log_positionns = await prisma.log_positionn.findMany()
+     * 
+     * // Get first 10 Log_positionns
+     * const log_positionns = await prisma.log_positionn.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const log_positionnWithIdOnly = await prisma.log_positionn.findMany({ select: { id: true } })
+     * 
+    **/
+    findMany<T extends log_positionnFindManyArgs>(
+      args?: SelectSubset<T, log_positionnFindManyArgs>
+    ): PrismaPromise<Array<log_positionnGetPayload<T>>>
+
+    /**
+     * Create a Log_positionn.
+     * @param {log_positionnCreateArgs} args - Arguments to create a Log_positionn.
+     * @example
+     * // Create one Log_positionn
+     * const Log_positionn = await prisma.log_positionn.create({
+     *   data: {
+     *     // ... data to create a Log_positionn
+     *   }
+     * })
+     * 
+    **/
+    create<T extends log_positionnCreateArgs>(
+      args: SelectSubset<T, log_positionnCreateArgs>
+    ): Prisma__log_positionnClient<log_positionnGetPayload<T>>
+
+    /**
+     * Create many Log_positionns.
+     *     @param {log_positionnCreateManyArgs} args - Arguments to create many Log_positionns.
+     *     @example
+     *     // Create many Log_positionns
+     *     const log_positionn = await prisma.log_positionn.createMany({
+     *       data: {
+     *         // ... provide data here
+     *       }
+     *     })
+     *     
+    **/
+    createMany<T extends log_positionnCreateManyArgs>(
+      args?: SelectSubset<T, log_positionnCreateManyArgs>
+    ): PrismaPromise<BatchPayload>
+
+    /**
+     * Delete a Log_positionn.
+     * @param {log_positionnDeleteArgs} args - Arguments to delete one Log_positionn.
+     * @example
+     * // Delete one Log_positionn
+     * const Log_positionn = await prisma.log_positionn.delete({
+     *   where: {
+     *     // ... filter to delete one Log_positionn
+     *   }
+     * })
+     * 
+    **/
+    delete<T extends log_positionnDeleteArgs>(
+      args: SelectSubset<T, log_positionnDeleteArgs>
+    ): Prisma__log_positionnClient<log_positionnGetPayload<T>>
+
+    /**
+     * Update one Log_positionn.
+     * @param {log_positionnUpdateArgs} args - Arguments to update one Log_positionn.
+     * @example
+     * // Update one Log_positionn
+     * const log_positionn = await prisma.log_positionn.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+    **/
+    update<T extends log_positionnUpdateArgs>(
+      args: SelectSubset<T, log_positionnUpdateArgs>
+    ): Prisma__log_positionnClient<log_positionnGetPayload<T>>
+
+    /**
+     * Delete zero or more Log_positionns.
+     * @param {log_positionnDeleteManyArgs} args - Arguments to filter Log_positionns to delete.
+     * @example
+     * // Delete a few Log_positionns
+     * const { count } = await prisma.log_positionn.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+    **/
+    deleteMany<T extends log_positionnDeleteManyArgs>(
+      args?: SelectSubset<T, log_positionnDeleteManyArgs>
+    ): PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Log_positionns.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {log_positionnUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many Log_positionns
+     * const log_positionn = await prisma.log_positionn.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+    **/
+    updateMany<T extends log_positionnUpdateManyArgs>(
+      args: SelectSubset<T, log_positionnUpdateManyArgs>
+    ): PrismaPromise<BatchPayload>
+
+    /**
+     * Create or update one Log_positionn.
+     * @param {log_positionnUpsertArgs} args - Arguments to update or create a Log_positionn.
+     * @example
+     * // Update or create a Log_positionn
+     * const log_positionn = await prisma.log_positionn.upsert({
+     *   create: {
+     *     // ... data to create a Log_positionn
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the Log_positionn we want to update
+     *   }
+     * })
+    **/
+    upsert<T extends log_positionnUpsertArgs>(
+      args: SelectSubset<T, log_positionnUpsertArgs>
+    ): Prisma__log_positionnClient<log_positionnGetPayload<T>>
+
+    /**
+     * Count the number of Log_positionns.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {log_positionnCountArgs} args - Arguments to filter Log_positionns to count.
+     * @example
+     * // Count the number of Log_positionns
+     * const count = await prisma.log_positionn.count({
+     *   where: {
+     *     // ... the filter for the Log_positionns we want to count
+     *   }
+     * })
+    **/
+    count<T extends log_positionnCountArgs>(
+      args?: Subset<T, log_positionnCountArgs>,
+    ): PrismaPromise<
+      T extends _Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], Log_positionnCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a Log_positionn.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {Log_positionnAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends Log_positionnAggregateArgs>(args: Subset<T, Log_positionnAggregateArgs>): PrismaPromise<GetLog_positionnAggregateType<T>>
+
+    /**
+     * Group by Log_positionn.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {Log_positionnGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends Log_positionnGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: Log_positionnGroupByArgs['orderBy'] }
+        : { orderBy?: Log_positionnGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends TupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, Log_positionnGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetLog_positionnGroupByPayload<T> : PrismaPromise<InputErrors>
+
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for log_positionn.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export class Prisma__log_positionnClient<T, Null = never> implements PrismaPromise<T> {
+    [prisma]: true;
+    private readonly _dmmf;
+    private readonly _fetcher;
+    private readonly _queryType;
+    private readonly _rootField;
+    private readonly _clientMethod;
+    private readonly _args;
+    private readonly _dataPath;
+    private readonly _errorFormat;
+    private readonly _measurePerformance?;
+    private _isList;
+    private _callsite;
+    private _requestPromise?;
+    constructor(_dmmf: runtime.DMMFClass, _fetcher: PrismaClientFetcher, _queryType: 'query' | 'mutation', _rootField: string, _clientMethod: string, _args: any, _dataPath: string[], _errorFormat: ErrorFormat, _measurePerformance?: boolean | undefined, _isList?: boolean);
+    readonly [Symbol.toStringTag]: 'PrismaClientPromise';
+
+    Position_user<T extends Position_userArgs= {}>(args?: Subset<T, Position_userArgs>): Prisma__Position_userClient<Position_userGetPayload<T> | Null>;
+
+    cretedByfk<T extends UserArgs= {}>(args?: Subset<T, UserArgs>): Prisma__UserClient<UserGetPayload<T> | Null>;
+
+    updtedByfk<T extends UserArgs= {}>(args?: Subset<T, UserArgs>): Prisma__UserClient<UserGetPayload<T> | Null>;
+
+    private get _document();
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): Promise<TResult1 | TResult2>;
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): Promise<T | TResult>;
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): Promise<T>;
+  }
+
+
+
+  // Custom InputTypes
+
+  /**
+   * log_positionn base type for findUnique actions
+   */
+  export type log_positionnFindUniqueArgsBase = {
+    /**
+     * Select specific fields to fetch from the log_positionn
+     */
+    select?: log_positionnSelect | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: log_positionnInclude | null
+    /**
+     * Filter, which log_positionn to fetch.
+     */
+    where: log_positionnWhereUniqueInput
+  }
+
+  /**
+   * log_positionn findUnique
+   */
+  export interface log_positionnFindUniqueArgs extends log_positionnFindUniqueArgsBase {
+   /**
+    * Throw an Error if query returns no results
+    * @deprecated since 4.0.0: use `findUniqueOrThrow` method instead
+    */
+    rejectOnNotFound?: RejectOnNotFound
+  }
+      
+
+  /**
+   * log_positionn findUniqueOrThrow
+   */
+  export type log_positionnFindUniqueOrThrowArgs = {
+    /**
+     * Select specific fields to fetch from the log_positionn
+     */
+    select?: log_positionnSelect | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: log_positionnInclude | null
+    /**
+     * Filter, which log_positionn to fetch.
+     */
+    where: log_positionnWhereUniqueInput
+  }
+
+
+  /**
+   * log_positionn base type for findFirst actions
+   */
+  export type log_positionnFindFirstArgsBase = {
+    /**
+     * Select specific fields to fetch from the log_positionn
+     */
+    select?: log_positionnSelect | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: log_positionnInclude | null
+    /**
+     * Filter, which log_positionn to fetch.
+     */
+    where?: log_positionnWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of log_positionns to fetch.
+     */
+    orderBy?: Enumerable<log_positionnOrderByWithRelationInput>
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for log_positionns.
+     */
+    cursor?: log_positionnWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` log_positionns from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` log_positionns.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of log_positionns.
+     */
+    distinct?: Enumerable<Log_positionnScalarFieldEnum>
+  }
+
+  /**
+   * log_positionn findFirst
+   */
+  export interface log_positionnFindFirstArgs extends log_positionnFindFirstArgsBase {
+   /**
+    * Throw an Error if query returns no results
+    * @deprecated since 4.0.0: use `findFirstOrThrow` method instead
+    */
+    rejectOnNotFound?: RejectOnNotFound
+  }
+      
+
+  /**
+   * log_positionn findFirstOrThrow
+   */
+  export type log_positionnFindFirstOrThrowArgs = {
+    /**
+     * Select specific fields to fetch from the log_positionn
+     */
+    select?: log_positionnSelect | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: log_positionnInclude | null
+    /**
+     * Filter, which log_positionn to fetch.
+     */
+    where?: log_positionnWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of log_positionns to fetch.
+     */
+    orderBy?: Enumerable<log_positionnOrderByWithRelationInput>
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for log_positionns.
+     */
+    cursor?: log_positionnWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` log_positionns from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` log_positionns.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of log_positionns.
+     */
+    distinct?: Enumerable<Log_positionnScalarFieldEnum>
+  }
+
+
+  /**
+   * log_positionn findMany
+   */
+  export type log_positionnFindManyArgs = {
+    /**
+     * Select specific fields to fetch from the log_positionn
+     */
+    select?: log_positionnSelect | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: log_positionnInclude | null
+    /**
+     * Filter, which log_positionns to fetch.
+     */
+    where?: log_positionnWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of log_positionns to fetch.
+     */
+    orderBy?: Enumerable<log_positionnOrderByWithRelationInput>
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing log_positionns.
+     */
+    cursor?: log_positionnWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` log_positionns from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` log_positionns.
+     */
+    skip?: number
+    distinct?: Enumerable<Log_positionnScalarFieldEnum>
+  }
+
+
+  /**
+   * log_positionn create
+   */
+  export type log_positionnCreateArgs = {
+    /**
+     * Select specific fields to fetch from the log_positionn
+     */
+    select?: log_positionnSelect | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: log_positionnInclude | null
+    /**
+     * The data needed to create a log_positionn.
+     */
+    data: XOR<log_positionnCreateInput, log_positionnUncheckedCreateInput>
+  }
+
+
+  /**
+   * log_positionn createMany
+   */
+  export type log_positionnCreateManyArgs = {
+    /**
+     * The data used to create many log_positionns.
+     */
+    data: Enumerable<log_positionnCreateManyInput>
+    skipDuplicates?: boolean
+  }
+
+
+  /**
+   * log_positionn update
+   */
+  export type log_positionnUpdateArgs = {
+    /**
+     * Select specific fields to fetch from the log_positionn
+     */
+    select?: log_positionnSelect | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: log_positionnInclude | null
+    /**
+     * The data needed to update a log_positionn.
+     */
+    data: XOR<log_positionnUpdateInput, log_positionnUncheckedUpdateInput>
+    /**
+     * Choose, which log_positionn to update.
+     */
+    where: log_positionnWhereUniqueInput
+  }
+
+
+  /**
+   * log_positionn updateMany
+   */
+  export type log_positionnUpdateManyArgs = {
+    /**
+     * The data used to update log_positionns.
+     */
+    data: XOR<log_positionnUpdateManyMutationInput, log_positionnUncheckedUpdateManyInput>
+    /**
+     * Filter which log_positionns to update
+     */
+    where?: log_positionnWhereInput
+  }
+
+
+  /**
+   * log_positionn upsert
+   */
+  export type log_positionnUpsertArgs = {
+    /**
+     * Select specific fields to fetch from the log_positionn
+     */
+    select?: log_positionnSelect | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: log_positionnInclude | null
+    /**
+     * The filter to search for the log_positionn to update in case it exists.
+     */
+    where: log_positionnWhereUniqueInput
+    /**
+     * In case the log_positionn found by the `where` argument doesn't exist, create a new log_positionn with this data.
+     */
+    create: XOR<log_positionnCreateInput, log_positionnUncheckedCreateInput>
+    /**
+     * In case the log_positionn was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<log_positionnUpdateInput, log_positionnUncheckedUpdateInput>
+  }
+
+
+  /**
+   * log_positionn delete
+   */
+  export type log_positionnDeleteArgs = {
+    /**
+     * Select specific fields to fetch from the log_positionn
+     */
+    select?: log_positionnSelect | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: log_positionnInclude | null
+    /**
+     * Filter which log_positionn to delete.
+     */
+    where: log_positionnWhereUniqueInput
+  }
+
+
+  /**
+   * log_positionn deleteMany
+   */
+  export type log_positionnDeleteManyArgs = {
+    /**
+     * Filter which log_positionns to delete
+     */
+    where?: log_positionnWhereInput
+  }
+
+
+  /**
+   * log_positionn without action
+   */
+  export type log_positionnArgs = {
+    /**
+     * Select specific fields to fetch from the log_positionn
+     */
+    select?: log_positionnSelect | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: log_positionnInclude | null
+  }
+
+
+
+  /**
    * Enums
    */
 
@@ -33625,6 +34734,18 @@ export namespace Prisma {
   };
 
   export type JsonNullValueInput = (typeof JsonNullValueInput)[keyof typeof JsonNullValueInput]
+
+
+  export const Log_positionnScalarFieldEnum: {
+    id: 'id',
+    positionId: 'positionId',
+    cretedBy: 'cretedBy',
+    creteddate: 'creteddate',
+    updtedBy: 'updtedBy',
+    updteddate: 'updteddate'
+  };
+
+  export type Log_positionnScalarFieldEnum = (typeof Log_positionnScalarFieldEnum)[keyof typeof Log_positionnScalarFieldEnum]
 
 
   export const Mas_all_collectScalarFieldEnum: {
@@ -34423,6 +35544,8 @@ export namespace Prisma {
     provident_log?: Provident_logListRelationFilter
     bookbank_log?: Bookbank_logListRelationFilter
     data_leave?: Data_leaveListRelationFilter
+    cretedByfk?: Log_positionnListRelationFilter
+    updtedByfk?: Log_positionnListRelationFilter
   }
 
   export type UserOrderByWithRelationInput = {
@@ -34449,6 +35572,8 @@ export namespace Prisma {
     provident_log?: provident_logOrderByRelationAggregateInput
     bookbank_log?: bookbank_logOrderByRelationAggregateInput
     data_leave?: data_leaveOrderByRelationAggregateInput
+    cretedByfk?: log_positionnOrderByRelationAggregateInput
+    updtedByfk?: log_positionnOrderByRelationAggregateInput
   }
 
   export type UserWhereUniqueInput = {
@@ -34938,6 +36063,7 @@ export namespace Prisma {
     mas_positionlevel1?: XOR<Mas_positionlevel1RelationFilter, mas_positionlevel1WhereInput> | null
     mas_positionlevel2?: XOR<Mas_positionlevel2RelationFilter, mas_positionlevel2WhereInput> | null
     mas_positionlevel3?: XOR<Mas_positionlevel3RelationFilter, mas_positionlevel3WhereInput> | null
+    log_position?: Log_positionnListRelationFilter
   }
 
   export type Position_userOrderByWithRelationInput = {
@@ -34954,6 +36080,7 @@ export namespace Prisma {
     mas_positionlevel1?: mas_positionlevel1OrderByWithRelationInput
     mas_positionlevel2?: mas_positionlevel2OrderByWithRelationInput
     mas_positionlevel3?: mas_positionlevel3OrderByWithRelationInput
+    log_position?: log_positionnOrderByRelationAggregateInput
   }
 
   export type Position_userWhereUniqueInput = {
@@ -35957,6 +37084,61 @@ export namespace Prisma {
     user_id?: UuidWithAggregatesFilter | string
   }
 
+  export type log_positionnWhereInput = {
+    AND?: Enumerable<log_positionnWhereInput>
+    OR?: Enumerable<log_positionnWhereInput>
+    NOT?: Enumerable<log_positionnWhereInput>
+    id?: UuidFilter | string
+    positionId?: UuidFilter | string
+    cretedBy?: UuidFilter | string
+    creteddate?: DateTimeFilter | Date | string
+    updtedBy?: UuidFilter | string
+    updteddate?: DateTimeFilter | Date | string
+    Position_user?: XOR<Position_userRelationFilter, Position_userWhereInput>
+    cretedByfk?: XOR<UserRelationFilter, UserWhereInput>
+    updtedByfk?: XOR<UserRelationFilter, UserWhereInput>
+  }
+
+  export type log_positionnOrderByWithRelationInput = {
+    id?: SortOrder
+    positionId?: SortOrder
+    cretedBy?: SortOrder
+    creteddate?: SortOrder
+    updtedBy?: SortOrder
+    updteddate?: SortOrder
+    Position_user?: Position_userOrderByWithRelationInput
+    cretedByfk?: UserOrderByWithRelationInput
+    updtedByfk?: UserOrderByWithRelationInput
+  }
+
+  export type log_positionnWhereUniqueInput = {
+    id?: string
+  }
+
+  export type log_positionnOrderByWithAggregationInput = {
+    id?: SortOrder
+    positionId?: SortOrder
+    cretedBy?: SortOrder
+    creteddate?: SortOrder
+    updtedBy?: SortOrder
+    updteddate?: SortOrder
+    _count?: log_positionnCountOrderByAggregateInput
+    _max?: log_positionnMaxOrderByAggregateInput
+    _min?: log_positionnMinOrderByAggregateInput
+  }
+
+  export type log_positionnScalarWhereWithAggregatesInput = {
+    AND?: Enumerable<log_positionnScalarWhereWithAggregatesInput>
+    OR?: Enumerable<log_positionnScalarWhereWithAggregatesInput>
+    NOT?: Enumerable<log_positionnScalarWhereWithAggregatesInput>
+    id?: UuidWithAggregatesFilter | string
+    positionId?: UuidWithAggregatesFilter | string
+    cretedBy?: UuidWithAggregatesFilter | string
+    creteddate?: DateTimeWithAggregatesFilter | Date | string
+    updtedBy?: UuidWithAggregatesFilter | string
+    updteddate?: DateTimeWithAggregatesFilter | Date | string
+  }
+
   export type CompanyCreateInput = {
     id: string
     name: string
@@ -36666,6 +37848,8 @@ export namespace Prisma {
     provident_log?: provident_logCreateNestedManyWithoutUserInput
     bookbank_log?: bookbank_logCreateNestedManyWithoutUserInput
     data_leave?: data_leaveCreateNestedManyWithoutUserInput
+    cretedByfk?: log_positionnCreateNestedManyWithoutCretedByfkInput
+    updtedByfk?: log_positionnCreateNestedManyWithoutUpdtedByfkInput
   }
 
   export type UserUncheckedCreateInput = {
@@ -36689,6 +37873,8 @@ export namespace Prisma {
     provident_log?: provident_logUncheckedCreateNestedManyWithoutUserInput
     bookbank_log?: bookbank_logUncheckedCreateNestedManyWithoutUserInput
     data_leave?: data_leaveUncheckedCreateNestedManyWithoutUserInput
+    cretedByfk?: log_positionnUncheckedCreateNestedManyWithoutCretedByfkInput
+    updtedByfk?: log_positionnUncheckedCreateNestedManyWithoutUpdtedByfkInput
   }
 
   export type UserUpdateInput = {
@@ -36712,6 +37898,8 @@ export namespace Prisma {
     provident_log?: provident_logUpdateManyWithoutUserNestedInput
     bookbank_log?: bookbank_logUpdateManyWithoutUserNestedInput
     data_leave?: data_leaveUpdateManyWithoutUserNestedInput
+    cretedByfk?: log_positionnUpdateManyWithoutCretedByfkNestedInput
+    updtedByfk?: log_positionnUpdateManyWithoutUpdtedByfkNestedInput
   }
 
   export type UserUncheckedUpdateInput = {
@@ -36735,6 +37923,8 @@ export namespace Prisma {
     provident_log?: provident_logUncheckedUpdateManyWithoutUserNestedInput
     bookbank_log?: bookbank_logUncheckedUpdateManyWithoutUserNestedInput
     data_leave?: data_leaveUncheckedUpdateManyWithoutUserNestedInput
+    cretedByfk?: log_positionnUncheckedUpdateManyWithoutCretedByfkNestedInput
+    updtedByfk?: log_positionnUncheckedUpdateManyWithoutUpdtedByfkNestedInput
   }
 
   export type UserCreateManyInput = {
@@ -37281,6 +38471,7 @@ export namespace Prisma {
     mas_positionlevel1?: mas_positionlevel1CreateNestedOneWithoutPosition_userInput
     mas_positionlevel2?: mas_positionlevel2CreateNestedOneWithoutPosition_userInput
     mas_positionlevel3?: mas_positionlevel3CreateNestedOneWithoutPosition_userInput
+    log_position?: log_positionnCreateNestedManyWithoutPosition_userInput
   }
 
   export type Position_userUncheckedCreateInput = {
@@ -37292,6 +38483,7 @@ export namespace Prisma {
     position3_id?: string | null
     role?: string | null
     headderId?: string | null
+    log_position?: log_positionnUncheckedCreateNestedManyWithoutPosition_userInput
   }
 
   export type Position_userUpdateInput = {
@@ -37303,6 +38495,7 @@ export namespace Prisma {
     mas_positionlevel1?: mas_positionlevel1UpdateOneWithoutPosition_userNestedInput
     mas_positionlevel2?: mas_positionlevel2UpdateOneWithoutPosition_userNestedInput
     mas_positionlevel3?: mas_positionlevel3UpdateOneWithoutPosition_userNestedInput
+    log_position?: log_positionnUpdateManyWithoutPosition_userNestedInput
   }
 
   export type Position_userUncheckedUpdateInput = {
@@ -37314,6 +38507,7 @@ export namespace Prisma {
     position3_id?: NullableStringFieldUpdateOperationsInput | string | null
     role?: NullableStringFieldUpdateOperationsInput | string | null
     headderId?: NullableStringFieldUpdateOperationsInput | string | null
+    log_position?: log_positionnUncheckedUpdateManyWithoutPosition_userNestedInput
   }
 
   export type Position_userCreateManyInput = {
@@ -38536,6 +39730,66 @@ export namespace Prisma {
     user_id?: StringFieldUpdateOperationsInput | string
   }
 
+  export type log_positionnCreateInput = {
+    id: string
+    creteddate: Date | string
+    updteddate: Date | string
+    Position_user: Position_userCreateNestedOneWithoutLog_positionInput
+    cretedByfk: UserCreateNestedOneWithoutCretedByfkInput
+    updtedByfk: UserCreateNestedOneWithoutUpdtedByfkInput
+  }
+
+  export type log_positionnUncheckedCreateInput = {
+    id: string
+    positionId: string
+    cretedBy: string
+    creteddate: Date | string
+    updtedBy: string
+    updteddate: Date | string
+  }
+
+  export type log_positionnUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    creteddate?: DateTimeFieldUpdateOperationsInput | Date | string
+    updteddate?: DateTimeFieldUpdateOperationsInput | Date | string
+    Position_user?: Position_userUpdateOneRequiredWithoutLog_positionNestedInput
+    cretedByfk?: UserUpdateOneRequiredWithoutCretedByfkNestedInput
+    updtedByfk?: UserUpdateOneRequiredWithoutUpdtedByfkNestedInput
+  }
+
+  export type log_positionnUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    positionId?: StringFieldUpdateOperationsInput | string
+    cretedBy?: StringFieldUpdateOperationsInput | string
+    creteddate?: DateTimeFieldUpdateOperationsInput | Date | string
+    updtedBy?: StringFieldUpdateOperationsInput | string
+    updteddate?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type log_positionnCreateManyInput = {
+    id: string
+    positionId: string
+    cretedBy: string
+    creteddate: Date | string
+    updtedBy: string
+    updteddate: Date | string
+  }
+
+  export type log_positionnUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    creteddate?: DateTimeFieldUpdateOperationsInput | Date | string
+    updteddate?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type log_positionnUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    positionId?: StringFieldUpdateOperationsInput | string
+    cretedBy?: StringFieldUpdateOperationsInput | string
+    creteddate?: DateTimeFieldUpdateOperationsInput | Date | string
+    updtedBy?: StringFieldUpdateOperationsInput | string
+    updteddate?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
   export type UuidFilter = {
     equals?: string
     in?: Enumerable<string>
@@ -39205,6 +40459,12 @@ export namespace Prisma {
     none?: data_leaveWhereInput
   }
 
+  export type Log_positionnListRelationFilter = {
+    every?: log_positionnWhereInput
+    some?: log_positionnWhereInput
+    none?: log_positionnWhereInput
+  }
+
   export type CompanyOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
@@ -39230,6 +40490,10 @@ export namespace Prisma {
   }
 
   export type data_leaveOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type log_positionnOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
@@ -40424,6 +41688,38 @@ export namespace Prisma {
     Status?: SortOrder
   }
 
+  export type Position_userRelationFilter = {
+    is?: Position_userWhereInput
+    isNot?: Position_userWhereInput
+  }
+
+  export type log_positionnCountOrderByAggregateInput = {
+    id?: SortOrder
+    positionId?: SortOrder
+    cretedBy?: SortOrder
+    creteddate?: SortOrder
+    updtedBy?: SortOrder
+    updteddate?: SortOrder
+  }
+
+  export type log_positionnMaxOrderByAggregateInput = {
+    id?: SortOrder
+    positionId?: SortOrder
+    cretedBy?: SortOrder
+    creteddate?: SortOrder
+    updtedBy?: SortOrder
+    updteddate?: SortOrder
+  }
+
+  export type log_positionnMinOrderByAggregateInput = {
+    id?: SortOrder
+    positionId?: SortOrder
+    cretedBy?: SortOrder
+    creteddate?: SortOrder
+    updtedBy?: SortOrder
+    updteddate?: SortOrder
+  }
+
   export type UserCreateNestedOneWithoutCompanyInput = {
     create?: XOR<UserCreateWithoutCompanyInput, UserUncheckedCreateWithoutCompanyInput>
     connectOrCreate?: UserCreateOrConnectWithoutCompanyInput
@@ -40996,6 +42292,20 @@ export namespace Prisma {
     connect?: Enumerable<data_leaveWhereUniqueInput>
   }
 
+  export type log_positionnCreateNestedManyWithoutCretedByfkInput = {
+    create?: XOR<Enumerable<log_positionnCreateWithoutCretedByfkInput>, Enumerable<log_positionnUncheckedCreateWithoutCretedByfkInput>>
+    connectOrCreate?: Enumerable<log_positionnCreateOrConnectWithoutCretedByfkInput>
+    createMany?: log_positionnCreateManyCretedByfkInputEnvelope
+    connect?: Enumerable<log_positionnWhereUniqueInput>
+  }
+
+  export type log_positionnCreateNestedManyWithoutUpdtedByfkInput = {
+    create?: XOR<Enumerable<log_positionnCreateWithoutUpdtedByfkInput>, Enumerable<log_positionnUncheckedCreateWithoutUpdtedByfkInput>>
+    connectOrCreate?: Enumerable<log_positionnCreateOrConnectWithoutUpdtedByfkInput>
+    createMany?: log_positionnCreateManyUpdtedByfkInputEnvelope
+    connect?: Enumerable<log_positionnWhereUniqueInput>
+  }
+
   export type ProfileUncheckedCreateNestedOneWithoutUserInput = {
     create?: XOR<ProfileCreateWithoutUserInput, ProfileUncheckedCreateWithoutUserInput>
     connectOrCreate?: ProfileCreateOrConnectWithoutUserInput
@@ -41056,6 +42366,20 @@ export namespace Prisma {
     connectOrCreate?: Enumerable<data_leaveCreateOrConnectWithoutUserInput>
     createMany?: data_leaveCreateManyUserInputEnvelope
     connect?: Enumerable<data_leaveWhereUniqueInput>
+  }
+
+  export type log_positionnUncheckedCreateNestedManyWithoutCretedByfkInput = {
+    create?: XOR<Enumerable<log_positionnCreateWithoutCretedByfkInput>, Enumerable<log_positionnUncheckedCreateWithoutCretedByfkInput>>
+    connectOrCreate?: Enumerable<log_positionnCreateOrConnectWithoutCretedByfkInput>
+    createMany?: log_positionnCreateManyCretedByfkInputEnvelope
+    connect?: Enumerable<log_positionnWhereUniqueInput>
+  }
+
+  export type log_positionnUncheckedCreateNestedManyWithoutUpdtedByfkInput = {
+    create?: XOR<Enumerable<log_positionnCreateWithoutUpdtedByfkInput>, Enumerable<log_positionnUncheckedCreateWithoutUpdtedByfkInput>>
+    connectOrCreate?: Enumerable<log_positionnCreateOrConnectWithoutUpdtedByfkInput>
+    createMany?: log_positionnCreateManyUpdtedByfkInputEnvelope
+    connect?: Enumerable<log_positionnWhereUniqueInput>
   }
 
   export type ProfileUpdateOneWithoutUserNestedInput = {
@@ -41210,6 +42534,34 @@ export namespace Prisma {
     deleteMany?: Enumerable<data_leaveScalarWhereInput>
   }
 
+  export type log_positionnUpdateManyWithoutCretedByfkNestedInput = {
+    create?: XOR<Enumerable<log_positionnCreateWithoutCretedByfkInput>, Enumerable<log_positionnUncheckedCreateWithoutCretedByfkInput>>
+    connectOrCreate?: Enumerable<log_positionnCreateOrConnectWithoutCretedByfkInput>
+    upsert?: Enumerable<log_positionnUpsertWithWhereUniqueWithoutCretedByfkInput>
+    createMany?: log_positionnCreateManyCretedByfkInputEnvelope
+    set?: Enumerable<log_positionnWhereUniqueInput>
+    disconnect?: Enumerable<log_positionnWhereUniqueInput>
+    delete?: Enumerable<log_positionnWhereUniqueInput>
+    connect?: Enumerable<log_positionnWhereUniqueInput>
+    update?: Enumerable<log_positionnUpdateWithWhereUniqueWithoutCretedByfkInput>
+    updateMany?: Enumerable<log_positionnUpdateManyWithWhereWithoutCretedByfkInput>
+    deleteMany?: Enumerable<log_positionnScalarWhereInput>
+  }
+
+  export type log_positionnUpdateManyWithoutUpdtedByfkNestedInput = {
+    create?: XOR<Enumerable<log_positionnCreateWithoutUpdtedByfkInput>, Enumerable<log_positionnUncheckedCreateWithoutUpdtedByfkInput>>
+    connectOrCreate?: Enumerable<log_positionnCreateOrConnectWithoutUpdtedByfkInput>
+    upsert?: Enumerable<log_positionnUpsertWithWhereUniqueWithoutUpdtedByfkInput>
+    createMany?: log_positionnCreateManyUpdtedByfkInputEnvelope
+    set?: Enumerable<log_positionnWhereUniqueInput>
+    disconnect?: Enumerable<log_positionnWhereUniqueInput>
+    delete?: Enumerable<log_positionnWhereUniqueInput>
+    connect?: Enumerable<log_positionnWhereUniqueInput>
+    update?: Enumerable<log_positionnUpdateWithWhereUniqueWithoutUpdtedByfkInput>
+    updateMany?: Enumerable<log_positionnUpdateManyWithWhereWithoutUpdtedByfkInput>
+    deleteMany?: Enumerable<log_positionnScalarWhereInput>
+  }
+
   export type ProfileUncheckedUpdateOneWithoutUserNestedInput = {
     create?: XOR<ProfileCreateWithoutUserInput, ProfileUncheckedCreateWithoutUserInput>
     connectOrCreate?: ProfileCreateOrConnectWithoutUserInput
@@ -41330,6 +42682,34 @@ export namespace Prisma {
     update?: Enumerable<data_leaveUpdateWithWhereUniqueWithoutUserInput>
     updateMany?: Enumerable<data_leaveUpdateManyWithWhereWithoutUserInput>
     deleteMany?: Enumerable<data_leaveScalarWhereInput>
+  }
+
+  export type log_positionnUncheckedUpdateManyWithoutCretedByfkNestedInput = {
+    create?: XOR<Enumerable<log_positionnCreateWithoutCretedByfkInput>, Enumerable<log_positionnUncheckedCreateWithoutCretedByfkInput>>
+    connectOrCreate?: Enumerable<log_positionnCreateOrConnectWithoutCretedByfkInput>
+    upsert?: Enumerable<log_positionnUpsertWithWhereUniqueWithoutCretedByfkInput>
+    createMany?: log_positionnCreateManyCretedByfkInputEnvelope
+    set?: Enumerable<log_positionnWhereUniqueInput>
+    disconnect?: Enumerable<log_positionnWhereUniqueInput>
+    delete?: Enumerable<log_positionnWhereUniqueInput>
+    connect?: Enumerable<log_positionnWhereUniqueInput>
+    update?: Enumerable<log_positionnUpdateWithWhereUniqueWithoutCretedByfkInput>
+    updateMany?: Enumerable<log_positionnUpdateManyWithWhereWithoutCretedByfkInput>
+    deleteMany?: Enumerable<log_positionnScalarWhereInput>
+  }
+
+  export type log_positionnUncheckedUpdateManyWithoutUpdtedByfkNestedInput = {
+    create?: XOR<Enumerable<log_positionnCreateWithoutUpdtedByfkInput>, Enumerable<log_positionnUncheckedCreateWithoutUpdtedByfkInput>>
+    connectOrCreate?: Enumerable<log_positionnCreateOrConnectWithoutUpdtedByfkInput>
+    upsert?: Enumerable<log_positionnUpsertWithWhereUniqueWithoutUpdtedByfkInput>
+    createMany?: log_positionnCreateManyUpdtedByfkInputEnvelope
+    set?: Enumerable<log_positionnWhereUniqueInput>
+    disconnect?: Enumerable<log_positionnWhereUniqueInput>
+    delete?: Enumerable<log_positionnWhereUniqueInput>
+    connect?: Enumerable<log_positionnWhereUniqueInput>
+    update?: Enumerable<log_positionnUpdateWithWhereUniqueWithoutUpdtedByfkInput>
+    updateMany?: Enumerable<log_positionnUpdateManyWithWhereWithoutUpdtedByfkInput>
+    deleteMany?: Enumerable<log_positionnScalarWhereInput>
   }
 
   export type UserCreateNestedManyWithoutRoleInput = {
@@ -41880,6 +43260,20 @@ export namespace Prisma {
     connect?: mas_positionlevel3WhereUniqueInput
   }
 
+  export type log_positionnCreateNestedManyWithoutPosition_userInput = {
+    create?: XOR<Enumerable<log_positionnCreateWithoutPosition_userInput>, Enumerable<log_positionnUncheckedCreateWithoutPosition_userInput>>
+    connectOrCreate?: Enumerable<log_positionnCreateOrConnectWithoutPosition_userInput>
+    createMany?: log_positionnCreateManyPosition_userInputEnvelope
+    connect?: Enumerable<log_positionnWhereUniqueInput>
+  }
+
+  export type log_positionnUncheckedCreateNestedManyWithoutPosition_userInput = {
+    create?: XOR<Enumerable<log_positionnCreateWithoutPosition_userInput>, Enumerable<log_positionnUncheckedCreateWithoutPosition_userInput>>
+    connectOrCreate?: Enumerable<log_positionnCreateOrConnectWithoutPosition_userInput>
+    createMany?: log_positionnCreateManyPosition_userInputEnvelope
+    connect?: Enumerable<log_positionnWhereUniqueInput>
+  }
+
   export type UserUpdateOneWithoutHenchmanNestedInput = {
     create?: XOR<UserCreateWithoutHenchmanInput, UserUncheckedCreateWithoutHenchmanInput>
     connectOrCreate?: UserCreateOrConnectWithoutHenchmanInput
@@ -41928,6 +43322,34 @@ export namespace Prisma {
     delete?: boolean
     connect?: mas_positionlevel3WhereUniqueInput
     update?: XOR<mas_positionlevel3UpdateWithoutPosition_userInput, mas_positionlevel3UncheckedUpdateWithoutPosition_userInput>
+  }
+
+  export type log_positionnUpdateManyWithoutPosition_userNestedInput = {
+    create?: XOR<Enumerable<log_positionnCreateWithoutPosition_userInput>, Enumerable<log_positionnUncheckedCreateWithoutPosition_userInput>>
+    connectOrCreate?: Enumerable<log_positionnCreateOrConnectWithoutPosition_userInput>
+    upsert?: Enumerable<log_positionnUpsertWithWhereUniqueWithoutPosition_userInput>
+    createMany?: log_positionnCreateManyPosition_userInputEnvelope
+    set?: Enumerable<log_positionnWhereUniqueInput>
+    disconnect?: Enumerable<log_positionnWhereUniqueInput>
+    delete?: Enumerable<log_positionnWhereUniqueInput>
+    connect?: Enumerable<log_positionnWhereUniqueInput>
+    update?: Enumerable<log_positionnUpdateWithWhereUniqueWithoutPosition_userInput>
+    updateMany?: Enumerable<log_positionnUpdateManyWithWhereWithoutPosition_userInput>
+    deleteMany?: Enumerable<log_positionnScalarWhereInput>
+  }
+
+  export type log_positionnUncheckedUpdateManyWithoutPosition_userNestedInput = {
+    create?: XOR<Enumerable<log_positionnCreateWithoutPosition_userInput>, Enumerable<log_positionnUncheckedCreateWithoutPosition_userInput>>
+    connectOrCreate?: Enumerable<log_positionnCreateOrConnectWithoutPosition_userInput>
+    upsert?: Enumerable<log_positionnUpsertWithWhereUniqueWithoutPosition_userInput>
+    createMany?: log_positionnCreateManyPosition_userInputEnvelope
+    set?: Enumerable<log_positionnWhereUniqueInput>
+    disconnect?: Enumerable<log_positionnWhereUniqueInput>
+    delete?: Enumerable<log_positionnWhereUniqueInput>
+    connect?: Enumerable<log_positionnWhereUniqueInput>
+    update?: Enumerable<log_positionnUpdateWithWhereUniqueWithoutPosition_userInput>
+    updateMany?: Enumerable<log_positionnUpdateManyWithWhereWithoutPosition_userInput>
+    deleteMany?: Enumerable<log_positionnScalarWhereInput>
   }
 
   export type CompanyCreateNestedOneWithoutHoliday_dateInput = {
@@ -42938,6 +44360,48 @@ export namespace Prisma {
     update?: XOR<UserUpdateWithoutData_leaveInput, UserUncheckedUpdateWithoutData_leaveInput>
   }
 
+  export type Position_userCreateNestedOneWithoutLog_positionInput = {
+    create?: XOR<Position_userCreateWithoutLog_positionInput, Position_userUncheckedCreateWithoutLog_positionInput>
+    connectOrCreate?: Position_userCreateOrConnectWithoutLog_positionInput
+    connect?: Position_userWhereUniqueInput
+  }
+
+  export type UserCreateNestedOneWithoutCretedByfkInput = {
+    create?: XOR<UserCreateWithoutCretedByfkInput, UserUncheckedCreateWithoutCretedByfkInput>
+    connectOrCreate?: UserCreateOrConnectWithoutCretedByfkInput
+    connect?: UserWhereUniqueInput
+  }
+
+  export type UserCreateNestedOneWithoutUpdtedByfkInput = {
+    create?: XOR<UserCreateWithoutUpdtedByfkInput, UserUncheckedCreateWithoutUpdtedByfkInput>
+    connectOrCreate?: UserCreateOrConnectWithoutUpdtedByfkInput
+    connect?: UserWhereUniqueInput
+  }
+
+  export type Position_userUpdateOneRequiredWithoutLog_positionNestedInput = {
+    create?: XOR<Position_userCreateWithoutLog_positionInput, Position_userUncheckedCreateWithoutLog_positionInput>
+    connectOrCreate?: Position_userCreateOrConnectWithoutLog_positionInput
+    upsert?: Position_userUpsertWithoutLog_positionInput
+    connect?: Position_userWhereUniqueInput
+    update?: XOR<Position_userUpdateWithoutLog_positionInput, Position_userUncheckedUpdateWithoutLog_positionInput>
+  }
+
+  export type UserUpdateOneRequiredWithoutCretedByfkNestedInput = {
+    create?: XOR<UserCreateWithoutCretedByfkInput, UserUncheckedCreateWithoutCretedByfkInput>
+    connectOrCreate?: UserCreateOrConnectWithoutCretedByfkInput
+    upsert?: UserUpsertWithoutCretedByfkInput
+    connect?: UserWhereUniqueInput
+    update?: XOR<UserUpdateWithoutCretedByfkInput, UserUncheckedUpdateWithoutCretedByfkInput>
+  }
+
+  export type UserUpdateOneRequiredWithoutUpdtedByfkNestedInput = {
+    create?: XOR<UserCreateWithoutUpdtedByfkInput, UserUncheckedCreateWithoutUpdtedByfkInput>
+    connectOrCreate?: UserCreateOrConnectWithoutUpdtedByfkInput
+    upsert?: UserUpsertWithoutUpdtedByfkInput
+    connect?: UserWhereUniqueInput
+    update?: XOR<UserUpdateWithoutUpdtedByfkInput, UserUncheckedUpdateWithoutUpdtedByfkInput>
+  }
+
   export type NestedUuidFilter = {
     equals?: string
     in?: Enumerable<string>
@@ -43247,6 +44711,8 @@ export namespace Prisma {
     provident_log?: provident_logCreateNestedManyWithoutUserInput
     bookbank_log?: bookbank_logCreateNestedManyWithoutUserInput
     data_leave?: data_leaveCreateNestedManyWithoutUserInput
+    cretedByfk?: log_positionnCreateNestedManyWithoutCretedByfkInput
+    updtedByfk?: log_positionnCreateNestedManyWithoutUpdtedByfkInput
   }
 
   export type UserUncheckedCreateWithoutCompanyInput = {
@@ -43269,6 +44735,8 @@ export namespace Prisma {
     provident_log?: provident_logUncheckedCreateNestedManyWithoutUserInput
     bookbank_log?: bookbank_logUncheckedCreateNestedManyWithoutUserInput
     data_leave?: data_leaveUncheckedCreateNestedManyWithoutUserInput
+    cretedByfk?: log_positionnUncheckedCreateNestedManyWithoutCretedByfkInput
+    updtedByfk?: log_positionnUncheckedCreateNestedManyWithoutUpdtedByfkInput
   }
 
   export type UserCreateOrConnectWithoutCompanyInput = {
@@ -43539,6 +45007,8 @@ export namespace Prisma {
     provident_log?: provident_logUpdateManyWithoutUserNestedInput
     bookbank_log?: bookbank_logUpdateManyWithoutUserNestedInput
     data_leave?: data_leaveUpdateManyWithoutUserNestedInput
+    cretedByfk?: log_positionnUpdateManyWithoutCretedByfkNestedInput
+    updtedByfk?: log_positionnUpdateManyWithoutUpdtedByfkNestedInput
   }
 
   export type UserUncheckedUpdateWithoutCompanyInput = {
@@ -43561,6 +45031,8 @@ export namespace Prisma {
     provident_log?: provident_logUncheckedUpdateManyWithoutUserNestedInput
     bookbank_log?: bookbank_logUncheckedUpdateManyWithoutUserNestedInput
     data_leave?: data_leaveUncheckedUpdateManyWithoutUserNestedInput
+    cretedByfk?: log_positionnUncheckedUpdateManyWithoutCretedByfkNestedInput
+    updtedByfk?: log_positionnUncheckedUpdateManyWithoutUpdtedByfkNestedInput
   }
 
   export type CompanyBranchUpsertWithWhereUniqueWithoutCompanyInput = {
@@ -43841,6 +45313,8 @@ export namespace Prisma {
     provident_log?: provident_logCreateNestedManyWithoutUserInput
     bookbank_log?: bookbank_logCreateNestedManyWithoutUserInput
     data_leave?: data_leaveCreateNestedManyWithoutUserInput
+    cretedByfk?: log_positionnCreateNestedManyWithoutCretedByfkInput
+    updtedByfk?: log_positionnCreateNestedManyWithoutUpdtedByfkInput
   }
 
   export type UserUncheckedCreateWithoutCompanyBranchInput = {
@@ -43863,6 +45337,8 @@ export namespace Prisma {
     provident_log?: provident_logUncheckedCreateNestedManyWithoutUserInput
     bookbank_log?: bookbank_logUncheckedCreateNestedManyWithoutUserInput
     data_leave?: data_leaveUncheckedCreateNestedManyWithoutUserInput
+    cretedByfk?: log_positionnUncheckedCreateNestedManyWithoutCretedByfkInput
+    updtedByfk?: log_positionnUncheckedCreateNestedManyWithoutUpdtedByfkInput
   }
 
   export type UserCreateOrConnectWithoutCompanyBranchInput = {
@@ -44083,6 +45559,8 @@ export namespace Prisma {
     provident_log?: provident_logCreateNestedManyWithoutUserInput
     bookbank_log?: bookbank_logCreateNestedManyWithoutUserInput
     data_leave?: data_leaveCreateNestedManyWithoutUserInput
+    cretedByfk?: log_positionnCreateNestedManyWithoutCretedByfkInput
+    updtedByfk?: log_positionnCreateNestedManyWithoutUpdtedByfkInput
   }
 
   export type UserUncheckedCreateWithoutProfileInput = {
@@ -44105,6 +45583,8 @@ export namespace Prisma {
     provident_log?: provident_logUncheckedCreateNestedManyWithoutUserInput
     bookbank_log?: bookbank_logUncheckedCreateNestedManyWithoutUserInput
     data_leave?: data_leaveUncheckedCreateNestedManyWithoutUserInput
+    cretedByfk?: log_positionnUncheckedCreateNestedManyWithoutCretedByfkInput
+    updtedByfk?: log_positionnUncheckedCreateNestedManyWithoutUpdtedByfkInput
   }
 
   export type UserCreateOrConnectWithoutProfileInput = {
@@ -44137,6 +45617,8 @@ export namespace Prisma {
     provident_log?: provident_logUpdateManyWithoutUserNestedInput
     bookbank_log?: bookbank_logUpdateManyWithoutUserNestedInput
     data_leave?: data_leaveUpdateManyWithoutUserNestedInput
+    cretedByfk?: log_positionnUpdateManyWithoutCretedByfkNestedInput
+    updtedByfk?: log_positionnUpdateManyWithoutUpdtedByfkNestedInput
   }
 
   export type UserUncheckedUpdateWithoutProfileInput = {
@@ -44159,6 +45641,8 @@ export namespace Prisma {
     provident_log?: provident_logUncheckedUpdateManyWithoutUserNestedInput
     bookbank_log?: bookbank_logUncheckedUpdateManyWithoutUserNestedInput
     data_leave?: data_leaveUncheckedUpdateManyWithoutUserNestedInput
+    cretedByfk?: log_positionnUncheckedUpdateManyWithoutCretedByfkNestedInput
+    updtedByfk?: log_positionnUncheckedUpdateManyWithoutUpdtedByfkNestedInput
   }
 
   export type ProfileCreateWithoutUserInput = {
@@ -44425,6 +45909,7 @@ export namespace Prisma {
     mas_positionlevel1?: mas_positionlevel1CreateNestedOneWithoutPosition_userInput
     mas_positionlevel2?: mas_positionlevel2CreateNestedOneWithoutPosition_userInput
     mas_positionlevel3?: mas_positionlevel3CreateNestedOneWithoutPosition_userInput
+    log_position?: log_positionnCreateNestedManyWithoutPosition_userInput
   }
 
   export type Position_userUncheckedCreateWithoutUserInput = {
@@ -44435,6 +45920,7 @@ export namespace Prisma {
     position3_id?: string | null
     role?: string | null
     headderId?: string | null
+    log_position?: log_positionnUncheckedCreateNestedManyWithoutPosition_userInput
   }
 
   export type Position_userCreateOrConnectWithoutUserInput = {
@@ -44455,6 +45941,7 @@ export namespace Prisma {
     mas_positionlevel1?: mas_positionlevel1CreateNestedOneWithoutPosition_userInput
     mas_positionlevel2?: mas_positionlevel2CreateNestedOneWithoutPosition_userInput
     mas_positionlevel3?: mas_positionlevel3CreateNestedOneWithoutPosition_userInput
+    log_position?: log_positionnCreateNestedManyWithoutPosition_userInput
   }
 
   export type Position_userUncheckedCreateWithoutHeaderInput = {
@@ -44465,6 +45952,7 @@ export namespace Prisma {
     position2_id?: string | null
     position3_id?: string | null
     role?: string | null
+    log_position?: log_positionnUncheckedCreateNestedManyWithoutPosition_userInput
   }
 
   export type Position_userCreateOrConnectWithoutHeaderInput = {
@@ -44702,6 +46190,58 @@ export namespace Prisma {
 
   export type data_leaveCreateManyUserInputEnvelope = {
     data: Enumerable<data_leaveCreateManyUserInput>
+    skipDuplicates?: boolean
+  }
+
+  export type log_positionnCreateWithoutCretedByfkInput = {
+    id: string
+    creteddate: Date | string
+    updteddate: Date | string
+    Position_user: Position_userCreateNestedOneWithoutLog_positionInput
+    updtedByfk: UserCreateNestedOneWithoutUpdtedByfkInput
+  }
+
+  export type log_positionnUncheckedCreateWithoutCretedByfkInput = {
+    id: string
+    positionId: string
+    creteddate: Date | string
+    updtedBy: string
+    updteddate: Date | string
+  }
+
+  export type log_positionnCreateOrConnectWithoutCretedByfkInput = {
+    where: log_positionnWhereUniqueInput
+    create: XOR<log_positionnCreateWithoutCretedByfkInput, log_positionnUncheckedCreateWithoutCretedByfkInput>
+  }
+
+  export type log_positionnCreateManyCretedByfkInputEnvelope = {
+    data: Enumerable<log_positionnCreateManyCretedByfkInput>
+    skipDuplicates?: boolean
+  }
+
+  export type log_positionnCreateWithoutUpdtedByfkInput = {
+    id: string
+    creteddate: Date | string
+    updteddate: Date | string
+    Position_user: Position_userCreateNestedOneWithoutLog_positionInput
+    cretedByfk: UserCreateNestedOneWithoutCretedByfkInput
+  }
+
+  export type log_positionnUncheckedCreateWithoutUpdtedByfkInput = {
+    id: string
+    positionId: string
+    cretedBy: string
+    creteddate: Date | string
+    updteddate: Date | string
+  }
+
+  export type log_positionnCreateOrConnectWithoutUpdtedByfkInput = {
+    where: log_positionnWhereUniqueInput
+    create: XOR<log_positionnCreateWithoutUpdtedByfkInput, log_positionnUncheckedCreateWithoutUpdtedByfkInput>
+  }
+
+  export type log_positionnCreateManyUpdtedByfkInputEnvelope = {
+    data: Enumerable<log_positionnCreateManyUpdtedByfkInput>
     skipDuplicates?: boolean
   }
 
@@ -45176,6 +46716,50 @@ export namespace Prisma {
     user_id?: UuidFilter | string
   }
 
+  export type log_positionnUpsertWithWhereUniqueWithoutCretedByfkInput = {
+    where: log_positionnWhereUniqueInput
+    update: XOR<log_positionnUpdateWithoutCretedByfkInput, log_positionnUncheckedUpdateWithoutCretedByfkInput>
+    create: XOR<log_positionnCreateWithoutCretedByfkInput, log_positionnUncheckedCreateWithoutCretedByfkInput>
+  }
+
+  export type log_positionnUpdateWithWhereUniqueWithoutCretedByfkInput = {
+    where: log_positionnWhereUniqueInput
+    data: XOR<log_positionnUpdateWithoutCretedByfkInput, log_positionnUncheckedUpdateWithoutCretedByfkInput>
+  }
+
+  export type log_positionnUpdateManyWithWhereWithoutCretedByfkInput = {
+    where: log_positionnScalarWhereInput
+    data: XOR<log_positionnUpdateManyMutationInput, log_positionnUncheckedUpdateManyWithoutCretedByfkInput>
+  }
+
+  export type log_positionnScalarWhereInput = {
+    AND?: Enumerable<log_positionnScalarWhereInput>
+    OR?: Enumerable<log_positionnScalarWhereInput>
+    NOT?: Enumerable<log_positionnScalarWhereInput>
+    id?: UuidFilter | string
+    positionId?: UuidFilter | string
+    cretedBy?: UuidFilter | string
+    creteddate?: DateTimeFilter | Date | string
+    updtedBy?: UuidFilter | string
+    updteddate?: DateTimeFilter | Date | string
+  }
+
+  export type log_positionnUpsertWithWhereUniqueWithoutUpdtedByfkInput = {
+    where: log_positionnWhereUniqueInput
+    update: XOR<log_positionnUpdateWithoutUpdtedByfkInput, log_positionnUncheckedUpdateWithoutUpdtedByfkInput>
+    create: XOR<log_positionnCreateWithoutUpdtedByfkInput, log_positionnUncheckedCreateWithoutUpdtedByfkInput>
+  }
+
+  export type log_positionnUpdateWithWhereUniqueWithoutUpdtedByfkInput = {
+    where: log_positionnWhereUniqueInput
+    data: XOR<log_positionnUpdateWithoutUpdtedByfkInput, log_positionnUncheckedUpdateWithoutUpdtedByfkInput>
+  }
+
+  export type log_positionnUpdateManyWithWhereWithoutUpdtedByfkInput = {
+    where: log_positionnScalarWhereInput
+    data: XOR<log_positionnUpdateManyMutationInput, log_positionnUncheckedUpdateManyWithoutUpdtedByfkInput>
+  }
+
   export type UserCreateWithoutRoleInput = {
     id: string
     email: string
@@ -45196,6 +46780,8 @@ export namespace Prisma {
     provident_log?: provident_logCreateNestedManyWithoutUserInput
     bookbank_log?: bookbank_logCreateNestedManyWithoutUserInput
     data_leave?: data_leaveCreateNestedManyWithoutUserInput
+    cretedByfk?: log_positionnCreateNestedManyWithoutCretedByfkInput
+    updtedByfk?: log_positionnCreateNestedManyWithoutUpdtedByfkInput
   }
 
   export type UserUncheckedCreateWithoutRoleInput = {
@@ -45218,6 +46804,8 @@ export namespace Prisma {
     provident_log?: provident_logUncheckedCreateNestedManyWithoutUserInput
     bookbank_log?: bookbank_logUncheckedCreateNestedManyWithoutUserInput
     data_leave?: data_leaveUncheckedCreateNestedManyWithoutUserInput
+    cretedByfk?: log_positionnUncheckedCreateNestedManyWithoutCretedByfkInput
+    updtedByfk?: log_positionnUncheckedCreateNestedManyWithoutUpdtedByfkInput
   }
 
   export type UserCreateOrConnectWithoutRoleInput = {
@@ -45266,6 +46854,8 @@ export namespace Prisma {
     provident_log?: provident_logCreateNestedManyWithoutUserInput
     bookbank_log?: bookbank_logCreateNestedManyWithoutUserInput
     data_leave?: data_leaveCreateNestedManyWithoutUserInput
+    cretedByfk?: log_positionnCreateNestedManyWithoutCretedByfkInput
+    updtedByfk?: log_positionnCreateNestedManyWithoutUpdtedByfkInput
   }
 
   export type UserUncheckedCreateWithoutRole_CompanyInput = {
@@ -45288,6 +46878,8 @@ export namespace Prisma {
     provident_log?: provident_logUncheckedCreateNestedManyWithoutUserInput
     bookbank_log?: bookbank_logUncheckedCreateNestedManyWithoutUserInput
     data_leave?: data_leaveUncheckedCreateNestedManyWithoutUserInput
+    cretedByfk?: log_positionnUncheckedCreateNestedManyWithoutCretedByfkInput
+    updtedByfk?: log_positionnUncheckedCreateNestedManyWithoutUpdtedByfkInput
   }
 
   export type UserCreateOrConnectWithoutRole_CompanyInput = {
@@ -45778,6 +47370,7 @@ export namespace Prisma {
     user?: UserCreateNestedOneWithoutPosition_userInput
     mas_positionlevel2?: mas_positionlevel2CreateNestedOneWithoutPosition_userInput
     mas_positionlevel3?: mas_positionlevel3CreateNestedOneWithoutPosition_userInput
+    log_position?: log_positionnCreateNestedManyWithoutPosition_userInput
   }
 
   export type Position_userUncheckedCreateWithoutMas_positionlevel1Input = {
@@ -45788,6 +47381,7 @@ export namespace Prisma {
     position3_id?: string | null
     role?: string | null
     headderId?: string | null
+    log_position?: log_positionnUncheckedCreateNestedManyWithoutPosition_userInput
   }
 
   export type Position_userCreateOrConnectWithoutMas_positionlevel1Input = {
@@ -45981,6 +47575,7 @@ export namespace Prisma {
     user?: UserCreateNestedOneWithoutPosition_userInput
     mas_positionlevel1?: mas_positionlevel1CreateNestedOneWithoutPosition_userInput
     mas_positionlevel3?: mas_positionlevel3CreateNestedOneWithoutPosition_userInput
+    log_position?: log_positionnCreateNestedManyWithoutPosition_userInput
   }
 
   export type Position_userUncheckedCreateWithoutMas_positionlevel2Input = {
@@ -45991,6 +47586,7 @@ export namespace Prisma {
     position3_id?: string | null
     role?: string | null
     headderId?: string | null
+    log_position?: log_positionnUncheckedCreateNestedManyWithoutPosition_userInput
   }
 
   export type Position_userCreateOrConnectWithoutMas_positionlevel2Input = {
@@ -46181,6 +47777,7 @@ export namespace Prisma {
     user?: UserCreateNestedOneWithoutPosition_userInput
     mas_positionlevel1?: mas_positionlevel1CreateNestedOneWithoutPosition_userInput
     mas_positionlevel2?: mas_positionlevel2CreateNestedOneWithoutPosition_userInput
+    log_position?: log_positionnCreateNestedManyWithoutPosition_userInput
   }
 
   export type Position_userUncheckedCreateWithoutMas_positionlevel3Input = {
@@ -46191,6 +47788,7 @@ export namespace Prisma {
     position2_id?: string | null
     role?: string | null
     headderId?: string | null
+    log_position?: log_positionnUncheckedCreateNestedManyWithoutPosition_userInput
   }
 
   export type Position_userCreateOrConnectWithoutMas_positionlevel3Input = {
@@ -46309,6 +47907,8 @@ export namespace Prisma {
     provident_log?: provident_logCreateNestedManyWithoutUserInput
     bookbank_log?: bookbank_logCreateNestedManyWithoutUserInput
     data_leave?: data_leaveCreateNestedManyWithoutUserInput
+    cretedByfk?: log_positionnCreateNestedManyWithoutCretedByfkInput
+    updtedByfk?: log_positionnCreateNestedManyWithoutUpdtedByfkInput
   }
 
   export type UserUncheckedCreateWithoutHenchmanInput = {
@@ -46331,6 +47931,8 @@ export namespace Prisma {
     provident_log?: provident_logUncheckedCreateNestedManyWithoutUserInput
     bookbank_log?: bookbank_logUncheckedCreateNestedManyWithoutUserInput
     data_leave?: data_leaveUncheckedCreateNestedManyWithoutUserInput
+    cretedByfk?: log_positionnUncheckedCreateNestedManyWithoutCretedByfkInput
+    updtedByfk?: log_positionnUncheckedCreateNestedManyWithoutUpdtedByfkInput
   }
 
   export type UserCreateOrConnectWithoutHenchmanInput = {
@@ -46358,6 +47960,8 @@ export namespace Prisma {
     provident_log?: provident_logCreateNestedManyWithoutUserInput
     bookbank_log?: bookbank_logCreateNestedManyWithoutUserInput
     data_leave?: data_leaveCreateNestedManyWithoutUserInput
+    cretedByfk?: log_positionnCreateNestedManyWithoutCretedByfkInput
+    updtedByfk?: log_positionnCreateNestedManyWithoutUpdtedByfkInput
   }
 
   export type UserUncheckedCreateWithoutPosition_userInput = {
@@ -46380,6 +47984,8 @@ export namespace Prisma {
     provident_log?: provident_logUncheckedCreateNestedManyWithoutUserInput
     bookbank_log?: bookbank_logUncheckedCreateNestedManyWithoutUserInput
     data_leave?: data_leaveUncheckedCreateNestedManyWithoutUserInput
+    cretedByfk?: log_positionnUncheckedCreateNestedManyWithoutCretedByfkInput
+    updtedByfk?: log_positionnUncheckedCreateNestedManyWithoutUpdtedByfkInput
   }
 
   export type UserCreateOrConnectWithoutPosition_userInput = {
@@ -46464,6 +48070,32 @@ export namespace Prisma {
     create: XOR<mas_positionlevel3CreateWithoutPosition_userInput, mas_positionlevel3UncheckedCreateWithoutPosition_userInput>
   }
 
+  export type log_positionnCreateWithoutPosition_userInput = {
+    id: string
+    creteddate: Date | string
+    updteddate: Date | string
+    cretedByfk: UserCreateNestedOneWithoutCretedByfkInput
+    updtedByfk: UserCreateNestedOneWithoutUpdtedByfkInput
+  }
+
+  export type log_positionnUncheckedCreateWithoutPosition_userInput = {
+    id: string
+    cretedBy: string
+    creteddate: Date | string
+    updtedBy: string
+    updteddate: Date | string
+  }
+
+  export type log_positionnCreateOrConnectWithoutPosition_userInput = {
+    where: log_positionnWhereUniqueInput
+    create: XOR<log_positionnCreateWithoutPosition_userInput, log_positionnUncheckedCreateWithoutPosition_userInput>
+  }
+
+  export type log_positionnCreateManyPosition_userInputEnvelope = {
+    data: Enumerable<log_positionnCreateManyPosition_userInput>
+    skipDuplicates?: boolean
+  }
+
   export type UserUpsertWithoutHenchmanInput = {
     update: XOR<UserUpdateWithoutHenchmanInput, UserUncheckedUpdateWithoutHenchmanInput>
     create: XOR<UserCreateWithoutHenchmanInput, UserUncheckedCreateWithoutHenchmanInput>
@@ -46489,6 +48121,8 @@ export namespace Prisma {
     provident_log?: provident_logUpdateManyWithoutUserNestedInput
     bookbank_log?: bookbank_logUpdateManyWithoutUserNestedInput
     data_leave?: data_leaveUpdateManyWithoutUserNestedInput
+    cretedByfk?: log_positionnUpdateManyWithoutCretedByfkNestedInput
+    updtedByfk?: log_positionnUpdateManyWithoutUpdtedByfkNestedInput
   }
 
   export type UserUncheckedUpdateWithoutHenchmanInput = {
@@ -46511,6 +48145,8 @@ export namespace Prisma {
     provident_log?: provident_logUncheckedUpdateManyWithoutUserNestedInput
     bookbank_log?: bookbank_logUncheckedUpdateManyWithoutUserNestedInput
     data_leave?: data_leaveUncheckedUpdateManyWithoutUserNestedInput
+    cretedByfk?: log_positionnUncheckedUpdateManyWithoutCretedByfkNestedInput
+    updtedByfk?: log_positionnUncheckedUpdateManyWithoutUpdtedByfkNestedInput
   }
 
   export type UserUpsertWithoutPosition_userInput = {
@@ -46538,6 +48174,8 @@ export namespace Prisma {
     provident_log?: provident_logUpdateManyWithoutUserNestedInput
     bookbank_log?: bookbank_logUpdateManyWithoutUserNestedInput
     data_leave?: data_leaveUpdateManyWithoutUserNestedInput
+    cretedByfk?: log_positionnUpdateManyWithoutCretedByfkNestedInput
+    updtedByfk?: log_positionnUpdateManyWithoutUpdtedByfkNestedInput
   }
 
   export type UserUncheckedUpdateWithoutPosition_userInput = {
@@ -46560,6 +48198,8 @@ export namespace Prisma {
     provident_log?: provident_logUncheckedUpdateManyWithoutUserNestedInput
     bookbank_log?: bookbank_logUncheckedUpdateManyWithoutUserNestedInput
     data_leave?: data_leaveUncheckedUpdateManyWithoutUserNestedInput
+    cretedByfk?: log_positionnUncheckedUpdateManyWithoutCretedByfkNestedInput
+    updtedByfk?: log_positionnUncheckedUpdateManyWithoutUpdtedByfkNestedInput
   }
 
   export type mas_positionlevel1UpsertWithoutPosition_userInput = {
@@ -46637,6 +48277,22 @@ export namespace Prisma {
     type?: StringFieldUpdateOperationsInput | string
     positionlevel2_id?: NullableStringFieldUpdateOperationsInput | string | null
     CompanyId?: NullableStringFieldUpdateOperationsInput | string | null
+  }
+
+  export type log_positionnUpsertWithWhereUniqueWithoutPosition_userInput = {
+    where: log_positionnWhereUniqueInput
+    update: XOR<log_positionnUpdateWithoutPosition_userInput, log_positionnUncheckedUpdateWithoutPosition_userInput>
+    create: XOR<log_positionnCreateWithoutPosition_userInput, log_positionnUncheckedCreateWithoutPosition_userInput>
+  }
+
+  export type log_positionnUpdateWithWhereUniqueWithoutPosition_userInput = {
+    where: log_positionnWhereUniqueInput
+    data: XOR<log_positionnUpdateWithoutPosition_userInput, log_positionnUncheckedUpdateWithoutPosition_userInput>
+  }
+
+  export type log_positionnUpdateManyWithWhereWithoutPosition_userInput = {
+    where: log_positionnScalarWhereInput
+    data: XOR<log_positionnUpdateManyMutationInput, log_positionnUncheckedUpdateManyWithoutLog_positionInput>
   }
 
   export type CompanyCreateWithoutHoliday_dateInput = {
@@ -47953,6 +49609,8 @@ export namespace Prisma {
     provident_log?: provident_logCreateNestedManyWithoutUserInput
     bookbank_log?: bookbank_logCreateNestedManyWithoutUserInput
     data_leave?: data_leaveCreateNestedManyWithoutUserInput
+    cretedByfk?: log_positionnCreateNestedManyWithoutCretedByfkInput
+    updtedByfk?: log_positionnCreateNestedManyWithoutUpdtedByfkInput
   }
 
   export type UserUncheckedCreateWithoutSalaryInput = {
@@ -47975,6 +49633,8 @@ export namespace Prisma {
     provident_log?: provident_logUncheckedCreateNestedManyWithoutUserInput
     bookbank_log?: bookbank_logUncheckedCreateNestedManyWithoutUserInput
     data_leave?: data_leaveUncheckedCreateNestedManyWithoutUserInput
+    cretedByfk?: log_positionnUncheckedCreateNestedManyWithoutCretedByfkInput
+    updtedByfk?: log_positionnUncheckedCreateNestedManyWithoutUpdtedByfkInput
   }
 
   export type UserCreateOrConnectWithoutSalaryInput = {
@@ -48149,6 +49809,8 @@ export namespace Prisma {
     provident_log?: provident_logUpdateManyWithoutUserNestedInput
     bookbank_log?: bookbank_logUpdateManyWithoutUserNestedInput
     data_leave?: data_leaveUpdateManyWithoutUserNestedInput
+    cretedByfk?: log_positionnUpdateManyWithoutCretedByfkNestedInput
+    updtedByfk?: log_positionnUpdateManyWithoutUpdtedByfkNestedInput
   }
 
   export type UserUncheckedUpdateWithoutSalaryInput = {
@@ -48171,6 +49833,8 @@ export namespace Prisma {
     provident_log?: provident_logUncheckedUpdateManyWithoutUserNestedInput
     bookbank_log?: bookbank_logUncheckedUpdateManyWithoutUserNestedInput
     data_leave?: data_leaveUncheckedUpdateManyWithoutUserNestedInput
+    cretedByfk?: log_positionnUncheckedUpdateManyWithoutCretedByfkNestedInput
+    updtedByfk?: log_positionnUncheckedUpdateManyWithoutUpdtedByfkNestedInput
   }
 
   export type bookbank_logUpsertWithoutSalaryInput = {
@@ -48319,6 +49983,8 @@ export namespace Prisma {
     provident_log?: provident_logCreateNestedManyWithoutUserInput
     bookbank_log?: bookbank_logCreateNestedManyWithoutUserInput
     data_leave?: data_leaveCreateNestedManyWithoutUserInput
+    cretedByfk?: log_positionnCreateNestedManyWithoutCretedByfkInput
+    updtedByfk?: log_positionnCreateNestedManyWithoutUpdtedByfkInput
   }
 
   export type UserUncheckedCreateWithoutMas_all_collectInput = {
@@ -48341,6 +50007,8 @@ export namespace Prisma {
     provident_log?: provident_logUncheckedCreateNestedManyWithoutUserInput
     bookbank_log?: bookbank_logUncheckedCreateNestedManyWithoutUserInput
     data_leave?: data_leaveUncheckedCreateNestedManyWithoutUserInput
+    cretedByfk?: log_positionnUncheckedCreateNestedManyWithoutCretedByfkInput
+    updtedByfk?: log_positionnUncheckedCreateNestedManyWithoutUpdtedByfkInput
   }
 
   export type UserCreateOrConnectWithoutMas_all_collectInput = {
@@ -48403,6 +50071,8 @@ export namespace Prisma {
     provident_log?: provident_logUpdateManyWithoutUserNestedInput
     bookbank_log?: bookbank_logUpdateManyWithoutUserNestedInput
     data_leave?: data_leaveUpdateManyWithoutUserNestedInput
+    cretedByfk?: log_positionnUpdateManyWithoutCretedByfkNestedInput
+    updtedByfk?: log_positionnUpdateManyWithoutUpdtedByfkNestedInput
   }
 
   export type UserUncheckedUpdateWithoutMas_all_collectInput = {
@@ -48425,6 +50095,8 @@ export namespace Prisma {
     provident_log?: provident_logUncheckedUpdateManyWithoutUserNestedInput
     bookbank_log?: bookbank_logUncheckedUpdateManyWithoutUserNestedInput
     data_leave?: data_leaveUncheckedUpdateManyWithoutUserNestedInput
+    cretedByfk?: log_positionnUncheckedUpdateManyWithoutCretedByfkNestedInput
+    updtedByfk?: log_positionnUncheckedUpdateManyWithoutUpdtedByfkNestedInput
   }
 
   export type provident_logUpsertWithWhereUniqueWithoutMas_all_collectInput = {
@@ -48582,6 +50254,8 @@ export namespace Prisma {
     salary?: salaryCreateNestedManyWithoutUserInput
     provident_log?: provident_logCreateNestedManyWithoutUserInput
     data_leave?: data_leaveCreateNestedManyWithoutUserInput
+    cretedByfk?: log_positionnCreateNestedManyWithoutCretedByfkInput
+    updtedByfk?: log_positionnCreateNestedManyWithoutUpdtedByfkInput
   }
 
   export type UserUncheckedCreateWithoutBookbank_logInput = {
@@ -48604,6 +50278,8 @@ export namespace Prisma {
     salary?: salaryUncheckedCreateNestedManyWithoutUserInput
     provident_log?: provident_logUncheckedCreateNestedManyWithoutUserInput
     data_leave?: data_leaveUncheckedCreateNestedManyWithoutUserInput
+    cretedByfk?: log_positionnUncheckedCreateNestedManyWithoutCretedByfkInput
+    updtedByfk?: log_positionnUncheckedCreateNestedManyWithoutUpdtedByfkInput
   }
 
   export type UserCreateOrConnectWithoutBookbank_logInput = {
@@ -48703,6 +50379,8 @@ export namespace Prisma {
     salary?: salaryUpdateManyWithoutUserNestedInput
     provident_log?: provident_logUpdateManyWithoutUserNestedInput
     data_leave?: data_leaveUpdateManyWithoutUserNestedInput
+    cretedByfk?: log_positionnUpdateManyWithoutCretedByfkNestedInput
+    updtedByfk?: log_positionnUpdateManyWithoutUpdtedByfkNestedInput
   }
 
   export type UserUncheckedUpdateWithoutBookbank_logInput = {
@@ -48725,6 +50403,8 @@ export namespace Prisma {
     salary?: salaryUncheckedUpdateManyWithoutUserNestedInput
     provident_log?: provident_logUncheckedUpdateManyWithoutUserNestedInput
     data_leave?: data_leaveUncheckedUpdateManyWithoutUserNestedInput
+    cretedByfk?: log_positionnUncheckedUpdateManyWithoutCretedByfkNestedInput
+    updtedByfk?: log_positionnUncheckedUpdateManyWithoutUpdtedByfkNestedInput
   }
 
   export type provident_logUpsertWithWhereUniqueWithoutBookbank_logInput = {
@@ -48763,6 +50443,8 @@ export namespace Prisma {
     salary?: salaryCreateNestedManyWithoutUserInput
     bookbank_log?: bookbank_logCreateNestedManyWithoutUserInput
     data_leave?: data_leaveCreateNestedManyWithoutUserInput
+    cretedByfk?: log_positionnCreateNestedManyWithoutCretedByfkInput
+    updtedByfk?: log_positionnCreateNestedManyWithoutUpdtedByfkInput
   }
 
   export type UserUncheckedCreateWithoutProvident_logInput = {
@@ -48785,6 +50467,8 @@ export namespace Prisma {
     salary?: salaryUncheckedCreateNestedManyWithoutUserInput
     bookbank_log?: bookbank_logUncheckedCreateNestedManyWithoutUserInput
     data_leave?: data_leaveUncheckedCreateNestedManyWithoutUserInput
+    cretedByfk?: log_positionnUncheckedCreateNestedManyWithoutCretedByfkInput
+    updtedByfk?: log_positionnUncheckedCreateNestedManyWithoutUpdtedByfkInput
   }
 
   export type UserCreateOrConnectWithoutProvident_logInput = {
@@ -48968,6 +50652,8 @@ export namespace Prisma {
     salary?: salaryUpdateManyWithoutUserNestedInput
     bookbank_log?: bookbank_logUpdateManyWithoutUserNestedInput
     data_leave?: data_leaveUpdateManyWithoutUserNestedInput
+    cretedByfk?: log_positionnUpdateManyWithoutCretedByfkNestedInput
+    updtedByfk?: log_positionnUpdateManyWithoutUpdtedByfkNestedInput
   }
 
   export type UserUncheckedUpdateWithoutProvident_logInput = {
@@ -48990,6 +50676,8 @@ export namespace Prisma {
     salary?: salaryUncheckedUpdateManyWithoutUserNestedInput
     bookbank_log?: bookbank_logUncheckedUpdateManyWithoutUserNestedInput
     data_leave?: data_leaveUncheckedUpdateManyWithoutUserNestedInput
+    cretedByfk?: log_positionnUncheckedUpdateManyWithoutCretedByfkNestedInput
+    updtedByfk?: log_positionnUncheckedUpdateManyWithoutUpdtedByfkNestedInput
   }
 
   export type mas_all_collectUpsertWithoutProvident_logInput = {
@@ -49228,6 +50916,8 @@ export namespace Prisma {
     salary?: salaryCreateNestedManyWithoutUserInput
     provident_log?: provident_logCreateNestedManyWithoutUserInput
     bookbank_log?: bookbank_logCreateNestedManyWithoutUserInput
+    cretedByfk?: log_positionnCreateNestedManyWithoutCretedByfkInput
+    updtedByfk?: log_positionnCreateNestedManyWithoutUpdtedByfkInput
   }
 
   export type UserUncheckedCreateWithoutData_leaveInput = {
@@ -49250,6 +50940,8 @@ export namespace Prisma {
     salary?: salaryUncheckedCreateNestedManyWithoutUserInput
     provident_log?: provident_logUncheckedCreateNestedManyWithoutUserInput
     bookbank_log?: bookbank_logUncheckedCreateNestedManyWithoutUserInput
+    cretedByfk?: log_positionnUncheckedCreateNestedManyWithoutCretedByfkInput
+    updtedByfk?: log_positionnUncheckedCreateNestedManyWithoutUpdtedByfkInput
   }
 
   export type UserCreateOrConnectWithoutData_leaveInput = {
@@ -49299,6 +50991,8 @@ export namespace Prisma {
     salary?: salaryUpdateManyWithoutUserNestedInput
     provident_log?: provident_logUpdateManyWithoutUserNestedInput
     bookbank_log?: bookbank_logUpdateManyWithoutUserNestedInput
+    cretedByfk?: log_positionnUpdateManyWithoutCretedByfkNestedInput
+    updtedByfk?: log_positionnUpdateManyWithoutUpdtedByfkNestedInput
   }
 
   export type UserUncheckedUpdateWithoutData_leaveInput = {
@@ -49321,6 +51015,274 @@ export namespace Prisma {
     salary?: salaryUncheckedUpdateManyWithoutUserNestedInput
     provident_log?: provident_logUncheckedUpdateManyWithoutUserNestedInput
     bookbank_log?: bookbank_logUncheckedUpdateManyWithoutUserNestedInput
+    cretedByfk?: log_positionnUncheckedUpdateManyWithoutCretedByfkNestedInput
+    updtedByfk?: log_positionnUncheckedUpdateManyWithoutUpdtedByfkNestedInput
+  }
+
+  export type Position_userCreateWithoutLog_positionInput = {
+    id: string
+    date?: Date | string | null
+    role?: string | null
+    header?: UserCreateNestedOneWithoutHenchmanInput
+    user?: UserCreateNestedOneWithoutPosition_userInput
+    mas_positionlevel1?: mas_positionlevel1CreateNestedOneWithoutPosition_userInput
+    mas_positionlevel2?: mas_positionlevel2CreateNestedOneWithoutPosition_userInput
+    mas_positionlevel3?: mas_positionlevel3CreateNestedOneWithoutPosition_userInput
+  }
+
+  export type Position_userUncheckedCreateWithoutLog_positionInput = {
+    id: string
+    user_id?: string | null
+    date?: Date | string | null
+    position1_id?: string | null
+    position2_id?: string | null
+    position3_id?: string | null
+    role?: string | null
+    headderId?: string | null
+  }
+
+  export type Position_userCreateOrConnectWithoutLog_positionInput = {
+    where: Position_userWhereUniqueInput
+    create: XOR<Position_userCreateWithoutLog_positionInput, Position_userUncheckedCreateWithoutLog_positionInput>
+  }
+
+  export type UserCreateWithoutCretedByfkInput = {
+    id: string
+    email: string
+    password: string
+    profile?: ProfileCreateNestedOneWithoutUserInput
+    islogin?: boolean
+    isActive?: boolean
+    isOwner?: boolean
+    lastlogin?: Date | string | null
+    createdAt?: Date | string
+    role?: RoleCreateNestedOneWithoutUsersInput
+    company?: CompanyCreateNestedManyWithoutOwnerInput
+    companyBranch?: CompanyBranchCreateNestedOneWithoutUsersInput
+    Role_Company?: Role_CompanyCreateNestedOneWithoutUsersInput
+    Position_user?: Position_userCreateNestedManyWithoutUserInput
+    henchman?: Position_userCreateNestedManyWithoutHeaderInput
+    mas_all_collect?: mas_all_collectCreateNestedManyWithoutUserInput
+    salary?: salaryCreateNestedManyWithoutUserInput
+    provident_log?: provident_logCreateNestedManyWithoutUserInput
+    bookbank_log?: bookbank_logCreateNestedManyWithoutUserInput
+    data_leave?: data_leaveCreateNestedManyWithoutUserInput
+    updtedByfk?: log_positionnCreateNestedManyWithoutUpdtedByfkInput
+  }
+
+  export type UserUncheckedCreateWithoutCretedByfkInput = {
+    id: string
+    email: string
+    password: string
+    profile?: ProfileUncheckedCreateNestedOneWithoutUserInput
+    islogin?: boolean
+    isActive?: boolean
+    isOwner?: boolean
+    lastlogin?: Date | string | null
+    createdAt?: Date | string
+    roleId?: string | null
+    RoleCompanyID?: string | null
+    company?: CompanyUncheckedCreateNestedManyWithoutOwnerInput
+    companyBranchId?: string | null
+    Position_user?: Position_userUncheckedCreateNestedManyWithoutUserInput
+    henchman?: Position_userUncheckedCreateNestedManyWithoutHeaderInput
+    mas_all_collect?: mas_all_collectUncheckedCreateNestedManyWithoutUserInput
+    salary?: salaryUncheckedCreateNestedManyWithoutUserInput
+    provident_log?: provident_logUncheckedCreateNestedManyWithoutUserInput
+    bookbank_log?: bookbank_logUncheckedCreateNestedManyWithoutUserInput
+    data_leave?: data_leaveUncheckedCreateNestedManyWithoutUserInput
+    updtedByfk?: log_positionnUncheckedCreateNestedManyWithoutUpdtedByfkInput
+  }
+
+  export type UserCreateOrConnectWithoutCretedByfkInput = {
+    where: UserWhereUniqueInput
+    create: XOR<UserCreateWithoutCretedByfkInput, UserUncheckedCreateWithoutCretedByfkInput>
+  }
+
+  export type UserCreateWithoutUpdtedByfkInput = {
+    id: string
+    email: string
+    password: string
+    profile?: ProfileCreateNestedOneWithoutUserInput
+    islogin?: boolean
+    isActive?: boolean
+    isOwner?: boolean
+    lastlogin?: Date | string | null
+    createdAt?: Date | string
+    role?: RoleCreateNestedOneWithoutUsersInput
+    company?: CompanyCreateNestedManyWithoutOwnerInput
+    companyBranch?: CompanyBranchCreateNestedOneWithoutUsersInput
+    Role_Company?: Role_CompanyCreateNestedOneWithoutUsersInput
+    Position_user?: Position_userCreateNestedManyWithoutUserInput
+    henchman?: Position_userCreateNestedManyWithoutHeaderInput
+    mas_all_collect?: mas_all_collectCreateNestedManyWithoutUserInput
+    salary?: salaryCreateNestedManyWithoutUserInput
+    provident_log?: provident_logCreateNestedManyWithoutUserInput
+    bookbank_log?: bookbank_logCreateNestedManyWithoutUserInput
+    data_leave?: data_leaveCreateNestedManyWithoutUserInput
+    cretedByfk?: log_positionnCreateNestedManyWithoutCretedByfkInput
+  }
+
+  export type UserUncheckedCreateWithoutUpdtedByfkInput = {
+    id: string
+    email: string
+    password: string
+    profile?: ProfileUncheckedCreateNestedOneWithoutUserInput
+    islogin?: boolean
+    isActive?: boolean
+    isOwner?: boolean
+    lastlogin?: Date | string | null
+    createdAt?: Date | string
+    roleId?: string | null
+    RoleCompanyID?: string | null
+    company?: CompanyUncheckedCreateNestedManyWithoutOwnerInput
+    companyBranchId?: string | null
+    Position_user?: Position_userUncheckedCreateNestedManyWithoutUserInput
+    henchman?: Position_userUncheckedCreateNestedManyWithoutHeaderInput
+    mas_all_collect?: mas_all_collectUncheckedCreateNestedManyWithoutUserInput
+    salary?: salaryUncheckedCreateNestedManyWithoutUserInput
+    provident_log?: provident_logUncheckedCreateNestedManyWithoutUserInput
+    bookbank_log?: bookbank_logUncheckedCreateNestedManyWithoutUserInput
+    data_leave?: data_leaveUncheckedCreateNestedManyWithoutUserInput
+    cretedByfk?: log_positionnUncheckedCreateNestedManyWithoutCretedByfkInput
+  }
+
+  export type UserCreateOrConnectWithoutUpdtedByfkInput = {
+    where: UserWhereUniqueInput
+    create: XOR<UserCreateWithoutUpdtedByfkInput, UserUncheckedCreateWithoutUpdtedByfkInput>
+  }
+
+  export type Position_userUpsertWithoutLog_positionInput = {
+    update: XOR<Position_userUpdateWithoutLog_positionInput, Position_userUncheckedUpdateWithoutLog_positionInput>
+    create: XOR<Position_userCreateWithoutLog_positionInput, Position_userUncheckedCreateWithoutLog_positionInput>
+  }
+
+  export type Position_userUpdateWithoutLog_positionInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    date?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    role?: NullableStringFieldUpdateOperationsInput | string | null
+    header?: UserUpdateOneWithoutHenchmanNestedInput
+    user?: UserUpdateOneWithoutPosition_userNestedInput
+    mas_positionlevel1?: mas_positionlevel1UpdateOneWithoutPosition_userNestedInput
+    mas_positionlevel2?: mas_positionlevel2UpdateOneWithoutPosition_userNestedInput
+    mas_positionlevel3?: mas_positionlevel3UpdateOneWithoutPosition_userNestedInput
+  }
+
+  export type Position_userUncheckedUpdateWithoutLog_positionInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    user_id?: NullableStringFieldUpdateOperationsInput | string | null
+    date?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    position1_id?: NullableStringFieldUpdateOperationsInput | string | null
+    position2_id?: NullableStringFieldUpdateOperationsInput | string | null
+    position3_id?: NullableStringFieldUpdateOperationsInput | string | null
+    role?: NullableStringFieldUpdateOperationsInput | string | null
+    headderId?: NullableStringFieldUpdateOperationsInput | string | null
+  }
+
+  export type UserUpsertWithoutCretedByfkInput = {
+    update: XOR<UserUpdateWithoutCretedByfkInput, UserUncheckedUpdateWithoutCretedByfkInput>
+    create: XOR<UserCreateWithoutCretedByfkInput, UserUncheckedCreateWithoutCretedByfkInput>
+  }
+
+  export type UserUpdateWithoutCretedByfkInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    password?: StringFieldUpdateOperationsInput | string
+    profile?: ProfileUpdateOneWithoutUserNestedInput
+    islogin?: BoolFieldUpdateOperationsInput | boolean
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    isOwner?: BoolFieldUpdateOperationsInput | boolean
+    lastlogin?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    role?: RoleUpdateOneWithoutUsersNestedInput
+    company?: CompanyUpdateManyWithoutOwnerNestedInput
+    companyBranch?: CompanyBranchUpdateOneWithoutUsersNestedInput
+    Role_Company?: Role_CompanyUpdateOneWithoutUsersNestedInput
+    Position_user?: Position_userUpdateManyWithoutUserNestedInput
+    henchman?: Position_userUpdateManyWithoutHeaderNestedInput
+    mas_all_collect?: mas_all_collectUpdateManyWithoutUserNestedInput
+    salary?: salaryUpdateManyWithoutUserNestedInput
+    provident_log?: provident_logUpdateManyWithoutUserNestedInput
+    bookbank_log?: bookbank_logUpdateManyWithoutUserNestedInput
+    data_leave?: data_leaveUpdateManyWithoutUserNestedInput
+    updtedByfk?: log_positionnUpdateManyWithoutUpdtedByfkNestedInput
+  }
+
+  export type UserUncheckedUpdateWithoutCretedByfkInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    password?: StringFieldUpdateOperationsInput | string
+    profile?: ProfileUncheckedUpdateOneWithoutUserNestedInput
+    islogin?: BoolFieldUpdateOperationsInput | boolean
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    isOwner?: BoolFieldUpdateOperationsInput | boolean
+    lastlogin?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    roleId?: NullableStringFieldUpdateOperationsInput | string | null
+    RoleCompanyID?: NullableStringFieldUpdateOperationsInput | string | null
+    company?: CompanyUncheckedUpdateManyWithoutOwnerNestedInput
+    companyBranchId?: NullableStringFieldUpdateOperationsInput | string | null
+    Position_user?: Position_userUncheckedUpdateManyWithoutUserNestedInput
+    henchman?: Position_userUncheckedUpdateManyWithoutHeaderNestedInput
+    mas_all_collect?: mas_all_collectUncheckedUpdateManyWithoutUserNestedInput
+    salary?: salaryUncheckedUpdateManyWithoutUserNestedInput
+    provident_log?: provident_logUncheckedUpdateManyWithoutUserNestedInput
+    bookbank_log?: bookbank_logUncheckedUpdateManyWithoutUserNestedInput
+    data_leave?: data_leaveUncheckedUpdateManyWithoutUserNestedInput
+    updtedByfk?: log_positionnUncheckedUpdateManyWithoutUpdtedByfkNestedInput
+  }
+
+  export type UserUpsertWithoutUpdtedByfkInput = {
+    update: XOR<UserUpdateWithoutUpdtedByfkInput, UserUncheckedUpdateWithoutUpdtedByfkInput>
+    create: XOR<UserCreateWithoutUpdtedByfkInput, UserUncheckedCreateWithoutUpdtedByfkInput>
+  }
+
+  export type UserUpdateWithoutUpdtedByfkInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    password?: StringFieldUpdateOperationsInput | string
+    profile?: ProfileUpdateOneWithoutUserNestedInput
+    islogin?: BoolFieldUpdateOperationsInput | boolean
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    isOwner?: BoolFieldUpdateOperationsInput | boolean
+    lastlogin?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    role?: RoleUpdateOneWithoutUsersNestedInput
+    company?: CompanyUpdateManyWithoutOwnerNestedInput
+    companyBranch?: CompanyBranchUpdateOneWithoutUsersNestedInput
+    Role_Company?: Role_CompanyUpdateOneWithoutUsersNestedInput
+    Position_user?: Position_userUpdateManyWithoutUserNestedInput
+    henchman?: Position_userUpdateManyWithoutHeaderNestedInput
+    mas_all_collect?: mas_all_collectUpdateManyWithoutUserNestedInput
+    salary?: salaryUpdateManyWithoutUserNestedInput
+    provident_log?: provident_logUpdateManyWithoutUserNestedInput
+    bookbank_log?: bookbank_logUpdateManyWithoutUserNestedInput
+    data_leave?: data_leaveUpdateManyWithoutUserNestedInput
+    cretedByfk?: log_positionnUpdateManyWithoutCretedByfkNestedInput
+  }
+
+  export type UserUncheckedUpdateWithoutUpdtedByfkInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    password?: StringFieldUpdateOperationsInput | string
+    profile?: ProfileUncheckedUpdateOneWithoutUserNestedInput
+    islogin?: BoolFieldUpdateOperationsInput | boolean
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    isOwner?: BoolFieldUpdateOperationsInput | boolean
+    lastlogin?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    roleId?: NullableStringFieldUpdateOperationsInput | string | null
+    RoleCompanyID?: NullableStringFieldUpdateOperationsInput | string | null
+    company?: CompanyUncheckedUpdateManyWithoutOwnerNestedInput
+    companyBranchId?: NullableStringFieldUpdateOperationsInput | string | null
+    Position_user?: Position_userUncheckedUpdateManyWithoutUserNestedInput
+    henchman?: Position_userUncheckedUpdateManyWithoutHeaderNestedInput
+    mas_all_collect?: mas_all_collectUncheckedUpdateManyWithoutUserNestedInput
+    salary?: salaryUncheckedUpdateManyWithoutUserNestedInput
+    provident_log?: provident_logUncheckedUpdateManyWithoutUserNestedInput
+    bookbank_log?: bookbank_logUncheckedUpdateManyWithoutUserNestedInput
+    data_leave?: data_leaveUncheckedUpdateManyWithoutUserNestedInput
+    cretedByfk?: log_positionnUncheckedUpdateManyWithoutCretedByfkNestedInput
   }
 
   export type CompanyBranchCreateManyCompanyInput = {
@@ -49690,6 +51652,8 @@ export namespace Prisma {
     provident_log?: provident_logUpdateManyWithoutUserNestedInput
     bookbank_log?: bookbank_logUpdateManyWithoutUserNestedInput
     data_leave?: data_leaveUpdateManyWithoutUserNestedInput
+    cretedByfk?: log_positionnUpdateManyWithoutCretedByfkNestedInput
+    updtedByfk?: log_positionnUpdateManyWithoutUpdtedByfkNestedInput
   }
 
   export type UserUncheckedUpdateWithoutCompanyBranchInput = {
@@ -49712,6 +51676,8 @@ export namespace Prisma {
     provident_log?: provident_logUncheckedUpdateManyWithoutUserNestedInput
     bookbank_log?: bookbank_logUncheckedUpdateManyWithoutUserNestedInput
     data_leave?: data_leaveUncheckedUpdateManyWithoutUserNestedInput
+    cretedByfk?: log_positionnUncheckedUpdateManyWithoutCretedByfkNestedInput
+    updtedByfk?: log_positionnUncheckedUpdateManyWithoutUpdtedByfkNestedInput
   }
 
   export type UserUncheckedUpdateManyWithoutUsersInput = {
@@ -49896,6 +51862,22 @@ export namespace Prisma {
     Status: number
   }
 
+  export type log_positionnCreateManyCretedByfkInput = {
+    id: string
+    positionId: string
+    creteddate: Date | string
+    updtedBy: string
+    updteddate: Date | string
+  }
+
+  export type log_positionnCreateManyUpdtedByfkInput = {
+    id: string
+    positionId: string
+    cretedBy: string
+    creteddate: Date | string
+    updteddate: Date | string
+  }
+
   export type CompanyUpdateWithoutOwnerInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
@@ -49954,6 +51936,7 @@ export namespace Prisma {
     mas_positionlevel1?: mas_positionlevel1UpdateOneWithoutPosition_userNestedInput
     mas_positionlevel2?: mas_positionlevel2UpdateOneWithoutPosition_userNestedInput
     mas_positionlevel3?: mas_positionlevel3UpdateOneWithoutPosition_userNestedInput
+    log_position?: log_positionnUpdateManyWithoutPosition_userNestedInput
   }
 
   export type Position_userUncheckedUpdateWithoutUserInput = {
@@ -49964,6 +51947,7 @@ export namespace Prisma {
     position3_id?: NullableStringFieldUpdateOperationsInput | string | null
     role?: NullableStringFieldUpdateOperationsInput | string | null
     headderId?: NullableStringFieldUpdateOperationsInput | string | null
+    log_position?: log_positionnUncheckedUpdateManyWithoutPosition_userNestedInput
   }
 
   export type Position_userUncheckedUpdateManyWithoutPosition_userInput = {
@@ -49984,6 +51968,7 @@ export namespace Prisma {
     mas_positionlevel1?: mas_positionlevel1UpdateOneWithoutPosition_userNestedInput
     mas_positionlevel2?: mas_positionlevel2UpdateOneWithoutPosition_userNestedInput
     mas_positionlevel3?: mas_positionlevel3UpdateOneWithoutPosition_userNestedInput
+    log_position?: log_positionnUpdateManyWithoutPosition_userNestedInput
   }
 
   export type Position_userUncheckedUpdateWithoutHeaderInput = {
@@ -49994,6 +51979,7 @@ export namespace Prisma {
     position2_id?: NullableStringFieldUpdateOperationsInput | string | null
     position3_id?: NullableStringFieldUpdateOperationsInput | string | null
     role?: NullableStringFieldUpdateOperationsInput | string | null
+    log_position?: log_positionnUncheckedUpdateManyWithoutPosition_userNestedInput
   }
 
   export type Position_userUncheckedUpdateManyWithoutHenchmanInput = {
@@ -50269,6 +52255,54 @@ export namespace Prisma {
     Status?: IntFieldUpdateOperationsInput | number
   }
 
+  export type log_positionnUpdateWithoutCretedByfkInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    creteddate?: DateTimeFieldUpdateOperationsInput | Date | string
+    updteddate?: DateTimeFieldUpdateOperationsInput | Date | string
+    Position_user?: Position_userUpdateOneRequiredWithoutLog_positionNestedInput
+    updtedByfk?: UserUpdateOneRequiredWithoutUpdtedByfkNestedInput
+  }
+
+  export type log_positionnUncheckedUpdateWithoutCretedByfkInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    positionId?: StringFieldUpdateOperationsInput | string
+    creteddate?: DateTimeFieldUpdateOperationsInput | Date | string
+    updtedBy?: StringFieldUpdateOperationsInput | string
+    updteddate?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type log_positionnUncheckedUpdateManyWithoutCretedByfkInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    positionId?: StringFieldUpdateOperationsInput | string
+    creteddate?: DateTimeFieldUpdateOperationsInput | Date | string
+    updtedBy?: StringFieldUpdateOperationsInput | string
+    updteddate?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type log_positionnUpdateWithoutUpdtedByfkInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    creteddate?: DateTimeFieldUpdateOperationsInput | Date | string
+    updteddate?: DateTimeFieldUpdateOperationsInput | Date | string
+    Position_user?: Position_userUpdateOneRequiredWithoutLog_positionNestedInput
+    cretedByfk?: UserUpdateOneRequiredWithoutCretedByfkNestedInput
+  }
+
+  export type log_positionnUncheckedUpdateWithoutUpdtedByfkInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    positionId?: StringFieldUpdateOperationsInput | string
+    cretedBy?: StringFieldUpdateOperationsInput | string
+    creteddate?: DateTimeFieldUpdateOperationsInput | Date | string
+    updteddate?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type log_positionnUncheckedUpdateManyWithoutUpdtedByfkInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    positionId?: StringFieldUpdateOperationsInput | string
+    cretedBy?: StringFieldUpdateOperationsInput | string
+    creteddate?: DateTimeFieldUpdateOperationsInput | Date | string
+    updteddate?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
   export type UserCreateManyRoleInput = {
     id: string
     email: string
@@ -50302,6 +52336,8 @@ export namespace Prisma {
     provident_log?: provident_logUpdateManyWithoutUserNestedInput
     bookbank_log?: bookbank_logUpdateManyWithoutUserNestedInput
     data_leave?: data_leaveUpdateManyWithoutUserNestedInput
+    cretedByfk?: log_positionnUpdateManyWithoutCretedByfkNestedInput
+    updtedByfk?: log_positionnUpdateManyWithoutUpdtedByfkNestedInput
   }
 
   export type UserUncheckedUpdateWithoutRoleInput = {
@@ -50324,6 +52360,8 @@ export namespace Prisma {
     provident_log?: provident_logUncheckedUpdateManyWithoutUserNestedInput
     bookbank_log?: bookbank_logUncheckedUpdateManyWithoutUserNestedInput
     data_leave?: data_leaveUncheckedUpdateManyWithoutUserNestedInput
+    cretedByfk?: log_positionnUncheckedUpdateManyWithoutCretedByfkNestedInput
+    updtedByfk?: log_positionnUncheckedUpdateManyWithoutUpdtedByfkNestedInput
   }
 
   export type UserCreateManyRole_CompanyInput = {
@@ -50359,6 +52397,8 @@ export namespace Prisma {
     provident_log?: provident_logUpdateManyWithoutUserNestedInput
     bookbank_log?: bookbank_logUpdateManyWithoutUserNestedInput
     data_leave?: data_leaveUpdateManyWithoutUserNestedInput
+    cretedByfk?: log_positionnUpdateManyWithoutCretedByfkNestedInput
+    updtedByfk?: log_positionnUpdateManyWithoutUpdtedByfkNestedInput
   }
 
   export type UserUncheckedUpdateWithoutRole_CompanyInput = {
@@ -50381,6 +52421,8 @@ export namespace Prisma {
     provident_log?: provident_logUncheckedUpdateManyWithoutUserNestedInput
     bookbank_log?: bookbank_logUncheckedUpdateManyWithoutUserNestedInput
     data_leave?: data_leaveUncheckedUpdateManyWithoutUserNestedInput
+    cretedByfk?: log_positionnUncheckedUpdateManyWithoutCretedByfkNestedInput
+    updtedByfk?: log_positionnUncheckedUpdateManyWithoutUpdtedByfkNestedInput
   }
 
   export type DistrictCreateManyProvinceInput = {
@@ -50478,6 +52520,7 @@ export namespace Prisma {
     user?: UserUpdateOneWithoutPosition_userNestedInput
     mas_positionlevel2?: mas_positionlevel2UpdateOneWithoutPosition_userNestedInput
     mas_positionlevel3?: mas_positionlevel3UpdateOneWithoutPosition_userNestedInput
+    log_position?: log_positionnUpdateManyWithoutPosition_userNestedInput
   }
 
   export type Position_userUncheckedUpdateWithoutMas_positionlevel1Input = {
@@ -50488,6 +52531,7 @@ export namespace Prisma {
     position3_id?: NullableStringFieldUpdateOperationsInput | string | null
     role?: NullableStringFieldUpdateOperationsInput | string | null
     headderId?: NullableStringFieldUpdateOperationsInput | string | null
+    log_position?: log_positionnUncheckedUpdateManyWithoutPosition_userNestedInput
   }
 
   export type mas_positionlevel3CreateManyMas_positionlevel2Input = {
@@ -50537,6 +52581,7 @@ export namespace Prisma {
     user?: UserUpdateOneWithoutPosition_userNestedInput
     mas_positionlevel1?: mas_positionlevel1UpdateOneWithoutPosition_userNestedInput
     mas_positionlevel3?: mas_positionlevel3UpdateOneWithoutPosition_userNestedInput
+    log_position?: log_positionnUpdateManyWithoutPosition_userNestedInput
   }
 
   export type Position_userUncheckedUpdateWithoutMas_positionlevel2Input = {
@@ -50547,6 +52592,7 @@ export namespace Prisma {
     position3_id?: NullableStringFieldUpdateOperationsInput | string | null
     role?: NullableStringFieldUpdateOperationsInput | string | null
     headderId?: NullableStringFieldUpdateOperationsInput | string | null
+    log_position?: log_positionnUncheckedUpdateManyWithoutPosition_userNestedInput
   }
 
   export type Position_userCreateManyMas_positionlevel3Input = {
@@ -50567,6 +52613,7 @@ export namespace Prisma {
     user?: UserUpdateOneWithoutPosition_userNestedInput
     mas_positionlevel1?: mas_positionlevel1UpdateOneWithoutPosition_userNestedInput
     mas_positionlevel2?: mas_positionlevel2UpdateOneWithoutPosition_userNestedInput
+    log_position?: log_positionnUpdateManyWithoutPosition_userNestedInput
   }
 
   export type Position_userUncheckedUpdateWithoutMas_positionlevel3Input = {
@@ -50577,6 +52624,39 @@ export namespace Prisma {
     position2_id?: NullableStringFieldUpdateOperationsInput | string | null
     role?: NullableStringFieldUpdateOperationsInput | string | null
     headderId?: NullableStringFieldUpdateOperationsInput | string | null
+    log_position?: log_positionnUncheckedUpdateManyWithoutPosition_userNestedInput
+  }
+
+  export type log_positionnCreateManyPosition_userInput = {
+    id: string
+    cretedBy: string
+    creteddate: Date | string
+    updtedBy: string
+    updteddate: Date | string
+  }
+
+  export type log_positionnUpdateWithoutPosition_userInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    creteddate?: DateTimeFieldUpdateOperationsInput | Date | string
+    updteddate?: DateTimeFieldUpdateOperationsInput | Date | string
+    cretedByfk?: UserUpdateOneRequiredWithoutCretedByfkNestedInput
+    updtedByfk?: UserUpdateOneRequiredWithoutUpdtedByfkNestedInput
+  }
+
+  export type log_positionnUncheckedUpdateWithoutPosition_userInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    cretedBy?: StringFieldUpdateOperationsInput | string
+    creteddate?: DateTimeFieldUpdateOperationsInput | Date | string
+    updtedBy?: StringFieldUpdateOperationsInput | string
+    updteddate?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type log_positionnUncheckedUpdateManyWithoutLog_positionInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    cretedBy?: StringFieldUpdateOperationsInput | string
+    creteddate?: DateTimeFieldUpdateOperationsInput | Date | string
+    updtedBy?: StringFieldUpdateOperationsInput | string
+    updteddate?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type holidayCompanyCreateManyHoliday_dateInput = {

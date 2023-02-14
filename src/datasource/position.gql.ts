@@ -252,7 +252,7 @@ export const positionResolvers: Resolvers = {
         if (e.masPosition2) {
           e.masPosition2?.forEach(async (a) => {
             if (a?.id_Position2) {
-              const CretePo_2 = await ctx.prisma.mas_positionlevel2.update({
+              var CretePo_2 = await ctx.prisma.mas_positionlevel2.update({
                 data: {
                   positionlevel1_id: a?.positionlevel1_id,
                   name: a?.name_Position2 as string,
@@ -264,7 +264,7 @@ export const positionResolvers: Resolvers = {
                 }
               })
             } if(a?.id_Position2 == "" || a?.id_Position2 == undefined){
-              const CretePo_2 = await ctx.prisma.mas_positionlevel2.create({
+              var CretePo_2 = await ctx.prisma.mas_positionlevel2.create({
                 data: {
                   id: v4(),
                   positionlevel1_id: a?.positionlevel1_id,
@@ -294,7 +294,7 @@ export const positionResolvers: Resolvers = {
                   const CretePo_3 = await ctx.prisma.mas_positionlevel3.create({
                     data: {
                       id: v4(),
-                      positionlevel2_id: b?.positionlevel2_id,
+                      positionlevel2_id: CretePo_2.id,
                       CompanyId: ctx.currentUser?.compayId,
                       name: b?.name_Position3 as string,
                       level: b?.level_Position3 as number,
@@ -369,7 +369,6 @@ export const positionResolvers: Resolvers = {
     async createdposition_user(p, args, ctx) {
       if (args.data.id) {
         const updated = await ctx.prisma.position_user.update({
-          
           data: {
             user_id: args.data.user_id as string,
             position1_id: args.data.position1_id as string,
