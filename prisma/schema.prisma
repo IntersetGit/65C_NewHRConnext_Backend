@@ -479,11 +479,11 @@ model data_leave {
 
 //------------ เก็บ logabout positions -------------------------//
 model log_positionn { 
-  id              String         @unique@db.Uuid
-  positionId      String         @db.Uuid
-  cretedBy        String         @db.Uuid
-  creteddate      DateTime    
-  updtedBy        String         @db.Uuid
+  id              String        @unique@db.Uuid
+  positionId      String        @db.Uuid
+  cretedBy        String        @db.Uuid
+  creteddate      DateTime  
+  updtedBy        String        @db.Uuid
   updteddate      DateTime
   Position_user   Position_user  @relation(fields: [positionId], references: [id])
   cretedByfk      User           @relation(fields: [cretedBy], references: [id])

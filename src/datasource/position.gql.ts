@@ -88,6 +88,7 @@ type Position_user {
   role: String 
   headderId: String 
   date: Date
+  log_position: [log_positionn]
   mas_positionlevel1: mas_positionlevel1
   mas_positionlevel2: mas_positionlevel2
   mas_positionlevel3: mas_positionlevel3
@@ -397,13 +398,14 @@ export const positionResolvers: Resolvers = {
           }
         })
         // const updated_position = await ctx.prisma.log_positionn.create({
-        //   // data:{
-        //   //   id: v4(),
-        //   //   positionId: args.data.id,
-        //   //   updtedBy: ctx.currentUser?.id,
-        //   //   updteddate: new Date(),
-        //   // }
+        //   data:{
+        //     id: v4(),
+        //     positionId: args.data.id as string,
+        //     updtedBy: ctx.currentUser?.id as string,
+        //     updteddate: new Date(),
+        //   }
         // })
+
         return {
           message: 'success',
           status: true,

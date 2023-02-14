@@ -91,7 +91,7 @@ type Query{
   getleavetypedata: [mas_leave_type]
   getleava_datame(dataleaveId: ID): getleaveResponseType
   getleava_alldata(dataleaveId: ID): [leave_data]
-  getAllleave(dataleaveId: ID): [leave_data]
+  getAllleave(userId: ID): [getdataaboutleave]
 }
 
 type Mutation{
@@ -249,28 +249,30 @@ export const leaveResolvers: Resolvers = {
         return alldata_hearder
       }
     },
-
+     //-------------- การลา --------------//
     async getAllleave(p, args, ctx) {
-      if (args.dataleaveId) {
-        const alldata_hearderbyId = await ctx.prisma.data_leave.findMany({
+      if (args.userId) {
+        const getdataAllleavebyId = await ctx.prisma.user.findMany({
           include: {
-            user: { include: { profile: true, Position_user: { include: { mas_positionlevel1: true, mas_positionlevel2: true, mas_positionlevel3: true, header: { include: { profile: true } } } }, } },
-            mas_leave_type: true
+            profile: true,
+            Position_user: { include: { mas_positionlevel1: true, mas_positionlevel2: true, mas_positionlevel3: true, header: { include: { profile: true } } } },
+            data_leave: { include: { mas_leave_type: true }}
           },
           where: {
-            id: args.dataleaveId
-          }
+            id: args.userId
+          },
         })
-        return alldata_hearderbyId
+        return getdataAllleavebyId
 
       } else {
-        const alldata_hearder = await ctx.prisma.data_leave.findMany({
+        const getdataAllleave = await ctx.prisma.user.findMany({
           include: {
-            user: { include: { profile: true, Position_user: { include: { mas_positionlevel1: true, mas_positionlevel2: true, mas_positionlevel3: true, header: { include: { profile: true } } } }, } },
-            mas_leave_type: true
-          }
+            profile: true,
+            Position_user: { include: { mas_positionlevel1: true, mas_positionlevel2: true, mas_positionlevel3: true, header: { include: { profile: true } } } },
+            data_leave: { include: { mas_leave_type: true }}
+          },
         })
-        return alldata_hearder
+        return getdataAllleave
       }
     }
   },

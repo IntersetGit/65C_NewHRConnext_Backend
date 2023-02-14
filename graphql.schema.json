@@ -4603,6 +4603,22 @@
             "deprecationReason": null
           },
           {
+            "name": "log_position",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "LIST",
+              "name": null,
+              "ofType": {
+                "kind": "OBJECT",
+                "name": "log_positionn",
+                "ofType": null
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
             "name": "mas_positionlevel1",
             "description": null,
             "args": [],
@@ -5609,7 +5625,7 @@
             "description": null,
             "args": [
               {
-                "name": "dataleaveId",
+                "name": "userId",
                 "description": null,
                 "type": {
                   "kind": "SCALAR",
@@ -5626,7 +5642,7 @@
               "name": null,
               "ofType": {
                 "kind": "OBJECT",
-                "name": "leave_data",
+                "name": "getdataaboutleave",
                 "ofType": null
               }
             },
