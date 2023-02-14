@@ -89,7 +89,7 @@ type getcount{
 
 type Query{
   getleavetypedata: [mas_leave_type]
-  getleava_datame: getleaveResponseType
+  getleava_datame(dataleaveId: ID): getleaveResponseType
   getleava_alldata(dataleaveId: ID): [leave_data]
   getAllleave(dataleaveId: ID): [leave_data]
 }
@@ -119,6 +119,7 @@ export const leaveResolvers: Resolvers = {
       let countleave2 = 0
       let countleave3 = 0
       let countleave4 = 0
+      if(!args.dataleaveId){
       const getdataleave = await ctx.prisma.user.findMany({
         include: {
           profile: true,
@@ -189,11 +190,35 @@ export const leaveResolvers: Resolvers = {
         count4: countleave4,
         hours4: cout_hours4
       }
+    
       // return getdataleave
       return {
         data_all: getdataleave,
         data_count: dataCount
       }
+    }else{
+      const search = args.dataleaveId? args.dataleaveId: undefined
+      const getdataleave = await ctx.prisma.user.findMany({
+        include: {
+          profile: true,
+          Position_user: { include: { mas_positionlevel1: true, mas_positionlevel2: true, mas_positionlevel3: true } },
+          data_leave: { include: { mas_leave_type: true } }
+        },
+        where: {
+          id: ctx.currentUser?.id,
+          AND:{
+            data_leave:{
+              some:{
+                id: args.dataleaveId
+              }
+            }
+          }
+        },
+      })
+      return {
+        data_all: getdataleave
+      }
+    }
     },
 
     async getleava_alldata(p, args, ctx) {

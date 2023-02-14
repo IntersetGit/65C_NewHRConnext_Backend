@@ -5743,7 +5743,20 @@
           {
             "name": "getleava_datame",
             "description": null,
-            "args": [],
+            "args": [
+              {
+                "name": "dataleaveId",
+                "description": null,
+                "type": {
+                  "kind": "SCALAR",
+                  "name": "ID",
+                  "ofType": null
+                },
+                "defaultValue": null,
+                "isDeprecated": false,
+                "deprecationReason": null
+              }
+            ],
             "type": {
               "kind": "OBJECT",
               "name": "getleaveResponseType",

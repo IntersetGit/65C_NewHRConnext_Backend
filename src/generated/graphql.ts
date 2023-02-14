@@ -766,6 +766,11 @@ export type QueryGetleava_AlldataArgs = {
 };
 
 
+export type QueryGetleava_DatameArgs = {
+  dataleaveId?: InputMaybe<Scalars['ID']>;
+};
+
+
 export type QueryGetposition_UserArgs = {
   id?: InputMaybe<Scalars['ID']>;
 };
@@ -2169,7 +2174,7 @@ export type QueryResolvers<ContextType = ApolloContext, ParentType extends Resol
   getProvince?: Resolver<Maybe<Array<Maybe<ResolversTypes['Province']>>>, ParentType, ContextType>;
   getcompanyRole?: Resolver<Maybe<Array<Maybe<ResolversTypes['Role_Company']>>>, ParentType, ContextType, Partial<QueryGetcompanyRoleArgs>>;
   getleava_alldata?: Resolver<Maybe<Array<Maybe<ResolversTypes['leave_data']>>>, ParentType, ContextType, Partial<QueryGetleava_AlldataArgs>>;
-  getleava_datame?: Resolver<Maybe<ResolversTypes['getleaveResponseType']>, ParentType, ContextType>;
+  getleava_datame?: Resolver<Maybe<ResolversTypes['getleaveResponseType']>, ParentType, ContextType, Partial<QueryGetleava_DatameArgs>>;
   getleavetypedata?: Resolver<Maybe<Array<Maybe<ResolversTypes['mas_leave_type']>>>, ParentType, ContextType>;
   getownCompany?: Resolver<Maybe<ResolversTypes['GetOwncompanytype']>, ParentType, ContextType>;
   getpositionMe?: Resolver<Maybe<Array<Maybe<ResolversTypes['getPositionUser']>>>, ParentType, ContextType>;

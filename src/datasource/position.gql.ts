@@ -308,6 +308,11 @@ export const positionResolvers: Resolvers = {
           })
         }
       }) 
+      // const updatedlog_position = await ctx.prisma.log_positionn.create({
+      //   data:{
+      //     id: v4(),
+      //     positionId: 
+      //   }
       return {
         message: 'success',
         status: true,
