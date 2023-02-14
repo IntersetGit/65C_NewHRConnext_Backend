@@ -151,6 +151,8 @@ model User {
   provident_log   provident_log[]
   bookbank_log    bookbank_log[]
   data_leave      data_leave[]
+  cretedByfk      log_positionn[]
+  updtedByfk      log_positionn[]  @relation("updtedByfk")
 }
 
 model Role {
@@ -252,6 +254,7 @@ model Position_user {
   mas_positionlevel1 mas_positionlevel1? @relation(fields: [position1_id], references: [id])
   mas_positionlevel2 mas_positionlevel2? @relation(fields: [position2_id], references: [id])
   mas_positionlevel3 mas_positionlevel3? @relation(fields: [position3_id], references: [id])
+  log_position       log_positionn[]
 }
 
 model holiday_date {
@@ -471,4 +474,18 @@ model data_leave {
   Status         Int            @db.SmallInt
   user_id        String         @db.Uuid
   user           User           @relation(fields: [user_id], references: [id])
+}
+
+
+//------------ เก็บ logabout positions -------------------------//
+model log_positionn { 
+  id              String         @unique@db.Uuid
+  positionId      String         @db.Uuid
+  cretedBy        String         @db.Uuid
+  creteddate      DateTime    
+  updtedBy        String         @db.Uuid
+  updteddate      DateTime
+  Position_user   Position_user  @relation(fields: [positionId], references: [id])
+  cretedByfk      User           @relation(fields: [cretedBy], references: [id])
+  updtedByfk      User           @relation("updtedByfk",fields: [updtedBy], references: [id])
 }
