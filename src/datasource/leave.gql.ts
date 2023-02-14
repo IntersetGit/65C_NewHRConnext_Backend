@@ -225,7 +225,7 @@ export const leaveResolvers: Resolvers = {
       if (args.dataleaveId) {
         const alldata_hearderbyId = await ctx.prisma.data_leave.findMany({
           include: {
-            user: { include: { profile: true, Position_user: { include: { mas_positionlevel1: true, mas_positionlevel2: true, mas_positionlevel3: true } }, } },
+            user: { include: { profile: true, Position_user: { include: { mas_positionlevel1: true, mas_positionlevel2: true, mas_positionlevel3: true, header: { include: { profile: true } } } }, } },
             mas_leave_type: true
           },
           where: {
@@ -236,7 +236,7 @@ export const leaveResolvers: Resolvers = {
       } else {
         const alldata_hearder = await ctx.prisma.data_leave.findMany({
           include: {
-            user: { include: { profile: true, Position_user: { include: { mas_positionlevel1: true, mas_positionlevel2: true, mas_positionlevel3: true } }, } },
+            user: { include: { profile: true, Position_user: { include: { mas_positionlevel1: true, mas_positionlevel2: true, mas_positionlevel3: true, header: { include: { profile: true } } } }, } },
             mas_leave_type: true
           },
           where: {
@@ -257,7 +257,7 @@ export const leaveResolvers: Resolvers = {
       if (args.dataleaveId) {
         const alldata_hearderbyId = await ctx.prisma.data_leave.findMany({
           include: {
-            user: { include: { profile: true, Position_user: { include: { mas_positionlevel1: true, mas_positionlevel2: true, mas_positionlevel3: true } }, } },
+            user: { include: { profile: true, Position_user: { include: { mas_positionlevel1: true, mas_positionlevel2: true, mas_positionlevel3: true,header: { include: { profile: true } } } }, } },
             mas_leave_type: true
           },
           where: {
@@ -269,7 +269,7 @@ export const leaveResolvers: Resolvers = {
       } else {
         const alldata_hearder = await ctx.prisma.data_leave.findMany({
           include: {
-            user: { include: { profile: true, Position_user: { include: { mas_positionlevel1: true, mas_positionlevel2: true, mas_positionlevel3: true } }, } },
+            user: { include: { profile: true, Position_user: { include: { mas_positionlevel1: true, mas_positionlevel2: true, mas_positionlevel3: true, header: { include: { profile: true } } } }, } },
             mas_leave_type: true
           }
         })
