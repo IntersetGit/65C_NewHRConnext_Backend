@@ -399,10 +399,21 @@ export const leaveResolvers: Resolvers = {
       } else {
         const getdataAllleave = await ctx.prisma.user.findMany({
           include: {
+            company: true,
             profile: true,
             Position_user: { include: { mas_positionlevel1: true, mas_positionlevel2: true, mas_positionlevel3: true, header: { include: { profile: true } } } },
             data_leave: { include: { mas_leave_type: true } }
           },
+          where: {
+            companyBranch: {
+              companyId: ctx.currentUser?.compayId
+            },
+            data_leave: {
+              some: {
+                Status: 1 || 2
+              }
+            }
+          }
         })
         if (getdataAllleave) {
           getdataAllleave.forEach((a) => {
@@ -539,9 +550,11 @@ const resolversleave = {
   'Query.getleavetypedata': [authenticate()],
   'Query.getleava_datame': [authenticate()],
   'Query.getleava_alldata': [authenticate()],
+  'Query.getAllleave': [authenticate()],
   'Mutation.createddata_leave': [authenticate()],
   'Mutation.editstatusleave': [authenticate()]
 };
+
 
 export const leavedataResolvers = composeResolvers(
   leaveResolvers,
