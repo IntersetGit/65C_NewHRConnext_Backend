@@ -124,7 +124,7 @@ export const leaveResolvers: Resolvers = {
           include: {
             profile: true,
             Position_user: { include: { mas_positionlevel1: true, mas_positionlevel2: true, mas_positionlevel3: true, header: { include: { profile: true } } } },
-            data_leave: { include: { mas_leave_type: true }}
+            data_leave: { include: { mas_leave_type: true } }
           },
           where: {
             id: ctx.currentUser?.id
@@ -202,12 +202,12 @@ export const leaveResolvers: Resolvers = {
           include: {
             profile: true,
             Position_user: { include: { mas_positionlevel1: true, mas_positionlevel2: true, mas_positionlevel3: true, header: { include: { profile: true } } } },
-            data_leave: { include: { mas_leave_type: true }, where: { id : search} }
+            data_leave: { include: { mas_leave_type: true }, where: { id: search } }
           },
           where: {
-              data_leave: {
-                some: {
-                  id: search
+            data_leave: {
+              some: {
+                id: search
               }
             }
           },
@@ -249,14 +249,14 @@ export const leaveResolvers: Resolvers = {
         return alldata_hearder
       }
     },
-     //-------------- การลา --------------//
+    //-------------- การลา --------------//
     async getAllleave(p, args, ctx) {
       if (args.userId) {
         const getdataAllleavebyId = await ctx.prisma.user.findMany({
           include: {
             profile: true,
             Position_user: { include: { mas_positionlevel1: true, mas_positionlevel2: true, mas_positionlevel3: true, header: { include: { profile: true } } } },
-            data_leave: { include: { mas_leave_type: true }}
+            data_leave: { include: { mas_leave_type: true } }
           },
           where: {
             id: args.userId
@@ -269,7 +269,7 @@ export const leaveResolvers: Resolvers = {
           include: {
             profile: true,
             Position_user: { include: { mas_positionlevel1: true, mas_positionlevel2: true, mas_positionlevel3: true, header: { include: { profile: true } } } },
-            data_leave: { include: { mas_leave_type: true }}
+            data_leave: { include: { mas_leave_type: true } }
           },
         })
         return getdataAllleave
