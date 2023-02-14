@@ -373,6 +373,7 @@ const resolvers: Resolvers = {
           id: args.id as string
         }
       });
+     
       //const deleteCompanyHead = await ctx.prisma.company.delete({
        // where: { 
 
