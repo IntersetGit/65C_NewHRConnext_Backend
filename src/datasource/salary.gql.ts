@@ -433,8 +433,8 @@ user_id:String
   }
 
   type Mutation {
-    Createsalary(data: salaryInput): createsalaryResponseType
-    Createbookbank(data: bookbank_logInput): createbookbanklogResponseType
+    Createandupdatesalary(data: salaryInput): createsalaryResponseType
+    Createandupdatebookbank(data: bookbank_logInput): createbookbanklogResponseType
     Createyears(data: yearsInput): yearsResponseType
     Createmonth(data: monthInput): monthResponseType
     createBank(data: BankInput): BankResponseType
@@ -690,8 +690,13 @@ const resolvers: Resolvers = {
       };
     },
 
-    async Createsalary(p: any, args: any, ctx: any) {
+    async Createandupdatesalary(p: any, args: any, ctx: any) {
       //สร้าง log สำหรับเงินเดือนจากนั้นเก็บกองทุนไว้ใน provident log จากนั้นเก็บค่าไว้ใน collect
+      if (args.data?.id) {
+        
+      }
+
+      //ถ้าหากไม่มีการส่ง id มาจะให้เป็นการสร้างใหม่
       const gensalaryID = v4();
       const genAllCollectID = v4();
       // let now = dayjs()
@@ -969,7 +974,7 @@ const resolvers: Resolvers = {
       };
     },
 
-    async Createbookbank(p: any, args: any, ctx: any) {
+    async Createandupdatebookbank(p: any, args: any, ctx: any) {
       //สร้าง bookbank
       const bookbankID = v4();
       // const providentID = v4()
@@ -1105,7 +1110,7 @@ const resolvers: Resolvers = {
 
       const new_collect = await ctx.prisma.mas_all_collect.update({
         data: {
-          date: new Date(args.data?.date),
+          date: new Date(),
           income_collect: new_income_collet,
           vat_collect: new_vat_collect,
           social_secu_collect: new_social_secu,
@@ -1114,7 +1119,7 @@ const resolvers: Resolvers = {
         },
         where: { userId: args.userId },
       })
-      
+
       const deletesalary = await ctx.prisma.salary.delete({
         where: {
           id: args.salaryid,
@@ -1151,8 +1156,8 @@ const resolversComposition = {
   'Query.datasalary_mee': [authenticate()],
   'Mutation.Createmonth': [authenticate()],
   'Mutation.Createyears': [authenticate()],
-  'Mutation.Createsalary': [authenticate()],
-  'Mutation.Createbookbank': [authenticate()],
+  'Mutation.Createandupdatesalary': [authenticate()],
+  'Mutation.Createandupdatebookbank': [authenticate()],
   'Mutation.createBank': [authenticate()],
   'Mutation.CreateAndUpdateExpenseCom': [authenticate()],
   'Mutation.Createincometype': [authenticate()],
