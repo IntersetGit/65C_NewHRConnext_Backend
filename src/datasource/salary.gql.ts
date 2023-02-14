@@ -1297,7 +1297,7 @@ const resolversComposition = {
   'Query.bookbank_log': [authenticate()],
   'Query.mas_all_collect': [authenticate()],
   'Query.data_salary': [authenticate()],
-  'Query.datasalary_mee': [authenticate()],
+  'Query.mydata_salary': [authenticate()],
   'Mutation.Createmonth': [authenticate()],
   'Mutation.Createyears': [authenticate()],
   'Mutation.Createandupdatesalary': [authenticate()],
