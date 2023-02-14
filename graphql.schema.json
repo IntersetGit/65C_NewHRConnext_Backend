@@ -5638,13 +5638,9 @@
               }
             ],
             "type": {
-              "kind": "LIST",
-              "name": null,
-              "ofType": {
-                "kind": "OBJECT",
-                "name": "getdataaboutleave",
-                "ofType": null
-              }
+              "kind": "OBJECT",
+              "name": "getleaveResponseType",
+              "ofType": null
             },
             "isDeprecated": false,
             "deprecationReason": null

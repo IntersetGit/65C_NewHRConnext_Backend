@@ -91,7 +91,7 @@ type Query{
   getleavetypedata: [mas_leave_type]
   getleava_datame(dataleaveId: ID): getleaveResponseType
   getleava_alldata(dataleaveId: ID): [leave_data]
-  getAllleave(userId: ID): [getdataaboutleave]
+  getAllleave(userId: ID): getleaveResponseType
 }
 
 type Mutation{
@@ -212,8 +212,69 @@ export const leaveResolvers: Resolvers = {
             }
           },
         })
+        if (getdataleave) {
+          getdataleave.forEach((a) => {
+            if (a.data_leave) {
+              a.data_leave.forEach((e) => {
+                if (e.mas_leave_type.name == "ลาพักร้อน") {
+                  cout_hours = cout_hours + e.quantity_hours
+                  countleave1 = countleave1 + e.quantity_day
+                }
+                if (e.mas_leave_type.name == "ลากิจ") {
+                  cout_hours2 = cout_hours2 + e.quantity_hours
+                  countleave2 = countleave2 + e.quantity_day
+                }
+                if (e.mas_leave_type.name == "ลาป่วย") {
+                  cout_hours3 = cout_hours3 + e.quantity_hours
+                  countleave3 = countleave3 + e.quantity_day
+
+                }
+                if (e.mas_leave_type.name == "ลาอื่นๆ") {
+                  cout_hours4 = cout_hours4 + e.quantity_hours
+                  countleave4 = countleave4 + e.quantity_day
+                }
+              })
+            }
+          })
+          if (cout_hours >= 8) {
+            let a = Math.trunc(cout_hours / 8)
+            countleave1 = a + countleave1
+            cout_hours = cout_hours - (a * 8)
+          }
+          if (cout_hours2 >= 8) {
+            let a = Math.trunc(cout_hours2 / 8)
+            countleave2 = a + countleave2
+            cout_hours2 = cout_hours2 - (a * 8)
+          }
+          if (cout_hours3 >= 8) {
+            let a = Math.trunc(cout_hours3 / 8)
+            countleave3 = a + countleave3
+            cout_hours3 = cout_hours3 - (a * 8)
+          }
+          if (cout_hours4 >= 8) {
+            let b = Math.trunc(cout_hours4 / 8)
+            countleave4 = b + countleave4
+            cout_hours4 = cout_hours4 - (b * 8)
+          }
+        }
+
+        let dataCount = {
+          name_1: 'ลาพักร้อน ' + countleave1 + ' วัน ' + cout_hours + ' ชั่วโมง',
+          count1: countleave1,
+          hours1: cout_hours,
+          name_2: 'ลากิจ ' + countleave2 + ' วัน ' + cout_hours2 + ' ชั่วโมง',
+          count2: countleave2,
+          hours2: cout_hours2,
+          name_3: 'ลาป่วย ' + countleave3 + ' วัน ' + cout_hours3 + ' ชั่วโมง',
+          count3: countleave3,
+          hours: cout_hours3,
+          name_4: 'ลาอื่นๆ ' + countleave4 + ' วัน ' + cout_hours4 + ' ชั่วโมง',
+          count4: countleave4,
+          hours4: cout_hours4
+        }
         return {
-          data_all: getdataleave
+          data_all: getdataleave,
+          data_count: dataCount
         }
       }
     },
@@ -251,6 +312,14 @@ export const leaveResolvers: Resolvers = {
     },
     //-------------- การลา --------------//
     async getAllleave(p, args, ctx) {
+      let cout_hours = 0
+      let cout_hours2 = 0
+      let cout_hours3 = 0
+      let cout_hours4 = 0
+      let countleave1 = 0
+      let countleave2 = 0
+      let countleave3 = 0
+      let countleave4 = 0
       if (args.userId) {
         const getdataAllleavebyId = await ctx.prisma.user.findMany({
           include: {
@@ -262,7 +331,70 @@ export const leaveResolvers: Resolvers = {
             id: args.userId
           },
         })
-        return getdataAllleavebyId
+        if (getdataAllleavebyId) {
+          getdataAllleavebyId.forEach((a) => {
+            if (a.data_leave) {
+              a.data_leave.forEach((e) => {
+                if (e.mas_leave_type.name == "ลาพักร้อน") {
+                  cout_hours = cout_hours + e.quantity_hours
+                  countleave1 = countleave1 + e.quantity_day
+                }
+                if (e.mas_leave_type.name == "ลากิจ") {
+                  cout_hours2 = cout_hours2 + e.quantity_hours
+                  countleave2 = countleave2 + e.quantity_day
+                }
+                if (e.mas_leave_type.name == "ลาป่วย") {
+                  cout_hours3 = cout_hours3 + e.quantity_hours
+                  countleave3 = countleave3 + e.quantity_day
+
+                }
+                if (e.mas_leave_type.name == "ลาอื่นๆ") {
+                  cout_hours4 = cout_hours4 + e.quantity_hours
+                  countleave4 = countleave4 + e.quantity_day
+                }
+              })
+            }
+          })
+          if (cout_hours >= 8) {
+            let a = Math.trunc(cout_hours / 8)
+            countleave1 = a + countleave1
+            cout_hours = cout_hours - (a * 8)
+          }
+          if (cout_hours2 >= 8) {
+            let a = Math.trunc(cout_hours2 / 8)
+            countleave2 = a + countleave2
+            cout_hours2 = cout_hours2 - (a * 8)
+          }
+          if (cout_hours3 >= 8) {
+            let a = Math.trunc(cout_hours3 / 8)
+            countleave3 = a + countleave3
+            cout_hours3 = cout_hours3 - (a * 8)
+          }
+          if (cout_hours4 >= 8) {
+            let b = Math.trunc(cout_hours4 / 8)
+            countleave4 = b + countleave4
+            cout_hours4 = cout_hours4 - (b * 8)
+          }
+        }
+
+        let dataCount = {
+          name_1: 'ลาพักร้อน ' + countleave1 + ' วัน ' + cout_hours + ' ชั่วโมง',
+          count1: countleave1,
+          hours1: cout_hours,
+          name_2: 'ลากิจ ' + countleave2 + ' วัน ' + cout_hours2 + ' ชั่วโมง',
+          count2: countleave2,
+          hours2: cout_hours2,
+          name_3: 'ลาป่วย ' + countleave3 + ' วัน ' + cout_hours3 + ' ชั่วโมง',
+          count3: countleave3,
+          hours: cout_hours3,
+          name_4: 'ลาอื่นๆ ' + countleave4 + ' วัน ' + cout_hours4 + ' ชั่วโมง',
+          count4: countleave4,
+          hours4: cout_hours4
+        }
+        return {
+          data_all: getdataAllleavebyId,
+          data_count: dataCount
+        }
 
       } else {
         const getdataAllleave = await ctx.prisma.user.findMany({
@@ -272,7 +404,70 @@ export const leaveResolvers: Resolvers = {
             data_leave: { include: { mas_leave_type: true } }
           },
         })
-        return getdataAllleave
+        if (getdataAllleave) {
+          getdataAllleave.forEach((a) => {
+            if (a.data_leave) {
+              a.data_leave.forEach((e) => {
+                if (e.mas_leave_type.name == "ลาพักร้อน") {
+                  cout_hours = cout_hours + e.quantity_hours
+                  countleave1 = countleave1 + e.quantity_day
+                }
+                if (e.mas_leave_type.name == "ลากิจ") {
+                  cout_hours2 = cout_hours2 + e.quantity_hours
+                  countleave2 = countleave2 + e.quantity_day
+                }
+                if (e.mas_leave_type.name == "ลาป่วย") {
+                  cout_hours3 = cout_hours3 + e.quantity_hours
+                  countleave3 = countleave3 + e.quantity_day
+
+                }
+                if (e.mas_leave_type.name == "ลาอื่นๆ") {
+                  cout_hours4 = cout_hours4 + e.quantity_hours
+                  countleave4 = countleave4 + e.quantity_day
+                }
+              })
+            }
+          })
+          if (cout_hours >= 8) {
+            let a = Math.trunc(cout_hours / 8)
+            countleave1 = a + countleave1
+            cout_hours = cout_hours - (a * 8)
+          }
+          if (cout_hours2 >= 8) {
+            let a = Math.trunc(cout_hours2 / 8)
+            countleave2 = a + countleave2
+            cout_hours2 = cout_hours2 - (a * 8)
+          }
+          if (cout_hours3 >= 8) {
+            let a = Math.trunc(cout_hours3 / 8)
+            countleave3 = a + countleave3
+            cout_hours3 = cout_hours3 - (a * 8)
+          }
+          if (cout_hours4 >= 8) {
+            let b = Math.trunc(cout_hours4 / 8)
+            countleave4 = b + countleave4
+            cout_hours4 = cout_hours4 - (b * 8)
+          }
+        }
+
+        let dataCount = {
+          name_1: 'ลาพักร้อน ' + countleave1 + ' วัน ' + cout_hours + ' ชั่วโมง',
+          count1: countleave1,
+          hours1: cout_hours,
+          name_2: 'ลากิจ ' + countleave2 + ' วัน ' + cout_hours2 + ' ชั่วโมง',
+          count2: countleave2,
+          hours2: cout_hours2,
+          name_3: 'ลาป่วย ' + countleave3 + ' วัน ' + cout_hours3 + ' ชั่วโมง',
+          count3: countleave3,
+          hours: cout_hours3,
+          name_4: 'ลาอื่นๆ ' + countleave4 + ' วัน ' + cout_hours4 + ' ชั่วโมง',
+          count4: countleave4,
+          hours4: cout_hours4
+        }
+        return {
+          data_all: getdataAllleave,
+          data_count: dataCount
+        }
       }
     }
   },
