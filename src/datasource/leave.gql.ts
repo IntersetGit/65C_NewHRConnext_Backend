@@ -123,8 +123,8 @@ export const leaveResolvers: Resolvers = {
         const getdataleave = await ctx.prisma.user.findMany({
           include: {
             profile: true,
-            Position_user: { include: { mas_positionlevel1: true, mas_positionlevel2: true, mas_positionlevel3: true } },
-            data_leave: { include: { mas_leave_type: true } }
+            Position_user: { include: { mas_positionlevel1: true, mas_positionlevel2: true, mas_positionlevel3: true, header: { include: { profile: true } } } },
+            data_leave: { include: { mas_leave_type: true }}
           },
           where: {
             id: ctx.currentUser?.id
@@ -201,16 +201,13 @@ export const leaveResolvers: Resolvers = {
         const getdataleave = await ctx.prisma.user.findMany({
           include: {
             profile: true,
-            Position_user: { include: { mas_positionlevel1: true, mas_positionlevel2: true, mas_positionlevel3: true } },
-            data_leave: { include: { mas_leave_type: true } }
+            Position_user: { include: { mas_positionlevel1: true, mas_positionlevel2: true, mas_positionlevel3: true, header: { include: { profile: true } } } },
+            data_leave: { include: { mas_leave_type: true }, where: { id : search} }
           },
           where: {
-            id: ctx.currentUser?.id,
-            AND: {
               data_leave: {
                 some: {
-                  id: args.dataleaveId
-                }
+                  id: search
               }
             }
           },
@@ -257,7 +254,7 @@ export const leaveResolvers: Resolvers = {
       if (args.dataleaveId) {
         const alldata_hearderbyId = await ctx.prisma.data_leave.findMany({
           include: {
-            user: { include: { profile: true, Position_user: { include: { mas_positionlevel1: true, mas_positionlevel2: true, mas_positionlevel3: true,header: { include: { profile: true } } } }, } },
+            user: { include: { profile: true, Position_user: { include: { mas_positionlevel1: true, mas_positionlevel2: true, mas_positionlevel3: true, header: { include: { profile: true } } } }, } },
             mas_leave_type: true
           },
           where: {

@@ -248,13 +248,6 @@ export const positionResolvers: Resolvers = {
               id: e.id_Position1 as string
             }
           })
-          // const updatedposition = await ctx.prisma.log_positionn.create({
-          //   data:{
-          //     id: v4(),
-              
-
-          //   }
-          // })
         } 
         if(e.id_Position1 == "" || e.id_Position1 == undefined  ){
           const createdPo_1 = await ctx.prisma.mas_positionlevel1.create({
@@ -403,6 +396,14 @@ export const positionResolvers: Resolvers = {
             id: args.data.id
           }
         })
+        // const updated_position = await ctx.prisma.log_positionn.create({
+        //   // data:{
+        //   //   id: v4(),
+        //   //   positionId: args.data.id,
+        //   //   updtedBy: ctx.currentUser?.id,
+        //   //   updteddate: new Date(),
+        //   // }
+        // })
         return {
           message: 'success',
           status: true,
