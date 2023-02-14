@@ -403,6 +403,13 @@ export const leaveResolvers: Resolvers = {
             Position_user: { include: { mas_positionlevel1: true, mas_positionlevel2: true, mas_positionlevel3: true, header: { include: { profile: true } } } },
             data_leave: { include: { mas_leave_type: true } }
           },
+          where:{
+            data_leave:{
+              some:{
+                Status: 1 || 2
+              }
+            }
+          }
         })
         if (getdataAllleave) {
           getdataAllleave.forEach((a) => {
