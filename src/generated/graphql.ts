@@ -783,6 +783,7 @@ export type QueryProvident_LogArgs = {
 
 export type QuerySalaryArgs = {
   userId?: InputMaybe<Scalars['String']>;
+  years?: InputMaybe<Scalars['String']>;
 };
 
 
