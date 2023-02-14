@@ -1,3 +1,4 @@
+import { User } from './../generated/graphql';
 import { composeResolvers } from '@graphql-tools/resolvers-composition';
 import { authenticate } from '../middleware/authenticatetoken';
 import { Resolvers } from '../generated/graphql';
@@ -27,6 +28,17 @@ input CreatedmasPosition2{
   masPosition3: [CreatedmasPosition3] 
 }
 
+type log_positionn { 
+  id: ID
+  positionId: String
+  cretedBy: String
+  creteddate: Date
+  updtedBy: String
+  updteddate: Date
+  Position_user: [Position_user] 
+  cretedByfk: User        
+  updtedByfk: User          
+}
 
 type mas_positionlevel3{
   id: ID!  
@@ -72,6 +84,7 @@ type Position_user {
   position1_id: String
   position2_id: String  
   position3_id: String  
+  header: User
   role: String 
   headderId: String 
   date: Date
@@ -235,6 +248,13 @@ export const positionResolvers: Resolvers = {
               id: e.id_Position1 as string
             }
           })
+          // const updatedposition = await ctx.prisma.log_positionn.create({
+          //   data:{
+          //     id: v4(),
+              
+
+          //   }
+          // })
         } 
         if(e.id_Position1 == "" || e.id_Position1 == undefined  ){
           const createdPo_1 = await ctx.prisma.mas_positionlevel1.create({
@@ -263,6 +283,7 @@ export const positionResolvers: Resolvers = {
                   id: a?.id_Position2 as string
                 }
               })
+
             } if(a?.id_Position2 == "" || a?.id_Position2 == undefined){
               var CretePo_2 = await ctx.prisma.mas_positionlevel2.create({
                 data: {
@@ -308,11 +329,6 @@ export const positionResolvers: Resolvers = {
           })
         }
       }) 
-      // const updatedlog_position = await ctx.prisma.log_positionn.create({
-      //   data:{
-      //     id: v4(),
-      //     positionId: 
-      //   }
       return {
         message: 'success',
         status: true,
