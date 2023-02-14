@@ -12,7 +12,10 @@ import provinceEnum from '../enum/province.enum';
 import districtEnum from '../enum/district.enum';
 import amphoeEnum from '../enum/amphoe.enum';
 import holidayEnum from '../enum/holiday.enum';
+import leavtypeEnum from '../enum/leavtype.enum';
 import bankEnum from '../enum/bank.enum';
+import mainbusinessEnum from '../enum/mainbusiness.enum';
+import subbusinessEnum from '../enum/subbusiness.enum';
 import { createPassword } from '../src/utils/passwords';
 import { update } from 'lodash';
 
@@ -74,6 +77,34 @@ const main = async () => {
     });
   });
 
+  const mainbusiness = await mainbusinessEnum.forEach(async (e) => {
+    await prisma.mainBusinessType.upsert({
+      where: {
+        id: e.id,
+      },
+      create: {
+        id: e.id,
+        name: e.name,
+      },
+      update: {},
+    });
+  });
+
+
+  const subbusiness = await subbusinessEnum.forEach(async (e) => {
+    await prisma.subBusinessType.upsert({
+      where: {
+        id: e.id,
+      },
+      create: {
+        id: e.id,
+        name: e.name,
+        MainBId: e.MainBId
+      },
+      update: {},
+    });
+  });
+
   const holiday = await holidayEnum.forEach(async (h) => {
     await prisma.holiday_year.upsert({
       where: {
@@ -99,6 +130,21 @@ const main = async () => {
         id: b.id,
         name: b.name,
         bank_code: b.bank_code
+      },
+      update: {},
+    });
+  });
+
+  
+  const leavetype = await leavtypeEnum.forEach(async (b) => {
+    await prisma.mas_leave_type.upsert({
+      where: {
+        id: b.id,
+      },
+      create:{
+        id: b.id,
+        name: b.name,
+        orderby: b.orderby 
       },
       update: {},
     });
@@ -158,6 +204,7 @@ const main = async () => {
       id: '4d4bebf3-7f56-4af8-aac3-b3231d54902a',
       isMainbranch: true,
       name: 'สำนักงานใหญ่',
+      
       address:
         '3300/119 ตึกช้าง อาคารบี ชั้น 23 ถนนพหลโยธิน แขวงจอมพล เขตจตุจักร กรุงเทพฯ 10900',
       city: '924f8ac4-fa10-41e0-8fb2-8005bc457710',

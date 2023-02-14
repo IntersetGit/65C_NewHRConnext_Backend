@@ -40,6 +40,7 @@ model Company {
   holiday_date            holiday_date[]
   mas_position            mas_position[]
   holidayCompany          holidayCompany[]
+  
 }
 
 model CompanyBranch {
@@ -73,6 +74,8 @@ model CompanyBranch {
   users             User[]
   Role_Company      Role_Company[]
   expense_company   expense_company[]
+  BusinesstypeId   String?            @db.Uuid
+  Businesstype         MainBusinessType?  @relation(fields: [BusinesstypeId], references: [id])
 }
 
 model Profile {
@@ -488,4 +491,19 @@ model log_positionn {
   Position_user   Position_user  @relation(fields: [positionId], references: [id])
   cretedByfk      User           @relation(fields: [cretedBy], references: [id])
   updtedByfk      User           @relation("updtedByfk",fields: [updtedBy], references: [id])
+}
+
+model MainBusinessType {
+  id                String      @unique @db.Uuid
+  name              String
+  SubBusinessType   SubBusinessType[]
+  CompanyBranch     CompanyBranch[]
+          
+}
+
+model SubBusinessType {
+  id                String            @unique @db.Uuid
+  name              String
+  MainBId           String            @db.Uuid           
+  MainBusinessType  MainBusinessType  @relation(fields: [MainBId], references: [id])
 }

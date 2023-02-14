@@ -1,4 +1,4 @@
-import { salary } from './../generated/client/index.d';
+
 
 import { Resolvers } from '../generated/graphql';
 import { createPassword } from '../utils/passwords';
@@ -122,6 +122,7 @@ export const userTypedef = gql`
     company_country: String!
     company_phone: String!
     company_icon: String
+    BusinesstypeId: String
   }
 
   input CreateAccountUserInput {
@@ -174,6 +175,7 @@ export const userTypedef = gql`
     social_likedin: String
     social_line: String
     social_telegram: String
+    BusinesstypeId: String
   }
 
   type CreateCompanyResponseType {
@@ -358,6 +360,7 @@ const resolvers: Resolvers = {
           country: args.data.company_country,
           companyId: createCompany.id,
           tel: args.data.company_phone,
+          BusinesstypeId: args.data.BusinesstypeId as string
         },
       });
 

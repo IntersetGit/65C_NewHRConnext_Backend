@@ -60,6 +60,7 @@ export type CompanyBranch = {
   createdAt: Date
   updatedAt: Date
   companyId: string | null
+  BusinesstypeId: string | null
 }
 
 /**
@@ -495,6 +496,25 @@ export type log_positionn = {
   updteddate: Date
 }
 
+/**
+ * Model MainBusinessType
+ * 
+ */
+export type MainBusinessType = {
+  id: string
+  name: string
+}
+
+/**
+ * Model SubBusinessType
+ * 
+ */
+export type SubBusinessType = {
+  id: string
+  name: string
+  MainBId: string
+}
+
 
 /**
  * ##  Prisma Client ʲˢ
@@ -922,6 +942,26 @@ export class PrismaClient<
     * ```
     */
   get log_positionn(): Prisma.log_positionnDelegate<GlobalReject>;
+
+  /**
+   * `prisma.mainBusinessType`: Exposes CRUD operations for the **MainBusinessType** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more MainBusinessTypes
+    * const mainBusinessTypes = await prisma.mainBusinessType.findMany()
+    * ```
+    */
+  get mainBusinessType(): Prisma.MainBusinessTypeDelegate<GlobalReject>;
+
+  /**
+   * `prisma.subBusinessType`: Exposes CRUD operations for the **SubBusinessType** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more SubBusinessTypes
+    * const subBusinessTypes = await prisma.subBusinessType.findMany()
+    * ```
+    */
+  get subBusinessType(): Prisma.SubBusinessTypeDelegate<GlobalReject>;
 }
 
 export namespace Prisma {
@@ -1428,7 +1468,9 @@ export namespace Prisma {
     provident_log: 'provident_log',
     mas_leave_type: 'mas_leave_type',
     data_leave: 'data_leave',
-    log_positionn: 'log_positionn'
+    log_positionn: 'log_positionn',
+    MainBusinessType: 'MainBusinessType',
+    SubBusinessType: 'SubBusinessType'
   };
 
   export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -2622,6 +2664,51 @@ export namespace Prisma {
      * Select specific fields to fetch from the Mas_leave_typeCountOutputType
      */
     select?: Mas_leave_typeCountOutputTypeSelect | null
+  }
+
+
+
+  /**
+   * Count Type MainBusinessTypeCountOutputType
+   */
+
+
+  export type MainBusinessTypeCountOutputType = {
+    SubBusinessType: number
+    CompanyBranch: number
+  }
+
+  export type MainBusinessTypeCountOutputTypeSelect = {
+    SubBusinessType?: boolean
+    CompanyBranch?: boolean
+  }
+
+  export type MainBusinessTypeCountOutputTypeGetPayload<S extends boolean | null | undefined | MainBusinessTypeCountOutputTypeArgs> =
+    S extends { select: any, include: any } ? 'Please either choose `select` or `include`' :
+    S extends true ? MainBusinessTypeCountOutputType :
+    S extends undefined ? never :
+    S extends { include: any } & (MainBusinessTypeCountOutputTypeArgs)
+    ? MainBusinessTypeCountOutputType 
+    : S extends { select: any } & (MainBusinessTypeCountOutputTypeArgs)
+      ? {
+    [P in TruthyKeys<S['select']>]:
+    P extends keyof MainBusinessTypeCountOutputType ? MainBusinessTypeCountOutputType[P] : never
+  } 
+      : MainBusinessTypeCountOutputType
+
+
+
+
+  // Custom InputTypes
+
+  /**
+   * MainBusinessTypeCountOutputType without action
+   */
+  export type MainBusinessTypeCountOutputTypeArgs = {
+    /**
+     * Select specific fields to fetch from the MainBusinessTypeCountOutputType
+     */
+    select?: MainBusinessTypeCountOutputTypeSelect | null
   }
 
 
@@ -3868,6 +3955,7 @@ export namespace Prisma {
     createdAt: Date | null
     updatedAt: Date | null
     companyId: string | null
+    BusinesstypeId: string | null
   }
 
   export type CompanyBranchMaxAggregateOutputType = {
@@ -3897,6 +3985,7 @@ export namespace Prisma {
     createdAt: Date | null
     updatedAt: Date | null
     companyId: string | null
+    BusinesstypeId: string | null
   }
 
   export type CompanyBranchCountAggregateOutputType = {
@@ -3926,6 +4015,7 @@ export namespace Prisma {
     createdAt: number
     updatedAt: number
     companyId: number
+    BusinesstypeId: number
     _all: number
   }
 
@@ -3957,6 +4047,7 @@ export namespace Prisma {
     createdAt?: true
     updatedAt?: true
     companyId?: true
+    BusinesstypeId?: true
   }
 
   export type CompanyBranchMaxAggregateInputType = {
@@ -3986,6 +4077,7 @@ export namespace Prisma {
     createdAt?: true
     updatedAt?: true
     companyId?: true
+    BusinesstypeId?: true
   }
 
   export type CompanyBranchCountAggregateInputType = {
@@ -4015,6 +4107,7 @@ export namespace Prisma {
     createdAt?: true
     updatedAt?: true
     companyId?: true
+    BusinesstypeId?: true
     _all?: true
   }
 
@@ -4118,6 +4211,7 @@ export namespace Prisma {
     createdAt: Date
     updatedAt: Date
     companyId: string | null
+    BusinesstypeId: string | null
     _count: CompanyBranchCountAggregateOutputType | null
     _min: CompanyBranchMinAggregateOutputType | null
     _max: CompanyBranchMaxAggregateOutputType | null
@@ -4168,6 +4262,8 @@ export namespace Prisma {
     users?: boolean | CompanyBranch$usersArgs
     Role_Company?: boolean | CompanyBranch$Role_CompanyArgs
     expense_company?: boolean | CompanyBranch$expense_companyArgs
+    BusinesstypeId?: boolean
+    Businesstype?: boolean | MainBusinessTypeArgs
     _count?: boolean | CompanyBranchCountOutputTypeArgs
   }
 
@@ -4177,6 +4273,7 @@ export namespace Prisma {
     users?: boolean | CompanyBranch$usersArgs
     Role_Company?: boolean | CompanyBranch$Role_CompanyArgs
     expense_company?: boolean | CompanyBranch$expense_companyArgs
+    Businesstype?: boolean | MainBusinessTypeArgs
     _count?: boolean | CompanyBranchCountOutputTypeArgs
   }
 
@@ -4191,6 +4288,7 @@ export namespace Prisma {
         P extends 'users' ? Array < UserGetPayload<S['include'][P]>>  :
         P extends 'Role_Company' ? Array < Role_CompanyGetPayload<S['include'][P]>>  :
         P extends 'expense_company' ? Array < expense_companyGetPayload<S['include'][P]>>  :
+        P extends 'Businesstype' ? MainBusinessTypeGetPayload<S['include'][P]> | null :
         P extends '_count' ? CompanyBranchCountOutputTypeGetPayload<S['include'][P]> :  never
   } 
     : S extends { select: any } & (CompanyBranchArgs | CompanyBranchFindManyArgs)
@@ -4200,6 +4298,7 @@ export namespace Prisma {
         P extends 'users' ? Array < UserGetPayload<S['select'][P]>>  :
         P extends 'Role_Company' ? Array < Role_CompanyGetPayload<S['select'][P]>>  :
         P extends 'expense_company' ? Array < expense_companyGetPayload<S['select'][P]>>  :
+        P extends 'Businesstype' ? MainBusinessTypeGetPayload<S['select'][P]> | null :
         P extends '_count' ? CompanyBranchCountOutputTypeGetPayload<S['select'][P]> :  P extends keyof CompanyBranch ? CompanyBranch[P] : never
   } 
       : CompanyBranch
@@ -4581,6 +4680,8 @@ export namespace Prisma {
     Role_Company<T extends CompanyBranch$Role_CompanyArgs= {}>(args?: Subset<T, CompanyBranch$Role_CompanyArgs>): PrismaPromise<Array<Role_CompanyGetPayload<T>>| Null>;
 
     expense_company<T extends CompanyBranch$expense_companyArgs= {}>(args?: Subset<T, CompanyBranch$expense_companyArgs>): PrismaPromise<Array<expense_companyGetPayload<T>>| Null>;
+
+    Businesstype<T extends MainBusinessTypeArgs= {}>(args?: Subset<T, MainBusinessTypeArgs>): Prisma__MainBusinessTypeClient<MainBusinessTypeGetPayload<T> | Null>;
 
     private get _document();
     /**
@@ -34570,6 +34671,1884 @@ export namespace Prisma {
 
 
   /**
+   * Model MainBusinessType
+   */
+
+
+  export type AggregateMainBusinessType = {
+    _count: MainBusinessTypeCountAggregateOutputType | null
+    _min: MainBusinessTypeMinAggregateOutputType | null
+    _max: MainBusinessTypeMaxAggregateOutputType | null
+  }
+
+  export type MainBusinessTypeMinAggregateOutputType = {
+    id: string | null
+    name: string | null
+  }
+
+  export type MainBusinessTypeMaxAggregateOutputType = {
+    id: string | null
+    name: string | null
+  }
+
+  export type MainBusinessTypeCountAggregateOutputType = {
+    id: number
+    name: number
+    _all: number
+  }
+
+
+  export type MainBusinessTypeMinAggregateInputType = {
+    id?: true
+    name?: true
+  }
+
+  export type MainBusinessTypeMaxAggregateInputType = {
+    id?: true
+    name?: true
+  }
+
+  export type MainBusinessTypeCountAggregateInputType = {
+    id?: true
+    name?: true
+    _all?: true
+  }
+
+  export type MainBusinessTypeAggregateArgs = {
+    /**
+     * Filter which MainBusinessType to aggregate.
+     */
+    where?: MainBusinessTypeWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of MainBusinessTypes to fetch.
+     */
+    orderBy?: Enumerable<MainBusinessTypeOrderByWithRelationInput>
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: MainBusinessTypeWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` MainBusinessTypes from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` MainBusinessTypes.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned MainBusinessTypes
+    **/
+    _count?: true | MainBusinessTypeCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: MainBusinessTypeMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: MainBusinessTypeMaxAggregateInputType
+  }
+
+  export type GetMainBusinessTypeAggregateType<T extends MainBusinessTypeAggregateArgs> = {
+        [P in keyof T & keyof AggregateMainBusinessType]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateMainBusinessType[P]>
+      : GetScalarType<T[P], AggregateMainBusinessType[P]>
+  }
+
+
+
+
+  export type MainBusinessTypeGroupByArgs = {
+    where?: MainBusinessTypeWhereInput
+    orderBy?: Enumerable<MainBusinessTypeOrderByWithAggregationInput>
+    by: MainBusinessTypeScalarFieldEnum[]
+    having?: MainBusinessTypeScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: MainBusinessTypeCountAggregateInputType | true
+    _min?: MainBusinessTypeMinAggregateInputType
+    _max?: MainBusinessTypeMaxAggregateInputType
+  }
+
+
+  export type MainBusinessTypeGroupByOutputType = {
+    id: string
+    name: string
+    _count: MainBusinessTypeCountAggregateOutputType | null
+    _min: MainBusinessTypeMinAggregateOutputType | null
+    _max: MainBusinessTypeMaxAggregateOutputType | null
+  }
+
+  type GetMainBusinessTypeGroupByPayload<T extends MainBusinessTypeGroupByArgs> = PrismaPromise<
+    Array<
+      PickArray<MainBusinessTypeGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof MainBusinessTypeGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], MainBusinessTypeGroupByOutputType[P]>
+            : GetScalarType<T[P], MainBusinessTypeGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type MainBusinessTypeSelect = {
+    id?: boolean
+    name?: boolean
+    SubBusinessType?: boolean | MainBusinessType$SubBusinessTypeArgs
+    CompanyBranch?: boolean | MainBusinessType$CompanyBranchArgs
+    _count?: boolean | MainBusinessTypeCountOutputTypeArgs
+  }
+
+
+  export type MainBusinessTypeInclude = {
+    SubBusinessType?: boolean | MainBusinessType$SubBusinessTypeArgs
+    CompanyBranch?: boolean | MainBusinessType$CompanyBranchArgs
+    _count?: boolean | MainBusinessTypeCountOutputTypeArgs
+  }
+
+  export type MainBusinessTypeGetPayload<S extends boolean | null | undefined | MainBusinessTypeArgs> =
+    S extends { select: any, include: any } ? 'Please either choose `select` or `include`' :
+    S extends true ? MainBusinessType :
+    S extends undefined ? never :
+    S extends { include: any } & (MainBusinessTypeArgs | MainBusinessTypeFindManyArgs)
+    ? MainBusinessType  & {
+    [P in TruthyKeys<S['include']>]:
+        P extends 'SubBusinessType' ? Array < SubBusinessTypeGetPayload<S['include'][P]>>  :
+        P extends 'CompanyBranch' ? Array < CompanyBranchGetPayload<S['include'][P]>>  :
+        P extends '_count' ? MainBusinessTypeCountOutputTypeGetPayload<S['include'][P]> :  never
+  } 
+    : S extends { select: any } & (MainBusinessTypeArgs | MainBusinessTypeFindManyArgs)
+      ? {
+    [P in TruthyKeys<S['select']>]:
+        P extends 'SubBusinessType' ? Array < SubBusinessTypeGetPayload<S['select'][P]>>  :
+        P extends 'CompanyBranch' ? Array < CompanyBranchGetPayload<S['select'][P]>>  :
+        P extends '_count' ? MainBusinessTypeCountOutputTypeGetPayload<S['select'][P]> :  P extends keyof MainBusinessType ? MainBusinessType[P] : never
+  } 
+      : MainBusinessType
+
+
+  type MainBusinessTypeCountArgs = 
+    Omit<MainBusinessTypeFindManyArgs, 'select' | 'include'> & {
+      select?: MainBusinessTypeCountAggregateInputType | true
+    }
+
+  export interface MainBusinessTypeDelegate<GlobalRejectSettings extends Prisma.RejectOnNotFound | Prisma.RejectPerOperation | false | undefined> {
+
+    /**
+     * Find zero or one MainBusinessType that matches the filter.
+     * @param {MainBusinessTypeFindUniqueArgs} args - Arguments to find a MainBusinessType
+     * @example
+     * // Get one MainBusinessType
+     * const mainBusinessType = await prisma.mainBusinessType.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+    **/
+    findUnique<T extends MainBusinessTypeFindUniqueArgs,  LocalRejectSettings = T["rejectOnNotFound"] extends RejectOnNotFound ? T['rejectOnNotFound'] : undefined>(
+      args: SelectSubset<T, MainBusinessTypeFindUniqueArgs>
+    ): HasReject<GlobalRejectSettings, LocalRejectSettings, 'findUnique', 'MainBusinessType'> extends True ? Prisma__MainBusinessTypeClient<MainBusinessTypeGetPayload<T>> : Prisma__MainBusinessTypeClient<MainBusinessTypeGetPayload<T> | null, null>
+
+    /**
+     * Find one MainBusinessType that matches the filter or throw an error  with `error.code='P2025'` 
+     *     if no matches were found.
+     * @param {MainBusinessTypeFindUniqueOrThrowArgs} args - Arguments to find a MainBusinessType
+     * @example
+     * // Get one MainBusinessType
+     * const mainBusinessType = await prisma.mainBusinessType.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+    **/
+    findUniqueOrThrow<T extends MainBusinessTypeFindUniqueOrThrowArgs>(
+      args?: SelectSubset<T, MainBusinessTypeFindUniqueOrThrowArgs>
+    ): Prisma__MainBusinessTypeClient<MainBusinessTypeGetPayload<T>>
+
+    /**
+     * Find the first MainBusinessType that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {MainBusinessTypeFindFirstArgs} args - Arguments to find a MainBusinessType
+     * @example
+     * // Get one MainBusinessType
+     * const mainBusinessType = await prisma.mainBusinessType.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+    **/
+    findFirst<T extends MainBusinessTypeFindFirstArgs,  LocalRejectSettings = T["rejectOnNotFound"] extends RejectOnNotFound ? T['rejectOnNotFound'] : undefined>(
+      args?: SelectSubset<T, MainBusinessTypeFindFirstArgs>
+    ): HasReject<GlobalRejectSettings, LocalRejectSettings, 'findFirst', 'MainBusinessType'> extends True ? Prisma__MainBusinessTypeClient<MainBusinessTypeGetPayload<T>> : Prisma__MainBusinessTypeClient<MainBusinessTypeGetPayload<T> | null, null>
+
+    /**
+     * Find the first MainBusinessType that matches the filter or
+     * throw `NotFoundError` if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {MainBusinessTypeFindFirstOrThrowArgs} args - Arguments to find a MainBusinessType
+     * @example
+     * // Get one MainBusinessType
+     * const mainBusinessType = await prisma.mainBusinessType.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+    **/
+    findFirstOrThrow<T extends MainBusinessTypeFindFirstOrThrowArgs>(
+      args?: SelectSubset<T, MainBusinessTypeFindFirstOrThrowArgs>
+    ): Prisma__MainBusinessTypeClient<MainBusinessTypeGetPayload<T>>
+
+    /**
+     * Find zero or more MainBusinessTypes that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {MainBusinessTypeFindManyArgs=} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all MainBusinessTypes
+     * const mainBusinessTypes = await prisma.mainBusinessType.findMany()
+     * 
+     * // Get first 10 MainBusinessTypes
+     * const mainBusinessTypes = await prisma.mainBusinessType.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const mainBusinessTypeWithIdOnly = await prisma.mainBusinessType.findMany({ select: { id: true } })
+     * 
+    **/
+    findMany<T extends MainBusinessTypeFindManyArgs>(
+      args?: SelectSubset<T, MainBusinessTypeFindManyArgs>
+    ): PrismaPromise<Array<MainBusinessTypeGetPayload<T>>>
+
+    /**
+     * Create a MainBusinessType.
+     * @param {MainBusinessTypeCreateArgs} args - Arguments to create a MainBusinessType.
+     * @example
+     * // Create one MainBusinessType
+     * const MainBusinessType = await prisma.mainBusinessType.create({
+     *   data: {
+     *     // ... data to create a MainBusinessType
+     *   }
+     * })
+     * 
+    **/
+    create<T extends MainBusinessTypeCreateArgs>(
+      args: SelectSubset<T, MainBusinessTypeCreateArgs>
+    ): Prisma__MainBusinessTypeClient<MainBusinessTypeGetPayload<T>>
+
+    /**
+     * Create many MainBusinessTypes.
+     *     @param {MainBusinessTypeCreateManyArgs} args - Arguments to create many MainBusinessTypes.
+     *     @example
+     *     // Create many MainBusinessTypes
+     *     const mainBusinessType = await prisma.mainBusinessType.createMany({
+     *       data: {
+     *         // ... provide data here
+     *       }
+     *     })
+     *     
+    **/
+    createMany<T extends MainBusinessTypeCreateManyArgs>(
+      args?: SelectSubset<T, MainBusinessTypeCreateManyArgs>
+    ): PrismaPromise<BatchPayload>
+
+    /**
+     * Delete a MainBusinessType.
+     * @param {MainBusinessTypeDeleteArgs} args - Arguments to delete one MainBusinessType.
+     * @example
+     * // Delete one MainBusinessType
+     * const MainBusinessType = await prisma.mainBusinessType.delete({
+     *   where: {
+     *     // ... filter to delete one MainBusinessType
+     *   }
+     * })
+     * 
+    **/
+    delete<T extends MainBusinessTypeDeleteArgs>(
+      args: SelectSubset<T, MainBusinessTypeDeleteArgs>
+    ): Prisma__MainBusinessTypeClient<MainBusinessTypeGetPayload<T>>
+
+    /**
+     * Update one MainBusinessType.
+     * @param {MainBusinessTypeUpdateArgs} args - Arguments to update one MainBusinessType.
+     * @example
+     * // Update one MainBusinessType
+     * const mainBusinessType = await prisma.mainBusinessType.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+    **/
+    update<T extends MainBusinessTypeUpdateArgs>(
+      args: SelectSubset<T, MainBusinessTypeUpdateArgs>
+    ): Prisma__MainBusinessTypeClient<MainBusinessTypeGetPayload<T>>
+
+    /**
+     * Delete zero or more MainBusinessTypes.
+     * @param {MainBusinessTypeDeleteManyArgs} args - Arguments to filter MainBusinessTypes to delete.
+     * @example
+     * // Delete a few MainBusinessTypes
+     * const { count } = await prisma.mainBusinessType.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+    **/
+    deleteMany<T extends MainBusinessTypeDeleteManyArgs>(
+      args?: SelectSubset<T, MainBusinessTypeDeleteManyArgs>
+    ): PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more MainBusinessTypes.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {MainBusinessTypeUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many MainBusinessTypes
+     * const mainBusinessType = await prisma.mainBusinessType.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+    **/
+    updateMany<T extends MainBusinessTypeUpdateManyArgs>(
+      args: SelectSubset<T, MainBusinessTypeUpdateManyArgs>
+    ): PrismaPromise<BatchPayload>
+
+    /**
+     * Create or update one MainBusinessType.
+     * @param {MainBusinessTypeUpsertArgs} args - Arguments to update or create a MainBusinessType.
+     * @example
+     * // Update or create a MainBusinessType
+     * const mainBusinessType = await prisma.mainBusinessType.upsert({
+     *   create: {
+     *     // ... data to create a MainBusinessType
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the MainBusinessType we want to update
+     *   }
+     * })
+    **/
+    upsert<T extends MainBusinessTypeUpsertArgs>(
+      args: SelectSubset<T, MainBusinessTypeUpsertArgs>
+    ): Prisma__MainBusinessTypeClient<MainBusinessTypeGetPayload<T>>
+
+    /**
+     * Count the number of MainBusinessTypes.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {MainBusinessTypeCountArgs} args - Arguments to filter MainBusinessTypes to count.
+     * @example
+     * // Count the number of MainBusinessTypes
+     * const count = await prisma.mainBusinessType.count({
+     *   where: {
+     *     // ... the filter for the MainBusinessTypes we want to count
+     *   }
+     * })
+    **/
+    count<T extends MainBusinessTypeCountArgs>(
+      args?: Subset<T, MainBusinessTypeCountArgs>,
+    ): PrismaPromise<
+      T extends _Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], MainBusinessTypeCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a MainBusinessType.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {MainBusinessTypeAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends MainBusinessTypeAggregateArgs>(args: Subset<T, MainBusinessTypeAggregateArgs>): PrismaPromise<GetMainBusinessTypeAggregateType<T>>
+
+    /**
+     * Group by MainBusinessType.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {MainBusinessTypeGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends MainBusinessTypeGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: MainBusinessTypeGroupByArgs['orderBy'] }
+        : { orderBy?: MainBusinessTypeGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends TupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, MainBusinessTypeGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetMainBusinessTypeGroupByPayload<T> : PrismaPromise<InputErrors>
+
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for MainBusinessType.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export class Prisma__MainBusinessTypeClient<T, Null = never> implements PrismaPromise<T> {
+    [prisma]: true;
+    private readonly _dmmf;
+    private readonly _fetcher;
+    private readonly _queryType;
+    private readonly _rootField;
+    private readonly _clientMethod;
+    private readonly _args;
+    private readonly _dataPath;
+    private readonly _errorFormat;
+    private readonly _measurePerformance?;
+    private _isList;
+    private _callsite;
+    private _requestPromise?;
+    constructor(_dmmf: runtime.DMMFClass, _fetcher: PrismaClientFetcher, _queryType: 'query' | 'mutation', _rootField: string, _clientMethod: string, _args: any, _dataPath: string[], _errorFormat: ErrorFormat, _measurePerformance?: boolean | undefined, _isList?: boolean);
+    readonly [Symbol.toStringTag]: 'PrismaClientPromise';
+
+    SubBusinessType<T extends MainBusinessType$SubBusinessTypeArgs= {}>(args?: Subset<T, MainBusinessType$SubBusinessTypeArgs>): PrismaPromise<Array<SubBusinessTypeGetPayload<T>>| Null>;
+
+    CompanyBranch<T extends MainBusinessType$CompanyBranchArgs= {}>(args?: Subset<T, MainBusinessType$CompanyBranchArgs>): PrismaPromise<Array<CompanyBranchGetPayload<T>>| Null>;
+
+    private get _document();
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): Promise<TResult1 | TResult2>;
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): Promise<T | TResult>;
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): Promise<T>;
+  }
+
+
+
+  // Custom InputTypes
+
+  /**
+   * MainBusinessType base type for findUnique actions
+   */
+  export type MainBusinessTypeFindUniqueArgsBase = {
+    /**
+     * Select specific fields to fetch from the MainBusinessType
+     */
+    select?: MainBusinessTypeSelect | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: MainBusinessTypeInclude | null
+    /**
+     * Filter, which MainBusinessType to fetch.
+     */
+    where: MainBusinessTypeWhereUniqueInput
+  }
+
+  /**
+   * MainBusinessType findUnique
+   */
+  export interface MainBusinessTypeFindUniqueArgs extends MainBusinessTypeFindUniqueArgsBase {
+   /**
+    * Throw an Error if query returns no results
+    * @deprecated since 4.0.0: use `findUniqueOrThrow` method instead
+    */
+    rejectOnNotFound?: RejectOnNotFound
+  }
+      
+
+  /**
+   * MainBusinessType findUniqueOrThrow
+   */
+  export type MainBusinessTypeFindUniqueOrThrowArgs = {
+    /**
+     * Select specific fields to fetch from the MainBusinessType
+     */
+    select?: MainBusinessTypeSelect | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: MainBusinessTypeInclude | null
+    /**
+     * Filter, which MainBusinessType to fetch.
+     */
+    where: MainBusinessTypeWhereUniqueInput
+  }
+
+
+  /**
+   * MainBusinessType base type for findFirst actions
+   */
+  export type MainBusinessTypeFindFirstArgsBase = {
+    /**
+     * Select specific fields to fetch from the MainBusinessType
+     */
+    select?: MainBusinessTypeSelect | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: MainBusinessTypeInclude | null
+    /**
+     * Filter, which MainBusinessType to fetch.
+     */
+    where?: MainBusinessTypeWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of MainBusinessTypes to fetch.
+     */
+    orderBy?: Enumerable<MainBusinessTypeOrderByWithRelationInput>
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for MainBusinessTypes.
+     */
+    cursor?: MainBusinessTypeWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` MainBusinessTypes from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` MainBusinessTypes.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of MainBusinessTypes.
+     */
+    distinct?: Enumerable<MainBusinessTypeScalarFieldEnum>
+  }
+
+  /**
+   * MainBusinessType findFirst
+   */
+  export interface MainBusinessTypeFindFirstArgs extends MainBusinessTypeFindFirstArgsBase {
+   /**
+    * Throw an Error if query returns no results
+    * @deprecated since 4.0.0: use `findFirstOrThrow` method instead
+    */
+    rejectOnNotFound?: RejectOnNotFound
+  }
+      
+
+  /**
+   * MainBusinessType findFirstOrThrow
+   */
+  export type MainBusinessTypeFindFirstOrThrowArgs = {
+    /**
+     * Select specific fields to fetch from the MainBusinessType
+     */
+    select?: MainBusinessTypeSelect | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: MainBusinessTypeInclude | null
+    /**
+     * Filter, which MainBusinessType to fetch.
+     */
+    where?: MainBusinessTypeWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of MainBusinessTypes to fetch.
+     */
+    orderBy?: Enumerable<MainBusinessTypeOrderByWithRelationInput>
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for MainBusinessTypes.
+     */
+    cursor?: MainBusinessTypeWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` MainBusinessTypes from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` MainBusinessTypes.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of MainBusinessTypes.
+     */
+    distinct?: Enumerable<MainBusinessTypeScalarFieldEnum>
+  }
+
+
+  /**
+   * MainBusinessType findMany
+   */
+  export type MainBusinessTypeFindManyArgs = {
+    /**
+     * Select specific fields to fetch from the MainBusinessType
+     */
+    select?: MainBusinessTypeSelect | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: MainBusinessTypeInclude | null
+    /**
+     * Filter, which MainBusinessTypes to fetch.
+     */
+    where?: MainBusinessTypeWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of MainBusinessTypes to fetch.
+     */
+    orderBy?: Enumerable<MainBusinessTypeOrderByWithRelationInput>
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing MainBusinessTypes.
+     */
+    cursor?: MainBusinessTypeWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` MainBusinessTypes from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` MainBusinessTypes.
+     */
+    skip?: number
+    distinct?: Enumerable<MainBusinessTypeScalarFieldEnum>
+  }
+
+
+  /**
+   * MainBusinessType create
+   */
+  export type MainBusinessTypeCreateArgs = {
+    /**
+     * Select specific fields to fetch from the MainBusinessType
+     */
+    select?: MainBusinessTypeSelect | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: MainBusinessTypeInclude | null
+    /**
+     * The data needed to create a MainBusinessType.
+     */
+    data: XOR<MainBusinessTypeCreateInput, MainBusinessTypeUncheckedCreateInput>
+  }
+
+
+  /**
+   * MainBusinessType createMany
+   */
+  export type MainBusinessTypeCreateManyArgs = {
+    /**
+     * The data used to create many MainBusinessTypes.
+     */
+    data: Enumerable<MainBusinessTypeCreateManyInput>
+    skipDuplicates?: boolean
+  }
+
+
+  /**
+   * MainBusinessType update
+   */
+  export type MainBusinessTypeUpdateArgs = {
+    /**
+     * Select specific fields to fetch from the MainBusinessType
+     */
+    select?: MainBusinessTypeSelect | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: MainBusinessTypeInclude | null
+    /**
+     * The data needed to update a MainBusinessType.
+     */
+    data: XOR<MainBusinessTypeUpdateInput, MainBusinessTypeUncheckedUpdateInput>
+    /**
+     * Choose, which MainBusinessType to update.
+     */
+    where: MainBusinessTypeWhereUniqueInput
+  }
+
+
+  /**
+   * MainBusinessType updateMany
+   */
+  export type MainBusinessTypeUpdateManyArgs = {
+    /**
+     * The data used to update MainBusinessTypes.
+     */
+    data: XOR<MainBusinessTypeUpdateManyMutationInput, MainBusinessTypeUncheckedUpdateManyInput>
+    /**
+     * Filter which MainBusinessTypes to update
+     */
+    where?: MainBusinessTypeWhereInput
+  }
+
+
+  /**
+   * MainBusinessType upsert
+   */
+  export type MainBusinessTypeUpsertArgs = {
+    /**
+     * Select specific fields to fetch from the MainBusinessType
+     */
+    select?: MainBusinessTypeSelect | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: MainBusinessTypeInclude | null
+    /**
+     * The filter to search for the MainBusinessType to update in case it exists.
+     */
+    where: MainBusinessTypeWhereUniqueInput
+    /**
+     * In case the MainBusinessType found by the `where` argument doesn't exist, create a new MainBusinessType with this data.
+     */
+    create: XOR<MainBusinessTypeCreateInput, MainBusinessTypeUncheckedCreateInput>
+    /**
+     * In case the MainBusinessType was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<MainBusinessTypeUpdateInput, MainBusinessTypeUncheckedUpdateInput>
+  }
+
+
+  /**
+   * MainBusinessType delete
+   */
+  export type MainBusinessTypeDeleteArgs = {
+    /**
+     * Select specific fields to fetch from the MainBusinessType
+     */
+    select?: MainBusinessTypeSelect | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: MainBusinessTypeInclude | null
+    /**
+     * Filter which MainBusinessType to delete.
+     */
+    where: MainBusinessTypeWhereUniqueInput
+  }
+
+
+  /**
+   * MainBusinessType deleteMany
+   */
+  export type MainBusinessTypeDeleteManyArgs = {
+    /**
+     * Filter which MainBusinessTypes to delete
+     */
+    where?: MainBusinessTypeWhereInput
+  }
+
+
+  /**
+   * MainBusinessType.SubBusinessType
+   */
+  export type MainBusinessType$SubBusinessTypeArgs = {
+    /**
+     * Select specific fields to fetch from the SubBusinessType
+     */
+    select?: SubBusinessTypeSelect | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: SubBusinessTypeInclude | null
+    where?: SubBusinessTypeWhereInput
+    orderBy?: Enumerable<SubBusinessTypeOrderByWithRelationInput>
+    cursor?: SubBusinessTypeWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: Enumerable<SubBusinessTypeScalarFieldEnum>
+  }
+
+
+  /**
+   * MainBusinessType.CompanyBranch
+   */
+  export type MainBusinessType$CompanyBranchArgs = {
+    /**
+     * Select specific fields to fetch from the CompanyBranch
+     */
+    select?: CompanyBranchSelect | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: CompanyBranchInclude | null
+    where?: CompanyBranchWhereInput
+    orderBy?: Enumerable<CompanyBranchOrderByWithRelationInput>
+    cursor?: CompanyBranchWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: Enumerable<CompanyBranchScalarFieldEnum>
+  }
+
+
+  /**
+   * MainBusinessType without action
+   */
+  export type MainBusinessTypeArgs = {
+    /**
+     * Select specific fields to fetch from the MainBusinessType
+     */
+    select?: MainBusinessTypeSelect | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: MainBusinessTypeInclude | null
+  }
+
+
+
+  /**
+   * Model SubBusinessType
+   */
+
+
+  export type AggregateSubBusinessType = {
+    _count: SubBusinessTypeCountAggregateOutputType | null
+    _min: SubBusinessTypeMinAggregateOutputType | null
+    _max: SubBusinessTypeMaxAggregateOutputType | null
+  }
+
+  export type SubBusinessTypeMinAggregateOutputType = {
+    id: string | null
+    name: string | null
+    MainBId: string | null
+  }
+
+  export type SubBusinessTypeMaxAggregateOutputType = {
+    id: string | null
+    name: string | null
+    MainBId: string | null
+  }
+
+  export type SubBusinessTypeCountAggregateOutputType = {
+    id: number
+    name: number
+    MainBId: number
+    _all: number
+  }
+
+
+  export type SubBusinessTypeMinAggregateInputType = {
+    id?: true
+    name?: true
+    MainBId?: true
+  }
+
+  export type SubBusinessTypeMaxAggregateInputType = {
+    id?: true
+    name?: true
+    MainBId?: true
+  }
+
+  export type SubBusinessTypeCountAggregateInputType = {
+    id?: true
+    name?: true
+    MainBId?: true
+    _all?: true
+  }
+
+  export type SubBusinessTypeAggregateArgs = {
+    /**
+     * Filter which SubBusinessType to aggregate.
+     */
+    where?: SubBusinessTypeWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of SubBusinessTypes to fetch.
+     */
+    orderBy?: Enumerable<SubBusinessTypeOrderByWithRelationInput>
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: SubBusinessTypeWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` SubBusinessTypes from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` SubBusinessTypes.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned SubBusinessTypes
+    **/
+    _count?: true | SubBusinessTypeCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: SubBusinessTypeMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: SubBusinessTypeMaxAggregateInputType
+  }
+
+  export type GetSubBusinessTypeAggregateType<T extends SubBusinessTypeAggregateArgs> = {
+        [P in keyof T & keyof AggregateSubBusinessType]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateSubBusinessType[P]>
+      : GetScalarType<T[P], AggregateSubBusinessType[P]>
+  }
+
+
+
+
+  export type SubBusinessTypeGroupByArgs = {
+    where?: SubBusinessTypeWhereInput
+    orderBy?: Enumerable<SubBusinessTypeOrderByWithAggregationInput>
+    by: SubBusinessTypeScalarFieldEnum[]
+    having?: SubBusinessTypeScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: SubBusinessTypeCountAggregateInputType | true
+    _min?: SubBusinessTypeMinAggregateInputType
+    _max?: SubBusinessTypeMaxAggregateInputType
+  }
+
+
+  export type SubBusinessTypeGroupByOutputType = {
+    id: string
+    name: string
+    MainBId: string
+    _count: SubBusinessTypeCountAggregateOutputType | null
+    _min: SubBusinessTypeMinAggregateOutputType | null
+    _max: SubBusinessTypeMaxAggregateOutputType | null
+  }
+
+  type GetSubBusinessTypeGroupByPayload<T extends SubBusinessTypeGroupByArgs> = PrismaPromise<
+    Array<
+      PickArray<SubBusinessTypeGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof SubBusinessTypeGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], SubBusinessTypeGroupByOutputType[P]>
+            : GetScalarType<T[P], SubBusinessTypeGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type SubBusinessTypeSelect = {
+    id?: boolean
+    name?: boolean
+    MainBId?: boolean
+    MainBusinessType?: boolean | MainBusinessTypeArgs
+  }
+
+
+  export type SubBusinessTypeInclude = {
+    MainBusinessType?: boolean | MainBusinessTypeArgs
+  }
+
+  export type SubBusinessTypeGetPayload<S extends boolean | null | undefined | SubBusinessTypeArgs> =
+    S extends { select: any, include: any } ? 'Please either choose `select` or `include`' :
+    S extends true ? SubBusinessType :
+    S extends undefined ? never :
+    S extends { include: any } & (SubBusinessTypeArgs | SubBusinessTypeFindManyArgs)
+    ? SubBusinessType  & {
+    [P in TruthyKeys<S['include']>]:
+        P extends 'MainBusinessType' ? MainBusinessTypeGetPayload<S['include'][P]> :  never
+  } 
+    : S extends { select: any } & (SubBusinessTypeArgs | SubBusinessTypeFindManyArgs)
+      ? {
+    [P in TruthyKeys<S['select']>]:
+        P extends 'MainBusinessType' ? MainBusinessTypeGetPayload<S['select'][P]> :  P extends keyof SubBusinessType ? SubBusinessType[P] : never
+  } 
+      : SubBusinessType
+
+
+  type SubBusinessTypeCountArgs = 
+    Omit<SubBusinessTypeFindManyArgs, 'select' | 'include'> & {
+      select?: SubBusinessTypeCountAggregateInputType | true
+    }
+
+  export interface SubBusinessTypeDelegate<GlobalRejectSettings extends Prisma.RejectOnNotFound | Prisma.RejectPerOperation | false | undefined> {
+
+    /**
+     * Find zero or one SubBusinessType that matches the filter.
+     * @param {SubBusinessTypeFindUniqueArgs} args - Arguments to find a SubBusinessType
+     * @example
+     * // Get one SubBusinessType
+     * const subBusinessType = await prisma.subBusinessType.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+    **/
+    findUnique<T extends SubBusinessTypeFindUniqueArgs,  LocalRejectSettings = T["rejectOnNotFound"] extends RejectOnNotFound ? T['rejectOnNotFound'] : undefined>(
+      args: SelectSubset<T, SubBusinessTypeFindUniqueArgs>
+    ): HasReject<GlobalRejectSettings, LocalRejectSettings, 'findUnique', 'SubBusinessType'> extends True ? Prisma__SubBusinessTypeClient<SubBusinessTypeGetPayload<T>> : Prisma__SubBusinessTypeClient<SubBusinessTypeGetPayload<T> | null, null>
+
+    /**
+     * Find one SubBusinessType that matches the filter or throw an error  with `error.code='P2025'` 
+     *     if no matches were found.
+     * @param {SubBusinessTypeFindUniqueOrThrowArgs} args - Arguments to find a SubBusinessType
+     * @example
+     * // Get one SubBusinessType
+     * const subBusinessType = await prisma.subBusinessType.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+    **/
+    findUniqueOrThrow<T extends SubBusinessTypeFindUniqueOrThrowArgs>(
+      args?: SelectSubset<T, SubBusinessTypeFindUniqueOrThrowArgs>
+    ): Prisma__SubBusinessTypeClient<SubBusinessTypeGetPayload<T>>
+
+    /**
+     * Find the first SubBusinessType that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {SubBusinessTypeFindFirstArgs} args - Arguments to find a SubBusinessType
+     * @example
+     * // Get one SubBusinessType
+     * const subBusinessType = await prisma.subBusinessType.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+    **/
+    findFirst<T extends SubBusinessTypeFindFirstArgs,  LocalRejectSettings = T["rejectOnNotFound"] extends RejectOnNotFound ? T['rejectOnNotFound'] : undefined>(
+      args?: SelectSubset<T, SubBusinessTypeFindFirstArgs>
+    ): HasReject<GlobalRejectSettings, LocalRejectSettings, 'findFirst', 'SubBusinessType'> extends True ? Prisma__SubBusinessTypeClient<SubBusinessTypeGetPayload<T>> : Prisma__SubBusinessTypeClient<SubBusinessTypeGetPayload<T> | null, null>
+
+    /**
+     * Find the first SubBusinessType that matches the filter or
+     * throw `NotFoundError` if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {SubBusinessTypeFindFirstOrThrowArgs} args - Arguments to find a SubBusinessType
+     * @example
+     * // Get one SubBusinessType
+     * const subBusinessType = await prisma.subBusinessType.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+    **/
+    findFirstOrThrow<T extends SubBusinessTypeFindFirstOrThrowArgs>(
+      args?: SelectSubset<T, SubBusinessTypeFindFirstOrThrowArgs>
+    ): Prisma__SubBusinessTypeClient<SubBusinessTypeGetPayload<T>>
+
+    /**
+     * Find zero or more SubBusinessTypes that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {SubBusinessTypeFindManyArgs=} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all SubBusinessTypes
+     * const subBusinessTypes = await prisma.subBusinessType.findMany()
+     * 
+     * // Get first 10 SubBusinessTypes
+     * const subBusinessTypes = await prisma.subBusinessType.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const subBusinessTypeWithIdOnly = await prisma.subBusinessType.findMany({ select: { id: true } })
+     * 
+    **/
+    findMany<T extends SubBusinessTypeFindManyArgs>(
+      args?: SelectSubset<T, SubBusinessTypeFindManyArgs>
+    ): PrismaPromise<Array<SubBusinessTypeGetPayload<T>>>
+
+    /**
+     * Create a SubBusinessType.
+     * @param {SubBusinessTypeCreateArgs} args - Arguments to create a SubBusinessType.
+     * @example
+     * // Create one SubBusinessType
+     * const SubBusinessType = await prisma.subBusinessType.create({
+     *   data: {
+     *     // ... data to create a SubBusinessType
+     *   }
+     * })
+     * 
+    **/
+    create<T extends SubBusinessTypeCreateArgs>(
+      args: SelectSubset<T, SubBusinessTypeCreateArgs>
+    ): Prisma__SubBusinessTypeClient<SubBusinessTypeGetPayload<T>>
+
+    /**
+     * Create many SubBusinessTypes.
+     *     @param {SubBusinessTypeCreateManyArgs} args - Arguments to create many SubBusinessTypes.
+     *     @example
+     *     // Create many SubBusinessTypes
+     *     const subBusinessType = await prisma.subBusinessType.createMany({
+     *       data: {
+     *         // ... provide data here
+     *       }
+     *     })
+     *     
+    **/
+    createMany<T extends SubBusinessTypeCreateManyArgs>(
+      args?: SelectSubset<T, SubBusinessTypeCreateManyArgs>
+    ): PrismaPromise<BatchPayload>
+
+    /**
+     * Delete a SubBusinessType.
+     * @param {SubBusinessTypeDeleteArgs} args - Arguments to delete one SubBusinessType.
+     * @example
+     * // Delete one SubBusinessType
+     * const SubBusinessType = await prisma.subBusinessType.delete({
+     *   where: {
+     *     // ... filter to delete one SubBusinessType
+     *   }
+     * })
+     * 
+    **/
+    delete<T extends SubBusinessTypeDeleteArgs>(
+      args: SelectSubset<T, SubBusinessTypeDeleteArgs>
+    ): Prisma__SubBusinessTypeClient<SubBusinessTypeGetPayload<T>>
+
+    /**
+     * Update one SubBusinessType.
+     * @param {SubBusinessTypeUpdateArgs} args - Arguments to update one SubBusinessType.
+     * @example
+     * // Update one SubBusinessType
+     * const subBusinessType = await prisma.subBusinessType.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+    **/
+    update<T extends SubBusinessTypeUpdateArgs>(
+      args: SelectSubset<T, SubBusinessTypeUpdateArgs>
+    ): Prisma__SubBusinessTypeClient<SubBusinessTypeGetPayload<T>>
+
+    /**
+     * Delete zero or more SubBusinessTypes.
+     * @param {SubBusinessTypeDeleteManyArgs} args - Arguments to filter SubBusinessTypes to delete.
+     * @example
+     * // Delete a few SubBusinessTypes
+     * const { count } = await prisma.subBusinessType.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+    **/
+    deleteMany<T extends SubBusinessTypeDeleteManyArgs>(
+      args?: SelectSubset<T, SubBusinessTypeDeleteManyArgs>
+    ): PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more SubBusinessTypes.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {SubBusinessTypeUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many SubBusinessTypes
+     * const subBusinessType = await prisma.subBusinessType.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+    **/
+    updateMany<T extends SubBusinessTypeUpdateManyArgs>(
+      args: SelectSubset<T, SubBusinessTypeUpdateManyArgs>
+    ): PrismaPromise<BatchPayload>
+
+    /**
+     * Create or update one SubBusinessType.
+     * @param {SubBusinessTypeUpsertArgs} args - Arguments to update or create a SubBusinessType.
+     * @example
+     * // Update or create a SubBusinessType
+     * const subBusinessType = await prisma.subBusinessType.upsert({
+     *   create: {
+     *     // ... data to create a SubBusinessType
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the SubBusinessType we want to update
+     *   }
+     * })
+    **/
+    upsert<T extends SubBusinessTypeUpsertArgs>(
+      args: SelectSubset<T, SubBusinessTypeUpsertArgs>
+    ): Prisma__SubBusinessTypeClient<SubBusinessTypeGetPayload<T>>
+
+    /**
+     * Count the number of SubBusinessTypes.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {SubBusinessTypeCountArgs} args - Arguments to filter SubBusinessTypes to count.
+     * @example
+     * // Count the number of SubBusinessTypes
+     * const count = await prisma.subBusinessType.count({
+     *   where: {
+     *     // ... the filter for the SubBusinessTypes we want to count
+     *   }
+     * })
+    **/
+    count<T extends SubBusinessTypeCountArgs>(
+      args?: Subset<T, SubBusinessTypeCountArgs>,
+    ): PrismaPromise<
+      T extends _Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], SubBusinessTypeCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a SubBusinessType.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {SubBusinessTypeAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends SubBusinessTypeAggregateArgs>(args: Subset<T, SubBusinessTypeAggregateArgs>): PrismaPromise<GetSubBusinessTypeAggregateType<T>>
+
+    /**
+     * Group by SubBusinessType.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {SubBusinessTypeGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends SubBusinessTypeGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: SubBusinessTypeGroupByArgs['orderBy'] }
+        : { orderBy?: SubBusinessTypeGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends TupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, SubBusinessTypeGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetSubBusinessTypeGroupByPayload<T> : PrismaPromise<InputErrors>
+
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for SubBusinessType.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export class Prisma__SubBusinessTypeClient<T, Null = never> implements PrismaPromise<T> {
+    [prisma]: true;
+    private readonly _dmmf;
+    private readonly _fetcher;
+    private readonly _queryType;
+    private readonly _rootField;
+    private readonly _clientMethod;
+    private readonly _args;
+    private readonly _dataPath;
+    private readonly _errorFormat;
+    private readonly _measurePerformance?;
+    private _isList;
+    private _callsite;
+    private _requestPromise?;
+    constructor(_dmmf: runtime.DMMFClass, _fetcher: PrismaClientFetcher, _queryType: 'query' | 'mutation', _rootField: string, _clientMethod: string, _args: any, _dataPath: string[], _errorFormat: ErrorFormat, _measurePerformance?: boolean | undefined, _isList?: boolean);
+    readonly [Symbol.toStringTag]: 'PrismaClientPromise';
+
+    MainBusinessType<T extends MainBusinessTypeArgs= {}>(args?: Subset<T, MainBusinessTypeArgs>): Prisma__MainBusinessTypeClient<MainBusinessTypeGetPayload<T> | Null>;
+
+    private get _document();
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): Promise<TResult1 | TResult2>;
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): Promise<T | TResult>;
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): Promise<T>;
+  }
+
+
+
+  // Custom InputTypes
+
+  /**
+   * SubBusinessType base type for findUnique actions
+   */
+  export type SubBusinessTypeFindUniqueArgsBase = {
+    /**
+     * Select specific fields to fetch from the SubBusinessType
+     */
+    select?: SubBusinessTypeSelect | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: SubBusinessTypeInclude | null
+    /**
+     * Filter, which SubBusinessType to fetch.
+     */
+    where: SubBusinessTypeWhereUniqueInput
+  }
+
+  /**
+   * SubBusinessType findUnique
+   */
+  export interface SubBusinessTypeFindUniqueArgs extends SubBusinessTypeFindUniqueArgsBase {
+   /**
+    * Throw an Error if query returns no results
+    * @deprecated since 4.0.0: use `findUniqueOrThrow` method instead
+    */
+    rejectOnNotFound?: RejectOnNotFound
+  }
+      
+
+  /**
+   * SubBusinessType findUniqueOrThrow
+   */
+  export type SubBusinessTypeFindUniqueOrThrowArgs = {
+    /**
+     * Select specific fields to fetch from the SubBusinessType
+     */
+    select?: SubBusinessTypeSelect | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: SubBusinessTypeInclude | null
+    /**
+     * Filter, which SubBusinessType to fetch.
+     */
+    where: SubBusinessTypeWhereUniqueInput
+  }
+
+
+  /**
+   * SubBusinessType base type for findFirst actions
+   */
+  export type SubBusinessTypeFindFirstArgsBase = {
+    /**
+     * Select specific fields to fetch from the SubBusinessType
+     */
+    select?: SubBusinessTypeSelect | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: SubBusinessTypeInclude | null
+    /**
+     * Filter, which SubBusinessType to fetch.
+     */
+    where?: SubBusinessTypeWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of SubBusinessTypes to fetch.
+     */
+    orderBy?: Enumerable<SubBusinessTypeOrderByWithRelationInput>
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for SubBusinessTypes.
+     */
+    cursor?: SubBusinessTypeWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` SubBusinessTypes from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` SubBusinessTypes.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of SubBusinessTypes.
+     */
+    distinct?: Enumerable<SubBusinessTypeScalarFieldEnum>
+  }
+
+  /**
+   * SubBusinessType findFirst
+   */
+  export interface SubBusinessTypeFindFirstArgs extends SubBusinessTypeFindFirstArgsBase {
+   /**
+    * Throw an Error if query returns no results
+    * @deprecated since 4.0.0: use `findFirstOrThrow` method instead
+    */
+    rejectOnNotFound?: RejectOnNotFound
+  }
+      
+
+  /**
+   * SubBusinessType findFirstOrThrow
+   */
+  export type SubBusinessTypeFindFirstOrThrowArgs = {
+    /**
+     * Select specific fields to fetch from the SubBusinessType
+     */
+    select?: SubBusinessTypeSelect | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: SubBusinessTypeInclude | null
+    /**
+     * Filter, which SubBusinessType to fetch.
+     */
+    where?: SubBusinessTypeWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of SubBusinessTypes to fetch.
+     */
+    orderBy?: Enumerable<SubBusinessTypeOrderByWithRelationInput>
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for SubBusinessTypes.
+     */
+    cursor?: SubBusinessTypeWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` SubBusinessTypes from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` SubBusinessTypes.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of SubBusinessTypes.
+     */
+    distinct?: Enumerable<SubBusinessTypeScalarFieldEnum>
+  }
+
+
+  /**
+   * SubBusinessType findMany
+   */
+  export type SubBusinessTypeFindManyArgs = {
+    /**
+     * Select specific fields to fetch from the SubBusinessType
+     */
+    select?: SubBusinessTypeSelect | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: SubBusinessTypeInclude | null
+    /**
+     * Filter, which SubBusinessTypes to fetch.
+     */
+    where?: SubBusinessTypeWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of SubBusinessTypes to fetch.
+     */
+    orderBy?: Enumerable<SubBusinessTypeOrderByWithRelationInput>
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing SubBusinessTypes.
+     */
+    cursor?: SubBusinessTypeWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` SubBusinessTypes from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` SubBusinessTypes.
+     */
+    skip?: number
+    distinct?: Enumerable<SubBusinessTypeScalarFieldEnum>
+  }
+
+
+  /**
+   * SubBusinessType create
+   */
+  export type SubBusinessTypeCreateArgs = {
+    /**
+     * Select specific fields to fetch from the SubBusinessType
+     */
+    select?: SubBusinessTypeSelect | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: SubBusinessTypeInclude | null
+    /**
+     * The data needed to create a SubBusinessType.
+     */
+    data: XOR<SubBusinessTypeCreateInput, SubBusinessTypeUncheckedCreateInput>
+  }
+
+
+  /**
+   * SubBusinessType createMany
+   */
+  export type SubBusinessTypeCreateManyArgs = {
+    /**
+     * The data used to create many SubBusinessTypes.
+     */
+    data: Enumerable<SubBusinessTypeCreateManyInput>
+    skipDuplicates?: boolean
+  }
+
+
+  /**
+   * SubBusinessType update
+   */
+  export type SubBusinessTypeUpdateArgs = {
+    /**
+     * Select specific fields to fetch from the SubBusinessType
+     */
+    select?: SubBusinessTypeSelect | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: SubBusinessTypeInclude | null
+    /**
+     * The data needed to update a SubBusinessType.
+     */
+    data: XOR<SubBusinessTypeUpdateInput, SubBusinessTypeUncheckedUpdateInput>
+    /**
+     * Choose, which SubBusinessType to update.
+     */
+    where: SubBusinessTypeWhereUniqueInput
+  }
+
+
+  /**
+   * SubBusinessType updateMany
+   */
+  export type SubBusinessTypeUpdateManyArgs = {
+    /**
+     * The data used to update SubBusinessTypes.
+     */
+    data: XOR<SubBusinessTypeUpdateManyMutationInput, SubBusinessTypeUncheckedUpdateManyInput>
+    /**
+     * Filter which SubBusinessTypes to update
+     */
+    where?: SubBusinessTypeWhereInput
+  }
+
+
+  /**
+   * SubBusinessType upsert
+   */
+  export type SubBusinessTypeUpsertArgs = {
+    /**
+     * Select specific fields to fetch from the SubBusinessType
+     */
+    select?: SubBusinessTypeSelect | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: SubBusinessTypeInclude | null
+    /**
+     * The filter to search for the SubBusinessType to update in case it exists.
+     */
+    where: SubBusinessTypeWhereUniqueInput
+    /**
+     * In case the SubBusinessType found by the `where` argument doesn't exist, create a new SubBusinessType with this data.
+     */
+    create: XOR<SubBusinessTypeCreateInput, SubBusinessTypeUncheckedCreateInput>
+    /**
+     * In case the SubBusinessType was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<SubBusinessTypeUpdateInput, SubBusinessTypeUncheckedUpdateInput>
+  }
+
+
+  /**
+   * SubBusinessType delete
+   */
+  export type SubBusinessTypeDeleteArgs = {
+    /**
+     * Select specific fields to fetch from the SubBusinessType
+     */
+    select?: SubBusinessTypeSelect | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: SubBusinessTypeInclude | null
+    /**
+     * Filter which SubBusinessType to delete.
+     */
+    where: SubBusinessTypeWhereUniqueInput
+  }
+
+
+  /**
+   * SubBusinessType deleteMany
+   */
+  export type SubBusinessTypeDeleteManyArgs = {
+    /**
+     * Filter which SubBusinessTypes to delete
+     */
+    where?: SubBusinessTypeWhereInput
+  }
+
+
+  /**
+   * SubBusinessType without action
+   */
+  export type SubBusinessTypeArgs = {
+    /**
+     * Select specific fields to fetch from the SubBusinessType
+     */
+    select?: SubBusinessTypeSelect | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: SubBusinessTypeInclude | null
+  }
+
+
+
+  /**
    * Enums
    */
 
@@ -34627,7 +36606,8 @@ export namespace Prisma {
     social_line: 'social_line',
     createdAt: 'createdAt',
     updatedAt: 'updatedAt',
-    companyId: 'companyId'
+    companyId: 'companyId',
+    BusinesstypeId: 'BusinesstypeId'
   };
 
   export type CompanyBranchScalarFieldEnum = (typeof CompanyBranchScalarFieldEnum)[keyof typeof CompanyBranchScalarFieldEnum]
@@ -34746,6 +36726,14 @@ export namespace Prisma {
   };
 
   export type Log_positionnScalarFieldEnum = (typeof Log_positionnScalarFieldEnum)[keyof typeof Log_positionnScalarFieldEnum]
+
+
+  export const MainBusinessTypeScalarFieldEnum: {
+    id: 'id',
+    name: 'name'
+  };
+
+  export type MainBusinessTypeScalarFieldEnum = (typeof MainBusinessTypeScalarFieldEnum)[keyof typeof MainBusinessTypeScalarFieldEnum]
 
 
   export const Mas_all_collectScalarFieldEnum: {
@@ -35043,6 +37031,15 @@ export namespace Prisma {
   export type SortOrder = (typeof SortOrder)[keyof typeof SortOrder]
 
 
+  export const SubBusinessTypeScalarFieldEnum: {
+    id: 'id',
+    name: 'name',
+    MainBId: 'MainBId'
+  };
+
+  export type SubBusinessTypeScalarFieldEnum = (typeof SubBusinessTypeScalarFieldEnum)[keyof typeof SubBusinessTypeScalarFieldEnum]
+
+
   export const TransactionIsolationLevel: {
     ReadUncommitted: 'ReadUncommitted',
     ReadCommitted: 'ReadCommitted',
@@ -35193,6 +37190,8 @@ export namespace Prisma {
     users?: UserListRelationFilter
     Role_Company?: Role_CompanyListRelationFilter
     expense_company?: Expense_companyListRelationFilter
+    BusinesstypeId?: UuidNullableFilter | string | null
+    Businesstype?: XOR<MainBusinessTypeRelationFilter, MainBusinessTypeWhereInput> | null
   }
 
   export type CompanyBranchOrderByWithRelationInput = {
@@ -35226,6 +37225,8 @@ export namespace Prisma {
     users?: UserOrderByRelationAggregateInput
     Role_Company?: Role_CompanyOrderByRelationAggregateInput
     expense_company?: expense_companyOrderByRelationAggregateInput
+    BusinesstypeId?: SortOrder
+    Businesstype?: MainBusinessTypeOrderByWithRelationInput
   }
 
   export type CompanyBranchWhereUniqueInput = {
@@ -35259,6 +37260,7 @@ export namespace Prisma {
     createdAt?: SortOrder
     updatedAt?: SortOrder
     companyId?: SortOrder
+    BusinesstypeId?: SortOrder
     _count?: CompanyBranchCountOrderByAggregateInput
     _max?: CompanyBranchMaxOrderByAggregateInput
     _min?: CompanyBranchMinOrderByAggregateInput
@@ -35294,6 +37296,7 @@ export namespace Prisma {
     createdAt?: DateTimeWithAggregatesFilter | Date | string
     updatedAt?: DateTimeWithAggregatesFilter | Date | string
     companyId?: UuidNullableWithAggregatesFilter | string | null
+    BusinesstypeId?: UuidNullableWithAggregatesFilter | string | null
   }
 
   export type ProfileWhereInput = {
@@ -37139,6 +39142,82 @@ export namespace Prisma {
     updteddate?: DateTimeWithAggregatesFilter | Date | string
   }
 
+  export type MainBusinessTypeWhereInput = {
+    AND?: Enumerable<MainBusinessTypeWhereInput>
+    OR?: Enumerable<MainBusinessTypeWhereInput>
+    NOT?: Enumerable<MainBusinessTypeWhereInput>
+    id?: UuidFilter | string
+    name?: StringFilter | string
+    SubBusinessType?: SubBusinessTypeListRelationFilter
+    CompanyBranch?: CompanyBranchListRelationFilter
+  }
+
+  export type MainBusinessTypeOrderByWithRelationInput = {
+    id?: SortOrder
+    name?: SortOrder
+    SubBusinessType?: SubBusinessTypeOrderByRelationAggregateInput
+    CompanyBranch?: CompanyBranchOrderByRelationAggregateInput
+  }
+
+  export type MainBusinessTypeWhereUniqueInput = {
+    id?: string
+  }
+
+  export type MainBusinessTypeOrderByWithAggregationInput = {
+    id?: SortOrder
+    name?: SortOrder
+    _count?: MainBusinessTypeCountOrderByAggregateInput
+    _max?: MainBusinessTypeMaxOrderByAggregateInput
+    _min?: MainBusinessTypeMinOrderByAggregateInput
+  }
+
+  export type MainBusinessTypeScalarWhereWithAggregatesInput = {
+    AND?: Enumerable<MainBusinessTypeScalarWhereWithAggregatesInput>
+    OR?: Enumerable<MainBusinessTypeScalarWhereWithAggregatesInput>
+    NOT?: Enumerable<MainBusinessTypeScalarWhereWithAggregatesInput>
+    id?: UuidWithAggregatesFilter | string
+    name?: StringWithAggregatesFilter | string
+  }
+
+  export type SubBusinessTypeWhereInput = {
+    AND?: Enumerable<SubBusinessTypeWhereInput>
+    OR?: Enumerable<SubBusinessTypeWhereInput>
+    NOT?: Enumerable<SubBusinessTypeWhereInput>
+    id?: UuidFilter | string
+    name?: StringFilter | string
+    MainBId?: UuidFilter | string
+    MainBusinessType?: XOR<MainBusinessTypeRelationFilter, MainBusinessTypeWhereInput>
+  }
+
+  export type SubBusinessTypeOrderByWithRelationInput = {
+    id?: SortOrder
+    name?: SortOrder
+    MainBId?: SortOrder
+    MainBusinessType?: MainBusinessTypeOrderByWithRelationInput
+  }
+
+  export type SubBusinessTypeWhereUniqueInput = {
+    id?: string
+  }
+
+  export type SubBusinessTypeOrderByWithAggregationInput = {
+    id?: SortOrder
+    name?: SortOrder
+    MainBId?: SortOrder
+    _count?: SubBusinessTypeCountOrderByAggregateInput
+    _max?: SubBusinessTypeMaxOrderByAggregateInput
+    _min?: SubBusinessTypeMinOrderByAggregateInput
+  }
+
+  export type SubBusinessTypeScalarWhereWithAggregatesInput = {
+    AND?: Enumerable<SubBusinessTypeScalarWhereWithAggregatesInput>
+    OR?: Enumerable<SubBusinessTypeScalarWhereWithAggregatesInput>
+    NOT?: Enumerable<SubBusinessTypeScalarWhereWithAggregatesInput>
+    id?: UuidWithAggregatesFilter | string
+    name?: StringWithAggregatesFilter | string
+    MainBId?: UuidWithAggregatesFilter | string
+  }
+
   export type CompanyCreateInput = {
     id: string
     name: string
@@ -37287,6 +39366,7 @@ export namespace Prisma {
     users?: UserCreateNestedManyWithoutCompanyBranchInput
     Role_Company?: Role_CompanyCreateNestedManyWithoutCompanyBranchInput
     expense_company?: expense_companyCreateNestedManyWithoutCompanyBranchInput
+    Businesstype?: MainBusinessTypeCreateNestedOneWithoutCompanyBranchInput
   }
 
   export type CompanyBranchUncheckedCreateInput = {
@@ -37319,6 +39399,7 @@ export namespace Prisma {
     users?: UserUncheckedCreateNestedManyWithoutCompanyBranchInput
     Role_Company?: Role_CompanyUncheckedCreateNestedManyWithoutCompanyBranchInput
     expense_company?: expense_companyUncheckedCreateNestedManyWithoutCompanyBranchInput
+    BusinesstypeId?: string | null
   }
 
   export type CompanyBranchUpdateInput = {
@@ -37351,6 +39432,7 @@ export namespace Prisma {
     users?: UserUpdateManyWithoutCompanyBranchNestedInput
     Role_Company?: Role_CompanyUpdateManyWithoutCompanyBranchNestedInput
     expense_company?: expense_companyUpdateManyWithoutCompanyBranchNestedInput
+    Businesstype?: MainBusinessTypeUpdateOneWithoutCompanyBranchNestedInput
   }
 
   export type CompanyBranchUncheckedUpdateInput = {
@@ -37383,6 +39465,7 @@ export namespace Prisma {
     users?: UserUncheckedUpdateManyWithoutCompanyBranchNestedInput
     Role_Company?: Role_CompanyUncheckedUpdateManyWithoutCompanyBranchNestedInput
     expense_company?: expense_companyUncheckedUpdateManyWithoutCompanyBranchNestedInput
+    BusinesstypeId?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type CompanyBranchCreateManyInput = {
@@ -37412,6 +39495,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     companyId?: string | null
+    BusinesstypeId?: string | null
   }
 
   export type CompanyBranchUpdateManyMutationInput = {
@@ -37469,6 +39553,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     companyId?: NullableStringFieldUpdateOperationsInput | string | null
+    BusinesstypeId?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type ProfileCreateInput = {
@@ -39790,6 +41875,90 @@ export namespace Prisma {
     updteddate?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
+  export type MainBusinessTypeCreateInput = {
+    id: string
+    name: string
+    SubBusinessType?: SubBusinessTypeCreateNestedManyWithoutMainBusinessTypeInput
+    CompanyBranch?: CompanyBranchCreateNestedManyWithoutBusinesstypeInput
+  }
+
+  export type MainBusinessTypeUncheckedCreateInput = {
+    id: string
+    name: string
+    SubBusinessType?: SubBusinessTypeUncheckedCreateNestedManyWithoutMainBusinessTypeInput
+    CompanyBranch?: CompanyBranchUncheckedCreateNestedManyWithoutBusinesstypeInput
+  }
+
+  export type MainBusinessTypeUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    SubBusinessType?: SubBusinessTypeUpdateManyWithoutMainBusinessTypeNestedInput
+    CompanyBranch?: CompanyBranchUpdateManyWithoutBusinesstypeNestedInput
+  }
+
+  export type MainBusinessTypeUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    SubBusinessType?: SubBusinessTypeUncheckedUpdateManyWithoutMainBusinessTypeNestedInput
+    CompanyBranch?: CompanyBranchUncheckedUpdateManyWithoutBusinesstypeNestedInput
+  }
+
+  export type MainBusinessTypeCreateManyInput = {
+    id: string
+    name: string
+  }
+
+  export type MainBusinessTypeUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type MainBusinessTypeUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type SubBusinessTypeCreateInput = {
+    id: string
+    name: string
+    MainBusinessType: MainBusinessTypeCreateNestedOneWithoutSubBusinessTypeInput
+  }
+
+  export type SubBusinessTypeUncheckedCreateInput = {
+    id: string
+    name: string
+    MainBId: string
+  }
+
+  export type SubBusinessTypeUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    MainBusinessType?: MainBusinessTypeUpdateOneRequiredWithoutSubBusinessTypeNestedInput
+  }
+
+  export type SubBusinessTypeUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    MainBId?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type SubBusinessTypeCreateManyInput = {
+    id: string
+    name: string
+    MainBId: string
+  }
+
+  export type SubBusinessTypeUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type SubBusinessTypeUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    MainBId?: StringFieldUpdateOperationsInput | string
+  }
+
   export type UuidFilter = {
     equals?: string
     in?: Enumerable<string>
@@ -40097,6 +42266,11 @@ export namespace Prisma {
     none?: expense_companyWhereInput
   }
 
+  export type MainBusinessTypeRelationFilter = {
+    is?: MainBusinessTypeWhereInput
+    isNot?: MainBusinessTypeWhereInput
+  }
+
   export type UserOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
@@ -40136,6 +42310,7 @@ export namespace Prisma {
     createdAt?: SortOrder
     updatedAt?: SortOrder
     companyId?: SortOrder
+    BusinesstypeId?: SortOrder
   }
 
   export type CompanyBranchMaxOrderByAggregateInput = {
@@ -40165,6 +42340,7 @@ export namespace Prisma {
     createdAt?: SortOrder
     updatedAt?: SortOrder
     companyId?: SortOrder
+    BusinesstypeId?: SortOrder
   }
 
   export type CompanyBranchMinOrderByAggregateInput = {
@@ -40194,6 +42370,7 @@ export namespace Prisma {
     createdAt?: SortOrder
     updatedAt?: SortOrder
     companyId?: SortOrder
+    BusinesstypeId?: SortOrder
   }
 
   export type BoolWithAggregatesFilter = {
@@ -41720,6 +43897,49 @@ export namespace Prisma {
     updteddate?: SortOrder
   }
 
+  export type SubBusinessTypeListRelationFilter = {
+    every?: SubBusinessTypeWhereInput
+    some?: SubBusinessTypeWhereInput
+    none?: SubBusinessTypeWhereInput
+  }
+
+  export type SubBusinessTypeOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type MainBusinessTypeCountOrderByAggregateInput = {
+    id?: SortOrder
+    name?: SortOrder
+  }
+
+  export type MainBusinessTypeMaxOrderByAggregateInput = {
+    id?: SortOrder
+    name?: SortOrder
+  }
+
+  export type MainBusinessTypeMinOrderByAggregateInput = {
+    id?: SortOrder
+    name?: SortOrder
+  }
+
+  export type SubBusinessTypeCountOrderByAggregateInput = {
+    id?: SortOrder
+    name?: SortOrder
+    MainBId?: SortOrder
+  }
+
+  export type SubBusinessTypeMaxOrderByAggregateInput = {
+    id?: SortOrder
+    name?: SortOrder
+    MainBId?: SortOrder
+  }
+
+  export type SubBusinessTypeMinOrderByAggregateInput = {
+    id?: SortOrder
+    name?: SortOrder
+    MainBId?: SortOrder
+  }
+
   export type UserCreateNestedOneWithoutCompanyInput = {
     create?: XOR<UserCreateWithoutCompanyInput, UserUncheckedCreateWithoutCompanyInput>
     connectOrCreate?: UserCreateOrConnectWithoutCompanyInput
@@ -42075,6 +44295,12 @@ export namespace Prisma {
     connect?: Enumerable<expense_companyWhereUniqueInput>
   }
 
+  export type MainBusinessTypeCreateNestedOneWithoutCompanyBranchInput = {
+    create?: XOR<MainBusinessTypeCreateWithoutCompanyBranchInput, MainBusinessTypeUncheckedCreateWithoutCompanyBranchInput>
+    connectOrCreate?: MainBusinessTypeCreateOrConnectWithoutCompanyBranchInput
+    connect?: MainBusinessTypeWhereUniqueInput
+  }
+
   export type UserUncheckedCreateNestedManyWithoutCompanyBranchInput = {
     create?: XOR<Enumerable<UserCreateWithoutCompanyBranchInput>, Enumerable<UserUncheckedCreateWithoutCompanyBranchInput>>
     connectOrCreate?: Enumerable<UserCreateOrConnectWithoutCompanyBranchInput>
@@ -42150,6 +44376,16 @@ export namespace Prisma {
     update?: Enumerable<expense_companyUpdateWithWhereUniqueWithoutCompanyBranchInput>
     updateMany?: Enumerable<expense_companyUpdateManyWithWhereWithoutCompanyBranchInput>
     deleteMany?: Enumerable<expense_companyScalarWhereInput>
+  }
+
+  export type MainBusinessTypeUpdateOneWithoutCompanyBranchNestedInput = {
+    create?: XOR<MainBusinessTypeCreateWithoutCompanyBranchInput, MainBusinessTypeUncheckedCreateWithoutCompanyBranchInput>
+    connectOrCreate?: MainBusinessTypeCreateOrConnectWithoutCompanyBranchInput
+    upsert?: MainBusinessTypeUpsertWithoutCompanyBranchInput
+    disconnect?: boolean
+    delete?: boolean
+    connect?: MainBusinessTypeWhereUniqueInput
+    update?: XOR<MainBusinessTypeUpdateWithoutCompanyBranchInput, MainBusinessTypeUncheckedUpdateWithoutCompanyBranchInput>
   }
 
   export type UserUncheckedUpdateManyWithoutCompanyBranchNestedInput = {
@@ -44402,6 +46638,104 @@ export namespace Prisma {
     update?: XOR<UserUpdateWithoutUpdtedByfkInput, UserUncheckedUpdateWithoutUpdtedByfkInput>
   }
 
+  export type SubBusinessTypeCreateNestedManyWithoutMainBusinessTypeInput = {
+    create?: XOR<Enumerable<SubBusinessTypeCreateWithoutMainBusinessTypeInput>, Enumerable<SubBusinessTypeUncheckedCreateWithoutMainBusinessTypeInput>>
+    connectOrCreate?: Enumerable<SubBusinessTypeCreateOrConnectWithoutMainBusinessTypeInput>
+    createMany?: SubBusinessTypeCreateManyMainBusinessTypeInputEnvelope
+    connect?: Enumerable<SubBusinessTypeWhereUniqueInput>
+  }
+
+  export type CompanyBranchCreateNestedManyWithoutBusinesstypeInput = {
+    create?: XOR<Enumerable<CompanyBranchCreateWithoutBusinesstypeInput>, Enumerable<CompanyBranchUncheckedCreateWithoutBusinesstypeInput>>
+    connectOrCreate?: Enumerable<CompanyBranchCreateOrConnectWithoutBusinesstypeInput>
+    createMany?: CompanyBranchCreateManyBusinesstypeInputEnvelope
+    connect?: Enumerable<CompanyBranchWhereUniqueInput>
+  }
+
+  export type SubBusinessTypeUncheckedCreateNestedManyWithoutMainBusinessTypeInput = {
+    create?: XOR<Enumerable<SubBusinessTypeCreateWithoutMainBusinessTypeInput>, Enumerable<SubBusinessTypeUncheckedCreateWithoutMainBusinessTypeInput>>
+    connectOrCreate?: Enumerable<SubBusinessTypeCreateOrConnectWithoutMainBusinessTypeInput>
+    createMany?: SubBusinessTypeCreateManyMainBusinessTypeInputEnvelope
+    connect?: Enumerable<SubBusinessTypeWhereUniqueInput>
+  }
+
+  export type CompanyBranchUncheckedCreateNestedManyWithoutBusinesstypeInput = {
+    create?: XOR<Enumerable<CompanyBranchCreateWithoutBusinesstypeInput>, Enumerable<CompanyBranchUncheckedCreateWithoutBusinesstypeInput>>
+    connectOrCreate?: Enumerable<CompanyBranchCreateOrConnectWithoutBusinesstypeInput>
+    createMany?: CompanyBranchCreateManyBusinesstypeInputEnvelope
+    connect?: Enumerable<CompanyBranchWhereUniqueInput>
+  }
+
+  export type SubBusinessTypeUpdateManyWithoutMainBusinessTypeNestedInput = {
+    create?: XOR<Enumerable<SubBusinessTypeCreateWithoutMainBusinessTypeInput>, Enumerable<SubBusinessTypeUncheckedCreateWithoutMainBusinessTypeInput>>
+    connectOrCreate?: Enumerable<SubBusinessTypeCreateOrConnectWithoutMainBusinessTypeInput>
+    upsert?: Enumerable<SubBusinessTypeUpsertWithWhereUniqueWithoutMainBusinessTypeInput>
+    createMany?: SubBusinessTypeCreateManyMainBusinessTypeInputEnvelope
+    set?: Enumerable<SubBusinessTypeWhereUniqueInput>
+    disconnect?: Enumerable<SubBusinessTypeWhereUniqueInput>
+    delete?: Enumerable<SubBusinessTypeWhereUniqueInput>
+    connect?: Enumerable<SubBusinessTypeWhereUniqueInput>
+    update?: Enumerable<SubBusinessTypeUpdateWithWhereUniqueWithoutMainBusinessTypeInput>
+    updateMany?: Enumerable<SubBusinessTypeUpdateManyWithWhereWithoutMainBusinessTypeInput>
+    deleteMany?: Enumerable<SubBusinessTypeScalarWhereInput>
+  }
+
+  export type CompanyBranchUpdateManyWithoutBusinesstypeNestedInput = {
+    create?: XOR<Enumerable<CompanyBranchCreateWithoutBusinesstypeInput>, Enumerable<CompanyBranchUncheckedCreateWithoutBusinesstypeInput>>
+    connectOrCreate?: Enumerable<CompanyBranchCreateOrConnectWithoutBusinesstypeInput>
+    upsert?: Enumerable<CompanyBranchUpsertWithWhereUniqueWithoutBusinesstypeInput>
+    createMany?: CompanyBranchCreateManyBusinesstypeInputEnvelope
+    set?: Enumerable<CompanyBranchWhereUniqueInput>
+    disconnect?: Enumerable<CompanyBranchWhereUniqueInput>
+    delete?: Enumerable<CompanyBranchWhereUniqueInput>
+    connect?: Enumerable<CompanyBranchWhereUniqueInput>
+    update?: Enumerable<CompanyBranchUpdateWithWhereUniqueWithoutBusinesstypeInput>
+    updateMany?: Enumerable<CompanyBranchUpdateManyWithWhereWithoutBusinesstypeInput>
+    deleteMany?: Enumerable<CompanyBranchScalarWhereInput>
+  }
+
+  export type SubBusinessTypeUncheckedUpdateManyWithoutMainBusinessTypeNestedInput = {
+    create?: XOR<Enumerable<SubBusinessTypeCreateWithoutMainBusinessTypeInput>, Enumerable<SubBusinessTypeUncheckedCreateWithoutMainBusinessTypeInput>>
+    connectOrCreate?: Enumerable<SubBusinessTypeCreateOrConnectWithoutMainBusinessTypeInput>
+    upsert?: Enumerable<SubBusinessTypeUpsertWithWhereUniqueWithoutMainBusinessTypeInput>
+    createMany?: SubBusinessTypeCreateManyMainBusinessTypeInputEnvelope
+    set?: Enumerable<SubBusinessTypeWhereUniqueInput>
+    disconnect?: Enumerable<SubBusinessTypeWhereUniqueInput>
+    delete?: Enumerable<SubBusinessTypeWhereUniqueInput>
+    connect?: Enumerable<SubBusinessTypeWhereUniqueInput>
+    update?: Enumerable<SubBusinessTypeUpdateWithWhereUniqueWithoutMainBusinessTypeInput>
+    updateMany?: Enumerable<SubBusinessTypeUpdateManyWithWhereWithoutMainBusinessTypeInput>
+    deleteMany?: Enumerable<SubBusinessTypeScalarWhereInput>
+  }
+
+  export type CompanyBranchUncheckedUpdateManyWithoutBusinesstypeNestedInput = {
+    create?: XOR<Enumerable<CompanyBranchCreateWithoutBusinesstypeInput>, Enumerable<CompanyBranchUncheckedCreateWithoutBusinesstypeInput>>
+    connectOrCreate?: Enumerable<CompanyBranchCreateOrConnectWithoutBusinesstypeInput>
+    upsert?: Enumerable<CompanyBranchUpsertWithWhereUniqueWithoutBusinesstypeInput>
+    createMany?: CompanyBranchCreateManyBusinesstypeInputEnvelope
+    set?: Enumerable<CompanyBranchWhereUniqueInput>
+    disconnect?: Enumerable<CompanyBranchWhereUniqueInput>
+    delete?: Enumerable<CompanyBranchWhereUniqueInput>
+    connect?: Enumerable<CompanyBranchWhereUniqueInput>
+    update?: Enumerable<CompanyBranchUpdateWithWhereUniqueWithoutBusinesstypeInput>
+    updateMany?: Enumerable<CompanyBranchUpdateManyWithWhereWithoutBusinesstypeInput>
+    deleteMany?: Enumerable<CompanyBranchScalarWhereInput>
+  }
+
+  export type MainBusinessTypeCreateNestedOneWithoutSubBusinessTypeInput = {
+    create?: XOR<MainBusinessTypeCreateWithoutSubBusinessTypeInput, MainBusinessTypeUncheckedCreateWithoutSubBusinessTypeInput>
+    connectOrCreate?: MainBusinessTypeCreateOrConnectWithoutSubBusinessTypeInput
+    connect?: MainBusinessTypeWhereUniqueInput
+  }
+
+  export type MainBusinessTypeUpdateOneRequiredWithoutSubBusinessTypeNestedInput = {
+    create?: XOR<MainBusinessTypeCreateWithoutSubBusinessTypeInput, MainBusinessTypeUncheckedCreateWithoutSubBusinessTypeInput>
+    connectOrCreate?: MainBusinessTypeCreateOrConnectWithoutSubBusinessTypeInput
+    upsert?: MainBusinessTypeUpsertWithoutSubBusinessTypeInput
+    connect?: MainBusinessTypeWhereUniqueInput
+    update?: XOR<MainBusinessTypeUpdateWithoutSubBusinessTypeInput, MainBusinessTypeUncheckedUpdateWithoutSubBusinessTypeInput>
+  }
+
   export type NestedUuidFilter = {
     equals?: string
     in?: Enumerable<string>
@@ -44773,6 +47107,7 @@ export namespace Prisma {
     users?: UserCreateNestedManyWithoutCompanyBranchInput
     Role_Company?: Role_CompanyCreateNestedManyWithoutCompanyBranchInput
     expense_company?: expense_companyCreateNestedManyWithoutCompanyBranchInput
+    Businesstype?: MainBusinessTypeCreateNestedOneWithoutCompanyBranchInput
   }
 
   export type CompanyBranchUncheckedCreateWithoutCompanyInput = {
@@ -44804,6 +47139,7 @@ export namespace Prisma {
     users?: UserUncheckedCreateNestedManyWithoutCompanyBranchInput
     Role_Company?: Role_CompanyUncheckedCreateNestedManyWithoutCompanyBranchInput
     expense_company?: expense_companyUncheckedCreateNestedManyWithoutCompanyBranchInput
+    BusinesstypeId?: string | null
   }
 
   export type CompanyBranchCreateOrConnectWithoutCompanyInput = {
@@ -45081,6 +47417,7 @@ export namespace Prisma {
     createdAt?: DateTimeFilter | Date | string
     updatedAt?: DateTimeFilter | Date | string
     companyId?: UuidNullableFilter | string | null
+    BusinesstypeId?: UuidNullableFilter | string | null
   }
 
   export type mas_positionlevel3UpsertWithWhereUniqueWithoutCompanyInput = {
@@ -45407,6 +47744,23 @@ export namespace Prisma {
     skipDuplicates?: boolean
   }
 
+  export type MainBusinessTypeCreateWithoutCompanyBranchInput = {
+    id: string
+    name: string
+    SubBusinessType?: SubBusinessTypeCreateNestedManyWithoutMainBusinessTypeInput
+  }
+
+  export type MainBusinessTypeUncheckedCreateWithoutCompanyBranchInput = {
+    id: string
+    name: string
+    SubBusinessType?: SubBusinessTypeUncheckedCreateNestedManyWithoutMainBusinessTypeInput
+  }
+
+  export type MainBusinessTypeCreateOrConnectWithoutCompanyBranchInput = {
+    where: MainBusinessTypeWhereUniqueInput
+    create: XOR<MainBusinessTypeCreateWithoutCompanyBranchInput, MainBusinessTypeUncheckedCreateWithoutCompanyBranchInput>
+  }
+
   export type CompanyUpsertWithoutBranchInput = {
     update: XOR<CompanyUpdateWithoutBranchInput, CompanyUncheckedUpdateWithoutBranchInput>
     create: XOR<CompanyCreateWithoutBranchInput, CompanyUncheckedCreateWithoutBranchInput>
@@ -45537,6 +47891,23 @@ export namespace Prisma {
     vat_per?: FloatNullableFilter | number | null
     ss_per?: FloatNullableFilter | number | null
     companyBranchId?: UuidNullableFilter | string | null
+  }
+
+  export type MainBusinessTypeUpsertWithoutCompanyBranchInput = {
+    update: XOR<MainBusinessTypeUpdateWithoutCompanyBranchInput, MainBusinessTypeUncheckedUpdateWithoutCompanyBranchInput>
+    create: XOR<MainBusinessTypeCreateWithoutCompanyBranchInput, MainBusinessTypeUncheckedCreateWithoutCompanyBranchInput>
+  }
+
+  export type MainBusinessTypeUpdateWithoutCompanyBranchInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    SubBusinessType?: SubBusinessTypeUpdateManyWithoutMainBusinessTypeNestedInput
+  }
+
+  export type MainBusinessTypeUncheckedUpdateWithoutCompanyBranchInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    SubBusinessType?: SubBusinessTypeUncheckedUpdateManyWithoutMainBusinessTypeNestedInput
   }
 
   export type UserCreateWithoutProfileInput = {
@@ -45842,6 +48213,7 @@ export namespace Prisma {
     company?: CompanyCreateNestedOneWithoutBranchInput
     Role_Company?: Role_CompanyCreateNestedManyWithoutCompanyBranchInput
     expense_company?: expense_companyCreateNestedManyWithoutCompanyBranchInput
+    Businesstype?: MainBusinessTypeCreateNestedOneWithoutCompanyBranchInput
   }
 
   export type CompanyBranchUncheckedCreateWithoutUsersInput = {
@@ -45873,6 +48245,7 @@ export namespace Prisma {
     companyId?: string | null
     Role_Company?: Role_CompanyUncheckedCreateNestedManyWithoutCompanyBranchInput
     expense_company?: expense_companyUncheckedCreateNestedManyWithoutCompanyBranchInput
+    BusinesstypeId?: string | null
   }
 
   export type CompanyBranchCreateOrConnectWithoutUsersInput = {
@@ -46431,6 +48804,7 @@ export namespace Prisma {
     company?: CompanyUpdateOneWithoutBranchNestedInput
     Role_Company?: Role_CompanyUpdateManyWithoutCompanyBranchNestedInput
     expense_company?: expense_companyUpdateManyWithoutCompanyBranchNestedInput
+    Businesstype?: MainBusinessTypeUpdateOneWithoutCompanyBranchNestedInput
   }
 
   export type CompanyBranchUncheckedUpdateWithoutUsersInput = {
@@ -46462,6 +48836,7 @@ export namespace Prisma {
     companyId?: NullableStringFieldUpdateOperationsInput | string | null
     Role_Company?: Role_CompanyUncheckedUpdateManyWithoutCompanyBranchNestedInput
     expense_company?: expense_companyUncheckedUpdateManyWithoutCompanyBranchNestedInput
+    BusinesstypeId?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type Role_CompanyUpsertWithoutUsersInput = {
@@ -46921,6 +49296,7 @@ export namespace Prisma {
     company?: CompanyCreateNestedOneWithoutBranchInput
     users?: UserCreateNestedManyWithoutCompanyBranchInput
     expense_company?: expense_companyCreateNestedManyWithoutCompanyBranchInput
+    Businesstype?: MainBusinessTypeCreateNestedOneWithoutCompanyBranchInput
   }
 
   export type CompanyBranchUncheckedCreateWithoutRole_CompanyInput = {
@@ -46952,6 +49328,7 @@ export namespace Prisma {
     companyId?: string | null
     users?: UserUncheckedCreateNestedManyWithoutCompanyBranchInput
     expense_company?: expense_companyUncheckedCreateNestedManyWithoutCompanyBranchInput
+    BusinesstypeId?: string | null
   }
 
   export type CompanyBranchCreateOrConnectWithoutRole_CompanyInput = {
@@ -47009,6 +49386,7 @@ export namespace Prisma {
     company?: CompanyUpdateOneWithoutBranchNestedInput
     users?: UserUpdateManyWithoutCompanyBranchNestedInput
     expense_company?: expense_companyUpdateManyWithoutCompanyBranchNestedInput
+    Businesstype?: MainBusinessTypeUpdateOneWithoutCompanyBranchNestedInput
   }
 
   export type CompanyBranchUncheckedUpdateWithoutRole_CompanyInput = {
@@ -47040,6 +49418,7 @@ export namespace Prisma {
     companyId?: NullableStringFieldUpdateOperationsInput | string | null
     users?: UserUncheckedUpdateManyWithoutCompanyBranchNestedInput
     expense_company?: expense_companyUncheckedUpdateManyWithoutCompanyBranchNestedInput
+    BusinesstypeId?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type DistrictCreateWithoutProvinceInput = {
@@ -49400,6 +51779,7 @@ export namespace Prisma {
     company?: CompanyCreateNestedOneWithoutBranchInput
     users?: UserCreateNestedManyWithoutCompanyBranchInput
     Role_Company?: Role_CompanyCreateNestedManyWithoutCompanyBranchInput
+    Businesstype?: MainBusinessTypeCreateNestedOneWithoutCompanyBranchInput
   }
 
   export type CompanyBranchUncheckedCreateWithoutExpense_companyInput = {
@@ -49431,6 +51811,7 @@ export namespace Prisma {
     companyId?: string | null
     users?: UserUncheckedCreateNestedManyWithoutCompanyBranchInput
     Role_Company?: Role_CompanyUncheckedCreateNestedManyWithoutCompanyBranchInput
+    BusinesstypeId?: string | null
   }
 
   export type CompanyBranchCreateOrConnectWithoutExpense_companyInput = {
@@ -49526,6 +51907,7 @@ export namespace Prisma {
     company?: CompanyUpdateOneWithoutBranchNestedInput
     users?: UserUpdateManyWithoutCompanyBranchNestedInput
     Role_Company?: Role_CompanyUpdateManyWithoutCompanyBranchNestedInput
+    Businesstype?: MainBusinessTypeUpdateOneWithoutCompanyBranchNestedInput
   }
 
   export type CompanyBranchUncheckedUpdateWithoutExpense_companyInput = {
@@ -49557,6 +51939,7 @@ export namespace Prisma {
     companyId?: NullableStringFieldUpdateOperationsInput | string | null
     users?: UserUncheckedUpdateManyWithoutCompanyBranchNestedInput
     Role_Company?: Role_CompanyUncheckedUpdateManyWithoutCompanyBranchNestedInput
+    BusinesstypeId?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type provident_logCreateWithoutSalaryInput = {
@@ -51285,6 +53668,175 @@ export namespace Prisma {
     cretedByfk?: log_positionnUncheckedUpdateManyWithoutCretedByfkNestedInput
   }
 
+  export type SubBusinessTypeCreateWithoutMainBusinessTypeInput = {
+    id: string
+    name: string
+  }
+
+  export type SubBusinessTypeUncheckedCreateWithoutMainBusinessTypeInput = {
+    id: string
+    name: string
+  }
+
+  export type SubBusinessTypeCreateOrConnectWithoutMainBusinessTypeInput = {
+    where: SubBusinessTypeWhereUniqueInput
+    create: XOR<SubBusinessTypeCreateWithoutMainBusinessTypeInput, SubBusinessTypeUncheckedCreateWithoutMainBusinessTypeInput>
+  }
+
+  export type SubBusinessTypeCreateManyMainBusinessTypeInputEnvelope = {
+    data: Enumerable<SubBusinessTypeCreateManyMainBusinessTypeInput>
+    skipDuplicates?: boolean
+  }
+
+  export type CompanyBranchCreateWithoutBusinesstypeInput = {
+    id: string
+    isMainbranch?: boolean
+    name: string
+    address: string
+    address_2?: string | null
+    city: string
+    state: string
+    zip: string
+    country?: string | null
+    tel?: string | null
+    fax?: string | null
+    website?: string | null
+    lat?: string | null
+    lng?: string | null
+    email?: string | null
+    email_2?: string | null
+    company_type?: string | null
+    sub_company_type?: string | null
+    registeredamount?: string | null
+    social_facebook?: string | null
+    social_likedin?: string | null
+    social_instragram?: string | null
+    social_line?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    company?: CompanyCreateNestedOneWithoutBranchInput
+    users?: UserCreateNestedManyWithoutCompanyBranchInput
+    Role_Company?: Role_CompanyCreateNestedManyWithoutCompanyBranchInput
+    expense_company?: expense_companyCreateNestedManyWithoutCompanyBranchInput
+  }
+
+  export type CompanyBranchUncheckedCreateWithoutBusinesstypeInput = {
+    id: string
+    isMainbranch?: boolean
+    name: string
+    address: string
+    address_2?: string | null
+    city: string
+    state: string
+    zip: string
+    country?: string | null
+    tel?: string | null
+    fax?: string | null
+    website?: string | null
+    lat?: string | null
+    lng?: string | null
+    email?: string | null
+    email_2?: string | null
+    company_type?: string | null
+    sub_company_type?: string | null
+    registeredamount?: string | null
+    social_facebook?: string | null
+    social_likedin?: string | null
+    social_instragram?: string | null
+    social_line?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    companyId?: string | null
+    users?: UserUncheckedCreateNestedManyWithoutCompanyBranchInput
+    Role_Company?: Role_CompanyUncheckedCreateNestedManyWithoutCompanyBranchInput
+    expense_company?: expense_companyUncheckedCreateNestedManyWithoutCompanyBranchInput
+  }
+
+  export type CompanyBranchCreateOrConnectWithoutBusinesstypeInput = {
+    where: CompanyBranchWhereUniqueInput
+    create: XOR<CompanyBranchCreateWithoutBusinesstypeInput, CompanyBranchUncheckedCreateWithoutBusinesstypeInput>
+  }
+
+  export type CompanyBranchCreateManyBusinesstypeInputEnvelope = {
+    data: Enumerable<CompanyBranchCreateManyBusinesstypeInput>
+    skipDuplicates?: boolean
+  }
+
+  export type SubBusinessTypeUpsertWithWhereUniqueWithoutMainBusinessTypeInput = {
+    where: SubBusinessTypeWhereUniqueInput
+    update: XOR<SubBusinessTypeUpdateWithoutMainBusinessTypeInput, SubBusinessTypeUncheckedUpdateWithoutMainBusinessTypeInput>
+    create: XOR<SubBusinessTypeCreateWithoutMainBusinessTypeInput, SubBusinessTypeUncheckedCreateWithoutMainBusinessTypeInput>
+  }
+
+  export type SubBusinessTypeUpdateWithWhereUniqueWithoutMainBusinessTypeInput = {
+    where: SubBusinessTypeWhereUniqueInput
+    data: XOR<SubBusinessTypeUpdateWithoutMainBusinessTypeInput, SubBusinessTypeUncheckedUpdateWithoutMainBusinessTypeInput>
+  }
+
+  export type SubBusinessTypeUpdateManyWithWhereWithoutMainBusinessTypeInput = {
+    where: SubBusinessTypeScalarWhereInput
+    data: XOR<SubBusinessTypeUpdateManyMutationInput, SubBusinessTypeUncheckedUpdateManyWithoutSubBusinessTypeInput>
+  }
+
+  export type SubBusinessTypeScalarWhereInput = {
+    AND?: Enumerable<SubBusinessTypeScalarWhereInput>
+    OR?: Enumerable<SubBusinessTypeScalarWhereInput>
+    NOT?: Enumerable<SubBusinessTypeScalarWhereInput>
+    id?: UuidFilter | string
+    name?: StringFilter | string
+    MainBId?: UuidFilter | string
+  }
+
+  export type CompanyBranchUpsertWithWhereUniqueWithoutBusinesstypeInput = {
+    where: CompanyBranchWhereUniqueInput
+    update: XOR<CompanyBranchUpdateWithoutBusinesstypeInput, CompanyBranchUncheckedUpdateWithoutBusinesstypeInput>
+    create: XOR<CompanyBranchCreateWithoutBusinesstypeInput, CompanyBranchUncheckedCreateWithoutBusinesstypeInput>
+  }
+
+  export type CompanyBranchUpdateWithWhereUniqueWithoutBusinesstypeInput = {
+    where: CompanyBranchWhereUniqueInput
+    data: XOR<CompanyBranchUpdateWithoutBusinesstypeInput, CompanyBranchUncheckedUpdateWithoutBusinesstypeInput>
+  }
+
+  export type CompanyBranchUpdateManyWithWhereWithoutBusinesstypeInput = {
+    where: CompanyBranchScalarWhereInput
+    data: XOR<CompanyBranchUpdateManyMutationInput, CompanyBranchUncheckedUpdateManyWithoutCompanyBranchInput>
+  }
+
+  export type MainBusinessTypeCreateWithoutSubBusinessTypeInput = {
+    id: string
+    name: string
+    CompanyBranch?: CompanyBranchCreateNestedManyWithoutBusinesstypeInput
+  }
+
+  export type MainBusinessTypeUncheckedCreateWithoutSubBusinessTypeInput = {
+    id: string
+    name: string
+    CompanyBranch?: CompanyBranchUncheckedCreateNestedManyWithoutBusinesstypeInput
+  }
+
+  export type MainBusinessTypeCreateOrConnectWithoutSubBusinessTypeInput = {
+    where: MainBusinessTypeWhereUniqueInput
+    create: XOR<MainBusinessTypeCreateWithoutSubBusinessTypeInput, MainBusinessTypeUncheckedCreateWithoutSubBusinessTypeInput>
+  }
+
+  export type MainBusinessTypeUpsertWithoutSubBusinessTypeInput = {
+    update: XOR<MainBusinessTypeUpdateWithoutSubBusinessTypeInput, MainBusinessTypeUncheckedUpdateWithoutSubBusinessTypeInput>
+    create: XOR<MainBusinessTypeCreateWithoutSubBusinessTypeInput, MainBusinessTypeUncheckedCreateWithoutSubBusinessTypeInput>
+  }
+
+  export type MainBusinessTypeUpdateWithoutSubBusinessTypeInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    CompanyBranch?: CompanyBranchUpdateManyWithoutBusinesstypeNestedInput
+  }
+
+  export type MainBusinessTypeUncheckedUpdateWithoutSubBusinessTypeInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    CompanyBranch?: CompanyBranchUncheckedUpdateManyWithoutBusinesstypeNestedInput
+  }
+
   export type CompanyBranchCreateManyCompanyInput = {
     id: string
     isMainbranch?: boolean
@@ -51311,6 +53863,7 @@ export namespace Prisma {
     social_line?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
+    BusinesstypeId?: string | null
   }
 
   export type mas_positionlevel3CreateManyCompanyInput = {
@@ -51389,6 +53942,7 @@ export namespace Prisma {
     users?: UserUpdateManyWithoutCompanyBranchNestedInput
     Role_Company?: Role_CompanyUpdateManyWithoutCompanyBranchNestedInput
     expense_company?: expense_companyUpdateManyWithoutCompanyBranchNestedInput
+    Businesstype?: MainBusinessTypeUpdateOneWithoutCompanyBranchNestedInput
   }
 
   export type CompanyBranchUncheckedUpdateWithoutCompanyInput = {
@@ -51420,6 +53974,7 @@ export namespace Prisma {
     users?: UserUncheckedUpdateManyWithoutCompanyBranchNestedInput
     Role_Company?: Role_CompanyUncheckedUpdateManyWithoutCompanyBranchNestedInput
     expense_company?: expense_companyUncheckedUpdateManyWithoutCompanyBranchNestedInput
+    BusinesstypeId?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type CompanyBranchUncheckedUpdateManyWithoutBranchInput = {
@@ -51448,6 +54003,7 @@ export namespace Prisma {
     social_line?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    BusinesstypeId?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type mas_positionlevel3UpdateWithoutCompanyInput = {
@@ -53697,6 +56253,148 @@ export namespace Prisma {
     detail_leave?: StringFieldUpdateOperationsInput | string
     Status?: IntFieldUpdateOperationsInput | number
     user_id?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type SubBusinessTypeCreateManyMainBusinessTypeInput = {
+    id: string
+    name: string
+  }
+
+  export type CompanyBranchCreateManyBusinesstypeInput = {
+    id: string
+    isMainbranch?: boolean
+    name: string
+    address: string
+    address_2?: string | null
+    city: string
+    state: string
+    zip: string
+    country?: string | null
+    tel?: string | null
+    fax?: string | null
+    website?: string | null
+    lat?: string | null
+    lng?: string | null
+    email?: string | null
+    email_2?: string | null
+    company_type?: string | null
+    sub_company_type?: string | null
+    registeredamount?: string | null
+    social_facebook?: string | null
+    social_likedin?: string | null
+    social_instragram?: string | null
+    social_line?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    companyId?: string | null
+  }
+
+  export type SubBusinessTypeUpdateWithoutMainBusinessTypeInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type SubBusinessTypeUncheckedUpdateWithoutMainBusinessTypeInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type SubBusinessTypeUncheckedUpdateManyWithoutSubBusinessTypeInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type CompanyBranchUpdateWithoutBusinesstypeInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    isMainbranch?: BoolFieldUpdateOperationsInput | boolean
+    name?: StringFieldUpdateOperationsInput | string
+    address?: StringFieldUpdateOperationsInput | string
+    address_2?: NullableStringFieldUpdateOperationsInput | string | null
+    city?: StringFieldUpdateOperationsInput | string
+    state?: StringFieldUpdateOperationsInput | string
+    zip?: StringFieldUpdateOperationsInput | string
+    country?: NullableStringFieldUpdateOperationsInput | string | null
+    tel?: NullableStringFieldUpdateOperationsInput | string | null
+    fax?: NullableStringFieldUpdateOperationsInput | string | null
+    website?: NullableStringFieldUpdateOperationsInput | string | null
+    lat?: NullableStringFieldUpdateOperationsInput | string | null
+    lng?: NullableStringFieldUpdateOperationsInput | string | null
+    email?: NullableStringFieldUpdateOperationsInput | string | null
+    email_2?: NullableStringFieldUpdateOperationsInput | string | null
+    company_type?: NullableStringFieldUpdateOperationsInput | string | null
+    sub_company_type?: NullableStringFieldUpdateOperationsInput | string | null
+    registeredamount?: NullableStringFieldUpdateOperationsInput | string | null
+    social_facebook?: NullableStringFieldUpdateOperationsInput | string | null
+    social_likedin?: NullableStringFieldUpdateOperationsInput | string | null
+    social_instragram?: NullableStringFieldUpdateOperationsInput | string | null
+    social_line?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    company?: CompanyUpdateOneWithoutBranchNestedInput
+    users?: UserUpdateManyWithoutCompanyBranchNestedInput
+    Role_Company?: Role_CompanyUpdateManyWithoutCompanyBranchNestedInput
+    expense_company?: expense_companyUpdateManyWithoutCompanyBranchNestedInput
+  }
+
+  export type CompanyBranchUncheckedUpdateWithoutBusinesstypeInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    isMainbranch?: BoolFieldUpdateOperationsInput | boolean
+    name?: StringFieldUpdateOperationsInput | string
+    address?: StringFieldUpdateOperationsInput | string
+    address_2?: NullableStringFieldUpdateOperationsInput | string | null
+    city?: StringFieldUpdateOperationsInput | string
+    state?: StringFieldUpdateOperationsInput | string
+    zip?: StringFieldUpdateOperationsInput | string
+    country?: NullableStringFieldUpdateOperationsInput | string | null
+    tel?: NullableStringFieldUpdateOperationsInput | string | null
+    fax?: NullableStringFieldUpdateOperationsInput | string | null
+    website?: NullableStringFieldUpdateOperationsInput | string | null
+    lat?: NullableStringFieldUpdateOperationsInput | string | null
+    lng?: NullableStringFieldUpdateOperationsInput | string | null
+    email?: NullableStringFieldUpdateOperationsInput | string | null
+    email_2?: NullableStringFieldUpdateOperationsInput | string | null
+    company_type?: NullableStringFieldUpdateOperationsInput | string | null
+    sub_company_type?: NullableStringFieldUpdateOperationsInput | string | null
+    registeredamount?: NullableStringFieldUpdateOperationsInput | string | null
+    social_facebook?: NullableStringFieldUpdateOperationsInput | string | null
+    social_likedin?: NullableStringFieldUpdateOperationsInput | string | null
+    social_instragram?: NullableStringFieldUpdateOperationsInput | string | null
+    social_line?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    companyId?: NullableStringFieldUpdateOperationsInput | string | null
+    users?: UserUncheckedUpdateManyWithoutCompanyBranchNestedInput
+    Role_Company?: Role_CompanyUncheckedUpdateManyWithoutCompanyBranchNestedInput
+    expense_company?: expense_companyUncheckedUpdateManyWithoutCompanyBranchNestedInput
+  }
+
+  export type CompanyBranchUncheckedUpdateManyWithoutCompanyBranchInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    isMainbranch?: BoolFieldUpdateOperationsInput | boolean
+    name?: StringFieldUpdateOperationsInput | string
+    address?: StringFieldUpdateOperationsInput | string
+    address_2?: NullableStringFieldUpdateOperationsInput | string | null
+    city?: StringFieldUpdateOperationsInput | string
+    state?: StringFieldUpdateOperationsInput | string
+    zip?: StringFieldUpdateOperationsInput | string
+    country?: NullableStringFieldUpdateOperationsInput | string | null
+    tel?: NullableStringFieldUpdateOperationsInput | string | null
+    fax?: NullableStringFieldUpdateOperationsInput | string | null
+    website?: NullableStringFieldUpdateOperationsInput | string | null
+    lat?: NullableStringFieldUpdateOperationsInput | string | null
+    lng?: NullableStringFieldUpdateOperationsInput | string | null
+    email?: NullableStringFieldUpdateOperationsInput | string | null
+    email_2?: NullableStringFieldUpdateOperationsInput | string | null
+    company_type?: NullableStringFieldUpdateOperationsInput | string | null
+    sub_company_type?: NullableStringFieldUpdateOperationsInput | string | null
+    registeredamount?: NullableStringFieldUpdateOperationsInput | string | null
+    social_facebook?: NullableStringFieldUpdateOperationsInput | string | null
+    social_likedin?: NullableStringFieldUpdateOperationsInput | string | null
+    social_instragram?: NullableStringFieldUpdateOperationsInput | string | null
+    social_line?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    companyId?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
 
