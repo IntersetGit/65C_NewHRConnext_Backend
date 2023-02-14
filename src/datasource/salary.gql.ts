@@ -424,7 +424,8 @@ user_id:String
     bookbank_log: [Bookbank_log_type]
     bookbank_log_admin(userId: String): [Bookbank_log_type]
     provident_log(userId:String):[provident_log]
-    datasalary_mee(date:String): [data_salary_me]
+    mydata_salary(years: String): data_salary
+    # datasalary_mee(years: String): data_salary_me
     # Selfdatasalary: selfsalary
     #Selfdatasalary: selfsalary
     mas_all_collect: mas_all_collect
@@ -451,19 +452,7 @@ user_id:String
 const resolvers: Resolvers = {
   Query: {
     async salary(parant: any, args: any, ctx: any) {
-      // const result = await ctx.prisma.salary.findMany({
-      //   include: {
-      //     User: true,
-      //     // mas_month: true,
-      //     // mas_years: true,
-      //     bookbank_log: true,
-      //   },
-      //   where: {
-      //     userId: args.userId,
-      //   },
-      // });
-      // return result;
-      // const date = args?.date ? args?.date : undefined;
+     
       let searchyears = args.years ? args.years : undefined
       const getdata = await ctx.prisma.user.findUnique({
         include: {
@@ -492,16 +481,36 @@ const resolvers: Resolvers = {
       return result;
     },
 
-    async datasalary_mee(parant, args: any, ctx) {  //เรียกดูตามปี
-      const date = args?.date ? args?.date : undefined;
-      const getdata = await ctx.prisma.user.findMany({
-        include: { salary: { where: { years: date }, include: { bookbank_log: true, mas_bank: true, } }, profile: true },
+    async mydata_salary(parant, args, ctx) {
+     console.log(ctx.currentUser?.id)
+      let searchyears = args.years ? args.years : undefined
+      const getmydata = await ctx.prisma.user.findUnique({
+        include: {
+          profile: true,
+          salary: { where: { years: searchyears } },
+          // company: { include: { branch: true } },
+          companyBranch: { include: { company: true } },
+          Position_user: { include: { mas_positionlevel3: true }, orderBy: { date: 'desc' } },
+          // bookbank_log: true
+          bookbank_log: { include: { mas_bank: true }, orderBy: { date: 'desc' } }
+        },
         where: {
-          id: ctx.currentUser?.id,
+          id: ctx.currentUser?.id
         },
       });
-      return getdata;
+      return getmydata;
     },
+
+    // async datasalary_mee(p:any, args:any, ctx:any) {  //เรียกดูตามปี
+    //   let searchyears = args.years ? args.years : undefined
+    //   const getdata = await ctx.prisma.user.findMany({
+    //     include: { salary: { where: { years: searchyears }, include: { bookbank_log: true, mas_bank: true, } }, profile: true },
+    //     where: {
+    //       id: ctx.currentUser?.id,
+    //     },
+    //   });
+    //   return getdata;
+    // },
 
     async salary_inmonthSlip(parant, args, ctx) { // for admin slip สำหรับให้ user เห็น
       const data = await ctx.prisma.user.findMany({

@@ -695,7 +695,6 @@ export type Query = {
   bookbank_log_admin?: Maybe<Array<Maybe<Bookbank_Log_Type>>>;
   company?: Maybe<ResponseCompany>;
   data_salary?: Maybe<Array<Maybe<Data_Salary>>>;
-  datasalary_mee?: Maybe<Array<Maybe<Data_Salary_Me>>>;
   getAllcompany?: Maybe<Array<Maybe<CompanyBranch>>>;
   getAllleave?: Maybe<Array<Maybe<Leave_Data>>>;
   getMasPositon?: Maybe<Array<Maybe<Mas_Positionlevel1>>>;
@@ -710,6 +709,7 @@ export type Query = {
   mas_all_collect?: Maybe<Mas_All_Collect>;
   mas_bank?: Maybe<Array<Maybe<Mas_Bank>>>;
   me?: Maybe<Me>;
+  mydata_salary?: Maybe<Data_Salary>;
   provident_log?: Maybe<Array<Maybe<Provident_Log>>>;
   salary?: Maybe<Data_Salary>;
   salary_inmonthSlip?: Maybe<Array<Maybe<Data_Salary>>>;
@@ -739,11 +739,6 @@ export type QueryData_SalaryArgs = {
   Position2?: InputMaybe<Scalars['String']>;
   Position3?: InputMaybe<Scalars['String']>;
   fristname?: InputMaybe<Scalars['String']>;
-};
-
-
-export type QueryDatasalary_MeeArgs = {
-  date?: InputMaybe<Scalars['String']>;
 };
 
 
@@ -779,6 +774,11 @@ export type QueryGetposition_UserArgs = {
 
 export type QueryMas_BankArgs = {
   id?: InputMaybe<Scalars['String']>;
+};
+
+
+export type QueryMydata_SalaryArgs = {
+  years?: InputMaybe<Scalars['String']>;
 };
 
 
@@ -2185,7 +2185,6 @@ export type QueryResolvers<ContextType = ApolloContext, ParentType extends Resol
   bookbank_log_admin?: Resolver<Maybe<Array<Maybe<ResolversTypes['Bookbank_log_type']>>>, ParentType, ContextType, Partial<QueryBookbank_Log_AdminArgs>>;
   company?: Resolver<Maybe<ResolversTypes['ResponseCompany']>, ParentType, ContextType, Partial<QueryCompanyArgs>>;
   data_salary?: Resolver<Maybe<Array<Maybe<ResolversTypes['data_salary']>>>, ParentType, ContextType, Partial<QueryData_SalaryArgs>>;
-  datasalary_mee?: Resolver<Maybe<Array<Maybe<ResolversTypes['data_salary_me']>>>, ParentType, ContextType, Partial<QueryDatasalary_MeeArgs>>;
   getAllcompany?: Resolver<Maybe<Array<Maybe<ResolversTypes['CompanyBranch']>>>, ParentType, ContextType, Partial<QueryGetAllcompanyArgs>>;
   getAllleave?: Resolver<Maybe<Array<Maybe<ResolversTypes['leave_data']>>>, ParentType, ContextType, Partial<QueryGetAllleaveArgs>>;
   getMasPositon?: Resolver<Maybe<Array<Maybe<ResolversTypes['mas_positionlevel1']>>>, ParentType, ContextType>;
@@ -2200,6 +2199,7 @@ export type QueryResolvers<ContextType = ApolloContext, ParentType extends Resol
   mas_all_collect?: Resolver<Maybe<ResolversTypes['mas_all_collect']>, ParentType, ContextType>;
   mas_bank?: Resolver<Maybe<Array<Maybe<ResolversTypes['mas_bank']>>>, ParentType, ContextType, Partial<QueryMas_BankArgs>>;
   me?: Resolver<Maybe<ResolversTypes['Me']>, ParentType, ContextType>;
+  mydata_salary?: Resolver<Maybe<ResolversTypes['data_salary']>, ParentType, ContextType, Partial<QueryMydata_SalaryArgs>>;
   provident_log?: Resolver<Maybe<Array<Maybe<ResolversTypes['provident_log']>>>, ParentType, ContextType, Partial<QueryProvident_LogArgs>>;
   salary?: Resolver<Maybe<ResolversTypes['data_salary']>, ParentType, ContextType, Partial<QuerySalaryArgs>>;
   salary_inmonthSlip?: Resolver<Maybe<Array<Maybe<ResolversTypes['data_salary']>>>, ParentType, ContextType, Partial<QuerySalary_InmonthSlipArgs>>;
