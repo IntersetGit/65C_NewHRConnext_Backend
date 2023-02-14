@@ -419,7 +419,7 @@ user_id:String
   }
 
   type Query {
-    salary(userId:String , years: String): [data_salary]
+    salary(userId:String , years: String): data_salary
     salary_inmonthSlip(userId: String, month: String, years: String):[data_salary]
     bookbank_log: [Bookbank_log_type]
     bookbank_log_admin(userId: String): [Bookbank_log_type]
@@ -465,7 +465,7 @@ const resolvers: Resolvers = {
       // return result;
       // const date = args?.date ? args?.date : undefined;
       let searchyears = args.years ? args.years : undefined
-      const getdata = await ctx.prisma.user.findMany({
+      const getdata = await ctx.prisma.user.findUnique({
         include: {
           profile: true,
           salary: { where: { years: searchyears } },
