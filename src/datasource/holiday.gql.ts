@@ -183,7 +183,9 @@ export const holidayResolvers: Resolvers = {
         message: 'success',
         status: true,
       };
-    }
+    },
+
+    
   },
 };
 
