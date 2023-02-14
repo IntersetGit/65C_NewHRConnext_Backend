@@ -258,6 +258,7 @@ export const salaryTypedef = gql`
     bankId: String
     date: Date
     vat_per: Float
+    ss_per: Float
     social_security: Float
     companyBranchId: String
     Salary: salary
@@ -355,6 +356,7 @@ export const salaryTypedef = gql`
     salary: [salary]
     bookbank_log: [Bookbank_log_type]
     Position_user: [Position_user]
+    expense_company: [expense_company]
   }
 type position_userr {
 id:ID!
@@ -452,7 +454,7 @@ user_id:String
 const resolvers: Resolvers = {
   Query: {
     async salary(parant: any, args: any, ctx: any) {
-     
+
       let searchyears = args.years ? args.years : undefined
       const getdata = await ctx.prisma.user.findUnique({
         include: {
@@ -482,7 +484,7 @@ const resolvers: Resolvers = {
     },
 
     async mydata_salary(parant, args, ctx) {
-     console.log(ctx.currentUser?.id)
+      console.log(ctx.currentUser?.id)
       let searchyears = args.years ? args.years : undefined
       const getmydata = await ctx.prisma.user.findUnique({
         include: {
@@ -638,7 +640,8 @@ const resolvers: Resolvers = {
             orderBy: { date: 'desc' }
           },
           salary: true,
-          bookbank_log: { include: { mas_bank: true }, orderBy: { date: 'desc' } }
+          bookbank_log: { include: { mas_bank: true }, orderBy: { date: 'desc' } },
+          companyBranch: { include: { expense_company: { orderBy: { date: 'desc' }} } }
         },
         where: {
           companyBranchId: ctx.currentUser?.branchId,
