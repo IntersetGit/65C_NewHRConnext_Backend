@@ -119,106 +119,106 @@ export const leaveResolvers: Resolvers = {
       let countleave2 = 0
       let countleave3 = 0
       let countleave4 = 0
-      if(!args.dataleaveId){
-      const getdataleave = await ctx.prisma.user.findMany({
-        include: {
-          profile: true,
-          Position_user: { include: { mas_positionlevel1: true, mas_positionlevel2: true, mas_positionlevel3: true } },
-          data_leave: { include: { mas_leave_type: true } }
-        },
-        where: {
-          id: ctx.currentUser?.id
-        },
-      })
-      if (getdataleave) {
-        getdataleave.forEach((a) => {
-          if (a.data_leave) {
-            a.data_leave.forEach((e) => {
-              if (e.mas_leave_type.name == "ลาพักร้อน") {
-                cout_hours = cout_hours + e.quantity_hours
-                countleave1 = countleave1 + e.quantity_day
-              }
-              if (e.mas_leave_type.name == "ลากิจ") {
-                cout_hours2 = cout_hours2 + e.quantity_hours
-                countleave2 = countleave2 + e.quantity_day
-              }
-              if (e.mas_leave_type.name == "ลาป่วย") {
-                cout_hours3 = cout_hours3 + e.quantity_hours
-                countleave3 = countleave3 + e.quantity_day
-
-              }
-              if (e.mas_leave_type.name == "ลาอื่นๆ") {
-                cout_hours4 = cout_hours4 + e.quantity_hours
-                countleave4 = countleave4 + e.quantity_day
-              }
-            })
-          }
+      if (!args.dataleaveId) {
+        const getdataleave = await ctx.prisma.user.findMany({
+          include: {
+            profile: true,
+            Position_user: { include: { mas_positionlevel1: true, mas_positionlevel2: true, mas_positionlevel3: true } },
+            data_leave: { include: { mas_leave_type: true } }
+          },
+          where: {
+            id: ctx.currentUser?.id
+          },
         })
-        if (cout_hours >= 8) {
-          let a = Math.trunc(cout_hours / 8)
-          countleave1 = a + countleave1
-          cout_hours = cout_hours - (a * 8)
-        }
-        if (cout_hours2 >= 8) {
-          let a = Math.trunc(cout_hours2 / 8)
-          countleave2 = a + countleave2
-          cout_hours2 = cout_hours2 - (a * 8)
-        }
-        if (cout_hours3 >= 8) {
-          let a = Math.trunc(cout_hours3 / 8)
-          countleave3 = a + countleave3
-          cout_hours3 = cout_hours3 - (a * 8)
-        }
-        if (cout_hours4 >= 8) {
-          let b = Math.trunc(cout_hours4 / 8)
-          countleave4 = b + countleave4
-          cout_hours4 = cout_hours4 - (b * 8)
-        }
-      }
+        if (getdataleave) {
+          getdataleave.forEach((a) => {
+            if (a.data_leave) {
+              a.data_leave.forEach((e) => {
+                if (e.mas_leave_type.name == "ลาพักร้อน") {
+                  cout_hours = cout_hours + e.quantity_hours
+                  countleave1 = countleave1 + e.quantity_day
+                }
+                if (e.mas_leave_type.name == "ลากิจ") {
+                  cout_hours2 = cout_hours2 + e.quantity_hours
+                  countleave2 = countleave2 + e.quantity_day
+                }
+                if (e.mas_leave_type.name == "ลาป่วย") {
+                  cout_hours3 = cout_hours3 + e.quantity_hours
+                  countleave3 = countleave3 + e.quantity_day
 
-      let dataCount = {
-        name_1: 'ลาพักร้อน ' + countleave1 + ' วัน ' + cout_hours + ' ชั่วโมง',
-        count1: countleave1,
-        hours1: cout_hours,
-        name_2: 'ลากิจ ' + countleave2 + ' วัน ' + cout_hours2 + ' ชั่วโมง',
-        count2: countleave2,
-        hours2: cout_hours2,
-        name_3: 'ลาป่วย ' + countleave3 + ' วัน ' + cout_hours3 + ' ชั่วโมง',
-        count3: countleave3,
-        hours: cout_hours3,
-        name_4: 'ลาอื่นๆ ' + countleave4 + ' วัน ' + cout_hours4 + ' ชั่วโมง',
-        count4: countleave4,
-        hours4: cout_hours4
-      }
-    
-      // return getdataleave
-      return {
-        data_all: getdataleave,
-        data_count: dataCount
-      }
-    }else{
-      const search = args.dataleaveId? args.dataleaveId: undefined
-      const getdataleave = await ctx.prisma.user.findMany({
-        include: {
-          profile: true,
-          Position_user: { include: { mas_positionlevel1: true, mas_positionlevel2: true, mas_positionlevel3: true } },
-          data_leave: { include: { mas_leave_type: true } }
-        },
-        where: {
-          id: ctx.currentUser?.id,
-          AND:{
-            data_leave:{
-              some:{
-                id: args.dataleaveId
+                }
+                if (e.mas_leave_type.name == "ลาอื่นๆ") {
+                  cout_hours4 = cout_hours4 + e.quantity_hours
+                  countleave4 = countleave4 + e.quantity_day
+                }
+              })
+            }
+          })
+          if (cout_hours >= 8) {
+            let a = Math.trunc(cout_hours / 8)
+            countleave1 = a + countleave1
+            cout_hours = cout_hours - (a * 8)
+          }
+          if (cout_hours2 >= 8) {
+            let a = Math.trunc(cout_hours2 / 8)
+            countleave2 = a + countleave2
+            cout_hours2 = cout_hours2 - (a * 8)
+          }
+          if (cout_hours3 >= 8) {
+            let a = Math.trunc(cout_hours3 / 8)
+            countleave3 = a + countleave3
+            cout_hours3 = cout_hours3 - (a * 8)
+          }
+          if (cout_hours4 >= 8) {
+            let b = Math.trunc(cout_hours4 / 8)
+            countleave4 = b + countleave4
+            cout_hours4 = cout_hours4 - (b * 8)
+          }
+        }
+
+        let dataCount = {
+          name_1: 'ลาพักร้อน ' + countleave1 + ' วัน ' + cout_hours + ' ชั่วโมง',
+          count1: countleave1,
+          hours1: cout_hours,
+          name_2: 'ลากิจ ' + countleave2 + ' วัน ' + cout_hours2 + ' ชั่วโมง',
+          count2: countleave2,
+          hours2: cout_hours2,
+          name_3: 'ลาป่วย ' + countleave3 + ' วัน ' + cout_hours3 + ' ชั่วโมง',
+          count3: countleave3,
+          hours: cout_hours3,
+          name_4: 'ลาอื่นๆ ' + countleave4 + ' วัน ' + cout_hours4 + ' ชั่วโมง',
+          count4: countleave4,
+          hours4: cout_hours4
+        }
+
+        // return getdataleave
+        return {
+          data_all: getdataleave,
+          data_count: dataCount
+        }
+      } else {
+        const search = args.dataleaveId ? args.dataleaveId : undefined
+        const getdataleave = await ctx.prisma.user.findMany({
+          include: {
+            profile: true,
+            Position_user: { include: { mas_positionlevel1: true, mas_positionlevel2: true, mas_positionlevel3: true } },
+            data_leave: { include: { mas_leave_type: true } }
+          },
+          where: {
+            id: ctx.currentUser?.id,
+            AND: {
+              data_leave: {
+                some: {
+                  id: args.dataleaveId
+                }
               }
             }
-          }
-        },
-      })
-      return {
-        data_all: getdataleave
+          },
+        })
+        return {
+          data_all: getdataleave
+        }
       }
-    }
     },
 
     async getleava_alldata(p, args, ctx) {
@@ -240,9 +240,9 @@ export const leaveResolvers: Resolvers = {
             mas_leave_type: true
           },
           where: {
-            user:{
-              Position_user:{
-                some:{
+            user: {
+              Position_user: {
+                some: {
                   headderId: ctx.currentUser?.id
                 }
               }
