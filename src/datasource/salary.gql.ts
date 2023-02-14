@@ -698,6 +698,15 @@ const resolvers: Resolvers = {
         let Thismonth = dayjs(date).format("MM")
         const pro_emp = args.data?.provident_employee
         const pro_com = args.data?.provident_company
+
+        const find_salary = await ctx.prisma.salary.findMany({
+          where: {
+            id: args.data?.id
+          }
+        })
+        // console.log(find_salary)
+        let provi_log_id = find_salary[0].provident_logId
+
         const updatesalary = await ctx.prisma.salary.update({
           data: {
             mas_monthId: args.data?.mas_monthId as string,
@@ -739,51 +748,55 @@ const resolvers: Resolvers = {
             update_by: ctx.currentUser?.id,
             update_date: new Date(),
             mas_bankId: args.data?.mas_bankId,
-            provident_log: {
-              update: {
-                pro_employee: pro_emp,
-                pro_company: pro_com,
-                mas_all_collectId: args.data?.mas_all_collectId,
-                // bookbank_logId : bookbankID
-              }
-            }
           },
           where: {
             id: args.data?.id
           }
         });
 
-        // const find_salary = await ctx.prisma.salary.findMany({
-        //   where: {
-        //     id: args.salaryid
-        //   }
-        // })
-        // console.log(find_salary)
+        const updatepro_log = await ctx.prisma.provident_log.update({
+          data: {
+            pro_employee: pro_emp,
+            pro_company: pro_com,
+            mas_all_collectId: args.data?.mas_all_collectId,
+          },
+          where: {
+            id: provi_log_id
+          }
+        })
 
-        // const check_all_collect = await ctx.prisma.mas_all_collect.findMany({
-        //   where: {
-        //     userId: args.userId
-        //   }
-        // })
+        const check_all_collect = await ctx.prisma.mas_all_collect.findMany({
+          where: {
+            userId: args.userId
+          }
+        })
+        console.log(find_salary)
+        console.log(check_all_collect)
 
-        // let new_income_collet = check_all_collect[0].income_collect - find_salary[0].net
-        // console.log(new_income_collet)
-        // let new_vat_collect = check_all_collect[0].vat_collect - find_salary[0].vat
-        // console.log(new_vat_collect)
-        // let new_social_secu = check_all_collect[0].social_secu_collect - find_salary[0].social_security
-        // console.log(new_social_secu)
+        let new_income_collet = (check_all_collect[0].income_collect - find_salary[0].net) + args.data?.net
+        console.log(new_income_collet)
+        let new_vat_collect = (check_all_collect[0].vat_collect - find_salary[0].vat) + args.data?.vat
+        console.log(new_vat_collect)
+        let new_social_secu = (check_all_collect[0].social_secu_collect - find_salary[0].social_security) + args.data?.social_security
+        console.log(new_social_secu)
+        let new_pro_emp = (check_all_collect[0].provident_collect_employee - find_salary[0].provident_employee) + pro_emp
+        console.log(new_pro_emp);
+        let new_pro_com = (check_all_collect[0].provident_collect_company - find_salary[0].provident_company) + pro_com
+        console.log(new_pro_com);
 
-        // const update_all_collect = await ctx.prisma.mas_all_collect.update({
-        //   data: {
-        //     date: new Date(),
-        //     income_collect: new_income_collet,
-        //     vat_collect: new_vat_collect,
-        //     social_secu_collect: new_social_secu,
-        //     provident_collect_employee: args.data?.provident_employee,
-        //     provident_collect_company: args.data?.provident_company,
-        //   },
-        //   where: { userId: args.userId },
-        // });
+        const update_all_collect = await ctx.prisma.mas_all_collect.update({
+          data: {
+            date: new Date(),
+            income_collect: new_income_collet,
+            vat_collect: new_vat_collect,
+            social_secu_collect: new_social_secu,
+            provident_collect_employee: new_pro_emp,
+            provident_collect_company: new_pro_com,
+          },
+          where: {
+            userId: args.data.userId,
+          },
+        });
         return {
           message: 'update success',
           status: true,
@@ -821,6 +834,15 @@ const resolvers: Resolvers = {
         },
       });
 
+      const check_bookbank = await ctx.prisma.bookbank_log.findMany({
+        where: {
+          userId : args.data.userId
+        },orderBy:{
+          date: "desc"
+        }
+      })  
+      let bookbank_logId = check_bookbank[0].id
+
       let time
       let result_incomeYears = 0;
       let result_vatYears = 0;
@@ -857,7 +879,7 @@ const resolvers: Resolvers = {
             total_expense: args.data?.total_expense as number,
             net: args.data?.net as number,
             userId: args.data?.userId,
-            bookbank_logId: args.data?.bookbank_logId,
+            bookbank_logId: bookbank_logId,
             mas_income_typeId: args.data?.mas_income_typeId,
             date: new Date(args.data?.date),
             mas_salary_statusId: "765d31b6-ab63-11ed-afa1-0242ac120002",
@@ -984,7 +1006,7 @@ const resolvers: Resolvers = {
             total_expense: args.data?.total_expense as number,
             net: args.data?.net as number,
             userId: args.data?.userId,
-            bookbank_logId: args.data?.bookbank_logId,
+            bookbank_logId: bookbank_logId,
             mas_income_typeId: args.data?.mas_income_typeId,
             date: new Date(args.data?.date),
             mas_salary_statusId: "765d31b6-ab63-11ed-afa1-0242ac120002",
@@ -1206,6 +1228,10 @@ const resolvers: Resolvers = {
       console.log(new_vat_collect)
       let new_social_secu = check_all_collect[0].social_secu_collect - find_salary[0].social_security
       console.log(new_social_secu)
+      let new_pro_emp = check_all_collect[0].provident_collect_employee - find_salary[0].provident_employee
+      console.log(new_pro_emp);
+      let new_pro_com = check_all_collect[0].provident_collect_company - find_salary[0].provident_company 
+      console.log(new_pro_com);
 
       const new_collect = await ctx.prisma.mas_all_collect.update({
         data: {
@@ -1213,8 +1239,8 @@ const resolvers: Resolvers = {
           income_collect: new_income_collet,
           vat_collect: new_vat_collect,
           social_secu_collect: new_social_secu,
-          provident_collect_employee: args.data?.provident_employee,
-          provident_collect_company: args.data?.provident_company,
+          provident_collect_employee: new_pro_emp,
+          provident_collect_company: new_pro_com,
         },
         where: { userId: args.userId },
       })
