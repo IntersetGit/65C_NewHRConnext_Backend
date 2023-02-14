@@ -213,6 +213,15 @@ exports.Prisma.JsonNullValueInput = makeEnum({
   JsonNull: Prisma.JsonNull
 });
 
+exports.Prisma.Log_positionnScalarFieldEnum = makeEnum({
+  id: 'id',
+  positionId: 'positionId',
+  cretedBy: 'cretedBy',
+  creteddate: 'creteddate',
+  updtedBy: 'updtedBy',
+  updteddate: 'updteddate'
+});
+
 exports.Prisma.Mas_all_collectScalarFieldEnum = makeEnum({
   id: 'id',
   userId: 'userId',
@@ -497,7 +506,8 @@ exports.Prisma.ModelName = makeEnum({
   bookbank_log: 'bookbank_log',
   provident_log: 'provident_log',
   mas_leave_type: 'mas_leave_type',
-  data_leave: 'data_leave'
+  data_leave: 'data_leave',
+  log_positionn: 'log_positionn'
 });
 
 /**

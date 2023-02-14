@@ -55,7 +55,7 @@ model CompanyBranch {
   tel               String?           @db.VarChar(255)
   fax               String?           @db.VarChar(255)
   website           String?           @db.VarChar(255)
-  lat               String?
+  lat               String?   
   lng               String?
   email             String?
   email_2           String?
@@ -151,6 +151,8 @@ model User {
   provident_log   provident_log[]
   bookbank_log    bookbank_log[]
   data_leave      data_leave[]
+  cretedByfk      log_positionn[]
+  updtedByfk      log_positionn[]  @relation("updtedByfk")
 }
 
 model Role {
@@ -252,6 +254,7 @@ model Position_user {
   mas_positionlevel1 mas_positionlevel1? @relation(fields: [position1_id], references: [id])
   mas_positionlevel2 mas_positionlevel2? @relation(fields: [position2_id], references: [id])
   mas_positionlevel3 mas_positionlevel3? @relation(fields: [position3_id], references: [id])
+  log_position       log_positionn[]
 }
 
 model holiday_date {
@@ -403,12 +406,12 @@ model mas_all_collect {
   id                         String          @unique @db.Uuid
   user                       User            @relation(fields: [userId], references: [id])
   userId                     String          @unique @db.Uuid
-  date                       DateTime
-  income_collect             Float
+  date                       DateTime?
+  income_collect             Float?
   vat_collect                Float?
-  social_secu_collect        Float
-  provident_collect_employee Float
-  provident_collect_company  Float
+  social_secu_collect        Float?
+  provident_collect_employee Float?
+  provident_collect_company  Float?
   // bookbank_log               bookbank_log[]
   provident_log              provident_log[]
   // @@unique([id , userId])
@@ -471,4 +474,18 @@ model data_leave {
   Status         Int            @db.SmallInt
   user_id        String         @db.Uuid
   user           User           @relation(fields: [user_id], references: [id])
+}
+
+
+//------------ เก็บ logabout positions -------------------------//
+model log_positionn { 
+  id              String         @unique@db.Uuid
+  positionId      String         @db.Uuid
+  cretedBy        String         @db.Uuid
+  creteddate      DateTime    
+  updtedBy        String         @db.Uuid
+  updteddate      DateTime
+  Position_user   Position_user  @relation(fields: [positionId], references: [id])
+  cretedByfk      User           @relation(fields: [cretedBy], references: [id])
+  updtedByfk      User           @relation("updtedByfk",fields: [updtedBy], references: [id])
 }
