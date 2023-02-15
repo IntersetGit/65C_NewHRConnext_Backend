@@ -212,8 +212,7 @@ exports.Prisma.Log_positionnScalarFieldEnum = makeEnum({
   positionId: 'positionId',
   cretedBy: 'cretedBy',
   creteddate: 'creteddate',
-  updtedBy: 'updtedBy',
-  updteddate: 'updteddate'
+  detail: 'detail'
 });
 
 exports.Prisma.MainBusinessTypeScalarFieldEnum = makeEnum({

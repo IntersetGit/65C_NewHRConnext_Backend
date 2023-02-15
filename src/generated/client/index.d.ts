@@ -481,8 +481,7 @@ export type log_positionn = {
   positionId: string
   cretedBy: string
   creteddate: Date
-  updtedBy: string
-  updteddate: Date
+  detail: string
 }
 
 /**
@@ -1728,7 +1727,6 @@ export namespace Prisma {
     bookbank_log: number
     data_leave: number
     cretedByfk: number
-    updtedByfk: number
   }
 
   export type UserCountOutputTypeSelect = {
@@ -1741,7 +1739,6 @@ export namespace Prisma {
     bookbank_log?: boolean
     data_leave?: boolean
     cretedByfk?: boolean
-    updtedByfk?: boolean
   }
 
   export type UserCountOutputTypeGetPayload<S extends boolean | null | undefined | UserCountOutputTypeArgs> =
@@ -6484,7 +6481,6 @@ export namespace Prisma {
     bookbank_log?: boolean | User$bookbank_logArgs
     data_leave?: boolean | User$data_leaveArgs
     cretedByfk?: boolean | User$cretedByfkArgs
-    updtedByfk?: boolean | User$updtedByfkArgs
     _count?: boolean | UserCountOutputTypeArgs
   }
 
@@ -6503,7 +6499,6 @@ export namespace Prisma {
     bookbank_log?: boolean | User$bookbank_logArgs
     data_leave?: boolean | User$data_leaveArgs
     cretedByfk?: boolean | User$cretedByfkArgs
-    updtedByfk?: boolean | User$updtedByfkArgs
     _count?: boolean | UserCountOutputTypeArgs
   }
 
@@ -6527,7 +6522,6 @@ export namespace Prisma {
         P extends 'bookbank_log' ? Array < bookbank_logGetPayload<S['include'][P]>>  :
         P extends 'data_leave' ? Array < data_leaveGetPayload<S['include'][P]>>  :
         P extends 'cretedByfk' ? Array < log_positionnGetPayload<S['include'][P]>>  :
-        P extends 'updtedByfk' ? Array < log_positionnGetPayload<S['include'][P]>>  :
         P extends '_count' ? UserCountOutputTypeGetPayload<S['include'][P]> :  never
   } 
     : S extends { select: any } & (UserArgs | UserFindManyArgs)
@@ -6546,7 +6540,6 @@ export namespace Prisma {
         P extends 'bookbank_log' ? Array < bookbank_logGetPayload<S['select'][P]>>  :
         P extends 'data_leave' ? Array < data_leaveGetPayload<S['select'][P]>>  :
         P extends 'cretedByfk' ? Array < log_positionnGetPayload<S['select'][P]>>  :
-        P extends 'updtedByfk' ? Array < log_positionnGetPayload<S['select'][P]>>  :
         P extends '_count' ? UserCountOutputTypeGetPayload<S['select'][P]> :  P extends keyof User ? User[P] : never
   } 
       : User
@@ -6946,8 +6939,6 @@ export namespace Prisma {
     data_leave<T extends User$data_leaveArgs= {}>(args?: Subset<T, User$data_leaveArgs>): PrismaPromise<Array<data_leaveGetPayload<T>>| Null>;
 
     cretedByfk<T extends User$cretedByfkArgs= {}>(args?: Subset<T, User$cretedByfkArgs>): PrismaPromise<Array<log_positionnGetPayload<T>>| Null>;
-
-    updtedByfk<T extends User$updtedByfkArgs= {}>(args?: Subset<T, User$updtedByfkArgs>): PrismaPromise<Array<log_positionnGetPayload<T>>| Null>;
 
     private get _document();
     /**
@@ -7476,27 +7467,6 @@ export namespace Prisma {
    * User.cretedByfk
    */
   export type User$cretedByfkArgs = {
-    /**
-     * Select specific fields to fetch from the log_positionn
-     */
-    select?: log_positionnSelect | null
-    /**
-     * Choose, which related nodes to fetch as well.
-     */
-    include?: log_positionnInclude | null
-    where?: log_positionnWhereInput
-    orderBy?: Enumerable<log_positionnOrderByWithRelationInput>
-    cursor?: log_positionnWhereUniqueInput
-    take?: number
-    skip?: number
-    distinct?: Enumerable<Log_positionnScalarFieldEnum>
-  }
-
-
-  /**
-   * User.updtedByfk
-   */
-  export type User$updtedByfkArgs = {
     /**
      * Select specific fields to fetch from the log_positionn
      */
@@ -32554,8 +32524,7 @@ export namespace Prisma {
     positionId: string | null
     cretedBy: string | null
     creteddate: Date | null
-    updtedBy: string | null
-    updteddate: Date | null
+    detail: string | null
   }
 
   export type Log_positionnMaxAggregateOutputType = {
@@ -32563,8 +32532,7 @@ export namespace Prisma {
     positionId: string | null
     cretedBy: string | null
     creteddate: Date | null
-    updtedBy: string | null
-    updteddate: Date | null
+    detail: string | null
   }
 
   export type Log_positionnCountAggregateOutputType = {
@@ -32572,8 +32540,7 @@ export namespace Prisma {
     positionId: number
     cretedBy: number
     creteddate: number
-    updtedBy: number
-    updteddate: number
+    detail: number
     _all: number
   }
 
@@ -32583,8 +32550,7 @@ export namespace Prisma {
     positionId?: true
     cretedBy?: true
     creteddate?: true
-    updtedBy?: true
-    updteddate?: true
+    detail?: true
   }
 
   export type Log_positionnMaxAggregateInputType = {
@@ -32592,8 +32558,7 @@ export namespace Prisma {
     positionId?: true
     cretedBy?: true
     creteddate?: true
-    updtedBy?: true
-    updteddate?: true
+    detail?: true
   }
 
   export type Log_positionnCountAggregateInputType = {
@@ -32601,8 +32566,7 @@ export namespace Prisma {
     positionId?: true
     cretedBy?: true
     creteddate?: true
-    updtedBy?: true
-    updteddate?: true
+    detail?: true
     _all?: true
   }
 
@@ -32684,8 +32648,7 @@ export namespace Prisma {
     positionId: string
     cretedBy: string
     creteddate: Date
-    updtedBy: string
-    updteddate: Date
+    detail: string
     _count: Log_positionnCountAggregateOutputType | null
     _min: Log_positionnMinAggregateOutputType | null
     _max: Log_positionnMaxAggregateOutputType | null
@@ -32710,18 +32673,15 @@ export namespace Prisma {
     positionId?: boolean
     cretedBy?: boolean
     creteddate?: boolean
-    updtedBy?: boolean
-    updteddate?: boolean
+    detail?: boolean
     Position_user?: boolean | Position_userArgs
     cretedByfk?: boolean | UserArgs
-    updtedByfk?: boolean | UserArgs
   }
 
 
   export type log_positionnInclude = {
     Position_user?: boolean | Position_userArgs
     cretedByfk?: boolean | UserArgs
-    updtedByfk?: boolean | UserArgs
   }
 
   export type log_positionnGetPayload<S extends boolean | null | undefined | log_positionnArgs> =
@@ -32732,15 +32692,13 @@ export namespace Prisma {
     ? log_positionn  & {
     [P in TruthyKeys<S['include']>]:
         P extends 'Position_user' ? Position_userGetPayload<S['include'][P]> :
-        P extends 'cretedByfk' ? UserGetPayload<S['include'][P]> :
-        P extends 'updtedByfk' ? UserGetPayload<S['include'][P]> :  never
+        P extends 'cretedByfk' ? UserGetPayload<S['include'][P]> :  never
   } 
     : S extends { select: any } & (log_positionnArgs | log_positionnFindManyArgs)
       ? {
     [P in TruthyKeys<S['select']>]:
         P extends 'Position_user' ? Position_userGetPayload<S['select'][P]> :
-        P extends 'cretedByfk' ? UserGetPayload<S['select'][P]> :
-        P extends 'updtedByfk' ? UserGetPayload<S['select'][P]> :  P extends keyof log_positionn ? log_positionn[P] : never
+        P extends 'cretedByfk' ? UserGetPayload<S['select'][P]> :  P extends keyof log_positionn ? log_positionn[P] : never
   } 
       : log_positionn
 
@@ -33117,8 +33075,6 @@ export namespace Prisma {
     Position_user<T extends Position_userArgs= {}>(args?: Subset<T, Position_userArgs>): Prisma__Position_userClient<Position_userGetPayload<T> | Null>;
 
     cretedByfk<T extends UserArgs= {}>(args?: Subset<T, UserArgs>): Prisma__UserClient<UserGetPayload<T> | Null>;
-
-    updtedByfk<T extends UserArgs= {}>(args?: Subset<T, UserArgs>): Prisma__UserClient<UserGetPayload<T> | Null>;
 
     private get _document();
     /**
@@ -35532,8 +35488,7 @@ export namespace Prisma {
     positionId: 'positionId',
     cretedBy: 'cretedBy',
     creteddate: 'creteddate',
-    updtedBy: 'updtedBy',
-    updteddate: 'updteddate'
+    detail: 'detail'
   };
 
   export type Log_positionnScalarFieldEnum = (typeof Log_positionnScalarFieldEnum)[keyof typeof Log_positionnScalarFieldEnum]
@@ -36357,7 +36312,6 @@ export namespace Prisma {
     bookbank_log?: Bookbank_logListRelationFilter
     data_leave?: Data_leaveListRelationFilter
     cretedByfk?: Log_positionnListRelationFilter
-    updtedByfk?: Log_positionnListRelationFilter
   }
 
   export type UserOrderByWithRelationInput = {
@@ -36385,7 +36339,6 @@ export namespace Prisma {
     bookbank_log?: bookbank_logOrderByRelationAggregateInput
     data_leave?: data_leaveOrderByRelationAggregateInput
     cretedByfk?: log_positionnOrderByRelationAggregateInput
-    updtedByfk?: log_positionnOrderByRelationAggregateInput
   }
 
   export type UserWhereUniqueInput = {
@@ -37853,11 +37806,9 @@ export namespace Prisma {
     positionId?: UuidFilter | string
     cretedBy?: UuidFilter | string
     creteddate?: DateTimeFilter | Date | string
-    updtedBy?: UuidFilter | string
-    updteddate?: DateTimeFilter | Date | string
+    detail?: StringFilter | string
     Position_user?: XOR<Position_userRelationFilter, Position_userWhereInput>
     cretedByfk?: XOR<UserRelationFilter, UserWhereInput>
-    updtedByfk?: XOR<UserRelationFilter, UserWhereInput>
   }
 
   export type log_positionnOrderByWithRelationInput = {
@@ -37865,11 +37816,9 @@ export namespace Prisma {
     positionId?: SortOrder
     cretedBy?: SortOrder
     creteddate?: SortOrder
-    updtedBy?: SortOrder
-    updteddate?: SortOrder
+    detail?: SortOrder
     Position_user?: Position_userOrderByWithRelationInput
     cretedByfk?: UserOrderByWithRelationInput
-    updtedByfk?: UserOrderByWithRelationInput
   }
 
   export type log_positionnWhereUniqueInput = {
@@ -37881,8 +37830,7 @@ export namespace Prisma {
     positionId?: SortOrder
     cretedBy?: SortOrder
     creteddate?: SortOrder
-    updtedBy?: SortOrder
-    updteddate?: SortOrder
+    detail?: SortOrder
     _count?: log_positionnCountOrderByAggregateInput
     _max?: log_positionnMaxOrderByAggregateInput
     _min?: log_positionnMinOrderByAggregateInput
@@ -37896,8 +37844,7 @@ export namespace Prisma {
     positionId?: UuidWithAggregatesFilter | string
     cretedBy?: UuidWithAggregatesFilter | string
     creteddate?: DateTimeWithAggregatesFilter | Date | string
-    updtedBy?: UuidWithAggregatesFilter | string
-    updteddate?: DateTimeWithAggregatesFilter | Date | string
+    detail?: StringWithAggregatesFilter | string
   }
 
   export type MainBusinessTypeWhereInput = {
@@ -38688,7 +38635,6 @@ export namespace Prisma {
     bookbank_log?: bookbank_logCreateNestedManyWithoutUserInput
     data_leave?: data_leaveCreateNestedManyWithoutUserInput
     cretedByfk?: log_positionnCreateNestedManyWithoutCretedByfkInput
-    updtedByfk?: log_positionnCreateNestedManyWithoutUpdtedByfkInput
   }
 
   export type UserUncheckedCreateInput = {
@@ -38713,7 +38659,6 @@ export namespace Prisma {
     bookbank_log?: bookbank_logUncheckedCreateNestedManyWithoutUserInput
     data_leave?: data_leaveUncheckedCreateNestedManyWithoutUserInput
     cretedByfk?: log_positionnUncheckedCreateNestedManyWithoutCretedByfkInput
-    updtedByfk?: log_positionnUncheckedCreateNestedManyWithoutUpdtedByfkInput
   }
 
   export type UserUpdateInput = {
@@ -38738,7 +38683,6 @@ export namespace Prisma {
     bookbank_log?: bookbank_logUpdateManyWithoutUserNestedInput
     data_leave?: data_leaveUpdateManyWithoutUserNestedInput
     cretedByfk?: log_positionnUpdateManyWithoutCretedByfkNestedInput
-    updtedByfk?: log_positionnUpdateManyWithoutUpdtedByfkNestedInput
   }
 
   export type UserUncheckedUpdateInput = {
@@ -38763,7 +38707,6 @@ export namespace Prisma {
     bookbank_log?: bookbank_logUncheckedUpdateManyWithoutUserNestedInput
     data_leave?: data_leaveUncheckedUpdateManyWithoutUserNestedInput
     cretedByfk?: log_positionnUncheckedUpdateManyWithoutCretedByfkNestedInput
-    updtedByfk?: log_positionnUncheckedUpdateManyWithoutUpdtedByfkNestedInput
   }
 
   export type UserCreateManyInput = {
@@ -40518,10 +40461,9 @@ export namespace Prisma {
   export type log_positionnCreateInput = {
     id: string
     creteddate: Date | string
-    updteddate: Date | string
+    detail: string
     Position_user: Position_userCreateNestedOneWithoutLog_positionInput
     cretedByfk: UserCreateNestedOneWithoutCretedByfkInput
-    updtedByfk: UserCreateNestedOneWithoutUpdtedByfkInput
   }
 
   export type log_positionnUncheckedCreateInput = {
@@ -40529,17 +40471,15 @@ export namespace Prisma {
     positionId: string
     cretedBy: string
     creteddate: Date | string
-    updtedBy: string
-    updteddate: Date | string
+    detail: string
   }
 
   export type log_positionnUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
     creteddate?: DateTimeFieldUpdateOperationsInput | Date | string
-    updteddate?: DateTimeFieldUpdateOperationsInput | Date | string
+    detail?: StringFieldUpdateOperationsInput | string
     Position_user?: Position_userUpdateOneRequiredWithoutLog_positionNestedInput
     cretedByfk?: UserUpdateOneRequiredWithoutCretedByfkNestedInput
-    updtedByfk?: UserUpdateOneRequiredWithoutUpdtedByfkNestedInput
   }
 
   export type log_positionnUncheckedUpdateInput = {
@@ -40547,8 +40487,7 @@ export namespace Prisma {
     positionId?: StringFieldUpdateOperationsInput | string
     cretedBy?: StringFieldUpdateOperationsInput | string
     creteddate?: DateTimeFieldUpdateOperationsInput | Date | string
-    updtedBy?: StringFieldUpdateOperationsInput | string
-    updteddate?: DateTimeFieldUpdateOperationsInput | Date | string
+    detail?: StringFieldUpdateOperationsInput | string
   }
 
   export type log_positionnCreateManyInput = {
@@ -40556,14 +40495,13 @@ export namespace Prisma {
     positionId: string
     cretedBy: string
     creteddate: Date | string
-    updtedBy: string
-    updteddate: Date | string
+    detail: string
   }
 
   export type log_positionnUpdateManyMutationInput = {
     id?: StringFieldUpdateOperationsInput | string
     creteddate?: DateTimeFieldUpdateOperationsInput | Date | string
-    updteddate?: DateTimeFieldUpdateOperationsInput | Date | string
+    detail?: StringFieldUpdateOperationsInput | string
   }
 
   export type log_positionnUncheckedUpdateManyInput = {
@@ -40571,8 +40509,7 @@ export namespace Prisma {
     positionId?: StringFieldUpdateOperationsInput | string
     cretedBy?: StringFieldUpdateOperationsInput | string
     creteddate?: DateTimeFieldUpdateOperationsInput | Date | string
-    updtedBy?: StringFieldUpdateOperationsInput | string
-    updteddate?: DateTimeFieldUpdateOperationsInput | Date | string
+    detail?: StringFieldUpdateOperationsInput | string
   }
 
   export type MainBusinessTypeCreateInput = {
@@ -42534,8 +42471,7 @@ export namespace Prisma {
     positionId?: SortOrder
     cretedBy?: SortOrder
     creteddate?: SortOrder
-    updtedBy?: SortOrder
-    updteddate?: SortOrder
+    detail?: SortOrder
   }
 
   export type log_positionnMaxOrderByAggregateInput = {
@@ -42543,8 +42479,7 @@ export namespace Prisma {
     positionId?: SortOrder
     cretedBy?: SortOrder
     creteddate?: SortOrder
-    updtedBy?: SortOrder
-    updteddate?: SortOrder
+    detail?: SortOrder
   }
 
   export type log_positionnMinOrderByAggregateInput = {
@@ -42552,8 +42487,7 @@ export namespace Prisma {
     positionId?: SortOrder
     cretedBy?: SortOrder
     creteddate?: SortOrder
-    updtedBy?: SortOrder
-    updteddate?: SortOrder
+    detail?: SortOrder
   }
 
   export type SubBusinessTypeListRelationFilter = {
@@ -43152,13 +43086,6 @@ export namespace Prisma {
     connect?: Enumerable<log_positionnWhereUniqueInput>
   }
 
-  export type log_positionnCreateNestedManyWithoutUpdtedByfkInput = {
-    create?: XOR<Enumerable<log_positionnCreateWithoutUpdtedByfkInput>, Enumerable<log_positionnUncheckedCreateWithoutUpdtedByfkInput>>
-    connectOrCreate?: Enumerable<log_positionnCreateOrConnectWithoutUpdtedByfkInput>
-    createMany?: log_positionnCreateManyUpdtedByfkInputEnvelope
-    connect?: Enumerable<log_positionnWhereUniqueInput>
-  }
-
   export type ProfileUncheckedCreateNestedOneWithoutUserInput = {
     create?: XOR<ProfileCreateWithoutUserInput, ProfileUncheckedCreateWithoutUserInput>
     connectOrCreate?: ProfileCreateOrConnectWithoutUserInput
@@ -43225,13 +43152,6 @@ export namespace Prisma {
     create?: XOR<Enumerable<log_positionnCreateWithoutCretedByfkInput>, Enumerable<log_positionnUncheckedCreateWithoutCretedByfkInput>>
     connectOrCreate?: Enumerable<log_positionnCreateOrConnectWithoutCretedByfkInput>
     createMany?: log_positionnCreateManyCretedByfkInputEnvelope
-    connect?: Enumerable<log_positionnWhereUniqueInput>
-  }
-
-  export type log_positionnUncheckedCreateNestedManyWithoutUpdtedByfkInput = {
-    create?: XOR<Enumerable<log_positionnCreateWithoutUpdtedByfkInput>, Enumerable<log_positionnUncheckedCreateWithoutUpdtedByfkInput>>
-    connectOrCreate?: Enumerable<log_positionnCreateOrConnectWithoutUpdtedByfkInput>
-    createMany?: log_positionnCreateManyUpdtedByfkInputEnvelope
     connect?: Enumerable<log_positionnWhereUniqueInput>
   }
 
@@ -43401,20 +43321,6 @@ export namespace Prisma {
     deleteMany?: Enumerable<log_positionnScalarWhereInput>
   }
 
-  export type log_positionnUpdateManyWithoutUpdtedByfkNestedInput = {
-    create?: XOR<Enumerable<log_positionnCreateWithoutUpdtedByfkInput>, Enumerable<log_positionnUncheckedCreateWithoutUpdtedByfkInput>>
-    connectOrCreate?: Enumerable<log_positionnCreateOrConnectWithoutUpdtedByfkInput>
-    upsert?: Enumerable<log_positionnUpsertWithWhereUniqueWithoutUpdtedByfkInput>
-    createMany?: log_positionnCreateManyUpdtedByfkInputEnvelope
-    set?: Enumerable<log_positionnWhereUniqueInput>
-    disconnect?: Enumerable<log_positionnWhereUniqueInput>
-    delete?: Enumerable<log_positionnWhereUniqueInput>
-    connect?: Enumerable<log_positionnWhereUniqueInput>
-    update?: Enumerable<log_positionnUpdateWithWhereUniqueWithoutUpdtedByfkInput>
-    updateMany?: Enumerable<log_positionnUpdateManyWithWhereWithoutUpdtedByfkInput>
-    deleteMany?: Enumerable<log_positionnScalarWhereInput>
-  }
-
   export type ProfileUncheckedUpdateOneWithoutUserNestedInput = {
     create?: XOR<ProfileCreateWithoutUserInput, ProfileUncheckedCreateWithoutUserInput>
     connectOrCreate?: ProfileCreateOrConnectWithoutUserInput
@@ -43548,20 +43454,6 @@ export namespace Prisma {
     connect?: Enumerable<log_positionnWhereUniqueInput>
     update?: Enumerable<log_positionnUpdateWithWhereUniqueWithoutCretedByfkInput>
     updateMany?: Enumerable<log_positionnUpdateManyWithWhereWithoutCretedByfkInput>
-    deleteMany?: Enumerable<log_positionnScalarWhereInput>
-  }
-
-  export type log_positionnUncheckedUpdateManyWithoutUpdtedByfkNestedInput = {
-    create?: XOR<Enumerable<log_positionnCreateWithoutUpdtedByfkInput>, Enumerable<log_positionnUncheckedCreateWithoutUpdtedByfkInput>>
-    connectOrCreate?: Enumerable<log_positionnCreateOrConnectWithoutUpdtedByfkInput>
-    upsert?: Enumerable<log_positionnUpsertWithWhereUniqueWithoutUpdtedByfkInput>
-    createMany?: log_positionnCreateManyUpdtedByfkInputEnvelope
-    set?: Enumerable<log_positionnWhereUniqueInput>
-    disconnect?: Enumerable<log_positionnWhereUniqueInput>
-    delete?: Enumerable<log_positionnWhereUniqueInput>
-    connect?: Enumerable<log_positionnWhereUniqueInput>
-    update?: Enumerable<log_positionnUpdateWithWhereUniqueWithoutUpdtedByfkInput>
-    updateMany?: Enumerable<log_positionnUpdateManyWithWhereWithoutUpdtedByfkInput>
     deleteMany?: Enumerable<log_positionnScalarWhereInput>
   }
 
@@ -45093,12 +44985,6 @@ export namespace Prisma {
     connect?: UserWhereUniqueInput
   }
 
-  export type UserCreateNestedOneWithoutUpdtedByfkInput = {
-    create?: XOR<UserCreateWithoutUpdtedByfkInput, UserUncheckedCreateWithoutUpdtedByfkInput>
-    connectOrCreate?: UserCreateOrConnectWithoutUpdtedByfkInput
-    connect?: UserWhereUniqueInput
-  }
-
   export type Position_userUpdateOneRequiredWithoutLog_positionNestedInput = {
     create?: XOR<Position_userCreateWithoutLog_positionInput, Position_userUncheckedCreateWithoutLog_positionInput>
     connectOrCreate?: Position_userCreateOrConnectWithoutLog_positionInput
@@ -45113,14 +44999,6 @@ export namespace Prisma {
     upsert?: UserUpsertWithoutCretedByfkInput
     connect?: UserWhereUniqueInput
     update?: XOR<UserUpdateWithoutCretedByfkInput, UserUncheckedUpdateWithoutCretedByfkInput>
-  }
-
-  export type UserUpdateOneRequiredWithoutUpdtedByfkNestedInput = {
-    create?: XOR<UserCreateWithoutUpdtedByfkInput, UserUncheckedCreateWithoutUpdtedByfkInput>
-    connectOrCreate?: UserCreateOrConnectWithoutUpdtedByfkInput
-    upsert?: UserUpsertWithoutUpdtedByfkInput
-    connect?: UserWhereUniqueInput
-    update?: XOR<UserUpdateWithoutUpdtedByfkInput, UserUncheckedUpdateWithoutUpdtedByfkInput>
   }
 
   export type SubBusinessTypeCreateNestedManyWithoutMainBusinessTypeInput = {
@@ -45531,7 +45409,6 @@ export namespace Prisma {
     bookbank_log?: bookbank_logCreateNestedManyWithoutUserInput
     data_leave?: data_leaveCreateNestedManyWithoutUserInput
     cretedByfk?: log_positionnCreateNestedManyWithoutCretedByfkInput
-    updtedByfk?: log_positionnCreateNestedManyWithoutUpdtedByfkInput
   }
 
   export type UserUncheckedCreateWithoutCompanyInput = {
@@ -45555,7 +45432,6 @@ export namespace Prisma {
     bookbank_log?: bookbank_logUncheckedCreateNestedManyWithoutUserInput
     data_leave?: data_leaveUncheckedCreateNestedManyWithoutUserInput
     cretedByfk?: log_positionnUncheckedCreateNestedManyWithoutCretedByfkInput
-    updtedByfk?: log_positionnUncheckedCreateNestedManyWithoutUpdtedByfkInput
   }
 
   export type UserCreateOrConnectWithoutCompanyInput = {
@@ -45805,7 +45681,6 @@ export namespace Prisma {
     bookbank_log?: bookbank_logUpdateManyWithoutUserNestedInput
     data_leave?: data_leaveUpdateManyWithoutUserNestedInput
     cretedByfk?: log_positionnUpdateManyWithoutCretedByfkNestedInput
-    updtedByfk?: log_positionnUpdateManyWithoutUpdtedByfkNestedInput
   }
 
   export type UserUncheckedUpdateWithoutCompanyInput = {
@@ -45829,7 +45704,6 @@ export namespace Prisma {
     bookbank_log?: bookbank_logUncheckedUpdateManyWithoutUserNestedInput
     data_leave?: data_leaveUncheckedUpdateManyWithoutUserNestedInput
     cretedByfk?: log_positionnUncheckedUpdateManyWithoutCretedByfkNestedInput
-    updtedByfk?: log_positionnUncheckedUpdateManyWithoutUpdtedByfkNestedInput
   }
 
   export type CompanyBranchUpsertWithWhereUniqueWithoutCompanyInput = {
@@ -46084,7 +45958,6 @@ export namespace Prisma {
     bookbank_log?: bookbank_logCreateNestedManyWithoutUserInput
     data_leave?: data_leaveCreateNestedManyWithoutUserInput
     cretedByfk?: log_positionnCreateNestedManyWithoutCretedByfkInput
-    updtedByfk?: log_positionnCreateNestedManyWithoutUpdtedByfkInput
   }
 
   export type UserUncheckedCreateWithoutCompanyBranchInput = {
@@ -46108,7 +45981,6 @@ export namespace Prisma {
     bookbank_log?: bookbank_logUncheckedCreateNestedManyWithoutUserInput
     data_leave?: data_leaveUncheckedCreateNestedManyWithoutUserInput
     cretedByfk?: log_positionnUncheckedCreateNestedManyWithoutCretedByfkInput
-    updtedByfk?: log_positionnUncheckedCreateNestedManyWithoutUpdtedByfkInput
   }
 
   export type UserCreateOrConnectWithoutCompanyBranchInput = {
@@ -46362,7 +46234,6 @@ export namespace Prisma {
     bookbank_log?: bookbank_logCreateNestedManyWithoutUserInput
     data_leave?: data_leaveCreateNestedManyWithoutUserInput
     cretedByfk?: log_positionnCreateNestedManyWithoutCretedByfkInput
-    updtedByfk?: log_positionnCreateNestedManyWithoutUpdtedByfkInput
   }
 
   export type UserUncheckedCreateWithoutProfileInput = {
@@ -46386,7 +46257,6 @@ export namespace Prisma {
     bookbank_log?: bookbank_logUncheckedCreateNestedManyWithoutUserInput
     data_leave?: data_leaveUncheckedCreateNestedManyWithoutUserInput
     cretedByfk?: log_positionnUncheckedCreateNestedManyWithoutCretedByfkInput
-    updtedByfk?: log_positionnUncheckedCreateNestedManyWithoutUpdtedByfkInput
   }
 
   export type UserCreateOrConnectWithoutProfileInput = {
@@ -46420,7 +46290,6 @@ export namespace Prisma {
     bookbank_log?: bookbank_logUpdateManyWithoutUserNestedInput
     data_leave?: data_leaveUpdateManyWithoutUserNestedInput
     cretedByfk?: log_positionnUpdateManyWithoutCretedByfkNestedInput
-    updtedByfk?: log_positionnUpdateManyWithoutUpdtedByfkNestedInput
   }
 
   export type UserUncheckedUpdateWithoutProfileInput = {
@@ -46444,7 +46313,6 @@ export namespace Prisma {
     bookbank_log?: bookbank_logUncheckedUpdateManyWithoutUserNestedInput
     data_leave?: data_leaveUncheckedUpdateManyWithoutUserNestedInput
     cretedByfk?: log_positionnUncheckedUpdateManyWithoutCretedByfkNestedInput
-    updtedByfk?: log_positionnUncheckedUpdateManyWithoutUpdtedByfkNestedInput
   }
 
   export type ProfileCreateWithoutUserInput = {
@@ -46998,17 +46866,15 @@ export namespace Prisma {
   export type log_positionnCreateWithoutCretedByfkInput = {
     id: string
     creteddate: Date | string
-    updteddate: Date | string
+    detail: string
     Position_user: Position_userCreateNestedOneWithoutLog_positionInput
-    updtedByfk: UserCreateNestedOneWithoutUpdtedByfkInput
   }
 
   export type log_positionnUncheckedCreateWithoutCretedByfkInput = {
     id: string
     positionId: string
     creteddate: Date | string
-    updtedBy: string
-    updteddate: Date | string
+    detail: string
   }
 
   export type log_positionnCreateOrConnectWithoutCretedByfkInput = {
@@ -47018,32 +46884,6 @@ export namespace Prisma {
 
   export type log_positionnCreateManyCretedByfkInputEnvelope = {
     data: Enumerable<log_positionnCreateManyCretedByfkInput>
-    skipDuplicates?: boolean
-  }
-
-  export type log_positionnCreateWithoutUpdtedByfkInput = {
-    id: string
-    creteddate: Date | string
-    updteddate: Date | string
-    Position_user: Position_userCreateNestedOneWithoutLog_positionInput
-    cretedByfk: UserCreateNestedOneWithoutCretedByfkInput
-  }
-
-  export type log_positionnUncheckedCreateWithoutUpdtedByfkInput = {
-    id: string
-    positionId: string
-    cretedBy: string
-    creteddate: Date | string
-    updteddate: Date | string
-  }
-
-  export type log_positionnCreateOrConnectWithoutUpdtedByfkInput = {
-    where: log_positionnWhereUniqueInput
-    create: XOR<log_positionnCreateWithoutUpdtedByfkInput, log_positionnUncheckedCreateWithoutUpdtedByfkInput>
-  }
-
-  export type log_positionnCreateManyUpdtedByfkInputEnvelope = {
-    data: Enumerable<log_positionnCreateManyUpdtedByfkInput>
     skipDuplicates?: boolean
   }
 
@@ -47544,24 +47384,7 @@ export namespace Prisma {
     positionId?: UuidFilter | string
     cretedBy?: UuidFilter | string
     creteddate?: DateTimeFilter | Date | string
-    updtedBy?: UuidFilter | string
-    updteddate?: DateTimeFilter | Date | string
-  }
-
-  export type log_positionnUpsertWithWhereUniqueWithoutUpdtedByfkInput = {
-    where: log_positionnWhereUniqueInput
-    update: XOR<log_positionnUpdateWithoutUpdtedByfkInput, log_positionnUncheckedUpdateWithoutUpdtedByfkInput>
-    create: XOR<log_positionnCreateWithoutUpdtedByfkInput, log_positionnUncheckedCreateWithoutUpdtedByfkInput>
-  }
-
-  export type log_positionnUpdateWithWhereUniqueWithoutUpdtedByfkInput = {
-    where: log_positionnWhereUniqueInput
-    data: XOR<log_positionnUpdateWithoutUpdtedByfkInput, log_positionnUncheckedUpdateWithoutUpdtedByfkInput>
-  }
-
-  export type log_positionnUpdateManyWithWhereWithoutUpdtedByfkInput = {
-    where: log_positionnScalarWhereInput
-    data: XOR<log_positionnUpdateManyMutationInput, log_positionnUncheckedUpdateManyWithoutUpdtedByfkInput>
+    detail?: StringFilter | string
   }
 
   export type UserCreateWithoutRoleInput = {
@@ -47585,7 +47408,6 @@ export namespace Prisma {
     bookbank_log?: bookbank_logCreateNestedManyWithoutUserInput
     data_leave?: data_leaveCreateNestedManyWithoutUserInput
     cretedByfk?: log_positionnCreateNestedManyWithoutCretedByfkInput
-    updtedByfk?: log_positionnCreateNestedManyWithoutUpdtedByfkInput
   }
 
   export type UserUncheckedCreateWithoutRoleInput = {
@@ -47609,7 +47431,6 @@ export namespace Prisma {
     bookbank_log?: bookbank_logUncheckedCreateNestedManyWithoutUserInput
     data_leave?: data_leaveUncheckedCreateNestedManyWithoutUserInput
     cretedByfk?: log_positionnUncheckedCreateNestedManyWithoutCretedByfkInput
-    updtedByfk?: log_positionnUncheckedCreateNestedManyWithoutUpdtedByfkInput
   }
 
   export type UserCreateOrConnectWithoutRoleInput = {
@@ -47659,7 +47480,6 @@ export namespace Prisma {
     bookbank_log?: bookbank_logCreateNestedManyWithoutUserInput
     data_leave?: data_leaveCreateNestedManyWithoutUserInput
     cretedByfk?: log_positionnCreateNestedManyWithoutCretedByfkInput
-    updtedByfk?: log_positionnCreateNestedManyWithoutUpdtedByfkInput
   }
 
   export type UserUncheckedCreateWithoutRole_CompanyInput = {
@@ -47683,7 +47503,6 @@ export namespace Prisma {
     bookbank_log?: bookbank_logUncheckedCreateNestedManyWithoutUserInput
     data_leave?: data_leaveUncheckedCreateNestedManyWithoutUserInput
     cretedByfk?: log_positionnUncheckedCreateNestedManyWithoutCretedByfkInput
-    updtedByfk?: log_positionnUncheckedCreateNestedManyWithoutUpdtedByfkInput
   }
 
   export type UserCreateOrConnectWithoutRole_CompanyInput = {
@@ -48700,7 +48519,6 @@ export namespace Prisma {
     bookbank_log?: bookbank_logCreateNestedManyWithoutUserInput
     data_leave?: data_leaveCreateNestedManyWithoutUserInput
     cretedByfk?: log_positionnCreateNestedManyWithoutCretedByfkInput
-    updtedByfk?: log_positionnCreateNestedManyWithoutUpdtedByfkInput
   }
 
   export type UserUncheckedCreateWithoutHenchmanInput = {
@@ -48724,7 +48542,6 @@ export namespace Prisma {
     bookbank_log?: bookbank_logUncheckedCreateNestedManyWithoutUserInput
     data_leave?: data_leaveUncheckedCreateNestedManyWithoutUserInput
     cretedByfk?: log_positionnUncheckedCreateNestedManyWithoutCretedByfkInput
-    updtedByfk?: log_positionnUncheckedCreateNestedManyWithoutUpdtedByfkInput
   }
 
   export type UserCreateOrConnectWithoutHenchmanInput = {
@@ -48753,7 +48570,6 @@ export namespace Prisma {
     bookbank_log?: bookbank_logCreateNestedManyWithoutUserInput
     data_leave?: data_leaveCreateNestedManyWithoutUserInput
     cretedByfk?: log_positionnCreateNestedManyWithoutCretedByfkInput
-    updtedByfk?: log_positionnCreateNestedManyWithoutUpdtedByfkInput
   }
 
   export type UserUncheckedCreateWithoutPosition_userInput = {
@@ -48777,7 +48593,6 @@ export namespace Prisma {
     bookbank_log?: bookbank_logUncheckedCreateNestedManyWithoutUserInput
     data_leave?: data_leaveUncheckedCreateNestedManyWithoutUserInput
     cretedByfk?: log_positionnUncheckedCreateNestedManyWithoutCretedByfkInput
-    updtedByfk?: log_positionnUncheckedCreateNestedManyWithoutUpdtedByfkInput
   }
 
   export type UserCreateOrConnectWithoutPosition_userInput = {
@@ -48865,17 +48680,15 @@ export namespace Prisma {
   export type log_positionnCreateWithoutPosition_userInput = {
     id: string
     creteddate: Date | string
-    updteddate: Date | string
+    detail: string
     cretedByfk: UserCreateNestedOneWithoutCretedByfkInput
-    updtedByfk: UserCreateNestedOneWithoutUpdtedByfkInput
   }
 
   export type log_positionnUncheckedCreateWithoutPosition_userInput = {
     id: string
     cretedBy: string
     creteddate: Date | string
-    updtedBy: string
-    updteddate: Date | string
+    detail: string
   }
 
   export type log_positionnCreateOrConnectWithoutPosition_userInput = {
@@ -48914,7 +48727,6 @@ export namespace Prisma {
     bookbank_log?: bookbank_logUpdateManyWithoutUserNestedInput
     data_leave?: data_leaveUpdateManyWithoutUserNestedInput
     cretedByfk?: log_positionnUpdateManyWithoutCretedByfkNestedInput
-    updtedByfk?: log_positionnUpdateManyWithoutUpdtedByfkNestedInput
   }
 
   export type UserUncheckedUpdateWithoutHenchmanInput = {
@@ -48938,7 +48750,6 @@ export namespace Prisma {
     bookbank_log?: bookbank_logUncheckedUpdateManyWithoutUserNestedInput
     data_leave?: data_leaveUncheckedUpdateManyWithoutUserNestedInput
     cretedByfk?: log_positionnUncheckedUpdateManyWithoutCretedByfkNestedInput
-    updtedByfk?: log_positionnUncheckedUpdateManyWithoutUpdtedByfkNestedInput
   }
 
   export type UserUpsertWithoutPosition_userInput = {
@@ -48967,7 +48778,6 @@ export namespace Prisma {
     bookbank_log?: bookbank_logUpdateManyWithoutUserNestedInput
     data_leave?: data_leaveUpdateManyWithoutUserNestedInput
     cretedByfk?: log_positionnUpdateManyWithoutCretedByfkNestedInput
-    updtedByfk?: log_positionnUpdateManyWithoutUpdtedByfkNestedInput
   }
 
   export type UserUncheckedUpdateWithoutPosition_userInput = {
@@ -48991,7 +48801,6 @@ export namespace Prisma {
     bookbank_log?: bookbank_logUncheckedUpdateManyWithoutUserNestedInput
     data_leave?: data_leaveUncheckedUpdateManyWithoutUserNestedInput
     cretedByfk?: log_positionnUncheckedUpdateManyWithoutCretedByfkNestedInput
-    updtedByfk?: log_positionnUncheckedUpdateManyWithoutUpdtedByfkNestedInput
   }
 
   export type mas_positionlevel1UpsertWithoutPosition_userInput = {
@@ -50148,7 +49957,6 @@ export namespace Prisma {
     bookbank_log?: bookbank_logCreateNestedManyWithoutUserInput
     data_leave?: data_leaveCreateNestedManyWithoutUserInput
     cretedByfk?: log_positionnCreateNestedManyWithoutCretedByfkInput
-    updtedByfk?: log_positionnCreateNestedManyWithoutUpdtedByfkInput
   }
 
   export type UserUncheckedCreateWithoutSalaryInput = {
@@ -50172,7 +49980,6 @@ export namespace Prisma {
     bookbank_log?: bookbank_logUncheckedCreateNestedManyWithoutUserInput
     data_leave?: data_leaveUncheckedCreateNestedManyWithoutUserInput
     cretedByfk?: log_positionnUncheckedCreateNestedManyWithoutCretedByfkInput
-    updtedByfk?: log_positionnUncheckedCreateNestedManyWithoutUpdtedByfkInput
   }
 
   export type UserCreateOrConnectWithoutSalaryInput = {
@@ -50348,7 +50155,6 @@ export namespace Prisma {
     bookbank_log?: bookbank_logUpdateManyWithoutUserNestedInput
     data_leave?: data_leaveUpdateManyWithoutUserNestedInput
     cretedByfk?: log_positionnUpdateManyWithoutCretedByfkNestedInput
-    updtedByfk?: log_positionnUpdateManyWithoutUpdtedByfkNestedInput
   }
 
   export type UserUncheckedUpdateWithoutSalaryInput = {
@@ -50372,7 +50178,6 @@ export namespace Prisma {
     bookbank_log?: bookbank_logUncheckedUpdateManyWithoutUserNestedInput
     data_leave?: data_leaveUncheckedUpdateManyWithoutUserNestedInput
     cretedByfk?: log_positionnUncheckedUpdateManyWithoutCretedByfkNestedInput
-    updtedByfk?: log_positionnUncheckedUpdateManyWithoutUpdtedByfkNestedInput
   }
 
   export type bookbank_logUpsertWithoutSalaryInput = {
@@ -50522,7 +50327,6 @@ export namespace Prisma {
     bookbank_log?: bookbank_logCreateNestedManyWithoutUserInput
     data_leave?: data_leaveCreateNestedManyWithoutUserInput
     cretedByfk?: log_positionnCreateNestedManyWithoutCretedByfkInput
-    updtedByfk?: log_positionnCreateNestedManyWithoutUpdtedByfkInput
   }
 
   export type UserUncheckedCreateWithoutMas_all_collectInput = {
@@ -50546,7 +50350,6 @@ export namespace Prisma {
     bookbank_log?: bookbank_logUncheckedCreateNestedManyWithoutUserInput
     data_leave?: data_leaveUncheckedCreateNestedManyWithoutUserInput
     cretedByfk?: log_positionnUncheckedCreateNestedManyWithoutCretedByfkInput
-    updtedByfk?: log_positionnUncheckedCreateNestedManyWithoutUpdtedByfkInput
   }
 
   export type UserCreateOrConnectWithoutMas_all_collectInput = {
@@ -50610,7 +50413,6 @@ export namespace Prisma {
     bookbank_log?: bookbank_logUpdateManyWithoutUserNestedInput
     data_leave?: data_leaveUpdateManyWithoutUserNestedInput
     cretedByfk?: log_positionnUpdateManyWithoutCretedByfkNestedInput
-    updtedByfk?: log_positionnUpdateManyWithoutUpdtedByfkNestedInput
   }
 
   export type UserUncheckedUpdateWithoutMas_all_collectInput = {
@@ -50634,7 +50436,6 @@ export namespace Prisma {
     bookbank_log?: bookbank_logUncheckedUpdateManyWithoutUserNestedInput
     data_leave?: data_leaveUncheckedUpdateManyWithoutUserNestedInput
     cretedByfk?: log_positionnUncheckedUpdateManyWithoutCretedByfkNestedInput
-    updtedByfk?: log_positionnUncheckedUpdateManyWithoutUpdtedByfkNestedInput
   }
 
   export type provident_logUpsertWithWhereUniqueWithoutMas_all_collectInput = {
@@ -50793,7 +50594,6 @@ export namespace Prisma {
     provident_log?: provident_logCreateNestedManyWithoutUserInput
     data_leave?: data_leaveCreateNestedManyWithoutUserInput
     cretedByfk?: log_positionnCreateNestedManyWithoutCretedByfkInput
-    updtedByfk?: log_positionnCreateNestedManyWithoutUpdtedByfkInput
   }
 
   export type UserUncheckedCreateWithoutBookbank_logInput = {
@@ -50817,7 +50617,6 @@ export namespace Prisma {
     provident_log?: provident_logUncheckedCreateNestedManyWithoutUserInput
     data_leave?: data_leaveUncheckedCreateNestedManyWithoutUserInput
     cretedByfk?: log_positionnUncheckedCreateNestedManyWithoutCretedByfkInput
-    updtedByfk?: log_positionnUncheckedCreateNestedManyWithoutUpdtedByfkInput
   }
 
   export type UserCreateOrConnectWithoutBookbank_logInput = {
@@ -50918,7 +50717,6 @@ export namespace Prisma {
     provident_log?: provident_logUpdateManyWithoutUserNestedInput
     data_leave?: data_leaveUpdateManyWithoutUserNestedInput
     cretedByfk?: log_positionnUpdateManyWithoutCretedByfkNestedInput
-    updtedByfk?: log_positionnUpdateManyWithoutUpdtedByfkNestedInput
   }
 
   export type UserUncheckedUpdateWithoutBookbank_logInput = {
@@ -50942,7 +50740,6 @@ export namespace Prisma {
     provident_log?: provident_logUncheckedUpdateManyWithoutUserNestedInput
     data_leave?: data_leaveUncheckedUpdateManyWithoutUserNestedInput
     cretedByfk?: log_positionnUncheckedUpdateManyWithoutCretedByfkNestedInput
-    updtedByfk?: log_positionnUncheckedUpdateManyWithoutUpdtedByfkNestedInput
   }
 
   export type provident_logUpsertWithWhereUniqueWithoutBookbank_logInput = {
@@ -50982,7 +50779,6 @@ export namespace Prisma {
     bookbank_log?: bookbank_logCreateNestedManyWithoutUserInput
     data_leave?: data_leaveCreateNestedManyWithoutUserInput
     cretedByfk?: log_positionnCreateNestedManyWithoutCretedByfkInput
-    updtedByfk?: log_positionnCreateNestedManyWithoutUpdtedByfkInput
   }
 
   export type UserUncheckedCreateWithoutProvident_logInput = {
@@ -51006,7 +50802,6 @@ export namespace Prisma {
     bookbank_log?: bookbank_logUncheckedCreateNestedManyWithoutUserInput
     data_leave?: data_leaveUncheckedCreateNestedManyWithoutUserInput
     cretedByfk?: log_positionnUncheckedCreateNestedManyWithoutCretedByfkInput
-    updtedByfk?: log_positionnUncheckedCreateNestedManyWithoutUpdtedByfkInput
   }
 
   export type UserCreateOrConnectWithoutProvident_logInput = {
@@ -51191,7 +50986,6 @@ export namespace Prisma {
     bookbank_log?: bookbank_logUpdateManyWithoutUserNestedInput
     data_leave?: data_leaveUpdateManyWithoutUserNestedInput
     cretedByfk?: log_positionnUpdateManyWithoutCretedByfkNestedInput
-    updtedByfk?: log_positionnUpdateManyWithoutUpdtedByfkNestedInput
   }
 
   export type UserUncheckedUpdateWithoutProvident_logInput = {
@@ -51215,7 +51009,6 @@ export namespace Prisma {
     bookbank_log?: bookbank_logUncheckedUpdateManyWithoutUserNestedInput
     data_leave?: data_leaveUncheckedUpdateManyWithoutUserNestedInput
     cretedByfk?: log_positionnUncheckedUpdateManyWithoutCretedByfkNestedInput
-    updtedByfk?: log_positionnUncheckedUpdateManyWithoutUpdtedByfkNestedInput
   }
 
   export type mas_all_collectUpsertWithoutProvident_logInput = {
@@ -51455,7 +51248,6 @@ export namespace Prisma {
     provident_log?: provident_logCreateNestedManyWithoutUserInput
     bookbank_log?: bookbank_logCreateNestedManyWithoutUserInput
     cretedByfk?: log_positionnCreateNestedManyWithoutCretedByfkInput
-    updtedByfk?: log_positionnCreateNestedManyWithoutUpdtedByfkInput
   }
 
   export type UserUncheckedCreateWithoutData_leaveInput = {
@@ -51479,7 +51271,6 @@ export namespace Prisma {
     provident_log?: provident_logUncheckedCreateNestedManyWithoutUserInput
     bookbank_log?: bookbank_logUncheckedCreateNestedManyWithoutUserInput
     cretedByfk?: log_positionnUncheckedCreateNestedManyWithoutCretedByfkInput
-    updtedByfk?: log_positionnUncheckedCreateNestedManyWithoutUpdtedByfkInput
   }
 
   export type UserCreateOrConnectWithoutData_leaveInput = {
@@ -51530,7 +51321,6 @@ export namespace Prisma {
     provident_log?: provident_logUpdateManyWithoutUserNestedInput
     bookbank_log?: bookbank_logUpdateManyWithoutUserNestedInput
     cretedByfk?: log_positionnUpdateManyWithoutCretedByfkNestedInput
-    updtedByfk?: log_positionnUpdateManyWithoutUpdtedByfkNestedInput
   }
 
   export type UserUncheckedUpdateWithoutData_leaveInput = {
@@ -51554,7 +51344,6 @@ export namespace Prisma {
     provident_log?: provident_logUncheckedUpdateManyWithoutUserNestedInput
     bookbank_log?: bookbank_logUncheckedUpdateManyWithoutUserNestedInput
     cretedByfk?: log_positionnUncheckedUpdateManyWithoutCretedByfkNestedInput
-    updtedByfk?: log_positionnUncheckedUpdateManyWithoutUpdtedByfkNestedInput
   }
 
   export type Position_userCreateWithoutLog_positionInput = {
@@ -51605,7 +51394,6 @@ export namespace Prisma {
     provident_log?: provident_logCreateNestedManyWithoutUserInput
     bookbank_log?: bookbank_logCreateNestedManyWithoutUserInput
     data_leave?: data_leaveCreateNestedManyWithoutUserInput
-    updtedByfk?: log_positionnCreateNestedManyWithoutUpdtedByfkInput
   }
 
   export type UserUncheckedCreateWithoutCretedByfkInput = {
@@ -51629,65 +51417,11 @@ export namespace Prisma {
     provident_log?: provident_logUncheckedCreateNestedManyWithoutUserInput
     bookbank_log?: bookbank_logUncheckedCreateNestedManyWithoutUserInput
     data_leave?: data_leaveUncheckedCreateNestedManyWithoutUserInput
-    updtedByfk?: log_positionnUncheckedCreateNestedManyWithoutUpdtedByfkInput
   }
 
   export type UserCreateOrConnectWithoutCretedByfkInput = {
     where: UserWhereUniqueInput
     create: XOR<UserCreateWithoutCretedByfkInput, UserUncheckedCreateWithoutCretedByfkInput>
-  }
-
-  export type UserCreateWithoutUpdtedByfkInput = {
-    id: string
-    email: string
-    password: string
-    profile?: ProfileCreateNestedOneWithoutUserInput
-    islogin?: boolean
-    isActive?: boolean
-    isOwner?: boolean
-    lastlogin?: Date | string | null
-    createdAt?: Date | string
-    role?: RoleCreateNestedOneWithoutUsersInput
-    company?: CompanyCreateNestedManyWithoutOwnerInput
-    companyBranch?: CompanyBranchCreateNestedOneWithoutUsersInput
-    Role_Company?: Role_CompanyCreateNestedOneWithoutUsersInput
-    Position_user?: Position_userCreateNestedManyWithoutUserInput
-    henchman?: Position_userCreateNestedManyWithoutHeaderInput
-    mas_all_collect?: mas_all_collectCreateNestedManyWithoutUserInput
-    salary?: salaryCreateNestedManyWithoutUserInput
-    provident_log?: provident_logCreateNestedManyWithoutUserInput
-    bookbank_log?: bookbank_logCreateNestedManyWithoutUserInput
-    data_leave?: data_leaveCreateNestedManyWithoutUserInput
-    cretedByfk?: log_positionnCreateNestedManyWithoutCretedByfkInput
-  }
-
-  export type UserUncheckedCreateWithoutUpdtedByfkInput = {
-    id: string
-    email: string
-    password: string
-    profile?: ProfileUncheckedCreateNestedOneWithoutUserInput
-    islogin?: boolean
-    isActive?: boolean
-    isOwner?: boolean
-    lastlogin?: Date | string | null
-    createdAt?: Date | string
-    roleId?: string | null
-    RoleCompanyID?: string | null
-    company?: CompanyUncheckedCreateNestedManyWithoutOwnerInput
-    companyBranchId?: string | null
-    Position_user?: Position_userUncheckedCreateNestedManyWithoutUserInput
-    henchman?: Position_userUncheckedCreateNestedManyWithoutHeaderInput
-    mas_all_collect?: mas_all_collectUncheckedCreateNestedManyWithoutUserInput
-    salary?: salaryUncheckedCreateNestedManyWithoutUserInput
-    provident_log?: provident_logUncheckedCreateNestedManyWithoutUserInput
-    bookbank_log?: bookbank_logUncheckedCreateNestedManyWithoutUserInput
-    data_leave?: data_leaveUncheckedCreateNestedManyWithoutUserInput
-    cretedByfk?: log_positionnUncheckedCreateNestedManyWithoutCretedByfkInput
-  }
-
-  export type UserCreateOrConnectWithoutUpdtedByfkInput = {
-    where: UserWhereUniqueInput
-    create: XOR<UserCreateWithoutUpdtedByfkInput, UserUncheckedCreateWithoutUpdtedByfkInput>
   }
 
   export type Position_userUpsertWithoutLog_positionInput = {
@@ -51743,7 +51477,6 @@ export namespace Prisma {
     provident_log?: provident_logUpdateManyWithoutUserNestedInput
     bookbank_log?: bookbank_logUpdateManyWithoutUserNestedInput
     data_leave?: data_leaveUpdateManyWithoutUserNestedInput
-    updtedByfk?: log_positionnUpdateManyWithoutUpdtedByfkNestedInput
   }
 
   export type UserUncheckedUpdateWithoutCretedByfkInput = {
@@ -51767,60 +51500,6 @@ export namespace Prisma {
     provident_log?: provident_logUncheckedUpdateManyWithoutUserNestedInput
     bookbank_log?: bookbank_logUncheckedUpdateManyWithoutUserNestedInput
     data_leave?: data_leaveUncheckedUpdateManyWithoutUserNestedInput
-    updtedByfk?: log_positionnUncheckedUpdateManyWithoutUpdtedByfkNestedInput
-  }
-
-  export type UserUpsertWithoutUpdtedByfkInput = {
-    update: XOR<UserUpdateWithoutUpdtedByfkInput, UserUncheckedUpdateWithoutUpdtedByfkInput>
-    create: XOR<UserCreateWithoutUpdtedByfkInput, UserUncheckedCreateWithoutUpdtedByfkInput>
-  }
-
-  export type UserUpdateWithoutUpdtedByfkInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    email?: StringFieldUpdateOperationsInput | string
-    password?: StringFieldUpdateOperationsInput | string
-    profile?: ProfileUpdateOneWithoutUserNestedInput
-    islogin?: BoolFieldUpdateOperationsInput | boolean
-    isActive?: BoolFieldUpdateOperationsInput | boolean
-    isOwner?: BoolFieldUpdateOperationsInput | boolean
-    lastlogin?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    role?: RoleUpdateOneWithoutUsersNestedInput
-    company?: CompanyUpdateManyWithoutOwnerNestedInput
-    companyBranch?: CompanyBranchUpdateOneWithoutUsersNestedInput
-    Role_Company?: Role_CompanyUpdateOneWithoutUsersNestedInput
-    Position_user?: Position_userUpdateManyWithoutUserNestedInput
-    henchman?: Position_userUpdateManyWithoutHeaderNestedInput
-    mas_all_collect?: mas_all_collectUpdateManyWithoutUserNestedInput
-    salary?: salaryUpdateManyWithoutUserNestedInput
-    provident_log?: provident_logUpdateManyWithoutUserNestedInput
-    bookbank_log?: bookbank_logUpdateManyWithoutUserNestedInput
-    data_leave?: data_leaveUpdateManyWithoutUserNestedInput
-    cretedByfk?: log_positionnUpdateManyWithoutCretedByfkNestedInput
-  }
-
-  export type UserUncheckedUpdateWithoutUpdtedByfkInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    email?: StringFieldUpdateOperationsInput | string
-    password?: StringFieldUpdateOperationsInput | string
-    profile?: ProfileUncheckedUpdateOneWithoutUserNestedInput
-    islogin?: BoolFieldUpdateOperationsInput | boolean
-    isActive?: BoolFieldUpdateOperationsInput | boolean
-    isOwner?: BoolFieldUpdateOperationsInput | boolean
-    lastlogin?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    roleId?: NullableStringFieldUpdateOperationsInput | string | null
-    RoleCompanyID?: NullableStringFieldUpdateOperationsInput | string | null
-    company?: CompanyUncheckedUpdateManyWithoutOwnerNestedInput
-    companyBranchId?: NullableStringFieldUpdateOperationsInput | string | null
-    Position_user?: Position_userUncheckedUpdateManyWithoutUserNestedInput
-    henchman?: Position_userUncheckedUpdateManyWithoutHeaderNestedInput
-    mas_all_collect?: mas_all_collectUncheckedUpdateManyWithoutUserNestedInput
-    salary?: salaryUncheckedUpdateManyWithoutUserNestedInput
-    provident_log?: provident_logUncheckedUpdateManyWithoutUserNestedInput
-    bookbank_log?: bookbank_logUncheckedUpdateManyWithoutUserNestedInput
-    data_leave?: data_leaveUncheckedUpdateManyWithoutUserNestedInput
-    cretedByfk?: log_positionnUncheckedUpdateManyWithoutCretedByfkNestedInput
   }
 
   export type SubBusinessTypeCreateWithoutMainBusinessTypeInput = {
@@ -52338,7 +52017,6 @@ export namespace Prisma {
     bookbank_log?: bookbank_logUpdateManyWithoutUserNestedInput
     data_leave?: data_leaveUpdateManyWithoutUserNestedInput
     cretedByfk?: log_positionnUpdateManyWithoutCretedByfkNestedInput
-    updtedByfk?: log_positionnUpdateManyWithoutUpdtedByfkNestedInput
   }
 
   export type UserUncheckedUpdateWithoutCompanyBranchInput = {
@@ -52362,7 +52040,6 @@ export namespace Prisma {
     bookbank_log?: bookbank_logUncheckedUpdateManyWithoutUserNestedInput
     data_leave?: data_leaveUncheckedUpdateManyWithoutUserNestedInput
     cretedByfk?: log_positionnUncheckedUpdateManyWithoutCretedByfkNestedInput
-    updtedByfk?: log_positionnUncheckedUpdateManyWithoutUpdtedByfkNestedInput
   }
 
   export type UserUncheckedUpdateManyWithoutUsersInput = {
@@ -52551,16 +52228,7 @@ export namespace Prisma {
     id: string
     positionId: string
     creteddate: Date | string
-    updtedBy: string
-    updteddate: Date | string
-  }
-
-  export type log_positionnCreateManyUpdtedByfkInput = {
-    id: string
-    positionId: string
-    cretedBy: string
-    creteddate: Date | string
-    updteddate: Date | string
+    detail: string
   }
 
   export type CompanyUpdateWithoutOwnerInput = {
@@ -52941,49 +52609,22 @@ export namespace Prisma {
   export type log_positionnUpdateWithoutCretedByfkInput = {
     id?: StringFieldUpdateOperationsInput | string
     creteddate?: DateTimeFieldUpdateOperationsInput | Date | string
-    updteddate?: DateTimeFieldUpdateOperationsInput | Date | string
+    detail?: StringFieldUpdateOperationsInput | string
     Position_user?: Position_userUpdateOneRequiredWithoutLog_positionNestedInput
-    updtedByfk?: UserUpdateOneRequiredWithoutUpdtedByfkNestedInput
   }
 
   export type log_positionnUncheckedUpdateWithoutCretedByfkInput = {
     id?: StringFieldUpdateOperationsInput | string
     positionId?: StringFieldUpdateOperationsInput | string
     creteddate?: DateTimeFieldUpdateOperationsInput | Date | string
-    updtedBy?: StringFieldUpdateOperationsInput | string
-    updteddate?: DateTimeFieldUpdateOperationsInput | Date | string
+    detail?: StringFieldUpdateOperationsInput | string
   }
 
   export type log_positionnUncheckedUpdateManyWithoutCretedByfkInput = {
     id?: StringFieldUpdateOperationsInput | string
     positionId?: StringFieldUpdateOperationsInput | string
     creteddate?: DateTimeFieldUpdateOperationsInput | Date | string
-    updtedBy?: StringFieldUpdateOperationsInput | string
-    updteddate?: DateTimeFieldUpdateOperationsInput | Date | string
-  }
-
-  export type log_positionnUpdateWithoutUpdtedByfkInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    creteddate?: DateTimeFieldUpdateOperationsInput | Date | string
-    updteddate?: DateTimeFieldUpdateOperationsInput | Date | string
-    Position_user?: Position_userUpdateOneRequiredWithoutLog_positionNestedInput
-    cretedByfk?: UserUpdateOneRequiredWithoutCretedByfkNestedInput
-  }
-
-  export type log_positionnUncheckedUpdateWithoutUpdtedByfkInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    positionId?: StringFieldUpdateOperationsInput | string
-    cretedBy?: StringFieldUpdateOperationsInput | string
-    creteddate?: DateTimeFieldUpdateOperationsInput | Date | string
-    updteddate?: DateTimeFieldUpdateOperationsInput | Date | string
-  }
-
-  export type log_positionnUncheckedUpdateManyWithoutUpdtedByfkInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    positionId?: StringFieldUpdateOperationsInput | string
-    cretedBy?: StringFieldUpdateOperationsInput | string
-    creteddate?: DateTimeFieldUpdateOperationsInput | Date | string
-    updteddate?: DateTimeFieldUpdateOperationsInput | Date | string
+    detail?: StringFieldUpdateOperationsInput | string
   }
 
   export type UserCreateManyRoleInput = {
@@ -53020,7 +52661,6 @@ export namespace Prisma {
     bookbank_log?: bookbank_logUpdateManyWithoutUserNestedInput
     data_leave?: data_leaveUpdateManyWithoutUserNestedInput
     cretedByfk?: log_positionnUpdateManyWithoutCretedByfkNestedInput
-    updtedByfk?: log_positionnUpdateManyWithoutUpdtedByfkNestedInput
   }
 
   export type UserUncheckedUpdateWithoutRoleInput = {
@@ -53044,7 +52684,6 @@ export namespace Prisma {
     bookbank_log?: bookbank_logUncheckedUpdateManyWithoutUserNestedInput
     data_leave?: data_leaveUncheckedUpdateManyWithoutUserNestedInput
     cretedByfk?: log_positionnUncheckedUpdateManyWithoutCretedByfkNestedInput
-    updtedByfk?: log_positionnUncheckedUpdateManyWithoutUpdtedByfkNestedInput
   }
 
   export type UserCreateManyRole_CompanyInput = {
@@ -53081,7 +52720,6 @@ export namespace Prisma {
     bookbank_log?: bookbank_logUpdateManyWithoutUserNestedInput
     data_leave?: data_leaveUpdateManyWithoutUserNestedInput
     cretedByfk?: log_positionnUpdateManyWithoutCretedByfkNestedInput
-    updtedByfk?: log_positionnUpdateManyWithoutUpdtedByfkNestedInput
   }
 
   export type UserUncheckedUpdateWithoutRole_CompanyInput = {
@@ -53105,7 +52743,6 @@ export namespace Prisma {
     bookbank_log?: bookbank_logUncheckedUpdateManyWithoutUserNestedInput
     data_leave?: data_leaveUncheckedUpdateManyWithoutUserNestedInput
     cretedByfk?: log_positionnUncheckedUpdateManyWithoutCretedByfkNestedInput
-    updtedByfk?: log_positionnUncheckedUpdateManyWithoutUpdtedByfkNestedInput
   }
 
   export type DistrictCreateManyProvinceInput = {
@@ -53314,32 +52951,28 @@ export namespace Prisma {
     id: string
     cretedBy: string
     creteddate: Date | string
-    updtedBy: string
-    updteddate: Date | string
+    detail: string
   }
 
   export type log_positionnUpdateWithoutPosition_userInput = {
     id?: StringFieldUpdateOperationsInput | string
     creteddate?: DateTimeFieldUpdateOperationsInput | Date | string
-    updteddate?: DateTimeFieldUpdateOperationsInput | Date | string
+    detail?: StringFieldUpdateOperationsInput | string
     cretedByfk?: UserUpdateOneRequiredWithoutCretedByfkNestedInput
-    updtedByfk?: UserUpdateOneRequiredWithoutUpdtedByfkNestedInput
   }
 
   export type log_positionnUncheckedUpdateWithoutPosition_userInput = {
     id?: StringFieldUpdateOperationsInput | string
     cretedBy?: StringFieldUpdateOperationsInput | string
     creteddate?: DateTimeFieldUpdateOperationsInput | Date | string
-    updtedBy?: StringFieldUpdateOperationsInput | string
-    updteddate?: DateTimeFieldUpdateOperationsInput | Date | string
+    detail?: StringFieldUpdateOperationsInput | string
   }
 
   export type log_positionnUncheckedUpdateManyWithoutLog_positionInput = {
     id?: StringFieldUpdateOperationsInput | string
     cretedBy?: StringFieldUpdateOperationsInput | string
     creteddate?: DateTimeFieldUpdateOperationsInput | Date | string
-    updtedBy?: StringFieldUpdateOperationsInput | string
-    updteddate?: DateTimeFieldUpdateOperationsInput | Date | string
+    detail?: StringFieldUpdateOperationsInput | string
   }
 
   export type expense_companyCreateManyMas_bankInput = {
