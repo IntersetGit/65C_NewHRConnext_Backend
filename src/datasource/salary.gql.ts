@@ -478,8 +478,11 @@ const resolvers: Resolvers = {
     async expense_company(p,args,ctx){
       // console.log(ctx.currentUser?.id)
       const getdata = await ctx.prisma.expense_company.findMany({
-        where:{
-          companyBranchId:ctx.currentUser?.branchId
+        include: {
+          mas_bank: true
+        },
+        where: {
+          companyBranchId: ctx.currentUser?.branchId
         },
         orderBy:
         {
@@ -885,11 +888,11 @@ const resolvers: Resolvers = {
           date: "desc"
         }
       })
-      let vat_per=check_combra[0].vat_per?check_combra[0].vat_per:0
-      let ss_per=check_combra[0].ss_per?check_combra[0].ss_per :0
+      let vat_per = check_combra[0].vat_per ? check_combra[0].vat_per : 0
+      let ss_per = check_combra[0].ss_per ? check_combra[0].ss_per : 0
       // console.log(vat_per);
       // console.log(ss_per);
-      
+
 
       let time
       let result_incomeYears = 0;
