@@ -1,5 +1,5 @@
 
-import { Resolvers } from '../generated/graphql';
+import { Resolvers, User, CompanyBranch } from '../generated/graphql';
 import gql from 'graphql-tag';
 import { v4 } from 'uuid';
 import { composeResolvers } from '@graphql-tools/resolvers-composition';
@@ -7,6 +7,7 @@ import { authenticate } from '../middleware/authenticatetoken';
 import dayjs from 'dayjs';
 import { includes, orderBy } from 'lodash';
 import { profile } from 'console';
+import { expense_company } from '../generated/client/index';
 
 
 
@@ -641,7 +642,7 @@ const resolvers: Resolvers = {
           },
           salary: true,
           bookbank_log: { include: { mas_bank: true }, orderBy: { date: 'desc' } },
-          companyBranch: { include: { expense_company: { orderBy: { date: 'desc' }} } }
+          companyBranch: { include: { expense_company: { orderBy: { date: 'desc' } } } }
         },
         where: {
           companyBranchId: ctx.currentUser?.branchId,
@@ -857,6 +858,25 @@ const resolvers: Resolvers = {
       })
       let bookbank_logId = check_bookbank[0].id //หา bookbank log ของ user คนนั้นจากนั้นให้ insert เข้า salary
 
+      const check_user_ex = await ctx.prisma.User.findMany({
+        where: {
+          id: args.data.userId
+
+        }
+      })
+      const cb = check_user_ex[0].companyBranchId
+      const check_combra = await ctx.prisma.expense_company.findMany({
+        where: {
+          companyBranchId: cb
+        }, orderBy: {
+          date: "desc"
+        }
+      })
+      let vat_per=check_combra[0].vat_per?check_combra[0].vat_per:0
+      let ss_per=check_combra[0].ss_per?check_combra[0].ss_per :0
+      console.log(vat_per);
+      console.log(ss_per);
+      
 
       let time
       let result_incomeYears = 0;
@@ -880,8 +900,8 @@ const resolvers: Resolvers = {
             travel_income: args.data?.travel_income as number,
             bursary: args.data?.bursary as number,
             welfare_money: args.data?.welfare_money as number,
-            vatper: args.data?.vatper as number,
-            ss_per: args.data?.ss_per as number,
+            vatper: vat_per as number,
+            ss_per: ss_per as number,
             vat: args.data?.vat as number,
             social_security: args.data?.social_security as number,
             miss: args.data?.miss as number,
