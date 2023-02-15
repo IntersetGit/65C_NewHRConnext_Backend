@@ -434,6 +434,7 @@ user_id:String
     mas_all_collect: mas_all_collect
     mas_bank(id: String): [mas_bank]
     data_salary(fristname: String ,Position2: String ,Position3: String):[data_salary]
+    expense_company:[expense_company]
   }
 
   type Mutation {
@@ -474,7 +475,19 @@ const resolvers: Resolvers = {
       return getdata;
     },
 
-
+    async expense_company(p,args,ctx){
+      console.log(ctx.currentUser?.id)
+      const getdata = await ctx.prisma.expense_company.findMany({
+        where:{
+          companyBranchId:ctx.currentUser?.branchId
+        },
+        orderBy:
+        {
+          date: "desc",
+        },
+      });
+      return getdata;
+    },
     async mas_bank(parant: any, args: any, ctx: any) {
       const result = await ctx.prisma.mas_bank.findMany({
         where: {
@@ -1316,6 +1329,7 @@ const resolvers: Resolvers = {
 
 
 const resolversComposition = {
+  'Query.expense_company': [authenticate()],
   'Query.salary': [authenticate()],
   'Query.bookbank_log': [authenticate()],
   'Query.mas_all_collect': [authenticate()],
