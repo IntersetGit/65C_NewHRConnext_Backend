@@ -1,3 +1,4 @@
+import { log_positionn } from './../generated/client/index.d';
 import { User } from './../generated/graphql';
 import { composeResolvers } from '@graphql-tools/resolvers-composition';
 import { authenticate } from '../middleware/authenticatetoken';
@@ -195,8 +196,8 @@ export const positionResolvers: Resolvers = {
       const resultMebyID = await ctx.prisma.position_user.findMany({
         include: { mas_positionlevel1: true, mas_positionlevel2: true, mas_positionlevel3: true, user: { include: { profile: true } }, header: { include: { profile: true } } },
         where: { user_id: ctx.currentUser?.id },
-        orderBy: {date: 'desc'}
-        
+        orderBy: { date: 'desc' }
+
       });
       return resultMebyID;
     },
@@ -249,8 +250,8 @@ export const positionResolvers: Resolvers = {
               id: e.id_Position1 as string
             }
           })
-        } 
-        if(e.id_Position1 == "" || e.id_Position1 == undefined  ){
+        }
+        if (e.id_Position1 == "" || e.id_Position1 == undefined) {
           const createdPo_1 = await ctx.prisma.mas_positionlevel1.create({
             // include: { mas_positionlevel2: { include: { mas_positionlevel3: true } } },
             data: {
@@ -278,7 +279,7 @@ export const positionResolvers: Resolvers = {
                 }
               })
 
-            } if(a?.id_Position2 == "" || a?.id_Position2 == undefined){
+            } if (a?.id_Position2 == "" || a?.id_Position2 == undefined) {
               var CretePo_2 = await ctx.prisma.mas_positionlevel2.create({
                 data: {
                   id: v4(),
@@ -322,7 +323,7 @@ export const positionResolvers: Resolvers = {
             }
           })
         }
-      }) 
+      })
       return {
         message: 'success',
         status: true,
@@ -382,6 +383,8 @@ export const positionResolvers: Resolvers = {
     },
 
     async createdposition_user(p, args, ctx) {
+      const genpositionId = v4();
+      const genidlog = v4();
       if (args.data.id) {
         const updated = await ctx.prisma.position_user.update({
           data: {
@@ -396,6 +399,17 @@ export const positionResolvers: Resolvers = {
           where: {
             id: args.data.id
           }
+        });
+
+        const updated_position = await ctx.prisma.log_positionn.create({
+          data: {
+            id: v4(),
+            positionId: args.data.id as string,
+            cretedBy: ctx.currentUser?.id as string,
+            creteddate: new Date(),
+            detail: 'update position_user'
+
+          }
         })
 
         return {
@@ -406,7 +420,7 @@ export const positionResolvers: Resolvers = {
       } else {
         const created = await ctx.prisma.position_user.create({
           data: {
-            id: v4(),
+            id: genpositionId,
             user_id: args.data.user_id as string,
             position1_id: args.data.position1_id as string,
             position2_id: args.data.position2_id as string,
@@ -414,6 +428,17 @@ export const positionResolvers: Resolvers = {
             role: args.data.role as string,
             headderId: args.data.headderId as string,
             date: args.data.date as string
+          }
+        });
+
+        const create_position = await ctx.prisma.log_positionn.create({
+          data: {
+            id: genidlog,
+            positionId: created.id,
+            cretedBy: ctx.currentUser?.id as string,
+            creteddate: new Date(),
+            detail: 'create position_user',
+
           }
         })
         return {
