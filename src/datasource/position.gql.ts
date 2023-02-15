@@ -397,14 +397,6 @@ export const positionResolvers: Resolvers = {
             id: args.data.id
           }
         })
-        // const updated_position = await ctx.prisma.log_positionn.create({
-        //   data:{
-        //     id: v4(),
-        //     positionId: args.data.id as string,
-        //     updtedBy: ctx.currentUser?.id as string,
-        //     updteddate: new Date(),
-        //   }
-        // })
 
         return {
           message: 'success',
