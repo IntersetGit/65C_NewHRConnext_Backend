@@ -476,7 +476,7 @@ const resolvers: Resolvers = {
     },
 
     async expense_company(p,args,ctx){
-      console.log(ctx.currentUser?.id)
+      // console.log(ctx.currentUser?.id)
       const getdata = await ctx.prisma.expense_company.findMany({
         where:{
           companyBranchId:ctx.currentUser?.branchId
