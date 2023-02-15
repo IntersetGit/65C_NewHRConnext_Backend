@@ -134,7 +134,8 @@ exports.Prisma.CompanyBranchScalarFieldEnum = makeEnum({
   social_line: 'social_line',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt',
-  companyId: 'companyId'
+  companyId: 'companyId',
+  BusinesstypeId: 'BusinesstypeId'
 });
 
 exports.Prisma.CompanyScalarFieldEnum = makeEnum({
@@ -178,13 +179,6 @@ exports.Prisma.Expense_companyScalarFieldEnum = makeEnum({
   companyBranchId: 'companyBranchId'
 });
 
-exports.Prisma.HolidayCompanyScalarFieldEnum = makeEnum({
-  id: 'id',
-  CompanyId: 'CompanyId',
-  holiday_dateId: 'holiday_dateId',
-  holiday_yearId: 'holiday_yearId'
-});
-
 exports.Prisma.Holiday_dateScalarFieldEnum = makeEnum({
   id: 'id',
   holiday_name: 'holiday_name',
@@ -220,6 +214,11 @@ exports.Prisma.Log_positionnScalarFieldEnum = makeEnum({
   creteddate: 'creteddate',
   updtedBy: 'updtedBy',
   updteddate: 'updteddate'
+});
+
+exports.Prisma.MainBusinessTypeScalarFieldEnum = makeEnum({
+  id: 'id',
+  name: 'name'
 });
 
 exports.Prisma.Mas_all_collectScalarFieldEnum = makeEnum({
@@ -454,6 +453,12 @@ exports.Prisma.SortOrder = makeEnum({
   desc: 'desc'
 });
 
+exports.Prisma.SubBusinessTypeScalarFieldEnum = makeEnum({
+  id: 'id',
+  name: 'name',
+  MainBId: 'MainBId'
+});
+
 exports.Prisma.TransactionIsolationLevel = makeStrictEnum({
   ReadUncommitted: 'ReadUncommitted',
   ReadCommitted: 'ReadCommitted',
@@ -493,7 +498,6 @@ exports.Prisma.ModelName = makeEnum({
   Position_user: 'Position_user',
   holiday_date: 'holiday_date',
   holiday_year: 'holiday_year',
-  holidayCompany: 'holidayCompany',
   mas_bank: 'mas_bank',
   mas_month: 'mas_month',
   mas_years: 'mas_years',
@@ -507,7 +511,9 @@ exports.Prisma.ModelName = makeEnum({
   provident_log: 'provident_log',
   mas_leave_type: 'mas_leave_type',
   data_leave: 'data_leave',
-  log_positionn: 'log_positionn'
+  log_positionn: 'log_positionn',
+  MainBusinessType: 'MainBusinessType',
+  SubBusinessType: 'SubBusinessType'
 });
 
 /**

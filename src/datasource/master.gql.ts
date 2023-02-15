@@ -1,4 +1,5 @@
-import { Mutation } from './../generated/graphql';
+import { MainBusinessType } from './../generated/client/index.d';
+import { Mutation, Salary } from './../generated/graphql';
 import gql from 'graphql-tag';
 import { Resolvers } from '../generated/graphql';
 
@@ -21,8 +22,20 @@ export const masterTypedef = gql`
     district: [District]
   }
 
+  type MainBusinessType {
+    id: ID!
+    name: String
+    SubBusinessType: [SubBusinessType]
+  }
+
+  type SubBusinessType {
+    id: ID!
+    name: String
+  }
+
   type Query {
     getProvince: [Province]
+    getBusinessType: [MainBusinessType]
   }
 
 `;
@@ -35,6 +48,15 @@ export const masterResolvers: Resolvers = {
       });
       return result;
     },
-  },
 
+    async getBusinessType(p, args, ctx) {
+      const result = await ctx.prisma.mainBusinessType.findMany({
+        orderBy: [
+          { name: "asc" }
+        ],
+        include: { SubBusinessType: true },
+      });
+      return result;
+    }
+  },
 };

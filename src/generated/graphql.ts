@@ -115,6 +115,7 @@ export type CountInsideBranch = {
 };
 
 export type CreateAccountInput = {
+  BusinesstypeId?: InputMaybe<Scalars['String']>;
   avatar?: InputMaybe<Scalars['String']>;
   companyCode: Scalars['String'];
   company_address: Scalars['String'];
@@ -135,6 +136,7 @@ export type CreateAccountInput = {
 };
 
 export type CreateAccountUserInput = {
+  BusinesstypeId?: InputMaybe<Scalars['String']>;
   address?: InputMaybe<Scalars['String']>;
   age?: InputMaybe<Scalars['String']>;
   avatar?: InputMaybe<Scalars['String']>;
@@ -363,6 +365,13 @@ export type LoginResponse = {
 export type LoginaInput = {
   email: Scalars['String'];
   password: Scalars['String'];
+};
+
+export type MainBusinessType = {
+  __typename?: 'MainBusinessType';
+  SubBusinessType?: Maybe<Array<Maybe<SubBusinessType>>>;
+  id: Scalars['ID'];
+  name?: Maybe<Scalars['String']>;
 };
 
 export type Me = {
@@ -699,6 +708,7 @@ export type Query = {
   data_salary?: Maybe<Array<Maybe<Data_Salary>>>;
   getAllcompany?: Maybe<Array<Maybe<CompanyBranch>>>;
   getAllleave?: Maybe<GetleaveResponseType>;
+  getBusinessType?: Maybe<Array<Maybe<MainBusinessType>>>;
   getMasPositon?: Maybe<Array<Maybe<Mas_Positionlevel1>>>;
   getProvince?: Maybe<Array<Maybe<Province>>>;
   getcompanyRole?: Maybe<Array<Maybe<Role_Company>>>;
@@ -908,6 +918,12 @@ export type SalaryStatusResponseType = {
   __typename?: 'SalaryStatusResponseType';
   message?: Maybe<Scalars['String']>;
   status?: Maybe<Scalars['Boolean']>;
+};
+
+export type SubBusinessType = {
+  __typename?: 'SubBusinessType';
+  id: Scalars['ID'];
+  name?: Maybe<Scalars['String']>;
 };
 
 export type UpdateRoleCompanyMangementType = {
@@ -1602,6 +1618,7 @@ export type ResolversTypes = ResolversObject<{
   JSON: ResolverTypeWrapper<Scalars['JSON']>;
   LoginResponse: ResolverTypeWrapper<LoginResponse>;
   LoginaInput: LoginaInput;
+  MainBusinessType: ResolverTypeWrapper<MainBusinessType>;
   Me: ResolverTypeWrapper<Me>;
   MeCompanyBranch: ResolverTypeWrapper<MeCompanyBranch>;
   MePositionType: ResolverTypeWrapper<MePositionType>;
@@ -1623,6 +1640,7 @@ export type ResolversTypes = ResolversObject<{
   SalaryResponseType: ResolverTypeWrapper<SalaryResponseType>;
   SalaryStatusResponseType: ResolverTypeWrapper<SalaryStatusResponseType>;
   String: ResolverTypeWrapper<Scalars['String']>;
+  SubBusinessType: ResolverTypeWrapper<SubBusinessType>;
   UpdateRoleCompanyMangementType: UpdateRoleCompanyMangementType;
   User: ResolverTypeWrapper<User>;
   ValidateRoute: ResolverTypeWrapper<ValidateRoute>;
@@ -1716,6 +1734,7 @@ export type ResolversParentTypes = ResolversObject<{
   JSON: Scalars['JSON'];
   LoginResponse: LoginResponse;
   LoginaInput: LoginaInput;
+  MainBusinessType: MainBusinessType;
   Me: Me;
   MeCompanyBranch: MeCompanyBranch;
   MePositionType: MePositionType;
@@ -1737,6 +1756,7 @@ export type ResolversParentTypes = ResolversObject<{
   SalaryResponseType: SalaryResponseType;
   SalaryStatusResponseType: SalaryStatusResponseType;
   String: Scalars['String'];
+  SubBusinessType: SubBusinessType;
   UpdateRoleCompanyMangementType: UpdateRoleCompanyMangementType;
   User: User;
   ValidateRoute: ValidateRoute;
@@ -2007,6 +2027,13 @@ export type LoginResponseResolvers<ContextType = ApolloContext, ParentType exten
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 }>;
 
+export type MainBusinessTypeResolvers<ContextType = ApolloContext, ParentType extends ResolversParentTypes['MainBusinessType'] = ResolversParentTypes['MainBusinessType']> = ResolversObject<{
+  SubBusinessType?: Resolver<Maybe<Array<Maybe<ResolversTypes['SubBusinessType']>>>, ParentType, ContextType>;
+  id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
+  name?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+}>;
+
 export type MeResolvers<ContextType = ApolloContext, ParentType extends ResolversParentTypes['Me'] = ResolversParentTypes['Me']> = ResolversObject<{
   Role_Company?: Resolver<Maybe<ResolversTypes['MePositionType']>, ParentType, ContextType>;
   companyBranch?: Resolver<Maybe<ResolversTypes['MeCompanyBranch']>, ParentType, ContextType>;
@@ -2192,6 +2219,7 @@ export type QueryResolvers<ContextType = ApolloContext, ParentType extends Resol
   data_salary?: Resolver<Maybe<Array<Maybe<ResolversTypes['data_salary']>>>, ParentType, ContextType, Partial<QueryData_SalaryArgs>>;
   getAllcompany?: Resolver<Maybe<Array<Maybe<ResolversTypes['CompanyBranch']>>>, ParentType, ContextType, Partial<QueryGetAllcompanyArgs>>;
   getAllleave?: Resolver<Maybe<ResolversTypes['getleaveResponseType']>, ParentType, ContextType, Partial<QueryGetAllleaveArgs>>;
+  getBusinessType?: Resolver<Maybe<Array<Maybe<ResolversTypes['MainBusinessType']>>>, ParentType, ContextType>;
   getMasPositon?: Resolver<Maybe<Array<Maybe<ResolversTypes['mas_positionlevel1']>>>, ParentType, ContextType>;
   getProvince?: Resolver<Maybe<Array<Maybe<ResolversTypes['Province']>>>, ParentType, ContextType>;
   getcompanyRole?: Resolver<Maybe<Array<Maybe<ResolversTypes['Role_Company']>>>, ParentType, ContextType, Partial<QueryGetcompanyRoleArgs>>;
@@ -2302,6 +2330,12 @@ export type SalaryResponseTypeResolvers<ContextType = ApolloContext, ParentType 
 export type SalaryStatusResponseTypeResolvers<ContextType = ApolloContext, ParentType extends ResolversParentTypes['SalaryStatusResponseType'] = ResolversParentTypes['SalaryStatusResponseType']> = ResolversObject<{
   message?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   status?: Resolver<Maybe<ResolversTypes['Boolean']>, ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+}>;
+
+export type SubBusinessTypeResolvers<ContextType = ApolloContext, ParentType extends ResolversParentTypes['SubBusinessType'] = ResolversParentTypes['SubBusinessType']> = ResolversObject<{
+  id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
+  name?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 }>;
 
@@ -2761,6 +2795,7 @@ export type Resolvers<ContextType = ApolloContext> = ResolversObject<{
   GetOwncompanytype?: GetOwncompanytypeResolvers<ContextType>;
   JSON?: GraphQLScalarType;
   LoginResponse?: LoginResponseResolvers<ContextType>;
+  MainBusinessType?: MainBusinessTypeResolvers<ContextType>;
   Me?: MeResolvers<ContextType>;
   MeCompanyBranch?: MeCompanyBranchResolvers<ContextType>;
   MePositionType?: MePositionTypeResolvers<ContextType>;
@@ -2780,6 +2815,7 @@ export type Resolvers<ContextType = ApolloContext> = ResolversObject<{
   Role_Company?: Role_CompanyResolvers<ContextType>;
   SalaryResponseType?: SalaryResponseTypeResolvers<ContextType>;
   SalaryStatusResponseType?: SalaryStatusResponseTypeResolvers<ContextType>;
+  SubBusinessType?: SubBusinessTypeResolvers<ContextType>;
   User?: UserResolvers<ContextType>;
   ValidateRoute?: ValidateRouteResolvers<ContextType>;
   book_bank_logResponseType?: Book_Bank_LogResponseTypeResolvers<ContextType>;
