@@ -874,8 +874,8 @@ const resolvers: Resolvers = {
       })
       let vat_per=check_combra[0].vat_per?check_combra[0].vat_per:0
       let ss_per=check_combra[0].ss_per?check_combra[0].ss_per :0
-      console.log(vat_per);
-      console.log(ss_per);
+      // console.log(vat_per);
+      // console.log(ss_per);
       
 
       let time
