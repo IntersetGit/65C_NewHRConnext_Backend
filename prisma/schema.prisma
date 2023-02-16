@@ -61,6 +61,8 @@ model CompanyBranch {
   company_type      String?
   sub_company_type  String?
   registeredamount  String?
+  regis_vat         String?
+  regiscomnumber    String?
   social_facebook   String?
   social_likedin    String?
   social_instragram String?

@@ -128,6 +128,8 @@ exports.Prisma.CompanyBranchScalarFieldEnum = makeEnum({
   company_type: 'company_type',
   sub_company_type: 'sub_company_type',
   registeredamount: 'registeredamount',
+  regis_vat: 'regis_vat',
+  regiscomnumber: 'regiscomnumber',
   social_facebook: 'social_facebook',
   social_likedin: 'social_likedin',
   social_instragram: 'social_instragram',
