@@ -122,6 +122,8 @@ export const companyTypedef = gql`
     social_facebook: String
     social_likedin: String
     social_instragram: String
+    regis_vat: String
+    regiscomnumber: String
     social_line: String
     createdAt: Date
     updatedAt: Date
@@ -301,8 +303,7 @@ const resolvers: Resolvers = {
       if (args.data?.id) {
         const createBranch = await ctx.prisma.companyBranch.update({
           data: {
-            id: genComBranchid,
-            name: args.data?.name as string,
+            name: 'สาขา',
             address: args.data?.address as string,
             address_2: args.data?.address_2 as string,
             city: args.data?.city as string,
@@ -329,7 +330,7 @@ const resolvers: Resolvers = {
             regiscomnumber: args.data.regiscomnumber
           },
           where: {
-            id: args.data.id
+            id: args.data.id as string
           }
         });
         return {
@@ -340,7 +341,7 @@ const resolvers: Resolvers = {
         const createBranch = await ctx.prisma.companyBranch.create({
           data: {
             id: genComBranchid,
-            name: args.data?.name as string,
+            name: 'สาขา',
             address: args.data?.address as string,
             address_2: args.data?.address_2,
             city: args.data?.city as string,
