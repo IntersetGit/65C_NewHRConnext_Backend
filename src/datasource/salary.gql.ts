@@ -434,6 +434,7 @@ user_id:String
     mas_all_collect: mas_all_collect
     mas_bank(id: String): [mas_bank]
     data_salary(fristname: String ,Position2: String ,Position3: String):[data_salary]
+    expense_company:[expense_company]
   }
 
   type Mutation {
@@ -474,7 +475,22 @@ const resolvers: Resolvers = {
       return getdata;
     },
 
-
+    async expense_company(p,args,ctx){
+      // console.log(ctx.currentUser?.id)
+      const getdata = await ctx.prisma.expense_company.findMany({
+        include: {
+          mas_bank: true
+        },
+        where: {
+          companyBranchId: ctx.currentUser?.branchId
+        },
+        orderBy:
+        {
+          date: "desc",
+        },
+      });
+      return getdata;
+    },
     async mas_bank(parant: any, args: any, ctx: any) {
       const result = await ctx.prisma.mas_bank.findMany({
         where: {
@@ -872,11 +888,11 @@ const resolvers: Resolvers = {
           date: "desc"
         }
       })
-      let vat_per=check_combra[0].vat_per?check_combra[0].vat_per:0
-      let ss_per=check_combra[0].ss_per?check_combra[0].ss_per :0
+      let vat_per = check_combra[0].vat_per ? check_combra[0].vat_per : 0
+      let ss_per = check_combra[0].ss_per ? check_combra[0].ss_per : 0
       // console.log(vat_per);
       // console.log(ss_per);
-      
+
 
       let time
       let result_incomeYears = 0;
@@ -1316,6 +1332,7 @@ const resolvers: Resolvers = {
 
 
 const resolversComposition = {
+  'Query.expense_company': [authenticate()],
   'Query.salary': [authenticate()],
   'Query.bookbank_log': [authenticate()],
   'Query.mas_all_collect': [authenticate()],
