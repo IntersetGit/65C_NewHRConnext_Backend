@@ -244,6 +244,7 @@ export const salaryTypedef = gql`
     exp_com_month: String
     exp_com_years: String
     companyBranchId: String
+    cal_date_salary: Date
   }
 
   input incometype {
@@ -269,6 +270,7 @@ export const salaryTypedef = gql`
     social_security: Float
     companyBranchId: String
     Salary: salary
+    cal_date_salary: Date
   }
   type Profile {
     bio: String
@@ -1238,6 +1240,7 @@ const resolvers: Resolvers = {
             ss_per: args.data?.ss_per as number,
             exp_com_month: Thismonth,
             exp_com_years: ThisYear,
+            cal_date_salary: args.data?.cal_date_salary,
             companyBranchId: args.data?.companyBranchId,
           },
           where: { id: args.data.id },
@@ -1257,6 +1260,7 @@ const resolvers: Resolvers = {
           check_vat: take_arr,
           exp_com_month: Thismonth,
           exp_com_years: ThisYear,
+          cal_date_salary: args.data?.cal_date_salary,
           companyBranchId: args.data?.companyBranchId,
         },
       });

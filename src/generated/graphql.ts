@@ -337,6 +337,7 @@ export type District = {
 
 export type ExpenseComInput = {
   bankId?: InputMaybe<Scalars['String']>;
+  cal_date_salary?: InputMaybe<Scalars['Date']>;
   check_vat?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
   companyBranchId?: InputMaybe<Scalars['String']>;
   date?: InputMaybe<Scalars['Date']>;
@@ -1112,6 +1113,7 @@ export type Expense_Company = {
   Mas_month?: Maybe<Mas_Month>;
   Salary?: Maybe<Salary>;
   bankId?: Maybe<Scalars['String']>;
+  cal_date_salary?: Maybe<Scalars['Date']>;
   check_vat?: Maybe<Array<Maybe<Scalars['String']>>>;
   companyBranchId?: Maybe<Scalars['String']>;
   date?: Maybe<Scalars['Date']>;
@@ -2474,6 +2476,7 @@ export type Expense_CompanyResolvers<ContextType = ApolloContext, ParentType ext
   Mas_month?: Resolver<Maybe<ResolversTypes['mas_month']>, ParentType, ContextType>;
   Salary?: Resolver<Maybe<ResolversTypes['salary']>, ParentType, ContextType>;
   bankId?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  cal_date_salary?: Resolver<Maybe<ResolversTypes['Date']>, ParentType, ContextType>;
   check_vat?: Resolver<Maybe<Array<Maybe<ResolversTypes['String']>>>, ParentType, ContextType>;
   companyBranchId?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   date?: Resolver<Maybe<ResolversTypes['Date']>, ParentType, ContextType>;
