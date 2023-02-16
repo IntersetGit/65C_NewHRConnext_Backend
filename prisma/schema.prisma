@@ -54,7 +54,7 @@ model CompanyBranch {
   tel               String?           @db.VarChar(255)
   fax               String?           @db.VarChar(255)
   website           String?           @db.VarChar(255)
-  lat               String?   
+  lat               String?
   lng               String?
   email             String?
   email_2           String?
@@ -72,8 +72,8 @@ model CompanyBranch {
   users             User[]
   Role_Company      Role_Company[]
   expense_company   expense_company[]
-  BusinesstypeId   String?            @db.Uuid
-  Businesstype         MainBusinessType?  @relation(fields: [BusinesstypeId], references: [id])
+  BusinesstypeId    String?           @db.Uuid
+  Businesstype      MainBusinessType? @relation(fields: [BusinesstypeId], references: [id])
 }
 
 model Profile {
@@ -258,22 +258,22 @@ model Position_user {
 }
 
 model holiday_date {
-  id             String           @unique @db.Uuid
-  holiday_name   String?
-  day            Int
-  month          Int
-  year           Int
-  Company        Company?         @relation(fields: [CompanyId], references: [id])
-  CompanyId      String?          @db.Uuid
-  status         Int              @db.SmallInt
+  id           String   @unique @db.Uuid
+  holiday_name String?
+  day          Int
+  month        Int
+  year         Int
+  Company      Company? @relation(fields: [CompanyId], references: [id])
+  CompanyId    String?  @db.Uuid
+  status       Int      @db.SmallInt
 }
 
 model holiday_year {
-  id             String           @unique @db.Uuid
-  day            Int
-  month          Int
-  year           Int
-  holiday_name   String?
+  id           String  @unique @db.Uuid
+  day          Int
+  month        Int
+  year         Int
+  holiday_name String?
 }
 
 model mas_bank {
@@ -324,6 +324,7 @@ model expense_company {
   date            DateTime
   vat_per         Float?
   ss_per          Float?
+  check_vat       String[]
   companyBranchId String?        @db.Uuid
   salary          salary[]
   Mas_month       mas_month?     @relation(fields: [monthId], references: [id])
@@ -464,29 +465,27 @@ model data_leave {
   user           User           @relation(fields: [user_id], references: [id])
 }
 
-
 //------------ เก็บ logabout positions -------------------------//
-model log_positionn { 
-  id              String        @unique@db.Uuid
-  positionId      String        @db.Uuid
-  cretedBy        String        @db.Uuid
-  creteddate      DateTime  
-  detail          String
-  Position_user   Position_user  @relation(fields: [positionId], references: [id])
-  cretedByfk      User           @relation(fields: [cretedBy], references: [id])
+model log_positionn {
+  id            String        @unique @db.Uuid
+  positionId    String        @db.Uuid
+  cretedBy      String        @db.Uuid
+  creteddate    DateTime
+  detail        String
+  Position_user Position_user @relation(fields: [positionId], references: [id])
+  cretedByfk    User          @relation(fields: [cretedBy], references: [id])
 }
 
 model MainBusinessType {
-  id                String      @unique @db.Uuid
-  name              String
-  SubBusinessType   SubBusinessType[]
-  CompanyBranch     CompanyBranch[]
-          
+  id              String            @unique @db.Uuid
+  name            String
+  SubBusinessType SubBusinessType[]
+  CompanyBranch   CompanyBranch[]
 }
 
 model SubBusinessType {
-  id                String            @unique @db.Uuid
-  name              String
-  MainBId           String            @db.Uuid           
-  MainBusinessType  MainBusinessType  @relation(fields: [MainBId], references: [id])
+  id               String           @unique @db.Uuid
+  name             String
+  MainBId          String           @db.Uuid
+  MainBusinessType MainBusinessType @relation(fields: [MainBId], references: [id])
 }

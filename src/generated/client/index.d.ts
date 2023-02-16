@@ -349,6 +349,7 @@ export type expense_company = {
   date: Date
   vat_per: number | null
   ss_per: number | null
+  check_vat: string[]
   companyBranchId: string | null
 }
 
@@ -24999,6 +25000,7 @@ export namespace Prisma {
     date: number
     vat_per: number
     ss_per: number
+    check_vat: number
     companyBranchId: number
     _all: number
   }
@@ -25041,6 +25043,7 @@ export namespace Prisma {
     date?: true
     vat_per?: true
     ss_per?: true
+    check_vat?: true
     companyBranchId?: true
     _all?: true
   }
@@ -25139,6 +25142,7 @@ export namespace Prisma {
     date: Date
     vat_per: number | null
     ss_per: number | null
+    check_vat: string[]
     companyBranchId: string | null
     _count: Expense_companyCountAggregateOutputType | null
     _avg: Expense_companyAvgAggregateOutputType | null
@@ -25168,6 +25172,7 @@ export namespace Prisma {
     date?: boolean
     vat_per?: boolean
     ss_per?: boolean
+    check_vat?: boolean
     companyBranchId?: boolean
     salary?: boolean | expense_company$salaryArgs
     Mas_month?: boolean | mas_monthArgs
@@ -35437,6 +35442,7 @@ export namespace Prisma {
     date: 'date',
     vat_per: 'vat_per',
     ss_per: 'ss_per',
+    check_vat: 'check_vat',
     companyBranchId: 'companyBranchId'
   };
 
@@ -37228,6 +37234,7 @@ export namespace Prisma {
     date?: DateTimeFilter | Date | string
     vat_per?: FloatNullableFilter | number | null
     ss_per?: FloatNullableFilter | number | null
+    check_vat?: StringNullableListFilter
     companyBranchId?: UuidNullableFilter | string | null
     salary?: SalaryListRelationFilter
     Mas_month?: XOR<Mas_monthRelationFilter, mas_monthWhereInput> | null
@@ -37242,6 +37249,7 @@ export namespace Prisma {
     date?: SortOrder
     vat_per?: SortOrder
     ss_per?: SortOrder
+    check_vat?: SortOrder
     companyBranchId?: SortOrder
     salary?: salaryOrderByRelationAggregateInput
     Mas_month?: mas_monthOrderByWithRelationInput
@@ -37260,6 +37268,7 @@ export namespace Prisma {
     date?: SortOrder
     vat_per?: SortOrder
     ss_per?: SortOrder
+    check_vat?: SortOrder
     companyBranchId?: SortOrder
     _count?: expense_companyCountOrderByAggregateInput
     _avg?: expense_companyAvgOrderByAggregateInput
@@ -37278,6 +37287,7 @@ export namespace Prisma {
     date?: DateTimeWithAggregatesFilter | Date | string
     vat_per?: FloatNullableWithAggregatesFilter | number | null
     ss_per?: FloatNullableWithAggregatesFilter | number | null
+    check_vat?: StringNullableListFilter
     companyBranchId?: UuidNullableWithAggregatesFilter | string | null
   }
 
@@ -39716,6 +39726,7 @@ export namespace Prisma {
     date: Date | string
     vat_per?: number | null
     ss_per?: number | null
+    check_vat?: expense_companyCreatecheck_vatInput | Enumerable<string>
     salary?: salaryCreateNestedManyWithoutExpense_companyInput
     Mas_month?: mas_monthCreateNestedOneWithoutExpense_companyInput
     mas_bank?: mas_bankCreateNestedOneWithoutExpense_companyInput
@@ -39729,6 +39740,7 @@ export namespace Prisma {
     date: Date | string
     vat_per?: number | null
     ss_per?: number | null
+    check_vat?: expense_companyCreatecheck_vatInput | Enumerable<string>
     companyBranchId?: string | null
     salary?: salaryUncheckedCreateNestedManyWithoutExpense_companyInput
   }
@@ -39738,6 +39750,7 @@ export namespace Prisma {
     date?: DateTimeFieldUpdateOperationsInput | Date | string
     vat_per?: NullableFloatFieldUpdateOperationsInput | number | null
     ss_per?: NullableFloatFieldUpdateOperationsInput | number | null
+    check_vat?: expense_companyUpdatecheck_vatInput | Enumerable<string>
     salary?: salaryUpdateManyWithoutExpense_companyNestedInput
     Mas_month?: mas_monthUpdateOneWithoutExpense_companyNestedInput
     mas_bank?: mas_bankUpdateOneWithoutExpense_companyNestedInput
@@ -39751,6 +39764,7 @@ export namespace Prisma {
     date?: DateTimeFieldUpdateOperationsInput | Date | string
     vat_per?: NullableFloatFieldUpdateOperationsInput | number | null
     ss_per?: NullableFloatFieldUpdateOperationsInput | number | null
+    check_vat?: expense_companyUpdatecheck_vatInput | Enumerable<string>
     companyBranchId?: NullableStringFieldUpdateOperationsInput | string | null
     salary?: salaryUncheckedUpdateManyWithoutExpense_companyNestedInput
   }
@@ -39762,6 +39776,7 @@ export namespace Prisma {
     date: Date | string
     vat_per?: number | null
     ss_per?: number | null
+    check_vat?: expense_companyCreatecheck_vatInput | Enumerable<string>
     companyBranchId?: string | null
   }
 
@@ -39770,6 +39785,7 @@ export namespace Prisma {
     date?: DateTimeFieldUpdateOperationsInput | Date | string
     vat_per?: NullableFloatFieldUpdateOperationsInput | number | null
     ss_per?: NullableFloatFieldUpdateOperationsInput | number | null
+    check_vat?: expense_companyUpdatecheck_vatInput | Enumerable<string>
   }
 
   export type expense_companyUncheckedUpdateManyInput = {
@@ -39779,6 +39795,7 @@ export namespace Prisma {
     date?: DateTimeFieldUpdateOperationsInput | Date | string
     vat_per?: NullableFloatFieldUpdateOperationsInput | number | null
     ss_per?: NullableFloatFieldUpdateOperationsInput | number | null
+    check_vat?: expense_companyUpdatecheck_vatInput | Enumerable<string>
     companyBranchId?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
@@ -41953,6 +41970,14 @@ export namespace Prisma {
     not?: NestedFloatNullableFilter | number | null
   }
 
+  export type StringNullableListFilter = {
+    equals?: Enumerable<string> | null
+    has?: string | null
+    hasEvery?: Enumerable<string>
+    hasSome?: Enumerable<string>
+    isEmpty?: boolean
+  }
+
   export type Mas_monthRelationFilter = {
     is?: mas_monthWhereInput | null
     isNot?: mas_monthWhereInput | null
@@ -41970,6 +41995,7 @@ export namespace Prisma {
     date?: SortOrder
     vat_per?: SortOrder
     ss_per?: SortOrder
+    check_vat?: SortOrder
     companyBranchId?: SortOrder
   }
 
@@ -44415,6 +44441,10 @@ export namespace Prisma {
     deleteMany?: Enumerable<salaryScalarWhereInput>
   }
 
+  export type expense_companyCreatecheck_vatInput = {
+    set: Enumerable<string>
+  }
+
   export type salaryCreateNestedManyWithoutExpense_companyInput = {
     create?: XOR<Enumerable<salaryCreateWithoutExpense_companyInput>, Enumerable<salaryUncheckedCreateWithoutExpense_companyInput>>
     connectOrCreate?: Enumerable<salaryCreateOrConnectWithoutExpense_companyInput>
@@ -44453,6 +44483,11 @@ export namespace Prisma {
     decrement?: number
     multiply?: number
     divide?: number
+  }
+
+  export type expense_companyUpdatecheck_vatInput = {
+    set?: Enumerable<string>
+    push?: string | Enumerable<string>
   }
 
   export type salaryUpdateManyWithoutExpense_companyNestedInput = {
@@ -46024,6 +46059,7 @@ export namespace Prisma {
     date: Date | string
     vat_per?: number | null
     ss_per?: number | null
+    check_vat?: expense_companyCreatecheck_vatInput | Enumerable<string>
     salary?: salaryCreateNestedManyWithoutExpense_companyInput
     Mas_month?: mas_monthCreateNestedOneWithoutExpense_companyInput
     mas_bank?: mas_bankCreateNestedOneWithoutExpense_companyInput
@@ -46036,6 +46072,7 @@ export namespace Prisma {
     date: Date | string
     vat_per?: number | null
     ss_per?: number | null
+    check_vat?: expense_companyCreatecheck_vatInput | Enumerable<string>
     salary?: salaryUncheckedCreateNestedManyWithoutExpense_companyInput
   }
 
@@ -46193,6 +46230,7 @@ export namespace Prisma {
     date?: DateTimeFilter | Date | string
     vat_per?: FloatNullableFilter | number | null
     ss_per?: FloatNullableFilter | number | null
+    check_vat?: StringNullableListFilter
     companyBranchId?: UuidNullableFilter | string | null
   }
 
@@ -48983,6 +49021,7 @@ export namespace Prisma {
     date: Date | string
     vat_per?: number | null
     ss_per?: number | null
+    check_vat?: expense_companyCreatecheck_vatInput | Enumerable<string>
     salary?: salaryCreateNestedManyWithoutExpense_companyInput
     Mas_month?: mas_monthCreateNestedOneWithoutExpense_companyInput
     CompanyBranch?: CompanyBranchCreateNestedOneWithoutExpense_companyInput
@@ -48994,6 +49033,7 @@ export namespace Prisma {
     date: Date | string
     vat_per?: number | null
     ss_per?: number | null
+    check_vat?: expense_companyCreatecheck_vatInput | Enumerable<string>
     companyBranchId?: string | null
     salary?: salaryUncheckedCreateNestedManyWithoutExpense_companyInput
   }
@@ -49195,6 +49235,7 @@ export namespace Prisma {
     date: Date | string
     vat_per?: number | null
     ss_per?: number | null
+    check_vat?: expense_companyCreatecheck_vatInput | Enumerable<string>
     salary?: salaryCreateNestedManyWithoutExpense_companyInput
     mas_bank?: mas_bankCreateNestedOneWithoutExpense_companyInput
     CompanyBranch?: CompanyBranchCreateNestedOneWithoutExpense_companyInput
@@ -49206,6 +49247,7 @@ export namespace Prisma {
     date: Date | string
     vat_per?: number | null
     ss_per?: number | null
+    check_vat?: expense_companyCreatecheck_vatInput | Enumerable<string>
     companyBranchId?: string | null
     salary?: salaryUncheckedCreateNestedManyWithoutExpense_companyInput
   }
@@ -50093,6 +50135,7 @@ export namespace Prisma {
     date: Date | string
     vat_per?: number | null
     ss_per?: number | null
+    check_vat?: expense_companyCreatecheck_vatInput | Enumerable<string>
     Mas_month?: mas_monthCreateNestedOneWithoutExpense_companyInput
     mas_bank?: mas_bankCreateNestedOneWithoutExpense_companyInput
     CompanyBranch?: CompanyBranchCreateNestedOneWithoutExpense_companyInput
@@ -50105,6 +50148,7 @@ export namespace Prisma {
     date: Date | string
     vat_per?: number | null
     ss_per?: number | null
+    check_vat?: expense_companyCreatecheck_vatInput | Enumerable<string>
     companyBranchId?: string | null
   }
 
@@ -50291,6 +50335,7 @@ export namespace Prisma {
     date?: DateTimeFieldUpdateOperationsInput | Date | string
     vat_per?: NullableFloatFieldUpdateOperationsInput | number | null
     ss_per?: NullableFloatFieldUpdateOperationsInput | number | null
+    check_vat?: expense_companyUpdatecheck_vatInput | Enumerable<string>
     Mas_month?: mas_monthUpdateOneWithoutExpense_companyNestedInput
     mas_bank?: mas_bankUpdateOneWithoutExpense_companyNestedInput
     CompanyBranch?: CompanyBranchUpdateOneWithoutExpense_companyNestedInput
@@ -50303,6 +50348,7 @@ export namespace Prisma {
     date?: DateTimeFieldUpdateOperationsInput | Date | string
     vat_per?: NullableFloatFieldUpdateOperationsInput | number | null
     ss_per?: NullableFloatFieldUpdateOperationsInput | number | null
+    check_vat?: expense_companyUpdatecheck_vatInput | Enumerable<string>
     companyBranchId?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
@@ -51994,6 +52040,7 @@ export namespace Prisma {
     date: Date | string
     vat_per?: number | null
     ss_per?: number | null
+    check_vat?: expense_companyCreatecheck_vatInput | Enumerable<string>
   }
 
   export type UserUpdateWithoutCompanyBranchInput = {
@@ -52083,6 +52130,7 @@ export namespace Prisma {
     date?: DateTimeFieldUpdateOperationsInput | Date | string
     vat_per?: NullableFloatFieldUpdateOperationsInput | number | null
     ss_per?: NullableFloatFieldUpdateOperationsInput | number | null
+    check_vat?: expense_companyUpdatecheck_vatInput | Enumerable<string>
     salary?: salaryUpdateManyWithoutExpense_companyNestedInput
     Mas_month?: mas_monthUpdateOneWithoutExpense_companyNestedInput
     mas_bank?: mas_bankUpdateOneWithoutExpense_companyNestedInput
@@ -52095,6 +52143,7 @@ export namespace Prisma {
     date?: DateTimeFieldUpdateOperationsInput | Date | string
     vat_per?: NullableFloatFieldUpdateOperationsInput | number | null
     ss_per?: NullableFloatFieldUpdateOperationsInput | number | null
+    check_vat?: expense_companyUpdatecheck_vatInput | Enumerable<string>
     salary?: salaryUncheckedUpdateManyWithoutExpense_companyNestedInput
   }
 
@@ -52105,6 +52154,7 @@ export namespace Prisma {
     date?: DateTimeFieldUpdateOperationsInput | Date | string
     vat_per?: NullableFloatFieldUpdateOperationsInput | number | null
     ss_per?: NullableFloatFieldUpdateOperationsInput | number | null
+    check_vat?: expense_companyUpdatecheck_vatInput | Enumerable<string>
   }
 
   export type CompanyCreateManyOwnerInput = {
@@ -52981,6 +53031,7 @@ export namespace Prisma {
     date: Date | string
     vat_per?: number | null
     ss_per?: number | null
+    check_vat?: expense_companyCreatecheck_vatInput | Enumerable<string>
     companyBranchId?: string | null
   }
 
@@ -53043,6 +53094,7 @@ export namespace Prisma {
     date?: DateTimeFieldUpdateOperationsInput | Date | string
     vat_per?: NullableFloatFieldUpdateOperationsInput | number | null
     ss_per?: NullableFloatFieldUpdateOperationsInput | number | null
+    check_vat?: expense_companyUpdatecheck_vatInput | Enumerable<string>
     salary?: salaryUpdateManyWithoutExpense_companyNestedInput
     Mas_month?: mas_monthUpdateOneWithoutExpense_companyNestedInput
     CompanyBranch?: CompanyBranchUpdateOneWithoutExpense_companyNestedInput
@@ -53054,6 +53106,7 @@ export namespace Prisma {
     date?: DateTimeFieldUpdateOperationsInput | Date | string
     vat_per?: NullableFloatFieldUpdateOperationsInput | number | null
     ss_per?: NullableFloatFieldUpdateOperationsInput | number | null
+    check_vat?: expense_companyUpdatecheck_vatInput | Enumerable<string>
     companyBranchId?: NullableStringFieldUpdateOperationsInput | string | null
     salary?: salaryUncheckedUpdateManyWithoutExpense_companyNestedInput
   }
@@ -53178,6 +53231,7 @@ export namespace Prisma {
     date: Date | string
     vat_per?: number | null
     ss_per?: number | null
+    check_vat?: expense_companyCreatecheck_vatInput | Enumerable<string>
     companyBranchId?: string | null
   }
 
@@ -53186,6 +53240,7 @@ export namespace Prisma {
     date?: DateTimeFieldUpdateOperationsInput | Date | string
     vat_per?: NullableFloatFieldUpdateOperationsInput | number | null
     ss_per?: NullableFloatFieldUpdateOperationsInput | number | null
+    check_vat?: expense_companyUpdatecheck_vatInput | Enumerable<string>
     salary?: salaryUpdateManyWithoutExpense_companyNestedInput
     mas_bank?: mas_bankUpdateOneWithoutExpense_companyNestedInput
     CompanyBranch?: CompanyBranchUpdateOneWithoutExpense_companyNestedInput
@@ -53197,6 +53252,7 @@ export namespace Prisma {
     date?: DateTimeFieldUpdateOperationsInput | Date | string
     vat_per?: NullableFloatFieldUpdateOperationsInput | number | null
     ss_per?: NullableFloatFieldUpdateOperationsInput | number | null
+    check_vat?: expense_companyUpdatecheck_vatInput | Enumerable<string>
     companyBranchId?: NullableStringFieldUpdateOperationsInput | string | null
     salary?: salaryUncheckedUpdateManyWithoutExpense_companyNestedInput
   }

@@ -176,6 +176,7 @@ exports.Prisma.Expense_companyScalarFieldEnum = makeEnum({
   date: 'date',
   vat_per: 'vat_per',
   ss_per: 'ss_per',
+  check_vat: 'check_vat',
   companyBranchId: 'companyBranchId'
 });
 
