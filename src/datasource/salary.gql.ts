@@ -502,7 +502,7 @@ const resolvers: Resolvers = {
           date: "desc",
         },
       });
-      return getdata;
+      return getdata
     },
     async mas_bank(parant: any, args: any, ctx: any) {
       const result = await ctx.prisma.mas_bank.findMany({
