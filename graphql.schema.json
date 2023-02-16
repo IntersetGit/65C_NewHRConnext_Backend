@@ -4128,12 +4128,16 @@
                 "name": "data",
                 "description": null,
                 "type": {
-                  "kind": "NON_NULL",
+                  "kind": "LIST",
                   "name": null,
                   "ofType": {
-                    "kind": "INPUT_OBJECT",
-                    "name": "CreateHolidayDate",
-                    "ofType": null
+                    "kind": "NON_NULL",
+                    "name": null,
+                    "ofType": {
+                      "kind": "INPUT_OBJECT",
+                      "name": "CreateHolidayDate",
+                      "ofType": null
+                    }
                   }
                 },
                 "defaultValue": null,

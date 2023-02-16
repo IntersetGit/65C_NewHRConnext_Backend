@@ -72,7 +72,7 @@ export const holidayTypedef = gql`
   type Mutation{
     createHolidayYear(data:[CreateHolidayYears!]): CreateHolidayYearResponseType
     deleteHolidayYear(id: ID!) : DeleteHolidayYearResponseType
-    createAndUpdateHolidayDate(data: CreateHolidayDate!) : CreateHolidayDateResponseType
+    createAndUpdateHolidayDate(data: [CreateHolidayDate!]): CreateHolidayDateResponseType
     deleteHolidayDate(id: ID!) : DeleteHolidayDateResponseType
   }
 `;
@@ -94,11 +94,11 @@ export const holidayResolvers: Resolvers = {
 
     async GetHolidayDate(p, args, ctx) {
       const result = await ctx.prisma.holiday_date.findMany({
-        include:{ Company: true},
-        where:{
-          CompanyId : ctx.currentUser?.compayId
+        include: { Company: true },
+        where: {
+          CompanyId: ctx.currentUser?.compayId
         }
-      
+
       });
       return result;
     }
@@ -136,41 +136,57 @@ export const holidayResolvers: Resolvers = {
     },
 
     async createAndUpdateHolidayDate(p, args, ctx) {
-      if (args.data.id) {
-        const updateHolidayDate = await ctx.prisma.holiday_date.update({
-          data: {
-            id: v4(),
-            holiday_name: args.data.holiday_name as string,
-            day: args.data.day as number,
-            month: args.data.month as number,
-            year: args.data.year as number,
-            status: args.data.status as number,
-          },
-          where: {
-            id: args.data.id
+      if (args.data) {
+        args.data.forEach(async (e) => {
+          if (e.id) {
+            const update = await ctx.prisma.holiday_date.update({
+              data: {
+                holiday_name: e.holiday_name as string,
+                day: e.day as number,
+                month: e.month as number,
+                year: e.year as number,
+                status: e.status as number,
+              },
+              where: {
+                id: e.id as string
+              }
+            })
+            return {
+
+
+            }
           }
-        });
-        return {
-          message: 'success',
-          status: true,
-        };
-      } else {
-        const createHolidayDate = await ctx.prisma.holiday_date.create({
-          data: {
-            id: v4(),
-            holiday_name: args.data.holiday_name as string,
-            day: args.data.day as number,
-            month: args.data.month as number,
-            year: args.data.year as number,
-            status: 1,
-            CompanyId: ctx.currentUser?.compayId
-          }
-        });
-        return {
-          message: 'success',
-          status: true,
-        };
+        })
       }
+
+      // if (e.id) {
+      //   const updateHolidayDate = await ctx.prisma.holiday_date.update({
+      //     data: {
+      //       holiday_name: e.holiday_name as string,
+      //       day: e.day as number,
+      //       month: e.month as number,
+      //       year: e.year as number,
+      //       status: e.status as number,
+      //     },
+      //     where: {
+      //       id: e.id as string
+      //     }
+      //   });
+      //   return{
+
+      //   }
+      // } else {
+      // const createHolidayDate = await ctx.prisma.holiday_date.create({
+      //   data: {
+      //     id: v4(),
+      //     holiday_name: e.holiday_name as string,
+      //     day: e.day as number,
+      //     month: e.month as number,
+      //     year: e.year as number,
+      //     status: 1 as number,
+      //     CompanyId: ctx.currentUser?.compayId
+      //   }
+      // });
     },
 
     async deleteHolidayDate(p, args, ctx) {
@@ -185,7 +201,7 @@ export const holidayResolvers: Resolvers = {
       };
     },
 
-    
+
   },
 };
 
