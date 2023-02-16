@@ -1018,6 +1018,8 @@ export type CreateCompanyBranch = {
   lat?: InputMaybe<Scalars['String']>;
   lng?: InputMaybe<Scalars['String']>;
   name?: InputMaybe<Scalars['String']>;
+  regis_vat?: InputMaybe<Scalars['String']>;
+  regiscomnumber?: InputMaybe<Scalars['String']>;
   registeredamount?: InputMaybe<Scalars['String']>;
   social_facebook?: InputMaybe<Scalars['String']>;
   social_instragram?: InputMaybe<Scalars['String']>;
