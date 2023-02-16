@@ -335,6 +335,7 @@ export type District = {
 
 export type ExpenseComInput = {
   bankId?: InputMaybe<Scalars['String']>;
+  check_vat?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
   companyBranchId?: InputMaybe<Scalars['String']>;
   date?: InputMaybe<Scalars['Date']>;
   id?: InputMaybe<Scalars['ID']>;

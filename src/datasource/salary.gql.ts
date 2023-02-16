@@ -240,6 +240,7 @@ export const salaryTypedef = gql`
     date: Date
     vat_per: Float
     ss_per: Float
+    check_vat: [String]
     companyBranchId: String
   }
 
@@ -1212,6 +1213,7 @@ const resolvers: Resolvers = {
     async CreateAndUpdateExpenseCom(p: any, args: any, ctx: any) {
       //สร้างและอัปเดท expensecom
       const genExpenseID = v4();
+       const take_arr = args.data?.check_vat
       if (args.data?.id) {
         const updateExpenseCom = await ctx.prisma.expense_company.update({
           data: {
@@ -1235,6 +1237,7 @@ const resolvers: Resolvers = {
           date: new Date(args.data?.date),
           vat_per: args.data?.vat_per as number,
           ss_per: args.data?.ss_per as number,
+          check_vat : take_arr,
           companyBranchId: args.data?.companyBranchId,
         },
       });
