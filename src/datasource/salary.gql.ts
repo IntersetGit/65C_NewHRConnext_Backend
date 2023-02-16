@@ -481,20 +481,20 @@ const resolvers: Resolvers = {
       return getdata;
     },
 
-    async expense_company(p,args,ctx){
+    async expense_company(p, args, ctx) {
       // console.log(ctx.currentUser?.id)
-      const date=args?.date
-      const month=dayjs(date).format('MM')
-      const years=dayjs(date).format('YYYY')
+      const date = args?.date
+      const month = dayjs(date).format('MM')
+      const years = dayjs(date).format('YYYY')
       const getdata = await ctx.prisma.expense_company.findMany({
         include: {
           mas_bank: true
         },
         where: {
           companyBranchId: ctx.currentUser?.branchId,
-          AND:{
-            exp_com_month:month,
-            exp_com_years:years
+          AND: {
+            exp_com_month: month,
+            exp_com_years: years
           },
         },
         orderBy:
@@ -502,7 +502,7 @@ const resolvers: Resolvers = {
           date: "desc",
         },
       });
-      return getdata;
+      return getdata
     },
     async mas_bank(parant: any, args: any, ctx: any) {
       const result = await ctx.prisma.mas_bank.findMany({
@@ -1225,7 +1225,10 @@ const resolvers: Resolvers = {
     async CreateAndUpdateExpenseCom(p: any, args: any, ctx: any) {
       //สร้างและอัปเดท expensecom
       const genExpenseID = v4();
-       const take_arr = args.data?.check_vat
+      let date = args.data?.date
+      let ThisYear = dayjs(date).format("YYYY")
+      let Thismonth = dayjs(date).format("MM")
+      const take_arr = args.data?.check_vat
       if (args.data?.id) {
         const updateExpenseCom = await ctx.prisma.expense_company.update({
           data: {
@@ -1233,6 +1236,8 @@ const resolvers: Resolvers = {
             date: new Date(args.data?.date),
             vat_per: args.data?.vat_per as number,
             ss_per: args.data?.ss_per as number,
+            exp_com_month: Thismonth,
+            exp_com_years: ThisYear,
             companyBranchId: args.data?.companyBranchId,
           },
           where: { id: args.data.id },
@@ -1249,7 +1254,9 @@ const resolvers: Resolvers = {
           date: new Date(args.data?.date),
           vat_per: args.data?.vat_per as number,
           ss_per: args.data?.ss_per as number,
-          check_vat : take_arr,
+          check_vat: take_arr,
+          exp_com_month: Thismonth,
+          exp_com_years: ThisYear,
           companyBranchId: args.data?.companyBranchId,
         },
       });
