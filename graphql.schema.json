@@ -5733,7 +5733,20 @@
           {
             "name": "expense_company",
             "description": null,
-            "args": [],
+            "args": [
+              {
+                "name": "date",
+                "description": null,
+                "type": {
+                  "kind": "SCALAR",
+                  "name": "String",
+                  "ofType": null
+                },
+                "defaultValue": null,
+                "isDeprecated": false,
+                "deprecationReason": null
+              }
+            ],
             "type": {
               "kind": "LIST",
               "name": null,

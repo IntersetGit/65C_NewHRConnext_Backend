@@ -758,6 +758,11 @@ export type QueryData_SalaryArgs = {
 };
 
 
+export type QueryExpense_CompanyArgs = {
+  date?: InputMaybe<Scalars['String']>;
+};
+
+
 export type QueryGetAllcompanyArgs = {
   name?: InputMaybe<Scalars['String']>;
 };
@@ -2224,7 +2229,7 @@ export type QueryResolvers<ContextType = ApolloContext, ParentType extends Resol
   bookbank_log_admin?: Resolver<Maybe<Array<Maybe<ResolversTypes['Bookbank_log_type']>>>, ParentType, ContextType, Partial<QueryBookbank_Log_AdminArgs>>;
   company?: Resolver<Maybe<ResolversTypes['ResponseCompany']>, ParentType, ContextType, Partial<QueryCompanyArgs>>;
   data_salary?: Resolver<Maybe<Array<Maybe<ResolversTypes['data_salary']>>>, ParentType, ContextType, Partial<QueryData_SalaryArgs>>;
-  expense_company?: Resolver<Maybe<Array<Maybe<ResolversTypes['expense_company']>>>, ParentType, ContextType>;
+  expense_company?: Resolver<Maybe<Array<Maybe<ResolversTypes['expense_company']>>>, ParentType, ContextType, Partial<QueryExpense_CompanyArgs>>;
   getAllcompany?: Resolver<Maybe<Array<Maybe<ResolversTypes['CompanyBranch']>>>, ParentType, ContextType, Partial<QueryGetAllcompanyArgs>>;
   getAllleave?: Resolver<Maybe<ResolversTypes['getleaveResponseType']>, ParentType, ContextType, Partial<QueryGetAllleaveArgs>>;
   getBusinessType?: Resolver<Maybe<Array<Maybe<ResolversTypes['MainBusinessType']>>>, ParentType, ContextType>;
