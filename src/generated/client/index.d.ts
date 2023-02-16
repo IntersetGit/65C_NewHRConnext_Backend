@@ -53,6 +53,8 @@ export type CompanyBranch = {
   company_type: string | null
   sub_company_type: string | null
   registeredamount: string | null
+  regis_vat: string | null
+  regiscomnumber: string | null
   social_facebook: string | null
   social_likedin: string | null
   social_instragram: string | null
@@ -3811,6 +3813,8 @@ export namespace Prisma {
     company_type: string | null
     sub_company_type: string | null
     registeredamount: string | null
+    regis_vat: string | null
+    regiscomnumber: string | null
     social_facebook: string | null
     social_likedin: string | null
     social_instragram: string | null
@@ -3841,6 +3845,8 @@ export namespace Prisma {
     company_type: string | null
     sub_company_type: string | null
     registeredamount: string | null
+    regis_vat: string | null
+    regiscomnumber: string | null
     social_facebook: string | null
     social_likedin: string | null
     social_instragram: string | null
@@ -3871,6 +3877,8 @@ export namespace Prisma {
     company_type: number
     sub_company_type: number
     registeredamount: number
+    regis_vat: number
+    regiscomnumber: number
     social_facebook: number
     social_likedin: number
     social_instragram: number
@@ -3903,6 +3911,8 @@ export namespace Prisma {
     company_type?: true
     sub_company_type?: true
     registeredamount?: true
+    regis_vat?: true
+    regiscomnumber?: true
     social_facebook?: true
     social_likedin?: true
     social_instragram?: true
@@ -3933,6 +3943,8 @@ export namespace Prisma {
     company_type?: true
     sub_company_type?: true
     registeredamount?: true
+    regis_vat?: true
+    regiscomnumber?: true
     social_facebook?: true
     social_likedin?: true
     social_instragram?: true
@@ -3963,6 +3975,8 @@ export namespace Prisma {
     company_type?: true
     sub_company_type?: true
     registeredamount?: true
+    regis_vat?: true
+    regiscomnumber?: true
     social_facebook?: true
     social_likedin?: true
     social_instragram?: true
@@ -4067,6 +4081,8 @@ export namespace Prisma {
     company_type: string | null
     sub_company_type: string | null
     registeredamount: string | null
+    regis_vat: string | null
+    regiscomnumber: string | null
     social_facebook: string | null
     social_likedin: string | null
     social_instragram: string | null
@@ -4114,6 +4130,8 @@ export namespace Prisma {
     company_type?: boolean
     sub_company_type?: boolean
     registeredamount?: boolean
+    regis_vat?: boolean
+    regiscomnumber?: boolean
     social_facebook?: boolean
     social_likedin?: boolean
     social_instragram?: boolean
@@ -35400,6 +35418,8 @@ export namespace Prisma {
     company_type: 'company_type',
     sub_company_type: 'sub_company_type',
     registeredamount: 'registeredamount',
+    regis_vat: 'regis_vat',
+    regiscomnumber: 'regiscomnumber',
     social_facebook: 'social_facebook',
     social_likedin: 'social_likedin',
     social_instragram: 'social_instragram',
@@ -35969,6 +35989,8 @@ export namespace Prisma {
     company_type?: StringNullableFilter | string | null
     sub_company_type?: StringNullableFilter | string | null
     registeredamount?: StringNullableFilter | string | null
+    regis_vat?: StringNullableFilter | string | null
+    regiscomnumber?: StringNullableFilter | string | null
     social_facebook?: StringNullableFilter | string | null
     social_likedin?: StringNullableFilter | string | null
     social_instragram?: StringNullableFilter | string | null
@@ -36004,6 +36026,8 @@ export namespace Prisma {
     company_type?: SortOrder
     sub_company_type?: SortOrder
     registeredamount?: SortOrder
+    regis_vat?: SortOrder
+    regiscomnumber?: SortOrder
     social_facebook?: SortOrder
     social_likedin?: SortOrder
     social_instragram?: SortOrder
@@ -36043,6 +36067,8 @@ export namespace Prisma {
     company_type?: SortOrder
     sub_company_type?: SortOrder
     registeredamount?: SortOrder
+    regis_vat?: SortOrder
+    regiscomnumber?: SortOrder
     social_facebook?: SortOrder
     social_likedin?: SortOrder
     social_instragram?: SortOrder
@@ -36079,6 +36105,8 @@ export namespace Prisma {
     company_type?: StringNullableWithAggregatesFilter | string | null
     sub_company_type?: StringNullableWithAggregatesFilter | string | null
     registeredamount?: StringNullableWithAggregatesFilter | string | null
+    regis_vat?: StringNullableWithAggregatesFilter | string | null
+    regiscomnumber?: StringNullableWithAggregatesFilter | string | null
     social_facebook?: StringNullableWithAggregatesFilter | string | null
     social_likedin?: StringNullableWithAggregatesFilter | string | null
     social_instragram?: StringNullableWithAggregatesFilter | string | null
@@ -38095,6 +38123,8 @@ export namespace Prisma {
     company_type?: string | null
     sub_company_type?: string | null
     registeredamount?: string | null
+    regis_vat?: string | null
+    regiscomnumber?: string | null
     social_facebook?: string | null
     social_likedin?: string | null
     social_instragram?: string | null
@@ -38128,6 +38158,8 @@ export namespace Prisma {
     company_type?: string | null
     sub_company_type?: string | null
     registeredamount?: string | null
+    regis_vat?: string | null
+    regiscomnumber?: string | null
     social_facebook?: string | null
     social_likedin?: string | null
     social_instragram?: string | null
@@ -38161,6 +38193,8 @@ export namespace Prisma {
     company_type?: NullableStringFieldUpdateOperationsInput | string | null
     sub_company_type?: NullableStringFieldUpdateOperationsInput | string | null
     registeredamount?: NullableStringFieldUpdateOperationsInput | string | null
+    regis_vat?: NullableStringFieldUpdateOperationsInput | string | null
+    regiscomnumber?: NullableStringFieldUpdateOperationsInput | string | null
     social_facebook?: NullableStringFieldUpdateOperationsInput | string | null
     social_likedin?: NullableStringFieldUpdateOperationsInput | string | null
     social_instragram?: NullableStringFieldUpdateOperationsInput | string | null
@@ -38194,6 +38228,8 @@ export namespace Prisma {
     company_type?: NullableStringFieldUpdateOperationsInput | string | null
     sub_company_type?: NullableStringFieldUpdateOperationsInput | string | null
     registeredamount?: NullableStringFieldUpdateOperationsInput | string | null
+    regis_vat?: NullableStringFieldUpdateOperationsInput | string | null
+    regiscomnumber?: NullableStringFieldUpdateOperationsInput | string | null
     social_facebook?: NullableStringFieldUpdateOperationsInput | string | null
     social_likedin?: NullableStringFieldUpdateOperationsInput | string | null
     social_instragram?: NullableStringFieldUpdateOperationsInput | string | null
@@ -38227,6 +38263,8 @@ export namespace Prisma {
     company_type?: string | null
     sub_company_type?: string | null
     registeredamount?: string | null
+    regis_vat?: string | null
+    regiscomnumber?: string | null
     social_facebook?: string | null
     social_likedin?: string | null
     social_instragram?: string | null
@@ -38257,6 +38295,8 @@ export namespace Prisma {
     company_type?: NullableStringFieldUpdateOperationsInput | string | null
     sub_company_type?: NullableStringFieldUpdateOperationsInput | string | null
     registeredamount?: NullableStringFieldUpdateOperationsInput | string | null
+    regis_vat?: NullableStringFieldUpdateOperationsInput | string | null
+    regiscomnumber?: NullableStringFieldUpdateOperationsInput | string | null
     social_facebook?: NullableStringFieldUpdateOperationsInput | string | null
     social_likedin?: NullableStringFieldUpdateOperationsInput | string | null
     social_instragram?: NullableStringFieldUpdateOperationsInput | string | null
@@ -38285,6 +38325,8 @@ export namespace Prisma {
     company_type?: NullableStringFieldUpdateOperationsInput | string | null
     sub_company_type?: NullableStringFieldUpdateOperationsInput | string | null
     registeredamount?: NullableStringFieldUpdateOperationsInput | string | null
+    regis_vat?: NullableStringFieldUpdateOperationsInput | string | null
+    regiscomnumber?: NullableStringFieldUpdateOperationsInput | string | null
     social_facebook?: NullableStringFieldUpdateOperationsInput | string | null
     social_likedin?: NullableStringFieldUpdateOperationsInput | string | null
     social_instragram?: NullableStringFieldUpdateOperationsInput | string | null
@@ -40989,6 +41031,8 @@ export namespace Prisma {
     company_type?: SortOrder
     sub_company_type?: SortOrder
     registeredamount?: SortOrder
+    regis_vat?: SortOrder
+    regiscomnumber?: SortOrder
     social_facebook?: SortOrder
     social_likedin?: SortOrder
     social_instragram?: SortOrder
@@ -41019,6 +41063,8 @@ export namespace Prisma {
     company_type?: SortOrder
     sub_company_type?: SortOrder
     registeredamount?: SortOrder
+    regis_vat?: SortOrder
+    regiscomnumber?: SortOrder
     social_facebook?: SortOrder
     social_likedin?: SortOrder
     social_instragram?: SortOrder
@@ -41049,6 +41095,8 @@ export namespace Prisma {
     company_type?: SortOrder
     sub_company_type?: SortOrder
     registeredamount?: SortOrder
+    regis_vat?: SortOrder
+    regiscomnumber?: SortOrder
     social_facebook?: SortOrder
     social_likedin?: SortOrder
     social_instragram?: SortOrder
@@ -45542,6 +45590,8 @@ export namespace Prisma {
     company_type?: string | null
     sub_company_type?: string | null
     registeredamount?: string | null
+    regis_vat?: string | null
+    regiscomnumber?: string | null
     social_facebook?: string | null
     social_likedin?: string | null
     social_instragram?: string | null
@@ -45574,6 +45624,8 @@ export namespace Prisma {
     company_type?: string | null
     sub_company_type?: string | null
     registeredamount?: string | null
+    regis_vat?: string | null
+    regiscomnumber?: string | null
     social_facebook?: string | null
     social_likedin?: string | null
     social_instragram?: string | null
@@ -45828,6 +45880,8 @@ export namespace Prisma {
     company_type?: StringNullableFilter | string | null
     sub_company_type?: StringNullableFilter | string | null
     registeredamount?: StringNullableFilter | string | null
+    regis_vat?: StringNullableFilter | string | null
+    regiscomnumber?: StringNullableFilter | string | null
     social_facebook?: StringNullableFilter | string | null
     social_likedin?: StringNullableFilter | string | null
     social_instragram?: StringNullableFilter | string | null
@@ -46593,6 +46647,8 @@ export namespace Prisma {
     company_type?: string | null
     sub_company_type?: string | null
     registeredamount?: string | null
+    regis_vat?: string | null
+    regiscomnumber?: string | null
     social_facebook?: string | null
     social_likedin?: string | null
     social_instragram?: string | null
@@ -46625,6 +46681,8 @@ export namespace Prisma {
     company_type?: string | null
     sub_company_type?: string | null
     registeredamount?: string | null
+    regis_vat?: string | null
+    regiscomnumber?: string | null
     social_facebook?: string | null
     social_likedin?: string | null
     social_instragram?: string | null
@@ -47156,6 +47214,8 @@ export namespace Prisma {
     company_type?: NullableStringFieldUpdateOperationsInput | string | null
     sub_company_type?: NullableStringFieldUpdateOperationsInput | string | null
     registeredamount?: NullableStringFieldUpdateOperationsInput | string | null
+    regis_vat?: NullableStringFieldUpdateOperationsInput | string | null
+    regiscomnumber?: NullableStringFieldUpdateOperationsInput | string | null
     social_facebook?: NullableStringFieldUpdateOperationsInput | string | null
     social_likedin?: NullableStringFieldUpdateOperationsInput | string | null
     social_instragram?: NullableStringFieldUpdateOperationsInput | string | null
@@ -47188,6 +47248,8 @@ export namespace Prisma {
     company_type?: NullableStringFieldUpdateOperationsInput | string | null
     sub_company_type?: NullableStringFieldUpdateOperationsInput | string | null
     registeredamount?: NullableStringFieldUpdateOperationsInput | string | null
+    regis_vat?: NullableStringFieldUpdateOperationsInput | string | null
+    regiscomnumber?: NullableStringFieldUpdateOperationsInput | string | null
     social_facebook?: NullableStringFieldUpdateOperationsInput | string | null
     social_likedin?: NullableStringFieldUpdateOperationsInput | string | null
     social_instragram?: NullableStringFieldUpdateOperationsInput | string | null
@@ -47627,6 +47689,8 @@ export namespace Prisma {
     company_type?: string | null
     sub_company_type?: string | null
     registeredamount?: string | null
+    regis_vat?: string | null
+    regiscomnumber?: string | null
     social_facebook?: string | null
     social_likedin?: string | null
     social_instragram?: string | null
@@ -47659,6 +47723,8 @@ export namespace Prisma {
     company_type?: string | null
     sub_company_type?: string | null
     registeredamount?: string | null
+    regis_vat?: string | null
+    regiscomnumber?: string | null
     social_facebook?: string | null
     social_likedin?: string | null
     social_instragram?: string | null
@@ -47717,6 +47783,8 @@ export namespace Prisma {
     company_type?: NullableStringFieldUpdateOperationsInput | string | null
     sub_company_type?: NullableStringFieldUpdateOperationsInput | string | null
     registeredamount?: NullableStringFieldUpdateOperationsInput | string | null
+    regis_vat?: NullableStringFieldUpdateOperationsInput | string | null
+    regiscomnumber?: NullableStringFieldUpdateOperationsInput | string | null
     social_facebook?: NullableStringFieldUpdateOperationsInput | string | null
     social_likedin?: NullableStringFieldUpdateOperationsInput | string | null
     social_instragram?: NullableStringFieldUpdateOperationsInput | string | null
@@ -47749,6 +47817,8 @@ export namespace Prisma {
     company_type?: NullableStringFieldUpdateOperationsInput | string | null
     sub_company_type?: NullableStringFieldUpdateOperationsInput | string | null
     registeredamount?: NullableStringFieldUpdateOperationsInput | string | null
+    regis_vat?: NullableStringFieldUpdateOperationsInput | string | null
+    regiscomnumber?: NullableStringFieldUpdateOperationsInput | string | null
     social_facebook?: NullableStringFieldUpdateOperationsInput | string | null
     social_likedin?: NullableStringFieldUpdateOperationsInput | string | null
     social_instragram?: NullableStringFieldUpdateOperationsInput | string | null
@@ -49838,6 +49908,8 @@ export namespace Prisma {
     company_type?: string | null
     sub_company_type?: string | null
     registeredamount?: string | null
+    regis_vat?: string | null
+    regiscomnumber?: string | null
     social_facebook?: string | null
     social_likedin?: string | null
     social_instragram?: string | null
@@ -49870,6 +49942,8 @@ export namespace Prisma {
     company_type?: string | null
     sub_company_type?: string | null
     registeredamount?: string | null
+    regis_vat?: string | null
+    regiscomnumber?: string | null
     social_facebook?: string | null
     social_likedin?: string | null
     social_instragram?: string | null
@@ -49966,6 +50040,8 @@ export namespace Prisma {
     company_type?: NullableStringFieldUpdateOperationsInput | string | null
     sub_company_type?: NullableStringFieldUpdateOperationsInput | string | null
     registeredamount?: NullableStringFieldUpdateOperationsInput | string | null
+    regis_vat?: NullableStringFieldUpdateOperationsInput | string | null
+    regiscomnumber?: NullableStringFieldUpdateOperationsInput | string | null
     social_facebook?: NullableStringFieldUpdateOperationsInput | string | null
     social_likedin?: NullableStringFieldUpdateOperationsInput | string | null
     social_instragram?: NullableStringFieldUpdateOperationsInput | string | null
@@ -49998,6 +50074,8 @@ export namespace Prisma {
     company_type?: NullableStringFieldUpdateOperationsInput | string | null
     sub_company_type?: NullableStringFieldUpdateOperationsInput | string | null
     registeredamount?: NullableStringFieldUpdateOperationsInput | string | null
+    regis_vat?: NullableStringFieldUpdateOperationsInput | string | null
+    regiscomnumber?: NullableStringFieldUpdateOperationsInput | string | null
     social_facebook?: NullableStringFieldUpdateOperationsInput | string | null
     social_likedin?: NullableStringFieldUpdateOperationsInput | string | null
     social_instragram?: NullableStringFieldUpdateOperationsInput | string | null
@@ -51658,6 +51736,8 @@ export namespace Prisma {
     company_type?: string | null
     sub_company_type?: string | null
     registeredamount?: string | null
+    regis_vat?: string | null
+    regiscomnumber?: string | null
     social_facebook?: string | null
     social_likedin?: string | null
     social_instragram?: string | null
@@ -51690,6 +51770,8 @@ export namespace Prisma {
     company_type?: string | null
     sub_company_type?: string | null
     registeredamount?: string | null
+    regis_vat?: string | null
+    regiscomnumber?: string | null
     social_facebook?: string | null
     social_likedin?: string | null
     social_instragram?: string | null
@@ -51807,6 +51889,8 @@ export namespace Prisma {
     company_type?: string | null
     sub_company_type?: string | null
     registeredamount?: string | null
+    regis_vat?: string | null
+    regiscomnumber?: string | null
     social_facebook?: string | null
     social_likedin?: string | null
     social_instragram?: string | null
@@ -51877,6 +51961,8 @@ export namespace Prisma {
     company_type?: NullableStringFieldUpdateOperationsInput | string | null
     sub_company_type?: NullableStringFieldUpdateOperationsInput | string | null
     registeredamount?: NullableStringFieldUpdateOperationsInput | string | null
+    regis_vat?: NullableStringFieldUpdateOperationsInput | string | null
+    regiscomnumber?: NullableStringFieldUpdateOperationsInput | string | null
     social_facebook?: NullableStringFieldUpdateOperationsInput | string | null
     social_likedin?: NullableStringFieldUpdateOperationsInput | string | null
     social_instragram?: NullableStringFieldUpdateOperationsInput | string | null
@@ -51909,6 +51995,8 @@ export namespace Prisma {
     company_type?: NullableStringFieldUpdateOperationsInput | string | null
     sub_company_type?: NullableStringFieldUpdateOperationsInput | string | null
     registeredamount?: NullableStringFieldUpdateOperationsInput | string | null
+    regis_vat?: NullableStringFieldUpdateOperationsInput | string | null
+    regiscomnumber?: NullableStringFieldUpdateOperationsInput | string | null
     social_facebook?: NullableStringFieldUpdateOperationsInput | string | null
     social_likedin?: NullableStringFieldUpdateOperationsInput | string | null
     social_instragram?: NullableStringFieldUpdateOperationsInput | string | null
@@ -51941,6 +52029,8 @@ export namespace Prisma {
     company_type?: NullableStringFieldUpdateOperationsInput | string | null
     sub_company_type?: NullableStringFieldUpdateOperationsInput | string | null
     registeredamount?: NullableStringFieldUpdateOperationsInput | string | null
+    regis_vat?: NullableStringFieldUpdateOperationsInput | string | null
+    regiscomnumber?: NullableStringFieldUpdateOperationsInput | string | null
     social_facebook?: NullableStringFieldUpdateOperationsInput | string | null
     social_likedin?: NullableStringFieldUpdateOperationsInput | string | null
     social_instragram?: NullableStringFieldUpdateOperationsInput | string | null
@@ -54150,6 +54240,8 @@ export namespace Prisma {
     company_type?: string | null
     sub_company_type?: string | null
     registeredamount?: string | null
+    regis_vat?: string | null
+    regiscomnumber?: string | null
     social_facebook?: string | null
     social_likedin?: string | null
     social_instragram?: string | null
@@ -54194,6 +54286,8 @@ export namespace Prisma {
     company_type?: NullableStringFieldUpdateOperationsInput | string | null
     sub_company_type?: NullableStringFieldUpdateOperationsInput | string | null
     registeredamount?: NullableStringFieldUpdateOperationsInput | string | null
+    regis_vat?: NullableStringFieldUpdateOperationsInput | string | null
+    regiscomnumber?: NullableStringFieldUpdateOperationsInput | string | null
     social_facebook?: NullableStringFieldUpdateOperationsInput | string | null
     social_likedin?: NullableStringFieldUpdateOperationsInput | string | null
     social_instragram?: NullableStringFieldUpdateOperationsInput | string | null
@@ -54226,6 +54320,8 @@ export namespace Prisma {
     company_type?: NullableStringFieldUpdateOperationsInput | string | null
     sub_company_type?: NullableStringFieldUpdateOperationsInput | string | null
     registeredamount?: NullableStringFieldUpdateOperationsInput | string | null
+    regis_vat?: NullableStringFieldUpdateOperationsInput | string | null
+    regiscomnumber?: NullableStringFieldUpdateOperationsInput | string | null
     social_facebook?: NullableStringFieldUpdateOperationsInput | string | null
     social_likedin?: NullableStringFieldUpdateOperationsInput | string | null
     social_instragram?: NullableStringFieldUpdateOperationsInput | string | null
@@ -54258,6 +54354,8 @@ export namespace Prisma {
     company_type?: NullableStringFieldUpdateOperationsInput | string | null
     sub_company_type?: NullableStringFieldUpdateOperationsInput | string | null
     registeredamount?: NullableStringFieldUpdateOperationsInput | string | null
+    regis_vat?: NullableStringFieldUpdateOperationsInput | string | null
+    regiscomnumber?: NullableStringFieldUpdateOperationsInput | string | null
     social_facebook?: NullableStringFieldUpdateOperationsInput | string | null
     social_likedin?: NullableStringFieldUpdateOperationsInput | string | null
     social_instragram?: NullableStringFieldUpdateOperationsInput | string | null
