@@ -136,88 +136,69 @@ export const holidayResolvers: Resolvers = {
     },
 
     async createAndUpdateHolidayDate(p, args, ctx) {
-      if (args.data) {
-        args.data.forEach(async (e) => {
-          if (e.id) {
-            const update = await ctx.prisma.holiday_date.update({
-              data: {
-                holiday_name: e.holiday_name as string,
-                day: e.day as number,
-                month: e.month as number,
-                year: e.year as number,
-                status: e.status as number,
-              },
-              where: {
-                id: e.id as string
-              }
-            })
-            return {
-
-
+      args.data?.forEach(async (e) => {
+        if (e.id) {
+          const update = await ctx.prisma.holiday_date.update({
+            data: {
+              holiday_name: e.holiday_name as string,
+              day: e.day as number,
+              month: e.month as number,
+              year: e.year as number,
+              status: e.status as number,
+            },
+            where: {
+              id: e.id as string
             }
+          })
+        } else {
+          const createHolidayDate = await ctx.prisma.holiday_date.create({
+            data: {
+              id: v4(),
+              holiday_name: e.holiday_name as string,
+              day: e.day as number,
+              month: e.month as number,
+              year: e.year as number,
+              status: 1 as number,
+              CompanyId: ctx.currentUser?.compayId
+            }
+          })
+        }
+      })
+          return {
+            message: 'success',
+            status: true,
           }
-        })
-      }
-
-      // if (e.id) {
-      //   const updateHolidayDate = await ctx.prisma.holiday_date.update({
-      //     data: {
-      //       holiday_name: e.holiday_name as string,
-      //       day: e.day as number,
-      //       month: e.month as number,
-      //       year: e.year as number,
-      //       status: e.status as number,
-      //     },
-      //     where: {
-      //       id: e.id as string
-      //     }
-      //   });
-      //   return{
-
-      //   }
-      // } else {
-      // const createHolidayDate = await ctx.prisma.holiday_date.create({
-      //   data: {
-      //     id: v4(),
-      //     holiday_name: e.holiday_name as string,
-      //     day: e.day as number,
-      //     month: e.month as number,
-      //     year: e.year as number,
-      //     status: 1 as number,
-      //     CompanyId: ctx.currentUser?.compayId
-      //   }
-      // });
-    },
+        },
 
     async deleteHolidayDate(p, args, ctx) {
-      const deleteHolidayDates = await ctx.prisma.holiday_date.delete({
-        where: {
-          id: args.id as string
-        }
-      });
-      return {
-        message: 'success',
-        status: true,
-      };
-    },
+          const deleteHolidayDates = await ctx.prisma.holiday_date.delete({
+            where: {
+              id: args.id as string
+            }
+          });
+          return {
+            message: 'success',
+            status: true,
+          };
+        },
 
 
-  },
+      },
 };
 
-const HolidayComposition = {
-  'Query.GetHoliDayYear': [authenticate()],
-  'Query.GetHolidayDate': [authenticate()],
-  'Mutation.createHolidayYear': [authenticate()],
-  'Mutation.deleteHolidayYear': [authenticate()],
-  'Mutation.createAndUpdateHolidayDate': [authenticate()],
-  'Mutation.deleteHolidayDate': [authenticate()],
-};
+    const HolidayComposition = {
+      'Query.GetHoliDayYear': [authenticate()],
+      'Query.GetHolidayDate': [authenticate()],
+      'Mutation.createHolidayYear': [authenticate()],
+      'Mutation.deleteHolidayYear': [authenticate()],
+      'Mutation.createAndUpdateHolidayDate': [authenticate()],
+      'Mutation.deleteHolidayDate': [authenticate()],
+    };
 
 
-export const Role_CompanyResolvers = composeResolvers(
-  holidayResolvers,
-  HolidayComposition
-);
+    export const Role_CompanyResolvers = composeResolvers(
+      holidayResolvers,
+      HolidayComposition
+    );
 
 
