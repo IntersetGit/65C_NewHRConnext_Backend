@@ -325,6 +325,8 @@ model expense_company {
   vat_per         Float?
   ss_per          Float?
   check_vat       String[]
+  exp_com_month   String?
+  exp_com_years   String?
   companyBranchId String?        @db.Uuid
   salary          salary[]
   Mas_month       mas_month?     @relation(fields: [monthId], references: [id])
