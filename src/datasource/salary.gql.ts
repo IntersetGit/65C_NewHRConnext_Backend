@@ -7,7 +7,7 @@ import { authenticate } from '../middleware/authenticatetoken';
 import dayjs from 'dayjs';
 import { includes, orderBy } from 'lodash';
 import { profile } from 'console';
-import { expense_company } from '../generated/client/index';
+import { expense_company, bookbank_log } from '../generated/client/index';
 
 
 
@@ -206,7 +206,21 @@ export const salaryTypedef = gql`
     mas_bank: mas_bank
     CompanyBranch: CompanyBranch
   }
+  type show_pervsp {
+    id: ID
+    monthId: String
+    bankId: String
+    date: Date
+    vat_per: Float
+    ss_per: Float
+    companyBranchId: String
+    salary: [salary]
+    Mas_month: mas_month
+    mas_bank: mas_bank
+    CompanyBranch: CompanyBranch
+    bookbank_log:bookbank_log
 
+  }
   type provident_log {
     id: ID
     User: User
@@ -244,6 +258,7 @@ export const salaryTypedef = gql`
     exp_com_month: String
     exp_com_years: String
     companyBranchId: String
+    cal_date_salary: Date
   }
 
   input incometype {
@@ -269,6 +284,7 @@ export const salaryTypedef = gql`
     social_security: Float
     companyBranchId: String
     Salary: salary
+    cal_date_salary: Date
   }
   type Profile {
     bio: String
@@ -440,7 +456,8 @@ user_id:String
     mas_all_collect: mas_all_collect
     mas_bank(id: String): [mas_bank]
     data_salary(fristname: String ,Position2: String ,Position3: String):[data_salary]
-    expense_company:[expense_company]
+    expense_company(date:String):[expense_company]
+    show_pervsp(date:String):[show_pervsp]
   }
 
   type Mutation {
@@ -481,21 +498,49 @@ const resolvers: Resolvers = {
       return getdata;
     },
 
-    async expense_company(p,args,ctx){
+    async expense_company(p, args, ctx) {
       // console.log(ctx.currentUser?.id)
+      const date = args?.date
+      const month = dayjs(date).format('MM')
+      const years = dayjs(date).format('YYYY')
       const getdata = await ctx.prisma.expense_company.findMany({
         include: {
           mas_bank: true
         },
         where: {
-          companyBranchId: ctx.currentUser?.branchId
+          companyBranchId: ctx.currentUser?.branchId,
+          AND: {
+            exp_com_month: month,
+            exp_com_years: years
+          },
         },
         orderBy:
         {
           date: "desc",
         },
       });
-      return getdata;
+      return getdata
+    },
+    async show_pervsp(p,args,ctx){
+      const date = args?.date
+      const month = dayjs(date).format('MM')
+      const years = dayjs(date).format('YYYY')
+      const getdata = await ctx.prisma.expense_company.findMany({
+        include: {
+        },
+        where: {
+          companyBranchId: ctx.currentUser?.branchId,
+          AND: {
+            exp_com_month: month,
+            exp_com_years: years
+          },
+        },
+        orderBy:
+        {
+          date: "desc",
+        },
+      });
+      return getdata
     },
     async mas_bank(parant: any, args: any, ctx: any) {
       const result = await ctx.prisma.mas_bank.findMany({
@@ -1218,7 +1263,10 @@ const resolvers: Resolvers = {
     async CreateAndUpdateExpenseCom(p: any, args: any, ctx: any) {
       //สร้างและอัปเดท expensecom
       const genExpenseID = v4();
-       const take_arr = args.data?.check_vat
+      let date = args.data?.date
+      let ThisYear = dayjs(date).format("YYYY")
+      let Thismonth = dayjs(date).format("MM")
+      const take_arr = args.data?.check_vat
       if (args.data?.id) {
         const updateExpenseCom = await ctx.prisma.expense_company.update({
           data: {
@@ -1226,6 +1274,9 @@ const resolvers: Resolvers = {
             date: new Date(args.data?.date),
             vat_per: args.data?.vat_per as number,
             ss_per: args.data?.ss_per as number,
+            exp_com_month: Thismonth,
+            exp_com_years: ThisYear,
+            cal_date_salary: args.data?.cal_date_salary,
             companyBranchId: args.data?.companyBranchId,
           },
           where: { id: args.data.id },
@@ -1242,7 +1293,10 @@ const resolvers: Resolvers = {
           date: new Date(args.data?.date),
           vat_per: args.data?.vat_per as number,
           ss_per: args.data?.ss_per as number,
-          check_vat : take_arr,
+          check_vat: take_arr,
+          exp_com_month: Thismonth,
+          exp_com_years: ThisYear,
+          cal_date_salary: args.data?.cal_date_salary,
           companyBranchId: args.data?.companyBranchId,
         },
       });
