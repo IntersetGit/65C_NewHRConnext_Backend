@@ -486,6 +486,8 @@ const resolvers: Resolvers = {
       const date=args?.date
       const month=dayjs(date).format('MM')
       const years=dayjs(date).format('YYYY')
+      // const data =getdata[0]
+
       const getdata = await ctx.prisma.expense_company.findMany({
         include: {
           mas_bank: true
@@ -502,7 +504,7 @@ const resolvers: Resolvers = {
           date: "desc",
         },
       });
-      return getdata;
+      return getdata
     },
     async mas_bank(parant: any, args: any, ctx: any) {
       const result = await ctx.prisma.mas_bank.findMany({
