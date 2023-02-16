@@ -250,6 +250,7 @@ const main = async () => {
     },
     update: {},
   });
+
   const createBighitCompany = await prisma.company.upsert({
     where: {
       id: 'e74d8ad3-855b-4fed-a3b4-f548e7bf5ec8',
@@ -353,6 +354,45 @@ const main = async () => {
           staff_code: 'BH004'
         },
       },
+    },
+    update: {},
+  });
+
+  const createHybeCompany = await prisma.company.upsert({
+    where: {
+      id: '7833c4ce-74d8-4111-bf26-f4ccd085b2ba',
+    },
+    create: {
+      id: '7833c4ce-74d8-4111-bf26-f4ccd085b2ba',
+      name: 'Hybe Entertainment',
+      companyCode: 'Hybe',
+      userlimit: 1000,
+      createdAt: '2023-01-25T04:48:57.199Z',
+      updatedAt: '2023-01-25T04:48:57.199Z',
+      ownerId: 'f6875d25-deb8-46cf-be58-fd2668e83ae7',
+    },
+    update: {},
+  });
+
+  const createHybeBranch = await prisma.companyBranch.upsert({
+    where: {
+      id: '20c79ffc-1391-4bb8-9d97-0e8205015adf',
+    },
+    create: {
+      id: '20c79ffc-1391-4bb8-9d97-0e8205015adf',
+      isMainbranch: true,
+      name: 'สำนักงานใหญ่',
+      address:
+        'Cheonggu Building 3F. 13-20, Dosan-daero 16-gil. Gangnam-gu, Seoul 06040. South Korea.',
+      city: '924f8ac4-fa10-41e0-8fb2-8005bc457710',
+      state: '0e451125-a597-4f76-ba92-d27c52071cf9',
+      zip: '10900',
+      country: 'd61deee2-467c-4860-a789-a0f4285a4d43',
+      tel: '0234440105',
+      company_type: 'สำนักงานใหญ่',
+      createdAt: '2023-01-25T04:48:57.210Z',
+      updatedAt: '2023-01-25T04:48:57.210Z',
+      companyId: '7833c4ce-74d8-4111-bf26-f4ccd085b2ba',
     },
     update: {},
   });

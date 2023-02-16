@@ -734,6 +734,16 @@ export type Query = {
 };
 
 
+export type QueryGetHoliDayYearArgs = {
+  year?: InputMaybe<Scalars['Int']>;
+};
+
+
+export type QueryGetHolidayDateArgs = {
+  year?: InputMaybe<Scalars['Int']>;
+};
+
+
 export type QuerySalarySlipArgs = {
   month?: InputMaybe<Scalars['String']>;
   userId?: InputMaybe<Scalars['String']>;
@@ -2217,8 +2227,8 @@ export type ProvinceResolvers<ContextType = ApolloContext, ParentType extends Re
 }>;
 
 export type QueryResolvers<ContextType = ApolloContext, ParentType extends ResolversParentTypes['Query'] = ResolversParentTypes['Query']> = ResolversObject<{
-  GetHoliDayYear?: Resolver<Maybe<Array<Maybe<ResolversTypes['holiday_years']>>>, ParentType, ContextType>;
-  GetHolidayDate?: Resolver<Maybe<Array<ResolversTypes['holiday_date']>>, ParentType, ContextType>;
+  GetHoliDayYear?: Resolver<Maybe<Array<Maybe<ResolversTypes['holiday_years']>>>, ParentType, ContextType, Partial<QueryGetHoliDayYearArgs>>;
+  GetHolidayDate?: Resolver<Maybe<Array<ResolversTypes['holiday_date']>>, ParentType, ContextType, Partial<QueryGetHolidayDateArgs>>;
   SalarySlip?: Resolver<Maybe<ResolversTypes['slipresolvers']>, ParentType, ContextType, Partial<QuerySalarySlipArgs>>;
   bookbank_log?: Resolver<Maybe<Array<Maybe<ResolversTypes['Bookbank_log_type']>>>, ParentType, ContextType>;
   bookbank_log_admin?: Resolver<Maybe<Array<Maybe<ResolversTypes['Bookbank_log_type']>>>, ParentType, ContextType, Partial<QueryBookbank_Log_AdminArgs>>;

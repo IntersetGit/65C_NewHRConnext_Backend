@@ -65,8 +65,8 @@ export const holidayTypedef = gql`
   }
 
   type Query{
-    GetHoliDayYear: [holiday_years]
-    GetHolidayDate: [holiday_date!]
+    GetHoliDayYear(year: Int): [holiday_years]
+    GetHolidayDate(year: Int): [holiday_date!]
   }
 
   type Mutation{
@@ -80,16 +80,22 @@ export const holidayTypedef = gql`
 export const holidayResolvers: Resolvers = {
   Query: {
     async GetHoliDayYear(p, args, ctx) {
+      const search = args.year as number ? args.year : undefined;
       const result = await ctx.prisma.holiday_year.findMany({
-        orderBy: [{
-          year: "asc"
-        }, {
-          month: "asc"
-        }, {
-          day: "asc"
-        }]
+        where: {
+          year: search as number
+        },
+        orderBy: [
+          {
+            year: "asc"
+          }, {
+            month: "asc"
+          }, {
+            day: "asc"
+          }
+        ],
       });
-      return result;
+      return result
     },
 
     async GetHolidayDate(p, args, ctx) {
@@ -164,41 +170,41 @@ export const holidayResolvers: Resolvers = {
           })
         }
       })
-          return {
-            message: 'success',
-            status: true,
-          }
-        },
+      return {
+        message: 'success',
+        status: true,
+      }
+    },
 
     async deleteHolidayDate(p, args, ctx) {
-          const deleteHolidayDates = await ctx.prisma.holiday_date.delete({
-            where: {
-              id: args.id as string
-            }
-          });
-          return {
-            message: 'success',
-            status: true,
-          };
-        },
+      const deleteHolidayDates = await ctx.prisma.holiday_date.delete({
+        where: {
+          id: args.id as string
+        }
+      });
+      return {
+        message: 'success',
+        status: true,
+      };
+    },
 
 
-      },
+  },
 };
 
-    const HolidayComposition = {
-      'Query.GetHoliDayYear': [authenticate()],
-      'Query.GetHolidayDate': [authenticate()],
-      'Mutation.createHolidayYear': [authenticate()],
-      'Mutation.deleteHolidayYear': [authenticate()],
-      'Mutation.createAndUpdateHolidayDate': [authenticate()],
-      'Mutation.deleteHolidayDate': [authenticate()],
-    };
+const HolidayComposition = {
+  'Query.GetHoliDayYear': [authenticate()],
+  'Query.GetHolidayDate': [authenticate()],
+  'Mutation.createHolidayYear': [authenticate()],
+  'Mutation.deleteHolidayYear': [authenticate()],
+  'Mutation.createAndUpdateHolidayDate': [authenticate()],
+  'Mutation.deleteHolidayDate': [authenticate()],
+};
 
 
-    export const Role_CompanyResolvers = composeResolvers(
-      holidayResolvers,
-      HolidayComposition
-    );
+export const Role_CompanyResolvers = composeResolvers(
+  holidayResolvers,
+  HolidayComposition
+);
 
 
