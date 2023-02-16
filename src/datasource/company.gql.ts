@@ -53,6 +53,8 @@ export const companyTypedef = gql`
     updatedAt: Date
     company: Company
     companyId: String
+    regis_vat: String
+    regiscomnumber: String
     users: [User]
     expense_company: [expense_company]
     Role_Company: [Role_Company]
