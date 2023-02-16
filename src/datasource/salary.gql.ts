@@ -7,7 +7,7 @@ import { authenticate } from '../middleware/authenticatetoken';
 import dayjs from 'dayjs';
 import { includes, orderBy } from 'lodash';
 import { profile } from 'console';
-import { expense_company } from '../generated/client/index';
+import { expense_company, bookbank_log } from '../generated/client/index';
 
 
 
@@ -206,7 +206,21 @@ export const salaryTypedef = gql`
     mas_bank: mas_bank
     CompanyBranch: CompanyBranch
   }
+  type show_pervsp {
+    id: ID
+    monthId: String
+    bankId: String
+    date: Date
+    vat_per: Float
+    ss_per: Float
+    companyBranchId: String
+    salary: [salary]
+    Mas_month: mas_month
+    mas_bank: mas_bank
+    CompanyBranch: CompanyBranch
+    bookbank_log:bookbank_log
 
+  }
   type provident_log {
     id: ID
     User: User
@@ -441,6 +455,7 @@ user_id:String
     mas_bank(id: String): [mas_bank]
     data_salary(fristname: String ,Position2: String ,Position3: String):[data_salary]
     expense_company(date:String):[expense_company]
+    show_pervsp(date:String):[show_pervsp]
   }
 
   type Mutation {
@@ -489,6 +504,27 @@ const resolvers: Resolvers = {
       const getdata = await ctx.prisma.expense_company.findMany({
         include: {
           mas_bank: true
+        },
+        where: {
+          companyBranchId: ctx.currentUser?.branchId,
+          AND: {
+            exp_com_month: month,
+            exp_com_years: years
+          },
+        },
+        orderBy:
+        {
+          date: "desc",
+        },
+      });
+      return getdata
+    },
+    async show_pervsp(p,args,ctx){
+      const date = args?.date
+      const month = dayjs(date).format('MM')
+      const years = dayjs(date).format('YYYY')
+      const getdata = await ctx.prisma.expense_company.findMany({
+        include: {
         },
         where: {
           companyBranchId: ctx.currentUser?.branchId,
