@@ -329,6 +329,7 @@ model expense_company {
   check_vat       String[]
   exp_com_month   String?
   exp_com_years   String?
+  cal_date_salary DateTime?
   companyBranchId String?        @db.Uuid
   salary          salary[]
   Mas_month       mas_month?     @relation(fields: [monthId], references: [id])
