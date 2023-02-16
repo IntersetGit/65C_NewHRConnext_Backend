@@ -89,6 +89,8 @@ export type CompanyBranch = {
   lat?: Maybe<Scalars['String']>;
   lng?: Maybe<Scalars['String']>;
   name?: Maybe<Scalars['String']>;
+  regis_vat?: Maybe<Scalars['String']>;
+  regiscomnumber?: Maybe<Scalars['String']>;
   registeredamount?: Maybe<Scalars['String']>;
   social_facebook?: Maybe<Scalars['String']>;
   social_instragram?: Maybe<Scalars['String']>;
@@ -1023,6 +1025,8 @@ export type CreateCompanyBranch = {
   lat?: InputMaybe<Scalars['String']>;
   lng?: InputMaybe<Scalars['String']>;
   name?: InputMaybe<Scalars['String']>;
+  regis_vat?: InputMaybe<Scalars['String']>;
+  regiscomnumber?: InputMaybe<Scalars['String']>;
   registeredamount?: InputMaybe<Scalars['String']>;
   social_facebook?: InputMaybe<Scalars['String']>;
   social_instragram?: InputMaybe<Scalars['String']>;
@@ -1882,6 +1886,8 @@ export type CompanyBranchResolvers<ContextType = ApolloContext, ParentType exten
   lat?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   lng?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   name?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  regis_vat?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  regiscomnumber?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   registeredamount?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   social_facebook?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   social_instragram?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;

@@ -53,6 +53,8 @@ export const companyTypedef = gql`
     updatedAt: Date
     company: Company
     companyId: String
+    regis_vat: String
+    regiscomnumber: String
     users: [User]
     expense_company: [expense_company]
     Role_Company: [Role_Company]
@@ -84,6 +86,8 @@ export const companyTypedef = gql`
     createdAt: Date
     updatedAt: Date
     companyId: String
+    regis_vat: String
+    regiscomnumber: String
   }
 
 
@@ -283,9 +287,9 @@ const resolvers: Resolvers = {
           }
         },
         orderBy:
-          {
-            company_type: "desc",
-          },
+        {
+          company_type: "desc",
+        },
       });
       return rolesCompanyget;
     }
@@ -320,7 +324,9 @@ const resolvers: Resolvers = {
             social_instragram: args.data?.social_facebook,
             social_line: args.data?.social_line,
             createdAt: new Date(),
-            companyId: ctx.currentUser?.compayId
+            companyId: ctx.currentUser?.compayId,
+            regis_vat: args.data?.regis_vat ,
+            regiscomnumber: args.data.regiscomnumber
           },
           where: {
             id: args.data.id
@@ -356,7 +362,9 @@ const resolvers: Resolvers = {
             social_instragram: args.data?.social_facebook,
             social_line: args.data?.social_line,
             createdAt: new Date(),
-            companyId: ctx.currentUser?.compayId
+            companyId: ctx.currentUser?.compayId,
+            regis_vat: args.data?.regis_vat ,
+            regiscomnumber: args.data.regiscomnumber
           },
         });
 
@@ -374,11 +382,11 @@ const resolvers: Resolvers = {
           id: args.id as string
         }
       });
-     
-      //const deleteCompanyHead = await ctx.prisma.company.delete({
-       // where: { 
 
-       // }
+      //const deleteCompanyHead = await ctx.prisma.company.delete({
+      // where: { 
+
+      // }
       //});
       return {
         message: 'success',
