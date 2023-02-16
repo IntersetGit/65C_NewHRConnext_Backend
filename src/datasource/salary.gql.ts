@@ -261,6 +261,7 @@ export const salaryTypedef = gql`
     date: Date
     vat_per: Float
     ss_per: Float
+    check_vat: [String]
     social_security: Float
     companyBranchId: String
     Salary: salary
