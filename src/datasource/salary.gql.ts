@@ -440,7 +440,7 @@ user_id:String
     mas_all_collect: mas_all_collect
     mas_bank(id: String): [mas_bank]
     data_salary(fristname: String ,Position2: String ,Position3: String):[data_salary]
-    expense_company:[expense_company]
+    expense_company(date:String):[expense_company]
   }
 
   type Mutation {
@@ -483,12 +483,19 @@ const resolvers: Resolvers = {
 
     async expense_company(p,args,ctx){
       // console.log(ctx.currentUser?.id)
+      const date=args?.date
+      const month=dayjs(date).format('MM')
+      const years=dayjs(date).format('YYYY')
       const getdata = await ctx.prisma.expense_company.findMany({
         include: {
           mas_bank: true
         },
         where: {
-          companyBranchId: ctx.currentUser?.branchId
+          companyBranchId: ctx.currentUser?.branchId,
+          AND:{
+            exp_com_month:month,
+            exp_com_years:years
+          },
         },
         orderBy:
         {
