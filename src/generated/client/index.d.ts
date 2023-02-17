@@ -434,6 +434,8 @@ export type bookbank_log = {
   base_salary: number
   provident_com: number
   provident_emp: number
+  accept_month: string | null
+  accept_years: string | null
   userId: string | null
 }
 
@@ -28519,6 +28521,8 @@ export namespace Prisma {
     base_salary: number | null
     provident_com: number | null
     provident_emp: number | null
+    accept_month: string | null
+    accept_years: string | null
     userId: string | null
   }
 
@@ -28531,6 +28535,8 @@ export namespace Prisma {
     base_salary: number | null
     provident_com: number | null
     provident_emp: number | null
+    accept_month: string | null
+    accept_years: string | null
     userId: string | null
   }
 
@@ -28543,6 +28549,8 @@ export namespace Prisma {
     base_salary: number
     provident_com: number
     provident_emp: number
+    accept_month: number
+    accept_years: number
     userId: number
     _all: number
   }
@@ -28569,6 +28577,8 @@ export namespace Prisma {
     base_salary?: true
     provident_com?: true
     provident_emp?: true
+    accept_month?: true
+    accept_years?: true
     userId?: true
   }
 
@@ -28581,6 +28591,8 @@ export namespace Prisma {
     base_salary?: true
     provident_com?: true
     provident_emp?: true
+    accept_month?: true
+    accept_years?: true
     userId?: true
   }
 
@@ -28593,6 +28605,8 @@ export namespace Prisma {
     base_salary?: true
     provident_com?: true
     provident_emp?: true
+    accept_month?: true
+    accept_years?: true
     userId?: true
     _all?: true
   }
@@ -28693,6 +28707,8 @@ export namespace Prisma {
     base_salary: number
     provident_com: number
     provident_emp: number
+    accept_month: string | null
+    accept_years: string | null
     userId: string | null
     _count: Bookbank_logCountAggregateOutputType | null
     _avg: Bookbank_logAvgAggregateOutputType | null
@@ -28724,6 +28740,8 @@ export namespace Prisma {
     base_salary?: boolean
     provident_com?: boolean
     provident_emp?: boolean
+    accept_month?: boolean
+    accept_years?: boolean
     salary?: boolean | bookbank_log$salaryArgs
     mas_bank?: boolean | mas_bankArgs
     User?: boolean | UserArgs
@@ -35401,6 +35419,8 @@ export namespace Prisma {
     base_salary: 'base_salary',
     provident_com: 'provident_com',
     provident_emp: 'provident_emp',
+    accept_month: 'accept_month',
+    accept_years: 'accept_years',
     userId: 'userId'
   };
 
@@ -37644,6 +37664,8 @@ export namespace Prisma {
     base_salary?: FloatFilter | number
     provident_com?: FloatFilter | number
     provident_emp?: FloatFilter | number
+    accept_month?: StringNullableFilter | string | null
+    accept_years?: StringNullableFilter | string | null
     salary?: SalaryListRelationFilter
     mas_bank?: XOR<Mas_bankRelationFilter, mas_bankWhereInput> | null
     User?: XOR<UserRelationFilter, UserWhereInput> | null
@@ -37660,6 +37682,8 @@ export namespace Prisma {
     base_salary?: SortOrder
     provident_com?: SortOrder
     provident_emp?: SortOrder
+    accept_month?: SortOrder
+    accept_years?: SortOrder
     salary?: salaryOrderByRelationAggregateInput
     mas_bank?: mas_bankOrderByWithRelationInput
     User?: UserOrderByWithRelationInput
@@ -37680,6 +37704,8 @@ export namespace Prisma {
     base_salary?: SortOrder
     provident_com?: SortOrder
     provident_emp?: SortOrder
+    accept_month?: SortOrder
+    accept_years?: SortOrder
     userId?: SortOrder
     _count?: bookbank_logCountOrderByAggregateInput
     _avg?: bookbank_logAvgOrderByAggregateInput
@@ -37700,6 +37726,8 @@ export namespace Prisma {
     base_salary?: FloatWithAggregatesFilter | number
     provident_com?: FloatWithAggregatesFilter | number
     provident_emp?: FloatWithAggregatesFilter | number
+    accept_month?: StringNullableWithAggregatesFilter | string | null
+    accept_years?: StringNullableWithAggregatesFilter | string | null
     userId?: UuidNullableWithAggregatesFilter | string | null
   }
 
@@ -40297,6 +40325,8 @@ export namespace Prisma {
     base_salary: number
     provident_com?: number
     provident_emp?: number
+    accept_month?: string | null
+    accept_years?: string | null
     salary?: salaryCreateNestedManyWithoutBookbank_logInput
     mas_bank?: mas_bankCreateNestedOneWithoutBookbank_logInput
     User?: UserCreateNestedOneWithoutBookbank_logInput
@@ -40312,6 +40342,8 @@ export namespace Prisma {
     base_salary: number
     provident_com?: number
     provident_emp?: number
+    accept_month?: string | null
+    accept_years?: string | null
     salary?: salaryUncheckedCreateNestedManyWithoutBookbank_logInput
     userId?: string | null
     provident_log?: provident_logUncheckedCreateNestedManyWithoutBookbank_logInput
@@ -40325,6 +40357,8 @@ export namespace Prisma {
     base_salary?: FloatFieldUpdateOperationsInput | number
     provident_com?: FloatFieldUpdateOperationsInput | number
     provident_emp?: FloatFieldUpdateOperationsInput | number
+    accept_month?: NullableStringFieldUpdateOperationsInput | string | null
+    accept_years?: NullableStringFieldUpdateOperationsInput | string | null
     salary?: salaryUpdateManyWithoutBookbank_logNestedInput
     mas_bank?: mas_bankUpdateOneWithoutBookbank_logNestedInput
     User?: UserUpdateOneWithoutBookbank_logNestedInput
@@ -40340,6 +40374,8 @@ export namespace Prisma {
     base_salary?: FloatFieldUpdateOperationsInput | number
     provident_com?: FloatFieldUpdateOperationsInput | number
     provident_emp?: FloatFieldUpdateOperationsInput | number
+    accept_month?: NullableStringFieldUpdateOperationsInput | string | null
+    accept_years?: NullableStringFieldUpdateOperationsInput | string | null
     salary?: salaryUncheckedUpdateManyWithoutBookbank_logNestedInput
     userId?: NullableStringFieldUpdateOperationsInput | string | null
     provident_log?: provident_logUncheckedUpdateManyWithoutBookbank_logNestedInput
@@ -40354,6 +40390,8 @@ export namespace Prisma {
     base_salary: number
     provident_com?: number
     provident_emp?: number
+    accept_month?: string | null
+    accept_years?: string | null
     userId?: string | null
   }
 
@@ -40365,6 +40403,8 @@ export namespace Prisma {
     base_salary?: FloatFieldUpdateOperationsInput | number
     provident_com?: FloatFieldUpdateOperationsInput | number
     provident_emp?: FloatFieldUpdateOperationsInput | number
+    accept_month?: NullableStringFieldUpdateOperationsInput | string | null
+    accept_years?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type bookbank_logUncheckedUpdateManyInput = {
@@ -40376,6 +40416,8 @@ export namespace Prisma {
     base_salary?: FloatFieldUpdateOperationsInput | number
     provident_com?: FloatFieldUpdateOperationsInput | number
     provident_emp?: FloatFieldUpdateOperationsInput | number
+    accept_month?: NullableStringFieldUpdateOperationsInput | string | null
+    accept_years?: NullableStringFieldUpdateOperationsInput | string | null
     userId?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
@@ -42436,6 +42478,8 @@ export namespace Prisma {
     base_salary?: SortOrder
     provident_com?: SortOrder
     provident_emp?: SortOrder
+    accept_month?: SortOrder
+    accept_years?: SortOrder
     userId?: SortOrder
   }
 
@@ -42454,6 +42498,8 @@ export namespace Prisma {
     base_salary?: SortOrder
     provident_com?: SortOrder
     provident_emp?: SortOrder
+    accept_month?: SortOrder
+    accept_years?: SortOrder
     userId?: SortOrder
   }
 
@@ -42466,6 +42512,8 @@ export namespace Prisma {
     base_salary?: SortOrder
     provident_com?: SortOrder
     provident_emp?: SortOrder
+    accept_month?: SortOrder
+    accept_years?: SortOrder
     userId?: SortOrder
   }
 
@@ -46980,6 +47028,8 @@ export namespace Prisma {
     base_salary: number
     provident_com?: number
     provident_emp?: number
+    accept_month?: string | null
+    accept_years?: string | null
     salary?: salaryCreateNestedManyWithoutBookbank_logInput
     mas_bank?: mas_bankCreateNestedOneWithoutBookbank_logInput
     provident_log?: provident_logCreateNestedManyWithoutBookbank_logInput
@@ -46994,6 +47044,8 @@ export namespace Prisma {
     base_salary: number
     provident_com?: number
     provident_emp?: number
+    accept_month?: string | null
+    accept_years?: string | null
     salary?: salaryUncheckedCreateNestedManyWithoutBookbank_logInput
     provident_log?: provident_logUncheckedCreateNestedManyWithoutBookbank_logInput
   }
@@ -47507,6 +47559,8 @@ export namespace Prisma {
     base_salary?: FloatFilter | number
     provident_com?: FloatFilter | number
     provident_emp?: FloatFilter | number
+    accept_month?: StringNullableFilter | string | null
+    accept_years?: StringNullableFilter | string | null
     userId?: UuidNullableFilter | string | null
   }
 
@@ -49213,6 +49267,8 @@ export namespace Prisma {
     base_salary: number
     provident_com?: number
     provident_emp?: number
+    accept_month?: string | null
+    accept_years?: string | null
     salary?: salaryCreateNestedManyWithoutBookbank_logInput
     User?: UserCreateNestedOneWithoutBookbank_logInput
     provident_log?: provident_logCreateNestedManyWithoutBookbank_logInput
@@ -49226,6 +49282,8 @@ export namespace Prisma {
     base_salary: number
     provident_com?: number
     provident_emp?: number
+    accept_month?: string | null
+    accept_years?: string | null
     salary?: salaryUncheckedCreateNestedManyWithoutBookbank_logInput
     userId?: string | null
     provident_log?: provident_logUncheckedCreateNestedManyWithoutBookbank_logInput
@@ -50208,6 +50266,8 @@ export namespace Prisma {
     base_salary: number
     provident_com?: number
     provident_emp?: number
+    accept_month?: string | null
+    accept_years?: string | null
     mas_bank?: mas_bankCreateNestedOneWithoutBookbank_logInput
     User?: UserCreateNestedOneWithoutBookbank_logInput
     provident_log?: provident_logCreateNestedManyWithoutBookbank_logInput
@@ -50222,6 +50282,8 @@ export namespace Prisma {
     base_salary: number
     provident_com?: number
     provident_emp?: number
+    accept_month?: string | null
+    accept_years?: string | null
     userId?: string | null
     provident_log?: provident_logUncheckedCreateNestedManyWithoutBookbank_logInput
   }
@@ -50414,6 +50476,8 @@ export namespace Prisma {
     base_salary?: FloatFieldUpdateOperationsInput | number
     provident_com?: FloatFieldUpdateOperationsInput | number
     provident_emp?: FloatFieldUpdateOperationsInput | number
+    accept_month?: NullableStringFieldUpdateOperationsInput | string | null
+    accept_years?: NullableStringFieldUpdateOperationsInput | string | null
     mas_bank?: mas_bankUpdateOneWithoutBookbank_logNestedInput
     User?: UserUpdateOneWithoutBookbank_logNestedInput
     provident_log?: provident_logUpdateManyWithoutBookbank_logNestedInput
@@ -50428,6 +50492,8 @@ export namespace Prisma {
     base_salary?: FloatFieldUpdateOperationsInput | number
     provident_com?: FloatFieldUpdateOperationsInput | number
     provident_emp?: FloatFieldUpdateOperationsInput | number
+    accept_month?: NullableStringFieldUpdateOperationsInput | string | null
+    accept_years?: NullableStringFieldUpdateOperationsInput | string | null
     userId?: NullableStringFieldUpdateOperationsInput | string | null
     provident_log?: provident_logUncheckedUpdateManyWithoutBookbank_logNestedInput
   }
@@ -51073,6 +51139,8 @@ export namespace Prisma {
     base_salary: number
     provident_com?: number
     provident_emp?: number
+    accept_month?: string | null
+    accept_years?: string | null
     salary?: salaryCreateNestedManyWithoutBookbank_logInput
     mas_bank?: mas_bankCreateNestedOneWithoutBookbank_logInput
     User?: UserCreateNestedOneWithoutBookbank_logInput
@@ -51087,6 +51155,8 @@ export namespace Prisma {
     base_salary: number
     provident_com?: number
     provident_emp?: number
+    accept_month?: string | null
+    accept_years?: string | null
     salary?: salaryUncheckedCreateNestedManyWithoutBookbank_logInput
     userId?: string | null
   }
@@ -51280,6 +51350,8 @@ export namespace Prisma {
     base_salary?: FloatFieldUpdateOperationsInput | number
     provident_com?: FloatFieldUpdateOperationsInput | number
     provident_emp?: FloatFieldUpdateOperationsInput | number
+    accept_month?: NullableStringFieldUpdateOperationsInput | string | null
+    accept_years?: NullableStringFieldUpdateOperationsInput | string | null
     salary?: salaryUpdateManyWithoutBookbank_logNestedInput
     mas_bank?: mas_bankUpdateOneWithoutBookbank_logNestedInput
     User?: UserUpdateOneWithoutBookbank_logNestedInput
@@ -51294,6 +51366,8 @@ export namespace Prisma {
     base_salary?: FloatFieldUpdateOperationsInput | number
     provident_com?: FloatFieldUpdateOperationsInput | number
     provident_emp?: FloatFieldUpdateOperationsInput | number
+    accept_month?: NullableStringFieldUpdateOperationsInput | string | null
+    accept_years?: NullableStringFieldUpdateOperationsInput | string | null
     salary?: salaryUncheckedUpdateManyWithoutBookbank_logNestedInput
     userId?: NullableStringFieldUpdateOperationsInput | string | null
   }
@@ -52468,6 +52542,8 @@ export namespace Prisma {
     base_salary: number
     provident_com?: number
     provident_emp?: number
+    accept_month?: string | null
+    accept_years?: string | null
   }
 
   export type data_leaveCreateManyUserInput = {
@@ -52801,6 +52877,8 @@ export namespace Prisma {
     base_salary?: FloatFieldUpdateOperationsInput | number
     provident_com?: FloatFieldUpdateOperationsInput | number
     provident_emp?: FloatFieldUpdateOperationsInput | number
+    accept_month?: NullableStringFieldUpdateOperationsInput | string | null
+    accept_years?: NullableStringFieldUpdateOperationsInput | string | null
     salary?: salaryUpdateManyWithoutBookbank_logNestedInput
     mas_bank?: mas_bankUpdateOneWithoutBookbank_logNestedInput
     provident_log?: provident_logUpdateManyWithoutBookbank_logNestedInput
@@ -52815,6 +52893,8 @@ export namespace Prisma {
     base_salary?: FloatFieldUpdateOperationsInput | number
     provident_com?: FloatFieldUpdateOperationsInput | number
     provident_emp?: FloatFieldUpdateOperationsInput | number
+    accept_month?: NullableStringFieldUpdateOperationsInput | string | null
+    accept_years?: NullableStringFieldUpdateOperationsInput | string | null
     salary?: salaryUncheckedUpdateManyWithoutBookbank_logNestedInput
     provident_log?: provident_logUncheckedUpdateManyWithoutBookbank_logNestedInput
   }
@@ -52828,6 +52908,8 @@ export namespace Prisma {
     base_salary?: FloatFieldUpdateOperationsInput | number
     provident_com?: FloatFieldUpdateOperationsInput | number
     provident_emp?: FloatFieldUpdateOperationsInput | number
+    accept_month?: NullableStringFieldUpdateOperationsInput | string | null
+    accept_years?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type data_leaveUpdateWithoutUserInput = {
@@ -53253,6 +53335,8 @@ export namespace Prisma {
     base_salary: number
     provident_com?: number
     provident_emp?: number
+    accept_month?: string | null
+    accept_years?: string | null
     userId?: string | null
   }
 
@@ -53335,6 +53419,8 @@ export namespace Prisma {
     base_salary?: FloatFieldUpdateOperationsInput | number
     provident_com?: FloatFieldUpdateOperationsInput | number
     provident_emp?: FloatFieldUpdateOperationsInput | number
+    accept_month?: NullableStringFieldUpdateOperationsInput | string | null
+    accept_years?: NullableStringFieldUpdateOperationsInput | string | null
     salary?: salaryUpdateManyWithoutBookbank_logNestedInput
     User?: UserUpdateOneWithoutBookbank_logNestedInput
     provident_log?: provident_logUpdateManyWithoutBookbank_logNestedInput
@@ -53348,6 +53434,8 @@ export namespace Prisma {
     base_salary?: FloatFieldUpdateOperationsInput | number
     provident_com?: FloatFieldUpdateOperationsInput | number
     provident_emp?: FloatFieldUpdateOperationsInput | number
+    accept_month?: NullableStringFieldUpdateOperationsInput | string | null
+    accept_years?: NullableStringFieldUpdateOperationsInput | string | null
     salary?: salaryUncheckedUpdateManyWithoutBookbank_logNestedInput
     userId?: NullableStringFieldUpdateOperationsInput | string | null
     provident_log?: provident_logUncheckedUpdateManyWithoutBookbank_logNestedInput

@@ -105,6 +105,8 @@ exports.Prisma.Bookbank_logScalarFieldEnum = makeEnum({
   base_salary: 'base_salary',
   provident_com: 'provident_com',
   provident_emp: 'provident_emp',
+  accept_month: 'accept_month',
+  accept_years: 'accept_years',
   userId: 'userId'
 });
 

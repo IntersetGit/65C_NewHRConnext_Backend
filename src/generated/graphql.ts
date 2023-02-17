@@ -732,7 +732,7 @@ export type Query = {
   provident_log?: Maybe<Array<Maybe<Provident_Log>>>;
   salary?: Maybe<Data_Salary>;
   salary_inmonthSlip?: Maybe<Array<Maybe<Data_Salary>>>;
-  show_pervsp?: Maybe<Array<Maybe<Show_Pervsp>>>;
+  show_pervspUser?: Maybe<Array<Maybe<CompanyBranch>>>;
   users?: Maybe<Array<Maybe<User>>>;
   verifyCompanycode?: Maybe<Scalars['Boolean']>;
 };
@@ -835,8 +835,9 @@ export type QuerySalary_InmonthSlipArgs = {
 };
 
 
-export type QueryShow_PervspArgs = {
+export type QueryShow_PervspUserArgs = {
   date?: InputMaybe<Scalars['String']>;
+  id: Scalars['ID'];
 };
 
 
@@ -966,6 +967,7 @@ export type User = {
   Position_user?: Maybe<Array<Maybe<Position_User>>>;
   RoleCompanyID?: Maybe<Scalars['String']>;
   Role_Company?: Maybe<Role_Company>;
+  bookbank_log?: Maybe<Array<Maybe<Bookbank_Log_Type>>>;
   company?: Maybe<Array<Maybe<Company>>>;
   companyBranch?: Maybe<CompanyBranch>;
   companyBranchId?: Maybe<Scalars['String']>;
@@ -1528,7 +1530,7 @@ export type Show_Pervsp = {
   CompanyBranch?: Maybe<CompanyBranch>;
   Mas_month?: Maybe<Mas_Month>;
   bankId?: Maybe<Scalars['String']>;
-  bookbank_log?: Maybe<Bookbank_Log>;
+  bookbank_log?: Maybe<Array<Maybe<Bookbank_Log_Type>>>;
   companyBranchId?: Maybe<Scalars['String']>;
   date?: Maybe<Scalars['Date']>;
   id?: Maybe<Scalars['ID']>;
@@ -2293,7 +2295,7 @@ export type QueryResolvers<ContextType = ApolloContext, ParentType extends Resol
   provident_log?: Resolver<Maybe<Array<Maybe<ResolversTypes['provident_log']>>>, ParentType, ContextType, Partial<QueryProvident_LogArgs>>;
   salary?: Resolver<Maybe<ResolversTypes['data_salary']>, ParentType, ContextType, Partial<QuerySalaryArgs>>;
   salary_inmonthSlip?: Resolver<Maybe<Array<Maybe<ResolversTypes['data_salary']>>>, ParentType, ContextType, Partial<QuerySalary_InmonthSlipArgs>>;
-  show_pervsp?: Resolver<Maybe<Array<Maybe<ResolversTypes['show_pervsp']>>>, ParentType, ContextType, Partial<QueryShow_PervspArgs>>;
+  show_pervspUser?: Resolver<Maybe<Array<Maybe<ResolversTypes['CompanyBranch']>>>, ParentType, ContextType, RequireFields<QueryShow_PervspUserArgs, 'id'>>;
   users?: Resolver<Maybe<Array<Maybe<ResolversTypes['User']>>>, ParentType, ContextType, Partial<QueryUsersArgs>>;
   verifyCompanycode?: Resolver<Maybe<ResolversTypes['Boolean']>, ParentType, ContextType, RequireFields<QueryVerifyCompanycodeArgs, 'companyname'>>;
 }>;
@@ -2403,6 +2405,7 @@ export type UserResolvers<ContextType = ApolloContext, ParentType extends Resolv
   Position_user?: Resolver<Maybe<Array<Maybe<ResolversTypes['Position_user']>>>, ParentType, ContextType>;
   RoleCompanyID?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   Role_Company?: Resolver<Maybe<ResolversTypes['Role_Company']>, ParentType, ContextType>;
+  bookbank_log?: Resolver<Maybe<Array<Maybe<ResolversTypes['Bookbank_log_type']>>>, ParentType, ContextType>;
   company?: Resolver<Maybe<Array<Maybe<ResolversTypes['Company']>>>, ParentType, ContextType>;
   companyBranch?: Resolver<Maybe<ResolversTypes['CompanyBranch']>, ParentType, ContextType>;
   companyBranchId?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
@@ -2820,7 +2823,7 @@ export type Show_PervspResolvers<ContextType = ApolloContext, ParentType extends
   CompanyBranch?: Resolver<Maybe<ResolversTypes['CompanyBranch']>, ParentType, ContextType>;
   Mas_month?: Resolver<Maybe<ResolversTypes['mas_month']>, ParentType, ContextType>;
   bankId?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
-  bookbank_log?: Resolver<Maybe<ResolversTypes['bookbank_log']>, ParentType, ContextType>;
+  bookbank_log?: Resolver<Maybe<Array<Maybe<ResolversTypes['Bookbank_log_type']>>>, ParentType, ContextType>;
   companyBranchId?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   date?: Resolver<Maybe<ResolversTypes['Date']>, ParentType, ContextType>;
   id?: Resolver<Maybe<ResolversTypes['ID']>, ParentType, ContextType>;

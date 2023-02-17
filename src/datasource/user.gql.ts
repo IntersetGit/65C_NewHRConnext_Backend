@@ -44,6 +44,7 @@ export const userTypedef = gql`
     companyBranchId: String
     Position_user: [Position_user]
     salary: [salary]
+    bookbank_log: [Bookbank_log_type]
   }
 
   input RegisterProfileInput {

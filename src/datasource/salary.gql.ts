@@ -218,7 +218,7 @@ export const salaryTypedef = gql`
     Mas_month: mas_month
     mas_bank: mas_bank
     CompanyBranch: CompanyBranch
-    bookbank_log:bookbank_log
+    bookbank_log:[Bookbank_log_type]
 
   }
   type provident_log {
@@ -457,7 +457,7 @@ user_id:String
     mas_bank(id: String): [mas_bank]
     data_salary(fristname: String ,Position2: String ,Position3: String):[data_salary]
     expense_company(date:String):[expense_company]
-    show_pervsp(date:String):[show_pervsp]
+    show_pervspUser(date:String , id:ID!):[CompanyBranch]
   }
 
   type Mutation {
@@ -521,27 +521,24 @@ const resolvers: Resolvers = {
       });
       return getdata
     },
-    async show_pervsp(p,args,ctx){
-      const date = args?.date
+    async show_pervspUser(p, args, ctx) {
+      const date = args?.date ? args?.date : undefined
+      console.log(ctx.currentUser?.branchId);
       const month = dayjs(date).format('MM')
       const years = dayjs(date).format('YYYY')
-      const getdata = await ctx.prisma.expense_company.findMany({
+      const getdata = await ctx.prisma.companyBranch.findMany({
         include: {
+          expense_company: { where: { exp_com_month: month, AND: { exp_com_years: years } } },
+          users: { include: { bookbank_log: { where: { userId: args.id }, orderBy: { date: 'desc' } } }, where: { id: args.id } }
+          // users: { where : {id : args.id}}
         },
         where: {
-          companyBranchId: ctx.currentUser?.branchId,
-          AND: {
-            exp_com_month: month,
-            exp_com_years: years
-          },
-        },
-        orderBy:
-        {
-          date: "desc",
+          id: ctx.currentUser?.branchId,
         },
       });
       return getdata
     },
+
     async mas_bank(parant: any, args: any, ctx: any) {
       const result = await ctx.prisma.mas_bank.findMany({
         where: {
@@ -1200,6 +1197,9 @@ const resolvers: Resolvers = {
     async Createandupdatebookbank(p: any, args: any, ctx: any) {
       //สร้าง bookbank
       const bookbankID = v4();
+      let date = args.data?.date
+      let ThisYear = dayjs(date).format("YYYY")
+      let Thismonth = dayjs(date).format("MM")
       // const providentID = v4()
       if (args.data?.id) {
         const createbook_bank = await ctx.prisma.bookbank_log.update({
@@ -1210,6 +1210,8 @@ const resolvers: Resolvers = {
             all_collectId: args.data?.all_collectId,
             base_salary: args.data?.base_salary as number,
             userId: args.data?.userId,
+            accept_month: Thismonth,
+            accept_years: ThisYear,
             provident_com: args.data?.provident_com, // กองทุนของพนักงาน ตัวเลขเป็น %
             provident_emp: args.data?.provident_emp, // กองทุนของบริษัท ตัวเลขเป็น %
           },
@@ -1231,6 +1233,8 @@ const resolvers: Resolvers = {
           all_collectId: args.data?.all_collectId,
           base_salary: args.data?.base_salary as number,
           userId: args.data?.userId,
+          accept_month: Thismonth,
+          accept_years: ThisYear,
           provident_com: args.data?.provident_com, // กองทุนของพนักงาน ตัวเลขเป็น %
           provident_emp: args.data?.provident_emp, // กองทุนของบริษัท ตัวเลขเป็น %
         },
@@ -1400,6 +1404,7 @@ const resolversComposition = {
   'Query.mas_all_collect': [authenticate()],
   'Query.data_salary': [authenticate()],
   'Query.mydata_salary': [authenticate()],
+  'Query.show_pervspUser': [authenticate()],
   'Mutation.Createmonth': [authenticate()],
   'Mutation.Createyears': [authenticate()],
   'Mutation.Createandupdatesalary': [authenticate()],
