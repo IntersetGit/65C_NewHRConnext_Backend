@@ -521,16 +521,39 @@ const resolvers: Resolvers = {
       });
       return getdata
     },
+
     async show_pervspUser(p, args, ctx) {
       const date = args?.date ? args?.date : undefined
-      console.log(ctx.currentUser?.branchId);
       const month = dayjs(date).format('MM')
       const years = dayjs(date).format('YYYY')
+      const result = await ctx.prisma.bookbank_log.findMany({
+        where: {
+          userId: args.id
+        }
+      })
+      for (let i = 0; i < result.length; i++) { //กำหนดวันที่ถ้าหากผลบังคับใช้มีเดือน มากกว่า การคำนวณเงินเดือนให้ใช้ index ที่ 1
+        const date_book_bank = result[i].date
+        const bb_month = dayjs(date_book_bank).format('MM')
+        const bb_years = dayjs(date_book_bank).format('YYYY')
+        if (parseInt(bb_month) > parseInt(month)) {
+          let bb_id = result[i - 1].id
+          const getdata = await ctx.prisma.companyBranch.findMany({
+            include: {
+              expense_company: { where: { exp_com_month: month, AND: { exp_com_years: years } } },
+              users: { include: { bookbank_log: { where: { userId: args.id , AND:{ id: bb_id}}, orderBy: { date: 'desc' } } }, where: { id: args.id } }
+            },
+            where: {
+              id: ctx.currentUser?.branchId,
+            },
+          });
+          return getdata
+        }
+      }
+      // ถ้าผลบังคับใช้ เท่ากับเวลาคำนวณเงินเดือน ใช้ index 0
       const getdata = await ctx.prisma.companyBranch.findMany({
         include: {
           expense_company: { where: { exp_com_month: month, AND: { exp_com_years: years } } },
           users: { include: { bookbank_log: { where: { userId: args.id }, orderBy: { date: 'desc' } } }, where: { id: args.id } }
-          // users: { where : {id : args.id}}
         },
         where: {
           id: ctx.currentUser?.branchId,
@@ -719,7 +742,7 @@ const resolvers: Resolvers = {
                 some: {
                   mas_positionlevel2: { name: { contains: search2 } },
                   AND: { mas_positionlevel3: { name: { contains: search3 } } }
-                }, //
+                },
               },
             },
           },
