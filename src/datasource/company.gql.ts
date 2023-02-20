@@ -383,34 +383,66 @@ const resolvers: Resolvers = {
           companyBranchId: args.id
         }
       })
+    
       finddata.forEach(async (a) => {
-        const deleteCompany = await ctx.prisma.companyBranch.delete({
-          include: {
-            users: {
-              include:{
-                provident_log: {where:{userId: a.id}},
-                salary:{where:{userId: a.id}},
-                bookbank_log: {where:{userId: a.id}},
-                data_leave:{where:{user_id: a.id}},
-                Position_user:{include:{log_position: true}, where:{user_id: a.id}},
-                mas_all_collect:{where:{userId: a.id}},
-              },where:{companyBranchId: args.id}
-            },
-            Role_Company:{where:{companyBranchId: args.id}},
-            expense_company: {where:{companyBranchId: args.id}}
-          },
-            where: {
-              id: args.id as string
-            }
-          });
+        const deleteprovident = await ctx.prisma.provident_log.deleteMany({
+          where: {
+            userId: a.id
+          }
+        })
+
+        const deletesalary  = await ctx.prisma.salary.deleteMany({
+          where: {
+            userId: a.id
+          }
+        })
+        const deletebookbanklog = await ctx.prisma.bookbank_log.deleteMany({
+          where: {
+            userId: a.id
+          }
+        })
+        const deletedata_leave = await ctx.prisma.data_leave.deleteMany({
+          where: {
+            user_id: a.id
+          }
+        })
+        const deleteposition_user = await ctx.prisma.position_user.deleteMany({
+          where: {
+            user_id: a.id
+          }
+        })
+        const deletemas_allcollect = await ctx.prisma.mas_all_collect.deleteMany({
+          where: {
+            userId: a.id
+          }
+        })
       })
 
+      const delete_user = await ctx.prisma.user.deleteMany({
+        where: {
+          companyBranchId: args.id
+        }
+      })
 
-      //const deleteCompanyHead = await ctx.prisma.company.delete({
-      // where: { 
+      const delete_rolecompany = await ctx.prisma.role_Company.deleteMany({
+        where: {
+          companyBranchId: args.id
+        }
+      })
 
-      // }
-      //});
+      const delete_expense = await ctx.prisma.expense_company.deleteMany({
+        where: {
+          companyBranchId: args.id
+        }
+      })
+
+      const deleteCompany = await ctx.prisma.companyBranch.delete({
+          where: {
+            id: args.id as string
+          }
+        });
+
+      
       return {
         message: 'success',
         status: true,

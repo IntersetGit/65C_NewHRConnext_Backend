@@ -328,6 +328,12 @@ export type DeletebookbankResponseType = {
   status?: Maybe<Scalars['Boolean']>;
 };
 
+export type DeleteleaveResponseType = {
+  __typename?: 'DeleteleaveResponseType';
+  message?: Maybe<Scalars['String']>;
+  status?: Maybe<Scalars['Boolean']>;
+};
+
 export type District = {
   __typename?: 'District';
   amphoe?: Maybe<Array<Maybe<Amphoe>>>;
@@ -351,6 +357,13 @@ export type ExpenseComInput = {
 export type GetCompanyAccessType = {
   __typename?: 'GetCompanyAccessType';
   name?: Maybe<Scalars['String']>;
+};
+
+export type GetHolidayYearResponseType = {
+  __typename?: 'GetHolidayYearResponseType';
+  countYaer?: Maybe<Scalars['Int']>;
+  dataAll?: Maybe<Array<Holiday_Date>>;
+  year?: Maybe<Scalars['Int']>;
 };
 
 export type GetOwncompanytype = {
@@ -464,6 +477,10 @@ export type Mutation = {
   deleteHolidayDate?: Maybe<DeleteHolidayDateResponseType>;
   deleteHolidayYear?: Maybe<DeleteHolidayYearResponseType>;
   deleteRoleCompany?: Maybe<DeleteRoleCompanyRespnsetType>;
+  delete_leve?: Maybe<DeleteleaveResponseType>;
+  delete_position1?: Maybe<DeletepositionResponseType>;
+  delete_position2?: Maybe<DeletepositionResponseType>;
+  delete_position3?: Maybe<DeletepositionResponseType>;
   editstatusleave?: Maybe<CreateleaveResponseType>;
   login?: Maybe<LoginResponse>;
   refreshToken?: Maybe<RefreshtokenResponseType>;
@@ -598,6 +615,26 @@ export type MutationDeleteRoleCompanyArgs = {
 };
 
 
+export type MutationDelete_LeveArgs = {
+  id: Scalars['ID'];
+};
+
+
+export type MutationDelete_Position1Args = {
+  id: Scalars['ID'];
+};
+
+
+export type MutationDelete_Position2Args = {
+  id: Scalars['ID'];
+};
+
+
+export type MutationDelete_Position3Args = {
+  id: Scalars['ID'];
+};
+
+
 export type MutationEditstatusleaveArgs = {
   data?: InputMaybe<Leave>;
 };
@@ -706,7 +743,7 @@ export type Province = {
 export type Query = {
   __typename?: 'Query';
   GetHoliDayYear?: Maybe<Array<Maybe<Holiday_Years>>>;
-  GetHolidayDate?: Maybe<Array<Holiday_Date>>;
+  GetHolidayDate?: Maybe<GetHolidayYearResponseType>;
   SalarySlip?: Maybe<Slipresolvers>;
   bookbank_log?: Maybe<Array<Maybe<Bookbank_Log_Type>>>;
   bookbank_log_admin?: Maybe<Array<Maybe<Bookbank_Log_Type>>>;
@@ -1125,6 +1162,12 @@ export type Data_Salary_Me = {
   role?: Maybe<Role>;
   roleId?: Maybe<Scalars['String']>;
   salary?: Maybe<Array<Maybe<Salary>>>;
+};
+
+export type DeletepositionResponseType = {
+  __typename?: 'deletepositionResponseType';
+  message?: Maybe<Scalars['String']>;
+  status?: Maybe<Scalars['Boolean']>;
 };
 
 export type Expense_Company = {
@@ -1662,10 +1705,12 @@ export type ResolversTypes = ResolversObject<{
   DeleteRoleCompanyRespnsetType: ResolverTypeWrapper<DeleteRoleCompanyRespnsetType>;
   DeleteSalaryResponseType: ResolverTypeWrapper<DeleteSalaryResponseType>;
   DeletebookbankResponseType: ResolverTypeWrapper<DeletebookbankResponseType>;
+  DeleteleaveResponseType: ResolverTypeWrapper<DeleteleaveResponseType>;
   District: ResolverTypeWrapper<District>;
   ExpenseComInput: ExpenseComInput;
   Float: ResolverTypeWrapper<Scalars['Float']>;
   GetCompanyAccessType: ResolverTypeWrapper<GetCompanyAccessType>;
+  GetHolidayYearResponseType: ResolverTypeWrapper<GetHolidayYearResponseType>;
   GetOwncompanytype: ResolverTypeWrapper<GetOwncompanytype>;
   ID: ResolverTypeWrapper<Scalars['ID']>;
   Int: ResolverTypeWrapper<Scalars['Int']>;
@@ -1707,6 +1752,7 @@ export type ResolversTypes = ResolversObject<{
   createsalaryResponseType: ResolverTypeWrapper<CreatesalaryResponseType>;
   data_salary: ResolverTypeWrapper<Data_Salary>;
   data_salary_me: ResolverTypeWrapper<Data_Salary_Me>;
+  deletepositionResponseType: ResolverTypeWrapper<DeletepositionResponseType>;
   expense_company: ResolverTypeWrapper<Expense_Company>;
   getPositionUser: ResolverTypeWrapper<GetPositionUser>;
   getcount: ResolverTypeWrapper<Getcount>;
@@ -1779,10 +1825,12 @@ export type ResolversParentTypes = ResolversObject<{
   DeleteRoleCompanyRespnsetType: DeleteRoleCompanyRespnsetType;
   DeleteSalaryResponseType: DeleteSalaryResponseType;
   DeletebookbankResponseType: DeletebookbankResponseType;
+  DeleteleaveResponseType: DeleteleaveResponseType;
   District: District;
   ExpenseComInput: ExpenseComInput;
   Float: Scalars['Float'];
   GetCompanyAccessType: GetCompanyAccessType;
+  GetHolidayYearResponseType: GetHolidayYearResponseType;
   GetOwncompanytype: GetOwncompanytype;
   ID: Scalars['ID'];
   Int: Scalars['Int'];
@@ -1824,6 +1872,7 @@ export type ResolversParentTypes = ResolversObject<{
   createsalaryResponseType: CreatesalaryResponseType;
   data_salary: Data_Salary;
   data_salary_me: Data_Salary_Me;
+  deletepositionResponseType: DeletepositionResponseType;
   expense_company: Expense_Company;
   getPositionUser: GetPositionUser;
   getcount: Getcount;
@@ -2054,6 +2103,12 @@ export type DeletebookbankResponseTypeResolvers<ContextType = ApolloContext, Par
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 }>;
 
+export type DeleteleaveResponseTypeResolvers<ContextType = ApolloContext, ParentType extends ResolversParentTypes['DeleteleaveResponseType'] = ResolversParentTypes['DeleteleaveResponseType']> = ResolversObject<{
+  message?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  status?: Resolver<Maybe<ResolversTypes['Boolean']>, ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+}>;
+
 export type DistrictResolvers<ContextType = ApolloContext, ParentType extends ResolversParentTypes['District'] = ResolversParentTypes['District']> = ResolversObject<{
   amphoe?: Resolver<Maybe<Array<Maybe<ResolversTypes['Amphoe']>>>, ParentType, ContextType>;
   id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
@@ -2063,6 +2118,13 @@ export type DistrictResolvers<ContextType = ApolloContext, ParentType extends Re
 
 export type GetCompanyAccessTypeResolvers<ContextType = ApolloContext, ParentType extends ResolversParentTypes['GetCompanyAccessType'] = ResolversParentTypes['GetCompanyAccessType']> = ResolversObject<{
   name?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+}>;
+
+export type GetHolidayYearResponseTypeResolvers<ContextType = ApolloContext, ParentType extends ResolversParentTypes['GetHolidayYearResponseType'] = ResolversParentTypes['GetHolidayYearResponseType']> = ResolversObject<{
+  countYaer?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
+  dataAll?: Resolver<Maybe<Array<ResolversTypes['holiday_date']>>, ParentType, ContextType>;
+  year?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 }>;
 
@@ -2175,6 +2237,10 @@ export type MutationResolvers<ContextType = ApolloContext, ParentType extends Re
   deleteHolidayDate?: Resolver<Maybe<ResolversTypes['DeleteHolidayDateResponseType']>, ParentType, ContextType, RequireFields<MutationDeleteHolidayDateArgs, 'id'>>;
   deleteHolidayYear?: Resolver<Maybe<ResolversTypes['DeleteHolidayYearResponseType']>, ParentType, ContextType, RequireFields<MutationDeleteHolidayYearArgs, 'id'>>;
   deleteRoleCompany?: Resolver<Maybe<ResolversTypes['DeleteRoleCompanyRespnsetType']>, ParentType, ContextType, RequireFields<MutationDeleteRoleCompanyArgs, 'id'>>;
+  delete_leve?: Resolver<Maybe<ResolversTypes['DeleteleaveResponseType']>, ParentType, ContextType, RequireFields<MutationDelete_LeveArgs, 'id'>>;
+  delete_position1?: Resolver<Maybe<ResolversTypes['deletepositionResponseType']>, ParentType, ContextType, RequireFields<MutationDelete_Position1Args, 'id'>>;
+  delete_position2?: Resolver<Maybe<ResolversTypes['deletepositionResponseType']>, ParentType, ContextType, RequireFields<MutationDelete_Position2Args, 'id'>>;
+  delete_position3?: Resolver<Maybe<ResolversTypes['deletepositionResponseType']>, ParentType, ContextType, RequireFields<MutationDelete_Position3Args, 'id'>>;
   editstatusleave?: Resolver<Maybe<ResolversTypes['CreateleaveResponseType']>, ParentType, ContextType, Partial<MutationEditstatusleaveArgs>>;
   login?: Resolver<Maybe<ResolversTypes['LoginResponse']>, ParentType, ContextType, RequireFields<MutationLoginArgs, 'data'>>;
   refreshToken?: Resolver<Maybe<ResolversTypes['RefreshtokenResponseType']>, ParentType, ContextType>;
@@ -2269,7 +2335,7 @@ export type ProvinceResolvers<ContextType = ApolloContext, ParentType extends Re
 
 export type QueryResolvers<ContextType = ApolloContext, ParentType extends ResolversParentTypes['Query'] = ResolversParentTypes['Query']> = ResolversObject<{
   GetHoliDayYear?: Resolver<Maybe<Array<Maybe<ResolversTypes['holiday_years']>>>, ParentType, ContextType, Partial<QueryGetHoliDayYearArgs>>;
-  GetHolidayDate?: Resolver<Maybe<Array<ResolversTypes['holiday_date']>>, ParentType, ContextType, Partial<QueryGetHolidayDateArgs>>;
+  GetHolidayDate?: Resolver<Maybe<ResolversTypes['GetHolidayYearResponseType']>, ParentType, ContextType, Partial<QueryGetHolidayDateArgs>>;
   SalarySlip?: Resolver<Maybe<ResolversTypes['slipresolvers']>, ParentType, ContextType, Partial<QuerySalarySlipArgs>>;
   bookbank_log?: Resolver<Maybe<Array<Maybe<ResolversTypes['Bookbank_log_type']>>>, ParentType, ContextType>;
   bookbank_log_admin?: Resolver<Maybe<Array<Maybe<ResolversTypes['Bookbank_log_type']>>>, ParentType, ContextType, Partial<QueryBookbank_Log_AdminArgs>>;
@@ -2510,6 +2576,12 @@ export type Data_Salary_MeResolvers<ContextType = ApolloContext, ParentType exte
   role?: Resolver<Maybe<ResolversTypes['Role']>, ParentType, ContextType>;
   roleId?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   salary?: Resolver<Maybe<Array<Maybe<ResolversTypes['salary']>>>, ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+}>;
+
+export type DeletepositionResponseTypeResolvers<ContextType = ApolloContext, ParentType extends ResolversParentTypes['deletepositionResponseType'] = ResolversParentTypes['deletepositionResponseType']> = ResolversObject<{
+  message?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  status?: Resolver<Maybe<ResolversTypes['Boolean']>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 }>;
 
@@ -2873,8 +2945,10 @@ export type Resolvers<ContextType = ApolloContext> = ResolversObject<{
   DeleteRoleCompanyRespnsetType?: DeleteRoleCompanyRespnsetTypeResolvers<ContextType>;
   DeleteSalaryResponseType?: DeleteSalaryResponseTypeResolvers<ContextType>;
   DeletebookbankResponseType?: DeletebookbankResponseTypeResolvers<ContextType>;
+  DeleteleaveResponseType?: DeleteleaveResponseTypeResolvers<ContextType>;
   District?: DistrictResolvers<ContextType>;
   GetCompanyAccessType?: GetCompanyAccessTypeResolvers<ContextType>;
+  GetHolidayYearResponseType?: GetHolidayYearResponseTypeResolvers<ContextType>;
   GetOwncompanytype?: GetOwncompanytypeResolvers<ContextType>;
   JSON?: GraphQLScalarType;
   LoginResponse?: LoginResponseResolvers<ContextType>;
@@ -2907,6 +2981,7 @@ export type Resolvers<ContextType = ApolloContext> = ResolversObject<{
   createsalaryResponseType?: CreatesalaryResponseTypeResolvers<ContextType>;
   data_salary?: Data_SalaryResolvers<ContextType>;
   data_salary_me?: Data_Salary_MeResolvers<ContextType>;
+  deletepositionResponseType?: DeletepositionResponseTypeResolvers<ContextType>;
   expense_company?: Expense_CompanyResolvers<ContextType>;
   getPositionUser?: GetPositionUserResolvers<ContextType>;
   getcount?: GetcountResolvers<ContextType>;
