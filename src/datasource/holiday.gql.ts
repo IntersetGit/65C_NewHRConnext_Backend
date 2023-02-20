@@ -1,3 +1,5 @@
+import { CreateHolidayDate } from './../generated/graphql';
+import { createPassword } from './../utils/passwords';
 
 import gql from 'graphql-tag';
 import { Resolvers } from '../generated/graphql';
@@ -44,6 +46,12 @@ export const holidayTypedef = gql`
     status: Int
   }
 
+  type GetHolidayYearResponseType {
+    dataAll: [holiday_date!]
+    countYaer: Int
+    year: Int
+    
+  }
   type CreateHolidayYearResponseType{
     message: String
     status: Boolean
@@ -66,7 +74,7 @@ export const holidayTypedef = gql`
 
   type Query{
     GetHoliDayYear(year: Int): [holiday_years]
-    GetHolidayDate(year: Int): [holiday_date!]
+    GetHolidayDate(year: Int): GetHolidayYearResponseType
   }
 
   type Mutation{
@@ -99,14 +107,40 @@ export const holidayResolvers: Resolvers = {
     },
 
     async GetHolidayDate(p, args, ctx) {
+      let count = 0
+      let yaer = 0
+      const search = args.year as number ? args.year : undefined;
       const result = await ctx.prisma.holiday_date.findMany({
         include: { Company: true },
         where: {
-          CompanyId: ctx.currentUser?.compayId
-        }
-
+          CompanyId: ctx.currentUser?.compayId,
+          AND: { year: search as number }
+        },
+        orderBy: [
+          {
+            year: "asc"
+          }, {
+            month: "asc"
+          }, {
+            day: "asc"
+          }
+        ],
       });
-      return result;
+
+      if (result && result.length >= 1)
+        result.forEach(async (e) => {
+          if (e.status === 1) {
+            count = count + e.status
+          }
+          if (e.year === e.year) {
+            yaer = e.year
+          }
+        })
+      return {
+        dataAll: result,
+        countYaer: count,
+        year: yaer
+      };
     }
   },
 
@@ -157,17 +191,36 @@ export const holidayResolvers: Resolvers = {
             }
           })
         } else {
-          const createHolidayDate = await ctx.prisma.holiday_date.create({
-            data: {
-              id: v4(),
-              holiday_name: e.holiday_name as string,
-              day: e.day as number,
-              month: e.month as number,
-              year: e.year as number,
-              status: 1 as number,
-              CompanyId: ctx.currentUser?.compayId
+          const check = await ctx.prisma.holiday_date.findMany({
+            where: {
+              AND:
+                [
+                  {
+                    day: e.day as number
+                  },
+                  {
+                    month: e.month as number
+                  },
+                  {
+                    year: e.year as number
+                  }
+                ]
             }
-          })
+          });
+
+          if (check.length >= 1 ? false : true) {
+            const createHolidayDate = await ctx.prisma.holiday_date.create({
+              data: {
+                id: v4(),
+                holiday_name: e.holiday_name as string,
+                day: e.day as number,
+                month: e.month as number,
+                year: e.year as number,
+                status: 1 as number,
+                CompanyId: ctx.currentUser?.compayId
+              },
+            })
+          }
         }
       })
       return {
