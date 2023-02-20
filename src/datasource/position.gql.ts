@@ -152,11 +152,19 @@ type Query {
     getpositionMe: [getPositionUser]
   }
 
+  type deletepositionResponseType {
+    message: String
+    status: Boolean
+  }
+
 
   type Mutation {
     CreatedPosition(data:[CreatedAndUpdatePosition!]): CreatepositionResponseType
     EditPosition(data:[CreatedAndUpdatePosition!]): CreatepositionResponseType
     createdposition_user(data:position!) :CreatepositionResponseType
+    delete_position1(id: ID!): deletepositionResponseType
+    delete_position2(id: ID!): deletepositionResponseType
+    delete_position3(id: ID!): deletepositionResponseType
   }
 `;
 
@@ -446,7 +454,72 @@ export const positionResolvers: Resolvers = {
           status: true,
         };
       }
-    }
+    },
+
+    async delete_position1(p, args, ctx) {
+      const find_position2 = await ctx.prisma.mas_positionlevel2.findMany({
+        where: {
+          positionlevel1_id: args.id
+        }
+      })
+      find_position2.forEach(async (a) => {
+        const delete_position3 = await ctx.prisma.mas_positionlevel3.deleteMany({
+          where: {
+            positionlevel2_id: a.id
+          }
+        })
+      })
+
+      const delete_position2 = await ctx.prisma.mas_positionlevel2.deleteMany({
+        where: {
+          positionlevel1_id: args.id
+        }
+      })
+      const delete_position1 = await ctx.prisma.mas_positionlevel1.delete({
+        where: { id: args.id },
+      });
+      return {
+        message: 'success',
+        status: true,
+      };
+    },
+
+    async delete_position2(p, args, ctx) {
+      const find_position2 = await ctx.prisma.mas_positionlevel2.findMany({
+        where: {
+          positionlevel1_id: args.id
+        }
+      })
+      find_position2.forEach(async (a) => {
+        const delete_position3 = await ctx.prisma.mas_positionlevel3.deleteMany({
+          where: {
+            positionlevel2_id: a.id
+          }
+        })
+      })
+
+      const delete_position2 = await ctx.prisma.mas_positionlevel2.deleteMany({
+        where: {
+          positionlevel1_id: args.id
+        }
+      })
+      return {
+        message: 'success',
+        status: true,
+      };
+    },
+
+    async delete_position3(p, args, ctx) {
+      const delete_position3 = await ctx.prisma.mas_positionlevel3.deleteMany({
+        where: {
+          id: args.id
+        }
+      })
+      return {
+        message: 'success',
+        status: true,
+      };
+    },
   }
 }
 
