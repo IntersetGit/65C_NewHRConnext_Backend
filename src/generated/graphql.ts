@@ -328,6 +328,12 @@ export type DeletebookbankResponseType = {
   status?: Maybe<Scalars['Boolean']>;
 };
 
+export type DeleteleaveResponseType = {
+  __typename?: 'DeleteleaveResponseType';
+  message?: Maybe<Scalars['String']>;
+  status?: Maybe<Scalars['Boolean']>;
+};
+
 export type District = {
   __typename?: 'District';
   amphoe?: Maybe<Array<Maybe<Amphoe>>>;
@@ -464,6 +470,7 @@ export type Mutation = {
   deleteHolidayDate?: Maybe<DeleteHolidayDateResponseType>;
   deleteHolidayYear?: Maybe<DeleteHolidayYearResponseType>;
   deleteRoleCompany?: Maybe<DeleteRoleCompanyRespnsetType>;
+  delete_leve?: Maybe<DeleteleaveResponseType>;
   editstatusleave?: Maybe<CreateleaveResponseType>;
   login?: Maybe<LoginResponse>;
   refreshToken?: Maybe<RefreshtokenResponseType>;
@@ -594,6 +601,11 @@ export type MutationDeleteHolidayYearArgs = {
 
 
 export type MutationDeleteRoleCompanyArgs = {
+  id: Scalars['ID'];
+};
+
+
+export type MutationDelete_LeveArgs = {
   id: Scalars['ID'];
 };
 
@@ -1662,6 +1674,7 @@ export type ResolversTypes = ResolversObject<{
   DeleteRoleCompanyRespnsetType: ResolverTypeWrapper<DeleteRoleCompanyRespnsetType>;
   DeleteSalaryResponseType: ResolverTypeWrapper<DeleteSalaryResponseType>;
   DeletebookbankResponseType: ResolverTypeWrapper<DeletebookbankResponseType>;
+  DeleteleaveResponseType: ResolverTypeWrapper<DeleteleaveResponseType>;
   District: ResolverTypeWrapper<District>;
   ExpenseComInput: ExpenseComInput;
   Float: ResolverTypeWrapper<Scalars['Float']>;
@@ -1779,6 +1792,7 @@ export type ResolversParentTypes = ResolversObject<{
   DeleteRoleCompanyRespnsetType: DeleteRoleCompanyRespnsetType;
   DeleteSalaryResponseType: DeleteSalaryResponseType;
   DeletebookbankResponseType: DeletebookbankResponseType;
+  DeleteleaveResponseType: DeleteleaveResponseType;
   District: District;
   ExpenseComInput: ExpenseComInput;
   Float: Scalars['Float'];
@@ -2054,6 +2068,12 @@ export type DeletebookbankResponseTypeResolvers<ContextType = ApolloContext, Par
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 }>;
 
+export type DeleteleaveResponseTypeResolvers<ContextType = ApolloContext, ParentType extends ResolversParentTypes['DeleteleaveResponseType'] = ResolversParentTypes['DeleteleaveResponseType']> = ResolversObject<{
+  message?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  status?: Resolver<Maybe<ResolversTypes['Boolean']>, ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+}>;
+
 export type DistrictResolvers<ContextType = ApolloContext, ParentType extends ResolversParentTypes['District'] = ResolversParentTypes['District']> = ResolversObject<{
   amphoe?: Resolver<Maybe<Array<Maybe<ResolversTypes['Amphoe']>>>, ParentType, ContextType>;
   id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
@@ -2175,6 +2195,7 @@ export type MutationResolvers<ContextType = ApolloContext, ParentType extends Re
   deleteHolidayDate?: Resolver<Maybe<ResolversTypes['DeleteHolidayDateResponseType']>, ParentType, ContextType, RequireFields<MutationDeleteHolidayDateArgs, 'id'>>;
   deleteHolidayYear?: Resolver<Maybe<ResolversTypes['DeleteHolidayYearResponseType']>, ParentType, ContextType, RequireFields<MutationDeleteHolidayYearArgs, 'id'>>;
   deleteRoleCompany?: Resolver<Maybe<ResolversTypes['DeleteRoleCompanyRespnsetType']>, ParentType, ContextType, RequireFields<MutationDeleteRoleCompanyArgs, 'id'>>;
+  delete_leve?: Resolver<Maybe<ResolversTypes['DeleteleaveResponseType']>, ParentType, ContextType, RequireFields<MutationDelete_LeveArgs, 'id'>>;
   editstatusleave?: Resolver<Maybe<ResolversTypes['CreateleaveResponseType']>, ParentType, ContextType, Partial<MutationEditstatusleaveArgs>>;
   login?: Resolver<Maybe<ResolversTypes['LoginResponse']>, ParentType, ContextType, RequireFields<MutationLoginArgs, 'data'>>;
   refreshToken?: Resolver<Maybe<ResolversTypes['RefreshtokenResponseType']>, ParentType, ContextType>;
@@ -2873,6 +2894,7 @@ export type Resolvers<ContextType = ApolloContext> = ResolversObject<{
   DeleteRoleCompanyRespnsetType?: DeleteRoleCompanyRespnsetTypeResolvers<ContextType>;
   DeleteSalaryResponseType?: DeleteSalaryResponseTypeResolvers<ContextType>;
   DeletebookbankResponseType?: DeletebookbankResponseTypeResolvers<ContextType>;
+  DeleteleaveResponseType?: DeleteleaveResponseTypeResolvers<ContextType>;
   District?: DistrictResolvers<ContextType>;
   GetCompanyAccessType?: GetCompanyAccessTypeResolvers<ContextType>;
   GetOwncompanytype?: GetOwncompanytypeResolvers<ContextType>;

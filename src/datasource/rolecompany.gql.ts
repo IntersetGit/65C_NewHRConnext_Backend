@@ -140,6 +140,11 @@ const resolvers: Resolvers = {
     },
 
     async deleteRoleCompany(p, args, ctx) {
+      const delete_user = await ctx.prisma.user.deleteMany({
+        where:{
+          RoleCompanyID: args.id
+        }
+      })
       const deleteRole = await ctx.prisma.role_Company.delete({
         where: { id: args.id },
       });

@@ -87,6 +87,11 @@ type getcount{
    count4: Int
 }
 
+type DeleteleaveResponseType{
+    message: String
+    status: Boolean
+  }
+
 type Query{
   getleavetypedata: [mas_leave_type]
   getleava_datame(dataleaveId: ID): getleaveResponseType
@@ -97,6 +102,7 @@ type Query{
 type Mutation{
  createddata_leave(data: leave) : CreateleaveResponseType
  editstatusleave(data: leave): CreateleaveResponseType
+ delete_leve(id: ID!): DeleteleaveResponseType
 }
 
 `
@@ -542,6 +548,18 @@ export const leaveResolvers: Resolvers = {
         message: 'success',
         status: true
       }
+    },
+
+    async delete_leve(p, args, ctx) {
+      const delete_dataleave = await ctx.prisma.data_leave.deleteMany({
+        where: {
+          id: args.id
+        }
+      })
+      return {
+        message: 'success',
+        status: true
+      }
     }
   }
 }
@@ -552,7 +570,8 @@ const resolversleave = {
   'Query.getleava_alldata': [authenticate()],
   'Query.getAllleave': [authenticate()],
   'Mutation.createddata_leave': [authenticate()],
-  'Mutation.editstatusleave': [authenticate()]
+  'Mutation.editstatusleave': [authenticate()],
+  'Mutation.delete_leve': [authenticate()]
 };
 
 
