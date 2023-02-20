@@ -1292,40 +1292,50 @@ const resolvers: Resolvers = {
       let Thismonth = dayjs(date).format("MM")
       const take_arr = args.data?.check_vat
       if (args.data?.id) {
-        // const updateExpenseCom = await ctx.prisma.expense_company.update({
-        //   data: {
-        //     bankId: args.data?.bankId as string,
-        //     date: new Date(args.data?.date),
-        //     vat_per: args.data?.vat_per as number,
-        //     ss_per: args.data?.ss_per as number,
-        //     exp_com_month: Thismonth,
-        //     exp_com_years: ThisYear,
-        //     cal_date_salary: args.data?.cal_date_salary,
-        //     companyBranchId: args.data?.companyBranchId,
-        //   },
-        //   where: { id: args.data.id },
-        // });
-        const chk_salary = await ctx.prisma.salary.findMany({
-          include: {
-            User: { include: { companyBranch: true, bookbank_log: { orderBy: { date: 'desc' } } } },
+        const updateExpenseCom = await ctx.prisma.expense_company.update({
+          data: {
+            bankId: args.data?.bankId as string,
+            date: new Date(args.data?.date),
+            vat_per: args.data?.vat_per as number,
+            ss_per: args.data?.ss_per as number,
+            exp_com_month: Thismonth,
+            exp_com_years: ThisYear,
+            cal_date_salary: args.data?.cal_date_salary,
+            companyBranchId: args.data?.companyBranchId,
           },
-          where: {
-            month: Thismonth,
-            AND: {
-              years: ThisYear
-            }
-          }
+          where: { id: args.data.id },
         });
-        console.log(chk_salary);
-        const chk_bookbank = await ctx.prisma.bookbank_log.findMany({
-          where: {
-            accept_month: Thismonth,
-            AND: {
-              accept_years: ThisYear
-            }
-          }
-        })
-        console.log(chk_bookbank)
+        // const chk_salary = await ctx.prisma.salary.findMany({
+        //   include: {
+        //     User: { include: { companyBranch: true, bookbank_log: { orderBy: { date: 'desc' } } } },
+        //   },
+        //   where: {
+        //     month: Thismonth,
+        //     AND: {
+        //       years: ThisYear
+        //     }
+        //   }
+        // });
+        // console.log(chk_salary);
+        // for (let i = 0; i < chk_salary.length; i++) {
+        //   let bb = chk_salary[i].User?.bookbank_log
+        //   bb?.forEach((e)=>{
+        //     // if(){
+
+        //     // }
+        //     console.log(e);
+        //   })
+        // }
+        // console.log(chk_salary);
+        // const chk_bookbank = await ctx.prisma.bookbank_log.findMany({
+        //   where: {
+        //     accept_month: Thismonth,
+        //     AND: {
+        //       accept_years: ThisYear
+        //     }
+        //   }
+        // })
+        // console.log('BBLOG',chk_bookbank)
         // if(Thismonth < BB_log[i].accept_month && ThisYear === BB_log[i].accept_years){
         //   let current_base_salary = BB_log[i-1].base_salary
         // }
