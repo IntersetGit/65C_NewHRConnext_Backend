@@ -530,7 +530,7 @@ const resolvers: Resolvers = {
         where: {
           userId: args.id
         }
-      })
+      })  //
       for (let i = 0; i < result.length; i++) { //กำหนดวันที่ถ้าหากผลบังคับใช้มีเดือน มากกว่า การคำนวณเงินเดือนให้ใช้ index ที่ 1
         const date_book_bank = result[i].date
         const bb_month = dayjs(date_book_bank).format('MM')
