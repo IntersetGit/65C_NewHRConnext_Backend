@@ -1349,7 +1349,7 @@ const resolvers: Resolvers = {
           check_vat: take_arr as string[],
           exp_com_month: Thismonth,
           exp_com_years: ThisYear,
-          cal_date_salary: new date(args.data?.cal_date_salary),
+          cal_date_salary: new Date(args.data?.cal_date_salary),
           companyBranchId: args.data?.companyBranchId,
         },
       });
