@@ -353,6 +353,13 @@ export type GetCompanyAccessType = {
   name?: Maybe<Scalars['String']>;
 };
 
+export type GetHolidayYearResponseType = {
+  __typename?: 'GetHolidayYearResponseType';
+  countYaer?: Maybe<Scalars['Int']>;
+  dataAll?: Maybe<Array<Holiday_Date>>;
+  year?: Maybe<Scalars['Int']>;
+};
+
 export type GetOwncompanytype = {
   __typename?: 'GetOwncompanytype';
   companies?: Maybe<Array<Maybe<OwnCompanyType>>>;
@@ -706,7 +713,7 @@ export type Province = {
 export type Query = {
   __typename?: 'Query';
   GetHoliDayYear?: Maybe<Array<Maybe<Holiday_Years>>>;
-  GetHolidayDate?: Maybe<Array<Holiday_Date>>;
+  GetHolidayDate?: Maybe<GetHolidayYearResponseType>;
   SalarySlip?: Maybe<Slipresolvers>;
   bookbank_log?: Maybe<Array<Maybe<Bookbank_Log_Type>>>;
   bookbank_log_admin?: Maybe<Array<Maybe<Bookbank_Log_Type>>>;
@@ -1666,6 +1673,7 @@ export type ResolversTypes = ResolversObject<{
   ExpenseComInput: ExpenseComInput;
   Float: ResolverTypeWrapper<Scalars['Float']>;
   GetCompanyAccessType: ResolverTypeWrapper<GetCompanyAccessType>;
+  GetHolidayYearResponseType: ResolverTypeWrapper<GetHolidayYearResponseType>;
   GetOwncompanytype: ResolverTypeWrapper<GetOwncompanytype>;
   ID: ResolverTypeWrapper<Scalars['ID']>;
   Int: ResolverTypeWrapper<Scalars['Int']>;
@@ -1783,6 +1791,7 @@ export type ResolversParentTypes = ResolversObject<{
   ExpenseComInput: ExpenseComInput;
   Float: Scalars['Float'];
   GetCompanyAccessType: GetCompanyAccessType;
+  GetHolidayYearResponseType: GetHolidayYearResponseType;
   GetOwncompanytype: GetOwncompanytype;
   ID: Scalars['ID'];
   Int: Scalars['Int'];
@@ -2066,6 +2075,13 @@ export type GetCompanyAccessTypeResolvers<ContextType = ApolloContext, ParentTyp
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 }>;
 
+export type GetHolidayYearResponseTypeResolvers<ContextType = ApolloContext, ParentType extends ResolversParentTypes['GetHolidayYearResponseType'] = ResolversParentTypes['GetHolidayYearResponseType']> = ResolversObject<{
+  countYaer?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
+  dataAll?: Resolver<Maybe<Array<ResolversTypes['holiday_date']>>, ParentType, ContextType>;
+  year?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+}>;
+
 export type GetOwncompanytypeResolvers<ContextType = ApolloContext, ParentType extends ResolversParentTypes['GetOwncompanytype'] = ResolversParentTypes['GetOwncompanytype']> = ResolversObject<{
   companies?: Resolver<Maybe<Array<Maybe<ResolversTypes['OwnCompanyType']>>>, ParentType, ContextType>;
   company?: Resolver<Maybe<ResolversTypes['OwnCompanyType']>, ParentType, ContextType>;
@@ -2269,7 +2285,7 @@ export type ProvinceResolvers<ContextType = ApolloContext, ParentType extends Re
 
 export type QueryResolvers<ContextType = ApolloContext, ParentType extends ResolversParentTypes['Query'] = ResolversParentTypes['Query']> = ResolversObject<{
   GetHoliDayYear?: Resolver<Maybe<Array<Maybe<ResolversTypes['holiday_years']>>>, ParentType, ContextType, Partial<QueryGetHoliDayYearArgs>>;
-  GetHolidayDate?: Resolver<Maybe<Array<ResolversTypes['holiday_date']>>, ParentType, ContextType, Partial<QueryGetHolidayDateArgs>>;
+  GetHolidayDate?: Resolver<Maybe<ResolversTypes['GetHolidayYearResponseType']>, ParentType, ContextType, Partial<QueryGetHolidayDateArgs>>;
   SalarySlip?: Resolver<Maybe<ResolversTypes['slipresolvers']>, ParentType, ContextType, Partial<QuerySalarySlipArgs>>;
   bookbank_log?: Resolver<Maybe<Array<Maybe<ResolversTypes['Bookbank_log_type']>>>, ParentType, ContextType>;
   bookbank_log_admin?: Resolver<Maybe<Array<Maybe<ResolversTypes['Bookbank_log_type']>>>, ParentType, ContextType, Partial<QueryBookbank_Log_AdminArgs>>;
@@ -2875,6 +2891,7 @@ export type Resolvers<ContextType = ApolloContext> = ResolversObject<{
   DeletebookbankResponseType?: DeletebookbankResponseTypeResolvers<ContextType>;
   District?: DistrictResolvers<ContextType>;
   GetCompanyAccessType?: GetCompanyAccessTypeResolvers<ContextType>;
+  GetHolidayYearResponseType?: GetHolidayYearResponseTypeResolvers<ContextType>;
   GetOwncompanytype?: GetOwncompanytypeResolvers<ContextType>;
   JSON?: GraphQLScalarType;
   LoginResponse?: LoginResponseResolvers<ContextType>;
