@@ -462,6 +462,11 @@ export const positionResolvers: Resolvers = {
           positionlevel1_id: args.id
         }
       })
+      const delete_positionUser = await ctx.prisma.position_user.deleteMany({
+        where:{
+          position1_id: args.id
+        }
+      })
       find_position2.forEach(async (a) => {
         const delete_position3 = await ctx.prisma.mas_positionlevel3.deleteMany({
           where: {
@@ -490,6 +495,11 @@ export const positionResolvers: Resolvers = {
           positionlevel1_id: args.id
         }
       })
+      const delete_positionUser = await ctx.prisma.position_user.deleteMany({
+        where:{
+          position2_id: args.id
+        }
+      })
       find_position2.forEach(async (a) => {
         const delete_position3 = await ctx.prisma.mas_positionlevel3.deleteMany({
           where: {
@@ -510,6 +520,11 @@ export const positionResolvers: Resolvers = {
     },
 
     async delete_position3(p, args, ctx) {
+      const delete_positionUser = await ctx.prisma.position_user.deleteMany({
+        where:{
+          position3_id: args.id
+        }
+      })
       const delete_position3 = await ctx.prisma.mas_positionlevel3.deleteMany({
         where: {
           id: args.id
