@@ -509,10 +509,7 @@ const resolvers: Resolvers = {
         },
         where: {
           companyBranchId: ctx.currentUser?.branchId,
-          AND: {
-            exp_com_month: month,
-            exp_com_years: years
-          },
+          
         },
         orderBy:
         {
