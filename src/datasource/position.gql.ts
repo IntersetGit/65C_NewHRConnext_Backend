@@ -548,6 +548,9 @@ const resolversPosition = {
   'Mutation.CreatedPosition': [authenticate()],
   'Mutation.createdposition_user': [authenticate()],
   'Mutation.EditPosition': [authenticate()],
+  'Mutation.delete_position1': [authenticate()],
+  'Mutation.delete_position2': [authenticate()],
+  'Mutation.delete_position3': [authenticate()],
 };
 
 export const companyResolvers = composeResolvers(
