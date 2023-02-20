@@ -509,7 +509,7 @@ const resolvers: Resolvers = {
         },
         where: {
           companyBranchId: ctx.currentUser?.branchId,
-          
+
         },
         orderBy:
         {
@@ -790,13 +790,13 @@ const resolvers: Resolvers = {
 
     async Createandupdatesalary(p: any, args: any, ctx: any) {
       //สร้าง log สำหรับเงินเดือนจากนั้นเก็บกองทุนไว้ใน provident log จากนั้นเก็บค่าไว้ใน collect
+
       if (args.data?.id) {
         let date = args.data?.date
         let ThisYear = dayjs(date).format("YYYY")
         let Thismonth = dayjs(date).format("MM")
         const pro_emp = args.data?.provident_employee
         const pro_com = args.data?.provident_company
-
         const find_salary = await ctx.prisma.salary.findMany({
           where: {
             id: args.data?.id
@@ -942,24 +942,39 @@ const resolvers: Resolvers = {
       })
       let bookbank_logId = check_bookbank[0].id //หา bookbank log ของ user คนนั้นจากนั้นให้ insert เข้า salary
 
-      const check_user_ex = await ctx.prisma.User.findMany({
-        where: {
-          id: args.data.userId
+      // const check_user_ex = await ctx.prisma.User.findMany({
+      //   where: {
+      //     id: args.data.userId
 
-        }
-      })
-      const cb = check_user_ex[0].companyBranchId
-      const check_combra = await ctx.prisma.expense_company.findMany({
-        where: {
-          companyBranchId: cb
-        }, orderBy: {
-          date: "desc"
-        }
-      })
-      let vat_per = check_combra[0].vat_per ? check_combra[0].vat_per : 0
-      let ss_per = check_combra[0].ss_per ? check_combra[0].ss_per : 0
+      //   }
+      // })
+      // const cb = check_user_ex[0].companyBranchId
+      // const check_combra = await ctx.prisma.expense_company.findMany({
+      //   where: {
+      //     companyBranchId: cb
+      //   }, orderBy: {
+      //     date: "desc"
+      //   }
+      // })
+      // let vat_per = check_combra[0].vat_per ? check_combra[0].vat_per : 0
+      // let ss_per = check_combra[0].ss_per ? check_combra[0].ss_per : 0
       // console.log(vat_per);
       // console.log(ss_per);
+      let Vat_per = null
+      let SS_per = null
+      const chk_vatByEXP = await ctx.prisma.expense_company.findMany({
+        where: {
+          companyBranchId: ctx.currentUser?.branchId
+        }, orderBy: {
+          date: 'desc'
+        }
+      })
+      for (let i = 0; i < chk_vatByEXP.length; i++) {
+        Vat_per = chk_vatByEXP[0].vat_per
+        SS_per = chk_vatByEXP[0].ss_per
+      }
+      console.log(chk_vatByEXP)
+      console.log(Vat_per, SS_per);
 
 
       let time
@@ -984,8 +999,8 @@ const resolvers: Resolvers = {
             travel_income: args.data?.travel_income as number,
             bursary: args.data?.bursary as number,
             welfare_money: args.data?.welfare_money as number,
-            vatper: vat_per as number,
-            ss_per: ss_per as number,
+            vatper: Vat_per as number,
+            ss_per: SS_per as number,
             vat: args.data?.vat as number,
             social_security: args.data?.social_security as number,
             miss: args.data?.miss as number,
@@ -1111,8 +1126,8 @@ const resolvers: Resolvers = {
             travel_income: args.data?.travel_income as number,
             bursary: args.data?.bursary as number,
             welfare_money: args.data?.welfare_money as number,
-            vatper: args.data?.vatper as number,
-            ss_per: args.data?.ss_per as number,
+            vatper: Vat_per as number,
+            ss_per: SS_per as number,
             vat: args.data?.vat as number,
             social_security: args.data?.social_security as number,
             miss: args.data?.miss as number,
@@ -1214,7 +1229,7 @@ const resolvers: Resolvers = {
       };
     },
 
-    async Createandupdatebookbank(p: any, args: any, ctx: any) {
+    async Createandupdatebookbank(p, args, ctx) {
       //สร้าง bookbank
       const bookbankID = v4();
       let date = args.data?.date
@@ -1226,14 +1241,14 @@ const resolvers: Resolvers = {
           data: {
             date: new Date(args.data?.date),
             mas_bankId: args.data?.mas_bankId,
-            bank_number: args.data?.bank_number as number,
+            bank_number: args.data?.bank_number as string,
             all_collectId: args.data?.all_collectId,
             base_salary: args.data?.base_salary as number,
             userId: args.data?.userId,
             accept_month: Thismonth,
             accept_years: ThisYear,
-            provident_com: args.data?.provident_com, // กองทุนของพนักงาน ตัวเลขเป็น %
-            provident_emp: args.data?.provident_emp, // กองทุนของบริษัท ตัวเลขเป็น %
+            provident_com: args.data?.provident_com as number, // กองทุนของพนักงาน ตัวเลขเป็น %
+            provident_emp: args.data?.provident_emp as number, // กองทุนของบริษัท ตัวเลขเป็น %
           },
           where: {
             id: args.data?.id,
@@ -1249,14 +1264,14 @@ const resolvers: Resolvers = {
           id: bookbankID,
           date: new Date(args.data?.date),
           mas_bankId: args.data?.mas_bankId,
-          bank_number: args.data?.bank_number as number,
+          bank_number: args.data?.bank_number as string,
           all_collectId: args.data?.all_collectId,
           base_salary: args.data?.base_salary as number,
           userId: args.data?.userId,
           accept_month: Thismonth,
           accept_years: ThisYear,
-          provident_com: args.data?.provident_com, // กองทุนของพนักงาน ตัวเลขเป็น %
-          provident_emp: args.data?.provident_emp, // กองทุนของบริษัท ตัวเลขเป็น %
+          provident_com: args.data?.provident_com as number, // กองทุนของพนักงาน ตัวเลขเป็น %
+          provident_emp: args.data?.provident_emp as number, // กองทุนของบริษัท ตัวเลขเป็น %
         },
       });
       return {
@@ -1292,50 +1307,120 @@ const resolvers: Resolvers = {
       let Thismonth = dayjs(date).format("MM")
       const take_arr = args.data?.check_vat
       if (args.data?.id) {
-        const updateExpenseCom = await ctx.prisma.expense_company.update({
-          data: {
-            bankId: args.data?.bankId as string,
-            date: new Date(args.data?.date),
-            vat_per: args.data?.vat_per as number,
-            ss_per: args.data?.ss_per as number,
-            exp_com_month: Thismonth,
-            exp_com_years: ThisYear,
-            cal_date_salary: args.data?.cal_date_salary,
-            companyBranchId: args.data?.companyBranchId,
-          },
-          where: { id: args.data.id },
-        });
-        // const chk_salary = await ctx.prisma.salary.findMany({
-        //   include: {
-        //     User: { include: { companyBranch: true, bookbank_log: { orderBy: { date: 'desc' } } } },
+        // const updateExpenseCom = await ctx.prisma.expense_company.update({
+        //   data: {
+        //     bankId: args.data?.bankId as string,
+        //     date: new Date(args.data?.date),
+        //     vat_per: args.data?.vat_per as number,
+        //     ss_per: args.data?.ss_per as number,
+        //     exp_com_month: Thismonth,
+        //     exp_com_years: ThisYear,
+        //     cal_date_salary: args.data?.cal_date_salary,
+        //     companyBranchId: args.data?.companyBranchId,
         //   },
-        //   where: {
-        //     month: Thismonth,
-        //     AND: {
-        //       years: ThisYear
-        //     }
-        //   }
+        //   where: { id: args.data.id },
         // });
-        // console.log(chk_salary);
-        // for (let i = 0; i < chk_salary.length; i++) {
-        //   let bb = chk_salary[i].User?.bookbank_log
-        //   bb?.forEach((e)=>{
-        //     // if(){
+        const chk_salary = await ctx.prisma.salary.findMany({
+          include: {
+            User: { include: { companyBranch: true, bookbank_log: { orderBy: { date: 'desc' } } } },
+          },
+          where: {
+            month: Thismonth,
+            AND: {
+              years: ThisYear
+            }
+          }
+        });
+        console.log(chk_salary);
 
-        //     // }
-        //     console.log(e);
-        //   })
-        // }
-        // console.log(chk_salary);
-        // const chk_bookbank = await ctx.prisma.bookbank_log.findMany({
-        //   where: {
-        //     accept_month: Thismonth,
-        //     AND: {
-        //       accept_years: ThisYear
-        //     }
-        //   }
-        // })
-        // console.log('BBLOG',chk_bookbank)
+        let VaT_per = args.data?.vat_per
+        let Ss_per = args.data?.ss_per
+        let NewSocial_security = 0 //Social security อันใหม่
+        ///////////////////////////////
+        let Total_income = 0
+        let Total_expense = 0
+        let SocialYears = 0
+        let Net = 0
+        ///////////////////////////////
+        let base_salary = 0
+        let commission = 0
+        let position_income = 0
+        let ot = 0
+        let bonus = 0
+        let special_income = 0
+        let other_income = 0
+        let travel_income = 0
+        let bursary = 0
+        let welfare_money = 0
+        //EXPENSE
+        let social_security = 0 //Social security อันเก่า
+        let vat = 0
+        let miss = 0
+        let ra = 0
+        let late = 0
+        let other = 0
+        let provident_employee = 0
+        let provident_company = 0
+        let ResultSocialYears = 0
+
+        for (let i = 0; i < chk_salary.length; i++) {
+
+          let salary_id = chk_salary[i].id
+          commission = chk_salary[i].commission as number
+          position_income = chk_salary[i].position_income as number
+          ot = chk_salary[i].ot as number
+          bonus = chk_salary[i].bonus as number
+          special_income = chk_salary[i].special_income as number
+          other_income = chk_salary[i].other_income as number
+          travel_income = chk_salary[i].travel_income as number
+          bursary = chk_salary[i].bursary as number
+          welfare_money = chk_salary[i].welfare_money as number
+          social_security = chk_salary[i].social_security as number
+          SocialYears = chk_salary[i].socialYears as number
+          console.log("SalaryId = ", salary_id);
+          let bb = chk_salary[i].User?.bookbank_log
+          bb?.forEach((e) => {
+            let bb_date = e.date
+            let bb_Year = dayjs(bb_date).format("YYYY")
+            let bb_month = dayjs(bb_date).format("MM")
+            if (Thismonth < bb_month && ThisYear === e.accept_years) {
+              base_salary = e.base_salary
+              // console.log(e.userId, base_salary);
+            }
+            if (Thismonth === bb_month && ThisYear === e.accept_years) {
+              base_salary = e.base_salary
+              // console.log(e.userId, base_salary);
+            }
+          })
+          if (Ss_per || VaT_per) {
+            if (Ss_per) {
+              //calculate the new salary update !
+              NewSocial_security = (base_salary * Ss_per) / 100
+              console.log('ประกันสังคมใหม่' , NewSocial_security);
+              
+              Total_income = commission + position_income + ot + bonus + special_income + other_income + travel_income + bursary + welfare_money + base_salary
+              Total_expense = social_security + vat + miss + ra + late + other + provident_employee + provident_company
+              Net = Total_income - Total_expense
+              ResultSocialYears = (SocialYears - social_security) + NewSocial_security
+              console.log("ประกันสังคมสะสม = ", ResultSocialYears)
+              const upt_salary = await ctx.prisma.salary.update({
+                data: {
+                  social_security: NewSocial_security,
+                  ss_per: Ss_per,
+                  total_income: Total_income,
+                  total_expense: Total_expense,
+                  socialYears: ResultSocialYears,
+                  net: Net
+                },
+                where: {
+                  id: salary_id
+                }
+              })
+              // console.log(upt_salary);
+
+            }
+          }
+        }
         // if(Thismonth < BB_log[i].accept_month && ThisYear === BB_log[i].accept_years){
         //   let current_base_salary = BB_log[i-1].base_salary
         // }
