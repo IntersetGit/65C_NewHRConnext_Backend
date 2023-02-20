@@ -326,7 +326,7 @@ const resolvers: Resolvers = {
             social_line: args.data?.social_line,
             createdAt: new Date(),
             companyId: ctx.currentUser?.compayId,
-            regis_vat: args.data?.regis_vat ,
+            regis_vat: args.data?.regis_vat,
             regiscomnumber: args.data.regiscomnumber
           },
           where: {
@@ -364,7 +364,7 @@ const resolvers: Resolvers = {
             social_line: args.data?.social_line,
             createdAt: new Date(),
             companyId: ctx.currentUser?.compayId,
-            regis_vat: args.data?.regis_vat ,
+            regis_vat: args.data?.regis_vat,
             regiscomnumber: args.data.regiscomnumber
           },
         });
@@ -378,11 +378,33 @@ const resolvers: Resolvers = {
 
     async deleteComBarance(p, args, ctx) {
       const deleteid = args.id ? args.id : undefined
-      const deleteCompany = await ctx.prisma.companyBranch.delete({
+      const finddata = await ctx.prisma.user.findMany({
         where: {
-          id: args.id as string
+          companyBranchId: args.id
         }
-      });
+      })
+      finddata.forEach(async (a) => {
+        const deleteCompany = await ctx.prisma.companyBranch.delete({
+          include: {
+            users: {
+              include:{
+                provident_log: {where:{userId: a.id}},
+                salary:{where:{userId: a.id}},
+                bookbank_log: {where:{userId: a.id}},
+                data_leave:{where:{user_id: a.id}},
+                Position_user:{include:{log_position: true}, where:{user_id: a.id}},
+                mas_all_collect:{where:{userId: a.id}},
+              },where:{companyBranchId: args.id}
+            },
+            Role_Company:{where:{companyBranchId: args.id}},
+            expense_company: {where:{companyBranchId: args.id}}
+          },
+            where: {
+              id: args.id as string
+            }
+          });
+      })
+
 
       //const deleteCompanyHead = await ctx.prisma.company.delete({
       // where: { 

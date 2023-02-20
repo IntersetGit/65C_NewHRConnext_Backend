@@ -509,10 +509,7 @@ const resolvers: Resolvers = {
         },
         where: {
           companyBranchId: ctx.currentUser?.branchId,
-          AND: {
-            exp_com_month: month,
-            exp_com_years: years
-          },
+          
         },
         orderBy:
         {
@@ -540,7 +537,7 @@ const resolvers: Resolvers = {
           const getdata = await ctx.prisma.companyBranch.findMany({
             include: {
               expense_company: { where: { exp_com_month: month, AND: { exp_com_years: years } } },
-              users: { include: { bookbank_log: { where: { userId: args.id , AND:{ id: bb_id}}, orderBy: { date: 'desc' } } }, where: { id: args.id } }
+              users: { include: { bookbank_log: { where: { userId: args.id, AND: { id: bb_id } }, orderBy: { date: 'desc' } } }, where: { id: args.id } }
             },
             where: {
               id: ctx.currentUser?.branchId,
@@ -1270,14 +1267,14 @@ const resolvers: Resolvers = {
 
 
 
-    async createBank(p: any, args: any, ctx: any) {
+    async createBank(p, args, ctx) {
       //สร้างธนาคาร
       const genBankID = v4();
       const create_bank = await ctx.prisma.mas_bank.create({
         data: {
           id: genBankID,
           name: args.data?.name as string,
-          bank_code: args.data?.bank_code,
+          bank_code: args.data?.bank_code as string,
 
         },
       });
@@ -1287,7 +1284,7 @@ const resolvers: Resolvers = {
       };
     },
 
-    async CreateAndUpdateExpenseCom(p: any, args: any, ctx: any) {
+    async CreateAndUpdateExpenseCom(p, args, ctx) {
       //สร้างและอัปเดท expensecom
       const genExpenseID = v4();
       let date = args.data?.date
@@ -1308,6 +1305,42 @@ const resolvers: Resolvers = {
           },
           where: { id: args.data.id },
         });
+        // const chk_salary = await ctx.prisma.salary.findMany({
+        //   include: {
+        //     User: { include: { companyBranch: true, bookbank_log: { orderBy: { date: 'desc' } } } },
+        //   },
+        //   where: {
+        //     month: Thismonth,
+        //     AND: {
+        //       years: ThisYear
+        //     }
+        //   }
+        // });
+        // console.log(chk_salary);
+        // for (let i = 0; i < chk_salary.length; i++) {
+        //   let bb = chk_salary[i].User?.bookbank_log
+        //   bb?.forEach((e)=>{
+        //     // if(){
+
+        //     // }
+        //     console.log(e);
+        //   })
+        // }
+        // console.log(chk_salary);
+        // const chk_bookbank = await ctx.prisma.bookbank_log.findMany({
+        //   where: {
+        //     accept_month: Thismonth,
+        //     AND: {
+        //       accept_years: ThisYear
+        //     }
+        //   }
+        // })
+        // console.log('BBLOG',chk_bookbank)
+        // if(Thismonth < BB_log[i].accept_month && ThisYear === BB_log[i].accept_years){
+        //   let current_base_salary = BB_log[i-1].base_salary
+        // }
+
+
         return {
           message: 'update success',
           status: true,
@@ -1320,10 +1353,10 @@ const resolvers: Resolvers = {
           date: new Date(args.data?.date),
           vat_per: args.data?.vat_per as number,
           ss_per: args.data?.ss_per as number,
-          check_vat: take_arr,
+          check_vat: take_arr as string[],
           exp_com_month: Thismonth,
           exp_com_years: ThisYear,
-          cal_date_salary: args.data?.cal_date_salary,
+          cal_date_salary: new Date(args.data?.cal_date_salary),
           companyBranchId: args.data?.companyBranchId,
         },
       });
