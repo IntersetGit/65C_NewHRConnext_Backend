@@ -909,8 +909,45 @@ const resolvers: Resolvers = {
         }
 
       }
-  
-      return chk_bb;
+      const getdata = await ctx.prisma.user.findMany({
+        include: {
+          profile: true,
+          role: true,
+          Position_user: {
+            include: { mas_positionlevel1: true, mas_positionlevel2: true, mas_positionlevel3: true },
+            where: {
+              mas_positionlevel2: {
+                name: { contains: search2 }
+              }, AND: {
+                mas_positionlevel3: {
+                  name: { contains: search3 }
+                }
+              }
+            },
+            orderBy: { date: 'desc' }
+          },
+          salary: true,
+          bookbank_log: { include: { mas_bank: true }, orderBy: { date: 'desc' } },
+          companyBranch: { include: { expense_company: { orderBy: { date: 'desc' } } } }
+        },
+        where: {
+          companyBranchId: ctx.currentUser?.branchId,
+          AND: {
+            profile: {
+              firstname_th: { contains: search1 }
+            },
+            AND: {
+              Position_user: {
+                some: {
+                  mas_positionlevel2: { name: { contains: search2 } },
+                  AND: { mas_positionlevel3: { name: { contains: search3 } } }
+                },
+              },
+            },
+          },
+        }
+      })
+      return getdata;
     },
   }, //
   Mutation: {
