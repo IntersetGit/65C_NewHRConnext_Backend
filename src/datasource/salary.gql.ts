@@ -798,8 +798,8 @@ const resolvers: Resolvers = {
       const search2 = args.Position2 ? args.Position2 : undefined
       const search3 = args.Position3 ? args.Position3 : undefined
       let current_time = new Date()
-      let current_month = "3"
-      // let current_month = dayjs(current_time).format("MM")
+      // let current_month = "3"
+      let current_month = dayjs(current_time).format("MM")
       let current_year = dayjs(current_time).format("YYYY")
       let bb_acp_month = ""
       let bb_acp_year = ""
@@ -807,7 +807,7 @@ const resolvers: Resolvers = {
 
       const chk_bb = await ctx.prisma.user.findMany({
         include: {
-          bookbank_log: { orderBy: { accept_date: 'asc' } }
+          bookbank_log: { orderBy: { accept_date: 'desc' } }
         },
         where: {
           companyBranchId: ctx.currentUser?.branchId
@@ -815,15 +815,15 @@ const resolvers: Resolvers = {
       })
       for (let i = 0; i < chk_bb.length; i++) {
         let bb_log_forme = chk_bb[i].bookbank_log
-
+        console.log(bb_log_forme);
         for (let a = 0; a < bb_log_forme.length; a++) {
           console.log(bb_log_forme[a]);
           
           bb_acp_month = bb_log_forme[a].accept_month as string
           bb_acp_year = bb_log_forme[a].accept_years as string
 
-          if (current_month < bb_acp_month && current_year === bb_acp_year) { //เช็คถ้าหากเดือน < เดือน ณ ปัจจุบัน ให้ทำการใช้ index[1]
-            bb_id = bb_log_forme[a - 1].id
+          if (parseInt(current_month) < parseInt(bb_acp_month) && current_year === bb_acp_year) { //เช็คถ้าหากเดือน < เดือน ณ ปัจจุบัน ให้ทำการใช้ index[1]
+            bb_id = bb_log_forme[a + 1].id
             const getdata = await ctx.prisma.user.findMany({
               include: {
                 profile: true,
@@ -842,7 +842,7 @@ const resolvers: Resolvers = {
                   orderBy: { date: 'desc' }
                 },
                 salary: true,
-                bookbank_log: { include: { mas_bank: true }, where: { id: bb_id }, orderBy: { date: 'desc' } },
+                bookbank_log: { where: { id: bb_id }},
                 companyBranch: { include: { expense_company: { orderBy: { date: 'desc' } } } }
               },
               where: {
@@ -864,93 +864,52 @@ const resolvers: Resolvers = {
             })
             return getdata;
           }
-          // if (current_month === bb_acp_month && current_year === bb_acp_year) { //เช็คถ้าหากเดือนเท่ากับ เดือน ณ ปัจจุบัน ให้ทำการใช้ index ปัจจุบัน
-          //   bb_id = bb_log_forme[i].id
-          //   const getdata = await ctx.prisma.user.findMany({
-          //     include: {
-          //       profile: true,
-          //       role: true,
-          //       Position_user: {
-          //         include: { mas_positionlevel1: true, mas_positionlevel2: true, mas_positionlevel3: true },
-          //         where: {
-          //           mas_positionlevel2: {
-          //             name: { contains: search2 }
-          //           }, AND: {
-          //             mas_positionlevel3: {
-          //               name: { contains: search3 }
-          //             }
-          //           }
-          //         },
-          //         orderBy: { date: 'desc' }
-          //       },
-          //       salary: true,
-          //       bookbank_log: { include: { mas_bank: true }, where: { id: bb_id }, orderBy: { date: 'desc' } },
-          //       companyBranch: { include: { expense_company: { orderBy: { date: 'desc' } } } }
-          //     },
-          //     where: {
-          //       companyBranchId: ctx.currentUser?.branchId,
-          //       AND: {
-          //         profile: {
-          //           firstname_th: { contains: search1 }
-          //         },
-          //         AND: {
-          //           Position_user: {
-          //             some: {
-          //               mas_positionlevel2: { name: { contains: search2 } },
-          //               AND: { mas_positionlevel3: { name: { contains: search3 } } }
-          //             },
-          //           },
-          //         },
-          //       },
-          //     }
-          //   })
-          //   return getdata;
-          // }
+          if (current_month === bb_acp_month && current_year === bb_acp_year) { //เช็คถ้าหากเดือนเท่ากับ เดือน ณ ปัจจุบัน ให้ทำการใช้ index ปัจจุบัน
+            bb_id = bb_log_forme[i].id
+            const getdata = await ctx.prisma.user.findMany({
+              include: {
+                profile: true,
+                role: true,
+                Position_user: {
+                  include: { mas_positionlevel1: true, mas_positionlevel2: true, mas_positionlevel3: true },
+                  where: {
+                    mas_positionlevel2: {
+                      name: { contains: search2 }
+                    }, AND: {
+                      mas_positionlevel3: {
+                        name: { contains: search3 }
+                      }
+                    }
+                  },
+                  orderBy: { date: 'desc' }
+                },
+                salary: true,
+                bookbank_log: { where: { id: bb_id } },
+                companyBranch: { include: { expense_company: { orderBy: { date: 'desc' } } } }
+              },
+              where: {
+                companyBranchId: ctx.currentUser?.branchId,
+                AND: {
+                  profile: {
+                    firstname_th: { contains: search1 }
+                  },
+                  AND: {
+                    Position_user: {
+                      some: {
+                        mas_positionlevel2: { name: { contains: search2 } },
+                        AND: { mas_positionlevel3: { name: { contains: search3 } } }
+                      },
+                    },
+                  },
+                },
+              }
+            })
+            return getdata;
+          }
         }
 
       }
-      console.log(chk_bb);
-
-
-      // const getdata = await ctx.prisma.user.findMany({
-      //   include: {
-      //     profile: true,
-      //     role: true,
-      //     Position_user: {
-      //       include: { mas_positionlevel1: true, mas_positionlevel2: true, mas_positionlevel3: true },
-      //       where: {
-      //         mas_positionlevel2: {
-      //           name: { contains: search2 }
-      //         }, AND: {
-      //           mas_positionlevel3: {
-      //             name: { contains: search3 }
-      //           }
-      //         }
-      //       },
-      //       orderBy: { date: 'desc' }
-      //     },
-      //     salary: true,
-      //     bookbank_log: { include: { mas_bank: true }, where: { id: bb_id }, orderBy: { date: 'desc' } },
-      //     companyBranch: { include: { expense_company: { orderBy: { date: 'desc' } } } }
-      //   },
-      //   where: {
-      //     companyBranchId: ctx.currentUser?.branchId,
-      //     AND: {
-      //       profile: {
-      //         firstname_th: { contains: search1 }
-      //       },
-      //       AND: {
-      //         Position_user: {
-      //           some: {
-      //             mas_positionlevel2: { name: { contains: search2 } },
-      //             AND: { mas_positionlevel3: { name: { contains: search3 } } }
-      //           },
-      //         },
-      //       },
-      //     },
-      //   }
-      // })
-
+  
       return chk_bb;
     },
   }, //
