@@ -848,6 +848,9 @@ export type QueryGetAllcompanyArgs = {
 
 
 export type QueryGetAllleaveArgs = {
+  name?: InputMaybe<Scalars['String']>;
+  position2_id?: InputMaybe<Scalars['ID']>;
+  position3_id?: InputMaybe<Scalars['ID']>;
   userId?: InputMaybe<Scalars['ID']>;
 };
 
@@ -859,6 +862,9 @@ export type QueryGetcompanyRoleArgs = {
 
 export type QueryGetleava_AlldataArgs = {
   dataleaveId?: InputMaybe<Scalars['ID']>;
+  name?: InputMaybe<Scalars['String']>;
+  position2_id?: InputMaybe<Scalars['ID']>;
+  position3_id?: InputMaybe<Scalars['ID']>;
 };
 
 
@@ -912,7 +918,10 @@ export type QueryShow_YearsArgs = {
 
 
 export type QueryUsersArgs = {
-  userid?: InputMaybe<Scalars['String']>;
+  name?: InputMaybe<Scalars['String']>;
+  position2_id?: InputMaybe<Scalars['ID']>;
+  position3_id?: InputMaybe<Scalars['ID']>;
+  userid?: InputMaybe<Scalars['ID']>;
 };
 
 
