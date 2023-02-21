@@ -60,6 +60,7 @@ export const salaryTypedef = gql`
     mas_all_collectId: String
     provident_com: Float
     provident_emp: Float
+    accept_date: Date
   }
 
   type bookbank_log {
@@ -1336,28 +1337,40 @@ const resolvers: Resolvers = {
       let Thismonth = dayjs(date).format("MM")
       // const providentID = v4()
       if (args.data?.id) {
-        const createbook_bank = await ctx.prisma.bookbank_log.update({
-          data: {
-            date: new Date(args.data?.date),
-            mas_bankId: args.data?.mas_bankId,
-            bank_number: args.data?.bank_number as string,
-            all_collectId: args.data?.all_collectId,
-            base_salary: args.data?.base_salary as number,
-            userId: args.data?.userId,
-            accept_date: new Date(args.data?.date),
-            accept_month: Thismonth,
-            accept_years: ThisYear,
-            provident_com: args.data?.provident_com as number, // กองทุนของพนักงาน ตัวเลขเป็น %
-            provident_emp: args.data?.provident_emp as number, // กองทุนของบริษัท ตัวเลขเป็น %
+        // const createbook_bank = await ctx.prisma.bookbank_log.update({
+        //   data: {
+        //     date: new Date(args.data?.date),
+        //     mas_bankId: args.data?.mas_bankId,
+        //     bank_number: args.data?.bank_number as string,
+        //     all_collectId: args.data?.all_collectId,
+        //     base_salary: args.data?.base_salary as number,
+        //     userId: args.data?.userId,
+        //     accept_date: new Date(args.data?.date),
+        //     accept_month: Thismonth,
+        //     accept_years: ThisYear,
+        //     provident_com: args.data?.provident_com as number, // กองทุนของพนักงาน ตัวเลขเป็น %
+        //     provident_emp: args.data?.provident_emp as number, // กองทุนของบริษัท ตัวเลขเป็น %
+        //   },
+        //   where: {
+        //     id: args.data?.id,
+        //   },
+        // });
+        // return {
+        //   message: 'update success',
+        //   status: true,
+        // };
+        const chk_salary = await ctx.prisma.salary.findMany({ //จากนั้นให้ทำการหาา salary ว่าเดือนที่มีการเปลี่ยนแปลง ตรงกับ เงินเดือนมั้ย
+          include: {
+            User: { include: { companyBranch: true, bookbank_log: { orderBy: { date: 'desc' } } } },
           },
           where: {
-            id: args.data?.id,
-          },
+            month: Thismonth,
+            AND: {
+              years: ThisYear
+            }
+          }
         });
-        return {
-          message: 'update success',
-          status: true,
-        };
+        console.log(chk_salary);
       }
       const createbook_bank = await ctx.prisma.bookbank_log.create({
         data: {
@@ -1368,7 +1381,7 @@ const resolvers: Resolvers = {
           all_collectId: args.data?.all_collectId,
           base_salary: args.data?.base_salary as number,
           userId: args.data?.userId,
-          accept_date: new Date(args.data?.date),
+          accept_date: new Date(args.data?.accept_date),
           accept_month: Thismonth,
           accept_years: ThisYear,
           provident_com: args.data?.provident_com as number, // กองทุนของพนักงาน ตัวเลขเป็น %

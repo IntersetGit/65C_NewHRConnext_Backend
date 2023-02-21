@@ -1074,6 +1074,7 @@ export type Bookbank_Log = {
 };
 
 export type Bookbank_LogInput = {
+  accept_date?: InputMaybe<Scalars['Date']>;
   all_collectId?: InputMaybe<Scalars['String']>;
   bank_number?: InputMaybe<Scalars['String']>;
   base_salary?: InputMaybe<Scalars['Float']>;
