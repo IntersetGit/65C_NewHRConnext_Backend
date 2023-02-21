@@ -865,7 +865,7 @@ const resolvers: Resolvers = {
             return getdata;
           }
           if (current_month === bb_acp_month && current_year === bb_acp_year) { //เช็คถ้าหากเดือนเท่ากับ เดือน ณ ปัจจุบัน ให้ทำการใช้ index ปัจจุบัน
-            bb_id = bb_log_forme[i].id
+            bb_id = bb_log_forme[a].id
             const getdata = await ctx.prisma.user.findMany({
               include: {
                 profile: true,
@@ -1449,6 +1449,24 @@ const resolvers: Resolvers = {
           }
         });
         console.log(chk_salary);
+
+        // for (let i = 0; i < chk_salary.length; i++) {
+        //   let bb = chk_salary[i].User?.bookbank_log
+        //   bb?.forEach((e) => {
+        //     let bb_date = e.date
+        //     let bb_Year = dayjs(bb_date).format("YYYY")
+        //     let bb_month = dayjs(bb_date).format("MM")
+        //     if (Thismonth < bb_month && ThisYear === e.accept_years) { //ถ้าหากเดือน Exp < เดือนของ bb ให้ใช้ฐานเงินเดือน array[1]
+        //       base_salary = e.base_salary
+        //       // console.log(e.userId, base_salary);
+        //     }
+        //     if (Thismonth === bb_month && ThisYear === e.accept_years) {//ถ้าหากเดือน Exp === เดือนของ bb ให้ใช้ฐานเงินเดือน array[0]
+        //       base_salary = e.base_salary
+        //       // console.log(e.userId, base_salary);
+        //     }
+        //   })
+        // }
+
         return {
           message: 'update success',
           status: true,
