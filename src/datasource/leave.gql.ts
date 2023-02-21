@@ -487,8 +487,9 @@ export const leaveResolvers: Resolvers = {
             company: true,
             profile: true,
             Position_user: {
+              take: 1,
               include: { mas_positionlevel1: true, mas_positionlevel2: true, mas_positionlevel3: true, header: { include: { profile: true } } },
-              where: { position2_id: filter2, AND: { position3_id: filter3 } },
+              //where: { position2_id: filter2, AND: { position3_id: filter3 } },
               orderBy: { date: 'desc' },
             },
             data_leave: { include: { mas_leave_type: true } }
@@ -598,8 +599,8 @@ export const leaveResolvers: Resolvers = {
         }
         const datas : any[] = []
        getdataAllleave_2?.forEach((e) => {
-          if (!e.Position_user?.[0]?.position2_id &&!(e.Position_user?.[0]?.position2_id === filter2)) return
-          if (!e.Position_user?.[0]?.position3_id && !(e.Position_user?.[0]?.position3_id === filter3)) return
+          if (e.Position_user?.[0]?.position2_id && !(e.Position_user?.[0]?.position2_id === filter2)) return
+          if (e.Position_user?.[0]?.position3_id && !(e.Position_user?.[0]?.position3_id === filter3)) return
             datas.push(e)
           
         })
