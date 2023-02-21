@@ -95,8 +95,8 @@ type DeleteleaveResponseType{
 type Query{
   getleavetypedata: [mas_leave_type]
   getleava_datame(dataleaveId: ID): getleaveResponseType
-  getleava_alldata(dataleaveId: ID): [leave_data]
-  getAllleave(userId: ID): getleaveResponseType
+  getleava_alldata(dataleaveId: ID, name: String, position2_id: ID, position3_id: ID): [leave_data] 
+  getAllleave(userId: ID, name: String, position2_id: ID, position3_id: ID): getleaveResponseType
 }
 
 type Mutation{
@@ -109,6 +109,7 @@ type Mutation{
 
 export const leaveResolvers: Resolvers = {
   Query: {
+
     async getleavetypedata(p, args, ctx) {
       const gettypeleave = await ctx.prisma.mas_leave_type.findMany({
         orderBy: { orderby: 'asc' }
@@ -284,8 +285,11 @@ export const leaveResolvers: Resolvers = {
         }
       }
     },
-
+    //--------- อนุมัติใบลา --------------------//
     async getleava_alldata(p, args, ctx) {
+      const filter = args?.name ? args?.name : undefined;
+      const filter2 = args?.position2_id ? args?.position2_id : undefined;
+      const filter3 = args?.position3_id ? args?.position3_id : undefined;
       if (args.dataleaveId) {
         const alldata_hearderbyId = await ctx.prisma.data_leave.findMany({
           include: {
@@ -300,16 +304,35 @@ export const leaveResolvers: Resolvers = {
       } else {
         const alldata_hearder = await ctx.prisma.data_leave.findMany({
           include: {
-            user: { include: { profile: true, Position_user: { include: { mas_positionlevel1: true, mas_positionlevel2: true, mas_positionlevel3: true, header: { include: { profile: true } } } }, } },
+            user: {
+              include: {
+                profile: true, Position_user: {
+                  include: { mas_positionlevel1: true, mas_positionlevel2: true, mas_positionlevel3: true, header: { include: { profile: true } } }, where: {
+                    position2_id: filter2, AND: { position3_id: filter3 }
+                  }
+                },
+              }
+            },
             mas_leave_type: true
           },
           where: {
             user: {
               Position_user: {
                 some: {
-                  headderId: ctx.currentUser?.id
+                  headderId: ctx.currentUser?.id,
+                  AND: {
+                    position2_id: filter2,
+                    AND: {
+                      position3_id: filter3
+                    }
+                  }
                 }
-              }
+              },
+              AND: {
+                profile: {
+                  firstname_th: { contains: filter },
+                },
+              },
             }
           }
         })
@@ -326,6 +349,9 @@ export const leaveResolvers: Resolvers = {
       let countleave2 = 0
       let countleave3 = 0
       let countleave4 = 0
+      const filter = args?.name ? args?.name : undefined;
+      const filter2 = args?.position2_id ? args?.position2_id : undefined;
+      const filter3 = args?.position3_id ? args?.position3_id : undefined;
       if (args.userId) {
         const getdataAllleavebyId = await ctx.prisma.user.findMany({
           include: {
@@ -407,17 +433,37 @@ export const leaveResolvers: Resolvers = {
           include: {
             company: true,
             profile: true,
-            Position_user: { include: { mas_positionlevel1: true, mas_positionlevel2: true, mas_positionlevel3: true, header: { include: { profile: true } } } },
+            Position_user: {
+              include: { mas_positionlevel1: true, mas_positionlevel2: true, mas_positionlevel3: true, header: { include: { profile: true } } },
+              where: { position2_id: filter2, AND: { position3_id: filter3 } }
+            },
             data_leave: { include: { mas_leave_type: true } }
           },
           where: {
             companyBranch: {
               companyId: ctx.currentUser?.compayId
             },
-            data_leave: {
-              some: {
-                Status: 1 || 2
-              }
+            AND: {
+              data_leave: {
+                some: {
+                  Status: 1 || 2
+                }
+              },
+              AND: {
+                profile: {
+                  firstname_th: { contains: filter },
+                },
+                AND: {
+                  Position_user: {
+                    some:{
+                      position2_id: filter2,
+                      AND:{
+                        position3_id: filter3
+                      }
+                    }
+                  }
+                }
+              },
             }
           }
         })
