@@ -1306,7 +1306,7 @@ const resolvers: Resolvers = {
       let ThisYear = dayjs(date).format("YYYY")
       let Thismonth = dayjs(date).format("MM")
       const take_arr = args.data?.check_vat
-      if (args.data?.id) {
+      if (args.data?.id) { //ถ้ามีการรับ ID ให้ทำการอัปเดท
         // const updateExpenseCom = await ctx.prisma.expense_company.update({
         //   data: {
         //     bankId: args.data?.bankId as string,
@@ -1320,7 +1320,7 @@ const resolvers: Resolvers = {
         //   },
         //   where: { id: args.data.id },
         // });
-        const chk_salary = await ctx.prisma.salary.findMany({
+        const chk_salary = await ctx.prisma.salary.findMany({ //จากนั้นให้ทำการหาา salary ว่าเดือนที่มีการเปลี่ยนแปลง ตรงกับ เงินเดือนมั้ย
           include: {
             User: { include: { companyBranch: true, bookbank_log: { orderBy: { date: 'desc' } } } },
           },
@@ -1333,7 +1333,7 @@ const resolvers: Resolvers = {
         });
         console.log(chk_salary);
 
-        let VaT_per = args.data?.vat_per
+        let VaT_per = args.data?.vat_per //กำหนดค่า ให้ค่าที่ต้องการคำนวณเริ่มต้นให้เป็น 0
         let Ss_per = args.data?.ss_per
         let NewSocial_security = 0 //Social security อันใหม่
         ///////////////////////////////
@@ -1363,7 +1363,7 @@ const resolvers: Resolvers = {
         let provident_company = 0
         let ResultSocialYears = 0
 
-        for (let i = 0; i < chk_salary.length; i++) {
+        for (let i = 0; i < chk_salary.length; i++) { //จากนั้น loop ข้อมูลเงินเดือนเพื่อจะเอามาคำนวณในแต่ละเดือน
 
           let salary_id = chk_salary[i].id
           commission = chk_salary[i].commission as number
@@ -1383,11 +1383,11 @@ const resolvers: Resolvers = {
             let bb_date = e.date
             let bb_Year = dayjs(bb_date).format("YYYY")
             let bb_month = dayjs(bb_date).format("MM")
-            if (Thismonth < bb_month && ThisYear === e.accept_years) {
+            if (Thismonth < bb_month && ThisYear === e.accept_years) { //ถ้าหากเดือน Exp < เดือนของ bb ให้ใช้ฐานเงินเดือน array[1]
               base_salary = e.base_salary
               // console.log(e.userId, base_salary);
             }
-            if (Thismonth === bb_month && ThisYear === e.accept_years) {
+            if (Thismonth === bb_month && ThisYear === e.accept_years) {//ถ้าหากเดือน Exp === เดือนของ bb ให้ใช้ฐานเงินเดือน array[0]
               base_salary = e.base_salary
               // console.log(e.userId, base_salary);
             }
@@ -1396,8 +1396,8 @@ const resolvers: Resolvers = {
             if (Ss_per) {
               //calculate the new salary update !
               NewSocial_security = (base_salary * Ss_per) / 100
-              console.log('ประกันสังคมใหม่' , NewSocial_security);
-              
+              console.log('ประกันสังคมใหม่', NewSocial_security);
+
               Total_income = commission + position_income + ot + bonus + special_income + other_income + travel_income + bursary + welfare_money + base_salary
               Total_expense = social_security + vat + miss + ra + late + other + provident_employee + provident_company
               Net = Total_income - Total_expense
@@ -1416,14 +1416,31 @@ const resolvers: Resolvers = {
                   id: salary_id
                 }
               })
-              // console.log(upt_salary);
+              const chk_all_collect = await ctx.prisma.mas_all_collect.findMany({
+                where: {
+                  userId: chk_salary[i].userId as string
+                }
+              })
+              console.log(chk_all_collect);
+
+              for (let a = 0; a < chk_all_collect.length; a++) {
+                let ss_collect_old = chk_all_collect[0].social_secu_collect as number
+                 let ss_collect_new =  (ss_collect_old - social_security) + NewSocial_security
+                const upt_all_collect = await ctx.prisma.mas_all_collect.update({
+                  data: {
+                    social_secu_collect: ss_collect_new
+                },
+                  where: {
+                    userId: chk_salary[i].userId as string
+                  }
+                })
+                console.log('ค่าใหม่ = ',upt_all_collect);
+                
+              }
 
             }
           }
         }
-        // if(Thismonth < BB_log[i].accept_month && ThisYear === BB_log[i].accept_years){
-        //   let current_base_salary = BB_log[i-1].base_salary
-        // }
 
 
         return {
