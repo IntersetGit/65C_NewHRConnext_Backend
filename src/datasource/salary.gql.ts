@@ -60,6 +60,7 @@ export const salaryTypedef = gql`
     mas_all_collectId: String
     provident_com: Float
     provident_emp: Float
+    accept_date: Date
   }
 
   type bookbank_log {
@@ -173,7 +174,10 @@ export const salaryTypedef = gql`
     mas_bank: mas_bank
     User: User
     userId: String
+    accept_month:   String
+    accept_years:   String
     provident_log: [provident_log]
+    accept_date: Date
   }
 
   type mas_month {
@@ -182,6 +186,11 @@ export const salaryTypedef = gql`
     expense_company: [expense_company]
     bookbank_log: [Bookbank_log_type]
     salary: [salary]
+  }
+
+  type mas_years {
+    id:   ID
+    name: String
   }
 
   type mas_bank {
@@ -448,6 +457,8 @@ user_id:String
     salary_inmonthSlip(userId: String, month: String, years: String):[data_salary]
     bookbank_log: [Bookbank_log_type]
     bookbank_log_admin(userId: String): [Bookbank_log_type]
+    filter_bookbank_admin(userId: String): [Bookbank_log_type]
+    filter_bookbank(userId: String): [Bookbank_log_type]
     provident_log(userId:String):[provident_log]
     mydata_salary(years: String): data_salary
     # datasalary_mee(years: String): data_salary_me
@@ -458,6 +469,7 @@ user_id:String
     data_salary(fristname: String ,Position2: String ,Position3: String):[data_salary]
     expense_company(date:String):[expense_company]
     show_pervspUser(date:String , id:ID!):[CompanyBranch]
+    show_years(name:String):[mas_years]
   }
 
   type Mutation {
@@ -496,6 +508,16 @@ const resolvers: Resolvers = {
         },
       });
       return getdata;
+    },
+
+    async show_years(p, args, ctx) {
+      let searchY = args.name ? args.name : undefined
+      const showYears = await ctx.prisma.mas_years.findMany({
+        where: {
+          name: searchY
+        }
+      })
+      return showYears
     },
 
     async expense_company(p, args, ctx) {
@@ -637,7 +659,7 @@ const resolvers: Resolvers = {
     //   });
     //   return result;
     // },
-
+    
     async bookbank_log(parant: any, args: any, ctx: any) {
       // const filter = args?.userId ? args.userId : undefined;
       const result = await ctx.prisma.bookbank_log.findMany({
@@ -656,22 +678,86 @@ const resolvers: Resolvers = {
       return result; //แสดงข้อมูลโดยล็อคอินด้วย user
     },
 
-    // async bookbank_log(parant: any, args: any, ctx: any) {
-    //   const filter = args?.userId ? args.userId : undefined;
-    //   const result = await ctx.prisma.bookbank_log.findMany({
-    //     include: { User: true, mas_bank: true },
-    //     where: {
-    //       userId: ctx.currentUser?.userId,
-    //       AND: {
-    //         AND: {
-    //           years: { contains: filter },
-    //           month: { contains: filter },
-    //         },
-    //       },
-    //     },
-    //   });
-    //   return result;
-    // },
+    async filter_bookbank(parant, args, ctx) {
+      // const filter = args?.userId ? args.userId : undefined;
+      let current_time = new Date()
+      let current_month = dayjs(current_time).format("MM")
+      let current_year = dayjs(current_time).format("YYYY")
+      let bb_acp_month = ""
+      let bb_acp_year = ""
+      let get_bb_before = ""
+      const result = await ctx.prisma.bookbank_log.findMany({
+        include: {
+          mas_bank: true
+        },
+        where: {
+          userId: ctx.currentUser?.id,
+        },
+        orderBy:
+        {
+          date: "asc",
+        },
+      });
+      
+      for (let i = 0; i < result.length; i++) { //ทำการ filter โดยถ้าหากเวลาปัจจุบันตรงกัน เวลาใน bookbank จะให้ใช้ฐานเงินเดือนปัจจุบัน
+        bb_acp_month = result[i].accept_month as string
+        bb_acp_year = result[i].accept_years as string
+        if(current_month < bb_acp_month && current_year === bb_acp_year){
+         let get_bb_before = await ctx.prisma.bookbank_log.findMany({
+          include:{
+            mas_bank : true
+          },
+          where : {
+            id : result[i - 1].id
+          }
+         })
+         return get_bb_before
+        }
+        
+      }
+      return result; //แสดงข้อมูลด้วยการค้นหา user
+    },
+
+     async filter_bookbank_admin(parant, args, ctx) {
+      // const filter = args?.userId ? args.userId : undefined;
+      let current_time = new Date()
+      let current_month = dayjs(current_time).format("MM")
+      let current_year = dayjs(current_time).format("YYYY")
+      let bb_acp_month = ""
+      let bb_acp_year = ""
+      let get_bb_before = ""
+      const result = await ctx.prisma.bookbank_log.findMany({
+        include: {
+          mas_bank: true
+        },
+        where: {
+          userId: args.userId,
+        },
+        orderBy:
+        {
+          date: "asc",
+        },
+      });
+      
+      for (let i = 0; i < result.length; i++) { //ทำการ filter โดยถ้าหากเวลาปัจจุบันตรงกัน เวลาใน bookbank จะให้ใช้ฐานเงินเดือนปัจจุบัน
+        bb_acp_month = result[i].accept_month as string
+        bb_acp_year = result[i].accept_years as string
+        if(current_month < bb_acp_month && current_year === bb_acp_year){
+         let get_bb_before = await ctx.prisma.bookbank_log.findMany({
+          include:{
+            mas_bank : true
+          },
+          where : {
+            id : result[i - 1].id
+          }
+         })
+         return get_bb_before
+        }
+        
+      }
+      return result; //แสดงข้อมูลด้วยการค้นหา user
+    },
+
 
     async bookbank_log_admin(parant: any, args: any, ctx: any) {
       // const filter = args?.userId ? args.userId : undefined;
@@ -962,16 +1048,30 @@ const resolvers: Resolvers = {
       // console.log(ss_per);
       let Vat_per = null
       let SS_per = null
-      const chk_vatByEXP = await ctx.prisma.expense_company.findMany({
+      const chk_vatByEXP = await ctx.prisma.expense_company.findMany({ //เช็ค expense company ถ้าหากวันที่คำนวณเงินเดือนยังไมถึงวันที่มีผลให้ใช้ expense company เดิม
         where: {
           companyBranchId: ctx.currentUser?.branchId
         }, orderBy: {
           date: 'desc'
         }
       })
+
       for (let i = 0; i < chk_vatByEXP.length; i++) {
-        Vat_per = chk_vatByEXP[0].vat_per
-        SS_per = chk_vatByEXP[0].ss_per
+        let vatSS_expTime = chk_vatByEXP[i].date
+        let vatSSYear = dayjs(vatSS_expTime).format("YYYY")
+        let vatSSmonth = dayjs(vatSS_expTime).format("MM")
+        if (Thismonth === vatSSmonth && vatSSYear === ThisYear) {
+          Vat_per = chk_vatByEXP[i].vat_per
+          SS_per = chk_vatByEXP[i].ss_per
+        }
+        if (Thismonth < vatSSmonth && vatSSYear === ThisYear) {
+          Vat_per = chk_vatByEXP[i + 1].vat_per
+          SS_per = chk_vatByEXP[i + 1].ss_per
+        }
+        
+        
+        // Vat_per = chk_vatByEXP[0].vat_per
+        // SS_per = chk_vatByEXP[0].ss_per
       }
       console.log(chk_vatByEXP)
       console.log(Vat_per, SS_per);
@@ -1237,27 +1337,40 @@ const resolvers: Resolvers = {
       let Thismonth = dayjs(date).format("MM")
       // const providentID = v4()
       if (args.data?.id) {
-        const createbook_bank = await ctx.prisma.bookbank_log.update({
-          data: {
-            date: new Date(args.data?.date),
-            mas_bankId: args.data?.mas_bankId,
-            bank_number: args.data?.bank_number as string,
-            all_collectId: args.data?.all_collectId,
-            base_salary: args.data?.base_salary as number,
-            userId: args.data?.userId,
-            accept_month: Thismonth,
-            accept_years: ThisYear,
-            provident_com: args.data?.provident_com as number, // กองทุนของพนักงาน ตัวเลขเป็น %
-            provident_emp: args.data?.provident_emp as number, // กองทุนของบริษัท ตัวเลขเป็น %
+        // const createbook_bank = await ctx.prisma.bookbank_log.update({
+        //   data: {
+        //     date: new Date(args.data?.date),
+        //     mas_bankId: args.data?.mas_bankId,
+        //     bank_number: args.data?.bank_number as string,
+        //     all_collectId: args.data?.all_collectId,
+        //     base_salary: args.data?.base_salary as number,
+        //     userId: args.data?.userId,
+        //     accept_date: new Date(args.data?.date),
+        //     accept_month: Thismonth,
+        //     accept_years: ThisYear,
+        //     provident_com: args.data?.provident_com as number, // กองทุนของพนักงาน ตัวเลขเป็น %
+        //     provident_emp: args.data?.provident_emp as number, // กองทุนของบริษัท ตัวเลขเป็น %
+        //   },
+        //   where: {
+        //     id: args.data?.id,
+        //   },
+        // });
+        // return {
+        //   message: 'update success',
+        //   status: true,
+        // };
+        const chk_salary = await ctx.prisma.salary.findMany({ //จากนั้นให้ทำการหาา salary ว่าเดือนที่มีการเปลี่ยนแปลง ตรงกับ เงินเดือนมั้ย
+          include: {
+            User: { include: { companyBranch: true, bookbank_log: { orderBy: { date: 'desc' } } } },
           },
           where: {
-            id: args.data?.id,
-          },
+            month: Thismonth,
+            AND: {
+              years: ThisYear
+            }
+          }
         });
-        return {
-          message: 'update success',
-          status: true,
-        };
+        console.log(chk_salary);
       }
       const createbook_bank = await ctx.prisma.bookbank_log.create({
         data: {
@@ -1268,6 +1381,7 @@ const resolvers: Resolvers = {
           all_collectId: args.data?.all_collectId,
           base_salary: args.data?.base_salary as number,
           userId: args.data?.userId,
+          accept_date: new Date(args.data?.accept_date),
           accept_month: Thismonth,
           accept_years: ThisYear,
           provident_com: args.data?.provident_com as number, // กองทุนของพนักงาน ตัวเลขเป็น %
@@ -1306,21 +1420,21 @@ const resolvers: Resolvers = {
       let ThisYear = dayjs(date).format("YYYY")
       let Thismonth = dayjs(date).format("MM")
       const take_arr = args.data?.check_vat
-      if (args.data?.id) {
-        // const updateExpenseCom = await ctx.prisma.expense_company.update({
-        //   data: {
-        //     bankId: args.data?.bankId as string,
-        //     date: new Date(args.data?.date),
-        //     vat_per: args.data?.vat_per as number,
-        //     ss_per: args.data?.ss_per as number,
-        //     exp_com_month: Thismonth,
-        //     exp_com_years: ThisYear,
-        //     cal_date_salary: args.data?.cal_date_salary,
-        //     companyBranchId: args.data?.companyBranchId,
-        //   },
-        //   where: { id: args.data.id },
-        // });
-        const chk_salary = await ctx.prisma.salary.findMany({
+      if (args.data?.id) { //ถ้ามีการรับ ID ให้ทำการอัปเดท
+        const updateExpenseCom = await ctx.prisma.expense_company.update({
+          data: {
+            bankId: args.data?.bankId as string,
+            date: new Date(args.data?.date),
+            vat_per: args.data?.vat_per as number,
+            ss_per: args.data?.ss_per as number,
+            exp_com_month: Thismonth,
+            exp_com_years: ThisYear,
+            cal_date_salary: args.data?.cal_date_salary,
+            companyBranchId: args.data?.companyBranchId,
+          },
+          where: { id: args.data.id },
+        });
+        const chk_salary = await ctx.prisma.salary.findMany({ //จากนั้นให้ทำการหาา salary ว่าเดือนที่มีการเปลี่ยนแปลง ตรงกับ เงินเดือนมั้ย
           include: {
             User: { include: { companyBranch: true, bookbank_log: { orderBy: { date: 'desc' } } } },
           },
@@ -1333,14 +1447,16 @@ const resolvers: Resolvers = {
         });
         console.log(chk_salary);
 
-        let VaT_per = args.data?.vat_per
+        let VaT_per = args.data?.vat_per //กำหนดค่า ให้ค่าที่ต้องการคำนวณเริ่มต้นให้เป็น 0
         let Ss_per = args.data?.ss_per
         let NewSocial_security = 0 //Social security อันใหม่
         ///////////////////////////////
         let Total_income = 0
         let Total_expense = 0
         let SocialYears = 0
+        let old_net = 0
         let Net = 0
+        let IncomeYears = 0
         ///////////////////////////////
         let base_salary = 0
         let commission = 0
@@ -1362,8 +1478,9 @@ const resolvers: Resolvers = {
         let provident_employee = 0
         let provident_company = 0
         let ResultSocialYears = 0
+        let ResultIncomeYears = 0
 
-        for (let i = 0; i < chk_salary.length; i++) {
+        for (let i = 0; i < chk_salary.length; i++) { //จากนั้น loop ข้อมูลเงินเดือนเพื่อจะเอามาคำนวณในแต่ละเดือน
 
           let salary_id = chk_salary[i].id
           commission = chk_salary[i].commission as number
@@ -1377,17 +1494,19 @@ const resolvers: Resolvers = {
           welfare_money = chk_salary[i].welfare_money as number
           social_security = chk_salary[i].social_security as number
           SocialYears = chk_salary[i].socialYears as number
+          IncomeYears = chk_salary[i].incomeYears as number
+          old_net = chk_salary[i].net as number
           console.log("SalaryId = ", salary_id);
           let bb = chk_salary[i].User?.bookbank_log
           bb?.forEach((e) => {
             let bb_date = e.date
             let bb_Year = dayjs(bb_date).format("YYYY")
             let bb_month = dayjs(bb_date).format("MM")
-            if (Thismonth < bb_month && ThisYear === e.accept_years) {
+            if (Thismonth < bb_month && ThisYear === e.accept_years) { //ถ้าหากเดือน Exp < เดือนของ bb ให้ใช้ฐานเงินเดือน array[1]
               base_salary = e.base_salary
               // console.log(e.userId, base_salary);
             }
-            if (Thismonth === bb_month && ThisYear === e.accept_years) {
+            if (Thismonth === bb_month && ThisYear === e.accept_years) {//ถ้าหากเดือน Exp === เดือนของ bb ให้ใช้ฐานเงินเดือน array[0]
               base_salary = e.base_salary
               // console.log(e.userId, base_salary);
             }
@@ -1396,12 +1515,13 @@ const resolvers: Resolvers = {
             if (Ss_per) {
               //calculate the new salary update !
               NewSocial_security = (base_salary * Ss_per) / 100
-              console.log('ประกันสังคมใหม่' , NewSocial_security);
-              
+              console.log('ประกันสังคมใหม่', NewSocial_security);
+
               Total_income = commission + position_income + ot + bonus + special_income + other_income + travel_income + bursary + welfare_money + base_salary
-              Total_expense = social_security + vat + miss + ra + late + other + provident_employee + provident_company
+              Total_expense = vat + miss + ra + late + other + provident_employee + provident_company + NewSocial_security 
               Net = Total_income - Total_expense
               ResultSocialYears = (SocialYears - social_security) + NewSocial_security
+              ResultIncomeYears = (IncomeYears - old_net) + Net
               console.log("ประกันสังคมสะสม = ", ResultSocialYears)
               const upt_salary = await ctx.prisma.salary.update({
                 data: {
@@ -1410,20 +1530,42 @@ const resolvers: Resolvers = {
                   total_income: Total_income,
                   total_expense: Total_expense,
                   socialYears: ResultSocialYears,
-                  net: Net
+                  net: Net,
+                  incomeYears: ResultIncomeYears
                 },
                 where: {
                   id: salary_id
                 }
               })
-              // console.log(upt_salary);
+              const chk_all_collect = await ctx.prisma.mas_all_collect.findMany({
+                where: {
+                  userId: chk_salary[i].userId as string
+                }
+              })
+              console.log(chk_all_collect);
 
+              for (let a = 0; a < chk_all_collect.length; a++) {
+                let ss_collect_old = chk_all_collect[0].social_secu_collect as number
+                let ss_collect_new = (ss_collect_old - social_security) + NewSocial_security
+                const upt_all_collect = await ctx.prisma.mas_all_collect.update({
+                  data: {
+                    social_secu_collect: ss_collect_new,
+                    income_collect: ResultIncomeYears
+                   
+                  },
+                  where: {
+                    userId: chk_salary[i].userId as string
+                  }
+                })
+                console.log('ค่าใหม่ = ', upt_all_collect);
+
+              }
             }
+            // if (VaT_per) {
+
+            // }
           }
         }
-        // if(Thismonth < BB_log[i].accept_month && ThisYear === BB_log[i].accept_years){
-        //   let current_base_salary = BB_log[i-1].base_salary
-        // }
 
 
         return {
@@ -1546,6 +1688,8 @@ const resolversComposition = {
   'Query.data_salary': [authenticate()],
   'Query.mydata_salary': [authenticate()],
   'Query.show_pervspUser': [authenticate()],
+  'Query.show_years': [authenticate()],
+  'Query.filter_bookbank_admin': [authenticate()],
   'Mutation.Createmonth': [authenticate()],
   'Mutation.Createyears': [authenticate()],
   'Mutation.Createandupdatesalary': [authenticate()],
