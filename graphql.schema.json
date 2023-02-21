@@ -6159,7 +6159,7 @@
                 "deprecationReason": null
               },
               {
-                "name": "position2_id",
+                "name": "position2Id",
                 "description": null,
                 "type": {
                   "kind": "SCALAR",
@@ -6171,7 +6171,7 @@
                 "deprecationReason": null
               },
               {
-                "name": "position3_id",
+                "name": "position3Id",
                 "description": null,
                 "type": {
                   "kind": "SCALAR",
@@ -6309,7 +6309,7 @@
                 "deprecationReason": null
               },
               {
-                "name": "position2_id",
+                "name": "position2Id",
                 "description": null,
                 "type": {
                   "kind": "SCALAR",
@@ -6321,7 +6321,7 @@
                 "deprecationReason": null
               },
               {
-                "name": "position3_id",
+                "name": "position3Id",
                 "description": null,
                 "type": {
                   "kind": "SCALAR",
@@ -6731,7 +6731,7 @@
                 "deprecationReason": null
               },
               {
-                "name": "position2_id",
+                "name": "position2Id",
                 "description": null,
                 "type": {
                   "kind": "SCALAR",
@@ -6743,7 +6743,7 @@
                 "deprecationReason": null
               },
               {
-                "name": "position3_id",
+                "name": "position3Id",
                 "description": null,
                 "type": {
                   "kind": "SCALAR",

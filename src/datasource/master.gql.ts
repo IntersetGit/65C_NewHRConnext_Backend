@@ -1,5 +1,5 @@
-import { MainBusinessType } from './../generated/client/index.d';
-import { Mutation, Salary } from './../generated/graphql';
+
+
 import gql from 'graphql-tag';
 import { Resolvers } from '../generated/graphql';
 
@@ -50,6 +50,7 @@ export const masterResolvers: Resolvers = {
     },
 
     async getBusinessType(p, args, ctx) {
+
       const result = await ctx.prisma.mainBusinessType.findMany({
         orderBy: [
           { name: "asc" }
@@ -60,3 +61,9 @@ export const masterResolvers: Resolvers = {
     }
   },
 };
+
+const date = new Date()
+
+var atee = date.toString()
+
+console.log(date);

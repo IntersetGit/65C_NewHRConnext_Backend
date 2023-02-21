@@ -95,8 +95,8 @@ type DeleteleaveResponseType{
 type Query{
   getleavetypedata: [mas_leave_type]
   getleava_datame(dataleaveId: ID): getleaveResponseType
-  getleava_alldata(dataleaveId: ID, name: String, position2_id: ID, position3_id: ID): [leave_data] 
-  getAllleave(userId: ID, name: String, position2_id: ID, position3_id: ID): getleaveResponseType
+  getleava_alldata(dataleaveId: ID, name: String, position2Id: ID, position3Id: ID): [leave_data] 
+  getAllleave(userId: ID, name: String, position2Id: ID, position3Id: ID): getleaveResponseType
 }
 
 type Mutation{
@@ -127,7 +127,7 @@ export const leaveResolvers: Resolvers = {
       let countleave3 = 0
       let countleave4 = 0
       if (!args.dataleaveId) {
-        const getdataleave = await ctx.prisma.user.findMany({
+        const getdataleave_2 = await ctx.prisma.user.findMany({
           include: {
             profile: true,
             Position_user: { include: { mas_positionlevel1: true, mas_positionlevel2: true, mas_positionlevel3: true, header: { include: { profile: true } } } },
@@ -135,6 +135,23 @@ export const leaveResolvers: Resolvers = {
           },
           where: {
             id: ctx.currentUser?.id
+          },
+        })
+        const getdataleave = await ctx.prisma.user.findMany({
+          include: {
+            profile: true,
+            Position_user: { include: { mas_positionlevel1: true, mas_positionlevel2: true, mas_positionlevel3: true, header: { include: { profile: true } } } },
+            data_leave: { include: { mas_leave_type: true }, where: { Status: 2 } }
+          },
+          where: {
+            id: ctx.currentUser?.id,
+            AND: {
+              data_leave: {
+                some: {
+                  Status: 2
+                }
+              }
+            }
           },
         })
         if (getdataleave) {
@@ -200,12 +217,12 @@ export const leaveResolvers: Resolvers = {
 
         // return getdataleave
         return {
-          data_all: getdataleave,
+          data_all: getdataleave_2,
           data_count: dataCount
         }
       } else {
         const search = args.dataleaveId ? args.dataleaveId : undefined
-        const getdataleave = await ctx.prisma.user.findMany({
+        const getdataleave_2 = await ctx.prisma.user.findMany({
           include: {
             profile: true,
             Position_user: { include: { mas_positionlevel1: true, mas_positionlevel2: true, mas_positionlevel3: true, header: { include: { profile: true } } } },
@@ -217,6 +234,26 @@ export const leaveResolvers: Resolvers = {
                 id: search
               }
             }
+          },
+        })
+        const getdataleave = await ctx.prisma.user.findMany({
+          include: {
+            profile: true,
+            Position_user: { include: { mas_positionlevel1: true, mas_positionlevel2: true, mas_positionlevel3: true, header: { include: { profile: true } } } },
+            data_leave: { include: { mas_leave_type: true }, where: { Status: 2, AND:{id: search} } }
+          },
+          where: {
+            
+            
+              data_leave: {
+                some: {
+                  Status: 2,
+                  AND:{
+                    id: search
+                  }
+                }
+              }
+            
           },
         })
         if (getdataleave) {
@@ -280,7 +317,7 @@ export const leaveResolvers: Resolvers = {
           hours4: cout_hours4
         }
         return {
-          data_all: getdataleave,
+          data_all: getdataleave_2,
           data_count: dataCount
         }
       }
@@ -288,8 +325,8 @@ export const leaveResolvers: Resolvers = {
     //--------- อนุมัติใบลา --------------------//
     async getleava_alldata(p, args, ctx) {
       const filter = args?.name ? args?.name : undefined;
-      const filter2 = args?.position2_id ? args?.position2_id : undefined;
-      const filter3 = args?.position3_id ? args?.position3_id : undefined;
+      const filter2 = args?.position2Id ? args?.position2Id : undefined;
+      const filter3 = args?.position3Id ? args?.position3Id : undefined;
       if (args.dataleaveId) {
         const alldata_hearderbyId = await ctx.prisma.data_leave.findMany({
           include: {
@@ -350,17 +387,35 @@ export const leaveResolvers: Resolvers = {
       let countleave3 = 0
       let countleave4 = 0
       const filter = args?.name ? args?.name : undefined;
-      const filter2 = args?.position2_id ? args?.position2_id : undefined;
-      const filter3 = args?.position3_id ? args?.position3_id : undefined;
+      const filter2 = args?.position2Id ? args?.position2Id : undefined;
+      const filter3 = args?.position3Id ? args?.position3Id : undefined;
       if (args.userId) {
+        const getdataAllleavebyId_2 = await ctx.prisma.user.findMany({
+          include: {
+            profile: true,
+            Position_user: { include: { mas_positionlevel1: true, mas_positionlevel2: true, mas_positionlevel3: true, header: { include: { profile: true } } } },
+            data_leave: { include: { mas_leave_type: true }}
+          },
+          where: {
+            id: args.userId,
+          },
+        })
+
         const getdataAllleavebyId = await ctx.prisma.user.findMany({
           include: {
             profile: true,
             Position_user: { include: { mas_positionlevel1: true, mas_positionlevel2: true, mas_positionlevel3: true, header: { include: { profile: true } } } },
-            data_leave: { include: { mas_leave_type: true } }
+            data_leave: { include: { mas_leave_type: true }, where: { Status: 2 } }
           },
           where: {
-            id: args.userId
+            id: args.userId,
+            AND: {
+              data_leave: {
+                some: {
+                  Status: 2
+                }
+              }
+            }
           },
         })
         if (getdataAllleavebyId) {
@@ -424,12 +479,12 @@ export const leaveResolvers: Resolvers = {
           hours4: cout_hours4
         }
         return {
-          data_all: getdataAllleavebyId,
+          data_all: getdataAllleavebyId_2,
           data_count: dataCount
         }
 
       } else {
-        const getdataAllleave = await ctx.prisma.user.findMany({
+        const getdataAllleave_2 = await ctx.prisma.user.findMany({
           include: {
             company: true,
             profile: true,
@@ -455,9 +510,9 @@ export const leaveResolvers: Resolvers = {
                 },
                 AND: {
                   Position_user: {
-                    some:{
+                    some: {
                       position2_id: filter2,
-                      AND:{
+                      AND: {
                         position3_id: filter3
                       }
                     }
@@ -467,6 +522,45 @@ export const leaveResolvers: Resolvers = {
             }
           }
         })
+        const getdataAllleave = await ctx.prisma.user.findMany({
+          include: {
+            company: true,
+            profile: true,
+            Position_user: {
+              include: { mas_positionlevel1: true, mas_positionlevel2: true, mas_positionlevel3: true, header: { include: { profile: true } } },
+              where: { position2_id: filter2, AND: { position3_id: filter3 } }
+            },
+            data_leave: { include: { mas_leave_type: true }, where: {Status: 2}}
+          },
+          where: {
+            companyBranch: {
+              companyId: ctx.currentUser?.compayId
+            },
+            AND: {
+              data_leave: {
+                some: {
+                  Status: 2
+                }
+              },
+              AND: {
+                profile: {
+                  firstname_th: { contains: filter },
+                },
+                AND: {
+                  Position_user: {
+                    some: {
+                      position2_id: filter2,
+                      AND: {
+                        position3_id: filter3
+                      }
+                    }
+                  }
+                }
+              },
+            }
+          }
+        })
+
         if (getdataAllleave) {
           getdataAllleave.forEach((a) => {
             if (a.data_leave) {
@@ -528,7 +622,7 @@ export const leaveResolvers: Resolvers = {
           hours4: cout_hours4
         }
         return {
-          data_all: getdataAllleave,
+          data_all: getdataAllleave_2,
           data_count: dataCount
         }
       }
