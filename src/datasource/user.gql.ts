@@ -205,7 +205,7 @@ export const userTypedef = gql`
   }
 
   type Query {
-    users(userid: ID , name: String, position2_id: ID, position3_id: ID): [User]
+    users(userid: ID ,  name: String, position2Id: ID, position3Id: ID): [User]
     verifyCompanycode(companyname: String!): Boolean
     me: Me
   }
@@ -222,8 +222,8 @@ const resolvers: Resolvers = {
     async users(parent, args, ctx) {
       if (!args.userid) {
         const filter = args?.name ? args?.name : undefined;
-        const filter2 = args?.position2_id ? args?.position2_id : undefined;
-        const filter3 = args?.position3_id ? args?.position3_id : undefined;
+        const filter2 = args?.position2Id ? args?.position2Id : undefined;
+        const filter3 = args?.position3Id ? args?.position3Id : undefined;
         const result = await ctx.prisma.user.findMany({
           include: {
             profile: true, company: true, Role_Company: true, companyBranch: true,
@@ -413,6 +413,7 @@ const resolvers: Resolvers = {
     async createAccountUser(p, args, ctx) {
       const genUserid = v4();
       const genProfileid = v4();
+      const type = typeof(args.data.age)? args.data.age : args.data.age?.toString()
       if (args.data.id) {
         const EditUser = await ctx.prisma.user.update({
           data: {
@@ -432,7 +433,7 @@ const resolvers: Resolvers = {
                 start_date_work: args.data?.start_date_work,
                 avatar: args.data?.avatar,
                 dob: new Date(args.data?.dob),
-                age: args.data?.age,
+                age: type ,
                 relationship: args.data?.relationship,
                 shirt_size: args.data?.shirt_size,
                 prefix_th: args.data?.prefix_th,
@@ -503,7 +504,7 @@ const resolvers: Resolvers = {
                 start_date_work: args.data?.start_date_work,
                 avatar: args.data?.avatar,
                 dob: new Date(args.data?.dob),
-                age: args.data?.age,
+                age: type ,
                 relationship: args.data?.relationship,
                 shirt_size: args.data?.shirt_size,
                 prefix_th: args.data?.prefix_th,
