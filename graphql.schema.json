@@ -159,6 +159,18 @@
             "deprecationReason": null
           },
           {
+            "name": "accept_date",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "Date",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
             "name": "accept_month",
             "description": null,
             "args": [],

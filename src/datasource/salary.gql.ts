@@ -176,6 +176,7 @@ export const salaryTypedef = gql`
     accept_month:   String
     accept_years:   String
     provident_log: [provident_log]
+    accept_date: Date
   }
 
   type mas_month {
@@ -1343,6 +1344,7 @@ const resolvers: Resolvers = {
             all_collectId: args.data?.all_collectId,
             base_salary: args.data?.base_salary as number,
             userId: args.data?.userId,
+            accept_date: new Date(args.data?.date),
             accept_month: Thismonth,
             accept_years: ThisYear,
             provident_com: args.data?.provident_com as number, // กองทุนของพนักงาน ตัวเลขเป็น %
@@ -1366,6 +1368,7 @@ const resolvers: Resolvers = {
           all_collectId: args.data?.all_collectId,
           base_salary: args.data?.base_salary as number,
           userId: args.data?.userId,
+          accept_date: new Date(args.data?.date),
           accept_month: Thismonth,
           accept_years: ThisYear,
           provident_com: args.data?.provident_com as number, // กองทุนของพนักงาน ตัวเลขเป็น %
