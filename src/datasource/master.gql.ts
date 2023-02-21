@@ -62,8 +62,4 @@ export const masterResolvers: Resolvers = {
   },
 };
 
-const date = new Date()
 
-var atee = date.toString()
-
-console.log(date);
