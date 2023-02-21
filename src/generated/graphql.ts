@@ -752,6 +752,7 @@ export type Query = {
   company?: Maybe<ResponseCompany>;
   data_salary?: Maybe<Array<Maybe<Data_Salary>>>;
   expense_company?: Maybe<Array<Maybe<Expense_Company>>>;
+  filter_bookbank?: Maybe<Array<Maybe<Bookbank_Log_Type>>>;
   filter_bookbank_admin?: Maybe<Array<Maybe<Bookbank_Log_Type>>>;
   getAllcompany?: Maybe<Array<Maybe<CompanyBranch>>>;
   getAllleave?: Maybe<GetleaveResponseType>;
@@ -815,6 +816,11 @@ export type QueryData_SalaryArgs = {
 
 export type QueryExpense_CompanyArgs = {
   date?: InputMaybe<Scalars['String']>;
+};
+
+
+export type QueryFilter_BookbankArgs = {
+  userId?: InputMaybe<Scalars['String']>;
 };
 
 
@@ -2366,6 +2372,7 @@ export type QueryResolvers<ContextType = ApolloContext, ParentType extends Resol
   company?: Resolver<Maybe<ResolversTypes['ResponseCompany']>, ParentType, ContextType, Partial<QueryCompanyArgs>>;
   data_salary?: Resolver<Maybe<Array<Maybe<ResolversTypes['data_salary']>>>, ParentType, ContextType, Partial<QueryData_SalaryArgs>>;
   expense_company?: Resolver<Maybe<Array<Maybe<ResolversTypes['expense_company']>>>, ParentType, ContextType, Partial<QueryExpense_CompanyArgs>>;
+  filter_bookbank?: Resolver<Maybe<Array<Maybe<ResolversTypes['Bookbank_log_type']>>>, ParentType, ContextType, Partial<QueryFilter_BookbankArgs>>;
   filter_bookbank_admin?: Resolver<Maybe<Array<Maybe<ResolversTypes['Bookbank_log_type']>>>, ParentType, ContextType, Partial<QueryFilter_Bookbank_AdminArgs>>;
   getAllcompany?: Resolver<Maybe<Array<Maybe<ResolversTypes['CompanyBranch']>>>, ParentType, ContextType, Partial<QueryGetAllcompanyArgs>>;
   getAllleave?: Resolver<Maybe<ResolversTypes['getleaveResponseType']>, ParentType, ContextType, Partial<QueryGetAllleaveArgs>>;

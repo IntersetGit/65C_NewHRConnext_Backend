@@ -456,6 +456,7 @@ user_id:String
     bookbank_log: [Bookbank_log_type]
     bookbank_log_admin(userId: String): [Bookbank_log_type]
     filter_bookbank_admin(userId: String): [Bookbank_log_type]
+    filter_bookbank(userId: String): [Bookbank_log_type]
     provident_log(userId:String):[provident_log]
     mydata_salary(years: String): data_salary
     # datasalary_mee(years: String): data_salary_me
@@ -675,26 +676,27 @@ const resolvers: Resolvers = {
       return result; //แสดงข้อมูลโดยล็อคอินด้วย user
     },
 
-     async filter_bookbank_admin(parant, args, ctx) {
+    async filter_bookbank(parant, args, ctx) {
       // const filter = args?.userId ? args.userId : undefined;
       let current_time = new Date()
       let current_month = dayjs(current_time).format("MM")
       let current_year = dayjs(current_time).format("YYYY")
       let bb_acp_month = ""
       let bb_acp_year = ""
+      let get_bb_before = ""
       const result = await ctx.prisma.bookbank_log.findMany({
         include: {
           mas_bank: true
         },
         where: {
-          userId: args.userId,
+          userId: ctx.currentUser?.id,
         },
         orderBy:
         {
-          date: "desc",
+          date: "asc",
         },
       });
-      console.log(result)
+      
       for (let i = 0; i < result.length; i++) { //ทำการ filter โดยถ้าหากเวลาปัจจุบันตรงกัน เวลาใน bookbank จะให้ใช้ฐานเงินเดือนปัจจุบัน
         bb_acp_month = result[i].accept_month as string
         bb_acp_year = result[i].accept_years as string
@@ -704,9 +706,50 @@ const resolvers: Resolvers = {
             mas_bank : true
           },
           where : {
-            id : result[i + 1].id
+            id : result[i - 1].id
           }
          })
+         return get_bb_before
+        }
+        
+      }
+      return result; //แสดงข้อมูลด้วยการค้นหา user
+    },
+
+     async filter_bookbank_admin(parant, args, ctx) {
+      // const filter = args?.userId ? args.userId : undefined;
+      let current_time = new Date()
+      let current_month = dayjs(current_time).format("MM")
+      let current_year = dayjs(current_time).format("YYYY")
+      let bb_acp_month = ""
+      let bb_acp_year = ""
+      let get_bb_before = ""
+      const result = await ctx.prisma.bookbank_log.findMany({
+        include: {
+          mas_bank: true
+        },
+        where: {
+          userId: args.userId,
+        },
+        orderBy:
+        {
+          date: "asc",
+        },
+      });
+      
+      for (let i = 0; i < result.length; i++) { //ทำการ filter โดยถ้าหากเวลาปัจจุบันตรงกัน เวลาใน bookbank จะให้ใช้ฐานเงินเดือนปัจจุบัน
+        bb_acp_month = result[i].accept_month as string
+        bb_acp_year = result[i].accept_years as string
+        if(current_month < bb_acp_month && current_year === bb_acp_year){
+         let get_bb_before = await ctx.prisma.bookbank_log.findMany({
+          include:{
+            mas_bank : true
+          },
+          where : {
+            id : result[i - 1].id
+          }
+         })
+         return get_bb_before
         }
         
       }
