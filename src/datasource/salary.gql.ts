@@ -739,7 +739,7 @@ const resolvers: Resolvers = {
     },
 
 
-    async bookbank_log_admin(parant: any, args: any, ctx: any) {
+    async bookbank_log_admin(parant, args, ctx) {
       // const filter = args?.userId ? args.userId : undefined;
       const result = await ctx.prisma.bookbank_log.findMany({
         include: {
@@ -751,7 +751,7 @@ const resolvers: Resolvers = {
         },
         orderBy:
         {
-          date: "asc",
+          accept_date: "asc",
         },
       });
       return result; //แสดงข้อมูลด้วยการค้นหา user
