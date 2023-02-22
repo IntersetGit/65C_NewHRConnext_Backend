@@ -8,6 +8,7 @@ import dayjs from 'dayjs';
 import { includes, orderBy } from 'lodash';
 import { profile } from 'console';
 import { expense_company, bookbank_log } from '../generated/client/index';
+import { string } from 'zod';
 
 
 
@@ -797,118 +798,159 @@ const resolvers: Resolvers = {
       const search1 = args.fristname ? args.fristname : undefined
       const search2 = args.Position2 ? args.Position2 : undefined
       const search3 = args.Position3 ? args.Position3 : undefined
-      let current_time = new Date()
-      // let current_month = "3"
-      let current_month = dayjs(current_time).format("MM")
-      let current_year = dayjs(current_time).format("YYYY")
-      let bb_acp_month = ""
-      let bb_acp_year = ""
-      let bb_id = ""
+      // let current_time = new Date()
+      // // let current_month = "3"
+      // let current_month = dayjs(current_time).format("MM")
+      // let current_year = dayjs(current_time).format("YYYY")
+      // let bb_acp_month = ""
+      // let bb_acp_year = ""
+      // let bb_id = ""
 
-      const chk_bb = await ctx.prisma.user.findMany({
-        include: {
-          bookbank_log: { orderBy: { accept_date: 'desc' } }
-        },
-        where: {
-          companyBranchId: ctx.currentUser?.branchId
-        }
-      })
-      for (let i = 0; i < chk_bb.length; i++) {
-        let bb_log_forme = chk_bb[i].bookbank_log
-        console.log(bb_log_forme);
-        for (let a = 0; a < bb_log_forme.length; a++) {
-          console.log(bb_log_forme[a]);
+      // const chk_bb = await ctx.prisma.user.findMany({
+      //   include: {
+      //     bookbank_log: { orderBy: { accept_date: 'desc' } }
+      //   },
+      //   where: {
+      //     companyBranchId: ctx.currentUser?.branchId
+      //   }
+      // })
+      // for (let i = 0; i < chk_bb.length; i++) {
+      //   let bb_log_forme = chk_bb[i].bookbank_log
+      //   console.log(bb_log_forme);
+      //   for (let a = 0; a < bb_log_forme.length; a++) {
+      //     console.log(bb_log_forme[a]);
+      //     bb_acp_month = bb_log_forme[a].accept_month as string
+      //     bb_acp_year = bb_log_forme[a].accept_years as string
+
+      //     if (parseInt(current_month) < parseInt(bb_acp_month) && current_year === bb_acp_year) { //เช็คถ้าหากเดือน < เดือน ณ ปัจจุบัน ให้ทำการใช้ index[1]
+      //       bb_id = bb_log_forme[a + 1].id
+      //        const chk_data = await ctx.prisma.user.findMany({
+      //         include: {
+      //           profile: true,
+      //           role: true,
+      //           Position_user: {
+      //             include: { mas_positionlevel1: true, mas_positionlevel2: true, mas_positionlevel3: true },
+      //             where: {
+      //               mas_positionlevel2: {
+      //                 name: { contains: search2 }
+      //               }, AND: {
+      //                 mas_positionlevel3: {
+      //                   name: { contains: search3 }
+      //                 }
+      //               }
+      //             },
+      //             orderBy: { date: 'desc' }
+      //           },
+      //           salary: true,
+      //           bookbank_log: { include: {mas_bank:true} , where: { id: bb_id } },
+      //           companyBranch: { include: { expense_company: { orderBy: { date: 'desc' } } } }
+      //         },
+      //         where: {
+      //           companyBranchId: ctx.currentUser?.branchId,
+      //           AND: {
+      //             profile: {
+      //               firstname_th: { contains: search1 }
+      //             },
+      //             AND: {
+      //               Position_user: {
+      //                 some: {
+      //                   mas_positionlevel2: { name: { contains: search2 } },
+      //                   AND: { mas_positionlevel3: { name: { contains: search3 } } }
+      //                 },
+      //               },
+      //             },
+      //           },
+      //         }
+      //       })
+      //       // return getdata;
+      //     }
+      //     if (current_month === bb_acp_month && current_year === bb_acp_year) { //เช็คถ้าหากเดือนเท่ากับ เดือน ณ ปัจจุบัน ให้ทำการใช้ index ปัจจุบัน
+      //       bb_id = bb_log_forme[a].id
+      //       const chk_data = await ctx.prisma.user.findMany({
+      //         include: {
+      //           profile: true,
+      //           role: true,
+      //           Position_user: {
+      //             include: { mas_positionlevel1: true, mas_positionlevel2: true, mas_positionlevel3: true },
+      //             where: {
+      //               mas_positionlevel2: {
+      //                 name: { contains: search2 }
+      //               }, AND: {
+      //                 mas_positionlevel3: {
+      //                   name: { contains: search3 }
+      //                 }
+      //               }
+      //             },
+      //             orderBy: { date: 'desc' }
+      //           },
+      //           salary: true,
+      //           bookbank_log: { include: {mas_bank:true} , where: { id: bb_id } },
+      //           companyBranch: { include: { expense_company: { orderBy: { date: 'desc' } } } }
+      //         },
+      //         where: {
+      //           companyBranchId: ctx.currentUser?.branchId,
+      //           AND: {
+      //             profile: {
+      //               firstname_th: { contains: search1 }
+      //             },
+      //             AND: {
+      //               Position_user: {
+      //                 some: {
+      //                   mas_positionlevel2: { name: { contains: search2 } },
+      //                   AND: { mas_positionlevel3: { name: { contains: search3 } } }
+      //                 },
+      //               },
+      //             },
+      //           },
+      //         }
+      //       })
+      //       // return getdata;
+      //     }else{
+      //       const chk_data = await ctx.prisma.user.findMany({
+      //         include: {
+      //           profile: true,
+      //           role: true,
+      //           Position_user: {
+      //             include: { mas_positionlevel1: true, mas_positionlevel2: true, mas_positionlevel3: true },
+      //             where: {
+      //               mas_positionlevel2: {
+      //                 name: { contains: search2 }
+      //               }, AND: {
+      //                 mas_positionlevel3: {
+      //                   name: { contains: search3 }
+      //                 }
+      //               }
+      //             },
+      //             orderBy: { date: 'desc' }
+      //           },
+      //           salary: true,
+      //           bookbank_log: { include: { mas_bank: true }, orderBy: { date: 'desc' } },
+      //           companyBranch: { include: { expense_company: { orderBy: { date: 'desc' } } } }
+      //         },
+      //         where: {
+      //           companyBranchId: ctx.currentUser?.branchId,
+      //           AND: {
+      //             profile: {
+      //               firstname_th: { contains: search1 }
+      //             },
+      //             AND: {
+      //               Position_user: {
+      //                 some: {
+      //                   mas_positionlevel2: { name: { contains: search2 } },
+      //                   AND: { mas_positionlevel3: { name: { contains: search3 } } }
+      //                 },
+      //               },
+      //             },
+      //           },
+      //         }
+      //       });
+            
+      //       // return getdata;
+      //     }
           
-          bb_acp_month = bb_log_forme[a].accept_month as string
-          bb_acp_year = bb_log_forme[a].accept_years as string
+      //   }
 
-          if (parseInt(current_month) < parseInt(bb_acp_month) && current_year === bb_acp_year) { //เช็คถ้าหากเดือน < เดือน ณ ปัจจุบัน ให้ทำการใช้ index[1]
-            bb_id = bb_log_forme[a + 1].id
-            const getdata = await ctx.prisma.user.findMany({
-              include: {
-                profile: true,
-                role: true,
-                Position_user: {
-                  include: { mas_positionlevel1: true, mas_positionlevel2: true, mas_positionlevel3: true },
-                  where: {
-                    mas_positionlevel2: {
-                      name: { contains: search2 }
-                    }, AND: {
-                      mas_positionlevel3: {
-                        name: { contains: search3 }
-                      }
-                    }
-                  },
-                  orderBy: { date: 'desc' }
-                },
-                salary: true,
-                bookbank_log: { where: { id: bb_id }},
-                companyBranch: { include: { expense_company: { orderBy: { date: 'desc' } } } }
-              },
-              where: {
-                companyBranchId: ctx.currentUser?.branchId,
-                AND: {
-                  profile: {
-                    firstname_th: { contains: search1 }
-                  },
-                  AND: {
-                    Position_user: {
-                      some: {
-                        mas_positionlevel2: { name: { contains: search2 } },
-                        AND: { mas_positionlevel3: { name: { contains: search3 } } }
-                      },
-                    },
-                  },
-                },
-              }
-            })
-            return getdata;
-          }
-          if (current_month === bb_acp_month && current_year === bb_acp_year) { //เช็คถ้าหากเดือนเท่ากับ เดือน ณ ปัจจุบัน ให้ทำการใช้ index ปัจจุบัน
-            bb_id = bb_log_forme[a].id
-            const getdata = await ctx.prisma.user.findMany({
-              include: {
-                profile: true,
-                role: true,
-                Position_user: {
-                  include: { mas_positionlevel1: true, mas_positionlevel2: true, mas_positionlevel3: true },
-                  where: {
-                    mas_positionlevel2: {
-                      name: { contains: search2 }
-                    }, AND: {
-                      mas_positionlevel3: {
-                        name: { contains: search3 }
-                      }
-                    }
-                  },
-                  orderBy: { date: 'desc' }
-                },
-                salary: true,
-                bookbank_log: { where: { id: bb_id } },
-                companyBranch: { include: { expense_company: { orderBy: { date: 'desc' } } } }
-              },
-              where: {
-                companyBranchId: ctx.currentUser?.branchId,
-                AND: {
-                  profile: {
-                    firstname_th: { contains: search1 }
-                  },
-                  AND: {
-                    Position_user: {
-                      some: {
-                        mas_positionlevel2: { name: { contains: search2 } },
-                        AND: { mas_positionlevel3: { name: { contains: search3 } } }
-                      },
-                    },
-                  },
-                },
-              }
-            })
-            return getdata;
-          }
-        }
-
-      }
+      // }
       const getdata = await ctx.prisma.user.findMany({
         include: {
           profile: true,
@@ -927,7 +969,7 @@ const resolvers: Resolvers = {
             orderBy: { date: 'desc' }
           },
           salary: true,
-          bookbank_log: { include: { mas_bank: true }, orderBy: { date: 'desc' } },
+          bookbank_log: { include: { mas_bank: true }, orderBy: { accept_date: 'desc' } },
           companyBranch: { include: { expense_company: { orderBy: { date: 'desc' } } } }
         },
         where: {
@@ -1487,22 +1529,143 @@ const resolvers: Resolvers = {
         });
         console.log(chk_salary);
 
-        // for (let i = 0; i < chk_salary.length; i++) {
-        //   let bb = chk_salary[i].User?.bookbank_log
-        //   bb?.forEach((e) => {
-        //     let bb_date = e.date
-        //     let bb_Year = dayjs(bb_date).format("YYYY")
-        //     let bb_month = dayjs(bb_date).format("MM")
-        //     if (Thismonth < bb_month && ThisYear === e.accept_years) { //ถ้าหากเดือน Exp < เดือนของ bb ให้ใช้ฐานเงินเดือน array[1]
-        //       base_salary = e.base_salary
-        //       // console.log(e.userId, base_salary);
-        //     }
-        //     if (Thismonth === bb_month && ThisYear === e.accept_years) {//ถ้าหากเดือน Exp === เดือนของ bb ให้ใช้ฐานเงินเดือน array[0]
-        //       base_salary = e.base_salary
-        //       // console.log(e.userId, base_salary);
-        //     }
-        //   })
-        // }
+        let New_Pro_emp_per = args.data.provident_emp as number
+        let New_Pro_com_per = args.data.provident_com as number
+        let New_Pro_Emp = 0
+        let New_Pro_Com = 0
+        let Total_income = 0
+        let Total_expense = 0
+        let SocialYears = 0
+        let old_net = 0
+        let Net = 0
+        let IncomeYears = 0
+        ///////////////////////////////
+        let base_salary = 0
+        let commission = 0
+        let position_income = 0
+        let ot = 0
+        let bonus = 0
+        let special_income = 0
+        let other_income = 0
+        let travel_income = 0
+        let bursary = 0
+        let welfare_money = 0
+        //EXPENSE
+        let social_security = 0 //Social security อันเก่า
+        let vat = 0
+        let miss = 0
+        let ra = 0
+        let late = 0
+        let other = 0
+        let provident_employee = 0
+        let provident_company = 0
+        let ResultSocialYears = 0
+        let ResultIncomeYears = 0
+
+        for (let i = 0; i < chk_salary.length; i++) {
+          let salary_id = chk_salary[i].id
+          let bb = chk_salary[i].User?.bookbank_log
+          commission = chk_salary[i].commission as number
+          position_income = chk_salary[i].position_income as number
+          ot = chk_salary[i].ot as number
+          bonus = chk_salary[i].bonus as number
+          special_income = chk_salary[i].special_income as number
+          other_income = chk_salary[i].other_income as number
+          travel_income = chk_salary[i].travel_income as number
+          bursary = chk_salary[i].bursary as number
+          welfare_money = chk_salary[i].welfare_money as number
+          social_security = chk_salary[i].social_security as number
+          SocialYears = chk_salary[i].socialYears as number
+          IncomeYears = chk_salary[i].incomeYears as number
+          old_net = chk_salary[i].net as number
+          vat = chk_salary[i].vat as number
+          miss = chk_salary[i].miss as number
+          ra = chk_salary[i].ra as number
+          late = chk_salary[i].late as number
+          other = chk_salary[i].other as number
+          bb?.forEach((e) => {
+            let bb_date = e.accept_date
+            let bb_Year = dayjs(bb_date).format("YYYY")
+            let bb_month = dayjs(bb_date).format("MM")
+            if (Thismonth < bb_month && ThisYear === e.accept_years) { //ถ้าหากเดือน Exp < เดือนของ bb ให้ใช้ฐานเงินเดือน array[1]
+              base_salary = e.base_salary
+            }
+            if (Thismonth === bb_month && ThisYear === e.accept_years) {//ถ้าหากเดือน Exp === เดือนของ bb ให้ใช้ฐานเงินเดือน array[0]
+              base_salary = e.base_salary
+            }
+          })
+          if (New_Pro_emp_per || New_Pro_com_per) {
+            if (New_Pro_emp_per) {
+              ///// calculate function ///////////
+              base_salary = args.data.base_salary ? args.data.base_salary : base_salary
+              New_Pro_Emp = (base_salary * New_Pro_emp_per) / 100
+              Total_income = commission + position_income + ot + bonus + special_income + other_income + travel_income + bursary + welfare_money + base_salary
+              Total_expense = social_security + vat + miss + ra + late + other + New_Pro_Com
+              Net = Total_income - Total_expense
+              ResultIncomeYears = (IncomeYears - old_net) + Net
+              const upt_salary = await ctx.prisma.salary.update({
+                data: {
+                  provident_employee: New_Pro_Emp,
+                  // provident_company: New_Pro_Com,
+                  total_income: Total_income,
+                  total_expense: Total_expense,
+                  incomeYears: ResultIncomeYears,
+                  net:Net
+                },
+                where: {
+                  id: salary_id
+                }
+              })
+              // console.log(upt_salary);
+              const chk_all_collect = await ctx.prisma.mas_all_collect.findMany({
+                where: {
+                  userId: chk_salary[i].userId as string
+                }
+              })
+              console.log(chk_all_collect);
+
+              // for (let a = 0; a < chk_all_collect.length; a++) {
+              //   let ss_collect_old = chk_all_collect[0].social_secu_collect as number
+              //   // let ss_collect_new = (ss_collect_old - social_security) + NewSocial_security
+              //   const upt_all_collect = await ctx.prisma.mas_all_collect.update({
+              //     data: {
+              //       social_secu_collect: ss_collect_new,
+              //       income_collect: ResultIncomeYears
+
+              //     },
+              //     where: {
+              //       userId: chk_salary[i].userId as string
+              //     }
+              //   })
+              //   console.log('ค่าใหม่ = ', upt_all_collect);
+
+              // }
+            }
+            
+            if (New_Pro_com_per) {
+              ///// calculate function ///////////
+              base_salary = args.data.base_salary ? args.data.base_salary : base_salary
+              New_Pro_Com = (base_salary * New_Pro_com_per) / 100
+              Total_income = commission + position_income + ot + bonus + special_income + other_income + travel_income + bursary + welfare_money + base_salary
+              Total_expense = social_security + vat + miss + ra + late + other + New_Pro_Com
+              Net = Total_income - Total_expense
+              ResultIncomeYears = (IncomeYears - old_net) + Net
+              const upt_salary = await ctx.prisma.salary.update({
+                data: {
+                  // provident_employee: New_Pro_Emp,
+                  provident_company: New_Pro_Com,
+                  total_income: Total_income,
+                  total_expense: Total_expense,
+                  incomeYears: ResultIncomeYears,
+                  net:Net
+                },
+                where: {
+                  id: salary_id
+                }
+              })
+            }
+          }
+        }
 
         return {
           message: 'update success',
@@ -1633,10 +1796,15 @@ const resolvers: Resolvers = {
           SocialYears = chk_salary[i].socialYears as number
           IncomeYears = chk_salary[i].incomeYears as number
           old_net = chk_salary[i].net as number
+          vat = chk_salary[i].vat as number
+          miss = chk_salary[i].miss as number
+          ra = chk_salary[i].ra as number
+          late = chk_salary[i].late as number
+          other = chk_salary[i].other as number
           console.log("SalaryId = ", salary_id);
           let bb = chk_salary[i].User?.bookbank_log
           bb?.forEach((e) => {
-            let bb_date = e.date
+            let bb_date = e.accept_date
             let bb_Year = dayjs(bb_date).format("YYYY")
             let bb_month = dayjs(bb_date).format("MM")
             if (Thismonth < bb_month && ThisYear === e.accept_years) { //ถ้าหากเดือน Exp < เดือนของ bb ให้ใช้ฐานเงินเดือน array[1]
