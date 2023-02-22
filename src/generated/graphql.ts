@@ -1521,6 +1521,7 @@ export type Provident_LogInput = {
   pro_company?: InputMaybe<Scalars['Float']>;
   pro_employee?: InputMaybe<Scalars['Float']>;
   provident_date?: InputMaybe<Scalars['Date']>;
+  salaryId?: InputMaybe<Scalars['String']>;
   userId?: InputMaybe<Scalars['String']>;
 };
 
