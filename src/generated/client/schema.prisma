@@ -421,8 +421,9 @@ model bookbank_log {
   provident_com Float           @default(0)
   provident_emp Float           @default(0)
   accept_date   DateTime
-  accept_month  String?
-  accept_years  String?
+  accept_month  Int?
+  accept_years  Int?
+  unix          Int?
   salary        salary[] //เรียกดู base salary
   // salaryId      String?      @db.Uuid
   // all_collect   all_collect? @relation(fields: [all_collectId], references: [id])
