@@ -240,20 +240,18 @@ export const leaveResolvers: Resolvers = {
           include: {
             profile: true,
             Position_user: { include: { mas_positionlevel1: true, mas_positionlevel2: true, mas_positionlevel3: true, header: { include: { profile: true } } } },
-            data_leave: { include: { mas_leave_type: true }, where: { Status: 2, AND:{id: search} } }
+            data_leave: { include: { mas_leave_type: true }, where: { Status: 2, AND: { id: search } } }
           },
           where: {
-            
-            
-              data_leave: {
-                some: {
-                  Status: 2,
-                  AND:{
-                    id: search
-                  }
+            data_leave: {
+              some: {
+                Status: 2,
+                AND: {
+                  id: search
                 }
               }
-            
+            }
+
           },
         })
         if (getdataleave) {
@@ -394,7 +392,7 @@ export const leaveResolvers: Resolvers = {
           include: {
             profile: true,
             Position_user: { include: { mas_positionlevel1: true, mas_positionlevel2: true, mas_positionlevel3: true, header: { include: { profile: true } } } },
-            data_leave: { include: { mas_leave_type: true }}
+            data_leave: { include: { mas_leave_type: true } }
           },
           where: {
             id: args.userId,
@@ -489,8 +487,10 @@ export const leaveResolvers: Resolvers = {
             company: true,
             profile: true,
             Position_user: {
+              take: 1,
               include: { mas_positionlevel1: true, mas_positionlevel2: true, mas_positionlevel3: true, header: { include: { profile: true } } },
-              where: { position2_id: filter2, AND: { position3_id: filter3 } }
+              //where: { position2_id: filter2, AND: { position3_id: filter3 } },
+              orderBy: { date: 'desc' },
             },
             data_leave: { include: { mas_leave_type: true } }
           },
@@ -508,20 +508,11 @@ export const leaveResolvers: Resolvers = {
                 profile: {
                   firstname_th: { contains: filter },
                 },
-                AND: {
-                  Position_user: {
-                    some: {
-                      position2_id: filter2,
-                      AND: {
-                        position3_id: filter3
-                      }
-                    }
-                  }
-                }
               },
             }
           }
         })
+
         const getdataAllleave = await ctx.prisma.user.findMany({
           include: {
             company: true,
@@ -530,7 +521,7 @@ export const leaveResolvers: Resolvers = {
               include: { mas_positionlevel1: true, mas_positionlevel2: true, mas_positionlevel3: true, header: { include: { profile: true } } },
               where: { position2_id: filter2, AND: { position3_id: filter3 } }
             },
-            data_leave: { include: { mas_leave_type: true }, where: {Status: 2}}
+            data_leave: { include: { mas_leave_type: true }, where: { Status: 2 } }
           },
           where: {
             companyBranch: {
@@ -606,6 +597,13 @@ export const leaveResolvers: Resolvers = {
             cout_hours4 = cout_hours4 - (b * 8)
           }
         }
+        const datas : any[] = []
+       getdataAllleave_2?.forEach((e) => {
+          if (e.Position_user?.[0]?.position2_id && !(e.Position_user?.[0]?.position2_id === filter2)) return
+          if (e.Position_user?.[0]?.position3_id && !(e.Position_user?.[0]?.position3_id === filter3)) return
+            datas.push(e)
+          
+        })
 
         let dataCount = {
           name_1: 'ลาพักร้อน ' + countleave1 + ' วัน ' + cout_hours + ' ชั่วโมง',
@@ -622,7 +620,7 @@ export const leaveResolvers: Resolvers = {
           hours4: cout_hours4
         }
         return {
-          data_all: getdataAllleave_2,
+          data_all: datas,
           data_count: dataCount
         }
       }
