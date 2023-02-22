@@ -1732,20 +1732,20 @@ const resolvers: Resolvers = {
       const take_arr = args.data?.check_vat ? args.data?.check_vat : []
 
       if (args.data?.id) { //ถ้ามีการรับ ID ให้ทำการอัปเดท
-        // const updateExpenseCom = await ctx.prisma.expense_company.update({
-        //   data: {
-        //     bankId: args.data?.bankId as string,
-        //     date: new Date(args.data?.date),
-        //     vat_per: args.data?.vat_per as number,
-        //     ss_per: args.data?.ss_per as number,
-        //     exp_com_month: Thismonth,
-        //     exp_com_years: ThisYear,
-        //     check_vat: take_arr as string[],
-        //     cal_date_salary: args.data?.cal_date_salary,
-        //     companyBranchId: args.data?.companyBranchId,
-        //   },
-        //   where: { id: args.data.id },
-        // });
+        const updateExpenseCom = await ctx.prisma.expense_company.update({
+          data: {
+            bankId: args.data?.bankId as string,
+            date: new Date(args.data?.date),
+            vat_per: args.data?.vat_per as number,
+            ss_per: args.data?.ss_per as number,
+            exp_com_month: Thismonth,
+            exp_com_years: ThisYear,
+            check_vat: take_arr as string[],
+            cal_date_salary: args.data?.cal_date_salary,
+            companyBranchId: args.data?.companyBranchId,
+          },
+          where: { id: args.data.id },
+        });
         const chk_salary = await ctx.prisma.salary.findMany({ //จากนั้นให้ทำการหาา salary ว่าเดือนที่มีการเปลี่ยนแปลง ตรงกับ เงินเดือนมั้ย
           include: {
             User: { include: { companyBranch: true, bookbank_log: { orderBy: { date: 'desc' } } } },
