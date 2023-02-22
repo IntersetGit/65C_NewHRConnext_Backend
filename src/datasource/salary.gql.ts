@@ -668,7 +668,7 @@ const resolvers: Resolvers = {
     //   return result;
     // },
 
-    async bookbank_log(parant: any, args: any, ctx: any) {
+    async bookbank_log(parant, args, ctx) {
       // const filter = args?.userId ? args.userId : undefined;
       const result = await ctx.prisma.bookbank_log.findMany({
         include: {
@@ -680,7 +680,7 @@ const resolvers: Resolvers = {
         },
         orderBy:
         {
-          date: "asc",
+          accept_date : "asc",
         },
       });
       return result; //แสดงข้อมูลโดยล็อคอินด้วย user
