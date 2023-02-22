@@ -697,32 +697,18 @@ const resolvers: Resolvers = {
       const result = await ctx.prisma.bookbank_log.findMany({
         include: {
           mas_bank: true
-        },
+        }, take: 1,
         where: {
           userId: ctx.currentUser?.id,
+          AND:{
+            unix: { lte: dayjs(new Date()).unix() }
+          }
         },
         orderBy:
         {
-          date: "asc",
+          accept_date: "desc",
         },
       });
-
-      for (let i = 0; i < result.length; i++) { //ทำการ filter โดยถ้าหากเวลาปัจจุบันตรงกัน เวลาใน bookbank จะให้ใช้ฐานเงินเดือนปัจจุบัน
-        bb_acp_month = result[i].accept_month?.toString() as string
-        bb_acp_year = result[i].accept_years?.toString() as string
-        if (current_month < bb_acp_month && current_year === bb_acp_year) {
-          let get_bb_before = await ctx.prisma.bookbank_log.findMany({
-            include: {
-              mas_bank: true
-            },
-            where: {
-              id: result[i - 1].id
-            }
-          })
-          return get_bb_before
-        }
-
-      }
       return result; //แสดงข้อมูลด้วยการค้นหา user
     },
 
@@ -737,32 +723,18 @@ const resolvers: Resolvers = {
       const result = await ctx.prisma.bookbank_log.findMany({
         include: {
           mas_bank: true
-        },
+        }, take: 1,
         where: {
           userId: args.userId,
+          AND:{
+            unix: { lte: dayjs(new Date()).unix() }
+          }
         },
         orderBy:
         {
-          date: "asc",
+          accept_date: "desc",
         },
       });
-
-      for (let i = 0; i < result.length; i++) { //ทำการ filter โดยถ้าหากเวลาปัจจุบันตรงกัน เวลาใน bookbank จะให้ใช้ฐานเงินเดือนปัจจุบัน
-        bb_acp_month = result[i].accept_month?.toString() as string
-        bb_acp_year = result[i].accept_years?.toString() as string
-        if (current_month < bb_acp_month && current_year === bb_acp_year) {
-          let get_bb_before = await ctx.prisma.bookbank_log.findMany({
-            include: {
-              mas_bank: true
-            },
-            where: {
-              id: result[i - 1].id
-            }
-          })
-          return get_bb_before
-        }
-
-      }
       return result; //แสดงข้อมูลด้วยการค้นหา user
     },
 
@@ -825,7 +797,7 @@ const resolvers: Resolvers = {
             orderBy: { date: 'desc' }
           },
           salary: true,
-          bookbank_log: {include : {mas_bank : true} ,take: 1, orderBy: { accept_date: 'desc' }, where: { unix : {lte : dayjs(new Date()).unix()} } },
+          bookbank_log: { include: { mas_bank: true }, take: 1, orderBy: { accept_date: 'desc' }, where: { unix: { lte: dayjs(new Date()).unix() } } },
           companyBranch: { include: { expense_company: { orderBy: { date: 'desc' } } } }
         },
         where: {
@@ -1719,7 +1691,7 @@ const resolvers: Resolvers = {
           base_salary: args.data?.base_salary as number,
           userId: args.data?.userId,
           accept_date: new Date(args.data?.accept_date),
-          unix : dayjs(new Date(args.data?.accept_date)).unix(),
+          unix: dayjs(new Date(args.data?.accept_date)).unix(),
           accept_month: Thismonth,
           accept_years: ThisYear,
           provident_com: args.data?.provident_com as number, // กองทุนของพนักงาน ตัวเลขเป็น %
