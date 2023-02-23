@@ -341,9 +341,9 @@ export const leaveResolvers: Resolvers = {
           include: {
             user: {
               include: {
-                profile: true, Position_user: {
-                  include: { mas_positionlevel1: true, mas_positionlevel2: true, mas_positionlevel3: true, header: { include: { profile: true } } }, where: {
-                    position2_id: filter2, AND: { position3_id: filter3 }
+                profile: { include: { mas_positionlevel1: true, mas_positionlevel2: true, mas_positionlevel3: true } },
+                Position_user: {
+                  include: { mas_positionlevel1: true, mas_positionlevel2: true, mas_positionlevel3: true, header: { include: { profile: true } } 
                   }
                 },
               }
@@ -355,17 +355,17 @@ export const leaveResolvers: Resolvers = {
               Position_user: {
                 some: {
                   headderId: ctx.currentUser?.id,
-                  AND: {
-                    position2_id: filter2,
-                    AND: {
-                      position3_id: filter3
-                    }
-                  }
                 }
               },
               AND: {
                 profile: {
                   firstname_th: { contains: filter },
+                  AND:{
+                    masposition2_id: filter2,
+                    AND:{
+                      masposition3_id: filter3
+                    }
+                  }
                 },
               },
             }
@@ -507,7 +507,8 @@ export const leaveResolvers: Resolvers = {
                 profile: {
                   firstname_th: { contains: filter },
                   AND: {
-                    masposition2_id: filter2, AND: {
+                    masposition2_id: filter2,
+                     AND: {
                       masposition3_id: filter3
                     }
                   }
@@ -540,7 +541,8 @@ export const leaveResolvers: Resolvers = {
                 profile: {
                   firstname_th: { contains: filter },
                   AND: {
-                    masposition2_id: filter2, AND: {
+                    masposition2_id: filter2,
+                     AND: {
                       masposition3_id: filter3
                     }
                   }
