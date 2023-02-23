@@ -220,39 +220,7 @@ export const userTypedef = gql`
 const resolvers: Resolvers = {
   Query: {
     async users(parent, args, ctx) {
-      if (!args.userid) {
-        const filter = args?.name ? args?.name : undefined;
-        const filter2 = args?.position2Id ? args?.position2Id : undefined;
-        const filter3 = args?.position3Id ? args?.position3Id : undefined;
-        const result = await ctx.prisma.user.findMany({
-          include: {
-            profile: true, company: true, Role_Company: true, companyBranch: true,
-            Position_user: {
-              include: { mas_positionlevel1: true, mas_positionlevel2: true, mas_positionlevel3: true },
-              where: { position2_id: filter2, AND: { position3_id: filter3 } }, orderBy: { date: 'desc' }
-            }
-          },
-          where: {
-            companyBranchId: ctx.currentUser?.branchId,
-            AND: {
-              profile: {
-                firstname_th: { contains: filter },
-              },
-              AND: {
-                Position_user: {
-                  some: {
-                    position2_id: filter2,
-                    AND: {
-                      position3_id: filter3
-                    }
-                  }
-                }
-              }
-            },
-          },
-        });
-        return result;
-      } else {
+      if (args.userid) {
         const result = await ctx.prisma.user.findMany({
           include: {
             profile: true, company: true, Role_Company: true, companyBranch: true,
@@ -265,7 +233,38 @@ const resolvers: Resolvers = {
           }
         })
         return result;
-      }
+      }else{
+        const filter = args?.name ? args?.name : undefined;
+        const filter2 = args?.position2Id ? args?.position2Id : undefined;
+        const filter3 = args?.position3Id ? args?.position3Id : undefined;
+        const result = await ctx.prisma.user.findMany({
+          include: {
+            profile: true, company: true, Role_Company: true, companyBranch: true,
+            Position_user: {
+              include: { mas_positionlevel1: true, mas_positionlevel2: true, mas_positionlevel3: true }, orderBy: { date: 'desc' }
+            }
+          },
+          where: {
+            companyBranchId: ctx.currentUser?.branchId,
+            AND: {
+              profile: {
+                firstname_th: { contains: filter },
+              },
+            //   AND: {
+            //     Position_user: {
+            //       some: {
+            //         position2_id: filter2,
+            //         AND: {
+            //           position3_id: filter3
+            //         }
+            //       }
+            //     }
+            //   }
+            },
+          },
+        });
+        return result;
+      } 
     },
 
     /**
