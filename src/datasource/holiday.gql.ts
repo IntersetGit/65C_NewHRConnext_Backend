@@ -109,6 +109,7 @@ export const holidayResolvers: Resolvers = {
     async GetHolidayDate(p, args, ctx) {
       let count = 0
       let yaer = 0
+      let groups = []
       const search = args.year as number ? args.year : undefined;
       const result = await ctx.prisma.holiday_date.findMany({
         include: { Company: true },
@@ -126,20 +127,27 @@ export const holidayResolvers: Resolvers = {
           }
         ],
       });
+      
+      // for (let i = 0; i < year.length; i++){
 
-      if (result && result.length >= 1)
-        result.forEach(async (e) => {
-          if (e.status === 1) {
-            count = count + e.status
-          }
-          if (e.year === e.year) {
-            yaer = e.year
-          }
-        })
+      // }
+
+
+      // if (result && result.length >= 1)
+      //   result.forEach(async (e) => {
+      //     if (e.yesr === e.year) {
+      //       count = count + e.status
+      //     } else {
+
+      //     }
+      //     if (e.year === e.year) {
+      //       yaer = e.year
+      //     }
+        // })
       return {
         dataAll: result,
         countYaer: count,
-        year: yaer
+        //year: yaer
       };
     }
   },

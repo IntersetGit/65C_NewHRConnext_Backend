@@ -130,6 +130,7 @@ exports.Prisma.CompanyBranchScalarFieldEnum = makeEnum({
   email: 'email',
   email_2: 'email_2',
   company_type: 'company_type',
+  main_company_type: 'main_company_type',
   sub_company_type: 'sub_company_type',
   registeredamount: 'registeredamount',
   regis_vat: 'regis_vat',

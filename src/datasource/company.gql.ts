@@ -43,6 +43,7 @@ export const companyTypedef = gql`
     email: String
     email_2: String
     company_type: String
+    main_company_type: String
     sub_company_type: String
     registeredamount: String
     social_facebook: String
@@ -77,6 +78,7 @@ export const companyTypedef = gql`
     email: String
     email_2: String
     company_type: String
+    main_company_type: String
     sub_company_type: String
     registeredamount: String
     social_facebook: String
@@ -117,6 +119,7 @@ export const companyTypedef = gql`
     email: String
     email_2: String
     company_type: String
+    main_company_type: String
     sub_company_type: String
     registeredamount: String
     social_facebook: String
@@ -318,6 +321,7 @@ const resolvers: Resolvers = {
             email: args.data?.email,
             email_2: args.data?.email_2,
             company_type: 'สาขา',
+            main_company_type: args.data?.main_company_type,
             sub_company_type: args.data?.sub_company_type,
             registeredamount: args.data?.registeredamount,
             social_facebook: args.data?.social_facebook,
@@ -356,6 +360,7 @@ const resolvers: Resolvers = {
             email: args.data?.email,
             email_2: args.data?.email_2,
             company_type: 'สาขา',
+            main_company_type: args.data?.main_company_type,
             sub_company_type: args.data?.sub_company_type,
             registeredamount: args.data?.registeredamount,
             social_facebook: args.data?.social_facebook,

@@ -91,6 +91,7 @@ export type CompanyBranch = {
   id: Scalars['ID'];
   lat?: Maybe<Scalars['String']>;
   lng?: Maybe<Scalars['String']>;
+  main_company_type?: Maybe<Scalars['String']>;
   name?: Maybe<Scalars['String']>;
   regis_vat?: Maybe<Scalars['String']>;
   regiscomnumber?: Maybe<Scalars['String']>;
@@ -990,6 +991,7 @@ export type ResponseCompany_Branch = {
   id: Scalars['ID'];
   lat?: Maybe<Scalars['String']>;
   lng?: Maybe<Scalars['String']>;
+  main_company_type?: Maybe<Scalars['String']>;
   name?: Maybe<Scalars['String']>;
   regis_vat?: Maybe<Scalars['String']>;
   regiscomnumber?: Maybe<Scalars['String']>;
@@ -1131,6 +1133,7 @@ export type CreateCompanyBranch = {
   id?: InputMaybe<Scalars['ID']>;
   lat?: InputMaybe<Scalars['String']>;
   lng?: InputMaybe<Scalars['String']>;
+  main_company_type?: InputMaybe<Scalars['String']>;
   name?: InputMaybe<Scalars['String']>;
   regis_vat?: InputMaybe<Scalars['String']>;
   regiscomnumber?: InputMaybe<Scalars['String']>;
@@ -2037,6 +2040,7 @@ export type CompanyBranchResolvers<ContextType = ApolloContext, ParentType exten
   id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
   lat?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   lng?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  main_company_type?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   name?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   regis_vat?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   regiscomnumber?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
@@ -2493,6 +2497,7 @@ export type ResponseCompany_BranchResolvers<ContextType = ApolloContext, ParentT
   id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
   lat?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   lng?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  main_company_type?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   name?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   regis_vat?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   regiscomnumber?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;

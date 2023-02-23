@@ -59,6 +59,7 @@ model CompanyBranch {
   email             String?
   email_2           String?
   company_type      String?
+  main_company_type String?
   sub_company_type  String?
   registeredamount  String?
   regis_vat         String?

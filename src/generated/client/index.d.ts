@@ -51,6 +51,7 @@ export type CompanyBranch = {
   email: string | null
   email_2: string | null
   company_type: string | null
+  main_company_type: string | null
   sub_company_type: string | null
   registeredamount: string | null
   regis_vat: string | null
@@ -3826,6 +3827,7 @@ export namespace Prisma {
     email: string | null
     email_2: string | null
     company_type: string | null
+    main_company_type: string | null
     sub_company_type: string | null
     registeredamount: string | null
     regis_vat: string | null
@@ -3858,6 +3860,7 @@ export namespace Prisma {
     email: string | null
     email_2: string | null
     company_type: string | null
+    main_company_type: string | null
     sub_company_type: string | null
     registeredamount: string | null
     regis_vat: string | null
@@ -3890,6 +3893,7 @@ export namespace Prisma {
     email: number
     email_2: number
     company_type: number
+    main_company_type: number
     sub_company_type: number
     registeredamount: number
     regis_vat: number
@@ -3924,6 +3928,7 @@ export namespace Prisma {
     email?: true
     email_2?: true
     company_type?: true
+    main_company_type?: true
     sub_company_type?: true
     registeredamount?: true
     regis_vat?: true
@@ -3956,6 +3961,7 @@ export namespace Prisma {
     email?: true
     email_2?: true
     company_type?: true
+    main_company_type?: true
     sub_company_type?: true
     registeredamount?: true
     regis_vat?: true
@@ -3988,6 +3994,7 @@ export namespace Prisma {
     email?: true
     email_2?: true
     company_type?: true
+    main_company_type?: true
     sub_company_type?: true
     registeredamount?: true
     regis_vat?: true
@@ -4094,6 +4101,7 @@ export namespace Prisma {
     email: string | null
     email_2: string | null
     company_type: string | null
+    main_company_type: string | null
     sub_company_type: string | null
     registeredamount: string | null
     regis_vat: string | null
@@ -4143,6 +4151,7 @@ export namespace Prisma {
     email?: boolean
     email_2?: boolean
     company_type?: boolean
+    main_company_type?: boolean
     sub_company_type?: boolean
     registeredamount?: boolean
     regis_vat?: boolean
@@ -35622,6 +35631,7 @@ export namespace Prisma {
     email: 'email',
     email_2: 'email_2',
     company_type: 'company_type',
+    main_company_type: 'main_company_type',
     sub_company_type: 'sub_company_type',
     registeredamount: 'registeredamount',
     regis_vat: 'regis_vat',
@@ -36198,6 +36208,7 @@ export namespace Prisma {
     email?: StringNullableFilter | string | null
     email_2?: StringNullableFilter | string | null
     company_type?: StringNullableFilter | string | null
+    main_company_type?: StringNullableFilter | string | null
     sub_company_type?: StringNullableFilter | string | null
     registeredamount?: StringNullableFilter | string | null
     regis_vat?: StringNullableFilter | string | null
@@ -36235,6 +36246,7 @@ export namespace Prisma {
     email?: SortOrder
     email_2?: SortOrder
     company_type?: SortOrder
+    main_company_type?: SortOrder
     sub_company_type?: SortOrder
     registeredamount?: SortOrder
     regis_vat?: SortOrder
@@ -36276,6 +36288,7 @@ export namespace Prisma {
     email?: SortOrder
     email_2?: SortOrder
     company_type?: SortOrder
+    main_company_type?: SortOrder
     sub_company_type?: SortOrder
     registeredamount?: SortOrder
     regis_vat?: SortOrder
@@ -36314,6 +36327,7 @@ export namespace Prisma {
     email?: StringNullableWithAggregatesFilter | string | null
     email_2?: StringNullableWithAggregatesFilter | string | null
     company_type?: StringNullableWithAggregatesFilter | string | null
+    main_company_type?: StringNullableWithAggregatesFilter | string | null
     sub_company_type?: StringNullableWithAggregatesFilter | string | null
     registeredamount?: StringNullableWithAggregatesFilter | string | null
     regis_vat?: StringNullableWithAggregatesFilter | string | null
@@ -38380,6 +38394,7 @@ export namespace Prisma {
     email?: string | null
     email_2?: string | null
     company_type?: string | null
+    main_company_type?: string | null
     sub_company_type?: string | null
     registeredamount?: string | null
     regis_vat?: string | null
@@ -38415,6 +38430,7 @@ export namespace Prisma {
     email?: string | null
     email_2?: string | null
     company_type?: string | null
+    main_company_type?: string | null
     sub_company_type?: string | null
     registeredamount?: string | null
     regis_vat?: string | null
@@ -38450,6 +38466,7 @@ export namespace Prisma {
     email?: NullableStringFieldUpdateOperationsInput | string | null
     email_2?: NullableStringFieldUpdateOperationsInput | string | null
     company_type?: NullableStringFieldUpdateOperationsInput | string | null
+    main_company_type?: NullableStringFieldUpdateOperationsInput | string | null
     sub_company_type?: NullableStringFieldUpdateOperationsInput | string | null
     registeredamount?: NullableStringFieldUpdateOperationsInput | string | null
     regis_vat?: NullableStringFieldUpdateOperationsInput | string | null
@@ -38485,6 +38502,7 @@ export namespace Prisma {
     email?: NullableStringFieldUpdateOperationsInput | string | null
     email_2?: NullableStringFieldUpdateOperationsInput | string | null
     company_type?: NullableStringFieldUpdateOperationsInput | string | null
+    main_company_type?: NullableStringFieldUpdateOperationsInput | string | null
     sub_company_type?: NullableStringFieldUpdateOperationsInput | string | null
     registeredamount?: NullableStringFieldUpdateOperationsInput | string | null
     regis_vat?: NullableStringFieldUpdateOperationsInput | string | null
@@ -38520,6 +38538,7 @@ export namespace Prisma {
     email?: string | null
     email_2?: string | null
     company_type?: string | null
+    main_company_type?: string | null
     sub_company_type?: string | null
     registeredamount?: string | null
     regis_vat?: string | null
@@ -38552,6 +38571,7 @@ export namespace Prisma {
     email?: NullableStringFieldUpdateOperationsInput | string | null
     email_2?: NullableStringFieldUpdateOperationsInput | string | null
     company_type?: NullableStringFieldUpdateOperationsInput | string | null
+    main_company_type?: NullableStringFieldUpdateOperationsInput | string | null
     sub_company_type?: NullableStringFieldUpdateOperationsInput | string | null
     registeredamount?: NullableStringFieldUpdateOperationsInput | string | null
     regis_vat?: NullableStringFieldUpdateOperationsInput | string | null
@@ -38582,6 +38602,7 @@ export namespace Prisma {
     email?: NullableStringFieldUpdateOperationsInput | string | null
     email_2?: NullableStringFieldUpdateOperationsInput | string | null
     company_type?: NullableStringFieldUpdateOperationsInput | string | null
+    main_company_type?: NullableStringFieldUpdateOperationsInput | string | null
     sub_company_type?: NullableStringFieldUpdateOperationsInput | string | null
     registeredamount?: NullableStringFieldUpdateOperationsInput | string | null
     regis_vat?: NullableStringFieldUpdateOperationsInput | string | null
@@ -41360,6 +41381,7 @@ export namespace Prisma {
     email?: SortOrder
     email_2?: SortOrder
     company_type?: SortOrder
+    main_company_type?: SortOrder
     sub_company_type?: SortOrder
     registeredamount?: SortOrder
     regis_vat?: SortOrder
@@ -41392,6 +41414,7 @@ export namespace Prisma {
     email?: SortOrder
     email_2?: SortOrder
     company_type?: SortOrder
+    main_company_type?: SortOrder
     sub_company_type?: SortOrder
     registeredamount?: SortOrder
     regis_vat?: SortOrder
@@ -41424,6 +41447,7 @@ export namespace Prisma {
     email?: SortOrder
     email_2?: SortOrder
     company_type?: SortOrder
+    main_company_type?: SortOrder
     sub_company_type?: SortOrder
     registeredamount?: SortOrder
     regis_vat?: SortOrder
@@ -46189,6 +46213,7 @@ export namespace Prisma {
     email?: string | null
     email_2?: string | null
     company_type?: string | null
+    main_company_type?: string | null
     sub_company_type?: string | null
     registeredamount?: string | null
     regis_vat?: string | null
@@ -46223,6 +46248,7 @@ export namespace Prisma {
     email?: string | null
     email_2?: string | null
     company_type?: string | null
+    main_company_type?: string | null
     sub_company_type?: string | null
     registeredamount?: string | null
     regis_vat?: string | null
@@ -46485,6 +46511,7 @@ export namespace Prisma {
     email?: StringNullableFilter | string | null
     email_2?: StringNullableFilter | string | null
     company_type?: StringNullableFilter | string | null
+    main_company_type?: StringNullableFilter | string | null
     sub_company_type?: StringNullableFilter | string | null
     registeredamount?: StringNullableFilter | string | null
     regis_vat?: StringNullableFilter | string | null
@@ -47430,6 +47457,7 @@ export namespace Prisma {
     email?: string | null
     email_2?: string | null
     company_type?: string | null
+    main_company_type?: string | null
     sub_company_type?: string | null
     registeredamount?: string | null
     regis_vat?: string | null
@@ -47464,6 +47492,7 @@ export namespace Prisma {
     email?: string | null
     email_2?: string | null
     company_type?: string | null
+    main_company_type?: string | null
     sub_company_type?: string | null
     registeredamount?: string | null
     regis_vat?: string | null
@@ -48011,6 +48040,7 @@ export namespace Prisma {
     email?: NullableStringFieldUpdateOperationsInput | string | null
     email_2?: NullableStringFieldUpdateOperationsInput | string | null
     company_type?: NullableStringFieldUpdateOperationsInput | string | null
+    main_company_type?: NullableStringFieldUpdateOperationsInput | string | null
     sub_company_type?: NullableStringFieldUpdateOperationsInput | string | null
     registeredamount?: NullableStringFieldUpdateOperationsInput | string | null
     regis_vat?: NullableStringFieldUpdateOperationsInput | string | null
@@ -48045,6 +48075,7 @@ export namespace Prisma {
     email?: NullableStringFieldUpdateOperationsInput | string | null
     email_2?: NullableStringFieldUpdateOperationsInput | string | null
     company_type?: NullableStringFieldUpdateOperationsInput | string | null
+    main_company_type?: NullableStringFieldUpdateOperationsInput | string | null
     sub_company_type?: NullableStringFieldUpdateOperationsInput | string | null
     registeredamount?: NullableStringFieldUpdateOperationsInput | string | null
     regis_vat?: NullableStringFieldUpdateOperationsInput | string | null
@@ -48490,6 +48521,7 @@ export namespace Prisma {
     email?: string | null
     email_2?: string | null
     company_type?: string | null
+    main_company_type?: string | null
     sub_company_type?: string | null
     registeredamount?: string | null
     regis_vat?: string | null
@@ -48524,6 +48556,7 @@ export namespace Prisma {
     email?: string | null
     email_2?: string | null
     company_type?: string | null
+    main_company_type?: string | null
     sub_company_type?: string | null
     registeredamount?: string | null
     regis_vat?: string | null
@@ -48584,6 +48617,7 @@ export namespace Prisma {
     email?: NullableStringFieldUpdateOperationsInput | string | null
     email_2?: NullableStringFieldUpdateOperationsInput | string | null
     company_type?: NullableStringFieldUpdateOperationsInput | string | null
+    main_company_type?: NullableStringFieldUpdateOperationsInput | string | null
     sub_company_type?: NullableStringFieldUpdateOperationsInput | string | null
     registeredamount?: NullableStringFieldUpdateOperationsInput | string | null
     regis_vat?: NullableStringFieldUpdateOperationsInput | string | null
@@ -48618,6 +48652,7 @@ export namespace Prisma {
     email?: NullableStringFieldUpdateOperationsInput | string | null
     email_2?: NullableStringFieldUpdateOperationsInput | string | null
     company_type?: NullableStringFieldUpdateOperationsInput | string | null
+    main_company_type?: NullableStringFieldUpdateOperationsInput | string | null
     sub_company_type?: NullableStringFieldUpdateOperationsInput | string | null
     registeredamount?: NullableStringFieldUpdateOperationsInput | string | null
     regis_vat?: NullableStringFieldUpdateOperationsInput | string | null
@@ -51202,6 +51237,7 @@ export namespace Prisma {
     email?: string | null
     email_2?: string | null
     company_type?: string | null
+    main_company_type?: string | null
     sub_company_type?: string | null
     registeredamount?: string | null
     regis_vat?: string | null
@@ -51236,6 +51272,7 @@ export namespace Prisma {
     email?: string | null
     email_2?: string | null
     company_type?: string | null
+    main_company_type?: string | null
     sub_company_type?: string | null
     registeredamount?: string | null
     regis_vat?: string | null
@@ -51334,6 +51371,7 @@ export namespace Prisma {
     email?: NullableStringFieldUpdateOperationsInput | string | null
     email_2?: NullableStringFieldUpdateOperationsInput | string | null
     company_type?: NullableStringFieldUpdateOperationsInput | string | null
+    main_company_type?: NullableStringFieldUpdateOperationsInput | string | null
     sub_company_type?: NullableStringFieldUpdateOperationsInput | string | null
     registeredamount?: NullableStringFieldUpdateOperationsInput | string | null
     regis_vat?: NullableStringFieldUpdateOperationsInput | string | null
@@ -51368,6 +51406,7 @@ export namespace Prisma {
     email?: NullableStringFieldUpdateOperationsInput | string | null
     email_2?: NullableStringFieldUpdateOperationsInput | string | null
     company_type?: NullableStringFieldUpdateOperationsInput | string | null
+    main_company_type?: NullableStringFieldUpdateOperationsInput | string | null
     sub_company_type?: NullableStringFieldUpdateOperationsInput | string | null
     registeredamount?: NullableStringFieldUpdateOperationsInput | string | null
     regis_vat?: NullableStringFieldUpdateOperationsInput | string | null
@@ -53070,6 +53109,7 @@ export namespace Prisma {
     email?: string | null
     email_2?: string | null
     company_type?: string | null
+    main_company_type?: string | null
     sub_company_type?: string | null
     registeredamount?: string | null
     regis_vat?: string | null
@@ -53104,6 +53144,7 @@ export namespace Prisma {
     email?: string | null
     email_2?: string | null
     company_type?: string | null
+    main_company_type?: string | null
     sub_company_type?: string | null
     registeredamount?: string | null
     regis_vat?: string | null
@@ -53223,6 +53264,7 @@ export namespace Prisma {
     email?: string | null
     email_2?: string | null
     company_type?: string | null
+    main_company_type?: string | null
     sub_company_type?: string | null
     registeredamount?: string | null
     regis_vat?: string | null
@@ -53295,6 +53337,7 @@ export namespace Prisma {
     email?: NullableStringFieldUpdateOperationsInput | string | null
     email_2?: NullableStringFieldUpdateOperationsInput | string | null
     company_type?: NullableStringFieldUpdateOperationsInput | string | null
+    main_company_type?: NullableStringFieldUpdateOperationsInput | string | null
     sub_company_type?: NullableStringFieldUpdateOperationsInput | string | null
     registeredamount?: NullableStringFieldUpdateOperationsInput | string | null
     regis_vat?: NullableStringFieldUpdateOperationsInput | string | null
@@ -53329,6 +53372,7 @@ export namespace Prisma {
     email?: NullableStringFieldUpdateOperationsInput | string | null
     email_2?: NullableStringFieldUpdateOperationsInput | string | null
     company_type?: NullableStringFieldUpdateOperationsInput | string | null
+    main_company_type?: NullableStringFieldUpdateOperationsInput | string | null
     sub_company_type?: NullableStringFieldUpdateOperationsInput | string | null
     registeredamount?: NullableStringFieldUpdateOperationsInput | string | null
     regis_vat?: NullableStringFieldUpdateOperationsInput | string | null
@@ -53363,6 +53407,7 @@ export namespace Prisma {
     email?: NullableStringFieldUpdateOperationsInput | string | null
     email_2?: NullableStringFieldUpdateOperationsInput | string | null
     company_type?: NullableStringFieldUpdateOperationsInput | string | null
+    main_company_type?: NullableStringFieldUpdateOperationsInput | string | null
     sub_company_type?: NullableStringFieldUpdateOperationsInput | string | null
     registeredamount?: NullableStringFieldUpdateOperationsInput | string | null
     regis_vat?: NullableStringFieldUpdateOperationsInput | string | null
@@ -56162,6 +56207,7 @@ export namespace Prisma {
     email?: string | null
     email_2?: string | null
     company_type?: string | null
+    main_company_type?: string | null
     sub_company_type?: string | null
     registeredamount?: string | null
     regis_vat?: string | null
@@ -56208,6 +56254,7 @@ export namespace Prisma {
     email?: NullableStringFieldUpdateOperationsInput | string | null
     email_2?: NullableStringFieldUpdateOperationsInput | string | null
     company_type?: NullableStringFieldUpdateOperationsInput | string | null
+    main_company_type?: NullableStringFieldUpdateOperationsInput | string | null
     sub_company_type?: NullableStringFieldUpdateOperationsInput | string | null
     registeredamount?: NullableStringFieldUpdateOperationsInput | string | null
     regis_vat?: NullableStringFieldUpdateOperationsInput | string | null
@@ -56242,6 +56289,7 @@ export namespace Prisma {
     email?: NullableStringFieldUpdateOperationsInput | string | null
     email_2?: NullableStringFieldUpdateOperationsInput | string | null
     company_type?: NullableStringFieldUpdateOperationsInput | string | null
+    main_company_type?: NullableStringFieldUpdateOperationsInput | string | null
     sub_company_type?: NullableStringFieldUpdateOperationsInput | string | null
     registeredamount?: NullableStringFieldUpdateOperationsInput | string | null
     regis_vat?: NullableStringFieldUpdateOperationsInput | string | null
@@ -56276,6 +56324,7 @@ export namespace Prisma {
     email?: NullableStringFieldUpdateOperationsInput | string | null
     email_2?: NullableStringFieldUpdateOperationsInput | string | null
     company_type?: NullableStringFieldUpdateOperationsInput | string | null
+    main_company_type?: NullableStringFieldUpdateOperationsInput | string | null
     sub_company_type?: NullableStringFieldUpdateOperationsInput | string | null
     registeredamount?: NullableStringFieldUpdateOperationsInput | string | null
     regis_vat?: NullableStringFieldUpdateOperationsInput | string | null
