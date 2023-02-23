@@ -130,7 +130,7 @@ export const leaveResolvers: Resolvers = {
         const getdataleave_2 = await ctx.prisma.user.findMany({
           include: {
             profile: true,
-            Position_user: { include: { mas_positionlevel1: true, mas_positionlevel2: true, mas_positionlevel3: true, header: { include: { profile: true } } } },
+            Position_user: { include: { mas_positionlevel1: true, mas_positionlevel2: true, mas_positionlevel3: true, header: { include: { profile: true } } }, orderBy:{ date: 'desc'}  },
             data_leave: { include: { mas_leave_type: true } }
           },
           where: {
@@ -140,7 +140,7 @@ export const leaveResolvers: Resolvers = {
         const getdataleave = await ctx.prisma.user.findMany({
           include: {
             profile: true,
-            Position_user: { include: { mas_positionlevel1: true, mas_positionlevel2: true, mas_positionlevel3: true, header: { include: { profile: true } } } },
+            Position_user: { include: { mas_positionlevel1: true, mas_positionlevel2: true, mas_positionlevel3: true, header: { include: { profile: true } } }, orderBy:{ date: 'desc'} },
             data_leave: { include: { mas_leave_type: true }, where: { Status: 2 } }
           },
           where: {
@@ -225,7 +225,7 @@ export const leaveResolvers: Resolvers = {
         const getdataleave_2 = await ctx.prisma.user.findMany({
           include: {
             profile: true,
-            Position_user: { include: { mas_positionlevel1: true, mas_positionlevel2: true, mas_positionlevel3: true, header: { include: { profile: true } } } },
+            Position_user: { include: { mas_positionlevel1: true, mas_positionlevel2: true, mas_positionlevel3: true, header: { include: { profile: true } } }, orderBy:{ date: 'desc'}  },
             data_leave: { include: { mas_leave_type: true }, where: { id: search } }
           },
           where: {
@@ -239,7 +239,7 @@ export const leaveResolvers: Resolvers = {
         const getdataleave = await ctx.prisma.user.findMany({
           include: {
             profile: true,
-            Position_user: { include: { mas_positionlevel1: true, mas_positionlevel2: true, mas_positionlevel3: true, header: { include: { profile: true } } } },
+            Position_user: { include: { mas_positionlevel1: true, mas_positionlevel2: true, mas_positionlevel3: true, header: { include: { profile: true } } }, orderBy:{ date: 'desc'} },
             data_leave: { include: { mas_leave_type: true }, where: { Status: 2, AND: { id: search } } }
           },
           where: {
@@ -491,7 +491,7 @@ export const leaveResolvers: Resolvers = {
               include: { mas_positionlevel1: true, mas_positionlevel2: true, mas_positionlevel3: true, header: { include: { profile: true } } },
               orderBy: { date: 'desc' },
             },
-            data_leave: { include: { mas_leave_type: true } }
+            data_leave: { include: { mas_leave_type: true }}
           },
           where: {
             companyBranch: {
