@@ -128,6 +128,14 @@ model Profile {
   social_likedin         String?
   social_line            String?
   social_telegram        String?
+  masposition1_id        String? @db.Uuid
+  masposition2_id        String? @db.Uuid
+  masposition3_id        String? @db.Uuid
+  mas_positionlevel1     mas_positionlevel1? @relation(fields: [masposition1_id], references: [id])
+  mas_positionlevel2     mas_positionlevel2? @relation(fields: [masposition2_id], references: [id])
+  mas_positionlevel3     mas_positionlevel3? @relation(fields: [masposition3_id], references: [id])
+
+
 }
 
 model User {
@@ -213,6 +221,7 @@ model mas_positionlevel1 {
   Company            Company?             @relation(fields: [CompanyId], references: [id])
   CompanyId          String?              @db.Uuid
   Position_user      Position_user[]
+  Profile            Profile[]
 }
 
 model mas_positionlevel2 {
@@ -227,6 +236,7 @@ model mas_positionlevel2 {
   Company            Company?             @relation(fields: [CompanyId], references: [id])
   CompanyId          String?              @db.Uuid
   position_user      Position_user[]
+  Profile            Profile[]
 }
 
 model mas_positionlevel3 {
@@ -240,6 +250,7 @@ model mas_positionlevel3 {
   Company            Company?            @relation(fields: [CompanyId], references: [id])
   CompanyId          String?             @db.Uuid
   Position_user      Position_user[]
+  Profile            Profile[]
 }
 
 model Position_user {

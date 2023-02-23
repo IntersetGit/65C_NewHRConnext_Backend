@@ -118,6 +118,9 @@ export type Profile = {
   social_likedin: string | null
   social_line: string | null
   social_telegram: string | null
+  masposition1_id: string | null
+  masposition2_id: string | null
+  masposition3_id: string | null
 }
 
 /**
@@ -1962,11 +1965,13 @@ export namespace Prisma {
   export type Mas_positionlevel1CountOutputType = {
     mas_positionlevel2: number
     Position_user: number
+    Profile: number
   }
 
   export type Mas_positionlevel1CountOutputTypeSelect = {
     mas_positionlevel2?: boolean
     Position_user?: boolean
+    Profile?: boolean
   }
 
   export type Mas_positionlevel1CountOutputTypeGetPayload<S extends boolean | null | undefined | Mas_positionlevel1CountOutputTypeArgs> =
@@ -2007,11 +2012,13 @@ export namespace Prisma {
   export type Mas_positionlevel2CountOutputType = {
     mas_positionlevel3: number
     position_user: number
+    Profile: number
   }
 
   export type Mas_positionlevel2CountOutputTypeSelect = {
     mas_positionlevel3?: boolean
     position_user?: boolean
+    Profile?: boolean
   }
 
   export type Mas_positionlevel2CountOutputTypeGetPayload<S extends boolean | null | undefined | Mas_positionlevel2CountOutputTypeArgs> =
@@ -2051,10 +2058,12 @@ export namespace Prisma {
 
   export type Mas_positionlevel3CountOutputType = {
     Position_user: number
+    Profile: number
   }
 
   export type Mas_positionlevel3CountOutputTypeSelect = {
     Position_user?: boolean
+    Profile?: boolean
   }
 
   export type Mas_positionlevel3CountOutputTypeGetPayload<S extends boolean | null | undefined | Mas_positionlevel3CountOutputTypeArgs> =
@@ -5064,6 +5073,9 @@ export namespace Prisma {
     social_likedin: string | null
     social_line: string | null
     social_telegram: string | null
+    masposition1_id: string | null
+    masposition2_id: string | null
+    masposition3_id: string | null
   }
 
   export type ProfileMaxAggregateOutputType = {
@@ -5115,6 +5127,9 @@ export namespace Prisma {
     social_likedin: string | null
     social_line: string | null
     social_telegram: string | null
+    masposition1_id: string | null
+    masposition2_id: string | null
+    masposition3_id: string | null
   }
 
   export type ProfileCountAggregateOutputType = {
@@ -5166,6 +5181,9 @@ export namespace Prisma {
     social_likedin: number
     social_line: number
     social_telegram: number
+    masposition1_id: number
+    masposition2_id: number
+    masposition3_id: number
     _all: number
   }
 
@@ -5219,6 +5237,9 @@ export namespace Prisma {
     social_likedin?: true
     social_line?: true
     social_telegram?: true
+    masposition1_id?: true
+    masposition2_id?: true
+    masposition3_id?: true
   }
 
   export type ProfileMaxAggregateInputType = {
@@ -5270,6 +5291,9 @@ export namespace Prisma {
     social_likedin?: true
     social_line?: true
     social_telegram?: true
+    masposition1_id?: true
+    masposition2_id?: true
+    masposition3_id?: true
   }
 
   export type ProfileCountAggregateInputType = {
@@ -5321,6 +5345,9 @@ export namespace Prisma {
     social_likedin?: true
     social_line?: true
     social_telegram?: true
+    masposition1_id?: true
+    masposition2_id?: true
+    masposition3_id?: true
     _all?: true
   }
 
@@ -5446,6 +5473,9 @@ export namespace Prisma {
     social_likedin: string | null
     social_line: string | null
     social_telegram: string | null
+    masposition1_id: string | null
+    masposition2_id: string | null
+    masposition3_id: string | null
     _count: ProfileCountAggregateOutputType | null
     _min: ProfileMinAggregateOutputType | null
     _max: ProfileMaxAggregateOutputType | null
@@ -5515,11 +5545,20 @@ export namespace Prisma {
     social_likedin?: boolean
     social_line?: boolean
     social_telegram?: boolean
+    masposition1_id?: boolean
+    masposition2_id?: boolean
+    masposition3_id?: boolean
+    mas_positionlevel1?: boolean | mas_positionlevel1Args
+    mas_positionlevel2?: boolean | mas_positionlevel2Args
+    mas_positionlevel3?: boolean | mas_positionlevel3Args
   }
 
 
   export type ProfileInclude = {
     user?: boolean | UserArgs
+    mas_positionlevel1?: boolean | mas_positionlevel1Args
+    mas_positionlevel2?: boolean | mas_positionlevel2Args
+    mas_positionlevel3?: boolean | mas_positionlevel3Args
   }
 
   export type ProfileGetPayload<S extends boolean | null | undefined | ProfileArgs> =
@@ -5529,12 +5568,18 @@ export namespace Prisma {
     S extends { include: any } & (ProfileArgs | ProfileFindManyArgs)
     ? Profile  & {
     [P in TruthyKeys<S['include']>]:
-        P extends 'user' ? UserGetPayload<S['include'][P]> :  never
+        P extends 'user' ? UserGetPayload<S['include'][P]> :
+        P extends 'mas_positionlevel1' ? mas_positionlevel1GetPayload<S['include'][P]> | null :
+        P extends 'mas_positionlevel2' ? mas_positionlevel2GetPayload<S['include'][P]> | null :
+        P extends 'mas_positionlevel3' ? mas_positionlevel3GetPayload<S['include'][P]> | null :  never
   } 
     : S extends { select: any } & (ProfileArgs | ProfileFindManyArgs)
       ? {
     [P in TruthyKeys<S['select']>]:
-        P extends 'user' ? UserGetPayload<S['select'][P]> :  P extends keyof Profile ? Profile[P] : never
+        P extends 'user' ? UserGetPayload<S['select'][P]> :
+        P extends 'mas_positionlevel1' ? mas_positionlevel1GetPayload<S['select'][P]> | null :
+        P extends 'mas_positionlevel2' ? mas_positionlevel2GetPayload<S['select'][P]> | null :
+        P extends 'mas_positionlevel3' ? mas_positionlevel3GetPayload<S['select'][P]> | null :  P extends keyof Profile ? Profile[P] : never
   } 
       : Profile
 
@@ -5909,6 +5954,12 @@ export namespace Prisma {
     readonly [Symbol.toStringTag]: 'PrismaClientPromise';
 
     user<T extends UserArgs= {}>(args?: Subset<T, UserArgs>): Prisma__UserClient<UserGetPayload<T> | Null>;
+
+    mas_positionlevel1<T extends mas_positionlevel1Args= {}>(args?: Subset<T, mas_positionlevel1Args>): Prisma__mas_positionlevel1Client<mas_positionlevel1GetPayload<T> | Null>;
+
+    mas_positionlevel2<T extends mas_positionlevel2Args= {}>(args?: Subset<T, mas_positionlevel2Args>): Prisma__mas_positionlevel2Client<mas_positionlevel2GetPayload<T> | Null>;
+
+    mas_positionlevel3<T extends mas_positionlevel3Args= {}>(args?: Subset<T, mas_positionlevel3Args>): Prisma__mas_positionlevel3Client<mas_positionlevel3GetPayload<T> | Null>;
 
     private get _document();
     /**
@@ -13432,6 +13483,7 @@ export namespace Prisma {
     Company?: boolean | CompanyArgs
     CompanyId?: boolean
     Position_user?: boolean | mas_positionlevel1$Position_userArgs
+    Profile?: boolean | mas_positionlevel1$ProfileArgs
     _count?: boolean | Mas_positionlevel1CountOutputTypeArgs
   }
 
@@ -13440,6 +13492,7 @@ export namespace Prisma {
     mas_positionlevel2?: boolean | mas_positionlevel1$mas_positionlevel2Args
     Company?: boolean | CompanyArgs
     Position_user?: boolean | mas_positionlevel1$Position_userArgs
+    Profile?: boolean | mas_positionlevel1$ProfileArgs
     _count?: boolean | Mas_positionlevel1CountOutputTypeArgs
   }
 
@@ -13453,6 +13506,7 @@ export namespace Prisma {
         P extends 'mas_positionlevel2' ? Array < mas_positionlevel2GetPayload<S['include'][P]>>  :
         P extends 'Company' ? CompanyGetPayload<S['include'][P]> | null :
         P extends 'Position_user' ? Array < Position_userGetPayload<S['include'][P]>>  :
+        P extends 'Profile' ? Array < ProfileGetPayload<S['include'][P]>>  :
         P extends '_count' ? Mas_positionlevel1CountOutputTypeGetPayload<S['include'][P]> :  never
   } 
     : S extends { select: any } & (mas_positionlevel1Args | mas_positionlevel1FindManyArgs)
@@ -13461,6 +13515,7 @@ export namespace Prisma {
         P extends 'mas_positionlevel2' ? Array < mas_positionlevel2GetPayload<S['select'][P]>>  :
         P extends 'Company' ? CompanyGetPayload<S['select'][P]> | null :
         P extends 'Position_user' ? Array < Position_userGetPayload<S['select'][P]>>  :
+        P extends 'Profile' ? Array < ProfileGetPayload<S['select'][P]>>  :
         P extends '_count' ? Mas_positionlevel1CountOutputTypeGetPayload<S['select'][P]> :  P extends keyof mas_positionlevel1 ? mas_positionlevel1[P] : never
   } 
       : mas_positionlevel1
@@ -13840,6 +13895,8 @@ export namespace Prisma {
     Company<T extends CompanyArgs= {}>(args?: Subset<T, CompanyArgs>): Prisma__CompanyClient<CompanyGetPayload<T> | Null>;
 
     Position_user<T extends mas_positionlevel1$Position_userArgs= {}>(args?: Subset<T, mas_positionlevel1$Position_userArgs>): PrismaPromise<Array<Position_userGetPayload<T>>| Null>;
+
+    Profile<T extends mas_positionlevel1$ProfileArgs= {}>(args?: Subset<T, mas_positionlevel1$ProfileArgs>): PrismaPromise<Array<ProfileGetPayload<T>>| Null>;
 
     private get _document();
     /**
@@ -14239,6 +14296,27 @@ export namespace Prisma {
 
 
   /**
+   * mas_positionlevel1.Profile
+   */
+  export type mas_positionlevel1$ProfileArgs = {
+    /**
+     * Select specific fields to fetch from the Profile
+     */
+    select?: ProfileSelect | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: ProfileInclude | null
+    where?: ProfileWhereInput
+    orderBy?: Enumerable<ProfileOrderByWithRelationInput>
+    cursor?: ProfileWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: Enumerable<ProfileScalarFieldEnum>
+  }
+
+
+  /**
    * mas_positionlevel1 without action
    */
   export type mas_positionlevel1Args = {
@@ -14474,6 +14552,7 @@ export namespace Prisma {
     Company?: boolean | CompanyArgs
     CompanyId?: boolean
     position_user?: boolean | mas_positionlevel2$position_userArgs
+    Profile?: boolean | mas_positionlevel2$ProfileArgs
     _count?: boolean | Mas_positionlevel2CountOutputTypeArgs
   }
 
@@ -14483,6 +14562,7 @@ export namespace Prisma {
     mas_positionlevel3?: boolean | mas_positionlevel2$mas_positionlevel3Args
     Company?: boolean | CompanyArgs
     position_user?: boolean | mas_positionlevel2$position_userArgs
+    Profile?: boolean | mas_positionlevel2$ProfileArgs
     _count?: boolean | Mas_positionlevel2CountOutputTypeArgs
   }
 
@@ -14497,6 +14577,7 @@ export namespace Prisma {
         P extends 'mas_positionlevel3' ? Array < mas_positionlevel3GetPayload<S['include'][P]>>  :
         P extends 'Company' ? CompanyGetPayload<S['include'][P]> | null :
         P extends 'position_user' ? Array < Position_userGetPayload<S['include'][P]>>  :
+        P extends 'Profile' ? Array < ProfileGetPayload<S['include'][P]>>  :
         P extends '_count' ? Mas_positionlevel2CountOutputTypeGetPayload<S['include'][P]> :  never
   } 
     : S extends { select: any } & (mas_positionlevel2Args | mas_positionlevel2FindManyArgs)
@@ -14506,6 +14587,7 @@ export namespace Prisma {
         P extends 'mas_positionlevel3' ? Array < mas_positionlevel3GetPayload<S['select'][P]>>  :
         P extends 'Company' ? CompanyGetPayload<S['select'][P]> | null :
         P extends 'position_user' ? Array < Position_userGetPayload<S['select'][P]>>  :
+        P extends 'Profile' ? Array < ProfileGetPayload<S['select'][P]>>  :
         P extends '_count' ? Mas_positionlevel2CountOutputTypeGetPayload<S['select'][P]> :  P extends keyof mas_positionlevel2 ? mas_positionlevel2[P] : never
   } 
       : mas_positionlevel2
@@ -14887,6 +14969,8 @@ export namespace Prisma {
     Company<T extends CompanyArgs= {}>(args?: Subset<T, CompanyArgs>): Prisma__CompanyClient<CompanyGetPayload<T> | Null>;
 
     position_user<T extends mas_positionlevel2$position_userArgs= {}>(args?: Subset<T, mas_positionlevel2$position_userArgs>): PrismaPromise<Array<Position_userGetPayload<T>>| Null>;
+
+    Profile<T extends mas_positionlevel2$ProfileArgs= {}>(args?: Subset<T, mas_positionlevel2$ProfileArgs>): PrismaPromise<Array<ProfileGetPayload<T>>| Null>;
 
     private get _document();
     /**
@@ -15286,6 +15370,27 @@ export namespace Prisma {
 
 
   /**
+   * mas_positionlevel2.Profile
+   */
+  export type mas_positionlevel2$ProfileArgs = {
+    /**
+     * Select specific fields to fetch from the Profile
+     */
+    select?: ProfileSelect | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: ProfileInclude | null
+    where?: ProfileWhereInput
+    orderBy?: Enumerable<ProfileOrderByWithRelationInput>
+    cursor?: ProfileWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: Enumerable<ProfileScalarFieldEnum>
+  }
+
+
+  /**
    * mas_positionlevel2 without action
    */
   export type mas_positionlevel2Args = {
@@ -15520,6 +15625,7 @@ export namespace Prisma {
     Company?: boolean | CompanyArgs
     CompanyId?: boolean
     Position_user?: boolean | mas_positionlevel3$Position_userArgs
+    Profile?: boolean | mas_positionlevel3$ProfileArgs
     _count?: boolean | Mas_positionlevel3CountOutputTypeArgs
   }
 
@@ -15528,6 +15634,7 @@ export namespace Prisma {
     mas_positionlevel2?: boolean | mas_positionlevel2Args
     Company?: boolean | CompanyArgs
     Position_user?: boolean | mas_positionlevel3$Position_userArgs
+    Profile?: boolean | mas_positionlevel3$ProfileArgs
     _count?: boolean | Mas_positionlevel3CountOutputTypeArgs
   }
 
@@ -15541,6 +15648,7 @@ export namespace Prisma {
         P extends 'mas_positionlevel2' ? mas_positionlevel2GetPayload<S['include'][P]> | null :
         P extends 'Company' ? CompanyGetPayload<S['include'][P]> | null :
         P extends 'Position_user' ? Array < Position_userGetPayload<S['include'][P]>>  :
+        P extends 'Profile' ? Array < ProfileGetPayload<S['include'][P]>>  :
         P extends '_count' ? Mas_positionlevel3CountOutputTypeGetPayload<S['include'][P]> :  never
   } 
     : S extends { select: any } & (mas_positionlevel3Args | mas_positionlevel3FindManyArgs)
@@ -15549,6 +15657,7 @@ export namespace Prisma {
         P extends 'mas_positionlevel2' ? mas_positionlevel2GetPayload<S['select'][P]> | null :
         P extends 'Company' ? CompanyGetPayload<S['select'][P]> | null :
         P extends 'Position_user' ? Array < Position_userGetPayload<S['select'][P]>>  :
+        P extends 'Profile' ? Array < ProfileGetPayload<S['select'][P]>>  :
         P extends '_count' ? Mas_positionlevel3CountOutputTypeGetPayload<S['select'][P]> :  P extends keyof mas_positionlevel3 ? mas_positionlevel3[P] : never
   } 
       : mas_positionlevel3
@@ -15929,6 +16038,8 @@ export namespace Prisma {
 
     Position_user<T extends mas_positionlevel3$Position_userArgs= {}>(args?: Subset<T, mas_positionlevel3$Position_userArgs>): PrismaPromise<Array<Position_userGetPayload<T>>| Null>;
 
+    Profile<T extends mas_positionlevel3$ProfileArgs= {}>(args?: Subset<T, mas_positionlevel3$ProfileArgs>): PrismaPromise<Array<ProfileGetPayload<T>>| Null>;
+
     private get _document();
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
@@ -16302,6 +16413,27 @@ export namespace Prisma {
     take?: number
     skip?: number
     distinct?: Enumerable<Position_userScalarFieldEnum>
+  }
+
+
+  /**
+   * mas_positionlevel3.Profile
+   */
+  export type mas_positionlevel3$ProfileArgs = {
+    /**
+     * Select specific fields to fetch from the Profile
+     */
+    select?: ProfileSelect | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: ProfileInclude | null
+    where?: ProfileWhereInput
+    orderBy?: Enumerable<ProfileOrderByWithRelationInput>
+    cursor?: ProfileWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: Enumerable<ProfileScalarFieldEnum>
   }
 
 
@@ -35809,7 +35941,10 @@ export namespace Prisma {
     social_facebook: 'social_facebook',
     social_likedin: 'social_likedin',
     social_line: 'social_line',
-    social_telegram: 'social_telegram'
+    social_telegram: 'social_telegram',
+    masposition1_id: 'masposition1_id',
+    masposition2_id: 'masposition2_id',
+    masposition3_id: 'masposition3_id'
   };
 
   export type ProfileScalarFieldEnum = (typeof ProfileScalarFieldEnum)[keyof typeof ProfileScalarFieldEnum]
@@ -36246,6 +36381,12 @@ export namespace Prisma {
     social_likedin?: StringNullableFilter | string | null
     social_line?: StringNullableFilter | string | null
     social_telegram?: StringNullableFilter | string | null
+    masposition1_id?: UuidNullableFilter | string | null
+    masposition2_id?: UuidNullableFilter | string | null
+    masposition3_id?: UuidNullableFilter | string | null
+    mas_positionlevel1?: XOR<Mas_positionlevel1RelationFilter, mas_positionlevel1WhereInput> | null
+    mas_positionlevel2?: XOR<Mas_positionlevel2RelationFilter, mas_positionlevel2WhereInput> | null
+    mas_positionlevel3?: XOR<Mas_positionlevel3RelationFilter, mas_positionlevel3WhereInput> | null
   }
 
   export type ProfileOrderByWithRelationInput = {
@@ -36298,6 +36439,12 @@ export namespace Prisma {
     social_likedin?: SortOrder
     social_line?: SortOrder
     social_telegram?: SortOrder
+    masposition1_id?: SortOrder
+    masposition2_id?: SortOrder
+    masposition3_id?: SortOrder
+    mas_positionlevel1?: mas_positionlevel1OrderByWithRelationInput
+    mas_positionlevel2?: mas_positionlevel2OrderByWithRelationInput
+    mas_positionlevel3?: mas_positionlevel3OrderByWithRelationInput
   }
 
   export type ProfileWhereUniqueInput = {
@@ -36355,6 +36502,9 @@ export namespace Prisma {
     social_likedin?: SortOrder
     social_line?: SortOrder
     social_telegram?: SortOrder
+    masposition1_id?: SortOrder
+    masposition2_id?: SortOrder
+    masposition3_id?: SortOrder
     _count?: ProfileCountOrderByAggregateInput
     _max?: ProfileMaxOrderByAggregateInput
     _min?: ProfileMinOrderByAggregateInput
@@ -36412,6 +36562,9 @@ export namespace Prisma {
     social_likedin?: StringNullableWithAggregatesFilter | string | null
     social_line?: StringNullableWithAggregatesFilter | string | null
     social_telegram?: StringNullableWithAggregatesFilter | string | null
+    masposition1_id?: UuidNullableWithAggregatesFilter | string | null
+    masposition2_id?: UuidNullableWithAggregatesFilter | string | null
+    masposition3_id?: UuidNullableWithAggregatesFilter | string | null
   }
 
   export type UserWhereInput = {
@@ -36773,6 +36926,7 @@ export namespace Prisma {
     Company?: XOR<CompanyRelationFilter, CompanyWhereInput> | null
     CompanyId?: UuidNullableFilter | string | null
     Position_user?: Position_userListRelationFilter
+    Profile?: ProfileListRelationFilter
   }
 
   export type mas_positionlevel1OrderByWithRelationInput = {
@@ -36785,6 +36939,7 @@ export namespace Prisma {
     Company?: CompanyOrderByWithRelationInput
     CompanyId?: SortOrder
     Position_user?: Position_userOrderByRelationAggregateInput
+    Profile?: ProfileOrderByRelationAggregateInput
   }
 
   export type mas_positionlevel1WhereUniqueInput = {
@@ -36832,6 +36987,7 @@ export namespace Prisma {
     Company?: XOR<CompanyRelationFilter, CompanyWhereInput> | null
     CompanyId?: UuidNullableFilter | string | null
     position_user?: Position_userListRelationFilter
+    Profile?: ProfileListRelationFilter
   }
 
   export type mas_positionlevel2OrderByWithRelationInput = {
@@ -36846,6 +37002,7 @@ export namespace Prisma {
     Company?: CompanyOrderByWithRelationInput
     CompanyId?: SortOrder
     position_user?: Position_userOrderByRelationAggregateInput
+    Profile?: ProfileOrderByRelationAggregateInput
   }
 
   export type mas_positionlevel2WhereUniqueInput = {
@@ -36894,6 +37051,7 @@ export namespace Prisma {
     Company?: XOR<CompanyRelationFilter, CompanyWhereInput> | null
     CompanyId?: UuidNullableFilter | string | null
     Position_user?: Position_userListRelationFilter
+    Profile?: ProfileListRelationFilter
   }
 
   export type mas_positionlevel3OrderByWithRelationInput = {
@@ -36907,6 +37065,7 @@ export namespace Prisma {
     Company?: CompanyOrderByWithRelationInput
     CompanyId?: SortOrder
     Position_user?: Position_userOrderByRelationAggregateInput
+    Profile?: ProfileOrderByRelationAggregateInput
   }
 
   export type mas_positionlevel3WhereUniqueInput = {
@@ -38486,6 +38645,9 @@ export namespace Prisma {
     social_likedin?: string | null
     social_line?: string | null
     social_telegram?: string | null
+    mas_positionlevel1?: mas_positionlevel1CreateNestedOneWithoutProfileInput
+    mas_positionlevel2?: mas_positionlevel2CreateNestedOneWithoutProfileInput
+    mas_positionlevel3?: mas_positionlevel3CreateNestedOneWithoutProfileInput
   }
 
   export type ProfileUncheckedCreateInput = {
@@ -38537,6 +38699,9 @@ export namespace Prisma {
     social_likedin?: string | null
     social_line?: string | null
     social_telegram?: string | null
+    masposition1_id?: string | null
+    masposition2_id?: string | null
+    masposition3_id?: string | null
   }
 
   export type ProfileUpdateInput = {
@@ -38588,6 +38753,9 @@ export namespace Prisma {
     social_likedin?: NullableStringFieldUpdateOperationsInput | string | null
     social_line?: NullableStringFieldUpdateOperationsInput | string | null
     social_telegram?: NullableStringFieldUpdateOperationsInput | string | null
+    mas_positionlevel1?: mas_positionlevel1UpdateOneWithoutProfileNestedInput
+    mas_positionlevel2?: mas_positionlevel2UpdateOneWithoutProfileNestedInput
+    mas_positionlevel3?: mas_positionlevel3UpdateOneWithoutProfileNestedInput
   }
 
   export type ProfileUncheckedUpdateInput = {
@@ -38639,6 +38807,9 @@ export namespace Prisma {
     social_likedin?: NullableStringFieldUpdateOperationsInput | string | null
     social_line?: NullableStringFieldUpdateOperationsInput | string | null
     social_telegram?: NullableStringFieldUpdateOperationsInput | string | null
+    masposition1_id?: NullableStringFieldUpdateOperationsInput | string | null
+    masposition2_id?: NullableStringFieldUpdateOperationsInput | string | null
+    masposition3_id?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type ProfileCreateManyInput = {
@@ -38690,6 +38861,9 @@ export namespace Prisma {
     social_likedin?: string | null
     social_line?: string | null
     social_telegram?: string | null
+    masposition1_id?: string | null
+    masposition2_id?: string | null
+    masposition3_id?: string | null
   }
 
   export type ProfileUpdateManyMutationInput = {
@@ -38791,6 +38965,9 @@ export namespace Prisma {
     social_likedin?: NullableStringFieldUpdateOperationsInput | string | null
     social_line?: NullableStringFieldUpdateOperationsInput | string | null
     social_telegram?: NullableStringFieldUpdateOperationsInput | string | null
+    masposition1_id?: NullableStringFieldUpdateOperationsInput | string | null
+    masposition2_id?: NullableStringFieldUpdateOperationsInput | string | null
+    masposition3_id?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type UserCreateInput = {
@@ -39215,6 +39392,7 @@ export namespace Prisma {
     mas_positionlevel2?: mas_positionlevel2CreateNestedManyWithoutMas_positionlevel1Input
     Company?: CompanyCreateNestedOneWithoutMas_positionlevel1Input
     Position_user?: Position_userCreateNestedManyWithoutMas_positionlevel1Input
+    Profile?: ProfileCreateNestedManyWithoutMas_positionlevel1Input
   }
 
   export type mas_positionlevel1UncheckedCreateInput = {
@@ -39226,6 +39404,7 @@ export namespace Prisma {
     mas_positionlevel2?: mas_positionlevel2UncheckedCreateNestedManyWithoutMas_positionlevel1Input
     CompanyId?: string | null
     Position_user?: Position_userUncheckedCreateNestedManyWithoutMas_positionlevel1Input
+    Profile?: ProfileUncheckedCreateNestedManyWithoutMas_positionlevel1Input
   }
 
   export type mas_positionlevel1UpdateInput = {
@@ -39237,6 +39416,7 @@ export namespace Prisma {
     mas_positionlevel2?: mas_positionlevel2UpdateManyWithoutMas_positionlevel1NestedInput
     Company?: CompanyUpdateOneWithoutMas_positionlevel1NestedInput
     Position_user?: Position_userUpdateManyWithoutMas_positionlevel1NestedInput
+    Profile?: ProfileUpdateManyWithoutMas_positionlevel1NestedInput
   }
 
   export type mas_positionlevel1UncheckedUpdateInput = {
@@ -39248,6 +39428,7 @@ export namespace Prisma {
     mas_positionlevel2?: mas_positionlevel2UncheckedUpdateManyWithoutMas_positionlevel1NestedInput
     CompanyId?: NullableStringFieldUpdateOperationsInput | string | null
     Position_user?: Position_userUncheckedUpdateManyWithoutMas_positionlevel1NestedInput
+    Profile?: ProfileUncheckedUpdateManyWithoutMas_positionlevel1NestedInput
   }
 
   export type mas_positionlevel1CreateManyInput = {
@@ -39286,6 +39467,7 @@ export namespace Prisma {
     mas_positionlevel3?: mas_positionlevel3CreateNestedManyWithoutMas_positionlevel2Input
     Company?: CompanyCreateNestedOneWithoutMas_positionlevel2Input
     position_user?: Position_userCreateNestedManyWithoutMas_positionlevel2Input
+    Profile?: ProfileCreateNestedManyWithoutMas_positionlevel2Input
   }
 
   export type mas_positionlevel2UncheckedCreateInput = {
@@ -39298,6 +39480,7 @@ export namespace Prisma {
     mas_positionlevel3?: mas_positionlevel3UncheckedCreateNestedManyWithoutMas_positionlevel2Input
     CompanyId?: string | null
     position_user?: Position_userUncheckedCreateNestedManyWithoutMas_positionlevel2Input
+    Profile?: ProfileUncheckedCreateNestedManyWithoutMas_positionlevel2Input
   }
 
   export type mas_positionlevel2UpdateInput = {
@@ -39310,6 +39493,7 @@ export namespace Prisma {
     mas_positionlevel3?: mas_positionlevel3UpdateManyWithoutMas_positionlevel2NestedInput
     Company?: CompanyUpdateOneWithoutMas_positionlevel2NestedInput
     position_user?: Position_userUpdateManyWithoutMas_positionlevel2NestedInput
+    Profile?: ProfileUpdateManyWithoutMas_positionlevel2NestedInput
   }
 
   export type mas_positionlevel2UncheckedUpdateInput = {
@@ -39322,6 +39506,7 @@ export namespace Prisma {
     mas_positionlevel3?: mas_positionlevel3UncheckedUpdateManyWithoutMas_positionlevel2NestedInput
     CompanyId?: NullableStringFieldUpdateOperationsInput | string | null
     position_user?: Position_userUncheckedUpdateManyWithoutMas_positionlevel2NestedInput
+    Profile?: ProfileUncheckedUpdateManyWithoutMas_positionlevel2NestedInput
   }
 
   export type mas_positionlevel2CreateManyInput = {
@@ -39361,6 +39546,7 @@ export namespace Prisma {
     mas_positionlevel2?: mas_positionlevel2CreateNestedOneWithoutMas_positionlevel3Input
     Company?: CompanyCreateNestedOneWithoutMas_positionlevel3Input
     Position_user?: Position_userCreateNestedManyWithoutMas_positionlevel3Input
+    Profile?: ProfileCreateNestedManyWithoutMas_positionlevel3Input
   }
 
   export type mas_positionlevel3UncheckedCreateInput = {
@@ -39372,6 +39558,7 @@ export namespace Prisma {
     positionlevel2_id?: string | null
     CompanyId?: string | null
     Position_user?: Position_userUncheckedCreateNestedManyWithoutMas_positionlevel3Input
+    Profile?: ProfileUncheckedCreateNestedManyWithoutMas_positionlevel3Input
   }
 
   export type mas_positionlevel3UpdateInput = {
@@ -39383,6 +39570,7 @@ export namespace Prisma {
     mas_positionlevel2?: mas_positionlevel2UpdateOneWithoutMas_positionlevel3NestedInput
     Company?: CompanyUpdateOneWithoutMas_positionlevel3NestedInput
     Position_user?: Position_userUpdateManyWithoutMas_positionlevel3NestedInput
+    Profile?: ProfileUpdateManyWithoutMas_positionlevel3NestedInput
   }
 
   export type mas_positionlevel3UncheckedUpdateInput = {
@@ -39394,6 +39582,7 @@ export namespace Prisma {
     positionlevel2_id?: NullableStringFieldUpdateOperationsInput | string | null
     CompanyId?: NullableStringFieldUpdateOperationsInput | string | null
     Position_user?: Position_userUncheckedUpdateManyWithoutMas_positionlevel3NestedInput
+    Profile?: ProfileUncheckedUpdateManyWithoutMas_positionlevel3NestedInput
   }
 
   export type mas_positionlevel3CreateManyInput = {
@@ -41283,6 +41472,21 @@ export namespace Prisma {
     not?: NestedDateTimeNullableFilter | Date | string | null
   }
 
+  export type Mas_positionlevel1RelationFilter = {
+    is?: mas_positionlevel1WhereInput | null
+    isNot?: mas_positionlevel1WhereInput | null
+  }
+
+  export type Mas_positionlevel2RelationFilter = {
+    is?: mas_positionlevel2WhereInput | null
+    isNot?: mas_positionlevel2WhereInput | null
+  }
+
+  export type Mas_positionlevel3RelationFilter = {
+    is?: mas_positionlevel3WhereInput | null
+    isNot?: mas_positionlevel3WhereInput | null
+  }
+
   export type ProfileCountOrderByAggregateInput = {
     id?: SortOrder
     bio?: SortOrder
@@ -41332,6 +41536,9 @@ export namespace Prisma {
     social_likedin?: SortOrder
     social_line?: SortOrder
     social_telegram?: SortOrder
+    masposition1_id?: SortOrder
+    masposition2_id?: SortOrder
+    masposition3_id?: SortOrder
   }
 
   export type ProfileMaxOrderByAggregateInput = {
@@ -41383,6 +41590,9 @@ export namespace Prisma {
     social_likedin?: SortOrder
     social_line?: SortOrder
     social_telegram?: SortOrder
+    masposition1_id?: SortOrder
+    masposition2_id?: SortOrder
+    masposition3_id?: SortOrder
   }
 
   export type ProfileMinOrderByAggregateInput = {
@@ -41434,6 +41644,9 @@ export namespace Prisma {
     social_likedin?: SortOrder
     social_line?: SortOrder
     social_telegram?: SortOrder
+    masposition1_id?: SortOrder
+    masposition2_id?: SortOrder
+    masposition3_id?: SortOrder
   }
 
   export type DateTimeNullableWithAggregatesFilter = {
@@ -41797,6 +42010,16 @@ export namespace Prisma {
     level?: SortOrder
   }
 
+  export type ProfileListRelationFilter = {
+    every?: ProfileWhereInput
+    some?: ProfileWhereInput
+    none?: ProfileWhereInput
+  }
+
+  export type ProfileOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
   export type mas_positionlevel1CountOrderByAggregateInput = {
     id?: SortOrder
     name?: SortOrder
@@ -41830,11 +42053,6 @@ export namespace Prisma {
 
   export type mas_positionlevel1SumOrderByAggregateInput = {
     level?: SortOrder
-  }
-
-  export type Mas_positionlevel1RelationFilter = {
-    is?: mas_positionlevel1WhereInput | null
-    isNot?: mas_positionlevel1WhereInput | null
   }
 
   export type mas_positionlevel2CountOrderByAggregateInput = {
@@ -41875,11 +42093,6 @@ export namespace Prisma {
     level?: SortOrder
   }
 
-  export type Mas_positionlevel2RelationFilter = {
-    is?: mas_positionlevel2WhereInput | null
-    isNot?: mas_positionlevel2WhereInput | null
-  }
-
   export type mas_positionlevel3CountOrderByAggregateInput = {
     id?: SortOrder
     name?: SortOrder
@@ -41916,11 +42129,6 @@ export namespace Prisma {
 
   export type mas_positionlevel3SumOrderByAggregateInput = {
     level?: SortOrder
-  }
-
-  export type Mas_positionlevel3RelationFilter = {
-    is?: mas_positionlevel3WhereInput | null
-    isNot?: mas_positionlevel3WhereInput | null
   }
 
   export type Position_userCountOrderByAggregateInput = {
@@ -43304,6 +43512,24 @@ export namespace Prisma {
     connect?: UserWhereUniqueInput
   }
 
+  export type mas_positionlevel1CreateNestedOneWithoutProfileInput = {
+    create?: XOR<mas_positionlevel1CreateWithoutProfileInput, mas_positionlevel1UncheckedCreateWithoutProfileInput>
+    connectOrCreate?: mas_positionlevel1CreateOrConnectWithoutProfileInput
+    connect?: mas_positionlevel1WhereUniqueInput
+  }
+
+  export type mas_positionlevel2CreateNestedOneWithoutProfileInput = {
+    create?: XOR<mas_positionlevel2CreateWithoutProfileInput, mas_positionlevel2UncheckedCreateWithoutProfileInput>
+    connectOrCreate?: mas_positionlevel2CreateOrConnectWithoutProfileInput
+    connect?: mas_positionlevel2WhereUniqueInput
+  }
+
+  export type mas_positionlevel3CreateNestedOneWithoutProfileInput = {
+    create?: XOR<mas_positionlevel3CreateWithoutProfileInput, mas_positionlevel3UncheckedCreateWithoutProfileInput>
+    connectOrCreate?: mas_positionlevel3CreateOrConnectWithoutProfileInput
+    connect?: mas_positionlevel3WhereUniqueInput
+  }
+
   export type NullableDateTimeFieldUpdateOperationsInput = {
     set?: Date | string | null
   }
@@ -43314,6 +43540,36 @@ export namespace Prisma {
     upsert?: UserUpsertWithoutProfileInput
     connect?: UserWhereUniqueInput
     update?: XOR<UserUpdateWithoutProfileInput, UserUncheckedUpdateWithoutProfileInput>
+  }
+
+  export type mas_positionlevel1UpdateOneWithoutProfileNestedInput = {
+    create?: XOR<mas_positionlevel1CreateWithoutProfileInput, mas_positionlevel1UncheckedCreateWithoutProfileInput>
+    connectOrCreate?: mas_positionlevel1CreateOrConnectWithoutProfileInput
+    upsert?: mas_positionlevel1UpsertWithoutProfileInput
+    disconnect?: boolean
+    delete?: boolean
+    connect?: mas_positionlevel1WhereUniqueInput
+    update?: XOR<mas_positionlevel1UpdateWithoutProfileInput, mas_positionlevel1UncheckedUpdateWithoutProfileInput>
+  }
+
+  export type mas_positionlevel2UpdateOneWithoutProfileNestedInput = {
+    create?: XOR<mas_positionlevel2CreateWithoutProfileInput, mas_positionlevel2UncheckedCreateWithoutProfileInput>
+    connectOrCreate?: mas_positionlevel2CreateOrConnectWithoutProfileInput
+    upsert?: mas_positionlevel2UpsertWithoutProfileInput
+    disconnect?: boolean
+    delete?: boolean
+    connect?: mas_positionlevel2WhereUniqueInput
+    update?: XOR<mas_positionlevel2UpdateWithoutProfileInput, mas_positionlevel2UncheckedUpdateWithoutProfileInput>
+  }
+
+  export type mas_positionlevel3UpdateOneWithoutProfileNestedInput = {
+    create?: XOR<mas_positionlevel3CreateWithoutProfileInput, mas_positionlevel3UncheckedCreateWithoutProfileInput>
+    connectOrCreate?: mas_positionlevel3CreateOrConnectWithoutProfileInput
+    upsert?: mas_positionlevel3UpsertWithoutProfileInput
+    disconnect?: boolean
+    delete?: boolean
+    connect?: mas_positionlevel3WhereUniqueInput
+    update?: XOR<mas_positionlevel3UpdateWithoutProfileInput, mas_positionlevel3UncheckedUpdateWithoutProfileInput>
   }
 
   export type ProfileCreateNestedOneWithoutUserInput = {
@@ -44022,6 +44278,13 @@ export namespace Prisma {
     connect?: Enumerable<Position_userWhereUniqueInput>
   }
 
+  export type ProfileCreateNestedManyWithoutMas_positionlevel1Input = {
+    create?: XOR<Enumerable<ProfileCreateWithoutMas_positionlevel1Input>, Enumerable<ProfileUncheckedCreateWithoutMas_positionlevel1Input>>
+    connectOrCreate?: Enumerable<ProfileCreateOrConnectWithoutMas_positionlevel1Input>
+    createMany?: ProfileCreateManyMas_positionlevel1InputEnvelope
+    connect?: Enumerable<ProfileWhereUniqueInput>
+  }
+
   export type mas_positionlevel2UncheckedCreateNestedManyWithoutMas_positionlevel1Input = {
     create?: XOR<Enumerable<mas_positionlevel2CreateWithoutMas_positionlevel1Input>, Enumerable<mas_positionlevel2UncheckedCreateWithoutMas_positionlevel1Input>>
     connectOrCreate?: Enumerable<mas_positionlevel2CreateOrConnectWithoutMas_positionlevel1Input>
@@ -44034,6 +44297,13 @@ export namespace Prisma {
     connectOrCreate?: Enumerable<Position_userCreateOrConnectWithoutMas_positionlevel1Input>
     createMany?: Position_userCreateManyMas_positionlevel1InputEnvelope
     connect?: Enumerable<Position_userWhereUniqueInput>
+  }
+
+  export type ProfileUncheckedCreateNestedManyWithoutMas_positionlevel1Input = {
+    create?: XOR<Enumerable<ProfileCreateWithoutMas_positionlevel1Input>, Enumerable<ProfileUncheckedCreateWithoutMas_positionlevel1Input>>
+    connectOrCreate?: Enumerable<ProfileCreateOrConnectWithoutMas_positionlevel1Input>
+    createMany?: ProfileCreateManyMas_positionlevel1InputEnvelope
+    connect?: Enumerable<ProfileWhereUniqueInput>
   }
 
   export type mas_positionlevel2UpdateManyWithoutMas_positionlevel1NestedInput = {
@@ -44074,6 +44344,20 @@ export namespace Prisma {
     deleteMany?: Enumerable<Position_userScalarWhereInput>
   }
 
+  export type ProfileUpdateManyWithoutMas_positionlevel1NestedInput = {
+    create?: XOR<Enumerable<ProfileCreateWithoutMas_positionlevel1Input>, Enumerable<ProfileUncheckedCreateWithoutMas_positionlevel1Input>>
+    connectOrCreate?: Enumerable<ProfileCreateOrConnectWithoutMas_positionlevel1Input>
+    upsert?: Enumerable<ProfileUpsertWithWhereUniqueWithoutMas_positionlevel1Input>
+    createMany?: ProfileCreateManyMas_positionlevel1InputEnvelope
+    set?: Enumerable<ProfileWhereUniqueInput>
+    disconnect?: Enumerable<ProfileWhereUniqueInput>
+    delete?: Enumerable<ProfileWhereUniqueInput>
+    connect?: Enumerable<ProfileWhereUniqueInput>
+    update?: Enumerable<ProfileUpdateWithWhereUniqueWithoutMas_positionlevel1Input>
+    updateMany?: Enumerable<ProfileUpdateManyWithWhereWithoutMas_positionlevel1Input>
+    deleteMany?: Enumerable<ProfileScalarWhereInput>
+  }
+
   export type mas_positionlevel2UncheckedUpdateManyWithoutMas_positionlevel1NestedInput = {
     create?: XOR<Enumerable<mas_positionlevel2CreateWithoutMas_positionlevel1Input>, Enumerable<mas_positionlevel2UncheckedCreateWithoutMas_positionlevel1Input>>
     connectOrCreate?: Enumerable<mas_positionlevel2CreateOrConnectWithoutMas_positionlevel1Input>
@@ -44102,6 +44386,20 @@ export namespace Prisma {
     deleteMany?: Enumerable<Position_userScalarWhereInput>
   }
 
+  export type ProfileUncheckedUpdateManyWithoutMas_positionlevel1NestedInput = {
+    create?: XOR<Enumerable<ProfileCreateWithoutMas_positionlevel1Input>, Enumerable<ProfileUncheckedCreateWithoutMas_positionlevel1Input>>
+    connectOrCreate?: Enumerable<ProfileCreateOrConnectWithoutMas_positionlevel1Input>
+    upsert?: Enumerable<ProfileUpsertWithWhereUniqueWithoutMas_positionlevel1Input>
+    createMany?: ProfileCreateManyMas_positionlevel1InputEnvelope
+    set?: Enumerable<ProfileWhereUniqueInput>
+    disconnect?: Enumerable<ProfileWhereUniqueInput>
+    delete?: Enumerable<ProfileWhereUniqueInput>
+    connect?: Enumerable<ProfileWhereUniqueInput>
+    update?: Enumerable<ProfileUpdateWithWhereUniqueWithoutMas_positionlevel1Input>
+    updateMany?: Enumerable<ProfileUpdateManyWithWhereWithoutMas_positionlevel1Input>
+    deleteMany?: Enumerable<ProfileScalarWhereInput>
+  }
+
   export type mas_positionlevel1CreateNestedOneWithoutMas_positionlevel2Input = {
     create?: XOR<mas_positionlevel1CreateWithoutMas_positionlevel2Input, mas_positionlevel1UncheckedCreateWithoutMas_positionlevel2Input>
     connectOrCreate?: mas_positionlevel1CreateOrConnectWithoutMas_positionlevel2Input
@@ -44128,6 +44426,13 @@ export namespace Prisma {
     connect?: Enumerable<Position_userWhereUniqueInput>
   }
 
+  export type ProfileCreateNestedManyWithoutMas_positionlevel2Input = {
+    create?: XOR<Enumerable<ProfileCreateWithoutMas_positionlevel2Input>, Enumerable<ProfileUncheckedCreateWithoutMas_positionlevel2Input>>
+    connectOrCreate?: Enumerable<ProfileCreateOrConnectWithoutMas_positionlevel2Input>
+    createMany?: ProfileCreateManyMas_positionlevel2InputEnvelope
+    connect?: Enumerable<ProfileWhereUniqueInput>
+  }
+
   export type mas_positionlevel3UncheckedCreateNestedManyWithoutMas_positionlevel2Input = {
     create?: XOR<Enumerable<mas_positionlevel3CreateWithoutMas_positionlevel2Input>, Enumerable<mas_positionlevel3UncheckedCreateWithoutMas_positionlevel2Input>>
     connectOrCreate?: Enumerable<mas_positionlevel3CreateOrConnectWithoutMas_positionlevel2Input>
@@ -44140,6 +44445,13 @@ export namespace Prisma {
     connectOrCreate?: Enumerable<Position_userCreateOrConnectWithoutMas_positionlevel2Input>
     createMany?: Position_userCreateManyMas_positionlevel2InputEnvelope
     connect?: Enumerable<Position_userWhereUniqueInput>
+  }
+
+  export type ProfileUncheckedCreateNestedManyWithoutMas_positionlevel2Input = {
+    create?: XOR<Enumerable<ProfileCreateWithoutMas_positionlevel2Input>, Enumerable<ProfileUncheckedCreateWithoutMas_positionlevel2Input>>
+    connectOrCreate?: Enumerable<ProfileCreateOrConnectWithoutMas_positionlevel2Input>
+    createMany?: ProfileCreateManyMas_positionlevel2InputEnvelope
+    connect?: Enumerable<ProfileWhereUniqueInput>
   }
 
   export type mas_positionlevel1UpdateOneWithoutMas_positionlevel2NestedInput = {
@@ -44190,6 +44502,20 @@ export namespace Prisma {
     deleteMany?: Enumerable<Position_userScalarWhereInput>
   }
 
+  export type ProfileUpdateManyWithoutMas_positionlevel2NestedInput = {
+    create?: XOR<Enumerable<ProfileCreateWithoutMas_positionlevel2Input>, Enumerable<ProfileUncheckedCreateWithoutMas_positionlevel2Input>>
+    connectOrCreate?: Enumerable<ProfileCreateOrConnectWithoutMas_positionlevel2Input>
+    upsert?: Enumerable<ProfileUpsertWithWhereUniqueWithoutMas_positionlevel2Input>
+    createMany?: ProfileCreateManyMas_positionlevel2InputEnvelope
+    set?: Enumerable<ProfileWhereUniqueInput>
+    disconnect?: Enumerable<ProfileWhereUniqueInput>
+    delete?: Enumerable<ProfileWhereUniqueInput>
+    connect?: Enumerable<ProfileWhereUniqueInput>
+    update?: Enumerable<ProfileUpdateWithWhereUniqueWithoutMas_positionlevel2Input>
+    updateMany?: Enumerable<ProfileUpdateManyWithWhereWithoutMas_positionlevel2Input>
+    deleteMany?: Enumerable<ProfileScalarWhereInput>
+  }
+
   export type mas_positionlevel3UncheckedUpdateManyWithoutMas_positionlevel2NestedInput = {
     create?: XOR<Enumerable<mas_positionlevel3CreateWithoutMas_positionlevel2Input>, Enumerable<mas_positionlevel3UncheckedCreateWithoutMas_positionlevel2Input>>
     connectOrCreate?: Enumerable<mas_positionlevel3CreateOrConnectWithoutMas_positionlevel2Input>
@@ -44218,6 +44544,20 @@ export namespace Prisma {
     deleteMany?: Enumerable<Position_userScalarWhereInput>
   }
 
+  export type ProfileUncheckedUpdateManyWithoutMas_positionlevel2NestedInput = {
+    create?: XOR<Enumerable<ProfileCreateWithoutMas_positionlevel2Input>, Enumerable<ProfileUncheckedCreateWithoutMas_positionlevel2Input>>
+    connectOrCreate?: Enumerable<ProfileCreateOrConnectWithoutMas_positionlevel2Input>
+    upsert?: Enumerable<ProfileUpsertWithWhereUniqueWithoutMas_positionlevel2Input>
+    createMany?: ProfileCreateManyMas_positionlevel2InputEnvelope
+    set?: Enumerable<ProfileWhereUniqueInput>
+    disconnect?: Enumerable<ProfileWhereUniqueInput>
+    delete?: Enumerable<ProfileWhereUniqueInput>
+    connect?: Enumerable<ProfileWhereUniqueInput>
+    update?: Enumerable<ProfileUpdateWithWhereUniqueWithoutMas_positionlevel2Input>
+    updateMany?: Enumerable<ProfileUpdateManyWithWhereWithoutMas_positionlevel2Input>
+    deleteMany?: Enumerable<ProfileScalarWhereInput>
+  }
+
   export type mas_positionlevel2CreateNestedOneWithoutMas_positionlevel3Input = {
     create?: XOR<mas_positionlevel2CreateWithoutMas_positionlevel3Input, mas_positionlevel2UncheckedCreateWithoutMas_positionlevel3Input>
     connectOrCreate?: mas_positionlevel2CreateOrConnectWithoutMas_positionlevel3Input
@@ -44237,11 +44577,25 @@ export namespace Prisma {
     connect?: Enumerable<Position_userWhereUniqueInput>
   }
 
+  export type ProfileCreateNestedManyWithoutMas_positionlevel3Input = {
+    create?: XOR<Enumerable<ProfileCreateWithoutMas_positionlevel3Input>, Enumerable<ProfileUncheckedCreateWithoutMas_positionlevel3Input>>
+    connectOrCreate?: Enumerable<ProfileCreateOrConnectWithoutMas_positionlevel3Input>
+    createMany?: ProfileCreateManyMas_positionlevel3InputEnvelope
+    connect?: Enumerable<ProfileWhereUniqueInput>
+  }
+
   export type Position_userUncheckedCreateNestedManyWithoutMas_positionlevel3Input = {
     create?: XOR<Enumerable<Position_userCreateWithoutMas_positionlevel3Input>, Enumerable<Position_userUncheckedCreateWithoutMas_positionlevel3Input>>
     connectOrCreate?: Enumerable<Position_userCreateOrConnectWithoutMas_positionlevel3Input>
     createMany?: Position_userCreateManyMas_positionlevel3InputEnvelope
     connect?: Enumerable<Position_userWhereUniqueInput>
+  }
+
+  export type ProfileUncheckedCreateNestedManyWithoutMas_positionlevel3Input = {
+    create?: XOR<Enumerable<ProfileCreateWithoutMas_positionlevel3Input>, Enumerable<ProfileUncheckedCreateWithoutMas_positionlevel3Input>>
+    connectOrCreate?: Enumerable<ProfileCreateOrConnectWithoutMas_positionlevel3Input>
+    createMany?: ProfileCreateManyMas_positionlevel3InputEnvelope
+    connect?: Enumerable<ProfileWhereUniqueInput>
   }
 
   export type mas_positionlevel2UpdateOneWithoutMas_positionlevel3NestedInput = {
@@ -44278,6 +44632,20 @@ export namespace Prisma {
     deleteMany?: Enumerable<Position_userScalarWhereInput>
   }
 
+  export type ProfileUpdateManyWithoutMas_positionlevel3NestedInput = {
+    create?: XOR<Enumerable<ProfileCreateWithoutMas_positionlevel3Input>, Enumerable<ProfileUncheckedCreateWithoutMas_positionlevel3Input>>
+    connectOrCreate?: Enumerable<ProfileCreateOrConnectWithoutMas_positionlevel3Input>
+    upsert?: Enumerable<ProfileUpsertWithWhereUniqueWithoutMas_positionlevel3Input>
+    createMany?: ProfileCreateManyMas_positionlevel3InputEnvelope
+    set?: Enumerable<ProfileWhereUniqueInput>
+    disconnect?: Enumerable<ProfileWhereUniqueInput>
+    delete?: Enumerable<ProfileWhereUniqueInput>
+    connect?: Enumerable<ProfileWhereUniqueInput>
+    update?: Enumerable<ProfileUpdateWithWhereUniqueWithoutMas_positionlevel3Input>
+    updateMany?: Enumerable<ProfileUpdateManyWithWhereWithoutMas_positionlevel3Input>
+    deleteMany?: Enumerable<ProfileScalarWhereInput>
+  }
+
   export type Position_userUncheckedUpdateManyWithoutMas_positionlevel3NestedInput = {
     create?: XOR<Enumerable<Position_userCreateWithoutMas_positionlevel3Input>, Enumerable<Position_userUncheckedCreateWithoutMas_positionlevel3Input>>
     connectOrCreate?: Enumerable<Position_userCreateOrConnectWithoutMas_positionlevel3Input>
@@ -44290,6 +44658,20 @@ export namespace Prisma {
     update?: Enumerable<Position_userUpdateWithWhereUniqueWithoutMas_positionlevel3Input>
     updateMany?: Enumerable<Position_userUpdateManyWithWhereWithoutMas_positionlevel3Input>
     deleteMany?: Enumerable<Position_userScalarWhereInput>
+  }
+
+  export type ProfileUncheckedUpdateManyWithoutMas_positionlevel3NestedInput = {
+    create?: XOR<Enumerable<ProfileCreateWithoutMas_positionlevel3Input>, Enumerable<ProfileUncheckedCreateWithoutMas_positionlevel3Input>>
+    connectOrCreate?: Enumerable<ProfileCreateOrConnectWithoutMas_positionlevel3Input>
+    upsert?: Enumerable<ProfileUpsertWithWhereUniqueWithoutMas_positionlevel3Input>
+    createMany?: ProfileCreateManyMas_positionlevel3InputEnvelope
+    set?: Enumerable<ProfileWhereUniqueInput>
+    disconnect?: Enumerable<ProfileWhereUniqueInput>
+    delete?: Enumerable<ProfileWhereUniqueInput>
+    connect?: Enumerable<ProfileWhereUniqueInput>
+    update?: Enumerable<ProfileUpdateWithWhereUniqueWithoutMas_positionlevel3Input>
+    updateMany?: Enumerable<ProfileUpdateManyWithWhereWithoutMas_positionlevel3Input>
+    deleteMany?: Enumerable<ProfileScalarWhereInput>
   }
 
   export type UserCreateNestedOneWithoutHenchmanInput = {
@@ -45875,6 +46257,7 @@ export namespace Prisma {
     type: string
     mas_positionlevel2?: mas_positionlevel2CreateNestedOneWithoutMas_positionlevel3Input
     Position_user?: Position_userCreateNestedManyWithoutMas_positionlevel3Input
+    Profile?: ProfileCreateNestedManyWithoutMas_positionlevel3Input
   }
 
   export type mas_positionlevel3UncheckedCreateWithoutCompanyInput = {
@@ -45885,6 +46268,7 @@ export namespace Prisma {
     type: string
     positionlevel2_id?: string | null
     Position_user?: Position_userUncheckedCreateNestedManyWithoutMas_positionlevel3Input
+    Profile?: ProfileUncheckedCreateNestedManyWithoutMas_positionlevel3Input
   }
 
   export type mas_positionlevel3CreateOrConnectWithoutCompanyInput = {
@@ -45906,6 +46290,7 @@ export namespace Prisma {
     mas_positionlevel1?: mas_positionlevel1CreateNestedOneWithoutMas_positionlevel2Input
     mas_positionlevel3?: mas_positionlevel3CreateNestedManyWithoutMas_positionlevel2Input
     position_user?: Position_userCreateNestedManyWithoutMas_positionlevel2Input
+    Profile?: ProfileCreateNestedManyWithoutMas_positionlevel2Input
   }
 
   export type mas_positionlevel2UncheckedCreateWithoutCompanyInput = {
@@ -45917,6 +46302,7 @@ export namespace Prisma {
     positionlevel1_id?: string | null
     mas_positionlevel3?: mas_positionlevel3UncheckedCreateNestedManyWithoutMas_positionlevel2Input
     position_user?: Position_userUncheckedCreateNestedManyWithoutMas_positionlevel2Input
+    Profile?: ProfileUncheckedCreateNestedManyWithoutMas_positionlevel2Input
   }
 
   export type mas_positionlevel2CreateOrConnectWithoutCompanyInput = {
@@ -45937,6 +46323,7 @@ export namespace Prisma {
     type: string
     mas_positionlevel2?: mas_positionlevel2CreateNestedManyWithoutMas_positionlevel1Input
     Position_user?: Position_userCreateNestedManyWithoutMas_positionlevel1Input
+    Profile?: ProfileCreateNestedManyWithoutMas_positionlevel1Input
   }
 
   export type mas_positionlevel1UncheckedCreateWithoutCompanyInput = {
@@ -45947,6 +46334,7 @@ export namespace Prisma {
     type: string
     mas_positionlevel2?: mas_positionlevel2UncheckedCreateNestedManyWithoutMas_positionlevel1Input
     Position_user?: Position_userUncheckedCreateNestedManyWithoutMas_positionlevel1Input
+    Profile?: ProfileUncheckedCreateNestedManyWithoutMas_positionlevel1Input
   }
 
   export type mas_positionlevel1CreateOrConnectWithoutCompanyInput = {
@@ -46635,6 +47023,89 @@ export namespace Prisma {
     create: XOR<UserCreateWithoutProfileInput, UserUncheckedCreateWithoutProfileInput>
   }
 
+  export type mas_positionlevel1CreateWithoutProfileInput = {
+    id: string
+    name: string
+    level: number
+    code: string
+    type: string
+    mas_positionlevel2?: mas_positionlevel2CreateNestedManyWithoutMas_positionlevel1Input
+    Company?: CompanyCreateNestedOneWithoutMas_positionlevel1Input
+    Position_user?: Position_userCreateNestedManyWithoutMas_positionlevel1Input
+  }
+
+  export type mas_positionlevel1UncheckedCreateWithoutProfileInput = {
+    id: string
+    name: string
+    level: number
+    code: string
+    type: string
+    mas_positionlevel2?: mas_positionlevel2UncheckedCreateNestedManyWithoutMas_positionlevel1Input
+    CompanyId?: string | null
+    Position_user?: Position_userUncheckedCreateNestedManyWithoutMas_positionlevel1Input
+  }
+
+  export type mas_positionlevel1CreateOrConnectWithoutProfileInput = {
+    where: mas_positionlevel1WhereUniqueInput
+    create: XOR<mas_positionlevel1CreateWithoutProfileInput, mas_positionlevel1UncheckedCreateWithoutProfileInput>
+  }
+
+  export type mas_positionlevel2CreateWithoutProfileInput = {
+    id: string
+    name: string
+    level: number
+    code: string
+    type: string
+    mas_positionlevel1?: mas_positionlevel1CreateNestedOneWithoutMas_positionlevel2Input
+    mas_positionlevel3?: mas_positionlevel3CreateNestedManyWithoutMas_positionlevel2Input
+    Company?: CompanyCreateNestedOneWithoutMas_positionlevel2Input
+    position_user?: Position_userCreateNestedManyWithoutMas_positionlevel2Input
+  }
+
+  export type mas_positionlevel2UncheckedCreateWithoutProfileInput = {
+    id: string
+    name: string
+    level: number
+    code: string
+    type: string
+    positionlevel1_id?: string | null
+    mas_positionlevel3?: mas_positionlevel3UncheckedCreateNestedManyWithoutMas_positionlevel2Input
+    CompanyId?: string | null
+    position_user?: Position_userUncheckedCreateNestedManyWithoutMas_positionlevel2Input
+  }
+
+  export type mas_positionlevel2CreateOrConnectWithoutProfileInput = {
+    where: mas_positionlevel2WhereUniqueInput
+    create: XOR<mas_positionlevel2CreateWithoutProfileInput, mas_positionlevel2UncheckedCreateWithoutProfileInput>
+  }
+
+  export type mas_positionlevel3CreateWithoutProfileInput = {
+    id: string
+    name: string
+    level: number
+    code: string
+    type: string
+    mas_positionlevel2?: mas_positionlevel2CreateNestedOneWithoutMas_positionlevel3Input
+    Company?: CompanyCreateNestedOneWithoutMas_positionlevel3Input
+    Position_user?: Position_userCreateNestedManyWithoutMas_positionlevel3Input
+  }
+
+  export type mas_positionlevel3UncheckedCreateWithoutProfileInput = {
+    id: string
+    name: string
+    level: number
+    code: string
+    type: string
+    positionlevel2_id?: string | null
+    CompanyId?: string | null
+    Position_user?: Position_userUncheckedCreateNestedManyWithoutMas_positionlevel3Input
+  }
+
+  export type mas_positionlevel3CreateOrConnectWithoutProfileInput = {
+    where: mas_positionlevel3WhereUniqueInput
+    create: XOR<mas_positionlevel3CreateWithoutProfileInput, mas_positionlevel3UncheckedCreateWithoutProfileInput>
+  }
+
   export type UserUpsertWithoutProfileInput = {
     update: XOR<UserUpdateWithoutProfileInput, UserUncheckedUpdateWithoutProfileInput>
     create: XOR<UserCreateWithoutProfileInput, UserUncheckedCreateWithoutProfileInput>
@@ -46686,6 +47157,89 @@ export namespace Prisma {
     cretedByfk?: log_positionnUncheckedUpdateManyWithoutCretedByfkNestedInput
   }
 
+  export type mas_positionlevel1UpsertWithoutProfileInput = {
+    update: XOR<mas_positionlevel1UpdateWithoutProfileInput, mas_positionlevel1UncheckedUpdateWithoutProfileInput>
+    create: XOR<mas_positionlevel1CreateWithoutProfileInput, mas_positionlevel1UncheckedCreateWithoutProfileInput>
+  }
+
+  export type mas_positionlevel1UpdateWithoutProfileInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    level?: IntFieldUpdateOperationsInput | number
+    code?: StringFieldUpdateOperationsInput | string
+    type?: StringFieldUpdateOperationsInput | string
+    mas_positionlevel2?: mas_positionlevel2UpdateManyWithoutMas_positionlevel1NestedInput
+    Company?: CompanyUpdateOneWithoutMas_positionlevel1NestedInput
+    Position_user?: Position_userUpdateManyWithoutMas_positionlevel1NestedInput
+  }
+
+  export type mas_positionlevel1UncheckedUpdateWithoutProfileInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    level?: IntFieldUpdateOperationsInput | number
+    code?: StringFieldUpdateOperationsInput | string
+    type?: StringFieldUpdateOperationsInput | string
+    mas_positionlevel2?: mas_positionlevel2UncheckedUpdateManyWithoutMas_positionlevel1NestedInput
+    CompanyId?: NullableStringFieldUpdateOperationsInput | string | null
+    Position_user?: Position_userUncheckedUpdateManyWithoutMas_positionlevel1NestedInput
+  }
+
+  export type mas_positionlevel2UpsertWithoutProfileInput = {
+    update: XOR<mas_positionlevel2UpdateWithoutProfileInput, mas_positionlevel2UncheckedUpdateWithoutProfileInput>
+    create: XOR<mas_positionlevel2CreateWithoutProfileInput, mas_positionlevel2UncheckedCreateWithoutProfileInput>
+  }
+
+  export type mas_positionlevel2UpdateWithoutProfileInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    level?: IntFieldUpdateOperationsInput | number
+    code?: StringFieldUpdateOperationsInput | string
+    type?: StringFieldUpdateOperationsInput | string
+    mas_positionlevel1?: mas_positionlevel1UpdateOneWithoutMas_positionlevel2NestedInput
+    mas_positionlevel3?: mas_positionlevel3UpdateManyWithoutMas_positionlevel2NestedInput
+    Company?: CompanyUpdateOneWithoutMas_positionlevel2NestedInput
+    position_user?: Position_userUpdateManyWithoutMas_positionlevel2NestedInput
+  }
+
+  export type mas_positionlevel2UncheckedUpdateWithoutProfileInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    level?: IntFieldUpdateOperationsInput | number
+    code?: StringFieldUpdateOperationsInput | string
+    type?: StringFieldUpdateOperationsInput | string
+    positionlevel1_id?: NullableStringFieldUpdateOperationsInput | string | null
+    mas_positionlevel3?: mas_positionlevel3UncheckedUpdateManyWithoutMas_positionlevel2NestedInput
+    CompanyId?: NullableStringFieldUpdateOperationsInput | string | null
+    position_user?: Position_userUncheckedUpdateManyWithoutMas_positionlevel2NestedInput
+  }
+
+  export type mas_positionlevel3UpsertWithoutProfileInput = {
+    update: XOR<mas_positionlevel3UpdateWithoutProfileInput, mas_positionlevel3UncheckedUpdateWithoutProfileInput>
+    create: XOR<mas_positionlevel3CreateWithoutProfileInput, mas_positionlevel3UncheckedCreateWithoutProfileInput>
+  }
+
+  export type mas_positionlevel3UpdateWithoutProfileInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    level?: IntFieldUpdateOperationsInput | number
+    code?: StringFieldUpdateOperationsInput | string
+    type?: StringFieldUpdateOperationsInput | string
+    mas_positionlevel2?: mas_positionlevel2UpdateOneWithoutMas_positionlevel3NestedInput
+    Company?: CompanyUpdateOneWithoutMas_positionlevel3NestedInput
+    Position_user?: Position_userUpdateManyWithoutMas_positionlevel3NestedInput
+  }
+
+  export type mas_positionlevel3UncheckedUpdateWithoutProfileInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    level?: IntFieldUpdateOperationsInput | number
+    code?: StringFieldUpdateOperationsInput | string
+    type?: StringFieldUpdateOperationsInput | string
+    positionlevel2_id?: NullableStringFieldUpdateOperationsInput | string | null
+    CompanyId?: NullableStringFieldUpdateOperationsInput | string | null
+    Position_user?: Position_userUncheckedUpdateManyWithoutMas_positionlevel3NestedInput
+  }
+
   export type ProfileCreateWithoutUserInput = {
     id: string
     bio?: string | null
@@ -46734,6 +47288,9 @@ export namespace Prisma {
     social_likedin?: string | null
     social_line?: string | null
     social_telegram?: string | null
+    mas_positionlevel1?: mas_positionlevel1CreateNestedOneWithoutProfileInput
+    mas_positionlevel2?: mas_positionlevel2CreateNestedOneWithoutProfileInput
+    mas_positionlevel3?: mas_positionlevel3CreateNestedOneWithoutProfileInput
   }
 
   export type ProfileUncheckedCreateWithoutUserInput = {
@@ -46784,6 +47341,9 @@ export namespace Prisma {
     social_likedin?: string | null
     social_line?: string | null
     social_telegram?: string | null
+    masposition1_id?: string | null
+    masposition2_id?: string | null
+    masposition3_id?: string | null
   }
 
   export type ProfileCreateOrConnectWithoutUserInput = {
@@ -47323,6 +47883,9 @@ export namespace Prisma {
     social_likedin?: NullableStringFieldUpdateOperationsInput | string | null
     social_line?: NullableStringFieldUpdateOperationsInput | string | null
     social_telegram?: NullableStringFieldUpdateOperationsInput | string | null
+    mas_positionlevel1?: mas_positionlevel1UpdateOneWithoutProfileNestedInput
+    mas_positionlevel2?: mas_positionlevel2UpdateOneWithoutProfileNestedInput
+    mas_positionlevel3?: mas_positionlevel3UpdateOneWithoutProfileNestedInput
   }
 
   export type ProfileUncheckedUpdateWithoutUserInput = {
@@ -47373,6 +47936,9 @@ export namespace Prisma {
     social_likedin?: NullableStringFieldUpdateOperationsInput | string | null
     social_line?: NullableStringFieldUpdateOperationsInput | string | null
     social_telegram?: NullableStringFieldUpdateOperationsInput | string | null
+    masposition1_id?: NullableStringFieldUpdateOperationsInput | string | null
+    masposition2_id?: NullableStringFieldUpdateOperationsInput | string | null
+    masposition3_id?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type RoleUpsertWithoutUsersInput = {
@@ -48318,6 +48884,7 @@ export namespace Prisma {
     mas_positionlevel3?: mas_positionlevel3CreateNestedManyWithoutMas_positionlevel2Input
     Company?: CompanyCreateNestedOneWithoutMas_positionlevel2Input
     position_user?: Position_userCreateNestedManyWithoutMas_positionlevel2Input
+    Profile?: ProfileCreateNestedManyWithoutMas_positionlevel2Input
   }
 
   export type mas_positionlevel2UncheckedCreateWithoutMas_positionlevel1Input = {
@@ -48329,6 +48896,7 @@ export namespace Prisma {
     mas_positionlevel3?: mas_positionlevel3UncheckedCreateNestedManyWithoutMas_positionlevel2Input
     CompanyId?: string | null
     position_user?: Position_userUncheckedCreateNestedManyWithoutMas_positionlevel2Input
+    Profile?: ProfileUncheckedCreateNestedManyWithoutMas_positionlevel2Input
   }
 
   export type mas_positionlevel2CreateOrConnectWithoutMas_positionlevel1Input = {
@@ -48414,6 +48982,122 @@ export namespace Prisma {
     skipDuplicates?: boolean
   }
 
+  export type ProfileCreateWithoutMas_positionlevel1Input = {
+    id: string
+    bio?: string | null
+    firstname_th?: string | null
+    lastname_th?: string | null
+    firstname_en?: string | null
+    lastname_en?: string | null
+    nickname?: string | null
+    blood_type?: string | null
+    employee_status?: string | null
+    start_date_work?: Date | string | null
+    avatar?: string | null
+    dob?: Date | string | null
+    age?: string | null
+    relationship?: string | null
+    shirt_size?: string | null
+    prefix_th?: string | null
+    prefix_en?: string | null
+    citizen_id?: string | null
+    social_id?: string | null
+    staff_status?: string | null
+    tel?: string | null
+    address?: string | null
+    gender?: string | null
+    staff_code?: string | null
+    religion?: string | null
+    user: UserCreateNestedOneWithoutProfileInput
+    citizen_addressnumber?: string | null
+    citizen_address?: string | null
+    citizen_country?: string | null
+    citizen_province?: string | null
+    citizen_district?: string | null
+    citizen_state?: string | null
+    citizen_zipcode?: string | null
+    citizen_tel?: string | null
+    contract_sameCitizen?: boolean
+    contract_addressnumber?: string | null
+    contract_address?: string | null
+    contract_country?: string | null
+    contract_province?: string | null
+    contract_district?: string | null
+    contract_state?: string | null
+    contract_zipcode?: string | null
+    contract_email?: string | null
+    contract_companyemail?: string | null
+    social_facebook?: string | null
+    social_likedin?: string | null
+    social_line?: string | null
+    social_telegram?: string | null
+    mas_positionlevel2?: mas_positionlevel2CreateNestedOneWithoutProfileInput
+    mas_positionlevel3?: mas_positionlevel3CreateNestedOneWithoutProfileInput
+  }
+
+  export type ProfileUncheckedCreateWithoutMas_positionlevel1Input = {
+    id: string
+    bio?: string | null
+    firstname_th?: string | null
+    lastname_th?: string | null
+    firstname_en?: string | null
+    lastname_en?: string | null
+    nickname?: string | null
+    blood_type?: string | null
+    employee_status?: string | null
+    start_date_work?: Date | string | null
+    avatar?: string | null
+    dob?: Date | string | null
+    age?: string | null
+    relationship?: string | null
+    shirt_size?: string | null
+    prefix_th?: string | null
+    prefix_en?: string | null
+    citizen_id?: string | null
+    social_id?: string | null
+    staff_status?: string | null
+    tel?: string | null
+    address?: string | null
+    gender?: string | null
+    staff_code?: string | null
+    religion?: string | null
+    userId: string
+    citizen_addressnumber?: string | null
+    citizen_address?: string | null
+    citizen_country?: string | null
+    citizen_province?: string | null
+    citizen_district?: string | null
+    citizen_state?: string | null
+    citizen_zipcode?: string | null
+    citizen_tel?: string | null
+    contract_sameCitizen?: boolean
+    contract_addressnumber?: string | null
+    contract_address?: string | null
+    contract_country?: string | null
+    contract_province?: string | null
+    contract_district?: string | null
+    contract_state?: string | null
+    contract_zipcode?: string | null
+    contract_email?: string | null
+    contract_companyemail?: string | null
+    social_facebook?: string | null
+    social_likedin?: string | null
+    social_line?: string | null
+    social_telegram?: string | null
+    masposition2_id?: string | null
+    masposition3_id?: string | null
+  }
+
+  export type ProfileCreateOrConnectWithoutMas_positionlevel1Input = {
+    where: ProfileWhereUniqueInput
+    create: XOR<ProfileCreateWithoutMas_positionlevel1Input, ProfileUncheckedCreateWithoutMas_positionlevel1Input>
+  }
+
+  export type ProfileCreateManyMas_positionlevel1InputEnvelope = {
+    data: Enumerable<ProfileCreateManyMas_positionlevel1Input>
+    skipDuplicates?: boolean
+  }
+
   export type mas_positionlevel2UpsertWithWhereUniqueWithoutMas_positionlevel1Input = {
     where: mas_positionlevel2WhereUniqueInput
     update: XOR<mas_positionlevel2UpdateWithoutMas_positionlevel1Input, mas_positionlevel2UncheckedUpdateWithoutMas_positionlevel1Input>
@@ -48487,6 +49171,79 @@ export namespace Prisma {
     data: XOR<Position_userUpdateManyMutationInput, Position_userUncheckedUpdateManyWithoutPosition_userInput>
   }
 
+  export type ProfileUpsertWithWhereUniqueWithoutMas_positionlevel1Input = {
+    where: ProfileWhereUniqueInput
+    update: XOR<ProfileUpdateWithoutMas_positionlevel1Input, ProfileUncheckedUpdateWithoutMas_positionlevel1Input>
+    create: XOR<ProfileCreateWithoutMas_positionlevel1Input, ProfileUncheckedCreateWithoutMas_positionlevel1Input>
+  }
+
+  export type ProfileUpdateWithWhereUniqueWithoutMas_positionlevel1Input = {
+    where: ProfileWhereUniqueInput
+    data: XOR<ProfileUpdateWithoutMas_positionlevel1Input, ProfileUncheckedUpdateWithoutMas_positionlevel1Input>
+  }
+
+  export type ProfileUpdateManyWithWhereWithoutMas_positionlevel1Input = {
+    where: ProfileScalarWhereInput
+    data: XOR<ProfileUpdateManyMutationInput, ProfileUncheckedUpdateManyWithoutProfileInput>
+  }
+
+  export type ProfileScalarWhereInput = {
+    AND?: Enumerable<ProfileScalarWhereInput>
+    OR?: Enumerable<ProfileScalarWhereInput>
+    NOT?: Enumerable<ProfileScalarWhereInput>
+    id?: UuidFilter | string
+    bio?: StringNullableFilter | string | null
+    firstname_th?: StringNullableFilter | string | null
+    lastname_th?: StringNullableFilter | string | null
+    firstname_en?: StringNullableFilter | string | null
+    lastname_en?: StringNullableFilter | string | null
+    nickname?: StringNullableFilter | string | null
+    blood_type?: StringNullableFilter | string | null
+    employee_status?: StringNullableFilter | string | null
+    start_date_work?: DateTimeNullableFilter | Date | string | null
+    avatar?: StringNullableFilter | string | null
+    dob?: DateTimeNullableFilter | Date | string | null
+    age?: StringNullableFilter | string | null
+    relationship?: StringNullableFilter | string | null
+    shirt_size?: StringNullableFilter | string | null
+    prefix_th?: StringNullableFilter | string | null
+    prefix_en?: StringNullableFilter | string | null
+    citizen_id?: StringNullableFilter | string | null
+    social_id?: StringNullableFilter | string | null
+    staff_status?: StringNullableFilter | string | null
+    tel?: StringNullableFilter | string | null
+    address?: StringNullableFilter | string | null
+    gender?: StringNullableFilter | string | null
+    staff_code?: StringNullableFilter | string | null
+    religion?: StringNullableFilter | string | null
+    userId?: UuidFilter | string
+    citizen_addressnumber?: StringNullableFilter | string | null
+    citizen_address?: StringNullableFilter | string | null
+    citizen_country?: StringNullableFilter | string | null
+    citizen_province?: StringNullableFilter | string | null
+    citizen_district?: StringNullableFilter | string | null
+    citizen_state?: StringNullableFilter | string | null
+    citizen_zipcode?: StringNullableFilter | string | null
+    citizen_tel?: StringNullableFilter | string | null
+    contract_sameCitizen?: BoolFilter | boolean
+    contract_addressnumber?: StringNullableFilter | string | null
+    contract_address?: StringNullableFilter | string | null
+    contract_country?: StringNullableFilter | string | null
+    contract_province?: StringNullableFilter | string | null
+    contract_district?: StringNullableFilter | string | null
+    contract_state?: StringNullableFilter | string | null
+    contract_zipcode?: StringNullableFilter | string | null
+    contract_email?: StringNullableFilter | string | null
+    contract_companyemail?: StringNullableFilter | string | null
+    social_facebook?: StringNullableFilter | string | null
+    social_likedin?: StringNullableFilter | string | null
+    social_line?: StringNullableFilter | string | null
+    social_telegram?: StringNullableFilter | string | null
+    masposition1_id?: UuidNullableFilter | string | null
+    masposition2_id?: UuidNullableFilter | string | null
+    masposition3_id?: UuidNullableFilter | string | null
+  }
+
   export type mas_positionlevel1CreateWithoutMas_positionlevel2Input = {
     id: string
     name: string
@@ -48495,6 +49252,7 @@ export namespace Prisma {
     type: string
     Company?: CompanyCreateNestedOneWithoutMas_positionlevel1Input
     Position_user?: Position_userCreateNestedManyWithoutMas_positionlevel1Input
+    Profile?: ProfileCreateNestedManyWithoutMas_positionlevel1Input
   }
 
   export type mas_positionlevel1UncheckedCreateWithoutMas_positionlevel2Input = {
@@ -48505,6 +49263,7 @@ export namespace Prisma {
     type: string
     CompanyId?: string | null
     Position_user?: Position_userUncheckedCreateNestedManyWithoutMas_positionlevel1Input
+    Profile?: ProfileUncheckedCreateNestedManyWithoutMas_positionlevel1Input
   }
 
   export type mas_positionlevel1CreateOrConnectWithoutMas_positionlevel2Input = {
@@ -48520,6 +49279,7 @@ export namespace Prisma {
     type: string
     Company?: CompanyCreateNestedOneWithoutMas_positionlevel3Input
     Position_user?: Position_userCreateNestedManyWithoutMas_positionlevel3Input
+    Profile?: ProfileCreateNestedManyWithoutMas_positionlevel3Input
   }
 
   export type mas_positionlevel3UncheckedCreateWithoutMas_positionlevel2Input = {
@@ -48530,6 +49290,7 @@ export namespace Prisma {
     type: string
     CompanyId?: string | null
     Position_user?: Position_userUncheckedCreateNestedManyWithoutMas_positionlevel3Input
+    Profile?: ProfileUncheckedCreateNestedManyWithoutMas_positionlevel3Input
   }
 
   export type mas_positionlevel3CreateOrConnectWithoutMas_positionlevel2Input = {
@@ -48615,6 +49376,122 @@ export namespace Prisma {
     skipDuplicates?: boolean
   }
 
+  export type ProfileCreateWithoutMas_positionlevel2Input = {
+    id: string
+    bio?: string | null
+    firstname_th?: string | null
+    lastname_th?: string | null
+    firstname_en?: string | null
+    lastname_en?: string | null
+    nickname?: string | null
+    blood_type?: string | null
+    employee_status?: string | null
+    start_date_work?: Date | string | null
+    avatar?: string | null
+    dob?: Date | string | null
+    age?: string | null
+    relationship?: string | null
+    shirt_size?: string | null
+    prefix_th?: string | null
+    prefix_en?: string | null
+    citizen_id?: string | null
+    social_id?: string | null
+    staff_status?: string | null
+    tel?: string | null
+    address?: string | null
+    gender?: string | null
+    staff_code?: string | null
+    religion?: string | null
+    user: UserCreateNestedOneWithoutProfileInput
+    citizen_addressnumber?: string | null
+    citizen_address?: string | null
+    citizen_country?: string | null
+    citizen_province?: string | null
+    citizen_district?: string | null
+    citizen_state?: string | null
+    citizen_zipcode?: string | null
+    citizen_tel?: string | null
+    contract_sameCitizen?: boolean
+    contract_addressnumber?: string | null
+    contract_address?: string | null
+    contract_country?: string | null
+    contract_province?: string | null
+    contract_district?: string | null
+    contract_state?: string | null
+    contract_zipcode?: string | null
+    contract_email?: string | null
+    contract_companyemail?: string | null
+    social_facebook?: string | null
+    social_likedin?: string | null
+    social_line?: string | null
+    social_telegram?: string | null
+    mas_positionlevel1?: mas_positionlevel1CreateNestedOneWithoutProfileInput
+    mas_positionlevel3?: mas_positionlevel3CreateNestedOneWithoutProfileInput
+  }
+
+  export type ProfileUncheckedCreateWithoutMas_positionlevel2Input = {
+    id: string
+    bio?: string | null
+    firstname_th?: string | null
+    lastname_th?: string | null
+    firstname_en?: string | null
+    lastname_en?: string | null
+    nickname?: string | null
+    blood_type?: string | null
+    employee_status?: string | null
+    start_date_work?: Date | string | null
+    avatar?: string | null
+    dob?: Date | string | null
+    age?: string | null
+    relationship?: string | null
+    shirt_size?: string | null
+    prefix_th?: string | null
+    prefix_en?: string | null
+    citizen_id?: string | null
+    social_id?: string | null
+    staff_status?: string | null
+    tel?: string | null
+    address?: string | null
+    gender?: string | null
+    staff_code?: string | null
+    religion?: string | null
+    userId: string
+    citizen_addressnumber?: string | null
+    citizen_address?: string | null
+    citizen_country?: string | null
+    citizen_province?: string | null
+    citizen_district?: string | null
+    citizen_state?: string | null
+    citizen_zipcode?: string | null
+    citizen_tel?: string | null
+    contract_sameCitizen?: boolean
+    contract_addressnumber?: string | null
+    contract_address?: string | null
+    contract_country?: string | null
+    contract_province?: string | null
+    contract_district?: string | null
+    contract_state?: string | null
+    contract_zipcode?: string | null
+    contract_email?: string | null
+    contract_companyemail?: string | null
+    social_facebook?: string | null
+    social_likedin?: string | null
+    social_line?: string | null
+    social_telegram?: string | null
+    masposition1_id?: string | null
+    masposition3_id?: string | null
+  }
+
+  export type ProfileCreateOrConnectWithoutMas_positionlevel2Input = {
+    where: ProfileWhereUniqueInput
+    create: XOR<ProfileCreateWithoutMas_positionlevel2Input, ProfileUncheckedCreateWithoutMas_positionlevel2Input>
+  }
+
+  export type ProfileCreateManyMas_positionlevel2InputEnvelope = {
+    data: Enumerable<ProfileCreateManyMas_positionlevel2Input>
+    skipDuplicates?: boolean
+  }
+
   export type mas_positionlevel1UpsertWithoutMas_positionlevel2Input = {
     update: XOR<mas_positionlevel1UpdateWithoutMas_positionlevel2Input, mas_positionlevel1UncheckedUpdateWithoutMas_positionlevel2Input>
     create: XOR<mas_positionlevel1CreateWithoutMas_positionlevel2Input, mas_positionlevel1UncheckedCreateWithoutMas_positionlevel2Input>
@@ -48628,6 +49505,7 @@ export namespace Prisma {
     type?: StringFieldUpdateOperationsInput | string
     Company?: CompanyUpdateOneWithoutMas_positionlevel1NestedInput
     Position_user?: Position_userUpdateManyWithoutMas_positionlevel1NestedInput
+    Profile?: ProfileUpdateManyWithoutMas_positionlevel1NestedInput
   }
 
   export type mas_positionlevel1UncheckedUpdateWithoutMas_positionlevel2Input = {
@@ -48638,6 +49516,7 @@ export namespace Prisma {
     type?: StringFieldUpdateOperationsInput | string
     CompanyId?: NullableStringFieldUpdateOperationsInput | string | null
     Position_user?: Position_userUncheckedUpdateManyWithoutMas_positionlevel1NestedInput
+    Profile?: ProfileUncheckedUpdateManyWithoutMas_positionlevel1NestedInput
   }
 
   export type mas_positionlevel3UpsertWithWhereUniqueWithoutMas_positionlevel2Input = {
@@ -48713,6 +49592,22 @@ export namespace Prisma {
     data: XOR<Position_userUpdateManyMutationInput, Position_userUncheckedUpdateManyWithoutPosition_userInput>
   }
 
+  export type ProfileUpsertWithWhereUniqueWithoutMas_positionlevel2Input = {
+    where: ProfileWhereUniqueInput
+    update: XOR<ProfileUpdateWithoutMas_positionlevel2Input, ProfileUncheckedUpdateWithoutMas_positionlevel2Input>
+    create: XOR<ProfileCreateWithoutMas_positionlevel2Input, ProfileUncheckedCreateWithoutMas_positionlevel2Input>
+  }
+
+  export type ProfileUpdateWithWhereUniqueWithoutMas_positionlevel2Input = {
+    where: ProfileWhereUniqueInput
+    data: XOR<ProfileUpdateWithoutMas_positionlevel2Input, ProfileUncheckedUpdateWithoutMas_positionlevel2Input>
+  }
+
+  export type ProfileUpdateManyWithWhereWithoutMas_positionlevel2Input = {
+    where: ProfileScalarWhereInput
+    data: XOR<ProfileUpdateManyMutationInput, ProfileUncheckedUpdateManyWithoutProfileInput>
+  }
+
   export type mas_positionlevel2CreateWithoutMas_positionlevel3Input = {
     id: string
     name: string
@@ -48722,6 +49617,7 @@ export namespace Prisma {
     mas_positionlevel1?: mas_positionlevel1CreateNestedOneWithoutMas_positionlevel2Input
     Company?: CompanyCreateNestedOneWithoutMas_positionlevel2Input
     position_user?: Position_userCreateNestedManyWithoutMas_positionlevel2Input
+    Profile?: ProfileCreateNestedManyWithoutMas_positionlevel2Input
   }
 
   export type mas_positionlevel2UncheckedCreateWithoutMas_positionlevel3Input = {
@@ -48733,6 +49629,7 @@ export namespace Prisma {
     positionlevel1_id?: string | null
     CompanyId?: string | null
     position_user?: Position_userUncheckedCreateNestedManyWithoutMas_positionlevel2Input
+    Profile?: ProfileUncheckedCreateNestedManyWithoutMas_positionlevel2Input
   }
 
   export type mas_positionlevel2CreateOrConnectWithoutMas_positionlevel3Input = {
@@ -48813,6 +49710,122 @@ export namespace Prisma {
     skipDuplicates?: boolean
   }
 
+  export type ProfileCreateWithoutMas_positionlevel3Input = {
+    id: string
+    bio?: string | null
+    firstname_th?: string | null
+    lastname_th?: string | null
+    firstname_en?: string | null
+    lastname_en?: string | null
+    nickname?: string | null
+    blood_type?: string | null
+    employee_status?: string | null
+    start_date_work?: Date | string | null
+    avatar?: string | null
+    dob?: Date | string | null
+    age?: string | null
+    relationship?: string | null
+    shirt_size?: string | null
+    prefix_th?: string | null
+    prefix_en?: string | null
+    citizen_id?: string | null
+    social_id?: string | null
+    staff_status?: string | null
+    tel?: string | null
+    address?: string | null
+    gender?: string | null
+    staff_code?: string | null
+    religion?: string | null
+    user: UserCreateNestedOneWithoutProfileInput
+    citizen_addressnumber?: string | null
+    citizen_address?: string | null
+    citizen_country?: string | null
+    citizen_province?: string | null
+    citizen_district?: string | null
+    citizen_state?: string | null
+    citizen_zipcode?: string | null
+    citizen_tel?: string | null
+    contract_sameCitizen?: boolean
+    contract_addressnumber?: string | null
+    contract_address?: string | null
+    contract_country?: string | null
+    contract_province?: string | null
+    contract_district?: string | null
+    contract_state?: string | null
+    contract_zipcode?: string | null
+    contract_email?: string | null
+    contract_companyemail?: string | null
+    social_facebook?: string | null
+    social_likedin?: string | null
+    social_line?: string | null
+    social_telegram?: string | null
+    mas_positionlevel1?: mas_positionlevel1CreateNestedOneWithoutProfileInput
+    mas_positionlevel2?: mas_positionlevel2CreateNestedOneWithoutProfileInput
+  }
+
+  export type ProfileUncheckedCreateWithoutMas_positionlevel3Input = {
+    id: string
+    bio?: string | null
+    firstname_th?: string | null
+    lastname_th?: string | null
+    firstname_en?: string | null
+    lastname_en?: string | null
+    nickname?: string | null
+    blood_type?: string | null
+    employee_status?: string | null
+    start_date_work?: Date | string | null
+    avatar?: string | null
+    dob?: Date | string | null
+    age?: string | null
+    relationship?: string | null
+    shirt_size?: string | null
+    prefix_th?: string | null
+    prefix_en?: string | null
+    citizen_id?: string | null
+    social_id?: string | null
+    staff_status?: string | null
+    tel?: string | null
+    address?: string | null
+    gender?: string | null
+    staff_code?: string | null
+    religion?: string | null
+    userId: string
+    citizen_addressnumber?: string | null
+    citizen_address?: string | null
+    citizen_country?: string | null
+    citizen_province?: string | null
+    citizen_district?: string | null
+    citizen_state?: string | null
+    citizen_zipcode?: string | null
+    citizen_tel?: string | null
+    contract_sameCitizen?: boolean
+    contract_addressnumber?: string | null
+    contract_address?: string | null
+    contract_country?: string | null
+    contract_province?: string | null
+    contract_district?: string | null
+    contract_state?: string | null
+    contract_zipcode?: string | null
+    contract_email?: string | null
+    contract_companyemail?: string | null
+    social_facebook?: string | null
+    social_likedin?: string | null
+    social_line?: string | null
+    social_telegram?: string | null
+    masposition1_id?: string | null
+    masposition2_id?: string | null
+  }
+
+  export type ProfileCreateOrConnectWithoutMas_positionlevel3Input = {
+    where: ProfileWhereUniqueInput
+    create: XOR<ProfileCreateWithoutMas_positionlevel3Input, ProfileUncheckedCreateWithoutMas_positionlevel3Input>
+  }
+
+  export type ProfileCreateManyMas_positionlevel3InputEnvelope = {
+    data: Enumerable<ProfileCreateManyMas_positionlevel3Input>
+    skipDuplicates?: boolean
+  }
+
   export type mas_positionlevel2UpsertWithoutMas_positionlevel3Input = {
     update: XOR<mas_positionlevel2UpdateWithoutMas_positionlevel3Input, mas_positionlevel2UncheckedUpdateWithoutMas_positionlevel3Input>
     create: XOR<mas_positionlevel2CreateWithoutMas_positionlevel3Input, mas_positionlevel2UncheckedCreateWithoutMas_positionlevel3Input>
@@ -48827,6 +49840,7 @@ export namespace Prisma {
     mas_positionlevel1?: mas_positionlevel1UpdateOneWithoutMas_positionlevel2NestedInput
     Company?: CompanyUpdateOneWithoutMas_positionlevel2NestedInput
     position_user?: Position_userUpdateManyWithoutMas_positionlevel2NestedInput
+    Profile?: ProfileUpdateManyWithoutMas_positionlevel2NestedInput
   }
 
   export type mas_positionlevel2UncheckedUpdateWithoutMas_positionlevel3Input = {
@@ -48838,6 +49852,7 @@ export namespace Prisma {
     positionlevel1_id?: NullableStringFieldUpdateOperationsInput | string | null
     CompanyId?: NullableStringFieldUpdateOperationsInput | string | null
     position_user?: Position_userUncheckedUpdateManyWithoutMas_positionlevel2NestedInput
+    Profile?: ProfileUncheckedUpdateManyWithoutMas_positionlevel2NestedInput
   }
 
   export type CompanyUpsertWithoutMas_positionlevel3Input = {
@@ -48895,6 +49910,22 @@ export namespace Prisma {
   export type Position_userUpdateManyWithWhereWithoutMas_positionlevel3Input = {
     where: Position_userScalarWhereInput
     data: XOR<Position_userUpdateManyMutationInput, Position_userUncheckedUpdateManyWithoutPosition_userInput>
+  }
+
+  export type ProfileUpsertWithWhereUniqueWithoutMas_positionlevel3Input = {
+    where: ProfileWhereUniqueInput
+    update: XOR<ProfileUpdateWithoutMas_positionlevel3Input, ProfileUncheckedUpdateWithoutMas_positionlevel3Input>
+    create: XOR<ProfileCreateWithoutMas_positionlevel3Input, ProfileUncheckedCreateWithoutMas_positionlevel3Input>
+  }
+
+  export type ProfileUpdateWithWhereUniqueWithoutMas_positionlevel3Input = {
+    where: ProfileWhereUniqueInput
+    data: XOR<ProfileUpdateWithoutMas_positionlevel3Input, ProfileUncheckedUpdateWithoutMas_positionlevel3Input>
+  }
+
+  export type ProfileUpdateManyWithWhereWithoutMas_positionlevel3Input = {
+    where: ProfileScalarWhereInput
+    data: XOR<ProfileUpdateManyMutationInput, ProfileUncheckedUpdateManyWithoutProfileInput>
   }
 
   export type UserCreateWithoutHenchmanInput = {
@@ -49007,6 +50038,7 @@ export namespace Prisma {
     type: string
     mas_positionlevel2?: mas_positionlevel2CreateNestedManyWithoutMas_positionlevel1Input
     Company?: CompanyCreateNestedOneWithoutMas_positionlevel1Input
+    Profile?: ProfileCreateNestedManyWithoutMas_positionlevel1Input
   }
 
   export type mas_positionlevel1UncheckedCreateWithoutPosition_userInput = {
@@ -49017,6 +50049,7 @@ export namespace Prisma {
     type: string
     mas_positionlevel2?: mas_positionlevel2UncheckedCreateNestedManyWithoutMas_positionlevel1Input
     CompanyId?: string | null
+    Profile?: ProfileUncheckedCreateNestedManyWithoutMas_positionlevel1Input
   }
 
   export type mas_positionlevel1CreateOrConnectWithoutPosition_userInput = {
@@ -49033,6 +50066,7 @@ export namespace Prisma {
     mas_positionlevel1?: mas_positionlevel1CreateNestedOneWithoutMas_positionlevel2Input
     mas_positionlevel3?: mas_positionlevel3CreateNestedManyWithoutMas_positionlevel2Input
     Company?: CompanyCreateNestedOneWithoutMas_positionlevel2Input
+    Profile?: ProfileCreateNestedManyWithoutMas_positionlevel2Input
   }
 
   export type mas_positionlevel2UncheckedCreateWithoutPosition_userInput = {
@@ -49044,6 +50078,7 @@ export namespace Prisma {
     positionlevel1_id?: string | null
     mas_positionlevel3?: mas_positionlevel3UncheckedCreateNestedManyWithoutMas_positionlevel2Input
     CompanyId?: string | null
+    Profile?: ProfileUncheckedCreateNestedManyWithoutMas_positionlevel2Input
   }
 
   export type mas_positionlevel2CreateOrConnectWithoutPosition_userInput = {
@@ -49059,6 +50094,7 @@ export namespace Prisma {
     type: string
     mas_positionlevel2?: mas_positionlevel2CreateNestedOneWithoutMas_positionlevel3Input
     Company?: CompanyCreateNestedOneWithoutMas_positionlevel3Input
+    Profile?: ProfileCreateNestedManyWithoutMas_positionlevel3Input
   }
 
   export type mas_positionlevel3UncheckedCreateWithoutPosition_userInput = {
@@ -49069,6 +50105,7 @@ export namespace Prisma {
     type: string
     positionlevel2_id?: string | null
     CompanyId?: string | null
+    Profile?: ProfileUncheckedCreateNestedManyWithoutMas_positionlevel3Input
   }
 
   export type mas_positionlevel3CreateOrConnectWithoutPosition_userInput = {
@@ -49215,6 +50252,7 @@ export namespace Prisma {
     type?: StringFieldUpdateOperationsInput | string
     mas_positionlevel2?: mas_positionlevel2UpdateManyWithoutMas_positionlevel1NestedInput
     Company?: CompanyUpdateOneWithoutMas_positionlevel1NestedInput
+    Profile?: ProfileUpdateManyWithoutMas_positionlevel1NestedInput
   }
 
   export type mas_positionlevel1UncheckedUpdateWithoutPosition_userInput = {
@@ -49225,6 +50263,7 @@ export namespace Prisma {
     type?: StringFieldUpdateOperationsInput | string
     mas_positionlevel2?: mas_positionlevel2UncheckedUpdateManyWithoutMas_positionlevel1NestedInput
     CompanyId?: NullableStringFieldUpdateOperationsInput | string | null
+    Profile?: ProfileUncheckedUpdateManyWithoutMas_positionlevel1NestedInput
   }
 
   export type mas_positionlevel2UpsertWithoutPosition_userInput = {
@@ -49241,6 +50280,7 @@ export namespace Prisma {
     mas_positionlevel1?: mas_positionlevel1UpdateOneWithoutMas_positionlevel2NestedInput
     mas_positionlevel3?: mas_positionlevel3UpdateManyWithoutMas_positionlevel2NestedInput
     Company?: CompanyUpdateOneWithoutMas_positionlevel2NestedInput
+    Profile?: ProfileUpdateManyWithoutMas_positionlevel2NestedInput
   }
 
   export type mas_positionlevel2UncheckedUpdateWithoutPosition_userInput = {
@@ -49252,6 +50292,7 @@ export namespace Prisma {
     positionlevel1_id?: NullableStringFieldUpdateOperationsInput | string | null
     mas_positionlevel3?: mas_positionlevel3UncheckedUpdateManyWithoutMas_positionlevel2NestedInput
     CompanyId?: NullableStringFieldUpdateOperationsInput | string | null
+    Profile?: ProfileUncheckedUpdateManyWithoutMas_positionlevel2NestedInput
   }
 
   export type mas_positionlevel3UpsertWithoutPosition_userInput = {
@@ -49267,6 +50308,7 @@ export namespace Prisma {
     type?: StringFieldUpdateOperationsInput | string
     mas_positionlevel2?: mas_positionlevel2UpdateOneWithoutMas_positionlevel3NestedInput
     Company?: CompanyUpdateOneWithoutMas_positionlevel3NestedInput
+    Profile?: ProfileUpdateManyWithoutMas_positionlevel3NestedInput
   }
 
   export type mas_positionlevel3UncheckedUpdateWithoutPosition_userInput = {
@@ -49277,6 +50319,7 @@ export namespace Prisma {
     type?: StringFieldUpdateOperationsInput | string
     positionlevel2_id?: NullableStringFieldUpdateOperationsInput | string | null
     CompanyId?: NullableStringFieldUpdateOperationsInput | string | null
+    Profile?: ProfileUncheckedUpdateManyWithoutMas_positionlevel3NestedInput
   }
 
   export type log_positionnUpsertWithWhereUniqueWithoutPosition_userInput = {
@@ -52341,6 +53384,7 @@ export namespace Prisma {
     type?: StringFieldUpdateOperationsInput | string
     mas_positionlevel2?: mas_positionlevel2UpdateOneWithoutMas_positionlevel3NestedInput
     Position_user?: Position_userUpdateManyWithoutMas_positionlevel3NestedInput
+    Profile?: ProfileUpdateManyWithoutMas_positionlevel3NestedInput
   }
 
   export type mas_positionlevel3UncheckedUpdateWithoutCompanyInput = {
@@ -52351,6 +53395,7 @@ export namespace Prisma {
     type?: StringFieldUpdateOperationsInput | string
     positionlevel2_id?: NullableStringFieldUpdateOperationsInput | string | null
     Position_user?: Position_userUncheckedUpdateManyWithoutMas_positionlevel3NestedInput
+    Profile?: ProfileUncheckedUpdateManyWithoutMas_positionlevel3NestedInput
   }
 
   export type mas_positionlevel3UncheckedUpdateManyWithoutMas_positionlevel3Input = {
@@ -52371,6 +53416,7 @@ export namespace Prisma {
     mas_positionlevel1?: mas_positionlevel1UpdateOneWithoutMas_positionlevel2NestedInput
     mas_positionlevel3?: mas_positionlevel3UpdateManyWithoutMas_positionlevel2NestedInput
     position_user?: Position_userUpdateManyWithoutMas_positionlevel2NestedInput
+    Profile?: ProfileUpdateManyWithoutMas_positionlevel2NestedInput
   }
 
   export type mas_positionlevel2UncheckedUpdateWithoutCompanyInput = {
@@ -52382,6 +53428,7 @@ export namespace Prisma {
     positionlevel1_id?: NullableStringFieldUpdateOperationsInput | string | null
     mas_positionlevel3?: mas_positionlevel3UncheckedUpdateManyWithoutMas_positionlevel2NestedInput
     position_user?: Position_userUncheckedUpdateManyWithoutMas_positionlevel2NestedInput
+    Profile?: ProfileUncheckedUpdateManyWithoutMas_positionlevel2NestedInput
   }
 
   export type mas_positionlevel2UncheckedUpdateManyWithoutMas_positionlevel2Input = {
@@ -52401,6 +53448,7 @@ export namespace Prisma {
     type?: StringFieldUpdateOperationsInput | string
     mas_positionlevel2?: mas_positionlevel2UpdateManyWithoutMas_positionlevel1NestedInput
     Position_user?: Position_userUpdateManyWithoutMas_positionlevel1NestedInput
+    Profile?: ProfileUpdateManyWithoutMas_positionlevel1NestedInput
   }
 
   export type mas_positionlevel1UncheckedUpdateWithoutCompanyInput = {
@@ -52411,6 +53459,7 @@ export namespace Prisma {
     type?: StringFieldUpdateOperationsInput | string
     mas_positionlevel2?: mas_positionlevel2UncheckedUpdateManyWithoutMas_positionlevel1NestedInput
     Position_user?: Position_userUncheckedUpdateManyWithoutMas_positionlevel1NestedInput
+    Profile?: ProfileUncheckedUpdateManyWithoutMas_positionlevel1NestedInput
   }
 
   export type mas_positionlevel1UncheckedUpdateManyWithoutMas_positionlevel1Input = {
@@ -53345,6 +54394,59 @@ export namespace Prisma {
     headderId?: string | null
   }
 
+  export type ProfileCreateManyMas_positionlevel1Input = {
+    id: string
+    bio?: string | null
+    firstname_th?: string | null
+    lastname_th?: string | null
+    firstname_en?: string | null
+    lastname_en?: string | null
+    nickname?: string | null
+    blood_type?: string | null
+    employee_status?: string | null
+    start_date_work?: Date | string | null
+    avatar?: string | null
+    dob?: Date | string | null
+    age?: string | null
+    relationship?: string | null
+    shirt_size?: string | null
+    prefix_th?: string | null
+    prefix_en?: string | null
+    citizen_id?: string | null
+    social_id?: string | null
+    staff_status?: string | null
+    tel?: string | null
+    address?: string | null
+    gender?: string | null
+    staff_code?: string | null
+    religion?: string | null
+    userId: string
+    citizen_addressnumber?: string | null
+    citizen_address?: string | null
+    citizen_country?: string | null
+    citizen_province?: string | null
+    citizen_district?: string | null
+    citizen_state?: string | null
+    citizen_zipcode?: string | null
+    citizen_tel?: string | null
+    contract_sameCitizen?: boolean
+    contract_addressnumber?: string | null
+    contract_address?: string | null
+    contract_country?: string | null
+    contract_province?: string | null
+    contract_district?: string | null
+    contract_state?: string | null
+    contract_zipcode?: string | null
+    contract_email?: string | null
+    contract_companyemail?: string | null
+    social_facebook?: string | null
+    social_likedin?: string | null
+    social_line?: string | null
+    social_telegram?: string | null
+    masposition2_id?: string | null
+    masposition3_id?: string | null
+  }
+
   export type mas_positionlevel2UpdateWithoutMas_positionlevel1Input = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
@@ -53354,6 +54456,7 @@ export namespace Prisma {
     mas_positionlevel3?: mas_positionlevel3UpdateManyWithoutMas_positionlevel2NestedInput
     Company?: CompanyUpdateOneWithoutMas_positionlevel2NestedInput
     position_user?: Position_userUpdateManyWithoutMas_positionlevel2NestedInput
+    Profile?: ProfileUpdateManyWithoutMas_positionlevel2NestedInput
   }
 
   export type mas_positionlevel2UncheckedUpdateWithoutMas_positionlevel1Input = {
@@ -53365,6 +54468,7 @@ export namespace Prisma {
     mas_positionlevel3?: mas_positionlevel3UncheckedUpdateManyWithoutMas_positionlevel2NestedInput
     CompanyId?: NullableStringFieldUpdateOperationsInput | string | null
     position_user?: Position_userUncheckedUpdateManyWithoutMas_positionlevel2NestedInput
+    Profile?: ProfileUncheckedUpdateManyWithoutMas_positionlevel2NestedInput
   }
 
   export type Position_userUpdateWithoutMas_positionlevel1Input = {
@@ -53389,6 +54493,165 @@ export namespace Prisma {
     log_position?: log_positionnUncheckedUpdateManyWithoutPosition_userNestedInput
   }
 
+  export type ProfileUpdateWithoutMas_positionlevel1Input = {
+    id?: StringFieldUpdateOperationsInput | string
+    bio?: NullableStringFieldUpdateOperationsInput | string | null
+    firstname_th?: NullableStringFieldUpdateOperationsInput | string | null
+    lastname_th?: NullableStringFieldUpdateOperationsInput | string | null
+    firstname_en?: NullableStringFieldUpdateOperationsInput | string | null
+    lastname_en?: NullableStringFieldUpdateOperationsInput | string | null
+    nickname?: NullableStringFieldUpdateOperationsInput | string | null
+    blood_type?: NullableStringFieldUpdateOperationsInput | string | null
+    employee_status?: NullableStringFieldUpdateOperationsInput | string | null
+    start_date_work?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    avatar?: NullableStringFieldUpdateOperationsInput | string | null
+    dob?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    age?: NullableStringFieldUpdateOperationsInput | string | null
+    relationship?: NullableStringFieldUpdateOperationsInput | string | null
+    shirt_size?: NullableStringFieldUpdateOperationsInput | string | null
+    prefix_th?: NullableStringFieldUpdateOperationsInput | string | null
+    prefix_en?: NullableStringFieldUpdateOperationsInput | string | null
+    citizen_id?: NullableStringFieldUpdateOperationsInput | string | null
+    social_id?: NullableStringFieldUpdateOperationsInput | string | null
+    staff_status?: NullableStringFieldUpdateOperationsInput | string | null
+    tel?: NullableStringFieldUpdateOperationsInput | string | null
+    address?: NullableStringFieldUpdateOperationsInput | string | null
+    gender?: NullableStringFieldUpdateOperationsInput | string | null
+    staff_code?: NullableStringFieldUpdateOperationsInput | string | null
+    religion?: NullableStringFieldUpdateOperationsInput | string | null
+    user?: UserUpdateOneRequiredWithoutProfileNestedInput
+    citizen_addressnumber?: NullableStringFieldUpdateOperationsInput | string | null
+    citizen_address?: NullableStringFieldUpdateOperationsInput | string | null
+    citizen_country?: NullableStringFieldUpdateOperationsInput | string | null
+    citizen_province?: NullableStringFieldUpdateOperationsInput | string | null
+    citizen_district?: NullableStringFieldUpdateOperationsInput | string | null
+    citizen_state?: NullableStringFieldUpdateOperationsInput | string | null
+    citizen_zipcode?: NullableStringFieldUpdateOperationsInput | string | null
+    citizen_tel?: NullableStringFieldUpdateOperationsInput | string | null
+    contract_sameCitizen?: BoolFieldUpdateOperationsInput | boolean
+    contract_addressnumber?: NullableStringFieldUpdateOperationsInput | string | null
+    contract_address?: NullableStringFieldUpdateOperationsInput | string | null
+    contract_country?: NullableStringFieldUpdateOperationsInput | string | null
+    contract_province?: NullableStringFieldUpdateOperationsInput | string | null
+    contract_district?: NullableStringFieldUpdateOperationsInput | string | null
+    contract_state?: NullableStringFieldUpdateOperationsInput | string | null
+    contract_zipcode?: NullableStringFieldUpdateOperationsInput | string | null
+    contract_email?: NullableStringFieldUpdateOperationsInput | string | null
+    contract_companyemail?: NullableStringFieldUpdateOperationsInput | string | null
+    social_facebook?: NullableStringFieldUpdateOperationsInput | string | null
+    social_likedin?: NullableStringFieldUpdateOperationsInput | string | null
+    social_line?: NullableStringFieldUpdateOperationsInput | string | null
+    social_telegram?: NullableStringFieldUpdateOperationsInput | string | null
+    mas_positionlevel2?: mas_positionlevel2UpdateOneWithoutProfileNestedInput
+    mas_positionlevel3?: mas_positionlevel3UpdateOneWithoutProfileNestedInput
+  }
+
+  export type ProfileUncheckedUpdateWithoutMas_positionlevel1Input = {
+    id?: StringFieldUpdateOperationsInput | string
+    bio?: NullableStringFieldUpdateOperationsInput | string | null
+    firstname_th?: NullableStringFieldUpdateOperationsInput | string | null
+    lastname_th?: NullableStringFieldUpdateOperationsInput | string | null
+    firstname_en?: NullableStringFieldUpdateOperationsInput | string | null
+    lastname_en?: NullableStringFieldUpdateOperationsInput | string | null
+    nickname?: NullableStringFieldUpdateOperationsInput | string | null
+    blood_type?: NullableStringFieldUpdateOperationsInput | string | null
+    employee_status?: NullableStringFieldUpdateOperationsInput | string | null
+    start_date_work?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    avatar?: NullableStringFieldUpdateOperationsInput | string | null
+    dob?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    age?: NullableStringFieldUpdateOperationsInput | string | null
+    relationship?: NullableStringFieldUpdateOperationsInput | string | null
+    shirt_size?: NullableStringFieldUpdateOperationsInput | string | null
+    prefix_th?: NullableStringFieldUpdateOperationsInput | string | null
+    prefix_en?: NullableStringFieldUpdateOperationsInput | string | null
+    citizen_id?: NullableStringFieldUpdateOperationsInput | string | null
+    social_id?: NullableStringFieldUpdateOperationsInput | string | null
+    staff_status?: NullableStringFieldUpdateOperationsInput | string | null
+    tel?: NullableStringFieldUpdateOperationsInput | string | null
+    address?: NullableStringFieldUpdateOperationsInput | string | null
+    gender?: NullableStringFieldUpdateOperationsInput | string | null
+    staff_code?: NullableStringFieldUpdateOperationsInput | string | null
+    religion?: NullableStringFieldUpdateOperationsInput | string | null
+    userId?: StringFieldUpdateOperationsInput | string
+    citizen_addressnumber?: NullableStringFieldUpdateOperationsInput | string | null
+    citizen_address?: NullableStringFieldUpdateOperationsInput | string | null
+    citizen_country?: NullableStringFieldUpdateOperationsInput | string | null
+    citizen_province?: NullableStringFieldUpdateOperationsInput | string | null
+    citizen_district?: NullableStringFieldUpdateOperationsInput | string | null
+    citizen_state?: NullableStringFieldUpdateOperationsInput | string | null
+    citizen_zipcode?: NullableStringFieldUpdateOperationsInput | string | null
+    citizen_tel?: NullableStringFieldUpdateOperationsInput | string | null
+    contract_sameCitizen?: BoolFieldUpdateOperationsInput | boolean
+    contract_addressnumber?: NullableStringFieldUpdateOperationsInput | string | null
+    contract_address?: NullableStringFieldUpdateOperationsInput | string | null
+    contract_country?: NullableStringFieldUpdateOperationsInput | string | null
+    contract_province?: NullableStringFieldUpdateOperationsInput | string | null
+    contract_district?: NullableStringFieldUpdateOperationsInput | string | null
+    contract_state?: NullableStringFieldUpdateOperationsInput | string | null
+    contract_zipcode?: NullableStringFieldUpdateOperationsInput | string | null
+    contract_email?: NullableStringFieldUpdateOperationsInput | string | null
+    contract_companyemail?: NullableStringFieldUpdateOperationsInput | string | null
+    social_facebook?: NullableStringFieldUpdateOperationsInput | string | null
+    social_likedin?: NullableStringFieldUpdateOperationsInput | string | null
+    social_line?: NullableStringFieldUpdateOperationsInput | string | null
+    social_telegram?: NullableStringFieldUpdateOperationsInput | string | null
+    masposition2_id?: NullableStringFieldUpdateOperationsInput | string | null
+    masposition3_id?: NullableStringFieldUpdateOperationsInput | string | null
+  }
+
+  export type ProfileUncheckedUpdateManyWithoutProfileInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    bio?: NullableStringFieldUpdateOperationsInput | string | null
+    firstname_th?: NullableStringFieldUpdateOperationsInput | string | null
+    lastname_th?: NullableStringFieldUpdateOperationsInput | string | null
+    firstname_en?: NullableStringFieldUpdateOperationsInput | string | null
+    lastname_en?: NullableStringFieldUpdateOperationsInput | string | null
+    nickname?: NullableStringFieldUpdateOperationsInput | string | null
+    blood_type?: NullableStringFieldUpdateOperationsInput | string | null
+    employee_status?: NullableStringFieldUpdateOperationsInput | string | null
+    start_date_work?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    avatar?: NullableStringFieldUpdateOperationsInput | string | null
+    dob?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    age?: NullableStringFieldUpdateOperationsInput | string | null
+    relationship?: NullableStringFieldUpdateOperationsInput | string | null
+    shirt_size?: NullableStringFieldUpdateOperationsInput | string | null
+    prefix_th?: NullableStringFieldUpdateOperationsInput | string | null
+    prefix_en?: NullableStringFieldUpdateOperationsInput | string | null
+    citizen_id?: NullableStringFieldUpdateOperationsInput | string | null
+    social_id?: NullableStringFieldUpdateOperationsInput | string | null
+    staff_status?: NullableStringFieldUpdateOperationsInput | string | null
+    tel?: NullableStringFieldUpdateOperationsInput | string | null
+    address?: NullableStringFieldUpdateOperationsInput | string | null
+    gender?: NullableStringFieldUpdateOperationsInput | string | null
+    staff_code?: NullableStringFieldUpdateOperationsInput | string | null
+    religion?: NullableStringFieldUpdateOperationsInput | string | null
+    userId?: StringFieldUpdateOperationsInput | string
+    citizen_addressnumber?: NullableStringFieldUpdateOperationsInput | string | null
+    citizen_address?: NullableStringFieldUpdateOperationsInput | string | null
+    citizen_country?: NullableStringFieldUpdateOperationsInput | string | null
+    citizen_province?: NullableStringFieldUpdateOperationsInput | string | null
+    citizen_district?: NullableStringFieldUpdateOperationsInput | string | null
+    citizen_state?: NullableStringFieldUpdateOperationsInput | string | null
+    citizen_zipcode?: NullableStringFieldUpdateOperationsInput | string | null
+    citizen_tel?: NullableStringFieldUpdateOperationsInput | string | null
+    contract_sameCitizen?: BoolFieldUpdateOperationsInput | boolean
+    contract_addressnumber?: NullableStringFieldUpdateOperationsInput | string | null
+    contract_address?: NullableStringFieldUpdateOperationsInput | string | null
+    contract_country?: NullableStringFieldUpdateOperationsInput | string | null
+    contract_province?: NullableStringFieldUpdateOperationsInput | string | null
+    contract_district?: NullableStringFieldUpdateOperationsInput | string | null
+    contract_state?: NullableStringFieldUpdateOperationsInput | string | null
+    contract_zipcode?: NullableStringFieldUpdateOperationsInput | string | null
+    contract_email?: NullableStringFieldUpdateOperationsInput | string | null
+    contract_companyemail?: NullableStringFieldUpdateOperationsInput | string | null
+    social_facebook?: NullableStringFieldUpdateOperationsInput | string | null
+    social_likedin?: NullableStringFieldUpdateOperationsInput | string | null
+    social_line?: NullableStringFieldUpdateOperationsInput | string | null
+    social_telegram?: NullableStringFieldUpdateOperationsInput | string | null
+    masposition2_id?: NullableStringFieldUpdateOperationsInput | string | null
+    masposition3_id?: NullableStringFieldUpdateOperationsInput | string | null
+  }
+
   export type mas_positionlevel3CreateManyMas_positionlevel2Input = {
     id: string
     name: string
@@ -53408,6 +54671,59 @@ export namespace Prisma {
     headderId?: string | null
   }
 
+  export type ProfileCreateManyMas_positionlevel2Input = {
+    id: string
+    bio?: string | null
+    firstname_th?: string | null
+    lastname_th?: string | null
+    firstname_en?: string | null
+    lastname_en?: string | null
+    nickname?: string | null
+    blood_type?: string | null
+    employee_status?: string | null
+    start_date_work?: Date | string | null
+    avatar?: string | null
+    dob?: Date | string | null
+    age?: string | null
+    relationship?: string | null
+    shirt_size?: string | null
+    prefix_th?: string | null
+    prefix_en?: string | null
+    citizen_id?: string | null
+    social_id?: string | null
+    staff_status?: string | null
+    tel?: string | null
+    address?: string | null
+    gender?: string | null
+    staff_code?: string | null
+    religion?: string | null
+    userId: string
+    citizen_addressnumber?: string | null
+    citizen_address?: string | null
+    citizen_country?: string | null
+    citizen_province?: string | null
+    citizen_district?: string | null
+    citizen_state?: string | null
+    citizen_zipcode?: string | null
+    citizen_tel?: string | null
+    contract_sameCitizen?: boolean
+    contract_addressnumber?: string | null
+    contract_address?: string | null
+    contract_country?: string | null
+    contract_province?: string | null
+    contract_district?: string | null
+    contract_state?: string | null
+    contract_zipcode?: string | null
+    contract_email?: string | null
+    contract_companyemail?: string | null
+    social_facebook?: string | null
+    social_likedin?: string | null
+    social_line?: string | null
+    social_telegram?: string | null
+    masposition1_id?: string | null
+    masposition3_id?: string | null
+  }
+
   export type mas_positionlevel3UpdateWithoutMas_positionlevel2Input = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
@@ -53416,6 +54732,7 @@ export namespace Prisma {
     type?: StringFieldUpdateOperationsInput | string
     Company?: CompanyUpdateOneWithoutMas_positionlevel3NestedInput
     Position_user?: Position_userUpdateManyWithoutMas_positionlevel3NestedInput
+    Profile?: ProfileUpdateManyWithoutMas_positionlevel3NestedInput
   }
 
   export type mas_positionlevel3UncheckedUpdateWithoutMas_positionlevel2Input = {
@@ -53426,6 +54743,7 @@ export namespace Prisma {
     type?: StringFieldUpdateOperationsInput | string
     CompanyId?: NullableStringFieldUpdateOperationsInput | string | null
     Position_user?: Position_userUncheckedUpdateManyWithoutMas_positionlevel3NestedInput
+    Profile?: ProfileUncheckedUpdateManyWithoutMas_positionlevel3NestedInput
   }
 
   export type Position_userUpdateWithoutMas_positionlevel2Input = {
@@ -53450,6 +54768,112 @@ export namespace Prisma {
     log_position?: log_positionnUncheckedUpdateManyWithoutPosition_userNestedInput
   }
 
+  export type ProfileUpdateWithoutMas_positionlevel2Input = {
+    id?: StringFieldUpdateOperationsInput | string
+    bio?: NullableStringFieldUpdateOperationsInput | string | null
+    firstname_th?: NullableStringFieldUpdateOperationsInput | string | null
+    lastname_th?: NullableStringFieldUpdateOperationsInput | string | null
+    firstname_en?: NullableStringFieldUpdateOperationsInput | string | null
+    lastname_en?: NullableStringFieldUpdateOperationsInput | string | null
+    nickname?: NullableStringFieldUpdateOperationsInput | string | null
+    blood_type?: NullableStringFieldUpdateOperationsInput | string | null
+    employee_status?: NullableStringFieldUpdateOperationsInput | string | null
+    start_date_work?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    avatar?: NullableStringFieldUpdateOperationsInput | string | null
+    dob?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    age?: NullableStringFieldUpdateOperationsInput | string | null
+    relationship?: NullableStringFieldUpdateOperationsInput | string | null
+    shirt_size?: NullableStringFieldUpdateOperationsInput | string | null
+    prefix_th?: NullableStringFieldUpdateOperationsInput | string | null
+    prefix_en?: NullableStringFieldUpdateOperationsInput | string | null
+    citizen_id?: NullableStringFieldUpdateOperationsInput | string | null
+    social_id?: NullableStringFieldUpdateOperationsInput | string | null
+    staff_status?: NullableStringFieldUpdateOperationsInput | string | null
+    tel?: NullableStringFieldUpdateOperationsInput | string | null
+    address?: NullableStringFieldUpdateOperationsInput | string | null
+    gender?: NullableStringFieldUpdateOperationsInput | string | null
+    staff_code?: NullableStringFieldUpdateOperationsInput | string | null
+    religion?: NullableStringFieldUpdateOperationsInput | string | null
+    user?: UserUpdateOneRequiredWithoutProfileNestedInput
+    citizen_addressnumber?: NullableStringFieldUpdateOperationsInput | string | null
+    citizen_address?: NullableStringFieldUpdateOperationsInput | string | null
+    citizen_country?: NullableStringFieldUpdateOperationsInput | string | null
+    citizen_province?: NullableStringFieldUpdateOperationsInput | string | null
+    citizen_district?: NullableStringFieldUpdateOperationsInput | string | null
+    citizen_state?: NullableStringFieldUpdateOperationsInput | string | null
+    citizen_zipcode?: NullableStringFieldUpdateOperationsInput | string | null
+    citizen_tel?: NullableStringFieldUpdateOperationsInput | string | null
+    contract_sameCitizen?: BoolFieldUpdateOperationsInput | boolean
+    contract_addressnumber?: NullableStringFieldUpdateOperationsInput | string | null
+    contract_address?: NullableStringFieldUpdateOperationsInput | string | null
+    contract_country?: NullableStringFieldUpdateOperationsInput | string | null
+    contract_province?: NullableStringFieldUpdateOperationsInput | string | null
+    contract_district?: NullableStringFieldUpdateOperationsInput | string | null
+    contract_state?: NullableStringFieldUpdateOperationsInput | string | null
+    contract_zipcode?: NullableStringFieldUpdateOperationsInput | string | null
+    contract_email?: NullableStringFieldUpdateOperationsInput | string | null
+    contract_companyemail?: NullableStringFieldUpdateOperationsInput | string | null
+    social_facebook?: NullableStringFieldUpdateOperationsInput | string | null
+    social_likedin?: NullableStringFieldUpdateOperationsInput | string | null
+    social_line?: NullableStringFieldUpdateOperationsInput | string | null
+    social_telegram?: NullableStringFieldUpdateOperationsInput | string | null
+    mas_positionlevel1?: mas_positionlevel1UpdateOneWithoutProfileNestedInput
+    mas_positionlevel3?: mas_positionlevel3UpdateOneWithoutProfileNestedInput
+  }
+
+  export type ProfileUncheckedUpdateWithoutMas_positionlevel2Input = {
+    id?: StringFieldUpdateOperationsInput | string
+    bio?: NullableStringFieldUpdateOperationsInput | string | null
+    firstname_th?: NullableStringFieldUpdateOperationsInput | string | null
+    lastname_th?: NullableStringFieldUpdateOperationsInput | string | null
+    firstname_en?: NullableStringFieldUpdateOperationsInput | string | null
+    lastname_en?: NullableStringFieldUpdateOperationsInput | string | null
+    nickname?: NullableStringFieldUpdateOperationsInput | string | null
+    blood_type?: NullableStringFieldUpdateOperationsInput | string | null
+    employee_status?: NullableStringFieldUpdateOperationsInput | string | null
+    start_date_work?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    avatar?: NullableStringFieldUpdateOperationsInput | string | null
+    dob?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    age?: NullableStringFieldUpdateOperationsInput | string | null
+    relationship?: NullableStringFieldUpdateOperationsInput | string | null
+    shirt_size?: NullableStringFieldUpdateOperationsInput | string | null
+    prefix_th?: NullableStringFieldUpdateOperationsInput | string | null
+    prefix_en?: NullableStringFieldUpdateOperationsInput | string | null
+    citizen_id?: NullableStringFieldUpdateOperationsInput | string | null
+    social_id?: NullableStringFieldUpdateOperationsInput | string | null
+    staff_status?: NullableStringFieldUpdateOperationsInput | string | null
+    tel?: NullableStringFieldUpdateOperationsInput | string | null
+    address?: NullableStringFieldUpdateOperationsInput | string | null
+    gender?: NullableStringFieldUpdateOperationsInput | string | null
+    staff_code?: NullableStringFieldUpdateOperationsInput | string | null
+    religion?: NullableStringFieldUpdateOperationsInput | string | null
+    userId?: StringFieldUpdateOperationsInput | string
+    citizen_addressnumber?: NullableStringFieldUpdateOperationsInput | string | null
+    citizen_address?: NullableStringFieldUpdateOperationsInput | string | null
+    citizen_country?: NullableStringFieldUpdateOperationsInput | string | null
+    citizen_province?: NullableStringFieldUpdateOperationsInput | string | null
+    citizen_district?: NullableStringFieldUpdateOperationsInput | string | null
+    citizen_state?: NullableStringFieldUpdateOperationsInput | string | null
+    citizen_zipcode?: NullableStringFieldUpdateOperationsInput | string | null
+    citizen_tel?: NullableStringFieldUpdateOperationsInput | string | null
+    contract_sameCitizen?: BoolFieldUpdateOperationsInput | boolean
+    contract_addressnumber?: NullableStringFieldUpdateOperationsInput | string | null
+    contract_address?: NullableStringFieldUpdateOperationsInput | string | null
+    contract_country?: NullableStringFieldUpdateOperationsInput | string | null
+    contract_province?: NullableStringFieldUpdateOperationsInput | string | null
+    contract_district?: NullableStringFieldUpdateOperationsInput | string | null
+    contract_state?: NullableStringFieldUpdateOperationsInput | string | null
+    contract_zipcode?: NullableStringFieldUpdateOperationsInput | string | null
+    contract_email?: NullableStringFieldUpdateOperationsInput | string | null
+    contract_companyemail?: NullableStringFieldUpdateOperationsInput | string | null
+    social_facebook?: NullableStringFieldUpdateOperationsInput | string | null
+    social_likedin?: NullableStringFieldUpdateOperationsInput | string | null
+    social_line?: NullableStringFieldUpdateOperationsInput | string | null
+    social_telegram?: NullableStringFieldUpdateOperationsInput | string | null
+    masposition1_id?: NullableStringFieldUpdateOperationsInput | string | null
+    masposition3_id?: NullableStringFieldUpdateOperationsInput | string | null
+  }
+
   export type Position_userCreateManyMas_positionlevel3Input = {
     id: string
     user_id?: string | null
@@ -53458,6 +54882,59 @@ export namespace Prisma {
     position2_id?: string | null
     role?: string | null
     headderId?: string | null
+  }
+
+  export type ProfileCreateManyMas_positionlevel3Input = {
+    id: string
+    bio?: string | null
+    firstname_th?: string | null
+    lastname_th?: string | null
+    firstname_en?: string | null
+    lastname_en?: string | null
+    nickname?: string | null
+    blood_type?: string | null
+    employee_status?: string | null
+    start_date_work?: Date | string | null
+    avatar?: string | null
+    dob?: Date | string | null
+    age?: string | null
+    relationship?: string | null
+    shirt_size?: string | null
+    prefix_th?: string | null
+    prefix_en?: string | null
+    citizen_id?: string | null
+    social_id?: string | null
+    staff_status?: string | null
+    tel?: string | null
+    address?: string | null
+    gender?: string | null
+    staff_code?: string | null
+    religion?: string | null
+    userId: string
+    citizen_addressnumber?: string | null
+    citizen_address?: string | null
+    citizen_country?: string | null
+    citizen_province?: string | null
+    citizen_district?: string | null
+    citizen_state?: string | null
+    citizen_zipcode?: string | null
+    citizen_tel?: string | null
+    contract_sameCitizen?: boolean
+    contract_addressnumber?: string | null
+    contract_address?: string | null
+    contract_country?: string | null
+    contract_province?: string | null
+    contract_district?: string | null
+    contract_state?: string | null
+    contract_zipcode?: string | null
+    contract_email?: string | null
+    contract_companyemail?: string | null
+    social_facebook?: string | null
+    social_likedin?: string | null
+    social_line?: string | null
+    social_telegram?: string | null
+    masposition1_id?: string | null
+    masposition2_id?: string | null
   }
 
   export type Position_userUpdateWithoutMas_positionlevel3Input = {
@@ -53480,6 +54957,112 @@ export namespace Prisma {
     role?: NullableStringFieldUpdateOperationsInput | string | null
     headderId?: NullableStringFieldUpdateOperationsInput | string | null
     log_position?: log_positionnUncheckedUpdateManyWithoutPosition_userNestedInput
+  }
+
+  export type ProfileUpdateWithoutMas_positionlevel3Input = {
+    id?: StringFieldUpdateOperationsInput | string
+    bio?: NullableStringFieldUpdateOperationsInput | string | null
+    firstname_th?: NullableStringFieldUpdateOperationsInput | string | null
+    lastname_th?: NullableStringFieldUpdateOperationsInput | string | null
+    firstname_en?: NullableStringFieldUpdateOperationsInput | string | null
+    lastname_en?: NullableStringFieldUpdateOperationsInput | string | null
+    nickname?: NullableStringFieldUpdateOperationsInput | string | null
+    blood_type?: NullableStringFieldUpdateOperationsInput | string | null
+    employee_status?: NullableStringFieldUpdateOperationsInput | string | null
+    start_date_work?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    avatar?: NullableStringFieldUpdateOperationsInput | string | null
+    dob?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    age?: NullableStringFieldUpdateOperationsInput | string | null
+    relationship?: NullableStringFieldUpdateOperationsInput | string | null
+    shirt_size?: NullableStringFieldUpdateOperationsInput | string | null
+    prefix_th?: NullableStringFieldUpdateOperationsInput | string | null
+    prefix_en?: NullableStringFieldUpdateOperationsInput | string | null
+    citizen_id?: NullableStringFieldUpdateOperationsInput | string | null
+    social_id?: NullableStringFieldUpdateOperationsInput | string | null
+    staff_status?: NullableStringFieldUpdateOperationsInput | string | null
+    tel?: NullableStringFieldUpdateOperationsInput | string | null
+    address?: NullableStringFieldUpdateOperationsInput | string | null
+    gender?: NullableStringFieldUpdateOperationsInput | string | null
+    staff_code?: NullableStringFieldUpdateOperationsInput | string | null
+    religion?: NullableStringFieldUpdateOperationsInput | string | null
+    user?: UserUpdateOneRequiredWithoutProfileNestedInput
+    citizen_addressnumber?: NullableStringFieldUpdateOperationsInput | string | null
+    citizen_address?: NullableStringFieldUpdateOperationsInput | string | null
+    citizen_country?: NullableStringFieldUpdateOperationsInput | string | null
+    citizen_province?: NullableStringFieldUpdateOperationsInput | string | null
+    citizen_district?: NullableStringFieldUpdateOperationsInput | string | null
+    citizen_state?: NullableStringFieldUpdateOperationsInput | string | null
+    citizen_zipcode?: NullableStringFieldUpdateOperationsInput | string | null
+    citizen_tel?: NullableStringFieldUpdateOperationsInput | string | null
+    contract_sameCitizen?: BoolFieldUpdateOperationsInput | boolean
+    contract_addressnumber?: NullableStringFieldUpdateOperationsInput | string | null
+    contract_address?: NullableStringFieldUpdateOperationsInput | string | null
+    contract_country?: NullableStringFieldUpdateOperationsInput | string | null
+    contract_province?: NullableStringFieldUpdateOperationsInput | string | null
+    contract_district?: NullableStringFieldUpdateOperationsInput | string | null
+    contract_state?: NullableStringFieldUpdateOperationsInput | string | null
+    contract_zipcode?: NullableStringFieldUpdateOperationsInput | string | null
+    contract_email?: NullableStringFieldUpdateOperationsInput | string | null
+    contract_companyemail?: NullableStringFieldUpdateOperationsInput | string | null
+    social_facebook?: NullableStringFieldUpdateOperationsInput | string | null
+    social_likedin?: NullableStringFieldUpdateOperationsInput | string | null
+    social_line?: NullableStringFieldUpdateOperationsInput | string | null
+    social_telegram?: NullableStringFieldUpdateOperationsInput | string | null
+    mas_positionlevel1?: mas_positionlevel1UpdateOneWithoutProfileNestedInput
+    mas_positionlevel2?: mas_positionlevel2UpdateOneWithoutProfileNestedInput
+  }
+
+  export type ProfileUncheckedUpdateWithoutMas_positionlevel3Input = {
+    id?: StringFieldUpdateOperationsInput | string
+    bio?: NullableStringFieldUpdateOperationsInput | string | null
+    firstname_th?: NullableStringFieldUpdateOperationsInput | string | null
+    lastname_th?: NullableStringFieldUpdateOperationsInput | string | null
+    firstname_en?: NullableStringFieldUpdateOperationsInput | string | null
+    lastname_en?: NullableStringFieldUpdateOperationsInput | string | null
+    nickname?: NullableStringFieldUpdateOperationsInput | string | null
+    blood_type?: NullableStringFieldUpdateOperationsInput | string | null
+    employee_status?: NullableStringFieldUpdateOperationsInput | string | null
+    start_date_work?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    avatar?: NullableStringFieldUpdateOperationsInput | string | null
+    dob?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    age?: NullableStringFieldUpdateOperationsInput | string | null
+    relationship?: NullableStringFieldUpdateOperationsInput | string | null
+    shirt_size?: NullableStringFieldUpdateOperationsInput | string | null
+    prefix_th?: NullableStringFieldUpdateOperationsInput | string | null
+    prefix_en?: NullableStringFieldUpdateOperationsInput | string | null
+    citizen_id?: NullableStringFieldUpdateOperationsInput | string | null
+    social_id?: NullableStringFieldUpdateOperationsInput | string | null
+    staff_status?: NullableStringFieldUpdateOperationsInput | string | null
+    tel?: NullableStringFieldUpdateOperationsInput | string | null
+    address?: NullableStringFieldUpdateOperationsInput | string | null
+    gender?: NullableStringFieldUpdateOperationsInput | string | null
+    staff_code?: NullableStringFieldUpdateOperationsInput | string | null
+    religion?: NullableStringFieldUpdateOperationsInput | string | null
+    userId?: StringFieldUpdateOperationsInput | string
+    citizen_addressnumber?: NullableStringFieldUpdateOperationsInput | string | null
+    citizen_address?: NullableStringFieldUpdateOperationsInput | string | null
+    citizen_country?: NullableStringFieldUpdateOperationsInput | string | null
+    citizen_province?: NullableStringFieldUpdateOperationsInput | string | null
+    citizen_district?: NullableStringFieldUpdateOperationsInput | string | null
+    citizen_state?: NullableStringFieldUpdateOperationsInput | string | null
+    citizen_zipcode?: NullableStringFieldUpdateOperationsInput | string | null
+    citizen_tel?: NullableStringFieldUpdateOperationsInput | string | null
+    contract_sameCitizen?: BoolFieldUpdateOperationsInput | boolean
+    contract_addressnumber?: NullableStringFieldUpdateOperationsInput | string | null
+    contract_address?: NullableStringFieldUpdateOperationsInput | string | null
+    contract_country?: NullableStringFieldUpdateOperationsInput | string | null
+    contract_province?: NullableStringFieldUpdateOperationsInput | string | null
+    contract_district?: NullableStringFieldUpdateOperationsInput | string | null
+    contract_state?: NullableStringFieldUpdateOperationsInput | string | null
+    contract_zipcode?: NullableStringFieldUpdateOperationsInput | string | null
+    contract_email?: NullableStringFieldUpdateOperationsInput | string | null
+    contract_companyemail?: NullableStringFieldUpdateOperationsInput | string | null
+    social_facebook?: NullableStringFieldUpdateOperationsInput | string | null
+    social_likedin?: NullableStringFieldUpdateOperationsInput | string | null
+    social_line?: NullableStringFieldUpdateOperationsInput | string | null
+    social_telegram?: NullableStringFieldUpdateOperationsInput | string | null
+    masposition1_id?: NullableStringFieldUpdateOperationsInput | string | null
+    masposition2_id?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type log_positionnCreateManyPosition_userInput = {

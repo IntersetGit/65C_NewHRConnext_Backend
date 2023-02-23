@@ -102,6 +102,12 @@ export const userTypedef = gql`
     social_telegram: String
     user: User
     userId: String
+    masposition1_id: String
+    masposition2_id: String
+    masposition3_id: String
+    mas_positionlevel1: mas_positionlevel1
+    mas_positionlevel2: mas_positionlevel2
+    mas_positionlevel3: mas_positionlevel3
   }
 
   #สร้าง Type ของการสร้าง account
@@ -233,13 +239,14 @@ const resolvers: Resolvers = {
           }
         })
         return result;
-      }else{
+      } else {
         const filter = args?.name ? args?.name : undefined;
         const filter2 = args?.position2Id ? args?.position2Id : undefined;
         const filter3 = args?.position3Id ? args?.position3Id : undefined;
         const result = await ctx.prisma.user.findMany({
           include: {
-            profile: true, company: true, Role_Company: true, companyBranch: true,
+            profile: { include: { mas_positionlevel1: true, mas_positionlevel2: true, mas_positionlevel3: true } },
+            company: true, Role_Company: true, companyBranch: true,
             Position_user: {
               include: { mas_positionlevel1: true, mas_positionlevel2: true, mas_positionlevel3: true }, orderBy: { date: 'desc' }
             }
@@ -249,22 +256,18 @@ const resolvers: Resolvers = {
             AND: {
               profile: {
                 firstname_th: { contains: filter },
+                AND: {
+                  masposition2_id: filter2, AND: {
+                    masposition3_id: filter3
+                  }
+                }
+
               },
-            //   AND: {
-            //     Position_user: {
-            //       some: {
-            //         position2_id: filter2,
-            //         AND: {
-            //           position3_id: filter3
-            //         }
-            //       }
-            //     }
-            //   }
             },
           },
         });
         return result;
-      } 
+      }
     },
 
     /**

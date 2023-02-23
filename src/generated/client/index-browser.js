@@ -377,7 +377,10 @@ exports.Prisma.ProfileScalarFieldEnum = makeEnum({
   social_facebook: 'social_facebook',
   social_likedin: 'social_likedin',
   social_line: 'social_line',
-  social_telegram: 'social_telegram'
+  social_telegram: 'social_telegram',
+  masposition1_id: 'masposition1_id',
+  masposition2_id: 'masposition2_id',
+  masposition3_id: 'masposition3_id'
 });
 
 exports.Prisma.Provident_logScalarFieldEnum = makeEnum({

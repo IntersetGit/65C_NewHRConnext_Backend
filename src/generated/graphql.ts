@@ -729,6 +729,12 @@ export type Profile = {
   id: Scalars['ID'];
   lastname_en?: Maybe<Scalars['String']>;
   lastname_th?: Maybe<Scalars['String']>;
+  mas_positionlevel1?: Maybe<Mas_Positionlevel1>;
+  mas_positionlevel2?: Maybe<Mas_Positionlevel2>;
+  mas_positionlevel3?: Maybe<Mas_Positionlevel3>;
+  masposition1_id?: Maybe<Scalars['String']>;
+  masposition2_id?: Maybe<Scalars['String']>;
+  masposition3_id?: Maybe<Scalars['String']>;
   nickname?: Maybe<Scalars['String']>;
   prefix_en?: Maybe<Scalars['String']>;
   prefix_th?: Maybe<Scalars['String']>;
@@ -2370,6 +2376,12 @@ export type ProfileResolvers<ContextType = ApolloContext, ParentType extends Res
   id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
   lastname_en?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   lastname_th?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  mas_positionlevel1?: Resolver<Maybe<ResolversTypes['mas_positionlevel1']>, ParentType, ContextType>;
+  mas_positionlevel2?: Resolver<Maybe<ResolversTypes['mas_positionlevel2']>, ParentType, ContextType>;
+  mas_positionlevel3?: Resolver<Maybe<ResolversTypes['mas_positionlevel3']>, ParentType, ContextType>;
+  masposition1_id?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  masposition2_id?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  masposition3_id?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   nickname?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   prefix_en?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   prefix_th?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
