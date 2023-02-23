@@ -815,6 +815,9 @@ const resolvers: Resolvers = {
               },
             },
           },
+        },
+        orderBy:{
+          profile: {staff_code : 'asc'}
         }
       })
       return getdata;
@@ -1940,11 +1943,7 @@ const resolvers: Resolvers = {
                 cal += cv[e]
               })
               console.log(cal)
-              // for (let i = 0; i < take_arr.length; i++) { //เอาข้อมูลจาก array check_vat มาเช็คให้หักภาษีจาก array 
-              //   console.log(take_arr[i]);
-              //   let result = take_arr[i]
-              //   console.log(chk_vat)
-              // }
+            
             }
           }
         }
