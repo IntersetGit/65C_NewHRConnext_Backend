@@ -491,7 +491,7 @@ export const leaveResolvers: Resolvers = {
               include: { mas_positionlevel1: true, mas_positionlevel2: true, mas_positionlevel3: true, header: { include: { profile: true } } },
               orderBy: { date: 'desc' },
             },
-            data_leave: { include: { mas_leave_type: true } }
+            data_leave: { include: { mas_leave_type: true }}
           },
           where: {
             companyBranch: {
