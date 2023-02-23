@@ -343,7 +343,8 @@ export const leaveResolvers: Resolvers = {
               include: {
                 profile: { include: { mas_positionlevel1: true, mas_positionlevel2: true, mas_positionlevel3: true } },
                 Position_user: {
-                  include: { mas_positionlevel1: true, mas_positionlevel2: true, mas_positionlevel3: true, header: { include: { profile: true } } 
+                  include: {
+                    mas_positionlevel1: true, mas_positionlevel2: true, mas_positionlevel3: true, header: { include: { profile: true } }
                   }
                 },
               }
@@ -360,9 +361,9 @@ export const leaveResolvers: Resolvers = {
               AND: {
                 profile: {
                   firstname_th: { contains: filter },
-                  AND:{
+                  AND: {
                     masposition2_id: filter2,
-                    AND:{
+                    AND: {
                       masposition3_id: filter3
                     }
                   }
@@ -487,7 +488,6 @@ export const leaveResolvers: Resolvers = {
             company: true,
             profile: { include: { mas_positionlevel1: true, mas_positionlevel2: true, mas_positionlevel3: true } },
             Position_user: {
-              take: 1,
               include: { mas_positionlevel1: true, mas_positionlevel2: true, mas_positionlevel3: true, header: { include: { profile: true } } },
               orderBy: { date: 'desc' },
             },
@@ -498,21 +498,14 @@ export const leaveResolvers: Resolvers = {
               companyId: ctx.currentUser?.compayId
             },
             AND: {
-              data_leave: {
-                some: {
-                  Status: 1 || 2
-                }
-              },
-              AND: {
-                profile: {
-                  firstname_th: { contains: filter },
+              profile: {
+                firstname_th: { contains: filter },
+                AND: {
+                  masposition2_id: filter2,
                   AND: {
-                    masposition2_id: filter2,
-                     AND: {
-                      masposition3_id: filter3
-                    }
+                    masposition3_id: filter3
                   }
-                },
+                }
               },
             }
           }
@@ -542,7 +535,7 @@ export const leaveResolvers: Resolvers = {
                   firstname_th: { contains: filter },
                   AND: {
                     masposition2_id: filter2,
-                     AND: {
+                    AND: {
                       masposition3_id: filter3
                     }
                   }
