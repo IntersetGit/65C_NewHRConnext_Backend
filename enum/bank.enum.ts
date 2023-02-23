@@ -64,4 +64,9 @@ export default [
     name: 'ธนาคารซิตี้แบงค์',
     bank_code: 'CITI',
   },
+  {
+    id: '1498d83c-fefa-43fd-b06c-dff5ba76473f',
+    name: 'ธนาคารไทยพาณิชย์',
+    bank_code: 'SCB'
+  },
 ]
