@@ -372,6 +372,7 @@ export type salary = {
   month: string | null
   years: string | null
   date: Date | null
+  base_salary: number | null
   commission: number | null
   position_income: number | null
   ot: number | null
@@ -26201,6 +26202,7 @@ export namespace Prisma {
   }
 
   export type SalaryAvgAggregateOutputType = {
+    base_salary: number | null
     commission: number | null
     position_income: number | null
     ot: number | null
@@ -26229,6 +26231,7 @@ export namespace Prisma {
   }
 
   export type SalarySumAggregateOutputType = {
+    base_salary: number | null
     commission: number | null
     position_income: number | null
     ot: number | null
@@ -26261,6 +26264,7 @@ export namespace Prisma {
     month: string | null
     years: string | null
     date: Date | null
+    base_salary: number | null
     commission: number | null
     position_income: number | null
     ot: number | null
@@ -26305,6 +26309,7 @@ export namespace Prisma {
     month: string | null
     years: string | null
     date: Date | null
+    base_salary: number | null
     commission: number | null
     position_income: number | null
     ot: number | null
@@ -26349,6 +26354,7 @@ export namespace Prisma {
     month: number
     years: number
     date: number
+    base_salary: number
     commission: number
     position_income: number
     ot: number
@@ -26391,6 +26397,7 @@ export namespace Prisma {
 
 
   export type SalaryAvgAggregateInputType = {
+    base_salary?: true
     commission?: true
     position_income?: true
     ot?: true
@@ -26419,6 +26426,7 @@ export namespace Prisma {
   }
 
   export type SalarySumAggregateInputType = {
+    base_salary?: true
     commission?: true
     position_income?: true
     ot?: true
@@ -26451,6 +26459,7 @@ export namespace Prisma {
     month?: true
     years?: true
     date?: true
+    base_salary?: true
     commission?: true
     position_income?: true
     ot?: true
@@ -26495,6 +26504,7 @@ export namespace Prisma {
     month?: true
     years?: true
     date?: true
+    base_salary?: true
     commission?: true
     position_income?: true
     ot?: true
@@ -26539,6 +26549,7 @@ export namespace Prisma {
     month?: true
     years?: true
     date?: true
+    base_salary?: true
     commission?: true
     position_income?: true
     ot?: true
@@ -26671,6 +26682,7 @@ export namespace Prisma {
     month: string | null
     years: string | null
     date: Date | null
+    base_salary: number | null
     commission: number | null
     position_income: number | null
     ot: number | null
@@ -26734,6 +26746,7 @@ export namespace Prisma {
     month?: boolean
     years?: boolean
     date?: boolean
+    base_salary?: boolean
     commission?: boolean
     position_income?: boolean
     ot?: boolean
@@ -36014,6 +36027,7 @@ export namespace Prisma {
     month: 'month',
     years: 'years',
     date: 'date',
+    base_salary: 'base_salary',
     commission: 'commission',
     position_income: 'position_income',
     ot: 'ot',
@@ -37612,6 +37626,7 @@ export namespace Prisma {
     month?: StringNullableFilter | string | null
     years?: StringNullableFilter | string | null
     date?: DateTimeNullableFilter | Date | string | null
+    base_salary?: FloatNullableFilter | number | null
     commission?: FloatNullableFilter | number | null
     position_income?: FloatNullableFilter | number | null
     ot?: FloatNullableFilter | number | null
@@ -37664,6 +37679,7 @@ export namespace Prisma {
     month?: SortOrder
     years?: SortOrder
     date?: SortOrder
+    base_salary?: SortOrder
     commission?: SortOrder
     position_income?: SortOrder
     ot?: SortOrder
@@ -37720,6 +37736,7 @@ export namespace Prisma {
     month?: SortOrder
     years?: SortOrder
     date?: SortOrder
+    base_salary?: SortOrder
     commission?: SortOrder
     position_income?: SortOrder
     ot?: SortOrder
@@ -37772,6 +37789,7 @@ export namespace Prisma {
     month?: StringNullableWithAggregatesFilter | string | null
     years?: StringNullableWithAggregatesFilter | string | null
     date?: DateTimeNullableWithAggregatesFilter | Date | string | null
+    base_salary?: FloatNullableWithAggregatesFilter | number | null
     commission?: FloatNullableWithAggregatesFilter | number | null
     position_income?: FloatNullableWithAggregatesFilter | number | null
     ot?: FloatNullableWithAggregatesFilter | number | null
@@ -40212,6 +40230,7 @@ export namespace Prisma {
     month?: string | null
     years?: string | null
     date?: Date | string | null
+    base_salary?: number | null
     commission?: number | null
     position_income?: number | null
     ot?: number | null
@@ -40257,6 +40276,7 @@ export namespace Prisma {
     month?: string | null
     years?: string | null
     date?: Date | string | null
+    base_salary?: number | null
     commission?: number | null
     position_income?: number | null
     ot?: number | null
@@ -40302,6 +40322,7 @@ export namespace Prisma {
     month?: NullableStringFieldUpdateOperationsInput | string | null
     years?: NullableStringFieldUpdateOperationsInput | string | null
     date?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    base_salary?: NullableFloatFieldUpdateOperationsInput | number | null
     commission?: NullableFloatFieldUpdateOperationsInput | number | null
     position_income?: NullableFloatFieldUpdateOperationsInput | number | null
     ot?: NullableFloatFieldUpdateOperationsInput | number | null
@@ -40347,6 +40368,7 @@ export namespace Prisma {
     month?: NullableStringFieldUpdateOperationsInput | string | null
     years?: NullableStringFieldUpdateOperationsInput | string | null
     date?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    base_salary?: NullableFloatFieldUpdateOperationsInput | number | null
     commission?: NullableFloatFieldUpdateOperationsInput | number | null
     position_income?: NullableFloatFieldUpdateOperationsInput | number | null
     ot?: NullableFloatFieldUpdateOperationsInput | number | null
@@ -40392,6 +40414,7 @@ export namespace Prisma {
     month?: string | null
     years?: string | null
     date?: Date | string | null
+    base_salary?: number | null
     commission?: number | null
     position_income?: number | null
     ot?: number | null
@@ -40436,6 +40459,7 @@ export namespace Prisma {
     month?: NullableStringFieldUpdateOperationsInput | string | null
     years?: NullableStringFieldUpdateOperationsInput | string | null
     date?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    base_salary?: NullableFloatFieldUpdateOperationsInput | number | null
     commission?: NullableFloatFieldUpdateOperationsInput | number | null
     position_income?: NullableFloatFieldUpdateOperationsInput | number | null
     ot?: NullableFloatFieldUpdateOperationsInput | number | null
@@ -40473,6 +40497,7 @@ export namespace Prisma {
     month?: NullableStringFieldUpdateOperationsInput | string | null
     years?: NullableStringFieldUpdateOperationsInput | string | null
     date?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    base_salary?: NullableFloatFieldUpdateOperationsInput | number | null
     commission?: NullableFloatFieldUpdateOperationsInput | number | null
     position_income?: NullableFloatFieldUpdateOperationsInput | number | null
     ot?: NullableFloatFieldUpdateOperationsInput | number | null
@@ -42580,6 +42605,7 @@ export namespace Prisma {
     month?: SortOrder
     years?: SortOrder
     date?: SortOrder
+    base_salary?: SortOrder
     commission?: SortOrder
     position_income?: SortOrder
     ot?: SortOrder
@@ -42620,6 +42646,7 @@ export namespace Prisma {
   }
 
   export type salaryAvgOrderByAggregateInput = {
+    base_salary?: SortOrder
     commission?: SortOrder
     position_income?: SortOrder
     ot?: SortOrder
@@ -42652,6 +42679,7 @@ export namespace Prisma {
     month?: SortOrder
     years?: SortOrder
     date?: SortOrder
+    base_salary?: SortOrder
     commission?: SortOrder
     position_income?: SortOrder
     ot?: SortOrder
@@ -42696,6 +42724,7 @@ export namespace Prisma {
     month?: SortOrder
     years?: SortOrder
     date?: SortOrder
+    base_salary?: SortOrder
     commission?: SortOrder
     position_income?: SortOrder
     ot?: SortOrder
@@ -42736,6 +42765,7 @@ export namespace Prisma {
   }
 
   export type salarySumOrderByAggregateInput = {
+    base_salary?: SortOrder
     commission?: SortOrder
     position_income?: SortOrder
     ot?: SortOrder
@@ -47636,6 +47666,7 @@ export namespace Prisma {
     month?: string | null
     years?: string | null
     date?: Date | string | null
+    base_salary?: number | null
     commission?: number | null
     position_income?: number | null
     ot?: number | null
@@ -47680,6 +47711,7 @@ export namespace Prisma {
     month?: string | null
     years?: string | null
     date?: Date | string | null
+    base_salary?: number | null
     commission?: number | null
     position_income?: number | null
     ot?: number | null
@@ -48213,6 +48245,7 @@ export namespace Prisma {
     month?: StringNullableFilter | string | null
     years?: StringNullableFilter | string | null
     date?: DateTimeNullableFilter | Date | string | null
+    base_salary?: FloatNullableFilter | number | null
     commission?: FloatNullableFilter | number | null
     position_income?: FloatNullableFilter | number | null
     ot?: FloatNullableFilter | number | null
@@ -50544,6 +50577,7 @@ export namespace Prisma {
     month?: string | null
     years?: string | null
     date?: Date | string | null
+    base_salary?: number | null
     commission?: number | null
     position_income?: number | null
     ot?: number | null
@@ -50588,6 +50622,7 @@ export namespace Prisma {
     month?: string | null
     years?: string | null
     date?: Date | string | null
+    base_salary?: number | null
     commission?: number | null
     position_income?: number | null
     ot?: number | null
@@ -50746,6 +50781,7 @@ export namespace Prisma {
     month?: string | null
     years?: string | null
     date?: Date | string | null
+    base_salary?: number | null
     commission?: number | null
     position_income?: number | null
     ot?: number | null
@@ -50790,6 +50826,7 @@ export namespace Prisma {
     month?: string | null
     years?: string | null
     date?: Date | string | null
+    base_salary?: number | null
     commission?: number | null
     position_income?: number | null
     ot?: number | null
@@ -50860,6 +50897,7 @@ export namespace Prisma {
     month?: string | null
     years?: string | null
     date?: Date | string | null
+    base_salary?: number | null
     commission?: number | null
     position_income?: number | null
     ot?: number | null
@@ -50904,6 +50942,7 @@ export namespace Prisma {
     month?: string | null
     years?: string | null
     date?: Date | string | null
+    base_salary?: number | null
     commission?: number | null
     position_income?: number | null
     ot?: number | null
@@ -50974,6 +51013,7 @@ export namespace Prisma {
     month?: string | null
     years?: string | null
     date?: Date | string | null
+    base_salary?: number | null
     commission?: number | null
     position_income?: number | null
     ot?: number | null
@@ -51018,6 +51058,7 @@ export namespace Prisma {
     month?: string | null
     years?: string | null
     date?: Date | string | null
+    base_salary?: number | null
     commission?: number | null
     position_income?: number | null
     ot?: number | null
@@ -51088,6 +51129,7 @@ export namespace Prisma {
     month?: string | null
     years?: string | null
     date?: Date | string | null
+    base_salary?: number | null
     commission?: number | null
     position_income?: number | null
     ot?: number | null
@@ -51132,6 +51174,7 @@ export namespace Prisma {
     month?: string | null
     years?: string | null
     date?: Date | string | null
+    base_salary?: number | null
     commission?: number | null
     position_income?: number | null
     ot?: number | null
@@ -52012,6 +52055,7 @@ export namespace Prisma {
     month?: string | null
     years?: string | null
     date?: Date | string | null
+    base_salary?: number | null
     commission?: number | null
     position_income?: number | null
     ot?: number | null
@@ -52056,6 +52100,7 @@ export namespace Prisma {
     month?: string | null
     years?: string | null
     date?: Date | string | null
+    base_salary?: number | null
     commission?: number | null
     position_income?: number | null
     ot?: number | null
@@ -52433,6 +52478,7 @@ export namespace Prisma {
     month?: string | null
     years?: string | null
     date?: Date | string | null
+    base_salary?: number | null
     commission?: number | null
     position_income?: number | null
     ot?: number | null
@@ -52477,6 +52523,7 @@ export namespace Prisma {
     month?: string | null
     years?: string | null
     date?: Date | string | null
+    base_salary?: number | null
     commission?: number | null
     position_income?: number | null
     ot?: number | null
@@ -52648,6 +52695,7 @@ export namespace Prisma {
     month?: NullableStringFieldUpdateOperationsInput | string | null
     years?: NullableStringFieldUpdateOperationsInput | string | null
     date?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    base_salary?: NullableFloatFieldUpdateOperationsInput | number | null
     commission?: NullableFloatFieldUpdateOperationsInput | number | null
     position_income?: NullableFloatFieldUpdateOperationsInput | number | null
     ot?: NullableFloatFieldUpdateOperationsInput | number | null
@@ -52692,6 +52740,7 @@ export namespace Prisma {
     month?: NullableStringFieldUpdateOperationsInput | string | null
     years?: NullableStringFieldUpdateOperationsInput | string | null
     date?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    base_salary?: NullableFloatFieldUpdateOperationsInput | number | null
     commission?: NullableFloatFieldUpdateOperationsInput | number | null
     position_income?: NullableFloatFieldUpdateOperationsInput | number | null
     ot?: NullableFloatFieldUpdateOperationsInput | number | null
@@ -53767,6 +53816,7 @@ export namespace Prisma {
     month?: string | null
     years?: string | null
     date?: Date | string | null
+    base_salary?: number | null
     commission?: number | null
     position_income?: number | null
     ot?: number | null
@@ -53997,6 +54047,7 @@ export namespace Prisma {
     month?: NullableStringFieldUpdateOperationsInput | string | null
     years?: NullableStringFieldUpdateOperationsInput | string | null
     date?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    base_salary?: NullableFloatFieldUpdateOperationsInput | number | null
     commission?: NullableFloatFieldUpdateOperationsInput | number | null
     position_income?: NullableFloatFieldUpdateOperationsInput | number | null
     ot?: NullableFloatFieldUpdateOperationsInput | number | null
@@ -54041,6 +54092,7 @@ export namespace Prisma {
     month?: NullableStringFieldUpdateOperationsInput | string | null
     years?: NullableStringFieldUpdateOperationsInput | string | null
     date?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    base_salary?: NullableFloatFieldUpdateOperationsInput | number | null
     commission?: NullableFloatFieldUpdateOperationsInput | number | null
     position_income?: NullableFloatFieldUpdateOperationsInput | number | null
     ot?: NullableFloatFieldUpdateOperationsInput | number | null
@@ -54085,6 +54137,7 @@ export namespace Prisma {
     month?: NullableStringFieldUpdateOperationsInput | string | null
     years?: NullableStringFieldUpdateOperationsInput | string | null
     date?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    base_salary?: NullableFloatFieldUpdateOperationsInput | number | null
     commission?: NullableFloatFieldUpdateOperationsInput | number | null
     position_income?: NullableFloatFieldUpdateOperationsInput | number | null
     ot?: NullableFloatFieldUpdateOperationsInput | number | null
@@ -55172,6 +55225,7 @@ export namespace Prisma {
     month?: string | null
     years?: string | null
     date?: Date | string | null
+    base_salary?: number | null
     commission?: number | null
     position_income?: number | null
     ot?: number | null
@@ -55279,6 +55333,7 @@ export namespace Prisma {
     month?: NullableStringFieldUpdateOperationsInput | string | null
     years?: NullableStringFieldUpdateOperationsInput | string | null
     date?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    base_salary?: NullableFloatFieldUpdateOperationsInput | number | null
     commission?: NullableFloatFieldUpdateOperationsInput | number | null
     position_income?: NullableFloatFieldUpdateOperationsInput | number | null
     ot?: NullableFloatFieldUpdateOperationsInput | number | null
@@ -55323,6 +55378,7 @@ export namespace Prisma {
     month?: NullableStringFieldUpdateOperationsInput | string | null
     years?: NullableStringFieldUpdateOperationsInput | string | null
     date?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    base_salary?: NullableFloatFieldUpdateOperationsInput | number | null
     commission?: NullableFloatFieldUpdateOperationsInput | number | null
     position_income?: NullableFloatFieldUpdateOperationsInput | number | null
     ot?: NullableFloatFieldUpdateOperationsInput | number | null
@@ -55411,6 +55467,7 @@ export namespace Prisma {
     month?: string | null
     years?: string | null
     date?: Date | string | null
+    base_salary?: number | null
     commission?: number | null
     position_income?: number | null
     ot?: number | null
@@ -55454,6 +55511,7 @@ export namespace Prisma {
     month?: NullableStringFieldUpdateOperationsInput | string | null
     years?: NullableStringFieldUpdateOperationsInput | string | null
     date?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    base_salary?: NullableFloatFieldUpdateOperationsInput | number | null
     commission?: NullableFloatFieldUpdateOperationsInput | number | null
     position_income?: NullableFloatFieldUpdateOperationsInput | number | null
     ot?: NullableFloatFieldUpdateOperationsInput | number | null
@@ -55498,6 +55556,7 @@ export namespace Prisma {
     month?: NullableStringFieldUpdateOperationsInput | string | null
     years?: NullableStringFieldUpdateOperationsInput | string | null
     date?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    base_salary?: NullableFloatFieldUpdateOperationsInput | number | null
     commission?: NullableFloatFieldUpdateOperationsInput | number | null
     position_income?: NullableFloatFieldUpdateOperationsInput | number | null
     ot?: NullableFloatFieldUpdateOperationsInput | number | null
@@ -55542,6 +55601,7 @@ export namespace Prisma {
     month?: string | null
     years?: string | null
     date?: Date | string | null
+    base_salary?: number | null
     commission?: number | null
     position_income?: number | null
     ot?: number | null
@@ -55585,6 +55645,7 @@ export namespace Prisma {
     month?: NullableStringFieldUpdateOperationsInput | string | null
     years?: NullableStringFieldUpdateOperationsInput | string | null
     date?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    base_salary?: NullableFloatFieldUpdateOperationsInput | number | null
     commission?: NullableFloatFieldUpdateOperationsInput | number | null
     position_income?: NullableFloatFieldUpdateOperationsInput | number | null
     ot?: NullableFloatFieldUpdateOperationsInput | number | null
@@ -55629,6 +55690,7 @@ export namespace Prisma {
     month?: NullableStringFieldUpdateOperationsInput | string | null
     years?: NullableStringFieldUpdateOperationsInput | string | null
     date?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    base_salary?: NullableFloatFieldUpdateOperationsInput | number | null
     commission?: NullableFloatFieldUpdateOperationsInput | number | null
     position_income?: NullableFloatFieldUpdateOperationsInput | number | null
     ot?: NullableFloatFieldUpdateOperationsInput | number | null
@@ -55673,6 +55735,7 @@ export namespace Prisma {
     month?: string | null
     years?: string | null
     date?: Date | string | null
+    base_salary?: number | null
     commission?: number | null
     position_income?: number | null
     ot?: number | null
@@ -55716,6 +55779,7 @@ export namespace Prisma {
     month?: NullableStringFieldUpdateOperationsInput | string | null
     years?: NullableStringFieldUpdateOperationsInput | string | null
     date?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    base_salary?: NullableFloatFieldUpdateOperationsInput | number | null
     commission?: NullableFloatFieldUpdateOperationsInput | number | null
     position_income?: NullableFloatFieldUpdateOperationsInput | number | null
     ot?: NullableFloatFieldUpdateOperationsInput | number | null
@@ -55760,6 +55824,7 @@ export namespace Prisma {
     month?: NullableStringFieldUpdateOperationsInput | string | null
     years?: NullableStringFieldUpdateOperationsInput | string | null
     date?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    base_salary?: NullableFloatFieldUpdateOperationsInput | number | null
     commission?: NullableFloatFieldUpdateOperationsInput | number | null
     position_income?: NullableFloatFieldUpdateOperationsInput | number | null
     ot?: NullableFloatFieldUpdateOperationsInput | number | null
@@ -55804,6 +55869,7 @@ export namespace Prisma {
     month?: string | null
     years?: string | null
     date?: Date | string | null
+    base_salary?: number | null
     commission?: number | null
     position_income?: number | null
     ot?: number | null
@@ -55847,6 +55913,7 @@ export namespace Prisma {
     month?: NullableStringFieldUpdateOperationsInput | string | null
     years?: NullableStringFieldUpdateOperationsInput | string | null
     date?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    base_salary?: NullableFloatFieldUpdateOperationsInput | number | null
     commission?: NullableFloatFieldUpdateOperationsInput | number | null
     position_income?: NullableFloatFieldUpdateOperationsInput | number | null
     ot?: NullableFloatFieldUpdateOperationsInput | number | null
@@ -55891,6 +55958,7 @@ export namespace Prisma {
     month?: NullableStringFieldUpdateOperationsInput | string | null
     years?: NullableStringFieldUpdateOperationsInput | string | null
     date?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    base_salary?: NullableFloatFieldUpdateOperationsInput | number | null
     commission?: NullableFloatFieldUpdateOperationsInput | number | null
     position_income?: NullableFloatFieldUpdateOperationsInput | number | null
     ot?: NullableFloatFieldUpdateOperationsInput | number | null
@@ -55995,6 +56063,7 @@ export namespace Prisma {
     month?: string | null
     years?: string | null
     date?: Date | string | null
+    base_salary?: number | null
     commission?: number | null
     position_income?: number | null
     ot?: number | null
@@ -56048,6 +56117,7 @@ export namespace Prisma {
     month?: NullableStringFieldUpdateOperationsInput | string | null
     years?: NullableStringFieldUpdateOperationsInput | string | null
     date?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    base_salary?: NullableFloatFieldUpdateOperationsInput | number | null
     commission?: NullableFloatFieldUpdateOperationsInput | number | null
     position_income?: NullableFloatFieldUpdateOperationsInput | number | null
     ot?: NullableFloatFieldUpdateOperationsInput | number | null
@@ -56092,6 +56162,7 @@ export namespace Prisma {
     month?: NullableStringFieldUpdateOperationsInput | string | null
     years?: NullableStringFieldUpdateOperationsInput | string | null
     date?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    base_salary?: NullableFloatFieldUpdateOperationsInput | number | null
     commission?: NullableFloatFieldUpdateOperationsInput | number | null
     position_income?: NullableFloatFieldUpdateOperationsInput | number | null
     ot?: NullableFloatFieldUpdateOperationsInput | number | null

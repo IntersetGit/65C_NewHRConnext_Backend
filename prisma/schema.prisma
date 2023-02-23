@@ -80,13 +80,13 @@ model CompanyBranch {
 }
 
 model Profile {
-  id                     String    @unique @db.Uuid
+  id                     String              @unique @db.Uuid
   bio                    String?
-  firstname_th           String?   @db.VarChar(255)
-  lastname_th            String?   @db.VarChar(255)
-  firstname_en           String?   @db.VarChar(255)
-  lastname_en            String?   @db.VarChar(255)
-  nickname               String?   @db.VarChar(255)
+  firstname_th           String?             @db.VarChar(255)
+  lastname_th            String?             @db.VarChar(255)
+  firstname_en           String?             @db.VarChar(255)
+  lastname_en            String?             @db.VarChar(255)
+  nickname               String?             @db.VarChar(255)
   blood_type             String?
   employee_status        String?
   start_date_work        DateTime?
@@ -103,10 +103,10 @@ model Profile {
   tel                    String?
   address                String?
   gender                 String?
-  staff_code             String?   @unique
+  staff_code             String?             @unique
   religion               String?
-  user                   User      @relation(fields: [userId], references: [id])
-  userId                 String    @unique @db.Uuid
+  user                   User                @relation(fields: [userId], references: [id])
+  userId                 String              @unique @db.Uuid
   citizen_addressnumber  String?
   citizen_address        String?
   citizen_country        String?
@@ -115,7 +115,7 @@ model Profile {
   citizen_state          String?
   citizen_zipcode        String?
   citizen_tel            String?
-  contract_sameCitizen   Boolean   @default(false)
+  contract_sameCitizen   Boolean             @default(false)
   contract_addressnumber String?
   contract_address       String?
   contract_country       String?
@@ -129,14 +129,12 @@ model Profile {
   social_likedin         String?
   social_line            String?
   social_telegram        String?
-  masposition1_id        String? @db.Uuid
-  masposition2_id        String? @db.Uuid
-  masposition3_id        String? @db.Uuid
+  masposition1_id        String?             @db.Uuid
+  masposition2_id        String?             @db.Uuid
+  masposition3_id        String?             @db.Uuid
   mas_positionlevel1     mas_positionlevel1? @relation(fields: [masposition1_id], references: [id])
   mas_positionlevel2     mas_positionlevel2? @relation(fields: [masposition2_id], references: [id])
   mas_positionlevel3     mas_positionlevel3? @relation(fields: [masposition3_id], references: [id])
-
-
 }
 
 model User {
@@ -356,6 +354,7 @@ model salary {
   month               String?
   years               String?
   date                DateTime?          @default(now())
+  base_salary         Float?
   commission          Float?
   position_income     Float?
   ot                  Float?
