@@ -1871,18 +1871,20 @@ const resolvers: Resolvers = {
             if (Ss_per) {
               //calculate the new salary update !
 
-              let cal_new_ss = (base_salary * Ss_per) / 100
+              let cal_ss = (base_salary * Ss_per) / 100
               console.log('ประกันสังคมใหม่', NewSocial_security);
-
+              NewSocial_security = cal_ss >= 750 ? 750 : cal_ss //กรณีที่มีการเปลี่ยนประกันสังคมตาม รัฐบาล ให้แก้ไขตรงตัวเลข 750 นะครับ
               Total_income = commission + position_income + ot + bonus + special_income + other_income + travel_income + bursary + welfare_money + base_salary
               Total_expense = vat + miss + ra + late + other + provident_employee + provident_company + NewSocial_security
               Net = Total_income - Total_expense
               ResultSocialYears = (SocialYears - social_security) + NewSocial_security
               ResultIncomeYears = (IncomeYears - old_net) + Net
 
-              NewSocial_security >= 750 ? 750 : cal_new_ss //กรณีที่มีการเปลี่ยนประกันสังคมตาม รัฐบาล ให้แก้ไขตรงตัวเลข 750 นะครับ
+
 
               console.log("ประกันสังคมสะสม = ", ResultSocialYears)
+              console.log('ประกันสังคมปัจจุบัน = ', NewSocial_security);
+
               const upt_salary = await ctx.prisma.salary.update({
                 data: {
                   social_security: NewSocial_security,
@@ -1922,7 +1924,6 @@ const resolvers: Resolvers = {
               }
             }
             if (VaT_per) {
-              let total_cal_vat = []
               const chk_vat = await ctx.prisma.salary.findUnique({
                 where: {
                   id: salary_id
