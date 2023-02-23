@@ -409,6 +409,18 @@ export const positionResolvers: Resolvers = {
           }
         });
 
+
+        const position_profile = await ctx.prisma.profile.update({
+          data:{
+            masposition1_id: args.data.position1_id as string,
+            masposition2_id: args.data.position2_id as string,
+            masposition3_id: args.data.position3_id as string,
+          },
+          where:{
+            userId: args.data.user_id as string,
+          }
+        })
+
         const updated_position = await ctx.prisma.log_positionn.create({
           data: {
             id: v4(),
@@ -438,6 +450,17 @@ export const positionResolvers: Resolvers = {
             date: args.data.date as string
           }
         });
+
+        const position_profile = await ctx.prisma.profile.update({
+          data:{
+            masposition1_id: args.data.position1_id as string,
+            masposition2_id: args.data.position2_id as string,
+            masposition3_id: args.data.position3_id as string,
+          },
+          where:{
+            userId: args.data.user_id as string,
+          }
+        })
 
         const create_position = await ctx.prisma.log_positionn.create({
           data: {
