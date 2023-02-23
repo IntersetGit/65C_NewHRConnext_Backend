@@ -303,7 +303,7 @@ const resolvers: Resolvers = {
       if (args.data?.id) {
         const createBranch = await ctx.prisma.companyBranch.update({
           data: {
-            name: 'สาขา',
+            name: args.data?.name as string,
             address: args.data?.address as string,
             address_2: args.data?.address_2 as string,
             city: args.data?.city as string,
@@ -341,7 +341,7 @@ const resolvers: Resolvers = {
         const createBranch = await ctx.prisma.companyBranch.create({
           data: {
             id: genComBranchid,
-            name: 'สาขา',
+            name: args.data?.name as string,
             address: args.data?.address as string,
             address_2: args.data?.address_2,
             city: args.data?.city as string,
