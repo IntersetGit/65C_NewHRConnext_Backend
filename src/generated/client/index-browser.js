@@ -422,6 +422,7 @@ exports.Prisma.SalaryScalarFieldEnum = makeEnum({
   month: 'month',
   years: 'years',
   date: 'date',
+  base_salary: 'base_salary',
   commission: 'commission',
   position_income: 'position_income',
   ot: 'ot',
