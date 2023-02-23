@@ -816,8 +816,8 @@ const resolvers: Resolvers = {
             },
           },
         },
-        orderBy:{
-          profile: {staff_code : 'asc'}
+        orderBy: {
+          profile: { staff_code: 'asc' }
         }
       })
       return getdata;
@@ -1147,33 +1147,22 @@ const resolvers: Resolvers = {
       let Vat_per = null
       let SS_per = null
       const chk_vatByEXP = await ctx.prisma.expense_company.findMany({ //เช็ค expense company ถ้าหากวันที่คำนวณเงินเดือนยังไมถึงวันที่มีผลให้ใช้ expense company เดิม
+        take: 1,
         where: {
-          companyBranchId: ctx.currentUser?.branchId
+          companyBranchId: ctx.currentUser?.branchId,
+          AND: {
+            unix: { lte: dayjs(new Date()).unix() }
+          }
         }, orderBy: {
           date: 'desc'
         }
       })
 
-      for (let i = 0; i < chk_vatByEXP.length; i++) {
-        let vatSS_expTime = chk_vatByEXP[i].date
-        let vatSSYear = dayjs(vatSS_expTime).format("YYYY")
-        let vatSSmonth = dayjs(vatSS_expTime).format("MM")
-        if (Thismonth === vatSSmonth && vatSSYear === ThisYear) {
-          Vat_per = chk_vatByEXP[i].vat_per
-          SS_per = chk_vatByEXP[i].ss_per
-        }
-        if (Thismonth < vatSSmonth && vatSSYear === ThisYear) {
-          Vat_per = chk_vatByEXP[i + 1].vat_per
-          SS_per = chk_vatByEXP[i + 1].ss_per
-        }
-
-
-        // Vat_per = chk_vatByEXP[0].vat_per
-        // SS_per = chk_vatByEXP[0].ss_per
-      }
-      console.log(chk_vatByEXP)
-      console.log(Vat_per, SS_per);
-
+      chk_vatByEXP.forEach((e: any) => {
+        Vat_per = e.vat_per
+        SS_per = e.ss_per
+      })
+      console.log(chk_vatByEXP);
 
       let time
       let result_incomeYears = 0;
@@ -1197,8 +1186,8 @@ const resolvers: Resolvers = {
             travel_income: args.data?.travel_income as number,
             bursary: args.data?.bursary as number,
             welfare_money: args.data?.welfare_money as number,
-            vatper: Vat_per as number,
-            ss_per: SS_per as number,
+            vatper: Vat_per, // เรียก vat จากปัจจุบันอัตโนมัติ
+            ss_per: SS_per,
             vat: args.data?.vat as number,
             social_security: args.data?.social_security as number,
             miss: args.data?.miss as number,
@@ -1324,8 +1313,8 @@ const resolvers: Resolvers = {
             travel_income: args.data?.travel_income as number,
             bursary: args.data?.bursary as number,
             welfare_money: args.data?.welfare_money as number,
-            vatper: Vat_per as number,
-            ss_per: SS_per as number,
+            vatper: Vat_per,
+            ss_per: SS_per,
             vat: args.data?.vat as number,
             social_security: args.data?.social_security as number,
             miss: args.data?.miss as number,
@@ -1882,7 +1871,7 @@ const resolvers: Resolvers = {
             if (Ss_per) {
               //calculate the new salary update !
 
-              NewSocial_security = (base_salary * Ss_per) / 100
+              let cal_new_ss = (base_salary * Ss_per) / 100
               console.log('ประกันสังคมใหม่', NewSocial_security);
 
               Total_income = commission + position_income + ot + bonus + special_income + other_income + travel_income + bursary + welfare_money + base_salary
@@ -1890,6 +1879,9 @@ const resolvers: Resolvers = {
               Net = Total_income - Total_expense
               ResultSocialYears = (SocialYears - social_security) + NewSocial_security
               ResultIncomeYears = (IncomeYears - old_net) + Net
+
+              NewSocial_security >= 750 ? 750 : cal_new_ss //กรณีที่มีการเปลี่ยนประกันสังคมตาม รัฐบาล ให้แก้ไขตรงตัวเลข 750 นะครับ
+
               console.log("ประกันสังคมสะสม = ", ResultSocialYears)
               const upt_salary = await ctx.prisma.salary.update({
                 data: {
@@ -1943,7 +1935,7 @@ const resolvers: Resolvers = {
                 cal += cv[e]
               })
               console.log(cal)
-            
+
             }
           }
         }
