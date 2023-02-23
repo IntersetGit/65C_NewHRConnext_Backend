@@ -142,7 +142,10 @@ exports.Prisma.CompanyBranchScalarFieldEnum = makeEnum({
   createdAt: 'createdAt',
   updatedAt: 'updatedAt',
   companyId: 'companyId',
-  BusinesstypeId: 'BusinesstypeId'
+  BusinesstypeId: 'BusinesstypeId',
+  photo_link: 'photo_link',
+  vat_link: 'vat_link',
+  certificate_link: 'certificate_link'
 });
 
 exports.Prisma.CompanyScalarFieldEnum = makeEnum({

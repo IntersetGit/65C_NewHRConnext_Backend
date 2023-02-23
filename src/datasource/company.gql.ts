@@ -59,6 +59,9 @@ export const companyTypedef = gql`
     users: [User]
     expense_company: [expense_company]
     Role_Company: [Role_Company]
+    photo_link: String
+    vat_link:  String
+    certificate_link: String
   }
 
   input createCompanyBranch {
@@ -90,6 +93,9 @@ export const companyTypedef = gql`
     companyId: String
     regis_vat: String
     regiscomnumber: String
+    photo_link: String
+    vat_link:  String
+    certificate_link: String
   }
 
 
@@ -135,6 +141,9 @@ export const companyTypedef = gql`
     users: [User]
     Role_Company: [Role_Company]
     _count: CountInsideBranch
+    photo_link: String
+    vat_link:  String
+    certificate_link: String
   }
 
   type ResponseCompany {
@@ -331,7 +340,10 @@ const resolvers: Resolvers = {
             createdAt: new Date(),
             companyId: ctx.currentUser?.compayId,
             regis_vat: args.data?.regis_vat,
-            regiscomnumber: args.data.regiscomnumber
+            regiscomnumber: args.data.regiscomnumber,
+            photo_link: args.data.photo_link,
+            vat_link:  args.data.vat_link, 
+            certificate_link: args.data.certificate_link
           },
           where: {
             id: args.data.id as string
@@ -370,7 +382,10 @@ const resolvers: Resolvers = {
             createdAt: new Date(),
             companyId: ctx.currentUser?.compayId,
             regis_vat: args.data?.regis_vat,
-            regiscomnumber: args.data.regiscomnumber
+            regiscomnumber: args.data.regiscomnumber,
+            photo_link: args.data.photo_link,
+            vat_link:  args.data.vat_link, 
+            certificate_link: args.data.certificate_link
           },
         });
 

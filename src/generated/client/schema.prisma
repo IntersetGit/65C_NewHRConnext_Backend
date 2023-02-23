@@ -77,6 +77,10 @@ model CompanyBranch {
   expense_company   expense_company[]
   BusinesstypeId    String?           @db.Uuid
   Businesstype      MainBusinessType? @relation(fields: [BusinesstypeId], references: [id])
+  photo_link        String?
+  vat_link          String?
+  certificate_link  String?
+
 }
 
 model Profile {

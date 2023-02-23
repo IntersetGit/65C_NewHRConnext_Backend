@@ -64,6 +64,9 @@ export type CompanyBranch = {
   updatedAt: Date
   companyId: string | null
   BusinesstypeId: string | null
+  photo_link: string | null
+  vat_link: string | null
+  certificate_link: string | null
 }
 
 /**
@@ -3841,6 +3844,9 @@ export namespace Prisma {
     updatedAt: Date | null
     companyId: string | null
     BusinesstypeId: string | null
+    photo_link: string | null
+    vat_link: string | null
+    certificate_link: string | null
   }
 
   export type CompanyBranchMaxAggregateOutputType = {
@@ -3874,6 +3880,9 @@ export namespace Prisma {
     updatedAt: Date | null
     companyId: string | null
     BusinesstypeId: string | null
+    photo_link: string | null
+    vat_link: string | null
+    certificate_link: string | null
   }
 
   export type CompanyBranchCountAggregateOutputType = {
@@ -3907,6 +3916,9 @@ export namespace Prisma {
     updatedAt: number
     companyId: number
     BusinesstypeId: number
+    photo_link: number
+    vat_link: number
+    certificate_link: number
     _all: number
   }
 
@@ -3942,6 +3954,9 @@ export namespace Prisma {
     updatedAt?: true
     companyId?: true
     BusinesstypeId?: true
+    photo_link?: true
+    vat_link?: true
+    certificate_link?: true
   }
 
   export type CompanyBranchMaxAggregateInputType = {
@@ -3975,6 +3990,9 @@ export namespace Prisma {
     updatedAt?: true
     companyId?: true
     BusinesstypeId?: true
+    photo_link?: true
+    vat_link?: true
+    certificate_link?: true
   }
 
   export type CompanyBranchCountAggregateInputType = {
@@ -4008,6 +4026,9 @@ export namespace Prisma {
     updatedAt?: true
     companyId?: true
     BusinesstypeId?: true
+    photo_link?: true
+    vat_link?: true
+    certificate_link?: true
     _all?: true
   }
 
@@ -4115,6 +4136,9 @@ export namespace Prisma {
     updatedAt: Date
     companyId: string | null
     BusinesstypeId: string | null
+    photo_link: string | null
+    vat_link: string | null
+    certificate_link: string | null
     _count: CompanyBranchCountAggregateOutputType | null
     _min: CompanyBranchMinAggregateOutputType | null
     _max: CompanyBranchMaxAggregateOutputType | null
@@ -4170,6 +4194,9 @@ export namespace Prisma {
     expense_company?: boolean | CompanyBranch$expense_companyArgs
     BusinesstypeId?: boolean
     Businesstype?: boolean | MainBusinessTypeArgs
+    photo_link?: boolean
+    vat_link?: boolean
+    certificate_link?: boolean
     _count?: boolean | CompanyBranchCountOutputTypeArgs
   }
 
@@ -35656,7 +35683,10 @@ export namespace Prisma {
     createdAt: 'createdAt',
     updatedAt: 'updatedAt',
     companyId: 'companyId',
-    BusinesstypeId: 'BusinesstypeId'
+    BusinesstypeId: 'BusinesstypeId',
+    photo_link: 'photo_link',
+    vat_link: 'vat_link',
+    certificate_link: 'certificate_link'
   };
 
   export type CompanyBranchScalarFieldEnum = (typeof CompanyBranchScalarFieldEnum)[keyof typeof CompanyBranchScalarFieldEnum]
@@ -36240,6 +36270,9 @@ export namespace Prisma {
     expense_company?: Expense_companyListRelationFilter
     BusinesstypeId?: UuidNullableFilter | string | null
     Businesstype?: XOR<MainBusinessTypeRelationFilter, MainBusinessTypeWhereInput> | null
+    photo_link?: StringNullableFilter | string | null
+    vat_link?: StringNullableFilter | string | null
+    certificate_link?: StringNullableFilter | string | null
   }
 
   export type CompanyBranchOrderByWithRelationInput = {
@@ -36278,6 +36311,9 @@ export namespace Prisma {
     expense_company?: expense_companyOrderByRelationAggregateInput
     BusinesstypeId?: SortOrder
     Businesstype?: MainBusinessTypeOrderByWithRelationInput
+    photo_link?: SortOrder
+    vat_link?: SortOrder
+    certificate_link?: SortOrder
   }
 
   export type CompanyBranchWhereUniqueInput = {
@@ -36315,6 +36351,9 @@ export namespace Prisma {
     updatedAt?: SortOrder
     companyId?: SortOrder
     BusinesstypeId?: SortOrder
+    photo_link?: SortOrder
+    vat_link?: SortOrder
+    certificate_link?: SortOrder
     _count?: CompanyBranchCountOrderByAggregateInput
     _max?: CompanyBranchMaxOrderByAggregateInput
     _min?: CompanyBranchMinOrderByAggregateInput
@@ -36354,6 +36393,9 @@ export namespace Prisma {
     updatedAt?: DateTimeWithAggregatesFilter | Date | string
     companyId?: UuidNullableWithAggregatesFilter | string | null
     BusinesstypeId?: UuidNullableWithAggregatesFilter | string | null
+    photo_link?: StringNullableWithAggregatesFilter | string | null
+    vat_link?: StringNullableWithAggregatesFilter | string | null
+    certificate_link?: StringNullableWithAggregatesFilter | string | null
   }
 
   export type ProfileWhereInput = {
@@ -38428,6 +38470,9 @@ export namespace Prisma {
     Role_Company?: Role_CompanyCreateNestedManyWithoutCompanyBranchInput
     expense_company?: expense_companyCreateNestedManyWithoutCompanyBranchInput
     Businesstype?: MainBusinessTypeCreateNestedOneWithoutCompanyBranchInput
+    photo_link?: string | null
+    vat_link?: string | null
+    certificate_link?: string | null
   }
 
   export type CompanyBranchUncheckedCreateInput = {
@@ -38464,6 +38509,9 @@ export namespace Prisma {
     Role_Company?: Role_CompanyUncheckedCreateNestedManyWithoutCompanyBranchInput
     expense_company?: expense_companyUncheckedCreateNestedManyWithoutCompanyBranchInput
     BusinesstypeId?: string | null
+    photo_link?: string | null
+    vat_link?: string | null
+    certificate_link?: string | null
   }
 
   export type CompanyBranchUpdateInput = {
@@ -38500,6 +38548,9 @@ export namespace Prisma {
     Role_Company?: Role_CompanyUpdateManyWithoutCompanyBranchNestedInput
     expense_company?: expense_companyUpdateManyWithoutCompanyBranchNestedInput
     Businesstype?: MainBusinessTypeUpdateOneWithoutCompanyBranchNestedInput
+    photo_link?: NullableStringFieldUpdateOperationsInput | string | null
+    vat_link?: NullableStringFieldUpdateOperationsInput | string | null
+    certificate_link?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type CompanyBranchUncheckedUpdateInput = {
@@ -38536,6 +38587,9 @@ export namespace Prisma {
     Role_Company?: Role_CompanyUncheckedUpdateManyWithoutCompanyBranchNestedInput
     expense_company?: expense_companyUncheckedUpdateManyWithoutCompanyBranchNestedInput
     BusinesstypeId?: NullableStringFieldUpdateOperationsInput | string | null
+    photo_link?: NullableStringFieldUpdateOperationsInput | string | null
+    vat_link?: NullableStringFieldUpdateOperationsInput | string | null
+    certificate_link?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type CompanyBranchCreateManyInput = {
@@ -38569,6 +38623,9 @@ export namespace Prisma {
     updatedAt?: Date | string
     companyId?: string | null
     BusinesstypeId?: string | null
+    photo_link?: string | null
+    vat_link?: string | null
+    certificate_link?: string | null
   }
 
   export type CompanyBranchUpdateManyMutationInput = {
@@ -38600,6 +38657,9 @@ export namespace Prisma {
     social_line?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    photo_link?: NullableStringFieldUpdateOperationsInput | string | null
+    vat_link?: NullableStringFieldUpdateOperationsInput | string | null
+    certificate_link?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type CompanyBranchUncheckedUpdateManyInput = {
@@ -38633,6 +38693,9 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     companyId?: NullableStringFieldUpdateOperationsInput | string | null
     BusinesstypeId?: NullableStringFieldUpdateOperationsInput | string | null
+    photo_link?: NullableStringFieldUpdateOperationsInput | string | null
+    vat_link?: NullableStringFieldUpdateOperationsInput | string | null
+    certificate_link?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type ProfileCreateInput = {
@@ -41419,6 +41482,9 @@ export namespace Prisma {
     updatedAt?: SortOrder
     companyId?: SortOrder
     BusinesstypeId?: SortOrder
+    photo_link?: SortOrder
+    vat_link?: SortOrder
+    certificate_link?: SortOrder
   }
 
   export type CompanyBranchMaxOrderByAggregateInput = {
@@ -41452,6 +41518,9 @@ export namespace Prisma {
     updatedAt?: SortOrder
     companyId?: SortOrder
     BusinesstypeId?: SortOrder
+    photo_link?: SortOrder
+    vat_link?: SortOrder
+    certificate_link?: SortOrder
   }
 
   export type CompanyBranchMinOrderByAggregateInput = {
@@ -41485,6 +41554,9 @@ export namespace Prisma {
     updatedAt?: SortOrder
     companyId?: SortOrder
     BusinesstypeId?: SortOrder
+    photo_link?: SortOrder
+    vat_link?: SortOrder
+    certificate_link?: SortOrder
   }
 
   export type BoolWithAggregatesFilter = {
@@ -46258,6 +46330,9 @@ export namespace Prisma {
     Role_Company?: Role_CompanyCreateNestedManyWithoutCompanyBranchInput
     expense_company?: expense_companyCreateNestedManyWithoutCompanyBranchInput
     Businesstype?: MainBusinessTypeCreateNestedOneWithoutCompanyBranchInput
+    photo_link?: string | null
+    vat_link?: string | null
+    certificate_link?: string | null
   }
 
   export type CompanyBranchUncheckedCreateWithoutCompanyInput = {
@@ -46293,6 +46368,9 @@ export namespace Prisma {
     Role_Company?: Role_CompanyUncheckedCreateNestedManyWithoutCompanyBranchInput
     expense_company?: expense_companyUncheckedCreateNestedManyWithoutCompanyBranchInput
     BusinesstypeId?: string | null
+    photo_link?: string | null
+    vat_link?: string | null
+    certificate_link?: string | null
   }
 
   export type CompanyBranchCreateOrConnectWithoutCompanyInput = {
@@ -46554,6 +46632,9 @@ export namespace Prisma {
     updatedAt?: DateTimeFilter | Date | string
     companyId?: UuidNullableFilter | string | null
     BusinesstypeId?: UuidNullableFilter | string | null
+    photo_link?: StringNullableFilter | string | null
+    vat_link?: StringNullableFilter | string | null
+    certificate_link?: StringNullableFilter | string | null
   }
 
   export type mas_positionlevel3UpsertWithWhereUniqueWithoutCompanyInput = {
@@ -47502,6 +47583,9 @@ export namespace Prisma {
     Role_Company?: Role_CompanyCreateNestedManyWithoutCompanyBranchInput
     expense_company?: expense_companyCreateNestedManyWithoutCompanyBranchInput
     Businesstype?: MainBusinessTypeCreateNestedOneWithoutCompanyBranchInput
+    photo_link?: string | null
+    vat_link?: string | null
+    certificate_link?: string | null
   }
 
   export type CompanyBranchUncheckedCreateWithoutUsersInput = {
@@ -47537,6 +47621,9 @@ export namespace Prisma {
     Role_Company?: Role_CompanyUncheckedCreateNestedManyWithoutCompanyBranchInput
     expense_company?: expense_companyUncheckedCreateNestedManyWithoutCompanyBranchInput
     BusinesstypeId?: string | null
+    photo_link?: string | null
+    vat_link?: string | null
+    certificate_link?: string | null
   }
 
   export type CompanyBranchCreateOrConnectWithoutUsersInput = {
@@ -48087,6 +48174,9 @@ export namespace Prisma {
     Role_Company?: Role_CompanyUpdateManyWithoutCompanyBranchNestedInput
     expense_company?: expense_companyUpdateManyWithoutCompanyBranchNestedInput
     Businesstype?: MainBusinessTypeUpdateOneWithoutCompanyBranchNestedInput
+    photo_link?: NullableStringFieldUpdateOperationsInput | string | null
+    vat_link?: NullableStringFieldUpdateOperationsInput | string | null
+    certificate_link?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type CompanyBranchUncheckedUpdateWithoutUsersInput = {
@@ -48122,6 +48212,9 @@ export namespace Prisma {
     Role_Company?: Role_CompanyUncheckedUpdateManyWithoutCompanyBranchNestedInput
     expense_company?: expense_companyUncheckedUpdateManyWithoutCompanyBranchNestedInput
     BusinesstypeId?: NullableStringFieldUpdateOperationsInput | string | null
+    photo_link?: NullableStringFieldUpdateOperationsInput | string | null
+    vat_link?: NullableStringFieldUpdateOperationsInput | string | null
+    certificate_link?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type Role_CompanyUpsertWithoutUsersInput = {
@@ -48569,6 +48662,9 @@ export namespace Prisma {
     users?: UserCreateNestedManyWithoutCompanyBranchInput
     expense_company?: expense_companyCreateNestedManyWithoutCompanyBranchInput
     Businesstype?: MainBusinessTypeCreateNestedOneWithoutCompanyBranchInput
+    photo_link?: string | null
+    vat_link?: string | null
+    certificate_link?: string | null
   }
 
   export type CompanyBranchUncheckedCreateWithoutRole_CompanyInput = {
@@ -48604,6 +48700,9 @@ export namespace Prisma {
     users?: UserUncheckedCreateNestedManyWithoutCompanyBranchInput
     expense_company?: expense_companyUncheckedCreateNestedManyWithoutCompanyBranchInput
     BusinesstypeId?: string | null
+    photo_link?: string | null
+    vat_link?: string | null
+    certificate_link?: string | null
   }
 
   export type CompanyBranchCreateOrConnectWithoutRole_CompanyInput = {
@@ -48665,6 +48764,9 @@ export namespace Prisma {
     users?: UserUpdateManyWithoutCompanyBranchNestedInput
     expense_company?: expense_companyUpdateManyWithoutCompanyBranchNestedInput
     Businesstype?: MainBusinessTypeUpdateOneWithoutCompanyBranchNestedInput
+    photo_link?: NullableStringFieldUpdateOperationsInput | string | null
+    vat_link?: NullableStringFieldUpdateOperationsInput | string | null
+    certificate_link?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type CompanyBranchUncheckedUpdateWithoutRole_CompanyInput = {
@@ -48700,6 +48802,9 @@ export namespace Prisma {
     users?: UserUncheckedUpdateManyWithoutCompanyBranchNestedInput
     expense_company?: expense_companyUncheckedUpdateManyWithoutCompanyBranchNestedInput
     BusinesstypeId?: NullableStringFieldUpdateOperationsInput | string | null
+    photo_link?: NullableStringFieldUpdateOperationsInput | string | null
+    vat_link?: NullableStringFieldUpdateOperationsInput | string | null
+    certificate_link?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type DistrictCreateWithoutProvinceInput = {
@@ -51295,6 +51400,9 @@ export namespace Prisma {
     users?: UserCreateNestedManyWithoutCompanyBranchInput
     Role_Company?: Role_CompanyCreateNestedManyWithoutCompanyBranchInput
     Businesstype?: MainBusinessTypeCreateNestedOneWithoutCompanyBranchInput
+    photo_link?: string | null
+    vat_link?: string | null
+    certificate_link?: string | null
   }
 
   export type CompanyBranchUncheckedCreateWithoutExpense_companyInput = {
@@ -51330,6 +51438,9 @@ export namespace Prisma {
     users?: UserUncheckedCreateNestedManyWithoutCompanyBranchInput
     Role_Company?: Role_CompanyUncheckedCreateNestedManyWithoutCompanyBranchInput
     BusinesstypeId?: string | null
+    photo_link?: string | null
+    vat_link?: string | null
+    certificate_link?: string | null
   }
 
   export type CompanyBranchCreateOrConnectWithoutExpense_companyInput = {
@@ -51429,6 +51540,9 @@ export namespace Prisma {
     users?: UserUpdateManyWithoutCompanyBranchNestedInput
     Role_Company?: Role_CompanyUpdateManyWithoutCompanyBranchNestedInput
     Businesstype?: MainBusinessTypeUpdateOneWithoutCompanyBranchNestedInput
+    photo_link?: NullableStringFieldUpdateOperationsInput | string | null
+    vat_link?: NullableStringFieldUpdateOperationsInput | string | null
+    certificate_link?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type CompanyBranchUncheckedUpdateWithoutExpense_companyInput = {
@@ -51464,6 +51578,9 @@ export namespace Prisma {
     users?: UserUncheckedUpdateManyWithoutCompanyBranchNestedInput
     Role_Company?: Role_CompanyUncheckedUpdateManyWithoutCompanyBranchNestedInput
     BusinesstypeId?: NullableStringFieldUpdateOperationsInput | string | null
+    photo_link?: NullableStringFieldUpdateOperationsInput | string | null
+    vat_link?: NullableStringFieldUpdateOperationsInput | string | null
+    certificate_link?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type provident_logCreateWithoutSalaryInput = {
@@ -53173,6 +53290,9 @@ export namespace Prisma {
     users?: UserCreateNestedManyWithoutCompanyBranchInput
     Role_Company?: Role_CompanyCreateNestedManyWithoutCompanyBranchInput
     expense_company?: expense_companyCreateNestedManyWithoutCompanyBranchInput
+    photo_link?: string | null
+    vat_link?: string | null
+    certificate_link?: string | null
   }
 
   export type CompanyBranchUncheckedCreateWithoutBusinesstypeInput = {
@@ -53208,6 +53328,9 @@ export namespace Prisma {
     users?: UserUncheckedCreateNestedManyWithoutCompanyBranchInput
     Role_Company?: Role_CompanyUncheckedCreateNestedManyWithoutCompanyBranchInput
     expense_company?: expense_companyUncheckedCreateNestedManyWithoutCompanyBranchInput
+    photo_link?: string | null
+    vat_link?: string | null
+    certificate_link?: string | null
   }
 
   export type CompanyBranchCreateOrConnectWithoutBusinesstypeInput = {
@@ -53325,6 +53448,9 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     BusinesstypeId?: string | null
+    photo_link?: string | null
+    vat_link?: string | null
+    certificate_link?: string | null
   }
 
   export type mas_positionlevel3CreateManyCompanyInput = {
@@ -53401,6 +53527,9 @@ export namespace Prisma {
     Role_Company?: Role_CompanyUpdateManyWithoutCompanyBranchNestedInput
     expense_company?: expense_companyUpdateManyWithoutCompanyBranchNestedInput
     Businesstype?: MainBusinessTypeUpdateOneWithoutCompanyBranchNestedInput
+    photo_link?: NullableStringFieldUpdateOperationsInput | string | null
+    vat_link?: NullableStringFieldUpdateOperationsInput | string | null
+    certificate_link?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type CompanyBranchUncheckedUpdateWithoutCompanyInput = {
@@ -53436,6 +53565,9 @@ export namespace Prisma {
     Role_Company?: Role_CompanyUncheckedUpdateManyWithoutCompanyBranchNestedInput
     expense_company?: expense_companyUncheckedUpdateManyWithoutCompanyBranchNestedInput
     BusinesstypeId?: NullableStringFieldUpdateOperationsInput | string | null
+    photo_link?: NullableStringFieldUpdateOperationsInput | string | null
+    vat_link?: NullableStringFieldUpdateOperationsInput | string | null
+    certificate_link?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type CompanyBranchUncheckedUpdateManyWithoutBranchInput = {
@@ -53468,6 +53600,9 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     BusinesstypeId?: NullableStringFieldUpdateOperationsInput | string | null
+    photo_link?: NullableStringFieldUpdateOperationsInput | string | null
+    vat_link?: NullableStringFieldUpdateOperationsInput | string | null
+    certificate_link?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type mas_positionlevel3UpdateWithoutCompanyInput = {
@@ -56290,6 +56425,9 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     companyId?: string | null
+    photo_link?: string | null
+    vat_link?: string | null
+    certificate_link?: string | null
   }
 
   export type SubBusinessTypeUpdateWithoutMainBusinessTypeInput = {
@@ -56340,6 +56478,9 @@ export namespace Prisma {
     users?: UserUpdateManyWithoutCompanyBranchNestedInput
     Role_Company?: Role_CompanyUpdateManyWithoutCompanyBranchNestedInput
     expense_company?: expense_companyUpdateManyWithoutCompanyBranchNestedInput
+    photo_link?: NullableStringFieldUpdateOperationsInput | string | null
+    vat_link?: NullableStringFieldUpdateOperationsInput | string | null
+    certificate_link?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type CompanyBranchUncheckedUpdateWithoutBusinesstypeInput = {
@@ -56375,6 +56516,9 @@ export namespace Prisma {
     users?: UserUncheckedUpdateManyWithoutCompanyBranchNestedInput
     Role_Company?: Role_CompanyUncheckedUpdateManyWithoutCompanyBranchNestedInput
     expense_company?: expense_companyUncheckedUpdateManyWithoutCompanyBranchNestedInput
+    photo_link?: NullableStringFieldUpdateOperationsInput | string | null
+    vat_link?: NullableStringFieldUpdateOperationsInput | string | null
+    certificate_link?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type CompanyBranchUncheckedUpdateManyWithoutCompanyBranchInput = {
@@ -56407,6 +56551,9 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     companyId?: NullableStringFieldUpdateOperationsInput | string | null
+    photo_link?: NullableStringFieldUpdateOperationsInput | string | null
+    vat_link?: NullableStringFieldUpdateOperationsInput | string | null
+    certificate_link?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
 

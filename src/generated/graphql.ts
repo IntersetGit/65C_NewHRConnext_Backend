@@ -78,6 +78,7 @@ export type CompanyBranch = {
   Role_Company?: Maybe<Array<Maybe<Role_Company>>>;
   address?: Maybe<Scalars['String']>;
   address_2?: Maybe<Scalars['String']>;
+  certificate_link?: Maybe<Scalars['String']>;
   city?: Maybe<Scalars['String']>;
   company?: Maybe<Company>;
   companyId?: Maybe<Scalars['String']>;
@@ -93,6 +94,7 @@ export type CompanyBranch = {
   lng?: Maybe<Scalars['String']>;
   main_company_type?: Maybe<Scalars['String']>;
   name?: Maybe<Scalars['String']>;
+  photo_link?: Maybe<Scalars['String']>;
   regis_vat?: Maybe<Scalars['String']>;
   regiscomnumber?: Maybe<Scalars['String']>;
   registeredamount?: Maybe<Scalars['String']>;
@@ -105,6 +107,7 @@ export type CompanyBranch = {
   tel?: Maybe<Scalars['String']>;
   updatedAt?: Maybe<Scalars['Date']>;
   users?: Maybe<Array<Maybe<User>>>;
+  vat_link?: Maybe<Scalars['String']>;
   website?: Maybe<Scalars['String']>;
   zip?: Maybe<Scalars['String']>;
 };
@@ -979,6 +982,7 @@ export type ResponseCompany_Branch = {
   _count?: Maybe<CountInsideBranch>;
   address?: Maybe<Scalars['String']>;
   address_2?: Maybe<Scalars['String']>;
+  certificate_link?: Maybe<Scalars['String']>;
   city?: Maybe<Scalars['String']>;
   company?: Maybe<Company>;
   companyId?: Maybe<Scalars['String']>;
@@ -993,6 +997,7 @@ export type ResponseCompany_Branch = {
   lng?: Maybe<Scalars['String']>;
   main_company_type?: Maybe<Scalars['String']>;
   name?: Maybe<Scalars['String']>;
+  photo_link?: Maybe<Scalars['String']>;
   regis_vat?: Maybe<Scalars['String']>;
   regiscomnumber?: Maybe<Scalars['String']>;
   registeredamount?: Maybe<Scalars['String']>;
@@ -1005,6 +1010,7 @@ export type ResponseCompany_Branch = {
   tel?: Maybe<Scalars['String']>;
   updatedAt?: Maybe<Scalars['Date']>;
   users?: Maybe<Array<Maybe<User>>>;
+  vat_link?: Maybe<Scalars['String']>;
   website?: Maybe<Scalars['String']>;
   zip?: Maybe<Scalars['String']>;
 };
@@ -1122,6 +1128,7 @@ export type Bookbank_LogInput = {
 export type CreateCompanyBranch = {
   address?: InputMaybe<Scalars['String']>;
   address_2?: InputMaybe<Scalars['String']>;
+  certificate_link?: InputMaybe<Scalars['String']>;
   city?: InputMaybe<Scalars['String']>;
   companyId?: InputMaybe<Scalars['String']>;
   company_type?: InputMaybe<Scalars['String']>;
@@ -1135,6 +1142,7 @@ export type CreateCompanyBranch = {
   lng?: InputMaybe<Scalars['String']>;
   main_company_type?: InputMaybe<Scalars['String']>;
   name?: InputMaybe<Scalars['String']>;
+  photo_link?: InputMaybe<Scalars['String']>;
   regis_vat?: InputMaybe<Scalars['String']>;
   regiscomnumber?: InputMaybe<Scalars['String']>;
   registeredamount?: InputMaybe<Scalars['String']>;
@@ -1146,6 +1154,7 @@ export type CreateCompanyBranch = {
   sub_company_type?: InputMaybe<Scalars['String']>;
   tel?: InputMaybe<Scalars['String']>;
   updatedAt?: InputMaybe<Scalars['Date']>;
+  vat_link?: InputMaybe<Scalars['String']>;
   website?: InputMaybe<Scalars['String']>;
   zip?: InputMaybe<Scalars['String']>;
 };
@@ -2027,6 +2036,7 @@ export type CompanyBranchResolvers<ContextType = ApolloContext, ParentType exten
   Role_Company?: Resolver<Maybe<Array<Maybe<ResolversTypes['Role_Company']>>>, ParentType, ContextType>;
   address?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   address_2?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  certificate_link?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   city?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   company?: Resolver<Maybe<ResolversTypes['Company']>, ParentType, ContextType>;
   companyId?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
@@ -2042,6 +2052,7 @@ export type CompanyBranchResolvers<ContextType = ApolloContext, ParentType exten
   lng?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   main_company_type?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   name?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  photo_link?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   regis_vat?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   regiscomnumber?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   registeredamount?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
@@ -2054,6 +2065,7 @@ export type CompanyBranchResolvers<ContextType = ApolloContext, ParentType exten
   tel?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   updatedAt?: Resolver<Maybe<ResolversTypes['Date']>, ParentType, ContextType>;
   users?: Resolver<Maybe<Array<Maybe<ResolversTypes['User']>>>, ParentType, ContextType>;
+  vat_link?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   website?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   zip?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
@@ -2485,6 +2497,7 @@ export type ResponseCompany_BranchResolvers<ContextType = ApolloContext, ParentT
   _count?: Resolver<Maybe<ResolversTypes['CountInsideBranch']>, ParentType, ContextType>;
   address?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   address_2?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  certificate_link?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   city?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   company?: Resolver<Maybe<ResolversTypes['Company']>, ParentType, ContextType>;
   companyId?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
@@ -2499,6 +2512,7 @@ export type ResponseCompany_BranchResolvers<ContextType = ApolloContext, ParentT
   lng?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   main_company_type?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   name?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  photo_link?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   regis_vat?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   regiscomnumber?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   registeredamount?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
@@ -2511,6 +2525,7 @@ export type ResponseCompany_BranchResolvers<ContextType = ApolloContext, ParentT
   tel?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   updatedAt?: Resolver<Maybe<ResolversTypes['Date']>, ParentType, ContextType>;
   users?: Resolver<Maybe<Array<Maybe<ResolversTypes['User']>>>, ParentType, ContextType>;
+  vat_link?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   website?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   zip?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
