@@ -80,7 +80,6 @@ model CompanyBranch {
   photo_link        String?
   vat_link          String?
   certificate_link  String?
-
 }
 
 model Profile {
@@ -345,6 +344,7 @@ model expense_company {
   exp_com_years   String?
   cal_date_salary DateTime?
   unix            Int?
+  unix_date       Int?
   companyBranchId String?        @db.Uuid
   salary          salary[]
   Mas_month       mas_month?     @relation(fields: [monthId], references: [id])

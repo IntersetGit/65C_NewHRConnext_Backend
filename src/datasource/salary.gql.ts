@@ -5,7 +5,6 @@ import { v4 } from 'uuid';
 import { composeResolvers } from '@graphql-tools/resolvers-composition';
 import { authenticate } from '../middleware/authenticatetoken';
 import dayjs from 'dayjs';
-import { includes, orderBy } from 'lodash';
 import { profile } from 'console';
 import { expense_company, bookbank_log } from '../generated/client/index';
 import { string } from 'zod';
@@ -393,15 +392,23 @@ export const salaryTypedef = gql`
     Position_user: [Position_user]
     expense_company: [expense_company]
   }
-type position_userr {
-id:ID!
-name:String
-position1_id:String
-position2_id:String
-position3_id:String
-role:String
-user_id:String
+    type position_userr {
+    id:ID!
+    name:String
+    position1_id:String
+    position2_id:String
+    position3_id:String
+    role:String
+    user_id:String
+    }
+
+  type show_pervspuser {
+    base_salary: Float
+    vat_per: Float
+    ss_per: Float
+    provident_emp: Float
   }
+
   type createsalaryResponseType {
     message: String
     status: Boolean
@@ -475,7 +482,7 @@ user_id:String
     mas_bank(id: String): [mas_bank]
     data_salary(fristname: String ,Position2: String ,Position3: String):[data_salary]
     expense_company(date:String):[expense_company]
-    show_pervspUser(date:String , id:ID!):[CompanyBranch]
+    show_pervspUser(date:String , userId: String):[User]
     show_years(name:String):[mas_years]
   }
 
@@ -553,40 +560,44 @@ const resolvers: Resolvers = {
       const date = args?.date ? args?.date : undefined
       const month = dayjs(date).format('MM')
       const years = dayjs(date).format('YYYY')
-      const result = await ctx.prisma.bookbank_log.findMany({
+      const result = await ctx.prisma.user.findMany({
+        include: {
+          bookbank_log: { include: { mas_bank: true }, take: 1, orderBy: { accept_date: 'desc' }, where: { unix: { lte: dayjs(new Date()).unix() } } },
+          companyBranch: { include: { expense_company: { take: 1, orderBy: { date: 'desc' }, where: { unix: { lte: dayjs(new Date()).unix() } } } } }
+        },
         where: {
-          userId: args.id
+          id: args.userId as string
         }
       })
-      for (let i = 0; i < result.length; i++) { //กำหนดวันที่ถ้าหากผลบังคับใช้มีเดือน มากกว่า การคำนวณเงินเดือนให้ใช้ index ที่ 1
-        const date_book_bank = result[i].date
-        const bb_month = dayjs(date_book_bank).format('MM')
-        const bb_years = dayjs(date_book_bank).format('YYYY')
-        if (parseInt(bb_month) > parseInt(month)) {
-          let bb_id = result[i - 1].id
-          const getdata = await ctx.prisma.companyBranch.findMany({
-            include: {
-              expense_company: { where: { exp_com_month: month, AND: { exp_com_years: years } } },
-              users: { include: { bookbank_log: { where: { userId: args.id, AND: { id: bb_id } }, orderBy: { date: 'desc' } } }, where: { id: args.id } }
-            },
-            where: {
-              id: ctx.currentUser?.branchId,
-            },
-          });
-          return getdata
-        }
-      }
-      // ถ้าผลบังคับใช้ เท่ากับเวลาคำนวณเงินเดือน ใช้ index 0
-      const getdata = await ctx.prisma.companyBranch.findMany({
-        include: {
-          expense_company: { where: { exp_com_month: month, AND: { exp_com_years: years } } },
-          users: { include: { bookbank_log: { where: { userId: args.id }, orderBy: { date: 'desc' } } }, where: { id: args.id } }
-        },
-        where: {
-          id: ctx.currentUser?.branchId,
-        },
-      });
-      return getdata
+      // for (let i = 0; i < result.length; i++) { //กำหนดวันที่ถ้าหากผลบังคับใช้มีเดือน มากกว่า การคำนวณเงินเดือนให้ใช้ index ที่ 1
+      //   const date_book_bank = result[i].date
+      //   const bb_month = dayjs(date_book_bank).format('MM')
+      //   const bb_years = dayjs(date_book_bank).format('YYYY')
+      //   if (parseInt(bb_month) > parseInt(month)) {
+      //     let bb_id = result[i - 1].id
+      //     const getdata = await ctx.prisma.companyBranch.findMany({
+      //       include: {
+      //         expense_company: { where: { exp_com_month: month, AND: { exp_com_years: years } } },
+      //         users: { include: { bookbank_log: { where: { userId: args.id, AND: { id: bb_id } }, orderBy: { date: 'desc' } } }, where: { id: args.id } }
+      //       },
+      //       where: {
+      //         id: ctx.currentUser?.branchId,
+      //       },
+      //     });
+      //     return getdata
+      //   }
+      // }
+      // // ถ้าผลบังคับใช้ เท่ากับเวลาคำนวณเงินเดือน ใช้ index 0
+      // const getdata = await ctx.prisma.companyBranch.findMany({
+      //   include: {
+      //     expense_company: { where: { exp_com_month: month, AND: { exp_com_years: years } } },
+      //     users: { include: { bookbank_log: { where: { userId: args.id }, orderBy: { date: 'desc' } } }, where: { id: args.id } }
+      //   },
+      //   where: {
+      //     id: ctx.currentUser?.branchId,
+      //   },
+      // });
+      return result
     },
 
     async mas_bank(parant: any, args: any, ctx: any) {
@@ -609,7 +620,7 @@ const resolvers: Resolvers = {
           companyBranch: { include: { company: true } },
           Position_user: { include: { mas_positionlevel3: true }, orderBy: { date: 'desc' } },
           // bookbank_log: true
-          bookbank_log: { include: { mas_bank: true }, orderBy: { date: 'desc' } }
+          bookbank_log: { include: { mas_bank: true }, orderBy: { accept_date: 'desc' } }
         },
         where: {
           id: ctx.currentUser?.id
@@ -1473,6 +1484,7 @@ const resolvers: Resolvers = {
             accept_date: new Date(args.data?.date),
             accept_month: Acp_month,
             accept_years: Acp_year,
+            unix: dayjs(new Date(args.data?.accept_date)).unix(),
             provident_com: args.data?.provident_com as number, // กองทุนของพนักงาน ตัวเลขเป็น %
             provident_emp: args.data?.provident_emp as number, // กองทุนของบริษัท ตัวเลขเป็น %
           },
@@ -1780,6 +1792,7 @@ const resolvers: Resolvers = {
             exp_com_years: ThisYear,
             check_vat: take_arr as string[],
             cal_date_salary: args.data?.cal_date_salary,
+            unix: unix,
             companyBranchId: args.data?.companyBranchId,
           },
           where: { id: args.data.id },
