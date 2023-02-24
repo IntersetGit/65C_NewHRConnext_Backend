@@ -562,41 +562,14 @@ const resolvers: Resolvers = {
       const years = dayjs(date).format('YYYY')
       const result = await ctx.prisma.user.findMany({
         include: {
-          bookbank_log: { include: { mas_bank: true }, take: 1, orderBy: { accept_date: 'desc' }, where: { unix: { lte: dayjs(new Date()).unix() } } },
-          companyBranch: { include: { expense_company: { take: 1, orderBy: { date: 'desc' }, where: { unix: { lte: dayjs(new Date()).unix() } } } } }
+          bookbank_log: { include: { mas_bank: true }, take: 1, orderBy: { accept_date: 'desc' }, where: { unix: { lte: dayjs(date).unix() } } },
+          companyBranch: { include: { expense_company: { take: 1, orderBy: { date: 'desc' }, where: { unix_date: { lte: dayjs(date).unix() }, AND: { id: ctx.currentUser?.branchId } } } } }
         },
         where: {
           id: args.userId as string
         }
       })
-      // for (let i = 0; i < result.length; i++) { //กำหนดวันที่ถ้าหากผลบังคับใช้มีเดือน มากกว่า การคำนวณเงินเดือนให้ใช้ index ที่ 1
-      //   const date_book_bank = result[i].date
-      //   const bb_month = dayjs(date_book_bank).format('MM')
-      //   const bb_years = dayjs(date_book_bank).format('YYYY')
-      //   if (parseInt(bb_month) > parseInt(month)) {
-      //     let bb_id = result[i - 1].id
-      //     const getdata = await ctx.prisma.companyBranch.findMany({
-      //       include: {
-      //         expense_company: { where: { exp_com_month: month, AND: { exp_com_years: years } } },
-      //         users: { include: { bookbank_log: { where: { userId: args.id, AND: { id: bb_id } }, orderBy: { date: 'desc' } } }, where: { id: args.id } }
-      //       },
-      //       where: {
-      //         id: ctx.currentUser?.branchId,
-      //       },
-      //     });
-      //     return getdata
-      //   }
-      // }
-      // // ถ้าผลบังคับใช้ เท่ากับเวลาคำนวณเงินเดือน ใช้ index 0
-      // const getdata = await ctx.prisma.companyBranch.findMany({
-      //   include: {
-      //     expense_company: { where: { exp_com_month: month, AND: { exp_com_years: years } } },
-      //     users: { include: { bookbank_log: { where: { userId: args.id }, orderBy: { date: 'desc' } } }, where: { id: args.id } }
-      //   },
-      //   where: {
-      //     id: ctx.currentUser?.branchId,
-      //   },
-      // });
+
       return result
     },
 
@@ -832,116 +805,7 @@ const resolvers: Resolvers = {
         }
       })
       return getdata;
-      // const chk_bb = await ctx.prisma.user.findMany({
-      //   include: {
-      //     bookbank_log: { take: 1, orderBy: { accept_date: 'desc' }, where: { unix : {lte : dayjs(new Date()).unix()} } },
-      //     profile: true
-      //   },
-      //   where: {
-      //     companyBranchId: ctx.currentUser?.branchId
-      //   },
-      // })
-      // for (let i = 0; i < chk_bb.length; i++) {
-      //   let bb_log_forme = chk_bb[i].bookbank_log
-      //   console.log(bb_log_forme);
-      //   for (let a = 0; a < bb_log_forme.length; a++) {
-      //     console.log(bb_log_forme[a]);
-      //     bb_acp_date = bb_log_forme[a].accept_date
-      //     let unix_bb = dayjs(bb_acp_date).unix()
-      //     console.log('วันที่มีผล = ', unix_bb);
-      //     let result_unix = unix_current - unix_bb
-      //     console.log('ผลลัพธ์จากการลบ = ', result_unix);
 
-
-
-      //     if (result_unix < 0) { //เช็คถ้าหากเดือน < เดือน ณ ปัจจุบัน ให้ทำการใช้ index[1]
-      //       bb_id = bb_log_forme[a + 1].id
-      //       const chk_data = await ctx.prisma.user.findMany({
-      //         include: {
-      //           profile: true,
-      //           role: true,
-      //           Position_user: {
-      //             include: { mas_positionlevel1: true, mas_positionlevel2: true, mas_positionlevel3: true },
-      //             where: {
-      //               mas_positionlevel2: {
-      //                 id: search2
-      //               }, AND: {
-      //                 mas_positionlevel3: {
-      //                   id: search3
-      //                 }
-      //               }
-      //             },
-      //             orderBy: { date: 'desc' }
-      //           },
-      //           salary: true,
-      //           bookbank_log: { include: { mas_bank: true }, where: { id: bb_id } },
-      //           companyBranch: { include: { expense_company: { orderBy: { date: 'desc' } } } }
-      //         },
-      //         where: {
-      //           companyBranchId: ctx.currentUser?.branchId,
-      //           AND: {
-      //             profile: {
-      //               firstname_th: { contains: search1 }
-      //             },
-      //             AND: {
-      //               Position_user: {
-      //                 some: {
-      //                   mas_positionlevel2: { id: search2 },
-      //                   AND: { mas_positionlevel3: { id: search3 } }
-      //                 },
-      //               },
-      //             },
-      //           },
-      //         }
-      //       })
-      //       return chk_data;
-      //     } else {
-      //       const getdata = await ctx.prisma.user.findMany({
-      //         include: {
-      //           profile: true,
-      //           role: true,
-      //           Position_user: {
-      //             include: { mas_positionlevel1: true, mas_positionlevel2: true, mas_positionlevel3: true },
-      //             where: {
-      //               mas_positionlevel2: {
-      //                 id: search2
-      //               }, AND: {
-      //                 mas_positionlevel3: {
-      //                   id: search3
-      //                 }
-      //               }
-      //             },
-      //             orderBy: { date: 'desc' }
-      //           },
-      //           salary: true,
-      //           bookbank_log: { include: { mas_bank: true }, orderBy: { accept_date: 'desc' } },
-      //           companyBranch: { include: { expense_company: { orderBy: { date: 'desc' } } } }
-      //         },
-      //         where: {
-      //           companyBranchId: ctx.currentUser?.branchId,
-      //           AND: {
-      //             profile: {
-      //               firstname_th: { contains: search1 }
-      //             },
-      //             AND: {
-      //               Position_user: {
-      //                 some: {
-      //                   mas_positionlevel2: { id: search2 },
-      //                   AND: { mas_positionlevel3: { id: search3 } }
-      //                 },
-      //               },
-      //             },
-      //           },
-      //         }
-      //       })
-      //       return getdata;
-      //     }
-
-      //   }
-
-      // }
-
-      //return chk_bb;
     },
   }, //
   Mutation: {
@@ -1778,6 +1642,7 @@ const resolvers: Resolvers = {
       let date = args.data?.date
       let ThisYear = dayjs(date).format("YYYY")
       let Thismonth = dayjs(date).format("MM")
+      let unix_date = dayjs(args.data?.date).unix()
       let unix = dayjs(args.data?.cal_date_salary).unix()
       const take_arr = args.data?.check_vat ? args.data?.check_vat : []
 
@@ -1793,6 +1658,7 @@ const resolvers: Resolvers = {
             check_vat: take_arr as string[],
             cal_date_salary: args.data?.cal_date_salary,
             unix: unix,
+            unix_date: unix_date,
             companyBranchId: args.data?.companyBranchId,
           },
           where: { id: args.data.id },
@@ -2025,6 +1891,7 @@ const resolvers: Resolvers = {
           exp_com_years: ThisYear,
           cal_date_salary: new Date(args.data?.cal_date_salary),
           unix: unix,
+          unix_date: unix_date,
           companyBranchId: args.data?.companyBranchId,
         },
       });
