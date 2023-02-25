@@ -1030,13 +1030,13 @@ const resolvers: Resolvers = {
         where: {
           companyBranchId: ctx.currentUser?.branchId,
           AND: {
-            unix: { lte: dayjs(new Date()).unix() }
+            unix_date: { lte: dayjs(new Date()).unix() }
           }
         }, orderBy: {
           date: 'desc'
         }
       })
-
+      
       chk_vatByEXP.forEach((e: any) => {
         Vat_per = e.vat_per
         SS_per = e.ss_per
@@ -1451,81 +1451,81 @@ const resolvers: Resolvers = {
 
           if (New_Pro_emp_per || New_Pro_com_per) {
 
-              ///// calculate function ///////////
-              base_salary = args.data.base_salary ? args.data.base_salary : base_salary //ทำการเช็คว่าฐานเงินเดือนมีการเปลี่ยนแปลงมั้ย ถ้าเปลี่ยนให้ใช้ฐานเงินเดือนใหม่คำนวณ
+            ///// calculate function ///////////
+            base_salary = args.data.base_salary ? args.data.base_salary : base_salary //ทำการเช็คว่าฐานเงินเดือนมีการเปลี่ยนแปลงมั้ย ถ้าเปลี่ยนให้ใช้ฐานเงินเดือนใหม่คำนวณ
 
-              New_Pro_Emp = (base_salary * New_Pro_emp_per) / 100
-              New_Pro_Com = (base_salary * New_Pro_com_per) / 100
-              Total_income = commission + position_income + ot + bonus + special_income + other_income + travel_income + bursary + welfare_money + base_salary
-              Total_expense = social_security + vat + miss + ra + late + other + New_Pro_Emp + New_Pro_Com
-              Net = Total_income - Total_expense
-              ResultIncomeYears = (IncomeYears - old_net) + Net
+            New_Pro_Emp = (base_salary * New_Pro_emp_per) / 100
+            New_Pro_Com = (base_salary * New_Pro_com_per) / 100
+            Total_income = commission + position_income + ot + bonus + special_income + other_income + travel_income + bursary + welfare_money + base_salary
+            Total_expense = social_security + vat + miss + ra + late + other + New_Pro_Emp + New_Pro_Com
+            Net = Total_income - Total_expense
+            ResultIncomeYears = (IncomeYears - old_net) + Net
 
-              const chk_all_collect = await ctx.prisma.mas_all_collect.findMany({ //ทำการค้นหา all_collect ของแต่ละคนจาก ID 
+            const chk_all_collect = await ctx.prisma.mas_all_collect.findMany({ //ทำการค้นหา all_collect ของแต่ละคนจาก ID 
+              where: {
+                userId: chk_salary[i].userId as string
+              }
+            })
+            console.log(chk_all_collect);
+
+            for (let a = 0; a < chk_all_collect.length; a++) { //ทำการอัปเดทค่าใน mas_all_collect ให้เป็นค่าปัจจุบันที่คำนวณมาแล้ว
+              let income_collect = chk_all_collect[0].income_collect as number
+              let ss_collect_old = chk_all_collect[0].social_secu_collect as number
+              let pro_col_emp = chk_all_collect[0].provident_collect_employee as number
+              let pro_col_com = chk_all_collect[0].provident_collect_company as number
+              let ResultPro_col_emp = (pro_col_emp - old_pro_emp) + New_Pro_Emp //คำนวณผลลัพธ์ของ provident_collect ของพนักงานใหม่
+              let ResultPro_col_com = (pro_col_com - old_pro_com) + New_Pro_Com //คำนวณผลลัพธ์ของ provident_collect ของพนักงานใหม่
+              let ResultIncome_col = (income_collect - old_net) + Net
+              // let pro_col_com = chk_all_collect[0].provident_collect_company as number
+              // let ss_collect_new = (ss_collect_old - social_security) + NewSocial_security
+              const upt_all_collect = await ctx.prisma.mas_all_collect.update({
+                data: {
+                  provident_collect_employee: ResultPro_col_emp,
+                  provident_collect_company: ResultPro_col_com,
+                  income_collect: ResultIncome_col
+
+                },
                 where: {
                   userId: chk_salary[i].userId as string
                 }
               })
-              console.log(chk_all_collect);
+              console.log('ค่าใหม่ = ', upt_all_collect);
 
-              for (let a = 0; a < chk_all_collect.length; a++) { //ทำการอัปเดทค่าใน mas_all_collect ให้เป็นค่าปัจจุบันที่คำนวณมาแล้ว
-                let income_collect = chk_all_collect[0].income_collect as number
-                let ss_collect_old = chk_all_collect[0].social_secu_collect as number
-                let pro_col_emp = chk_all_collect[0].provident_collect_employee as number
-                let pro_col_com = chk_all_collect[0].provident_collect_company as number
-                let ResultPro_col_emp = (pro_col_emp - old_pro_emp) + New_Pro_Emp //คำนวณผลลัพธ์ของ provident_collect ของพนักงานใหม่
-                let ResultPro_col_com = (pro_col_com - old_pro_com) + New_Pro_Com //คำนวณผลลัพธ์ของ provident_collect ของพนักงานใหม่
-                let ResultIncome_col = (income_collect - old_net) + Net
-                // let pro_col_com = chk_all_collect[0].provident_collect_company as number
-                // let ss_collect_new = (ss_collect_old - social_security) + NewSocial_security
-                const upt_all_collect = await ctx.prisma.mas_all_collect.update({
-                  data: {
-                    provident_collect_employee: ResultPro_col_emp,
-                    provident_collect_company: ResultPro_col_com,
-                    income_collect: ResultIncome_col
+            }
 
-                  },
-                  where: {
-                    userId: chk_salary[i].userId as string
-                  }
-                })
-                console.log('ค่าใหม่ = ', upt_all_collect);
-
+            const upt_salary = await ctx.prisma.salary.update({ //ทำการ update เงินเดือนให้เป็นปัจจุบันจากการคำนวณล่าสุด
+              data: {
+                provident_employee: New_Pro_Emp,
+                provident_company: New_Pro_Com,
+                total_income: Total_income,
+                total_expense: Total_expense,
+                incomeYears: ResultIncomeYears,
+                net: Net
+              },
+              where: {
+                id: salary_id
               }
-
-              const upt_salary = await ctx.prisma.salary.update({ //ทำการ update เงินเดือนให้เป็นปัจจุบันจากการคำนวณล่าสุด
-                data: {
-                  provident_employee: New_Pro_Emp,
-                  provident_company: New_Pro_Com,
-                  total_income: Total_income,
-                  total_expense: Total_expense,
-                  incomeYears: ResultIncomeYears,
-                  net: Net
-                },
-                where: {
-                  id: salary_id
-                }
-              })
-              // console.log(upt_salary);
+            })
+            // console.log(upt_salary);
 
 
-              const chk_provi_log = await ctx.prisma.provident_log.findMany({
-                where: {
-                  userId: chk_salary[i].userId as string,
-                  AND: {
-                    salaryId: salary_id
-                  }
+            const chk_provi_log = await ctx.prisma.provident_log.findMany({
+              where: {
+                userId: chk_salary[i].userId as string,
+                AND: {
+                  salaryId: salary_id
                 }
-              })
-              const upt_provi_log = await ctx.prisma.provident_log.update({
-                data: {
-                  pro_employee: New_Pro_Emp as number,
-                  pro_company: New_Pro_Com as number
-                },
-                where: {
-                  id: chk_provi_log[0].id
-                }
-              })
+              }
+            })
+            const upt_provi_log = await ctx.prisma.provident_log.update({
+              data: {
+                pro_employee: New_Pro_Emp as number,
+                pro_company: New_Pro_Com as number
+              },
+              where: {
+                id: chk_provi_log[0].id
+              }
+            })
 
           }
         }
@@ -1618,8 +1618,8 @@ const resolvers: Resolvers = {
         });
         console.log(chk_salary);
 
-        let VaT_per = args.data?.vat_per //กำหนดค่า ให้ค่าที่ต้องการคำนวณเริ่มต้นให้เป็น 0
-        let Ss_per = args.data?.ss_per
+        let VaT_per = 0//กำหนดค่า ให้ค่าที่ต้องการคำนวณเริ่มต้นให้เป็น 0
+        let Ss_per = 0
         let NewSocial_security = 0 //Social security อันใหม่
         ///////////////////////////////
         let Total_income = 0
@@ -1678,6 +1678,8 @@ const resolvers: Resolvers = {
           ra = chk_salary[i].ra as number
           late = chk_salary[i].late as number
           other = chk_salary[i].other as number
+          VaT_per = chk_salary[i].vatper as number
+          Ss_per = chk_salary[i].ss_per as number
 
 
           const chk_bb = await ctx.prisma.bookbank_log.findMany({
@@ -1698,114 +1700,57 @@ const resolvers: Resolvers = {
             console.log(base_salary);
           })
 
-
+          VaT_per = args.data.vat_per ? args.data.vat_per : VaT_per
+          Ss_per = args.data.ss_per ? args.data.ss_per : Ss_per
           if (Ss_per || VaT_per) {
-            if (Ss_per) {
-              //calculate the new salary update !
 
-              let cal_ss = (base_salary * Ss_per) / 100
-              console.log('ประกันสังคมใหม่', NewSocial_security);
-              NewSocial_security = cal_ss >= 750 ? 750 : cal_ss //กรณีที่มีการเปลี่ยนประกันสังคมตาม รัฐบาล ให้แก้ไขตรงตัวเลข 750 นะครับ
-              Total_income = commission + position_income + ot + bonus + special_income + other_income + travel_income + bursary + welfare_money + base_salary
-              Total_expense = vat + miss + ra + late + other + provident_employee + provident_company + NewSocial_security
-              Net = Total_income - Total_expense
-              ResultSocialYears = (SocialYears - social_security) + NewSocial_security
-              ResultIncomeYears = (IncomeYears - old_net) + Net
-
-              console.log("ประกันสังคมสะสม = ", ResultSocialYears)
-              console.log('ประกันสังคมปัจจุบัน = ', NewSocial_security);
-
-              const chk_all_collect = await ctx.prisma.mas_all_collect.findMany({
-                where: {
-                  userId: chk_salary[i].userId as string
-                }
-              })
-              console.log(chk_all_collect);
-
-              for (let a = 0; a < chk_all_collect.length; a++) {
-                let ss_collect_old = chk_all_collect[0].social_secu_collect as number
-                let ss_collect_new = (ss_collect_old - social_security) + NewSocial_security
-                const upt_all_collect = await ctx.prisma.mas_all_collect.update({
-                  data: {
-                    social_secu_collect: ss_collect_new,
-                    income_collect: ResultIncomeYears
-
-                  },
-                  where: {
-                    userId: chk_salary[i].userId as string
-                  }
-                })
-                console.log('ค่าใหม่ = ', upt_all_collect);
-
+            //calculate the new salary update !
+            /////////////////////////////// cal vat////////////////////////////////
+            const chk_vat = await ctx.prisma.salary.findUnique({
+              where: {
+                id: salary_id
               }
-              const upt_salary = await ctx.prisma.salary.update({
-                data: {
-                  social_security: NewSocial_security,
-                  ss_per: Ss_per,
-                  total_income: Total_income,
-                  total_expense: Total_expense,
-                  socialYears: ResultSocialYears,
-                  net: Net,
-                  incomeYears: ResultIncomeYears
-                },
-                where: {
-                  id: salary_id
-                }
-              })
-              
-            }
-            if (VaT_per) {
-              const chk_vat = await ctx.prisma.salary.findUnique({
-                where: {
-                  id: salary_id
-                }
-              })
-              const cv: any = chk_vat
-              let cal = 0 //คำนวณค่าจาก array ทั้งหมดจากนั้นนำค่ามาใส่ในตัวแปร cal
-              take_arr?.forEach((e: any) => {
-                if (!e && !chk_vat) return
-                cal += cv[e]
-              })
-              console.log(cal)
-              let cal_vat = (cal * VaT_per) / 100 //cal_vat คือค่าใหม่ ส่วน vat คือค่าเก่า
+            })
+            const cv: any = chk_vat
+            let cal = 0 //คำนวณค่าจาก array ทั้งหมดจากนั้นนำค่ามาใส่ในตัวแปร cal
+            take_arr?.forEach((e: any) => {
+              if (!e && !chk_vat) return
+              cal += cv[e]
+            })
+            console.log(cal)
+            let cal_vat = (cal * VaT_per) / 100 //cal_vat คือค่าใหม่ ส่วน vat คือค่าเก่า
+            /////////////// cal ss ////////////////////////////////////////////
+            let cal_ss = (base_salary * Ss_per) / 100
+            console.log('ประกันสังคมใหม่', NewSocial_security);
+            NewSocial_security = cal_ss >= 750 ? 750 : cal_ss //กรณีที่มีการเปลี่ยนประกันสังคมตาม รัฐบาล ให้แก้ไขตรงตัวเลข 750 นะครับ
+            Total_income = commission + position_income + ot + bonus + special_income + other_income + travel_income + bursary + welfare_money + base_salary
+            Total_expense = cal_vat + miss + ra + late + other + provident_employee + provident_company + NewSocial_security
+            Net = Total_income - Total_expense
 
-              Total_income = commission + position_income + ot + bonus + special_income + other_income + travel_income + bursary + welfare_money + base_salary
-              Total_expense = cal_vat + miss + ra + late + other + provident_employee + provident_company + social_security
-              Net = Total_income - Total_expense
-              ResultVatYears = (VatYears - vat) + cal_vat
-              ResultIncomeYears = (IncomeYears - old_net) + Net
-              console.log("Vat สะสม = ", ResultVatYears)
+            ResultVatYears = (VatYears - vat) + cal_vat
+            ResultSocialYears = (SocialYears - social_security) + NewSocial_security
+            ResultIncomeYears = (IncomeYears - old_net) + Net
 
-              const upt_salary = await ctx.prisma.salary.update({
-                data: {
-                  vat: cal_vat,
-                  vatper: VaT_per,
-                  total_income: Total_income,
-                  total_expense: Total_expense,
-                  vatYears: ResultVatYears,
-                  net: Net,
-                  incomeYears: ResultIncomeYears
-                },
-                where: {
-                  id: salary_id
-                }
-              })
+            console.log("ประกันสังคมสะสม = ", ResultSocialYears)
+            console.log('ประกันสังคมปัจจุบัน = ', NewSocial_security);
 
-              const chk_all_collect = await ctx.prisma.mas_all_collect.findUnique({
-                where: {
-                  userId: chk_salary[i].userId as string
-                }
-              })
-              console.log(chk_all_collect);
+            const chk_all_collect = await ctx.prisma.mas_all_collect.findMany({
+              where: {
+                userId: chk_salary[i].userId as string
+              }
+            })
+            console.log(chk_all_collect);
 
-              let vat_collect_old = chk_all_collect?.vat_collect as number
+            for (let a = 0; a < chk_all_collect.length; a++) {
+
+              let vat_collect_old = chk_all_collect[0].vat_collect as number
               let vat_collect_new = (vat_collect_old - vat) + cal_vat
-              // let ss_collect_old = chk_all_collect[0].social_secu_collect as number
-              // let ss_collect_new = (ss_collect_old - social_security) + NewSocial_security
-
+              let ss_collect_old = chk_all_collect[0].social_secu_collect as number
+              let ss_collect_new = (ss_collect_old - social_security) + NewSocial_security
               const upt_all_collect = await ctx.prisma.mas_all_collect.update({
                 data: {
                   vat_collect: vat_collect_new,
+                  social_secu_collect: ss_collect_new,
                   income_collect: ResultIncomeYears
 
                 },
@@ -1814,7 +1759,25 @@ const resolvers: Resolvers = {
                 }
               })
               console.log('ค่าใหม่ = ', upt_all_collect);
+
             }
+            const upt_salary = await ctx.prisma.salary.update({
+              data: {
+                vat: cal_vat,
+                vatper: VaT_per, 
+                social_security: NewSocial_security,
+                ss_per: Ss_per,
+                total_income: Total_income,
+                total_expense: Total_expense,
+                socialYears: ResultSocialYears,
+                vatYears: ResultVatYears,
+                net: Net,
+                incomeYears: ResultIncomeYears
+              },
+              where: {
+                id: salary_id
+              }
+            })
           }
         }
 
