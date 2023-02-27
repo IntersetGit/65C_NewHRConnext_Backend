@@ -129,7 +129,6 @@ export const userTypedef = gql`
     company_country: String!
     company_phone: String!
     company_icon: String
-    main_business_id: String
   }
 
   input CreateAccountUserInput {
@@ -395,7 +394,6 @@ const resolvers: Resolvers = {
           country: args.data.company_country,
           companyId: createCompany.id,
           tel: args.data.company_phone,
-          main_business_id: args.data.main_business_id as string
         },
       });
 

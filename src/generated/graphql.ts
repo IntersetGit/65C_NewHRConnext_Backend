@@ -140,7 +140,6 @@ export type CreateAccountInput = {
   email: Scalars['String'];
   firstname: Scalars['String'];
   lastname: Scalars['String'];
-  main_business_id?: InputMaybe<Scalars['String']>;
   password: Scalars['String'];
   tel: Scalars['String'];
   userlimit?: InputMaybe<Scalars['Int']>;

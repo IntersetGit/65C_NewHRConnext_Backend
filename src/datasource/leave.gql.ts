@@ -133,7 +133,7 @@ export const leaveResolvers: Resolvers = {
         const getdataleave_2 = await ctx.prisma.user.findMany({
           include: {
             profile: true,
-            Position_user: { include: { mas_positionlevel1: true, mas_positionlevel2: true, mas_positionlevel3: true, header: { include: { profile: true } } }, orderBy:{ date: 'desc'}  },
+            Position_user: { include: { mas_positionlevel1: true, mas_positionlevel2: true, mas_positionlevel3: true, header: { include: { profile: true } } }, orderBy: { date: 'desc' } },
             data_leave: { include: { mas_leave_type: true } }
           },
           where: {
@@ -143,7 +143,7 @@ export const leaveResolvers: Resolvers = {
         const getdataleave = await ctx.prisma.user.findMany({
           include: {
             profile: true,
-            Position_user: { include: { mas_positionlevel1: true, mas_positionlevel2: true, mas_positionlevel3: true, header: { include: { profile: true } } }, orderBy:{ date: 'desc'} },
+            Position_user: { include: { mas_positionlevel1: true, mas_positionlevel2: true, mas_positionlevel3: true, header: { include: { profile: true } } }, orderBy: { date: 'desc' } },
             data_leave: { include: { mas_leave_type: true }, where: { Status: 2 } }
           },
           where: {
@@ -228,7 +228,7 @@ export const leaveResolvers: Resolvers = {
         const getdataleave_2 = await ctx.prisma.user.findMany({
           include: {
             profile: true,
-            Position_user: { include: { mas_positionlevel1: true, mas_positionlevel2: true, mas_positionlevel3: true, header: { include: { profile: true } } }, orderBy:{ date: 'desc'}  },
+            Position_user: { include: { mas_positionlevel1: true, mas_positionlevel2: true, mas_positionlevel3: true, header: { include: { profile: true } } }, orderBy: { date: 'desc' } },
             data_leave: { include: { mas_leave_type: true }, where: { id: search } }
           },
           where: {
@@ -242,7 +242,7 @@ export const leaveResolvers: Resolvers = {
         const getdataleave = await ctx.prisma.user.findMany({
           include: {
             profile: true,
-            Position_user: { include: { mas_positionlevel1: true, mas_positionlevel2: true, mas_positionlevel3: true, header: { include: { profile: true } } }, orderBy:{ date: 'desc'} },
+            Position_user: { include: { mas_positionlevel1: true, mas_positionlevel2: true, mas_positionlevel3: true, header: { include: { profile: true } } }, orderBy: { date: 'desc' } },
             data_leave: { include: { mas_leave_type: true }, where: { Status: 2, AND: { id: search } } }
           },
           where: {
@@ -396,7 +396,9 @@ export const leaveResolvers: Resolvers = {
           include: {
             profile: true,
             Position_user: { include: { mas_positionlevel1: true, mas_positionlevel2: true, mas_positionlevel3: true, header: { include: { profile: true } } } },
-            data_leave: { include: { mas_leave_type: true } }
+            data_leave: {
+              include: { mas_leave_type: true }, 
+            }
           },
           where: {
             id: args.userId,
@@ -494,7 +496,7 @@ export const leaveResolvers: Resolvers = {
               include: { mas_positionlevel1: true, mas_positionlevel2: true, mas_positionlevel3: true, header: { include: { profile: true } } },
               orderBy: { date: 'desc' },
             },
-            data_leave: { include: { mas_leave_type: true }}
+            data_leave: { include: { mas_leave_type: true } }
           },
           where: {
             companyBranch: {
@@ -631,7 +633,7 @@ export const leaveResolvers: Resolvers = {
             detail_leave: args.data?.detail_leave as string,
             Status: args.data.Status as number,
             user_id: args.data?.user_id as string
-          
+
           },
           where: {
             id: args.data.id
