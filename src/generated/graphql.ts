@@ -1002,7 +1002,7 @@ export type ResponseCompany_Branch = {
   id: Scalars['ID'];
   lat?: Maybe<Scalars['String']>;
   lng?: Maybe<Scalars['String']>;
-  main_business_type?: Maybe<Array<Maybe<MainBusinessType>>>;
+  main_business_type?: Maybe<MainBusinessType>;
   name?: Maybe<Scalars['String']>;
   photo_link?: Maybe<Scalars['String']>;
   regis_vat?: Maybe<Scalars['String']>;
@@ -1013,7 +1013,7 @@ export type ResponseCompany_Branch = {
   social_likedin?: Maybe<Scalars['String']>;
   social_line?: Maybe<Scalars['String']>;
   state?: Maybe<Scalars['String']>;
-  sub_company_type?: Maybe<Array<Maybe<SubBusinessType>>>;
+  sub_company_type?: Maybe<SubBusinessType>;
   tel?: Maybe<Scalars['String']>;
   updatedAt?: Maybe<Scalars['Date']>;
   users?: Maybe<Array<Maybe<User>>>;
@@ -2534,7 +2534,7 @@ export type ResponseCompany_BranchResolvers<ContextType = ApolloContext, ParentT
   id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
   lat?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   lng?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
-  main_business_type?: Resolver<Maybe<Array<Maybe<ResolversTypes['MainBusinessType']>>>, ParentType, ContextType>;
+  main_business_type?: Resolver<Maybe<ResolversTypes['MainBusinessType']>, ParentType, ContextType>;
   name?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   photo_link?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   regis_vat?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
@@ -2545,7 +2545,7 @@ export type ResponseCompany_BranchResolvers<ContextType = ApolloContext, ParentT
   social_likedin?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   social_line?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   state?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
-  sub_company_type?: Resolver<Maybe<Array<Maybe<ResolversTypes['SubBusinessType']>>>, ParentType, ContextType>;
+  sub_company_type?: Resolver<Maybe<ResolversTypes['SubBusinessType']>, ParentType, ContextType>;
   tel?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   updatedAt?: Resolver<Maybe<ResolversTypes['Date']>, ParentType, ContextType>;
   users?: Resolver<Maybe<Array<Maybe<ResolversTypes['User']>>>, ParentType, ContextType>;

@@ -378,6 +378,7 @@ const resolvers: Resolvers = {
           userlimit: args.data.userlimit as number,
           ownerId: createUser.id,
           icon: args.data.company_icon ? args.data.company_icon : '',
+
         },
       });
 
@@ -394,6 +395,7 @@ const resolvers: Resolvers = {
           country: args.data.company_country,
           companyId: createCompany.id,
           tel: args.data.company_phone,
+          
         },
       });
 

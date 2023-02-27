@@ -182,8 +182,8 @@ type MeCompanyBranch {
     photo_link: String
     vat_link:  String
     certificate_link: String
-    main_business_type: [MainBusinessType]
-    sub_company_type: [SubBusinessType]
+    main_business_type: MainBusinessType
+    sub_company_type: SubBusinessType
   }
 
   type ResponseCompany {
@@ -260,7 +260,7 @@ const resolvers: Resolvers = {
         include: {
           _count: true,
           branch: {
-            include: { _count: true , main_business_type: true , sub_company_type: true },
+            include: { main_business_type: true , sub_company_type: true , _count:true  },
             where: { name: { contains: name_filter } },
           },
         },
