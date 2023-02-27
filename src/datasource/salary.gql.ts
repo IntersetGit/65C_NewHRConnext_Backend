@@ -478,7 +478,9 @@ export const salaryTypedef = gql`
     # datasalary_mee(years: String): data_salary_me
     # Selfdatasalary: selfsalary
     #Selfdatasalary: selfsalary
-    mas_all_collect: mas_all_collect
+    mas_all_collectuser: mas_all_collect
+    mas_all_collectadmin(userId: String): [mas_all_collect]
+
     mas_bank(id: String): [mas_bank]
     data_salary(fristname: String ,Position2: String ,Position3: String):[data_salary]
     expense_company(date:String):[expense_company]
@@ -630,8 +632,7 @@ const resolvers: Resolvers = {
       return data
     },
 
-    async mas_all_collect(parant: any, args: any, ctx: any) {
-      console.log(ctx.currentUser?.id);
+    async mas_all_collectuser(parant: any, args: any, ctx: any) {
       const result = await ctx.prisma.mas_all_collect.findMany({
         where: {
           userId: ctx.currentUser?.id,
@@ -640,6 +641,15 @@ const resolvers: Resolvers = {
       for (let i = 0; i < result.length; i++) {
         return result[i];
       }
+    },
+    async mas_all_collectadmin(parant: any, args: any, ctx: any) {
+      const result = await ctx.prisma.mas_all_collect.findMany({
+        where: {
+          userId: args.userId as string,
+        },
+      });
+        return result
+      
     },
 
     // async Selfdatasalary(parant, args, ctx) {
@@ -1916,7 +1926,8 @@ const resolversComposition = {
   'Query.expense_company': [authenticate()],
   'Query.salary': [authenticate()],
   'Query.bookbank_log': [authenticate()],
-  'Query.mas_all_collect': [authenticate()],
+  'Query.mas_all_collectuser': [authenticate()],
+  'Query.mas_all_collectadmin': [authenticate()],
   'Query.data_salary': [authenticate()],
   'Query.mydata_salary': [authenticate()],
   'Query.show_pervspUser': [authenticate()],

@@ -789,7 +789,8 @@ export type Query = {
   getownCompany?: Maybe<GetOwncompanytype>;
   getpositionMe?: Maybe<Array<Maybe<GetPositionUser>>>;
   getposition_user?: Maybe<Array<Maybe<GetPositionUser>>>;
-  mas_all_collect?: Maybe<Mas_All_Collect>;
+  mas_all_collectadmin?: Maybe<Array<Maybe<Mas_All_Collect>>>;
+  mas_all_collectuser?: Maybe<Mas_All_Collect>;
   mas_bank?: Maybe<Array<Maybe<Mas_Bank>>>;
   me?: Maybe<Me>;
   mydata_salary?: Maybe<Data_Salary>;
@@ -885,6 +886,11 @@ export type QueryGetleava_DatameArgs = {
 
 export type QueryGetposition_UserArgs = {
   id?: InputMaybe<Scalars['ID']>;
+};
+
+
+export type QueryMas_All_CollectadminArgs = {
+  userId?: InputMaybe<Scalars['String']>;
 };
 
 
@@ -2458,7 +2464,8 @@ export type QueryResolvers<ContextType = ApolloContext, ParentType extends Resol
   getownCompany?: Resolver<Maybe<ResolversTypes['GetOwncompanytype']>, ParentType, ContextType>;
   getpositionMe?: Resolver<Maybe<Array<Maybe<ResolversTypes['getPositionUser']>>>, ParentType, ContextType>;
   getposition_user?: Resolver<Maybe<Array<Maybe<ResolversTypes['getPositionUser']>>>, ParentType, ContextType, Partial<QueryGetposition_UserArgs>>;
-  mas_all_collect?: Resolver<Maybe<ResolversTypes['mas_all_collect']>, ParentType, ContextType>;
+  mas_all_collectadmin?: Resolver<Maybe<Array<Maybe<ResolversTypes['mas_all_collect']>>>, ParentType, ContextType, Partial<QueryMas_All_CollectadminArgs>>;
+  mas_all_collectuser?: Resolver<Maybe<ResolversTypes['mas_all_collect']>, ParentType, ContextType>;
   mas_bank?: Resolver<Maybe<Array<Maybe<ResolversTypes['mas_bank']>>>, ParentType, ContextType, Partial<QueryMas_BankArgs>>;
   me?: Resolver<Maybe<ResolversTypes['Me']>, ParentType, ContextType>;
   mydata_salary?: Resolver<Maybe<ResolversTypes['data_salary']>, ParentType, ContextType, Partial<QueryMydata_SalaryArgs>>;
