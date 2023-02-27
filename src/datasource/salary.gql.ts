@@ -649,8 +649,8 @@ const resolvers: Resolvers = {
           userId: args.userId as string,
         },
       });
-        return result
-      
+      return result
+
     },
 
     // async Selfdatasalary(parant, args, ctx) {
@@ -1316,33 +1316,50 @@ const resolvers: Resolvers = {
       let Acp_month = dayjs(date).month()
       let find_year = dayjs(date).format("YYYY")
       let find_month = dayjs(date).format("MM")
+      let Result = dayjs(date).format('YYYY-MM')
+      console.log(Result);
+      let unix_date_upt = dayjs(new Date(Result)).unix()
+      console.log(unix_date_upt);
+
+
+      // let b = dayjs(New_date).set('D', 1).set('h', 0).set('m', 0).set('s', 0).set('ms', 0)
+      // let _date = new Date(b)
       // const providentID = v4()
       if (args.data?.id) {
         // เช็คถ้าหาก วันที่จ่ายเงินมากกว่าวันที่ที่จะอัปเดท ไม่สามารถแก้ไข bookbank log ของเดือนนั้นได้ให้ทำการ Throw Error 
         let unix_acp_bb = 0
-        const chk_acp_bb = await ctx.prisma.bookbank_log.findUnique({
+        const chk_acp_bb = await ctx.prisma.bookbank_log.findMany({
           where: {
-            id: args.data.id
+            id: args.data.id,
+            AND: {
+              unix: { lte: dayjs(new Date()).unix() }
+            }
           }
         })
-        unix_acp_bb = chk_acp_bb?.unix as number
+        chk_acp_bb.forEach((e) => {
+          unix_acp_bb = e.unix as number
+        })
+        console.log('วันที่มีผล =', unix_acp_bb);
+
 
         const chk_payday = await ctx.prisma.expense_company.findMany({
           take: 1,
           where: {
             companyBranchId: ctx.currentUser?.branchId,
             AND: {
-              unix: { lte: dayjs(new Date()).unix() }
+              unix: { gte: dayjs(new Date()).unix() }
             }
           }, orderBy: {
-            date: 'desc'
+            cal_date_salary: 'asc'
           }
         })
         // console.log(chk_payday);
         chk_payday.forEach((e) => {
           let unix_cal_date = e.unix as number
+          console.log('วันที่จ่ายเงิน =', unix_cal_date);
           let result = unix_cal_date - unix_acp_bb
-          if (result >= 0) {
+          console.log(result);
+          if (result <= 0) {
             throw new Error("ไม่สามารถอัปเดทข้อมูลได้เนื่องจากเลยวันจ่ายเงินเดือนแล้ว ");
           }
 
@@ -1356,10 +1373,10 @@ const resolvers: Resolvers = {
             all_collectId: args.data?.all_collectId,
             base_salary: args.data?.base_salary as number,
             userId: args.data?.userId,
-            accept_date: new Date(args.data?.date),
+            accept_date: new Date(Result),
             accept_month: Acp_month + 1,
             accept_years: Acp_year,
-            unix: dayjs(date).unix(),
+            unix: unix_date_upt,
             provident_com: args.data?.provident_com as number, // กองทุนของพนักงาน ตัวเลขเป็น %
             provident_emp: args.data?.provident_emp as number, // กองทุนของบริษัท ตัวเลขเป็น %
           },
@@ -1487,8 +1504,8 @@ const resolvers: Resolvers = {
                 take: 1,
                 where: {
                   unix_date: { lte: dayjs(new Date()).unix() },
-                  AND:{
-                    companyBranchId : ctx.currentUser?.branchId
+                  AND: {
+                    companyBranchId: ctx.currentUser?.branchId
                   }
                 }
               })
@@ -1722,7 +1739,10 @@ const resolvers: Resolvers = {
       let date = args.data?.date
       let ThisYear = dayjs(date).format("YYYY")
       let Thismonth = dayjs(date).format("MM")
-
+      let Result = dayjs(date).format('YYYY-MM')
+      console.log(Result);
+      let unix_date_upt = dayjs(new Date(Result)).unix()
+      console.log(unix_date_upt);
       let unix_date = dayjs(args.data?.date).unix()
       let unix = dayjs(args.data?.cal_date_salary).unix()
       const take_arr = args.data?.check_vat ? args.data?.check_vat : []
@@ -1731,7 +1751,7 @@ const resolvers: Resolvers = {
         const updateExpenseCom = await ctx.prisma.expense_company.update({
           data: {
             bankId: args.data?.bankId as string,
-            date: new Date(args.data?.date),
+            date: new Date(Result),
             vat_per: args.data?.vat_per as number,
             ss_per: args.data?.ss_per as number,
             exp_com_month: Thismonth,
@@ -1739,7 +1759,7 @@ const resolvers: Resolvers = {
             check_vat: take_arr as string[],
             cal_date_salary: args.data?.cal_date_salary,
             unix: unix,
-            unix_date: unix_date,
+            unix_date: unix_date_upt,
             companyBranchId: args.data?.companyBranchId,
           },
           where: { id: args.data.id },
