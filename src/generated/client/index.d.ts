@@ -363,6 +363,7 @@ export type expense_company = {
   exp_com_years: string | null
   cal_date_salary: Date | null
   unix: number | null
+  unix_date: number | null
   companyBranchId: string | null
 }
 
@@ -25162,12 +25163,14 @@ export namespace Prisma {
     vat_per: number | null
     ss_per: number | null
     unix: number | null
+    unix_date: number | null
   }
 
   export type Expense_companySumAggregateOutputType = {
     vat_per: number | null
     ss_per: number | null
     unix: number | null
+    unix_date: number | null
   }
 
   export type Expense_companyMinAggregateOutputType = {
@@ -25181,6 +25184,7 @@ export namespace Prisma {
     exp_com_years: string | null
     cal_date_salary: Date | null
     unix: number | null
+    unix_date: number | null
     companyBranchId: string | null
   }
 
@@ -25195,6 +25199,7 @@ export namespace Prisma {
     exp_com_years: string | null
     cal_date_salary: Date | null
     unix: number | null
+    unix_date: number | null
     companyBranchId: string | null
   }
 
@@ -25210,6 +25215,7 @@ export namespace Prisma {
     exp_com_years: number
     cal_date_salary: number
     unix: number
+    unix_date: number
     companyBranchId: number
     _all: number
   }
@@ -25219,12 +25225,14 @@ export namespace Prisma {
     vat_per?: true
     ss_per?: true
     unix?: true
+    unix_date?: true
   }
 
   export type Expense_companySumAggregateInputType = {
     vat_per?: true
     ss_per?: true
     unix?: true
+    unix_date?: true
   }
 
   export type Expense_companyMinAggregateInputType = {
@@ -25238,6 +25246,7 @@ export namespace Prisma {
     exp_com_years?: true
     cal_date_salary?: true
     unix?: true
+    unix_date?: true
     companyBranchId?: true
   }
 
@@ -25252,6 +25261,7 @@ export namespace Prisma {
     exp_com_years?: true
     cal_date_salary?: true
     unix?: true
+    unix_date?: true
     companyBranchId?: true
   }
 
@@ -25267,6 +25277,7 @@ export namespace Prisma {
     exp_com_years?: true
     cal_date_salary?: true
     unix?: true
+    unix_date?: true
     companyBranchId?: true
     _all?: true
   }
@@ -25370,6 +25381,7 @@ export namespace Prisma {
     exp_com_years: string | null
     cal_date_salary: Date | null
     unix: number | null
+    unix_date: number | null
     companyBranchId: string | null
     _count: Expense_companyCountAggregateOutputType | null
     _avg: Expense_companyAvgAggregateOutputType | null
@@ -25404,6 +25416,7 @@ export namespace Prisma {
     exp_com_years?: boolean
     cal_date_salary?: boolean
     unix?: boolean
+    unix_date?: boolean
     companyBranchId?: boolean
     salary?: boolean | expense_company$salaryArgs
     Mas_month?: boolean | mas_monthArgs
@@ -35744,6 +35757,7 @@ export namespace Prisma {
     exp_com_years: 'exp_com_years',
     cal_date_salary: 'cal_date_salary',
     unix: 'unix',
+    unix_date: 'unix_date',
     companyBranchId: 'companyBranchId'
   };
 
@@ -37592,6 +37606,7 @@ export namespace Prisma {
     exp_com_years?: StringNullableFilter | string | null
     cal_date_salary?: DateTimeNullableFilter | Date | string | null
     unix?: IntNullableFilter | number | null
+    unix_date?: IntNullableFilter | number | null
     companyBranchId?: UuidNullableFilter | string | null
     salary?: SalaryListRelationFilter
     Mas_month?: XOR<Mas_monthRelationFilter, mas_monthWhereInput> | null
@@ -37611,6 +37626,7 @@ export namespace Prisma {
     exp_com_years?: SortOrder
     cal_date_salary?: SortOrder
     unix?: SortOrder
+    unix_date?: SortOrder
     companyBranchId?: SortOrder
     salary?: salaryOrderByRelationAggregateInput
     Mas_month?: mas_monthOrderByWithRelationInput
@@ -37634,6 +37650,7 @@ export namespace Prisma {
     exp_com_years?: SortOrder
     cal_date_salary?: SortOrder
     unix?: SortOrder
+    unix_date?: SortOrder
     companyBranchId?: SortOrder
     _count?: expense_companyCountOrderByAggregateInput
     _avg?: expense_companyAvgOrderByAggregateInput
@@ -37657,6 +37674,7 @@ export namespace Prisma {
     exp_com_years?: StringNullableWithAggregatesFilter | string | null
     cal_date_salary?: DateTimeNullableWithAggregatesFilter | Date | string | null
     unix?: IntNullableWithAggregatesFilter | number | null
+    unix_date?: IntNullableWithAggregatesFilter | number | null
     companyBranchId?: UuidNullableWithAggregatesFilter | string | null
   }
 
@@ -40192,6 +40210,7 @@ export namespace Prisma {
     exp_com_years?: string | null
     cal_date_salary?: Date | string | null
     unix?: number | null
+    unix_date?: number | null
     salary?: salaryCreateNestedManyWithoutExpense_companyInput
     Mas_month?: mas_monthCreateNestedOneWithoutExpense_companyInput
     mas_bank?: mas_bankCreateNestedOneWithoutExpense_companyInput
@@ -40210,6 +40229,7 @@ export namespace Prisma {
     exp_com_years?: string | null
     cal_date_salary?: Date | string | null
     unix?: number | null
+    unix_date?: number | null
     companyBranchId?: string | null
     salary?: salaryUncheckedCreateNestedManyWithoutExpense_companyInput
   }
@@ -40224,6 +40244,7 @@ export namespace Prisma {
     exp_com_years?: NullableStringFieldUpdateOperationsInput | string | null
     cal_date_salary?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     unix?: NullableIntFieldUpdateOperationsInput | number | null
+    unix_date?: NullableIntFieldUpdateOperationsInput | number | null
     salary?: salaryUpdateManyWithoutExpense_companyNestedInput
     Mas_month?: mas_monthUpdateOneWithoutExpense_companyNestedInput
     mas_bank?: mas_bankUpdateOneWithoutExpense_companyNestedInput
@@ -40242,6 +40263,7 @@ export namespace Prisma {
     exp_com_years?: NullableStringFieldUpdateOperationsInput | string | null
     cal_date_salary?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     unix?: NullableIntFieldUpdateOperationsInput | number | null
+    unix_date?: NullableIntFieldUpdateOperationsInput | number | null
     companyBranchId?: NullableStringFieldUpdateOperationsInput | string | null
     salary?: salaryUncheckedUpdateManyWithoutExpense_companyNestedInput
   }
@@ -40258,6 +40280,7 @@ export namespace Prisma {
     exp_com_years?: string | null
     cal_date_salary?: Date | string | null
     unix?: number | null
+    unix_date?: number | null
     companyBranchId?: string | null
   }
 
@@ -40271,6 +40294,7 @@ export namespace Prisma {
     exp_com_years?: NullableStringFieldUpdateOperationsInput | string | null
     cal_date_salary?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     unix?: NullableIntFieldUpdateOperationsInput | number | null
+    unix_date?: NullableIntFieldUpdateOperationsInput | number | null
   }
 
   export type expense_companyUncheckedUpdateManyInput = {
@@ -40285,6 +40309,7 @@ export namespace Prisma {
     exp_com_years?: NullableStringFieldUpdateOperationsInput | string | null
     cal_date_salary?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     unix?: NullableIntFieldUpdateOperationsInput | number | null
+    unix_date?: NullableIntFieldUpdateOperationsInput | number | null
     companyBranchId?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
@@ -42572,6 +42597,7 @@ export namespace Prisma {
     exp_com_years?: SortOrder
     cal_date_salary?: SortOrder
     unix?: SortOrder
+    unix_date?: SortOrder
     companyBranchId?: SortOrder
   }
 
@@ -42579,6 +42605,7 @@ export namespace Prisma {
     vat_per?: SortOrder
     ss_per?: SortOrder
     unix?: SortOrder
+    unix_date?: SortOrder
   }
 
   export type expense_companyMaxOrderByAggregateInput = {
@@ -42592,6 +42619,7 @@ export namespace Prisma {
     exp_com_years?: SortOrder
     cal_date_salary?: SortOrder
     unix?: SortOrder
+    unix_date?: SortOrder
     companyBranchId?: SortOrder
   }
 
@@ -42606,6 +42634,7 @@ export namespace Prisma {
     exp_com_years?: SortOrder
     cal_date_salary?: SortOrder
     unix?: SortOrder
+    unix_date?: SortOrder
     companyBranchId?: SortOrder
   }
 
@@ -42613,6 +42642,7 @@ export namespace Prisma {
     vat_per?: SortOrder
     ss_per?: SortOrder
     unix?: SortOrder
+    unix_date?: SortOrder
   }
 
   export type FloatNullableWithAggregatesFilter = {
@@ -46911,6 +46941,7 @@ export namespace Prisma {
     exp_com_years?: string | null
     cal_date_salary?: Date | string | null
     unix?: number | null
+    unix_date?: number | null
     salary?: salaryCreateNestedManyWithoutExpense_companyInput
     Mas_month?: mas_monthCreateNestedOneWithoutExpense_companyInput
     mas_bank?: mas_bankCreateNestedOneWithoutExpense_companyInput
@@ -46928,6 +46959,7 @@ export namespace Prisma {
     exp_com_years?: string | null
     cal_date_salary?: Date | string | null
     unix?: number | null
+    unix_date?: number | null
     salary?: salaryUncheckedCreateNestedManyWithoutExpense_companyInput
   }
 
@@ -47090,6 +47122,7 @@ export namespace Prisma {
     exp_com_years?: StringNullableFilter | string | null
     cal_date_salary?: DateTimeNullableFilter | Date | string | null
     unix?: IntNullableFilter | number | null
+    unix_date?: IntNullableFilter | number | null
     companyBranchId?: UuidNullableFilter | string | null
   }
 
@@ -50603,6 +50636,7 @@ export namespace Prisma {
     exp_com_years?: string | null
     cal_date_salary?: Date | string | null
     unix?: number | null
+    unix_date?: number | null
     salary?: salaryCreateNestedManyWithoutExpense_companyInput
     Mas_month?: mas_monthCreateNestedOneWithoutExpense_companyInput
     CompanyBranch?: CompanyBranchCreateNestedOneWithoutExpense_companyInput
@@ -50619,6 +50653,7 @@ export namespace Prisma {
     exp_com_years?: string | null
     cal_date_salary?: Date | string | null
     unix?: number | null
+    unix_date?: number | null
     companyBranchId?: string | null
     salary?: salaryUncheckedCreateNestedManyWithoutExpense_companyInput
   }
@@ -50835,6 +50870,7 @@ export namespace Prisma {
     exp_com_years?: string | null
     cal_date_salary?: Date | string | null
     unix?: number | null
+    unix_date?: number | null
     salary?: salaryCreateNestedManyWithoutExpense_companyInput
     mas_bank?: mas_bankCreateNestedOneWithoutExpense_companyInput
     CompanyBranch?: CompanyBranchCreateNestedOneWithoutExpense_companyInput
@@ -50851,6 +50887,7 @@ export namespace Prisma {
     exp_com_years?: string | null
     cal_date_salary?: Date | string | null
     unix?: number | null
+    unix_date?: number | null
     companyBranchId?: string | null
     salary?: salaryUncheckedCreateNestedManyWithoutExpense_companyInput
   }
@@ -51783,6 +51820,7 @@ export namespace Prisma {
     exp_com_years?: string | null
     cal_date_salary?: Date | string | null
     unix?: number | null
+    unix_date?: number | null
     Mas_month?: mas_monthCreateNestedOneWithoutExpense_companyInput
     mas_bank?: mas_bankCreateNestedOneWithoutExpense_companyInput
     CompanyBranch?: CompanyBranchCreateNestedOneWithoutExpense_companyInput
@@ -51800,6 +51838,7 @@ export namespace Prisma {
     exp_com_years?: string | null
     cal_date_salary?: Date | string | null
     unix?: number | null
+    unix_date?: number | null
     companyBranchId?: string | null
   }
 
@@ -51999,6 +52038,7 @@ export namespace Prisma {
     exp_com_years?: NullableStringFieldUpdateOperationsInput | string | null
     cal_date_salary?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     unix?: NullableIntFieldUpdateOperationsInput | number | null
+    unix_date?: NullableIntFieldUpdateOperationsInput | number | null
     Mas_month?: mas_monthUpdateOneWithoutExpense_companyNestedInput
     mas_bank?: mas_bankUpdateOneWithoutExpense_companyNestedInput
     CompanyBranch?: CompanyBranchUpdateOneWithoutExpense_companyNestedInput
@@ -52016,6 +52056,7 @@ export namespace Prisma {
     exp_com_years?: NullableStringFieldUpdateOperationsInput | string | null
     cal_date_salary?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     unix?: NullableIntFieldUpdateOperationsInput | number | null
+    unix_date?: NullableIntFieldUpdateOperationsInput | number | null
     companyBranchId?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
@@ -53776,6 +53817,7 @@ export namespace Prisma {
     exp_com_years?: string | null
     cal_date_salary?: Date | string | null
     unix?: number | null
+    unix_date?: number | null
   }
 
   export type UserUpdateWithoutCompanyBranchInput = {
@@ -53870,6 +53912,7 @@ export namespace Prisma {
     exp_com_years?: NullableStringFieldUpdateOperationsInput | string | null
     cal_date_salary?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     unix?: NullableIntFieldUpdateOperationsInput | number | null
+    unix_date?: NullableIntFieldUpdateOperationsInput | number | null
     salary?: salaryUpdateManyWithoutExpense_companyNestedInput
     Mas_month?: mas_monthUpdateOneWithoutExpense_companyNestedInput
     mas_bank?: mas_bankUpdateOneWithoutExpense_companyNestedInput
@@ -53887,6 +53930,7 @@ export namespace Prisma {
     exp_com_years?: NullableStringFieldUpdateOperationsInput | string | null
     cal_date_salary?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     unix?: NullableIntFieldUpdateOperationsInput | number | null
+    unix_date?: NullableIntFieldUpdateOperationsInput | number | null
     salary?: salaryUncheckedUpdateManyWithoutExpense_companyNestedInput
   }
 
@@ -53902,6 +53946,7 @@ export namespace Prisma {
     exp_com_years?: NullableStringFieldUpdateOperationsInput | string | null
     cal_date_salary?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     unix?: NullableIntFieldUpdateOperationsInput | number | null
+    unix_date?: NullableIntFieldUpdateOperationsInput | number | null
   }
 
   export type CompanyCreateManyOwnerInput = {
@@ -55337,6 +55382,7 @@ export namespace Prisma {
     exp_com_years?: string | null
     cal_date_salary?: Date | string | null
     unix?: number | null
+    unix_date?: number | null
     companyBranchId?: string | null
   }
 
@@ -55409,6 +55455,7 @@ export namespace Prisma {
     exp_com_years?: NullableStringFieldUpdateOperationsInput | string | null
     cal_date_salary?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     unix?: NullableIntFieldUpdateOperationsInput | number | null
+    unix_date?: NullableIntFieldUpdateOperationsInput | number | null
     salary?: salaryUpdateManyWithoutExpense_companyNestedInput
     Mas_month?: mas_monthUpdateOneWithoutExpense_companyNestedInput
     CompanyBranch?: CompanyBranchUpdateOneWithoutExpense_companyNestedInput
@@ -55425,6 +55472,7 @@ export namespace Prisma {
     exp_com_years?: NullableStringFieldUpdateOperationsInput | string | null
     cal_date_salary?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     unix?: NullableIntFieldUpdateOperationsInput | number | null
+    unix_date?: NullableIntFieldUpdateOperationsInput | number | null
     companyBranchId?: NullableStringFieldUpdateOperationsInput | string | null
     salary?: salaryUncheckedUpdateManyWithoutExpense_companyNestedInput
   }
@@ -55564,6 +55612,7 @@ export namespace Prisma {
     exp_com_years?: string | null
     cal_date_salary?: Date | string | null
     unix?: number | null
+    unix_date?: number | null
     companyBranchId?: string | null
   }
 
@@ -55577,6 +55626,7 @@ export namespace Prisma {
     exp_com_years?: NullableStringFieldUpdateOperationsInput | string | null
     cal_date_salary?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     unix?: NullableIntFieldUpdateOperationsInput | number | null
+    unix_date?: NullableIntFieldUpdateOperationsInput | number | null
     salary?: salaryUpdateManyWithoutExpense_companyNestedInput
     mas_bank?: mas_bankUpdateOneWithoutExpense_companyNestedInput
     CompanyBranch?: CompanyBranchUpdateOneWithoutExpense_companyNestedInput
@@ -55593,6 +55643,7 @@ export namespace Prisma {
     exp_com_years?: NullableStringFieldUpdateOperationsInput | string | null
     cal_date_salary?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     unix?: NullableIntFieldUpdateOperationsInput | number | null
+    unix_date?: NullableIntFieldUpdateOperationsInput | number | null
     companyBranchId?: NullableStringFieldUpdateOperationsInput | string | null
     salary?: salaryUncheckedUpdateManyWithoutExpense_companyNestedInput
   }
