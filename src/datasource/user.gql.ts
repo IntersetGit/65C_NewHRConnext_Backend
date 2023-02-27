@@ -129,7 +129,7 @@ export const userTypedef = gql`
     company_country: String!
     company_phone: String!
     company_icon: String
-    BusinesstypeId: String
+    main_business_id: String
   }
 
   input CreateAccountUserInput {
@@ -182,7 +182,7 @@ export const userTypedef = gql`
     social_likedin: String
     social_line: String
     social_telegram: String
-    BusinesstypeId: String
+    main_business_id: String
   }
 
   type CreateCompanyResponseType {
@@ -395,7 +395,7 @@ const resolvers: Resolvers = {
           country: args.data.company_country,
           companyId: createCompany.id,
           tel: args.data.company_phone,
-          BusinesstypeId: args.data.BusinesstypeId as string
+          main_business_id: args.data.main_business_id as string
         },
       });
 

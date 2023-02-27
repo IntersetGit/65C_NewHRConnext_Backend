@@ -94,7 +94,6 @@ export type CompanyBranch = {
   lng?: Maybe<Scalars['String']>;
   main_business_id?: Maybe<Scalars['String']>;
   main_business_type?: Maybe<MainBusinessType>;
-  main_company_type?: Maybe<Scalars['String']>;
   name?: Maybe<Scalars['String']>;
   photo_link?: Maybe<Scalars['String']>;
   regis_vat?: Maybe<Scalars['String']>;
@@ -127,7 +126,6 @@ export type CountInsideBranch = {
 };
 
 export type CreateAccountInput = {
-  BusinesstypeId?: InputMaybe<Scalars['String']>;
   avatar?: InputMaybe<Scalars['String']>;
   companyCode: Scalars['String'];
   company_address: Scalars['String'];
@@ -142,13 +140,13 @@ export type CreateAccountInput = {
   email: Scalars['String'];
   firstname: Scalars['String'];
   lastname: Scalars['String'];
+  main_business_id?: InputMaybe<Scalars['String']>;
   password: Scalars['String'];
   tel: Scalars['String'];
   userlimit?: InputMaybe<Scalars['Int']>;
 };
 
 export type CreateAccountUserInput = {
-  BusinesstypeId?: InputMaybe<Scalars['String']>;
   address?: InputMaybe<Scalars['String']>;
   age?: InputMaybe<Scalars['String']>;
   avatar?: InputMaybe<Scalars['String']>;
@@ -181,6 +179,7 @@ export type CreateAccountUserInput = {
   id?: InputMaybe<Scalars['ID']>;
   lastname_en?: InputMaybe<Scalars['String']>;
   lastname_th?: InputMaybe<Scalars['String']>;
+  main_business_id?: InputMaybe<Scalars['String']>;
   nickname?: InputMaybe<Scalars['String']>;
   password?: InputMaybe<Scalars['String']>;
   prefix_en?: InputMaybe<Scalars['String']>;
@@ -1005,7 +1004,6 @@ export type ResponseCompany_Branch = {
   lat?: Maybe<Scalars['String']>;
   lng?: Maybe<Scalars['String']>;
   main_business_type?: Maybe<Array<Maybe<MainBusinessType>>>;
-  main_company_type?: Maybe<Scalars['String']>;
   name?: Maybe<Scalars['String']>;
   photo_link?: Maybe<Scalars['String']>;
   regis_vat?: Maybe<Scalars['String']>;
@@ -2076,7 +2074,6 @@ export type CompanyBranchResolvers<ContextType = ApolloContext, ParentType exten
   lng?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   main_business_id?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   main_business_type?: Resolver<Maybe<ResolversTypes['MainBusinessType']>, ParentType, ContextType>;
-  main_company_type?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   name?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   photo_link?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   regis_vat?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
@@ -2539,7 +2536,6 @@ export type ResponseCompany_BranchResolvers<ContextType = ApolloContext, ParentT
   lat?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   lng?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   main_business_type?: Resolver<Maybe<Array<Maybe<ResolversTypes['MainBusinessType']>>>, ParentType, ContextType>;
-  main_company_type?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   name?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   photo_link?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   regis_vat?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;

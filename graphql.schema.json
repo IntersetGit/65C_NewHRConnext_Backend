@@ -787,18 +787,6 @@
             "deprecationReason": null
           },
           {
-            "name": "main_company_type",
-            "description": null,
-            "args": [],
-            "type": {
-              "kind": "SCALAR",
-              "name": "String",
-              "ofType": null
-            },
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
             "name": "name",
             "description": null,
             "args": [],
@@ -1089,18 +1077,6 @@
         "fields": null,
         "inputFields": [
           {
-            "name": "BusinesstypeId",
-            "description": null,
-            "type": {
-              "kind": "SCALAR",
-              "name": "String",
-              "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
             "name": "avatar",
             "description": null,
             "type": {
@@ -1317,6 +1293,18 @@
             "deprecationReason": null
           },
           {
+            "name": "main_business_id",
+            "description": null,
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
             "name": "password",
             "description": null,
             "type": {
@@ -1371,18 +1359,6 @@
         "description": null,
         "fields": null,
         "inputFields": [
-          {
-            "name": "BusinesstypeId",
-            "description": null,
-            "type": {
-              "kind": "SCALAR",
-              "name": "String",
-              "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
           {
             "name": "address",
             "description": null,
@@ -1757,6 +1733,18 @@
           },
           {
             "name": "lastname_th",
+            "description": null,
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "main_business_id",
             "description": null,
             "type": {
               "kind": "SCALAR",
@@ -7620,18 +7608,6 @@
                 "name": "MainBusinessType",
                 "ofType": null
               }
-            },
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "main_company_type",
-            "description": null,
-            "args": [],
-            "type": {
-              "kind": "SCALAR",
-              "name": "String",
-              "ofType": null
             },
             "isDeprecated": false,
             "deprecationReason": null

@@ -44,8 +44,6 @@ export const companyTypedef = gql`
     email: String
     email_2: String
     company_type: String
-    main_company_type: String
-    sub_company_type: String
     registeredamount: String
     social_facebook: String
     social_likedin: String
@@ -167,8 +165,6 @@ type MeCompanyBranch {
     email: String
     email_2: String
     company_type: String
-    main_company_type: String
-    sub_company_type: String
     registeredamount: String
     social_facebook: String
     social_likedin: String
