@@ -495,7 +495,7 @@ export const leaveResolvers: Resolvers = {
           },
           where: {
             companyBranch: {
-              companyId: ctx.currentUser?.compayId
+              id: ctx.currentUser?.branchId
             },
             AND: {
               profile: {
@@ -522,7 +522,7 @@ export const leaveResolvers: Resolvers = {
           },
           where: {
             companyBranch: {
-              companyId: ctx.currentUser?.compayId
+              id: ctx.currentUser?.branchId
             },
             AND: {
               data_leave: {
