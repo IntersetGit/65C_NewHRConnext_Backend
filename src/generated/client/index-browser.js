@@ -130,8 +130,7 @@ exports.Prisma.CompanyBranchScalarFieldEnum = makeEnum({
   email: 'email',
   email_2: 'email_2',
   company_type: 'company_type',
-  main_company_type: 'main_company_type',
-  sub_company_type: 'sub_company_type',
+  sub_company_typeId: 'sub_company_typeId',
   registeredamount: 'registeredamount',
   regis_vat: 'regis_vat',
   regiscomnumber: 'regiscomnumber',
@@ -142,7 +141,7 @@ exports.Prisma.CompanyBranchScalarFieldEnum = makeEnum({
   createdAt: 'createdAt',
   updatedAt: 'updatedAt',
   companyId: 'companyId',
-  BusinesstypeId: 'BusinesstypeId',
+  main_business_id: 'main_business_id',
   photo_link: 'photo_link',
   vat_link: 'vat_link',
   certificate_link: 'certificate_link'
@@ -170,7 +169,8 @@ exports.Prisma.Data_leaveScalarFieldEnum = makeEnum({
   quantity_hours: 'quantity_hours',
   detail_leave: 'detail_leave',
   Status: 'Status',
-  user_id: 'user_id'
+  user_id: 'user_id',
+  link_pdf: 'link_pdf'
 });
 
 exports.Prisma.DistrictScalarFieldEnum = makeEnum({

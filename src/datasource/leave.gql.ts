@@ -7,6 +7,7 @@ import { authenticate } from '../middleware/authenticatetoken';
 import { Resolvers } from '../generated/graphql';
 import gql from 'graphql-tag';
 import { v4 } from 'uuid';
+import { link } from 'fs';
 
 
 export const leaveTypedef = gql`
@@ -20,6 +21,7 @@ input leave{
  detail_leave: String 
  Status: Int                
  user_id: String
+ link_pdf: String
 }
 
 type getdataaboutleave{
@@ -55,7 +57,8 @@ type leave_data{
  detail_leave: String 
  Status: Int                
  user_id: String     
- user: User            
+ user: User  
+ link_pdf: String          
 }
 
 type mas_leave_type{
@@ -622,11 +625,13 @@ export const leaveResolvers: Resolvers = {
             leavetype_id: args.data?.leavetype_id as string,
             start_date: args.data?.start_date,
             end_date: args.data?.end_date,
+            link_pdf: args.data.link_pdf,
             quantity_day: args.data?.quantity_day as number,
             quantity_hours: args.data.quantity_hours as number,
             detail_leave: args.data?.detail_leave as string,
             Status: args.data.Status as number,
             user_id: args.data?.user_id as string
+          
           },
           where: {
             id: args.data.id
@@ -647,6 +652,7 @@ export const leaveResolvers: Resolvers = {
             quantity_hours: args.data?.quantity_hours as number,
             quantity_day: args.data?.quantity_day as number,
             detail_leave: args.data?.detail_leave as string,
+            link_pdf: args.data?.link_pdf,
             Status: 1,
             user_id: args.data?.user_id as string
           }

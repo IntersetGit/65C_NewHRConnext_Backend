@@ -59,8 +59,8 @@ model CompanyBranch {
   email             String?
   email_2           String?
   company_type      String?
-  main_company_type String?
-  sub_company_type  String?
+  sub_company_typeId  String?          @db.Uuid
+  sub_company_type  SubBusinessType? @relation(fields: [sub_company_typeId], references: [id])
   registeredamount  String?
   regis_vat         String?
   regiscomnumber    String?
@@ -75,8 +75,8 @@ model CompanyBranch {
   users             User[]
   Role_Company      Role_Company[]
   expense_company   expense_company[]
-  BusinesstypeId    String?           @db.Uuid
-  Businesstype      MainBusinessType? @relation(fields: [BusinesstypeId], references: [id])
+  main_business_id  String?           @db.Uuid
+  main_business_type MainBusinessType? @relation(fields: [main_business_id], references: [id])
   photo_link        String?
   vat_link          String?
   certificate_link  String?
@@ -488,6 +488,7 @@ model data_leave {
   Status         Int            @db.SmallInt
   user_id        String         @db.Uuid
   user           User           @relation(fields: [user_id], references: [id])
+  link_pdf       String?
 }
 
 //------------ เก็บ logabout positions -------------------------//
@@ -513,4 +514,5 @@ model SubBusinessType {
   name             String
   MainBId          String           @db.Uuid
   MainBusinessType MainBusinessType @relation(fields: [MainBId], references: [id])
+  CompanyBranch   CompanyBranch[]
 }

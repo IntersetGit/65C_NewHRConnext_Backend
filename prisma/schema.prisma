@@ -488,6 +488,7 @@ model data_leave {
   Status         Int            @db.SmallInt
   user_id        String         @db.Uuid
   user           User           @relation(fields: [user_id], references: [id])
+  link_pdf       String?
 }
 
 //------------ เก็บ logabout positions -------------------------//

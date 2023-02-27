@@ -75,5 +75,24 @@ routes.post('/pdfvatregistration', pdfVatUpload.single('vat'), (req, res) => {
   res.send(req.file);
 });
 
+//-------------------- pdf การลา ---------------------------------------//bin
+
+const PdfleaveVAT = multer.diskStorage({
+  destination: function (req, file, callback) {
+    callback(null, 'uploads/pdfleave');
+  },
+  filename: function (req, file, callback) {
+    const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1e9);
+    callback(null, 'leave' + '-' + uniqueSuffix + '.pdf');
+  },
+});
+
+const leaveUpload = multer({ storage: PdfleaveVAT });
+
+routes.post('/pdfleave', leaveUpload.single('vat'), (req, res) => {
+  res.send(req.file);
+});
+
+
 
 export default routes;

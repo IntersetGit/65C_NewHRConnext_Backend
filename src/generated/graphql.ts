@@ -92,6 +92,8 @@ export type CompanyBranch = {
   id: Scalars['ID'];
   lat?: Maybe<Scalars['String']>;
   lng?: Maybe<Scalars['String']>;
+  main_business_id?: Maybe<Scalars['String']>;
+  main_business_type?: Maybe<MainBusinessType>;
   main_company_type?: Maybe<Scalars['String']>;
   name?: Maybe<Scalars['String']>;
   photo_link?: Maybe<Scalars['String']>;
@@ -103,7 +105,8 @@ export type CompanyBranch = {
   social_likedin?: Maybe<Scalars['String']>;
   social_line?: Maybe<Scalars['String']>;
   state?: Maybe<Scalars['String']>;
-  sub_company_type?: Maybe<Scalars['String']>;
+  sub_company_type?: Maybe<SubBusinessType>;
+  sub_company_typeId?: Maybe<Scalars['String']>;
   tel?: Maybe<Scalars['String']>;
   updatedAt?: Maybe<Scalars['Date']>;
   users?: Maybe<Array<Maybe<User>>>;
@@ -1001,6 +1004,7 @@ export type ResponseCompany_Branch = {
   id: Scalars['ID'];
   lat?: Maybe<Scalars['String']>;
   lng?: Maybe<Scalars['String']>;
+  main_business_type?: Maybe<Array<Maybe<MainBusinessType>>>;
   main_company_type?: Maybe<Scalars['String']>;
   name?: Maybe<Scalars['String']>;
   photo_link?: Maybe<Scalars['String']>;
@@ -1012,7 +1016,7 @@ export type ResponseCompany_Branch = {
   social_likedin?: Maybe<Scalars['String']>;
   social_line?: Maybe<Scalars['String']>;
   state?: Maybe<Scalars['String']>;
-  sub_company_type?: Maybe<Scalars['String']>;
+  sub_company_type?: Maybe<Array<Maybe<SubBusinessType>>>;
   tel?: Maybe<Scalars['String']>;
   updatedAt?: Maybe<Scalars['Date']>;
   users?: Maybe<Array<Maybe<User>>>;
@@ -1052,6 +1056,8 @@ export type SalaryStatusResponseType = {
 
 export type SubBusinessType = {
   __typename?: 'SubBusinessType';
+  MainBId?: Maybe<Scalars['String']>;
+  MainBusinessType?: Maybe<MainBusinessType>;
   id: Scalars['ID'];
   name?: Maybe<Scalars['String']>;
 };
@@ -1146,7 +1152,7 @@ export type CreateCompanyBranch = {
   id?: InputMaybe<Scalars['ID']>;
   lat?: InputMaybe<Scalars['String']>;
   lng?: InputMaybe<Scalars['String']>;
-  main_company_type?: InputMaybe<Scalars['String']>;
+  main_business_id?: InputMaybe<Scalars['String']>;
   name?: InputMaybe<Scalars['String']>;
   photo_link?: InputMaybe<Scalars['String']>;
   regis_vat?: InputMaybe<Scalars['String']>;
@@ -1157,7 +1163,7 @@ export type CreateCompanyBranch = {
   social_likedin?: InputMaybe<Scalars['String']>;
   social_line?: InputMaybe<Scalars['String']>;
   state?: InputMaybe<Scalars['String']>;
-  sub_company_type?: InputMaybe<Scalars['String']>;
+  sub_company_typeId?: InputMaybe<Scalars['String']>;
   tel?: InputMaybe<Scalars['String']>;
   updatedAt?: InputMaybe<Scalars['Date']>;
   vat_link?: InputMaybe<Scalars['String']>;
@@ -1358,6 +1364,7 @@ export type Leave = {
   end_date?: InputMaybe<Scalars['Date']>;
   id?: InputMaybe<Scalars['String']>;
   leavetype_id?: InputMaybe<Scalars['String']>;
+  link_pdf?: InputMaybe<Scalars['String']>;
   quantity_day?: InputMaybe<Scalars['Int']>;
   quantity_hours?: InputMaybe<Scalars['Int']>;
   start_date?: InputMaybe<Scalars['Date']>;
@@ -1371,6 +1378,7 @@ export type Leave_Data = {
   end_date?: Maybe<Scalars['Date']>;
   id?: Maybe<Scalars['ID']>;
   leavetype_id?: Maybe<Scalars['String']>;
+  link_pdf?: Maybe<Scalars['String']>;
   mas_leave_type?: Maybe<Mas_Leave_Type>;
   quantity_day?: Maybe<Scalars['Int']>;
   quantity_hours?: Maybe<Scalars['Int']>;
@@ -2066,6 +2074,8 @@ export type CompanyBranchResolvers<ContextType = ApolloContext, ParentType exten
   id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
   lat?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   lng?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  main_business_id?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  main_business_type?: Resolver<Maybe<ResolversTypes['MainBusinessType']>, ParentType, ContextType>;
   main_company_type?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   name?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   photo_link?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
@@ -2077,7 +2087,8 @@ export type CompanyBranchResolvers<ContextType = ApolloContext, ParentType exten
   social_likedin?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   social_line?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   state?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
-  sub_company_type?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  sub_company_type?: Resolver<Maybe<ResolversTypes['SubBusinessType']>, ParentType, ContextType>;
+  sub_company_typeId?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   tel?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   updatedAt?: Resolver<Maybe<ResolversTypes['Date']>, ParentType, ContextType>;
   users?: Resolver<Maybe<Array<Maybe<ResolversTypes['User']>>>, ParentType, ContextType>;
@@ -2527,6 +2538,7 @@ export type ResponseCompany_BranchResolvers<ContextType = ApolloContext, ParentT
   id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
   lat?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   lng?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  main_business_type?: Resolver<Maybe<Array<Maybe<ResolversTypes['MainBusinessType']>>>, ParentType, ContextType>;
   main_company_type?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   name?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   photo_link?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
@@ -2538,7 +2550,7 @@ export type ResponseCompany_BranchResolvers<ContextType = ApolloContext, ParentT
   social_likedin?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   social_line?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   state?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
-  sub_company_type?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  sub_company_type?: Resolver<Maybe<Array<Maybe<ResolversTypes['SubBusinessType']>>>, ParentType, ContextType>;
   tel?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   updatedAt?: Resolver<Maybe<ResolversTypes['Date']>, ParentType, ContextType>;
   users?: Resolver<Maybe<Array<Maybe<ResolversTypes['User']>>>, ParentType, ContextType>;
@@ -2578,6 +2590,8 @@ export type SalaryStatusResponseTypeResolvers<ContextType = ApolloContext, Paren
 }>;
 
 export type SubBusinessTypeResolvers<ContextType = ApolloContext, ParentType extends ResolversParentTypes['SubBusinessType'] = ResolversParentTypes['SubBusinessType']> = ResolversObject<{
+  MainBId?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  MainBusinessType?: Resolver<Maybe<ResolversTypes['MainBusinessType']>, ParentType, ContextType>;
   id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
   name?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
@@ -2817,6 +2831,7 @@ export type Leave_DataResolvers<ContextType = ApolloContext, ParentType extends 
   end_date?: Resolver<Maybe<ResolversTypes['Date']>, ParentType, ContextType>;
   id?: Resolver<Maybe<ResolversTypes['ID']>, ParentType, ContextType>;
   leavetype_id?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  link_pdf?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   mas_leave_type?: Resolver<Maybe<ResolversTypes['mas_leave_type']>, ParentType, ContextType>;
   quantity_day?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
   quantity_hours?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;

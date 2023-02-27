@@ -1,3 +1,4 @@
+import { includes } from 'lodash';
 import { composeResolvers } from '@graphql-tools/resolvers-composition';
 import gql from 'graphql-tag';
 import { Resolvers } from 'src/generated/graphql';
@@ -62,8 +63,10 @@ export const companyTypedef = gql`
     photo_link: String
     vat_link:  String
     certificate_link: String
-    main_business_type: []
-    sub_company_type: []
+    main_business_id: String
+    sub_company_typeId: String
+    main_business_type: MainBusinessType
+    sub_company_type: SubBusinessType
   }
 
   input createCompanyBranch {
@@ -101,7 +104,7 @@ export const companyTypedef = gql`
   }
 
   type MainBusinessType {
-  id: String          
+  id: ID          
   name: String
   SubBusinessType: [SubBusinessType]
 }
@@ -109,10 +112,32 @@ export const companyTypedef = gql`
 
 
 type SubBusinessType {
-  id: String          
+  id: ID          
   name: String
-  MainBId: String         
+  MainBId: String   
+  MainBusinessType: MainBusinessType      
 }
+
+type MeCompanyBranch {
+    id: ID!
+    name: String
+    address: String
+    city: String
+    state: String
+    zip: String
+    country: String
+    createdAt: Date
+    updatedAt: Date
+    company: MecompanyType
+    companyId: String
+  }
+
+  type MecompanyType {
+    id: ID!
+    name: String
+    companyCode: String
+    icon: String
+  }
 
 
 
@@ -161,6 +186,8 @@ type SubBusinessType {
     photo_link: String
     vat_link:  String
     certificate_link: String
+    main_business_type: [MainBusinessType]
+    sub_company_type: [SubBusinessType]
   }
 
   type ResponseCompany {
@@ -180,26 +207,7 @@ type SubBusinessType {
     _count: CountBranch
   }
 
-  type MeCompanyBranch {
-    id: ID!
-    name: String
-    address: String
-    city: String
-    state: String
-    zip: String
-    country: String
-    createdAt: Date
-    updatedAt: Date
-    company: MecompanyType
-    companyId: String
-  }
-
-  type MecompanyType {
-    id: ID!
-    name: String
-    companyCode: String
-    icon: String
-  }
+  
 
   type GetCompanyAccessType {
     name: String
@@ -256,7 +264,7 @@ const resolvers: Resolvers = {
         include: {
           _count: true,
           branch: {
-            include: { _count: true },
+            include: { _count: true , main_business_type: true , sub_company_type: true },
             where: { name: { contains: name_filter } },
           },
         },
@@ -310,7 +318,11 @@ const resolvers: Resolvers = {
     async getAllcompany(p, args, ctx) {
       const search = args.name ? args.name : undefined
       const rolesCompanyget = await ctx.prisma.companyBranch.findMany({
-        include: { company: true },
+       include:{
+        main_business_type: true,
+        sub_company_type: true,
+        company: true
+       },
         where: {
           companyId: ctx.currentUser?.compayId,
           AND: {
@@ -347,8 +359,8 @@ const resolvers: Resolvers = {
             email: args.data?.email,
             email_2: args.data?.email_2,
             company_type: 'สาขา',
-            main_company_type: args.data?.main_company_type,
-            sub_company_type: args.data?.sub_company_type,
+            sub_company_typeId: args.data?.sub_company_typeId,
+            main_business_id: args.data.main_business_id,
             registeredamount: args.data?.registeredamount,
             social_facebook: args.data?.social_facebook,
             social_likedin: args.data?.social_likedin,
@@ -359,7 +371,7 @@ const resolvers: Resolvers = {
             regis_vat: args.data?.regis_vat,
             regiscomnumber: args.data.regiscomnumber,
             photo_link: args.data.photo_link,
-            vat_link:  args.data.vat_link, 
+            vat_link: args.data.vat_link,
             certificate_link: args.data.certificate_link
           },
           where: {
@@ -389,8 +401,8 @@ const resolvers: Resolvers = {
             email: args.data?.email,
             email_2: args.data?.email_2,
             company_type: 'สาขา',
-            main_company_type: args.data?.main_company_type,
-            sub_company_type: args.data?.sub_company_type,
+            sub_company_typeId: args.data?.sub_company_typeId,
+            main_business_id: args.data.main_business_id,
             registeredamount: args.data?.registeredamount,
             social_facebook: args.data?.social_facebook,
             social_likedin: args.data?.social_likedin,
@@ -401,7 +413,7 @@ const resolvers: Resolvers = {
             regis_vat: args.data?.regis_vat,
             regiscomnumber: args.data.regiscomnumber,
             photo_link: args.data.photo_link,
-            vat_link:  args.data.vat_link, 
+            vat_link: args.data.vat_link,
             certificate_link: args.data.certificate_link
           },
         });
@@ -420,7 +432,7 @@ const resolvers: Resolvers = {
           companyBranchId: args.id
         }
       })
-    
+
       finddata.forEach(async (a) => {
         const deleteprovident = await ctx.prisma.provident_log.deleteMany({
           where: {
@@ -428,7 +440,7 @@ const resolvers: Resolvers = {
           }
         })
 
-        const deletesalary  = await ctx.prisma.salary.deleteMany({
+        const deletesalary = await ctx.prisma.salary.deleteMany({
           where: {
             userId: a.id
           }
@@ -474,12 +486,12 @@ const resolvers: Resolvers = {
       })
 
       const deleteCompany = await ctx.prisma.companyBranch.delete({
-          where: {
-            id: args.id as string
-          }
-        });
+        where: {
+          id: args.id as string
+        }
+      });
 
-      
+
       return {
         message: 'success',
         status: true,
