@@ -1347,10 +1347,10 @@ const resolvers: Resolvers = {
           where: {
             companyBranchId: ctx.currentUser?.branchId,
             AND: {
-              unix: { lte: dayjs(new Date()).unix() }
+              unix: { gte: dayjs(new Date()).unix() }
             }
           }, orderBy: {
-            cal_date_salary: 'desc'
+            cal_date_salary: 'asc'
           }
         })
         // console.log(chk_payday);
