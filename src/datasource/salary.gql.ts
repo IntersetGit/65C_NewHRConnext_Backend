@@ -715,7 +715,7 @@ const resolvers: Resolvers = {
       });
       return result; //แสดงข้อมูลโดยล็อคอินด้วย user
     },
-    
+
     // async read_bookbank_log(parant, args, ctx) {
     //   // const filter = args?.userId ? args.userId : undefined;
     //   const result = await ctx.prisma.read_bookbank_log.findMany({
@@ -1461,6 +1461,7 @@ const resolvers: Resolvers = {
             provident_emp: args.data?.provident_emp as number, // กองทุนของบริษัท ตัวเลขเป็น %
             update_by: ctx.currentUser?.id,
             update_date: new Date(),
+            bookbank_logId: args.data?.id
           }
         });
 
@@ -1829,6 +1830,7 @@ const resolvers: Resolvers = {
           provident_emp: args.data?.provident_emp as number, // กองทุนของบริษัท ตัวเลขเป็น %
           update_by: ctx.currentUser?.id,
           update_date: new Date(),
+          bookbank_logId: bookbankID
         }
       });
       return {
@@ -2161,8 +2163,26 @@ const resolvers: Resolvers = {
       };
     },
 
-    async Deletebookbank(p: any, args: any, ctx: any) {
-      const deletebook_bank = await ctx.prisma.bookbank_log.delete({ //
+    async Deletebookbank(p, args, ctx) {
+
+      let read_bb_ID = null
+      const find_by_id = await ctx.prisma.read_bookbank_log.findMany({
+        where: {
+          bookbank_logId: args.id
+        }
+      })
+      console.log(find_by_id);
+      find_by_id.forEach(async (e) => {
+        read_bb_ID = e.id
+
+        const delete_read_bb_log = await ctx.prisma.read_bookbank_log.delete({
+          where: {
+            id: read_bb_ID,
+          }
+        })
+      })
+
+      const deletebook_bank = await ctx.prisma.bookbank_log.delete({ //ลบ bookbank log ที่เลือกจาก id
         where: {
           id: args.id,
         },
