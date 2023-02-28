@@ -845,17 +845,17 @@ const resolvers: Resolvers = {
       let pw = ""
       const find_user = await ctx.prisma.user.findMany({
         where: {
-          id : ctx.currentUser?.id
+          id: ctx.currentUser?.id
         }
       })
-      find_user.forEach((e)=>{
+      find_user.forEach((e) => {
         pw = e.password
       })
       // pw = find_user.password
-      const decrypt_pw = await comparePassword(args.data?.password as string , pw)
-      console.log('รหัสผ่าน = ',decrypt_pw);
+      const decrypt_pw = await comparePassword(args.data?.password as string, pw)
+      console.log('รหัสผ่าน = ', decrypt_pw);
 
-      if(decrypt_pw === true) {
+      if (decrypt_pw === true) {
         return {
           message: 'ยืนยันรหัสผ่านถูกต้อง',
           status: true,
@@ -1054,24 +1054,7 @@ const resolvers: Resolvers = {
       })
       let bookbank_logId = check_bookbank[0].id //หา bookbank log ของ user คนนั้นจากนั้นให้ insert เข้า salary
       let Base_salary = check_bookbank[0].base_salary
-      // const check_user_ex = await ctx.prisma.User.findMany({
-      //   where: {
-      //     id: args.data.userId
 
-      //   }
-      // })
-      // const cb = check_user_ex[0].companyBranchId
-      // const check_combra = await ctx.prisma.expense_company.findMany({
-      //   where: {
-      //     companyBranchId: cb
-      //   }, orderBy: {
-      //     date: "desc"
-      //   }
-      // })
-      // let vat_per = check_combra[0].vat_per ? check_combra[0].vat_per : 0
-      // let ss_per = check_combra[0].ss_per ? check_combra[0].ss_per : 0
-      // console.log(vat_per);
-      // console.log(ss_per);
       let Vat_per = null
       let SS_per = null
       const chk_vatByEXP = await ctx.prisma.expense_company.findMany({ //เช็ค expense company ถ้าหากวันที่คำนวณเงินเดือนยังไมถึงวันที่มีผลให้ใช้ expense company เดิม
@@ -1730,46 +1713,27 @@ const resolvers: Resolvers = {
       }
       // console.log(chk_payday);
 
+
+      if (args.data?.userId) {
         let baseold = 0
-      if(args.data?.userId){
         const chk_acp_bb = await ctx.prisma.bookbank_log.findMany({
           where: {
             userId: args.data?.userId,
+            AND:{
+              unix : { gte : dayjs(new Date(args.data.accept_date)).unix()}
+            }
           },
           orderBy: {
             accept_date: 'desc'
           }
         })
-      chk_acp_bb.forEach((e) => {
-        baseold = e.base_salary as number
-        let basenew= args.data?.base_salary?args.data?.base_salary:0
-        console.log('ฐานเงินเดือน =', basenew);
-        let result =basenew-baseold
-        console.log(result);
-        if (result <0 ) {
-          // if(args.data?.accept_date){
-          //   let chk_acp_b=0
-          //   const chk_acp_bbb = await ctx.prisma.bookbank_log.findMany({
-          //     where: {
-          //       userId: args.data?.userId,
-          //     },
-          //     orderBy: {
-          //       accept_date: 'desc'
-          //     }
-          //   })
-          //   chk_acp_bbb.forEach((e)=>{
-          //     chk_acp_b=e.unix as number
-          //     let ac=dayjs(new Date(args.data?.accept_date)).unix()
-          //     let result =ac-chk_acp_b
-          //     console.log(result);
-          //     if(result <0){
-          //     }
-          //   })}
-          throw new Error("ไม่สามารถต้องค่าฐานเงินเดือนน้อยกว่าเดือนก่อนหน้า ");
+        console.log(chk_acp_bb);
+        if(chk_acp_bb.length > 0){
+          throw new Error("ไม่สามารถตั้งค่าฐานเงินเดือนน้อยกว่าเดือนก่อนหน้า ");
         }
-    })}
-      
-      
+      }
+
+
       const createbook_bank = await ctx.prisma.bookbank_log.create({
         data: {
           id: bookbankID,
