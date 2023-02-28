@@ -430,26 +430,27 @@ model mas_all_collect {
 
 //ใช้สำหรับเรียกดู bookbank ของ user วว่าเคยอัปเดท bookbank ไปกี่ครั้ง และแต่ละครั้งมีการปรับเปลี่ยนอะไรบ้าง //
 model bookbank_log {
-  id            String          @unique @db.Uuid
-  date          DateTime
-  mas_bankId    String?         @db.Uuid
-  bank_number   String          @db.VarChar(50)
-  all_collectId String?         @db.Uuid
-  base_salary   Float
-  provident_com Float           @default(0)
-  provident_emp Float           @default(0)
-  accept_date   DateTime
-  accept_month  Int?
-  accept_years  Int?
-  unix          Int?
-  salary        salary[] //เรียกดู base salary
+  id                String              @unique @db.Uuid
+  date              DateTime
+  mas_bankId        String?             @db.Uuid
+  bank_number       String              @db.VarChar(50)
+  all_collectId     String?             @db.Uuid
+  base_salary       Float
+  provident_com     Float               @default(0)
+  provident_emp     Float               @default(0)
+  accept_date       DateTime
+  accept_month      Int?
+  accept_years      Int?
+  unix              Int?
+  salary            salary[] //เรียกดู base salary
   // salaryId      String?      @db.Uuid
   // all_collect   all_collect? @relation(fields: [all_collectId], references: [id])
-  mas_bank      mas_bank?       @relation(fields: [mas_bankId], references: [id])
+  mas_bank          mas_bank?           @relation(fields: [mas_bankId], references: [id])
   // salary        salary?      @relation(fields: [salaryId], references: [id])
-  User          User?           @relation(fields: [userId], references: [id])
-  userId        String?         @db.Uuid
-  provident_log provident_log[]
+  User              User?               @relation(fields: [userId], references: [id])
+  userId            String?             @db.Uuid
+  provident_log     provident_log[]
+  read_bookbank_log read_bookbank_log[]
 }
 
 //ใช้สำหรับเรียกดูว่ามีการแก้ไขหรืออัปเดทอะไรไปบ้าง โดยจะเก็บเป็น log//
@@ -469,7 +470,10 @@ model read_bookbank_log {
   update_by     String?
   update_date   DateTime?
   userId        String?   @db.Uuid
+  bookbank_logId String?       @db.Uuid
   User          User?     @relation(fields: [userId], references: [id])
+
+  bookbank_log   bookbank_log? @relation(fields: [bookbank_logId], references: [id])
   
 }
 

@@ -424,7 +424,8 @@ exports.Prisma.Read_bookbank_logScalarFieldEnum = makeEnum({
   unix: 'unix',
   update_by: 'update_by',
   update_date: 'update_date',
-  userId: 'userId'
+  userId: 'userId',
+  bookbank_logId: 'bookbank_logId'
 });
 
 exports.Prisma.RoleScalarFieldEnum = makeEnum({
