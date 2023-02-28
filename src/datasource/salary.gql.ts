@@ -187,6 +187,27 @@ export const salaryTypedef = gql`
     provident_log: [provident_log]
     accept_date: Date
   }
+  type read_bookbank_log {
+    id: ID
+    date: Date
+    mas_bankId: String
+    bank_number: String
+    all_collectId: String
+    base_salary: Float
+    provident_com: Float
+    provident_emp: Float
+    salary: [salary]
+    mas_bank: mas_bank
+    User: User
+    userId: String
+    accept_month:   Int
+    accept_years:   Int
+    provident_log: [provident_log]
+    accept_date: Date
+    unix: Int
+    update_by:String
+    update_date: Date
+  }
 
   type mas_month {
     id: ID
@@ -492,6 +513,7 @@ export const salaryTypedef = gql`
     #Selfdatasalary: selfsalary
     mas_all_collectuser: mas_all_collect
     mas_all_collectadmin(userId: String): [mas_all_collect]
+    read_bookbank_log(userId: String):[read_bookbank_log]
 
     mas_bank(id: String): [mas_bank]
     data_salary(fristname: String ,Position2: String ,Position3: String):[data_salary]
@@ -693,7 +715,23 @@ const resolvers: Resolvers = {
       });
       return result; //แสดงข้อมูลโดยล็อคอินด้วย user
     },
-
+    
+    // async read_bookbank_log(parant, args, ctx) {
+    //   // const filter = args?.userId ? args.userId : undefined;
+    //   const result = await ctx.prisma.read_bookbank_log.findMany({
+    //     include: {
+    //       User: true
+    //     },
+    //     where: {
+    //       userId: ctx.currentUser?.id,
+    //     },
+    //     orderBy:
+    //     {
+    //       accept_date: "asc",
+    //     },
+    //   });
+    //   return result; //แสดงข้อมูลโดยล็อคอินด้วย user
+    // },
     async filter_bookbank(parant, args, ctx) {
       // const filter = args?.userId ? args.userId : undefined;
       let current_time = new Date()

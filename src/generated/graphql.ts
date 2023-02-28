@@ -808,6 +808,7 @@ export type Query = {
   me?: Maybe<Me>;
   mydata_salary?: Maybe<Data_Salary>;
   provident_log?: Maybe<Array<Maybe<Provident_Log>>>;
+  read_bookbank_log?: Maybe<Array<Maybe<Read_Bookbank_Log>>>;
   salary?: Maybe<Data_Salary>;
   salary_inmonthSlip?: Maybe<Array<Maybe<Data_Salary>>>;
   show_pervspUser?: Maybe<Array<Maybe<User>>>;
@@ -918,6 +919,11 @@ export type QueryMydata_SalaryArgs = {
 
 
 export type QueryProvident_LogArgs = {
+  userId?: InputMaybe<Scalars['String']>;
+};
+
+
+export type QueryRead_Bookbank_LogArgs = {
   userId?: InputMaybe<Scalars['String']>;
 };
 
@@ -1570,6 +1576,29 @@ export type Provident_LogInput = {
   userId?: InputMaybe<Scalars['String']>;
 };
 
+export type Read_Bookbank_Log = {
+  __typename?: 'read_bookbank_log';
+  User?: Maybe<User>;
+  accept_date?: Maybe<Scalars['Date']>;
+  accept_month?: Maybe<Scalars['Int']>;
+  accept_years?: Maybe<Scalars['Int']>;
+  all_collectId?: Maybe<Scalars['String']>;
+  bank_number?: Maybe<Scalars['String']>;
+  base_salary?: Maybe<Scalars['Float']>;
+  date?: Maybe<Scalars['Date']>;
+  id?: Maybe<Scalars['ID']>;
+  mas_bank?: Maybe<Mas_Bank>;
+  mas_bankId?: Maybe<Scalars['String']>;
+  provident_com?: Maybe<Scalars['Float']>;
+  provident_emp?: Maybe<Scalars['Float']>;
+  provident_log?: Maybe<Array<Maybe<Provident_Log>>>;
+  salary?: Maybe<Array<Maybe<Salary>>>;
+  unix?: Maybe<Scalars['Int']>;
+  update_by?: Maybe<Scalars['String']>;
+  update_date?: Maybe<Scalars['Date']>;
+  userId?: Maybe<Scalars['String']>;
+};
+
 export type Salary = {
   __typename?: 'salary';
   bonus?: Maybe<Scalars['Float']>;
@@ -1888,6 +1917,7 @@ export type ResolversTypes = ResolversObject<{
   position_userr: ResolverTypeWrapper<Position_Userr>;
   provident_log: ResolverTypeWrapper<Provident_Log>;
   provident_logInput: Provident_LogInput;
+  read_bookbank_log: ResolverTypeWrapper<Read_Bookbank_Log>;
   salary: ResolverTypeWrapper<Salary>;
   salaryInput: SalaryInput;
   salary_status_input: Salary_Status_Input;
@@ -2013,6 +2043,7 @@ export type ResolversParentTypes = ResolversObject<{
   position_userr: Position_Userr;
   provident_log: Provident_Log;
   provident_logInput: Provident_LogInput;
+  read_bookbank_log: Read_Bookbank_Log;
   salary: Salary;
   salaryInput: SalaryInput;
   salary_status_input: Salary_Status_Input;
@@ -2504,6 +2535,7 @@ export type QueryResolvers<ContextType = ApolloContext, ParentType extends Resol
   me?: Resolver<Maybe<ResolversTypes['Me']>, ParentType, ContextType>;
   mydata_salary?: Resolver<Maybe<ResolversTypes['data_salary']>, ParentType, ContextType, Partial<QueryMydata_SalaryArgs>>;
   provident_log?: Resolver<Maybe<Array<Maybe<ResolversTypes['provident_log']>>>, ParentType, ContextType, Partial<QueryProvident_LogArgs>>;
+  read_bookbank_log?: Resolver<Maybe<Array<Maybe<ResolversTypes['read_bookbank_log']>>>, ParentType, ContextType, Partial<QueryRead_Bookbank_LogArgs>>;
   salary?: Resolver<Maybe<ResolversTypes['data_salary']>, ParentType, ContextType, Partial<QuerySalaryArgs>>;
   salary_inmonthSlip?: Resolver<Maybe<Array<Maybe<ResolversTypes['data_salary']>>>, ParentType, ContextType, Partial<QuerySalary_InmonthSlipArgs>>;
   show_pervspUser?: Resolver<Maybe<Array<Maybe<ResolversTypes['User']>>>, ParentType, ContextType, Partial<QueryShow_PervspUserArgs>>;
@@ -3006,6 +3038,29 @@ export type Provident_LogResolvers<ContextType = ApolloContext, ParentType exten
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 }>;
 
+export type Read_Bookbank_LogResolvers<ContextType = ApolloContext, ParentType extends ResolversParentTypes['read_bookbank_log'] = ResolversParentTypes['read_bookbank_log']> = ResolversObject<{
+  User?: Resolver<Maybe<ResolversTypes['User']>, ParentType, ContextType>;
+  accept_date?: Resolver<Maybe<ResolversTypes['Date']>, ParentType, ContextType>;
+  accept_month?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
+  accept_years?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
+  all_collectId?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  bank_number?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  base_salary?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
+  date?: Resolver<Maybe<ResolversTypes['Date']>, ParentType, ContextType>;
+  id?: Resolver<Maybe<ResolversTypes['ID']>, ParentType, ContextType>;
+  mas_bank?: Resolver<Maybe<ResolversTypes['mas_bank']>, ParentType, ContextType>;
+  mas_bankId?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  provident_com?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
+  provident_emp?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
+  provident_log?: Resolver<Maybe<Array<Maybe<ResolversTypes['provident_log']>>>, ParentType, ContextType>;
+  salary?: Resolver<Maybe<Array<Maybe<ResolversTypes['salary']>>>, ParentType, ContextType>;
+  unix?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
+  update_by?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  update_date?: Resolver<Maybe<ResolversTypes['Date']>, ParentType, ContextType>;
+  userId?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+}>;
+
 export type SalaryResolvers<ContextType = ApolloContext, ParentType extends ResolversParentTypes['salary'] = ResolversParentTypes['salary']> = ResolversObject<{
   bonus?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
   bookbank_log?: Resolver<Maybe<ResolversTypes['Bookbank_log_type']>, ParentType, ContextType>;
@@ -3175,6 +3230,7 @@ export type Resolvers<ContextType = ApolloContext> = ResolversObject<{
   monthResponseType?: MonthResponseTypeResolvers<ContextType>;
   position_userr?: Position_UserrResolvers<ContextType>;
   provident_log?: Provident_LogResolvers<ContextType>;
+  read_bookbank_log?: Read_Bookbank_LogResolvers<ContextType>;
   salary?: SalaryResolvers<ContextType>;
   show_pervsp?: Show_PervspResolvers<ContextType>;
   show_pervspuser?: Show_PervspuserResolvers<ContextType>;
