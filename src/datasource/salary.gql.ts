@@ -1362,7 +1362,6 @@ const resolvers: Resolvers = {
           if (result <= 0) {
             throw new Error("ไม่สามารถอัปเดทข้อมูลได้เนื่องจากเลยวันจ่ายเงินเดือนแล้ว ");
           }
-
         })
         ///////////////////////////////เงื่อนไขนี้คือการอัปเดท /////////////////////////////////////////////////
         const createbook_bank = await ctx.prisma.bookbank_log.update({
@@ -1691,6 +1690,48 @@ const resolvers: Resolvers = {
           status: true,
         };
       }
+      // console.log(chk_payday);
+
+        let baseold = 0
+      if(args.data?.userId){
+        const chk_acp_bb = await ctx.prisma.bookbank_log.findMany({
+          where: {
+            userId: args.data?.userId,
+          },
+          orderBy: {
+            accept_date: 'desc'
+          }
+        })
+      chk_acp_bb.forEach((e) => {
+        baseold = e.base_salary as number
+        let basenew= args.data?.base_salary?args.data?.base_salary:0
+        console.log('ฐานเงินเดือน =', basenew);
+        let result =basenew-baseold
+        console.log(result);
+        if (result <0 ) {
+          // if(args.data?.accept_date){
+          //   let chk_acp_b=0
+          //   const chk_acp_bbb = await ctx.prisma.bookbank_log.findMany({
+          //     where: {
+          //       userId: args.data?.userId,
+          //     },
+          //     orderBy: {
+          //       accept_date: 'desc'
+          //     }
+          //   })
+          //   chk_acp_bbb.forEach((e)=>{
+          //     chk_acp_b=e.unix as number
+          //     let ac=dayjs(new Date(args.data?.accept_date)).unix()
+          //     let result =ac-chk_acp_b
+          //     console.log(result);
+          //     if(result <0){
+          //     }
+          //   })}
+          throw new Error("ไม่สามารถต้องค่าฐานเงินเดือนน้อยกว่าเดือนก่อนหน้า ");
+        }
+    })}
+      
+      
       const createbook_bank = await ctx.prisma.bookbank_log.create({
         data: {
           id: bookbankID,
