@@ -409,6 +409,24 @@ exports.Prisma.QueryMode = makeEnum({
   insensitive: 'insensitive'
 });
 
+exports.Prisma.Read_bookbank_logScalarFieldEnum = makeEnum({
+  id: 'id',
+  date: 'date',
+  mas_bankId: 'mas_bankId',
+  bank_number: 'bank_number',
+  all_collectId: 'all_collectId',
+  base_salary: 'base_salary',
+  provident_com: 'provident_com',
+  provident_emp: 'provident_emp',
+  accept_date: 'accept_date',
+  accept_month: 'accept_month',
+  accept_years: 'accept_years',
+  unix: 'unix',
+  update_by: 'update_by',
+  update_date: 'update_date',
+  userId: 'userId'
+});
+
 exports.Prisma.RoleScalarFieldEnum = makeEnum({
   id: 'id',
   name: 'name'
@@ -527,6 +545,7 @@ exports.Prisma.ModelName = makeEnum({
   salary: 'salary',
   mas_all_collect: 'mas_all_collect',
   bookbank_log: 'bookbank_log',
+  read_bookbank_log: 'read_bookbank_log',
   provident_log: 'provident_log',
   mas_leave_type: 'mas_leave_type',
   data_leave: 'data_leave',
