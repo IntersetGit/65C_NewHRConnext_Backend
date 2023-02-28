@@ -565,7 +565,7 @@ const resolvers: Resolvers = {
       const result = await ctx.prisma.user.findMany({
         include: {
           bookbank_log: { include: { mas_bank: true }, take: 1, orderBy: { accept_date: 'desc' }, where: { unix: { lte: dayjs(date).unix() } } },
-          companyBranch: { include: { expense_company: { take: 1, orderBy: { date: 'desc' }, where: { unix_date: { lte: dayjs(date).unix() }, AND: { id: ctx.currentUser?.branchId } } } } }
+          companyBranch: { include: { expense_company: { take: 1, orderBy: { date: 'desc' }, where: { unix_date: { lte: dayjs(date).unix() }, AND: { companyBranchId: ctx.currentUser?.branchId } } } } }
         },
         where: {
           id: args.userId as string
