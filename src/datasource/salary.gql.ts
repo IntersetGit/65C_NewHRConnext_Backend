@@ -8,6 +8,7 @@ import dayjs from 'dayjs';
 import { profile } from 'console';
 import { expense_company, bookbank_log } from '../generated/client/index';
 import { string } from 'zod';
+import { comparePassword } from '../utils/passwords';
 
 
 
@@ -16,6 +17,11 @@ export const salaryTypedef = gql`
     id: ID
     name: String
   }
+
+  input chk_pw_input {
+    password: String
+  }
+
   input monthInput {
     id: ID
     month_number: Int
@@ -466,6 +472,12 @@ export const salaryTypedef = gql`
     message: String
     status: Boolean
   }
+
+  type Check_passwordResponseType {
+    message: String
+    status: Boolean
+  }
+
   type Query {
     salary(userId:String , years: String): data_salary
     salary_inmonthSlip(userId: String, month: String, years: String):[data_salary]
@@ -502,6 +514,7 @@ export const salaryTypedef = gql`
     DeleteExpensecom(id: ID!): DeleteExpensecomResponseType
     Deletebookbank(id: ID!): DeletebookbankResponseType
     CreateSalaryStatus(data: salary_status_input ): SalaryStatusResponseType
+    Check_password(data: chk_pw_input): Check_passwordResponseType
   }
 `;
 
@@ -828,6 +841,31 @@ const resolvers: Resolvers = {
      * @returns
      */
 
+    async Check_password(p, args, ctx) {
+      let pw = ""
+      const find_user = await ctx.prisma.user.findMany({
+        where: {
+          id : ctx.currentUser?.id
+        }
+      })
+      find_user.forEach((e)=>{
+        pw = e.password
+      })
+      // pw = find_user.password
+      const decrypt_pw = await comparePassword(args.data?.password as string , pw)
+      console.log('รหัสผ่าน = ',decrypt_pw);
+
+      if(decrypt_pw === true) {
+        return {
+          message: 'ยืนยันรหัสผ่านถูกต้อง',
+          status: true,
+        }
+      }
+      return {
+        message: 'รหัสผ่านของคุณไม่ถูกต้อง',
+        status: true,
+      }
+    },
 
     async Createmonth(p: any, args: any, ctx: any) {
       const genmonthID = v4();
@@ -2082,6 +2120,7 @@ const resolversComposition = {
   'Query.show_years': [authenticate()],
   'Query.filter_bookbank_admin': [authenticate()],
   'Query.filter_bookbank': [authenticate()],
+  'Mutation.Check_password': [authenticate()],
   'Mutation.Createmonth': [authenticate()],
   'Mutation.Createyears': [authenticate()],
   'Mutation.Createandupdatesalary': [authenticate()],

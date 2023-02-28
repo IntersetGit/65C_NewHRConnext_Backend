@@ -56,6 +56,12 @@ export type Bookbank_Log_Type = {
   userId?: Maybe<Scalars['String']>;
 };
 
+export type Check_PasswordResponseType = {
+  __typename?: 'Check_passwordResponseType';
+  message?: Maybe<Scalars['String']>;
+  status?: Maybe<Scalars['Boolean']>;
+};
+
 export type Company = {
   __typename?: 'Company';
   branch?: Maybe<Array<Maybe<CompanyBranch>>>;
@@ -466,6 +472,7 @@ export type MeprofileType = {
 
 export type Mutation = {
   __typename?: 'Mutation';
+  Check_password?: Maybe<Check_PasswordResponseType>;
   CreateAndUpdateExpenseCom?: Maybe<CreateAndUpdateExpenseComResponseType>;
   CreateSalaryStatus?: Maybe<SalaryStatusResponseType>;
   Createandupdatebookbank?: Maybe<CreatebookbanklogResponseType>;
@@ -501,6 +508,11 @@ export type Mutation = {
   refreshToken?: Maybe<RefreshtokenResponseType>;
   updateRoleCompanyMangement?: Maybe<CreateRoleCompanyResponseType>;
   validateRoute?: Maybe<ValidateRoute>;
+};
+
+
+export type MutationCheck_PasswordArgs = {
+  data?: InputMaybe<Chk_Pw_Input>;
 };
 
 
@@ -1134,6 +1146,10 @@ export type Bookbank_LogInput = {
   userId?: InputMaybe<Scalars['String']>;
 };
 
+export type Chk_Pw_Input = {
+  password?: InputMaybe<Scalars['String']>;
+};
+
 export type CreateCompanyBranch = {
   address?: InputMaybe<Scalars['String']>;
   address_2?: InputMaybe<Scalars['String']>;
@@ -1764,6 +1780,7 @@ export type ResolversTypes = ResolversObject<{
   BankResponseType: ResolverTypeWrapper<BankResponseType>;
   Bookbank_log_type: ResolverTypeWrapper<Bookbank_Log_Type>;
   Boolean: ResolverTypeWrapper<Scalars['Boolean']>;
+  Check_passwordResponseType: ResolverTypeWrapper<Check_PasswordResponseType>;
   Company: ResolverTypeWrapper<Company>;
   CompanyBranch: ResolverTypeWrapper<CompanyBranch>;
   CountBranch: ResolverTypeWrapper<CountBranch>;
@@ -1834,6 +1851,7 @@ export type ResolversTypes = ResolversObject<{
   book_bank_logResponseType: ResolverTypeWrapper<Book_Bank_LogResponseType>;
   bookbank_log: ResolverTypeWrapper<Bookbank_Log>;
   bookbank_logInput: Bookbank_LogInput;
+  chk_pw_input: Chk_Pw_Input;
   createCompanyBranch: CreateCompanyBranch;
   createRoleCompanyGroup: CreateRoleCompanyGroup;
   createbookbanklogResponseType: ResolverTypeWrapper<CreatebookbanklogResponseType>;
@@ -1887,6 +1905,7 @@ export type ResolversParentTypes = ResolversObject<{
   BankResponseType: BankResponseType;
   Bookbank_log_type: Bookbank_Log_Type;
   Boolean: Scalars['Boolean'];
+  Check_passwordResponseType: Check_PasswordResponseType;
   Company: Company;
   CompanyBranch: CompanyBranch;
   CountBranch: CountBranch;
@@ -1957,6 +1976,7 @@ export type ResolversParentTypes = ResolversObject<{
   book_bank_logResponseType: Book_Bank_LogResponseType;
   bookbank_log: Bookbank_Log;
   bookbank_logInput: Bookbank_LogInput;
+  chk_pw_input: Chk_Pw_Input;
   createCompanyBranch: CreateCompanyBranch;
   createRoleCompanyGroup: CreateRoleCompanyGroup;
   createbookbanklogResponseType: CreatebookbanklogResponseType;
@@ -2033,6 +2053,12 @@ export type Bookbank_Log_TypeResolvers<ContextType = ApolloContext, ParentType e
   provident_log?: Resolver<Maybe<Array<Maybe<ResolversTypes['provident_log']>>>, ParentType, ContextType>;
   salary?: Resolver<Maybe<Array<Maybe<ResolversTypes['salary']>>>, ParentType, ContextType>;
   userId?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+}>;
+
+export type Check_PasswordResponseTypeResolvers<ContextType = ApolloContext, ParentType extends ResolversParentTypes['Check_passwordResponseType'] = ResolversParentTypes['Check_passwordResponseType']> = ResolversObject<{
+  message?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  status?: Resolver<Maybe<ResolversTypes['Boolean']>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 }>;
 
@@ -2320,6 +2346,7 @@ export type MeprofileTypeResolvers<ContextType = ApolloContext, ParentType exten
 }>;
 
 export type MutationResolvers<ContextType = ApolloContext, ParentType extends ResolversParentTypes['Mutation'] = ResolversParentTypes['Mutation']> = ResolversObject<{
+  Check_password?: Resolver<Maybe<ResolversTypes['Check_passwordResponseType']>, ParentType, ContextType, Partial<MutationCheck_PasswordArgs>>;
   CreateAndUpdateExpenseCom?: Resolver<Maybe<ResolversTypes['CreateAndUpdateExpenseComResponseType']>, ParentType, ContextType, Partial<MutationCreateAndUpdateExpenseComArgs>>;
   CreateSalaryStatus?: Resolver<Maybe<ResolversTypes['SalaryStatusResponseType']>, ParentType, ContextType, Partial<MutationCreateSalaryStatusArgs>>;
   Createandupdatebookbank?: Resolver<Maybe<ResolversTypes['createbookbanklogResponseType']>, ParentType, ContextType, Partial<MutationCreateandupdatebookbankArgs>>;
@@ -3064,6 +3091,7 @@ export type Resolvers<ContextType = ApolloContext> = ResolversObject<{
   Amphoe?: AmphoeResolvers<ContextType>;
   BankResponseType?: BankResponseTypeResolvers<ContextType>;
   Bookbank_log_type?: Bookbank_Log_TypeResolvers<ContextType>;
+  Check_passwordResponseType?: Check_PasswordResponseTypeResolvers<ContextType>;
   Company?: CompanyResolvers<ContextType>;
   CompanyBranch?: CompanyBranchResolvers<ContextType>;
   CountBranch?: CountBranchResolvers<ContextType>;
