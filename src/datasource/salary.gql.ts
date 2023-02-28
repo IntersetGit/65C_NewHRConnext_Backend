@@ -1332,6 +1332,7 @@ const resolvers: Resolvers = {
     async Createandupdatebookbank(p, args, ctx) {
       //สร้าง bookbank
       const bookbankID = v4();
+      const readbookbankID = v4();
       let date = args.data?.accept_date
       let Acp_year = dayjs(date).year()
       let Acp_month = dayjs(date).month()
@@ -1385,7 +1386,7 @@ const resolvers: Resolvers = {
           }
         })
         ///////////////////////////////เงื่อนไขนี้คือการอัปเดท /////////////////////////////////////////////////
-        const createbook_bank = await ctx.prisma.bookbank_log.update({
+        const createbook_bank = await ctx.prisma.bookbank_log.update({ //อัปเดทข้อมูลใน bookbank log
           data: {
             date: new Date(args.data?.date),
             mas_bankId: args.data?.mas_bankId,
@@ -1404,6 +1405,27 @@ const resolvers: Resolvers = {
             id: args.data?.id,
           },
         });
+
+        const insert_read_bb_log = await ctx.prisma.read_bookbank_log.create({ //เก็บ log ของการอัปเดทเข้าไปใน read_bookbank_log
+          data: {
+            id: readbookbankID,
+            date: new Date(args.data?.date),
+            mas_bankId: args.data?.mas_bankId,
+            bank_number: args.data?.bank_number as string,
+            all_collectId: args.data?.all_collectId,
+            base_salary: args.data?.base_salary as number,
+            userId: args.data?.userId,
+            accept_date: new Date(Result),
+            unix: unix_date_upt,
+            accept_month: Acp_month + 1,
+            accept_years: Acp_year,
+            provident_com: args.data?.provident_com as number, // กองทุนของพนักงาน ตัวเลขเป็น %
+            provident_emp: args.data?.provident_emp as number, // กองทุนของบริษัท ตัวเลขเป็น %
+            update_by: ctx.currentUser?.id,
+            update_date: new Date(),
+          }
+        });
+
         const chk_salary = await ctx.prisma.salary.findMany({ //จากนั้นให้ทำการหาา salary ว่าเดือนที่มีการเปลี่ยนแปลง ตรงกับ เงินเดือนมั้ย
           include: {
             User: { include: { companyBranch: true, bookbank_log: { orderBy: { accept_date: 'desc' } } } },
@@ -1719,8 +1741,8 @@ const resolvers: Resolvers = {
         const chk_acp_bb = await ctx.prisma.bookbank_log.findMany({
           where: {
             userId: args.data?.userId,
-            AND:{
-              unix : { gte : dayjs(new Date(args.data.accept_date)).unix()}
+            AND: {
+              unix: { gte: dayjs(new Date(args.data.accept_date)).unix() }
             }
           },
           orderBy: {
@@ -1728,7 +1750,7 @@ const resolvers: Resolvers = {
           }
         })
         console.log(chk_acp_bb);
-        if(chk_acp_bb.length > 0){
+        if (chk_acp_bb.length > 0) {
           throw new Error("ไม่สามารถตั้งค่าฐานเงินเดือนน้อยกว่าเดือนก่อนหน้า ");
         }
       }
@@ -1750,6 +1772,26 @@ const resolvers: Resolvers = {
           provident_com: args.data?.provident_com as number, // กองทุนของพนักงาน ตัวเลขเป็น %
           provident_emp: args.data?.provident_emp as number, // กองทุนของบริษัท ตัวเลขเป็น %
         },
+      });
+
+      const insert_read_bb_log = await ctx.prisma.read_bookbank_log.create({
+        data: {
+          id: readbookbankID,
+          date: new Date(args.data?.date),
+          mas_bankId: args.data?.mas_bankId,
+          bank_number: args.data?.bank_number as string,
+          all_collectId: args.data?.all_collectId,
+          base_salary: args.data?.base_salary as number,
+          userId: args.data?.userId,
+          accept_date: new Date(args.data?.accept_date),
+          unix: dayjs(new Date(args.data?.accept_date)).unix(),
+          accept_month: Acp_month + 1,
+          accept_years: Acp_year,
+          provident_com: args.data?.provident_com as number, // กองทุนของพนักงาน ตัวเลขเป็น %
+          provident_emp: args.data?.provident_emp as number, // กองทุนของบริษัท ตัวเลขเป็น %
+          update_by: ctx.currentUser?.id,
+          update_date: new Date(),
+        }
       });
       return {
         message: 'success',
@@ -2082,11 +2124,12 @@ const resolvers: Resolvers = {
     },
 
     async Deletebookbank(p: any, args: any, ctx: any) {
-      const deletebook_bank = await ctx.prisma.bookbank_log.delete({
+      const deletebook_bank = await ctx.prisma.bookbank_log.delete({ //
         where: {
           id: args.id,
         },
       });
+      
       return {
         message: 'delete bookbank success',
         status: true,
