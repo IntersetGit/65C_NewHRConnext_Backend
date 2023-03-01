@@ -42,44 +42,44 @@ model Company {
 }
 
 model CompanyBranch {
-  id                String            @unique @db.Uuid
-  isMainbranch      Boolean           @default(false)
-  name              String            @db.VarChar(255)
-  address           String            @db.VarChar(255)
-  address_2         String?           @db.VarChar(255)
-  city              String            @db.VarChar(255)
-  state             String            @db.VarChar(255)
-  zip               String            @db.VarChar(255)
-  country           String?           @db.VarChar(255)
-  tel               String?           @db.VarChar(255)
-  fax               String?           @db.VarChar(255)
-  website           String?           @db.VarChar(255)
-  lat               String?
-  lng               String?
-  email             String?
-  email_2           String?
-  company_type      String?
-  sub_company_typeId  String?          @db.Uuid
-  sub_company_type  SubBusinessType? @relation(fields: [sub_company_typeId], references: [id])
-  registeredamount  String?
-  regis_vat         String?
-  regiscomnumber    String?
-  social_facebook   String?
-  social_likedin    String?
-  social_instragram String?
-  social_line       String?
-  createdAt         DateTime          @default(now())
-  updatedAt         DateTime          @updatedAt
-  company           Company?          @relation(fields: [companyId], references: [id])
-  companyId         String?           @db.Uuid
-  users             User[]
-  Role_Company      Role_Company[]
-  expense_company   expense_company[]
-  main_business_id  String?           @db.Uuid
+  id                 String            @unique @db.Uuid
+  isMainbranch       Boolean           @default(false)
+  name               String            @db.VarChar(255)
+  address            String            @db.VarChar(255)
+  address_2          String?           @db.VarChar(255)
+  city               String            @db.VarChar(255)
+  state              String            @db.VarChar(255)
+  zip                String            @db.VarChar(255)
+  country            String?           @db.VarChar(255)
+  tel                String?           @db.VarChar(255)
+  fax                String?           @db.VarChar(255)
+  website            String?           @db.VarChar(255)
+  lat                String?
+  lng                String?
+  email              String?
+  email_2            String?
+  company_type       String?
+  sub_company_typeId String?           @db.Uuid
+  sub_company_type   SubBusinessType?  @relation(fields: [sub_company_typeId], references: [id])
+  registeredamount   String?
+  regis_vat          String?
+  regiscomnumber     String?
+  social_facebook    String?
+  social_likedin     String?
+  social_instragram  String?
+  social_line        String?
+  createdAt          DateTime          @default(now())
+  updatedAt          DateTime          @updatedAt
+  company            Company?          @relation(fields: [companyId], references: [id])
+  companyId          String?           @db.Uuid
+  users              User[]
+  Role_Company       Role_Company[]
+  expense_company    expense_company[]
+  main_business_id   String?           @db.Uuid
   main_business_type MainBusinessType? @relation(fields: [main_business_id], references: [id])
-  photo_link        String?
-  vat_link          String?
-  certificate_link  String?
+  photo_link         String?
+  vat_link           String?
+  certificate_link   String?
 }
 
 model Profile {
@@ -141,30 +141,31 @@ model Profile {
 }
 
 model User {
-  id              String            @unique @db.Uuid
-  email           String            @unique
-  password        String
-  profile         Profile?
-  islogin         Boolean           @default(false)
-  isActive        Boolean           @default(false)
-  isOwner         Boolean           @default(false)
-  lastlogin       DateTime?         @updatedAt
-  createdAt       DateTime          @default(now())
-  roleId          String?           @db.Uuid
-  role            Role?             @relation(fields: [roleId], references: [id])
-  RoleCompanyID   String?           @db.Uuid
-  company         Company[]
-  companyBranch   CompanyBranch?    @relation(fields: [companyBranchId], references: [id])
-  companyBranchId String?           @db.Uuid
-  Role_Company    Role_Company?     @relation(fields: [RoleCompanyID], references: [id])
-  Position_user   Position_user[]   @relation("user")
-  henchman        Position_user[]
-  mas_all_collect mas_all_collect[]
-  salary          salary[]
-  provident_log   provident_log[]
-  bookbank_log    bookbank_log[]
-  data_leave      data_leave[]
-  cretedByfk      log_positionn[]
+  id                String              @unique @db.Uuid
+  email             String              @unique
+  password          String
+  profile           Profile?
+  islogin           Boolean             @default(false)
+  isActive          Boolean             @default(false)
+  isOwner           Boolean             @default(false)
+  lastlogin         DateTime?           @updatedAt
+  createdAt         DateTime            @default(now())
+  roleId            String?             @db.Uuid
+  role              Role?               @relation(fields: [roleId], references: [id])
+  RoleCompanyID     String?             @db.Uuid
+  company           Company[]
+  companyBranch     CompanyBranch?      @relation(fields: [companyBranchId], references: [id])
+  companyBranchId   String?             @db.Uuid
+  Role_Company      Role_Company?       @relation(fields: [RoleCompanyID], references: [id])
+  Position_user     Position_user[]     @relation("user")
+  henchman          Position_user[]
+  mas_all_collect   mas_all_collect[]
+  salary            salary[]
+  provident_log     provident_log[]
+  bookbank_log      bookbank_log[]
+  data_leave        data_leave[]
+  cretedByfk        log_positionn[]
+  read_bookbank_log read_bookbank_log[]
 }
 
 model Role {
@@ -427,27 +428,53 @@ model mas_all_collect {
   // @@unique([id , userId])
 }
 
+//ใช้สำหรับเรียกดู bookbank ของ user วว่าเคยอัปเดท bookbank ไปกี่ครั้ง และแต่ละครั้งมีการปรับเปลี่ยนอะไรบ้าง //
 model bookbank_log {
-  id            String          @unique @db.Uuid
+  id                String              @unique @db.Uuid
+  date              DateTime
+  mas_bankId        String?             @db.Uuid
+  bank_number       String              @db.VarChar(50)
+  all_collectId     String?             @db.Uuid
+  base_salary       Float
+  provident_com     Float               @default(0)
+  provident_emp     Float               @default(0)
+  accept_date       DateTime
+  accept_month      Int?
+  accept_years      Int?
+  unix              Int?
+  salary            salary[] //เรียกดู base salary
+  // salaryId      String?      @db.Uuid
+  // all_collect   all_collect? @relation(fields: [all_collectId], references: [id])
+  mas_bank          mas_bank?           @relation(fields: [mas_bankId], references: [id])
+  // salary        salary?      @relation(fields: [salaryId], references: [id])
+  User              User?               @relation(fields: [userId], references: [id])
+  userId            String?             @db.Uuid
+  provident_log     provident_log[]
+  read_bookbank_log read_bookbank_log[]
+}
+
+//ใช้สำหรับเรียกดูว่ามีการแก้ไขหรืออัปเดทอะไรไปบ้าง โดยจะเก็บเป็น log//
+model read_bookbank_log {
+  id            String    @unique @db.Uuid
   date          DateTime
-  mas_bankId    String?         @db.Uuid
-  bank_number   String          @db.VarChar(50)
-  all_collectId String?         @db.Uuid
-  base_salary   Float
-  provident_com Float           @default(0)
-  provident_emp Float           @default(0)
+  mas_bankId    String?   @db.Uuid
+  bank_number   String    @db.VarChar(50)
+  all_collectId String?   @db.Uuid
+  base_salary   Float?
+  provident_com Float?    @default(0)
+  provident_emp Float?    @default(0)
   accept_date   DateTime
   accept_month  Int?
   accept_years  Int?
   unix          Int?
-  salary        salary[] //เรียกดู base salary
-  // salaryId      String?      @db.Uuid
-  // all_collect   all_collect? @relation(fields: [all_collectId], references: [id])
-  mas_bank      mas_bank?       @relation(fields: [mas_bankId], references: [id])
-  // salary        salary?      @relation(fields: [salaryId], references: [id])
-  User          User?           @relation(fields: [userId], references: [id])
-  userId        String?         @db.Uuid
-  provident_log provident_log[]
+  update_by     String?
+  update_date   DateTime?
+  userId        String?   @db.Uuid
+  bookbank_logId String?       @db.Uuid
+  User          User?     @relation(fields: [userId], references: [id])
+
+  bookbank_log   bookbank_log? @relation(fields: [bookbank_logId], references: [id])
+  
 }
 
 model provident_log {
@@ -514,5 +541,5 @@ model SubBusinessType {
   name             String
   MainBId          String           @db.Uuid
   MainBusinessType MainBusinessType @relation(fields: [MainBId], references: [id])
-  CompanyBranch   CompanyBranch[]
+  CompanyBranch    CompanyBranch[]
 }

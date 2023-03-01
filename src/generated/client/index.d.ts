@@ -451,6 +451,29 @@ export type bookbank_log = {
 }
 
 /**
+ * Model read_bookbank_log
+ * 
+ */
+export type read_bookbank_log = {
+  id: string
+  date: Date
+  mas_bankId: string | null
+  bank_number: string
+  all_collectId: string | null
+  base_salary: number | null
+  provident_com: number | null
+  provident_emp: number | null
+  accept_date: Date
+  accept_month: number | null
+  accept_years: number | null
+  unix: number | null
+  update_by: string | null
+  update_date: Date | null
+  userId: string | null
+  bookbank_logId: string | null
+}
+
+/**
  * Model provident_log
  * 
  */
@@ -900,6 +923,16 @@ export class PrismaClient<
     * ```
     */
   get bookbank_log(): Prisma.bookbank_logDelegate<GlobalReject>;
+
+  /**
+   * `prisma.read_bookbank_log`: Exposes CRUD operations for the **read_bookbank_log** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more Read_bookbank_logs
+    * const read_bookbank_logs = await prisma.read_bookbank_log.findMany()
+    * ```
+    */
+  get read_bookbank_log(): Prisma.read_bookbank_logDelegate<GlobalReject>;
 
   /**
    * `prisma.provident_log`: Exposes CRUD operations for the **provident_log** model.
@@ -1462,6 +1495,7 @@ export namespace Prisma {
     salary: 'salary',
     mas_all_collect: 'mas_all_collect',
     bookbank_log: 'bookbank_log',
+    read_bookbank_log: 'read_bookbank_log',
     provident_log: 'provident_log',
     mas_leave_type: 'mas_leave_type',
     data_leave: 'data_leave',
@@ -1747,6 +1781,7 @@ export namespace Prisma {
     bookbank_log: number
     data_leave: number
     cretedByfk: number
+    read_bookbank_log: number
   }
 
   export type UserCountOutputTypeSelect = {
@@ -1759,6 +1794,7 @@ export namespace Prisma {
     bookbank_log?: boolean
     data_leave?: boolean
     cretedByfk?: boolean
+    read_bookbank_log?: boolean
   }
 
   export type UserCountOutputTypeGetPayload<S extends boolean | null | undefined | UserCountOutputTypeArgs> =
@@ -2501,11 +2537,13 @@ export namespace Prisma {
   export type Bookbank_logCountOutputType = {
     salary: number
     provident_log: number
+    read_bookbank_log: number
   }
 
   export type Bookbank_logCountOutputTypeSelect = {
     salary?: boolean
     provident_log?: boolean
+    read_bookbank_log?: boolean
   }
 
   export type Bookbank_logCountOutputTypeGetPayload<S extends boolean | null | undefined | Bookbank_logCountOutputTypeArgs> =
@@ -6638,6 +6676,7 @@ export namespace Prisma {
     bookbank_log?: boolean | User$bookbank_logArgs
     data_leave?: boolean | User$data_leaveArgs
     cretedByfk?: boolean | User$cretedByfkArgs
+    read_bookbank_log?: boolean | User$read_bookbank_logArgs
     _count?: boolean | UserCountOutputTypeArgs
   }
 
@@ -6656,6 +6695,7 @@ export namespace Prisma {
     bookbank_log?: boolean | User$bookbank_logArgs
     data_leave?: boolean | User$data_leaveArgs
     cretedByfk?: boolean | User$cretedByfkArgs
+    read_bookbank_log?: boolean | User$read_bookbank_logArgs
     _count?: boolean | UserCountOutputTypeArgs
   }
 
@@ -6679,6 +6719,7 @@ export namespace Prisma {
         P extends 'bookbank_log' ? Array < bookbank_logGetPayload<S['include'][P]>>  :
         P extends 'data_leave' ? Array < data_leaveGetPayload<S['include'][P]>>  :
         P extends 'cretedByfk' ? Array < log_positionnGetPayload<S['include'][P]>>  :
+        P extends 'read_bookbank_log' ? Array < read_bookbank_logGetPayload<S['include'][P]>>  :
         P extends '_count' ? UserCountOutputTypeGetPayload<S['include'][P]> :  never
   } 
     : S extends { select: any } & (UserArgs | UserFindManyArgs)
@@ -6697,6 +6738,7 @@ export namespace Prisma {
         P extends 'bookbank_log' ? Array < bookbank_logGetPayload<S['select'][P]>>  :
         P extends 'data_leave' ? Array < data_leaveGetPayload<S['select'][P]>>  :
         P extends 'cretedByfk' ? Array < log_positionnGetPayload<S['select'][P]>>  :
+        P extends 'read_bookbank_log' ? Array < read_bookbank_logGetPayload<S['select'][P]>>  :
         P extends '_count' ? UserCountOutputTypeGetPayload<S['select'][P]> :  P extends keyof User ? User[P] : never
   } 
       : User
@@ -7096,6 +7138,8 @@ export namespace Prisma {
     data_leave<T extends User$data_leaveArgs= {}>(args?: Subset<T, User$data_leaveArgs>): PrismaPromise<Array<data_leaveGetPayload<T>>| Null>;
 
     cretedByfk<T extends User$cretedByfkArgs= {}>(args?: Subset<T, User$cretedByfkArgs>): PrismaPromise<Array<log_positionnGetPayload<T>>| Null>;
+
+    read_bookbank_log<T extends User$read_bookbank_logArgs= {}>(args?: Subset<T, User$read_bookbank_logArgs>): PrismaPromise<Array<read_bookbank_logGetPayload<T>>| Null>;
 
     private get _document();
     /**
@@ -7638,6 +7682,27 @@ export namespace Prisma {
     take?: number
     skip?: number
     distinct?: Enumerable<Log_positionnScalarFieldEnum>
+  }
+
+
+  /**
+   * User.read_bookbank_log
+   */
+  export type User$read_bookbank_logArgs = {
+    /**
+     * Select specific fields to fetch from the read_bookbank_log
+     */
+    select?: read_bookbank_logSelect | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: read_bookbank_logInclude | null
+    where?: read_bookbank_logWhereInput
+    orderBy?: Enumerable<read_bookbank_logOrderByWithRelationInput>
+    cursor?: read_bookbank_logWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: Enumerable<Read_bookbank_logScalarFieldEnum>
   }
 
 
@@ -29025,6 +29090,7 @@ export namespace Prisma {
     User?: boolean | UserArgs
     userId?: boolean
     provident_log?: boolean | bookbank_log$provident_logArgs
+    read_bookbank_log?: boolean | bookbank_log$read_bookbank_logArgs
     _count?: boolean | Bookbank_logCountOutputTypeArgs
   }
 
@@ -29034,6 +29100,7 @@ export namespace Prisma {
     mas_bank?: boolean | mas_bankArgs
     User?: boolean | UserArgs
     provident_log?: boolean | bookbank_log$provident_logArgs
+    read_bookbank_log?: boolean | bookbank_log$read_bookbank_logArgs
     _count?: boolean | Bookbank_logCountOutputTypeArgs
   }
 
@@ -29048,6 +29115,7 @@ export namespace Prisma {
         P extends 'mas_bank' ? mas_bankGetPayload<S['include'][P]> | null :
         P extends 'User' ? UserGetPayload<S['include'][P]> | null :
         P extends 'provident_log' ? Array < provident_logGetPayload<S['include'][P]>>  :
+        P extends 'read_bookbank_log' ? Array < read_bookbank_logGetPayload<S['include'][P]>>  :
         P extends '_count' ? Bookbank_logCountOutputTypeGetPayload<S['include'][P]> :  never
   } 
     : S extends { select: any } & (bookbank_logArgs | bookbank_logFindManyArgs)
@@ -29057,6 +29125,7 @@ export namespace Prisma {
         P extends 'mas_bank' ? mas_bankGetPayload<S['select'][P]> | null :
         P extends 'User' ? UserGetPayload<S['select'][P]> | null :
         P extends 'provident_log' ? Array < provident_logGetPayload<S['select'][P]>>  :
+        P extends 'read_bookbank_log' ? Array < read_bookbank_logGetPayload<S['select'][P]>>  :
         P extends '_count' ? Bookbank_logCountOutputTypeGetPayload<S['select'][P]> :  P extends keyof bookbank_log ? bookbank_log[P] : never
   } 
       : bookbank_log
@@ -29438,6 +29507,8 @@ export namespace Prisma {
     User<T extends UserArgs= {}>(args?: Subset<T, UserArgs>): Prisma__UserClient<UserGetPayload<T> | Null>;
 
     provident_log<T extends bookbank_log$provident_logArgs= {}>(args?: Subset<T, bookbank_log$provident_logArgs>): PrismaPromise<Array<provident_logGetPayload<T>>| Null>;
+
+    read_bookbank_log<T extends bookbank_log$read_bookbank_logArgs= {}>(args?: Subset<T, bookbank_log$read_bookbank_logArgs>): PrismaPromise<Array<read_bookbank_logGetPayload<T>>| Null>;
 
     private get _document();
     /**
@@ -29837,6 +29908,27 @@ export namespace Prisma {
 
 
   /**
+   * bookbank_log.read_bookbank_log
+   */
+  export type bookbank_log$read_bookbank_logArgs = {
+    /**
+     * Select specific fields to fetch from the read_bookbank_log
+     */
+    select?: read_bookbank_logSelect | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: read_bookbank_logInclude | null
+    where?: read_bookbank_logWhereInput
+    orderBy?: Enumerable<read_bookbank_logOrderByWithRelationInput>
+    cursor?: read_bookbank_logWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: Enumerable<Read_bookbank_logScalarFieldEnum>
+  }
+
+
+  /**
    * bookbank_log without action
    */
   export type bookbank_logArgs = {
@@ -29848,6 +29940,1087 @@ export namespace Prisma {
      * Choose, which related nodes to fetch as well.
      */
     include?: bookbank_logInclude | null
+  }
+
+
+
+  /**
+   * Model read_bookbank_log
+   */
+
+
+  export type AggregateRead_bookbank_log = {
+    _count: Read_bookbank_logCountAggregateOutputType | null
+    _avg: Read_bookbank_logAvgAggregateOutputType | null
+    _sum: Read_bookbank_logSumAggregateOutputType | null
+    _min: Read_bookbank_logMinAggregateOutputType | null
+    _max: Read_bookbank_logMaxAggregateOutputType | null
+  }
+
+  export type Read_bookbank_logAvgAggregateOutputType = {
+    base_salary: number | null
+    provident_com: number | null
+    provident_emp: number | null
+    accept_month: number | null
+    accept_years: number | null
+    unix: number | null
+  }
+
+  export type Read_bookbank_logSumAggregateOutputType = {
+    base_salary: number | null
+    provident_com: number | null
+    provident_emp: number | null
+    accept_month: number | null
+    accept_years: number | null
+    unix: number | null
+  }
+
+  export type Read_bookbank_logMinAggregateOutputType = {
+    id: string | null
+    date: Date | null
+    mas_bankId: string | null
+    bank_number: string | null
+    all_collectId: string | null
+    base_salary: number | null
+    provident_com: number | null
+    provident_emp: number | null
+    accept_date: Date | null
+    accept_month: number | null
+    accept_years: number | null
+    unix: number | null
+    update_by: string | null
+    update_date: Date | null
+    userId: string | null
+    bookbank_logId: string | null
+  }
+
+  export type Read_bookbank_logMaxAggregateOutputType = {
+    id: string | null
+    date: Date | null
+    mas_bankId: string | null
+    bank_number: string | null
+    all_collectId: string | null
+    base_salary: number | null
+    provident_com: number | null
+    provident_emp: number | null
+    accept_date: Date | null
+    accept_month: number | null
+    accept_years: number | null
+    unix: number | null
+    update_by: string | null
+    update_date: Date | null
+    userId: string | null
+    bookbank_logId: string | null
+  }
+
+  export type Read_bookbank_logCountAggregateOutputType = {
+    id: number
+    date: number
+    mas_bankId: number
+    bank_number: number
+    all_collectId: number
+    base_salary: number
+    provident_com: number
+    provident_emp: number
+    accept_date: number
+    accept_month: number
+    accept_years: number
+    unix: number
+    update_by: number
+    update_date: number
+    userId: number
+    bookbank_logId: number
+    _all: number
+  }
+
+
+  export type Read_bookbank_logAvgAggregateInputType = {
+    base_salary?: true
+    provident_com?: true
+    provident_emp?: true
+    accept_month?: true
+    accept_years?: true
+    unix?: true
+  }
+
+  export type Read_bookbank_logSumAggregateInputType = {
+    base_salary?: true
+    provident_com?: true
+    provident_emp?: true
+    accept_month?: true
+    accept_years?: true
+    unix?: true
+  }
+
+  export type Read_bookbank_logMinAggregateInputType = {
+    id?: true
+    date?: true
+    mas_bankId?: true
+    bank_number?: true
+    all_collectId?: true
+    base_salary?: true
+    provident_com?: true
+    provident_emp?: true
+    accept_date?: true
+    accept_month?: true
+    accept_years?: true
+    unix?: true
+    update_by?: true
+    update_date?: true
+    userId?: true
+    bookbank_logId?: true
+  }
+
+  export type Read_bookbank_logMaxAggregateInputType = {
+    id?: true
+    date?: true
+    mas_bankId?: true
+    bank_number?: true
+    all_collectId?: true
+    base_salary?: true
+    provident_com?: true
+    provident_emp?: true
+    accept_date?: true
+    accept_month?: true
+    accept_years?: true
+    unix?: true
+    update_by?: true
+    update_date?: true
+    userId?: true
+    bookbank_logId?: true
+  }
+
+  export type Read_bookbank_logCountAggregateInputType = {
+    id?: true
+    date?: true
+    mas_bankId?: true
+    bank_number?: true
+    all_collectId?: true
+    base_salary?: true
+    provident_com?: true
+    provident_emp?: true
+    accept_date?: true
+    accept_month?: true
+    accept_years?: true
+    unix?: true
+    update_by?: true
+    update_date?: true
+    userId?: true
+    bookbank_logId?: true
+    _all?: true
+  }
+
+  export type Read_bookbank_logAggregateArgs = {
+    /**
+     * Filter which read_bookbank_log to aggregate.
+     */
+    where?: read_bookbank_logWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of read_bookbank_logs to fetch.
+     */
+    orderBy?: Enumerable<read_bookbank_logOrderByWithRelationInput>
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: read_bookbank_logWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` read_bookbank_logs from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` read_bookbank_logs.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned read_bookbank_logs
+    **/
+    _count?: true | Read_bookbank_logCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: Read_bookbank_logAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: Read_bookbank_logSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: Read_bookbank_logMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: Read_bookbank_logMaxAggregateInputType
+  }
+
+  export type GetRead_bookbank_logAggregateType<T extends Read_bookbank_logAggregateArgs> = {
+        [P in keyof T & keyof AggregateRead_bookbank_log]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateRead_bookbank_log[P]>
+      : GetScalarType<T[P], AggregateRead_bookbank_log[P]>
+  }
+
+
+
+
+  export type Read_bookbank_logGroupByArgs = {
+    where?: read_bookbank_logWhereInput
+    orderBy?: Enumerable<read_bookbank_logOrderByWithAggregationInput>
+    by: Read_bookbank_logScalarFieldEnum[]
+    having?: read_bookbank_logScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: Read_bookbank_logCountAggregateInputType | true
+    _avg?: Read_bookbank_logAvgAggregateInputType
+    _sum?: Read_bookbank_logSumAggregateInputType
+    _min?: Read_bookbank_logMinAggregateInputType
+    _max?: Read_bookbank_logMaxAggregateInputType
+  }
+
+
+  export type Read_bookbank_logGroupByOutputType = {
+    id: string
+    date: Date
+    mas_bankId: string | null
+    bank_number: string
+    all_collectId: string | null
+    base_salary: number | null
+    provident_com: number | null
+    provident_emp: number | null
+    accept_date: Date
+    accept_month: number | null
+    accept_years: number | null
+    unix: number | null
+    update_by: string | null
+    update_date: Date | null
+    userId: string | null
+    bookbank_logId: string | null
+    _count: Read_bookbank_logCountAggregateOutputType | null
+    _avg: Read_bookbank_logAvgAggregateOutputType | null
+    _sum: Read_bookbank_logSumAggregateOutputType | null
+    _min: Read_bookbank_logMinAggregateOutputType | null
+    _max: Read_bookbank_logMaxAggregateOutputType | null
+  }
+
+  type GetRead_bookbank_logGroupByPayload<T extends Read_bookbank_logGroupByArgs> = PrismaPromise<
+    Array<
+      PickArray<Read_bookbank_logGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof Read_bookbank_logGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], Read_bookbank_logGroupByOutputType[P]>
+            : GetScalarType<T[P], Read_bookbank_logGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type read_bookbank_logSelect = {
+    id?: boolean
+    date?: boolean
+    mas_bankId?: boolean
+    bank_number?: boolean
+    all_collectId?: boolean
+    base_salary?: boolean
+    provident_com?: boolean
+    provident_emp?: boolean
+    accept_date?: boolean
+    accept_month?: boolean
+    accept_years?: boolean
+    unix?: boolean
+    update_by?: boolean
+    update_date?: boolean
+    userId?: boolean
+    bookbank_logId?: boolean
+    User?: boolean | UserArgs
+    bookbank_log?: boolean | bookbank_logArgs
+  }
+
+
+  export type read_bookbank_logInclude = {
+    User?: boolean | UserArgs
+    bookbank_log?: boolean | bookbank_logArgs
+  }
+
+  export type read_bookbank_logGetPayload<S extends boolean | null | undefined | read_bookbank_logArgs> =
+    S extends { select: any, include: any } ? 'Please either choose `select` or `include`' :
+    S extends true ? read_bookbank_log :
+    S extends undefined ? never :
+    S extends { include: any } & (read_bookbank_logArgs | read_bookbank_logFindManyArgs)
+    ? read_bookbank_log  & {
+    [P in TruthyKeys<S['include']>]:
+        P extends 'User' ? UserGetPayload<S['include'][P]> | null :
+        P extends 'bookbank_log' ? bookbank_logGetPayload<S['include'][P]> | null :  never
+  } 
+    : S extends { select: any } & (read_bookbank_logArgs | read_bookbank_logFindManyArgs)
+      ? {
+    [P in TruthyKeys<S['select']>]:
+        P extends 'User' ? UserGetPayload<S['select'][P]> | null :
+        P extends 'bookbank_log' ? bookbank_logGetPayload<S['select'][P]> | null :  P extends keyof read_bookbank_log ? read_bookbank_log[P] : never
+  } 
+      : read_bookbank_log
+
+
+  type read_bookbank_logCountArgs = 
+    Omit<read_bookbank_logFindManyArgs, 'select' | 'include'> & {
+      select?: Read_bookbank_logCountAggregateInputType | true
+    }
+
+  export interface read_bookbank_logDelegate<GlobalRejectSettings extends Prisma.RejectOnNotFound | Prisma.RejectPerOperation | false | undefined> {
+
+    /**
+     * Find zero or one Read_bookbank_log that matches the filter.
+     * @param {read_bookbank_logFindUniqueArgs} args - Arguments to find a Read_bookbank_log
+     * @example
+     * // Get one Read_bookbank_log
+     * const read_bookbank_log = await prisma.read_bookbank_log.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+    **/
+    findUnique<T extends read_bookbank_logFindUniqueArgs,  LocalRejectSettings = T["rejectOnNotFound"] extends RejectOnNotFound ? T['rejectOnNotFound'] : undefined>(
+      args: SelectSubset<T, read_bookbank_logFindUniqueArgs>
+    ): HasReject<GlobalRejectSettings, LocalRejectSettings, 'findUnique', 'read_bookbank_log'> extends True ? Prisma__read_bookbank_logClient<read_bookbank_logGetPayload<T>> : Prisma__read_bookbank_logClient<read_bookbank_logGetPayload<T> | null, null>
+
+    /**
+     * Find one Read_bookbank_log that matches the filter or throw an error  with `error.code='P2025'` 
+     *     if no matches were found.
+     * @param {read_bookbank_logFindUniqueOrThrowArgs} args - Arguments to find a Read_bookbank_log
+     * @example
+     * // Get one Read_bookbank_log
+     * const read_bookbank_log = await prisma.read_bookbank_log.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+    **/
+    findUniqueOrThrow<T extends read_bookbank_logFindUniqueOrThrowArgs>(
+      args?: SelectSubset<T, read_bookbank_logFindUniqueOrThrowArgs>
+    ): Prisma__read_bookbank_logClient<read_bookbank_logGetPayload<T>>
+
+    /**
+     * Find the first Read_bookbank_log that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {read_bookbank_logFindFirstArgs} args - Arguments to find a Read_bookbank_log
+     * @example
+     * // Get one Read_bookbank_log
+     * const read_bookbank_log = await prisma.read_bookbank_log.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+    **/
+    findFirst<T extends read_bookbank_logFindFirstArgs,  LocalRejectSettings = T["rejectOnNotFound"] extends RejectOnNotFound ? T['rejectOnNotFound'] : undefined>(
+      args?: SelectSubset<T, read_bookbank_logFindFirstArgs>
+    ): HasReject<GlobalRejectSettings, LocalRejectSettings, 'findFirst', 'read_bookbank_log'> extends True ? Prisma__read_bookbank_logClient<read_bookbank_logGetPayload<T>> : Prisma__read_bookbank_logClient<read_bookbank_logGetPayload<T> | null, null>
+
+    /**
+     * Find the first Read_bookbank_log that matches the filter or
+     * throw `NotFoundError` if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {read_bookbank_logFindFirstOrThrowArgs} args - Arguments to find a Read_bookbank_log
+     * @example
+     * // Get one Read_bookbank_log
+     * const read_bookbank_log = await prisma.read_bookbank_log.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+    **/
+    findFirstOrThrow<T extends read_bookbank_logFindFirstOrThrowArgs>(
+      args?: SelectSubset<T, read_bookbank_logFindFirstOrThrowArgs>
+    ): Prisma__read_bookbank_logClient<read_bookbank_logGetPayload<T>>
+
+    /**
+     * Find zero or more Read_bookbank_logs that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {read_bookbank_logFindManyArgs=} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all Read_bookbank_logs
+     * const read_bookbank_logs = await prisma.read_bookbank_log.findMany()
+     * 
+     * // Get first 10 Read_bookbank_logs
+     * const read_bookbank_logs = await prisma.read_bookbank_log.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const read_bookbank_logWithIdOnly = await prisma.read_bookbank_log.findMany({ select: { id: true } })
+     * 
+    **/
+    findMany<T extends read_bookbank_logFindManyArgs>(
+      args?: SelectSubset<T, read_bookbank_logFindManyArgs>
+    ): PrismaPromise<Array<read_bookbank_logGetPayload<T>>>
+
+    /**
+     * Create a Read_bookbank_log.
+     * @param {read_bookbank_logCreateArgs} args - Arguments to create a Read_bookbank_log.
+     * @example
+     * // Create one Read_bookbank_log
+     * const Read_bookbank_log = await prisma.read_bookbank_log.create({
+     *   data: {
+     *     // ... data to create a Read_bookbank_log
+     *   }
+     * })
+     * 
+    **/
+    create<T extends read_bookbank_logCreateArgs>(
+      args: SelectSubset<T, read_bookbank_logCreateArgs>
+    ): Prisma__read_bookbank_logClient<read_bookbank_logGetPayload<T>>
+
+    /**
+     * Create many Read_bookbank_logs.
+     *     @param {read_bookbank_logCreateManyArgs} args - Arguments to create many Read_bookbank_logs.
+     *     @example
+     *     // Create many Read_bookbank_logs
+     *     const read_bookbank_log = await prisma.read_bookbank_log.createMany({
+     *       data: {
+     *         // ... provide data here
+     *       }
+     *     })
+     *     
+    **/
+    createMany<T extends read_bookbank_logCreateManyArgs>(
+      args?: SelectSubset<T, read_bookbank_logCreateManyArgs>
+    ): PrismaPromise<BatchPayload>
+
+    /**
+     * Delete a Read_bookbank_log.
+     * @param {read_bookbank_logDeleteArgs} args - Arguments to delete one Read_bookbank_log.
+     * @example
+     * // Delete one Read_bookbank_log
+     * const Read_bookbank_log = await prisma.read_bookbank_log.delete({
+     *   where: {
+     *     // ... filter to delete one Read_bookbank_log
+     *   }
+     * })
+     * 
+    **/
+    delete<T extends read_bookbank_logDeleteArgs>(
+      args: SelectSubset<T, read_bookbank_logDeleteArgs>
+    ): Prisma__read_bookbank_logClient<read_bookbank_logGetPayload<T>>
+
+    /**
+     * Update one Read_bookbank_log.
+     * @param {read_bookbank_logUpdateArgs} args - Arguments to update one Read_bookbank_log.
+     * @example
+     * // Update one Read_bookbank_log
+     * const read_bookbank_log = await prisma.read_bookbank_log.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+    **/
+    update<T extends read_bookbank_logUpdateArgs>(
+      args: SelectSubset<T, read_bookbank_logUpdateArgs>
+    ): Prisma__read_bookbank_logClient<read_bookbank_logGetPayload<T>>
+
+    /**
+     * Delete zero or more Read_bookbank_logs.
+     * @param {read_bookbank_logDeleteManyArgs} args - Arguments to filter Read_bookbank_logs to delete.
+     * @example
+     * // Delete a few Read_bookbank_logs
+     * const { count } = await prisma.read_bookbank_log.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+    **/
+    deleteMany<T extends read_bookbank_logDeleteManyArgs>(
+      args?: SelectSubset<T, read_bookbank_logDeleteManyArgs>
+    ): PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Read_bookbank_logs.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {read_bookbank_logUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many Read_bookbank_logs
+     * const read_bookbank_log = await prisma.read_bookbank_log.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+    **/
+    updateMany<T extends read_bookbank_logUpdateManyArgs>(
+      args: SelectSubset<T, read_bookbank_logUpdateManyArgs>
+    ): PrismaPromise<BatchPayload>
+
+    /**
+     * Create or update one Read_bookbank_log.
+     * @param {read_bookbank_logUpsertArgs} args - Arguments to update or create a Read_bookbank_log.
+     * @example
+     * // Update or create a Read_bookbank_log
+     * const read_bookbank_log = await prisma.read_bookbank_log.upsert({
+     *   create: {
+     *     // ... data to create a Read_bookbank_log
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the Read_bookbank_log we want to update
+     *   }
+     * })
+    **/
+    upsert<T extends read_bookbank_logUpsertArgs>(
+      args: SelectSubset<T, read_bookbank_logUpsertArgs>
+    ): Prisma__read_bookbank_logClient<read_bookbank_logGetPayload<T>>
+
+    /**
+     * Count the number of Read_bookbank_logs.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {read_bookbank_logCountArgs} args - Arguments to filter Read_bookbank_logs to count.
+     * @example
+     * // Count the number of Read_bookbank_logs
+     * const count = await prisma.read_bookbank_log.count({
+     *   where: {
+     *     // ... the filter for the Read_bookbank_logs we want to count
+     *   }
+     * })
+    **/
+    count<T extends read_bookbank_logCountArgs>(
+      args?: Subset<T, read_bookbank_logCountArgs>,
+    ): PrismaPromise<
+      T extends _Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], Read_bookbank_logCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a Read_bookbank_log.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {Read_bookbank_logAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends Read_bookbank_logAggregateArgs>(args: Subset<T, Read_bookbank_logAggregateArgs>): PrismaPromise<GetRead_bookbank_logAggregateType<T>>
+
+    /**
+     * Group by Read_bookbank_log.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {Read_bookbank_logGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends Read_bookbank_logGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: Read_bookbank_logGroupByArgs['orderBy'] }
+        : { orderBy?: Read_bookbank_logGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends TupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, Read_bookbank_logGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetRead_bookbank_logGroupByPayload<T> : PrismaPromise<InputErrors>
+
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for read_bookbank_log.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export class Prisma__read_bookbank_logClient<T, Null = never> implements PrismaPromise<T> {
+    [prisma]: true;
+    private readonly _dmmf;
+    private readonly _fetcher;
+    private readonly _queryType;
+    private readonly _rootField;
+    private readonly _clientMethod;
+    private readonly _args;
+    private readonly _dataPath;
+    private readonly _errorFormat;
+    private readonly _measurePerformance?;
+    private _isList;
+    private _callsite;
+    private _requestPromise?;
+    constructor(_dmmf: runtime.DMMFClass, _fetcher: PrismaClientFetcher, _queryType: 'query' | 'mutation', _rootField: string, _clientMethod: string, _args: any, _dataPath: string[], _errorFormat: ErrorFormat, _measurePerformance?: boolean | undefined, _isList?: boolean);
+    readonly [Symbol.toStringTag]: 'PrismaClientPromise';
+
+    User<T extends UserArgs= {}>(args?: Subset<T, UserArgs>): Prisma__UserClient<UserGetPayload<T> | Null>;
+
+    bookbank_log<T extends bookbank_logArgs= {}>(args?: Subset<T, bookbank_logArgs>): Prisma__bookbank_logClient<bookbank_logGetPayload<T> | Null>;
+
+    private get _document();
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): Promise<TResult1 | TResult2>;
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): Promise<T | TResult>;
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): Promise<T>;
+  }
+
+
+
+  // Custom InputTypes
+
+  /**
+   * read_bookbank_log base type for findUnique actions
+   */
+  export type read_bookbank_logFindUniqueArgsBase = {
+    /**
+     * Select specific fields to fetch from the read_bookbank_log
+     */
+    select?: read_bookbank_logSelect | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: read_bookbank_logInclude | null
+    /**
+     * Filter, which read_bookbank_log to fetch.
+     */
+    where: read_bookbank_logWhereUniqueInput
+  }
+
+  /**
+   * read_bookbank_log findUnique
+   */
+  export interface read_bookbank_logFindUniqueArgs extends read_bookbank_logFindUniqueArgsBase {
+   /**
+    * Throw an Error if query returns no results
+    * @deprecated since 4.0.0: use `findUniqueOrThrow` method instead
+    */
+    rejectOnNotFound?: RejectOnNotFound
+  }
+      
+
+  /**
+   * read_bookbank_log findUniqueOrThrow
+   */
+  export type read_bookbank_logFindUniqueOrThrowArgs = {
+    /**
+     * Select specific fields to fetch from the read_bookbank_log
+     */
+    select?: read_bookbank_logSelect | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: read_bookbank_logInclude | null
+    /**
+     * Filter, which read_bookbank_log to fetch.
+     */
+    where: read_bookbank_logWhereUniqueInput
+  }
+
+
+  /**
+   * read_bookbank_log base type for findFirst actions
+   */
+  export type read_bookbank_logFindFirstArgsBase = {
+    /**
+     * Select specific fields to fetch from the read_bookbank_log
+     */
+    select?: read_bookbank_logSelect | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: read_bookbank_logInclude | null
+    /**
+     * Filter, which read_bookbank_log to fetch.
+     */
+    where?: read_bookbank_logWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of read_bookbank_logs to fetch.
+     */
+    orderBy?: Enumerable<read_bookbank_logOrderByWithRelationInput>
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for read_bookbank_logs.
+     */
+    cursor?: read_bookbank_logWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` read_bookbank_logs from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` read_bookbank_logs.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of read_bookbank_logs.
+     */
+    distinct?: Enumerable<Read_bookbank_logScalarFieldEnum>
+  }
+
+  /**
+   * read_bookbank_log findFirst
+   */
+  export interface read_bookbank_logFindFirstArgs extends read_bookbank_logFindFirstArgsBase {
+   /**
+    * Throw an Error if query returns no results
+    * @deprecated since 4.0.0: use `findFirstOrThrow` method instead
+    */
+    rejectOnNotFound?: RejectOnNotFound
+  }
+      
+
+  /**
+   * read_bookbank_log findFirstOrThrow
+   */
+  export type read_bookbank_logFindFirstOrThrowArgs = {
+    /**
+     * Select specific fields to fetch from the read_bookbank_log
+     */
+    select?: read_bookbank_logSelect | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: read_bookbank_logInclude | null
+    /**
+     * Filter, which read_bookbank_log to fetch.
+     */
+    where?: read_bookbank_logWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of read_bookbank_logs to fetch.
+     */
+    orderBy?: Enumerable<read_bookbank_logOrderByWithRelationInput>
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for read_bookbank_logs.
+     */
+    cursor?: read_bookbank_logWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` read_bookbank_logs from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` read_bookbank_logs.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of read_bookbank_logs.
+     */
+    distinct?: Enumerable<Read_bookbank_logScalarFieldEnum>
+  }
+
+
+  /**
+   * read_bookbank_log findMany
+   */
+  export type read_bookbank_logFindManyArgs = {
+    /**
+     * Select specific fields to fetch from the read_bookbank_log
+     */
+    select?: read_bookbank_logSelect | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: read_bookbank_logInclude | null
+    /**
+     * Filter, which read_bookbank_logs to fetch.
+     */
+    where?: read_bookbank_logWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of read_bookbank_logs to fetch.
+     */
+    orderBy?: Enumerable<read_bookbank_logOrderByWithRelationInput>
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing read_bookbank_logs.
+     */
+    cursor?: read_bookbank_logWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` read_bookbank_logs from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` read_bookbank_logs.
+     */
+    skip?: number
+    distinct?: Enumerable<Read_bookbank_logScalarFieldEnum>
+  }
+
+
+  /**
+   * read_bookbank_log create
+   */
+  export type read_bookbank_logCreateArgs = {
+    /**
+     * Select specific fields to fetch from the read_bookbank_log
+     */
+    select?: read_bookbank_logSelect | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: read_bookbank_logInclude | null
+    /**
+     * The data needed to create a read_bookbank_log.
+     */
+    data: XOR<read_bookbank_logCreateInput, read_bookbank_logUncheckedCreateInput>
+  }
+
+
+  /**
+   * read_bookbank_log createMany
+   */
+  export type read_bookbank_logCreateManyArgs = {
+    /**
+     * The data used to create many read_bookbank_logs.
+     */
+    data: Enumerable<read_bookbank_logCreateManyInput>
+    skipDuplicates?: boolean
+  }
+
+
+  /**
+   * read_bookbank_log update
+   */
+  export type read_bookbank_logUpdateArgs = {
+    /**
+     * Select specific fields to fetch from the read_bookbank_log
+     */
+    select?: read_bookbank_logSelect | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: read_bookbank_logInclude | null
+    /**
+     * The data needed to update a read_bookbank_log.
+     */
+    data: XOR<read_bookbank_logUpdateInput, read_bookbank_logUncheckedUpdateInput>
+    /**
+     * Choose, which read_bookbank_log to update.
+     */
+    where: read_bookbank_logWhereUniqueInput
+  }
+
+
+  /**
+   * read_bookbank_log updateMany
+   */
+  export type read_bookbank_logUpdateManyArgs = {
+    /**
+     * The data used to update read_bookbank_logs.
+     */
+    data: XOR<read_bookbank_logUpdateManyMutationInput, read_bookbank_logUncheckedUpdateManyInput>
+    /**
+     * Filter which read_bookbank_logs to update
+     */
+    where?: read_bookbank_logWhereInput
+  }
+
+
+  /**
+   * read_bookbank_log upsert
+   */
+  export type read_bookbank_logUpsertArgs = {
+    /**
+     * Select specific fields to fetch from the read_bookbank_log
+     */
+    select?: read_bookbank_logSelect | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: read_bookbank_logInclude | null
+    /**
+     * The filter to search for the read_bookbank_log to update in case it exists.
+     */
+    where: read_bookbank_logWhereUniqueInput
+    /**
+     * In case the read_bookbank_log found by the `where` argument doesn't exist, create a new read_bookbank_log with this data.
+     */
+    create: XOR<read_bookbank_logCreateInput, read_bookbank_logUncheckedCreateInput>
+    /**
+     * In case the read_bookbank_log was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<read_bookbank_logUpdateInput, read_bookbank_logUncheckedUpdateInput>
+  }
+
+
+  /**
+   * read_bookbank_log delete
+   */
+  export type read_bookbank_logDeleteArgs = {
+    /**
+     * Select specific fields to fetch from the read_bookbank_log
+     */
+    select?: read_bookbank_logSelect | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: read_bookbank_logInclude | null
+    /**
+     * Filter which read_bookbank_log to delete.
+     */
+    where: read_bookbank_logWhereUniqueInput
+  }
+
+
+  /**
+   * read_bookbank_log deleteMany
+   */
+  export type read_bookbank_logDeleteManyArgs = {
+    /**
+     * Filter which read_bookbank_logs to delete
+     */
+    where?: read_bookbank_logWhereInput
+  }
+
+
+  /**
+   * read_bookbank_log without action
+   */
+  export type read_bookbank_logArgs = {
+    /**
+     * Select specific fields to fetch from the read_bookbank_log
+     */
+    select?: read_bookbank_logSelect | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: read_bookbank_logInclude | null
   }
 
 
@@ -36127,6 +37300,28 @@ export namespace Prisma {
   export type QueryMode = (typeof QueryMode)[keyof typeof QueryMode]
 
 
+  export const Read_bookbank_logScalarFieldEnum: {
+    id: 'id',
+    date: 'date',
+    mas_bankId: 'mas_bankId',
+    bank_number: 'bank_number',
+    all_collectId: 'all_collectId',
+    base_salary: 'base_salary',
+    provident_com: 'provident_com',
+    provident_emp: 'provident_emp',
+    accept_date: 'accept_date',
+    accept_month: 'accept_month',
+    accept_years: 'accept_years',
+    unix: 'unix',
+    update_by: 'update_by',
+    update_date: 'update_date',
+    userId: 'userId',
+    bookbank_logId: 'bookbank_logId'
+  };
+
+  export type Read_bookbank_logScalarFieldEnum = (typeof Read_bookbank_logScalarFieldEnum)[keyof typeof Read_bookbank_logScalarFieldEnum]
+
+
   export const RoleScalarFieldEnum: {
     id: 'id',
     name: 'name'
@@ -36757,6 +37952,7 @@ export namespace Prisma {
     bookbank_log?: Bookbank_logListRelationFilter
     data_leave?: Data_leaveListRelationFilter
     cretedByfk?: Log_positionnListRelationFilter
+    read_bookbank_log?: Read_bookbank_logListRelationFilter
   }
 
   export type UserOrderByWithRelationInput = {
@@ -36784,6 +37980,7 @@ export namespace Prisma {
     bookbank_log?: bookbank_logOrderByRelationAggregateInput
     data_leave?: data_leaveOrderByRelationAggregateInput
     cretedByfk?: log_positionnOrderByRelationAggregateInput
+    read_bookbank_log?: read_bookbank_logOrderByRelationAggregateInput
   }
 
   export type UserWhereUniqueInput = {
@@ -38052,6 +39249,7 @@ export namespace Prisma {
     User?: XOR<UserRelationFilter, UserWhereInput> | null
     userId?: UuidNullableFilter | string | null
     provident_log?: Provident_logListRelationFilter
+    read_bookbank_log?: Read_bookbank_logListRelationFilter
   }
 
   export type bookbank_logOrderByWithRelationInput = {
@@ -38072,6 +39270,7 @@ export namespace Prisma {
     User?: UserOrderByWithRelationInput
     userId?: SortOrder
     provident_log?: provident_logOrderByRelationAggregateInput
+    read_bookbank_log?: read_bookbank_logOrderByRelationAggregateInput
   }
 
   export type bookbank_logWhereUniqueInput = {
@@ -38116,6 +39315,101 @@ export namespace Prisma {
     accept_years?: IntNullableWithAggregatesFilter | number | null
     unix?: IntNullableWithAggregatesFilter | number | null
     userId?: UuidNullableWithAggregatesFilter | string | null
+  }
+
+  export type read_bookbank_logWhereInput = {
+    AND?: Enumerable<read_bookbank_logWhereInput>
+    OR?: Enumerable<read_bookbank_logWhereInput>
+    NOT?: Enumerable<read_bookbank_logWhereInput>
+    id?: UuidFilter | string
+    date?: DateTimeFilter | Date | string
+    mas_bankId?: UuidNullableFilter | string | null
+    bank_number?: StringFilter | string
+    all_collectId?: UuidNullableFilter | string | null
+    base_salary?: FloatNullableFilter | number | null
+    provident_com?: FloatNullableFilter | number | null
+    provident_emp?: FloatNullableFilter | number | null
+    accept_date?: DateTimeFilter | Date | string
+    accept_month?: IntNullableFilter | number | null
+    accept_years?: IntNullableFilter | number | null
+    unix?: IntNullableFilter | number | null
+    update_by?: StringNullableFilter | string | null
+    update_date?: DateTimeNullableFilter | Date | string | null
+    userId?: UuidNullableFilter | string | null
+    bookbank_logId?: UuidNullableFilter | string | null
+    User?: XOR<UserRelationFilter, UserWhereInput> | null
+    bookbank_log?: XOR<Bookbank_logRelationFilter, bookbank_logWhereInput> | null
+  }
+
+  export type read_bookbank_logOrderByWithRelationInput = {
+    id?: SortOrder
+    date?: SortOrder
+    mas_bankId?: SortOrder
+    bank_number?: SortOrder
+    all_collectId?: SortOrder
+    base_salary?: SortOrder
+    provident_com?: SortOrder
+    provident_emp?: SortOrder
+    accept_date?: SortOrder
+    accept_month?: SortOrder
+    accept_years?: SortOrder
+    unix?: SortOrder
+    update_by?: SortOrder
+    update_date?: SortOrder
+    userId?: SortOrder
+    bookbank_logId?: SortOrder
+    User?: UserOrderByWithRelationInput
+    bookbank_log?: bookbank_logOrderByWithRelationInput
+  }
+
+  export type read_bookbank_logWhereUniqueInput = {
+    id?: string
+  }
+
+  export type read_bookbank_logOrderByWithAggregationInput = {
+    id?: SortOrder
+    date?: SortOrder
+    mas_bankId?: SortOrder
+    bank_number?: SortOrder
+    all_collectId?: SortOrder
+    base_salary?: SortOrder
+    provident_com?: SortOrder
+    provident_emp?: SortOrder
+    accept_date?: SortOrder
+    accept_month?: SortOrder
+    accept_years?: SortOrder
+    unix?: SortOrder
+    update_by?: SortOrder
+    update_date?: SortOrder
+    userId?: SortOrder
+    bookbank_logId?: SortOrder
+    _count?: read_bookbank_logCountOrderByAggregateInput
+    _avg?: read_bookbank_logAvgOrderByAggregateInput
+    _max?: read_bookbank_logMaxOrderByAggregateInput
+    _min?: read_bookbank_logMinOrderByAggregateInput
+    _sum?: read_bookbank_logSumOrderByAggregateInput
+  }
+
+  export type read_bookbank_logScalarWhereWithAggregatesInput = {
+    AND?: Enumerable<read_bookbank_logScalarWhereWithAggregatesInput>
+    OR?: Enumerable<read_bookbank_logScalarWhereWithAggregatesInput>
+    NOT?: Enumerable<read_bookbank_logScalarWhereWithAggregatesInput>
+    id?: UuidWithAggregatesFilter | string
+    date?: DateTimeWithAggregatesFilter | Date | string
+    mas_bankId?: UuidNullableWithAggregatesFilter | string | null
+    bank_number?: StringWithAggregatesFilter | string
+    all_collectId?: UuidNullableWithAggregatesFilter | string | null
+    base_salary?: FloatNullableWithAggregatesFilter | number | null
+    provident_com?: FloatNullableWithAggregatesFilter | number | null
+    provident_emp?: FloatNullableWithAggregatesFilter | number | null
+    accept_date?: DateTimeWithAggregatesFilter | Date | string
+    accept_month?: IntNullableWithAggregatesFilter | number | null
+    accept_years?: IntNullableWithAggregatesFilter | number | null
+    unix?: IntNullableWithAggregatesFilter | number | null
+    update_by?: StringNullableWithAggregatesFilter | string | null
+    update_date?: DateTimeNullableWithAggregatesFilter | Date | string | null
+    userId?: UuidNullableWithAggregatesFilter | string | null
+    bookbank_logId?: UuidNullableWithAggregatesFilter | string | null
   }
 
   export type provident_logWhereInput = {
@@ -39188,6 +40482,7 @@ export namespace Prisma {
     bookbank_log?: bookbank_logCreateNestedManyWithoutUserInput
     data_leave?: data_leaveCreateNestedManyWithoutUserInput
     cretedByfk?: log_positionnCreateNestedManyWithoutCretedByfkInput
+    read_bookbank_log?: read_bookbank_logCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateInput = {
@@ -39212,6 +40507,7 @@ export namespace Prisma {
     bookbank_log?: bookbank_logUncheckedCreateNestedManyWithoutUserInput
     data_leave?: data_leaveUncheckedCreateNestedManyWithoutUserInput
     cretedByfk?: log_positionnUncheckedCreateNestedManyWithoutCretedByfkInput
+    read_bookbank_log?: read_bookbank_logUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserUpdateInput = {
@@ -39236,6 +40532,7 @@ export namespace Prisma {
     bookbank_log?: bookbank_logUpdateManyWithoutUserNestedInput
     data_leave?: data_leaveUpdateManyWithoutUserNestedInput
     cretedByfk?: log_positionnUpdateManyWithoutCretedByfkNestedInput
+    read_bookbank_log?: read_bookbank_logUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateInput = {
@@ -39260,6 +40557,7 @@ export namespace Prisma {
     bookbank_log?: bookbank_logUncheckedUpdateManyWithoutUserNestedInput
     data_leave?: data_leaveUncheckedUpdateManyWithoutUserNestedInput
     cretedByfk?: log_positionnUncheckedUpdateManyWithoutCretedByfkNestedInput
+    read_bookbank_log?: read_bookbank_logUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type UserCreateManyInput = {
@@ -40797,6 +42095,7 @@ export namespace Prisma {
     mas_bank?: mas_bankCreateNestedOneWithoutBookbank_logInput
     User?: UserCreateNestedOneWithoutBookbank_logInput
     provident_log?: provident_logCreateNestedManyWithoutBookbank_logInput
+    read_bookbank_log?: read_bookbank_logCreateNestedManyWithoutBookbank_logInput
   }
 
   export type bookbank_logUncheckedCreateInput = {
@@ -40815,6 +42114,7 @@ export namespace Prisma {
     salary?: salaryUncheckedCreateNestedManyWithoutBookbank_logInput
     userId?: string | null
     provident_log?: provident_logUncheckedCreateNestedManyWithoutBookbank_logInput
+    read_bookbank_log?: read_bookbank_logUncheckedCreateNestedManyWithoutBookbank_logInput
   }
 
   export type bookbank_logUpdateInput = {
@@ -40833,6 +42133,7 @@ export namespace Prisma {
     mas_bank?: mas_bankUpdateOneWithoutBookbank_logNestedInput
     User?: UserUpdateOneWithoutBookbank_logNestedInput
     provident_log?: provident_logUpdateManyWithoutBookbank_logNestedInput
+    read_bookbank_log?: read_bookbank_logUpdateManyWithoutBookbank_logNestedInput
   }
 
   export type bookbank_logUncheckedUpdateInput = {
@@ -40851,6 +42152,7 @@ export namespace Prisma {
     salary?: salaryUncheckedUpdateManyWithoutBookbank_logNestedInput
     userId?: NullableStringFieldUpdateOperationsInput | string | null
     provident_log?: provident_logUncheckedUpdateManyWithoutBookbank_logNestedInput
+    read_bookbank_log?: read_bookbank_logUncheckedUpdateManyWithoutBookbank_logNestedInput
   }
 
   export type bookbank_logCreateManyInput = {
@@ -40897,6 +42199,137 @@ export namespace Prisma {
     accept_years?: NullableIntFieldUpdateOperationsInput | number | null
     unix?: NullableIntFieldUpdateOperationsInput | number | null
     userId?: NullableStringFieldUpdateOperationsInput | string | null
+  }
+
+  export type read_bookbank_logCreateInput = {
+    id: string
+    date: Date | string
+    mas_bankId?: string | null
+    bank_number: string
+    all_collectId?: string | null
+    base_salary?: number | null
+    provident_com?: number | null
+    provident_emp?: number | null
+    accept_date: Date | string
+    accept_month?: number | null
+    accept_years?: number | null
+    unix?: number | null
+    update_by?: string | null
+    update_date?: Date | string | null
+    User?: UserCreateNestedOneWithoutRead_bookbank_logInput
+    bookbank_log?: bookbank_logCreateNestedOneWithoutRead_bookbank_logInput
+  }
+
+  export type read_bookbank_logUncheckedCreateInput = {
+    id: string
+    date: Date | string
+    mas_bankId?: string | null
+    bank_number: string
+    all_collectId?: string | null
+    base_salary?: number | null
+    provident_com?: number | null
+    provident_emp?: number | null
+    accept_date: Date | string
+    accept_month?: number | null
+    accept_years?: number | null
+    unix?: number | null
+    update_by?: string | null
+    update_date?: Date | string | null
+    userId?: string | null
+    bookbank_logId?: string | null
+  }
+
+  export type read_bookbank_logUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    date?: DateTimeFieldUpdateOperationsInput | Date | string
+    mas_bankId?: NullableStringFieldUpdateOperationsInput | string | null
+    bank_number?: StringFieldUpdateOperationsInput | string
+    all_collectId?: NullableStringFieldUpdateOperationsInput | string | null
+    base_salary?: NullableFloatFieldUpdateOperationsInput | number | null
+    provident_com?: NullableFloatFieldUpdateOperationsInput | number | null
+    provident_emp?: NullableFloatFieldUpdateOperationsInput | number | null
+    accept_date?: DateTimeFieldUpdateOperationsInput | Date | string
+    accept_month?: NullableIntFieldUpdateOperationsInput | number | null
+    accept_years?: NullableIntFieldUpdateOperationsInput | number | null
+    unix?: NullableIntFieldUpdateOperationsInput | number | null
+    update_by?: NullableStringFieldUpdateOperationsInput | string | null
+    update_date?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    User?: UserUpdateOneWithoutRead_bookbank_logNestedInput
+    bookbank_log?: bookbank_logUpdateOneWithoutRead_bookbank_logNestedInput
+  }
+
+  export type read_bookbank_logUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    date?: DateTimeFieldUpdateOperationsInput | Date | string
+    mas_bankId?: NullableStringFieldUpdateOperationsInput | string | null
+    bank_number?: StringFieldUpdateOperationsInput | string
+    all_collectId?: NullableStringFieldUpdateOperationsInput | string | null
+    base_salary?: NullableFloatFieldUpdateOperationsInput | number | null
+    provident_com?: NullableFloatFieldUpdateOperationsInput | number | null
+    provident_emp?: NullableFloatFieldUpdateOperationsInput | number | null
+    accept_date?: DateTimeFieldUpdateOperationsInput | Date | string
+    accept_month?: NullableIntFieldUpdateOperationsInput | number | null
+    accept_years?: NullableIntFieldUpdateOperationsInput | number | null
+    unix?: NullableIntFieldUpdateOperationsInput | number | null
+    update_by?: NullableStringFieldUpdateOperationsInput | string | null
+    update_date?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    userId?: NullableStringFieldUpdateOperationsInput | string | null
+    bookbank_logId?: NullableStringFieldUpdateOperationsInput | string | null
+  }
+
+  export type read_bookbank_logCreateManyInput = {
+    id: string
+    date: Date | string
+    mas_bankId?: string | null
+    bank_number: string
+    all_collectId?: string | null
+    base_salary?: number | null
+    provident_com?: number | null
+    provident_emp?: number | null
+    accept_date: Date | string
+    accept_month?: number | null
+    accept_years?: number | null
+    unix?: number | null
+    update_by?: string | null
+    update_date?: Date | string | null
+    userId?: string | null
+    bookbank_logId?: string | null
+  }
+
+  export type read_bookbank_logUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    date?: DateTimeFieldUpdateOperationsInput | Date | string
+    mas_bankId?: NullableStringFieldUpdateOperationsInput | string | null
+    bank_number?: StringFieldUpdateOperationsInput | string
+    all_collectId?: NullableStringFieldUpdateOperationsInput | string | null
+    base_salary?: NullableFloatFieldUpdateOperationsInput | number | null
+    provident_com?: NullableFloatFieldUpdateOperationsInput | number | null
+    provident_emp?: NullableFloatFieldUpdateOperationsInput | number | null
+    accept_date?: DateTimeFieldUpdateOperationsInput | Date | string
+    accept_month?: NullableIntFieldUpdateOperationsInput | number | null
+    accept_years?: NullableIntFieldUpdateOperationsInput | number | null
+    unix?: NullableIntFieldUpdateOperationsInput | number | null
+    update_by?: NullableStringFieldUpdateOperationsInput | string | null
+    update_date?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  }
+
+  export type read_bookbank_logUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    date?: DateTimeFieldUpdateOperationsInput | Date | string
+    mas_bankId?: NullableStringFieldUpdateOperationsInput | string | null
+    bank_number?: StringFieldUpdateOperationsInput | string
+    all_collectId?: NullableStringFieldUpdateOperationsInput | string | null
+    base_salary?: NullableFloatFieldUpdateOperationsInput | number | null
+    provident_com?: NullableFloatFieldUpdateOperationsInput | number | null
+    provident_emp?: NullableFloatFieldUpdateOperationsInput | number | null
+    accept_date?: DateTimeFieldUpdateOperationsInput | Date | string
+    accept_month?: NullableIntFieldUpdateOperationsInput | number | null
+    accept_years?: NullableIntFieldUpdateOperationsInput | number | null
+    unix?: NullableIntFieldUpdateOperationsInput | number | null
+    update_by?: NullableStringFieldUpdateOperationsInput | string | null
+    update_date?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    userId?: NullableStringFieldUpdateOperationsInput | string | null
+    bookbank_logId?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type provident_logCreateInput = {
@@ -41966,6 +43399,12 @@ export namespace Prisma {
     none?: log_positionnWhereInput
   }
 
+  export type Read_bookbank_logListRelationFilter = {
+    every?: read_bookbank_logWhereInput
+    some?: read_bookbank_logWhereInput
+    none?: read_bookbank_logWhereInput
+  }
+
   export type CompanyOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
@@ -41995,6 +43434,10 @@ export namespace Prisma {
   }
 
   export type log_positionnOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type read_bookbank_logOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
@@ -43099,6 +44542,81 @@ export namespace Prisma {
     unix?: SortOrder
   }
 
+  export type read_bookbank_logCountOrderByAggregateInput = {
+    id?: SortOrder
+    date?: SortOrder
+    mas_bankId?: SortOrder
+    bank_number?: SortOrder
+    all_collectId?: SortOrder
+    base_salary?: SortOrder
+    provident_com?: SortOrder
+    provident_emp?: SortOrder
+    accept_date?: SortOrder
+    accept_month?: SortOrder
+    accept_years?: SortOrder
+    unix?: SortOrder
+    update_by?: SortOrder
+    update_date?: SortOrder
+    userId?: SortOrder
+    bookbank_logId?: SortOrder
+  }
+
+  export type read_bookbank_logAvgOrderByAggregateInput = {
+    base_salary?: SortOrder
+    provident_com?: SortOrder
+    provident_emp?: SortOrder
+    accept_month?: SortOrder
+    accept_years?: SortOrder
+    unix?: SortOrder
+  }
+
+  export type read_bookbank_logMaxOrderByAggregateInput = {
+    id?: SortOrder
+    date?: SortOrder
+    mas_bankId?: SortOrder
+    bank_number?: SortOrder
+    all_collectId?: SortOrder
+    base_salary?: SortOrder
+    provident_com?: SortOrder
+    provident_emp?: SortOrder
+    accept_date?: SortOrder
+    accept_month?: SortOrder
+    accept_years?: SortOrder
+    unix?: SortOrder
+    update_by?: SortOrder
+    update_date?: SortOrder
+    userId?: SortOrder
+    bookbank_logId?: SortOrder
+  }
+
+  export type read_bookbank_logMinOrderByAggregateInput = {
+    id?: SortOrder
+    date?: SortOrder
+    mas_bankId?: SortOrder
+    bank_number?: SortOrder
+    all_collectId?: SortOrder
+    base_salary?: SortOrder
+    provident_com?: SortOrder
+    provident_emp?: SortOrder
+    accept_date?: SortOrder
+    accept_month?: SortOrder
+    accept_years?: SortOrder
+    unix?: SortOrder
+    update_by?: SortOrder
+    update_date?: SortOrder
+    userId?: SortOrder
+    bookbank_logId?: SortOrder
+  }
+
+  export type read_bookbank_logSumOrderByAggregateInput = {
+    base_salary?: SortOrder
+    provident_com?: SortOrder
+    provident_emp?: SortOrder
+    accept_month?: SortOrder
+    accept_years?: SortOrder
+    unix?: SortOrder
+  }
+
   export type Mas_all_collectRelationFilter = {
     is?: mas_all_collectWhereInput | null
     isNot?: mas_all_collectWhereInput | null
@@ -43923,6 +45441,13 @@ export namespace Prisma {
     connect?: Enumerable<log_positionnWhereUniqueInput>
   }
 
+  export type read_bookbank_logCreateNestedManyWithoutUserInput = {
+    create?: XOR<Enumerable<read_bookbank_logCreateWithoutUserInput>, Enumerable<read_bookbank_logUncheckedCreateWithoutUserInput>>
+    connectOrCreate?: Enumerable<read_bookbank_logCreateOrConnectWithoutUserInput>
+    createMany?: read_bookbank_logCreateManyUserInputEnvelope
+    connect?: Enumerable<read_bookbank_logWhereUniqueInput>
+  }
+
   export type ProfileUncheckedCreateNestedOneWithoutUserInput = {
     create?: XOR<ProfileCreateWithoutUserInput, ProfileUncheckedCreateWithoutUserInput>
     connectOrCreate?: ProfileCreateOrConnectWithoutUserInput
@@ -43990,6 +45515,13 @@ export namespace Prisma {
     connectOrCreate?: Enumerable<log_positionnCreateOrConnectWithoutCretedByfkInput>
     createMany?: log_positionnCreateManyCretedByfkInputEnvelope
     connect?: Enumerable<log_positionnWhereUniqueInput>
+  }
+
+  export type read_bookbank_logUncheckedCreateNestedManyWithoutUserInput = {
+    create?: XOR<Enumerable<read_bookbank_logCreateWithoutUserInput>, Enumerable<read_bookbank_logUncheckedCreateWithoutUserInput>>
+    connectOrCreate?: Enumerable<read_bookbank_logCreateOrConnectWithoutUserInput>
+    createMany?: read_bookbank_logCreateManyUserInputEnvelope
+    connect?: Enumerable<read_bookbank_logWhereUniqueInput>
   }
 
   export type ProfileUpdateOneWithoutUserNestedInput = {
@@ -44158,6 +45690,20 @@ export namespace Prisma {
     deleteMany?: Enumerable<log_positionnScalarWhereInput>
   }
 
+  export type read_bookbank_logUpdateManyWithoutUserNestedInput = {
+    create?: XOR<Enumerable<read_bookbank_logCreateWithoutUserInput>, Enumerable<read_bookbank_logUncheckedCreateWithoutUserInput>>
+    connectOrCreate?: Enumerable<read_bookbank_logCreateOrConnectWithoutUserInput>
+    upsert?: Enumerable<read_bookbank_logUpsertWithWhereUniqueWithoutUserInput>
+    createMany?: read_bookbank_logCreateManyUserInputEnvelope
+    set?: Enumerable<read_bookbank_logWhereUniqueInput>
+    disconnect?: Enumerable<read_bookbank_logWhereUniqueInput>
+    delete?: Enumerable<read_bookbank_logWhereUniqueInput>
+    connect?: Enumerable<read_bookbank_logWhereUniqueInput>
+    update?: Enumerable<read_bookbank_logUpdateWithWhereUniqueWithoutUserInput>
+    updateMany?: Enumerable<read_bookbank_logUpdateManyWithWhereWithoutUserInput>
+    deleteMany?: Enumerable<read_bookbank_logScalarWhereInput>
+  }
+
   export type ProfileUncheckedUpdateOneWithoutUserNestedInput = {
     create?: XOR<ProfileCreateWithoutUserInput, ProfileUncheckedCreateWithoutUserInput>
     connectOrCreate?: ProfileCreateOrConnectWithoutUserInput
@@ -44292,6 +45838,20 @@ export namespace Prisma {
     update?: Enumerable<log_positionnUpdateWithWhereUniqueWithoutCretedByfkInput>
     updateMany?: Enumerable<log_positionnUpdateManyWithWhereWithoutCretedByfkInput>
     deleteMany?: Enumerable<log_positionnScalarWhereInput>
+  }
+
+  export type read_bookbank_logUncheckedUpdateManyWithoutUserNestedInput = {
+    create?: XOR<Enumerable<read_bookbank_logCreateWithoutUserInput>, Enumerable<read_bookbank_logUncheckedCreateWithoutUserInput>>
+    connectOrCreate?: Enumerable<read_bookbank_logCreateOrConnectWithoutUserInput>
+    upsert?: Enumerable<read_bookbank_logUpsertWithWhereUniqueWithoutUserInput>
+    createMany?: read_bookbank_logCreateManyUserInputEnvelope
+    set?: Enumerable<read_bookbank_logWhereUniqueInput>
+    disconnect?: Enumerable<read_bookbank_logWhereUniqueInput>
+    delete?: Enumerable<read_bookbank_logWhereUniqueInput>
+    connect?: Enumerable<read_bookbank_logWhereUniqueInput>
+    update?: Enumerable<read_bookbank_logUpdateWithWhereUniqueWithoutUserInput>
+    updateMany?: Enumerable<read_bookbank_logUpdateManyWithWhereWithoutUserInput>
+    deleteMany?: Enumerable<read_bookbank_logScalarWhereInput>
   }
 
   export type UserCreateNestedManyWithoutRoleInput = {
@@ -45729,6 +47289,13 @@ export namespace Prisma {
     connect?: Enumerable<provident_logWhereUniqueInput>
   }
 
+  export type read_bookbank_logCreateNestedManyWithoutBookbank_logInput = {
+    create?: XOR<Enumerable<read_bookbank_logCreateWithoutBookbank_logInput>, Enumerable<read_bookbank_logUncheckedCreateWithoutBookbank_logInput>>
+    connectOrCreate?: Enumerable<read_bookbank_logCreateOrConnectWithoutBookbank_logInput>
+    createMany?: read_bookbank_logCreateManyBookbank_logInputEnvelope
+    connect?: Enumerable<read_bookbank_logWhereUniqueInput>
+  }
+
   export type salaryUncheckedCreateNestedManyWithoutBookbank_logInput = {
     create?: XOR<Enumerable<salaryCreateWithoutBookbank_logInput>, Enumerable<salaryUncheckedCreateWithoutBookbank_logInput>>
     connectOrCreate?: Enumerable<salaryCreateOrConnectWithoutBookbank_logInput>
@@ -45741,6 +47308,13 @@ export namespace Prisma {
     connectOrCreate?: Enumerable<provident_logCreateOrConnectWithoutBookbank_logInput>
     createMany?: provident_logCreateManyBookbank_logInputEnvelope
     connect?: Enumerable<provident_logWhereUniqueInput>
+  }
+
+  export type read_bookbank_logUncheckedCreateNestedManyWithoutBookbank_logInput = {
+    create?: XOR<Enumerable<read_bookbank_logCreateWithoutBookbank_logInput>, Enumerable<read_bookbank_logUncheckedCreateWithoutBookbank_logInput>>
+    connectOrCreate?: Enumerable<read_bookbank_logCreateOrConnectWithoutBookbank_logInput>
+    createMany?: read_bookbank_logCreateManyBookbank_logInputEnvelope
+    connect?: Enumerable<read_bookbank_logWhereUniqueInput>
   }
 
   export type salaryUpdateManyWithoutBookbank_logNestedInput = {
@@ -45791,6 +47365,20 @@ export namespace Prisma {
     deleteMany?: Enumerable<provident_logScalarWhereInput>
   }
 
+  export type read_bookbank_logUpdateManyWithoutBookbank_logNestedInput = {
+    create?: XOR<Enumerable<read_bookbank_logCreateWithoutBookbank_logInput>, Enumerable<read_bookbank_logUncheckedCreateWithoutBookbank_logInput>>
+    connectOrCreate?: Enumerable<read_bookbank_logCreateOrConnectWithoutBookbank_logInput>
+    upsert?: Enumerable<read_bookbank_logUpsertWithWhereUniqueWithoutBookbank_logInput>
+    createMany?: read_bookbank_logCreateManyBookbank_logInputEnvelope
+    set?: Enumerable<read_bookbank_logWhereUniqueInput>
+    disconnect?: Enumerable<read_bookbank_logWhereUniqueInput>
+    delete?: Enumerable<read_bookbank_logWhereUniqueInput>
+    connect?: Enumerable<read_bookbank_logWhereUniqueInput>
+    update?: Enumerable<read_bookbank_logUpdateWithWhereUniqueWithoutBookbank_logInput>
+    updateMany?: Enumerable<read_bookbank_logUpdateManyWithWhereWithoutBookbank_logInput>
+    deleteMany?: Enumerable<read_bookbank_logScalarWhereInput>
+  }
+
   export type salaryUncheckedUpdateManyWithoutBookbank_logNestedInput = {
     create?: XOR<Enumerable<salaryCreateWithoutBookbank_logInput>, Enumerable<salaryUncheckedCreateWithoutBookbank_logInput>>
     connectOrCreate?: Enumerable<salaryCreateOrConnectWithoutBookbank_logInput>
@@ -45817,6 +47405,52 @@ export namespace Prisma {
     update?: Enumerable<provident_logUpdateWithWhereUniqueWithoutBookbank_logInput>
     updateMany?: Enumerable<provident_logUpdateManyWithWhereWithoutBookbank_logInput>
     deleteMany?: Enumerable<provident_logScalarWhereInput>
+  }
+
+  export type read_bookbank_logUncheckedUpdateManyWithoutBookbank_logNestedInput = {
+    create?: XOR<Enumerable<read_bookbank_logCreateWithoutBookbank_logInput>, Enumerable<read_bookbank_logUncheckedCreateWithoutBookbank_logInput>>
+    connectOrCreate?: Enumerable<read_bookbank_logCreateOrConnectWithoutBookbank_logInput>
+    upsert?: Enumerable<read_bookbank_logUpsertWithWhereUniqueWithoutBookbank_logInput>
+    createMany?: read_bookbank_logCreateManyBookbank_logInputEnvelope
+    set?: Enumerable<read_bookbank_logWhereUniqueInput>
+    disconnect?: Enumerable<read_bookbank_logWhereUniqueInput>
+    delete?: Enumerable<read_bookbank_logWhereUniqueInput>
+    connect?: Enumerable<read_bookbank_logWhereUniqueInput>
+    update?: Enumerable<read_bookbank_logUpdateWithWhereUniqueWithoutBookbank_logInput>
+    updateMany?: Enumerable<read_bookbank_logUpdateManyWithWhereWithoutBookbank_logInput>
+    deleteMany?: Enumerable<read_bookbank_logScalarWhereInput>
+  }
+
+  export type UserCreateNestedOneWithoutRead_bookbank_logInput = {
+    create?: XOR<UserCreateWithoutRead_bookbank_logInput, UserUncheckedCreateWithoutRead_bookbank_logInput>
+    connectOrCreate?: UserCreateOrConnectWithoutRead_bookbank_logInput
+    connect?: UserWhereUniqueInput
+  }
+
+  export type bookbank_logCreateNestedOneWithoutRead_bookbank_logInput = {
+    create?: XOR<bookbank_logCreateWithoutRead_bookbank_logInput, bookbank_logUncheckedCreateWithoutRead_bookbank_logInput>
+    connectOrCreate?: bookbank_logCreateOrConnectWithoutRead_bookbank_logInput
+    connect?: bookbank_logWhereUniqueInput
+  }
+
+  export type UserUpdateOneWithoutRead_bookbank_logNestedInput = {
+    create?: XOR<UserCreateWithoutRead_bookbank_logInput, UserUncheckedCreateWithoutRead_bookbank_logInput>
+    connectOrCreate?: UserCreateOrConnectWithoutRead_bookbank_logInput
+    upsert?: UserUpsertWithoutRead_bookbank_logInput
+    disconnect?: boolean
+    delete?: boolean
+    connect?: UserWhereUniqueInput
+    update?: XOR<UserUpdateWithoutRead_bookbank_logInput, UserUncheckedUpdateWithoutRead_bookbank_logInput>
+  }
+
+  export type bookbank_logUpdateOneWithoutRead_bookbank_logNestedInput = {
+    create?: XOR<bookbank_logCreateWithoutRead_bookbank_logInput, bookbank_logUncheckedCreateWithoutRead_bookbank_logInput>
+    connectOrCreate?: bookbank_logCreateOrConnectWithoutRead_bookbank_logInput
+    upsert?: bookbank_logUpsertWithoutRead_bookbank_logInput
+    disconnect?: boolean
+    delete?: boolean
+    connect?: bookbank_logWhereUniqueInput
+    update?: XOR<bookbank_logUpdateWithoutRead_bookbank_logInput, bookbank_logUncheckedUpdateWithoutRead_bookbank_logInput>
   }
 
   export type UserCreateNestedOneWithoutProvident_logInput = {
@@ -46447,6 +48081,7 @@ export namespace Prisma {
     bookbank_log?: bookbank_logCreateNestedManyWithoutUserInput
     data_leave?: data_leaveCreateNestedManyWithoutUserInput
     cretedByfk?: log_positionnCreateNestedManyWithoutCretedByfkInput
+    read_bookbank_log?: read_bookbank_logCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutCompanyInput = {
@@ -46470,6 +48105,7 @@ export namespace Prisma {
     bookbank_log?: bookbank_logUncheckedCreateNestedManyWithoutUserInput
     data_leave?: data_leaveUncheckedCreateNestedManyWithoutUserInput
     cretedByfk?: log_positionnUncheckedCreateNestedManyWithoutCretedByfkInput
+    read_bookbank_log?: read_bookbank_logUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutCompanyInput = {
@@ -46735,6 +48371,7 @@ export namespace Prisma {
     bookbank_log?: bookbank_logUpdateManyWithoutUserNestedInput
     data_leave?: data_leaveUpdateManyWithoutUserNestedInput
     cretedByfk?: log_positionnUpdateManyWithoutCretedByfkNestedInput
+    read_bookbank_log?: read_bookbank_logUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutCompanyInput = {
@@ -46758,6 +48395,7 @@ export namespace Prisma {
     bookbank_log?: bookbank_logUncheckedUpdateManyWithoutUserNestedInput
     data_leave?: data_leaveUncheckedUpdateManyWithoutUserNestedInput
     cretedByfk?: log_positionnUncheckedUpdateManyWithoutCretedByfkNestedInput
+    read_bookbank_log?: read_bookbank_logUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type CompanyBranchUpsertWithWhereUniqueWithoutCompanyInput = {
@@ -47034,6 +48672,7 @@ export namespace Prisma {
     bookbank_log?: bookbank_logCreateNestedManyWithoutUserInput
     data_leave?: data_leaveCreateNestedManyWithoutUserInput
     cretedByfk?: log_positionnCreateNestedManyWithoutCretedByfkInput
+    read_bookbank_log?: read_bookbank_logCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutCompanyBranchInput = {
@@ -47057,6 +48696,7 @@ export namespace Prisma {
     bookbank_log?: bookbank_logUncheckedCreateNestedManyWithoutUserInput
     data_leave?: data_leaveUncheckedCreateNestedManyWithoutUserInput
     cretedByfk?: log_positionnUncheckedCreateNestedManyWithoutCretedByfkInput
+    read_bookbank_log?: read_bookbank_logUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutCompanyBranchInput = {
@@ -47345,6 +48985,7 @@ export namespace Prisma {
     bookbank_log?: bookbank_logCreateNestedManyWithoutUserInput
     data_leave?: data_leaveCreateNestedManyWithoutUserInput
     cretedByfk?: log_positionnCreateNestedManyWithoutCretedByfkInput
+    read_bookbank_log?: read_bookbank_logCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutProfileInput = {
@@ -47368,6 +49009,7 @@ export namespace Prisma {
     bookbank_log?: bookbank_logUncheckedCreateNestedManyWithoutUserInput
     data_leave?: data_leaveUncheckedCreateNestedManyWithoutUserInput
     cretedByfk?: log_positionnUncheckedCreateNestedManyWithoutCretedByfkInput
+    read_bookbank_log?: read_bookbank_logUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutProfileInput = {
@@ -47484,6 +49126,7 @@ export namespace Prisma {
     bookbank_log?: bookbank_logUpdateManyWithoutUserNestedInput
     data_leave?: data_leaveUpdateManyWithoutUserNestedInput
     cretedByfk?: log_positionnUpdateManyWithoutCretedByfkNestedInput
+    read_bookbank_log?: read_bookbank_logUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutProfileInput = {
@@ -47507,6 +49150,7 @@ export namespace Prisma {
     bookbank_log?: bookbank_logUncheckedUpdateManyWithoutUserNestedInput
     data_leave?: data_leaveUncheckedUpdateManyWithoutUserNestedInput
     cretedByfk?: log_positionnUncheckedUpdateManyWithoutCretedByfkNestedInput
+    read_bookbank_log?: read_bookbank_logUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type mas_positionlevel1UpsertWithoutProfileInput = {
@@ -48105,6 +49749,7 @@ export namespace Prisma {
     salary?: salaryCreateNestedManyWithoutBookbank_logInput
     mas_bank?: mas_bankCreateNestedOneWithoutBookbank_logInput
     provident_log?: provident_logCreateNestedManyWithoutBookbank_logInput
+    read_bookbank_log?: read_bookbank_logCreateNestedManyWithoutBookbank_logInput
   }
 
   export type bookbank_logUncheckedCreateWithoutUserInput = {
@@ -48122,6 +49767,7 @@ export namespace Prisma {
     unix?: number | null
     salary?: salaryUncheckedCreateNestedManyWithoutBookbank_logInput
     provident_log?: provident_logUncheckedCreateNestedManyWithoutBookbank_logInput
+    read_bookbank_log?: read_bookbank_logUncheckedCreateNestedManyWithoutBookbank_logInput
   }
 
   export type bookbank_logCreateOrConnectWithoutUserInput = {
@@ -48189,6 +49835,52 @@ export namespace Prisma {
 
   export type log_positionnCreateManyCretedByfkInputEnvelope = {
     data: Enumerable<log_positionnCreateManyCretedByfkInput>
+    skipDuplicates?: boolean
+  }
+
+  export type read_bookbank_logCreateWithoutUserInput = {
+    id: string
+    date: Date | string
+    mas_bankId?: string | null
+    bank_number: string
+    all_collectId?: string | null
+    base_salary?: number | null
+    provident_com?: number | null
+    provident_emp?: number | null
+    accept_date: Date | string
+    accept_month?: number | null
+    accept_years?: number | null
+    unix?: number | null
+    update_by?: string | null
+    update_date?: Date | string | null
+    bookbank_log?: bookbank_logCreateNestedOneWithoutRead_bookbank_logInput
+  }
+
+  export type read_bookbank_logUncheckedCreateWithoutUserInput = {
+    id: string
+    date: Date | string
+    mas_bankId?: string | null
+    bank_number: string
+    all_collectId?: string | null
+    base_salary?: number | null
+    provident_com?: number | null
+    provident_emp?: number | null
+    accept_date: Date | string
+    accept_month?: number | null
+    accept_years?: number | null
+    unix?: number | null
+    update_by?: string | null
+    update_date?: Date | string | null
+    bookbank_logId?: string | null
+  }
+
+  export type read_bookbank_logCreateOrConnectWithoutUserInput = {
+    where: read_bookbank_logWhereUniqueInput
+    create: XOR<read_bookbank_logCreateWithoutUserInput, read_bookbank_logUncheckedCreateWithoutUserInput>
+  }
+
+  export type read_bookbank_logCreateManyUserInputEnvelope = {
+    data: Enumerable<read_bookbank_logCreateManyUserInput>
     skipDuplicates?: boolean
   }
 
@@ -48714,6 +50406,44 @@ export namespace Prisma {
     detail?: StringFilter | string
   }
 
+  export type read_bookbank_logUpsertWithWhereUniqueWithoutUserInput = {
+    where: read_bookbank_logWhereUniqueInput
+    update: XOR<read_bookbank_logUpdateWithoutUserInput, read_bookbank_logUncheckedUpdateWithoutUserInput>
+    create: XOR<read_bookbank_logCreateWithoutUserInput, read_bookbank_logUncheckedCreateWithoutUserInput>
+  }
+
+  export type read_bookbank_logUpdateWithWhereUniqueWithoutUserInput = {
+    where: read_bookbank_logWhereUniqueInput
+    data: XOR<read_bookbank_logUpdateWithoutUserInput, read_bookbank_logUncheckedUpdateWithoutUserInput>
+  }
+
+  export type read_bookbank_logUpdateManyWithWhereWithoutUserInput = {
+    where: read_bookbank_logScalarWhereInput
+    data: XOR<read_bookbank_logUpdateManyMutationInput, read_bookbank_logUncheckedUpdateManyWithoutRead_bookbank_logInput>
+  }
+
+  export type read_bookbank_logScalarWhereInput = {
+    AND?: Enumerable<read_bookbank_logScalarWhereInput>
+    OR?: Enumerable<read_bookbank_logScalarWhereInput>
+    NOT?: Enumerable<read_bookbank_logScalarWhereInput>
+    id?: UuidFilter | string
+    date?: DateTimeFilter | Date | string
+    mas_bankId?: UuidNullableFilter | string | null
+    bank_number?: StringFilter | string
+    all_collectId?: UuidNullableFilter | string | null
+    base_salary?: FloatNullableFilter | number | null
+    provident_com?: FloatNullableFilter | number | null
+    provident_emp?: FloatNullableFilter | number | null
+    accept_date?: DateTimeFilter | Date | string
+    accept_month?: IntNullableFilter | number | null
+    accept_years?: IntNullableFilter | number | null
+    unix?: IntNullableFilter | number | null
+    update_by?: StringNullableFilter | string | null
+    update_date?: DateTimeNullableFilter | Date | string | null
+    userId?: UuidNullableFilter | string | null
+    bookbank_logId?: UuidNullableFilter | string | null
+  }
+
   export type UserCreateWithoutRoleInput = {
     id: string
     email: string
@@ -48735,6 +50465,7 @@ export namespace Prisma {
     bookbank_log?: bookbank_logCreateNestedManyWithoutUserInput
     data_leave?: data_leaveCreateNestedManyWithoutUserInput
     cretedByfk?: log_positionnCreateNestedManyWithoutCretedByfkInput
+    read_bookbank_log?: read_bookbank_logCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutRoleInput = {
@@ -48758,6 +50489,7 @@ export namespace Prisma {
     bookbank_log?: bookbank_logUncheckedCreateNestedManyWithoutUserInput
     data_leave?: data_leaveUncheckedCreateNestedManyWithoutUserInput
     cretedByfk?: log_positionnUncheckedCreateNestedManyWithoutCretedByfkInput
+    read_bookbank_log?: read_bookbank_logUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutRoleInput = {
@@ -48807,6 +50539,7 @@ export namespace Prisma {
     bookbank_log?: bookbank_logCreateNestedManyWithoutUserInput
     data_leave?: data_leaveCreateNestedManyWithoutUserInput
     cretedByfk?: log_positionnCreateNestedManyWithoutCretedByfkInput
+    read_bookbank_log?: read_bookbank_logCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutRole_CompanyInput = {
@@ -48830,6 +50563,7 @@ export namespace Prisma {
     bookbank_log?: bookbank_logUncheckedCreateNestedManyWithoutUserInput
     data_leave?: data_leaveUncheckedCreateNestedManyWithoutUserInput
     cretedByfk?: log_positionnUncheckedCreateNestedManyWithoutCretedByfkInput
+    read_bookbank_log?: read_bookbank_logUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutRole_CompanyInput = {
@@ -50331,6 +52065,7 @@ export namespace Prisma {
     bookbank_log?: bookbank_logCreateNestedManyWithoutUserInput
     data_leave?: data_leaveCreateNestedManyWithoutUserInput
     cretedByfk?: log_positionnCreateNestedManyWithoutCretedByfkInput
+    read_bookbank_log?: read_bookbank_logCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutHenchmanInput = {
@@ -50354,6 +52089,7 @@ export namespace Prisma {
     bookbank_log?: bookbank_logUncheckedCreateNestedManyWithoutUserInput
     data_leave?: data_leaveUncheckedCreateNestedManyWithoutUserInput
     cretedByfk?: log_positionnUncheckedCreateNestedManyWithoutCretedByfkInput
+    read_bookbank_log?: read_bookbank_logUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutHenchmanInput = {
@@ -50382,6 +52118,7 @@ export namespace Prisma {
     bookbank_log?: bookbank_logCreateNestedManyWithoutUserInput
     data_leave?: data_leaveCreateNestedManyWithoutUserInput
     cretedByfk?: log_positionnCreateNestedManyWithoutCretedByfkInput
+    read_bookbank_log?: read_bookbank_logCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutPosition_userInput = {
@@ -50405,6 +52142,7 @@ export namespace Prisma {
     bookbank_log?: bookbank_logUncheckedCreateNestedManyWithoutUserInput
     data_leave?: data_leaveUncheckedCreateNestedManyWithoutUserInput
     cretedByfk?: log_positionnUncheckedCreateNestedManyWithoutCretedByfkInput
+    read_bookbank_log?: read_bookbank_logUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutPosition_userInput = {
@@ -50545,6 +52283,7 @@ export namespace Prisma {
     bookbank_log?: bookbank_logUpdateManyWithoutUserNestedInput
     data_leave?: data_leaveUpdateManyWithoutUserNestedInput
     cretedByfk?: log_positionnUpdateManyWithoutCretedByfkNestedInput
+    read_bookbank_log?: read_bookbank_logUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutHenchmanInput = {
@@ -50568,6 +52307,7 @@ export namespace Prisma {
     bookbank_log?: bookbank_logUncheckedUpdateManyWithoutUserNestedInput
     data_leave?: data_leaveUncheckedUpdateManyWithoutUserNestedInput
     cretedByfk?: log_positionnUncheckedUpdateManyWithoutCretedByfkNestedInput
+    read_bookbank_log?: read_bookbank_logUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type UserUpsertWithoutPosition_userInput = {
@@ -50596,6 +52336,7 @@ export namespace Prisma {
     bookbank_log?: bookbank_logUpdateManyWithoutUserNestedInput
     data_leave?: data_leaveUpdateManyWithoutUserNestedInput
     cretedByfk?: log_positionnUpdateManyWithoutCretedByfkNestedInput
+    read_bookbank_log?: read_bookbank_logUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutPosition_userInput = {
@@ -50619,6 +52360,7 @@ export namespace Prisma {
     bookbank_log?: bookbank_logUncheckedUpdateManyWithoutUserNestedInput
     data_leave?: data_leaveUncheckedUpdateManyWithoutUserNestedInput
     cretedByfk?: log_positionnUncheckedUpdateManyWithoutCretedByfkNestedInput
+    read_bookbank_log?: read_bookbank_logUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type mas_positionlevel1UpsertWithoutPosition_userInput = {
@@ -50859,6 +52601,7 @@ export namespace Prisma {
     salary?: salaryCreateNestedManyWithoutBookbank_logInput
     User?: UserCreateNestedOneWithoutBookbank_logInput
     provident_log?: provident_logCreateNestedManyWithoutBookbank_logInput
+    read_bookbank_log?: read_bookbank_logCreateNestedManyWithoutBookbank_logInput
   }
 
   export type bookbank_logUncheckedCreateWithoutMas_bankInput = {
@@ -50876,6 +52619,7 @@ export namespace Prisma {
     salary?: salaryUncheckedCreateNestedManyWithoutBookbank_logInput
     userId?: string | null
     provident_log?: provident_logUncheckedCreateNestedManyWithoutBookbank_logInput
+    read_bookbank_log?: read_bookbank_logUncheckedCreateNestedManyWithoutBookbank_logInput
   }
 
   export type bookbank_logCreateOrConnectWithoutMas_bankInput = {
@@ -51843,6 +53587,7 @@ export namespace Prisma {
     bookbank_log?: bookbank_logCreateNestedManyWithoutUserInput
     data_leave?: data_leaveCreateNestedManyWithoutUserInput
     cretedByfk?: log_positionnCreateNestedManyWithoutCretedByfkInput
+    read_bookbank_log?: read_bookbank_logCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutSalaryInput = {
@@ -51866,6 +53611,7 @@ export namespace Prisma {
     bookbank_log?: bookbank_logUncheckedCreateNestedManyWithoutUserInput
     data_leave?: data_leaveUncheckedCreateNestedManyWithoutUserInput
     cretedByfk?: log_positionnUncheckedCreateNestedManyWithoutCretedByfkInput
+    read_bookbank_log?: read_bookbank_logUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutSalaryInput = {
@@ -51888,6 +53634,7 @@ export namespace Prisma {
     mas_bank?: mas_bankCreateNestedOneWithoutBookbank_logInput
     User?: UserCreateNestedOneWithoutBookbank_logInput
     provident_log?: provident_logCreateNestedManyWithoutBookbank_logInput
+    read_bookbank_log?: read_bookbank_logCreateNestedManyWithoutBookbank_logInput
   }
 
   export type bookbank_logUncheckedCreateWithoutSalaryInput = {
@@ -51905,6 +53652,7 @@ export namespace Prisma {
     unix?: number | null
     userId?: string | null
     provident_log?: provident_logUncheckedCreateNestedManyWithoutBookbank_logInput
+    read_bookbank_log?: read_bookbank_logUncheckedCreateNestedManyWithoutBookbank_logInput
   }
 
   export type bookbank_logCreateOrConnectWithoutSalaryInput = {
@@ -52061,6 +53809,7 @@ export namespace Prisma {
     bookbank_log?: bookbank_logUpdateManyWithoutUserNestedInput
     data_leave?: data_leaveUpdateManyWithoutUserNestedInput
     cretedByfk?: log_positionnUpdateManyWithoutCretedByfkNestedInput
+    read_bookbank_log?: read_bookbank_logUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutSalaryInput = {
@@ -52084,6 +53833,7 @@ export namespace Prisma {
     bookbank_log?: bookbank_logUncheckedUpdateManyWithoutUserNestedInput
     data_leave?: data_leaveUncheckedUpdateManyWithoutUserNestedInput
     cretedByfk?: log_positionnUncheckedUpdateManyWithoutCretedByfkNestedInput
+    read_bookbank_log?: read_bookbank_logUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type bookbank_logUpsertWithoutSalaryInput = {
@@ -52106,6 +53856,7 @@ export namespace Prisma {
     mas_bank?: mas_bankUpdateOneWithoutBookbank_logNestedInput
     User?: UserUpdateOneWithoutBookbank_logNestedInput
     provident_log?: provident_logUpdateManyWithoutBookbank_logNestedInput
+    read_bookbank_log?: read_bookbank_logUpdateManyWithoutBookbank_logNestedInput
   }
 
   export type bookbank_logUncheckedUpdateWithoutSalaryInput = {
@@ -52123,6 +53874,7 @@ export namespace Prisma {
     unix?: NullableIntFieldUpdateOperationsInput | number | null
     userId?: NullableStringFieldUpdateOperationsInput | string | null
     provident_log?: provident_logUncheckedUpdateManyWithoutBookbank_logNestedInput
+    read_bookbank_log?: read_bookbank_logUncheckedUpdateManyWithoutBookbank_logNestedInput
   }
 
   export type mas_income_typeUpsertWithoutSalaryInput = {
@@ -52253,6 +54005,7 @@ export namespace Prisma {
     bookbank_log?: bookbank_logCreateNestedManyWithoutUserInput
     data_leave?: data_leaveCreateNestedManyWithoutUserInput
     cretedByfk?: log_positionnCreateNestedManyWithoutCretedByfkInput
+    read_bookbank_log?: read_bookbank_logCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutMas_all_collectInput = {
@@ -52276,6 +54029,7 @@ export namespace Prisma {
     bookbank_log?: bookbank_logUncheckedCreateNestedManyWithoutUserInput
     data_leave?: data_leaveUncheckedCreateNestedManyWithoutUserInput
     cretedByfk?: log_positionnUncheckedCreateNestedManyWithoutCretedByfkInput
+    read_bookbank_log?: read_bookbank_logUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutMas_all_collectInput = {
@@ -52339,6 +54093,7 @@ export namespace Prisma {
     bookbank_log?: bookbank_logUpdateManyWithoutUserNestedInput
     data_leave?: data_leaveUpdateManyWithoutUserNestedInput
     cretedByfk?: log_positionnUpdateManyWithoutCretedByfkNestedInput
+    read_bookbank_log?: read_bookbank_logUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutMas_all_collectInput = {
@@ -52362,6 +54117,7 @@ export namespace Prisma {
     bookbank_log?: bookbank_logUncheckedUpdateManyWithoutUserNestedInput
     data_leave?: data_leaveUncheckedUpdateManyWithoutUserNestedInput
     cretedByfk?: log_positionnUncheckedUpdateManyWithoutCretedByfkNestedInput
+    read_bookbank_log?: read_bookbank_logUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type provident_logUpsertWithWhereUniqueWithoutMas_all_collectInput = {
@@ -52522,6 +54278,7 @@ export namespace Prisma {
     provident_log?: provident_logCreateNestedManyWithoutUserInput
     data_leave?: data_leaveCreateNestedManyWithoutUserInput
     cretedByfk?: log_positionnCreateNestedManyWithoutCretedByfkInput
+    read_bookbank_log?: read_bookbank_logCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutBookbank_logInput = {
@@ -52545,6 +54302,7 @@ export namespace Prisma {
     provident_log?: provident_logUncheckedCreateNestedManyWithoutUserInput
     data_leave?: data_leaveUncheckedCreateNestedManyWithoutUserInput
     cretedByfk?: log_positionnUncheckedCreateNestedManyWithoutCretedByfkInput
+    read_bookbank_log?: read_bookbank_logUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutBookbank_logInput = {
@@ -52579,6 +54337,52 @@ export namespace Prisma {
 
   export type provident_logCreateManyBookbank_logInputEnvelope = {
     data: Enumerable<provident_logCreateManyBookbank_logInput>
+    skipDuplicates?: boolean
+  }
+
+  export type read_bookbank_logCreateWithoutBookbank_logInput = {
+    id: string
+    date: Date | string
+    mas_bankId?: string | null
+    bank_number: string
+    all_collectId?: string | null
+    base_salary?: number | null
+    provident_com?: number | null
+    provident_emp?: number | null
+    accept_date: Date | string
+    accept_month?: number | null
+    accept_years?: number | null
+    unix?: number | null
+    update_by?: string | null
+    update_date?: Date | string | null
+    User?: UserCreateNestedOneWithoutRead_bookbank_logInput
+  }
+
+  export type read_bookbank_logUncheckedCreateWithoutBookbank_logInput = {
+    id: string
+    date: Date | string
+    mas_bankId?: string | null
+    bank_number: string
+    all_collectId?: string | null
+    base_salary?: number | null
+    provident_com?: number | null
+    provident_emp?: number | null
+    accept_date: Date | string
+    accept_month?: number | null
+    accept_years?: number | null
+    unix?: number | null
+    update_by?: string | null
+    update_date?: Date | string | null
+    userId?: string | null
+  }
+
+  export type read_bookbank_logCreateOrConnectWithoutBookbank_logInput = {
+    where: read_bookbank_logWhereUniqueInput
+    create: XOR<read_bookbank_logCreateWithoutBookbank_logInput, read_bookbank_logUncheckedCreateWithoutBookbank_logInput>
+  }
+
+  export type read_bookbank_logCreateManyBookbank_logInputEnvelope = {
+    data: Enumerable<read_bookbank_logCreateManyBookbank_logInput>
     skipDuplicates?: boolean
   }
 
@@ -52645,6 +54449,7 @@ export namespace Prisma {
     provident_log?: provident_logUpdateManyWithoutUserNestedInput
     data_leave?: data_leaveUpdateManyWithoutUserNestedInput
     cretedByfk?: log_positionnUpdateManyWithoutCretedByfkNestedInput
+    read_bookbank_log?: read_bookbank_logUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutBookbank_logInput = {
@@ -52668,6 +54473,7 @@ export namespace Prisma {
     provident_log?: provident_logUncheckedUpdateManyWithoutUserNestedInput
     data_leave?: data_leaveUncheckedUpdateManyWithoutUserNestedInput
     cretedByfk?: log_positionnUncheckedUpdateManyWithoutCretedByfkNestedInput
+    read_bookbank_log?: read_bookbank_logUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type provident_logUpsertWithWhereUniqueWithoutBookbank_logInput = {
@@ -52684,6 +54490,210 @@ export namespace Prisma {
   export type provident_logUpdateManyWithWhereWithoutBookbank_logInput = {
     where: provident_logScalarWhereInput
     data: XOR<provident_logUpdateManyMutationInput, provident_logUncheckedUpdateManyWithoutProvident_logInput>
+  }
+
+  export type read_bookbank_logUpsertWithWhereUniqueWithoutBookbank_logInput = {
+    where: read_bookbank_logWhereUniqueInput
+    update: XOR<read_bookbank_logUpdateWithoutBookbank_logInput, read_bookbank_logUncheckedUpdateWithoutBookbank_logInput>
+    create: XOR<read_bookbank_logCreateWithoutBookbank_logInput, read_bookbank_logUncheckedCreateWithoutBookbank_logInput>
+  }
+
+  export type read_bookbank_logUpdateWithWhereUniqueWithoutBookbank_logInput = {
+    where: read_bookbank_logWhereUniqueInput
+    data: XOR<read_bookbank_logUpdateWithoutBookbank_logInput, read_bookbank_logUncheckedUpdateWithoutBookbank_logInput>
+  }
+
+  export type read_bookbank_logUpdateManyWithWhereWithoutBookbank_logInput = {
+    where: read_bookbank_logScalarWhereInput
+    data: XOR<read_bookbank_logUpdateManyMutationInput, read_bookbank_logUncheckedUpdateManyWithoutRead_bookbank_logInput>
+  }
+
+  export type UserCreateWithoutRead_bookbank_logInput = {
+    id: string
+    email: string
+    password: string
+    profile?: ProfileCreateNestedOneWithoutUserInput
+    islogin?: boolean
+    isActive?: boolean
+    isOwner?: boolean
+    lastlogin?: Date | string | null
+    createdAt?: Date | string
+    role?: RoleCreateNestedOneWithoutUsersInput
+    company?: CompanyCreateNestedManyWithoutOwnerInput
+    companyBranch?: CompanyBranchCreateNestedOneWithoutUsersInput
+    Role_Company?: Role_CompanyCreateNestedOneWithoutUsersInput
+    Position_user?: Position_userCreateNestedManyWithoutUserInput
+    henchman?: Position_userCreateNestedManyWithoutHeaderInput
+    mas_all_collect?: mas_all_collectCreateNestedManyWithoutUserInput
+    salary?: salaryCreateNestedManyWithoutUserInput
+    provident_log?: provident_logCreateNestedManyWithoutUserInput
+    bookbank_log?: bookbank_logCreateNestedManyWithoutUserInput
+    data_leave?: data_leaveCreateNestedManyWithoutUserInput
+    cretedByfk?: log_positionnCreateNestedManyWithoutCretedByfkInput
+  }
+
+  export type UserUncheckedCreateWithoutRead_bookbank_logInput = {
+    id: string
+    email: string
+    password: string
+    profile?: ProfileUncheckedCreateNestedOneWithoutUserInput
+    islogin?: boolean
+    isActive?: boolean
+    isOwner?: boolean
+    lastlogin?: Date | string | null
+    createdAt?: Date | string
+    roleId?: string | null
+    RoleCompanyID?: string | null
+    company?: CompanyUncheckedCreateNestedManyWithoutOwnerInput
+    companyBranchId?: string | null
+    Position_user?: Position_userUncheckedCreateNestedManyWithoutUserInput
+    henchman?: Position_userUncheckedCreateNestedManyWithoutHeaderInput
+    mas_all_collect?: mas_all_collectUncheckedCreateNestedManyWithoutUserInput
+    salary?: salaryUncheckedCreateNestedManyWithoutUserInput
+    provident_log?: provident_logUncheckedCreateNestedManyWithoutUserInput
+    bookbank_log?: bookbank_logUncheckedCreateNestedManyWithoutUserInput
+    data_leave?: data_leaveUncheckedCreateNestedManyWithoutUserInput
+    cretedByfk?: log_positionnUncheckedCreateNestedManyWithoutCretedByfkInput
+  }
+
+  export type UserCreateOrConnectWithoutRead_bookbank_logInput = {
+    where: UserWhereUniqueInput
+    create: XOR<UserCreateWithoutRead_bookbank_logInput, UserUncheckedCreateWithoutRead_bookbank_logInput>
+  }
+
+  export type bookbank_logCreateWithoutRead_bookbank_logInput = {
+    id: string
+    date: Date | string
+    bank_number: string
+    all_collectId?: string | null
+    base_salary: number
+    provident_com?: number
+    provident_emp?: number
+    accept_date: Date | string
+    accept_month?: number | null
+    accept_years?: number | null
+    unix?: number | null
+    salary?: salaryCreateNestedManyWithoutBookbank_logInput
+    mas_bank?: mas_bankCreateNestedOneWithoutBookbank_logInput
+    User?: UserCreateNestedOneWithoutBookbank_logInput
+    provident_log?: provident_logCreateNestedManyWithoutBookbank_logInput
+  }
+
+  export type bookbank_logUncheckedCreateWithoutRead_bookbank_logInput = {
+    id: string
+    date: Date | string
+    mas_bankId?: string | null
+    bank_number: string
+    all_collectId?: string | null
+    base_salary: number
+    provident_com?: number
+    provident_emp?: number
+    accept_date: Date | string
+    accept_month?: number | null
+    accept_years?: number | null
+    unix?: number | null
+    salary?: salaryUncheckedCreateNestedManyWithoutBookbank_logInput
+    userId?: string | null
+    provident_log?: provident_logUncheckedCreateNestedManyWithoutBookbank_logInput
+  }
+
+  export type bookbank_logCreateOrConnectWithoutRead_bookbank_logInput = {
+    where: bookbank_logWhereUniqueInput
+    create: XOR<bookbank_logCreateWithoutRead_bookbank_logInput, bookbank_logUncheckedCreateWithoutRead_bookbank_logInput>
+  }
+
+  export type UserUpsertWithoutRead_bookbank_logInput = {
+    update: XOR<UserUpdateWithoutRead_bookbank_logInput, UserUncheckedUpdateWithoutRead_bookbank_logInput>
+    create: XOR<UserCreateWithoutRead_bookbank_logInput, UserUncheckedCreateWithoutRead_bookbank_logInput>
+  }
+
+  export type UserUpdateWithoutRead_bookbank_logInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    password?: StringFieldUpdateOperationsInput | string
+    profile?: ProfileUpdateOneWithoutUserNestedInput
+    islogin?: BoolFieldUpdateOperationsInput | boolean
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    isOwner?: BoolFieldUpdateOperationsInput | boolean
+    lastlogin?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    role?: RoleUpdateOneWithoutUsersNestedInput
+    company?: CompanyUpdateManyWithoutOwnerNestedInput
+    companyBranch?: CompanyBranchUpdateOneWithoutUsersNestedInput
+    Role_Company?: Role_CompanyUpdateOneWithoutUsersNestedInput
+    Position_user?: Position_userUpdateManyWithoutUserNestedInput
+    henchman?: Position_userUpdateManyWithoutHeaderNestedInput
+    mas_all_collect?: mas_all_collectUpdateManyWithoutUserNestedInput
+    salary?: salaryUpdateManyWithoutUserNestedInput
+    provident_log?: provident_logUpdateManyWithoutUserNestedInput
+    bookbank_log?: bookbank_logUpdateManyWithoutUserNestedInput
+    data_leave?: data_leaveUpdateManyWithoutUserNestedInput
+    cretedByfk?: log_positionnUpdateManyWithoutCretedByfkNestedInput
+  }
+
+  export type UserUncheckedUpdateWithoutRead_bookbank_logInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    password?: StringFieldUpdateOperationsInput | string
+    profile?: ProfileUncheckedUpdateOneWithoutUserNestedInput
+    islogin?: BoolFieldUpdateOperationsInput | boolean
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    isOwner?: BoolFieldUpdateOperationsInput | boolean
+    lastlogin?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    roleId?: NullableStringFieldUpdateOperationsInput | string | null
+    RoleCompanyID?: NullableStringFieldUpdateOperationsInput | string | null
+    company?: CompanyUncheckedUpdateManyWithoutOwnerNestedInput
+    companyBranchId?: NullableStringFieldUpdateOperationsInput | string | null
+    Position_user?: Position_userUncheckedUpdateManyWithoutUserNestedInput
+    henchman?: Position_userUncheckedUpdateManyWithoutHeaderNestedInput
+    mas_all_collect?: mas_all_collectUncheckedUpdateManyWithoutUserNestedInput
+    salary?: salaryUncheckedUpdateManyWithoutUserNestedInput
+    provident_log?: provident_logUncheckedUpdateManyWithoutUserNestedInput
+    bookbank_log?: bookbank_logUncheckedUpdateManyWithoutUserNestedInput
+    data_leave?: data_leaveUncheckedUpdateManyWithoutUserNestedInput
+    cretedByfk?: log_positionnUncheckedUpdateManyWithoutCretedByfkNestedInput
+  }
+
+  export type bookbank_logUpsertWithoutRead_bookbank_logInput = {
+    update: XOR<bookbank_logUpdateWithoutRead_bookbank_logInput, bookbank_logUncheckedUpdateWithoutRead_bookbank_logInput>
+    create: XOR<bookbank_logCreateWithoutRead_bookbank_logInput, bookbank_logUncheckedCreateWithoutRead_bookbank_logInput>
+  }
+
+  export type bookbank_logUpdateWithoutRead_bookbank_logInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    date?: DateTimeFieldUpdateOperationsInput | Date | string
+    bank_number?: StringFieldUpdateOperationsInput | string
+    all_collectId?: NullableStringFieldUpdateOperationsInput | string | null
+    base_salary?: FloatFieldUpdateOperationsInput | number
+    provident_com?: FloatFieldUpdateOperationsInput | number
+    provident_emp?: FloatFieldUpdateOperationsInput | number
+    accept_date?: DateTimeFieldUpdateOperationsInput | Date | string
+    accept_month?: NullableIntFieldUpdateOperationsInput | number | null
+    accept_years?: NullableIntFieldUpdateOperationsInput | number | null
+    unix?: NullableIntFieldUpdateOperationsInput | number | null
+    salary?: salaryUpdateManyWithoutBookbank_logNestedInput
+    mas_bank?: mas_bankUpdateOneWithoutBookbank_logNestedInput
+    User?: UserUpdateOneWithoutBookbank_logNestedInput
+    provident_log?: provident_logUpdateManyWithoutBookbank_logNestedInput
+  }
+
+  export type bookbank_logUncheckedUpdateWithoutRead_bookbank_logInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    date?: DateTimeFieldUpdateOperationsInput | Date | string
+    mas_bankId?: NullableStringFieldUpdateOperationsInput | string | null
+    bank_number?: StringFieldUpdateOperationsInput | string
+    all_collectId?: NullableStringFieldUpdateOperationsInput | string | null
+    base_salary?: FloatFieldUpdateOperationsInput | number
+    provident_com?: FloatFieldUpdateOperationsInput | number
+    provident_emp?: FloatFieldUpdateOperationsInput | number
+    accept_date?: DateTimeFieldUpdateOperationsInput | Date | string
+    accept_month?: NullableIntFieldUpdateOperationsInput | number | null
+    accept_years?: NullableIntFieldUpdateOperationsInput | number | null
+    unix?: NullableIntFieldUpdateOperationsInput | number | null
+    salary?: salaryUncheckedUpdateManyWithoutBookbank_logNestedInput
+    userId?: NullableStringFieldUpdateOperationsInput | string | null
+    provident_log?: provident_logUncheckedUpdateManyWithoutBookbank_logNestedInput
   }
 
   export type UserCreateWithoutProvident_logInput = {
@@ -52707,6 +54717,7 @@ export namespace Prisma {
     bookbank_log?: bookbank_logCreateNestedManyWithoutUserInput
     data_leave?: data_leaveCreateNestedManyWithoutUserInput
     cretedByfk?: log_positionnCreateNestedManyWithoutCretedByfkInput
+    read_bookbank_log?: read_bookbank_logCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutProvident_logInput = {
@@ -52730,6 +54741,7 @@ export namespace Prisma {
     bookbank_log?: bookbank_logUncheckedCreateNestedManyWithoutUserInput
     data_leave?: data_leaveUncheckedCreateNestedManyWithoutUserInput
     cretedByfk?: log_positionnUncheckedCreateNestedManyWithoutCretedByfkInput
+    read_bookbank_log?: read_bookbank_logUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutProvident_logInput = {
@@ -52779,6 +54791,7 @@ export namespace Prisma {
     salary?: salaryCreateNestedManyWithoutBookbank_logInput
     mas_bank?: mas_bankCreateNestedOneWithoutBookbank_logInput
     User?: UserCreateNestedOneWithoutBookbank_logInput
+    read_bookbank_log?: read_bookbank_logCreateNestedManyWithoutBookbank_logInput
   }
 
   export type bookbank_logUncheckedCreateWithoutProvident_logInput = {
@@ -52796,6 +54809,7 @@ export namespace Prisma {
     unix?: number | null
     salary?: salaryUncheckedCreateNestedManyWithoutBookbank_logInput
     userId?: string | null
+    read_bookbank_log?: read_bookbank_logUncheckedCreateNestedManyWithoutBookbank_logInput
   }
 
   export type bookbank_logCreateOrConnectWithoutProvident_logInput = {
@@ -52924,6 +54938,7 @@ export namespace Prisma {
     bookbank_log?: bookbank_logUpdateManyWithoutUserNestedInput
     data_leave?: data_leaveUpdateManyWithoutUserNestedInput
     cretedByfk?: log_positionnUpdateManyWithoutCretedByfkNestedInput
+    read_bookbank_log?: read_bookbank_logUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutProvident_logInput = {
@@ -52947,6 +54962,7 @@ export namespace Prisma {
     bookbank_log?: bookbank_logUncheckedUpdateManyWithoutUserNestedInput
     data_leave?: data_leaveUncheckedUpdateManyWithoutUserNestedInput
     cretedByfk?: log_positionnUncheckedUpdateManyWithoutCretedByfkNestedInput
+    read_bookbank_log?: read_bookbank_logUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type mas_all_collectUpsertWithoutProvident_logInput = {
@@ -52996,6 +55012,7 @@ export namespace Prisma {
     salary?: salaryUpdateManyWithoutBookbank_logNestedInput
     mas_bank?: mas_bankUpdateOneWithoutBookbank_logNestedInput
     User?: UserUpdateOneWithoutBookbank_logNestedInput
+    read_bookbank_log?: read_bookbank_logUpdateManyWithoutBookbank_logNestedInput
   }
 
   export type bookbank_logUncheckedUpdateWithoutProvident_logInput = {
@@ -53013,6 +55030,7 @@ export namespace Prisma {
     unix?: NullableIntFieldUpdateOperationsInput | number | null
     salary?: salaryUncheckedUpdateManyWithoutBookbank_logNestedInput
     userId?: NullableStringFieldUpdateOperationsInput | string | null
+    read_bookbank_log?: read_bookbank_logUncheckedUpdateManyWithoutBookbank_logNestedInput
   }
 
   export type salaryUpsertWithoutProvident_logInput = {
@@ -53198,6 +55216,7 @@ export namespace Prisma {
     provident_log?: provident_logCreateNestedManyWithoutUserInput
     bookbank_log?: bookbank_logCreateNestedManyWithoutUserInput
     cretedByfk?: log_positionnCreateNestedManyWithoutCretedByfkInput
+    read_bookbank_log?: read_bookbank_logCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutData_leaveInput = {
@@ -53221,6 +55240,7 @@ export namespace Prisma {
     provident_log?: provident_logUncheckedCreateNestedManyWithoutUserInput
     bookbank_log?: bookbank_logUncheckedCreateNestedManyWithoutUserInput
     cretedByfk?: log_positionnUncheckedCreateNestedManyWithoutCretedByfkInput
+    read_bookbank_log?: read_bookbank_logUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutData_leaveInput = {
@@ -53271,6 +55291,7 @@ export namespace Prisma {
     provident_log?: provident_logUpdateManyWithoutUserNestedInput
     bookbank_log?: bookbank_logUpdateManyWithoutUserNestedInput
     cretedByfk?: log_positionnUpdateManyWithoutCretedByfkNestedInput
+    read_bookbank_log?: read_bookbank_logUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutData_leaveInput = {
@@ -53294,6 +55315,7 @@ export namespace Prisma {
     provident_log?: provident_logUncheckedUpdateManyWithoutUserNestedInput
     bookbank_log?: bookbank_logUncheckedUpdateManyWithoutUserNestedInput
     cretedByfk?: log_positionnUncheckedUpdateManyWithoutCretedByfkNestedInput
+    read_bookbank_log?: read_bookbank_logUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type Position_userCreateWithoutLog_positionInput = {
@@ -53344,6 +55366,7 @@ export namespace Prisma {
     provident_log?: provident_logCreateNestedManyWithoutUserInput
     bookbank_log?: bookbank_logCreateNestedManyWithoutUserInput
     data_leave?: data_leaveCreateNestedManyWithoutUserInput
+    read_bookbank_log?: read_bookbank_logCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutCretedByfkInput = {
@@ -53367,6 +55390,7 @@ export namespace Prisma {
     provident_log?: provident_logUncheckedCreateNestedManyWithoutUserInput
     bookbank_log?: bookbank_logUncheckedCreateNestedManyWithoutUserInput
     data_leave?: data_leaveUncheckedCreateNestedManyWithoutUserInput
+    read_bookbank_log?: read_bookbank_logUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutCretedByfkInput = {
@@ -53427,6 +55451,7 @@ export namespace Prisma {
     provident_log?: provident_logUpdateManyWithoutUserNestedInput
     bookbank_log?: bookbank_logUpdateManyWithoutUserNestedInput
     data_leave?: data_leaveUpdateManyWithoutUserNestedInput
+    read_bookbank_log?: read_bookbank_logUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutCretedByfkInput = {
@@ -53450,6 +55475,7 @@ export namespace Prisma {
     provident_log?: provident_logUncheckedUpdateManyWithoutUserNestedInput
     bookbank_log?: bookbank_logUncheckedUpdateManyWithoutUserNestedInput
     data_leave?: data_leaveUncheckedUpdateManyWithoutUserNestedInput
+    read_bookbank_log?: read_bookbank_logUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type SubBusinessTypeCreateWithoutMainBusinessTypeInput = {
@@ -54111,6 +56137,7 @@ export namespace Prisma {
     bookbank_log?: bookbank_logUpdateManyWithoutUserNestedInput
     data_leave?: data_leaveUpdateManyWithoutUserNestedInput
     cretedByfk?: log_positionnUpdateManyWithoutCretedByfkNestedInput
+    read_bookbank_log?: read_bookbank_logUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutCompanyBranchInput = {
@@ -54134,6 +56161,7 @@ export namespace Prisma {
     bookbank_log?: bookbank_logUncheckedUpdateManyWithoutUserNestedInput
     data_leave?: data_leaveUncheckedUpdateManyWithoutUserNestedInput
     cretedByfk?: log_positionnUncheckedUpdateManyWithoutCretedByfkNestedInput
+    read_bookbank_log?: read_bookbank_logUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateManyWithoutUsersInput = {
@@ -54347,6 +56375,24 @@ export namespace Prisma {
     positionId: string
     creteddate: Date | string
     detail: string
+  }
+
+  export type read_bookbank_logCreateManyUserInput = {
+    id: string
+    date: Date | string
+    mas_bankId?: string | null
+    bank_number: string
+    all_collectId?: string | null
+    base_salary?: number | null
+    provident_com?: number | null
+    provident_emp?: number | null
+    accept_date: Date | string
+    accept_month?: number | null
+    accept_years?: number | null
+    unix?: number | null
+    update_by?: string | null
+    update_date?: Date | string | null
+    bookbank_logId?: string | null
   }
 
   export type CompanyUpdateWithoutOwnerInput = {
@@ -54672,6 +56718,7 @@ export namespace Prisma {
     salary?: salaryUpdateManyWithoutBookbank_logNestedInput
     mas_bank?: mas_bankUpdateOneWithoutBookbank_logNestedInput
     provident_log?: provident_logUpdateManyWithoutBookbank_logNestedInput
+    read_bookbank_log?: read_bookbank_logUpdateManyWithoutBookbank_logNestedInput
   }
 
   export type bookbank_logUncheckedUpdateWithoutUserInput = {
@@ -54689,6 +56736,7 @@ export namespace Prisma {
     unix?: NullableIntFieldUpdateOperationsInput | number | null
     salary?: salaryUncheckedUpdateManyWithoutBookbank_logNestedInput
     provident_log?: provident_logUncheckedUpdateManyWithoutBookbank_logNestedInput
+    read_bookbank_log?: read_bookbank_logUncheckedUpdateManyWithoutBookbank_logNestedInput
   }
 
   export type bookbank_logUncheckedUpdateManyWithoutBookbank_logInput = {
@@ -54763,6 +56811,60 @@ export namespace Prisma {
     detail?: StringFieldUpdateOperationsInput | string
   }
 
+  export type read_bookbank_logUpdateWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    date?: DateTimeFieldUpdateOperationsInput | Date | string
+    mas_bankId?: NullableStringFieldUpdateOperationsInput | string | null
+    bank_number?: StringFieldUpdateOperationsInput | string
+    all_collectId?: NullableStringFieldUpdateOperationsInput | string | null
+    base_salary?: NullableFloatFieldUpdateOperationsInput | number | null
+    provident_com?: NullableFloatFieldUpdateOperationsInput | number | null
+    provident_emp?: NullableFloatFieldUpdateOperationsInput | number | null
+    accept_date?: DateTimeFieldUpdateOperationsInput | Date | string
+    accept_month?: NullableIntFieldUpdateOperationsInput | number | null
+    accept_years?: NullableIntFieldUpdateOperationsInput | number | null
+    unix?: NullableIntFieldUpdateOperationsInput | number | null
+    update_by?: NullableStringFieldUpdateOperationsInput | string | null
+    update_date?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    bookbank_log?: bookbank_logUpdateOneWithoutRead_bookbank_logNestedInput
+  }
+
+  export type read_bookbank_logUncheckedUpdateWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    date?: DateTimeFieldUpdateOperationsInput | Date | string
+    mas_bankId?: NullableStringFieldUpdateOperationsInput | string | null
+    bank_number?: StringFieldUpdateOperationsInput | string
+    all_collectId?: NullableStringFieldUpdateOperationsInput | string | null
+    base_salary?: NullableFloatFieldUpdateOperationsInput | number | null
+    provident_com?: NullableFloatFieldUpdateOperationsInput | number | null
+    provident_emp?: NullableFloatFieldUpdateOperationsInput | number | null
+    accept_date?: DateTimeFieldUpdateOperationsInput | Date | string
+    accept_month?: NullableIntFieldUpdateOperationsInput | number | null
+    accept_years?: NullableIntFieldUpdateOperationsInput | number | null
+    unix?: NullableIntFieldUpdateOperationsInput | number | null
+    update_by?: NullableStringFieldUpdateOperationsInput | string | null
+    update_date?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    bookbank_logId?: NullableStringFieldUpdateOperationsInput | string | null
+  }
+
+  export type read_bookbank_logUncheckedUpdateManyWithoutRead_bookbank_logInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    date?: DateTimeFieldUpdateOperationsInput | Date | string
+    mas_bankId?: NullableStringFieldUpdateOperationsInput | string | null
+    bank_number?: StringFieldUpdateOperationsInput | string
+    all_collectId?: NullableStringFieldUpdateOperationsInput | string | null
+    base_salary?: NullableFloatFieldUpdateOperationsInput | number | null
+    provident_com?: NullableFloatFieldUpdateOperationsInput | number | null
+    provident_emp?: NullableFloatFieldUpdateOperationsInput | number | null
+    accept_date?: DateTimeFieldUpdateOperationsInput | Date | string
+    accept_month?: NullableIntFieldUpdateOperationsInput | number | null
+    accept_years?: NullableIntFieldUpdateOperationsInput | number | null
+    unix?: NullableIntFieldUpdateOperationsInput | number | null
+    update_by?: NullableStringFieldUpdateOperationsInput | string | null
+    update_date?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    bookbank_logId?: NullableStringFieldUpdateOperationsInput | string | null
+  }
+
   export type UserCreateManyRoleInput = {
     id: string
     email: string
@@ -54797,6 +56899,7 @@ export namespace Prisma {
     bookbank_log?: bookbank_logUpdateManyWithoutUserNestedInput
     data_leave?: data_leaveUpdateManyWithoutUserNestedInput
     cretedByfk?: log_positionnUpdateManyWithoutCretedByfkNestedInput
+    read_bookbank_log?: read_bookbank_logUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutRoleInput = {
@@ -54820,6 +56923,7 @@ export namespace Prisma {
     bookbank_log?: bookbank_logUncheckedUpdateManyWithoutUserNestedInput
     data_leave?: data_leaveUncheckedUpdateManyWithoutUserNestedInput
     cretedByfk?: log_positionnUncheckedUpdateManyWithoutCretedByfkNestedInput
+    read_bookbank_log?: read_bookbank_logUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type UserCreateManyRole_CompanyInput = {
@@ -54856,6 +56960,7 @@ export namespace Prisma {
     bookbank_log?: bookbank_logUpdateManyWithoutUserNestedInput
     data_leave?: data_leaveUpdateManyWithoutUserNestedInput
     cretedByfk?: log_positionnUpdateManyWithoutCretedByfkNestedInput
+    read_bookbank_log?: read_bookbank_logUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutRole_CompanyInput = {
@@ -54879,6 +56984,7 @@ export namespace Prisma {
     bookbank_log?: bookbank_logUncheckedUpdateManyWithoutUserNestedInput
     data_leave?: data_leaveUncheckedUpdateManyWithoutUserNestedInput
     cretedByfk?: log_positionnUncheckedUpdateManyWithoutCretedByfkNestedInput
+    read_bookbank_log?: read_bookbank_logUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type DistrictCreateManyProvinceInput = {
@@ -55766,6 +57872,7 @@ export namespace Prisma {
     salary?: salaryUpdateManyWithoutBookbank_logNestedInput
     User?: UserUpdateOneWithoutBookbank_logNestedInput
     provident_log?: provident_logUpdateManyWithoutBookbank_logNestedInput
+    read_bookbank_log?: read_bookbank_logUpdateManyWithoutBookbank_logNestedInput
   }
 
   export type bookbank_logUncheckedUpdateWithoutMas_bankInput = {
@@ -55783,6 +57890,7 @@ export namespace Prisma {
     salary?: salaryUncheckedUpdateManyWithoutBookbank_logNestedInput
     userId?: NullableStringFieldUpdateOperationsInput | string | null
     provident_log?: provident_logUncheckedUpdateManyWithoutBookbank_logNestedInput
+    read_bookbank_log?: read_bookbank_logUncheckedUpdateManyWithoutBookbank_logNestedInput
   }
 
   export type salaryUpdateWithoutMas_bankInput = {
@@ -56572,6 +58680,24 @@ export namespace Prisma {
     salaryId?: string | null
   }
 
+  export type read_bookbank_logCreateManyBookbank_logInput = {
+    id: string
+    date: Date | string
+    mas_bankId?: string | null
+    bank_number: string
+    all_collectId?: string | null
+    base_salary?: number | null
+    provident_com?: number | null
+    provident_emp?: number | null
+    accept_date: Date | string
+    accept_month?: number | null
+    accept_years?: number | null
+    unix?: number | null
+    update_by?: string | null
+    update_date?: Date | string | null
+    userId?: string | null
+  }
+
   export type salaryUpdateWithoutBookbank_logInput = {
     id?: StringFieldUpdateOperationsInput | string
     month?: NullableStringFieldUpdateOperationsInput | string | null
@@ -56680,6 +58806,42 @@ export namespace Prisma {
     pro_company?: NullableFloatFieldUpdateOperationsInput | number | null
     mas_all_collectId?: NullableStringFieldUpdateOperationsInput | string | null
     salaryId?: NullableStringFieldUpdateOperationsInput | string | null
+  }
+
+  export type read_bookbank_logUpdateWithoutBookbank_logInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    date?: DateTimeFieldUpdateOperationsInput | Date | string
+    mas_bankId?: NullableStringFieldUpdateOperationsInput | string | null
+    bank_number?: StringFieldUpdateOperationsInput | string
+    all_collectId?: NullableStringFieldUpdateOperationsInput | string | null
+    base_salary?: NullableFloatFieldUpdateOperationsInput | number | null
+    provident_com?: NullableFloatFieldUpdateOperationsInput | number | null
+    provident_emp?: NullableFloatFieldUpdateOperationsInput | number | null
+    accept_date?: DateTimeFieldUpdateOperationsInput | Date | string
+    accept_month?: NullableIntFieldUpdateOperationsInput | number | null
+    accept_years?: NullableIntFieldUpdateOperationsInput | number | null
+    unix?: NullableIntFieldUpdateOperationsInput | number | null
+    update_by?: NullableStringFieldUpdateOperationsInput | string | null
+    update_date?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    User?: UserUpdateOneWithoutRead_bookbank_logNestedInput
+  }
+
+  export type read_bookbank_logUncheckedUpdateWithoutBookbank_logInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    date?: DateTimeFieldUpdateOperationsInput | Date | string
+    mas_bankId?: NullableStringFieldUpdateOperationsInput | string | null
+    bank_number?: StringFieldUpdateOperationsInput | string
+    all_collectId?: NullableStringFieldUpdateOperationsInput | string | null
+    base_salary?: NullableFloatFieldUpdateOperationsInput | number | null
+    provident_com?: NullableFloatFieldUpdateOperationsInput | number | null
+    provident_emp?: NullableFloatFieldUpdateOperationsInput | number | null
+    accept_date?: DateTimeFieldUpdateOperationsInput | Date | string
+    accept_month?: NullableIntFieldUpdateOperationsInput | number | null
+    accept_years?: NullableIntFieldUpdateOperationsInput | number | null
+    unix?: NullableIntFieldUpdateOperationsInput | number | null
+    update_by?: NullableStringFieldUpdateOperationsInput | string | null
+    update_date?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    userId?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type data_leaveCreateManyMas_leave_typeInput = {
