@@ -501,7 +501,7 @@ export const salaryTypedef = gql`
 
   type Query {
     salary(userId:String , years: String): data_salary
-    salary_inmonthSlip(userId: String, month: String, years: String):[data_salary]
+    salary_inmonthSlip(userId: String, date:Date):[data_salary]
     bookbank_log: [Bookbank_log_type]
     bookbank_log_admin(userId: String): [Bookbank_log_type]
     filter_bookbank_admin(userId: String): [Bookbank_log_type]
@@ -646,8 +646,8 @@ const resolvers: Resolvers = {
           companyBranch: { include: { company: true } },
           //join table Position_user และให้ table mas_positionlevel3 join Position_user จัดเรียงตาม date จากมากไปน้อย
           Position_user: { include: { mas_positionlevel3: true }, orderBy: { date: 'desc' } },
-          //join table bookbank_log และให้ mas_bank join bookbank_log จัดเรียงตาม วันที่มีผล จากมากไปน้อย
-          bookbank_log: { include: { mas_bank: true }, orderBy: { accept_date: 'desc' } }
+          // bookbank_log: true
+          bookbank_log: { include: { mas_bank: true }, take: 1, orderBy: { accept_date: 'desc' }, where: { unix: { lte: dayjs(new Date()).unix() } } }
         },
         where: {
           //โดยอ้างกจากuser.id
@@ -672,19 +672,18 @@ const resolvers: Resolvers = {
 
     /////แสดง ใบเสร็จพนักงาน โดยอ้างจากการรับค่า userid//////
     async salary_inmonthSlip(parant, args, ctx) { // for admin slip สำหรับให้ user เห็น
+      let searchTime = new Date(args.date)
+      let fm_years = dayjs(searchTime).format("YYYY")
+      let fm_month = dayjs(searchTime).format("MM")
       const data = await ctx.prisma.user.findMany({
         include: {
           //join table profile
           profile: true,
-          //join table salary โดยอ้างงเดือน จาก การรับค่าเดือน และการรับค่าปี
           salary: { where: { month: args.month, AND: { years: args.years } } },
-          //่join table companyBranch และให้ table company และ table expense_company join companyBranch 
           companyBranch: { include: { company: true, expense_company: true } },
           //่join table Position_user และให้ table mas_positionlevel2 และ table mas_positionlevel3 join Position_user จัดเรียงตาม date จากมากไปน้อย 
           Position_user: { include: { mas_positionlevel2: true, mas_positionlevel3: true }, orderBy: { date: 'desc' } },
-          //่join table bookbank_logและให้ table mas_bank join table bookbank_log จัดเรียงตาม date จากมากไปน้อย
           bookbank_log: { include: { mas_bank: true }, orderBy: { date: 'desc' } },
-          //join table mas_all_collect
           mas_all_collect: true
         },
         where: {
@@ -1454,11 +1453,14 @@ const resolvers: Resolvers = {
         // เช็คถ้าหาก วันที่จ่ายเงินมากกว่าวันที่ที่จะอัปเดท ไม่สามารถแก้ไข bookbank log ของเดือนนั้นได้ให้ทำการ Throw Error 
         let unix_acp_bb = 0
         const chk_acp_bb = await ctx.prisma.bookbank_log.findMany({
+          take: 1,
           where: {
-            id: args.data.id,
+            unix: { lte: dayjs(new Date()).unix() },
             AND: {
-              unix: { lte: dayjs(new Date()).unix() }
+              userId: args.data.userId
             }
+          }, orderBy: {
+            accept_date: 'desc'
           }
         })
         chk_acp_bb.forEach((e) => {
@@ -1475,7 +1477,7 @@ const resolvers: Resolvers = {
               unix: { gte: dayjs(new Date()).unix() }
             }
           }, orderBy: {
-            cal_date_salary: 'asc'
+            cal_date_salary: 'desc'
           }
         })
         // console.log(chk_payday);
@@ -1724,6 +1726,8 @@ const resolvers: Resolvers = {
                   total_income: Total_income,
                   total_expense: Total_expense,
                   incomeYears: ResultIncomeYears,
+                  socialYears:ResultSocialYears,
+                  vatYears: ResultVatYears,
                   net: Net
                 },
                 where: {
