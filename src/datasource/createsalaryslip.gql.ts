@@ -19,7 +19,7 @@ type slipresolvers {
 }
 
 type Query{
-    SalarySlip(userId: String, month: String, years: String): slipresolvers
+    SalarySlip(userId: String, date: Date): slipresolvers
 }
 
 
@@ -75,13 +75,17 @@ const resolversslip: Resolvers = {
             let Vat_collect = null
             let Social_secu_collect = null
 
+            let searchTime = new Date(args.date)
+            let fm_years = dayjs(searchTime).format("YYYY")
+            let fm_month = dayjs(searchTime).format("MM")
+            
             const data = await ctx.prisma.user.findMany({
                 include: {
                     profile: true,
-                    salary: { where: { month: args.month, AND: { years: args.years } } },
+                    salary: { where: { month: fm_month, AND: { years: fm_years } } },
                     companyBranch: { include: { company: true, expense_company: true } },
                     Position_user: { include: { mas_positionlevel2: true, mas_positionlevel3: true }, orderBy: { date: 'desc' } },
-                    bookbank_log: { include: { mas_bank: true }, orderBy: { date: 'desc' } },
+                    bookbank_log: { include: { mas_bank: true }, take:1 , orderBy: { accept_date: 'desc' }, where: { unix: { lte: dayjs(new Date(searchTime)).unix() } } },
                     mas_all_collect: true
                 },
                 where: {
@@ -100,7 +104,7 @@ const resolversslip: Resolvers = {
                 staffcode = data[i].profile?.staff_code
                 firstname = data[i].profile?.firstname_th
                 lastname = data[i].profile?.lastname_th
-                
+
                 Ss_per = data[i].companyBranch?.expense_company[0].ss_per
                 Vat_per = data[i].companyBranch?.expense_company[0].vat_per
 
@@ -385,7 +389,7 @@ const resolversslip: Resolvers = {
                 path: url,
                 status: true
             }
-            
+
         }
     },
 }

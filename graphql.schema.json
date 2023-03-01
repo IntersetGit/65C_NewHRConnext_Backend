@@ -6115,11 +6115,11 @@
             "description": null,
             "args": [
               {
-                "name": "month",
+                "name": "date",
                 "description": null,
                 "type": {
                   "kind": "SCALAR",
-                  "name": "String",
+                  "name": "Date",
                   "ofType": null
                 },
                 "defaultValue": null,
@@ -6128,18 +6128,6 @@
               },
               {
                 "name": "userId",
-                "description": null,
-                "type": {
-                  "kind": "SCALAR",
-                  "name": "String",
-                  "ofType": null
-                },
-                "defaultValue": null,
-                "isDeprecated": false,
-                "deprecationReason": null
-              },
-              {
-                "name": "years",
                 "description": null,
                 "type": {
                   "kind": "SCALAR",
@@ -6906,11 +6894,11 @@
             "description": null,
             "args": [
               {
-                "name": "month",
+                "name": "date",
                 "description": null,
                 "type": {
                   "kind": "SCALAR",
-                  "name": "String",
+                  "name": "Date",
                   "ofType": null
                 },
                 "defaultValue": null,
@@ -6919,18 +6907,6 @@
               },
               {
                 "name": "userId",
-                "description": null,
-                "type": {
-                  "kind": "SCALAR",
-                  "name": "String",
-                  "ofType": null
-                },
-                "defaultValue": null,
-                "isDeprecated": false,
-                "deprecationReason": null
-              },
-              {
-                "name": "years",
                 "description": null,
                 "type": {
                   "kind": "SCALAR",

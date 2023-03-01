@@ -829,9 +829,8 @@ export type QueryGetHolidayDateArgs = {
 
 
 export type QuerySalarySlipArgs = {
-  month?: InputMaybe<Scalars['String']>;
+  date?: InputMaybe<Scalars['Date']>;
   userId?: InputMaybe<Scalars['String']>;
-  years?: InputMaybe<Scalars['String']>;
 };
 
 
@@ -935,9 +934,8 @@ export type QuerySalaryArgs = {
 
 
 export type QuerySalary_InmonthSlipArgs = {
-  month?: InputMaybe<Scalars['String']>;
+  date?: InputMaybe<Scalars['Date']>;
   userId?: InputMaybe<Scalars['String']>;
-  years?: InputMaybe<Scalars['String']>;
 };
 
 
