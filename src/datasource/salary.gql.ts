@@ -543,14 +543,14 @@ export const salaryTypedef = gql`
 const resolvers: Resolvers = {
   Query: {
     ////////////////////แสดงเงินเดือนโดยใช่ userid เป็นตัวอ้าง/////////////////////////////
-    async salary(parant: any, args: any, ctx: any) {
+    async salary(parant, args, ctx) {
       let searchyears = args.years ? args.years : undefined
       const getdata = await ctx.prisma.user.findUnique({
         include: {
           //join table profile////
           profile: true,
           //join table salary โดยอ้างจากปี/////
-          salary: { where: { years: searchyears } },
+          salary: { where: { years: searchyears?.toString() } },
           //่join table companyBranch และให้ table company join companyBranch/////////
           companyBranch: { include: { company: true } },
           /////join table Position_user และให้ table mas_positionlevel3 join Position_user จัดเรียงตาม date มากไปน้อย/////
@@ -560,7 +560,7 @@ const resolvers: Resolvers = {
         },
         where: {
           //โดยอ้างจาก user id///
-          id: args.userId
+          id: args.userId as string
         },
       });
       return getdata;
