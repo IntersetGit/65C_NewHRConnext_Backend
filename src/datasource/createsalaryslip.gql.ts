@@ -386,6 +386,7 @@ const resolversslip: Resolvers = {
             let url = `http://localhost:4000/${process.env.SUB_API_PATH}/assets/payment/${name}`
 
             return {
+                message : "เรียกดู slip เงินเดือนสำเร็จ",
                 path: url,
                 status: true
             }
