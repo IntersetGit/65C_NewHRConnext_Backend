@@ -679,7 +679,7 @@ const resolvers: Resolvers = {
         include: {
           //join table profile
           profile: true,
-          salary: { where: { month: args.month, AND: { years: args.years } } },
+          salary: { where: { month: fm_month, AND: { years: fm_years } } },
           companyBranch: { include: { company: true, expense_company: true } },
           //่join table Position_user และให้ table mas_positionlevel2 และ table mas_positionlevel3 join Position_user จัดเรียงตาม date จากมากไปน้อย 
           Position_user: { include: { mas_positionlevel2: true, mas_positionlevel3: true }, orderBy: { date: 'desc' } },
