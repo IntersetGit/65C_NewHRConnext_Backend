@@ -542,26 +542,30 @@ export const salaryTypedef = gql`
 
 const resolvers: Resolvers = {
   Query: {
+    ////////////////////แสดงเงินเดือนโดยใช่ userid เป็นตัวอ้าง/////////////////////////////
     async salary(parant: any, args: any, ctx: any) {
-
       let searchyears = args.years ? args.years : undefined
       const getdata = await ctx.prisma.user.findUnique({
         include: {
+          //join table profile////
           profile: true,
+          //join table salary โดยอ้างจากปี/////
           salary: { where: { years: searchyears } },
-          // company: { include: { branch: true } },
+          //่join table companyBranch และให้ table company join companyBranch/////////
           companyBranch: { include: { company: true } },
+          /////join table Position_user และให้ table mas_positionlevel3 join Position_user จัดเรียงตาม date มากไปน้อย/////
           Position_user: { include: { mas_positionlevel3: true }, orderBy: { date: 'desc' } },
-          // bookbank_log: true
+          // join table bookbank_log และให้ table mas_bank join bookbank_log  จัดเรียงตาม date มากไปน้อย//////
           bookbank_log: { include: { mas_bank: true }, orderBy: { date: 'desc' } }
         },
         where: {
+          //โดยอ้างจาก user id///
           id: args.userId
         },
       });
       return getdata;
     },
-
+    ////แสดง ปี โดยใช้ ปี/////
     async show_years(p, args, ctx) {
       let searchY = args.name ? args.name : undefined
       const showYears = await ctx.prisma.mas_years.findMany({
@@ -571,20 +575,26 @@ const resolvers: Resolvers = {
       })
       return showYears
     },
-
+    /////////////////////// แสดง ภาษี ประกันสังคม ของบริษัท//////////
     async expense_company(p, args, ctx) {
-      // console.log(ctx.currentUser?.id)
+      /////ตั้งตัวแปรมา รับค่า date ////
       const date = args?.date
+      //แปลงค่า date ให้เหลือแค่เดือน////
       const month = dayjs(date).format('MM')
+      //แปลงค่า date ให้เหลือแค่ปี/////
       const years = dayjs(date).format('YYYY')
+      //ตั้งตัวแปรมา รับค่าที่ไปหาใน table expense_company///////// 
       const getdata = await ctx.prisma.expense_company.findMany({
         include: {
+          ///join table mas_bank///////
           mas_bank: true
         },
         where: {
+          //โดยหาจาก branchId จาก token ของ userที่ login เข้ามา///////
           companyBranchId: ctx.currentUser?.branchId,
 
         },
+        //จัดเรียงจากมากไปน้อย อ้างจาก date/////////
         orderBy:
         {
           date: "desc",
@@ -592,17 +602,20 @@ const resolvers: Resolvers = {
       });
       return getdata
     },
-
+    ////////////////// แสดง  ภาษี ประกันสังคม กองทุน ของปัจจุบัน
     async show_pervspUser(p, args, ctx) {
       const date = args?.date ? args?.date : undefined
       const month = dayjs(date).format('MM')
       const years = dayjs(date).format('YYYY')
       const result = await ctx.prisma.user.findMany({
         include: {
+          //่join table bookbank_log และให้ table mas_bank join table bookbank_log เอา 1 ตัว จัดเรียงตามวันที่มีผลจากมากไปน้อยโดยอ้างจากวัน วันที่มีผล ให้=< วันปัจจุบัน
           bookbank_log: { include: { mas_bank: true }, take: 1, orderBy: { accept_date: 'desc' }, where: { unix: { lte: dayjs(date).unix() } } },
+          //่join table companyBranch และให้ table expense_company join table companyBranch เอา 1 ตัว จัดเรียงตามวันที่มีผลจากมากไปน้อยโดยอ้างจากวัน วันที่มีผล ให้=< วันปัจจุบัน และ อ้างจาก branchId จากtoken ของuserที่ login
           companyBranch: { include: { expense_company: { take: 1, orderBy: { date: 'desc' }, where: { unix_date: { lte: dayjs(date).unix() }, AND: { companyBranchId: ctx.currentUser?.branchId } } } } }
         },
         where: {
+          //โดยอ้างจาก userid/////
           id: args.userId as string
         }
       })
@@ -610,7 +623,7 @@ const resolvers: Resolvers = {
 
       return result
     },
-
+    //แสดง แบงค์ โดยอ้างจาก idที่ได้รับ/////
     async mas_bank(parant: any, args: any, ctx: any) {
       const result = await ctx.prisma.mas_bank.findMany({
         where: {
@@ -619,22 +632,27 @@ const resolvers: Resolvers = {
       });
       return result;
     },
-
+    //////////////////แสดง เงินเดือนของตัวเอง โดยอ้างกจากuser.id จาก tokenที่login และจากการรับค่า ปี   
     async mydata_salary(parant, args, ctx) {
       console.log(ctx.currentUser?.id)
       let searchyears = args.years ? args.years : undefined
       const getmydata = await ctx.prisma.user.findUnique({
         include: {
+          //join table profile
           profile: true,
+          //join table salary โดยอ้างจาก ปี
           salary: { where: { years: searchyears } },
-          // company: { include: { branch: true } },
+          //join table companyBranch และให้ table company join companyBranch 
           companyBranch: { include: { company: true } },
+          //join table Position_user และให้ table mas_positionlevel3 join Position_user จัดเรียงตาม date จากมากไปน้อย
           Position_user: { include: { mas_positionlevel3: true }, orderBy: { date: 'desc' } },
           // bookbank_log: true
           bookbank_log: { include: { mas_bank: true }, take: 1, orderBy: { accept_date: 'desc' }, where: { unix: { lte: dayjs(new Date()).unix() } } }
         },
         where: {
+          //โดยอ้างกจากuser.id
           id: ctx.currentUser?.id
+
         },
       });
       return getmydata;
@@ -651,29 +669,35 @@ const resolvers: Resolvers = {
     //   return getdata;
     // },
 
+
+    /////แสดง ใบเสร็จพนักงาน โดยอ้างจากการรับค่า userid//////
     async salary_inmonthSlip(parant, args, ctx) { // for admin slip สำหรับให้ user เห็น
       let searchTime = new Date(args.date)
       let fm_years = dayjs(searchTime).format("YYYY")
       let fm_month = dayjs(searchTime).format("MM")
       const data = await ctx.prisma.user.findMany({
         include: {
+          //join table profile
           profile: true,
           salary: { where: { month: fm_month, AND: { years: fm_years } } },
           companyBranch: { include: { company: true, expense_company: true } },
+          //่join table Position_user และให้ table mas_positionlevel2 และ table mas_positionlevel3 join Position_user จัดเรียงตาม date จากมากไปน้อย 
           Position_user: { include: { mas_positionlevel2: true, mas_positionlevel3: true }, orderBy: { date: 'desc' } },
-          bookbank_log: { include: { mas_bank: true }, take: 1, orderBy: { accept_date: 'desc' }, where: { unix: { lte: dayjs(new Date(searchTime)).unix() } } },
+          bookbank_log: { include: { mas_bank: true }, orderBy: { date: 'desc' } },
           mas_all_collect: true
         },
         where: {
+          //โดยอ้างจากการรับค่า userid
           id: args.userId as string,
         }
       });
       return data
     },
-
+    ////แสดง รายได้ สะสม ภาษี สะสม ประกันสังคม สะสม กองทุน สะสมของพนักงาน/////// 
     async mas_all_collectuser(parant: any, args: any, ctx: any) {
       const result = await ctx.prisma.mas_all_collect.findMany({
         where: {
+          //โดยอ้างกจากuser.id จาก tokenที่login
           userId: ctx.currentUser?.id,
         },
       });
@@ -681,9 +705,11 @@ const resolvers: Resolvers = {
         return result[i];
       }
     },
+    ////แสดง รายได้ สะสม ภาษี สะสม ประกันสังคม สะสม กองทุน สะสมของ/////// 
     async mas_all_collectadmin(parant: any, args: any, ctx: any) {
       const result = await ctx.prisma.mas_all_collect.findMany({
         where: {
+          //โดยอ้างจากการรับค่า userid
           userId: args.userId as string,
         },
       });
@@ -701,14 +727,18 @@ const resolvers: Resolvers = {
     //   return result;
     // },
 
+
+    //แสดง ฐานเงินเดือน กองทุนพนักงาน กอนทุนบริษัท  วันที่มีผล bankid numberbank////
     async bookbank_log(parant, args, ctx) {
-      // const filter = args?.userId ? args.userId : undefined;
       const result = await ctx.prisma.bookbank_log.findMany({
         include: {
+          //join table User <--[(และให้ table profile และ (table Position_user และให้ table mas_positionlevel3 join table Position_user)]---join table User)
           User: { include: { profile: true, Position_user: { include: { mas_positionlevel3: true } } } },
+          //join table mas_bank
           mas_bank: true
         },
         where: {
+          //โดยอ้างกจากuser.id จาก tokenที่login
           userId: ctx.currentUser?.id,
         },
         orderBy:
@@ -735,6 +765,8 @@ const resolvers: Resolvers = {
     //   });
     //   return result; //แสดงข้อมูลโดยล็อคอินด้วย user
     // },
+
+    /////////////// แสดงข้อมูล ฐานเงินเดือน กองทุนพนักงาน กอนทุนบริษัท  วันที่มีผล bankid numberbank ปัจจุบัน ของพนักงาน/////
     async filter_bookbank(parant, args, ctx) {
       // const filter = args?.userId ? args.userId : undefined;
       let current_time = new Date()
@@ -745,14 +777,19 @@ const resolvers: Resolvers = {
       let get_bb_before = ""
       const result = await ctx.prisma.bookbank_log.findMany({
         include: {
+          // join table mas_bank
           mas_bank: true
+          //เลือกเอาแค่ 1ตัว
         }, take: 1,
         where: {
+          //โดยอ้างกจากuserid จาก tokenที่login
           userId: ctx.currentUser?.id,
           AND: {
+            //และเวลาที่มีผลน้อยกว่าวันปัจจุบัน
             unix: { lte: dayjs(new Date()).unix() }
           }
         },
+        //จัดเรียงตาาม วันที่มีผลจาก มากไปน้อย
         orderBy:
         {
           accept_date: "desc",
@@ -760,7 +797,7 @@ const resolvers: Resolvers = {
       });
       return result; //แสดงข้อมูลด้วยการค้นหา user
     },
-
+    /////////////// แสดงข้อมูล ฐานเงินเดือน กองทุนพนักงาน กอนทุนบริษัท  วันที่มีผล bankid numberbank ปัจจุบัน สำหรับแอดมิน////
     async filter_bookbank_admin(parant, args, ctx) {
       // const filter = args?.userId ? args.userId : undefined;
       let current_time = new Date()
@@ -771,14 +808,19 @@ const resolvers: Resolvers = {
       let get_bb_before = ""
       const result = await ctx.prisma.bookbank_log.findMany({
         include: {
+          // join table mas_bank
           mas_bank: true
+          //เลือกเอาแค่ 1ตัว
         }, take: 1,
         where: {
+          //โดยอ้างกจากการรับค่าuserid 
           userId: args.userId,
           AND: {
+            //และเวลาที่มีผลน้อยกว่าวันปัจจุบัน
             unix: { lte: dayjs(new Date()).unix() }
           }
         },
+        //จัดเรียงตาาม วันที่มีผลจาก มากไปน้อย
         orderBy:
         {
           accept_date: "desc",
@@ -787,17 +829,21 @@ const resolvers: Resolvers = {
       return result; //แสดงข้อมูลด้วยการค้นหา user
     },
 
-
+    /////////////// แสดงข้อมูล ฐานเงินเดือน กองทุนพนักงาน กอนทุนบริษัท  วันที่มีผล bankid numberbank  สำหรับแอดมิน////
     async bookbank_log_admin(parant, args, ctx) {
       // const filter = args?.userId ? args.userId : undefined;
       const result = await ctx.prisma.bookbank_log.findMany({
         include: {
+          //join table User <--[(และให้ table profile และ (table Position_user และให้ table mas_positionlevel3 join table Position_user)]---join table User)
           User: { include: { profile: true, Position_user: { include: { mas_positionlevel3: true } } } },
+          //join table mas_bank
           mas_bank: true
         },
         where: {
+          //โดยอ้างจากการรับค่า userid 
           userId: args.userId,
         },
+        //โดยจดเรียงตาม วันที่มีผลจากมากไปหาน้อย
         orderBy:
         {
           accept_date: "asc",
@@ -805,36 +851,43 @@ const resolvers: Resolvers = {
       });
       return result; //แสดงข้อมูลด้วยการค้นหา user
     },
-
+    //แสดง กองทุนพนักงาน และ กองทุนบริษัท////
     async provident_log(parant: any, args: any, ctx: any) {
       const filter = args?.userId ? args.userId : undefined;
       const result = await ctx.prisma.provident_log.findMany({
         include: { User: true, mas_all_collect: true },
         where: {
+          //โดยอ้างกจากuserid จาก tokenที่login
           userId: ctx.currentUser?.userId,
         },
       });
       return result;
     },
-
+    //แสดง เงินเดือนของแต่ละคน///
     async data_salary(p, args, ctx) { //เงินเดือนของแต่ละคน
+      //ถ้ามี ค่า fristname  ให้ใส่ในตัวแปล search1 ไม่มี ให้ใส่ undefined
       const search1 = args.fristname ? args.fristname : undefined
+      //ถ้ามี ค่า Position2  ให้ใส่ในตัวแปล search2 ไม่มี ให้ใส่ undefined
       const search2 = args.Position2 ? args.Position2 : undefined
+      //ถ้ามี ค่า Position3  ให้ใส่ในตัวแปล search3 ไม่มี ให้ใส่ undefined
       const search3 = args.Position3 ? args.Position3 : undefined
+      //เก็บวันที่ปัจจุบันในตัวแปลcurrent_time
       let current_time = new Date()
       // let current_month = "3"
+      //นำcurrent_time มาแปลงเป็นเวา unix 
       let unix_current = dayjs(current_time).unix()
       console.log('วันปัจจุบัน = ', unix_current);
       let bb_acp_date
       let bb_id = ""
-
       const getdata = await ctx.prisma.user.findMany({
         include: {
+
           profile: true,
           role: true,
           Position_user: {
             include: { mas_positionlevel1: true, mas_positionlevel2: true, mas_positionlevel3: true },
             where: {
+              //และโดยอ้างจาก table  Position_user การรับค่า search2 และ 3 หรือ Position2 และ 3
               mas_positionlevel2: {
                 id: search2
               }, AND: {
@@ -846,15 +899,19 @@ const resolvers: Resolvers = {
             orderBy: { date: 'desc' }
           },
           salary: true,
+          //
           bookbank_log: { include: { mas_bank: true }, take: 1, orderBy: { accept_date: 'desc' }, where: { unix: { lte: dayjs(new Date()).unix() } } },
           companyBranch: { include: { expense_company: { orderBy: { date: 'desc' } } } }
-        },
+        },///สินสุดการjoin
         where: {
+          //โดยอ้างจากbranchId ของ tokenที่login
           companyBranchId: ctx.currentUser?.branchId,
           AND: {
+            //และโดยอ้างจาก table  profile การรับค่า search1หรือ fristname
             profile: {
               firstname_th: { contains: search1 }
             },
+            //และโดยอ้างจาก table  Position_user การรับค่า search2 และ 3 หรือ Position2 และ 3
             AND: {
               Position_user: {
                 some: {
@@ -865,6 +922,7 @@ const resolvers: Resolvers = {
             },
           },
         },
+        //จัดเรียงตามรหัสพนักงาน
         orderBy: {
           profile: { staff_code: 'asc' }
         }
@@ -881,11 +939,12 @@ const resolvers: Resolvers = {
      * @param ctx
      * @returns
      */
-
+    ///ตรวจสอบ password เพื่อยืนยันตัวตนในการปรับเปลี่ยน
     async Check_password(p, args, ctx) {
       let pw = ""
       const find_user = await ctx.prisma.user.findMany({
         where: {
+          //โดยอ้างจาก userid ของtoken ที่ login
           id: ctx.currentUser?.id
         }
       })
@@ -895,19 +954,20 @@ const resolvers: Resolvers = {
       // pw = find_user.password
       const decrypt_pw = await comparePassword(args.data?.password as string, pw)
       console.log('รหัสผ่าน = ', decrypt_pw);
-
+      //หากถูกต้อง
       if (decrypt_pw === true) {
         return {
           message: 'ยืนยันรหัสผ่านถูกต้อง',
           status: true,
         }
       }
+      //หากไม่ถูกต้อง
       return {
         message: 'รหัสผ่านของคุณไม่ถูกต้อง',
         status: true,
       }
     },
-
+    //สร้างเดือน
     async Createmonth(p: any, args: any, ctx: any) {
       const genmonthID = v4();
       const createmonth = await ctx.prisma.mas_month.create({
@@ -921,7 +981,7 @@ const resolvers: Resolvers = {
         status: true,
       };
     },
-
+    //สร้าง ปี
     async Createyears(p: any, args: any, ctx: any) {
       const genyearsID = v4();
       const createyears = await ctx.prisma.mas_years.create({
@@ -936,24 +996,26 @@ const resolvers: Resolvers = {
         status: true,
       };
     },
-
+    //สร้างและอัพเดท เงินเดือน///
     async Createandupdatesalary(p: any, args: any, ctx: any) {
       //สร้าง log สำหรับเงินเดือนจากนั้นเก็บกองทุนไว้ใน provident log จากนั้นเก็บค่าไว้ใน collect
 
       if (args.data?.id) {
         let date = args.data?.date
+        //แปลง date ให้เหลือแค่ปี
         let ThisYear = dayjs(date).format("YYYY")
+        //แปลง date ให้เหลือแค่เดือน
         let Thismonth = dayjs(date).format("MM")
         const pro_emp = args.data?.provident_employee
         const pro_com = args.data?.provident_company
         const find_salary = await ctx.prisma.salary.findMany({
           where: {
+            //โดยอ้างจากการรับค่า id
             id: args.data?.id
           }
         })
         // console.log(find_salary)
         let provi_log_id = find_salary[0].provident_logId
-
         const updatesalary = await ctx.prisma.salary.update({
           data: {
             mas_monthId: args.data?.mas_monthId as string,
@@ -1369,7 +1431,6 @@ const resolvers: Resolvers = {
         status: true,
       };
     },
-
     async Createandupdatebookbank(p, args, ctx) {
       //สร้าง bookbank
       const bookbankID = v4();
@@ -2114,7 +2175,7 @@ const resolvers: Resolvers = {
         status: true,
       };
     },
-
+//ลบ salary และ provident_log และอัพเดทค่า การสะสมใน mas_all_collect
     async DeleteSalary(p: any, args: any, ctx: any) {
       const find_salary = await ctx.prisma.salary.findMany({ //ทำการคำนวณยอดเงินใน mas_collect ใหม่
         where: {
@@ -2170,12 +2231,12 @@ const resolvers: Resolvers = {
         status: true,
       };
     },
-
+//ลบ Deletebookbank และ read_bookbank_log
     async Deletebookbank(p, args, ctx) {
-
       let read_bb_ID = null
       const find_by_id = await ctx.prisma.read_bookbank_log.findMany({
         where: {
+          //โดยอ้างจาก bookbank_logId ที่ได้รับจากการรับค่า id
           bookbank_logId: args.id
         }
       })
@@ -2201,7 +2262,7 @@ const resolvers: Resolvers = {
         status: true,
       };
     },
-
+//ลบ expense_company
     async DeleteExpensecom(p, args, ctx) {
       const delete_expense_com = await ctx.prisma.expense_company.delete({
         where: {
