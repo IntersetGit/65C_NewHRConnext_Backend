@@ -485,6 +485,7 @@ export type Mutation = {
   DeleteSalary?: Maybe<DeleteSalaryResponseType>;
   Deletebookbank?: Maybe<DeletebookbankResponseType>;
   EditPosition?: Maybe<CreatepositionResponseType>;
+  SalarySlip?: Maybe<Slipresolvers>;
   createAccount?: Maybe<CreateCompanyResponseType>;
   createAccountUser?: Maybe<CreateUserResponseType>;
   createAndUpdateComBarance?: Maybe<CreateComapnyBranchResponseType>;
@@ -574,6 +575,12 @@ export type MutationDeletebookbankArgs = {
 
 export type MutationEditPositionArgs = {
   data?: InputMaybe<Array<CreatedAndUpdatePosition>>;
+};
+
+
+export type MutationSalarySlipArgs = {
+  date?: InputMaybe<Scalars['Date']>;
+  userId?: InputMaybe<Scalars['String']>;
 };
 
 
@@ -782,7 +789,6 @@ export type Query = {
   __typename?: 'Query';
   GetHoliDayYear?: Maybe<Array<Maybe<Holiday_Years>>>;
   GetHolidayDate?: Maybe<GetHolidayYearResponseType>;
-  SalarySlip?: Maybe<Slipresolvers>;
   bookbank_log?: Maybe<Array<Maybe<Bookbank_Log_Type>>>;
   bookbank_log_admin?: Maybe<Array<Maybe<Bookbank_Log_Type>>>;
   company?: Maybe<ResponseCompany>;
@@ -825,12 +831,6 @@ export type QueryGetHoliDayYearArgs = {
 
 export type QueryGetHolidayDateArgs = {
   year?: InputMaybe<Scalars['Int']>;
-};
-
-
-export type QuerySalarySlipArgs = {
-  date?: InputMaybe<Scalars['Date']>;
-  userId?: InputMaybe<Scalars['String']>;
 };
 
 
@@ -2388,6 +2388,7 @@ export type MutationResolvers<ContextType = ApolloContext, ParentType extends Re
   DeleteSalary?: Resolver<Maybe<ResolversTypes['DeleteSalaryResponseType']>, ParentType, ContextType, RequireFields<MutationDeleteSalaryArgs, 'salaryid' | 'userId'>>;
   Deletebookbank?: Resolver<Maybe<ResolversTypes['DeletebookbankResponseType']>, ParentType, ContextType, RequireFields<MutationDeletebookbankArgs, 'id'>>;
   EditPosition?: Resolver<Maybe<ResolversTypes['CreatepositionResponseType']>, ParentType, ContextType, Partial<MutationEditPositionArgs>>;
+  SalarySlip?: Resolver<Maybe<ResolversTypes['slipresolvers']>, ParentType, ContextType, Partial<MutationSalarySlipArgs>>;
   createAccount?: Resolver<Maybe<ResolversTypes['CreateCompanyResponseType']>, ParentType, ContextType, RequireFields<MutationCreateAccountArgs, 'data'>>;
   createAccountUser?: Resolver<Maybe<ResolversTypes['CreateUserResponseType']>, ParentType, ContextType, RequireFields<MutationCreateAccountUserArgs, 'data'>>;
   createAndUpdateComBarance?: Resolver<Maybe<ResolversTypes['CreateComapnyBranchResponseType']>, ParentType, ContextType, RequireFields<MutationCreateAndUpdateComBaranceArgs, 'data'>>;
@@ -2507,7 +2508,6 @@ export type ProvinceResolvers<ContextType = ApolloContext, ParentType extends Re
 export type QueryResolvers<ContextType = ApolloContext, ParentType extends ResolversParentTypes['Query'] = ResolversParentTypes['Query']> = ResolversObject<{
   GetHoliDayYear?: Resolver<Maybe<Array<Maybe<ResolversTypes['holiday_years']>>>, ParentType, ContextType, Partial<QueryGetHoliDayYearArgs>>;
   GetHolidayDate?: Resolver<Maybe<ResolversTypes['GetHolidayYearResponseType']>, ParentType, ContextType, Partial<QueryGetHolidayDateArgs>>;
-  SalarySlip?: Resolver<Maybe<ResolversTypes['slipresolvers']>, ParentType, ContextType, Partial<QuerySalarySlipArgs>>;
   bookbank_log?: Resolver<Maybe<Array<Maybe<ResolversTypes['Bookbank_log_type']>>>, ParentType, ContextType>;
   bookbank_log_admin?: Resolver<Maybe<Array<Maybe<ResolversTypes['Bookbank_log_type']>>>, ParentType, ContextType, Partial<QueryBookbank_Log_AdminArgs>>;
   company?: Resolver<Maybe<ResolversTypes['ResponseCompany']>, ParentType, ContextType, Partial<QueryCompanyArgs>>;

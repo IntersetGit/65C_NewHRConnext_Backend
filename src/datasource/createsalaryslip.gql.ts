@@ -18,7 +18,7 @@ type slipresolvers {
     status: Boolean
 }
 
-type Query{
+type Mutation{
     SalarySlip(userId: String, date: Date): slipresolvers
 }
 
@@ -26,7 +26,7 @@ type Query{
 
 `
 const resolversslip: Resolvers = {
-    Query: {
+    Mutation: {
         async SalarySlip(p, args, ctx) {
 
             let resultmonth // เดือน
@@ -397,7 +397,7 @@ const resolversslip: Resolvers = {
 
 
 const resolversSlipComposition = {
-    'Query.SalarySlip': [authenticate()],
+    'Mutation.SalarySlip': [authenticate()],
 };
 
 export const salarySlipResolvers = composeResolvers(
