@@ -81,6 +81,7 @@ export const salaryTypedef = gql`
     Salary: salary
     provident_com: Float
     provident_emp: Float
+    unix: Int
   }
 
   input salaryInput {
@@ -185,6 +186,7 @@ export const salaryTypedef = gql`
     accept_years:   Int
     provident_log: [provident_log]
     accept_date: Date
+    unix: Int
   }
   type read_bookbank_log {
     id: ID

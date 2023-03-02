@@ -53,6 +53,7 @@ export type Bookbank_Log_Type = {
   provident_emp?: Maybe<Scalars['Float']>;
   provident_log?: Maybe<Array<Maybe<Provident_Log>>>;
   salary?: Maybe<Array<Maybe<Salary>>>;
+  unix?: Maybe<Scalars['Int']>;
   userId?: Maybe<Scalars['String']>;
 };
 
@@ -1136,6 +1137,7 @@ export type Bookbank_Log = {
   mas_bankId?: Maybe<Scalars['String']>;
   provident_com?: Maybe<Scalars['Float']>;
   provident_emp?: Maybe<Scalars['Float']>;
+  unix?: Maybe<Scalars['Int']>;
   userId?: Maybe<User>;
 };
 
@@ -2087,6 +2089,7 @@ export type Bookbank_Log_TypeResolvers<ContextType = ApolloContext, ParentType e
   provident_emp?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
   provident_log?: Resolver<Maybe<Array<Maybe<ResolversTypes['provident_log']>>>, ParentType, ContextType>;
   salary?: Resolver<Maybe<Array<Maybe<ResolversTypes['salary']>>>, ParentType, ContextType>;
+  unix?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
   userId?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 }>;
@@ -2705,6 +2708,7 @@ export type Bookbank_LogResolvers<ContextType = ApolloContext, ParentType extend
   mas_bankId?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   provident_com?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
   provident_emp?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
+  unix?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
   userId?: Resolver<Maybe<ResolversTypes['User']>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 }>;
