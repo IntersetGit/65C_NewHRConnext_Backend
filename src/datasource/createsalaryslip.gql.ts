@@ -75,10 +75,12 @@ const resolversslip: Resolvers = {
             let Vat_collect = null
             let Social_secu_collect = null
 
+            // ทำการ format จาก date ที่รับเข้ามา
             let searchTime = new Date(args.date)
             let fm_years = dayjs(searchTime).format("YYYY")
             let fm_month = dayjs(searchTime).format("MM")
             
+            // ทำการค้นหา ค่าทุกอย่างที่มีใน สลิปเงินเดือน  โดยอิงจากวันที่ที่รับเข้ามา
             const data = await ctx.prisma.user.findMany({
                 include: {
                     profile: true,
@@ -95,6 +97,7 @@ const resolversslip: Resolvers = {
             })
             console.log(data);
 
+            // ทำการ loop ค่าจาก data ถ้าหากตัวไหนเป็น array ให้เข้าไป loop ต่อเพื่อเอาค่านั้นออกมาใส่ตัวแปร แล้วเอาไปใช้ในการแสดง สลิปเงินเดือน
             for (let i = 0; i < data.length; i++) {
 
                 company_name = data[i].companyBranch?.company?.name
@@ -383,8 +386,8 @@ const resolversslip: Resolvers = {
             console.log(pdfDoc)
 
             let name = `ใบแจ้งเงินเดือน_${staffcode}_${resultmonth}_${Number(Year) + 543}.pdf`
-            let url = `https://system.hrconnext.co/${process.env.SUB_API_PATH}/assets/payment/${name}`
-
+            let url = `https://system.hrconnext.co/${process.env.SUB_API_PATH}/assets/payment/${name}` //กรณีแสดงไฟล์ pdf ใน server
+            // let url = `http://localhost:4000/${process.env.SUB_API_PATH}/assets/payment/${name}` //กรณีแสดงไฟล์ pdf ใน localhost
             return {
                 message : "เรียกดู slip เงินเดือนสำเร็จ",
                 path: url,
