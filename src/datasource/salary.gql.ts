@@ -1943,8 +1943,8 @@ const resolvers: Resolvers = {
 
     async CreateAndUpdateExpenseCom(p, args, ctx) {
       //สร้างและอัปเดท expensecom
-      const genExpenseID = v4();
-      let date = args.data?.date
+      const genExpenseID = v4(); // เจน id ของ expense company
+      let date = args.data?.date // format วันที่ที่รับเข้ามา
       let ThisYear = dayjs(date).format("YYYY")
       let Thismonth = dayjs(date).format("MM")
       let Result = dayjs(date).format('YYYY-MM')
@@ -1953,9 +1953,10 @@ const resolvers: Resolvers = {
       console.log(unix_date_upt);
       let unix_date = dayjs(args.data?.date).unix()
       let unix = dayjs(args.data?.cal_date_salary).unix()
-      const take_arr = args.data?.check_vat ? args.data?.check_vat : []
+      const take_arr = args.data?.check_vat ? args.data?.check_vat : [] // กำหนดให้ take_arr เท่ากับ check_vat ที่รับเข้ามา ถ้าไม่มีการส่งมากำหนดในเป็น []
 
       if (args.data?.id) { //ถ้ามีการรับ ID ให้ทำการอัปเดท
+        //1. ทำการ update ExpenseCompany
         const updateExpenseCom = await ctx.prisma.expense_company.update({
           data: {
             bankId: args.data?.bankId as string,
@@ -1972,7 +1973,7 @@ const resolvers: Resolvers = {
           },
           where: { id: args.data.id },
         });
-        const chk_salary = await ctx.prisma.salary.findMany({ //จากนั้นให้ทำการหาา salary ว่าเดือนที่มีการเปลี่ยนแปลง ตรงกับ เงินเดือนมั้ย
+        const chk_salary = await ctx.prisma.salary.findMany({ //2. จากนั้นให้ทำการหาา salary ว่าเดือนที่มีการเปลี่ยนแปลง ตรงกับ เงินเดือนมั้ย
           include: {
             User: { include: { companyBranch: true, bookbank_log: { orderBy: { accept_date: 'desc' } } } },
           },
@@ -2020,7 +2021,7 @@ const resolvers: Resolvers = {
         let ResultVatYears = 0
         let ResultIncomeYears = 0
 
-        for (let i = 0; i < chk_salary.length; i++) { //จากนั้น loop ข้อมูลเงินเดือนเพื่อจะเอามาคำนวณในแต่ละเดือน
+        for (let i = 0; i < chk_salary.length; i++) { //3. จากนั้น loop ข้อมูลเงินเดือนเพื่อจะเอามาคำนวณในแต่ละเดือน
 
           let salary_id = chk_salary[i].id
           let user_id = chk_salary[i].userId
@@ -2048,7 +2049,7 @@ const resolvers: Resolvers = {
           VaT_per = chk_salary[i].vatper as number
           Ss_per = chk_salary[i].ss_per as number
 
-
+          // ทำการเช็ค bookbank_log 
           const chk_bb = await ctx.prisma.bookbank_log.findMany({
             take: 1,
             where: {
@@ -2061,13 +2062,13 @@ const resolvers: Resolvers = {
               accept_date: 'desc'
             }
           })
-
+          // forEach เพื่อเอาค่าของฐานเงินเดือนไปเรียกใช้
           chk_bb.forEach((e) => {
             base_salary = e.base_salary
             console.log(base_salary);
           })
 
-
+          // ถ้าหากมีการเปลี่ยนค่าของ ss_per และ vat_per
           if (Ss_per || VaT_per) {
 
             //calculate the new salary update !
@@ -2088,7 +2089,7 @@ const resolvers: Resolvers = {
             /////////////// cal ss ////////////////////////////////////////////
             let cal_ss = (base_salary * Ss_per) / 100
             console.log('ประกันสังคมใหม่', NewSocial_security);
-            NewSocial_security = cal_ss >= 750 ? 750 : cal_ss //กรณีที่มีการเปลี่ยนประกันสังคมตาม รัฐบาล ให้แก้ไขตรงตัวเลข 750 นะครับ
+            NewSocial_security = cal_ss >= 750 ? 750 : cal_ss //************** กรณีที่มีการเปลี่ยนประกันสังคมตาม รัฐบาล ให้แก้ไขตรงตัวเลข 750 นะครับ ***************
             Total_income = commission + position_income + ot + bonus + special_income + other_income + travel_income + bursary + welfare_money + base_salary
             Total_expense = cal_vat + miss + ra + late + other + provident_employee + provident_company + NewSocial_security
             Net = Total_income - Total_expense
@@ -2100,19 +2101,22 @@ const resolvers: Resolvers = {
             console.log("ประกันสังคมสะสม = ", ResultSocialYears)
             console.log('ประกันสังคมปัจจุบัน = ', NewSocial_security);
 
+            // ทำการค้นหา mas_all_collect โดยอิงจาก userID ที่ loop มาจาก เช็คเงินเดือน
             const chk_all_collect = await ctx.prisma.mas_all_collect.findMany({
               where: {
                 userId: chk_salary[i].userId as string
               }
             })
             console.log(chk_all_collect);
-
+            // ทำการ loop ค่าของ chk_all_collect 
             for (let a = 0; a < chk_all_collect.length; a++) {
 
               let vat_collect_old = chk_all_collect[0].vat_collect as number
               let vat_collect_new = (vat_collect_old - vat) + cal_vat
               let ss_collect_old = chk_all_collect[0].social_secu_collect as number
               let ss_collect_new = (ss_collect_old - social_security) + NewSocial_security
+
+              // จากนั้นทำการ อัปเดทข้อมูลใหม่ให้กับ mas_all_collect โดยเปลี่ยน vat social_security และ income
               const upt_all_collect = await ctx.prisma.mas_all_collect.update({
                 data: {
                   vat_collect: vat_collect_new,
@@ -2127,6 +2131,7 @@ const resolvers: Resolvers = {
               console.log('ค่าใหม่ = ', upt_all_collect);
 
             }
+            // จากนั้นทำการอัปเดท เงินเดือนโดยคำนวณค่าจาก vatper ssper ที่รับเข้ามาใหม่
             const upt_salary = await ctx.prisma.salary.update({
               data: {
                 vat: cal_vat,

@@ -16,6 +16,7 @@ import leavtypeEnum from '../enum/leavtype.enum';
 import bankEnum from '../enum/bank.enum';
 import mainbusinessEnum from '../enum/mainbusiness.enum';
 import subbusinessEnum from '../enum/subbusiness.enum';
+import yearsEnum from '../enum/years.enum';
 import { createPassword } from '../src/utils/passwords';
 import { update } from 'lodash';
 
@@ -149,6 +150,31 @@ const main = async () => {
       update: {},
     });
   });
+
+  const mas_yearstype = await yearsEnum.forEach(async (b) => {
+    await prisma.mas_years.upsert({
+      where: {
+        id: b.id,
+      },
+      create:{
+        id: b.id,
+        name: b.name, 
+      },
+      update: {},
+    });
+  });
+
+  const salary_status = await prisma.mas_salary_status.upsert({
+    where: {
+      id: '765d31b6-ab63-11ed-afa1-0242ac120002',
+    },
+    create: {
+      id: '765d31b6-ab63-11ed-afa1-0242ac120002',
+      no: 1,
+      name: 'คำนวณเงินสำเร็จแล้ว'
+    },
+    update: {},
+  })
 
   const user = await prisma.user.upsert({
     where: {
