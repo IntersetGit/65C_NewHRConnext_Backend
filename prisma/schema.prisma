@@ -142,7 +142,7 @@ model Profile {
 
 model User {
   id                String              @unique @db.Uuid
-  email             String              @unique
+  email             String              
   password          String
   profile           Profile?
   islogin           Boolean             @default(false)
