@@ -999,7 +999,7 @@ const resolvers: Resolvers = {
     //สร้างและอัพเดท เงินเดือน///
     async Createandupdatesalary(p: any, args: any, ctx: any) {
       //สร้าง log สำหรับเงินเดือนจากนั้นเก็บกองทุนไว้ใน provident log จากนั้นเก็บค่าไว้ใน collect
-
+      /////////////////////// กรณี อัปเดทเงินเดือน /////////////////////////////////////////////
       if (args.data?.id) {
         let date = args.data?.date
         //แปลง date ให้เหลือแค่ปี
@@ -1015,8 +1015,8 @@ const resolvers: Resolvers = {
           }
         })
         // console.log(find_salary)
-        let provi_log_id = find_salary[0].provident_logId
-        const updatesalary = await ctx.prisma.salary.update({
+        let provi_log_id = find_salary[0].provident_logId //หา provident log Id เพื่อที่จะทำการเอาไปอ้างอิงในการอัปเดท provident log
+        const updatesalary = await ctx.prisma.salary.update({ // ทำการอัปเดทเงินเดือน 
           data: {
             mas_monthId: args.data?.mas_monthId as string,
             mas_yearsId: args.data?.mas_yearsId as string,
@@ -1062,7 +1062,7 @@ const resolvers: Resolvers = {
             id: args.data?.id
           }
         });
-
+        // อัปเดท provident log (กองทุน พนักงาน และ บริษัท)
         const updatepro_log = await ctx.prisma.provident_log.update({
           data: {
             pro_employee: pro_emp,
@@ -1073,7 +1073,7 @@ const resolvers: Resolvers = {
             id: provi_log_id
           }
         })
-
+        // ทำการเช็คค่าของ mas_all_collect โดยอ้างอิงจาก userId
         const check_all_collect = await ctx.prisma.mas_all_collect.findMany({
           where: {
             userId: args.userId
@@ -1082,6 +1082,7 @@ const resolvers: Resolvers = {
         console.log(find_salary)
         console.log(check_all_collect)
 
+        // นำค่าต่างๆ ของ mas_all_collect มาลบด้วยค่าเก่าที่เคยมี จากนั้น + ด้วยค่าใหม่ที่ทำการอัปเดทเงินเดือนแล้ว
         let new_income_collet = (check_all_collect[0].income_collect - find_salary[0].net) + args.data?.net
         console.log(new_income_collet)
         let new_vat_collect = (check_all_collect[0].vat_collect - find_salary[0].vat) + args.data?.vat
@@ -1093,7 +1094,7 @@ const resolvers: Resolvers = {
         let new_pro_com = (check_all_collect[0].provident_collect_company - find_salary[0].provident_company) + pro_com
         console.log(new_pro_com);
 
-        const update_all_collect = await ctx.prisma.mas_all_collect.update({
+        const update_all_collect = await ctx.prisma.mas_all_collect.update({ //ทำการอัปเดทค่าต่าง ๆ ที่ผ่านการคำนวณแล้วเข้าไปใน mas_all_collect
           data: {
             date: new Date(),
             income_collect: new_income_collet,
@@ -1111,15 +1112,13 @@ const resolvers: Resolvers = {
           status: true,
         }
       }
+      ////////////////////////////// ถ้าหากไม่มี id จะทำการสร้างเงินเดือน //////////////////////////////
 
-      //ถ้าหากไม่มีการส่ง id มาจะให้เป็นการสร้างใหม่
-      const gensalaryID = v4();
-      const genAllCollectID = v4();
-      const providentID = v4()
+      const gensalaryID = v4(); // เจน id ของเงินเดือน
+      const genAllCollectID = v4(); // เจน id ของ mas_all_collect
+      const providentID = v4() // เจน id ของ provident log
 
-      // let now = dayjs()
-      // console.log(now.format("MM-DD"));
-
+      // 1. เช็คค่าจาก mas_all_collect โดยอิงจาก userId
       const chk_collectLog = await ctx.prisma.mas_all_collect.findMany({
         include: { provident_log: true },
         where: {
@@ -1127,9 +1126,12 @@ const resolvers: Resolvers = {
         },
       });
 
+      // format ค่าวันจาก date ที่รับเข้ามา
       let date = args.data?.date
       let ThisYear = dayjs(date).format("YYYY")
       let Thismonth = dayjs(date).format("MM")
+
+      // 2. เช็คค่าจากเงินเดือนโดยอ้างอิงจาก userId และ ปีจากที่ format มา
       const chk_salaryYears = await ctx.prisma.salary.findMany({
         include: { provident_log: true },
         where: {
@@ -1143,49 +1145,50 @@ const resolvers: Resolvers = {
           years: "desc",
         },
       });
-
+    // 3. เช็คค่าจาก bookbank_log (ฐานเงินเดือน) โดยอ้างอิงจาก userId และ และ unix(เวลาของวันที่มีผล accept_date) 
       const check_bookbank = await ctx.prisma.bookbank_log.findMany({
         take: 1,
         where: {
           userId: args.data.userId,
-          AND: {
-            unix: { lte: dayjs(new Date()).unix() }
+          AND: { 
+            unix: { lte: dayjs(new Date()).unix() } //โดยอ้างอิงจากเวลาปัจจุบัน  เพื่อจะหาค่า ฐานเงินเดือนได้ถูกต้อง
           }
         }, orderBy: {
           date: "desc"
         }
       })
       let bookbank_logId = check_bookbank[0].id //หา bookbank log ของ user คนนั้นจากนั้นให้ insert เข้า salary
-      let Base_salary = check_bookbank[0].base_salary
+      let Base_salary = check_bookbank[0].base_salary //กำหนดให้ base_salary เท่ากับฐานเดือนของเดือนที่ทำการค้นหา
 
-      let Vat_per = null
-      let SS_per = null
+      let Vat_per = null //กำหนดค่า vat_per เป็น 0
+      let SS_per = null//กำหนดค่า SS_per เป็น 0
       const chk_vatByEXP = await ctx.prisma.expense_company.findMany({ //เช็ค expense company ถ้าหากวันที่คำนวณเงินเดือนยังไมถึงวันที่มีผลให้ใช้ expense company เดิม
         take: 1,
         where: {
           companyBranchId: ctx.currentUser?.branchId,
           AND: {
-            unix_date: { lte: dayjs(new Date()).unix() }
+            unix_date: { lte: dayjs(new Date()).unix() } //โดยอ้างอิงจาก unix_date(เดือนที่มีผล)
           }
         }, orderBy: {
           date: 'desc'
         }
       })
-
-      chk_vatByEXP.forEach((e: any) => {
+      // ทำการ forEach ค่าของ chk_vatByEXP จากนั้นกำหนดค่าให้ Vat_per และ SS_per
+      chk_vatByEXP.forEach((e: any) => { 
         Vat_per = e.vat_per
         SS_per = e.ss_per
       })
       console.log(chk_vatByEXP);
 
       let time
-      let result_incomeYears = 0;
-      let result_vatYears = 0;
-      let result_sosialYears = 0;
+      let result_incomeYears = 0; // กำหนดค่าให้ result_incomeYears เป็น 0
+      let result_vatYears = 0; // กำหนดค่าให้ result_vatYears เป็น 0
+      let result_sosialYears = 0; // กำหนดค่าให้ result_sosialYears เป็น 0
 
       if (chk_salaryYears.length === 0) { //เช็คค่าของเงินเดือนในปีนั้น ถ้า user คนนั้นพึ่งสมัครมาครั้งแรกให้เข้าเงื่อนไขนี้
-        const pro_emp = args.data?.provident_employee
+        const pro_emp = args.data?.provident_employee 
         const pro_com = args.data?.provident_company
+        // 4. ทำการสร้างเงินเดือนขึ้นมา โดยการคำนวณครั้งแรก  front end เป็นฝ่ายคำนวณเงินก่อน
         const createsalary = await ctx.prisma.salary.create({
           data: {
             id: gensalaryID,
@@ -1230,7 +1233,7 @@ const resolvers: Resolvers = {
             mas_bankId: args.data?.mas_bankId,
             base_salary: Base_salary,
             provident_logId: providentID,
-            provident_log: {
+            provident_log: { //ทำการสร้าง provident_log เพื่อเก็บค่าของกองทุน พนักงานและบริษัทด้วย เนื่องจากว่า กองทุนทั้ง 2 อย่างจำเป็นที่จะต้องเก็บไว้ทุกเดือน เพื่อสามารถเรียกดูย้อนหลังได้
               create: {
                 id: providentID,
                 userId: args.data?.userId,
@@ -1245,7 +1248,8 @@ const resolvers: Resolvers = {
 
           }
         });
-        if (chk_collectLog.length > 0) { //ถ้าหากว่า all_collect มีอยู่แล้วให้ทำการอัปเดท
+        //5. ทำการเช็ค mas_all_collect ว่าที่เงินเดือนออกแล้ว เขามียอดเงินสะสมทั้งหมดหรือไม่ 
+        if (chk_collectLog.length > 0) { 
           console.log(args.data?.userId);
           console.log(args.data);
           let total_income = chk_collectLog[0].income_collect + args.data?.net;
@@ -1260,7 +1264,7 @@ const resolvers: Resolvers = {
             total_pro_emp,
             total_pro_com,
           );
-
+            //5.1 ถ้าหากว่าเขามีอยู่แล้ววให้ทำการอัปเดทข้อมูล
           const UpdateAllCollect = await ctx.prisma.mas_all_collect.update({
             // include: { provident_log: true , User:true },
             data: {
