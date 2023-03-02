@@ -7,7 +7,6 @@ import { authenticate } from '../middleware/authenticatetoken';
 import dayjs from 'dayjs';
 import { profile } from 'console';
 import { expense_company, bookbank_log } from '../generated/client/index';
-import { string } from 'zod';
 import { comparePassword } from '../utils/passwords';
 
 
@@ -550,7 +549,7 @@ const resolvers: Resolvers = {
           //join table profile////
           profile: true,
           //join table salary โดยอ้างจากปี/////
-          salary: { where: { years: searchyears?.toString() } },
+          salary: { where: { years: searchyears?.toString() } , orderBy:{ date : 'desc'}},
           //่join table companyBranch และให้ table company join companyBranch/////////
           companyBranch: { include: { company: true } },
           /////join table Position_user และให้ table mas_positionlevel3 join Position_user จัดเรียงตาม date มากไปน้อย/////
@@ -561,7 +560,7 @@ const resolvers: Resolvers = {
         where: {
           //โดยอ้างจาก user id///
           id: args.userId as string
-        },
+        }
       });
       return getdata;
     },
