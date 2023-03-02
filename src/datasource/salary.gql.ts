@@ -549,7 +549,7 @@ const resolvers: Resolvers = {
           //join table profile////
           profile: true,
           //join table salary โดยอ้างจากปี/////
-          salary: { where: { years: searchyears?.toString() } , orderBy:{ date : 'asc'}},
+          salary: { where: { years: searchyears?.toString() }, orderBy: { date: 'asc' } },
           //่join table companyBranch และให้ table company join companyBranch/////////
           companyBranch: { include: { company: true } },
           /////join table Position_user และให้ table mas_positionlevel3 join Position_user จัดเรียงตาม date มากไปน้อย/////
@@ -834,13 +834,19 @@ const resolvers: Resolvers = {
       const result = await ctx.prisma.bookbank_log.findMany({
         include: {
           //join table User <--[(และให้ table profile และ (table Position_user และให้ table mas_positionlevel3 join table Position_user)]---join table User)
-          User: { include: { profile: true, Position_user: { include: { mas_positionlevel3: true } } } },
+          User: {
+            include: {
+              profile: true,
+              Position_user: { include: { mas_positionlevel3: true } },
+              companyBranch: { include: { expense_company: { take:1 , where: { unix: { gte: dayjs(new Date()).unix() } }, orderBy: { date: 'asc' } } } }
+            }
+          },
           //join table mas_bank
           mas_bank: true
         },
         where: {
           //โดยอ้างจากการรับค่า userid 
-          userId: args.userId,
+          userId: args.userId
         },
         //โดยจดเรียงตาม วันที่มีผลจากมากไปหาน้อย
         orderBy:
@@ -848,6 +854,7 @@ const resolvers: Resolvers = {
           accept_date: "asc",
         },
       });
+
       return result; //แสดงข้อมูลด้วยการค้นหา user
     },
     //แสดง กองทุนพนักงาน และ กองทุนบริษัท////
@@ -1144,12 +1151,12 @@ const resolvers: Resolvers = {
           years: "desc",
         },
       });
-    // 3. เช็คค่าจาก bookbank_log (ฐานเงินเดือน) โดยอ้างอิงจาก userId และ และ unix(เวลาของวันที่มีผล accept_date) 
+      // 3. เช็คค่าจาก bookbank_log (ฐานเงินเดือน) โดยอ้างอิงจาก userId และ และ unix(เวลาของวันที่มีผล accept_date) 
       const check_bookbank = await ctx.prisma.bookbank_log.findMany({
         take: 1,
         where: {
           userId: args.data.userId,
-          AND: { 
+          AND: {
             unix: { lte: dayjs(new Date()).unix() } //โดยอ้างอิงจากเวลาปัจจุบัน  เพื่อจะหาค่า ฐานเงินเดือนได้ถูกต้อง
           }
         }, orderBy: {
@@ -1173,7 +1180,7 @@ const resolvers: Resolvers = {
         }
       })
       // ทำการ forEach ค่าของ chk_vatByEXP จากนั้นกำหนดค่าให้ Vat_per และ SS_per
-      chk_vatByEXP.forEach((e: any) => { 
+      chk_vatByEXP.forEach((e: any) => {
         Vat_per = e.vat_per
         SS_per = e.ss_per
       })
@@ -1185,7 +1192,7 @@ const resolvers: Resolvers = {
       let result_sosialYears = 0; // กำหนดค่าให้ result_sosialYears เป็น 0
 
       if (chk_salaryYears.length === 0) { //เช็คค่าของเงินเดือนในปีนั้น ถ้า user คนนั้นพึ่งสมัครมาครั้งแรกให้เข้าเงื่อนไขนี้
-        const pro_emp = args.data?.provident_employee 
+        const pro_emp = args.data?.provident_employee
         const pro_com = args.data?.provident_company
         // 4. ทำการสร้างเงินเดือนขึ้นมา โดยการคำนวณครั้งแรก  front end เป็นฝ่ายคำนวณเงินก่อน
         const createsalary = await ctx.prisma.salary.create({
@@ -1248,7 +1255,7 @@ const resolvers: Resolvers = {
           }
         });
         //5. ทำการเช็ค mas_all_collect ว่าที่เงินเดือนออกแล้ว เขามียอดเงินสะสมทั้งหมดหรือไม่ 
-        if (chk_collectLog.length > 0) { 
+        if (chk_collectLog.length > 0) {
           console.log(args.data?.userId);
           console.log(args.data);
           let total_income = chk_collectLog[0].income_collect + args.data?.net;
@@ -1263,7 +1270,7 @@ const resolvers: Resolvers = {
             total_pro_emp,
             total_pro_com,
           );
-            //5.1 ถ้าหากว่าเขามีอยู่แล้ววให้ทำการอัปเดทข้อมูล
+          //5.1 ถ้าหากว่าเขามีอยู่แล้ววให้ทำการอัปเดทข้อมูล
           const UpdateAllCollect = await ctx.prisma.mas_all_collect.update({
             // include: { provident_log: true , User:true },
             data: {
@@ -1302,7 +1309,7 @@ const resolvers: Resolvers = {
           status: true,
         };
       }
-      
+
       for (let i = 0; i < chk_salaryYears.length; i++) { // ทำการ loop ค่า เพื่อเช็คยอดเงินประจำปี รายรับรวม ภาษีรวม ประกันสังคมรวม
         // time = dayjs(chk_salaryYears[i].date).format("MM")
         result_incomeYears += chk_salaryYears[i].net
@@ -1588,7 +1595,7 @@ const resolvers: Resolvers = {
         let ResultIncomeYears = 0
         let ResultVatYears = 0
         let take_arr = []
-        
+
         // ทำการ loop ค่าเงินเดือนของเดือนนั้นที่มีการเปลี่ยนแปลง bookbank_log เช่นเ คำนวณเงินเดือนเสร็จแล้ว เดือน 2 แต่ต้องการจะเปลี่ยนฐานเงินเดือนเดือน 2 จะต้องทำคำนวณเงินเดือนใหมอีกครั้ง
         for (let i = 0; i < chk_salary.length; i++) {
 
@@ -1636,7 +1643,7 @@ const resolvers: Resolvers = {
           })
           // ทำการ forEach เพื่อกำหนดค่าให้ฐานเงินเดือนเป็นเดือนล่าสุด
           chk_bb.forEach((e) => {
-            base_salary = e.base_salary 
+            base_salary = e.base_salary
             console.log(base_salary);
           })
           // 1. ทำการเช็คค่าถ้าหากว่ามีการส่ง กองทุนพนักงานและกองทุนบริษัท
@@ -1652,7 +1659,7 @@ const resolvers: Resolvers = {
 
               ////////// cal vat /////
               let cal = 0 //คำนวณค่าจาก array ทั้งหมดจากนั้นนำค่ามาใส่ในตัวแปร cal
-              const chk_take_arr = await ctx.prisma.expense_company.findMany({ 
+              const chk_take_arr = await ctx.prisma.expense_company.findMany({
                 take: 1,
                 where: {
                   unix_date: { lte: dayjs(new Date()).unix() },
@@ -1670,7 +1677,7 @@ const resolvers: Resolvers = {
                 })
                 console.log(cal)
               })
-              
+
               // คำนวณค่าภาษี
               let cal_vat = (cal * vat_per) / 100 //cal_vat คือค่าใหม่ ส่วน vat คือค่าเก่า
 
@@ -1737,7 +1744,7 @@ const resolvers: Resolvers = {
                   total_income: Total_income,
                   total_expense: Total_expense,
                   incomeYears: ResultIncomeYears,
-                  socialYears:ResultSocialYears,
+                  socialYears: ResultSocialYears,
                   vatYears: ResultVatYears,
                   net: Net
                 },
@@ -1895,7 +1902,7 @@ const resolvers: Resolvers = {
         },
       });
 
-        //// ทำการสร้าง read_bookbank_log 
+      //// ทำการสร้าง read_bookbank_log 
       const insert_read_bb_log = await ctx.prisma.read_bookbank_log.create({
         data: {
           id: readbookbankID,
@@ -2194,7 +2201,7 @@ const resolvers: Resolvers = {
         status: true,
       };
     },
-//ลบ salary และ provident_log และอัพเดทค่า การสะสมใน mas_all_collect
+    //ลบ salary และ provident_log และอัพเดทค่า การสะสมใน mas_all_collect
     async DeleteSalary(p: any, args: any, ctx: any) {
       const find_salary = await ctx.prisma.salary.findMany({ //ทำการคำนวณยอดเงินใน mas_collect ใหม่
         where: {
@@ -2250,7 +2257,7 @@ const resolvers: Resolvers = {
         status: true,
       };
     },
-//ลบ Deletebookbank และ read_bookbank_log
+    //ลบ Deletebookbank และ read_bookbank_log
     async Deletebookbank(p, args, ctx) {
       let read_bb_ID = null
       const find_by_id = await ctx.prisma.read_bookbank_log.findMany({
@@ -2281,7 +2288,7 @@ const resolvers: Resolvers = {
         status: true,
       };
     },
-//ลบ expense_company
+    //ลบ expense_company
     async DeleteExpensecom(p, args, ctx) {
       const delete_expense_com = await ctx.prisma.expense_company.delete({
         where: {
