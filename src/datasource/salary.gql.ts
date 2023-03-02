@@ -1856,26 +1856,26 @@ const resolvers: Resolvers = {
       // console.log(chk_payday);
 
       ////////////////// กรณีที่ไม่มีการอัปเดท แต่ต้องการจะเพิ่มฐานเงินเดือนใหม่ //////////////////
-      if (args.data?.userId) { 
-        // ทำการเช็ค bookbank_log โดนอิงจาก userID และ วันที่มีผลโดยอิง ฐานเงินเดือนที่มีค่ามากกว่าจากวันที่ที่รับเข้ามา
-        let baseold = 0
-        const chk_acp_bb = await ctx.prisma.bookbank_log.findMany({
-          where: {
-            userId: args.data?.userId,
-            AND: {
-              unix: { gte: dayjs(new Date(args.data.accept_date)).unix() }
-            }
-          },
-          orderBy: {
-            accept_date: 'desc'
-          }
-        })
-        console.log(chk_acp_bb); 
-        // ถ้าหากเช็ค bookbank log มันมากกว่าค่าวันที่รับเข้ามา จะส่ง error
-        if (chk_acp_bb.length > 0) {
-          throw new Error("ไม่สามารถตั้งค่าฐานเงินเดือนน้อยกว่าเดือนก่อนหน้า ");
-        }
-      }
+      // if (args.data?.userId) { 
+      //   // ทำการเช็ค bookbank_log โดนอิงจาก userID และ วันที่มีผลโดยอิง ฐานเงินเดือนที่มีค่ามากกว่าจากวันที่ที่รับเข้ามา
+      //   let baseold = 0
+      //   const chk_acp_bb = await ctx.prisma.bookbank_log.findMany({
+      //     where: {
+      //       userId: args.data?.userId,
+      //       AND: {
+      //         unix: { gte: dayjs(new Date(args.data.accept_date)).unix() }
+      //       }
+      //     },
+      //     orderBy: {
+      //       accept_date: 'desc'
+      //     }
+      //   })
+      //   console.log(chk_acp_bb); 
+      //   // ถ้าหากเช็ค bookbank log มันมากกว่าค่าวันที่รับเข้ามา จะส่ง error
+      //   if (chk_acp_bb.length > 0) {
+      //     throw new Error("ไม่สามารถตั้งค่าฐานเงินเดือนน้อยกว่าเดือนก่อนหน้า ");
+      //   }
+      // }
 
       //// ทำการสร้าง bookbank_log 
       const createbook_bank = await ctx.prisma.bookbank_log.create({
