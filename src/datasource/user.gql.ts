@@ -353,7 +353,7 @@ const resolvers: Resolvers = {
       return checker.length >= 1 ? false : true;
     },
     /**
-     * ?เช็คข้อมูลซ้ำของรหัสหรือชื่อย่อบริษัท
+     * ?เช็คข้อมูลซ้ำของอีเมล
      * @param p
      * @param args
      * @param ctx
