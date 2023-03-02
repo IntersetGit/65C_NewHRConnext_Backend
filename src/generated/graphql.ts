@@ -821,6 +821,7 @@ export type Query = {
   show_years?: Maybe<Array<Maybe<Mas_Years>>>;
   users?: Maybe<Array<Maybe<User>>>;
   verifyCompanycode?: Maybe<Scalars['Boolean']>;
+  verifyEmail?: Maybe<Scalars['Boolean']>;
 };
 
 
@@ -960,6 +961,11 @@ export type QueryUsersArgs = {
 
 export type QueryVerifyCompanycodeArgs = {
   companyname: Scalars['String'];
+};
+
+
+export type QueryVerifyEmailArgs = {
+  emails: Scalars['String'];
 };
 
 export type RefreshtokenResponseType = {
@@ -2540,6 +2546,7 @@ export type QueryResolvers<ContextType = ApolloContext, ParentType extends Resol
   show_years?: Resolver<Maybe<Array<Maybe<ResolversTypes['mas_years']>>>, ParentType, ContextType, Partial<QueryShow_YearsArgs>>;
   users?: Resolver<Maybe<Array<Maybe<ResolversTypes['User']>>>, ParentType, ContextType, Partial<QueryUsersArgs>>;
   verifyCompanycode?: Resolver<Maybe<ResolversTypes['Boolean']>, ParentType, ContextType, RequireFields<QueryVerifyCompanycodeArgs, 'companyname'>>;
+  verifyEmail?: Resolver<Maybe<ResolversTypes['Boolean']>, ParentType, ContextType, RequireFields<QueryVerifyEmailArgs, 'emails'>>;
 }>;
 
 export type RefreshtokenResponseTypeResolvers<ContextType = ApolloContext, ParentType extends ResolversParentTypes['RefreshtokenResponseType'] = ResolversParentTypes['RefreshtokenResponseType']> = ResolversObject<{
