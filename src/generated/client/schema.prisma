@@ -142,7 +142,7 @@ model Profile {
 
 model User {
   id                String              @unique @db.Uuid
-  email             String              @unique
+  email             String              
   password          String
   profile           Profile?
   islogin           Boolean             @default(false)
@@ -455,26 +455,25 @@ model bookbank_log {
 
 //ใช้สำหรับเรียกดูว่ามีการแก้ไขหรืออัปเดทอะไรไปบ้าง โดยจะเก็บเป็น log//
 model read_bookbank_log {
-  id            String    @unique @db.Uuid
-  date          DateTime
-  mas_bankId    String?   @db.Uuid
-  bank_number   String    @db.VarChar(50)
-  all_collectId String?   @db.Uuid
-  base_salary   Float?
-  provident_com Float?    @default(0)
-  provident_emp Float?    @default(0)
-  accept_date   DateTime
-  accept_month  Int?
-  accept_years  Int?
-  unix          Int?
-  update_by     String?
-  update_date   DateTime?
-  userId        String?   @db.Uuid
-  bookbank_logId String?       @db.Uuid
-  User          User?     @relation(fields: [userId], references: [id])
+  id             String    @unique @db.Uuid
+  date           DateTime
+  mas_bankId     String?   @db.Uuid
+  bank_number    String    @db.VarChar(50)
+  all_collectId  String?   @db.Uuid
+  base_salary    Float?
+  provident_com  Float?    @default(0)
+  provident_emp  Float?    @default(0)
+  accept_date    DateTime
+  accept_month   Int?
+  accept_years   Int?
+  unix           Int?
+  update_by      String?
+  update_date    DateTime?
+  userId         String?   @db.Uuid
+  bookbank_logId String?   @db.Uuid
+  User           User?     @relation(fields: [userId], references: [id])
 
-  bookbank_log   bookbank_log? @relation(fields: [bookbank_logId], references: [id])
-  
+  bookbank_log bookbank_log? @relation(fields: [bookbank_logId], references: [id])
 }
 
 model provident_log {

@@ -37985,7 +37985,6 @@ export namespace Prisma {
 
   export type UserWhereUniqueInput = {
     id?: string
-    email?: string
   }
 
   export type UserOrderByWithAggregationInput = {
