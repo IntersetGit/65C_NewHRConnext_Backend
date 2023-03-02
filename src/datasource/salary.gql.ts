@@ -549,7 +549,7 @@ const resolvers: Resolvers = {
           //join table profile////
           profile: true,
           //join table salary โดยอ้างจากปี/////
-          salary: { where: { years: searchyears?.toString() } , orderBy:{ date : 'desc'}},
+          salary: { where: { years: searchyears?.toString() } , orderBy:{ date : 'asc'}},
           //่join table companyBranch และให้ table company join companyBranch/////////
           companyBranch: { include: { company: true } },
           /////join table Position_user และให้ table mas_positionlevel3 join Position_user จัดเรียงตาม date มากไปน้อย/////
