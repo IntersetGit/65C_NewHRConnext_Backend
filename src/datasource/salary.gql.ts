@@ -507,7 +507,7 @@ export const salaryTypedef = gql`
     bookbank_log: [Bookbank_log_type]
     bookbank_log_admin(userId: String): [Bookbank_log_type]
     filter_bookbank_admin(userId: String): [Bookbank_log_type]
-    filter_bookbank(userId: String): [Bookbank_log_type]
+    filter_bookbank: [Bookbank_log_type]
     provident_log(userId:String):[provident_log]
     mydata_salary(years: String): data_salary
     # datasalary_mee(years: String): data_salary_me
@@ -558,7 +558,7 @@ const resolvers: Resolvers = {
           /////join table Position_user และให้ table mas_positionlevel3 join Position_user จัดเรียงตาม date มากไปน้อย/////
           Position_user: { include: { mas_positionlevel3: true }, orderBy: { date: 'desc' } },
           // join table bookbank_log และให้ table mas_bank join bookbank_log  จัดเรียงตาม date มากไปน้อย//////
-          bookbank_log: { include: { mas_bank: true }, orderBy: { date: 'desc' } }
+          bookbank_log: { include: { mas_bank: true }, take: 1, orderBy: { accept_date: 'desc' }, where: { unix: { lte: dayjs(new Date()).unix() } } }
         },
         where: {
           //โดยอ้างจาก user id///
@@ -732,22 +732,47 @@ const resolvers: Resolvers = {
 
     //แสดง ฐานเงินเดือน กองทุนพนักงาน กอนทุนบริษัท  วันที่มีผล bankid numberbank////
     async bookbank_log(parant, args, ctx) {
+      // const result = await ctx.prisma.bookbank_log.findMany({
+      //   include: {
+      //     //join table User <--[(และให้ table profile และ (table Position_user และให้ table mas_positionlevel3 join table Position_user)]---join table User)
+      //     User: { include: { profile: true, Position_user: { include: { mas_positionlevel3: true } } } },
+      //     //join table mas_bank
+      //     mas_bank: true
+      //   },
+      //   where: {
+      //     //โดยอ้างกจากuser.id จาก tokenที่login
+      //     userId: ctx.currentUser?.id,
+      //   },
+      //   orderBy:
+      //   {
+      //     accept_date: "asc",
+      //   },
+      // });
+
       const result = await ctx.prisma.bookbank_log.findMany({
         include: {
           //join table User <--[(และให้ table profile และ (table Position_user และให้ table mas_positionlevel3 join table Position_user)]---join table User)
-          User: { include: { profile: true, Position_user: { include: { mas_positionlevel3: true } } } },
+          User: {
+            include: {
+              profile: true,
+              Position_user: { include: { mas_positionlevel3: true } },
+              companyBranch: { include: { expense_company: { take: 1, where: { unix: { gte: dayjs(new Date()).unix() } }, orderBy: { date: 'asc' } } } }
+            }
+          },
           //join table mas_bank
           mas_bank: true
         },
         where: {
-          //โดยอ้างกจากuser.id จาก tokenที่login
-          userId: ctx.currentUser?.id,
+          //โดยอ้างจากการรับค่า userid 
+          userId: ctx.currentUser?.id
         },
+        //โดยจดเรียงตาม วันที่มีผลจากมากไปหาน้อย
         orderBy:
         {
           accept_date: "asc",
         },
       });
+
       return result; //แสดงข้อมูลโดยล็อคอินด้วย user
     },
 
@@ -841,7 +866,7 @@ const resolvers: Resolvers = {
             include: {
               profile: true,
               Position_user: { include: { mas_positionlevel3: true } },
-              companyBranch: { include: { expense_company: { take:1 , where: { unix: { gte: dayjs(new Date()).unix() } }, orderBy: { date: 'asc' } } } }
+              companyBranch: { include: { expense_company: { take: 1, where: { unix: { gte: dayjs(new Date()).unix() } }, orderBy: { date: 'asc' } } } }
             }
           },
           //join table mas_bank
