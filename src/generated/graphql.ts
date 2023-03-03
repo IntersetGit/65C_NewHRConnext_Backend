@@ -1281,6 +1281,8 @@ export type Expense_Company = {
   salary?: Maybe<Array<Maybe<Salary>>>;
   social_security?: Maybe<Scalars['Float']>;
   ss_per?: Maybe<Scalars['Float']>;
+  unix?: Maybe<Scalars['Int']>;
+  unix_date?: Maybe<Scalars['Int']>;
   vat_per?: Maybe<Scalars['Float']>;
 };
 
@@ -2791,6 +2793,8 @@ export type Expense_CompanyResolvers<ContextType = ApolloContext, ParentType ext
   salary?: Resolver<Maybe<Array<Maybe<ResolversTypes['salary']>>>, ParentType, ContextType>;
   social_security?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
   ss_per?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
+  unix?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
+  unix_date?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
   vat_per?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 }>;

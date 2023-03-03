@@ -325,6 +325,8 @@ export const salaryTypedef = gql`
     companyBranchId: String
     Salary: salary
     cal_date_salary: Date
+    unix: Int
+    unix_date: Int
   }
   type Profile {
     bio: String
