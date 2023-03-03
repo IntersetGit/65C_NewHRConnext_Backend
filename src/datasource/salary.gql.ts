@@ -167,6 +167,7 @@ export const salaryTypedef = gql`
     incomeYears: Float
     mas_bankId: String
     mas_bank: mas_bank
+    base_salary: Float
   }
 
   type Bookbank_log_type {

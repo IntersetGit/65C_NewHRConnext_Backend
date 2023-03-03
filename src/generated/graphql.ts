@@ -1607,6 +1607,7 @@ export type Read_Bookbank_Log = {
 
 export type Salary = {
   __typename?: 'salary';
+  base_salary?: Maybe<Scalars['Float']>;
   bonus?: Maybe<Scalars['Float']>;
   bookbank_log?: Maybe<Bookbank_Log_Type>;
   bookbank_logId?: Maybe<Scalars['String']>;
@@ -3071,6 +3072,7 @@ export type Read_Bookbank_LogResolvers<ContextType = ApolloContext, ParentType e
 }>;
 
 export type SalaryResolvers<ContextType = ApolloContext, ParentType extends ResolversParentTypes['salary'] = ResolversParentTypes['salary']> = ResolversObject<{
+  base_salary?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
   bonus?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
   bookbank_log?: Resolver<Maybe<ResolversTypes['Bookbank_log_type']>, ParentType, ContextType>;
   bookbank_logId?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
