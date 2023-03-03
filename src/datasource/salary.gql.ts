@@ -805,6 +805,7 @@ const resolvers: Resolvers = {
       const result = await ctx.prisma.bookbank_log.findMany({
         include: {
           // join table mas_bank
+          User: { include: { profile: true, Position_user: { include: { mas_positionlevel1: true, mas_positionlevel2: true, mas_positionlevel3: true } } } },
           mas_bank: true
           //เลือกเอาแค่ 1ตัว
         }, take: 1,
