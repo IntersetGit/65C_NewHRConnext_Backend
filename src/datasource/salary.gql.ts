@@ -1051,8 +1051,43 @@ const resolvers: Resolvers = {
             id: args.data?.id
           }
         })
-        // console.log(find_salary)
         let provi_log_id = find_salary[0].provident_logId //หา provident log Id เพื่อที่จะทำการเอาไปอ้างอิงในการอัปเดท provident log
+        // console.log(find_salary)
+         // ทำการเช็คค่าของ mas_all_collect โดยอ้างอิงจาก userId
+         const check_all_collect = await ctx.prisma.mas_all_collect.findMany({
+          where: {
+            userId: args.userId
+          }
+        })
+        console.log(find_salary)
+        console.log(check_all_collect)
+
+        // นำค่าต่างๆ ของ mas_all_collect มาลบด้วยค่าเก่าที่เคยมี จากนั้น + ด้วยค่าใหม่ที่ทำการอัปเดทเงินเดือนแล้ว
+        let new_income_collet = (check_all_collect[0].income_collect - find_salary[0].net) + args.data?.net
+        console.log(new_income_collet)
+        let new_vat_collect = (check_all_collect[0].vat_collect - find_salary[0].vat) + args.data?.vat
+        console.log(new_vat_collect)
+        let new_social_secu = (check_all_collect[0].social_secu_collect - find_salary[0].social_security) + args.data?.social_security
+        console.log(new_social_secu)
+        let new_pro_emp = (check_all_collect[0].provident_collect_employee - find_salary[0].provident_employee) + pro_emp
+        console.log(new_pro_emp);
+        let new_pro_com = (check_all_collect[0].provident_collect_company - find_salary[0].provident_company) + pro_com
+        console.log(new_pro_com);
+
+        const update_all_collect = await ctx.prisma.mas_all_collect.update({ //ทำการอัปเดทค่าต่าง ๆ ที่ผ่านการคำนวณแล้วเข้าไปใน mas_all_collect
+          data: {
+            date: new Date(),
+            income_collect: new_income_collet,
+            vat_collect: new_vat_collect,
+            social_secu_collect: new_social_secu,
+            provident_collect_employee: new_pro_emp,
+            provident_collect_company: new_pro_com,
+          },
+          where: {
+            userId: args.data.userId,
+          },
+        });
+
         const updatesalary = await ctx.prisma.salary.update({ // ทำการอัปเดทเงินเดือน 
           data: {
             mas_monthId: args.data?.mas_monthId as string,
@@ -1110,40 +1145,7 @@ const resolvers: Resolvers = {
             id: provi_log_id
           }
         })
-        // ทำการเช็คค่าของ mas_all_collect โดยอ้างอิงจาก userId
-        const check_all_collect = await ctx.prisma.mas_all_collect.findMany({
-          where: {
-            userId: args.userId
-          }
-        })
-        console.log(find_salary)
-        console.log(check_all_collect)
-
-        // นำค่าต่างๆ ของ mas_all_collect มาลบด้วยค่าเก่าที่เคยมี จากนั้น + ด้วยค่าใหม่ที่ทำการอัปเดทเงินเดือนแล้ว
-        let new_income_collet = (check_all_collect[0].income_collect - find_salary[0].net) + args.data?.net
-        console.log(new_income_collet)
-        let new_vat_collect = (check_all_collect[0].vat_collect - find_salary[0].vat) + args.data?.vat
-        console.log(new_vat_collect)
-        let new_social_secu = (check_all_collect[0].social_secu_collect - find_salary[0].social_security) + args.data?.social_security
-        console.log(new_social_secu)
-        let new_pro_emp = (check_all_collect[0].provident_collect_employee - find_salary[0].provident_employee) + pro_emp
-        console.log(new_pro_emp);
-        let new_pro_com = (check_all_collect[0].provident_collect_company - find_salary[0].provident_company) + pro_com
-        console.log(new_pro_com);
-
-        const update_all_collect = await ctx.prisma.mas_all_collect.update({ //ทำการอัปเดทค่าต่าง ๆ ที่ผ่านการคำนวณแล้วเข้าไปใน mas_all_collect
-          data: {
-            date: new Date(),
-            income_collect: new_income_collet,
-            vat_collect: new_vat_collect,
-            social_secu_collect: new_social_secu,
-            provident_collect_employee: new_pro_emp,
-            provident_collect_company: new_pro_com,
-          },
-          where: {
-            userId: args.data.userId,
-          },
-        });
+       
         return {
           message: 'update success',
           status: true,
