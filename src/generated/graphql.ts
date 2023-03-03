@@ -487,6 +487,7 @@ export type Mutation = {
   Deletebookbank?: Maybe<DeletebookbankResponseType>;
   EditPosition?: Maybe<CreatepositionResponseType>;
   SalarySlip?: Maybe<Slipresolvers>;
+  SalarySlip_User?: Maybe<Slipresolvers>;
   createAccount?: Maybe<CreateCompanyResponseType>;
   createAccountUser?: Maybe<CreateUserResponseType>;
   createAndUpdateComBarance?: Maybe<CreateComapnyBranchResponseType>;
@@ -582,6 +583,11 @@ export type MutationEditPositionArgs = {
 export type MutationSalarySlipArgs = {
   date?: InputMaybe<Scalars['Date']>;
   userId?: InputMaybe<Scalars['String']>;
+};
+
+
+export type MutationSalarySlip_UserArgs = {
+  date?: InputMaybe<Scalars['Date']>;
 };
 
 
@@ -2396,6 +2402,7 @@ export type MutationResolvers<ContextType = ApolloContext, ParentType extends Re
   Deletebookbank?: Resolver<Maybe<ResolversTypes['DeletebookbankResponseType']>, ParentType, ContextType, RequireFields<MutationDeletebookbankArgs, 'id'>>;
   EditPosition?: Resolver<Maybe<ResolversTypes['CreatepositionResponseType']>, ParentType, ContextType, Partial<MutationEditPositionArgs>>;
   SalarySlip?: Resolver<Maybe<ResolversTypes['slipresolvers']>, ParentType, ContextType, Partial<MutationSalarySlipArgs>>;
+  SalarySlip_User?: Resolver<Maybe<ResolversTypes['slipresolvers']>, ParentType, ContextType, Partial<MutationSalarySlip_UserArgs>>;
   createAccount?: Resolver<Maybe<ResolversTypes['CreateCompanyResponseType']>, ParentType, ContextType, RequireFields<MutationCreateAccountArgs, 'data'>>;
   createAccountUser?: Resolver<Maybe<ResolversTypes['CreateUserResponseType']>, ParentType, ContextType, RequireFields<MutationCreateAccountUserArgs, 'data'>>;
   createAndUpdateComBarance?: Resolver<Maybe<ResolversTypes['CreateComapnyBranchResponseType']>, ParentType, ContextType, RequireFields<MutationCreateAndUpdateComBaranceArgs, 'data'>>;
