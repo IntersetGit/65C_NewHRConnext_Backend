@@ -554,7 +554,7 @@ const resolvers: Resolvers = {
           //join table salary โดยอ้างจากปี/////
           salary: { where: { years: searchyears?.toString() }, orderBy: { date: 'asc' } },
           //่join table companyBranch และให้ table company join companyBranch/////////
-          companyBranch: { include: { company: true } },
+          companyBranch: { include: {  expense_company: { take: 1, where: { unix: { gte: dayjs(new Date()).unix() } }, orderBy: { date: 'asc' } },company: true }  },
           /////join table Position_user และให้ table mas_positionlevel3 join Position_user จัดเรียงตาม date มากไปน้อย/////
           Position_user: { include: { mas_positionlevel3: true }, orderBy: { date: 'desc' } },
           // join table bookbank_log และให้ table mas_bank join bookbank_log  จัดเรียงตาม date มากไปน้อย//////
@@ -645,7 +645,7 @@ const resolvers: Resolvers = {
           //join table salary โดยอ้างจาก ปี
           salary: { where: { years: searchyears } },
           //join table companyBranch และให้ table company join companyBranch 
-          companyBranch: { include: { company: true } },
+          companyBranch: { include: {  expense_company: { take: 1, where: { unix: { gte: dayjs(new Date()).unix() } }, orderBy: { date: 'asc' } },company: true }  },
           //join table Position_user และให้ table mas_positionlevel3 join Position_user จัดเรียงตาม date จากมากไปน้อย
           Position_user: { include: { mas_positionlevel3: true }, orderBy: { date: 'desc' } },
           // bookbank_log: true
