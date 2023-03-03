@@ -387,8 +387,8 @@ const resolversslip: Resolvers = {
             console.log(pdfDoc)
 
             let name = `ใบแจ้งเงินเดือน_${staffcode}_${resultmonth}_${Number(Year) + 543}.pdf`
-            // let url = `https://system.hrconnext.co/${process.env.SUB_API_PATH}/assets/payment/${name}` //กรณีแสดงไฟล์ pdf ใน server
-            let url = `http://localhost:4000/${process.env.SUB_API_PATH}/assets/payment/${name}` //กรณีแสดงไฟล์ pdf ใน localhost
+            let url = `https://system.hrconnext.co/${process.env.SUB_API_PATH}/assets/payment/${name}` //กรณีแสดงไฟล์ pdf ใน server
+            // let url = `http://localhost:4000/${process.env.SUB_API_PATH}/assets/payment/${name}` //กรณีแสดงไฟล์ pdf ใน localhost
             return {
                 message : "เรียกดู slip เงินเดือนสำเร็จ",
                 path: url,
@@ -756,8 +756,8 @@ const resolversslip: Resolvers = {
             console.log(pdfDoc)
 
             let name = `ใบแจ้งเงินเดือน_${staffcode}_${resultmonth}_${Number(Year) + 543}.pdf`
-            // let url = `https://system.hrconnext.co/${process.env.SUB_API_PATH}/assets/payment/${name}` //กรณีแสดงไฟล์ pdf ใน server
-            let url = `http://localhost:4000/${process.env.SUB_API_PATH}/assets/payment/${name}` //กรณีแสดงไฟล์ pdf ใน localhost
+            let url = `https://system.hrconnext.co/${process.env.SUB_API_PATH}/assets/payment/${name}` //กรณีแสดงไฟล์ pdf ใน server
+            // let url = `http://localhost:4000/${process.env.SUB_API_PATH}/assets/payment/${name}` //กรณีแสดงไฟล์ pdf ใน localhost
             return {
                 message : "เรียกดู slip เงินเดือนสำเร็จ",
                 path: url,
