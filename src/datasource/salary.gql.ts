@@ -642,16 +642,16 @@ const resolvers: Resolvers = {
       let searchyears = args.years ? args.years : undefined
       const getmydata = await ctx.prisma.user.findUnique({
         include: {
-          //join table profile
-          profile: true,
-          //join table salary โดยอ้างจาก ปี
-          salary: { where: { years: searchyears } },
-          //join table companyBranch และให้ table company join companyBranch 
-          companyBranch: { include: {  expense_company: { take: 1, where: { unix: { gte: dayjs(new Date()).unix() } }, orderBy: { date: 'asc' } },company: true }  },
-          //join table Position_user และให้ table mas_positionlevel3 join Position_user จัดเรียงตาม date จากมากไปน้อย
-          Position_user: { include: { mas_positionlevel3: true }, orderBy: { date: 'desc' } },
-          // bookbank_log: true
-          bookbank_log: { include: { mas_bank: true }, take: 1, orderBy: { accept_date: 'desc' }, where: { unix: { lte: dayjs(new Date()).unix() } } }
+         //join table profile////
+         profile: true,
+         //join table salary โดยอ้างจากปี/////
+         salary: { where: { years: searchyears?.toString() }, orderBy: { date: 'asc' } },
+         //่join table companyBranch และให้ table company join companyBranch/////////
+         companyBranch: { include: {  expense_company: { take: 1, where: { unix: { gte: dayjs(new Date()).unix() } }, orderBy: { date: 'asc' } },company: true }  },
+         /////join table Position_user และให้ table mas_positionlevel3 join Position_user จัดเรียงตาม date มากไปน้อย/////
+         Position_user: { include: { mas_positionlevel3: true }, orderBy: { date: 'desc' } },
+         // join table bookbank_log และให้ table mas_bank join bookbank_log  จัดเรียงตาม date มากไปน้อย//////
+         bookbank_log: { include: { mas_bank: true }, take: 1, orderBy: { accept_date: 'desc' }, where: { unix: { lte: dayjs(new Date()).unix() } } }
         },
         where: {
           //โดยอ้างกจากuser.id
