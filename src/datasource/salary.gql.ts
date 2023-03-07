@@ -1165,9 +1165,9 @@ const resolvers: Resolvers = {
         }
       })
       if(chk_expense.length === 0){
-        throw new Error("ไม่สามารถคำนวณเงินเดือนได้ กรุณาตั้งค่าการคำนวณเงินเดือนก่อน "); //ถ้าหากค่าเป็นติดลบ ให้ส่ง error 
+        throw new Error("ไม่สามารถคำนวณเงินเดือนได้ กรุณาตั้งค่าการคำนวณเงินเดือนก่อน "); //ถ้าหากค่า length มีค่า 0 ให้ส่ง error ไปตั้งค่า expense company ก่อน
       }
-      
+      //// ในกรณีที่มี expense company สามารถคำนวณเงินได้ตามปกติเลย
       const gensalaryID = v4(); // เจน id ของเงินเดือน
       const genAllCollectID = v4(); // เจน id ของ mas_all_collect
       const providentID = v4() // เจน id ของ provident log
