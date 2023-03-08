@@ -441,6 +441,11 @@ export const salaryTypedef = gql`
     provident_emp: Float
   }
 
+  type showsalary_Response {
+    data_s:data_salary
+    all_years:[String]
+  }
+
   type createsalaryResponseType {
     message: String
     status: Boolean
@@ -505,14 +510,14 @@ export const salaryTypedef = gql`
   }
 
   type Query {
-    salary(userId:String , years: String): data_salary
+    salary(userId:String , years: String): showsalary_Response
     salary_inmonthSlip(userId: String, date:Date):[data_salary]
     bookbank_log: [Bookbank_log_type]
     bookbank_log_admin(userId: String): [Bookbank_log_type]
     filter_bookbank_admin(userId: String): [Bookbank_log_type]
     filter_bookbank: [Bookbank_log_type]
     provident_log(userId:String):[provident_log]
-    mydata_salary(years: String): data_salary
+    mydata_salary(years: String): showsalary_Response
     # datasalary_mee(years: String): data_salary_me
     # Selfdatasalary: selfsalary
     #Selfdatasalary: selfsalary
@@ -549,6 +554,7 @@ const resolvers: Resolvers = {
   Query: {
     ////////////////////แสดงเงินเดือนโดยใช่ userid เป็นตัวอ้าง/////////////////////////////
     async salary(parant, args, ctx) {
+      var info :any []  = []
       let searchyears = args.years ? args.years : undefined
       const getdata = await ctx.prisma.user.findUnique({
         include: {
@@ -568,7 +574,24 @@ const resolvers: Resolvers = {
           id: args.userId as string
         }
       });
-      return getdata;
+      const get_years = await ctx.prisma.salary.findMany({
+        select: {
+          years: true,
+        }
+      })
+      get_years.forEach((c,b)=>{
+        const chk_year = info.find(e => e == c.years)
+        if(!chk_year){
+          info.push(c.years)
+        }
+      })
+
+      console.log('ปี  = ',info);
+    
+      return {
+        data_s: getdata,
+        all_years: info,
+      };
     },
     ////แสดง ปี โดยใช้ ปี/////
     async show_years(p, args, ctx) {
@@ -639,9 +662,11 @@ const resolvers: Resolvers = {
     },
     //////////////////แสดง เงินเดือนของตัวเอง โดยอ้างกจากuser.id จาก tokenที่login และจากการรับค่า ปี   
     async mydata_salary(parant, args, ctx) {
+      
       console.log(ctx.currentUser?.id)
+      var info :any []  = []
       let searchyears = args.years ? args.years : undefined
-      const getmydata = await ctx.prisma.user.findUnique({
+      const getdata = await ctx.prisma.user.findUnique({
         include: {
           //join table profile////
           profile: true,
@@ -655,12 +680,28 @@ const resolvers: Resolvers = {
           bookbank_log: { include: { mas_bank: true }, take: 1, orderBy: { accept_date: 'desc' }, where: { unix: { lte: dayjs(new Date()).unix() } } }
         },
         where: {
-          //โดยอ้างกจากuser.id
+          //โดยอ้างจาก user id///
           id: ctx.currentUser?.id
-
-        },
+        }
       });
-      return getmydata;
+      const get_years = await ctx.prisma.salary.findMany({
+        select: {
+          years: true,
+        }
+      })
+      get_years.forEach((c,b)=>{
+        const chk_year = info.find(e => e == c.years)
+        if(!chk_year){
+          info.push(c.years)
+        }
+      })
+
+      console.log('ปี  = ',info);
+    
+      return {
+        data_s: getdata,
+        all_years: info,
+      };
     },
 
     // async datasalary_mee(p:any, args:any, ctx:any) {  //เรียกดูตามปี
@@ -1166,7 +1207,7 @@ const resolvers: Resolvers = {
           }
         }
       })
-      if(chk_expense.length === 0){
+      if (chk_expense.length === 0) {
         throw new Error("ไม่สามารถคำนวณเงินเดือนได้ กรุณาตั้งค่าการคำนวณเงินเดือนก่อน "); //ถ้าหากค่า length มีค่า 0 ให้ส่ง error ไปตั้งค่า expense company ก่อน
       }
       //// ในกรณีที่มี expense company สามารถคำนวณเงินได้ตามปกติเลย
