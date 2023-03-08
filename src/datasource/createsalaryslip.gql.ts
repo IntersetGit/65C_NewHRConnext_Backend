@@ -80,7 +80,7 @@ const resolversslip: Resolvers = {
             let searchTime = new Date(args.date)
             let fm_years = dayjs(searchTime).format("YYYY")
             let fm_month = dayjs(searchTime).format("MM")
-            
+
             // ทำการค้นหา ค่าทุกอย่างที่มีใน สลิปเงินเดือน  โดยอิงจากวันที่ที่รับเข้ามา
             const data = await ctx.prisma.user.findMany({
                 include: {
@@ -88,7 +88,7 @@ const resolversslip: Resolvers = {
                     salary: { where: { month: fm_month, AND: { years: fm_years } } },
                     companyBranch: { include: { company: true, expense_company: true } },
                     Position_user: { include: { mas_positionlevel2: true, mas_positionlevel3: true }, orderBy: { date: 'desc' } },
-                    bookbank_log: { include: { mas_bank: true }, take:1 , orderBy: { accept_date: 'desc' }, where: { unix: { lte: dayjs(new Date(searchTime)).unix() } } },
+                    bookbank_log: { include: { mas_bank: true }, take: 1, orderBy: { accept_date: 'desc' }, where: { unix: { lte: dayjs(new Date(searchTime)).unix() } } },
                     mas_all_collect: true
                 },
                 where: {
@@ -143,6 +143,8 @@ const resolversslip: Resolvers = {
                     Incomeyears = Salary[i].incomeYears
                     Vatyears = Salary[i].vatYears
                     //รายหัก
+                    // Ss_per = Salary[i].ss_per
+                    // Vat_per = Salary[i].vatper
                     // Vatper = Salary[i].vatper
                     // Ss_per = Salary[i].ss_per
                     vat = Salary[i].vat
@@ -238,6 +240,9 @@ const resolversslip: Resolvers = {
             if (Total_expense === null) {
                 Total_expense = 0
             }
+
+
+
             let pdfDoc = new PDFDocument({ size: 'A4' });
             let pdfpath = path.resolve(`./public/assets/payment/ใบแจ้งเงินเดือน_${staffcode}_${resultmonth}_${Number(Year) + 543}.pdf`)
             let convertpath = pdfpath.replace(/\\/g, '/')
@@ -274,46 +279,46 @@ const resolversslip: Resolvers = {
             pdfDoc.fontSize(12).text("รายได้ (Income)", 85, 243, { align: 'left' }) // หัวตาราง
 
             pdfDoc.fontSize(12).text("เงินเดือนค่าจ้าง", 25, 265, { align: 'left' })
-            pdfDoc.fontSize(12).text(`${base_salary?.toFixed(2)}`, 100, 265, { width: 100, align: 'right' })
+            pdfDoc.fontSize(12).text(`${base_salary?.toLocaleString(undefined, { minimumFractionDigits: 2 })}`, 100, 265, { width: 100, align: 'right' })
 
             pdfDoc.fontSize(12).text("ค่าคอมมิชชั่น", 25, 285, { align: 'left' })
-            pdfDoc.fontSize(12).text(`${Com?.toFixed(2)}`, 100, 285, { width: 100, align: 'right' })
+            pdfDoc.fontSize(12).text(`${Com?.toLocaleString(undefined, { minimumFractionDigits: 2 })}`, 100, 285, { width: 100, align: 'right' })
 
             pdfDoc.fontSize(12).text("ค่าตำแหน่ง", 25, 305, { align: 'left' })
-            pdfDoc.fontSize(12).text(`${Position_income?.toFixed(2)}`, 100, 305, { width: 100, align: 'right' })
+            pdfDoc.fontSize(12).text(`${Position_income?.toLocaleString(undefined, { minimumFractionDigits: 2 })}`, 100, 305, { width: 100, align: 'right' })
 
             pdfDoc.fontSize(12).text("เงินพิเศษ", 25, 325, { align: 'left' })
-            pdfDoc.fontSize(12).text(`${Special_income?.toFixed(2)}`, 100, 325, { width: 100, align: 'right' })
+            pdfDoc.fontSize(12).text(`${Special_income?.toLocaleString(undefined, { minimumFractionDigits: 2 })}`, 100, 325, { width: 100, align: 'right' })
 
             pdfDoc.fontSize(12).text("ค่าล่วงเวลา", 25, 345, { align: 'left' })
-            pdfDoc.fontSize(12).text(`${Ot?.toFixed(2)}`, 100, 345, { width: 100, align: 'right' })
+            pdfDoc.fontSize(12).text(`${Ot?.toLocaleString(undefined, { minimumFractionDigits: 2 })}`, 100, 345, { width: 100, align: 'right' })
 
             pdfDoc.fontSize(12).text("รายได้อื่น", 25, 365, { align: 'left' })
-            pdfDoc.fontSize(12).text(`${Other_in?.toFixed(2)}`, 100, 365, { width: 100, align: 'right' })
+            pdfDoc.fontSize(12).text(`${Other_in?.toLocaleString(undefined, { minimumFractionDigits: 2 })}`, 100, 365, { width: 100, align: 'right' })
 
             pdfDoc.fontSize(12).text("ค่าเดินทาง", 25, 385, { align: 'left' })
-            pdfDoc.fontSize(12).text(`${Travel_income?.toFixed(2)}`, 100, 385, { width: 100, align: 'right' })
+            pdfDoc.fontSize(12).text(`${Travel_income?.toLocaleString(undefined, { minimumFractionDigits: 2 })}`, 100, 385, { width: 100, align: 'right' })
 
             pdfDoc.fontSize(12).text("เงินอุดหนุน", 25, 405, { align: 'left' })
-            pdfDoc.fontSize(12).text(`${Bursary?.toFixed(2)}`, 100, 405, { width: 100, align: 'right' })
+            pdfDoc.fontSize(12).text(`${Bursary?.toLocaleString(undefined, { minimumFractionDigits: 2 })}`, 100, 405, { width: 100, align: 'right' })
 
             pdfDoc.fontSize(12).text("เงินสวัสดิการ", 25, 425, { align: 'left' })
-            pdfDoc.fontSize(12).text(`${Welfare_money?.toFixed(2)}`, 100, 425, { width: 100, align: 'right' })
+            pdfDoc.fontSize(12).text(`${Welfare_money?.toLocaleString(undefined, { minimumFractionDigits: 2 })}`, 100, 425, { width: 100, align: 'right' })
 
             pdfDoc.fontSize(12).text("เงินโบนัส", 25, 445, { align: 'left' })
-            pdfDoc.fontSize(12).text(`${Bonus?.toFixed(2)}`, 100, 445, { width: 100, align: 'right' })
+            pdfDoc.fontSize(12).text(`${Bonus?.toLocaleString(undefined, { minimumFractionDigits: 2 })}`, 100, 445, { width: 100, align: 'right' })
 
             // เงินได้สะสม ภาษีสะสม
             pdfDoc.lineJoin('miter') //กรอบกลางล่าง ประกันสังคมสะสม
                 .rect(19, 480, 186, 20)
                 .stroke()
             pdfDoc.fontSize(12).text("เงินได้สะสม (ปี)", 25, 483, { align: 'left' })
-            pdfDoc.fontSize(12).text(`${Incomeyears?.toFixed(2)}`, 100, 483, { width: 100, align: 'right' })
+            pdfDoc.fontSize(12).text(`${Incomeyears?.toLocaleString(undefined, { minimumFractionDigits: 2 })}`, 100, 483, { width: 100, align: 'right' })
             pdfDoc.lineJoin('miter') //กรอบกลางล่าง กองทุนสำรองเลี้ยงชีพสะสม
                 .rect(19, 500, 186, 20)
                 .stroke()
             pdfDoc.fontSize(12).text("ภาษีสะสม (ปี)", 25, 503, { align: 'left' })
-            pdfDoc.fontSize(12).text(`${Vatyears?.toFixed(2)}`, 100, 503, { width: 100, align: 'right' })
+            pdfDoc.fontSize(12).text(`${Vatyears?.toLocaleString(undefined, { minimumFractionDigits: 2 })}`, 100, 503, { width: 100, align: 'right' })
             ///////////////////////////////////////////////////////////////////////
             pdfDoc.lineJoin('miter') //กรอบกลาง
                 .rect(205, 240, 185, 20)
@@ -325,37 +330,37 @@ const resolversslip: Resolvers = {
             pdfDoc.fontSize(12).text("รายการหัก (Deduction)", 255, 243, { align: 'left' })
 
             pdfDoc.fontSize(12).text(`ภาษีหัก ณ ที่จ่าย (${Vat_per}%)`, 210, 265, { align: 'left' })
-            pdfDoc.fontSize(12).text(`${vat?.toFixed(2)}`, 285, 265, { width: 100, align: 'right' })
+            pdfDoc.fontSize(12).text(`${vat?.toLocaleString(undefined, { minimumFractionDigits: 2 })}`, 285, 265, { width: 100, align: 'right' })
 
             pdfDoc.fontSize(12).text(`ประกันสังคม (${Ss_per}%)`, 210, 285, { align: 'left' })
-            pdfDoc.fontSize(12).text(`${Social_security?.toFixed(2)}`, 285, 285, { width: 100, align: 'right' })
+            pdfDoc.fontSize(12).text(`${Social_security?.toLocaleString(undefined, { minimumFractionDigits: 2 })}`, 285, 285, { width: 100, align: 'right' })
 
             pdfDoc.fontSize(12).text("หักมาทำงานสาย", 210, 305, { align: 'left' })
-            pdfDoc.fontSize(12).text(`${Late?.toFixed(2)}`, 285, 305, { width: 100, align: 'right' })
+            pdfDoc.fontSize(12).text(`${Late?.toLocaleString(undefined, { minimumFractionDigits: 2 })}`, 285, 305, { width: 100, align: 'right' })
 
             pdfDoc.fontSize(12).text("หักขาดงาน", 210, 325, { align: 'left' })
-            pdfDoc.fontSize(12).text(`${Miss?.toFixed(2)}`, 285, 325, { width: 100, align: 'right' })
+            pdfDoc.fontSize(12).text(`${Miss?.toLocaleString(undefined, { minimumFractionDigits: 2 })}`, 285, 325, { width: 100, align: 'right' })
 
             pdfDoc.fontSize(12).text("หักลากิจ / ลาป่วย", 210, 345, { align: 'left' })
-            pdfDoc.fontSize(12).text(`${Ra?.toFixed(2)}`, 285, 345, { width: 100, align: 'right' })
+            pdfDoc.fontSize(12).text(`${Ra?.toLocaleString(undefined, { minimumFractionDigits: 2 })}`, 285, 345, { width: 100, align: 'right' })
 
             pdfDoc.fontSize(12).text("หักอื่น ๆ ", 210, 365, { align: 'left' })
-            pdfDoc.fontSize(12).text(`${Other?.toFixed(2)}`, 285, 365, { width: 100, align: 'right' })
+            pdfDoc.fontSize(12).text(`${Other?.toLocaleString(undefined, { minimumFractionDigits: 2 })}`, 285, 365, { width: 100, align: 'right' })
 
             pdfDoc.fontSize(12).text(`กองทุนสำรองเลี้ยงชีพ (${Pro_emp_month}%)`, 210, 385, { align: 'left' })
-            pdfDoc.fontSize(12).text(`${Provident_employee?.toFixed(2)}`, 285, 385, { width: 100, align: 'right' })
+            pdfDoc.fontSize(12).text(`${Provident_employee?.toLocaleString(undefined, { minimumFractionDigits: 2 })}`, 285, 385, { width: 100, align: 'right' })
 
             pdfDoc.lineJoin('miter') //กรอบกลางล่าง ประกันสังคมสะสม
                 .rect(205, 480, 185, 20)
                 .stroke()
             pdfDoc.fontSize(12).text("ประกันสังคมสะสม (ปี)", 211, 483, { align: 'left' })
-            pdfDoc.fontSize(12).text(`${Socialyears?.toFixed(2)}`, 285, 483, { width: 100, align: 'right' })
+            pdfDoc.fontSize(12).text(`${Socialyears?.toLocaleString(undefined, { minimumFractionDigits: 2 })}`, 285, 483, { width: 100, align: 'right' })
 
             pdfDoc.lineJoin('miter') //กรอบกลางล่าง กองทุนสำรองเลี้ยงชีพสะสม
                 .rect(205, 500, 185, 20)
                 .stroke()
             pdfDoc.fontSize(12).text("กองทุนสำรองเลี้ยงชีพสะสม", 211, 503, { align: 'left' })
-            pdfDoc.fontSize(12).text(`${pro_emp?.toFixed(2)}`, 285, 503, { width: 100, align: 'right' })
+            pdfDoc.fontSize(12).text(`${pro_emp?.toLocaleString(undefined, { minimumFractionDigits: 2 })}`, 285, 503, { width: 100, align: 'right' })
 
             ///////////////////////////////////////////////////////////////////////
             pdfDoc.lineJoin('miter') //กรอบขวา
@@ -366,12 +371,12 @@ const resolversslip: Resolvers = {
                 .stroke()
 
             pdfDoc.fontSize(12).text("รวมเงินได้", 400, 265, { align: 'left' })
-            pdfDoc.fontSize(12).text(`${Total_income?.toFixed(2)}`, 470, 265, { width: 100, align: 'right' })
+            pdfDoc.fontSize(12).text(`${Total_income?.toLocaleString(undefined, { minimumFractionDigits: 2 })}`, 470, 265, { width: 100, align: 'right' })
             pdfDoc.fontSize(12).text("รวมเงินหัก", 400, 285, { align: 'left' })
-            pdfDoc.fontSize(12).text(`${Total_expense?.toFixed(2)}`, 470, 285, { width: 100, align: 'right' })
+            pdfDoc.fontSize(12).text(`${Total_expense?.toLocaleString(undefined, { minimumFractionDigits: 2 })}`, 470, 285, { width: 100, align: 'right' })
 
             pdfDoc.fontSize(12).text("เงินได้สุทธิ", 400, 325, { align: 'left' })
-            pdfDoc.fontSize(12).text(`${Net?.toFixed(2)}`, 460, 335, { width: 100, align: 'right' })
+            pdfDoc.fontSize(12).text(`${Net?.toLocaleString(undefined, { minimumFractionDigits: 2 })}`, 460, 335, { width: 100, align: 'right' })
             pdfDoc.fontSize(12).text("(Net Income)", 400, 345, { align: 'left' })
             pdfDoc.lineJoin('miter') //กรอบขวา
                 .rect(480, 330, 90, 0)
@@ -389,15 +394,17 @@ const resolversslip: Resolvers = {
             let name = `ใบแจ้งเงินเดือน_${staffcode}_${resultmonth}_${Number(Year) + 543}.pdf`
             let url = `https://system.hrconnext.co/${process.env.SUB_API_PATH}/assets/payment/${name}` //กรณีแสดงไฟล์ pdf ใน server
             // let url = `http://localhost:4000/${process.env.SUB_API_PATH}/assets/payment/${name}` //กรณีแสดงไฟล์ pdf ใน localhost
+            console.log('เงินเดือน', base_salary);
+
             return {
-                message : "เรียกดู slip เงินเดือนสำเร็จ",
+                message: "เรียกดู slip เงินเดือนสำเร็จ",
                 path: url,
                 status: true
             }
 
         },
 
-         async SalarySlip_User(p, args, ctx) {
+        async SalarySlip_User(p, args, ctx) {
 
             let resultmonth // เดือน
             let Year //ปี
@@ -449,15 +456,15 @@ const resolversslip: Resolvers = {
             let searchTime = new Date(args.date)
             let fm_years = dayjs(searchTime).format("YYYY")
             let fm_month = dayjs(searchTime).format("MM")
-            
+
             // ทำการค้นหา ค่าทุกอย่างที่มีใน สลิปเงินเดือน  โดยอิงจากวันที่ที่รับเข้ามา
             const data = await ctx.prisma.user.findMany({
                 include: {
                     profile: true,
                     salary: { where: { month: fm_month, AND: { years: fm_years } } },
-                    companyBranch: { include: { company: true, expense_company: true } },
+                    companyBranch: { include: { company: true, expense_company: { take: 1, orderBy: { date: 'desc' }, where: { unix_date: { lte: dayjs(new Date(searchTime)).unix() }, AND: { companyBranchId: ctx.currentUser?.branchId } } } } },
                     Position_user: { include: { mas_positionlevel2: true, mas_positionlevel3: true }, orderBy: { date: 'desc' } },
-                    bookbank_log: { include: { mas_bank: true }, take:1 , orderBy: { accept_date: 'desc' }, where: { unix: { lte: dayjs(new Date(searchTime)).unix() } } },
+                    bookbank_log: { include: { mas_bank: true }, take: 1, orderBy: { accept_date: 'desc' }, where: { unix: { lte: dayjs(new Date(searchTime)).unix() } } },
                     mas_all_collect: true
                 },
                 where: {
@@ -477,9 +484,9 @@ const resolversslip: Resolvers = {
                 staffcode = data[i].profile?.staff_code
                 firstname = data[i].profile?.firstname_th
                 lastname = data[i].profile?.lastname_th
-
                 Ss_per = data[i].companyBranch?.expense_company[0].ss_per
                 Vat_per = data[i].companyBranch?.expense_company[0].vat_per
+
 
                 let bookbank_Log = data[i].bookbank_log
                 for (let a = 0; a < bookbank_Log.length; a++) {
@@ -499,7 +506,7 @@ const resolversslip: Resolvers = {
                 let Salary = data[i].salary
                 for (let a = 0; a < Salary.length; a++) {
                     //รายได้
-
+                    // base_salary = Salary[i].base_salary
                     Com = Salary[i].commission
                     Position_income = Salary[i].position_income
                     Ot = Salary[i].ot
@@ -512,6 +519,8 @@ const resolversslip: Resolvers = {
                     Incomeyears = Salary[i].incomeYears
                     Vatyears = Salary[i].vatYears
                     //รายหัก
+                    // Ss_per = Salary[i].ss_per
+                    // Vat_per = Salary[i].vatper
                     // Vatper = Salary[i].vatper
                     // Ss_per = Salary[i].ss_per
                     vat = Salary[i].vat
@@ -643,46 +652,46 @@ const resolversslip: Resolvers = {
             pdfDoc.fontSize(12).text("รายได้ (Income)", 85, 243, { align: 'left' }) // หัวตาราง
 
             pdfDoc.fontSize(12).text("เงินเดือนค่าจ้าง", 25, 265, { align: 'left' })
-            pdfDoc.fontSize(12).text(`${base_salary?.toFixed(2)}`, 100, 265, { width: 100, align: 'right' })
+            pdfDoc.fontSize(12).text(`${base_salary?.toLocaleString(undefined, { minimumFractionDigits: 2 })}`, 100, 265, { width: 100, align: 'right' })
 
             pdfDoc.fontSize(12).text("ค่าคอมมิชชั่น", 25, 285, { align: 'left' })
-            pdfDoc.fontSize(12).text(`${Com?.toFixed(2)}`, 100, 285, { width: 100, align: 'right' })
+            pdfDoc.fontSize(12).text(`${Com?.toLocaleString(undefined, { minimumFractionDigits: 2 })}`, 100, 285, { width: 100, align: 'right' })
 
             pdfDoc.fontSize(12).text("ค่าตำแหน่ง", 25, 305, { align: 'left' })
-            pdfDoc.fontSize(12).text(`${Position_income?.toFixed(2)}`, 100, 305, { width: 100, align: 'right' })
+            pdfDoc.fontSize(12).text(`${Position_income?.toLocaleString(undefined, { minimumFractionDigits: 2 })}`, 100, 305, { width: 100, align: 'right' })
 
             pdfDoc.fontSize(12).text("เงินพิเศษ", 25, 325, { align: 'left' })
-            pdfDoc.fontSize(12).text(`${Special_income?.toFixed(2)}`, 100, 325, { width: 100, align: 'right' })
+            pdfDoc.fontSize(12).text(`${Special_income?.toLocaleString(undefined, { minimumFractionDigits: 2 })}`, 100, 325, { width: 100, align: 'right' })
 
             pdfDoc.fontSize(12).text("ค่าล่วงเวลา", 25, 345, { align: 'left' })
-            pdfDoc.fontSize(12).text(`${Ot?.toFixed(2)}`, 100, 345, { width: 100, align: 'right' })
+            pdfDoc.fontSize(12).text(`${Ot?.toLocaleString(undefined, { minimumFractionDigits: 2 })}`, 100, 345, { width: 100, align: 'right' })
 
             pdfDoc.fontSize(12).text("รายได้อื่น", 25, 365, { align: 'left' })
-            pdfDoc.fontSize(12).text(`${Other_in?.toFixed(2)}`, 100, 365, { width: 100, align: 'right' })
+            pdfDoc.fontSize(12).text(`${Other_in?.toLocaleString(undefined, { minimumFractionDigits: 2 })}`, 100, 365, { width: 100, align: 'right' })
 
             pdfDoc.fontSize(12).text("ค่าเดินทาง", 25, 385, { align: 'left' })
-            pdfDoc.fontSize(12).text(`${Travel_income?.toFixed(2)}`, 100, 385, { width: 100, align: 'right' })
+            pdfDoc.fontSize(12).text(`${Travel_income?.toLocaleString(undefined, { minimumFractionDigits: 2 })}`, 100, 385, { width: 100, align: 'right' })
 
             pdfDoc.fontSize(12).text("เงินอุดหนุน", 25, 405, { align: 'left' })
-            pdfDoc.fontSize(12).text(`${Bursary?.toFixed(2)}`, 100, 405, { width: 100, align: 'right' })
+            pdfDoc.fontSize(12).text(`${Bursary?.toLocaleString(undefined, { minimumFractionDigits: 2 })}`, 100, 405, { width: 100, align: 'right' })
 
             pdfDoc.fontSize(12).text("เงินสวัสดิการ", 25, 425, { align: 'left' })
-            pdfDoc.fontSize(12).text(`${Welfare_money?.toFixed(2)}`, 100, 425, { width: 100, align: 'right' })
+            pdfDoc.fontSize(12).text(`${Welfare_money?.toLocaleString(undefined, { minimumFractionDigits: 2 })}`, 100, 425, { width: 100, align: 'right' })
 
             pdfDoc.fontSize(12).text("เงินโบนัส", 25, 445, { align: 'left' })
-            pdfDoc.fontSize(12).text(`${Bonus?.toFixed(2)}`, 100, 445, { width: 100, align: 'right' })
+            pdfDoc.fontSize(12).text(`${Bonus?.toLocaleString(undefined, { minimumFractionDigits: 2 })}`, 100, 445, { width: 100, align: 'right' })
 
             // เงินได้สะสม ภาษีสะสม
             pdfDoc.lineJoin('miter') //กรอบกลางล่าง ประกันสังคมสะสม
                 .rect(19, 480, 186, 20)
                 .stroke()
             pdfDoc.fontSize(12).text("เงินได้สะสม (ปี)", 25, 483, { align: 'left' })
-            pdfDoc.fontSize(12).text(`${Incomeyears?.toFixed(2)}`, 100, 483, { width: 100, align: 'right' })
+            pdfDoc.fontSize(12).text(`${Incomeyears?.toLocaleString(undefined, { minimumFractionDigits: 2 })}`, 100, 483, { width: 100, align: 'right' })
             pdfDoc.lineJoin('miter') //กรอบกลางล่าง กองทุนสำรองเลี้ยงชีพสะสม
                 .rect(19, 500, 186, 20)
                 .stroke()
             pdfDoc.fontSize(12).text("ภาษีสะสม (ปี)", 25, 503, { align: 'left' })
-            pdfDoc.fontSize(12).text(`${Vatyears?.toFixed(2)}`, 100, 503, { width: 100, align: 'right' })
+            pdfDoc.fontSize(12).text(`${Vatyears?.toLocaleString(undefined, { minimumFractionDigits: 2 })}`, 100, 503, { width: 100, align: 'right' })
             ///////////////////////////////////////////////////////////////////////
             pdfDoc.lineJoin('miter') //กรอบกลาง
                 .rect(205, 240, 185, 20)
@@ -694,37 +703,37 @@ const resolversslip: Resolvers = {
             pdfDoc.fontSize(12).text("รายการหัก (Deduction)", 255, 243, { align: 'left' })
 
             pdfDoc.fontSize(12).text(`ภาษีหัก ณ ที่จ่าย (${Vat_per}%)`, 210, 265, { align: 'left' })
-            pdfDoc.fontSize(12).text(`${vat?.toFixed(2)}`, 285, 265, { width: 100, align: 'right' })
+            pdfDoc.fontSize(12).text(`${vat?.toLocaleString(undefined, { minimumFractionDigits: 2 })}`, 285, 265, { width: 100, align: 'right' })
 
             pdfDoc.fontSize(12).text(`ประกันสังคม (${Ss_per}%)`, 210, 285, { align: 'left' })
-            pdfDoc.fontSize(12).text(`${Social_security?.toFixed(2)}`, 285, 285, { width: 100, align: 'right' })
+            pdfDoc.fontSize(12).text(`${Social_security?.toLocaleString(undefined, { minimumFractionDigits: 2 })}`, 285, 285, { width: 100, align: 'right' })
 
             pdfDoc.fontSize(12).text("หักมาทำงานสาย", 210, 305, { align: 'left' })
-            pdfDoc.fontSize(12).text(`${Late?.toFixed(2)}`, 285, 305, { width: 100, align: 'right' })
+            pdfDoc.fontSize(12).text(`${Late?.toLocaleString(undefined, { minimumFractionDigits: 2 })}`, 285, 305, { width: 100, align: 'right' })
 
             pdfDoc.fontSize(12).text("หักขาดงาน", 210, 325, { align: 'left' })
-            pdfDoc.fontSize(12).text(`${Miss?.toFixed(2)}`, 285, 325, { width: 100, align: 'right' })
+            pdfDoc.fontSize(12).text(`${Miss?.toLocaleString(undefined, { minimumFractionDigits: 2 })}`, 285, 325, { width: 100, align: 'right' })
 
             pdfDoc.fontSize(12).text("หักลากิจ / ลาป่วย", 210, 345, { align: 'left' })
-            pdfDoc.fontSize(12).text(`${Ra?.toFixed(2)}`, 285, 345, { width: 100, align: 'right' })
+            pdfDoc.fontSize(12).text(`${Ra?.toLocaleString(undefined, { minimumFractionDigits: 2 })}`, 285, 345, { width: 100, align: 'right' })
 
             pdfDoc.fontSize(12).text("หักอื่น ๆ ", 210, 365, { align: 'left' })
-            pdfDoc.fontSize(12).text(`${Other?.toFixed(2)}`, 285, 365, { width: 100, align: 'right' })
+            pdfDoc.fontSize(12).text(`${Other?.toLocaleString(undefined, { minimumFractionDigits: 2 })}`, 285, 365, { width: 100, align: 'right' })
 
             pdfDoc.fontSize(12).text(`กองทุนสำรองเลี้ยงชีพ (${Pro_emp_month}%)`, 210, 385, { align: 'left' })
-            pdfDoc.fontSize(12).text(`${Provident_employee?.toFixed(2)}`, 285, 385, { width: 100, align: 'right' })
+            pdfDoc.fontSize(12).text(`${Provident_employee?.toLocaleString(undefined, { minimumFractionDigits: 2 })}`, 285, 385, { width: 100, align: 'right' })
 
             pdfDoc.lineJoin('miter') //กรอบกลางล่าง ประกันสังคมสะสม
                 .rect(205, 480, 185, 20)
                 .stroke()
             pdfDoc.fontSize(12).text("ประกันสังคมสะสม (ปี)", 211, 483, { align: 'left' })
-            pdfDoc.fontSize(12).text(`${Socialyears?.toFixed(2)}`, 285, 483, { width: 100, align: 'right' })
+            pdfDoc.fontSize(12).text(`${Socialyears?.toLocaleString(undefined, { minimumFractionDigits: 2 })}`, 285, 483, { width: 100, align: 'right' })
 
             pdfDoc.lineJoin('miter') //กรอบกลางล่าง กองทุนสำรองเลี้ยงชีพสะสม
                 .rect(205, 500, 185, 20)
                 .stroke()
             pdfDoc.fontSize(12).text("กองทุนสำรองเลี้ยงชีพสะสม", 211, 503, { align: 'left' })
-            pdfDoc.fontSize(12).text(`${pro_emp?.toFixed(2)}`, 285, 503, { width: 100, align: 'right' })
+            pdfDoc.fontSize(12).text(`${pro_emp?.toLocaleString(undefined, { minimumFractionDigits: 2 })}`, 285, 503, { width: 100, align: 'right' })
 
             ///////////////////////////////////////////////////////////////////////
             pdfDoc.lineJoin('miter') //กรอบขวา
@@ -735,12 +744,12 @@ const resolversslip: Resolvers = {
                 .stroke()
 
             pdfDoc.fontSize(12).text("รวมเงินได้", 400, 265, { align: 'left' })
-            pdfDoc.fontSize(12).text(`${Total_income?.toFixed(2)}`, 470, 265, { width: 100, align: 'right' })
+            pdfDoc.fontSize(12).text(`${Total_income?.toLocaleString(undefined, { minimumFractionDigits: 2 })}`, 470, 265, { width: 100, align: 'right' })
             pdfDoc.fontSize(12).text("รวมเงินหัก", 400, 285, { align: 'left' })
-            pdfDoc.fontSize(12).text(`${Total_expense?.toFixed(2)}`, 470, 285, { width: 100, align: 'right' })
+            pdfDoc.fontSize(12).text(`${Total_expense?.toLocaleString(undefined, { minimumFractionDigits: 2 })}`, 470, 285, { width: 100, align: 'right' })
 
             pdfDoc.fontSize(12).text("เงินได้สุทธิ", 400, 325, { align: 'left' })
-            pdfDoc.fontSize(12).text(`${Net?.toFixed(2)}`, 460, 335, { width: 100, align: 'right' })
+            pdfDoc.fontSize(12).text(`${Net?.toLocaleString(undefined, { minimumFractionDigits: 2 })}`, 460, 335, { width: 100, align: 'right' })
             pdfDoc.fontSize(12).text("(Net Income)", 400, 345, { align: 'left' })
             pdfDoc.lineJoin('miter') //กรอบขวา
                 .rect(480, 330, 90, 0)
@@ -759,7 +768,7 @@ const resolversslip: Resolvers = {
             let url = `https://system.hrconnext.co/${process.env.SUB_API_PATH}/assets/payment/${name}` //กรณีแสดงไฟล์ pdf ใน server
             // let url = `http://localhost:4000/${process.env.SUB_API_PATH}/assets/payment/${name}` //กรณีแสดงไฟล์ pdf ใน localhost
             return {
-                message : "เรียกดู slip เงินเดือนสำเร็จ",
+                message: "เรียกดู slip เงินเดือนสำเร็จ",
                 path: url,
                 status: true
             }

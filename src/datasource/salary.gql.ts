@@ -1208,7 +1208,7 @@ const resolvers: Resolvers = {
         }
       })
       let bookbank_logId = check_bookbank[0].id //หา bookbank log ของ user คนนั้นจากนั้นให้ insert เข้า salary
-      let Base_salary = check_bookbank[0].base_salary //กำหนดให้ base_salary เท่ากับฐานเดือนของเดือนที่ทำการค้นหา
+      // let Base_salary = check_bookbank[0].base_salary //กำหนดให้ base_salary เท่ากับฐานเดือนของเดือนที่ทำการค้นหา
 
       let Vat_per = null //กำหนดค่า vat_per เป็น 0
       let SS_per = null//กำหนดค่า SS_per เป็น 0
@@ -1217,7 +1217,7 @@ const resolvers: Resolvers = {
         where: {
           companyBranchId: ctx.currentUser?.branchId,
           AND: {
-            unix_date: { lte: dayjs(new Date()).unix() } //โดยอ้างอิงจาก unix_date(เดือนที่มีผล)
+            unix_date: { lte: dayjs(new Date(new Date(args.data.date))).unix() } //โดยอ้างอิงจาก unix_date(เดือนที่มีผล)
           }
         }, orderBy: {
           date: 'desc'
@@ -1281,7 +1281,7 @@ const resolvers: Resolvers = {
             // update_by: ctx.currentUser?.userId,
             // update_date: new Date(),
             mas_bankId: args.data?.mas_bankId,
-            base_salary: Base_salary,
+            base_salary: args.data?.base_salary,
             provident_logId: providentID,
             provident_log: { //ทำการสร้าง provident_log เพื่อเก็บค่าของกองทุน พนักงานและบริษัทด้วย เนื่องจากว่า กองทุนทั้ง 2 อย่างจำเป็นที่จะต้องเก็บไว้ทุกเดือน เพื่อสามารถเรียกดูย้อนหลังได้
               create: {
@@ -1411,7 +1411,7 @@ const resolvers: Resolvers = {
             // update_date: new Date(),
             mas_bankId: args.data?.mas_bankId,
             provident_logId: providentID,
-            base_salary: Base_salary,
+            base_salary: args.data?.base_salary,
             provident_log: {
               create: {
                 id: providentID,
