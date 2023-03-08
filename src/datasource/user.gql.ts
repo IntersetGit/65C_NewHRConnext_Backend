@@ -1,5 +1,3 @@
-
-
 import { Resolvers } from '../generated/graphql';
 import { createPassword } from '../utils/passwords';
 import gql from 'graphql-tag';
@@ -210,8 +208,9 @@ export const userTypedef = gql`
   }
 
   type Query {
-    users(userid: ID ,  name: String, position2Id: ID, position3Id: ID): [User]
+    users(userid: ID, name: String, position2Id: ID, position3Id: ID): [User]
     verifyCompanycode(companyname: String!): Boolean
+    verifyEmail(emails: String!): Boolean
     me: Me
   }
 
@@ -228,15 +227,23 @@ const resolvers: Resolvers = {
       if (args.userid) {
         const result = await ctx.prisma.user.findMany({
           include: {
-            profile: true, company: true, Role_Company: true, companyBranch: true,
+            profile: true,
+            company: true,
+            Role_Company: true,
+            companyBranch: true,
             Position_user: {
-              include: { mas_positionlevel1: true, mas_positionlevel2: true, mas_positionlevel3: true }, orderBy: { date: 'desc' }
-            }
+              include: {
+                mas_positionlevel1: true,
+                mas_positionlevel2: true,
+                mas_positionlevel3: true,
+              },
+              orderBy: { date: 'desc' },
+            },
           },
           where: {
-            id: args.userid as string
-          }
-        })
+            id: args.userid as string,
+          },
+        });
         return result;
       } else {
         const filter = args?.name ? args?.name : undefined;
@@ -244,11 +251,24 @@ const resolvers: Resolvers = {
         const filter3 = args?.position3Id ? args?.position3Id : undefined;
         const result = await ctx.prisma.user.findMany({
           include: {
-            profile: { include: { mas_positionlevel1: true, mas_positionlevel2: true, mas_positionlevel3: true } },
-            company: true, Role_Company: true, companyBranch: true,
+            profile: {
+              include: {
+                mas_positionlevel1: true,
+                mas_positionlevel2: true,
+                mas_positionlevel3: true,
+              },
+            },
+            company: true,
+            Role_Company: true,
+            companyBranch: true,
             Position_user: {
-              include: { mas_positionlevel1: true, mas_positionlevel2: true, mas_positionlevel3: true }, orderBy: { date: 'desc' }
-            }
+              include: {
+                mas_positionlevel1: true,
+                mas_positionlevel2: true,
+                mas_positionlevel3: true,
+              },
+              orderBy: { date: 'desc' },
+            },
           },
           where: {
             companyBranchId: ctx.currentUser?.branchId,
@@ -256,11 +276,11 @@ const resolvers: Resolvers = {
               profile: {
                 firstname_th: { contains: filter },
                 AND: {
-                  masposition2_id: filter2, AND: {
-                    masposition3_id: filter3
-                  }
-                }
-
+                  masposition2_id: filter2,
+                  AND: {
+                    masposition3_id: filter3,
+                  },
+                },
               },
             },
           },
@@ -332,6 +352,18 @@ const resolvers: Resolvers = {
       });
       return checker.length >= 1 ? false : true;
     },
+    /**
+     * ?เช็คข้อมูลซ้ำของอีเมล
+     * @param p
+     * @param args
+     * @param ctx
+     */
+    async verifyEmail(p, args, ctx) {
+      const checker = await ctx.prisma.user.findMany({
+        where: { email: args.emails, AND: { isOwner: true } },
+      });
+      return checker.length >= 1 ? false : true;
+    },
   },
   Mutation: {
     /**
@@ -378,7 +410,6 @@ const resolvers: Resolvers = {
           userlimit: args.data.userlimit as number,
           ownerId: createUser.id,
           icon: args.data.company_icon ? args.data.company_icon : '',
-
         },
       });
 
@@ -395,7 +426,6 @@ const resolvers: Resolvers = {
           country: args.data.company_country,
           companyId: createCompany.id,
           tel: args.data.company_phone,
-          
         },
       });
 
@@ -415,7 +445,9 @@ const resolvers: Resolvers = {
     async createAccountUser(p, args, ctx) {
       const genUserid = v4();
       const genProfileid = v4();
-      const type = typeof (args.data.age) ? args.data.age : args.data.age?.toString()
+      const type = typeof args.data.age
+        ? args.data.age
+        : args.data.age?.toString();
       if (args.data.id) {
         if (args.data.role_company == 'OWNER_POSITION') {
           const EditUser = await ctx.prisma.user.update({
@@ -456,7 +488,8 @@ const resolvers: Resolvers = {
                   citizen_state: args.data?.citizen_state,
                   citizen_zipcode: args.data?.citizen_zipcode,
                   citizen_tel: args.data?.citizen_tel,
-                  contract_sameCitizen: args.data?.contract_sameCitizen as boolean,
+                  contract_sameCitizen: args.data
+                    ?.contract_sameCitizen as boolean,
                   contract_addressnumber: args.data?.contract_addressnumber,
                   contract_address: args.data?.contract_address,
                   contract_country: args.data?.contract_country,
@@ -479,7 +512,6 @@ const resolvers: Resolvers = {
             message: 'success',
             status: true,
           };
-
         } else {
           const EditUser = await ctx.prisma.user.update({
             data: {
@@ -520,7 +552,8 @@ const resolvers: Resolvers = {
                   citizen_state: args.data?.citizen_state,
                   citizen_zipcode: args.data?.citizen_zipcode,
                   citizen_tel: args.data?.citizen_tel,
-                  contract_sameCitizen: args.data?.contract_sameCitizen as boolean,
+                  contract_sameCitizen: args.data
+                    ?.contract_sameCitizen as boolean,
                   contract_addressnumber: args.data?.contract_addressnumber,
                   contract_address: args.data?.contract_address,
                   contract_country: args.data?.contract_country,
@@ -592,7 +625,8 @@ const resolvers: Resolvers = {
                 citizen_state: args.data?.citizen_state,
                 citizen_zipcode: args.data?.citizen_zipcode,
                 citizen_tel: args.data?.citizen_tel,
-                contract_sameCitizen: args.data?.contract_sameCitizen as boolean,
+                contract_sameCitizen: args.data
+                  ?.contract_sameCitizen as boolean,
                 contract_addressnumber: args.data?.contract_addressnumber,
                 contract_address: args.data?.contract_address,
                 contract_country: args.data?.contract_country,
@@ -643,6 +677,3 @@ const resolversComposition = {
 };
 
 export const userResolvers = composeResolvers(resolvers, resolversComposition);
-
-
-
