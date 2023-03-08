@@ -109,8 +109,8 @@ const resolversslip: Resolvers = {
                 firstname = data[i].profile?.firstname_th
                 lastname = data[i].profile?.lastname_th
 
-                Ss_per = data[i].companyBranch?.expense_company[0].ss_per
-                Vat_per = data[i].companyBranch?.expense_company[0].vat_per
+                // Ss_per = data[i].companyBranch?.expense_company[0].ss_per
+                // Vat_per = data[i].companyBranch?.expense_company[0].vat_per
 
                 let bookbank_Log = data[i].bookbank_log
                 for (let a = 0; a < bookbank_Log.length; a++) {
@@ -143,8 +143,8 @@ const resolversslip: Resolvers = {
                     Incomeyears = Salary[i].incomeYears
                     Vatyears = Salary[i].vatYears
                     //รายหัก
-                    // Ss_per = Salary[i].ss_per
-                    // Vat_per = Salary[i].vatper
+                    Ss_per = Salary[i].ss_per
+                    Vat_per = Salary[i].vatper
                     // Vatper = Salary[i].vatper
                     // Ss_per = Salary[i].ss_per
                     vat = Salary[i].vat
@@ -484,8 +484,8 @@ const resolversslip: Resolvers = {
                 staffcode = data[i].profile?.staff_code
                 firstname = data[i].profile?.firstname_th
                 lastname = data[i].profile?.lastname_th
-                Ss_per = data[i].companyBranch?.expense_company[0].ss_per
-                Vat_per = data[i].companyBranch?.expense_company[0].vat_per
+                // Ss_per = data[i].companyBranch?.expense_company[0].ss_per
+                // Vat_per = data[i].companyBranch?.expense_company[0].vat_per
 
 
                 let bookbank_Log = data[i].bookbank_log
@@ -519,8 +519,8 @@ const resolversslip: Resolvers = {
                     Incomeyears = Salary[i].incomeYears
                     Vatyears = Salary[i].vatYears
                     //รายหัก
-                    // Ss_per = Salary[i].ss_per
-                    // Vat_per = Salary[i].vatper
+                    Ss_per = Salary[i].ss_per
+                    Vat_per = Salary[i].vatper
                     // Vatper = Salary[i].vatper
                     // Ss_per = Salary[i].ss_per
                     vat = Salary[i].vat

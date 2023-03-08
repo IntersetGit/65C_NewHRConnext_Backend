@@ -1775,7 +1775,7 @@ const resolvers: Resolvers = {
               // Total_income คือ คำนวณรายได้รวมใหม่
               Total_income = commission + position_income + ot + bonus + special_income + other_income + travel_income + bursary + welfare_money + base_salary
               // Total_expense คือ คำนวณรายหักรวมใหม่
-              Total_expense = NewSocial_security + cal_vat + miss + ra + late + other + New_Pro_Emp + New_Pro_Com
+              Total_expense = NewSocial_security + cal_vat + miss + ra + late + other + New_Pro_Emp 
               // Net คือ คำนวณรายได้สุทธิ โดยการเอา รายได้รวม - รายหักรวม
               Net = Total_income - Total_expense
               // ResultSocialYears คือ คำนวณประกันสังคมสะสมรายปี
@@ -1869,7 +1869,7 @@ const resolvers: Resolvers = {
             New_Pro_Emp = (base_salary * New_Pro_emp_per) / 100
             New_Pro_Com = (base_salary * New_Pro_com_per) / 100
             Total_income = commission + position_income + ot + bonus + special_income + other_income + travel_income + bursary + welfare_money + base_salary
-            Total_expense = social_security + vat + miss + ra + late + other + New_Pro_Emp + New_Pro_Com
+            Total_expense = social_security + vat + miss + ra + late + other + New_Pro_Emp 
             Net = Total_income - Total_expense
             ResultIncomeYears = (IncomeYears - old_net) + Net
 
@@ -2163,8 +2163,9 @@ const resolvers: Resolvers = {
           })
 
           // ถ้าหากมีการเปลี่ยนค่าของ ss_per และ vat_per
-          if (Ss_per || VaT_per) {
-
+          if (args.data.ss_per || args.data.vat_per) {
+            VaT_per = args.data.vat_per ? args.data.vat_per : VaT_per
+            Ss_per = args.data.ss_per ? args.data.ss_per : Ss_per
             //calculate the new salary update !
             /////////////////////////////// cal vat////////////////////////////////
             const chk_vat = await ctx.prisma.salary.findUnique({
@@ -2185,7 +2186,7 @@ const resolvers: Resolvers = {
             console.log('ประกันสังคมใหม่', NewSocial_security);
             NewSocial_security = cal_ss >= 750 ? 750 : cal_ss //************** กรณีที่มีการเปลี่ยนประกันสังคมตาม รัฐบาล ให้แก้ไขตรงตัวเลข 750 นะครับ ***************
             Total_income = commission + position_income + ot + bonus + special_income + other_income + travel_income + bursary + welfare_money + base_salary
-            Total_expense = cal_vat + miss + ra + late + other + provident_employee + provident_company + NewSocial_security
+            Total_expense = cal_vat + miss + ra + late + other + provident_employee  + NewSocial_security
             Net = Total_income - Total_expense
 
             ResultVatYears = (VatYears - vat) + cal_vat
