@@ -46,15 +46,21 @@ export const holidayTypedef = gql`
     status: Int
   }
 
-  type GetHolidayDateResponseType {
-    dataAll: [dataHoliday]
-  }
-
-  type dataHoliday {
-    data: [holiday_date!]
+  type YearCountType {
     year: Int
     count: Int
   }
+
+  type GetHolidayDateResponseType {
+    data: [holiday_date]
+    year_count: [YearCountType]
+  }
+
+  # type dataHoliday {
+  #   data: [holiday_date!]
+  #   year: Int
+  #   count: Int
+  # }
 
   type CreateHolidayYearResponseType{
     message: String
@@ -116,7 +122,7 @@ export const holidayResolvers: Resolvers = {
       let years = 0
       const search = args.year as number ? args.year : undefined;
       const getHoliday = await ctx.prisma.holiday_date.findMany({
-        include: { Company: true },
+        include: { Company : true},
         where: {
           CompanyId: ctx.currentUser?.compayId,
           AND: { year: search as number }
@@ -132,35 +138,28 @@ export const holidayResolvers: Resolvers = {
         ],
       });
 
-      // if (getHoliday) {
-      //   getHoliday.forEach(async (e) => {
-      //     const groups = await ctx.prisma.holiday_date.findMany({
-      //       include: {
-              
-      //       }
-      //     })
+      //const ydb : number[] = []
+      // let _L = getHoliday.map((e) => {
+      //   if(ydb.find(_e => _e === e.year )) return
+      //   ydb.push(e.year)
+      //   return {
+      //     year : e.year,
+      //     count : getHoliday.filter((_e) => _e.year === e.year && _e.status === 1).length
+      //   }
+      // })
 
-      //   })
-         
-      // }
+      const year_count : {year : number , count : number}[] = []
+      getHoliday.forEach(e => {
+        if(year_count.find((_e) => _e.year === e.year)) return
+        year_count.push({year : e.year , count : getHoliday.filter((_e) => _e.year === e.year && _e.status === 1).length})
+      })
+   
 
-
-      // if (getHoliday && getHoliday.length >= 1) {
-      //   getHoliday.forEach((e) => {
-      //     if (e.year === e.year) {
-      //       count = count + e.status
-      //       years = e.year
-      //     }
-      //   })
-      // }
-
-      let dataHoliday =  {
-        data: getHoliday,
-        count: count,
-        year: years
-      }
-
-      return {};
+      return {
+        data : getHoliday,
+        //year_count : _L.filter(e => e != undefined) as any
+        year_count
+      };
     }
   },
 

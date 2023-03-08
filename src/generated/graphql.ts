@@ -382,7 +382,8 @@ export type GetCompanyAccessType = {
 
 export type GetHolidayDateResponseType = {
   __typename?: 'GetHolidayDateResponseType';
-  dataAll?: Maybe<Array<Maybe<DataHoliday>>>;
+  data?: Maybe<Array<Maybe<Holiday_Date>>>;
+  year_count?: Maybe<Array<Maybe<YearCountType>>>;
 };
 
 export type GetOwncompanytype = {
@@ -1119,6 +1120,12 @@ export type ValidateRoute = {
   reFresh?: Maybe<Scalars['String']>;
 };
 
+export type YearCountType = {
+  __typename?: 'YearCountType';
+  count?: Maybe<Scalars['Int']>;
+  year?: Maybe<Scalars['Int']>;
+};
+
 export type Book_Bank_LogResponseType = {
   __typename?: 'book_bank_logResponseType';
   message?: Maybe<Scalars['String']>;
@@ -1212,13 +1219,6 @@ export type CreatesalaryResponseType = {
   __typename?: 'createsalaryResponseType';
   message?: Maybe<Scalars['String']>;
   status?: Maybe<Scalars['Boolean']>;
-};
-
-export type DataHoliday = {
-  __typename?: 'dataHoliday';
-  count?: Maybe<Scalars['Int']>;
-  data?: Maybe<Array<Holiday_Date>>;
-  year?: Maybe<Scalars['Int']>;
 };
 
 export type Data_Salary = {
@@ -1899,6 +1899,7 @@ export type ResolversTypes = ResolversObject<{
   UpdateRoleCompanyMangementType: UpdateRoleCompanyMangementType;
   User: ResolverTypeWrapper<User>;
   ValidateRoute: ResolverTypeWrapper<ValidateRoute>;
+  YearCountType: ResolverTypeWrapper<YearCountType>;
   book_bank_logResponseType: ResolverTypeWrapper<Book_Bank_LogResponseType>;
   bookbank_log: ResolverTypeWrapper<Bookbank_Log>;
   bookbank_logInput: Bookbank_LogInput;
@@ -1907,7 +1908,6 @@ export type ResolversTypes = ResolversObject<{
   createRoleCompanyGroup: CreateRoleCompanyGroup;
   createbookbanklogResponseType: ResolverTypeWrapper<CreatebookbanklogResponseType>;
   createsalaryResponseType: ResolverTypeWrapper<CreatesalaryResponseType>;
-  dataHoliday: ResolverTypeWrapper<DataHoliday>;
   data_salary: ResolverTypeWrapper<Data_Salary>;
   data_salary_me: ResolverTypeWrapper<Data_Salary_Me>;
   deletepositionResponseType: ResolverTypeWrapper<DeletepositionResponseType>;
@@ -2027,6 +2027,7 @@ export type ResolversParentTypes = ResolversObject<{
   UpdateRoleCompanyMangementType: UpdateRoleCompanyMangementType;
   User: User;
   ValidateRoute: ValidateRoute;
+  YearCountType: YearCountType;
   book_bank_logResponseType: Book_Bank_LogResponseType;
   bookbank_log: Bookbank_Log;
   bookbank_logInput: Bookbank_LogInput;
@@ -2035,7 +2036,6 @@ export type ResolversParentTypes = ResolversObject<{
   createRoleCompanyGroup: CreateRoleCompanyGroup;
   createbookbanklogResponseType: CreatebookbanklogResponseType;
   createsalaryResponseType: CreatesalaryResponseType;
-  dataHoliday: DataHoliday;
   data_salary: Data_Salary;
   data_salary_me: Data_Salary_Me;
   deletepositionResponseType: DeletepositionResponseType;
@@ -2314,7 +2314,8 @@ export type GetCompanyAccessTypeResolvers<ContextType = ApolloContext, ParentTyp
 }>;
 
 export type GetHolidayDateResponseTypeResolvers<ContextType = ApolloContext, ParentType extends ResolversParentTypes['GetHolidayDateResponseType'] = ResolversParentTypes['GetHolidayDateResponseType']> = ResolversObject<{
-  dataAll?: Resolver<Maybe<Array<Maybe<ResolversTypes['dataHoliday']>>>, ParentType, ContextType>;
+  data?: Resolver<Maybe<Array<Maybe<ResolversTypes['holiday_date']>>>, ParentType, ContextType>;
+  year_count?: Resolver<Maybe<Array<Maybe<ResolversTypes['YearCountType']>>>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 }>;
 
@@ -2711,6 +2712,12 @@ export type ValidateRouteResolvers<ContextType = ApolloContext, ParentType exten
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 }>;
 
+export type YearCountTypeResolvers<ContextType = ApolloContext, ParentType extends ResolversParentTypes['YearCountType'] = ResolversParentTypes['YearCountType']> = ResolversObject<{
+  count?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
+  year?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+}>;
+
 export type Book_Bank_LogResponseTypeResolvers<ContextType = ApolloContext, ParentType extends ResolversParentTypes['book_bank_logResponseType'] = ResolversParentTypes['book_bank_logResponseType']> = ResolversObject<{
   message?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   status?: Resolver<Maybe<ResolversTypes['Boolean']>, ParentType, ContextType>;
@@ -2741,13 +2748,6 @@ export type CreatebookbanklogResponseTypeResolvers<ContextType = ApolloContext, 
 export type CreatesalaryResponseTypeResolvers<ContextType = ApolloContext, ParentType extends ResolversParentTypes['createsalaryResponseType'] = ResolversParentTypes['createsalaryResponseType']> = ResolversObject<{
   message?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   status?: Resolver<Maybe<ResolversTypes['Boolean']>, ParentType, ContextType>;
-  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
-}>;
-
-export type DataHolidayResolvers<ContextType = ApolloContext, ParentType extends ResolversParentTypes['dataHoliday'] = ResolversParentTypes['dataHoliday']> = ResolversObject<{
-  count?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
-  data?: Resolver<Maybe<Array<ResolversTypes['holiday_date']>>, ParentType, ContextType>;
-  year?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 }>;
 
@@ -3243,11 +3243,11 @@ export type Resolvers<ContextType = ApolloContext> = ResolversObject<{
   SubBusinessType?: SubBusinessTypeResolvers<ContextType>;
   User?: UserResolvers<ContextType>;
   ValidateRoute?: ValidateRouteResolvers<ContextType>;
+  YearCountType?: YearCountTypeResolvers<ContextType>;
   book_bank_logResponseType?: Book_Bank_LogResponseTypeResolvers<ContextType>;
   bookbank_log?: Bookbank_LogResolvers<ContextType>;
   createbookbanklogResponseType?: CreatebookbanklogResponseTypeResolvers<ContextType>;
   createsalaryResponseType?: CreatesalaryResponseTypeResolvers<ContextType>;
-  dataHoliday?: DataHolidayResolvers<ContextType>;
   data_salary?: Data_SalaryResolvers<ContextType>;
   data_salary_me?: Data_Salary_MeResolvers<ContextType>;
   deletepositionResponseType?: DeletepositionResponseTypeResolvers<ContextType>;

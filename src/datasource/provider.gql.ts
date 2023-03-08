@@ -53,8 +53,9 @@ const resolvers: Resolvers = {
      * ?เข้าสู่ระบบ
      */
     async login(p, args, ctx) {
-      const finduser = await ctx.prisma.user.findUnique({
-        where: { email: args.data.email },
+      const finduser = await ctx.prisma.user.findMany({
+        take : 1,
+        where: { email: args.data.email},
         select: {
           id: true,
           roleId: true,
@@ -73,7 +74,7 @@ const resolvers: Resolvers = {
         },
       });
 
-      if (!finduser) {
+      if ((finduser.length <= 0)) {
         throw new GraphQLError('User not found.', {
           extensions: {
             code: 'USER_NOT_FOUND',
@@ -83,7 +84,7 @@ const resolvers: Resolvers = {
       }
       const isMatch = await comparePassword(
         args.data.password,
-        finduser.password,
+        finduser[0].password,
       );
       if (!isMatch) {
         throw new GraphQLError('Wrong password.', {
@@ -95,11 +96,11 @@ const resolvers: Resolvers = {
       }
 
       const credential = {
-        id: finduser.id,
-        roleId: finduser.roleId,
-        isOwner: finduser.isOwner,
-        compayId: finduser.companyBranch?.company?.id,
-        branchId: finduser.companyBranch?.id,
+        id: finduser[0].id,
+        roleId: finduser[0].roleId,
+        isOwner: finduser[0].isOwner,
+        compayId: finduser[0].companyBranch?.company?.id,
+        branchId: finduser[0].companyBranch?.id,
       };
 
       const secret = process.env.JWT_SECRET || 'secret';
