@@ -1,5 +1,3 @@
-import { CreateHolidayDate } from './../generated/graphql';
-import { createPassword } from './../utils/passwords';
 
 import gql from 'graphql-tag';
 import { Resolvers } from '../generated/graphql';
@@ -7,6 +5,8 @@ import { v4 } from 'uuid';
 import { composeResolvers } from '@graphql-tools/resolvers-composition';
 import { authenticate } from '../middleware/authenticatetoken';
 import _ from 'lodash';
+import e from 'express';
+import { prisma } from 'src/generated/client';
 
 export const holidayTypedef = gql`
 
@@ -46,12 +46,16 @@ export const holidayTypedef = gql`
     status: Int
   }
 
-  type GetHolidayYearResponseType {
-    dataAll: [holiday_date!]
-    countYaer: Int
-    year: Int
-    
+  type GetHolidayDateResponseType {
+    dataAll: [dataHoliday]
   }
+
+  type dataHoliday {
+    data: [holiday_date!]
+    year: Int
+    count: Int
+  }
+
   type CreateHolidayYearResponseType{
     message: String
     status: Boolean
@@ -74,7 +78,7 @@ export const holidayTypedef = gql`
 
   type Query{
     GetHoliDayYear(year: Int): [holiday_years]
-    GetHolidayDate(year: Int): GetHolidayYearResponseType
+    GetHolidayDate(year: Int): GetHolidayDateResponseType
   }
 
   type Mutation{
@@ -108,10 +112,10 @@ export const holidayResolvers: Resolvers = {
 
     async GetHolidayDate(p, args, ctx) {
       let count = 0
-      let yaer = 0
       let groups = []
+      let years = 0
       const search = args.year as number ? args.year : undefined;
-      const result = await ctx.prisma.holiday_date.findMany({
+      const getHoliday = await ctx.prisma.holiday_date.findMany({
         include: { Company: true },
         where: {
           CompanyId: ctx.currentUser?.compayId,
@@ -127,28 +131,36 @@ export const holidayResolvers: Resolvers = {
           }
         ],
       });
-      
-      // for (let i = 0; i < year.length; i++){
 
+      // if (getHoliday) {
+      //   getHoliday.forEach(async (e) => {
+      //     const groups = await ctx.prisma.holiday_date.findMany({
+      //       include: {
+              
+      //       }
+      //     })
+
+      //   })
+         
       // }
 
 
-      // if (result && result.length >= 1)
-      //   result.forEach(async (e) => {
-      //     if (e.yesr === e.year) {
-      //       count = count + e.status
-      //     } else {
-
-      //     }
+      // if (getHoliday && getHoliday.length >= 1) {
+      //   getHoliday.forEach((e) => {
       //     if (e.year === e.year) {
-      //       yaer = e.year
+      //       count = count + e.status
+      //       years = e.year
       //     }
-        // })
-      return {
-        dataAll: result,
-        countYaer: count,
-        //year: yaer
-      };
+      //   })
+      // }
+
+      let dataHoliday =  {
+        data: getHoliday,
+        count: count,
+        year: years
+      }
+
+      return {};
     }
   },
 
