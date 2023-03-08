@@ -125,6 +125,7 @@ export const salaryTypedef = gql`
     create_date: Date     
     update_by: String                  
     update_date: Date
+    base_salary: Float
   }
   type salary {
     id: ID
@@ -1129,6 +1130,7 @@ const resolvers: Resolvers = {
             update_by: ctx.currentUser?.id,
             update_date: new Date(),
             mas_bankId: args.data?.mas_bankId,
+            base_salary: args.data?.base_salary,
           },
           where: {
             id: args.data?.id

@@ -1654,6 +1654,7 @@ export type Salary = {
 };
 
 export type SalaryInput = {
+  base_salary?: InputMaybe<Scalars['Float']>;
   bonus?: InputMaybe<Scalars['Float']>;
   bookbank_logId?: InputMaybe<Scalars['String']>;
   bursary?: InputMaybe<Scalars['Float']>;
