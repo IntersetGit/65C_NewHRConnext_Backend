@@ -554,7 +554,7 @@ const resolvers: Resolvers = {
   Query: {
     ////////////////////แสดงเงินเดือนโดยใช่ userid เป็นตัวอ้าง/////////////////////////////
     async salary(parant, args, ctx) {
-      var info :any []  = []
+      var info: any[] = []
       let searchyears = args.years ? args.years : undefined
       const getdata = await ctx.prisma.user.findUnique({
         include: {
@@ -579,15 +579,15 @@ const resolvers: Resolvers = {
           years: true,
         }
       })
-      get_years.forEach((c,b)=>{
+      get_years.forEach((c, b) => {
         const chk_year = info.find(e => e == c.years)
-        if(!chk_year){
+        if (!chk_year) {
           info.push(c.years)
         }
       })
 
-      console.log('ปี  = ',info);
-    
+      console.log('ปี  = ', info);
+
       return {
         data_s: getdata,
         all_years: info,
@@ -662,9 +662,9 @@ const resolvers: Resolvers = {
     },
     //////////////////แสดง เงินเดือนของตัวเอง โดยอ้างกจากuser.id จาก tokenที่login และจากการรับค่า ปี   
     async mydata_salary(parant, args, ctx) {
-      
+
       console.log(ctx.currentUser?.id)
-      var info :any []  = []
+      var info: any[] = []
       let searchyears = args.years ? args.years : undefined
       const getdata = await ctx.prisma.user.findUnique({
         include: {
@@ -689,15 +689,15 @@ const resolvers: Resolvers = {
           years: true,
         }
       })
-      get_years.forEach((c,b)=>{
+      get_years.forEach((c, b) => {
         const chk_year = info.find(e => e == c.years)
-        if(!chk_year){
+        if (!chk_year) {
           info.push(c.years)
         }
       })
 
-      console.log('ปี  = ',info);
-    
+      console.log('ปี  = ', info);
+
       return {
         data_s: getdata,
         all_years: info,
@@ -1087,6 +1087,9 @@ const resolvers: Resolvers = {
         let Thismonth = dayjs(date).format("MM")
         const pro_emp = args.data?.provident_employee
         const pro_com = args.data?.provident_company
+        let new_income_years = 0
+        let new_vat_years = 0
+        let new_ss_years = 0
         const find_salary = await ctx.prisma.salary.findMany({
           where: {
             //โดยอ้างจากการรับค่า id
@@ -1115,7 +1118,9 @@ const resolvers: Resolvers = {
         console.log(new_pro_emp);
         let new_pro_com = (check_all_collect[0].provident_collect_company - find_salary[0].provident_company) + pro_com
         console.log(new_pro_com);
-
+        new_income_years = (find_salary[0].incomeYears - find_salary[0].net) + args.data?.net
+        new_vat_years = (find_salary[0].vatYears - find_salary[0].vat) + args.data?.vat
+        new_ss_years = (find_salary[0].socialYears - find_salary[0].social_security) + args.data?.social_security
         const update_all_collect = await ctx.prisma.mas_all_collect.update({ //ทำการอัปเดทค่าต่าง ๆ ที่ผ่านการคำนวณแล้วเข้าไปใน mas_all_collect
           data: {
             date: new Date(),
@@ -1161,9 +1166,9 @@ const resolvers: Resolvers = {
             mas_income_typeId: args.data?.mas_income_typeId,
             date: new Date(args.data?.date),
             mas_salary_statusId: "765d31b6-ab63-11ed-afa1-0242ac120002",
-            socialYears: 0 + args.data?.social_security,
-            vatYears: 0 + args.data?.vat,
-            incomeYears: 0 + args.data?.net,
+            socialYears: new_ss_years,
+            vatYears: new_vat_years,
+            incomeYears: new_income_years,
             month: Thismonth,
             years: ThisYear,
             // create_by: ctx.currentUser?.id,
@@ -1177,6 +1182,8 @@ const resolvers: Resolvers = {
             id: args.data?.id
           }
         });
+        console.log('อัปเดทเงินเดือน = ', updatesalary);
+
         // อัปเดท provident log (กองทุน พนักงาน และ บริษัท)
         const updatepro_log = await ctx.prisma.provident_log.update({
           data: {
@@ -1775,7 +1782,7 @@ const resolvers: Resolvers = {
               // Total_income คือ คำนวณรายได้รวมใหม่
               Total_income = commission + position_income + ot + bonus + special_income + other_income + travel_income + bursary + welfare_money + base_salary
               // Total_expense คือ คำนวณรายหักรวมใหม่
-              Total_expense = NewSocial_security + cal_vat + miss + ra + late + other + New_Pro_Emp 
+              Total_expense = NewSocial_security + cal_vat + miss + ra + late + other + New_Pro_Emp
               // Net คือ คำนวณรายได้สุทธิ โดยการเอา รายได้รวม - รายหักรวม
               Net = Total_income - Total_expense
               // ResultSocialYears คือ คำนวณประกันสังคมสะสมรายปี
@@ -1869,7 +1876,7 @@ const resolvers: Resolvers = {
             New_Pro_Emp = (base_salary * New_Pro_emp_per) / 100
             New_Pro_Com = (base_salary * New_Pro_com_per) / 100
             Total_income = commission + position_income + ot + bonus + special_income + other_income + travel_income + bursary + welfare_money + base_salary
-            Total_expense = social_security + vat + miss + ra + late + other + New_Pro_Emp 
+            Total_expense = social_security + vat + miss + ra + late + other + New_Pro_Emp
             Net = Total_income - Total_expense
             ResultIncomeYears = (IncomeYears - old_net) + Net
 
@@ -2186,7 +2193,7 @@ const resolvers: Resolvers = {
             console.log('ประกันสังคมใหม่', NewSocial_security);
             NewSocial_security = cal_ss >= 750 ? 750 : cal_ss //************** กรณีที่มีการเปลี่ยนประกันสังคมตาม รัฐบาล ให้แก้ไขตรงตัวเลข 750 นะครับ ***************
             Total_income = commission + position_income + ot + bonus + special_income + other_income + travel_income + bursary + welfare_money + base_salary
-            Total_expense = cal_vat + miss + ra + late + other + provident_employee  + NewSocial_security
+            Total_expense = cal_vat + miss + ra + late + other + provident_employee + NewSocial_security
             Net = Total_income - Total_expense
 
             ResultVatYears = (VatYears - vat) + cal_vat
