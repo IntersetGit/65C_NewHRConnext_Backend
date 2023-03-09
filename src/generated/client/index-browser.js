@@ -396,7 +396,8 @@ exports.Prisma.Provident_logScalarFieldEnum = makeEnum({
   pro_company: 'pro_company',
   mas_all_collectId: 'mas_all_collectId',
   bookbank_logId: 'bookbank_logId',
-  salaryId: 'salaryId'
+  salaryId: 'salaryId',
+  salary_logId: 'salary_logId'
 });
 
 exports.Prisma.ProvinceScalarFieldEnum = makeEnum({
@@ -442,6 +443,51 @@ exports.Prisma.Role_CompanyScalarFieldEnum = makeEnum({
 });
 
 exports.Prisma.SalaryScalarFieldEnum = makeEnum({
+  id: 'id',
+  month: 'month',
+  years: 'years',
+  date: 'date',
+  base_salary: 'base_salary',
+  commission: 'commission',
+  position_income: 'position_income',
+  ot: 'ot',
+  bonus: 'bonus',
+  special_income: 'special_income',
+  other_income: 'other_income',
+  travel_income: 'travel_income',
+  bursary: 'bursary',
+  welfare_money: 'welfare_money',
+  vatper: 'vatper',
+  ss_per: 'ss_per',
+  vat: 'vat',
+  social_security: 'social_security',
+  miss: 'miss',
+  ra: 'ra',
+  late: 'late',
+  other: 'other',
+  provident_employee: 'provident_employee',
+  provident_company: 'provident_company',
+  total_income: 'total_income',
+  total_expense: 'total_expense',
+  net: 'net',
+  socialYears: 'socialYears',
+  vatYears: 'vatYears',
+  incomeYears: 'incomeYears',
+  create_by: 'create_by',
+  create_date: 'create_date',
+  update_by: 'update_by',
+  update_date: 'update_date',
+  userId: 'userId',
+  mas_income_typeId: 'mas_income_typeId',
+  bookbank_logId: 'bookbank_logId',
+  mas_salary_statusId: 'mas_salary_statusId',
+  mas_bankId: 'mas_bankId',
+  mas_vat_socialsId: 'mas_vat_socialsId',
+  expense_companyId: 'expense_companyId',
+  provident_logId: 'provident_logId'
+});
+
+exports.Prisma.Salary_logScalarFieldEnum = makeEnum({
   id: 'id',
   month: 'month',
   years: 'years',
@@ -544,6 +590,7 @@ exports.Prisma.ModelName = makeEnum({
   mas_income_type: 'mas_income_type',
   expense_company: 'expense_company',
   salary: 'salary',
+  salary_log: 'salary_log',
   mas_all_collect: 'mas_all_collect',
   bookbank_log: 'bookbank_log',
   read_bookbank_log: 'read_bookbank_log',

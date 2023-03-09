@@ -142,7 +142,7 @@ model Profile {
 
 model User {
   id                String              @unique @db.Uuid
-  email             String              
+  email             String
   password          String
   profile           Profile?
   islogin           Boolean             @default(false)
@@ -166,6 +166,7 @@ model User {
   data_leave        data_leave[]
   cretedByfk        log_positionn[]
   read_bookbank_log read_bookbank_log[]
+  salary_log        salary_log[]
 }
 
 model Role {
@@ -299,6 +300,7 @@ model mas_bank {
   expense_company expense_company[]
   bookbank_log    bookbank_log[]
   salary          salary[]
+  salary_log      salary_log[]
 }
 
 model mas_month {
@@ -314,23 +316,26 @@ model mas_years {
 }
 
 model mas_vat_socials {
-  id             String   @unique @db.Uuid
+  id             String       @unique @db.Uuid
   current_vat    Float
   current_social Float
   salary         salary[]
+  salary_log     salary_log[]
 }
 
 model mas_salary_status {
-  id     String   @unique @db.Uuid
-  no     Int
-  name   String
-  salary salary[]
+  id         String       @unique @db.Uuid
+  no         Int
+  name       String
+  salary     salary[]
+  salary_log salary_log[]
 }
 
 model mas_income_type {
-  id     String   @unique @db.Uuid
-  name   String
-  salary salary[]
+  id         String       @unique @db.Uuid
+  name       String
+  salary     salary[]
+  salary_log salary_log[]
 }
 
 model expense_company {
@@ -351,9 +356,70 @@ model expense_company {
   Mas_month       mas_month?     @relation(fields: [monthId], references: [id])
   mas_bank        mas_bank?      @relation(fields: [bankId], references: [id])
   CompanyBranch   CompanyBranch? @relation(fields: [companyBranchId], references: [id])
+  salary_log      salary_log[]
 }
 
 model salary {
+  //รายรับ
+  id                  String             @unique @db.Uuid
+  month               String?
+  years               String?
+  date                DateTime?          @default(now())
+  base_salary         Float?
+  commission          Float?
+  position_income     Float?
+  ot                  Float?
+  bonus               Float?
+  special_income      Float?
+  other_income        Float?
+  travel_income       Float?
+  bursary             Float? //เงินอุดหนุน
+  welfare_money       Float? //เงินสวัสดิการ
+  //รายการหัก
+  vatper              Float?
+  ss_per              Float?
+  vat                 Float?
+  social_security     Float?
+  miss                Float?
+  ra                  Float?
+  late                Float?
+  other               Float?
+  provident_employee  Float?
+  provident_company   Float?
+  //รายรับรวม
+  total_income        Float?
+  //รายหักรวม
+  total_expense       Float?
+  //รายได้สุทธิ
+  net                 Float?
+  //ยอดรวมทั้งปีของสลิปเงินเดือน
+  socialYears         Float?
+  vatYears            Float?
+  incomeYears         Float?
+  create_by           String?            @db.Uuid
+  create_date         DateTime?
+  update_by           String?            @db.Uuid
+  update_date         DateTime?
+  userId              String?            @db.Uuid
+  // bookbank_log       bookbank_log[]
+  mas_income_typeId   String?            @db.Uuid
+  bookbank_logId      String?            @db.Uuid //เรียกดู 
+  mas_salary_statusId String?            @db.Uuid
+  mas_bankId          String?            @db.Uuid
+  mas_vat_socialsId   String?            @db.Uuid
+  expense_companyId   String?            @db.Uuid
+  provident_logId     String?            @db.Uuid
+  provident_log       provident_log[]
+  User                User?              @relation(fields: [userId], references: [id])
+  bookbank_log        bookbank_log?      @relation(fields: [bookbank_logId], references: [id])
+  mas_income_type     mas_income_type?   @relation(fields: [mas_income_typeId], references: [id])
+  mas_salary_status   mas_salary_status? @relation(fields: [mas_salary_statusId], references: [id])
+  mas_bank            mas_bank?          @relation(fields: [mas_bankId], references: [id])
+  mas_vat_socials     mas_vat_socials?   @relation(fields: [mas_vat_socialsId], references: [id])
+  expense_company     expense_company?   @relation(fields: [expense_companyId], references: [id])
+}
+
+model salary_log {
   //รายรับ
   id                  String             @unique @db.Uuid
   month               String?
@@ -451,6 +517,7 @@ model bookbank_log {
   userId            String?             @db.Uuid
   provident_log     provident_log[]
   read_bookbank_log read_bookbank_log[]
+  salary_log        salary_log[]
 }
 
 //ใช้สำหรับเรียกดูว่ามีการแก้ไขหรืออัปเดทอะไรไปบ้าง โดยจะเก็บเป็น log//
@@ -490,6 +557,8 @@ model provident_log {
   bookbank_logId    String?          @db.Uuid
   salary            salary?          @relation(fields: [salaryId], references: [id])
   salaryId          String?          @db.Uuid
+  salary_log        salary_log?      @relation(fields: [salary_logId], references: [id])
+  salary_logId      String?          @db.Uuid
 }
 
 //-------- ตาราง master ประเภทวันหยุด -----------//
