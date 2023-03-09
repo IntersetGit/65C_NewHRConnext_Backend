@@ -1184,6 +1184,43 @@ const resolvers: Resolvers = {
         });
         console.log('อัปเดทเงินเดือน = ', updatesalary);
 
+        let result_incomeYears = 0
+        let result_vatYears = 0
+        let result_sosialYears = 0
+        const chk_salaryYears = await ctx.prisma.salary.findMany({
+          include: { provident_log: true },
+          where: {
+            userId: args.data?.userId,
+            AND: {
+              month: { gte: Thismonth },
+              years: { gte: ThisYear }
+            }
+          },
+          orderBy:
+          {
+            date: "asc",
+          },
+        });
+        for (let i = 0; i < chk_salaryYears.length; i++) { // ทำการ loop ค่า เพื่อเช็คยอดเงินประจำปี รายรับรวม ภาษีรวม ประกันสังคมรวม
+          // time = dayjs(chk_salaryYears[i].date).format("MM")
+          result_incomeYears += chk_salaryYears[i].net
+          result_vatYears += chk_salaryYears[i].vat
+          result_sosialYears += chk_salaryYears[i].social_security
+          const updatesalary = await ctx.prisma.salary.update({ // ทำการอัปเดทเงินเดือน 
+            data: {
+              socialYears: result_sosialYears,
+              vatYears: result_vatYears,
+              incomeYears: result_incomeYears,
+            },
+            where: {
+              id: chk_salaryYears[i].id
+            }
+          });
+          console.log(`เดือนที่ ${i}`,result_incomeYears , result_vatYears , result_sosialYears);
+        }
+        
+        
+        ////////////////////////////////////////////////
         // อัปเดท provident log (กองทุน พนักงาน และ บริษัท)
         const updatepro_log = await ctx.prisma.provident_log.update({
           data: {
