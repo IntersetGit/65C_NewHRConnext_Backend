@@ -75,6 +75,9 @@ const resolversslip: Resolvers = {
             let Income_collect = null
             let Vat_collect = null
             let Social_secu_collect = null
+            let result_income_years = 0
+            let result_vat_years = 0
+            let result_ss_years = 0
 
             // ทำการ format จาก date ที่รับเข้ามา
             let searchTime = new Date(args.date)
@@ -182,7 +185,24 @@ const resolversslip: Resolvers = {
 
             console.log(resultmonth)
             console.log(Number(Year) + 543)
-            // check ค่าว่าง
+
+            const cal_salary = await ctx.prisma.salary.findMany({
+                where: {
+                    date: { lte: searchTime }, AND: {
+                        years: fm_years
+                    }
+                }, orderBy: {
+                    date: 'asc'
+                }
+            })
+            for (let i = 0; i < cal_salary.length; i++) {
+                 result_income_years +=  cal_salary[i].net as number
+                 result_vat_years +=  cal_salary[i].vat as number
+                 result_ss_years +=  cal_salary[i].social_security as number
+            }
+            console.log('เงินบวกทั้งหมด = ' , result_income_years , result_vat_years , result_ss_years );
+            
+            // check ค่าว่าง  
             if (address2 === null) {
                 address2 = ''
             }
@@ -313,12 +333,12 @@ const resolversslip: Resolvers = {
                 .rect(19, 480, 186, 20)
                 .stroke()
             pdfDoc.fontSize(12).text("เงินได้สะสม (ปี)", 25, 483, { align: 'left' })
-            pdfDoc.fontSize(12).text(`${Incomeyears?.toLocaleString(undefined, { minimumFractionDigits: 2 })}`, 100, 483, { width: 100, align: 'right' })
+            pdfDoc.fontSize(12).text(`${result_income_years?.toLocaleString(undefined, { minimumFractionDigits: 2 })}`, 100, 483, { width: 100, align: 'right' })
             pdfDoc.lineJoin('miter') //กรอบกลางล่าง กองทุนสำรองเลี้ยงชีพสะสม
                 .rect(19, 500, 186, 20)
                 .stroke()
             pdfDoc.fontSize(12).text("ภาษีสะสม (ปี)", 25, 503, { align: 'left' })
-            pdfDoc.fontSize(12).text(`${Vatyears?.toLocaleString(undefined, { minimumFractionDigits: 2 })}`, 100, 503, { width: 100, align: 'right' })
+            pdfDoc.fontSize(12).text(`${result_vat_years?.toLocaleString(undefined, { minimumFractionDigits: 2 })}`, 100, 503, { width: 100, align: 'right' })
             ///////////////////////////////////////////////////////////////////////
             pdfDoc.lineJoin('miter') //กรอบกลาง
                 .rect(205, 240, 185, 20)
@@ -354,7 +374,7 @@ const resolversslip: Resolvers = {
                 .rect(205, 480, 185, 20)
                 .stroke()
             pdfDoc.fontSize(12).text("ประกันสังคมสะสม (ปี)", 211, 483, { align: 'left' })
-            pdfDoc.fontSize(12).text(`${Socialyears?.toLocaleString(undefined, { minimumFractionDigits: 2 })}`, 285, 483, { width: 100, align: 'right' })
+            pdfDoc.fontSize(12).text(`${result_ss_years?.toLocaleString(undefined, { minimumFractionDigits: 2 })}`, 285, 483, { width: 100, align: 'right' })
 
             pdfDoc.lineJoin('miter') //กรอบกลางล่าง กองทุนสำรองเลี้ยงชีพสะสม
                 .rect(205, 500, 185, 20)
@@ -451,6 +471,9 @@ const resolversslip: Resolvers = {
             let Income_collect = null
             let Vat_collect = null
             let Social_secu_collect = null
+            let result_income_years = 0
+            let result_vat_years = 0
+            let result_ss_years = 0
 
             // ทำการ format จาก date ที่รับเข้ามา
             let searchTime = new Date(args.date)
@@ -558,6 +581,21 @@ const resolversslip: Resolvers = {
 
             console.log(resultmonth)
             console.log(Number(Year) + 543)
+            const cal_salary = await ctx.prisma.salary.findMany({
+                where: {
+                    date: { lte: searchTime }, AND: {
+                        years: fm_years
+                    }
+                }, orderBy: {
+                    date: 'asc'
+                }
+            })
+            for (let i = 0; i < cal_salary.length; i++) {
+                 result_income_years +=  cal_salary[i].net as number
+                 result_vat_years +=  cal_salary[i].vat as number
+                 result_ss_years +=  cal_salary[i].social_security as number
+            }
+            console.log('เงินบวกทั้งหมด = ' , result_income_years , result_vat_years , result_ss_years );
             // check ค่าว่าง
             if (address2 === null) {
                 address2 = ''
@@ -686,12 +724,12 @@ const resolversslip: Resolvers = {
                 .rect(19, 480, 186, 20)
                 .stroke()
             pdfDoc.fontSize(12).text("เงินได้สะสม (ปี)", 25, 483, { align: 'left' })
-            pdfDoc.fontSize(12).text(`${Incomeyears?.toLocaleString(undefined, { minimumFractionDigits: 2 })}`, 100, 483, { width: 100, align: 'right' })
+            pdfDoc.fontSize(12).text(`${result_income_years?.toLocaleString(undefined, { minimumFractionDigits: 2 })}`, 100, 483, { width: 100, align: 'right' })
             pdfDoc.lineJoin('miter') //กรอบกลางล่าง กองทุนสำรองเลี้ยงชีพสะสม
                 .rect(19, 500, 186, 20)
                 .stroke()
             pdfDoc.fontSize(12).text("ภาษีสะสม (ปี)", 25, 503, { align: 'left' })
-            pdfDoc.fontSize(12).text(`${Vatyears?.toLocaleString(undefined, { minimumFractionDigits: 2 })}`, 100, 503, { width: 100, align: 'right' })
+            pdfDoc.fontSize(12).text(`${result_vat_years?.toLocaleString(undefined, { minimumFractionDigits: 2 })}`, 100, 503, { width: 100, align: 'right' })
             ///////////////////////////////////////////////////////////////////////
             pdfDoc.lineJoin('miter') //กรอบกลาง
                 .rect(205, 240, 185, 20)
@@ -727,7 +765,7 @@ const resolversslip: Resolvers = {
                 .rect(205, 480, 185, 20)
                 .stroke()
             pdfDoc.fontSize(12).text("ประกันสังคมสะสม (ปี)", 211, 483, { align: 'left' })
-            pdfDoc.fontSize(12).text(`${Socialyears?.toLocaleString(undefined, { minimumFractionDigits: 2 })}`, 285, 483, { width: 100, align: 'right' })
+            pdfDoc.fontSize(12).text(`${result_ss_years?.toLocaleString(undefined, { minimumFractionDigits: 2 })}`, 285, 483, { width: 100, align: 'right' })
 
             pdfDoc.lineJoin('miter') //กรอบกลางล่าง กองทุนสำรองเลี้ยงชีพสะสม
                 .rect(205, 500, 185, 20)
