@@ -2149,25 +2149,26 @@ const resolvers: Resolvers = {
           other = chk_salary[i].other as number
           VaT_per = chk_salary[i].vatper as number
           Ss_per = chk_salary[i].ss_per as number
+          base_salary = chk_salary[i].base_salary as number
 
           // ทำการเช็ค bookbank_log 
-          const chk_bb = await ctx.prisma.bookbank_log.findMany({
-            take: 1,
-            where: {
-              userId: user_id,
-              AND: {
-                unix: { lte: dayjs(new Date()).unix() }
-              }
-            },
-            orderBy: {
-              accept_date: 'desc'
-            }
-          })
-          // forEach เพื่อเอาค่าของฐานเงินเดือนไปเรียกใช้
-          chk_bb.forEach((e) => {
-            base_salary = e.base_salary
-            console.log(base_salary);
-          })
+          // const chk_bb = await ctx.prisma.bookbank_log.findMany({
+          //   take: 1,
+          //   where: {
+          //     userId: user_id,
+          //     AND: {
+          //       unix: { lte: dayjs(new Date()).unix() }
+          //     }
+          //   },
+          //   orderBy: {
+          //     accept_date: 'desc'
+          //   }
+          // })
+          // // forEach เพื่อเอาค่าของฐานเงินเดือนไปเรียกใช้
+          // chk_bb.forEach((e) => {
+          //   base_salary = e.base_salary
+          //   console.log(base_salary);
+          // })
 
           // ถ้าหากมีการเปลี่ยนค่าของ ss_per และ vat_per
           if (args.data.ss_per || args.data.vat_per) {
