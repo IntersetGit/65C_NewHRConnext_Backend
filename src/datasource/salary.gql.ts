@@ -1118,6 +1118,7 @@ const resolvers: Resolvers = {
         console.log(new_pro_emp);
         let new_pro_com = (check_all_collect[0].provident_collect_company - find_salary[0].provident_company) + pro_com
         console.log(new_pro_com);
+
         new_income_years = (find_salary[0].incomeYears - find_salary[0].net) + args.data?.net
         new_vat_years = (find_salary[0].vatYears - find_salary[0].vat) + args.data?.vat
         new_ss_years = (find_salary[0].socialYears - find_salary[0].social_security) + args.data?.social_security
@@ -2252,6 +2253,10 @@ const resolvers: Resolvers = {
           if (args.data.ss_per || args.data.vat_per) {
             VaT_per = args.data.vat_per ? args.data.vat_per : VaT_per
             Ss_per = args.data.ss_per ? args.data.ss_per : Ss_per
+            if (chk_salary[i].month != Thismonth) {
+              VaT_per = chk_salary[i].vatper as number
+              Ss_per = chk_salary[i].ss_per as number
+            }
             //calculate the new salary update !
             /////////////////////////////// cal vat////////////////////////////////
             const chk_vat = await ctx.prisma.salary.findUnique({
