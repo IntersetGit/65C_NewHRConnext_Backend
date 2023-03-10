@@ -417,6 +417,8 @@ model salary {
   mas_bank            mas_bank?          @relation(fields: [mas_bankId], references: [id])
   mas_vat_socials     mas_vat_socials?   @relation(fields: [mas_vat_socialsId], references: [id])
   expense_company     expense_company?   @relation(fields: [expense_companyId], references: [id])
+  salary_log          salary_log?        @relation(fields: [salary_logId], references: [id])
+  salary_logId        String?            @db.Uuid
 }
 
 model salary_log {
@@ -470,6 +472,7 @@ model salary_log {
   expense_companyId   String?            @db.Uuid
   provident_logId     String?            @db.Uuid
   provident_log       provident_log[]
+  salaryId            salary[]
   User                User?              @relation(fields: [userId], references: [id])
   bookbank_log        bookbank_log?      @relation(fields: [bookbank_logId], references: [id])
   mas_income_type     mas_income_type?   @relation(fields: [mas_income_typeId], references: [id])

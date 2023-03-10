@@ -484,7 +484,8 @@ exports.Prisma.SalaryScalarFieldEnum = makeEnum({
   mas_bankId: 'mas_bankId',
   mas_vat_socialsId: 'mas_vat_socialsId',
   expense_companyId: 'expense_companyId',
-  provident_logId: 'provident_logId'
+  provident_logId: 'provident_logId',
+  salary_logId: 'salary_logId'
 });
 
 exports.Prisma.Salary_logScalarFieldEnum = makeEnum({
