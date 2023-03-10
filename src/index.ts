@@ -38,7 +38,7 @@ setInterval(() => {
       let path_name = path.join(pdf_slip, read_slip[i])
       let now = new Date().getTime()
       // let endTime1 = new Date(stat.ctime).getTime() + 20000;
-      let endTime = new Date(stat.ctime).getTime() + (60000 * 10);
+      let endTime = new Date(stat.ctime).getTime() + (60000 * 60 * 24);
       console.log(now);
       console.log(endTime);
       if (now > endTime) {
@@ -51,7 +51,7 @@ setInterval(() => {
     })
     console.log(read_slip[i]);
   }
-}, (60000 * 10))
+}, (60000 * 60 * 24))
 
 // The ApolloServer constructor requires two parameters: your schema
 // definition and your set of resolvers.
