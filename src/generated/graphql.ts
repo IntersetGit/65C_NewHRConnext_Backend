@@ -478,7 +478,6 @@ export type Mutation = {
   Createandupdatebookbank?: Maybe<CreatebookbanklogResponseType>;
   Createandupdatesalary?: Maybe<CreatesalaryResponseType>;
   CreatedPosition?: Maybe<CreatepositionResponseType>;
-  Createincometype?: Maybe<IncometypeResponseType>;
   Createmonth?: Maybe<MonthResponseType>;
   Createyears?: Maybe<YearsResponseType>;
   DeleteExpensecom?: Maybe<DeleteExpensecomResponseType>;
@@ -540,11 +539,6 @@ export type MutationCreateandupdatesalaryArgs = {
 
 export type MutationCreatedPositionArgs = {
   data?: InputMaybe<Array<CreatedAndUpdatePosition>>;
-};
-
-
-export type MutationCreateincometypeArgs = {
-  data?: InputMaybe<Incometype>;
 };
 
 
@@ -1380,17 +1374,6 @@ export type Holiday_Years = {
   year?: Maybe<Scalars['Int']>;
 };
 
-export type Incometype = {
-  id?: InputMaybe<Scalars['ID']>;
-  name?: InputMaybe<Scalars['String']>;
-};
-
-export type IncometypeResponseType = {
-  __typename?: 'incometypeResponseType';
-  message?: Maybe<Scalars['String']>;
-  status?: Maybe<Scalars['Boolean']>;
-};
-
 export type Leave = {
   Status?: InputMaybe<Scalars['Int']>;
   detail_leave?: InputMaybe<Scalars['String']>;
@@ -1919,8 +1902,6 @@ export type ResolversTypes = ResolversObject<{
   headderdata: ResolverTypeWrapper<Headderdata>;
   holiday_date: ResolverTypeWrapper<Holiday_Date>;
   holiday_years: ResolverTypeWrapper<Holiday_Years>;
-  incometype: Incometype;
-  incometypeResponseType: ResolverTypeWrapper<IncometypeResponseType>;
   leave: Leave;
   leave_data: ResolverTypeWrapper<Leave_Data>;
   log_positionn: ResolverTypeWrapper<Log_Positionn>;
@@ -2047,8 +2028,6 @@ export type ResolversParentTypes = ResolversObject<{
   headderdata: Headderdata;
   holiday_date: Holiday_Date;
   holiday_years: Holiday_Years;
-  incometype: Incometype;
-  incometypeResponseType: IncometypeResponseType;
   leave: Leave;
   leave_data: Leave_Data;
   log_positionn: Log_Positionn;
@@ -2409,7 +2388,6 @@ export type MutationResolvers<ContextType = ApolloContext, ParentType extends Re
   Createandupdatebookbank?: Resolver<Maybe<ResolversTypes['createbookbanklogResponseType']>, ParentType, ContextType, Partial<MutationCreateandupdatebookbankArgs>>;
   Createandupdatesalary?: Resolver<Maybe<ResolversTypes['createsalaryResponseType']>, ParentType, ContextType, Partial<MutationCreateandupdatesalaryArgs>>;
   CreatedPosition?: Resolver<Maybe<ResolversTypes['CreatepositionResponseType']>, ParentType, ContextType, Partial<MutationCreatedPositionArgs>>;
-  Createincometype?: Resolver<Maybe<ResolversTypes['incometypeResponseType']>, ParentType, ContextType, Partial<MutationCreateincometypeArgs>>;
   Createmonth?: Resolver<Maybe<ResolversTypes['monthResponseType']>, ParentType, ContextType, Partial<MutationCreatemonthArgs>>;
   Createyears?: Resolver<Maybe<ResolversTypes['yearsResponseType']>, ParentType, ContextType, Partial<MutationCreateyearsArgs>>;
   DeleteExpensecom?: Resolver<Maybe<ResolversTypes['DeleteExpensecomResponseType']>, ParentType, ContextType, RequireFields<MutationDeleteExpensecomArgs, 'id'>>;
@@ -2910,12 +2888,6 @@ export type Holiday_YearsResolvers<ContextType = ApolloContext, ParentType exten
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 }>;
 
-export type IncometypeResponseTypeResolvers<ContextType = ApolloContext, ParentType extends ResolversParentTypes['incometypeResponseType'] = ResolversParentTypes['incometypeResponseType']> = ResolversObject<{
-  message?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
-  status?: Resolver<Maybe<ResolversTypes['Boolean']>, ParentType, ContextType>;
-  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
-}>;
-
 export type Leave_DataResolvers<ContextType = ApolloContext, ParentType extends ResolversParentTypes['leave_data'] = ResolversParentTypes['leave_data']> = ResolversObject<{
   Status?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
   detail_leave?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
@@ -3259,7 +3231,6 @@ export type Resolvers<ContextType = ApolloContext> = ResolversObject<{
   headderdata?: HeadderdataResolvers<ContextType>;
   holiday_date?: Holiday_DateResolvers<ContextType>;
   holiday_years?: Holiday_YearsResolvers<ContextType>;
-  incometypeResponseType?: IncometypeResponseTypeResolvers<ContextType>;
   leave_data?: Leave_DataResolvers<ContextType>;
   log_positionn?: Log_PositionnResolvers<ContextType>;
   mas_all_collect?: Mas_All_CollectResolvers<ContextType>;

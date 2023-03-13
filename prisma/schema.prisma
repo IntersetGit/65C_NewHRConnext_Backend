@@ -331,13 +331,6 @@ model mas_salary_status {
   salary_log salary_log[]
 }
 
-model mas_income_type {
-  id         String       @unique @db.Uuid
-  name       String
-  salary     salary[]
-  salary_log salary_log[]
-}
-
 model expense_company {
   id              String         @unique @db.Uuid
   monthId         String?        @db.Uuid
@@ -402,7 +395,7 @@ model salary {
   update_date         DateTime?
   userId              String?            @db.Uuid
   // bookbank_log       bookbank_log[]
-  mas_income_typeId   String?            @db.Uuid
+  
   bookbank_logId      String?            @db.Uuid //เรียกดู 
   mas_salary_statusId String?            @db.Uuid
   mas_bankId          String?            @db.Uuid
@@ -412,7 +405,7 @@ model salary {
   provident_log       provident_log[]
   User                User?              @relation(fields: [userId], references: [id])
   bookbank_log        bookbank_log?      @relation(fields: [bookbank_logId], references: [id])
-  mas_income_type     mas_income_type?   @relation(fields: [mas_income_typeId], references: [id])
+  
   mas_salary_status   mas_salary_status? @relation(fields: [mas_salary_statusId], references: [id])
   mas_bank            mas_bank?          @relation(fields: [mas_bankId], references: [id])
   mas_vat_socials     mas_vat_socials?   @relation(fields: [mas_vat_socialsId], references: [id])
@@ -463,7 +456,6 @@ model salary_log {
   update_date         DateTime?
   userId              String?            @db.Uuid
   // bookbank_log       bookbank_log[]
-  mas_income_typeId   String?            @db.Uuid
   bookbank_logId      String?            @db.Uuid //เรียกดู 
   mas_salary_statusId String?            @db.Uuid
   mas_bankId          String?            @db.Uuid
@@ -474,7 +466,6 @@ model salary_log {
   salaryId            String?            @db.Uuid
   User                User?              @relation(fields: [userId], references: [id])
   bookbank_log        bookbank_log?      @relation(fields: [bookbank_logId], references: [id])
-  mas_income_type     mas_income_type?   @relation(fields: [mas_income_typeId], references: [id])
   mas_salary_status   mas_salary_status? @relation(fields: [mas_salary_statusId], references: [id])
   mas_bank            mas_bank?          @relation(fields: [mas_bankId], references: [id])
   mas_vat_socials     mas_vat_socials?   @relation(fields: [mas_vat_socialsId], references: [id])

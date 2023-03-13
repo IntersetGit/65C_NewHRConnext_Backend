@@ -253,11 +253,6 @@ exports.Prisma.Mas_bankScalarFieldEnum = makeEnum({
   bank_code: 'bank_code'
 });
 
-exports.Prisma.Mas_income_typeScalarFieldEnum = makeEnum({
-  id: 'id',
-  name: 'name'
-});
-
 exports.Prisma.Mas_leave_typeScalarFieldEnum = makeEnum({
   id: 'id',
   name: 'name',
@@ -478,7 +473,6 @@ exports.Prisma.SalaryScalarFieldEnum = makeEnum({
   update_by: 'update_by',
   update_date: 'update_date',
   userId: 'userId',
-  mas_income_typeId: 'mas_income_typeId',
   bookbank_logId: 'bookbank_logId',
   mas_salary_statusId: 'mas_salary_statusId',
   mas_bankId: 'mas_bankId',
@@ -523,7 +517,6 @@ exports.Prisma.Salary_logScalarFieldEnum = makeEnum({
   update_by: 'update_by',
   update_date: 'update_date',
   userId: 'userId',
-  mas_income_typeId: 'mas_income_typeId',
   bookbank_logId: 'bookbank_logId',
   mas_salary_statusId: 'mas_salary_statusId',
   mas_bankId: 'mas_bankId',
@@ -588,7 +581,6 @@ exports.Prisma.ModelName = makeEnum({
   mas_years: 'mas_years',
   mas_vat_socials: 'mas_vat_socials',
   mas_salary_status: 'mas_salary_status',
-  mas_income_type: 'mas_income_type',
   expense_company: 'expense_company',
   salary: 'salary',
   salary_log: 'salary_log',

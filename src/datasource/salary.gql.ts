@@ -1,4 +1,3 @@
-
 import { Resolvers, User, CompanyBranch } from '../generated/graphql';
 import gql from 'graphql-tag';
 import { v4 } from 'uuid';
@@ -8,8 +7,6 @@ import dayjs from 'dayjs';
 import { profile } from 'console';
 import { expense_company, bookbank_log, salary_log } from '../generated/client/index';
 import { comparePassword } from '../utils/passwords';
-import { orderBy } from 'lodash';
-
 
 
 export const salaryTypedef = gql`
@@ -303,11 +300,6 @@ export const salaryTypedef = gql`
     cal_date_salary: Date
   }
 
-  input incometype {
-    id: ID
-    name: String
-  }
-
   type slipresolvers {
     message: String
     status: Boolean!
@@ -480,11 +472,6 @@ export const salaryTypedef = gql`
     status: Boolean
   }
 
-  type incometypeResponseType {
-    message: String
-    status: Boolean
-  }
-
   type DeleteSalaryResponseType {
     message: String
     status: Boolean
@@ -539,7 +526,6 @@ export const salaryTypedef = gql`
     Createyears(data: yearsInput): yearsResponseType
     Createmonth(data: monthInput): monthResponseType
     createBank(data: BankInput): BankResponseType
-    Createincometype(data: incometype): incometypeResponseType
     CreateAndUpdateExpenseCom(
       data: ExpenseComInput
     ): CreateAndUpdateExpenseComResponseType
@@ -2607,21 +2593,6 @@ const resolvers: Resolvers = {
         status: true,
       };
     },
-
-    async Createincometype(p: any, args: any, ctx: any) {
-      //สร้างประเภทของรายรับ
-      const genIncomeTypeID = v4();
-      const createIncomeype = await ctx.prisma.mas_income_type.create({
-        data: {
-          id: genIncomeTypeID,
-          name: args.data?.name,
-        },
-      });
-      return {
-        message: 'success',
-        status: true,
-      };
-    },
     //ลบ salary และ provident_log และอัพเดทค่า การสะสมใน mas_all_collect
     async DeleteSalary(p: any, args: any, ctx: any) {
       const find_salary = await ctx.prisma.salary.findMany({ //ทำการคำนวณยอดเงินใน mas_collect ใหม่
@@ -2752,7 +2723,6 @@ const resolversComposition = {
   'Mutation.Createandupdatebookbank': [authenticate()],
   'Mutation.createBank': [authenticate()],
   'Mutation.CreateAndUpdateExpenseCom': [authenticate()],
-  'Mutation.Createincometype': [authenticate()],
   'Mutation.Deletebookbank': [authenticate()],
   'Mutation.DeleteSalary': [authenticate()],
   'Mutation.DeleteExpensecom': [authenticate()],
