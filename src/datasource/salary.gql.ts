@@ -1080,6 +1080,7 @@ const resolvers: Resolvers = {
     async Createandupdatesalary(p: any, args: any, ctx: any) {
       //สร้าง log สำหรับเงินเดือนจากนั้นเก็บกองทุนไว้ใน provident log จากนั้นเก็บค่าไว้ใน collect
       /////////////////////// กรณี อัปเดทเงินเดือน /////////////////////////////////////////////
+      const gen_salarylog = v4()
       if (args.data?.id) {
         let date = args.data?.date
         //แปลง date ให้เหลือแค่ปี
@@ -1184,50 +1185,54 @@ const resolvers: Resolvers = {
             id: args.data?.id
           }
         });
-        // const creatdatesalary = await ctx.prisma.salary_log.create({ // ทำการสร้างlogเงินเดือน 
-        //   data: {
-        //     mas_monthId: args.data?.mas_monthId as string,
-        //     mas_yearsId: args.data?.mas_yearsId as string,
-        //     commission: args.data?.commission as number,
-        //     position_income: args.data?.position_income as number,
-        //     ot: args.data?.ot as number,
-        //     bonus: args.data?.bonus as number,
-        //     special_income: args.data?.special_income as number,
-        //     other_income: args.data?.other_income as number,
-        //     travel_income: args.data?.travel_income as number,
-        //     bursary: args.data?.bursary as number,
-        //     welfare_money: args.data?.welfare_money as number,
-        //     vatper: args.data?.vatper as number,
-        //     ss_per: args.data?.ss_per as number,
-        //     vat: args.data?.vat as number,
-        //     social_security: args.data?.social_security as number,
-        //     miss: args.data?.miss as number,
-        //     ra: args.data?.ra as number,
-        //     late: args.data?.late as number,
-        //     other: args.data?.other as number,
-        //     provident_employee: pro_emp as number,
-        //     provident_company: pro_com as number,
-        //     total_income: args.data?.total_income as number,
-        //     total_expense: args.data?.total_expense as number,
-        //     net: args.data?.net as number,
-        //     userId: args.data?.userId,
-        //     bookbank_logId: args.data?.bookbank_logId,
-        //     mas_income_typeId: args.data?.mas_income_typeId,
-        //     date: new Date(args.data?.date),
-        //     mas_salary_statusId: "765d31b6-ab63-11ed-afa1-0242ac120002",
-        //     socialYears: new_ss_years,
-        //     vatYears: new_vat_years,
-        //     incomeYears: new_income_years,
-        //     month: Thismonth,
-        //     years: ThisYear,
-        //     create_by: ctx.currentUser?.id,
-        //     create_date: new Date(),
-        //     update_by: ctx.currentUser?.id,
-        //     update_date: new Date(),
-        //     mas_bankId: args.data?.mas_bankId,
-        //     base_salary: args.data?.base_salary,
-        //   }
-        // });
+
+        const creatdatesalary_log = await ctx.prisma.salary_log.create({ // ทำการสร้างlogเงินเดือน 
+          data: {
+            id: gen_salarylog,
+            mas_monthId: args.data?.mas_monthId as string,
+            mas_yearsId: args.data?.mas_yearsId as string,
+            commission: args.data?.commission as number,
+            position_income: args.data?.position_income as number,
+            ot: args.data?.ot as number,
+            bonus: args.data?.bonus as number,
+            special_income: args.data?.special_income as number,
+            other_income: args.data?.other_income as number,
+            travel_income: args.data?.travel_income as number,
+            bursary: args.data?.bursary as number,
+            welfare_money: args.data?.welfare_money as number,
+            vatper: args.data?.vatper as number,
+            ss_per: args.data?.ss_per as number,
+            vat: args.data?.vat as number,
+            social_security: args.data?.social_security as number,
+            miss: args.data?.miss as number,
+            ra: args.data?.ra as number,
+            late: args.data?.late as number,
+            other: args.data?.other as number,
+            provident_employee: pro_emp as number,
+            provident_company: pro_com as number,
+            total_income: args.data?.total_income as number,
+            total_expense: args.data?.total_expense as number,
+            net: args.data?.net as number,
+            userId: args.data?.userId,
+            bookbank_logId: args.data?.bookbank_logId,
+            mas_income_typeId: args.data?.mas_income_typeId,
+            date: new Date(args.data?.date),
+            mas_salary_statusId: "765d31b6-ab63-11ed-afa1-0242ac120002",
+            socialYears: new_ss_years,
+            vatYears: new_vat_years,
+            incomeYears: new_income_years,
+            month: Thismonth,
+            years: ThisYear,
+            create_by: ctx.currentUser?.id,
+            create_date: new Date(),
+            update_by: ctx.currentUser?.id,
+            update_date: new Date(),
+            mas_bankId: args.data?.mas_bankId,
+            base_salary: args.data?.base_salary,
+            salaryId: args.data?.id,
+
+          }
+        });
         console.log('อัปเดทเงินเดือน = ', updatesalary);
 
         let result_incomeYears = 0
@@ -1431,49 +1436,53 @@ const resolvers: Resolvers = {
 
           }
         });
-        // const creatdatesalary = await ctx.prisma.salary_log.create({ // ทำการสร้างlogเงินเดือน 
-        //   data: {
-        //     mas_monthId: args.data?.mas_monthId as string,
-        //     mas_yearsId: args.data?.mas_yearsId as string,
-        //     commission: args.data?.commission as number,
-        //     position_income: args.data?.position_income as number,
-        //     ot: args.data?.ot as number,
-        //     bonus: args.data?.bonus as number,
-        //     special_income: args.data?.special_income as number,
-        //     other_income: args.data?.other_income as number,
-        //     travel_income: args.data?.travel_income as number,
-        //     bursary: args.data?.bursary as number,
-        //     welfare_money: args.data?.welfare_money as number,
-        //     vatper: args.data?.vatper as number,
-        //     ss_per: args.data?.ss_per as number,
-        //     vat: args.data?.vat as number,
-        //     social_security: args.data?.social_security as number,
-        //     miss: args.data?.miss as number,
-        //     ra: args.data?.ra as number,
-        //     late: args.data?.late as number,
-        //     other: args.data?.other as number,
-        //     provident_employee: pro_emp as number,
-        //     provident_company: pro_com as number,
-        //     total_income: args.data?.total_income as number,
-        //     total_expense: args.data?.total_expense as number,
-        //     net: args.data?.net as number,
-        //     userId: args.data?.userId,
-        //     bookbank_logId: args.data?.bookbank_logId,
-        //     mas_income_typeId: args.data?.mas_income_typeId,
-        //     date: new Date(args.data?.date),
-        //     mas_salary_statusId: "765d31b6-ab63-11ed-afa1-0242ac120002",
-        //     socialYears: 0 + args.data?.social_security, // กรณีนี้คือกรณีที่เงินเดือนเป็นเดือนมกราคม จะทำการล้างค่าประกันสังคม ภาษี รายได้สะสมทั้งหมดให้เป็น 0 แล้ว บวกด้วยค่าที่รับเข้ามา
-        //     vatYears: 0 + args.data?.vat,
-        //     incomeYears: 0 + args.data?.net,
-        //     month: Thismonth,
-        //     years: ThisYear,
-        //     create_by: ctx.currentUser?.id,
-        //     create_date: new Date(),
-        //     update_by: ctx.currentUser?.id,
-        //     update_date: new Date(),
-        //     mas_bankId: args.data?.mas_bankId,
-        //     base_salary: args.data?.base_salary,
-        //   }});
+
+        const creatdatesalary_log = await ctx.prisma.salary_log.create({ // ทำการสร้างlogเงินเดือน 
+          data: {
+            id: gen_salarylog ,
+            mas_monthId: args.data?.mas_monthId as string,
+            mas_yearsId: args.data?.mas_yearsId as string,
+            commission: args.data?.commission as number,
+            position_income: args.data?.position_income as number,
+            ot: args.data?.ot as number,
+            bonus: args.data?.bonus as number,
+            special_income: args.data?.special_income as number,
+            other_income: args.data?.other_income as number,
+            travel_income: args.data?.travel_income as number,
+            bursary: args.data?.bursary as number,
+            welfare_money: args.data?.welfare_money as number,
+            vatper: args.data?.vatper as number,
+            ss_per: args.data?.ss_per as number,
+            vat: args.data?.vat as number,
+            social_security: args.data?.social_security as number,
+            miss: args.data?.miss as number,
+            ra: args.data?.ra as number,
+            late: args.data?.late as number,
+            other: args.data?.other as number,
+            provident_employee: pro_emp as number,
+            provident_company: pro_com as number,
+            total_income: args.data?.total_income as number,
+            total_expense: args.data?.total_expense as number,
+            net: args.data?.net as number,
+            userId: args.data?.userId,
+            bookbank_logId: args.data?.bookbank_logId,
+            mas_income_typeId: args.data?.mas_income_typeId,
+            date: new Date(args.data?.date),
+            mas_salary_statusId: "765d31b6-ab63-11ed-afa1-0242ac120002",
+            socialYears: 0 + args.data?.social_security, // กรณีนี้คือกรณีที่เงินเดือนเป็นเดือนมกราคม จะทำการล้างค่าประกันสังคม ภาษี รายได้สะสมทั้งหมดให้เป็น 0 แล้ว บวกด้วยค่าที่รับเข้ามา
+            vatYears: 0 + args.data?.vat,
+            incomeYears: 0 + args.data?.net,
+            month: Thismonth,
+            years: ThisYear,
+            create_by: ctx.currentUser?.id,
+            create_date: new Date(),
+            update_by: ctx.currentUser?.id,
+            update_date: new Date(),
+            mas_bankId: args.data?.mas_bankId,
+            base_salary: args.data?.base_salary,
+            salaryId: gensalaryID,
+          }});
+
         //5. ทำการเช็ค mas_all_collect ว่าที่เงินเดือนออกแล้ว เขามียอดเงินสะสมทั้งหมดหรือไม่ 
         if (chk_collectLog.length > 0) {
           console.log(args.data?.userId);
@@ -1603,49 +1612,52 @@ const resolvers: Resolvers = {
 
           }
         })
-        // const creatdatesalary = await ctx.prisma.salary_log.create({ // ทำการสร้างlogเงินเดือน 
-        //   data: {
-        //     mas_monthId: args.data?.mas_monthId as string,
-        //     mas_yearsId: args.data?.mas_yearsId as string,
-        //     commission: args.data?.commission as number,
-        //     position_income: args.data?.position_income as number,
-        //     ot: args.data?.ot as number,
-        //     bonus: args.data?.bonus as number,
-        //     special_income: args.data?.special_income as number,
-        //     other_income: args.data?.other_income as number,
-        //     travel_income: args.data?.travel_income as number,
-        //     bursary: args.data?.bursary as number,
-        //     welfare_money: args.data?.welfare_money as number,
-        //     vatper: args.data?.vatper as number,
-        //     ss_per: args.data?.ss_per as number,
-        //     vat: args.data?.vat as number,
-        //     social_security: args.data?.social_security as number,
-        //     miss: args.data?.miss as number,
-        //     ra: args.data?.ra as number,
-        //     late: args.data?.late as number,
-        //     other: args.data?.other as number,
-        //     provident_employee: pro_emp as number,
-        //     provident_company: pro_com as number,
-        //     total_income: args.data?.total_income as number,
-        //     total_expense: args.data?.total_expense as number,
-        //     net: args.data?.net as number,
-        //     userId: args.data?.userId,
-        //     bookbank_logId: args.data?.bookbank_logId,
-        //     mas_income_typeId: args.data?.mas_income_typeId,
-        //     date: new Date(args.data?.date),
-        //     mas_salary_statusId: "765d31b6-ab63-11ed-afa1-0242ac120002",
-        //     socialYears: result_sosialYears + args.data?.social_security, //โดยประกันสังคมปี จะบวกเพิ่มไปเรื่อยๆ จนถึงเดือนที่ 12
-        //     vatYears: result_vatYears + args.data?.vat, //โดยภาษีปี จะบวกเพิ่มไปเรื่อยๆ จนถึงเดือนที่ 12
-        //     incomeYears: result_incomeYears + args.data?.net, //โดยยอดรายได้สะสมปี จะบวกเพิ่มไปเรื่อยๆ จนถึงเดือนที่ 12
-        //     month: Thismonth,
-        //     years: ThisYear,
-        //     create_by: ctx.currentUser?.id,
-        //     create_date: new Date(),
-        //     update_by: ctx.currentUser?.id,
-        //     update_date: new Date(),
-        //     mas_bankId: args.data?.mas_bankId,
-        //     base_salary: args.data?.base_salary,
-        //   }});
+
+        const creatdatesalary_log = await ctx.prisma.salary_log.create({ // ทำการสร้างlogเงินเดือน 
+          data: {
+            id: gen_salarylog ,
+            mas_monthId: args.data?.mas_monthId as string,
+            mas_yearsId: args.data?.mas_yearsId as string,
+            commission: args.data?.commission as number,
+            position_income: args.data?.position_income as number,
+            ot: args.data?.ot as number,
+            bonus: args.data?.bonus as number,
+            special_income: args.data?.special_income as number,
+            other_income: args.data?.other_income as number,
+            travel_income: args.data?.travel_income as number,
+            bursary: args.data?.bursary as number,
+            welfare_money: args.data?.welfare_money as number,
+            vatper: args.data?.vatper as number,
+            ss_per: args.data?.ss_per as number,
+            vat: args.data?.vat as number,
+            social_security: args.data?.social_security as number,
+            miss: args.data?.miss as number,
+            ra: args.data?.ra as number,
+            late: args.data?.late as number,
+            other: args.data?.other as number,
+            provident_employee: pro_emp as number,
+            provident_company: pro_com as number,
+            total_income: args.data?.total_income as number,
+            total_expense: args.data?.total_expense as number,
+            net: args.data?.net as number,
+            userId: args.data?.userId,
+            bookbank_logId: args.data?.bookbank_logId,
+            mas_income_typeId: args.data?.mas_income_typeId,
+            date: new Date(args.data?.date),
+            mas_salary_statusId: "765d31b6-ab63-11ed-afa1-0242ac120002",
+            socialYears: result_sosialYears + args.data?.social_security, //โดยประกันสังคมปี จะบวกเพิ่มไปเรื่อยๆ จนถึงเดือนที่ 12
+            vatYears: result_vatYears + args.data?.vat, //โดยภาษีปี จะบวกเพิ่มไปเรื่อยๆ จนถึงเดือนที่ 12
+            incomeYears: result_incomeYears + args.data?.net, //โดยยอดรายได้สะสมปี จะบวกเพิ่มไปเรื่อยๆ จนถึงเดือนที่ 12
+            month: Thismonth,
+            years: ThisYear,
+            create_by: ctx.currentUser?.id,
+            create_date: new Date(),
+            update_by: ctx.currentUser?.id,
+            update_date: new Date(),
+            mas_bankId: args.data?.mas_bankId,
+            base_salary: args.data?.base_salary,
+            salaryId: gensalaryID,
+          }});
       }
 
       if (chk_collectLog.length > 0) { //6.1 ทำการเช็คถ้าหาก all_collect มี ให้ทำการอัปเดท
@@ -1708,6 +1720,7 @@ const resolvers: Resolvers = {
       //สร้าง bookbank
       const bookbankID = v4(); //เจน id ของ bookbank_log
       const readbookbankID = v4(); //เจน id ของ read_bookbank_log
+      const gen_salarylog = v4()
       let date = args.data?.accept_date //format ค่าเวลาที่รับเข้ามา
       let Acp_year = dayjs(date).year()
       let Acp_month = dayjs(date).month()
@@ -1897,6 +1910,8 @@ const resolvers: Resolvers = {
           provident_employee = chk_salary[i].provident_employee as number
           provident_company = chk_salary[i].provident_company as number
           base_salary = chk_salary[i].base_salary as number
+          let bookbank_logId = chk_salary[i].bookbank_logId as string
+          let old_date = chk_salary[i].date
           // const chk_bb = await ctx.prisma.bookbank_log.findMany({ //ทำการเช็คค่าของ bookbank_log เพื่อที่จะหา ฐานเงินเดือนล่าสุดของคนนั้นโดยอิงจาก userId และ เดือนที่มีผล โดยอิงจากเวลาปัจจุบัน
           //   take: 1,
           //   where: {
@@ -2015,6 +2030,8 @@ const resolvers: Resolvers = {
 
             const upt_salary = await ctx.prisma.salary.update({ //ทำการ update เงินเดือนให้เป็นปัจจุบันจากการคำนวณล่าสุด
               data: {
+                update_by: ctx.currentUser?.id,
+                update_date: new Date(),
                 base_salary: base_salary,
                 vat: cal_vat,
                 social_security: NewSocial_security,
@@ -2031,6 +2048,51 @@ const resolvers: Resolvers = {
                 id: salary_id
               }
             })
+
+            const creatdatesalary_log = await ctx.prisma.salary_log.create({ // ทำการสร้างlogเงินเดือน 
+              data: {
+                id: gen_salarylog,
+                commission: commission,
+                position_income: position_income ,
+                ot: ot ,
+                bonus: bonus ,
+                special_income: special_income ,
+                other_income: other_income ,
+                travel_income: travel_income ,
+                bursary: bursary ,
+                welfare_money: welfare_money ,
+                vatper: vat_per ,
+                ss_per: ss_per ,
+                vat: vat ,
+                social_security: social_security ,
+                miss: miss ,
+                ra: ra ,
+                late: late ,
+                other: other ,
+                provident_employee: provident_employee ,
+                provident_company: provident_company ,
+                total_income: Total_income ,
+                total_expense: Total_expense ,
+                net: Net ,
+                userId: user_id,
+                bookbank_logId: bookbank_logId,
+                date: old_date, //วันเดิม
+                mas_salary_statusId: "765d31b6-ab63-11ed-afa1-0242ac120002",
+                socialYears: ResultSocialYears,
+                vatYears: ResultVatYears,
+                incomeYears: ResultIncomeYears,
+                month: find_month,
+                years: find_year,
+                create_by: ctx.currentUser?.id,
+                create_date: new Date(),
+                update_by: ctx.currentUser?.id,
+                update_date: new Date(),
+                // mas_bankId: args.data?.mas_bankId,
+                base_salary: base_salary,
+                salaryId: salary_id,
+    
+              }
+            });
             // console.log(upt_salary);
 
             const chk_all_collect = await ctx.prisma.mas_all_collect.findMany({ //ทำการค้นหา all_collect ของแต่ละคนจาก ID 
@@ -2265,9 +2327,10 @@ const resolvers: Resolvers = {
 
     async CreateAndUpdateExpenseCom(p, args, ctx) {
       //สร้างและอัปเดท expensecom
+      const gen_salarylog = v4()
       const genExpenseID = v4(); // เจน id ของ expense company
       let date = args.data?.date // format วันที่ที่รับเข้ามา
-      let ThisYear = dayjs(date).format("YYYY")
+      let ThisYear = dayjs(date).format("YYYY") 
       let Thismonth = dayjs(date).format("MM")
       let Result = dayjs(date).format('YYYY-MM')
       console.log(Result);
@@ -2375,7 +2438,8 @@ const resolvers: Resolvers = {
           VaT_per = chk_salary[i].vatper as number
           Ss_per = chk_salary[i].ss_per as number
           base_salary = chk_salary[i].base_salary as number
-
+          let bookbank_logId = chk_salary[i].bookbank_logId as string
+          let old_date = chk_salary[i].date
           // result_incomeYears += chk_salary[i].net as number
           // result_vatYears += chk_salary[i].vat as number
           // result_sosialYears += chk_salary[i].social_security as number
@@ -2451,6 +2515,8 @@ const resolvers: Resolvers = {
             // จากนั้นทำการอัปเดท เงินเดือนโดยคำนวณค่าจาก vatper ssper ที่รับเข้ามาใหม่
             const upt_salary = await ctx.prisma.salary.update({
               data: {
+                update_by: ctx.currentUser?.id,
+                update_date: new Date(),
                 vat: cal_vat,
                 vatper: VaT_per,
                 social_security: NewSocial_security,
@@ -2466,6 +2532,51 @@ const resolvers: Resolvers = {
                 id: salary_id
               }
             })
+
+            const creatdatesalary_log = await ctx.prisma.salary_log.create({ // ทำการสร้างlogเงินเดือน 
+              data: {
+                id: gen_salarylog,
+                commission: commission,
+                position_income: position_income ,
+                ot: ot ,
+                bonus: bonus ,
+                special_income: special_income ,
+                other_income: other_income ,
+                travel_income: travel_income ,
+                bursary: bursary ,
+                welfare_money: welfare_money ,
+                vatper: VaT_per ,
+                ss_per: Ss_per ,
+                vat: vat ,
+                social_security: social_security ,
+                miss: miss ,
+                ra: ra ,
+                late: late ,
+                other: other ,
+                provident_employee: provident_employee ,
+                provident_company: provident_company ,
+                total_income: Total_income ,
+                total_expense: Total_expense ,
+                net: Net ,
+                userId: user_id,
+                bookbank_logId: bookbank_logId,
+                date: old_date, //วันเดิม
+                mas_salary_statusId: "765d31b6-ab63-11ed-afa1-0242ac120002",
+                socialYears: ResultSocialYears,
+                vatYears: ResultVatYears,
+                incomeYears: ResultIncomeYears,
+                month: Thismonth,
+                years: ThisYear,
+                create_by: ctx.currentUser?.id,
+                create_date: new Date(),
+                update_by: ctx.currentUser?.id,
+                update_date: new Date(),
+                // mas_bankId: args.data?.mas_bankId,
+                base_salary: base_salary,
+                salaryId: salary_id,
+    
+              }
+            });
           }
         }
 
