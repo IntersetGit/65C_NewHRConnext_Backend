@@ -472,6 +472,7 @@ export type MeprofileType = {
 
 export type Mutation = {
   __typename?: 'Mutation';
+  Changeselfpassword?: Maybe<Changepasswordresponsetype>;
   Check_password?: Maybe<Check_PasswordResponseType>;
   CreateAndUpdateExpenseCom?: Maybe<CreateAndUpdateExpenseComResponseType>;
   CreateSalaryStatus?: Maybe<SalaryStatusResponseType>;
@@ -509,6 +510,11 @@ export type Mutation = {
   refreshToken?: Maybe<RefreshtokenResponseType>;
   updateRoleCompanyMangement?: Maybe<CreateRoleCompanyResponseType>;
   validateRoute?: Maybe<ValidateRoute>;
+};
+
+
+export type MutationChangeselfpasswordArgs = {
+  data?: InputMaybe<Changepasswordinput>;
 };
 
 
@@ -1156,6 +1162,17 @@ export type Bookbank_LogInput = {
   provident_date?: InputMaybe<Scalars['Date']>;
   provident_emp?: InputMaybe<Scalars['Float']>;
   userId?: InputMaybe<Scalars['String']>;
+};
+
+export type Changepasswordinput = {
+  newpassword?: InputMaybe<Scalars['String']>;
+  password?: InputMaybe<Scalars['String']>;
+};
+
+export type Changepasswordresponsetype = {
+  __typename?: 'changepasswordresponsetype';
+  message?: Maybe<Scalars['String']>;
+  status?: Maybe<Scalars['Boolean']>;
 };
 
 export type Chk_Pw_Input = {
@@ -1886,6 +1903,8 @@ export type ResolversTypes = ResolversObject<{
   book_bank_logResponseType: ResolverTypeWrapper<Book_Bank_LogResponseType>;
   bookbank_log: ResolverTypeWrapper<Bookbank_Log>;
   bookbank_logInput: Bookbank_LogInput;
+  changepasswordinput: Changepasswordinput;
+  changepasswordresponsetype: ResolverTypeWrapper<Changepasswordresponsetype>;
   chk_pw_input: Chk_Pw_Input;
   createCompanyBranch: CreateCompanyBranch;
   createRoleCompanyGroup: CreateRoleCompanyGroup;
@@ -2012,6 +2031,8 @@ export type ResolversParentTypes = ResolversObject<{
   book_bank_logResponseType: Book_Bank_LogResponseType;
   bookbank_log: Bookbank_Log;
   bookbank_logInput: Bookbank_LogInput;
+  changepasswordinput: Changepasswordinput;
+  changepasswordresponsetype: Changepasswordresponsetype;
   chk_pw_input: Chk_Pw_Input;
   createCompanyBranch: CreateCompanyBranch;
   createRoleCompanyGroup: CreateRoleCompanyGroup;
@@ -2382,6 +2403,7 @@ export type MeprofileTypeResolvers<ContextType = ApolloContext, ParentType exten
 }>;
 
 export type MutationResolvers<ContextType = ApolloContext, ParentType extends ResolversParentTypes['Mutation'] = ResolversParentTypes['Mutation']> = ResolversObject<{
+  Changeselfpassword?: Resolver<Maybe<ResolversTypes['changepasswordresponsetype']>, ParentType, ContextType, Partial<MutationChangeselfpasswordArgs>>;
   Check_password?: Resolver<Maybe<ResolversTypes['Check_passwordResponseType']>, ParentType, ContextType, Partial<MutationCheck_PasswordArgs>>;
   CreateAndUpdateExpenseCom?: Resolver<Maybe<ResolversTypes['CreateAndUpdateExpenseComResponseType']>, ParentType, ContextType, Partial<MutationCreateAndUpdateExpenseComArgs>>;
   CreateSalaryStatus?: Resolver<Maybe<ResolversTypes['SalaryStatusResponseType']>, ParentType, ContextType, Partial<MutationCreateSalaryStatusArgs>>;
@@ -2714,6 +2736,12 @@ export type Bookbank_LogResolvers<ContextType = ApolloContext, ParentType extend
   provident_emp?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
   unix?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
   userId?: Resolver<Maybe<ResolversTypes['User']>, ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+}>;
+
+export type ChangepasswordresponsetypeResolvers<ContextType = ApolloContext, ParentType extends ResolversParentTypes['changepasswordresponsetype'] = ResolversParentTypes['changepasswordresponsetype']> = ResolversObject<{
+  message?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  status?: Resolver<Maybe<ResolversTypes['Boolean']>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 }>;
 
@@ -3218,6 +3246,7 @@ export type Resolvers<ContextType = ApolloContext> = ResolversObject<{
   YearCountType?: YearCountTypeResolvers<ContextType>;
   book_bank_logResponseType?: Book_Bank_LogResponseTypeResolvers<ContextType>;
   bookbank_log?: Bookbank_LogResolvers<ContextType>;
+  changepasswordresponsetype?: ChangepasswordresponsetypeResolvers<ContextType>;
   createbookbanklogResponseType?: CreatebookbanklogResponseTypeResolvers<ContextType>;
   createsalaryResponseType?: CreatesalaryResponseTypeResolvers<ContextType>;
   data_salary?: Data_SalaryResolvers<ContextType>;

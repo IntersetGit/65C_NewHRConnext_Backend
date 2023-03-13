@@ -2,17 +2,27 @@ import gql from 'graphql-tag';
 import { Resolvers } from '../generated/graphql';
 import { comparePassword } from '../utils/passwords';
 import { GraphQLError } from 'graphql';
+import { createPassword } from '../utils/passwords';
 import jwt from 'jsonwebtoken';
 import _ from 'lodash';
 import { authenticate } from '../middleware/authenticatetoken';
 import { composeResolvers } from '@graphql-tools/resolvers-composition';
+import { prisma } from 'src/generated/client';
+import { update } from 'lodash';
 
 export const providerTypedef = gql`
   input LoginaInput {
     email: String!
     password: String!
   }
-
+  input changepasswordinput {
+    password: String
+    newpassword:String
+  }
+  type changepasswordresponsetype{
+    message: String
+    status: Boolean
+  }
   type LoginResponse {
     access_token: String
     refresh_token: String
@@ -42,6 +52,7 @@ export const providerTypedef = gql`
     login(data: LoginaInput!): LoginResponse
     validateRoute(args: String!, branch: String): ValidateRoute
     refreshToken: RefreshtokenResponseType
+    Changeselfpassword(data:changepasswordinput):changepasswordresponsetype
   }
 `;
 
@@ -54,8 +65,8 @@ const resolvers: Resolvers = {
      */
     async login(p, args, ctx) {
       const finduser = await ctx.prisma.user.findMany({
-        take : 1,
-        where: { email: args.data.email},
+        take: 1,
+        where: { email: args.data.email },
         select: {
           id: true,
           roleId: true,
@@ -117,6 +128,43 @@ const resolvers: Resolvers = {
         refresh_token,
         status: true,
       };
+    },
+    //เปลี่ยนpasswordตัวเอง
+    async Changeselfpassword(p, args, ctx) {
+      let pw = ""
+      const find_user = await ctx.prisma.user.findMany({
+        where: {
+          //โดยอ้างจาก userid ของtoken ที่ login
+          id: ctx.currentUser?.id
+        }
+      })
+      find_user.forEach((e) => {
+        pw = e.password
+      })
+      // pw = find_user.password
+      const decrypt_pw = await comparePassword(args.data?.password as string, pw)
+      console.log('รหัสผ่าน = ', decrypt_pw);
+      //หากถูกต้อง
+      if (decrypt_pw === true) {    
+       const newpassword= await createPassword(args.data?.newpassword as string)
+        const changepassword = await ctx.prisma.user.update({
+          data:{
+            password : newpassword as string,
+          },
+          where:{
+            id: ctx.currentUser?.id
+          }
+        })
+        return {
+          message: 'เปลี่ยนรหัสผ่านเรียบร้อย',
+          status: true,
+        }
+      }
+      //หากไม่ถูกต้อง
+      return {
+        message: 'รหัสผ่านของคุณไม่ถูกต้อง',
+        status: true,
+      }
     },
     /**
      * ?รีเฟรชโทเค็น
@@ -248,26 +296,26 @@ const resolvers: Resolvers = {
         acess: result?.isOwner
           ? result?.company.length > 0
           : result?.companyBranch?.company?.companyCode === args
-          ? true
-          : false,
+            ? true
+            : false,
         path: args,
         currentBranch: result?.isOwner
           ? {
-              branchId: branchSearch
-                ? branchSearch.id
-                : result.company[0].branch[0].id,
-              branchName: branchSearch
-                ? branchSearch.name
-                : result.company[0].branch[0].name,
-              companyName: result.company[0].name,
-              companyId: result.company[0].id,
-            }
+            branchId: branchSearch
+              ? branchSearch.id
+              : result.company[0].branch[0].id,
+            branchName: branchSearch
+              ? branchSearch.name
+              : result.company[0].branch[0].name,
+            companyName: result.company[0].name,
+            companyId: result.company[0].id,
+          }
           : {
-              branchId: result.companyBranch?.id,
-              branchName: result.companyBranch?.name,
-              companyId: result.companyBranch?.company?.id,
-              companyName: result.companyBranch?.company?.name,
-            },
+            branchId: result.companyBranch?.id,
+            branchName: result.companyBranch?.name,
+            companyId: result.companyBranch?.company?.id,
+            companyName: result.companyBranch?.company?.name,
+          },
         reAccess: access_token,
         reFresh: refresh_token,
       };
@@ -277,6 +325,7 @@ const resolvers: Resolvers = {
 
 const resolversComposition = {
   'Mutation.validateRoute': [authenticate()],
+  'Mutation.Changeselfpassword': [authenticate()],
 };
 
 export const providerResolvers = composeResolvers(
