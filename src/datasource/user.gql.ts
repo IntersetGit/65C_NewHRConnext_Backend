@@ -382,6 +382,7 @@ const resolvers: Resolvers = {
       const createUser = await ctx.prisma.user.create({
         data: {
           id: genUserid,
+          companyBranchId: genbranchid,
           email: args.data.email,
           password: await createPassword(args.data.password),
           roleId: 'd0bff324-e70c-494e-b4c3-da220cd0d9af',
