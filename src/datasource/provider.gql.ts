@@ -75,6 +75,7 @@ const resolvers: Resolvers = {
           companyBranch: {
             select: {
               id: true,
+              photo_link: true,
               company: {
                 select: {
                   id: true,
@@ -112,6 +113,7 @@ const resolvers: Resolvers = {
         isOwner: finduser[0].isOwner,
         compayId: finduser[0].companyBranch?.company?.id,
         branchId: finduser[0].companyBranch?.id,
+        photoLink: finduser[0].companyBranch?.photo_link
       };
 
       const secret = process.env.JWT_SECRET || 'secret';
@@ -229,6 +231,7 @@ const resolvers: Resolvers = {
                 select: {
                   id: true,
                   name: true,
+                  photo_link: true
                 },
                 //where: { isMainbranch: true },
                 //take: 1,
@@ -240,11 +243,13 @@ const resolvers: Resolvers = {
             select: {
               id: true,
               name: true,
+              photo_link: true,
               company: {
                 select: {
                   id: true,
                   name: true,
                   companyCode: true,
+              
                 },
               },
             },
@@ -273,14 +278,9 @@ const resolvers: Resolvers = {
         id: result?.id,
         roleId: result?.roleId,
         isOwner: result?.isOwner,
-        compayId: result?.isOwner
-          ? result.company[0].id
-          : result?.companyBranch?.company?.id,
-        branchId: result?.isOwner
-          ? branchSearch
-            ? branchSearch.id
-            : result.company[0].branch[0].id
-          : result?.companyBranch?.id,
+        compayId: result?.isOwner? result.company[0].id: result?.companyBranch?.company?.id,
+        branchId: result?.isOwner? branchSearch? branchSearch.id: result.company[0].branch[0].id: result?.companyBranch?.id,
+        photoLink: result?.companyBranch?.photo_link 
       };
 
       const secret = process.env.JWT_SECRET || 'secret';
