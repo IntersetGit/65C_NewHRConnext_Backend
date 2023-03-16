@@ -159,9 +159,9 @@ const resolvers: Resolvers = {
         status: true,
       };
     },
-    async Forgetpassword(p,args,ctx){
-      let id=""
-      const secret= process.env.JWT_SECRET || 'secret';
+    async Forgetpassword(p, args, ctx) {
+      let id = ""
+      const secret = process.env.JWT_SECRET || 'secret';
       const find_user = await ctx.prisma.user.findMany({
         where: {
           //โดยอ้างจาก userid ของtoken ที่ login
@@ -171,15 +171,15 @@ const resolvers: Resolvers = {
       find_user.forEach((e) => {
         id = e.id
       })
-      if(find_user.length>0){
+      if (find_user.length > 0) {
         var transporter = nodemailer.createTransport({
           service: 'gmail',
           auth: {
-            user:process.env.ADMIN_E_MAIL,
+            user: process.env.ADMIN_E_MAIL,
             pass: process.env.ADMIN_PASS
           }
         });
-        const token = await jwt.sign({ id:id,email:args.data?.email }, secret, { expiresIn: '5m' })
+        const token = await jwt.sign({ id: id, email: args.data?.email }, secret, { expiresIn: '5m' })
         const link = `https://tmt.hrconnext.co/reset-password?aceesid=${id}&tokenid=${token}`
         var mailOptions = {
           from: process.env.ADMIN_E_MAIL,
@@ -197,9 +197,9 @@ const resolvers: Resolvers = {
             console.log('Email sent: ' + info.response);
           }
         });
-        return{
+        return {
           message: 'ส่ง Emailเปลี่ยนรหัสผ่านของคุณในEmailแล้ว',
-        status: true,
+          status: true,
         }
       }
       return {
@@ -207,31 +207,32 @@ const resolvers: Resolvers = {
         status: true,
       }
     },
-    async Changesepasswordinforgot(p,args,ctx){
-      if(args.data?.password1==args.data?.password2){
-        const newpassword= await createPassword(args.data?.password2 as string)
+    async Changesepasswordinforgot(p, args, ctx) {
+      if (args.data?.password1 == args.data?.password2) {
+        const newpassword = await createPassword(args.data?.password2 as string)
         const find_user = await ctx.prisma.user.findUnique({
           where: {
             //โดยอ้างจาก userid 
             id: args.data?.id as string
           }
         })
-        if(find_user){
-          const change= await ctx.prisma.user.update({
-            data:{
+        if (find_user) {
+          const change = await ctx.prisma.user.update({
+            data: {
               password: newpassword as string
             },
-            where:{
-              id : find_user.id
+            where: {
+              id: find_user.id
             }
           })
-          return{
+          return {
             message: 'เปลี่ยนรหัสผ่านของคุณเรียบร้อยแล้ว',
-          status: true,}
+            status: true,
           }
+        }
       }
-        return{
-          message: 'รหัสผ่านไม่ตรงกัน',
+      return {
+        message: 'รหัสผ่านไม่ตรงกัน',
         status: true,
       }
 
@@ -397,8 +398,8 @@ const resolvers: Resolvers = {
           ? branchSearch
             ? branchSearch.id
             : result.company[0].branch.sort(
-                (a, b) => Number(b.isMainbranch) - Number(a.isMainbranch),
-              )[0].id
+              (a, b) => Number(b.isMainbranch) - Number(a.isMainbranch),
+            )[0].id
           : result?.companyBranch?.id,
         photoLink: result?.companyBranch?.photo_link,
       };
@@ -416,30 +417,30 @@ const resolvers: Resolvers = {
         acess: result?.isOwner
           ? result?.company.length > 0
           : result?.companyBranch?.company?.companyCode === args
-          ? true
-          : false,
+            ? true
+            : false,
         path: args,
         currentBranch: result?.isOwner
           ? {
-              branchId: branchSearch
-                ? branchSearch.id
-                : result.company[0].branch.sort(
-                    (a, b) => Number(b.isMainbranch) - Number(a.isMainbranch),
-                  )[0].id,
-              branchName: branchSearch
-                ? branchSearch.name
-                : result.company[0].branch.sort(
-                    (a, b) => Number(b.isMainbranch) - Number(a.isMainbranch),
-                  )[0].name,
-              companyName: result.company[0].name,
-              companyId: result.company[0].id,
-            }
+            branchId: branchSearch
+              ? branchSearch.id
+              : result.company[0].branch.sort(
+                (a, b) => Number(b.isMainbranch) - Number(a.isMainbranch),
+              )[0].id,
+            branchName: branchSearch
+              ? branchSearch.name
+              : result.company[0].branch.sort(
+                (a, b) => Number(b.isMainbranch) - Number(a.isMainbranch),
+              )[0].name,
+            companyName: result.company[0].name,
+            companyId: result.company[0].id,
+          }
           : {
-              branchId: result.companyBranch?.id,
-              branchName: result.companyBranch?.name,
-              companyId: result.companyBranch?.company?.id,
-              companyName: result.companyBranch?.company?.name,
-            },
+            branchId: result.companyBranch?.id,
+            branchName: result.companyBranch?.name,
+            companyId: result.companyBranch?.company?.id,
+            companyName: result.companyBranch?.company?.name,
+          },
         reAccess: access_token,
         reFresh: refresh_token,
       };
