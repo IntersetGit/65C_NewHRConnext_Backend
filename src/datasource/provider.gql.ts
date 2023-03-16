@@ -175,14 +175,14 @@ const resolvers: Resolvers = {
         var transporter = nodemailer.createTransport({
           service: 'gmail',
           auth: {
-            user:"tmt.hrconnext@gmail.com",
-            pass: "uxhhupkjcvjfmzqv"
+            user:process.env.ADMIN_E_MAIL,
+            pass: process.env.ADMIN_PASS
           }
         });
         const token = await jwt.sign({ id:id,email:args.data?.email }, secret, { expiresIn: '5m' })
         const link = `https://tmt.hrconnext.co/reset-password?aceesid=${id}&tokenid=${token}`
         var mailOptions = {
-          from: "tmt.hrconnext@gmail.com",
+          from: process.env.ADMIN_E_MAIL,
           to: args.data?.email,
           subject: 'Password Reset',
           text: 'You are receiving this email because you requested a password reset for your account.\n\n' +
