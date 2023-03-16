@@ -397,7 +397,7 @@ export const leaveResolvers: Resolvers = {
             profile: true,
             Position_user: { include: { mas_positionlevel1: true, mas_positionlevel2: true, mas_positionlevel3: true, header: { include: { profile: true } } } },
             data_leave: {
-              include: { mas_leave_type: true }, 
+              include: { mas_leave_type: true },
             }
           },
           where: {
@@ -621,48 +621,60 @@ export const leaveResolvers: Resolvers = {
 
   Mutation: {
     async createddata_leave(p, args, ctx) {
-      if (args.data?.id) {
-        const updatedLeavdData = await ctx.prisma.data_leave.update({
-          data: {
-            leavetype_id: args.data?.leavetype_id as string,
-            start_date: args.data?.start_date,
-            end_date: args.data?.end_date,
-            link_pdf: args.data.link_pdf,
-            quantity_day: args.data?.quantity_day as number,
-            quantity_hours: args.data.quantity_hours as number,
-            detail_leave: args.data?.detail_leave as string,
-            Status: args.data.Status as number,
-            user_id: args.data?.user_id as string
-
-          },
-          where: {
-            id: args.data.id
-          }
-        })
-        return {
-          message: 'success',
-          status: true,
+      const leaveData = await ctx.prisma.position_user.findMany({
+        include: { user: true },
+        where: {
+          user_id: args.data?.user_id,
         }
+      })
+      if (leaveData[0].headderId !== null) {
+        if (args.data?.id) {
+          const updatedLeavdData = await ctx.prisma.data_leave.update({
+            data: {
+              leavetype_id: args.data?.leavetype_id as string,
+              start_date: args.data?.start_date,
+              end_date: args.data?.end_date,
+              link_pdf: args.data.link_pdf,
+              quantity_day: args.data?.quantity_day as number,
+              quantity_hours: args.data.quantity_hours as number,
+              detail_leave: args.data?.detail_leave as string,
+              Status: args.data.Status as number,
+              user_id: args.data?.user_id as string
 
-      } else {
-        const addLeavdData = await ctx.prisma.data_leave.create({
-          data: {
-            id: v4(),
-            leavetype_id: args.data?.leavetype_id as string,
-            start_date: args.data?.start_date,
-            end_date: args.data?.end_date,
-            quantity_hours: args.data?.quantity_hours as number,
-            quantity_day: args.data?.quantity_day as number,
-            detail_leave: args.data?.detail_leave as string,
-            link_pdf: args.data?.link_pdf,
-            Status: 1,
-            user_id: args.data?.user_id as string
+            },
+            where: {
+              id: args.data.id
+            }
+          })
+          return {
+            message: 'success',
+            status: true,
           }
-        })
-        return {
-          message: 'success',
-          status: true,
+
+        } else {
+          const addLeavdData = await ctx.prisma.data_leave.create({
+            data: {
+              id: v4(),
+              leavetype_id: args.data?.leavetype_id as string,
+              start_date: args.data?.start_date,
+              end_date: args.data?.end_date,
+              quantity_hours: args.data?.quantity_hours as number,
+              quantity_day: args.data?.quantity_day as number,
+              detail_leave: args.data?.detail_leave as string,
+              link_pdf: args.data?.link_pdf,
+              Status: 1,
+              user_id: args.data?.user_id as string
+            }
+          })
+          return {
+            message: 'success',
+            status: true,
+          }
         }
+      }
+      return {
+        message: 'ไม่พบหัวหน้างาน',
+        status: false,
       }
     },
 
