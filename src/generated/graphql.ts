@@ -486,7 +486,7 @@ export type Mutation = {
   DeleteSalary?: Maybe<DeleteSalaryResponseType>;
   Deletebookbank?: Maybe<DeletebookbankResponseType>;
   EditPosition?: Maybe<CreatepositionResponseType>;
-  Forgetpassword?: Maybe<Forgetpasswordresponsetype>;
+  Forgotpassword?: Maybe<Forgetpasswordresponsetype>;
   SalarySlip?: Maybe<Slipresolvers>;
   SalarySlip_User?: Maybe<Slipresolvers>;
   createAccount?: Maybe<CreateCompanyResponseType>;
@@ -586,7 +586,7 @@ export type MutationEditPositionArgs = {
 };
 
 
-export type MutationForgetpasswordArgs = {
+export type MutationForgotpasswordArgs = {
   data?: InputMaybe<ForgetpasswordInput>;
 };
 
@@ -2459,7 +2459,7 @@ export type MutationResolvers<ContextType = ApolloContext, ParentType extends Re
   DeleteSalary?: Resolver<Maybe<ResolversTypes['DeleteSalaryResponseType']>, ParentType, ContextType, RequireFields<MutationDeleteSalaryArgs, 'salaryid' | 'userId'>>;
   Deletebookbank?: Resolver<Maybe<ResolversTypes['DeletebookbankResponseType']>, ParentType, ContextType, RequireFields<MutationDeletebookbankArgs, 'id'>>;
   EditPosition?: Resolver<Maybe<ResolversTypes['CreatepositionResponseType']>, ParentType, ContextType, Partial<MutationEditPositionArgs>>;
-  Forgetpassword?: Resolver<Maybe<ResolversTypes['forgetpasswordresponsetype']>, ParentType, ContextType, Partial<MutationForgetpasswordArgs>>;
+  Forgotpassword?: Resolver<Maybe<ResolversTypes['forgetpasswordresponsetype']>, ParentType, ContextType, Partial<MutationForgotpasswordArgs>>;
   SalarySlip?: Resolver<Maybe<ResolversTypes['slipresolvers']>, ParentType, ContextType, Partial<MutationSalarySlipArgs>>;
   SalarySlip_User?: Resolver<Maybe<ResolversTypes['slipresolvers']>, ParentType, ContextType, Partial<MutationSalarySlip_UserArgs>>;
   createAccount?: Resolver<Maybe<ResolversTypes['CreateCompanyResponseType']>, ParentType, ContextType, RequireFields<MutationCreateAccountArgs, 'data'>>;
