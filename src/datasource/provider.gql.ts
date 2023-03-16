@@ -201,11 +201,8 @@ const resolvers: Resolvers = {
           message: 'ส่ง Emailเปลี่ยนรหัสผ่านของคุณในEmailแล้ว',
           status: true,
         }
-      }
-      return {
-        message: 'Emailของคุณไม่ถูกต้อง',
-        status: true,
-      }
+      };
+      throw new Error("Email not found")
     },
     async Changesepasswordinforgot(p, args, ctx) {
       if (args.data?.password1 == args.data?.password2) {
