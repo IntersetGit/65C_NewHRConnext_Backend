@@ -473,6 +473,7 @@ export type MeprofileType = {
 export type Mutation = {
   __typename?: 'Mutation';
   Changeselfpassword?: Maybe<Changepasswordresponsetype>;
+  Changesepasswordinforgot?: Maybe<ChangepasswordInforgotpasswordresponsetype>;
   Check_password?: Maybe<Check_PasswordResponseType>;
   CreateAndUpdateExpenseCom?: Maybe<CreateAndUpdateExpenseComResponseType>;
   CreateSalaryStatus?: Maybe<SalaryStatusResponseType>;
@@ -485,6 +486,7 @@ export type Mutation = {
   DeleteSalary?: Maybe<DeleteSalaryResponseType>;
   Deletebookbank?: Maybe<DeletebookbankResponseType>;
   EditPosition?: Maybe<CreatepositionResponseType>;
+  Forgetpassword?: Maybe<Forgetpasswordresponsetype>;
   SalarySlip?: Maybe<Slipresolvers>;
   SalarySlip_User?: Maybe<Slipresolvers>;
   createAccount?: Maybe<CreateCompanyResponseType>;
@@ -515,6 +517,11 @@ export type Mutation = {
 
 export type MutationChangeselfpasswordArgs = {
   data?: InputMaybe<Changepasswordinput>;
+};
+
+
+export type MutationChangesepasswordinforgotArgs = {
+  data?: InputMaybe<ChangepasswordInforgotpasswordinput>;
 };
 
 
@@ -576,6 +583,11 @@ export type MutationDeletebookbankArgs = {
 
 export type MutationEditPositionArgs = {
   data?: InputMaybe<Array<CreatedAndUpdatePosition>>;
+};
+
+
+export type MutationForgetpasswordArgs = {
+  data?: InputMaybe<ForgetpasswordInput>;
 };
 
 
@@ -1164,6 +1176,18 @@ export type Bookbank_LogInput = {
   userId?: InputMaybe<Scalars['String']>;
 };
 
+export type ChangepasswordInforgotpasswordinput = {
+  id?: InputMaybe<Scalars['String']>;
+  password1?: InputMaybe<Scalars['String']>;
+  password2?: InputMaybe<Scalars['String']>;
+};
+
+export type ChangepasswordInforgotpasswordresponsetype = {
+  __typename?: 'changepasswordInforgotpasswordresponsetype';
+  message?: Maybe<Scalars['String']>;
+  status?: Maybe<Scalars['Boolean']>;
+};
+
 export type Changepasswordinput = {
   newpassword?: InputMaybe<Scalars['String']>;
   password?: InputMaybe<Scalars['String']>;
@@ -1306,6 +1330,16 @@ export type Expense_Company = {
   unix?: Maybe<Scalars['Int']>;
   unix_date?: Maybe<Scalars['Int']>;
   vat_per?: Maybe<Scalars['Float']>;
+};
+
+export type ForgetpasswordInput = {
+  email: Scalars['String'];
+};
+
+export type Forgetpasswordresponsetype = {
+  __typename?: 'forgetpasswordresponsetype';
+  message?: Maybe<Scalars['String']>;
+  status?: Maybe<Scalars['Boolean']>;
 };
 
 export type GetPositionUser = {
@@ -1903,6 +1937,8 @@ export type ResolversTypes = ResolversObject<{
   book_bank_logResponseType: ResolverTypeWrapper<Book_Bank_LogResponseType>;
   bookbank_log: ResolverTypeWrapper<Bookbank_Log>;
   bookbank_logInput: Bookbank_LogInput;
+  changepasswordInforgotpasswordinput: ChangepasswordInforgotpasswordinput;
+  changepasswordInforgotpasswordresponsetype: ResolverTypeWrapper<ChangepasswordInforgotpasswordresponsetype>;
   changepasswordinput: Changepasswordinput;
   changepasswordresponsetype: ResolverTypeWrapper<Changepasswordresponsetype>;
   chk_pw_input: Chk_Pw_Input;
@@ -1914,6 +1950,8 @@ export type ResolversTypes = ResolversObject<{
   data_salary_me: ResolverTypeWrapper<Data_Salary_Me>;
   deletepositionResponseType: ResolverTypeWrapper<DeletepositionResponseType>;
   expense_company: ResolverTypeWrapper<Expense_Company>;
+  forgetpasswordInput: ForgetpasswordInput;
+  forgetpasswordresponsetype: ResolverTypeWrapper<Forgetpasswordresponsetype>;
   getPositionUser: ResolverTypeWrapper<GetPositionUser>;
   getcount: ResolverTypeWrapper<Getcount>;
   getdataaboutleave: ResolverTypeWrapper<Getdataaboutleave>;
@@ -2031,6 +2069,8 @@ export type ResolversParentTypes = ResolversObject<{
   book_bank_logResponseType: Book_Bank_LogResponseType;
   bookbank_log: Bookbank_Log;
   bookbank_logInput: Bookbank_LogInput;
+  changepasswordInforgotpasswordinput: ChangepasswordInforgotpasswordinput;
+  changepasswordInforgotpasswordresponsetype: ChangepasswordInforgotpasswordresponsetype;
   changepasswordinput: Changepasswordinput;
   changepasswordresponsetype: Changepasswordresponsetype;
   chk_pw_input: Chk_Pw_Input;
@@ -2042,6 +2082,8 @@ export type ResolversParentTypes = ResolversObject<{
   data_salary_me: Data_Salary_Me;
   deletepositionResponseType: DeletepositionResponseType;
   expense_company: Expense_Company;
+  forgetpasswordInput: ForgetpasswordInput;
+  forgetpasswordresponsetype: Forgetpasswordresponsetype;
   getPositionUser: GetPositionUser;
   getcount: Getcount;
   getdataaboutleave: Getdataaboutleave;
@@ -2404,6 +2446,7 @@ export type MeprofileTypeResolvers<ContextType = ApolloContext, ParentType exten
 
 export type MutationResolvers<ContextType = ApolloContext, ParentType extends ResolversParentTypes['Mutation'] = ResolversParentTypes['Mutation']> = ResolversObject<{
   Changeselfpassword?: Resolver<Maybe<ResolversTypes['changepasswordresponsetype']>, ParentType, ContextType, Partial<MutationChangeselfpasswordArgs>>;
+  Changesepasswordinforgot?: Resolver<Maybe<ResolversTypes['changepasswordInforgotpasswordresponsetype']>, ParentType, ContextType, Partial<MutationChangesepasswordinforgotArgs>>;
   Check_password?: Resolver<Maybe<ResolversTypes['Check_passwordResponseType']>, ParentType, ContextType, Partial<MutationCheck_PasswordArgs>>;
   CreateAndUpdateExpenseCom?: Resolver<Maybe<ResolversTypes['CreateAndUpdateExpenseComResponseType']>, ParentType, ContextType, Partial<MutationCreateAndUpdateExpenseComArgs>>;
   CreateSalaryStatus?: Resolver<Maybe<ResolversTypes['SalaryStatusResponseType']>, ParentType, ContextType, Partial<MutationCreateSalaryStatusArgs>>;
@@ -2416,6 +2459,7 @@ export type MutationResolvers<ContextType = ApolloContext, ParentType extends Re
   DeleteSalary?: Resolver<Maybe<ResolversTypes['DeleteSalaryResponseType']>, ParentType, ContextType, RequireFields<MutationDeleteSalaryArgs, 'salaryid' | 'userId'>>;
   Deletebookbank?: Resolver<Maybe<ResolversTypes['DeletebookbankResponseType']>, ParentType, ContextType, RequireFields<MutationDeletebookbankArgs, 'id'>>;
   EditPosition?: Resolver<Maybe<ResolversTypes['CreatepositionResponseType']>, ParentType, ContextType, Partial<MutationEditPositionArgs>>;
+  Forgetpassword?: Resolver<Maybe<ResolversTypes['forgetpasswordresponsetype']>, ParentType, ContextType, Partial<MutationForgetpasswordArgs>>;
   SalarySlip?: Resolver<Maybe<ResolversTypes['slipresolvers']>, ParentType, ContextType, Partial<MutationSalarySlipArgs>>;
   SalarySlip_User?: Resolver<Maybe<ResolversTypes['slipresolvers']>, ParentType, ContextType, Partial<MutationSalarySlip_UserArgs>>;
   createAccount?: Resolver<Maybe<ResolversTypes['CreateCompanyResponseType']>, ParentType, ContextType, RequireFields<MutationCreateAccountArgs, 'data'>>;
@@ -2739,6 +2783,12 @@ export type Bookbank_LogResolvers<ContextType = ApolloContext, ParentType extend
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 }>;
 
+export type ChangepasswordInforgotpasswordresponsetypeResolvers<ContextType = ApolloContext, ParentType extends ResolversParentTypes['changepasswordInforgotpasswordresponsetype'] = ResolversParentTypes['changepasswordInforgotpasswordresponsetype']> = ResolversObject<{
+  message?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  status?: Resolver<Maybe<ResolversTypes['Boolean']>, ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+}>;
+
 export type ChangepasswordresponsetypeResolvers<ContextType = ApolloContext, ParentType extends ResolversParentTypes['changepasswordresponsetype'] = ResolversParentTypes['changepasswordresponsetype']> = ResolversObject<{
   message?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   status?: Resolver<Maybe<ResolversTypes['Boolean']>, ParentType, ContextType>;
@@ -2830,6 +2880,12 @@ export type Expense_CompanyResolvers<ContextType = ApolloContext, ParentType ext
   unix?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
   unix_date?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
   vat_per?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+}>;
+
+export type ForgetpasswordresponsetypeResolvers<ContextType = ApolloContext, ParentType extends ResolversParentTypes['forgetpasswordresponsetype'] = ResolversParentTypes['forgetpasswordresponsetype']> = ResolversObject<{
+  message?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  status?: Resolver<Maybe<ResolversTypes['Boolean']>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 }>;
 
@@ -3246,6 +3302,7 @@ export type Resolvers<ContextType = ApolloContext> = ResolversObject<{
   YearCountType?: YearCountTypeResolvers<ContextType>;
   book_bank_logResponseType?: Book_Bank_LogResponseTypeResolvers<ContextType>;
   bookbank_log?: Bookbank_LogResolvers<ContextType>;
+  changepasswordInforgotpasswordresponsetype?: ChangepasswordInforgotpasswordresponsetypeResolvers<ContextType>;
   changepasswordresponsetype?: ChangepasswordresponsetypeResolvers<ContextType>;
   createbookbanklogResponseType?: CreatebookbanklogResponseTypeResolvers<ContextType>;
   createsalaryResponseType?: CreatesalaryResponseTypeResolvers<ContextType>;
@@ -3253,6 +3310,7 @@ export type Resolvers<ContextType = ApolloContext> = ResolversObject<{
   data_salary_me?: Data_Salary_MeResolvers<ContextType>;
   deletepositionResponseType?: DeletepositionResponseTypeResolvers<ContextType>;
   expense_company?: Expense_CompanyResolvers<ContextType>;
+  forgetpasswordresponsetype?: ForgetpasswordresponsetypeResolvers<ContextType>;
   getPositionUser?: GetPositionUserResolvers<ContextType>;
   getcount?: GetcountResolvers<ContextType>;
   getdataaboutleave?: GetdataaboutleaveResolvers<ContextType>;
