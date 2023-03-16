@@ -1,5 +1,5 @@
 import gql from 'graphql-tag';
-import { Resolvers } from '../generated/graphql';
+import { Resolvers, ForgetpasswordInput } from '../generated/graphql';
 import { comparePassword } from '../utils/passwords';
 import { GraphQLError } from 'graphql';
 import { createPassword } from '../utils/passwords';
@@ -9,17 +9,34 @@ import { authenticate } from '../middleware/authenticatetoken';
 import { composeResolvers } from '@graphql-tools/resolvers-composition';
 import { prisma } from 'src/generated/client';
 import { update } from 'lodash';
+import nodemailer from 'nodemailer';
 
 export const providerTypedef = gql`
   input LoginaInput {
     email: String!
     password: String!
   }
+  input forgetpasswordInput {
+    email: String!
+  }
+  type forgetpasswordresponsetype{
+    message: String
+    status: Boolean
+  }
   input changepasswordinput {
     password: String
     newpassword:String
   }
   type changepasswordresponsetype{
+    message: String
+    status: Boolean
+  }
+  input changepasswordInforgotpasswordinput {
+    id:String
+    password1: String
+    password2:String
+  }
+  type changepasswordInforgotpasswordresponsetype{
     message: String
     status: Boolean
   }
@@ -53,6 +70,8 @@ export const providerTypedef = gql`
     validateRoute(args: String!, branch: String): ValidateRoute
     refreshToken: RefreshtokenResponseType
     Changeselfpassword(data:changepasswordinput):changepasswordresponsetype
+    Forgetpassword(data:forgetpasswordInput):forgetpasswordresponsetype
+    Changesepasswordinforgot(data:changepasswordInforgotpasswordinput):changepasswordInforgotpasswordresponsetype
   }
 `;
 
@@ -130,6 +149,83 @@ const resolvers: Resolvers = {
         refresh_token,
         status: true,
       };
+    },
+    async Forgetpassword(p,args,ctx){
+      let id=""
+      const secret= process.env.JWT_SECRET || 'secret';
+      const find_user = await ctx.prisma.user.findMany({
+        where: {
+          //โดยอ้างจาก userid ของtoken ที่ login
+          email: args.data?.email
+        }
+      })
+      find_user.forEach((e) => {
+        id = e.id
+      })
+      if(find_user.length>0){
+        var transporter = nodemailer.createTransport({
+          service: 'gmail',
+          auth: {
+            user:"tmt.hrconnext@gmail.com",
+            pass: "uxhhupkjcvjfmzqv"
+          }
+        });
+        const token = await jwt.sign({ id:id,email:args.data?.email }, secret, { expiresIn: '5m' })
+        const link = `https://tmt.hrconnext.co/reset-password?aceesid=${id}&tokenid=${token}`
+        var mailOptions = {
+          from: "tmt.hrconnext@gmail.com",
+          to: args.data?.email,
+          subject: 'Password Reset',
+          text: 'You are receiving this email because you requested a password reset for your account.\n\n' +
+            'Please click on the following link, or paste this into your browser to complete the process:\n\n' +
+            `${link}` + '\n\n' +
+            'If you did not request this, please ignore this email.\n'
+        };
+        transporter.sendMail(mailOptions, function (error, info) {
+          if (error) {
+            console.log(error);
+          } else {
+            console.log('Email sent: ' + info.response);
+          }
+        });
+        return{
+          message: 'ส่ง Emailเปลี่ยนรหัสผ่านของคุณในEmailแล้ว',
+        status: true,
+        }
+      }
+      return {
+        message: 'Emailของคุณไม่ถูกต้อง',
+        status: true,
+      }
+    },
+    async Changesepasswordinforgot(p,args,ctx){
+      if(args.data?.password1==args.data?.password2){
+        const newpassword= await createPassword(args.data?.password2 as string)
+        const find_user = await ctx.prisma.user.findUnique({
+          where: {
+            //โดยอ้างจาก userid 
+            id: args.data?.id as string
+          }
+        })
+        if(find_user){
+          const change= await ctx.prisma.user.update({
+            data:{
+              password: newpassword as string
+            },
+            where:{
+              id : find_user.id
+            }
+          })
+          return{
+            message: 'เปลี่ยนรหัสผ่านของคุณเรียบร้อยแล้ว',
+          status: true,}
+          }
+      }
+        return{
+          message: 'รหัสผ่านไม่ตรงกัน',
+        status: true,
+      }
+
     },
     //เปลี่ยนpasswordตัวเอง
     async Changeselfpassword(p, args, ctx) {
@@ -326,6 +422,7 @@ const resolvers: Resolvers = {
 const resolversComposition = {
   'Mutation.validateRoute': [authenticate()],
   'Mutation.Changeselfpassword': [authenticate()],
+  'Mutation.Changesepasswordinforget': [authenticate()],
 };
 
 export const providerResolvers = composeResolvers(

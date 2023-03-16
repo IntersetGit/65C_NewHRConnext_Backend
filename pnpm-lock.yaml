@@ -18,6 +18,7 @@ specifiers:
   '@types/morgan': ^1.9.3
   '@types/multer': ^1.4.7
   '@types/node': ^18.7.9
+  '@types/nodemailer': ^6.4.7
   '@types/uuid': ^8.3.4
   bcrypt: ^5.0.1
   body-parser: ^1.20.0
@@ -54,6 +55,7 @@ specifiers:
 dependencies:
   '@apollo/server': 4.3.0_graphql@16.6.0
   '@prisma/client': 4.9.0_prisma@4.9.0
+  '@types/nodemailer': 6.4.7
   body-parser: 1.20.1
   cors: 2.8.5
   dayjs: 1.11.7
@@ -2234,6 +2236,12 @@ packages:
 
   /@types/node/18.11.18:
     resolution: {integrity: sha512-DHQpWGjyQKSHj3ebjFI/wRKcqQcdR+MoFBygntYOZytCqNfkd2ZC4ARDJ2DQqhjH5p85Nnd3jhUJIXrszFX/JA==}
+
+  /@types/nodemailer/6.4.7:
+    resolution: {integrity: sha512-f5qCBGAn/f0qtRcd4SEn88c8Fp3Swct1731X4ryPKqS61/A3LmmzN8zaEz7hneJvpjFbUUgY7lru/B/7ODTazg==}
+    dependencies:
+      '@types/node': 18.11.18
+    dev: false
 
   /@types/parse-json/4.0.0:
     resolution: {integrity: sha512-//oorEZjL6sbPcKUaCdIGlIUeH26mgzimjBB77G6XRgnDl/L5wOnpyBGRe/Mmf5CVW3PwEBE1NjiMZ/ssFh4wA==}
