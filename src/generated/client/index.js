@@ -276,6 +276,7 @@ exports.Prisma.Mas_positionScalarFieldEnum = makeEnum({
   CompanyId: 'CompanyId'
 });
 
+
 exports.Prisma.Mas_positionlevel1ScalarFieldEnum = makeEnum({
   id: 'id',
   name: 'name',
