@@ -17,9 +17,9 @@ export const providerTypedef = gql`
   }
   input changepasswordinput {
     password: String
-    newpassword:String
+    newpassword: String
   }
-  type changepasswordresponsetype{
+  type changepasswordresponsetype {
     message: String
     status: Boolean
   }
@@ -52,7 +52,7 @@ export const providerTypedef = gql`
     login(data: LoginaInput!): LoginResponse
     validateRoute(args: String!, branch: String): ValidateRoute
     refreshToken: RefreshtokenResponseType
-    Changeselfpassword(data:changepasswordinput):changepasswordresponsetype
+    Changeselfpassword(data: changepasswordinput): changepasswordresponsetype
   }
 `;
 
@@ -86,7 +86,7 @@ const resolvers: Resolvers = {
         },
       });
 
-      if ((finduser.length <= 0)) {
+      if (finduser.length <= 0) {
         throw new GraphQLError('User not found.', {
           extensions: {
             code: 'USER_NOT_FOUND',
@@ -113,7 +113,7 @@ const resolvers: Resolvers = {
         isOwner: finduser[0].isOwner,
         compayId: finduser[0].companyBranch?.company?.id,
         branchId: finduser[0].companyBranch?.id,
-        photoLink: finduser[0].companyBranch?.photo_link
+        photoLink: finduser[0].companyBranch?.photo_link,
       };
 
       const secret = process.env.JWT_SECRET || 'secret';
@@ -133,40 +133,45 @@ const resolvers: Resolvers = {
     },
     //เปลี่ยนpasswordตัวเอง
     async Changeselfpassword(p, args, ctx) {
-      let pw = ""
+      let pw = '';
       const find_user = await ctx.prisma.user.findMany({
         where: {
           //โดยอ้างจาก userid ของtoken ที่ login
-          id: ctx.currentUser?.id
-        }
-      })
+          id: ctx.currentUser?.id,
+        },
+      });
       find_user.forEach((e) => {
-        pw = e.password
-      })
+        pw = e.password;
+      });
       // pw = find_user.password
-      const decrypt_pw = await comparePassword(args.data?.password as string, pw)
+      const decrypt_pw = await comparePassword(
+        args.data?.password as string,
+        pw,
+      );
       console.log('รหัสผ่าน = ', decrypt_pw);
       //หากถูกต้อง
-      if (decrypt_pw === true) {    
-       const newpassword= await createPassword(args.data?.newpassword as string)
+      if (decrypt_pw === true) {
+        const newpassword = await createPassword(
+          args.data?.newpassword as string,
+        );
         const changepassword = await ctx.prisma.user.update({
-          data:{
-            password : newpassword as string,
+          data: {
+            password: newpassword as string,
           },
-          where:{
-            id: ctx.currentUser?.id
-          }
-        })
+          where: {
+            id: ctx.currentUser?.id,
+          },
+        });
         return {
           message: 'เปลี่ยนรหัสผ่านเรียบร้อย',
           status: true,
-        }
+        };
       }
       //หากไม่ถูกต้อง
       return {
         message: 'รหัสผ่านของคุณไม่ถูกต้อง',
         status: true,
-      }
+      };
     },
     /**
      * ?รีเฟรชโทเค็น
@@ -214,7 +219,7 @@ const resolvers: Resolvers = {
           },
         });
       const branchfilter = branch ? branch : null;
-      const result = await ctx.prisma.user.findUnique({
+      let result = await ctx.prisma.user.findUnique({
         where: {
           id: ctx.currentUser?.id,
         },
@@ -231,10 +236,11 @@ const resolvers: Resolvers = {
                 select: {
                   id: true,
                   name: true,
-                  photo_link: true
+                  photo_link: true,
+                  isMainbranch: true,
                 },
-                //where: { isMainbranch: true },
-                //take: 1,
+                // where: { isMainbranch: true },
+                // take: 1,
               },
             },
             where: { companyCode: args },
@@ -249,7 +255,6 @@ const resolvers: Resolvers = {
                   id: true,
                   name: true,
                   companyCode: true,
-              
                 },
               },
             },
@@ -268,6 +273,8 @@ const resolvers: Resolvers = {
         });
       }
 
+      // let comp_sort = result.company[0].branch.sort((a,b) => Number(b.isMainbranch) -  Number(a.isMainbranch))
+
       /**
        * ?Set token ใหม่
        */
@@ -278,9 +285,17 @@ const resolvers: Resolvers = {
         id: result?.id,
         roleId: result?.roleId,
         isOwner: result?.isOwner,
-        compayId: result?.isOwner? result.company[0].id: result?.companyBranch?.company?.id,
-        branchId: result?.isOwner? branchSearch? branchSearch.id: result.company[0].branch[0].id: result?.companyBranch?.id,
-        photoLink: result?.companyBranch?.photo_link 
+        compayId: result?.isOwner
+          ? result.company[0].id
+          : result?.companyBranch?.company?.id,
+        branchId: result?.isOwner
+          ? branchSearch
+            ? branchSearch.id
+            : result.company[0].branch.sort(
+                (a, b) => Number(b.isMainbranch) - Number(a.isMainbranch),
+              )[0].id
+          : result?.companyBranch?.id,
+        photoLink: result?.companyBranch?.photo_link,
       };
 
       const secret = process.env.JWT_SECRET || 'secret';
@@ -296,26 +311,30 @@ const resolvers: Resolvers = {
         acess: result?.isOwner
           ? result?.company.length > 0
           : result?.companyBranch?.company?.companyCode === args
-            ? true
-            : false,
+          ? true
+          : false,
         path: args,
         currentBranch: result?.isOwner
           ? {
-            branchId: branchSearch
-              ? branchSearch.id
-              : result.company[0].branch[0].id,
-            branchName: branchSearch
-              ? branchSearch.name
-              : result.company[0].branch[0].name,
-            companyName: result.company[0].name,
-            companyId: result.company[0].id,
-          }
+              branchId: branchSearch
+                ? branchSearch.id
+                : result.company[0].branch.sort(
+                    (a, b) => Number(b.isMainbranch) - Number(a.isMainbranch),
+                  )[0].id,
+              branchName: branchSearch
+                ? branchSearch.name
+                : result.company[0].branch.sort(
+                    (a, b) => Number(b.isMainbranch) - Number(a.isMainbranch),
+                  )[0].name,
+              companyName: result.company[0].name,
+              companyId: result.company[0].id,
+            }
           : {
-            branchId: result.companyBranch?.id,
-            branchName: result.companyBranch?.name,
-            companyId: result.companyBranch?.company?.id,
-            companyName: result.companyBranch?.company?.name,
-          },
+              branchId: result.companyBranch?.id,
+              branchName: result.companyBranch?.name,
+              companyId: result.companyBranch?.company?.id,
+              companyName: result.companyBranch?.company?.name,
+            },
         reAccess: access_token,
         reFresh: refresh_token,
       };
