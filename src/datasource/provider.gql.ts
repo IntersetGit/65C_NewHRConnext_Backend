@@ -79,7 +79,7 @@ export const providerTypedef = gql`
     validateRoute(args: String!, branch: String): ValidateRoute
     refreshToken: RefreshtokenResponseType
     Changeselfpassword(data:changepasswordinput):changepasswordresponsetype
-    Forgetpassword(data:forgetpasswordInput):forgetpasswordresponsetype
+    Forgotpassword(data:forgetpasswordInput):forgetpasswordresponsetype
     Changesepasswordinforgot(data:changepasswordInforgotpasswordinput):changepasswordInforgotpasswordresponsetype
   }
 `;
@@ -159,7 +159,7 @@ const resolvers: Resolvers = {
         status: true,
       };
     },
-    async Forgetpassword(p, args, ctx) {
+    async Forgotpassword(p, args, ctx) {
       let id = ""
       const secret = process.env.JWT_SECRET || 'secret';
       const find_user = await ctx.prisma.user.findMany({
@@ -451,7 +451,7 @@ const resolvers: Resolvers = {
 const resolversComposition = {
   'Mutation.validateRoute': [authenticate()],
   'Mutation.Changeselfpassword': [authenticate()],
-  'Mutation.Changesepasswordinforget': [authenticate()],
+  'Mutation.Changesepasswordinforgot': [authenticate()],
 };
 
 export const providerResolvers = composeResolvers(

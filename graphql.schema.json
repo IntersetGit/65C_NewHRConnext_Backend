@@ -4445,7 +4445,7 @@
             "deprecationReason": null
           },
           {
-            "name": "Forgetpassword",
+            "name": "Forgotpassword",
             "description": null,
             "args": [
               {
