@@ -614,7 +614,7 @@ const config = {
       "value": "prisma-client-js"
     },
     "output": {
-      "value": "C:\\Users\\admin\\Desktop\\ptt_work\\hr\\65C_NewHRConnext_Backend\\src\\generated\\client",
+      "value": "C:\\Khaimook\\ProjectCode\\65C_NewHRConnext_Backend\\src\\generated\\client",
       "fromEnvVar": null
     },
     "config": {
