@@ -180,14 +180,14 @@ const resolvers: Resolvers = {
           }
         });
         const token = await jwt.sign({ id: id, email: args.data?.email }, secret, { expiresIn: '5m' })
-        const link = `https://tmt.hrconnext.co/reset-password?aceesid=${id}&tokenid=${token}`
+        // const link = `https://tmt.hrconnext.co/reset-password?aceesid=${id}&tokenid=${token}`
         var mailOptions = {
           from: process.env.ADMIN_E_MAIL,
           to: args.data?.email,
           subject: 'Password Reset',
           text: 'You are receiving this email because you requested a password reset for your account.\n\n' +
             'Please click on the following link, or paste this into your browser to complete the process:\n\n' +
-            `${link}` + '\n\n' +
+            `${"link"}` + '\n\n' +
             'If you did not request this, please ignore this email.\n'
         };
         transporter.sendMail(mailOptions, function (error, info) {
@@ -201,11 +201,8 @@ const resolvers: Resolvers = {
           message: 'ส่ง Emailเปลี่ยนรหัสผ่านของคุณในEmailแล้ว',
           status: true,
         }
-      }
-      return {
-        message: 'Emailของคุณไม่ถูกต้อง',
-        status: true,
-      }
+      };
+      throw new Error("Email not found")
     },
     async Changesepasswordinforgot(p, args, ctx) {
       if (args.data?.password1 == args.data?.password2) {
