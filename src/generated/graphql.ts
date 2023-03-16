@@ -382,8 +382,7 @@ export type GetCompanyAccessType = {
 
 export type GetHolidayDateResponseType = {
   __typename?: 'GetHolidayDateResponseType';
-  data?: Maybe<Array<Maybe<Holiday_Date>>>;
-  year_count?: Maybe<Array<Maybe<YearCountType>>>;
+  data?: Maybe<Array<Maybe<YearCountType>>>;
 };
 
 export type GetOwncompanytype = {
@@ -1134,6 +1133,7 @@ export type ValidateRoute = {
 
 export type YearCountType = {
   __typename?: 'YearCountType';
+  child?: Maybe<Array<Maybe<Holiday_Date>>>;
   count?: Maybe<Scalars['Int']>;
   year?: Maybe<Scalars['Int']>;
 };
@@ -2356,8 +2356,7 @@ export type GetCompanyAccessTypeResolvers<ContextType = ApolloContext, ParentTyp
 }>;
 
 export type GetHolidayDateResponseTypeResolvers<ContextType = ApolloContext, ParentType extends ResolversParentTypes['GetHolidayDateResponseType'] = ResolversParentTypes['GetHolidayDateResponseType']> = ResolversObject<{
-  data?: Resolver<Maybe<Array<Maybe<ResolversTypes['holiday_date']>>>, ParentType, ContextType>;
-  year_count?: Resolver<Maybe<Array<Maybe<ResolversTypes['YearCountType']>>>, ParentType, ContextType>;
+  data?: Resolver<Maybe<Array<Maybe<ResolversTypes['YearCountType']>>>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 }>;
 
@@ -2757,6 +2756,7 @@ export type ValidateRouteResolvers<ContextType = ApolloContext, ParentType exten
 }>;
 
 export type YearCountTypeResolvers<ContextType = ApolloContext, ParentType extends ResolversParentTypes['YearCountType'] = ResolversParentTypes['YearCountType']> = ResolversObject<{
+  child?: Resolver<Maybe<Array<Maybe<ResolversTypes['holiday_date']>>>, ParentType, ContextType>;
   count?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
   year?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;

@@ -49,11 +49,11 @@ export const holidayTypedef = gql`
   type YearCountType {
     year: Int
     count: Int
+    child: [holiday_date]
   }
 
   type GetHolidayDateResponseType {
-    data: [holiday_date]
-    year_count: [YearCountType]
+    data: [YearCountType]
   }
 
   # type dataHoliday {
@@ -148,17 +148,20 @@ export const holidayResolvers: Resolvers = {
       //   }
       // })
 
-      const year_count : {year : number , count : number}[] = []
+      const year_count : {year : number , count : number , child : any[] }[] = []
       getHoliday.forEach(e => {
         if(year_count.find((_e) => _e.year === e.year)) return
-        year_count.push({year : e.year , count : getHoliday.filter((_e) => _e.year === e.year && _e.status === 1).length})
+        year_count.push({year : e.year , count : getHoliday.filter((_e) => _e.year === e.year && _e.status === 1).length , child : getHoliday.filter((_e) => _e.year === e.year)  })
       })
+ 
+
+      
    
 
       return {
-        data : getHoliday,
+        data : year_count,
         //year_count : _L.filter(e => e != undefined) as any
-        year_count
+        //year_count
       };
     }
   },
