@@ -181,15 +181,15 @@ const resolvers: Resolvers = {
           }
         });
         const token = await jwt.sign({ id: id, email: args.data?.email }, secret, { expiresIn: '5m' })
-        
-        // const link = `https://tmt.hrconnext.co/reset-password?aceesid=${id}&tokenid=${token}`
+        const link = `http://localhost:5173/reset-password?aceesid=${id}&tokenid=${token}`
+        // const link = `https://system.hrconnext.co/reset-password?aceesid=${id}&tokenid=${token}`
         var mailOptions = {
           from: process.env.ADMIN_E_MAIL,
           to: args.data?.email,
           subject: 'Password Reset',
           text: 'You are receiving this email because you requested a password reset for your account.\n\n' +
             'Please click on the following link, or paste this into your browser to complete the process:\n\n' +
-            `${"link"}` + '\n\n' +
+            `${link}` + '\n\n' +
             'If you did not request this, please ignore this email.\n'
         };
         await transporter.sendMail(mailOptions, function (error, info) {
