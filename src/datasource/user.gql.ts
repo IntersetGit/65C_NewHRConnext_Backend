@@ -480,7 +480,8 @@ const resolvers: Resolvers = {
       throw new Error("Email not found")
     },
    //----------------- เปลี่ยนสถานะของ user หลัง confrim email---------------//
-    async editActive(p, args, ctx) {
+   
+   async editActive(p, args, ctx) {
       const editActiveCon = await ctx.prisma.user.update({
         data: {
           isActive: true,
