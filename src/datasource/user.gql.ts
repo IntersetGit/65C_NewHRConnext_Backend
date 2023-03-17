@@ -455,8 +455,8 @@ const resolvers: Resolvers = {
         var mailOptions = {
           from: process.env.ADMIN_E_MAIL,
           to: args.data?.email,
-          subject: 'Password Reset',
-          text: 'เรียนแจ้งให้ทราบว่า email ' + `${createUser.email}` +
+          subject: 'Verify Your Email',
+          text: 'เรียนแจ้งให้ทราบว่า Email ' + `${createUser.email}` +
             'ได้ทำการลงทะเบียนสมาชิกกับทาง hr connect เพื่อการสมัครสมาชิกที่สมบูรณ์กรุณากดยืนยัน email ของท่านที่ลิงค์ด้านล่าง\n\n' +
             `${link_confrim}` + '\n\n' +
             'ขอบคุณที่สมัครใช้บริการกับ hr connect \n'
