@@ -1344,6 +1344,7 @@ export type ForgetpasswordInput = {
 
 export type Forgetpasswordresponsetype = {
   __typename?: 'forgetpasswordresponsetype';
+  expireIn?: Maybe<Scalars['Int']>;
   message?: Maybe<Scalars['String']>;
   status?: Maybe<Scalars['Boolean']>;
 };
@@ -2891,6 +2892,7 @@ export type Expense_CompanyResolvers<ContextType = ApolloContext, ParentType ext
 }>;
 
 export type ForgetpasswordresponsetypeResolvers<ContextType = ApolloContext, ParentType extends ResolversParentTypes['forgetpasswordresponsetype'] = ResolversParentTypes['forgetpasswordresponsetype']> = ResolversObject<{
+  expireIn?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
   message?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   status?: Resolver<Maybe<ResolversTypes['Boolean']>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
