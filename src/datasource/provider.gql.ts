@@ -202,8 +202,8 @@ const resolvers: Resolvers = {
         });
         const token = await jwt.sign({ id: id, email: args.data?.email }, secret, { expiresIn: '5m' })
 
-        // const link = `http://localhost:5173/reset-password?aceesid=${id}&tokenid=${token}`
-        const link = `https://system.hrconnext.co/reset-password?aceesid=${id}&tokenid=${token}`
+        const link = `http://localhost:5173/reset-password?aceesid=${id}&tokenid=${token}`
+        // const link = `https://system.hrconnext.co/reset-password?aceesid=${id}&tokenid=${token}`
         var mailOptions = {
           from: process.env.ADMIN_E_MAIL,
           to: args.data?.email,
