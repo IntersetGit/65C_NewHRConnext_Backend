@@ -128,7 +128,7 @@ const resolvers: Resolvers = {
         });
       }
 
-      if (!finduser[0].isActive){
+      if (!finduser[0].isActive) {
         throw new GraphQLError('Please verify your email.', {
           extensions: {
             code: 'VERIFY_YOUR_EMAIL',
@@ -208,7 +208,12 @@ const resolvers: Resolvers = {
           from: process.env.ADMIN_E_MAIL,
           to: args.data?.email,
           subject: 'Password Reset',
-          text: 'You are receiving this email because you requested a password reset for your account.\n\n' +
+          text: `คุณได้รับอีเมลนี้เนื่องจากคุณได้ขอรีเซ็ตรหัสผ่านสำหรับบัญชีของคุณ\n\n` +
+            `โปรดคลิกลิงก์ต่อไปนี้ หรือวางในเบราว์เซอร์ของคุณเพื่อดำเนินการให้เสร็จสิ้น\n\n` +
+            `${link}` + '\n\n' +
+            `หากคุณไม่ได้ร้องขอ โปรดเพิกเฉยต่ออีเมลนี้\n\n` +
+
+            'You are receiving this email because you requested a password reset for your account.\n\n' +
             'Please click on the following link, or paste this into your browser to complete the process:\n\n' +
             `${link}` + '\n\n' +
             'If you did not request this, please ignore this email.\n'
@@ -254,10 +259,11 @@ const resolvers: Resolvers = {
           }
         }
       }
-      return {
-        message: 'รหัสผ่านไม่ตรงกัน',
-        status: true,
-      }
+      throw new Error("รหัสผ่านไม่ตรงกัน")
+      // return {
+      //   message: 'รหัสผ่านไม่ตรงกัน',
+      //   status: true,
+      // }
 
     },
     //เปลี่ยนpasswordตัวเอง
