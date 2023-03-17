@@ -450,9 +450,7 @@ const resolvers: Resolvers = {
             pass: process.env.ADMIN_PASS
           }
         });
-
         const token = await jwt.sign({ id: createUser.id }, secretKey, { expiresIn: '15m' })
-
         const link_confrim = `http://127.0.0.1:5173/confirm?aceesid=${createUser.id}&tokenid=${token}`
         var mailOptions = {
           from: process.env.ADMIN_E_MAIL,
