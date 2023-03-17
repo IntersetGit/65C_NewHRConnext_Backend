@@ -174,6 +174,8 @@ const resolvers: Resolvers = {
       if (find_user.length > 0) {
         var transporter = nodemailer.createTransport({
           service: 'gmail',
+          port: 465,
+          secure: true,
           auth: {
             user: process.env.ADMIN_E_MAIL,
             pass: process.env.ADMIN_PASS
