@@ -174,14 +174,14 @@ const resolvers: Resolvers = {
       if (find_user.length > 0) {
         var transporter = nodemailer.createTransport({
           service: 'gmail',
-          port: 465,
-          secure: true,
+          secure: false,
           auth: {
             user: process.env.ADMIN_E_MAIL,
             pass: process.env.ADMIN_PASS
           }
         });
         const token = await jwt.sign({ id: id, email: args.data?.email }, secret, { expiresIn: '5m' })
+        
         // const link = `https://tmt.hrconnext.co/reset-password?aceesid=${id}&tokenid=${token}`
         var mailOptions = {
           from: process.env.ADMIN_E_MAIL,
@@ -192,13 +192,14 @@ const resolvers: Resolvers = {
             `${"link"}` + '\n\n' +
             'If you did not request this, please ignore this email.\n'
         };
-        transporter.sendMail(mailOptions, function (error, info) {
+        await transporter.sendMail(mailOptions, function (error, info) {
           if (error) {
             console.log(error);
           } else {
             console.log('Email sent: ' + info.response);
           }
         });
+        
         return {
           message: 'ส่ง Emailเปลี่ยนรหัสผ่านของคุณในEmailแล้ว',
           status: true,
