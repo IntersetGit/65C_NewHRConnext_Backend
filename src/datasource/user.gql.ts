@@ -385,7 +385,6 @@ const resolvers: Resolvers = {
       const createUser = await ctx.prisma.user.create({
         data: {
           id: genUserid,
-          companyBranchId: genbranchid,
           email: args.data.email,
           password: await createPassword(args.data.password),
           roleId: 'd0bff324-e70c-494e-b4c3-da220cd0d9af',
@@ -433,6 +432,14 @@ const resolvers: Resolvers = {
         },
       });
 
+      const updateUserCom = await ctx.prisma.user.update({
+        data:{
+          companyBranchId: createBranch.id
+        },where:{
+          id: createUser.id
+        }
+      })
+
       if (createUser) {
         const secretKey = process.env.JWT_SECRET || 'secret';
         var transporter = nodemailer.createTransport({
@@ -443,16 +450,14 @@ const resolvers: Resolvers = {
             pass: process.env.ADMIN_PASS
           }
         });
-
         const token = await jwt.sign({ id: createUser.id }, secretKey, { expiresIn: '15m' })
-
         const link_confrim = `http://127.0.0.1:5173/confirm?aceesid=${createUser.id}&tokenid=${token}`
         var mailOptions = {
           from: process.env.ADMIN_E_MAIL,
           to: args.data?.email,
           subject: 'Password Reset',
-          text: 'เรียนแจ้งให้ทราบว่า email \n\n' + `${createUser.email}` +
-            'ได้ทำการลงทะเบียนสมาชิกกับทาง hr connect เพื่อการสมัครสมาชิกที่สมบูรณ์กรูณากดยืนยัน email ของท่านที่ลิงค์ด้านล่าง\n\n' +
+          text: 'เรียนแจ้งให้ทราบว่า email ' + `${createUser.email}` +
+            'ได้ทำการลงทะเบียนสมาชิกกับทาง hr connect เพื่อการสมัครสมาชิกที่สมบูรณ์กรุณากดยืนยัน email ของท่านที่ลิงค์ด้านล่าง\n\n' +
             `${link_confrim}` + '\n\n' +
             'ขอบคุณที่สมัครใช้บริการกับ hr connect \n'
         };
@@ -472,8 +477,9 @@ const resolvers: Resolvers = {
       }
       throw new Error("Email not found")
     },
-
-    async editActive(p, args, ctx) {
+   //----------------- เปลี่ยนสถานะของ user หลัง confrim email---------------//
+   
+   async editActive(p, args, ctx) {
       const editActiveCon = await ctx.prisma.user.update({
         data: {
           isActive: true,
