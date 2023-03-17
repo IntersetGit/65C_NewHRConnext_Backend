@@ -220,6 +220,7 @@ export const userTypedef = gql`
     createAccount(data: CreateAccountInput!): CreateCompanyResponseType
     createAccountUser(data: CreateAccountUserInput!): CreateUserResponseType
     deleteAccountUser(id: ID!): DeleteAccountUserResponseType
+    editActive(active:Boolean!, id: ID): DeleteAccountUserResponseType
   }
 `;
 
@@ -470,6 +471,21 @@ const resolvers: Resolvers = {
         }
       }
       throw new Error("Email not found")
+    },
+
+    async editActive(p, args, ctx) {
+      const editActiveCon = await ctx.prisma.user.update({
+        data: {
+          isActive: args.active,
+        },
+        where: {
+          id: args.id as string
+        }
+      })
+      return {
+        message: 'success',
+        status: true
+      }
     },
 
     /**

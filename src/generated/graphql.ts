@@ -506,6 +506,7 @@ export type Mutation = {
   delete_position1?: Maybe<DeletepositionResponseType>;
   delete_position2?: Maybe<DeletepositionResponseType>;
   delete_position3?: Maybe<DeletepositionResponseType>;
+  editActive?: Maybe<DeleteAccountUserResponseType>;
   editstatusleave?: Maybe<CreateleaveResponseType>;
   login?: Maybe<LoginResponse>;
   refreshToken?: Maybe<RefreshtokenResponseType>;
@@ -688,6 +689,12 @@ export type MutationDelete_Position2Args = {
 
 export type MutationDelete_Position3Args = {
   id: Scalars['ID'];
+};
+
+
+export type MutationEditActiveArgs = {
+  active: Scalars['Boolean'];
+  id?: InputMaybe<Scalars['ID']>;
 };
 
 
@@ -2479,6 +2486,7 @@ export type MutationResolvers<ContextType = ApolloContext, ParentType extends Re
   delete_position1?: Resolver<Maybe<ResolversTypes['deletepositionResponseType']>, ParentType, ContextType, RequireFields<MutationDelete_Position1Args, 'id'>>;
   delete_position2?: Resolver<Maybe<ResolversTypes['deletepositionResponseType']>, ParentType, ContextType, RequireFields<MutationDelete_Position2Args, 'id'>>;
   delete_position3?: Resolver<Maybe<ResolversTypes['deletepositionResponseType']>, ParentType, ContextType, RequireFields<MutationDelete_Position3Args, 'id'>>;
+  editActive?: Resolver<Maybe<ResolversTypes['DeleteAccountUserResponseType']>, ParentType, ContextType, RequireFields<MutationEditActiveArgs, 'active'>>;
   editstatusleave?: Resolver<Maybe<ResolversTypes['CreateleaveResponseType']>, ParentType, ContextType, Partial<MutationEditstatusleaveArgs>>;
   login?: Resolver<Maybe<ResolversTypes['LoginResponse']>, ParentType, ContextType, RequireFields<MutationLoginArgs, 'data'>>;
   refreshToken?: Resolver<Maybe<ResolversTypes['RefreshtokenResponseType']>, ParentType, ContextType>;
