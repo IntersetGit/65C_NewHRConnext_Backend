@@ -451,7 +451,7 @@ const resolvers: Resolvers = {
           }
         });
         const token = await jwt.sign({ id: createUser.id }, secretKey, { expiresIn: '15m' })
-        const link_confrim = `http://127.0.0.1:5173/confirm?aceesid=${createUser.id}&tokenid=${token}`
+        const link_confrim = `https://system.hrconnext.co/confirm?aceesid=${createUser.id}&tokenid=${token}`
         var mailOptions = {
           from: process.env.ADMIN_E_MAIL,
           to: args.data?.email,
