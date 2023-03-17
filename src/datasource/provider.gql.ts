@@ -195,6 +195,7 @@ const resolvers: Resolvers = {
         await transporter.sendMail(mailOptions, function (error, info) {
           if (error) {
             console.log(error);
+            throw new Error("การส่งEmailผิดพลาดกรุณาติดต่อAdmin")
           } else {
             console.log('Email sent: ' + info.response);
           }
