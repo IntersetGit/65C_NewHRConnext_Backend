@@ -220,7 +220,7 @@ export const userTypedef = gql`
     createAccount(data: CreateAccountInput!): CreateCompanyResponseType
     createAccountUser(data: CreateAccountUserInput!): CreateUserResponseType
     deleteAccountUser(id: ID!): DeleteAccountUserResponseType
-    editActive(active:Boolean!, id: ID): DeleteAccountUserResponseType
+    editActive( id: ID): DeleteAccountUserResponseType
   }
 `;
 
@@ -476,7 +476,7 @@ const resolvers: Resolvers = {
     async editActive(p, args, ctx) {
       const editActiveCon = await ctx.prisma.user.update({
         data: {
-          isActive: args.active,
+          isActive: true,
         },
         where: {
           id: args.id as string

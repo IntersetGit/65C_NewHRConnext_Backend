@@ -693,7 +693,6 @@ export type MutationDelete_Position3Args = {
 
 
 export type MutationEditActiveArgs = {
-  active: Scalars['Boolean'];
   id?: InputMaybe<Scalars['ID']>;
 };
 
@@ -2486,7 +2485,7 @@ export type MutationResolvers<ContextType = ApolloContext, ParentType extends Re
   delete_position1?: Resolver<Maybe<ResolversTypes['deletepositionResponseType']>, ParentType, ContextType, RequireFields<MutationDelete_Position1Args, 'id'>>;
   delete_position2?: Resolver<Maybe<ResolversTypes['deletepositionResponseType']>, ParentType, ContextType, RequireFields<MutationDelete_Position2Args, 'id'>>;
   delete_position3?: Resolver<Maybe<ResolversTypes['deletepositionResponseType']>, ParentType, ContextType, RequireFields<MutationDelete_Position3Args, 'id'>>;
-  editActive?: Resolver<Maybe<ResolversTypes['DeleteAccountUserResponseType']>, ParentType, ContextType, RequireFields<MutationEditActiveArgs, 'active'>>;
+  editActive?: Resolver<Maybe<ResolversTypes['DeleteAccountUserResponseType']>, ParentType, ContextType, Partial<MutationEditActiveArgs>>;
   editstatusleave?: Resolver<Maybe<ResolversTypes['CreateleaveResponseType']>, ParentType, ContextType, Partial<MutationEditstatusleaveArgs>>;
   login?: Resolver<Maybe<ResolversTypes['LoginResponse']>, ParentType, ContextType, RequireFields<MutationLoginArgs, 'data'>>;
   refreshToken?: Resolver<Maybe<ResolversTypes['RefreshtokenResponseType']>, ParentType, ContextType>;
