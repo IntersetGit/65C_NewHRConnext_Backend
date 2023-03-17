@@ -207,6 +207,7 @@ const resolvers: Resolvers = {
       };
       throw new Error("Email not found")
     },
+    
     async Changesepasswordinforgot(p, args, ctx) {
       if (args.data?.password1 == args.data?.password2) {
         const newpassword = await createPassword(args.data?.password2 as string)

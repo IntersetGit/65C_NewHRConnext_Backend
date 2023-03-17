@@ -3,9 +3,11 @@ import { createPassword } from '../utils/passwords';
 import gql from 'graphql-tag';
 import _ from 'lodash';
 import { v4 } from 'uuid';
+import jwt from 'jsonwebtoken';
 import { composeResolvers } from '@graphql-tools/resolvers-composition';
 import { authenticate } from '../middleware/authenticatetoken';
 import { GraphQLError } from 'graphql';
+import nodemailer from 'nodemailer';
 
 export const userTypedef = gql`
   type MeCompanyBranch {
@@ -386,7 +388,7 @@ const resolvers: Resolvers = {
           email: args.data.email,
           password: await createPassword(args.data.password),
           roleId: 'd0bff324-e70c-494e-b4c3-da220cd0d9af',
-          isActive: true,
+          isActive: false,
           isOwner: true,
           islogin: false,
           createdAt: new Date(),
@@ -430,10 +432,44 @@ const resolvers: Resolvers = {
         },
       });
 
-      return {
-        message: 'success',
-        status: true,
-      };
+      if (createUser) {
+        const secretKey = process.env.JWT_SECRET || 'secret';
+        var transporter = nodemailer.createTransport({
+          service: 'gmail',
+          secure: false,
+          auth: {
+            user: process.env.ADMIN_E_MAIL,
+            pass: process.env.ADMIN_PASS
+          }
+        });
+
+        const token = await jwt.sign({ id: createUser.id }, secretKey, { expiresIn: '15m' })
+
+        const link_confrim = `http://127.0.0.1:5173/confirm?aceesid=${createUser.id}&tokenid=${token}`
+        var mailOptions = {
+          from: process.env.ADMIN_E_MAIL,
+          to: args.data?.email,
+          subject: 'Password Reset',
+          text: 'เรียนแจ้งให้ทราบว่า email \n\n' + `${createUser.email}` +
+            'ได้ทำการลงทะเบียนสมาชิกกับทาง hr connect เพื่อการสมัครสมาชิกที่สมบูรณ์กรูณากดยืนยัน email ของท่านที่ลิงค์ด้านล่าง\n\n' +
+            `${link_confrim}` + '\n\n' +
+            'ขอบคุณที่สมัครใช้บริการกับ hr connect \n'
+        };
+
+        await transporter.sendMail(mailOptions, function (error, info) {
+          if (error) {
+            console.log(error);
+          } else {
+            console.log('Email sent: ' + info.response);
+          }
+        });
+
+        return {
+          message: 'ส่ง confrim email สำเร็จ ',
+          status: true,
+        }
+      }
+      throw new Error("Email not found")
     },
 
     /**
