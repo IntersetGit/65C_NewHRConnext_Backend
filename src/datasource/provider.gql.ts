@@ -10,6 +10,7 @@ import { composeResolvers } from '@graphql-tools/resolvers-composition';
 import { prisma } from 'src/generated/client';
 import { update } from 'lodash';
 import nodemailer from 'nodemailer';
+import { check } from 'prettier';
 
 export const providerTypedef = gql`
   input LoginaInput {
@@ -94,12 +95,16 @@ const resolvers: Resolvers = {
     async login(p, args, ctx) {
       const finduser = await ctx.prisma.user.findMany({
         take: 1,
-        where: { email: args.data.email },
+        where: {
+          email: args.data.email, AND: {
+          }
+        },
         select: {
           id: true,
           roleId: true,
           isOwner: true,
           password: true,
+          isActive: true,
           companyBranch: {
             select: {
               id: true,
@@ -122,6 +127,16 @@ const resolvers: Resolvers = {
           },
         });
       }
+
+      if (!finduser[0].isActive){
+        throw new GraphQLError('Please verify your email.', {
+          extensions: {
+            code: 'VERIFY_YOUR_EMAIL',
+            argumentName: 'isActive',
+          },
+        });
+      }
+
       const isMatch = await comparePassword(
         args.data.password,
         finduser[0].password,
@@ -134,6 +149,11 @@ const resolvers: Resolvers = {
           },
         });
       }
+
+
+
+
+
 
       const credential = {
         id: finduser[0].id,
@@ -181,7 +201,7 @@ const resolvers: Resolvers = {
           }
         });
         const token = await jwt.sign({ id: id, email: args.data?.email }, secret, { expiresIn: '5m' })
-        
+
         // const link = `https://tmt.hrconnext.co/reset-password?aceesid=${id}&tokenid=${token}`
         var mailOptions = {
           from: process.env.ADMIN_E_MAIL,
@@ -200,7 +220,7 @@ const resolvers: Resolvers = {
             console.log('Email sent: ' + info.response);
           }
         });
-        
+
         return {
           message: 'ส่ง Emailเปลี่ยนรหัสผ่านของคุณในEmailแล้ว',
           status: true,
@@ -208,7 +228,7 @@ const resolvers: Resolvers = {
       };
       throw new Error("Email not found")
     },
-    
+
     async Changesepasswordinforgot(p, args, ctx) {
       if (args.data?.password1 == args.data?.password2) {
         const newpassword = await createPassword(args.data?.password2 as string)
