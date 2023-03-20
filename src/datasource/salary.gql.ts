@@ -911,7 +911,10 @@ const resolvers: Resolvers = {
         },///สินสุดการjoin
         where: {
           //โดยอ้างจากbranchId ของ tokenที่login
-          companyBranchId: ctx.currentUser?.branchId,
+          companyBranchId: ctx.currentUser?.branchId, 
+          // OR:{
+          //   RoleCompanyID: 
+          // },
           AND: {
             //และโดยอ้างจาก table  profile การรับค่า search1หรือ fristname
             profile: {
