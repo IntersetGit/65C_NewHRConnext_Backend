@@ -885,6 +885,7 @@ const resolvers: Resolvers = {
       console.log('วันปัจจุบัน = ', unix_current);
       let bb_acp_date
       let bb_id = ""
+      let roleid = 'd0bff324-e70c-494e-b4c3-da220cd0d9af'
       const getdata = await ctx.prisma.user.findMany({
         include: {
 
@@ -892,16 +893,16 @@ const resolvers: Resolvers = {
           role: true,
           Position_user: {
             include: { mas_positionlevel1: true, mas_positionlevel2: true, mas_positionlevel3: true },
-            where: {
-              //และโดยอ้างจาก table  Position_user การรับค่า search2 และ 3 หรือ Position2 และ 3
-              mas_positionlevel2: {
-                id: search2
-              }, AND: {
-                mas_positionlevel3: {
-                  id: search3
-                }
-              }
-            },
+            // where: {
+            //   //และโดยอ้างจาก table  Position_user การรับค่า search2 และ 3 หรือ Position2 และ 3
+            //   mas_positionlevel2: {
+            //     id: search2
+            //   }, AND: {
+            //     mas_positionlevel3: {
+            //       id: search3
+            //     }
+            //   }
+            // },
             orderBy: { date: 'desc' }
           },
           salary: true,
@@ -911,24 +912,27 @@ const resolvers: Resolvers = {
         },///สินสุดการjoin
         where: {
           //โดยอ้างจากbranchId ของ tokenที่login
-          companyBranchId: ctx.currentUser?.branchId, 
-          // OR:{
-          //   RoleCompanyID: 
-          // },
+          companyBranchId: ctx.currentUser?.branchId,
+
           AND: {
             //และโดยอ้างจาก table  profile การรับค่า search1หรือ fristname
             profile: {
-              firstname_th: { contains: search1 }
+              firstname_th: { contains: search1 },
+              mas_positionlevel2: { id: search2},
+               mas_positionlevel3: { id: search3 } 
             },
-            //และโดยอ้างจาก table  Position_user การรับค่า search2 และ 3 หรือ Position2 และ 3
-            AND: {
-              Position_user: {
-                some: {
-                  mas_positionlevel2: { id: search2 },
-                  AND: { mas_positionlevel3: { id: search3 } }
-                },
-              },
-            },
+            // Position_user:{
+            //   some:{}
+            // }
+            // และโดยอ้างจาก table  Position_user การรับค่า search2 และ 3 หรือ Position2 และ 3
+            // AND: {
+            //   Position_user: {
+            //     some: {
+            //       mas_positionlevel2: { id: search2 },
+            //       AND: { mas_positionlevel3: { id: search3 } }
+            //     },
+            //   },
+            // },
           },
         },
         //จัดเรียงตามรหัสพนักงาน
