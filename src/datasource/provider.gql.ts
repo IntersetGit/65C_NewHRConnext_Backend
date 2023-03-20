@@ -26,7 +26,8 @@ export const providerTypedef = gql`
   }
   input changepasswordinput {
     password: String
-    newpassword: String
+    newpassword1: String
+    newpassword2: String
   }
   type changepasswordresponsetype {
     message: String
@@ -310,6 +311,7 @@ const resolvers: Resolvers = {
     },
     //เปลี่ยนpasswordตัวเอง
     async Changeselfpassword(p, args, ctx) {
+      if (args.data?.newpassword1 == args.data?.newpassword2) {
       let pw = '';
       const find_user = await ctx.prisma.user.findMany({
         where: {
@@ -329,7 +331,7 @@ const resolvers: Resolvers = {
       //หากถูกต้อง
       if (decrypt_pw === true) {
         const newpassword = await createPassword(
-          args.data?.newpassword as string,
+          args.data?.newpassword2 as string,
         );
         const changepassword = await ctx.prisma.user.update({
           data: {
@@ -344,11 +346,10 @@ const resolvers: Resolvers = {
           status: true,
         };
       }
+        throw new Error("รหัสผ่านเก่าของคุณไม่ถูกต้อง")
+    }
       //หากไม่ถูกต้อง
-      return {
-        message: 'รหัสผ่านของคุณไม่ถูกต้อง',
-        status: true,
-      };
+        throw new Error("รหัสผ่านไม่ตรงกัน")
     },
     /**
      * ?รีเฟรชโทเค็น

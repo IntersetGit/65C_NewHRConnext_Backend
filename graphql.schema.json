@@ -10089,7 +10089,19 @@
         "fields": null,
         "inputFields": [
           {
-            "name": "newpassword",
+            "name": "newpassword1",
+            "description": null,
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "newpassword2",
             "description": null,
             "type": {
               "kind": "SCALAR",
@@ -11539,18 +11551,6 @@
         "name": "forgetpasswordresponsetype",
         "description": null,
         "fields": [
-          {
-            "name": "expireIn",
-            "description": null,
-            "args": [],
-            "type": {
-              "kind": "SCALAR",
-              "name": "Int",
-              "ofType": null
-            },
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
           {
             "name": "message",
             "description": null,
