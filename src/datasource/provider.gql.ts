@@ -211,21 +211,6 @@ const resolvers: Resolvers = {
           subject: 'Password Reset',
           html: `คุณได้รับอีเมลนี้เนื่องจากคุณได้ขอรีเซ็ตรหัสผ่านสำหรับบัญชีของคุณ <br><br>
           โปรดคลิกลิงก์ต่อไปนี้ หรือวางในเบราว์เซอร์ของคุณเพื่อดำเนินการให้เสร็จสิ้น<br><br>
-          <a href=${link} style="background-color:#44c767;
-          border-radius:28px;
-          border:1px solid #18ab29;
-          display:inline-block;
-          cursor:pointer;
-          color:#ffffff;
-          font-family:Arial;
-          font-size:17px;
-          padding:16px 31px;
-          text-decoration:none;
-          text-shadow:0px 1px 0px #2f6627; 
-          background-color:#5cbf2a;
-          margin-left: 40%">รีเซ็ตรหัสผ่าน</a>
-          <br><br>
-          ${link}<br><br>
           หากคุณไม่ได้ร้องขอ โปรดเพิกเฉยต่ออีเมลนี้<br><br>
           You are receiving this email because you requested a password reset for your account. <br><br>
           Please click on the following link, or paste this into your browser to complete the process:<br><br>
@@ -243,23 +228,45 @@ const resolvers: Resolvers = {
           background-color:#5cbf2a;
           margin-left: 40%">Reset Password</a>
           <br><br>
-          ${link}<br><br>
           If you did not request this, please ignore this email.
           `,
-          // attachments: [{
-          //   path: `${iconpath}`,
-          //   // cid: 'unique@kreata.ee' ,
-          //   href: `${link}`
-          // }],
-          // text: `คุณได้รับอีเมลนี้เนื่องจากคุณได้ขอรีเซ็ตรหัสผ่านสำหรับบัญชีของคุณ\n\n` +
-          //   `โปรดคลิกลิงก์ต่อไปนี้ หรือวางในเบราว์เซอร์ของคุณเพื่อดำเนินการให้เสร็จสิ้น\n\n` +
-          //   `${link}` + '\n\n' +
-          //   `หากคุณไม่ได้ร้องขอ โปรดเพิกเฉยต่ออีเมลนี้\n\n` +
-
-          //   'You are receiving this email because you requested a password reset for your account.\n\n' +
-          //   'Please click on the following link, or paste this into your browser to complete the process:\n\n' +
-          //   `${link}` + '\n\n' +
-          //   'If you did not request this, please ignore this email.\n'
+          // html: `คุณได้รับอีเมลนี้เนื่องจากคุณได้ขอรีเซ็ตรหัสผ่านสำหรับบัญชีของคุณ <br><br>
+          // โปรดคลิกลิงก์ต่อไปนี้ หรือวางในเบราว์เซอร์ของคุณเพื่อดำเนินการให้เสร็จสิ้น<br><br>
+          // <a href=${link} style="background-color:#44c767;
+          // border-radius:28px;
+          // border:1px solid #18ab29;
+          // display:inline-block;
+          // cursor:pointer;
+          // color:#ffffff;
+          // font-family:Arial;
+          // font-size:17px;
+          // padding:16px 31px;
+          // text-decoration:none;
+          // text-shadow:0px 1px 0px #2f6627; 
+          // background-color:#5cbf2a;
+          // margin-left: 40%">รีเซ็ตรหัสผ่าน</a>
+          // <br><br>
+          // ${link}<br><br>
+          // หากคุณไม่ได้ร้องขอ โปรดเพิกเฉยต่ออีเมลนี้<br><br>
+          // You are receiving this email because you requested a password reset for your account. <br><br>
+          // Please click on the following link, or paste this into your browser to complete the process:<br><br>
+          // <a href=${link} style="background-color:#44c767;
+          // border-radius:28px;
+          // border:1px solid #18ab29;
+          // display:inline-block;
+          // cursor:pointer;
+          // color:#ffffff;
+          // font-family:Arial;
+          // font-size:17px;
+          // padding:16px 31px;
+          // text-decoration:none;
+          // text-shadow:0px 1px 0px #2f6627; 
+          // background-color:#5cbf2a;
+          // margin-left: 40%">Reset Password</a>
+          // <br><br>
+          // ${link}<br><br>
+          // If you did not request this, please ignore this email.
+          // `,
         };
         await transporter.sendMail(mailOptions, function (error, info) {
           if (error) {
