@@ -202,7 +202,8 @@ exports.Prisma.Holiday_dateScalarFieldEnum = makeEnum({
   month: 'month',
   year: 'year',
   CompanyId: 'CompanyId',
-  status: 'status'
+  status: 'status',
+  holiday_yearId: 'holiday_yearId'
 });
 
 exports.Prisma.Holiday_yearScalarFieldEnum = makeEnum({

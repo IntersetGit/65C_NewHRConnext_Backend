@@ -275,14 +275,16 @@ model Position_user {
 }
 
 model holiday_date {
-  id           String   @unique @db.Uuid
-  holiday_name String?
-  day          Int
-  month        Int
-  year         Int
-  Company      Company? @relation(fields: [CompanyId], references: [id])
-  CompanyId    String?  @db.Uuid
-  status       Int      @db.SmallInt
+  id              String   @unique @db.Uuid
+  holiday_name    String?
+  day             Int
+  month           Int
+  year            Int
+  Company         Company? @relation(fields: [CompanyId], references: [id])
+  CompanyId       String?  @db.Uuid
+  status          Int      @db.SmallInt
+  holiday_year    holiday_year? @relation(fields: [holiday_yearId], references: [id])
+  holiday_yearId  String? @db.Uuid
 }
 
 model holiday_year {
@@ -291,6 +293,7 @@ model holiday_year {
   month        Int
   year         Int
   holiday_name String?
+  holiday_date  holiday_date[]
 }
 
 model mas_bank {

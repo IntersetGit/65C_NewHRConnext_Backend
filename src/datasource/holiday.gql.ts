@@ -1,3 +1,4 @@
+import { holiday_year } from './../generated/client/index.d';
 
 import gql from 'graphql-tag';
 import { Resolvers } from '../generated/graphql';
@@ -44,6 +45,7 @@ export const holidayTypedef = gql`
     month: Int
     year: Int
     status: Int
+    holiday_yearId: String
   }
 
   type YearCountType {
@@ -122,7 +124,7 @@ export const holidayResolvers: Resolvers = {
       let years = 0
       const search = args.year as number ? args.year : undefined;
       const getHoliday = await ctx.prisma.holiday_date.findMany({
-        include: { Company : true},
+        include: { Company : true,},
         where: {
           CompanyId: ctx.currentUser?.compayId,
           AND: { year: search as number }
@@ -207,6 +209,7 @@ export const holidayResolvers: Resolvers = {
               month: e.month as number,
               year: e.year as number,
               status: e.status as number,
+              holiday_yearId: e.holiday_yearId
             },
             where: {
               id: e.id as string
@@ -239,7 +242,8 @@ export const holidayResolvers: Resolvers = {
                 month: e.month as number,
                 year: e.year as number,
                 status: 1 as number,
-                CompanyId: ctx.currentUser?.compayId
+                CompanyId: ctx.currentUser?.compayId,
+                holiday_yearId: e.holiday_yearId
               },
             })
           }

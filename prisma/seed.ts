@@ -23,7 +23,7 @@ import { update } from 'lodash';
 const prisma = new PrismaClient();
 
 const main = async () => {
-  const role = await rolesEnum.forEach(async (role) => {
+  const role =  rolesEnum.forEach(async (role) => {
     await prisma.role.upsert({
       where: {
         id: role.id,
@@ -36,7 +36,7 @@ const main = async () => {
     });
   });
 
-  const procince = await provinceEnum.forEach(async (e) => {
+  const procince =  provinceEnum.forEach(async (e) => {
     await prisma.province.upsert({
       where: {
         id: e.identifier,
@@ -49,7 +49,7 @@ const main = async () => {
     });
   });
 
-  const district = await districtEnum.forEach(async (e) => {
+  const district =  districtEnum.forEach(async (e) => {
     await prisma.district.upsert({
       where: {
         id: e.identifier,
@@ -63,7 +63,7 @@ const main = async () => {
     });
   });
 
-  const amphoe = await amphoeEnum.forEach(async (e) => {
+  const amphoe =  amphoeEnum.forEach(async (e) => {
     await prisma.amphoe.upsert({
       where: {
         id: e.identifier,
@@ -78,7 +78,7 @@ const main = async () => {
     });
   });
 
-  const mainbusiness = await mainbusinessEnum.forEach(async (e) => {
+  const mainbusiness =  mainbusinessEnum.forEach(async (e) => {
     await prisma.mainBusinessType.upsert({
       where: {
         id: e.id,
@@ -92,7 +92,7 @@ const main = async () => {
   });
 
 
-  const subbusiness = await subbusinessEnum.forEach(async (e) => {
+  const subbusiness =  subbusinessEnum.forEach(async (e) => {
     await prisma.subBusinessType.upsert({
       where: {
         id: e.id,
@@ -106,7 +106,7 @@ const main = async () => {
     });
   });
 
-  const holiday = await holidayEnum.forEach(async (h) => {
+  const holiday =  holidayEnum.forEach(async (h) => {
     await prisma.holiday_year.upsert({
       where: {
         id: h.id,
@@ -122,7 +122,7 @@ const main = async () => {
     });
   });
 
-  const bank = await bankEnum.forEach(async (b) => {
+  const bank =  bankEnum.forEach(async (b) => {
     await prisma.mas_bank.upsert({
       where: {
         id: b.id,
@@ -137,7 +137,7 @@ const main = async () => {
   });
 
   
-  const leavetype = await leavtypeEnum.forEach(async (b) => {
+  const leavetype =  leavtypeEnum.forEach(async (b) => {
     await prisma.mas_leave_type.upsert({
       where: {
         id: b.id,
@@ -151,7 +151,7 @@ const main = async () => {
     });
   });
 
-  const mas_yearstype = await yearsEnum.forEach(async (b) => {
+  const mas_yearstype =  yearsEnum.forEach(async (b) => {
     await prisma.mas_years.upsert({
       where: {
         id: b.id,

@@ -226,6 +226,7 @@ export type CreateCompanyResponseType = {
 export type CreateHolidayDate = {
   day?: InputMaybe<Scalars['Int']>;
   holiday_name?: InputMaybe<Scalars['String']>;
+  holiday_yearId?: InputMaybe<Scalars['String']>;
   id?: InputMaybe<Scalars['ID']>;
   month?: InputMaybe<Scalars['Int']>;
   status?: InputMaybe<Scalars['Int']>;
