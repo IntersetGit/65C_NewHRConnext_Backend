@@ -1418,6 +1418,7 @@ export type Holiday_Date = {
   CompanyId?: Maybe<Scalars['String']>;
   day?: Maybe<Scalars['Int']>;
   holiday_name?: Maybe<Scalars['String']>;
+  holiday_yearId?: Maybe<Scalars['String']>;
   id?: Maybe<Scalars['ID']>;
   month?: Maybe<Scalars['Int']>;
   status?: Maybe<Scalars['Int']>;
@@ -2965,6 +2966,7 @@ export type Holiday_DateResolvers<ContextType = ApolloContext, ParentType extend
   CompanyId?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   day?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
   holiday_name?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  holiday_yearId?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   id?: Resolver<Maybe<ResolversTypes['ID']>, ParentType, ContextType>;
   month?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
   status?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
