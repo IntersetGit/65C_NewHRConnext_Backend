@@ -242,7 +242,7 @@ export const holidayResolvers: Resolvers = {
                 day: e.day as number,
                 month: e.month as number,
                 year: e.year as number,
-                status: 1 as number,
+                status: e.status as number,
                 CompanyId: ctx.currentUser?.compayId,
                 holiday_yearId: e.holiday_yearId
               },
