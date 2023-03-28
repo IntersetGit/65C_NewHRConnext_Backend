@@ -47,6 +47,8 @@ export const holidayTypedef = gql`
     year: Int
     status: Int
     holiday_yearId: String
+
+
   }
 
   type YearCountType {
@@ -229,6 +231,9 @@ export const holidayResolvers: Resolvers = {
                   },
                   {
                     year: e.year as number
+                  },
+                  {
+                    CompanyId: ctx.currentUser?.compayId
                   }
                 ]
             }
